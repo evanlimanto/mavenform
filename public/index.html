@@ -14,7 +14,7 @@
   -->
   <title>Mavenform</title>
   <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900,900i" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>
   <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
@@ -27,26 +27,42 @@
   <div class="center">
     <h5>Niknejad, Sahai | Midterm 1 | Fall 2015</h5>
   </div>
-  <hr class="s5">
   <div class="sidebar">
+    <hr class="s5">
     <h4>CONTENTS</h4>
     <hr class="s2">
     <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
     <hr class="s1">
-    <div><a class="sidetitle">Straightforward Questions</a></div>
-    <div><a href="#q3" class="sidetab">3. Solve It</a></div>
-    <div><a href="#q4" class="sidetab">4. Invert It</a></div>
-    <div><a href="#q5" class="sidetab">5. Show It</a></div>
-    <div><a href="#q6" class="sidetab">6. Null It</a></div>
-    
+    <div class="sidetitle">Straightforward Questions</div>
+    <div><a class="sidetab" onclick="$('#q3').smoothScroll();">3. Solve It</a></div>
+    <div><a class="sidetab" onclick="$('#q4').smoothScroll();">4. Invert It</a></div>
+    <div><a class="sidetab" onclick="$('#q5').smoothScroll();">5. Show It</a></div>
+    <div><a class="sidetab" onclick="$('#q6').smoothScroll();">6. Null It</a></div>
     <hr class="s1">
-    <div><a class="sidetitle">Free-form Problems</a></div>
-    <div><a href="#q7a" class="sidetab">7. Finding the Bright Cave</a></div>
-    <div><a href="#q8a" class="sidetab">8. A Tale of Two Cities</a></div>
-    <div><a href="#q9a" class="sidetab">9. Justin Beaver</a></div>
+    <div class="sidetitle">Free-form Problems</div>
+    <div><a class="sidetab" onclick="$('#q7a').smoothScroll();">7. Finding the Bright Cave</a></div>
+    <div><a class="sidetab" onclick="$('#q8a').smoothScroll();">8. A Tale of Two Cities</a></div>
+    <div><a class="sidetab" onclick="$('#q9a').smoothScroll();">9. Justin Beaver</a></div>
   </div>
   <div class="content">
     <div id="root"></div>
   </div>
+  <hr class="margin">
+  <script>
+    $.fn.smoothScroll = function() {
+      $('html, body').animate({scrollTop: $(this).offset().top - 36});
+    };
+
+    var sidebarTop = $('.sidebar').offset().top;
+    $(window).scroll(function() {
+      var windowTop = $(window).scrollTop() - 36;
+      var windowSize = $(window).width();
+      if (sidebarTop < windowTop && windowSize > 1020) {
+        $('.sidebar').css('position', 'fixed');
+      } else {
+        $('.sidebar').css('position', 'relative');
+      }
+    });
+  </script>
 </body>
 </html>

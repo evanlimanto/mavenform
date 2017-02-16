@@ -35,7 +35,7 @@ h2 {
   text-align: left;
   font-family: 'Lato', sans-serif;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 22px;
   color: #111;
 }
 
@@ -174,11 +174,22 @@ input[type=button]:hover {
   opacity: 1;
 }
 
+.no-input {
+  color: #11accd;
+}
+
 .cell {
   text-align: center;
   height: 36px;
   width: 36px;
   margin: 6px;
+}
+
+.sidebar {
+  float: left;
+  padding-right: 40px;
+  max-width: 240px;
+  top: 0;
 }
 
 .sidetitle {
@@ -206,16 +217,9 @@ input[type=button]:hover {
   color: #333;
 }
 
-.sidebar {
-  float: left;
-  padding-right: 20px;
-  width: 220px;
-}
-
 .content {
-  float: left;
-  padding-left: 20px;
-  width: 600px;
+  float: right;
+  max-width: 580px;
 }
 
 .center {
@@ -253,5 +257,26 @@ input[type=button]:hover {
   display: block;
   width: 100%;
   clear: both;
-  height: 150px;
+  height: 100px;
+}
+
+@media (max-width: 1019px) {
+  body {
+    padding: 0 50px;
+  }
+
+  .sidebar {
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .content {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 599px) {
+  body {
+    padding: 0 25px;
+  }
 }
