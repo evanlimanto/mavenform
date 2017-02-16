@@ -1,0 +1,9 @@
+Answer each of the following questions by circling True or False. No work is necessary for credit on this
+part.
+
+(a) (True) (False) The pivot columns of matrix A forms a basis for the column space of A.
+(b) (True) (False) Let A be a 2× 2 matrix, where A2 = 0. Then A is the zero matrix.
+(c) (True) (False) Let A,B,C be some arbitrary matrices. Then, (AB)C = A(BC).
+(d) (True) (False) An M × N matrix has at most N pivots.
+(e) (True) (False) AB = BA where A and B are N × N matrices.
+(f) (True) (False) Applying any pair of 2× 2 rotation matrices to an input vector is a commutative operation.

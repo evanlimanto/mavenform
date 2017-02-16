@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import renderHTML from 'react-render-html';
 const _ = require('lodash');
 
 class Solution extends Component {
@@ -21,7 +20,6 @@ class Solution extends Component {
 
   render() {
     const hasResponse = this.props.hasResponse;
-    const showImage = this.state.showImage;
     var check = null;
     var image = null;
     if (hasResponse) {
@@ -32,7 +30,7 @@ class Solution extends Component {
           <span>
             {_.map(this.props.image, (file) => {
               const path = require('../../solutions/' + file);
-              return <img className="solution" src={path} />;
+              return <img className="solution" src={path} role="presentation" />;
             })}
           </span>
         );
