@@ -54,7 +54,7 @@ class VariablesQuestion extends Component {
     const content = this.props.content;
     const variables = this.props.variables;
     return (
-      <div>
+      <div id={this.props.id}>
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <hr className="s2" />
           {_.map(variables, (variable, key) => {
@@ -74,7 +74,7 @@ class MatrixQuestion extends Component {
     const cols = this.props.cols;
 
     return (
-      <div>
+      <div id={this.props.id}>
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <hr className="s2" />
         {_.range(rows).map((rowKey) => {
@@ -94,7 +94,7 @@ class TrueFalseQuestion extends Component {
     const content = this.props.content;
 
     return (
-      <div>
+      <div id={this.props.id}>
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <hr className="s5" />
         <input type="checkbox" data-toggle="toggle" data-on="True" data-off="False" />
@@ -117,7 +117,7 @@ class FreeFormQuestion extends Component {
     }
 
     return (
-      <div>
+      <div id={this.props.id}>
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <hr className="s5" />
         {solution} 
