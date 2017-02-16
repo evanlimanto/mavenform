@@ -61,6 +61,14 @@ h4 {
   color: #666;
 }
 
+h5 {
+  line-height: initial;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  color: #999;
+}
+
 a {
   font-family: 'Lato', sans-serif;
   text-decoration: none;

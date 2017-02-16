@@ -61,7 +61,7 @@ class TrueFalseQuestion extends Component {
 
     return (
       <div>
-        {content}
+        <div dangerouslySetInnerHTML={{__html: content}}></div>
         <hr className="s5" />
         <input type="checkbox" data-toggle="toggle" data-on="True" data-off="False" />
         <Solution />
@@ -84,7 +84,8 @@ class FreeFormQuestion extends Component {
 
     return (
       <div>
-        {content}
+        <div dangerouslySetInnerHTML={{__html: content}}></div>
+        <hr className="s5" />
         {solution} 
         <Solution />
       </div>
@@ -92,4 +93,4 @@ class FreeFormQuestion extends Component {
   }
 }
 
-export { VariablesQuestion, MatrixQuestion };
+export { VariablesQuestion, MatrixQuestion, TrueFalseQuestion, FreeFormQuestion };

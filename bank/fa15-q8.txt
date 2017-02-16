@@ -1,4 +1,4 @@
-<b>8. A Tale of Two Cities (24pts +15pts)</b><br/>
+<h3>8. A Tale of Two Cities (24pts +15pts)</h3>
 
 <b>[NOTE: The last two parts of this problem are extra credit. Do them if you have time, but don’t get stuck on them if you don’t.]</b><br/><br/>
 There are two isolated cities in the desert. They each have their own network of roads and intersections, as shown in Figure 2. (Note: The arrows are oriented arbitrarily – net trafﬁc can ﬂow in either direction along a road). The citizens of these cities are careful drivers, and consequently, the net trafﬁc ﬂows along roads always obey the ﬂow conservation constraints (net cars per hour into an intersection equals the net cars per hour leaving that intersection).
@@ -8,18 +8,18 @@ There are two isolated cities in the desert. They each have their own network of
 (a) <b>(7pts)</b> We know how to model the net trafﬁc ﬂows within each city individually (from the Homework). We would like to jointly model the net trafﬁc ﬂows of both cities. That is, let the net trafﬁc ﬂow (cars/hr) along all roads be described by a vector
 
 $$
-\vec{t} =
-\begin{bmatrix}
-t_1 \\
-t_2 \\
-t_3 \\
-t_4 \\
-t_5 \\
-t_6 \\
-\end{bmatrix}
+\\vec{t} =
+\\begin{bmatrix}
+t_1 \\\\
+t_2 \\\\
+t_3 \\\\
+t_4 \\\\
+t_5 \\\\
+t_6 \\\\
+\\end{bmatrix}
 $$
 
-Find a matrix $B$ such that the set of valid net trafﬁc ﬂows is exactly the nullspace of $B$ (i.e., all $\vec{t}$ such that $B\vec{t} = \vec{0}$).
+Find a matrix $B$ such that the set of valid net trafﬁc ﬂows is exactly the nullspace of $B$ (i.e., all $\\vec{t}$ such that $B\\vec{t} = \\vec{0}$).
 
 (b) <b>(5pts)</b> A new road is constructed between the two cities, as shown in Figure 3.
 
@@ -28,16 +28,16 @@ Find a matrix $B$ such that the set of valid net trafﬁc ﬂows is exactly the 
 Let trafﬁc ﬂows be described by a vector
 
 $$
-\vec{t} =
-\begin{bmatrix}
-t_1 \\
-t_2 \\
-t_3 \\
-t_4 \\
-t_5 \\
-t_6 \\
-t_7 \\
-\end{bmatrix}
+\\vec{t} =
+\\begin{bmatrix}
+t_1 \\\\
+t_2 \\\\
+t_3 \\\\
+t_4 \\\\
+t_5 \\\\
+t_6 \\\\
+t_7 \\\\
+\\end{bmatrix}
 $$
 
 <b>Find a matrix $B$ such that the valid trafﬁc ﬂows are exactly the nullspace of $B'$.</b>
@@ -46,25 +46,25 @@ $$
 $$
 B'
 =
-\left[
-\begin{array}{c|c}
-B & \vec{b}
-\end{array}
-\right]
+\\left[
+\\begin{array}{c|c}
+B & \\vec{b}
+\\end{array}
+\\right]
 $$
 
-<i>as in you only need to add a single column $\vec{b}$ to the matrix B from the previous part. Feel free to just write down the vector $\vec{b}$. You don’t have to write out the numbers of B again.</i><br/><br/>
+<i>as in you only need to add a single column $\\vec{b}$ to the matrix B from the previous part. Feel free to just write down the vector $\\vec{b}$. You don’t have to write out the numbers of B again.</i><br/><br/>
 
 (c) <b>(12pts)</b> Does adding this additional road change the possible trafﬁc ﬂows of the two cities? That is,
-is there any valid ﬂow $\vec{t}$ for which the additional road has non-zero ﬂow ($t_7 \ne 0$)? <b>Give an explicit example of such a ﬂow or an argument why one cannot exist.</b><br/>
+is there any valid ﬂow $\\vec{t}$ for which the additional road has non-zero ﬂow ($t_7 \\ne 0$)? <b>Give an explicit example of such a ﬂow or an argument why one cannot exist.</b><br/>
 (<i>Hint: One way of doing this is to recall that each row in the incidence matrix corresponds to the constraint that the total ﬂow into an intersection is zero. Can you interpret the constraint resulting from the sum of all the rows corresponding to intersections in a city?</i>)<br/><br/>
 
 (d) <b>(BONUS 5pts)</b> Now suppose instead that <i>two</i> roads are constructed between the cities, as shown in Figure 4.
 
 <p align="center">Figure 4: The trafﬁc network after two new roads are constructed.</p>
 
-Let trafﬁc ﬂows be described by a vector $\vec{t} \in R^8$.
-Does adding this additional pair of roads change the possible trafﬁc ﬂows of the two cities (beyond the case when the two cities were not connected)? That is, is there any valid ﬂow $\vec{t}$ for which at least one of the additional roads has non-zero ﬂow ($t_7 \ne 0$ or $t_8 \ne 0$)? <b>Give an explicit example of such a ﬂow or an argument why one cannot exist.</b><br/><br/>
+Let trafﬁc ﬂows be described by a vector $\\vec{t} \\in R^8$.
+Does adding this additional pair of roads change the possible trafﬁc ﬂows of the two cities (beyond the case when the two cities were not connected)? That is, is there any valid ﬂow $\\vec{t}$ for which at least one of the additional roads has non-zero ﬂow ($t_7 \\ne 0$ or $t_8 \\ne 0$)? <b>Give an explicit example of such a ﬂow or an argument why one cannot exist.</b><br/><br/>
 
 (e) <b>(BONUS 10pts)</b> Before they were connected, both cities individually had sensors set up to measure their trafﬁc ﬂows. That is, they measured the ﬂows along some set of roads, and were able to re-construct the ﬂows along all roads in their <i>isolated</i> city. After the two new roads of Figure 4 were constructed, the state’s engineers added two additional sensors, one on each road (on $t_7$ and $t_8$). Using the data from each city’s sensors, and these two new sensors, they were able to recover the ﬂows of all roads in the network.<br/>
 However, one day the sensor on $t_7$ breaks. <b>Can they still recover all the ﬂows, using only the remaining sensors? Give an argument for why or why not.</b>
