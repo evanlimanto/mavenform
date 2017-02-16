@@ -1,0 +1,25 @@
+{
+  "name": "mavenform",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:8080/",
+  "devDependencies": {
+    "concurrently": "^3.3.0",
+    "react-scripts": "0.9.0"
+  },
+  "dependencies": {
+    "browserify": "^14.1.0",
+    "marked": "^0.3.6",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "scripts": {
+    "magic": "concurrently \"npm run start\" \"npm run watch\"",
+    "server": "npm run build&&node main.js",
+    "start": "node main.js",
+    "watch": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

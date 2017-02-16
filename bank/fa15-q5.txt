@@ -1,0 +1,5 @@
+<b>5. Show It</b><br/>
+
+Let $n$ be a positive integer. Let $\{\vec{v_1}, \vec{v_2}, . . . , \vec{v_k}\}$ be a set of $k$ linearly dependent vectors in $\mathbb{R}^n$. Show that for
+any ($n × n$) matrix A, the set $\{\vec{Av_1}, \vec{Av_2}, . . . , \vec{Av_k}\}$ is a set of linearly dependent vectors.
+
