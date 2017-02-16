@@ -61,7 +61,7 @@ What is the null space of the matrix
 const img7a = require('./q7a.png');
 const fa15q7a =
 `
-<h3>7. Finding the bright cave <i>(27pts total)</i></h3>
+<h3>7. Finding the Bright Cave <i>(27pts total)</i></h3>
 
 Nara the one-handed druid and Kody the one-handed ranger ﬁnd themselves in dire straits. Before them is a cliff with four cave entrances arranged in a square: two upper caves and two lower caves. Each entrance emits a certain amount of light, and the two wish to ﬁnd exactly the amount of light coming from each cave. Here’s the catch: after contracting a particularly potent strain of ghoul fever, our intrepid heroes are only able to see the total intensity of light before them (so their eyes operate like a single-pixel camera). Kody and Nara are capable adventurers. But they don’t know any linear algebra - and they need your help.<br/><br/>
 
