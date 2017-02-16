@@ -35,7 +35,7 @@ h2 {
   text-align: left;
   font-family: 'Lato', sans-serif;
   font-weight: 700;
-  font-size: 22px;
+  font-size: 24px;
   color: #111;
 }
 
@@ -154,11 +154,14 @@ img {
 }
 
 .solution {
-  margin: 25px 0;
+  margin: 15px 0;
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
   border-radius: 5px;
-  display: none;
+}
+
+.problem-image {
+  margin: 25px 0;
 }
 
 input[type=text] {

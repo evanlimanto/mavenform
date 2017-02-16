@@ -3,34 +3,68 @@ import renderHTML from 'react-render-html';
 const _ = require('lodash');
 
 class Solution extends Component {
+  constructor(props) {
+    super(props); 
+
+    this.state = {
+      showImage: false
+    };
+
+    this.toggleSolution = this.toggleSolution.bind(this);
+  }
+
+  toggleSolution() {
+    this.setState({
+      showImage: !this.state.showImage
+    });
+  }
+
   render() {
+    const hasResponse = this.props.hasResponse;
+    const showImage = this.state.showImage;
+    var check = null;
+    var image = null;
+    if (hasResponse) {
+       check = <input className="blue" type="button" value="Check" />;
+    }
+    if (this.props.image && this.state.showImage) {
+        image = (
+          <span>
+            {_.map(this.props.image, (file) => {
+              const path = require('../../solutions/' + file);
+              return <img className="solution" src={path} />;
+            })}
+          </span>
+        );
+    }
+
     return (
       <div>
         <hr className="s2" />
-        <input className="blue" type="button" value="Check" />
-        <input className="gray" type="button" value="Solution" />
-        <img id="s1" className="solution" src="s1.png" />
+        {check}
+        <input className="gray" type="button" value="Solution" onClick={() => this.toggleSolution()}/>
+        {image}
       </div>
     );
   }
 }
 
 class VariablesQuestion extends Component {
-    render() {
-      const content = this.props.content;
-      const variables = this.props.variables;
-      return (
-        <div>
-          <div dangerouslySetInnerHTML={{__html: content}}></div>
-          <hr className="s2" />
-            {_.map(variables, (variable, key) => {
-              const str = `\\(${variable} =\\)`;
-              return <span key={key}>{str}<input className="cell" type="text" /></span>;
-            })}
-          <Solution />
-        </div>
-      );
-    }
+  render() {
+    const content = this.props.content;
+    const variables = this.props.variables;
+    return (
+      <div>
+        <div dangerouslySetInnerHTML={{__html: content}}></div>
+        <hr className="s2" />
+          {_.map(variables, (variable, key) => {
+            const str = `\\(${variable} =\\)`;
+            return <span key={key}>{str}<input className="cell" type="text" /></span>;
+          })}
+        <Solution hasResponse={true} image={this.props.image} />
+      </div>
+    );
+  }
 }
 
 class MatrixQuestion extends Component {
@@ -43,13 +77,13 @@ class MatrixQuestion extends Component {
       <div>
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <hr className="s2" />
-        {_.range(rows).map(() => {
-          const row = _.range(cols).map(() => {
-            return <input className="cell" type="text" />
+        {_.range(rows).map((rowKey) => {
+          const row = _.range(cols).map((colKey) => {
+            return <input key={colKey} className="cell" type="text" />
           });
-          return <div>{row}</div>
+          return <div key={rowKey}>{row}</div>
         })}
-        <Solution />
+        <Solution hasResponse={true} image={this.props.image} />
       </div>
     );
   }
@@ -64,7 +98,7 @@ class TrueFalseQuestion extends Component {
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <hr className="s5" />
         <input type="checkbox" data-toggle="toggle" data-on="True" data-off="False" />
-        <Solution />
+        <Solution hasResponse={true} image={this.props.image} />
       </div>
     );
   }
@@ -87,7 +121,7 @@ class FreeFormQuestion extends Component {
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <hr className="s5" />
         {solution} 
-        <Solution />
+        <Solution hasResponse={hasResponse} image={this.props.image} />
       </div>
     );
   }
