@@ -58,7 +58,7 @@ What is the null space of the matrix
 ?
 `;
 
-const img7a = require('./q7a.png');
+const img7a = require('../img/fa16q7-1.png');
 const fa15q7a =
 `
 <h3>7. Finding the Bright Cave <i>(27pts total)</i></h3>
@@ -95,7 +95,7 @@ $$
 why not?</b>
 `;
 
-const img8a = require('./q8a.png');
+const img8a = require('../img/fa16q8-1.png');
 const fa15q8a =
 `
 <h3>8. A Tale of Two Cities <i>(24pts +15pts)</i></h3>
@@ -124,7 +124,7 @@ $$
 Find a matrix \\(B\\) such that the set of valid net trafﬁc ﬂows is exactly the nullspace of \\(B\\) (i.e., all \\(\\vec{t}\\) such that \\(B\\vec{t} = \\vec{0}\\)).
 `;
 
-const img8b = require('./q8b.png');
+const img8b = require('../img/fa16q8-2.png');
 const fa15q8b =
 `
 <b>(b)</b> <i>(5pts)</i> A new road is constructed between the two cities, as shown in Figure 3.
@@ -172,7 +172,7 @@ is there any valid ﬂow \\(\\vec{t}\\) for which the additional road has non-ze
 
 `;
 
-const img8d = require('./q8d.png');
+const img8d = require('../img/fa16q8-3.png');
 const fa15q8d =
 `
 <b>(d)</b> <i>(BONUS 5pts)</i> Now suppose instead that <i>two</i> roads are constructed between the cities, as shown in Figure 4.
@@ -193,7 +193,7 @@ However, one day the sensor on \\(t_7\\) breaks. <b>Can they still recover all t
 
 `;
 
-const img9a = require('./q9a.png');
+const img9a = require('../img/fa16q9-1.png');
 const fa15q9a =
 `
 <h3>9. Justin Beaver <i>(43pts)</i></h3>
@@ -245,7 +245,7 @@ $$
 <i>(Hint: Think about what the rows of \\(D\\) should be. It sufﬁces to give an expression for the jth row \\(D_j\\) of \\(D\\).)</i><br/><br/>
 `;
 
-const img9e = require('./q9e.png');
+const img9e = require('../img/fa16q9-2.png');
 const fa15q9e =
 `
 <b>(e)</b> <i>(13pts)</i> Now assume we have a speciﬁc network of pumps with a different pump matrix.
@@ -270,48 +270,71 @@ class EE16AFa15 extends Component {
   render() {
     return (
       <span>
-        <hr className="s5" />
-        <h2>Straightforward questions <i>(24 points)</i></h2>
+        <h1>EE 16A</h1>
         <hr className="s2" />
-        <p>Unless told otherwise, you must show work to get credit. There will be very little partial credit given in this section. You get one drop: do 3 out of the following 4 questions. (We will grade all 4 and keep the best 3 scores.) Each problem is worth 8 points. Students who get all 4 questions correct will receive some bonus points (6 points).</p>
-        <hr className="s5" />
-        <VariablesQuestion id={"q3"} content={fa15q3} variables={['x_1', 'x_2']} image={['q3.png']} />
-        <hr className="s5" />
-        <MatrixQuestion id={"q4"} content={fa15q4} rows={2} cols={2} image={['q4-1.png', 'q4-2.png']} />
-        <hr className="s5" />
-        <FreeFormQuestion id={"q5"} content={fa15q5} hasResponse={false} image={['q5-1.png', 'q5-2.png']} />
-        <hr className="s5" />
-        <FreeFormQuestion id={"q6"} content={fa15q6} hasResponse={false} image={['q6-1.png', 'q6-2.png']} />
-        <hr className="s5" />
-        <h2>Free-form Problems <i>(94 + 15 points)</i></h2>
-        <hr className="s5" />
-        <MatrixQuestion id={"q7a"} content={fa15q7a} rows={4} cols={4} image={['q7a.png']} />
-        <hr className="s5" />
-        <ToggleQuestion id={"q7b"} content={fa15q7b} on="Yes" off="No" image={['q7b.png']} />
-        <hr className="s5" />
-        <ToggleQuestion id={"q7c"} content={fa15q7c} on="Yes" off="No" image={['q7c.png']} />
-        <hr className="s5" />
-        <MatrixQuestion id={"q8a"} content={fa15q8a} rows={6} cols={6} image={['q8a.png']} />
-        <hr className="s5" />
-        <MatrixQuestion id={"q8b"} content={fa15q8b} rows={6} cols={1} image={['q8b-1.png', 'q8b-2.png']} />
-        <hr className="s5" />
-        <FreeFormQuestion id={"q8c"} content={fa15q8c} hasResponse={false} image={['q8c.png']} />
-        <hr className="s5" />
-        <FreeFormQuestion id={"q8d"} content={fa15q8d} hasResponse={false} image={['q8d.png']} />
-        <hr className="s5" />
-        <ToggleQuestion id={"q8e"} content={fa15q8e} on="Yes" off="No" image={['q8e-1.png', 'q8e-2.png']} />
-        <hr className="s5" />
-        <ToggleQuestion id={"q9a"} content={fa15q9a} on="Yes" off="No" image={['q9a.png']} />
-        <hr className="s5" />
-        <FreeFormQuestion id={"q9b"} content={fa15q9b} hasResponse={false} image={['q9b.png']} />
-        <hr className="s5" />
-        <MatrixQuestion id={"q9c"} content={fa15q9c} rows={3} cols={1} image={['q9c.png']} />
-        <hr className="s5" />
-        <FreeFormQuestion id={"q9d"} content={fa15q9d} hasResponse={false} image={['q9d.png']} />
-        <hr className="s5" />
-        <FreeFormQuestion id={"q9e"} content={fa15q9e} hasResponse={true} image={['q9e-1.png', 'q9e-2.png']} />
-        <hr className="s5" />
-        <MatrixQuestion id={"q9f"} content={fa15q9f} rows={3} cols={1} image={['q9f-1.png', 'q9f-2.png']} />
+        <div className="center">
+          <h5>Midterm 1 | Fall 2015 | Niknejad, Sahai</h5>
+        </div>
+        <div className="sidebar">
+          <hr className="s5" />
+          <h4>CONTENTS</h4>
+          <hr className="s2" />
+          <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
+          <hr className="s1" />
+          <div className="sidetitle">Section 1</div>
+          <div><a className="sidetab">3. True/False</a></div>
+          <div><a className="sidetab">4. Proof</a></div>
+          <div><a className="sidetab">5. Inverse of a Matrix</a></div>
+          <hr className="s1" />
+          <div className="sidetitle">Section 2</div>
+          <div><a className="sidetab">6. Directional Shovels</a></div>
+          <div><a className="sidetab">7. Graph Majors</a></div>
+          <div><a className="sidetab">8. Transformation Basketball</a></div>
+        </div>
+        <div className="content">
+          <hr className="s5" />
+          <h2>Straightforward questions <i>(24 points)</i></h2>
+          <hr className="s2" />
+          <p>Unless told otherwise, you must show work to get credit. There will be very little partial credit given in this section. You get one drop: do 3 out of the following 4 questions. (We will grade all 4 and keep the best 3 scores.) Each problem is worth 8 points. Students who get all 4 questions correct will receive some bonus points (6 points).</p>
+          <hr className="s5" />
+          <VariablesQuestion id={"q3"} content={fa15q3} variables={['x_1', 'x_2']} image={['q3.png']} />
+          <hr className="s5" />
+          <MatrixQuestion id={"q4"} content={fa15q4} rows={2} cols={2} image={['q4-1.png', 'q4-2.png']} />
+          <hr className="s5" />
+          <FreeFormQuestion id={"q5"} content={fa15q5} hasResponse={false} image={['q5-1.png', 'q5-2.png']} />
+          <hr className="s5" />
+          <FreeFormQuestion id={"q6"} content={fa15q6} hasResponse={false} image={['q6-1.png', 'q6-2.png']} />
+          <hr className="s5" />
+          <h2>Free-form Problems <i>(94 + 15 points)</i></h2>
+          <hr className="s5" />
+          <MatrixQuestion id={"q7a"} content={fa15q7a} rows={4} cols={4} image={['q7a.png']} />
+          <hr className="s5" />
+          <ToggleQuestion id={"q7b"} content={fa15q7b} on="Yes" off="No" image={['q7b.png']} />
+          <hr className="s5" />
+          <ToggleQuestion id={"q7c"} content={fa15q7c} on="Yes" off="No" image={['q7c.png']} />
+          <hr className="s5" />
+          <MatrixQuestion id={"q8a"} content={fa15q8a} rows={6} cols={6} image={['q8a.png']} />
+          <hr className="s5" />
+          <MatrixQuestion id={"q8b"} content={fa15q8b} rows={6} cols={1} image={['q8b-1.png', 'q8b-2.png']} />
+          <hr className="s5" />
+          <FreeFormQuestion id={"q8c"} content={fa15q8c} hasResponse={false} image={['q8c.png']} />
+          <hr className="s5" />
+          <FreeFormQuestion id={"q8d"} content={fa15q8d} hasResponse={false} image={['q8d.png']} />
+          <hr className="s5" />
+          <ToggleQuestion id={"q8e"} content={fa15q8e} on="Yes" off="No" image={['q8e-1.png', 'q8e-2.png']} />
+          <hr className="s5" />
+          <ToggleQuestion id={"q9a"} content={fa15q9a} on="Yes" off="No" image={['q9a.png']} />
+          <hr className="s5" />
+          <FreeFormQuestion id={"q9b"} content={fa15q9b} hasResponse={false} image={['q9b.png']} />
+          <hr className="s5" />
+          <MatrixQuestion id={"q9c"} content={fa15q9c} rows={3} cols={1} image={['q9c.png']} />
+          <hr className="s5" />
+          <FreeFormQuestion id={"q9d"} content={fa15q9d} hasResponse={false} image={['q9d.png']} />
+          <hr className="s5" />
+          <FreeFormQuestion id={"q9e"} content={fa15q9e} hasResponse={true} image={['q9e-1.png', 'q9e-2.png']} />
+          <hr className="s5" />
+          <MatrixQuestion id={"q9f"} content={fa15q9f} rows={3} cols={1} image={['q9f-1.png', 'q9f-2.png']} />
+        </div>
       </span>
     );
   }

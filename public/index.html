@@ -21,8 +21,7 @@
   <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 </head>
 <body>
-  <a class="return">&#8592; Return</a>
-<!--   <div class="menu">
+  <!--<div class="menu">
     <a class="home center">Mavenform</a>
     <div class="sidetitle">Midterm 1</div>
     <div><a class="sidetab">Spring 2015</a></div>
@@ -43,39 +42,9 @@
     <div><a class="sidetab">Fall 2016</a></div>
     <a class="index">&#8592; Return</a>
   </div> -->
-  <div class="test-container">
-    <div class="test">
-      <hr class="margin">
-      <h1>EE 16A</h1>
-      <hr class="s2">
-      <div class="center">
-        <h5>Niknejad, Sahai | Midterm 1 | Fall 2015</h5>
-      </div>
-      <div class="sidebar">
-        <hr class="s5">
-        <h4>CONTENTS</h4>
-        <hr class="s2">
-        <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
-        <hr class="s1">
-        <div class="sidetitle">Straightforward Questions</div>
-        <div><a class="sidetab" onclick="$('#q3').smoothScroll();">3. Solve It</a></div>
-        <div><a class="sidetab" onclick="$('#q4').smoothScroll();">4. Invert It</a></div>
-        <div><a class="sidetab" onclick="$('#q5').smoothScroll();">5. Show It</a></div>
-        <div><a class="sidetab" onclick="$('#q6').smoothScroll();">6. Null It</a></div>
-        <hr class="s1">
-        <div class="sidetitle">Free-form Problems</div>
-        <div><a class="sidetab" onclick="$('#q7a').smoothScroll();">7. Finding the Bright Cave</a></div>
-        <div><a class="sidetab" onclick="$('#q8a').smoothScroll();">8. A Tale of Two Cities</a></div>
-        <div><a class="sidetab" onclick="$('#q9a').smoothScroll();">9. Justin Beaver</a></div>
-      </div>
-      <div class="content">
-        <div id="root"></div>
-      </div>
-      <hr class="margin">
-    </div>
-  </div>
+  <div id="root"></div>
   <script>
-    $.fn.smoothScroll = function() {
+    /*$.fn.smoothScroll = function() {
       $('html, body').animate({scrollTop: $(this).offset().top - 40});
     };
 
@@ -88,7 +57,7 @@
       } else {
         $('.sidebar').css('position', 'relative');
       }
-    });
+    });*/
   </script>
 </body>
 </html>

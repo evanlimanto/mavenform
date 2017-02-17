@@ -236,49 +236,73 @@ class EE16AFa16 extends Component {
   render() {
     return (
       <span>
-        <hr className="s5" />
-        <h2>Section 1 (18 points)</h2>
+        <h1>EE 16A</h1>
         <hr className="s2" />
-        <ToggleQuestion id={"q3a"} content={fa16q3a} />
-        <hr className="s5" />
-        <ToggleQuestion id={"q3b"} content={fa16q3b} />
-        <hr className="s5" />
-        <ToggleQuestion id={"q3c"} content={fa16q3c} />
-        <hr className="s5" />
-        <ToggleQuestion id={"q3d"} content={fa16q3d} />
-        <hr className="s5" />
-        <ToggleQuestion id={"q3e"} content={fa16q3e} />
-        <hr className="s5" />
-        <ToggleQuestion id={"q3f"} content={fa16q3f} />
-        <hr className="s5" />
-        <FreeFormQuestion id={"q4a"} content={fa16q4a} hasResponse={false} />
-        <hr className="s5" />
-        <FreeFormQuestion id={"q4b"} content={fa16q4b} hasResponse={false} />
-        <hr className="s5" />
-        <FreeFormQuestion id={"q5"} content={fa16q5} hasResponse={false} />
-        <hr className="s5" />
-        <h2>Section 2 (55 points)</h2>
-        <hr className="s2" />
-        <FreeFormQuestion id={"q6a"} content={fa16q6a} hasResponse={false} />
-        <hr className="s2" />
-        <FreeFormQuestion id={"q6b"} content={fa16q6b} hasResponse={false} />
-        <hr className="s2" />
-        <MatrixQuestion id={"q7a"} content={fa16q7a} rows={3} cols={3} />
-        <hr className="s2" />
-        <FreeFormQuestion id={"q7b"} content={fa16q7b} hasResponse={false} />
-        <hr className="s2" />
-        <FreeFormQuestion id={"q7c"} content={fa16q7c} hasResponse={false} />
-        <hr className="s2" />
-        <FreeFormQuestion id={"q7d"} content={fa16q7d} hasResponse={false} />
-        <hr className="s3" />
-        <FreeFormQuestion id={"q7e"} content={fa16q7e} hasResponse={false} />
-        <hr className="s3" />
-        <MatrixQuestion id={"q8a"} content={fa16q8a} rows={2} cols={2} />
-        <hr className="s3" />
-        <FreeFormQuestion id={"q8b"} content={fa16q8b} hasResponse={false} />
-        <hr className="s3" />
-        <FreeFormQuestion id={"q8c"} content={fa16q8c} hasResponse={false} />
-        <hr className="s5" />
+        <div className="center">
+          <h5>Midterm 1 | Fall 2016 | Ayazifar, Stojanovic</h5>
+        </div>
+        <div className="sidebar">
+          <hr className="s5" />
+          <h4>CONTENTS</h4>
+          <hr className="s2" />
+          <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
+          <hr className="s1" />
+          <div className="sidetitle">Straightforward Questions</div>
+          <div><a className="sidetab">3. Solve It</a></div>
+          <div><a className="sidetab">4. Invert It</a></div>
+          <div><a className="sidetab">5. Show It</a></div>
+          <div><a className="sidetab">6. Null It</a></div>
+          <hr className="s1" />
+          <div className="sidetitle">Free-form Problems</div>
+          <div><a className="sidetab">7. Finding the Bright Cave</a></div>
+          <div><a className="sidetab">8. A Tale of Two Cities</a></div>
+          <div><a className="sidetab">9. Justin Beaver</a></div>
+        </div>
+        <div className="content">
+          <hr className="s5" />
+          <h2>Section 1 (18 points)</h2>
+          <hr className="s2" />
+          <ToggleQuestion id={"q3a"} content={fa16q3a} />
+          <hr className="s5" />
+          <ToggleQuestion id={"q3b"} content={fa16q3b} />
+          <hr className="s5" />
+          <ToggleQuestion id={"q3c"} content={fa16q3c} />
+          <hr className="s5" />
+          <ToggleQuestion id={"q3d"} content={fa16q3d} />
+          <hr className="s5" />
+          <ToggleQuestion id={"q3e"} content={fa16q3e} />
+          <hr className="s5" />
+          <ToggleQuestion id={"q3f"} content={fa16q3f} />
+          <hr className="s5" />
+          <FreeFormQuestion id={"q4a"} content={fa16q4a} hasResponse={false} />
+          <hr className="s5" />
+          <FreeFormQuestion id={"q4b"} content={fa16q4b} hasResponse={false} />
+          <hr className="s5" />
+          <FreeFormQuestion id={"q5"} content={fa16q5} hasResponse={false} />
+          <hr className="s5" />
+          <h2>Section 2 (55 points)</h2>
+          <hr className="s2" />
+          <FreeFormQuestion id={"q6a"} content={fa16q6a} hasResponse={false} />
+          <hr className="s2" />
+          <FreeFormQuestion id={"q6b"} content={fa16q6b} hasResponse={false} />
+          <hr className="s2" />
+          <MatrixQuestion id={"q7a"} content={fa16q7a} rows={3} cols={3} />
+          <hr className="s2" />
+          <FreeFormQuestion id={"q7b"} content={fa16q7b} hasResponse={false} />
+          <hr className="s2" />
+          <FreeFormQuestion id={"q7c"} content={fa16q7c} hasResponse={false} />
+          <hr className="s2" />
+          <FreeFormQuestion id={"q7d"} content={fa16q7d} hasResponse={false} />
+          <hr className="s3" />
+          <FreeFormQuestion id={"q7e"} content={fa16q7e} hasResponse={false} />
+          <hr className="s3" />
+          <MatrixQuestion id={"q8a"} content={fa16q8a} rows={2} cols={2} />
+          <hr className="s3" />
+          <FreeFormQuestion id={"q8b"} content={fa16q8b} hasResponse={false} />
+          <hr className="s3" />
+          <FreeFormQuestion id={"q8c"} content={fa16q8c} hasResponse={false} />
+          <hr className="s5" />
+        </div>
       </span>
     );
   }
