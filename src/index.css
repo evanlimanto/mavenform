@@ -164,6 +164,10 @@ img {
   border-radius: 5px;
 }
 
+.hidden {
+  display: none;
+}
+
 .problem-image {
   margin: 25px 0;
 }
