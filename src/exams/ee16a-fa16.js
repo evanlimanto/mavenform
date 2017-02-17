@@ -146,7 +146,7 @@ const fa16q7a =
 
 We’d like to understand how engineering undergrads change their majors. For simplicity, there are three majors we’ll look at: EECS, CS, and MechE. Let’s assume that students can only be studying one major at a time, and must be studying one of these three majors. Let’s also assume that once a week, students can choose to switch to another major, or stick with what they’re studying. So, a discrete time step represents one week.<br/>
 
-<img src="${imgfa16q7_1}" class="problem-image" />
+<img src="${imgfa16q7_1}" className="problem-image" />
 
 At the start of week n, the number of EECS, CS, MechE students are \\(x_e[n]\\), \\(x_c[n]\\), and \\(x_m[n]\\), respectively.<br/>
 Let \\(\\vec{x}[n]\\) =
@@ -169,7 +169,7 @@ k_1 \\\\ k_2 \\\\ k_3 \\\\ k_4 \\\\\
 
 const fa16q7b =
 `
-<img src="${imgfa16q7_1}" class="problem-image" />
+<img src="${imgfa16q7_1}" className="problem-image" />
 
 (b) Assume that from one week to the next, no students drop out or are enrolled to the system – in other
 words, the total number of students is conserved. Write a system of four linear equations that relate \\(k_1\\), \\(k_2\\), \\(k_3\\), \\(k_4\\).<br/>
@@ -178,7 +178,7 @@ words, the total number of students is conserved. Write a system of four linear 
 
 const fa16q7c =
 `
-<img src="${imgfa16q7_1}" class="problem-image" />
+<img src="${imgfa16q7_1}" className="problem-image" />
 
 (c) Let \\(\\vec{x}[10]\\) = \\(\\left[\\begin{array}{c}100\\\\200\\\\200\\\\\\end{array}\\right]\\) and \\(\\vec{x}[11]\\) = \\(\\left[\\begin{array}{c}150\\\\100\\\\250\\\\\\end{array}\\right]\\). Rewrite your four linear equations from part (b) in the form \\(T\\vec{k}\\) = \\(\\vec{b}\\), where \\(\\vec{k}\\) is the vector defined above and \\(\\vec{b}\\) is a vector of constants. Do not solve for \\(\\vec{k}\\).
 `;
@@ -211,7 +211,7 @@ Kevin Bancroft just joined the Column Space Warriors. In order to better learn h
 (a) Kevin Bancroft and Draymond Blue-Gold are running a drill where they each have to run from a
 starting coordinate to an end coordinate. Kevin starts at point \\(ks\\) = ${lmatrix([[3, 7]], true)} and wants to go to point \\(k_e\\) = ${lmatrix([[-4, 10]], true)}. Draymond starts at point \\(d_s\\) = ${lmatrix([[-6, 1]], true)} and wants to go to point \\(d_e\\) = ${lmatrix([[-7, -5]], true)}.
 
-<img src="${imgfa16q8_1}" class="problem-image" />
+<img src="${imgfa16q8_1}" className="problem-image" />
 
 Each player must apply the same matrix transformation A on his starting point to reach reach his end point, such that ${lx('Ak_s')} = ${lx('k_e')} and ${lx('Ad_s')} = ${lx('d_e')}. Derive the transformation matrix ${lx('A')}, if possible. We also know that the transformation matrix ${lx('A')} is of the form ${lx('A')} = ${lmatrix([[1, 'a'], ['b', 1]])}, where ${lx('a')}, ${lx('b')} are real numbers.
 `;
@@ -229,7 +229,7 @@ const fa16q8c =
 `
 (c) After a couple of drills, Kevin Bancroft came up with a new idea – he decided to race his teammates across the court to see who is faster. Kevin starts at point ${lx('k_s')} = ${lmatrix([[-2, 1]], true)} and ends at ${lx('k_e')} = ${lmatrix([[3, 2]], true)}. Steph starts at ${lx('s_s')} = ${lmatrix([[0, 0]], true)} and ends at ${lx('s_e')} = ${lmatrix([[-6, -3]], true)}. Can this be represented by a transformation matrix? Brieﬂy justify why or why not.
 
-<img src="${imgfa16q8_2}" class="problem-image" />
+<img src="${imgfa16q8_2}" className="problem-image" />
 `;
 
 class EE16AFa16 extends Component {

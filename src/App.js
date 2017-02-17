@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { EE16AFa15, EE16AFa16 } from './exams';
+import { EE16ASp15, EE16AFa15, EE16AFa16 } from './exams';
 import Home from './home';
 
 import './App.css';
@@ -15,6 +15,8 @@ class App extends Component {
       exam = <EE16AFa16 />; 
     } else if (exam === 'ee16afa15') {
       exam = <EE16AFa15 />;
+    } else if (exam === 'ee16asp15') {
+      exam = <EE16ASp15 />; 
     } else {
       return (
         <Home />

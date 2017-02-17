@@ -1,0 +1,297 @@
+Section 1: Straightforward questions (24 points)
+
+Unless told otherwise, you must show work to get credit. There will be very little partial credit given in this
+section. You get one drop: do 3 out of the following 4 questions. (We will grade all 4 and keep the best
+3 scores.) Each problem is worth 8 points. Students who get all 4 questions correct will receive some bonus
+points (6 points).
+
+3. Solve It
+
+Solve the following system of linear equations
+
+1 3
+−2 −5
+
+x1
+x2
+
+=
+
+4
+−6
+
+4. Invert It
+
+What is the inverse of the matrix
+
+1 3
+−2 −5
+?
+
+EECS 16A, Fall 2015, Midterm 1
+
+3
+
+5. Show It
+
+Let n be a positive integer. Let {v1, v2, . . . ,vk} be a set of k linearly dependent vectors in Rn. Show that for
+any (n× n) matrix A, the set {Av1,Av2, . . . ,Avk} is a set of linearly dependent vectors.
+
+6. Null It
+
+What is the null space of the matrix
+
+1 1 −2 3
+0 0 −1 2
+0 0 3 -6
+?
+
+Section 2: Free-form Problems (94+15 points)
+
+7. Finding the bright cave (27pts total)
+
+Nara the one-handed druid and Kody the one-handed ranger ﬁnd themselves in dire straits. Before them is
+a cliff with four cave entrances arranged in a square: two upper caves and two lower caves. Each entrance
+emits a certain amount of light, and the two wish to ﬁnd exactly the amount of light coming from each cave.
+Here’s the catch: after contracting a particularly potent strain of ghoul fever, our intrepid heroes are only
+able to see the total intensity of light before them (so their eyes operate like a single-pixel camera). Kody
+and Nara are capable adventurers. But they don’t know any linear algebra - and they need your help.
+Kody proposes an imaging strategy where he uses his hand to completely block the light from two caves at
+a time. He is able to take measurements using the following four masks (black means the light is blocked
+from that cave):
+
+Figure 1: Four image masks.
+
+(a) (5pts) Let x be the four-element vector that represents the magnitude of light emanating from the four
+cave entrances. Write a matrix K that performs the masking process in Fig. 1 on the vector x,
+such that Kx is the result of the four measurements.
+
+EECS 16A, Fall 2015, Midterm 1
+
+(b) (10pts) Does Kody’s set of masks give us a unique solution for all four caves’ light intensities? Why
+
+or why not?
+
+(c) (12pts) Nara, in her inﬁnite wisdom, places her one hand diagonally across the entrances, covering
+two of the cave entrances. However her hand is not wide enough, letting in 50% of the light from the
+caves covered and 100% of the light from the caves not covered. The following diagram shows the
+percentage of light let through from each cave:
+
+50% 100%
+100% 50%
+
+Does this additional measurement give them enough information to solve the problem? Why or
+why not?
+
+8. A Tale of Two Cities (24pts +15pts)
+
+[NOTE: The last two parts of this problem are extra credit. Do them if you have time, but don’t get
+stuck on them if you don’t.]
+There are two isolated cities in the desert. They each have their own network of roads and intersections, as
+shown in Figure 2. (Note: The arrows are oriented arbitrarily – net trafﬁc can ﬂow in either direction along
+a road). The citizens of these cities are careful drivers, and consequently, the net trafﬁc ﬂows along roads
+always obey the ﬂow conservation constraints (net cars per hour into an intersection equals the net cars per
+hour leaving that intersection).
+
+Figure 2: The trafﬁc networks of two isolated cities.
+
+(a) (7pts) We know how to model the net trafﬁc ﬂows within each city individually (from the Homework).
+We would like to jointly model the net trafﬁc ﬂows of both cities. That is, let the net trafﬁc ﬂow
+(cars/hr) along all roads be described by a vector
+
+
+t =
+t1
+t2
+t3
+t4
+t5
+t6
+
+Find a matrix B such that the set of valid net trafﬁc ﬂows is exactly the nullspace of B (ie, all t such that Bt =0).
+
+
+(b) (5pts) A new road is constructed between the two cities, as shown in Figure 3.
+
+Figure 3: The trafﬁc network after a new road is constructed.
+
+Let trafﬁc ﬂows be described by a vector
+
+t =
+
+t1
+t2
+t3
+t4
+t5
+t6
+t7
+
+Find a matrix B such that the valid trafﬁc ﬂows are exactly the nullspace of B.
+Hint: B will have the form
+
+B
+
+=
+
+B|b
+
+as in you only need to add a single column b to the matrix B from the previous part. Feel free to just
+write down the vector b. You don’t have to write out the numbers of B again.
+
+
+(c) (12pts) Does adding this additional road change the possible trafﬁc ﬂows of the two cities? That is,
+is there any valid ﬂow t for which the additional road has non-zero ﬂow (t7 = 0)? Give an explicit
+example of such a ﬂow or an argument why one cannot exist.
+(Hint: One way of doing this is to recall that each row in the incidence matrix corresponds to the
+constraint that the total ﬂow into an intersection is zero. Can you interpret the constraint resulting
+from the sum of all the rows corresponding to intersections in a city? )
+
+EECS 16A, Fall 2015, Midterm 1
+
+(d) (BONUS 5pts) Now suppose instead that two roads are constructed between the cities, as shown in
+
+Figure 4.
+
+Figure 4: The trafﬁc network after two new roads are constructed.
+
+Let trafﬁc ﬂows be described by a vector t ∈ R8.
+Does adding this additional pair of roads change the possible trafﬁc ﬂows of the two cities (beyond the
+case when the two cities were not connected)? That is, is there any valid ﬂow t for which at least one
+of the additional roads has non-zero ﬂow (t7 = 0 or t8 = 0)? Give an explicit example of such a ﬂow
+or an argument why one cannot exist.
+
+
+(e) (BONUS 10pts) Before they were connected, both cities individually had sensors set up to measure
+their trafﬁc ﬂows. That is, they measured the ﬂows along some set of roads, and were able to re-
+construct the ﬂows along all roads in their isolated city. After the two new roads of Figure 4 were
+constructed, the state’s engineers added two additional sensors, one on each road (on t7 and t8). Using
+the data from each city’s sensors, and these two new sensors, they were able to recover the ﬂows of all
+roads in the network.
+However, one day the sensor on t7 breaks. Can they still recover all the ﬂows, using only the
+remaining sensors? Give an argument for why or why not.
+
+
+[Extra page. If you want the work on this page to be graded, make sure you tell us on the problem’s main
+page.]
+
+
+9. Justin Beaver (43pts)
+
+In Homework 3, there was a question about Justin Bieber’s Segway — that was about controlling a multi-
+dimensional system with one control input.
+In this problem, we will instead think about a curious and
+superintelligent beaver watching the water level in a pool — this is implicitly about how many sensors are
+needed to measure the state of a multi-dimensional system.
+Three superintelligent rodents live in a network of pools. Justin Beaver lives in pool 1. Selena Gopher lives
+in pool 2. And Mousey Cyrus lives in pool 3. They are sadly not on talking terms, but Justin really wants to
+know about the other pools.
+Suppose there is a network of pumps connecting the three different pools, given in the ﬁgure. x1[t], x2[t],
+and x3[t] is the water level in each pool at time step t. At each time step, the water from each pool is pumped
+along the arrows. The water levels are updated according to the matrix
+
+x1[t + 1]
+x2[t + 1]
+x3[t + 1]
+=
+0 1 0
+0 0 1
+1 0 0
+
+x1[t]
+x2[t]
+x3[t]
+
+(a) (5pts) Justin lives in pool 1 so he can watch the water level in this pool. He also knows exactly how
+the pumps work — i.e. knows the pump matrix A. Can Justin ﬁgure out the initial water levels in
+all three pools just by watching the water levels in his pool as time goes by? Describe (brieﬂy) in
+words how to do this. How many times does Justin need to observe the water in his own pool to
+ﬁgure this out?
+(Hint: No “linear algebra” machinery is needed here. Just think about what Justin observes as time
+goes by.)
+
+
+(b) (5pts) Consider now a general pump matrix A that is known to Justin, not necessarily the one in the
+example above. Just for this part, suppose Justin had been told the initial water levels x[0] by someone
+else. Could he ﬁgure out x[t]? Write an expression for x[t] given the initial levels x[0] and the pump
+matrix A.
+
+(c) (5pts) Suppose we use y[t] to denote Justin’s measurement of the water level in pool 1 at time t. We
+
+know that y[t] = x1[t]. Find a vector c such that
+
+y[t] = cTx[t]
+
+EECS 16A, Fall 2015, Midterm 1
+
+
+(d) (5pts) We want to know if tracking the water level in pool 1 is enough to eventually ﬁgure out the
+initial water level in all the pools. First ﬁnd a matrix D in terms of c and A (and powers of A) such
+
+that
+
+y[0]
+y[1]
+...
+
+y[T − 1]
+
+=
+
+D
+
+x1[0]
+x2[0]
+x3[0]
+
+(1)
+
+(Hint: Think about what the rows of D should be. It sufﬁces to give an expression for the jth row D j of
+D.)
+
+
+(e) (13pts) Now assume we have a speciﬁc network of pumps with a different pump matrix.
+
+ =
+x1[t + 1]
+x2[t + 1]
+x3[t + 1]
+
+0 1/4 1/2
+0 3/4 1/2
+1
+0
+
+0
+
+A
+
+x1[t]
+x2[t]
+x3[t]
+
+Given this speciﬁc A matrix, how many time steps T of observations in pool 1 will Justin need in
+order to recover the initial water levels x[0]? Argue why this number of observations is enough.
+
+
+(f) (10pts) For the T chosen in the previous part and the pump matrix A given there, suppose Justin
+
+measures
+
+y[t] = 1
+
+for t = 0,1, ..., (T − 1)
+
+What was x[0]? (Show work)
+
+
+PRINT your name and student ID:
+[Extra page. If you want the work on this page to be graded, make sure you tell us on the problem’s main
+page.]
+
+
+[Doodle page! Draw us something if you want or give us suggestions or complaints. You can also use this
+page to report anything suspicious that you might have noticed.]
+
+
+
