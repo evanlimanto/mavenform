@@ -25,12 +25,13 @@ class Solution extends Component {
     if (hasResponse) {
        check = <input className="blue" type="button" value="Check" />;
     }
-    if (this.props.image && this.state.showImage) {
+    if (this.props.image) {
         image = (
           <span>
             {_.map(this.props.image, (file) => {
               const path = require('../../solutions/' + file);
-              return <img className="solution" src={path} role="presentation" />;
+              const solutionClass = "solution" + ((this.state.showImage) ? "" : " hidden");
+              return <img className={solutionClass} src={path} role="presentation" />;
             })}
           </span>
         );
