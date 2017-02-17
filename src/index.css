@@ -10,15 +10,37 @@
 }
 
 body {
-  margin: auto;
-  max-width: 1020px;
-  padding: 0 100px;
   text-align: left;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 22px;
   color: #333;
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 250px;
+  padding: 120px 30px;
+  background: #333;
+}
+
+.test-container {
+  position: absolute;
+  top: 0;
+  left: 250px;
+  bottom: 0;
+  right: 0;
+}
+
+.test {
+  margin: auto;
+  max-width: 1020px;
+  padding: 0 100px;
 }
 
 h1 {
@@ -35,7 +57,7 @@ h2 {
   text-align: left;
   font-family: 'Lato', sans-serif;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 22px;
   color: #111;
 }
 
@@ -104,12 +126,13 @@ input:focus {
 }
 
 input[type=button] {
-  padding: 10px 15px;
+  padding: 10px 15px 12px;
   border-radius: 5px;
   margin-right: 10px;
   border: none;
   color: #fff;
   opacity: 0.8;
+  -webkit-appearance: none;
 }
 
 label {
@@ -178,11 +201,22 @@ input[type=button]:hover {
   opacity: 1;
 }
 
+.no-input {
+  color: #11accd;
+}
+
 .cell {
   text-align: center;
   height: 36px;
   width: 36px;
   margin: 6px;
+}
+
+.sidebar {
+  float: left;
+  padding-right: 40px;
+  max-width: 240px;
+  top: 0;
 }
 
 .sidetitle {
@@ -193,14 +227,66 @@ input[type=button]:hover {
   color: #333;
 }
 
-.sidetitle:hover {
-  border-bottom: none;
+.menu .sidetitle {
+  color: #ddd;
 }
 
 .sidetab {
   font-size: 14px;
   margin-left: 16px;
   line-height: 32px;
+}
+
+.menu .sidetab {
+  color: #aaa;
+  border-bottom: none;
+}
+
+.menu .sidetab:hover {
+  color: #11accd;
+}
+
+.menu .active {
+  color: #11accd;
+  border-bottom: 1px solid #11accd;
+}
+
+.home {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 250px;
+  display: block;
+  padding: 40px;
+  color: #eee;
+  background: #222;
+  font-weight: 400;
+  font-size: 22px;
+  border-bottom: none;
+}
+
+.home:hover {
+  border-bottom: none;
+  background: #111;
+}
+
+.index {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 250px;
+  display: block;
+  padding: 15px 25px;
+  color: #aaa;
+  background: #444;
+  font-weight: 400;
+  font-size: 16px;
+  border-bottom: none;
+}
+
+.index:hover {
+  border-bottom: none;
+  background: #222;
 }
 
 .selector {
@@ -210,16 +296,16 @@ input[type=button]:hover {
   color: #333;
 }
 
-.sidebar {
-  float: left;
-  padding-right: 20px;
-  width: 220px;
+.content {
+  float: right;
+  max-width: 580px;
 }
 
-.content {
-  float: left;
-  padding-left: 20px;
-  width: 600px;
+.return {
+  position: absolute;
+  top: 20px;
+  left: 25px;
+  z-index: 1;
 }
 
 .center {
@@ -257,5 +343,36 @@ input[type=button]:hover {
   display: block;
   width: 100%;
   clear: both;
-  height: 150px;
+  height: 100px;
+}
+
+@media (max-width: 1269px) {
+  .menu {
+    display: none;
+  }
+
+  .test-container {
+    left: 0;
+  }
+}
+
+@media (max-width: 1019px) {
+  .test {
+    padding: 0 50px;
+  }
+
+  .sidebar {
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .content {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 599px) {
+  .test {
+    padding: 0 25px;
+  }
 }

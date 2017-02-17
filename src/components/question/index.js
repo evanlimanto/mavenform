@@ -39,7 +39,7 @@ class Solution extends Component {
 
     return (
       <div>
-        <hr className="s2" />
+        <hr className="s3" />
         {check}
         <input className="gray" type="button" value="Solution" onClick={() => this.toggleSolution()}/>
         {image}
@@ -55,7 +55,7 @@ class VariablesQuestion extends Component {
     return (
       <div id={this.props.id}>
         <div dangerouslySetInnerHTML={{__html: content}}></div>
-        <hr className="s2" />
+        <hr className="s3" />
           {_.map(variables, (variable, key) => {
             const str = `\\(${variable} =\\)`;
             return <span key={key}>{str}<input className="cell" type="text" /></span>;
@@ -75,7 +75,7 @@ class MatrixQuestion extends Component {
     return (
       <div id={this.props.id}>
         <div dangerouslySetInnerHTML={{__html: content}}></div>
-        <hr className="s2" />
+        <hr className="s3" />
         {_.range(rows).map((rowKey) => {
           const row = _.range(cols).map((colKey) => {
             return <input key={colKey} className="cell" type="text" />
@@ -88,15 +88,17 @@ class MatrixQuestion extends Component {
   }
 }
 
-class TrueFalseQuestion extends Component {
+class ToggleQuestion extends Component {
   render() {
     const content = this.props.content;
+    const on = this.props.on;
+    const off = this.props.off;
 
     return (
       <div id={this.props.id}>
         <div dangerouslySetInnerHTML={{__html: content}}></div>
-        <hr className="s5" />
-        <input type="checkbox" data-toggle="toggle" data-on="True" data-off="False" />
+        <hr className="s3" />
+        <input type="checkbox" data-toggle="toggle" data-on={on} data-off={off} />
         <Solution hasResponse={true} image={this.props.image} />
       </div>
     );
@@ -112,13 +114,13 @@ class FreeFormQuestion extends Component {
     if (hasResponse) {
       solution = (<input type="text" />);
     } else {
-      solution = (<i>Free-form answer. No input type available.</i>);
+      solution = (<i className="no-input">Free-form answer. No input type available.</i>);
     }
 
     return (
       <div id={this.props.id}>
         <div dangerouslySetInnerHTML={{__html: content}}></div>
-        <hr className="s5" />
+        <hr className="s3" />
         {solution} 
         <Solution hasResponse={hasResponse} image={this.props.image} />
       </div>
@@ -126,4 +128,4 @@ class FreeFormQuestion extends Component {
   }
 }
 
-export { VariablesQuestion, MatrixQuestion, TrueFalseQuestion, FreeFormQuestion };
+export { VariablesQuestion, MatrixQuestion, ToggleQuestion, FreeFormQuestion };
