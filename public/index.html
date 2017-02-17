@@ -22,7 +22,7 @@
 </head>
 <body>
   <a class="return">&#8592; Return</a>
-  <div class="menu">
+<!--   <div class="menu">
     <a class="home center">Mavenform</a>
     <div class="sidetitle">Midterm 1</div>
     <div><a class="sidetab">Spring 2015</a></div>
@@ -42,7 +42,7 @@
     <div><a class="sidetab">Spring 2016</a></div>
     <div><a class="sidetab">Fall 2016</a></div>
     <a class="index">&#8592; Return</a>
-  </div>
+  </div> -->
   <div class="test-container">
     <div class="test">
       <hr class="margin">
@@ -81,7 +81,7 @@
 
     var sidebarTop = $('.sidebar').offset().top;
     $(window).scroll(function() {
-      var windowTop = $(window).scrollTop() + 340;
+      var windowTop = $(window).scrollTop();
       var windowSize = $(window).width();
       if (sidebarTop < windowTop && windowSize > 1020) {
         $('.sidebar').css('position', 'fixed');
