@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { VariablesQuestion, MatrixQuestion, FreeFormQuestion, TrueFalseQuestion } from '../components/question';
+import { VariablesQuestion, MatrixQuestion, FreeFormQuestion, ToggleQuestion } from '../components/question';
 import { lmatrix, lx } from '../utils';
 
 const fa16q3a =
@@ -139,13 +139,14 @@ const fa16q6b =
 Nara is convinced that the axe she found is better, but Kody disagrees. Show that Kody’s shovel can reach anywhere that Nara’s pick-axe can.
 `;
 
+const imgfa16q7_1 = require("../img/fa16q7-1.png");
 const fa16q7a =
 `
 <h3>7. Graph Majors (30 points)</h3>
 
 We’d like to understand how engineering undergrads change their majors. For simplicity, there are three majors we’ll look at: EECS, CS, and MechE. Let’s assume that students can only be studying one major at a time, and must be studying one of these three majors. Let’s also assume that once a week, students can choose to switch to another major, or stick with what they’re studying. So, a discrete time step represents one week.<br/>
 
-<img />
+<img src="${imgfa16q7_1}" class="problem-image" />
 
 At the start of week n, the number of EECS, CS, MechE students are \\(x_e[n]\\), \\(x_c[n]\\), and \\(x_m[n]\\), respectively.<br/>
 Let \\(\\vec{x}[n]\\) =
@@ -168,6 +169,8 @@ k_1 \\\\ k_2 \\\\ k_3 \\\\ k_4 \\\\\
 
 const fa16q7b =
 `
+<img src="${imgfa16q7_1}" class="problem-image" />
+
 (b) Assume that from one week to the next, no students drop out or are enrolled to the system – in other
 words, the total number of students is conserved. Write a system of four linear equations that relate \\(k_1\\), \\(k_2\\), \\(k_3\\), \\(k_4\\).<br/>
 <i>Hint: you should use \\(x_e[n]\\), \\(x_c[n]\\), \\(x_m[n]\\), \\(x_e[n + 1]\\), \\(x_c[n + 1]\\), \\(x_m[n + 1]\\) in your answer.
@@ -175,6 +178,8 @@ words, the total number of students is conserved. Write a system of four linear 
 
 const fa16q7c =
 `
+<img src="${imgfa16q7_1}" class="problem-image" />
+
 (c) Let \\(\\vec{x}[10]\\) = \\(\\left[\\begin{array}{c}100\\\\200\\\\200\\\\\\end{array}\\right]\\) and \\(\\vec{x}[11]\\) = \\(\\left[\\begin{array}{c}150\\\\100\\\\250\\\\\\end{array}\\right]\\). Rewrite your four linear equations from part (b) in the form \\(T\\vec{k}\\) = \\(\\vec{b}\\), where \\(\\vec{k}\\) is the vector defined above and \\(\\vec{b}\\) is a vector of constants. Do not solve for \\(\\vec{k}\\).
 `;
 
@@ -196,6 +201,7 @@ Is \\(\\vec{x}[5]\\) = \\(\\left[\\begin{array}{c}120\\\\120\\\\260\\\\\\end{arr
 derived from previous parts of the problem.
 `;
 
+const imgfa16q8_1 = require('../img/fa16q8-1.png');
 const fa16q8a =
 `
 <h3>8. Transformation Basketball (15 points)</h3>
@@ -205,8 +211,11 @@ Kevin Bancroft just joined the Column Space Warriors. In order to better learn h
 (a) Kevin Bancroft and Draymond Blue-Gold are running a drill where they each have to run from a
 starting coordinate to an end coordinate. Kevin starts at point \\(ks\\) = ${lmatrix([[3, 7]], true)} and wants to go to point \\(k_e\\) = ${lmatrix([[-4, 10]], true)}. Draymond starts at point \\(d_s\\) = ${lmatrix([[-6, 1]], true)} and wants to go to point \\(d_e\\) = ${lmatrix([[-7, -5]], true)}.
 
+<img src="${imgfa16q8_1}" class="problem-image" />
+
 Each player must apply the same matrix transformation A on his starting point to reach reach his end point, such that ${lx('Ak_s')} = ${lx('k_e')} and ${lx('Ad_s')} = ${lx('d_e')}. Derive the transformation matrix ${lx('A')}, if possible. We also know that the transformation matrix ${lx('A')} is of the form ${lx('A')} = ${lmatrix([[1, 'a'], ['b', 1]])}, where ${lx('a')}, ${lx('b')} are real numbers.
 `;
+
 
 const fa16q8b =
 `
@@ -215,28 +224,32 @@ ${lx('B')} = ${lmatrix([[2, 2], [-2, 2]])}.<br/><br/>
 Describe what transformation matrix ${lx('B')} performs to an input position in terms of rotations, scaling, and reﬂections.
 `;
 
+const imgfa16q8_2 = require('../img/fa16q8-2.png');
 const fa16q8c =
 `
 (c) After a couple of drills, Kevin Bancroft came up with a new idea – he decided to race his teammates across the court to see who is faster. Kevin starts at point ${lx('k_s')} = ${lmatrix([[-2, 1]], true)} and ends at ${lx('k_e')} = ${lmatrix([[3, 2]], true)}. Steph starts at ${lx('s_s')} = ${lmatrix([[0, 0]], true)} and ends at ${lx('s_e')} = ${lmatrix([[-6, -3]], true)}. Can this be represented by a transformation matrix? Brieﬂy justify why or why not.
+
+<img src="${imgfa16q8_2}" class="problem-image" />
 `;
 
 class EE16AFa16 extends Component {
   render() {
     return (
       <span>
+        <hr className="s5" />
         <h2>Section 1 (18 points)</h2>
         <hr className="s2" />
-        <TrueFalseQuestion id={"q3a"} content={fa16q3a} />
+        <ToggleQuestion id={"q3a"} content={fa16q3a} />
         <hr className="s5" />
-        <TrueFalseQuestion id={"q3b"} content={fa16q3b} />
+        <ToggleQuestion id={"q3b"} content={fa16q3b} />
         <hr className="s5" />
-        <TrueFalseQuestion id={"q3c"} content={fa16q3c} />
+        <ToggleQuestion id={"q3c"} content={fa16q3c} />
         <hr className="s5" />
-        <TrueFalseQuestion id={"q3d"} content={fa16q3d} />
+        <ToggleQuestion id={"q3d"} content={fa16q3d} />
         <hr className="s5" />
-        <TrueFalseQuestion id={"q3e"} content={fa16q3e} />
+        <ToggleQuestion id={"q3e"} content={fa16q3e} />
         <hr className="s5" />
-        <TrueFalseQuestion id={"q3f"} content={fa16q3f} />
+        <ToggleQuestion id={"q3f"} content={fa16q3f} />
         <hr className="s5" />
         <FreeFormQuestion id={"q4a"} content={fa16q4a} hasResponse={false} />
         <hr className="s5" />
@@ -265,6 +278,7 @@ class EE16AFa16 extends Component {
         <FreeFormQuestion id={"q8b"} content={fa16q8b} hasResponse={false} />
         <hr className="s3" />
         <FreeFormQuestion id={"q8c"} content={fa16q8c} hasResponse={false} />
+        <hr className="s5" />
       </span>
     );
   }
