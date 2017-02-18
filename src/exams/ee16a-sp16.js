@@ -285,7 +285,7 @@ class EE16ASp16 extends Component {
         <h1>EE 16A</h1>
         <hr className="s2" />
         <div className="center">
-          <h5>Midterm 1 | Fall 2015 | Niknejad, Sahai</h5>
+          <h5>Midterm 1 | Spring 2016 | Alon, Ayazifar</h5>
         </div>
         <div className="sidebar">
           <hr className="s5" />
