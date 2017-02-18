@@ -76,23 +76,26 @@ You only need to write True or False under each subpart.</br>
 (a) There exists an invertible \\(n × n\\) matrix \\(A\\) for which ${lx('A^2')} = 0. 
 `;
 
-const sp16q5a_soln = 
+const sp16q5a_soln =
 `
 <h3>False</h3>
 
 Let’s left multiply and right multiply ${lx('A_2')} by ${lx('A^{-1}')} so we have ${lx('A^{−1} AAA^{−1}')}. By associativity of matrix multiplication, we have ${lx('(A^{−1}A)(AA^{−1})')} = ${lx('I_nI_n')} = ${lx('I_n')} where ${lx('I')} is the identity matrix. However, if ${lx('A^2')} were ${lx('0')}, then ${lx('(A^{−1}A)(AA^{−1})')} = ${lx('A^{−1} A^{2} A^{−1}')} = ${lx('0')} where ${lx('0')} is a matrix of all zeros, hence resulting in a contradiction.
 `;
 
-const sp16q5b = 
+const sp16q5b =
 `
 (b) If \\(A\\) is an invertible \\(n × n\\) matrix, then for all vectors \\(\\vec{b}\\) ∈ ${lx('R^n')}, the system \\(A\\)\\(\\vec{x}\\)=\\(\\vec{b}\\) has a unique solution.
+`;
 
+const sp16q5b_soln =
+`
 <h3>True</h3>
 
 If ${lx('A')} is invertible, then there is a unique matrix ${lx('A^{-1}')}. Left multiply the equation by ${lx('A^{−1}')}, and we will have ${lx('A^{−1}A\\vec{x}')} = ${lx('A^{−1}\\vec{b} \\implies \\vec{x} = A^{−1}\\vec{b}')}, where ${lx('\\vec{x}')} is a unique vector.
 `;
 
-const sp16q5c = 
+const sp16q5c =
 `
 (c) If \\(A\\) and \\(B\\) are invertible \\(n × n\\) matrices, then the product \\(AB\\) is invertible.
 `;
@@ -105,7 +108,7 @@ ${lx('(AB)^{−1} = B^{−1}A^{−1}')}.
 Note that ${lx('ABB^{-1}A^{-1}')} = ${lx('I')} and ${lx('B^{-1}A^{-1}AB')} = ${lx('B^{-1}IB')} = ${lx('B^{-1}B')} = ${lx('I')}
 `;
 
-const sp16q5d = 
+const sp16q5d =
 `
 (d) The two vectors ${lx('v_1')} = ${lmatrix([[1], [1], [0]])} and ${lx('v_2')} = ${lmatrix([[1], [-1], [0]])} form a basis for the 
 subspace Span(${lx('\\{')}${lmatrix([[1], [1], [0]])}, ${lmatrix([[1], [-1], [0]])}${lx('\\}')}).
@@ -118,7 +121,7 @@ const sp16q5d_soln =
 Span(${lx('{')}${lmatrix([[1], [0], [1]])},${lmatrix([[0], [1], [0]])}${lx('}')}) spans the ${lx('x')}-${lx('y')} plane in ${lx('\\mathbb{R}^3')} as well.
 `;
 
-const sp16q5e = 
+const sp16q5e =
 `
 (e) A set of ${lx('n')} linearly dependent vectors in ${lx('\\mathbb{R}^n')} can span ${lx('\\mathbb{R}^n')}.
 `;
@@ -134,20 +137,20 @@ vector, and a set of vectors spans some subspace (potentially the entire space.)
 
 `;
 
-const sp16q5f = 
+const sp16q5f =
 `
 (f) For all matrices \\(A\\) and \\(B\\), where \\(A\\) is ${lx('5')}×${lx('5')} and \\(B\\) is ${lx('4')}×${lx('4')}, it is always the case that Rank(\\(A\\)) > Rank(\\(A\\)).
 `;
 
-const sp16q5f =
+const sp16q5f_soln =
 `
 <h3>False.</h3>
 
-Size does not determine rank! For example, if ${lx('A')} was a matrix of all ones rank(${lx('A'})) would be 1. If, on the other hand ${lx('B')} was an identity matrix it would have full rank: rank(${lx('B')}) = ${lx('4')}.<br/>
+Size does not determine rank! For example, if ${lx('A')} was a matrix of all ones rank(${lx('A')}) would be 1. If, on the other hand ${lx('B')} was an identity matrix it would have full rank: rank(${lx('B')}) = ${lx('4')}.<br/>
 You can only claim larger size implies larger rank if you assume the matrices are full rank (pivots in every column, all column vectors are linearly independent from the rest.)
 `;
 
-const sp16q6a = 
+const sp16q6a =
 `
 <h3>6. Faerie Battles <i>(20 points)</i></h3>
 
@@ -188,7 +191,7 @@ const sp16q6a_soln =
 ${lx('\\left \\begin{aligned} A + 5B + C &= 7 \\\\ 2B + 4C + 6D &= 26 \\\\ 2C + 2D &= 10 \\\\ 3D = 9 \\\\ \\end{aligned}')}
 `;
 
-const sp16q6b = 
+const sp16q6b =
 `
 (b) From the given information, can you determine how many imps are at each campsite? If so, report
 their numbers to help the faeries! If not, explain why not.
@@ -196,10 +199,25 @@ their numbers to help the faeries! If not, explain why not.
 
 const sp16q6b_soln =
 `
+The matrix is upper triangular, so the matrix’s columns must be linearly independent and
+there is enough information to determine exactly how many enemy imps there are at each campsite.<br/>
+We can ﬁnd the number of imps at each campsite by row reducing the following augmented system (process omitted for brevity):<br/>
 
+${lmatrix([[1, 5, 1, 0, '\\vdots', 7], [0, 2, 4, 6, '\\vdots', 26], [0, 0, 2, 2, '\\vdots', 10], [0, 0, 0, 3, '\\vdots', 9]], false, false)}
+${lx('\\implies', false)}
+${lmatrix([[1, 0, 0, 0, '\\vdots', 5], [0, 1, 0, 0, '\\vdots', 0], [0, 0, 1, 0, '\\vdots', 2], [0, 0, 0, 1, '\\vdots', 3]], false, false)}
+
+Thus, we discover that:
+<ul><li>Camp A has 5 imps</li><li>Camp B has 0 imps</li><li>Camp C has 2 imps</li><li>Camp D has 3 imps</li></ul><br/>
+We can check our answer by substituting our answers into the original equations:
+
+1·5 + 5·0 + 1·2 = 5 + 2 = 7<br/>
+2·0 + 4·2 + 6·3 = 8 + 18 = 26<br/>
+2·2 + 2·3 = 4 + 6 = 10<br/>
+3·3 = 9<br/>
 `;
 
-const sp16q6c = 
+const sp16q6c =
 `
 (c) Oh no! You just found out that the evil imps manipulated the faerie lights from Group 1, rendering
 their information useless. You send in an emergency group of faeries to make up for the loss. They
@@ -212,9 +230,19 @@ many imps are at each campsite? If so, report their numbers to help the faeries!
 not.
 `;
 
-const imgsp16q7_1 = require('../img/sp16q7-1.png');
+const sp16q6c_soln =
+`
+No you cannot determine how many imps are at each campsite.
+<ul>
+<li>The new team does not pass through Camp A so you have no way of determining the number of imps in Camp A.</li>
+<li>The new measurement conﬂicts with an existing measurement. The system of equations is inconsistent, so there is no solution.</li>
+<li>The new measurement is a linearly dependent one. Speciﬁcally, it sends half the faerie lights that the second measurement sends. Therefore, we do not have enough linearly independent
+measurements to solve for the imps in each camp.</li>
+</ul>
+`;
 
-const sp16q7a = 
+const imgsp16q7_1 = require('../img/sp16q7-1.png');
+const sp16q7a =
 `
 <h3>7. A Tale of a Million Technocrats and the Four Dream Cities <i>(24 points)</i></h3>
 
@@ -253,6 +281,11 @@ where ${lx('A')} is the state-transition matrix. </br></br>
 (a) Determine the state-transition matrix ${lx('A')}.
 `;
 
+const sp16q7a_soln =
+`
+${lmatrix([[1, '\\alpha', 0, 0], [0, '1 - \\alpha - \\beta', '\\alpha', 0], [0, '\\beta', '1 - \\alpha - \\beta', 0], [0, '\\beta', '1 - \\alpha - \\beta', 0], [0, 0, '\\beta', 1]])}
+`;
+
 const sp16q7b =
 `
 (b) In this part, we’re interested in backward inference of the state vector ${lx('\\vec{s}[n]')} from a future state vector, say ${lx('\\vec{s}[n+1]')}. As you know, this is possible only if a matrix ${lx('A^{−1}')} exists, so that
@@ -260,6 +293,22 @@ ${lx('\\vec{s}[n]')} = ${lx('A^{−1}\\vec{s}[n + 1]')}.<br/>
 Consider a model of the Technocrat migration system described above with ${lx('\\beta')} = ${lx('\\alpha')} = 1/3. Assume ${lx('\\vec{s}[1]')} = ${lx('\\vec{1}')}, where ${lx('\\vec{1}')} denotes the vector of all ones.<br/>
 ${lx('\\vec{1}')} = ${lmatrix([[1], [1], [1], [1]])}<br/>
 For this model of the system described above, either explain why time-reversed inference of the state vector is not possible, or determine ${lx('\\vec{s}[0]')} from ${lx('\\vec{s}[1]')} explicitly by computing ${lx('A^{−1}')} first.
+`;
+
+const sp16q7b_soln =
+`
+<h3>Model 1</h3>
+${lx('A_1')} = ${lmatrix([[1, '1/3', 0, 0], [0, '1/3', '1/3', 0] [0, '1/3', '1/3', 0], [0, 0, '1/3', 1]])}<br/>
+
+Rows 2 and 3 are identical, so A1 is not invertible. In other words, the row vectors are linearly dependent and Gaussian Elimination would result in a row of 0’s, which can’t be inverted.
+
+<h3>Model 2</h3>
+${lx('A_2')} = ${lmatrix([[1, '1/4', 0, 0], [0, '1/2', '1/4', 0], [0, '1/2', '1/2', 0], [0, 0, '1/4', 1]])}<br/>
+This is full rank, so it's invertible. In other words, there is a pivot in every row; every row vector is linearly independent from the rest.
+
+${lx('A_2^{-1}')} = ${lmatrix([[1, '-2/3', '1/3', 0], [0, '8/3', '-4/3', 0], [0, '-4/3', '8/3', 0], [0, '1/3', '-2/3', 1]], false, false)}
+
+${lx('\\vec{s}[0]')} = ${lx('A_2^{-1}\\vec{1}')} = ${lmatrix([['2/3'], ['4/3'], ['4/3'], ['2/3']])}
 `;
 
 const sp16q7c =
@@ -275,6 +324,12 @@ ${lx('\\vec{s}[0]')} = ${lmatrix([['1/2'], [0], [0], ['1/2']])}.
 This means that, initially, 500,000 Technocrats are in San Francisco, and the other 500,000 are in New York City. Without complicated mathematical derivations, determine the state vector ${lx('\\vec{s}[n]')} for all ${lx('n \\geq 1')}.
 `;
 
+const sp16q7c_soln =
+`
+${lx('\\vec{s_\\infty}')} = ${lmatrix([['1/2'], [0], [0], ['1/2']])}
+With the given state transition diagram, no technocrats would move so ${lx('\\vec{s_0}')} = ${lx('\\vec{s_t}')} = ${lx('\\vec{s_\\infty}')}.
+`;
+
 const sp16q7d =
 `
 (d) Now suppose the initial state of the system is given by the vector ${lx('\\vec{s}[0]')} = ${lmatrix([[0], ['1/2'], ['1/2'], [0]])}.<br/>
@@ -282,11 +337,26 @@ This means that, initially, 500,000 Technocrats are in Denver, and the other 500
 Without complicated mathematical derivations, determine the limiting state vector ${lx('\\lim\\limits_{n \\to \\infty} \\vec{s}[n]')}
 `;
 
+const sp16q7d_soln =
+`
+${lx('\\vec{s_\\infty}')} = ${lmatrix([['1/2'], [0], [0], ['1/2']])}
+By symmetry, half go to SF and half go to NYC.
+`;
+
 const sp16q7e =
 `
 (e) Finally, now suppose the initial state of the system is given by the vector
 ${lx('\\vec{s}[0]')} = ${lmatrix([['1/4'], ['1/4'], ['1/4'], ['1/4']])}.
 This means that, initially, the Technocrats are equally distributed among the four Dream Cities. Without complicated mathematical derivations, determine ${lx('\\lim\\limits_{n \\to \\infty} \\vec{s}[n]')}.
+`;
+
+const sp16q7e_soln =
+`
+${lx('\\vec{s_\\infty}')} = ${lmatrix([['1/2'], [0], [0], ['1/2']])}
+By symmetry, half go to SF and half go to NYC. In addition, we can think of the state vector in this part as follows:<br/>
+
+${lmatrix([['1/4'], ['1/4'], ['1/4'], ['1/4']])} = ${lx('\\frac{1}{2}')}${lmatrix([['1/2'], [0], [0], ['1/2']])} + ${lx('\\frac{1}{2}')}${lmatrix([[0], ['1/2'], ['1/2'], [0]])}
+Where the first vector is from part (c) and the second vector is from part (d). So in the limit ${lx('n \\to \\infty')}, we get the same distribution as before.
 `;
 
 const sp16q8a =
@@ -301,9 +371,22 @@ ${lx('T_2')}: Rotates ${lx('\\vec{p}')} clockwise about the origin by ${lx('45\\
 (a) Write the matrix ${lx('A_1')} that applies the transformation ${lx('T_1')}.
 `;
 
+const sp16q8a_soln =
+`
+${lx('\\vec{a_1}')} = ${lx('T_1\\left\\begin{array}{c}1\\\\0\\\\\\\end{array}\\right')} = ${lmatrix([[0], [-1]])}<br/>
+${lx('\\vec{a_2}')} = ${lx('T_1\\left\\begin{array}{c}0\\\\1\\\\\\\end{array}\\right')} = ${lmatrix([[-1], [0]])}<br/>
+${lx('A_1')} = ${lmatrix([['\\vec{a_1}', '\\vec{a_2}']])} = ${lmatrix([[0, -1], [-1, 0]])}
+`;
+
 const sp16q8b =
 `
 (b) Write the matrix ${lx('A_2')} that applies the transformation ${lx('T_2')}.
+`;
+
+const sp16q8b_soln =
+`
+${lx('\\theta')} = ${lx('\\frac{\\pi}{4}')} = ${lx('-45^\\circ')}<br/>
+${lx('A_2')} = ${lmatrix([['cos \\theta', '-sin \\theta'], ['sin \\theta', 'cos \\theta']])} = ${lmatrix([['\\frac{1}{\\sqrt{2}}', '\\frac{1}{\\sqrt{2}}'], ['-\\frac{1}{\\sqrt{2}}', '\\frac{1}{\\sqrt{2}}']])}
 `;
 
 const sp16q8c =
@@ -311,15 +394,32 @@ const sp16q8c =
 (c) Leah commands SIXTEEN-AYY to perform ${lx('T_1')} followed by ${lx('T_2')} - find the matrix ${lx('A_{12}')} that captures the effect of this sequence of commands.
 `;
 
+const sp16q8c_soln =
+`
+${lx('A_{12}')} = ${lx('A_2A_1')} = ${lmatrix([['\\frac{1}{\\sqrt{2}}', '\\frac{1}{\\sqrt{2}}'], ['-\\frac{1}{\\sqrt{2}}', '\\frac{1}{\\sqrt{2}}']])}
+${lmatrix([[0, -1], [-1, 0]])} = ${lmatrix([['-\\frac{1}{\\sqrt{2}}', '-\\frac{1}{\\sqrt{2}}'], ['-\\frac{1}{\\sqrt{2}}', '\\frac{1}{\\sqrt{2}}']])}
+`;
+
 const sp16q8d =
 `
 (d) Being the contrarian that he is, Bob instead wants to command SIXTEEN-AYY to perform ${lx('T_2')} followed by ${lx('T_1')}. Find the matrix ${lx('A_{21}')} that captures the effect of this sequence of commands.
+`;
+
+const sp16q8d_soln =
+`
+${lx('A_{21}')} = ${lx('A_1A_2')} = ${lmatrix([[0, -1], [-1, 0]])} ${lmatrix([['\\frac{1}{\\sqrt{2}}', '\\frac{1}{\\sqrt{2}}'], ['-\\frac{1}{\\sqrt{2}}', '\\frac{1}{\\sqrt{2}}']])}
+ = ${lmatrix([['\\frac{1}{\\sqrt{2}}', '-\\frac{1}{\\sqrt{2}}'], ['-\\frac{1}{\\sqrt{2}}', '\\frac{1}{\\sqrt{2}}']])}
 `;
 
 const sp16q8e =
 `
 (e) If SIXTEEN-AYY started out in the same initial configuration for both Bob and Leah, will its arm end up in the same place after executing Leah’s command as it does after executing Bob’s command?<br/>
 Briefly justify why or why not.
+`;
+
+const sp16q8e_soln =
+`
+No, the resulting matrices won't be the same because we've just shown ${lx('A_1A_2 \\ne A_2A_1')}; i.e. matrix multiplication is not commutative.
 `;
 
 const img8f = require('../img/sp16q8-1.png');
@@ -330,6 +430,11 @@ const sp16q8f =
 <img src="${img8f}" className="problem-image" />
 `;
 
+const sp16q8f_soln =
+`
+The span of the vectors is defined by ${lmatrix([['P_x'], ['P_y'], [0]])}, which is just the xy plane. Thus, our answer is diagram 1.
+`;
+
 const img8g = require('../img/sp16q8-2.png');
 const sp16q8g =
 `
@@ -338,6 +443,21 @@ vectors that would correspond to this possible range of motion for a fixed ${lx(
 (<i>Hint</i>: If you had a point along the ${lx('y')}-axis and wanted to rotate it by an angle of ${lx('\\theta')} radians relative to the ${lx('y')}-axis while remaining on the ${lx('y')}-${lx('z')} plane, what transformation would you apply?)
 
 <img src="${img8g}" className="problem-image" />
+`;
+
+const sp16q8g_soln =
+`
+We notie that a rotation relative to the y-axis maintains the same x-value while rotating our y and z by ${lx('\\theta')} radians. Thus, we can write the transformation matrix as<br/>
+${lmatrix([[1, 0, 0], [0, 'cos \\theta', '-sin \\theta'], [0, 'sin \\theta', 'cos \\theta']], false, false)}
+Note that since we only had two basis vectors to begin with, the new range of motion also only needs two basis vectors corresponding to the rotation of the x and y unit vectors, so our basis vectors are:
+
+${lx('\\left{\\begin{array}{c}1\\\\0\\\\0\\\\0\\end{array},\\begin{array}{c}0\\\\cos \\theta\\\\sin \\theta\\end{array}\\right}', false)}
+
+In fact, all rotation matrices in ${lx('n')} dimensions can be decomposed into a series of rotations in 2 dimensions. So all rotations are products of the basic rotation matrix
+
+${lmatrix([['cos \\theta', '-sin \\theta'], ['sin \\theta', 'cos \\theta']], false, false)}
+
+generalized to a larger ${lx('n')} x ${lx('n')} matrix with 1's in the dimensions that aren't being rotated. Read more on <b>Wikipedia!</b>
 `;
 
 const img9a = require('../img/sp16q9-1.png');
@@ -356,9 +476,21 @@ The fractions of furballs leaving the Play Room could not be determined through 
 ${lx('A')}${lmatrix([['x_f[n]'], ['x_s[n]'], ['x_p[n]']])}. Write ${lx('A')} using the numbers and the variables in the diagram.
 `;
 
+const sp16q9a_soln =
+`
+Write a matrix in which each column corresponds to the outgoing arrows in the diagram from a particular room, and each row corresponds to the incoming arrows to a particular room:
+
+${lmatrix([[0.5, 0.4, 'p_1'], [0.5, 0.5, 'p_2'], [0, 0.1, 'p_3']], false, false)}
+`;
+
 const sp16q9b =
 `
 (b) We know that no furballs enter or leave the configuration of tunnels shown above and that during the time you’re observing the behavior, and no furballs die or are born. What constraint does this place on the values of ${lx('p_1')}, ${lx('p_2')}, ${lx('p_3')}? Write your answer in equation form.
+`;
+
+const sp16q9b_soln =
+`
+If number is conserved, this means each column vector in the matrix sums to 1. Therefore: ${lx('p_1')} + ${lx('p_2')} + ${lx('p_3')} = 1
 `;
 
 const sp16q9c =
@@ -367,10 +499,24 @@ const sp16q9c =
 (<i>Hint</i>: what is the relationship between ${lx('\\vec{x}[n+1]')} and ${lx('\\vec{x}[n]')})
 `;
 
+const sp16q9c_soln =
+`
+${lmatrix([[0.5, 0.4, 'p_1'], [0.5, 0.5, 'p_2'], [0, 0.1, 'p_3']])}${lmatrix([['x_f[n]'], ['x_s[n]'], ['x_p[n]']])} = ${lx('\\vec{x}[n + 1]')}<br/>
+${lx('x_f[n]')}${lmatrix([[0.5], [0.5], [0]])} + ${lx('x_s[n]')}${lmatrix([[0.4], [0.5], [0.1]])} + ${lx('x_p[n]')}${lmatrix([['p_1'], ['p_2'], ['p_3']])} = ${lx('\\vec{x}[n + 1]')}<br/>
+${lx('x_p[n]')}${lmatrix([['p_1'], ['p_2'], ['p_3']])} = ${lx('\\vec{x}[n + 1]')} - ${lx('x_f[n]')}${lmatrix([[0.5], [0.5], [0]])} - ${lx('x_s[n]')}${lmatrix([[0.4], [0.5], [0.1]])}<br/>
+${lx('\\vec{p}')} = ${lx('\\frac{1}{x_p[n]}')}${lx('\\left(\\vec{x}[n + 1] - x_f[n]\\begin{array}{c}0.5 \\\\ 0.5 \\\\ 0 \\\\ \\end{array} - x_s[n]\\begin{array}{c}0.4 \\\\ 0.5 \\\\ 0.1 \\\\ \\end{array} \\right)')}
+`;
+
 const sp16q9d =
 `
 (d) Using part (c), solve for ${lx('\\vec{p}')} given that ${lx('\\vec{x}[n+1]')} =
 ${lmatrix([[22], [30], [48]])} and ${lx('$vec{x}[n]')} = ${lmatrix([[20], [30], [50]])}.
+`;
+
+const sp16q9d_soln =
+`
+${lx('\\vec{p}')} = ${lx('\\frac{1}{50} \\left(\\begin{array}{c} 22 \\\\ 30 \\\\ 48 \\\\ \\end{array} - 20 \\begin{array}{c} 0.5 \\\\ 0.5 \\\\ 0 \\\\ \\end{array} - 30 \\begin{array}{c} 0.4 \\\\ 0.5 \\\\ 0.1 \\\\ \\end{array} \\right)')}
+${lx('\\vec{p}')} = ${lmatrix([[0], [0.1], [0.9]])}
 `;
 
 const img9e = require('../img/sp16q9-2.png');
@@ -381,6 +527,21 @@ ${lmatrix([['x_1[n]'], ['x_2[n]'], ['x_3[n]']])} where ${lx('x_i[n]')} represent
 diagrams in Figure 2 represents a possible set of behaviors for this colony?
 
 <img src="${img9e}" className="problem-image" />
+`;
+
+const sp16q9e_soln =
+`
+(i) The third row in Ai consists of all zeros. This means, at any positive timestep, ${lx('\\vec{x}')} would be forced to
+have zero as its third entry. Therefore, the given ${lx('\\vec{x}[2]')} is not in the range of this matrix, and this option
+do not represent a possible set of behaviors.
+
+(ii) The ﬁrst two rows in ${lx('A_{ii}')} are the same. This means, at any positive timestep, ${lx('x')} would be forced to
+have the same number in its first and second entry. Therefore, the given ${lx('\\vec{x}[2]')} is not in the range of this
+matrix, and this option do not represent a possible set of behaviors.
+
+(iii) The given ${lx('\\vec{x}[2]')} is in the range of ${lx('A_{iii}')}. Therefore, full credit was given for choosing this option.
+However, number is not conserved in this option. Since it was ambiguous whether or not number
+was meant to be conserved in the question, partial credit was given for excluding this option with this explanation.
 `;
 
 class EE16ASp16 extends Component {
@@ -419,59 +580,59 @@ class EE16ASp16 extends Component {
           <hr className="s5" />
           <FreeFormQuestion id={"q4"} content={sp16q4} hasReponse={false} solution={sp16q4_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q5a"} content={sp16q5a} hasReponse={false}/>
+          <FreeFormQuestion id={"q5a"} content={sp16q5a} hasReponse={false} solution={sp16q5a_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q5b"} content={sp16q5b} hasReponse={false}/>
+          <FreeFormQuestion id={"q5b"} content={sp16q5b} hasReponse={false} solution={sp16q5b_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q5c"} content={sp16q5c} hasReponse={false}/>
+          <FreeFormQuestion id={"q5c"} content={sp16q5c} hasReponse={false} solution={sp16q5c_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q5d"} content={sp16q5d} hasReponse={false}/>
+          <FreeFormQuestion id={"q5d"} content={sp16q5d} hasReponse={false} solution={sp16q5d_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q5e"} content={sp16q5e} hasReponse={false}/>
+          <FreeFormQuestion id={"q5e"} content={sp16q5e} hasReponse={false} solution={sp16q5e_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q5f"} content={sp16q5f} hasReponse={false}/>
+          <FreeFormQuestion id={"q5f"} content={sp16q5f} hasReponse={false} solution={sp16q5f_soln} />
           <hr className="s5" />
           <h2>Free-form Problems <i>(100 points)</i></h2>
           <hr className="s2" />
-          <FreeFormQuestion id={"q6a"} content={sp16q6a} hasReponse={false}/>
+          <FreeFormQuestion id={"q6a"} content={sp16q6a} hasReponse={false} solution={sp16q6a_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q6b"} content={sp16q6b} hasReponse={false}/>
+          <FreeFormQuestion id={"q6b"} content={sp16q6b} hasReponse={false} solution={sp16q6b_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q6c"} content={sp16q6c} hasReponse={false}/>
+          <FreeFormQuestion id={"q6c"} content={sp16q6c} hasReponse={false} solution={sp16q6c_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q7a"} content={sp16q7a} hasReponse={false}/>
+          <FreeFormQuestion id={"q7a"} content={sp16q7a} hasReponse={false} solution={sp16q7a_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q7b"} content={sp16q7b} hasReponse={false}/>
+          <FreeFormQuestion id={"q7b"} content={sp16q7b} hasReponse={false} solution={sp16q7b_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q7c"} content={sp16q7c} hasReponse={false}/>
+          <FreeFormQuestion id={"q7c"} content={sp16q7c} hasReponse={false} solution={sp16q7c_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q7d"} content={sp16q7d} hasReponse={false}/>
+          <FreeFormQuestion id={"q7d"} content={sp16q7d} hasReponse={false} solution={sp16q7d_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q7e"} content={sp16q7e} hasReponse={false}/>
+          <FreeFormQuestion id={"q7e"} content={sp16q7e} hasReponse={false} solution={sp16q7e_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q8a"} content={sp16q8a} hasReponse={false}/>
+          <FreeFormQuestion id={"q8a"} content={sp16q8a} hasReponse={false} solution={sp16q8a_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q8b"} content={sp16q8b} hasReponse={false}/>
+          <FreeFormQuestion id={"q8b"} content={sp16q8b} hasReponse={false} solution={sp16q8b_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q8c"} content={sp16q8c} hasReponse={false}/>
+          <FreeFormQuestion id={"q8c"} content={sp16q8c} hasReponse={false} solution={sp16q8c_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q8d"} content={sp16q8d} hasReponse={false}/>
+          <FreeFormQuestion id={"q8d"} content={sp16q8d} hasReponse={false} solution={sp16q8d_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q8e"} content={sp16q8e} hasReponse={false}/>
+          <FreeFormQuestion id={"q8e"} content={sp16q8e} hasReponse={false} solution={sp16q8e_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q8f"} content={sp16q8f} hasReponse={false}/>
+          <FreeFormQuestion id={"q8f"} content={sp16q8f} hasReponse={false} solution={sp16q8f_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q8g"} content={sp16q8g} hasReponse={false}/>
+          <FreeFormQuestion id={"q8g"} content={sp16q8g} hasReponse={false} solution={sp16q8g_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q9a"} content={sp16q9a} hasReponse={false}/>
+          <FreeFormQuestion id={"q9a"} content={sp16q9a} hasReponse={false} solution={sp16q9a_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q9b"} content={sp16q9b} hasReponse={false}/>
+          <FreeFormQuestion id={"q9b"} content={sp16q9b} hasReponse={false} solution={sp16q9b_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q9c"} content={sp16q9c} hasReponse={false}/>
+          <FreeFormQuestion id={"q9c"} content={sp16q9c} hasReponse={false} solution={sp16q9c_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q9d"} content={sp16q9d} hasReponse={false}/>
+          <FreeFormQuestion id={"q9d"} content={sp16q9d} hasReponse={false} solution={sp16q9d_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q9e"} content={sp16q9e} hasReponse={false}/>
+          <FreeFormQuestion id={"q9e"} content={sp16q9e} hasReponse={false} solution={sp16q9e_soln} />
         </div>
       </span>
     );
