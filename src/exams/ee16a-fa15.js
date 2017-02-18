@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Question } from '../components/question';
+import { lmatrix, lx } from '../utils';
 
 const examCode = 'ee16a-fa15';
 
@@ -86,7 +87,7 @@ any (\\(n × n\\)) matrix A, the set \\(\\{\\vec{Av_1}, \\vec{Av_2}, . . . , \\v
 
 const fa15q5_soln =
 `
-it is given that ${lx('{\\vec{v_1}, \\vec{v-2}, \\dots, \\vec{v_k} | \\vec{v_i} \\in \\mathbb{R}^{n}}')} are linearly dependent. This implies that there exist ${lx('k')} scalars, ${lx('{\\vec{\\alpha_1}, \\vec{\\alpha_2}, \\dots, \\vec{\\alpha_k}}') from ${lx('\\mathbb{R}')} that are <i>not all equal to zero simultaneously</i> (or equivalently <i>at least one of them is not equal to zero</i>), such that<br/>
+it is given that ${lx('{\\vec{v_1}, \\vec{v-2}, \\dots, \\vec{v_k} | \\vec{v_i} \\in \\mathbb{R}^{n}}')} are linearly dependent. This implies that there exist ${lx('k')} scalars, ${lx('{\\vec{\\alpha_1}, \\vec{\\alpha_2}, \\dots, \\vec{\\alpha_k}}')} from ${lx('\\mathbb{R}')} that are <i>not all equal to zero simultaneously</i> (or equivalently <i>at least one of them is not equal to zero</i>), such that<br/>
 ${lx('\\alpha_1·\\vec{v_1} + \\alpha_2·\\vec{v_2} + \\cdots + \\alpha_k·\\vec{v_k} = \\vec{0}', false)}
 
 By multiplying Equation 9 by ${lx('A')} from the left side, we get
@@ -158,7 +159,7 @@ ${lx('x_2 = a', false)}
 ${lx('x_3 = 2b', false)}
 ${lx('x_4 = b', false)}
 
-${lmatrix([['x_1'], ['x_2'], ['x_3'], ['x_4']]) = ${lx('a')}${lmatrix([[-1], [1], [0], [0]])} + ${lx('b')}${lmatrix([[1], [0], [2], [1]])}<br/>
+${lmatrix([['x_1'], ['x_2'], ['x_3'], ['x_4']])} = ${lx('a')}${lmatrix([[-1], [1], [0], [0]])} + ${lx('b')}${lmatrix([[1], [0], [2], [1]])}<br/>
 
 Thus the nullspace of the matrix is:
 ${lx('span \\left{ \\begin{array}{c}-1 \\\\ 1 \\\\ 0 \\\\ 0 \\\\ \\end{array} , \\begin{array}{c}1 \\\\ 0 \\\\ 2 \\\\ 1 \\end{array} \\right}', false)}
@@ -315,13 +316,13 @@ $$
 <i>as in you only need to add a single column \\(\\vec{b}\\) to the matrix B from the previous part. Feel free to just write down the vector \\(\\vec{b}\\). You don’t have to write out the numbers of B again.</i>
 `;
 
-const fa15q8b =
+const fa15q8b_soln =
 `
 The column ${lx('\\vec{b}')} corresponds to the road ${lx('t_7')}, which exits node ${lx('C')} and enters node ${lx('E')}:
 
 ${lx('\\vec{b} = \\begin{array}{c} 0 \\\\ 0 \\\\ -1 \\\\ 0 \\\\ +1 \\\\ 0 \\\\ \\end{array}', false)}
 
-(In our ${lx('B')} from the previous part, node ${lx('C')} corresponds to the third row, and node ${lx('E')} corresponds to the fifth row). Note that this must be consistent with the previous part: If you constructed ${lx('B')} using a different ordering of nodes (that is, if the rows of ${lx('B')} were permuted), then the entries in ${lx('\\vec{b}') must be permuted accordingly.<br/>
+(In our ${lx('B')} from the previous part, node ${lx('C')} corresponds to the third row, and node ${lx('E')} corresponds to the fifth row). Note that this must be consistent with the previous part: If you constructed ${lx('B')} using a different ordering of nodes (that is, if the rows of ${lx('B')} were permuted), then the entries in ${lx('\\vec{b}')} must be permuted accordingly.<br/>
 
 Written explicitly, ${lx("B'")} is:
 
@@ -339,7 +340,7 @@ is there any valid ﬂow \\(\\vec{t}\\) for which the additional road has non-ze
 
 const fa15q8c_soln =
 `
-No, any valid flow ${lx('\\vec{t}')} must have ${lx('t_7 = 0').
+No, any valid flow ${lx('\\vec{t}')} must have ${lx('t_7 = 0')}.
 There are several ways to see this. First, intuitively: If for example ${lx('t_7 > 0')}, then there is a net flow of cars from the first city to the second. Thus, at least intuitively, some conservation constraint must be violated, because cars are “draining” from the first city and “accumulating” in the second. But our conservation constraints say that this accumulation cannot happen at any single intersection, and so it cannot happen at all within a city (which is a collection of intersections). Development of this intuitive argument received partial credit.<br/><br/>
 The formal argument suggested in the hint is: Consider summing all the constraints corresponding to nodes in the first city (that is, the first 3 rows of ${lx("B'")}). Each row corresponds to the constraint that the net flow into an intersection is zero. Summing a set of rows corresponds to the constraint that the net flow into a <i>set of intersections</i> is zero. Thus, summing the first three rows will yield the constraint that the net flow into the first city is zero. But ${lx('t_7')} is the only road out of the first city, so ${lx('t_7 = 0')}.<br/><br/>
 Explicitly, any valid ${lx('\\vec{t}')} satisfies
@@ -413,7 +414,7 @@ ${lx("\\begin{array}{c c c c c c c}0 & 0 & 0 & 0 & 0 & 0 & -1 & +1 \\\\ \\end{ar
 Which is just the constrant ${lx('-t_7 + t_8 = 0')}.<br/><br/>
 
 <b>Alternate Solutions:</b>
-It was also possible to row-reduce ${lx("B''"}), find a basis for the nullspace, and show that all basis vectors have t7 = t8 (and therefore all valid flows must have ${lx('t_7')} = ${lx('t_8')} as well).<br/>
+It was also possible to row-reduce ${lx("B''")}, find a basis for the nullspace, and show that all basis vectors have t7 = t8 (and therefore all valid flows must have ${lx('t_7')} = ${lx('t_8')} as well).<br/>
 Notice that in this problem, we do not know the exact sensor placements of each city. Solutions which made assumptions about the particular sensor arrangements of the cities received partial credit. (In theory, it was possible to enumerate all possible valid sensor arrangements, and confirm that each one works by the procedure of Homework 3.)<br/>
 Some students argued that it is sufficient to have one sensor per “independent loop”. And since the cities already had sensors on their individual loops (necessarily, by assumption), it is sufficient to have one sensor on the new “independent loop” created by adding the two new roads. This is correct intuition. However, the concept of “independent loop” was not defined or developed in this class, so any argument using “independent loops” without definition only received partial credit.
 `;
@@ -552,8 +553,9 @@ This is problematic because multiple different initial water levels will give th
 
 ${lx('\\left[ D \\right] \\left( \\vec{x}[0] + \\vec{x}_{NS}[0] \\right) = \\left[ D \\right] \\vec{x}[0] + \\left[ D \\right] \\vec{x}_{NS}[0] = \\left[ D \\ right]\\vec{x}[0]', false)}
 
-Thus in order to determine ${lx('\\vec{x}[0]')} uniquely we need <b>at least 3 rows of ${lx('D')} to be linearly independent. It turns out that the first three rows ⃗cT ,⃗cT A, and ⃗cT A2 are linearly independent thus Justin needs only 3 time steps (t = 0,t = 1,t = 2) to solve for ⃗x[0]. In order to get full credit on this part, you had to show that the first three rows are linearly independent. The easiest way to show this is by doing Gaussian elimination which we will do when we solve for the answer in part (f). [It is perfectly ok to point to a later problem part when solving a problem.] Note that you could also use three other linearly independent rows to solve for the solution but the first three rows are the easiest to calculate.
-  Here we see also why we have to be careful if A is more complicated. For a complicated A, it is difficult to tell if the vectors ⃗cT ,⃗cT A,⃗cT A2 , . . . will span all of R3 until we calculate them out. If they don’t span R3, then D will have a non-trivial nullspace and this nullspace represents a set of initial water levels that are hidden from Justin’s measurements. There is a general condition called observability of A and ⃗c that tells us when this nullspace exists. It has to do with the relationship between ⃗c and the eigenvectors of the matrix A. Maybe we’ll get it to it later in the course or in EE16b.
+Thus in order to determine ${lx('\\vec{x}[0]')} uniquely we need <b>at least 3 rows of ${lx('D')} to be linearly independent</b>.
+It turns out that the first three rows ${lx('\\vec{c}^T, \\vec{c}^T A')}, and ${lx('\\vec{c}^T A^2')} are linearly independent <b>thus Justin needs only 3 time steps</b> (t = 0, t = 1, t = 2) to solve for ${lx('\\vec{x}[0]')}. In order to get full credit on this part, you had to show that the first three rows are linearly independent. The easiest way to show this is by doing Gaussian elimination which we will do when we solve for the answer in part (f). [It is perfectly ok to point to a later problem part when solving a problem.] Note that you could also use three other linearly independent rows to solve for the solution but the first three rows are the easiest to calculate.<br/><br/>
+Here we see also why we have to be careful if A is more complicated. For a complicated A, it is difficult to tell if the vectors ${lx('\\vec{c}^T, \\vec{c}^T A, \\vec{c}^T A^2, \\dots')} will span all of ${lx('\\mathbb{R}^3')} until we calculate them out. If they don’t span ${lx('\\mathbb{R}^3')}, then D will have a non-trivial nullspace and this nullspace represents a set of initial water levels that are <i>hidden</i> from Justin’s measurements. There is a general condition called <i>observability of ${lx('A')} and ${lx('\\vec{c}')}</i> that tells us when this nullspace exists. It has to do with the relationship between ${lx('\\vec{c}')} and the eigenvectors of the matrix ${lx('A')}. Maybe we’ll get it to it later in the course or in EE16b.
 `;
 
 const fa15q9f =
@@ -565,6 +567,37 @@ y[t] = 1 \\qquad for \\; t = 0, \\, 1, \\, \\dots, \\, (T − 1)
 $$
 
 <b>What was \\(\\vec{x}[0]\\)? (Show work)</b>
+`;
+
+const fa15q9f_soln =
+`
+In this part we will solve for ${lx('\\vec{x}[0]')} using Gaussian Elimination and in doing so we will show that the first three rows of ${lx('D')} are linearly independent.<br/>
+We want to solve the system of equations
+${lx('\\begin{array}{c} y[0] \\\\ y[1] \\\\ y[2] \\\\ \\end{array} = \\begin{array}{c} \\vec{c}^T \\\\ \\vec{c}^T A \\\\ \\vec{c}^T A^2 \\\\ \\end{array} \\begin{array}{c} x_1[0] \\\\ x_2[0] \\\\ x_3[0] \\\\ \\end{array}', false)}
+
+We first need to calculate ${lx('\\vec{c}^T A')} and ${lx('\\vec{c}^T A^2')}.
+
+${lx('\\vec{c}^T A = \\begin{array}{c c c} 1 & 0 & 0 \\\\ \\end{array} \\begin{array}{c c c} 0 & 1/4 & 1/2 \\\\ 0 & 3/4 & 1/2 \\\\ 1 & 0 & 0 \\\\ \\end{array} = \\begin{array}{c c c} 0 & 1/4 & 1/2 \\\\ \\end{array}', false)}
+
+${lx('\\begin{align} \\vec{c}^T A & = \\begin{array}{c c c} 1 & 0 & 0 \\\\ \\end{array} \\begin{array}{c c c} 0 & 1/4 & 1/2 \\\\ 0 & 3/4 & 1/2 \\\\ 1 & 0 & 0 \\\\ \\end{array} \\begin{array}{c c c} 0 & 1/4 & 1/2 \\\\ 0 & 3/4 & 1/2 \\\\ 1 & 0 & 0 \\\\ & = \\begin{array}{c c c} 1 & 0 & 0 \\\\ \\end{array} \\begin{array}{c c c} 1/2 & 3/16 & 1/8 \\\\ 1/2 & 9/16 & 3/8 \\\\ 0 & 1/4 & 1/2 \\\\ \\end{array} = \\begin{array}{c c c} 1/2 & 3/16 & 1/8 \\\\ \\end{array} \\end{align}', false)}
+
+Writing out the augmented system for the first equation gives the values ${lx('y[0] = y[1] = y[2] = 1')}, we have
+
+${lx('\\begin{array}{c c c} - \\vec{c}^T - & \\vdots & y[0] \\\\ \\vec{c}^T A - & \\vdots & y[1] \\\\ \\vec{c}^T A^2 - & \\vdots & y[2] \\\\ \\end{array} = \\begin{array}{c c c c c} 1 & 0 & 0 & \\vdots & 1 \\\\ 0 & 1/4 & 1/2 & \\vdots & 1 \\\\ 1/2 & 3/16 & 1/8 & \\vdots & 1 \\\\ \\end{array}', false)}
+
+Row reducing, we get the final matrix (process omitted for brevity):
+${lx('\\begin{array}{c c c c c} 1 & 0 & 0 & \\vdots & 1 \\\\ 0 & 1 & 0 & \\vdots & 2 \\\\ 0 & 0 & 1 & \\vdots & 1 \\end{array}', false)}
+
+Thus we have that
+${lx('\\vec{x}[0] = \\begin{array}{c} 1 \\\\ 2 \\\\ 1 \\\\ \\end{array}', false)}
+
+We also have shown that ${lx('\\bar{D}')} row reduces to the identity. Thus the first 3 rows of ${lx('D')} are linearly in- dependent and ${lx('\\vec{0}')} is the only vector in the nullspace of D and there is a unique solution for the first equation above.
+Some other methods you could have used to solve for ${lx('\\vec{x}[0]')} and show linear independence were solving for ${lx('\\bar{D}^{-1}')} by row reducing the augmented system
+
+${lx('\\left[ \\begin{array}{c c c} I & \\vdots & \\bar{D} \\\\ \\end{array} \\right] \\implies \\left[ \\begin{array}{c c c} \\bar{D}^{-1} & \\vdots & I \\\\ \\end{array}', false)}
+${lx('\\vec{x}[0] = \\left[ \\bar{D}^{-1} \\right] \\begin{array}{c} y[0] \\\\ y[1] \\\\ y[2] \\\\ \\right]', false)}
+
+or using your initial knowledge that ${lx('x_1[0] = 1')} to write a system of 2 equations in the 2 unknowns, ${lx('x_2[0]')} and ${lx('x_3[0]')}, and solve that system. (This is equivalent to starting at the third step of the row reduction shown above. )
 `;
 
 var Scroll = require('react-scroll');
@@ -663,43 +696,43 @@ class EE16AFa15 extends Component {
           <hr className="s2" />
           <p>Unless told otherwise, you must show work to get credit. There will be very little partial credit given in this section. You get one drop: do 3 out of the following 4 questions. (We will grade all 4 and keep the best 3 scores.) Each problem is worth 8 points. Students who get all 4 questions correct will receive some bonus points (6 points).</p>
           <hr className="s5" />
-          <Question id={"q3"} content={fa15q3} variables={['x_1', 'x_2']} image={['q3.png']} examCode={examCode} />
+          <Question id={"q3"} content={fa15q3} variables={['x_1', 'x_2']} image={['q3.png']} examCode={examCode} solution={fa15q3_soln} />
           <hr className="s5" />
-          <Question id={"q4"} content={fa15q4} rows={2} cols={2} image={['q4-1.png', 'q4-2.png']} examCode={examCode} />
+          <Question id={"q4"} content={fa15q4} rows={2} cols={2} image={['q4-1.png', 'q4-2.png']} examCode={examCode} solution={fa15q4_soln}  />
           <hr className="s5" />
-          <Question id={"q5"} content={fa15q5} hasResponse={false} image={['q5-1.png', 'q5-2.png']} examCode={examCode} />
+          <Question id={"q5"} content={fa15q5} hasResponse={false} image={['q5-1.png', 'q5-2.png']} examCode={examCode} solution={fa15q5_soln}  />
           <hr className="s5" />
-          <Question id={"q6"} content={fa15q6} hasResponse={false} image={['q6-1.png', 'q6-2.png']} examCode={examCode} />
+          <Question id={"q6"} content={fa15q6} hasResponse={false} image={['q6-1.png', 'q6-2.png']} examCode={examCode} solution={fa15q6_soln}  />
           <hr className="s5" />
           <h2>Free-form Problems <i>(94 + 15 points)</i></h2>
           <hr className="s5" />
-          <Question id={"q7a"} content={fa15q7a} rows={4} cols={4} image={['q7a.png']} examCode={examCode} />
+          <Question id={"q7a"} content={fa15q7a} rows={4} cols={4} image={['q7a.png']} examCode={examCode} solution={fa15q7a_soln}  />
           <hr className="s5" />
-          <Question id={"q7b"} content={fa15q7b} on="Yes" off="No" image={['q7b.png']} examCode={examCode} />
+          <Question id={"q7b"} content={fa15q7b} on="Yes" off="No" image={['q7b.png']} examCode={examCode} solution={fa15q7b_soln}  />
           <hr className="s5" />
-          <Question id={"q7c"} content={fa15q7c} on="Yes" off="No" image={['q7c.png']} examCode={examCode} />
+          <Question id={"q7c"} content={fa15q7c} on="Yes" off="No" image={['q7c.png']} examCode={examCode} solution={fa15q7c_soln}  />
           <hr className="s5" />
-          <Question id={"q8a"} content={fa15q8a} rows={6} cols={6} image={['q8a.png']} examCode={examCode} />
+          <Question id={"q8a"} content={fa15q8a} rows={6} cols={6} image={['q8a.png']} examCode={examCode} solution={fa15q8a_soln}  />
           <hr className="s5" />
-          <Question id={"q8b"} content={fa15q8b} rows={6} cols={1} image={['q8b-1.png', 'q8b-2.png']} examCode={examCode} />
+          <Question id={"q8b"} content={fa15q8b} rows={6} cols={1} image={['q8b-1.png', 'q8b-2.png']} examCode={examCode} solution={fa15q8b_soln}  />
           <hr className="s5" />
-          <Question id={"q8c"} content={fa15q8c} hasResponse={false} image={['q8c.png']} examCode={examCode} />
+          <Question id={"q8c"} content={fa15q8c} hasResponse={false} image={['q8c.png']} examCode={examCode} solution={fa15q8c_soln}  />
           <hr className="s5" />
-          <Question id={"q8d"} content={fa15q8d} hasResponse={false} image={['q8d.png']} examCode={examCode} />
+          <Question id={"q8d"} content={fa15q8d} hasResponse={false} image={['q8d.png']} examCode={examCode} solution={fa15q8d_soln}  />
           <hr className="s5" />
-          <Question id={"q8e"} content={fa15q8e} on="Yes" off="No" image={['q8e-1.png', 'q8e-2.png']} examCode={examCode} />
+          <Question id={"q8e"} content={fa15q8e} on="Yes" off="No" image={['q8e-1.png', 'q8e-2.png']} examCode={examCode} solution={fa15q8e_soln}  />
           <hr className="s5" />
-          <Question id={"q9a"} content={fa15q9a} on="Yes" off="No" image={['q9a.png']} examCode={examCode} />
+          <Question id={"q9a"} content={fa15q9a} on="Yes" off="No" image={['q9a.png']} examCode={examCode} solution={fa15q9a_soln}  />
           <hr className="s5" />
-          <Question id={"q9b"} content={fa15q9b} hasResponse={false} image={['q9b.png']} examCode={examCode} />
+          <Question id={"q9b"} content={fa15q9b} hasResponse={false} image={['q9b.png']} examCode={examCode} solution={fa15q9b_soln}  />
           <hr className="s5" />
-          <Question id={"q9c"} content={fa15q9c} rows={3} cols={1} image={['q9c.png']} examCode={examCode} />
+          <Question id={"q9c"} content={fa15q9c} rows={3} cols={1} image={['q9c.png']} examCode={examCode} solution={fa15q9c_soln}  />
           <hr className="s5" />
-          <Question id={"q9d"} content={fa15q9d} hasResponse={false} image={['q9d.png']} examCode={examCode} />
+          <Question id={"q9d"} content={fa15q9d} hasResponse={false} image={['q9d.png']} examCode={examCode} solution={fa15q9d_soln}  />
           <hr className="s5" />
-          <Question id={"q9e"} content={fa15q9e} hasResponse={true} image={['q9e-1.png', 'q9e-2.png']} examCode={examCode} />
+          <Question id={"q9e"} content={fa15q9e} hasResponse={true} image={['q9e-1.png', 'q9e-2.png']} examCode={examCode} solution={fa15q9e_soln}  />
           <hr className="s5" />
-          <Question id={"q9f"} content={fa15q9f} rows={3} cols={1} image={['q9f-1.png', 'q9f-2.png']} examCode={examCode} />
+          <Question id={"q9f"} content={fa15q9f} rows={3} cols={1} image={['q9f-1.png', 'q9f-2.png']} examCode={examCode} solution={fa15q9f_soln}  />
         </div>
       </span>
     );
