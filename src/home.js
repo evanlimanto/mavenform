@@ -13,6 +13,16 @@ class Home extends Component {
           </div>
           <hr className="margin" />
         </div>
+        <div class="shadow-banner">
+          <hr className="margin" />
+          <h6>Mavenform</h6>
+          <hr className="s2" />
+          <div className="center">
+            <h5 className="h5-alt">A new and intuitive format to view and study past exams</h5>
+          </div>
+          <hr className="margin" />
+        </div>
+        <hr className="s5" />
         <h1 className="center">EE 16A</h1>
         <hr className="s1" />
         <h5>Available Interactive Exams</h5>

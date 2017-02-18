@@ -96,6 +96,10 @@ h6 {
   left: 0;
 }
 
+.shadow-banner {
+  opacity: 0;
+}
+
 a {
   font-family: 'Lato', sans-serif;
   text-decoration: none;
@@ -189,6 +193,10 @@ img {
   border: 1px solid #11accd;
 }
 
+.solution * {
+  color: #11accd;
+}
+
 .problem-image {
   margin: 25px 0;
 }
@@ -259,7 +267,6 @@ input[type=button]:hover {
 }
 
 .card-container {
-  padding-top: 360px;
   max-width: 1200px;
 }
 

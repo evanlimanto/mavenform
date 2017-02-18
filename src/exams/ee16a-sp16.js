@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FreeFormQuestion } from '../components/question';
+import { Question } from '../components/question';
 import { lmatrix, lx } from '../utils';
 
 const sp16q3 =
@@ -544,6 +544,10 @@ However, number is not conserved in this option. Since it was ambiguous whether 
 was meant to be conserved in the question, partial credit was given for excluding this option with this explanation.
 `;
 
+var Scroll = require('react-scroll');
+var scroller = Scroll.scroller;
+var Sticky = require('react-stickynode');
+
 class EE16ASp16 extends Component {
   render() {
     return (
@@ -635,63 +639,63 @@ class EE16ASp16 extends Component {
           <hr className="s2" />
           <p>Unless told otherwise, you must show work to get credit. There will be very little partial credit given in this section. Each problem is worth 8 points.</p>
           <hr className="s5" />
-          <FreeFormQuestion id={"q3"} content={sp16q3} hasReponse={false} solution={sp16q3_soln} />
+          <Question id={"q3"} content={sp16q3} hasReponse={false} solution={sp16q3_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q4"} content={sp16q4} hasReponse={false} solution={sp16q4_soln} />
+          <Question id={"q4"} content={sp16q4} hasReponse={false} solution={sp16q4_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q5a"} content={sp16q5a} hasReponse={false} solution={sp16q5a_soln} />
+          <Question id={"q5a"} content={sp16q5a} hasReponse={false} solution={sp16q5a_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q5b"} content={sp16q5b} hasReponse={false} solution={sp16q5b_soln} />
+          <Question id={"q5b"} content={sp16q5b} hasReponse={false} solution={sp16q5b_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q5c"} content={sp16q5c} hasReponse={false} solution={sp16q5c_soln} />
+          <Question id={"q5c"} content={sp16q5c} hasReponse={false} solution={sp16q5c_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q5d"} content={sp16q5d} hasReponse={false} solution={sp16q5d_soln} />
+          <Question id={"q5d"} content={sp16q5d} hasReponse={false} solution={sp16q5d_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q5e"} content={sp16q5e} hasReponse={false} solution={sp16q5e_soln} />
+          <Question id={"q5e"} content={sp16q5e} hasReponse={false} solution={sp16q5e_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q5f"} content={sp16q5f} hasReponse={false} solution={sp16q5f_soln} />
+          <Question id={"q5f"} content={sp16q5f} hasReponse={false} solution={sp16q5f_soln} />
           <hr className="s5" />
           <h2>Free-form Problems <i>(100 points)</i></h2>
           <hr className="s2" />
-          <FreeFormQuestion id={"q6a"} content={sp16q6a} hasReponse={false} solution={sp16q6a_soln} />
+          <Question id={"q6a"} content={sp16q6a} hasReponse={false} solution={sp16q6a_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q6b"} content={sp16q6b} hasReponse={false} solution={sp16q6b_soln} />
+          <Question id={"q6b"} content={sp16q6b} hasReponse={false} solution={sp16q6b_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q6c"} content={sp16q6c} hasReponse={false} solution={sp16q6c_soln} />
+          <Question id={"q6c"} content={sp16q6c} hasReponse={false} solution={sp16q6c_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q7a"} content={sp16q7a} hasReponse={false} solution={sp16q7a_soln} />
+          <Question id={"q7a"} content={sp16q7a} hasReponse={false} solution={sp16q7a_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q7b"} content={sp16q7b} hasReponse={false} solution={sp16q7b_soln} />
+          <Question id={"q7b"} content={sp16q7b} hasReponse={false} solution={sp16q7b_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q7c"} content={sp16q7c} hasReponse={false} solution={sp16q7c_soln} />
+          <Question id={"q7c"} content={sp16q7c} hasReponse={false} solution={sp16q7c_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q7d"} content={sp16q7d} hasReponse={false} solution={sp16q7d_soln} />
+          <Question id={"q7d"} content={sp16q7d} hasReponse={false} solution={sp16q7d_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q7e"} content={sp16q7e} hasReponse={false} solution={sp16q7e_soln} />
+          <Question id={"q7e"} content={sp16q7e} hasReponse={false} solution={sp16q7e_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q8a"} content={sp16q8a} hasReponse={false} solution={sp16q8a_soln} />
+          <Question id={"q8a"} content={sp16q8a} hasReponse={false} solution={sp16q8a_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q8b"} content={sp16q8b} hasReponse={false} solution={sp16q8b_soln} />
+          <Question id={"q8b"} content={sp16q8b} hasReponse={false} solution={sp16q8b_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q8c"} content={sp16q8c} hasReponse={false} solution={sp16q8c_soln} />
+          <Question id={"q8c"} content={sp16q8c} hasReponse={false} solution={sp16q8c_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q8d"} content={sp16q8d} hasReponse={false} solution={sp16q8d_soln} />
+          <Question id={"q8d"} content={sp16q8d} hasReponse={false} solution={sp16q8d_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q8e"} content={sp16q8e} hasReponse={false} solution={sp16q8e_soln} />
+          <Question id={"q8e"} content={sp16q8e} hasReponse={false} solution={sp16q8e_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q8f"} content={sp16q8f} hasReponse={false} solution={sp16q8f_soln} />
+          <Question id={"q8f"} content={sp16q8f} hasReponse={false} solution={sp16q8f_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q8g"} content={sp16q8g} hasReponse={false} solution={sp16q8g_soln} />
+          <Question id={"q8g"} content={sp16q8g} hasReponse={false} solution={sp16q8g_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q9a"} content={sp16q9a} hasReponse={false} solution={sp16q9a_soln} />
+          <Question id={"q9a"} content={sp16q9a} hasReponse={false} solution={sp16q9a_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q9b"} content={sp16q9b} hasReponse={false} solution={sp16q9b_soln} />
+          <Question id={"q9b"} content={sp16q9b} hasReponse={false} solution={sp16q9b_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q9c"} content={sp16q9c} hasReponse={false} solution={sp16q9c_soln} />
+          <Question id={"q9c"} content={sp16q9c} hasReponse={false} solution={sp16q9c_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q9d"} content={sp16q9d} hasReponse={false} solution={sp16q9d_soln} />
+          <Question id={"q9d"} content={sp16q9d} hasReponse={false} solution={sp16q9d_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q9e"} content={sp16q9e} hasReponse={false} solution={sp16q9e_soln} />
+          <Question id={"q9e"} content={sp16q9e} hasReponse={false} solution={sp16q9e_soln} />
         </div>
       </span>
     );
