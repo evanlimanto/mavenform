@@ -47,12 +47,34 @@ class Solution extends Component {
       );
     }
 
+    if (!this.state.showImage) {
+      solution = (
+        <input className="blue" type="button" value="Show Solution" onClick={() => this.toggleSolution()}/>
+      );
+    } else {
+      solution = (
+        <input className="gray" type="button" value="Hide Solution" onClick={() => this.toggleSolution()}/>
+      );
+    }
+
     return (
       <div>
         <hr className="s3" />
         {check}
         <input className="gray" type="button" value="Solution" onClick={() => this.toggleSolution()}/>
         {solutionContent}
+      </div>
+    );
+  }
+}
+
+class Question extends Component {
+  render() {
+    const content = this.props.content;
+    return (
+      <div id={this.props.id}>
+        <div dangerouslySetInnerHTML={{__html: content}}></div>
+        <Solution image={this.props.image} />
       </div>
     );
   }
@@ -138,4 +160,4 @@ class FreeFormQuestion extends Component {
   }
 }
 
-export { VariablesQuestion, MatrixQuestion, ToggleQuestion, FreeFormQuestion };
+export { Question, VariablesQuestion, MatrixQuestion, ToggleQuestion, FreeFormQuestion };
