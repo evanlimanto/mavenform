@@ -278,6 +278,10 @@ diagrams in Figure 2 represents a possible set of behaviors for this colony?
 <img src="${img9e}" className="problem-image" />
 `;
 
+var Scroll = require('react-scroll');
+var scroller = Scroll.scroller;
+var Sticky = require('react-stickynode');
+
 class EE16ASp16 extends Component {
   render() {
     return (
@@ -287,22 +291,81 @@ class EE16ASp16 extends Component {
         <div className="center">
           <h5>Midterm 1 | Spring 2016 | Alon, Ayazifar</h5>
         </div>
-        <div className="sidebar">
+        <Sticky className="sidebar screen">
           <hr className="s5" />
           <h4>CONTENTS</h4>
           <hr className="s2" />
           <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
           <hr className="s1" />
           <div className="sidetitle">Straightforward Questions</div>
-          <div><a className="sidetab">3. Mechanical Johann</a></div>
-          <div><a className="sidetab">4. Freedom!</a></div>
-          <div><a className="sidetab">5. True or False?</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q3', {
+              duration: 500,
+              smooth: true,
+            })}>3. Mechanical Johann</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q4', {
+              duration: 500,
+              smooth: true,
+            })}>4. Freedom!</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q5a', {
+              duration: 500,
+              smooth: true,
+            })}>5. True or False?</a></div>
           <hr className="s1" />
           <div className="sidetitle">Free-form Problems</div>
-          <div><a className="sidetab">6. Faerie Battles</a></div>
-          <div><a className="sidetab">7. A Tale of a Million Technocrats and the Four Dream Cities</a></div>
-          <div><a className="sidetab">8. Ayy - Reflections on SIXTEEN</a></div>
-          <div><a className="sidetab">9. Goodness Gracious, Great Balls of Fur!</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q6a', {
+              duration: 500,
+              smooth: true,
+            })}>6. Faerie Battles</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q7a', {
+              duration: 500,
+              smooth: true,
+            })}>7. A Tale of a Million Technocrats and the Four Dream Cities</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q8a', {
+              duration: 500,
+              smooth: true,
+            })}>8. Ayy - Reflections on SIXTEEN</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q9a', {
+              duration: 500,
+              smooth: true,
+            })}>9. Goodness Gracious, Great Balls of Fur!</a></div>
+        </Sticky>
+        <div className="sidebar mobile">
+          <hr className="s5" />
+          <h4>CONTENTS</h4>
+          <hr className="s2" />
+          <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
+          <hr className="s1" />
+          <div className="sidetitle">Straightforward Questions</div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q3', {
+              duration: 500,
+              smooth: true,
+            })}>3. Mechanical Johann</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q4', {
+              duration: 500,
+              smooth: true,
+            })}>4. Freedom!</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q5a', {
+              duration: 500,
+              smooth: true,
+            })}>5. True or False?</a></div>
+          <hr className="s1" />
+          <div className="sidetitle">Free-form Problems</div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q6a', {
+              duration: 500,
+              smooth: true,
+            })}>6. Faerie Battles</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q7a', {
+              duration: 500,
+              smooth: true,
+            })}>7. A Tale of a Million Technocrats and the Four Dream Cities</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q8a', {
+              duration: 500,
+              smooth: true,
+            })}>8. Ayy - Reflections on SIXTEEN</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q9a', {
+              duration: 500,
+              smooth: true,
+            })}>9. Goodness Gracious, Great Balls of Fur!</a></div>
         </div>
         <div className="content">
           <hr className="s5" />

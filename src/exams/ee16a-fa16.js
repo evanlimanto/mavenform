@@ -365,6 +365,10 @@ const fa16q8c_soln =
 It cannot because in the case of Steph ${lmatrix([[0, 0]])} goes to a nonzero vector. This transformation cannot be a linear transformation, so there is no matrix representation.
 `;
 
+var Scroll = require('react-scroll');
+var scroller = Scroll.scroller;
+var Sticky = require('react-stickynode');
+
 class EE16AFa16 extends Component {
   render() {
     const examCode = 'ee16a-fa16';
@@ -375,21 +379,77 @@ class EE16AFa16 extends Component {
         <div className="center">
           <h5>Midterm 1 | Fall 2016 | Ayazifar, Stojanovic</h5>
         </div>
-        <div className="sidebar">
+        <Sticky className="sidebar screen">
           <hr className="s5" />
           <h4>CONTENTS</h4>
           <hr className="s2" />
           <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
           <hr className="s1" />
           <div className="sidetitle">Section 1</div>
-          <div><a className="sidetab">3. True/False</a></div>
-          <div><a className="sidetab">4. Proof</a></div>
-          <div><a className="sidetab">5. Inverse of a Matrix</a></div>
+          <div>
+            <a className="sidetab" onClick={() => scroller.scrollTo('q3a', {
+              duration: 500,
+              smooth: true,
+            })}>3. True/False</a></div>
+          <div>
+            <a className="sidetab" onClick={() => scroller.scrollTo('q4a', {
+              duration: 500,
+              smooth: true,
+            })}>4. Proof</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q5', {
+              duration: 500,
+              smooth: true,
+            })}>5. Inverse of a Matrix</a></div>
           <hr className="s1" />
           <div className="sidetitle">Section 2</div>
-          <div><a className="sidetab">6. Directional Shovels</a></div>
-          <div><a className="sidetab">7. Graph Majors</a></div>
-          <div><a className="sidetab">8. Transformation Basketball</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q6a', {
+              duration: 500,
+              smooth: true,
+            })}>6. Directional Shovels</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q7a', {
+              duration: 500,
+              smooth: true,
+            })}>7. Graph Majors</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q8a', {
+              duration: 500,
+              smooth: true,
+            })}>8. Transformation Basketball</a></div>
+        </Sticky>
+        <div className="sidebar mobile">
+          <hr className="s5" />
+          <h4>CONTENTS</h4>
+          <hr className="s2" />
+          <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
+          <hr className="s1" />
+          <div className="sidetitle">Section 1</div>
+          <div>
+            <a className="sidetab" onClick={() => scroller.scrollTo('q3a', {
+              duration: 500,
+              smooth: true,
+            })}>3. True/False</a></div>
+          <div>
+            <a className="sidetab" onClick={() => scroller.scrollTo('q4a', {
+              duration: 500,
+              smooth: true,
+            })}>4. Proof</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q5', {
+              duration: 500,
+              smooth: true,
+            })}>5. Inverse of a Matrix</a></div>
+          <hr className="s1" />
+          <div className="sidetitle">Section 2</div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q6a', {
+              duration: 500,
+              smooth: true,
+            })}>6. Directional Shovels</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q7a', {
+              duration: 500,
+              smooth: true,
+            })}>7. Graph Majors</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q8a', {
+              duration: 500,
+              smooth: true,
+            })}>8. Transformation Basketball</a></div>
         </div>
         <div className="content">
           <hr className="s5" />

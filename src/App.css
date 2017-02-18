@@ -215,9 +215,11 @@ input[type=button]:hover {
 }
 
 .sidebar {
+  display: block;
+  box-sizing: border-box;
   float: left;
-  padding-right: 40px;
-  max-width: 240px;
+  margin-right: 40px;
+  width: 200px;
   top: 0;
 }
 
@@ -231,7 +233,9 @@ input[type=button]:hover {
 
 .sidetab {
   font-size: 14px;
-  margin-left: 16px;
+  position: relative;
+  left: 16px;
+  margin-right: 16px;
   line-height: 32px;
 }
 
@@ -332,6 +336,14 @@ input[type=button]:hover {
   display: none;
 }
 
+.screen {
+  display: initial;
+}
+
+.mobile {
+  display: none;
+}
+
 @media (max-width: 1019px) {
   .return {
     position: absolute;
@@ -343,11 +355,19 @@ input[type=button]:hover {
 
   .sidebar {
     padding: 0;
-    max-width: 100%;
+    width: 100%;
   }
 
   .content {
     max-width: 100%;
+  }
+
+  .screen {
+    display: none;
+  }
+
+  .mobile {
+    display: initial;
   }
 }
 
