@@ -234,6 +234,7 @@ const fa16q8c =
 
 class EE16AFa16 extends Component {
   render() {
+    const examCode = 'ee16a-fa16';
     return (
       <span>
         <h1>EE 16A</h1>
@@ -247,60 +248,59 @@ class EE16AFa16 extends Component {
           <hr className="s2" />
           <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
           <hr className="s1" />
-          <div className="sidetitle">Straightforward Questions</div>
-          <div><a className="sidetab">3. Solve It</a></div>
-          <div><a className="sidetab">4. Invert It</a></div>
-          <div><a className="sidetab">5. Show It</a></div>
-          <div><a className="sidetab">6. Null It</a></div>
+          <div className="sidetitle">Section 1</div>
+          <div><a className="sidetab">3. True/False</a></div>
+          <div><a className="sidetab">4. Proof</a></div>
+          <div><a className="sidetab">5. Inverse of a Matrix</a></div>
           <hr className="s1" />
-          <div className="sidetitle">Free-form Problems</div>
-          <div><a className="sidetab">7. Finding the Bright Cave</a></div>
-          <div><a className="sidetab">8. A Tale of Two Cities</a></div>
-          <div><a className="sidetab">9. Justin Beaver</a></div>
+          <div className="sidetitle">Section 2</div>
+          <div><a className="sidetab">6. Directional Shovels</a></div>
+          <div><a className="sidetab">7. Graph Majors</a></div>
+          <div><a className="sidetab">8. Transformation Basketball</a></div>
         </div>
         <div className="content">
           <hr className="s5" />
           <h2>Section 1 (18 points)</h2>
           <hr className="s2" />
-          <ToggleQuestion id={"q3a"} content={fa16q3a} />
+          <ToggleQuestion id={"q3a"} content={fa16q3a} image={['q3-1.png']} examCode={examCode} />
           <hr className="s5" />
-          <ToggleQuestion id={"q3b"} content={fa16q3b} />
+          <ToggleQuestion id={"q3b"} content={fa16q3b} image={['q3-2.png']} examCode={examCode} />
           <hr className="s5" />
-          <ToggleQuestion id={"q3c"} content={fa16q3c} />
+          <ToggleQuestion id={"q3c"} content={fa16q3c} image={['q3-1.png']} examCode={examCode} />
           <hr className="s5" />
-          <ToggleQuestion id={"q3d"} content={fa16q3d} />
+          <ToggleQuestion id={"q3d"} content={fa16q3d} image={['q3-1.png']} examCode={examCode} />
           <hr className="s5" />
-          <ToggleQuestion id={"q3e"} content={fa16q3e} />
+          <ToggleQuestion id={"q3e"} content={fa16q3e} image={['q3-2.png']} examCode={examCode} />
           <hr className="s5" />
-          <ToggleQuestion id={"q3f"} content={fa16q3f} />
+          <ToggleQuestion id={"q3f"} content={fa16q3f} image={['q3-1.png']} examCode={examCode} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q4a"} content={fa16q4a} hasResponse={false} />
+          <FreeFormQuestion id={"q4a"} content={fa16q4a} hasResponse={false} image={['q4a.png']} examCode={examCode} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q4b"} content={fa16q4b} hasResponse={false} />
+          <FreeFormQuestion id={"q4b"} content={fa16q4b} hasResponse={false} image={['q4b.png']} examCode={examCode} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q5"} content={fa16q5} hasResponse={false} />
+          <FreeFormQuestion id={"q5"} content={fa16q5} hasResponse={false} image={['q5a.png']} examCode={examCode} />
           <hr className="s5" />
           <h2>Section 2 (55 points)</h2>
           <hr className="s2" />
-          <FreeFormQuestion id={"q6a"} content={fa16q6a} hasResponse={false} />
+          <FreeFormQuestion id={"q6a"} content={fa16q6a} hasResponse={false} image={['q6a.png']} examCode={examCode} />
           <hr className="s2" />
-          <FreeFormQuestion id={"q6b"} content={fa16q6b} hasResponse={false} />
+          <FreeFormQuestion id={"q6b"} content={fa16q6b} hasResponse={false} image={['q6b.png']} examCode={examCode} />
           <hr className="s2" />
-          <MatrixQuestion id={"q7a"} content={fa16q7a} rows={3} cols={3} />
+          <MatrixQuestion id={"q7a"} content={fa16q7a} rows={3} cols={3} image={['q7a.png']} examCode={examCode} />
           <hr className="s2" />
-          <FreeFormQuestion id={"q7b"} content={fa16q7b} hasResponse={false} />
+          <FreeFormQuestion id={"q7b"} content={fa16q7b} hasResponse={false} image={['q7b.png']} examCode={examCode} />
           <hr className="s2" />
-          <FreeFormQuestion id={"q7c"} content={fa16q7c} hasResponse={false} />
+          <FreeFormQuestion id={"q7c"} content={fa16q7c} hasResponse={false} image={['q7c.png']} examCode={examCode} />
           <hr className="s2" />
-          <FreeFormQuestion id={"q7d"} content={fa16q7d} hasResponse={false} />
+          <FreeFormQuestion id={"q7d"} content={fa16q7d} hasResponse={false} image={['q7d.png']} examCode={examCode} />
           <hr className="s3" />
-          <FreeFormQuestion id={"q7e"} content={fa16q7e} hasResponse={false} />
+          <FreeFormQuestion id={"q7e"} content={fa16q7e} hasResponse={false} image={['q7e.png']} examCode={examCode} />
           <hr className="s3" />
-          <MatrixQuestion id={"q8a"} content={fa16q8a} rows={2} cols={2} />
+          <MatrixQuestion id={"q8a"} content={fa16q8a} rows={2} cols={2} image={['q8a.png']} examCode={examCode} />
           <hr className="s3" />
-          <FreeFormQuestion id={"q8b"} content={fa16q8b} hasResponse={false} />
+          <FreeFormQuestion id={"q8b"} content={fa16q8b} hasResponse={false} image={['q8b.png']} examCode={examCode} />
           <hr className="s3" />
-          <FreeFormQuestion id={"q8c"} content={fa16q8c} hasResponse={false} />
+          <FreeFormQuestion id={"q8c"} content={fa16q8c} hasResponse={false} image={['q8c.png']} examCode={examCode} />
           <hr className="s5" />
         </div>
       </span>

@@ -4,7 +4,7 @@ import { lmatrix, lx } from '../utils';
 
 const sp15q1a =
 `
-<h3>1. Imaging Circuit <i>(12 points)</i></h3>
+<h3>PROBLEM 1. Imaging Circuit <i>(12 points)</i></h3>
 In this problem we will return one final time to examining how one might choose the area of a photodetector in order to maximize the measured voltage. This time however, let’s assume that light shines only over a fixed area \\(A_{illuminated}\\).<br/><br/>
 
 (Recall that in the rain analogy, the area of the photodetector is analogous to the area of the bucket, the current is analogous to the amount of water per unit time being captured in the bucket, and the voltage is analogous to the height of the water accumulated within the bucket.)<br/><br/>
@@ -36,13 +36,12 @@ and/or plots showing how the voltage depends on ${lx('A_{PD}')} and ${lx('A_{ill
 const imgsp15q2_1 = require('../img/sp15q2-1.png');
 const sp15q2a =
 `
-<h3>PROBLEM 2. (14 pts) Sparse Images and Vector Geometry</h3>
+<h3>PROBLEM 2. Sparse Images and Vector Geometry <i>(14 pts)</i></h3>
  
 So far we've usually represented images as data grids. However, sometimes this can be 
 very expensive in cases where most of the image pixels are exactly identical.
 example, consider a 5 X 5 image where all the pixels are white, except for the pixel 
-position ${lmatrix([[2, 3]])} which is black. Such an image is called a "sparse" image, and it may be much more efficient to represent it by only specifying the location(s) of the wh
-pixel(s).
+position ${lmatrix([[2, 3]])} which is black. Such an image is called a "sparse" image, and it may be much more efficient to represent it by only specifying the location(s) of the white pixel(s).<br/><br/>
  
 For example, if we had a 2 x 2 image with a white background, an image comprised of 
 the vector ${lmatrix([['x', 'y']], true)} = ${lmatrix([[0, 1]], true)} would have a black pixel in the upper left hand corner of the image. (In other words, in this encoding the vectors correspond to positions in ${lmatrix([[0, 0]], true)} is the origin.) This particular image is shown below. Note that for the rest of the problem, when we ask you to draw an image, rather than you filling in each pixel, we will just be asking you to draw an X at the positions indicated by each vector – this is depicted on the right for the example image.   
@@ -61,12 +60,12 @@ our image consists of the vectors ${lmatrix([[1], [2]])} and ${lmatrix([[1], [1]
 
 const sp15q2c =
 `
-c) <b>(6 pts)</b> Now let’s imagine we had an image with black pixels everywhere, and that we transformed this image by the same ${lmatrix([[1, 2], [2, 4]])} matrix as in part b). Sketch the that we transformed this image by the same resulting transformed image. Note that you don’t need to know the exact size of the original image – just indicate what happens to the transformed image as this size is increased. It may help you to consider what happens when you multiply an arbitrary vector ${lmatrix(['x', 'y'], true)} by the transformation matrix. What is property of the transformation matrix makes the resulting image look the way it does? 
+c) <b>(6 pts)</b> Now let’s imagine we had an image with black pixels everywhere, and that we transformed this image by the same ${lmatrix([[1, 2], [2, 4]])} matrix as in part b). Sketch the that we transformed this image by the same resulting transformed image. Note that you don’t need to know the exact size of the original image – just indicate what happens to the transformed image as this size is increased. It may help you to consider what happens when you multiply an arbitrary vector ${lmatrix([['x', 'y']], true)} by the transformation matrix. What is property of the transformation matrix makes the resulting image look the way it does? 
 `;
 
 const sp15q3a =
 `
-<h3>PROBLEM 3. Coding for Storage (13 points)</h3>
+<h3>PROBLEM 3. Coding for Storage <i>(13 points)</i></h3>
 Alice is a budding young photographer. Given the beautiful weather over the weekend 
 she goes up into the Berkeley hills and takes a bunch of gorgeous pictures of San 
 Francisco. She’s hoping to sell these pictures to make some extra money, and so she 
@@ -86,37 +85,34 @@ b) <b>(5 pts)</b> Alice realizes that if she wants to keep taking pictures, she 
 So she focuses on first understanding how she can efficiently store two images. 
 Just like in the lab, we’ll express the images as vectors. 
  
-Consider two image vectors <b>x</b> and <b>y</b>. Alice applies the following strategy: she 
-stores <b>x</b> on the laptop, <b>y</b> on the USB stick, and <b>x</b> on her phone. Alice’s friend Elaine instead suggests that Alice use a different strategy and store <b>x+y</b> on her 
-phone instead (while leaving the data stored on the laptop and USB the same as in 
-Alice’s strategy). Is Elaine’s strategy better than Alice’s strategy? If so, describe 
-at least one scenario where Elaine’s strategy can recover the data but Alice’s 
-cannot. If not, explain why the strategies are equivalent.
+Consider two image vectors ${lx('x')} and ${lx('y')}. Alice applies the following strategy: she 
+stores ${lx('x')} on the laptop, ${lx('y')} on the USB stick, and ${lx('x')} on her phone. Alice’s friend Elaine instead suggests that Alice use a different strategy and store ${lx('x + y')} on her 
+phone instead (while leaving the data stored on the laptop and USB the same as in Alice’s strategy). Is Elaine’s strategy better than Alice’s strategy? If so, describe at least one scenario where Elaine’s strategy can recover the data but Alice’s cannot. If not, explain why the strategies are equivalent.
 `;
 
 const sp15q3c =
 `
 c) <b>(6 pts)</b> Let’s now consider a more advanced storage strategy that uses 8 storage 
-devices to handle four images a, b, c, and d. If each pixel (which contains a real 
+devices to handle four images ${lx('a')}, ${lx('b')}, ${lx('c')}, and ${lx('d')}. If each pixel (which contains a real 
 number representing the intensity) in each of the four image vectors is ${lx('a_i')}, ${lx('b_i')}, ${lx('c_i')}, ${lx('d_i')}, 
 the information stored in each pixel location of the 8 storage devices will be ${lx('a_i')}, ${lx('b_i')}, 
 ${lx('c_i')}, ${lx('d_i')}, ${lx('a_i')}+${lx('b_i')}, ${lx('c_i')}+${lx('d_i')}, ${lx('a_i')}
 +${lx('c_i')}, ${lx('b_i')}+${lx('d_i')}. If we were to represent the storage action 
-happening on each of the pixels as an 8x4 matrix multiplying a 4x1 vector, what 
-would the entries in that 8x4 matrix and 4x1 vector be? 
+happening on each of the pixels as an ${lx('8')}x${lx('4')} matrix multiplying a ${lx('4')}x${lx('1')} vector, what 
+would the entries in that ${lx('8')}x${lx('4')} matrix and ${lx('4')}x${lx('1')} vector be? 
 `;
 
 const sp15q3d =
 `
-d) <b>(Bonus: 6 pts)</b> Recalling that <b>a</b>, <b>b</b>, <b>c</b>, and <b>d</b> are all ${lx('n^2')} x 1 vectors, show how you 
+d) <b>(Bonus: 6 pts)</b> Recalling that ${lx('a')}, ${lx('b')}, ${lx('c')}, and ${lx('d')} are all ${lx('n^2')} x ${lx('1')} vectors, show how you 
 could perform a single matrix-matrix multiplication to represent the storage action 
-of  all  of  the  pixels  simultaneously.    Hint:  what  would  be  the  dimensions  of  a 
+of all of the pixels simultaneously. Hint: what would be the dimensions of a 
 matrix composed of ${lmatrix([['a', 'b', 'c', 'd']], true)}? 
 `;
 
 const sp15q4a =
 `
-<h3>PROBLEM 4. (10 pts) Investment Strategy</H3>
+<h3>PROBLEM 4. Investment Strategy <i>(10 pts)</i></h3>
  
 Alice finally sells some of her photographs and makes a bunch of money. In fact, she is 
 so rich that at the beginning of every day she can put $1 of her money into the stock 
@@ -146,7 +142,7 @@ investment strategy was (i.e., to find the values of ${lx('\\alpha_f')}, ${lx('\
 
 const sp15q5a =
 `
-<h3>PROBLEM 5. (16 pts) Berkeley Forever!</h3>
+<h3>PROBLEM 5. Berkeley Forever! <i>(16 pts)</i></h3>
  
 Berkeley, as we all know, is a great place to live. But sometimes people make silly 
 decisions, and move to places on the east coast (say Boston) and get stuck in blizzards. 
@@ -169,7 +165,7 @@ probabilities of moving from one node to the other.
 const sp15q5b =
 `
 b) <b>(4 pts)</b> Now let’s say we set up a vector ${lx('x(i)')} = ${lmatrix([['x_{berkeley}(i)', 'x_{boston}(i)']], true)}, where ${lx('x_{berkeley}(i)')} represents the number of people living in Berkeley at month ${lx('i')} (similarly 
-for Boston and ${lx('x_{boston}(i)')}). Write a matrix ${lx('A_{transition}')} that you could multiply by this vector to predict the number of people living in each city at month ${lx('i')}+1 (i.e., ${lx('x(i + 1)')} = ${lx('A_{transition}x(i)')})
+for Boston and ${lx('x_{boston}(i)')}). Write a matrix ${lx('A_{transition}')} that you could multiply by this vector to predict the number of people living in each city at month ${lx('i+1')} (i.e., ${lx('x(i + 1)')} = ${lx('A_{transition}x(i)')})
 `;
 
 const sp15q5c =
@@ -193,18 +189,12 @@ class EE16ASp15 extends Component {
         <div className="sidebar">
           <hr className="s5" />
           <h4>CONTENTS</h4>
-          <hr className="s2" />
-          <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
           <hr className="s1" />
-          <div className="sidetitle">Section 1</div>
-          <div><a className="sidetab">3. True/False</a></div>
-          <div><a className="sidetab">4. Proof</a></div>
-          <div><a className="sidetab">5. Inverse of a Matrix</a></div>
-          <hr className="s1" />
-          <div className="sidetitle">Section 2</div>
-          <div><a className="sidetab">6. Directional Shovels</a></div>
-          <div><a className="sidetab">7. Graph Majors</a></div>
-          <div><a className="sidetab">8. Transformation Basketball</a></div>
+          <div><a className="sidetab">1. Imaging Circuit</a></div>
+          <div><a className="sidetab">2. Sparse Images and Vector Geometry</a></div>
+          <div><a className="sidetab">3. Coding for Storage</a></div>
+          <div><a className="sidetab">4. Investment Strategy</a></div>
+          <div><a className="sidetab">5. Berkeley Forever</a></div>
         </div>
         <div className="content">
           <hr className="s5" />

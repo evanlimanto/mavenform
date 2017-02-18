@@ -283,15 +283,16 @@ class EE16AFa15 extends Component {
           <hr className="s2" />
           <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
           <hr className="s1" />
-          <div className="sidetitle">Section 1</div>
-          <div><a className="sidetab">3. True/False</a></div>
-          <div><a className="sidetab">4. Proof</a></div>
-          <div><a className="sidetab">5. Inverse of a Matrix</a></div>
+          <div className="sidetitle">Straightforward Questions</div>
+          <div><a className="sidetab">3. Solve It</a></div>
+          <div><a className="sidetab">4. Invert It</a></div>
+          <div><a className="sidetab">5. Show It</a></div>
+          <div><a className="sidetab">6. Null It</a></div>
           <hr className="s1" />
-          <div className="sidetitle">Section 2</div>
-          <div><a className="sidetab">6. Directional Shovels</a></div>
-          <div><a className="sidetab">7. Graph Majors</a></div>
-          <div><a className="sidetab">8. Transformation Basketball</a></div>
+          <div className="sidetitle">Free-form Problems</div>
+          <div><a className="sidetab">7. Finding the Bright Cave</a></div>
+          <div><a className="sidetab">8. A Tale of Two Cities</a></div>
+          <div><a className="sidetab">9. Justin Beaver</a></div>
         </div>
         <div className="content">
           <hr className="s5" />
