@@ -21,21 +21,30 @@ class Solution extends Component {
   render() {
     const hasResponse = this.props.hasResponse;
     const examCode = this.props.examCode;
+    const solution = this.props.solution;
     var check = null;
-    var image = null;
+    var solutionContent = null;
     if (hasResponse) {
        check = <input className="blue" type="button" value="Check" />;
     }
-    if (this.props.image) {
-        image = (
-          <div>
-            {_.map(this.props.image, (file) => {
-              const path = require('../../solutions/' + examCode + '/' + file);
-              const solutionClass = "solution" + ((this.state.showImage) ? "" : " hidden");
-              return <img className={solutionClass} src={path} role="presentation" />;
-            })}
-          </div>
-        );
+   
+    if (this.props.solution) { 
+      const solutionClass = "solution" + ((this.state.showImage) ? "" : " hidden");
+      solutionContent = (
+        <div className={solutionClass}>
+          <span dangerouslySetInnerHTML={{'__html': this.props.solution}}></span>
+        </div>
+      );
+    } else if (this.props.image) {
+      solutionContent = (
+        <div>
+          {_.map(this.props.image, (file) => {
+            const path = require('../../solutions/' + examCode + '/' + file);
+            const solutionClass = "solution" + ((this.state.showImage) ? "" : " hidden");
+            return <img className={solutionClass} src={path} role="presentation" />;
+          })}
+        </div>
+      );
     }
 
     return (
@@ -43,7 +52,7 @@ class Solution extends Component {
         <hr className="s3" />
         {check}
         <input className="gray" type="button" value="Solution" onClick={() => this.toggleSolution()}/>
-        {image}
+        {solutionContent}
       </div>
     );
   }
@@ -123,7 +132,7 @@ class FreeFormQuestion extends Component {
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <hr className="s3" />
         {solution} 
-        <Solution hasResponse={hasResponse} image={this.props.image} examCode={this.props.examCode} />
+        <Solution hasResponse={hasResponse} solution={this.props.solution} image={this.props.image} examCode={this.props.examCode} />
       </div>
     );
   }
