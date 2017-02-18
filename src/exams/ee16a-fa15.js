@@ -268,6 +268,10 @@ $$
 <b>What was \\(\\vec{x}[0]\\)? (Show work)</b>
 `;
 
+var Scroll = require('react-scroll');
+var scroller = Scroll.scroller;
+var Sticky = require('react-stickynode');
+
 class EE16AFa15 extends Component {
   render() {
     const examCode = 'ee16a-fa15';
@@ -278,22 +282,81 @@ class EE16AFa15 extends Component {
         <div className="center">
           <h5>Midterm 1 | Fall 2015 | Niknejad, Sahai</h5>
         </div>
-        <div className="sidebar">
+        <Sticky className="sidebar screen">
           <hr className="s5" />
           <h4>CONTENTS</h4>
           <hr className="s2" />
           <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
           <hr className="s1" />
           <div className="sidetitle">Straightforward Questions</div>
-          <div><a className="sidetab">3. Solve It</a></div>
-          <div><a className="sidetab">4. Invert It</a></div>
-          <div><a className="sidetab">5. Show It</a></div>
-          <div><a className="sidetab">6. Null It</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q3', {
+              duration: 500,
+              smooth: true,
+            })}>3. Solve It</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q4', {
+              duration: 500,
+              smooth: true,
+            })}>4. Invert It</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q5', {
+              duration: 500,
+              smooth: true,
+            })}>5. Show It</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q6', {
+              duration: 500,
+              smooth: true,
+            })}>6. Null It</a></div>
           <hr className="s1" />
           <div className="sidetitle">Free-form Problems</div>
-          <div><a className="sidetab">7. Finding the Bright Cave</a></div>
-          <div><a className="sidetab">8. A Tale of Two Cities</a></div>
-          <div><a className="sidetab">9. Justin Beaver</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q7a', {
+              duration: 500,
+              smooth: true,
+            })}>7. Finding the Bright Cave</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q8a', {
+              duration: 500,
+              smooth: true,
+            })}>8. A Tale of Two Cities</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q9a', {
+              duration: 500,
+              smooth: true,
+            })}>9. Justin Beaver</a></div>
+        </Sticky>
+        <div className="sidebar mobile">
+          <hr className="s5" />
+          <h4>CONTENTS</h4>
+          <hr className="s2" />
+          <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
+          <hr className="s1" />
+          <div className="sidetitle">Straightforward Questions</div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q3', {
+              duration: 500,
+              smooth: true,
+            })}>3. Solve It</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q4', {
+              duration: 500,
+              smooth: true,
+            })}>4. Invert It</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q5', {
+              duration: 500,
+              smooth: true,
+            })}>5. Show It</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q6', {
+              duration: 500,
+              smooth: true,
+            })}>6. Null It</a></div>
+          <hr className="s1" />
+          <div className="sidetitle">Free-form Problems</div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q7a', {
+              duration: 500,
+              smooth: true,
+            })}>7. Finding the Bright Cave</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q8a', {
+              duration: 500,
+              smooth: true,
+            })}>8. A Tale of Two Cities</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q9a', {
+              duration: 500,
+              smooth: true,
+            })}>9. Justin Beaver</a></div>
         </div>
         <div className="content">
           <hr className="s5" />

@@ -176,6 +176,10 @@ above to find the steady-state populations in Berkeley and Boston. If the total
 population is 100, calculate the number of people in Berkeley at steady state?
 `;
 
+var Scroll = require('react-scroll');
+var scroller = Scroll.scroller;
+var Sticky = require('react-stickynode');
+
 class EE16ASp15 extends Component {
   render() {
     const examCode = 'ee16a-sp15';
@@ -186,15 +190,55 @@ class EE16ASp15 extends Component {
         <div className="center">
           <h5>Midterm 1 | Spring 2015 | Alon, Ayazifar, Subramanian</h5>
         </div>
-        <div className="sidebar">
+        <Sticky className="sidebar screen">
           <hr className="s5" />
           <h4>CONTENTS</h4>
           <hr className="s1" />
-          <div><a className="sidetab">1. Imaging Circuit</a></div>
-          <div><a className="sidetab">2. Sparse Images and Vector Geometry</a></div>
-          <div><a className="sidetab">3. Coding for Storage</a></div>
-          <div><a className="sidetab">4. Investment Strategy</a></div>
-          <div><a className="sidetab">5. Berkeley Forever</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q1a', {
+              duration: 500,
+              smooth: true,
+            })}>1. Imaging Circuit</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q2a', {
+              duration: 500,
+              smooth: true,
+            })}>2. Sparse Images and Vector Geometry</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q3a', {
+              duration: 500,
+              smooth: true,
+            })}>3. Coding for Storage</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q4a', {
+              duration: 500,
+              smooth: true,
+            })}>4. Investment Strategy</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q5a', {
+              duration: 500,
+              smooth: true,
+            })}>5. Berkeley Forever</a></div>
+        </Sticky>
+        <div className="sidebar mobile">
+          <hr className="s5" />
+          <h4>CONTENTS</h4>
+          <hr className="s1" />
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q1a', {
+              duration: 500,
+              smooth: true,
+            })}>1. Imaging Circuit</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q2a', {
+              duration: 500,
+              smooth: true,
+            })}>2. Sparse Images and Vector Geometry</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q3a', {
+              duration: 500,
+              smooth: true,
+            })}>3. Coding for Storage</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q4a', {
+              duration: 500,
+              smooth: true,
+            })}>4. Investment Strategy</a></div>
+          <div><a className="sidetab" onClick={() => scroller.scrollTo('q5a', {
+              duration: 500,
+              smooth: true,
+            })}>5. Berkeley Forever</a></div>
         </div>
         <div className="content">
           <hr className="s5" />

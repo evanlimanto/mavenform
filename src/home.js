@@ -9,13 +9,13 @@ class Home extends Component {
           <h6>Mavenform</h6>
           <hr className="s2" />
           <div className="center">
-            <h5 className="h5-alt">A responsive and intuitive portal for past exams</h5>
+            <h5 className="h5-alt">A new and intuitive format to view and study past exams</h5>
           </div>
           <hr className="margin" />
         </div>
         <h1 className="center">EE 16A</h1>
         <hr className="s1" />
-        <h5>Available Exams</h5>
+        <h5>Available Interactive Exams</h5>
         <hr className="s2" />
         <a className="card" href="/?exam=ee16afa16">
           <h2>Midterm 1</h2>
