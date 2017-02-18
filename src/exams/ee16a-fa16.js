@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { VariablesQuestion, MatrixQuestion, FreeFormQuestion, ToggleQuestion } from '../components/question';
+import { FreeFormQuestion } from '../components/question';
 import { lmatrix, lx } from '../utils';
 
 const fa16q3a =
@@ -262,17 +262,17 @@ class EE16AFa16 extends Component {
           <hr className="s5" />
           <h2>Section 1 (18 points)</h2>
           <hr className="s2" />
-          <ToggleQuestion id={"q3a"} content={fa16q3a} image={['q3-1.png']} examCode={examCode} />
+          <FreeFormQuestion id={"q3a"} content={fa16q3a} image={['q3-1.png']} examCode={examCode} />
           <hr className="s5" />
-          <ToggleQuestion id={"q3b"} content={fa16q3b} image={['q3-2.png']} examCode={examCode} />
+          <FreeFormQuestion id={"q3b"} content={fa16q3b} image={['q3-2.png']} examCode={examCode} />
           <hr className="s5" />
-          <ToggleQuestion id={"q3c"} content={fa16q3c} image={['q3-1.png']} examCode={examCode} />
+          <FreeFormQuestion id={"q3c"} content={fa16q3c} image={['q3-1.png']} examCode={examCode} />
           <hr className="s5" />
-          <ToggleQuestion id={"q3d"} content={fa16q3d} image={['q3-1.png']} examCode={examCode} />
+          <FreeFormQuestion id={"q3d"} content={fa16q3d} image={['q3-1.png']} examCode={examCode} />
           <hr className="s5" />
-          <ToggleQuestion id={"q3e"} content={fa16q3e} image={['q3-2.png']} examCode={examCode} />
+          <FreeFormQuestion id={"q3e"} content={fa16q3e} image={['q3-2.png']} examCode={examCode} />
           <hr className="s5" />
-          <ToggleQuestion id={"q3f"} content={fa16q3f} image={['q3-1.png']} examCode={examCode} />
+          <FreeFormQuestion id={"q3f"} content={fa16q3f} image={['q3-1.png']} examCode={examCode} />
           <hr className="s5" />
           <FreeFormQuestion id={"q4a"} content={fa16q4a} hasResponse={false} image={['q4a.png']} examCode={examCode} />
           <hr className="s5" />
@@ -286,7 +286,7 @@ class EE16AFa16 extends Component {
           <hr className="s2" />
           <FreeFormQuestion id={"q6b"} content={fa16q6b} hasResponse={false} image={['q6b.png']} examCode={examCode} />
           <hr className="s2" />
-          <MatrixQuestion id={"q7a"} content={fa16q7a} rows={3} cols={3} image={['q7a.png']} examCode={examCode} />
+          <FreeFormQuestion id={"q7a"} content={fa16q7a} rows={3} cols={3} image={['q7a.png']} examCode={examCode} />
           <hr className="s2" />
           <FreeFormQuestion id={"q7b"} content={fa16q7b} hasResponse={false} image={['q7b.png']} examCode={examCode} />
           <hr className="s2" />
@@ -296,7 +296,7 @@ class EE16AFa16 extends Component {
           <hr className="s3" />
           <FreeFormQuestion id={"q7e"} content={fa16q7e} hasResponse={false} image={['q7e.png']} examCode={examCode} />
           <hr className="s3" />
-          <MatrixQuestion id={"q8a"} content={fa16q8a} rows={2} cols={2} image={['q8a.png']} examCode={examCode} />
+          <FreeFormQuestion id={"q8a"} content={fa16q8a} rows={2} cols={2} image={['q8a.png']} examCode={examCode} />
           <hr className="s3" />
           <FreeFormQuestion id={"q8b"} content={fa16q8b} hasResponse={false} image={['q8b.png']} examCode={examCode} />
           <hr className="s3" />

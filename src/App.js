@@ -35,7 +35,6 @@ class App extends Component {
         </div>
       </span>
     );
-    return <EE16AFa16 />;
   }
 }
 
