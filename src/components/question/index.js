@@ -23,6 +23,7 @@ class Solution extends Component {
     const examCode = this.props.examCode;
     const solution = this.props.solution;
     var check = null;
+    var solutionButton = null;
     var solutionContent = null;
     if (hasResponse) {
        check = <input className="blue" type="button" value="Check" />;
@@ -47,12 +48,34 @@ class Solution extends Component {
       );
     }
 
+    if (!this.state.showImage) {
+      solutionButton = (
+        <input className="blue" type="button" value="Show Solution" onClick={() => this.toggleSolution()}/>
+      );
+    } else {
+      solutionButton = (
+        <input className="gray" type="button" value="Hide Solution" onClick={() => this.toggleSolution()}/>
+      );
+    }
+
     return (
       <div>
         <hr className="s3" />
         {check}
-        <input className="gray" type="button" value="Solution" onClick={() => this.toggleSolution()}/>
+        {solutionButton}
         {solutionContent}
+      </div>
+    );
+  }
+}
+
+class Question extends Component {
+  render() {
+    const content = this.props.content;
+    return (
+      <div id={this.props.id}>
+        <div dangerouslySetInnerHTML={{__html: content}}></div>
+        <Solution solution={this.props.solution} image={this.props.image} examCode={this.props.examCode} />
       </div>
     );
   }
@@ -138,4 +161,4 @@ class FreeFormQuestion extends Component {
   }
 }
 
-export { VariablesQuestion, MatrixQuestion, ToggleQuestion, FreeFormQuestion };
+export { Question, VariablesQuestion, MatrixQuestion, ToggleQuestion, FreeFormQuestion };
