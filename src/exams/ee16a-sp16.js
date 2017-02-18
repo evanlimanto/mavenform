@@ -39,7 +39,7 @@ const sp16q5c =
 const sp16q5d = 
 `
 (d) The two vectors ${lx('v_1')} = ${lmatrix([[1], [1], [0]])} and ${lx('v_2')} = ${lmatrix([[1], [-1], [0]])} form a basis for the 
-subspace Span(${lx('{')}${lmatrix([[1], [1], [0]])}, ${lmatrix([[1], [-1], [0]])}${lx('}')}).
+subspace Span(${lx('\\{')}${lmatrix([[1], [1], [0]])}, ${lmatrix([[1], [-1], [0]])}${lx('\\}')}).
 `;
 
 const sp16q5e = 
@@ -217,18 +217,25 @@ const sp16q8e =
 Briefly justify why or why not.
 `;
 
+const img8f = require('../img/sp16q8-1.png');
 const sp16q8f =
 `
 (f) Now let’s go back to 3-dimensional space, with the position of the end of the robot arm represented as vectors ${lmatrix([['P_x'], ['P_y'], ['P_z']])} ${lx('\\in')} ${lx('\\mathbb{R}^3')}. Suppose the end of the robot’s arm can reach only points in the span of the vectors ${lmatrix([[1], [0], [0]])} and ${lmatrix([[0], [1], [0]])}. Circle the graph below that corresponds to this possible range of motion.
+
+<img src="${img8f}" className="problem-image" />
 `;
 
+const img8g = require('../img/sp16q8-2.png');
 const sp16q8g =
 `
 (g) Finally, we’d like to allow the robot to place the end of its arm at a point that is ${lx('\\theta')} radians above the ${lx('x')}-${lx('y')} plane, but as shown below, is still restricted to a two-dimensional plane at that angle. Write the basis
 vectors that would correspond to this possible range of motion for a fixed ${lx('\\theta')}.<br/>
 (<i>Hint</i>: If you had a point along the ${lx('y')}-axis and wanted to rotate it by an angle of ${lx('\\theta')} radians relative to the ${lx('y')}-axis while remaining on the ${lx('y')}-${lx('z')} plane, what transformation would you apply?)
+
+<img src="${img8g}" className="problem-image" />
 `;
 
+const img9a = require('../img/sp16q9-1.png');
 const sp16q9a =
 `
 <h3>9. Goodness Gracious, Great Balls of Fur! <i>(28 points)</i></h3>
@@ -238,6 +245,8 @@ furballs in each chamber at every minute. After observing the furballs’ behavi
 out that their behavior follows a regular pattern. Each minute, a well defined fraction of the furballs
 in a given chamber move to the other chambers. The fractions you have observed are shown in Figure 1.
 The fractions of furballs leaving the Play Room could not be determined through your observations, and are shown as the variables ${lx('p_1')}, ${lx('p_2')}, and ${lx('p_3')}.<br/><br/>
+<img src="${img9a}" className="problem-image" />
+<br/><br/>
 (a) Let the number of furballs in the Food Storeroom at time ${lx('n')} be ${lx('x_f[n]')}, the number of furballs in Sleep room at time ${lx('n')} be ${lx('x_s[n]')}, and the number of furballs in the Play Room at time ${lx('n')} be ${lx('x_p[n]')}. We would like to find the transition matrix ${lx('A')} such that ${lmatrix([['x_f[n+1]'], ['x_s[n+1]'], ['x_p[n+1]']])} =
 ${lx('A')}${lmatrix([['x_f[n]'], ['x_s[n]'], ['x_p[n]']])}. Write ${lx('A')} using the numbers and the variables in the diagram.
 `;
@@ -259,11 +268,14 @@ const sp16q9d =
 ${lmatrix([[22], [30], [48]])} and ${lx('$vec{x}[n]')} = ${lmatrix([[20], [30], [50]])}.
 `;
 
+const img9e = require('../img/sp16q9-2.png');
 const sp16q9e =
 `
 (e) You discover a new system of tunnels where furballs live. You know this system has 3 chambers like the last one did, but you do not know how the chambers are connected, or the behavior of this colony of furballs. However, if ${lx('\\vec{x}[n]')} =
 ${lmatrix([['x_1[n]'], ['x_2[n]'], ['x_3[n]']])} where ${lx('x_i[n]')} represents the number of furballs in chamber ${lx('i')} at timestep ${lx('n')}, where time starts at ${lx('n')} = 0, you observe that ${lx('\\vec{x}[2]')} = ${lmatrix([[60], [24], [16]])}. Which of the following pump
 diagrams in Figure 2 represents a possible set of behaviors for this colony?
+
+<img src="${img9e}" className="problem-image" />
 `;
 
 class EE16ASp16 extends Component {
