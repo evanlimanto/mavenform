@@ -9,7 +9,7 @@ class Home extends Component {
           <h6>Mavenform</h6>
           <hr className="s2" />
           <div className="center">
-            <h5 className="h5-alt">A responsive and intuitive portal for past exams</h5>
+            <h5 className="h5-alt">A responsive and intuitive format to view past exams</h5>
           </div>
           <hr className="margin" />
         </div>
