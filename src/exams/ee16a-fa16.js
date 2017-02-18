@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FreeFormQuestion } from '../components/question';
+import { Question } from '../components/question';
 import { lmatrix, lx } from '../utils';
 
 const fa16q3a =
@@ -395,45 +395,45 @@ class EE16AFa16 extends Component {
           <hr className="s5" />
           <h2>Section 1 (18 points)</h2>
           <hr className="s2" />
-          <FreeFormQuestion id={"q3a"} content={fa16q3a} image={['q3-1.png']} examCode={examCode} solution={fa16q3a_soln} />
+          <Question id={"q3a"} content={fa16q3a} image={['q3-1.png']} examCode={examCode} solution={fa16q3a_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q3b"} content={fa16q3b} image={['q3-2.png']} examCode={examCode} solution={fa16q3b_soln} />
+          <Question id={"q3b"} content={fa16q3b} image={['q3-2.png']} examCode={examCode} solution={fa16q3b_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q3c"} content={fa16q3c} image={['q3-1.png']} examCode={examCode} solution={fa16q3c_soln} />
+          <Question id={"q3c"} content={fa16q3c} image={['q3-1.png']} examCode={examCode} solution={fa16q3c_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q3d"} content={fa16q3d} image={['q3-1.png']} examCode={examCode} solution={fa16q3d_soln} />
+          <Question id={"q3d"} content={fa16q3d} image={['q3-1.png']} examCode={examCode} solution={fa16q3d_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q3e"} content={fa16q3e} image={['q3-2.png']} examCode={examCode} solution={fa16q3e_soln} />
+          <Question id={"q3e"} content={fa16q3e} image={['q3-2.png']} examCode={examCode} solution={fa16q3e_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q3f"} content={fa16q3f} image={['q3-1.png']} examCode={examCode} solution={fa16q3f_soln} />
+          <Question id={"q3f"} content={fa16q3f} image={['q3-1.png']} examCode={examCode} solution={fa16q3f_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q4a"} content={fa16q4a} hasResponse={false} image={['q4a.png']} examCode={examCode} solution={fa16q4a_soln} />
+          <Question id={"q4a"} content={fa16q4a} hasResponse={false} image={['q4a.png']} examCode={examCode} solution={fa16q4a_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q4b"} content={fa16q4b} hasResponse={false} image={['q4b.png']} examCode={examCode} solution={fa16q4b_soln} />
+          <Question id={"q4b"} content={fa16q4b} hasResponse={false} image={['q4b.png']} examCode={examCode} solution={fa16q4b_soln} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q5"} content={fa16q5} hasResponse={false} image={['q5a.png']} examCode={examCode} solution={fa16q5_soln} />
+          <Question id={"q5"} content={fa16q5} hasResponse={false} image={['q5a.png']} examCode={examCode} solution={fa16q5_soln} />
           <hr className="s5" />
           <h2>Section 2 (55 points)</h2>
           <hr className="s2" />
-          <FreeFormQuestion id={"q6a"} content={fa16q6a} hasResponse={false} image={['q6a.png']} examCode={examCode} solution={fa16q6a_soln} />
+          <Question id={"q6a"} content={fa16q6a} hasResponse={false} image={['q6a.png']} examCode={examCode} solution={fa16q6a_soln} />
           <hr className="s2" />
-          <FreeFormQuestion id={"q6b"} content={fa16q6b} hasResponse={false} image={['q6b.png']} examCode={examCode} solution={fa16q6b_soln} />
+          <Question id={"q6b"} content={fa16q6b} hasResponse={false} image={['q6b.png']} examCode={examCode} solution={fa16q6b_soln} />
           <hr className="s2" />
-          <FreeFormQuestion id={"q7a"} content={fa16q7a} rows={3} cols={3} image={['q7a.png']} examCode={examCode} solution={fa16q7a_soln} />
+          <Question id={"q7a"} content={fa16q7a} rows={3} cols={3} image={['q7a.png']} examCode={examCode} solution={fa16q7a_soln} />
           <hr className="s2" />
-          <FreeFormQuestion id={"q7b"} content={fa16q7b} hasResponse={false} image={['q7b.png']} examCode={examCode} solution={fa16q7b_soln} />
+          <Question id={"q7b"} content={fa16q7b} hasResponse={false} image={['q7b.png']} examCode={examCode} solution={fa16q7b_soln} />
           <hr className="s2" />
-          <FreeFormQuestion id={"q7c"} content={fa16q7c} hasResponse={false} image={['q7c.png']} examCode={examCode} solution={fa16q7c_soln} />
+          <Question id={"q7c"} content={fa16q7c} hasResponse={false} image={['q7c.png']} examCode={examCode} solution={fa16q7c_soln} />
           <hr className="s2" />
-          <FreeFormQuestion id={"q7d"} content={fa16q7d} hasResponse={false} image={['q7d.png']} examCode={examCode} solution={fa16q7d_soln} />
+          <Question id={"q7d"} content={fa16q7d} hasResponse={false} image={['q7d.png']} examCode={examCode} solution={fa16q7d_soln} />
           <hr className="s3" />
-          <FreeFormQuestion id={"q7e"} content={fa16q7e} hasResponse={false} image={['q7e.png']} examCode={examCode} solution={fa16q7e_soln} />
+          <Question id={"q7e"} content={fa16q7e} hasResponse={false} image={['q7e.png']} examCode={examCode} solution={fa16q7e_soln} />
           <hr className="s3" />
-          <FreeFormQuestion id={"q8a"} content={fa16q8a} rows={2} cols={2} image={['q8a.png']} examCode={examCode} solution={fa16q8a_soln} />
+          <Question id={"q8a"} content={fa16q8a} rows={2} cols={2} image={['q8a.png']} examCode={examCode} solution={fa16q8a_soln} />
           <hr className="s3" />
-          <FreeFormQuestion id={"q8b"} content={fa16q8b} hasResponse={false} image={['q8b.png']} examCode={examCode} solution={fa16q8b_soln} />
+          <Question id={"q8b"} content={fa16q8b} hasResponse={false} image={['q8b.png']} examCode={examCode} solution={fa16q8b_soln} />
           <hr className="s3" />
-          <FreeFormQuestion id={"q8c"} content={fa16q8c} hasResponse={false} image={['q8c.png']} examCode={examCode} solution={fa16q8c_soln} />
+          <Question id={"q8c"} content={fa16q8c} hasResponse={false} image={['q8c.png']} examCode={examCode} solution={fa16q8c_soln} />
           <hr className="s5" />
         </div>
       </span>

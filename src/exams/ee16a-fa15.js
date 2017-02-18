@@ -270,6 +270,7 @@ $$
 
 class EE16AFa15 extends Component {
   render() {
+    const examCode = 'ee16a-fa15';
     return (
       <span>
         <h1>EE 16A</h1>
@@ -300,43 +301,43 @@ class EE16AFa15 extends Component {
           <hr className="s2" />
           <p>Unless told otherwise, you must show work to get credit. There will be very little partial credit given in this section. You get one drop: do 3 out of the following 4 questions. (We will grade all 4 and keep the best 3 scores.) Each problem is worth 8 points. Students who get all 4 questions correct will receive some bonus points (6 points).</p>
           <hr className="s5" />
-          <Question id={"q3"} content={fa15q3} variables={['x_1', 'x_2']} image={['q3.png']} />
+          <Question id={"q3"} content={fa15q3} variables={['x_1', 'x_2']} image={['q3.png']} examCode={examCode} />
           <hr className="s5" />
-          <Question id={"q4"} content={fa15q4} rows={2} cols={2} image={['q4-1.png', 'q4-2.png']} />
+          <Question id={"q4"} content={fa15q4} rows={2} cols={2} image={['q4-1.png', 'q4-2.png']} examCode={examCode} />
           <hr className="s5" />
-          <Question id={"q5"} content={fa15q5} hasResponse={false} image={['q5-1.png', 'q5-2.png']} />
+          <Question id={"q5"} content={fa15q5} hasResponse={false} image={['q5-1.png', 'q5-2.png']} examCode={examCode} />
           <hr className="s5" />
-          <Question id={"q6"} content={fa15q6} hasResponse={false} image={['q6-1.png', 'q6-2.png']} />
+          <Question id={"q6"} content={fa15q6} hasResponse={false} image={['q6-1.png', 'q6-2.png']} examCode={examCode} />
           <hr className="s5" />
           <h2>Free-form Problems <i>(94 + 15 points)</i></h2>
           <hr className="s5" />
-          <Question id={"q7a"} content={fa15q7a} rows={4} cols={4} image={['q7a.png']} />
+          <Question id={"q7a"} content={fa15q7a} rows={4} cols={4} image={['q7a.png']} examCode={examCode} />
           <hr className="s5" />
-          <Question id={"q7b"} content={fa15q7b} on="Yes" off="No" image={['q7b.png']} />
+          <Question id={"q7b"} content={fa15q7b} on="Yes" off="No" image={['q7b.png']} examCode={examCode} />
           <hr className="s5" />
-          <Question id={"q7c"} content={fa15q7c} on="Yes" off="No" image={['q7c.png']} />
+          <Question id={"q7c"} content={fa15q7c} on="Yes" off="No" image={['q7c.png']} examCode={examCode} />
           <hr className="s5" />
-          <Question id={"q8a"} content={fa15q8a} rows={6} cols={6} image={['q8a.png']} />
+          <Question id={"q8a"} content={fa15q8a} rows={6} cols={6} image={['q8a.png']} examCode={examCode} />
           <hr className="s5" />
-          <Question id={"q8b"} content={fa15q8b} rows={6} cols={1} image={['q8b-1.png', 'q8b-2.png']} />
+          <Question id={"q8b"} content={fa15q8b} rows={6} cols={1} image={['q8b-1.png', 'q8b-2.png']} examCode={examCode} />
           <hr className="s5" />
-          <Question id={"q8c"} content={fa15q8c} hasResponse={false} image={['q8c.png']} />
+          <Question id={"q8c"} content={fa15q8c} hasResponse={false} image={['q8c.png']} examCode={examCode} />
           <hr className="s5" />
-          <Question id={"q8d"} content={fa15q8d} hasResponse={false} image={['q8d.png']} />
+          <Question id={"q8d"} content={fa15q8d} hasResponse={false} image={['q8d.png']} examCode={examCode} />
           <hr className="s5" />
-          <Question id={"q8e"} content={fa15q8e} on="Yes" off="No" image={['q8e-1.png', 'q8e-2.png']} />
+          <Question id={"q8e"} content={fa15q8e} on="Yes" off="No" image={['q8e-1.png', 'q8e-2.png']} examCode={examCode} />
           <hr className="s5" />
-          <Question id={"q9a"} content={fa15q9a} on="Yes" off="No" image={['q9a.png']} />
+          <Question id={"q9a"} content={fa15q9a} on="Yes" off="No" image={['q9a.png']} examCode={examCode} />
           <hr className="s5" />
-          <Question id={"q9b"} content={fa15q9b} hasResponse={false} image={['q9b.png']} />
+          <Question id={"q9b"} content={fa15q9b} hasResponse={false} image={['q9b.png']} examCode={examCode} />
           <hr className="s5" />
-          <Question id={"q9c"} content={fa15q9c} rows={3} cols={1} image={['q9c.png']} />
+          <Question id={"q9c"} content={fa15q9c} rows={3} cols={1} image={['q9c.png']} examCode={examCode} />
           <hr className="s5" />
-          <Question id={"q9d"} content={fa15q9d} hasResponse={false} image={['q9d.png']} />
+          <Question id={"q9d"} content={fa15q9d} hasResponse={false} image={['q9d.png']} examCode={examCode} />
           <hr className="s5" />
-          <Question id={"q9e"} content={fa15q9e} hasResponse={true} image={['q9e-1.png', 'q9e-2.png']} />
+          <Question id={"q9e"} content={fa15q9e} hasResponse={true} image={['q9e-1.png', 'q9e-2.png']} examCode={examCode} />
           <hr className="s5" />
-          <Question id={"q9f"} content={fa15q9f} rows={3} cols={1} image={['q9f-1.png', 'q9f-2.png']} />
+          <Question id={"q9f"} content={fa15q9f} rows={3} cols={1} image={['q9f-1.png', 'q9f-2.png']} examCode={examCode} />
         </div>
       </span>
     );
