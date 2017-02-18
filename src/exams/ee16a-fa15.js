@@ -152,6 +152,16 @@ We solve ${lmatrix([[1, 1, -2, 3], [0, 0, -1, 2], [0, 0, 3, -6]])} · ${lmatrix(
 ${lmatrix([[1, 1, -2, 3, '\\vdots', 0], [0, 0, -1, 2, '\\vdots', 0], [0, 0, 3, -6, '\\vdots', 0]])} ${lx('\\implies')} ${lmatrix([[1, 1, 0, -1, '\\vdots', 0], [0, 0, 1, -2, '\\vdots', 0], [0, 0, 0, 0, '\\vdots', 0]], false, false)}
 
 Now we can set ${lx('x_2')} and ${lx('x_4')} as free variables and write the following system of equations:<br/>
+
+${lx('x_1 = -a + b', false)}
+${lx('x_2 = a', false)}
+${lx('x_3 = 2b', false)}
+${lx('x_4 = b', false)}
+
+${lmatrix([['x_1'], ['x_2'], ['x_3'], ['x_4']]) = ${lx('a')}${lmatrix([[-1], [1], [0], [0]])} + ${lx('b')}${lmatrix([[1], [0], [2], [1]])}<br/>
+
+Thus the nullspace of the matrix is:
+${lx('span \\left{ \\begin{array}{c}-1 \\\\ 1 \\\\ 0 \\\\ 0 \\\\ \\end{array} , \\begin{array}{c}1 \\\\ 0 \\\\ 2 \\\\ 1 \\end{array} \\right}', false)}
 `;
 
 const img7a = require('../img/fa16q7-1.png');
@@ -170,9 +180,30 @@ Kody proposes an imaging strategy where he uses his hand to completely block the
 <b>(a)</b> <i>(5pts)</i> Let \\(\\vec{x}\\) be the four-element vector that represents the magnitude of light emanating from the four cave entrances. <b>Write a matrix \\(K\\) that performs the masking process in Fig. 1 on the vector \\(\\vec{x}\\), such that \\(K\\vec{x}\\) is the result of the four measurements.</b>
 `;
 
+const fa15q7a_soln =
+`
+${lx('\\vec{m} = K · \\vec{x}', false)}
+${lx('\\begin{array}{c} m_1 \\\\ m_2 \\\\ m_3 \\\\ m_4 \\\\\ \\end{array} = \\begin{array}{c c c c} 1 & 0 & 1 & 0 \\\\ 1 & 1 & 0 & 0 \\\\ 0 & 1 & 0 & 1 \\\\ 0 & 0 & 1 & 1 \\\\ \\end{array} \\begin{array}{c} x_1 \\\\ x_2 \\\\ x_3 \\\\ x_4 \\\\ \\end{array}', false)}
+
+Note here that ${lx('\\vec{m}')} is the vector of Kody's measurements. The order of the rows does not matter (as long as you tell us which measurement they each correspond to), but the order of the columns does. Re-arranging the columns results in a different set of masks.
+`;
+
 const fa15q7b =
 `
 <b>(b)</b> <i>(10pts)</i> Does Kody’s set of masks give us a unique solution for all four caves’ light intensities? Why or why not?
+`;
+
+const fa15q7b_soln =
+`
+Nope!<br/>
+Two solutions are acceptable:<br/>
+1) Notice that the sum of masks 1 and 3 will hvae exactly the same result as sum of masks 2 and 4. So the four rows must be linearly dependent and hence ${lx('K')} has a nontrivial nullspace. Consequently, there would be infinitely valid solutions to any measurements taken.<br/>
+2) Perform row reduction to see that the rows (and therefore the columns) do not span ${lx('\\mathbb{R}^4')}; In this case, ${lx('\\mathbb{R}^4')} is equivalent to all possible light intensities of the caves.
+
+${lmatrix([[1, 0, 1, 0], [1, 1, 0, 0], [0, 1, 0, 1], [0, 0, 1, 1]], false, false)}
+${lmatrix([[1, 0, 1, 0], [0, 1, -1, 0], [0, 1, 0, 1], [0, 0, 1, 1]], false, false)}
+${lmatrix([[1, 0, 1, 0], [0, 1, -1, 0], [0, 0, 1, 1], [0, 0, 1, 1]], false, false)}
+${lmatrix([[1, 0, 1, 0], [0, 1, -1, 0], [0, 0, 1, 1], [0, 0, 0, 0]], false, false)}
 `;
 
 const fa15q7c =
@@ -189,6 +220,22 @@ $$
 
 <b>Does this additional measurement give them enough information to solve the problem? Why or
 why not?</b>
+`;
+
+const fa15q7c_soln =
+`
+The answer is yes, the additional measurement does give them enough information to solve the problem. Since Nara’s measurement is linearly independent from the other four, we are now able to solve for all four light intensities uniquely.<br/>
+This can be shown using Gaussian elimination with the addition of the following equation:<br/>
+${lx('m_5 = \\frac{1}{2}x_1 + x_2 + x_3 + \\frac{1}{2}', false)}
+
+At this point you can either add this equation to make a 5x4 system of equations, or you can remove one of Kody’s masks to make a 4x4 system of equations. Here, we write it as a 5x4 matrix:
+
+${lmatrix([[1, 0, 1, 0], [1, 1, 0, 0], [0, 1, 0, 1], [0, 0, 1, 1], [0.5, 1, 1, 0.5]], false, false)}
+${lmatrix([[1, 0, 1, 0], [0, 1, -1, 0], [0, 1, 0, 1], [0, 0, 1, 1], [0, 1, 0.5, 0.5]], false, false)}
+${lmatrix([[1, 0, 1, 0], [0, 1, -1, 0], [0, 0, 1, 1], [0, 0, 1, 1], [0, 0, 1.5, 0.5]], false, false)}
+${lmatrix([[1, 0, 1, 0], [0, 1, -1, 0], [0, 0, 1, 1], [0, 0, 0, 0], [0, 0, 0, -1]], false, false)}
+
+Notice here that in spite of the row of zeros, we still have four pivot columns. In other words, we have a system of four unkowns and four linearly independent equations. Therefore, we can uniquely determine all four light intensities given Nara’s added measurement.
 `;
 
 const img8a = require('../img/fa16q8-1.png');
@@ -218,6 +265,14 @@ t_6 \\\\
 $$
 
 Find a matrix \\(B\\) such that the set of valid net trafﬁc ﬂows is exactly the nullspace of \\(B\\) (i.e., all \\(\\vec{t}\\) such that \\(B\\vec{t} = \\vec{0}\\)).
+`;
+
+const fa15q8a_soln =
+`
+B is the incidence matrix of the traffic network:
+${lx('B = \\begin{array}{c c c c c c} -1 & 0 & +1 & 0 & 0 & 0 \\\\ +1 & -1 & 0 & 0 & 0 & 0 \\\\ 0 & +1 & -1 & 0 & 0 & 0 \\\\ 0 & +1 & -1 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & -1 & 0 & +1 \\\\ 0 & 0 & 0 & +1 & -1 & 0 \\\\ 0 & 0 & 0 & 0 & +1 & -1 \\\\ \\end{array}', false)}
+
+There is one row per node, corresponding to the constraint that the net flow of traffic into the node is 0. In the above ${lx('B')}, we ordered nodes as ${lx('A, B, C, D, E, F')}, and used the convention that a positive value of ${lx('t_i')} means a positive net flow directed along the arrow of ${lx('t_7')}. Any matrix row-equivalent to ${lx('B')} is correct. (In particular, this means the sum of each column of ${lx('B')} must be 0.)
 `;
 
 const img8b = require('../img/fa16q8-2.png');
@@ -260,12 +315,49 @@ $$
 <i>as in you only need to add a single column \\(\\vec{b}\\) to the matrix B from the previous part. Feel free to just write down the vector \\(\\vec{b}\\). You don’t have to write out the numbers of B again.</i>
 `;
 
+const fa15q8b =
+`
+The column ${lx('\\vec{b}')} corresponds to the road ${lx('t_7')}, which exits node ${lx('C')} and enters node ${lx('E')}:
+
+${lx('\\vec{b} = \\begin{array}{c} 0 \\\\ 0 \\\\ -1 \\\\ 0 \\\\ +1 \\\\ 0 \\\\ \\end{array}', false)}
+
+(In our ${lx('B')} from the previous part, node ${lx('C')} corresponds to the third row, and node ${lx('E')} corresponds to the fifth row). Note that this must be consistent with the previous part: If you constructed ${lx('B')} using a different ordering of nodes (that is, if the rows of ${lx('B')} were permuted), then the entries in ${lx('\\vec{b}') must be permuted accordingly.<br/>
+
+Written explicitly, ${lx("B'")} is:
+
+${lx('B = \\begin{array}{c c c c c c} -1 & 0 & +1 & 0 & 0 & 0 & 0 \\\\ +1 & -1 & 0 & 0 & 0 & 0 & 0 \\\\ 0 & +1 & -1 & 0 & 0 & 0 & -1 \\\\ 0 & +1 & -1 & 0 & 0 & 0 & -1 \\\\ 0 & 0 & 0 & -1 & 0 & +1 & 0 \\\\ 0 & 0 & 0 & +1 & -1 & 0 & +1 \\\\ 0 & 0 & 0 & 0 & +1 & -1 & 0 \\\\ \\end{array}', false)}
+
+Any explicit ${lx("B'")} that is row-equivalent to this is also correct.
+`;
+
 const fa15q8c =
 `
 <b>(c)</b> <i>(12pts)</i> Does adding this additional road change the possible trafﬁc ﬂows of the two cities? That is,
 is there any valid ﬂow \\(\\vec{t}\\) for which the additional road has non-zero ﬂow (\\(t_7 \\ne 0\\))? <b>Give an explicit example of such a ﬂow or an argument why one cannot exist.</b><br/><br/>
 (<i>Hint: One way of doing this is to recall that each row in the incidence matrix corresponds to the constraint that the total ﬂow into an intersection is zero. Can you interpret the constraint resulting from the sum of all the rows corresponding to intersections in a city?</i>)
+`;
 
+const fa15q8c_soln =
+`
+No, any valid flow ${lx('\\vec{t}')} must have ${lx('t_7 = 0').
+There are several ways to see this. First, intuitively: If for example ${lx('t_7 > 0')}, then there is a net flow of cars from the first city to the second. Thus, at least intuitively, some conservation constraint must be violated, because cars are “draining” from the first city and “accumulating” in the second. But our conservation constraints say that this accumulation cannot happen at any single intersection, and so it cannot happen at all within a city (which is a collection of intersections). Development of this intuitive argument received partial credit.<br/><br/>
+The formal argument suggested in the hint is: Consider summing all the constraints corresponding to nodes in the first city (that is, the first 3 rows of ${lx("B'")}). Each row corresponds to the constraint that the net flow into an intersection is zero. Summing a set of rows corresponds to the constraint that the net flow into a <i>set of intersections</i> is zero. Thus, summing the first three rows will yield the constraint that the net flow into the first city is zero. But ${lx('t_7')} is the only road out of the first city, so ${lx('t_7 = 0')}.<br/><br/>
+Explicitly, any valid ${lx('\\vec{t}')} satisfies
+${lx("B'\\vec{t} = \\vec{0}", false)}
+
+Therefore, it must also satisfy:<br/>
+${lx("\\begin{array}{c c c c c c}1 & 1 & 1 & 0 & 0 & 0 \\\\ \\end{array}B'\\vec{t} = \\begin{array}{c c c c c c}1 & 1 & 1 & 0 & 0 & 0 \\\\ \\end{array} \\vec{0}", false)}
+
+Which simplifies to:
+${lx("\\begin{array}{c c c c c c}1 & 1 & 1 & 0 & 0 & 0 \\\\ \\end{array}B'\\vec{t} = \\vec{0}")}
+
+${lx("\\begin{array}{c c c c c c}1 & 1 & 1 & 0 & 0 & 0 \\\\ \\end{array} \\begin{array}{c c c c c c} -1 & 0 & +1 & 0 & 0 & 0 & 0 \\\\ +1 & -1 & 0 & 0 & 0 & 0 & 0 \\\\ 0 & +1 & -1 & 0 & 0 & 0 & -1 \\\\ 0 & +1 & -1 & 0 & 0 & 0 & -1 \\\\ 0 & 0 & 0 & -1 & 0 & +1 & 0 \\\\ 0 & 0 & 0 & +1 & -1 & 0 & +1 \\\\ 0 & 0 & 0 & 0 & +1 & -1 & 0 \\\\ \\end{array} \\vec{t} = \\vec{0}", false)}
+
+${lx("\\begin{array}{c c c c c c c}0 & 0 & 0 & 0 & 0 & 0 & -1 \\\\ \\end{array} \\vec{t} = 0", false)}
+
+Which is just the constrant ${lx('-t_7 = 0')}.
+<i>Remark</i>: Notice that this argument easily generalizes to the case of two arbitrarily-complex isolated cities, connected by a single road.<br/>
+<b>Alternate Solutions:</b> Any correct formal argument received full credit. For example, noticing that ${lx('t_1 = t_2 = t_3')}, and therefore ${lx('t_7 = 0')}, by considering the constraint of node ${lx('C')}. It was also possible to row-reduce ${lx("B'")}, find a basis for the nullspace, and argue that all basis vectors have ${lx('t_7 = 0')}.
 `;
 
 const img8d = require('../img/fa16q8-3.png');
@@ -279,13 +371,25 @@ const fa15q8d =
 
 Let trafﬁc ﬂows be described by a vector \\(\\vec{t} \\in R^8\\).<br/>
 Does adding this additional pair of roads change the possible trafﬁc ﬂows of the two cities (beyond the case when the two cities were not connected)? That is, is there any valid ﬂow \\(\\vec{t}\\) for which at least one of the additional roads has non-zero ﬂow (\\(t_7 \\ne 0\\) or \\(t_8 \\ne 0\\))? <b>Give an explicit example of such a ﬂow or an argument why one cannot exist.</b>
+`;
 
+const fa15q8d_soln =
+`
+Yes, there are new flows possible here. For example, the flow around the loop ${lx('C - E - F - B')}:
+
+${lx('\\vec{t} = \\begin{array}{c} 0 \\\\ 1 \\\\ 0 \\\\ 0 \\\\ 1 \\\\ 0 \\\\ 1 \\\\ 1 \\\\ \\end{array}', false)}
+
+Any <i>explicit</i> valid flow vector ${lx('\\vec{t}')} with ${lx('t_7 \\ne 0')} received full credit.
 `;
 
 const fa15q8e =
 `
 <b>(e)</b> <i>(BONUS 10pts)</i> Before they were connected, both cities individually had sensors set up to measure their trafﬁc ﬂows. That is, they measured the ﬂows along some set of roads, and were able to re-construct the ﬂows along all roads in their <i>isolated</i> city. After the two new roads of Figure 4 were constructed, the state’s engineers added two additional sensors, one on each road (on \\(t_7\\) and \\(t_8\\)). Using the data from each city’s sensors, and these two new sensors, they were able to recover the ﬂows of all roads in the network.<br/><br/>
 However, one day the sensor on \\(t_7\\) breaks. <b>Can they still recover all the ﬂows, using only the remaining sensors? Give an argument for why or why not.</b>
+`;
+
+const fa15q8e_soln =
+`
 
 `;
 
