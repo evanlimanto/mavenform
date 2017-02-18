@@ -61,13 +61,8 @@ class Solution extends Component {
       <div>
         <hr className="s3" />
         {check}
-<<<<<<< HEAD
-        {solution}
-        {image}
-=======
         <input className="gray" type="button" value="Solution" onClick={() => this.toggleSolution()}/>
         {solutionContent}
->>>>>>> b724e5d502d51cfd0275f4e972036b8a1692d474
       </div>
     );
   }
