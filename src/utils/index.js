@@ -1,11 +1,11 @@
 const _ = require('lodash');
 
 function lmatrix(values, transpose=false) {
-  var n = values.length;
+  var s;
   if (Array.isArray(values[0])) {
     // 2-D
     var m = values[0].length;
-    var s = `
+    s = `
       \\(\\left[\\begin{array}{${
         _.repeat('c ', m)
       }}${
@@ -15,11 +15,11 @@ function lmatrix(values, transpose=false) {
       }\\end{array}\\right]${
         (transpose) ? "^T" : ""  
       }\\)
-      `;
+    `;
     return s;
   } else {
     // 1-D
-    var s = `
+    s = `
       \\(\\left[\\begin{array}{c}${
         _.join(_.map(values, (value) => {
           return value + "\\\\";
@@ -27,7 +27,7 @@ function lmatrix(values, transpose=false) {
       }\\end{array}\\right]${
         (transpose) ? "^T" : ""
       }\\)
-      `;
+    `;
     return s;
   }
 }

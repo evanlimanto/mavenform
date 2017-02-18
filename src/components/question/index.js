@@ -20,22 +20,31 @@ class Solution extends Component {
 
   render() {
     const hasResponse = this.props.hasResponse;
+    const examCode = this.props.examCode;
+    const solution = this.props.solution;
     var check = null;
-    var image = null;
-    var solution = null;
+    var solutionContent = null;
     if (hasResponse) {
        check = <input className="blue" type="button" value="Check" />;
     }
-    if (this.props.image) {
-        image = (
-          <span>
-            {_.map(this.props.image, (file) => {
-              const path = require('../../solutions/' + file);
-              const solutionClass = "solution" + ((this.state.showImage) ? "" : " hidden");
-              return <img className={solutionClass} src={path} role="presentation" />;
-            })}
-          </span>
-        );
+   
+    if (this.props.solution) { 
+      const solutionClass = "solution" + ((this.state.showImage) ? "" : " hidden");
+      solutionContent = (
+        <div className={solutionClass}>
+          <span dangerouslySetInnerHTML={{'__html': this.props.solution}}></span>
+        </div>
+      );
+    } else if (this.props.image) {
+      solutionContent = (
+        <div>
+          {_.map(this.props.image, (file) => {
+            const path = require('../../solutions/' + examCode + '/' + file);
+            const solutionClass = "solution" + ((this.state.showImage) ? "" : " hidden");
+            return <img className={solutionClass} src={path} role="presentation" />;
+          })}
+        </div>
+      );
     }
 
     if (!this.state.showImage) {
@@ -52,8 +61,13 @@ class Solution extends Component {
       <div>
         <hr className="s3" />
         {check}
+<<<<<<< HEAD
         {solution}
         {image}
+=======
+        <input className="gray" type="button" value="Solution" onClick={() => this.toggleSolution()}/>
+        {solutionContent}
+>>>>>>> b724e5d502d51cfd0275f4e972036b8a1692d474
       </div>
     );
   }
@@ -83,7 +97,7 @@ class VariablesQuestion extends Component {
             const str = `\\(${variable} =\\)`;
             return <span key={key}>{str}<input className="cell" type="text" /></span>;
           })}
-        <Solution hasResponse={true} image={this.props.image} />
+        <Solution hasResponse={true} image={this.props.image} examCode={this.props.examCode} />
       </div>
     );
   }
@@ -105,7 +119,7 @@ class MatrixQuestion extends Component {
           });
           return <div key={rowKey}>{row}</div>
         })}
-        <Solution hasResponse={true} image={this.props.image} />
+        <Solution hasResponse={true} image={this.props.image} examCode={this.props.examCode} />
       </div>
     );
   }
@@ -122,7 +136,7 @@ class ToggleQuestion extends Component {
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <hr className="s3" />
         <input type="checkbox" data-toggle="toggle" data-on={on} data-off={off} />
-        <Solution hasResponse={true} image={this.props.image} />
+        <Solution hasResponse={true} image={this.props.image} examCode={this.props.examCode} />
       </div>
     );
   }
@@ -145,7 +159,7 @@ class FreeFormQuestion extends Component {
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <hr className="s3" />
         {solution} 
-        <Solution hasResponse={hasResponse} image={this.props.image} />
+        <Solution hasResponse={hasResponse} solution={this.props.solution} image={this.props.image} examCode={this.props.examCode} />
       </div>
     );
   }
