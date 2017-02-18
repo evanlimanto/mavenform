@@ -20,8 +20,7 @@ Consider a model of the Technocrat migration system described above with β = α
 For this model of the system described above, either explain why time-reversed inference of the state
 vector is not possible, or determine (cid:126)s[0] from (cid:126)s[1] explicitly by computing A−1 ﬁrst.
 
-Rows 2 and 3 are identical, so A1 is not invertible. In other words, the row vectors are linearly depen-
-dent and Gaussian Elimination would result in a row of 0’s, which can’t be inverted.
+
 
 Solutions: Model 1:
 
@@ -777,18 +776,6 @@ Aiii =
 0.5
 
 Solutions:
-(i) The third row in Ai consists of all zeros. This means, at any positive timestep, (cid:126)x would be forced to
-have zero as its third entry. Therefore, the given (cid:126)x[2] is not in the range of this matrix, and this option
-do not represent a possible set of behaviors.
-
-(ii) The ﬁrst two rows in Aii are the same. This means, at any positive timestep, (cid:126)x would be forced to
-have the same number in its ﬁrst and second entry. Therefore, the given (cid:126)x[2] is not in the range of this
-matrix, and this option do not represent a possible set of behaviors.
-
-(iii) The given (cid:126)x[2] is in the range of Aiii. Therefore, full credit was given for choosing this option.
-However, number is not conserved in this option. Since it was ambiguous whether or not number
-was meant to be conserved in the question, partial credit was given for excluding this option with this
-explanation.
 
 EECS 16A, Spring 2016, Midterm 1
 

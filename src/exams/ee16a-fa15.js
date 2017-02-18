@@ -24,7 +24,22 @@ $$\\left[
    4 \\\\
    -6
 \\end{array} \\right]$$
+`;
+
+const fa15q3_soln =
 `
+We can solve this by row reducing the augmented system (process omitted for brevity): <br/><br/>
+
+${lmatrix([[1, 3, '\\vdots', 4], [-2, -5, '\\vdots', -6]], false, false)}
+
+which gives
+
+${lmatrix([[1, 0, '\\vdots', -2], [0, 1, '\\vdots', 2]], false, false)}
+
+and yields the solution
+
+${lmatrix([['x_1'], ['x_2']])} = ${lmatrix([[-2], [2]], false, false)}
+`;
 
 const fa15q4 =
 `
@@ -38,12 +53,82 @@ $$\\left[
 \\\end{array} \\right]$$
 `;
 
+const fa15q4_soln =
+`
+We can find the inverse by row reducing the augmented system (process omitted for brevity): <br/><br/>
+
+${lmatrix([[1, 0, '\\vdots,', 1, 3], [0, 1, '\\vdots', -2 -5]])}
+
+which gives
+
+${lmatrix([[-5, -3, '\\vdots', 1, 0], [2, 1, '\\vdots', 0, 1]])}
+
+Thus the inverse is given by
+
+${lmatrix([[-5, -3], [2, 1]], false, false)}
+
+We can check our answer by calculating<br/>
+
+${lmatrix([[1, 3], [-2, -5]])} ${lmatrix([[-5, -3], [2, 1]])} = ${lmatrix([[1, 0,], [0, 1]])}<br/>
+
+You could also have used the equation for the inverse of a 2x2 matrix if you know it<br/>
+${lx('\\begin{array}{c c}a & b \\\\ c & d \\\\ \\end{array}^{-1} = \\frac{1}{ad - bc}\\begin{array}{c c}d & -b \\\\ -c & a \\\\ \\end{array}', false)}
+${lx('\\begin{array}{c c}1 & 3 \\\\ -2 & -5 \\\\ \\end{array}{-1} = \\frac{1}{1}\\begin{array}{c c}-5 & -3 \\\\ 2 & 1 \\\\ \\end{array}', false)}
+`;
+
 const fa15q5 =
 `
 <h3>5. Show It</h3>
 
 Let \\(n\\) be a positive integer. Let \\(\\{\\vec{v_1}, \\vec{v_2}, . . . , \\vec{v_k}\\}\\) be a set of \\(k\\) linearly dependent vectors in \\(\\mathbb{R}^n\\). Show that for
 any (\\(n × n\\)) matrix A, the set \\(\\{\\vec{Av_1}, \\vec{Av_2}, . . . , \\vec{Av_k}\\}\\) is a set of linearly dependent vectors.
+`;
+
+const fa15q5_soln =
+`
+it is given that ${lx('{\\vec{v_1}, \\vec{v-2}, \\dots, \\vec{v_k} | \\vec{v_i} \\in \\mathbb{R}^{n}}')} are linearly dependent. This implies that there exist ${lx('k')} scalars, ${lx('{\\vec{\\alpha_1}, \\vec{\\alpha_2}, \\dots, \\vec{\\alpha_k}}') from ${lx('\\mathbb{R}')} that are <i>not all equal to zero simultaneously</i> (or equivalently <i>at least one of them is not equal to zero</i>), such that<br/>
+${lx('\\alpha_1·\\vec{v_1} + \\alpha_2·\\vec{v_2} + \\cdots + \\alpha_k·\\vec{v_k} = \\vec{0}', false)}
+
+By multiplying Equation 9 by ${lx('A')} from the left side, we get
+  ${lx('A · (\\alpha_1 · \\vec{v_1} + \\alpha_2 · \\vec{v_2} + \\cdots + \\alpha_k · \\vec{v_k}) = A · \\vec{0}', false)}
+
+First, note that ${lx('A · \\vec{0} = \\vec{0}')}. Moreover, if we distribute we get
+  ${lx('A · (\\alpha_1 · \\vec{v_1}) + A · (\\alpha_2 · \\vec{v_2}) + \\cdots + A · (\\alpha_k · \\vec{v_k}) = \\vec{0}', false)}
+
+From associativity of multiplication we get
+  ${lx('(A · \\alpha_1) · \\vec{v_1} + (A · \\alpha_2) · \\vec{v_2} + \\cdots + (A · \\alpha_k) · \\vec{v_k} = \\vec{0}', false)}
+
+Since scalar-matrix multiplication is commutative, we get
+  ${lx('(\\alpha_1 · A) · \\vec{v_1} + (\\alpha_2 · A) · \\vec{v_2} + \\cdots + (\\alpha_k · A) · \\vec{v_k} = \\vec{0}', false)}
+
+By using associativity of multiplication again, we get
+  ${lx('\\alpha_1 · (A · \\vec{v_1}) + \\alpha_2 · (A · \\vec{v_2}) + \\cdots + \\alpha_k · (A · \\vec{v_k}) = \\vec{0}', false)}
+
+Therefore, the same k scalars, ${lx('{\\alpha_1, \\alpha_2, \\dots, \\alpha_k}')} show the linear dependence of the vectors ${lx('{A\\vec{v_1}, A\\vec{v_2}, \\dots, A\\vec{v_k}}')} as requested.<br/>
+
+Note: There are alternative and equivalent implications of linear dependence that can be used in the proof (in place of Equation 9). Here are a few of them:<br/>
+(a) The vector ${lx('\\vec{v_k}')} can be represented as a linear combination of the other vectors as follows: There exist scalars ${lx('\\vec{\\alpha_1} + \\vec{\\alpha_2} + \\dots + \\vec{\\alpha_{k-1}}')} such that
+${lx('\\alpha_1 · \\vec{v_1} + \\alpha_2 · \\vec{v_2} + \\dots + \\alpha_{k-1} · \\vec{k - 1} = \\vec{k}', false)}
+(in this alternative, the scalars may all be zeros, and the linear combination in the left hand side must exclude ${lx('\\vec{v_k}')})<br/>
+
+(b) Some vector ${lx('\\vec{v_j}')} can be represented as a linear combination of the other vectors as follows: There exist scalars ${lx('\\alpha_i, 1 \\le i \\le k, i \\ne j')} such that
+${lx('\\sum_{i=1, i \\ne j}^{k} \\alpha_i · \\vec{v_i} = \\vec{v_j}')}
+
+(in this alternative, the scalars may all be zeros, and the linear combination in the left hand side must exclude ${lx('\\vec{v_j}')})
+
+(c) There exists ${lx('1 \\le j \\le k')} such that ${lx('\\vec{v_j}')} can be represented as a linear combination of the ${lx('\\vec{v_1}, \\vec{v_2}, \\dots, \\vec{v_{j-1}}')} as follows: There exist scalars ${lx('\\alpha_1, \\alpha_2, \\dots, \\alpha_{j-1}')} such that
+${lx('\\sum_{i=1}^{j-1} \\alpha_i · \\vec{v_i} = \\vec{v_j}')}
+
+(in this alternative, the scalars may all be zeros, and the linear combination in the left hand side must exclude ${lx('\\vec{v_j}')})
+
+For any of these alternatives, the rest of the proof is similar to the one demonstrated above (multiply both sides by ${lx('A')} and then apply the linearity of matrix multiplication to push the ${lx('A')} inside the relevant sum and next to the ${lx('\\vec{v_i}')}) and will result in an equation similar to Equation 14 (that matches the alternative chosen).<br/>
+Common mistakes included:
+<ul>
+<li>When using the definition provided in Equation 9, not indicating that the at least one of scalars needs to be different than zero.</li>
+<li>When using the definition provided in Equation 9, stating that all scalars need to be different than zero.</li>
+<li>When using any of the alternative implications (a)-(c) above, requiring that at least one scalar be different than zero (or all different than zero).</li>
+<li>When using any of the alternative implications (a)-(c) above, not excluding the vector on the right hand side from the linear combination on the left hand side.</li>
+</ul>
 `;
 
 const fa15q6 = 
@@ -58,6 +143,15 @@ What is the null space of the matrix
 0 & 0 & 3 & -6 \\\\
 \\end{array}\\right]\\)
 ?
+`;
+
+const fa15q6_soln =
+`
+We solve ${lmatrix([[1, 1, -2, 3], [0, 0, -1, 2], [0, 0, 3, -6]])} · ${lmatrix([['x_1'], ['x_2'], ['x_3'], ['x_4']])} = ${lmatrix([[0], [0], [0]])}<br/>
+
+${lmatrix([[1, 1, -2, 3, '\\vdots', 0], [0, 0, -1, 2, '\\vdots', 0], [0, 0, 3, -6, '\\vdots', 0]])} ${lx('\\implies')} ${lmatrix([[1, 1, 0, -1, '\\vdots', 0], [0, 0, 1, -2, '\\vdots', 0], [0, 0, 0, 0, '\\vdots', 0]], false, false)}
+
+Now we can set ${lx('x_2')} and ${lx('x_4')} as free variables and write the following system of equations:<br/>
 `;
 
 const img7a = require('../img/fa16q7-1.png');
