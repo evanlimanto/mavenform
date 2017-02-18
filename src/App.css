@@ -130,6 +130,10 @@ label {
   overflow: hidden;
 }
 
+.hidden {
+  display: none;
+}
+
 .btn:hover {
   cursor: pointer;
 }

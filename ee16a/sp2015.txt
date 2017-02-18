@@ -1,30 +1,6 @@
 
-b)  (4  pts)  Now  let’s  say  we  set  up  a  vector 
-T ,  where 
-xberkeley(i) represents the number of people living in Berkeley at month i (similarly 
-for Boston and xboston(i) ).  Write a matrix Atransition that you could multiply by this 
-vector  to  predict  the  number  of  people  living  in  each  city  at  month  i+1  (i.e., 
-(
-x i
-A
-transition
-x
-berkeley
-( )
-x i
-) 
-x
-boston
-( )
-i
-
-
-1)
-+ =
-c)  (9 pts) Now let us say the total population stays constant, and we start with half 
-the population in Berkeley and the other half in Boston. Use the matrix you wrote 
-above  to  find  the  steady-state  populations  in  Berkeley  and  Boston.  If  the  total 
-population is 100, calculate the number of people in Berkeley at steady state?   
+
+
 
  
  

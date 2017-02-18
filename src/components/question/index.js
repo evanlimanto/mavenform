@@ -20,6 +20,7 @@ class Solution extends Component {
 
   render() {
     const hasResponse = this.props.hasResponse;
+    const examCode = this.props.examCode;
     var check = null;
     var image = null;
     if (hasResponse) {
@@ -27,13 +28,13 @@ class Solution extends Component {
     }
     if (this.props.image) {
         image = (
-          <span>
+          <div>
             {_.map(this.props.image, (file) => {
-              const path = require('../../solutions/' + file);
+              const path = require('../../solutions/' + examCode + '/' + file);
               const solutionClass = "solution" + ((this.state.showImage) ? "" : " hidden");
               return <img className={solutionClass} src={path} role="presentation" />;
             })}
-          </span>
+          </div>
         );
     }
 
@@ -60,7 +61,7 @@ class VariablesQuestion extends Component {
             const str = `\\(${variable} =\\)`;
             return <span key={key}>{str}<input className="cell" type="text" /></span>;
           })}
-        <Solution hasResponse={true} image={this.props.image} />
+        <Solution hasResponse={true} image={this.props.image} examCode={this.props.examCode} />
       </div>
     );
   }
@@ -82,7 +83,7 @@ class MatrixQuestion extends Component {
           });
           return <div key={rowKey}>{row}</div>
         })}
-        <Solution hasResponse={true} image={this.props.image} />
+        <Solution hasResponse={true} image={this.props.image} examCode={this.props.examCode} />
       </div>
     );
   }
@@ -99,7 +100,7 @@ class ToggleQuestion extends Component {
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <hr className="s3" />
         <input type="checkbox" data-toggle="toggle" data-on={on} data-off={off} />
-        <Solution hasResponse={true} image={this.props.image} />
+        <Solution hasResponse={true} image={this.props.image} examCode={this.props.examCode} />
       </div>
     );
   }
@@ -122,7 +123,7 @@ class FreeFormQuestion extends Component {
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <hr className="s3" />
         {solution} 
-        <Solution hasResponse={hasResponse} image={this.props.image} />
+        <Solution hasResponse={hasResponse} image={this.props.image} examCode={this.props.examCode} />
       </div>
     );
   }

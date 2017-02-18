@@ -182,6 +182,7 @@ population is 100, calculate the number of people in Berkeley at steady state?
 
 class EE16ASp15 extends Component {
   render() {
+    const examCode = 'ee16a-sp15';
     return (
       <span>
         <h1>EE 16A</h1>
@@ -207,35 +208,35 @@ class EE16ASp15 extends Component {
         </div>
         <div className="content">
           <hr className="s5" />
-          <FreeFormQuestion id={"q1a"} content={sp15q1a} hasResponse={false} />
+          <FreeFormQuestion id={"q1a"} content={sp15q1a} hasResponse={false} examCode={examCode} image={['q1a.png']} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q1b"} content={sp15q1b} hasResponse={false} />
+          <FreeFormQuestion id={"q1b"} content={sp15q1b} hasResponse={false} examCode={examCode} image={['q1b.png']} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q1c"} content={sp15q1c} hasResponse={false} />
+          <FreeFormQuestion id={"q1c"} content={sp15q1c} hasResponse={false} examCode={examCode} image={['q1c.png']} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q2a"} content={sp15q2a} hasResponse={false} />
+          <FreeFormQuestion id={"q2a"} content={sp15q2a} hasResponse={false} examCode={examCode} image={['q2a.png']} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q2b"} content={sp15q2b} hasResponse={false} />
+          <FreeFormQuestion id={"q2b"} content={sp15q2b} hasResponse={false} examCode={examCode} image={['q2b.png']} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q2c"} content={sp15q2c} hasResponse={false} />
+          <FreeFormQuestion id={"q2c"} content={sp15q2c} hasResponse={false} examCode={examCode} image={['q2c.png']} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q3a"} content={sp15q3a} hasResponse={false} />
+          <FreeFormQuestion id={"q3a"} content={sp15q3a} hasResponse={false} examCode={examCode} image={['q3a.png']} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q3b"} content={sp15q3b} hasResponse={false} />
+          <FreeFormQuestion id={"q3b"} content={sp15q3b} hasResponse={false} examCode={examCode} image={['q3b.png']} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q3c"} content={sp15q3c} hasResponse={false} />
+          <FreeFormQuestion id={"q3c"} content={sp15q3c} hasResponse={false} examCode={examCode} image={['q3c.png']} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q3d"} content={sp15q3d} hasResponse={false} />
+          <FreeFormQuestion id={"q3d"} content={sp15q3d} hasResponse={false} examCode={examCode} image={['q3d.png']} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q4a"} content={sp15q4a} hasResponse={false} />
+          <FreeFormQuestion id={"q4a"} content={sp15q4a} hasResponse={false} examCode={examCode} image={['q4a.png']} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q4b"} content={sp15q4b} hasResponse={false} />
+          <FreeFormQuestion id={"q4b"} content={sp15q4b} hasResponse={false} examCode={examCode} image={['q4b.png']} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q5a"} content={sp15q5a} hasResponse={false} />
+          <FreeFormQuestion id={"q5a"} content={sp15q5a} hasResponse={false} examCode={examCode} image={['q5a.png']} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q5b"} content={sp15q5b} hasResponse={false} />
+          <FreeFormQuestion id={"q5b"} content={sp15q5b} hasResponse={false} examCode={examCode} image={['q5b.png']} />
           <hr className="s5" />
-          <FreeFormQuestion id={"q5c"} content={sp15q5c} hasResponse={false} />
+          <FreeFormQuestion id={"q5c"} content={sp15q5c} hasResponse={false} examCode={examCode} image={['q5c.png']} />
         </div>
       </span>
     );
