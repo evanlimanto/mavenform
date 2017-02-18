@@ -154,10 +154,6 @@ label {
   overflow: hidden;
 }
 
-.hidden {
-  display: none;
-}
-
 .btn:hover {
   cursor: pointer;
 }
@@ -187,9 +183,10 @@ img {
 
 .solution {
   margin: 15px 0;
-  -webkit-filter: grayscale(100%);
-  filter: grayscale(100%);
   border-radius: 5px;
+  padding: 25px;
+  color: #11accd;
+  border: 1px solid #11accd;
 }
 
 .problem-image {
