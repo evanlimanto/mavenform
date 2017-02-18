@@ -1,0 +1,1070 @@
+Solutions: The matrix is upper triangular, so the matrix’s columns must be linearly independent and
+there is enough information to determine exactly how many enemy imps there are at each campsite.
+We can ﬁnd the number of imps at each campsite by row reducing the following augmented system:
+
+
+
+
+
+1 5 1 0
+0 2 4 6
+0 0 2 2
+0 0 0 3
+
+1 5 1 0
+0 1 2 3
+0 0 1 0
+0 0 0 1
+
+1 5 1 0
+0 1 0 0
+0 0 1 0
+0 0 0 1
+
+R2←R2/2
+R3←R3/2
+R4←R4/3
+
+ =⇒(cid:124)(cid:123)(cid:122)(cid:125)
+
+
+
+=⇒(cid:124)(cid:123)(cid:122)(cid:125)
+
+=⇒(cid:124)(cid:123)(cid:122)(cid:125)
+
+...
+7
+... 26
+... 10
+...
+9
+
+...
+7
+... 13
+...
+2
+...
+3
+
+... 7
+... 0
+... 2
+... 3
+
+R1←R1+(−1)·R3
+
+R2←R2+(−3)·R4
+
+
+
+1 5 1 0
+0 1 2 3
+0 0 1 1
+0 0 0 1
+
+
+
+...
+7
+... 13
+...
+5
+...
+3
+
+
+
+
+1 5 1 0
+0 1 2 0
+0 0 1 0
+0 0 0 1
+
+1 5 0 0
+0 1 0 0
+0 0 1 0
+0 0 0 1
+
+
+
+
+... 7
+... 4
+... 2
+... 3
+
+... 5
+... 0
+... 2
+... 3
+
+=⇒(cid:124)(cid:123)(cid:122)(cid:125)
+
+R3←R3+(−1)·R4
+
+=⇒(cid:124)(cid:123)(cid:122)(cid:125)
+
+R2←R2+(−2)·R3
+
+=⇒(cid:124)(cid:123)(cid:122)(cid:125)
+
+R1←R1+(−5)·R2
+
+Thus, we discover that:
+• Camp A has 5 imps
+• Camp B has 0 imps
+• Camp C has 2 imps
+• Camp D has 3 imps
+
+We can check our answer by substituting our answers into the original equations:
+
+1· 5 + 5· 0 + 1· 2 = 5 + 2 = 7
+2· 0 + 4· 2 + 6· 3 = 8 + 18 = 26
+2· 2 + 2· 3 = 4 + 6 = 10
+3· 3 = 9
+
+EECS 16A, Spring 2016, Midterm 1
+
+8
+
+(c) Oh no! You just found out that the evil imps manipulated the faerie lights from Group 1, rendering
+their information useless. You send in an emergency group of faeries to make up for the loss. They
+gained a total of 10 brightness units, and visited camps as follows:
+
+• 1 faerie light visited Camp B
+• 2 faerie lights visited Camp C
+• 3 faerie lights visited Camp D
+
+From this information (together with the information from Groups 2, 3, 4), can you determine how
+many imps are at each campsite? If so, report their numbers to help the faeries! If not, explain why
+not.
+Solutions: No you cannot determine how many imps are at each campsite.
+
+• The new team does not pass through Camp A so you have no way of determining the number of
+
+imps in Camp A.
+
+• The new measurement conﬂicts with an existing measurement. The system of equations is incon-
+
+sistent, so there is no solution.
+
+• The new measurement is a linearly dependent one. Speciﬁcally, it sends half the faerie lights
+that the second measurement sends. Therefore, we do not have enough linearly independent
+measurements to solve for the imps in each camp.
+
+EECS 16A, Spring 2016, Midterm 1
+
+9
+
+PRINT your name and student ID:
+
+7. A Tale of a Million Technocrats and the Four Dream Cities (24 Points)
+
+This problem is a tale of one million Technocrats and four Dream Cities. Listed in order from West to East,
+the four cities are (I) San Francisco, (II) Denver, (III) Chicago, and (IV) New York City.
+The Technocrats don’t die. They don’t reproduce. In other words, their total population size is a constant
+from the initial time n = 0 to the end of time as n → ∞. At the strike of each second on a Universal Clock,
+each Technocrat chooses to either remain at the city he or she is already in, or move instantaneously to
+another of the four Dream Cities, according to the following rules:
+
+• Every Technocrat who moves to either San Francisco or New York City will stay in that city forever
+
+(no more moving thereafter!);
+
+• Whether eastward or westward, every Technocrat moves in single hops—so for example, no direct
+
+move from San Francisco to either Chicago or New York City is allowed;
+
+• At each second, the fraction of Technocrats in each city who move eastward legally (e.g. from Denver
+
+to Chicago, or from Chicago to New York City) is β ;
+
+• At each second, the fraction of Technocrats in each city who move westward legally (e.g. from Chicago
+
+to Denver, or from Denver to San Francisco) is α;
+• The following inequality must be true: α + β ≤ 1.
+
+The following diagram summarizes these restrictions graphically.
+
+1− α − β
+
+1− α − β
+
+β
+
+III
+
+IV
+
+1
+
+1
+
+I
+
+II
+
+α
+
+Let the state vector for this system be at time n be:
+
+(cid:126)s[n] =
+
+β
+
+α
+
+ ,
+s1[n]
+
+s2[n]
+s3[n]
+s4[n]
+
+where s(cid:96)[n] denotes number of Technocrats in City (cid:96) at time n; for example, s3[n] denotes the Technocrat
+population in Chicago at time n.
+The state-evolution equation for this system is given by
+
+where A is the state-transition matrix.
+
+(cid:126)s[n + 1] = A(cid:126)s[n],
+
+EECS 16A, Spring 2016, Midterm 1
+
+10
+
+(a) Determine the state-transition matrix A.
+
+Solutions:
+
+1
+
+α
+
+0 1− α − β
+0
+0
+
+β
+0
+
+ ,
+
+0
+α
+
+0
+0
+1− α − β 0
+1
+
+β
+
+(b) In this part, we’re interested in backward inference of the state vector (cid:126)s[n] from a future state vector,
+
+say (cid:126)s[n + 1]. As you know, this is possible only if a matrix A−1 exists, so that
+
+(cid:126)s[n] = A−1(cid:126)s[n + 1].
+
+Consider a model of the Technocrat migration system described above with β = α = 1/3. Assume
+(cid:126)s[1] =(cid:126)1, where(cid:126)1 denotes the vector of all ones.
+
+
+
+1
+
+1
+1
+1
+
+(cid:126)1 =
+
+For this model of the system described above, either explain why time-reversed inference of the state
+vector is not possible, or determine (cid:126)s[0] from (cid:126)s[1] explicitly by computing A−1 ﬁrst.
+
+Rows 2 and 3 are identical, so A1 is not invertible. In other words, the row vectors are linearly depen-
+dent and Gaussian Elimination would result in a row of 0’s, which can’t be inverted.
+
+Solutions: Model 1:
+
+A1 =
+
+Model 2:
+
+A2 =
+
+1 1/3
+
+0
+
+0
+0 1/3 1/3 0
+0 1/3 1/3 0
+0
+1/3 1
+
+0
+
+ .
+
+1 1/4
+
+0
+
+0
+0 1/2 1/4 0
+0 1/2 1/2 0
+0
+1/4 1
+
+0
+
+ .
+
+This is full rank, so it’s invertible. In other words, there is a pivot in every row; every row vector is
+linearly independent from the rest.
+
+ .
+
+1/3
+
+0
+8/3 −4/3 0
+0
+1/3 −2/3 1
+
+8/3
+
+0
+0 −4/3
+0
+
+1 −2/3
+2/3
+ .
+
+(cid:126)1 =
+
+4/3
+4/3
+2/3
+
+A−1
+2 =
+
+(cid:126)s[0] = A−1
+2
+
+EECS 16A, Spring 2016, Midterm 1
+
+11
+
+For the remainder of the problem, assume β = α = 1/4 and that the state transition matrix A is:
+
+1 1/4
+
+0
+
+0
+0 1/2 1/4 0
+0 1/4 1/2 0
+0
+1/4 1
+
+0
+
+ .
+
+A =
+
+Recall that the following equation governs (cid:126)s[n], the state of the system at time n, and the initial state (cid:126)s[0]:
+
+For each of the remaining parts, assume that a limiting state vector exists, given by
+
+(cid:126)s[n] = An(cid:126)s[0].
+
+lim
+n→∞
+
+(cid:126)s[n] =(cid:126)s∞.
+
+(c) Suppose the initial state of the system is given by the vector
+
+This means that, initially, 500,000 Technocrats are in San Francisco, and the other 500,000 are in New
+York City. Without complicated mathematical derivations, determine the state vector (cid:126)s[n] for all n ≥ 1.
+Solutions:
+
+With the given state transition diagram, no technocrats would move so (cid:126)s0 =(cid:126)st =(cid:126)s∞.
+
+(d) Now suppose the initial state of the system is given by the vector
+
+(cid:126)s[0] =
+
+(cid:126)s∞ =
+
+(cid:126)s[0] =
+
+0
+0
+1/2
+
+0
+0
+1/2
+
+1/2
+ .
+1/2
+ .
+ .
+ 0
+1/2
+ .
+
+1/2
+1/2
+0
+
+0
+0
+1/2
+
+This means that, initially, 500,000 Technocrats are in Denver, and the other 500,000 are in Chicago.
+Without complicated mathematical derivations, determine the limiting state vector lim
+n→∞
+Solutions:
+
+(cid:126)s[n].
+
+(cid:126)s∞ =
+
+By symmetry, half go to SF and half go to NYC.
+
+EECS 16A, Spring 2016, Midterm 1
+
+12
+
+(e) Finally, now suppose the initial state of the system is given by the vector
+
+This means that, initially, the Technocrats are equally distributed among the four Dream Cities. With-
+out complicated mathematical derivations, determine lim
+n→∞
+Solutions:
+
+(cid:126)s[n].
+
+1/4
+1/4
+1/4
+
+1/4
+ .
+ .
+1/2
+
+0
+0
+1/2
+
+(cid:126)s[0] =
+
+(cid:126)s∞ =
+
+By symmetry, half go to SF and half go to NYC. In addition, we can think of the state vector in this
+part as follows:
+
+ =
+
+ 1
+
+4
+1
+4
+1
+4
+1
+4
+
+ +
+
+ 1
+
+2
+0
+0
+1
+2
+
+1
+2
+
+
+
+0
+
+1
+2
+1
+2
+0
+
+1
+2
+
+Where the ﬁrst vector is from part (c) and the second vector is from part(d). So in the limit n → ∞, we
+get the same distribution as before.
+
+EECS 16A, Spring 2016, Midterm 1
+
+13
+
+PRINT your name and student ID:
+
+8. Ayy - Reﬂections on SIXTEEN (28 points)
+
+(cid:21)
+
+(cid:20)px
+
+You are involved in the design of a robot called SIXTEEN-AYY that has arms with a certain range of motion
+and certain operations that the arms can perform.
+For parts (a)–(e) of this problem, we will look at a simpliﬁed case where we pretend that the robot’s arm can
+move only in a 2-dimensional space. Thus, we will represent the position of the end of the robot’s arm with
+a vector (cid:126)p =
+. Let’s further assume that the robot will be built to perform two movement commands
+determined by the following transformations:
+T1: Reﬂects (cid:126)p about the line y = −x.
+T2: Rotates (cid:126)p clockwise about the origin by 45◦
+
+py
+
+(a) Write the matrix A1 that applies the transformation T1.
+
+Solutions:
+
+(cid:126)a1 = T1
+
+(cid:18)(cid:20)1
+(cid:21)(cid:19)
+(cid:18)(cid:20)0
+(cid:21)(cid:19)
+(cid:3) =
+A1 =(cid:2)(cid:126)a1 (cid:126)a2
+
+(cid:126)a2 = T2
+
+0
+
+1
+
+=
+
+=
+
+−1
+
+(cid:20) 0
+(cid:21)
+(cid:20)−1
+(cid:21)
+(cid:20) 0 −1
+(cid:21)
+
+0
+
+−1
+
+0
+
+(b) Write the matrix A2 that applies the transformation T2.
+
+Solutions:
+
+θ =
+
+A2 =
+
+−π
+4
+
+= −45◦
+
+(cid:20)cosθ −sinθ
+
+sinθ
+
+cosθ
+
+(cid:21)
+
+=
+
+(cid:34) 1√
+
+2
+− 1√
+2
+
+(cid:35)
+
+1√
+2
+1√
+2
+
+(c) Leah commands SIXTEEN-AYY to perform T1 followed by T2 - ﬁnd the matrix A12 that captures the
+
+effect of this sequence of commands.
+Solutions:
+
+(cid:34) 1√
+
+2
+− 1√
+2
+
+(cid:35)(cid:20) 0 −1
+(cid:21)
+
+−1
+
+0
+
+(cid:34)− 1√
+
+2
+− 1√
+2
+
+=
+
+(cid:35)
+
+− 1√
+2
+1√
+2
+
+1√
+2
+1√
+2
+
+A12 = A2 A1 =
+
+(d) Being the contrarian that he is, Bob instead wants to command SIXTEEN-AYY to perform T2 followed
+
+by T1. Find the matrix A21 that captures the effect of this sequence of commands.
+Solutions:
+
+(cid:20) 0 −1
+
+(cid:21)(cid:34) 1√
+
+−1
+
+0
+
+2
+− 1√
+2
+
+(cid:35)
+
+1√
+2
+1√
+2
+
+(cid:34) 1√
+
+=
+
+2
+− 1√
+2
+
+(cid:35)
+
+− 1√
+2
+− 1√
+2
+
+A21 = A1 A2 =
+
+EECS 16A, Spring 2016, Midterm 1
+
+14
+
+(e) If SIXTEEN-AYY started out in the same initial conﬁguration for both Bob and Leah, will its arm
+end up in the same place after executing Leah’s command as it does after executing Bob’s command?
+Brieﬂy justify why or why not.
+Solutions: No, the resulting matrices won’t be the same because we’ve just shown A1A2 (cid:54)= A2A1; i.e.
+matrix multiplication is not commutative.
+
+ ∈ R3. Suppose the end of the robot’s arm can reach only points in the span of the vectors
+Px
+0
+ and
+. Circle the graph below that corresponds to this possible range of motion.
+
+(f) Now let’s go back to 3-dimensional space, with the position of the end of the robot arm represented as
+
+vectors
+
+Py
+Pz
+
+1
+
+0
+0
+
+1
+0
+
+Solutions: The span of the vectors is deﬁned by
+
+is diagram 1.
+
+, which is just the xy plane. Thus, our answer
+
+Px
+
+Py
+0
+
+(g) Finally, we’d like to allow the robot to place the end of its arm at a point that is θ radians above the x-y
+plane, but as shown below, is still restricted to a two-dimensional plane at that angle. Write the basis
+vectors that would correspond to this possible range of motion for a ﬁxed θ.
+(Hint: If you had a point along the y- axis and wanted to rotate it by an angle of θ radians relative to
+the y-axis while remaining on the y-z plane, what transformation would you apply?)
+
+Solutions: We notice that a rotation relative to the y-axis maintains the same x-value while rotating
+our y and z by θ radians. Thus, we can write the transformation matrix as
+
+1
+
+0
+
+0
+
+0 cosθ −sinθ
+0 sinθ
+cosθ
+
+
+
+EECS 16A, Spring 2016, Midterm 1
+
+15
+
+Note that since we only had two basis vectors to begin with, the new range of motion also only needs
+two basis vectors corresponding to the rotation of the x and y unit vectors, so our basis vectors are:
+
+In fact, all rotation matrices in n dimensions can be decomposed into a series of rotations in 2 dimen-
+sions. So all rotations are products of the basic rotation matrix
+
+0
+0
+
+cosθ
+sinθ
+
+(cid:110)1
+ ,
+ 0
+(cid:111)
+(cid:21)
+(cid:20)cosθ −sinθ
+
+sinθ
+
+cosθ
+
+generalized to a larger n× n matrix with 1’s in the dimensions that aren’t being rotated. Read more on
+Wikipedia!
+
+EECS 16A, Spring 2016, Midterm 1
+
+16
+
+PRINT your name and student ID:
+
+9. Goodness Gracious, Great Balls of Fur! (28 points)
+
+You are a biologist who has discovered a new species of rodents that live in tunnels underground, and you
+have named the species "furballs". You have been observing a particular network of tunnels. Figure 1 shows
+the network of tunnels with three chambers in it. To document their behavior, you observe the number of
+furballs in each chamber at every minute. After observing the furballs’ behavior for a while, you have ﬁg-
+ured out that their behavior follows a regular pattern. Each minute, a well deﬁned fraction of the furballs
+in a given chamber move to the other chambers. The fractions you have observed are shown in Figure 1.
+The fractions of furballs leaving the Play Room could not be determined through your observations, and are
+shown as the variables p1, p2, and p3
+
+Figure 1
+
+(a) Let the number of furballs in the Food Storeroom at time n be x f [n], the number of furballs in Sleep
+room at time n be xs[n], and the number of furballs in the Play Room at time n be xp[n]. We would like
+
+x f [n]
+ . Write A using the numbers and the
+
+to ﬁnd the transition matrix A such that,
+
+variables in the diagram.
+
+x f [n + 1]
+ = A
+
+xs[n + 1]
+xp[n + 1]
+
+xs[n]
+xp[n]
+
+Solutions: Write a matrix in which each column corresponds to the outgoing arrows in the diagram
+from a particular room, and each row corresponds to the incoming arrows to a particular room:
+
+0.5 0.4 p1
+
+0.5 0.5 p2
+0.1 p3
+0
+
+
+
+(b) We know that no furballs enter or leave the conﬁguration of tunnels shown above and that during the
+time you’re observing the behavior, and no furballs die or are born. What constraint does this place on
+the values of p1, p2, p3? Write your answer in equation form.
+
+Solutions: If number is conserved, this means each column vector in the matrix sums to 1. Therefore:
+
+EECS 16A, Spring 2016, Midterm 1
+
+17
+
+p1 + p2 + p3 = 1
+
+(c) Suppose we let (cid:126)p =
+
+, (cid:126)x[n + 1] =
+
+p1
+
+p2
+p3
+
+x f [n + 1]
+
+xs[n + 1]
+xp[n + 1]
+
+ and (cid:126)x[n] =
+
+x f [n]
+, and that we are sure that xp[n]
+
+xs[n]
+xp[n]
+
+is nonzero. Express (cid:126)p as a function of the numbers in the diagram, (cid:126)x[n], and (cid:126)x[n + 1]. (Hint: what is
+the relationship between (cid:126)x[n + 1] and (cid:126)x[n])
+
+Solutions:
+
+x f [n]
+
+xp[n]
+
+p2
+p3
+
+(cid:126)p =
+
+1
+
+xp[n]
+
+p2
+p3
+
+0.5
+0.1
+
+0.5
+0
+
+0.5
+0.1
+
+0.5
+0
+
+xs[n]
+xp[n]
+
+0.5 0.5 p2
+0.1 p3
+0
+
+ =(cid:126)x[n + 1]
+x f [n]
+0.5 0.4 p1
+ =(cid:126)x[n + 1]
+p1
+0.4
+ + xp[n]
+ + xs[n]
+0.5
+
+0.4
+− xs[n]
+p1
+0.5
+ =(cid:126)x[n + 1]− x f [n]
+
+0.4
+− xs[n]
+0.5
+(cid:126)x[n + 1]− x f [n]
+.
+ and (cid:126)x[n] =
+20
+22
+
+0.4
+− 30
+− 20
+0.5
+22
+
+ 0
+
+0.5
+0
+
+0.5
+0.1
+
+0.5
+0
+
+0.5
+0.1
+
+30
+48
+
+30
+50
+
+(cid:126)p =
+
+1
+50
+
+30
+48
+
+(cid:126)p =
+
+0.1
+0.9
+
+(d) Using part (c), solve for (cid:126)p given that (cid:126)x[n + 1] =
+
+Solutions:
+
+of furballs. However, if (cid:126)x[n] =
+
+(e) You discover a new system of tunnels where furballs live. You know this system has 3 chambers like
+the last one did, but you do not know how the chambers are connected, or the behavior of this colony
+
+x1[n]
+ where xi[n] represents the number of furballs in chamber i at
+. Which of the following pump
+60
+
+x2[n]
+x3[n]
+
+24
+16
+
+timestep n, where time starts at n = 0, you observe that (cid:126)x[2] =
+
+diagrams in Figure 2 represent a possible set of behaviors for this colony?
+
+EECS 16A, Spring 2016, Midterm 1
+
+18
+
+0.5 0.4 0
+
+0.5 0.6 1
+0
+0
+
+0
+
+
+
+Ai =
+
+0.4 0.4 0.2
+
+0.4 0.4 0.2
+0.2 0.2 0.6
+
+
+
+Figure 2
+
+Aii =
+
+Aiii =
+
+1 0.25 0.25
+
+
+0
+0
+
+0.5
+0
+
+0.25
+0.5
+
+Solutions:
+(i) The third row in Ai consists of all zeros. This means, at any positive timestep, (cid:126)x would be forced to
+have zero as its third entry. Therefore, the given (cid:126)x[2] is not in the range of this matrix, and this option
+do not represent a possible set of behaviors.
+
+(ii) The ﬁrst two rows in Aii are the same. This means, at any positive timestep, (cid:126)x would be forced to
+have the same number in its ﬁrst and second entry. Therefore, the given (cid:126)x[2] is not in the range of this
+matrix, and this option do not represent a possible set of behaviors.
+
+(iii) The given (cid:126)x[2] is in the range of Aiii. Therefore, full credit was given for choosing this option.
+However, number is not conserved in this option. Since it was ambiguous whether or not number
+was meant to be conserved in the question, partial credit was given for excluding this option with this
+explanation.
+
+EECS 16A, Spring 2016, Midterm 1
+
+19
+
+PRINT your name and student ID:
+[If you are want the work on this page be graded, please state CLEARLY which problem(s) this space is
+for. You can also draw us something if you want or give us suggestions or complaints. You can also use this
+page to report anything suspicious that you might have noticed.]
+
+EECS 16A, Spring 2016, Midterm 1
+
+20
+
+

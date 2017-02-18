@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Question } from '../components/question';
+import { FreeFormQuestion } from '../components/question';
 import { lmatrix, lx } from '../utils';
 
 const sp16q3 =
@@ -10,12 +10,62 @@ Invert the following matrix:
 ${lmatrix([[1, 2, 6], [0, 1, 4], [2, 4, 10]])}
 `;
 
+const sp16q3_soln =
+`
+We can ﬁnd the inverse by row reducing the augmented system (process omitted for brevity): <br/><br/>
+
+${lmatrix([[1, 2, 6, '\\vdots', 1, 0, 0], [0, 1, 4, '\\vdots', 0, 1, 0], [2, 4, 10, '\\vdots', 0, 0, 1]], false, false)}
+<br/>
+
+Thus the inverse is given by:<br/>
+${lmatrix([[3, -2, -1], [-4, 1, 2], [1, 0, '-1/2']], false, false)}<br/>
+
+We can check our answer by calculating:<br/><br/>
+${lmatrix([[1, 2, 6], [0, 1, 4], [2, 4, 10]])}
+${lmatrix([[3, -2, -1], [-4, 1, 2], [1, 0, '-1/2']])}
+=
+${lmatrix([[1, 0, 0], [0, 1, 0], [0, 0, 1]])}
+`;
+
 const sp16q4 = 
 `
 <h3>4. Freedom!</h3>
 Let \\(A\\) and \\(B\\) be \\(n × n\\) matrices. Suppose \\(A\\) is invertible, but \\(B\\) is not. <b>Prove that Rank</b>(\\(AB\\)) < <b>Rank</b>(\\(A\\)).<br/><br/>
-(That is, show that the number of linearly independent columns in \\(AB\\) is strictly less than the number of
-linearly independent columns in \\(A\\)).
+(That is, show that the number of linearly independent columns in \\(AB\\) is strictly less than the number of linearly independent columns in \\(A\\)).
+`;
+
+const sp16q4_soln =
+`
+Proof 1:
+Since ${lx('B')} is rank deﬁcient, it has linearly dependent columns. This means that there exists a nonzero vector ${lx('\\vec{x}')} such that ${lx('B\\vec{x} = \\vec{0}', false)}.
+
+Premultiplying this equation by the matrix ${lx('A')} gives
+${lx('A(B\\vec{x}) = A\\vec{0} = \\vec{0}', false)}.
+
+But ${lx('A(B\\vec{x}) = (AB)\\vec{x})', false)},
+
+so we've shown that
+${lx('(AB)\\vec{x}) = \\vec{0}', false)}
+
+for some nonzero vector ${lx('\\vec{x}')}. This proves that the columns of the ${lx('n x n')} matrix ${lx('AB')} are linearly dependent, which in turn means that rank(${lx('AB')}) < ${lx('n')}.<br/><br/>
+
+Proof 2:
+Define the product matrix ${lx('C')} = ${lx('AB')}. Writing the matrix ${lx('B')} in column form, we ﬁnd that
+
+${lx('\\begin{align}C & = AB \\\\ & = A \\begin{bmatrix} \\vec{b_1} & \\cdots & \\vec{b_l} \\cdots & \\vec{b_n} \\end{bmatrix} \\\\ & = \\begin{bmatrix} A\\vec{b_1} & \\cdots & A\\vec{b_l} & \\cdots & A\\vec{b_n} \\end{bmatrix} \\\\ & = \\begin{bmatrix} \\vec{c_1} & \\cdots & \\vec{c_l} & \\cdots & \\vec{c_n} \\end{bmatrix} \\\\ \\end{align}', false)}
+
+where ${lx('\\vec{c_l}')} = ${lx('A\\vec{b_l}')} denotes the ${lx('l_{th}')} column of the matrix ${lx('C')} = ${lx('AB')}.
+Since ${lx('B')} is rank deﬁcient its columns must be linearly dependent. This means that we can write any column of ${lx('B')} as a nontrivial linear combination of the others (by nontrivial we mean that not all the coefﬁcients in the linear combination are zero). For example, let’s write the last column of B as a linear combination of the first ${lx('n')} − ${lx('1')} columns. That is,
+
+${lx('\\vec{b_n} = \\sum_{l = 1}^{n - 1}{a_l \\vec{b_l}}', false)}
+
+for some set of coefﬁcients ${lx('\\alpha_1, \\cdots ,\\alpha_{n−1}')}, <i>not all zero</i>.
+Now let’s look at the last column of the product matrix ${lx('C')} = ${lx('AB')}:
+
+${lx('\\begin{align} \\vec{c_n} & = A\\vec{b_n} \\\\ & = A \\sum_{l = 1}^{n - 1}{a_l\\vec{b_l}} \\\\ & = \\sum_{l = 1}^{n - 1}{a_l \\underbrace{A \\vec{b_l}}_{\\vec{c_l}}} \\\\ & = \\sum_{l = 1}^{n - 1}{a_l\\vec{c_l}} \\\\ \\end{align}', false)}
+
+which shows that the nth column of ${lx('C')} = ${lx('AB')} is a nontrivial linear combination of the ﬁrst ${lx('n')} - ${lx('1')} columns.<br/>
+This means that ${lx('C')} has linearly dependent columns, which in turn implies that ${lx('AB')} is rank deficient.
 `;
 
 const sp16q5a = 
@@ -26,14 +76,33 @@ You only need to write True or False under each subpart.</br>
 (a) There exists an invertible \\(n × n\\) matrix \\(A\\) for which ${lx('A^2')} = 0. 
 `;
 
+const sp16q5a_soln = 
+`
+<h3>False</h3>
+
+Let’s left multiply and right multiply ${lx('A_2')} by ${lx('A^{-1}')} so we have ${lx('A^{−1} AAA^{−1}')}. By associativity of matrix multiplication, we have ${lx('(A^{−1}A)(AA^{−1})')} = ${lx('I_nI_n')} = ${lx('I_n')} where ${lx('I')} is the identity matrix. However, if ${lx('A^2')} were ${lx('0')}, then ${lx('(A^{−1}A)(AA^{−1})')} = ${lx('A^{−1} A^{2} A^{−1}')} = ${lx('0')} where ${lx('0')} is a matrix of all zeros, hence resulting in a contradiction.
+`;
+
 const sp16q5b = 
 `
 (b) If \\(A\\) is an invertible \\(n × n\\) matrix, then for all vectors \\(\\vec{b}\\) ∈ ${lx('R^n')}, the system \\(A\\)\\(\\vec{x}\\)=\\(\\vec{b}\\) has a unique solution.
+
+<h3>True</h3>
+
+If ${lx('A')} is invertible, then there is a unique matrix ${lx('A^{-1}')}. Left multiply the equation by ${lx('A^{−1}')}, and we will have ${lx('A^{−1}A\\vec{x}')} = ${lx('A^{−1}\\vec{b} \\implies \\vec{x} = A^{−1}\\vec{b}')}, where ${lx('\\vec{x}')} is a unique vector.
 `;
 
 const sp16q5c = 
 `
 (c) If \\(A\\) and \\(B\\) are invertible \\(n × n\\) matrices, then the product \\(AB\\) is invertible.
+`;
+
+const sp16q5c_soln =
+`
+<h3>True</h3>
+
+${lx('(AB)^{−1} = B^{−1}A^{−1}')}.
+Note that ${lx('ABB^{-1}A^{-1}')} = ${lx('I')} and ${lx('B^{-1}A^{-1}AB')} = ${lx('B^{-1}IB')} = ${lx('B^{-1}B')} = ${lx('I')}
 `;
 
 const sp16q5d = 
@@ -42,14 +111,40 @@ const sp16q5d =
 subspace Span(${lx('\\{')}${lmatrix([[1], [1], [0]])}, ${lmatrix([[1], [-1], [0]])}${lx('\\}')}).
 `;
 
+const sp16q5d_soln =
+`
+<h3>True.</h3>
+
+Span(${lx('{')}${lmatrix([[1], [0], [1]])},${lmatrix([[0], [1], [0]])}${lx('}')}) spans the ${lx('x')}-${lx('y')} plane in ${lx('\\mathbb{R}^3')} as well.
+`;
+
 const sp16q5e = 
 `
 (e) A set of ${lx('n')} linearly dependent vectors in ${lx('\\mathbb{R}^n')} can span ${lx('\\mathbb{R}^n')}.
 `;
 
+const sp16q5e_soln =
+`
+<h3>False.</h3>
+
+A set of ${lx('n')} linearly dependent vectors span some subspace of dimension ${lx('0')} < dim(${lx('A')}) < ${lx('n')} in ${lx('\\mathbb{R}^n')}.<br/>
+<b>Note</b>: It is incorrect to say the set of linearly dependent vectors spans ${lx('\\mathbb{R}^{n−1}')} for two reasons. First, you
+don’t know what the dimension is of the subspace it spans, which could be less than ${lx('n')} − ${lx('1')}. Second, there is no such thing as ${lx('\\mathbb{R}^{n−1} \\in \\mathbb{R}^n')}. The vectors are “in” ${lx('\\mathbb{R}^n')} based on how many elements are in the
+vector, and a set of vectors spans some subspace (potentially the entire space.)
+
+`;
+
 const sp16q5f = 
 `
 (f) For all matrices \\(A\\) and \\(B\\), where \\(A\\) is ${lx('5')}×${lx('5')} and \\(B\\) is ${lx('4')}×${lx('4')}, it is always the case that Rank(\\(A\\)) > Rank(\\(A\\)).
+`;
+
+const sp16q5f =
+`
+<h3>False.</h3>
+
+Size does not determine rank! For example, if ${lx('A')} was a matrix of all ones rank(${lx('A'})) would be 1. If, on the other hand ${lx('B')} was an identity matrix it would have full rank: rank(${lx('B')}) = ${lx('4')}.<br/>
+You can only claim larger size implies larger rank if you assume the matrices are full rank (pivots in every column, all column vectors are linearly independent from the rest.)
 `;
 
 const sp16q6a = 
@@ -88,10 +183,20 @@ Group 4 gained 9 total brightness units</br>
 brightness units from each group.
 `;
 
+const sp16q6a_soln =
+`
+${lx('\\left \\begin{aligned} A + 5B + C &= 7 \\\\ 2B + 4C + 6D &= 26 \\\\ 2C + 2D &= 10 \\\\ 3D = 9 \\\\ \\end{aligned}')}
+`;
+
 const sp16q6b = 
 `
 (b) From the given information, can you determine how many imps are at each campsite? If so, report
 their numbers to help the faeries! If not, explain why not.
+`;
+
+const sp16q6b_soln =
+`
+
 `;
 
 const sp16q6c = 
@@ -310,63 +415,63 @@ class EE16ASp16 extends Component {
           <hr className="s2" />
           <p>Unless told otherwise, you must show work to get credit. There will be very little partial credit given in this section. Each problem is worth 8 points.</p>
           <hr className="s5" />
-          <Question id={"q3"} content={sp16q3} hasReponse={false}/>
+          <FreeFormQuestion id={"q3"} content={sp16q3} hasReponse={false} solution={sp16q3_soln} />
           <hr className="s5" />
-          <Question id={"q4"} content={sp16q4} hasReponse={false}/>
+          <FreeFormQuestion id={"q4"} content={sp16q4} hasReponse={false} solution={sp16q4_soln} />
           <hr className="s5" />
-          <Question id={"q5a"} content={sp16q5a} hasReponse={false}/>
+          <FreeFormQuestion id={"q5a"} content={sp16q5a} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q5b"} content={sp16q5b} hasReponse={false}/>
+          <FreeFormQuestion id={"q5b"} content={sp16q5b} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q5c"} content={sp16q5c} hasReponse={false}/>
+          <FreeFormQuestion id={"q5c"} content={sp16q5c} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q5d"} content={sp16q5d} hasReponse={false}/>
+          <FreeFormQuestion id={"q5d"} content={sp16q5d} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q5e"} content={sp16q5e} hasReponse={false}/>
+          <FreeFormQuestion id={"q5e"} content={sp16q5e} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q5f"} content={sp16q5f} hasReponse={false}/>
+          <FreeFormQuestion id={"q5f"} content={sp16q5f} hasReponse={false}/>
           <hr className="s5" />
           <h2>Free-form Problems <i>(100 points)</i></h2>
           <hr className="s2" />
-          <Question id={"q6a"} content={sp16q6a} hasReponse={false}/>
+          <FreeFormQuestion id={"q6a"} content={sp16q6a} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q6b"} content={sp16q6b} hasReponse={false}/>
+          <FreeFormQuestion id={"q6b"} content={sp16q6b} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q6c"} content={sp16q6c} hasReponse={false}/>
+          <FreeFormQuestion id={"q6c"} content={sp16q6c} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q7a"} content={sp16q7a} hasReponse={false}/>
+          <FreeFormQuestion id={"q7a"} content={sp16q7a} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q7b"} content={sp16q7b} hasReponse={false}/>
+          <FreeFormQuestion id={"q7b"} content={sp16q7b} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q7c"} content={sp16q7c} hasReponse={false}/>
+          <FreeFormQuestion id={"q7c"} content={sp16q7c} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q7d"} content={sp16q7d} hasReponse={false}/>
+          <FreeFormQuestion id={"q7d"} content={sp16q7d} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q7e"} content={sp16q7e} hasReponse={false}/>
+          <FreeFormQuestion id={"q7e"} content={sp16q7e} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q8a"} content={sp16q8a} hasReponse={false}/>
+          <FreeFormQuestion id={"q8a"} content={sp16q8a} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q8b"} content={sp16q8b} hasReponse={false}/>
+          <FreeFormQuestion id={"q8b"} content={sp16q8b} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q8c"} content={sp16q8c} hasReponse={false}/>
+          <FreeFormQuestion id={"q8c"} content={sp16q8c} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q8d"} content={sp16q8d} hasReponse={false}/>
+          <FreeFormQuestion id={"q8d"} content={sp16q8d} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q8e"} content={sp16q8e} hasReponse={false}/>
+          <FreeFormQuestion id={"q8e"} content={sp16q8e} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q8f"} content={sp16q8f} hasReponse={false}/>
+          <FreeFormQuestion id={"q8f"} content={sp16q8f} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q8g"} content={sp16q8g} hasReponse={false}/>
+          <FreeFormQuestion id={"q8g"} content={sp16q8g} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q9a"} content={sp16q9a} hasReponse={false}/>
+          <FreeFormQuestion id={"q9a"} content={sp16q9a} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q9b"} content={sp16q9b} hasReponse={false}/>
+          <FreeFormQuestion id={"q9b"} content={sp16q9b} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q9c"} content={sp16q9c} hasReponse={false}/>
+          <FreeFormQuestion id={"q9c"} content={sp16q9c} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q9d"} content={sp16q9d} hasReponse={false}/>
+          <FreeFormQuestion id={"q9d"} content={sp16q9d} hasReponse={false}/>
           <hr className="s5" />
-          <Question id={"q9e"} content={sp16q9e} hasReponse={false}/>
+          <FreeFormQuestion id={"q9e"} content={sp16q9e} hasReponse={false}/>
         </div>
       </span>
     );
