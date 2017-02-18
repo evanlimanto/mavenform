@@ -58,7 +58,7 @@ h4 {
   margin-top: 5px;
   text-align: left;
   font-family: 'Lato', sans-serif;
-  font-weight: 700;
+  font-weight: 400;
   font-size: 18px;
   letter-spacing: 1px;
   color: #666;
@@ -70,6 +70,30 @@ h5 {
   font-weight: 400;
   font-size: 20px;
   color: #999;
+}
+
+h6 {
+  line-height: initial;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 48px;
+  color: #fff;
+}
+
+.h5-alt {
+  font-size: 22px;
+  color: #fff;
+  opacity: 0.8;
+  padding: 0 50px;
+}
+
+.banner {
+  position: absolute;
+  background: #11accd;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
 
 a {
@@ -230,10 +254,12 @@ input[type=button]:hover {
 }
 
 .card-container {
+  padding-top: 360px;
   max-width: 1200px;
 }
 
 .card {
+  position: relative;
   vertical-align: top;
   display: inline-block;
   padding: 30px;
@@ -249,6 +275,18 @@ input[type=button]:hover {
   cursor: pointer;
   background: #eee;
   border: 1px solid #11accd;
+}
+
+.card-helper {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  font-size: 16px;
+  color: #ccc;
+}
+
+.card:hover .card-helper {
+  color: #11accd;
 }
 
 .center {
@@ -287,6 +325,10 @@ input[type=button]:hover {
   width: 100%;
   clear: both;
   height: 100px;
+}
+
+.hidden {
+  display: none;
 }
 
 @media (max-width: 1019px) {
