@@ -390,7 +390,32 @@ However, one day the sensor on \\(t_7\\) breaks. <b>Can they still recover all t
 
 const fa15q8e_soln =
 `
+Yes. First, we will show that ${lx('t_7')} = ${lx('t_8')} for all valid flows. Therefore, they can recover the value of the broken sensor at ${lx('t_7')}, knowing only the value of ${lx('t_8')}. Now the situation is as if all the sensors were working, so by assumption they can recover all the flows.<br/>
+We can show that ${lx('t_7')} = ${lx('t_8')} analogously to the argument for part (c). Intuitively, this is true because the net flow into the first city must be zero. (In fact, our argument from part (c) is exactly how to make this intuition formal).
+In this case, the incidence matrix is the following:
 
+${lx('B\'\' = \\begin{array}{c c c c c c} -1 & 0 & +1 & 0 & 0 & 0 & 0 & 0 \\\\ +1 & -1 & 0 & 0 & 0 & 0 & 0 & +1 \\\\ 0 & +1 & -1 & 0 & 0 & 0 & -1 & 0 \\\\ 0 & +1 & -1 & 0 & 0 & 0 & -1 & 0 \\\\ 0 & 0 & 0 & -1 & 0 & +1 & 0 & 0 \\\\ 0 & 0 & 0 & +1 & -1 & 0 & +1 & 0 \\\\ 0 & 0 & 0 & 0 & +1 & -1 & 0 & -1 \\\\ \\end{array}', false)}
+
+(Which has two additional columns over ${lx('B')} from the first part).<br/>
+Now, any valid ${lx('\\vec{t}')} satisfies
+${lx('B\'\'\\vec{t} = \\vec{0}', false)}
+
+Therefore, it must also satisfy:<br/>
+${lx("\\begin{array}{c c c c c c}1 & 1 & 1 & 0 & 0 & 0 \\\\ \\end{array}B''\\vec{t} = \\begin{array}{c c c c c c}1 & 1 & 1 & 0 & 0 & 0 \\\\ \\end{array} \\vec{0}", false)}
+
+Which simplifies to:
+${lx("\\begin{array}{c c c c c c}1 & 1 & 1 & 0 & 0 & 0 \\\\ \\end{array}B''\\vec{t} = \\vec{0}")}
+
+${lx("\\begin{array}{c c c c c c}1 & 1 & 1 & 0 & 0 & 0 \\\\ \\end{array} \\begin{array}{c c c c c c} -1 & 0 & +1 & 0 & 0 & 0 & 0 & 0 \\\\ +1 & -1 & 0 & 0 & 0 & 0 & 0 & +1 \\\\ 0 & +1 & -1 & 0 & 0 & 0 & -1 & 0 \\\\ 0 & +1 & -1 & 0 & 0 & 0 & -1 & 0 \\\\ 0 & 0 & 0 & -1 & 0 & +1 & 0 & 0 \\\\ 0 & 0 & 0 & +1 & -1 & 0 & +1 & 0 \\\\ 0 & 0 & 0 & 0 & +1 & -1 & 0 & -1 \\\\ \\end{array} \\vec{t} = \\vec{0}", false)}
+
+${lx("\\begin{array}{c c c c c c c}0 & 0 & 0 & 0 & 0 & 0 & -1 & +1 \\\\ \\end{array} \\vec{t} = 0", false)}
+
+Which is just the constrant ${lx('-t_7 + t_8 = 0')}.<br/><br/>
+
+<b>Alternate Solutions:</b>
+It was also possible to row-reduce ${lx("B''"}), find a basis for the nullspace, and show that all basis vectors have t7 = t8 (and therefore all valid flows must have ${lx('t_7')} = ${lx('t_8')} as well).<br/>
+Notice that in this problem, we do not know the exact sensor placements of each city. Solutions which made assumptions about the particular sensor arrangements of the cities received partial credit. (In theory, it was possible to enumerate all possible valid sensor arrangements, and confirm that each one works by the procedure of Homework 3.)<br/>
+Some students argued that it is sufficient to have one sensor per “independent loop”. And since the cities already had sensors on their individual loops (necessarily, by assumption), it is sufficient to have one sensor on the new “independent loop” created by adding the two new roads. This is correct intuition. However, the concept of “independent loop” was not defined or developed in this class, so any argument using “independent loops” without definition only received partial credit.
 `;
 
 const img9a = require('../img/fa16q9-1.png');
@@ -409,15 +434,49 @@ Suppose there is a network of pumps connecting the three different pools, given 
 <i>(Hint: No “linear algebra” machinery is needed here. Just think about what Justin observes as time goes by.)</i>
 `;
 
+const fa15q9a_soln =
+`
+Because the water flow from one pool into another is fairly simple in this system, we can figure out intuitively that Justin will be able to figure out the initial water level in each pool. (We will see later that in situations where the system of pumps is more complex, we will need to be much more careful. There are some more complex systems of pumps that will be able to effectively hide information about water levels in the other pools from Justin.)<br/>
+In this case, however, Justin’s analysis is straight-forward. At each time step, all the water from pool 1 flows into pool 3, all the water from pool 2 flows into pool 1, and all the water from pool 3 flows into pool 2. Because of the cyclic way in which the water flows, Justin only has to wait 3 time steps in order to figure out the initial water level in each pool. At time step t=0, Justin can measure the initial water level in pool 1. At time t=1, the water level in pool 1 will be equivalent to the initial water level in pool 2, and at time t=2, the water level in pool 1 will be equivalent to the initial water level in pool 3. Thus Justin needs to wait 3 time steps (including the initial time step) – t=0, t=1, and t=2 – in order to figure out the initial water levels in all the pools.
+`;
+
 const fa15q9b =
 `
 <b>(b)</b> <i>(5pts)</i> Consider now a general pump matrix A that is known to Justin, not necessarily the one in the example above. Just for this part, suppose Justin had been told the initial water levels \\(\\vec{x}[0]\\) by someone else. Could he ﬁgure out \\(\\vec{x}[t]\\)? <b>Write an expression for \\(\\vec{x}[t]\\) given the initial levels \\(\\vec{x}[0]\\) and the pump matrix \\(A\\)</b>.
 `;
 
+const fa15q9b_soln =
+`
+If Justin knows ${lx('\\vec{x}[0]')}, he can use what he knows about how the system changes over time (the dynamics of the system) to figure out ${lx('\\vec{x}[t]')}. These dynamics are summarized in the pump matrix ${lx('A')}. ${lx('A')} tells us how ${lx('\\vec{x}')} updates at each time step. Every time we multiple on the left by ${lx('A')}, we figure out what ${lx('\\vec{x}')} will be one time step in the future. Thus we can calculate
+
+${lx('\\vec{x}[1] = A\\vec{x}[0]', false)}
+${lx('\\vec{x}[2] = A\\vec{x}[1] = A(A\\vec{x}[0]) = A^2\\vec[0]', false)}
+${lx('\\vec{x}[3] = A\\vec{x}[2] = A^3(\\vec{x}[0])', false)},
+
+Thus the general expression for ${lx('\\vec{x}[t]')} in terms of ${lx('A')} and ${lx('\\vec{x}[0]')} is
+
+${lx('\\vec{x}[t] = A^t\\vec{x}[0]', false)}
+
+This expression is useful for calculating the initial water levels (as we will see in part (d)). It is also interesting because it points out that if Justin is able to calculate ${lx('\\vec{x}[0]')} then he really is able to calculate the water level of each pool at any time step in the future using this equation.
+`;
+
 const fa15q9c =
 `
-<b>(c)</b> <i>(5pts)</i> Suppose we use \\(y[t]\\) to denote Justin’s measurement of the water level in pool 1 at time t. We  know that \\(y[t] = x_1[t]\\). <b>Find a vector \\(\\vec{c}\\) such that
+<b>(c)</b> <i>(5pts)</i> Suppose we use \\(y[t]\\) to denote Justin’s measurement of the water level in pool 1 at time t. We know that \\(y[t] = x_1[t]\\). <b>Find a vector \\(\\vec{c}\\) such that
 $$y[t] = \\vec{c}_T\\vec{x}[t]$$
+`;
+
+const fa15q9c_soln =
+`
+In this problem, we want to mathematically describe what Justin is doing when he measures the water level in his pool. He is measuring ${lx('x_1')} which is the first element of the vector ${lx('\\vec{x}')}. We can describe this measuring process as taking the inner product of ${lx('\\vec{c}')} and specific vector ${lx('\\vec{c}')}. That vector ${lx('\\vec{c}')} is given by
+
+${lx('\\vec{c} = \\begin{array}{c} 1 \\\\ 0 \\\\ 0 \\\\ \\end{array}', false)}
+
+Thus we have
+
+${lx('y[t] = <\\vec{c}, \\vec{x}[t]> = \\vec{c}^T\\vec{x}[t] = \\begin{array}{c c c}1 & 0 & 0 \\end{array} \\begin{array}{c} x_1[t] \\\\ x_2[t] \\\\ x_3[t] \\\\ \\end{array} = 1 · x_1[t] + 0 · x_2[t] + 0 · x_3[t] = x_1[t]', false)}
+
+as desired.
 `;
 
 const fa15q9d =
@@ -445,6 +504,27 @@ $$
 <i>(Hint: Think about what the rows of \\(D\\) should be. It sufﬁces to give an expression for the jth row \\(D_j\\) of \\(D\\).)</i><br/><br/>
 `;
 
+const fa15q9d_soln =
+`
+Now we start getting into the heart of the problem. We want to figure out how Justin can calculate the initial water levels even if the pump matrix A is not as simple as in part (a).<br/>
+Over time Justin will acquire a bunch of measurements of the water level in his pool,
+${lx('y[0], y[1], \\dots , y[t]')}. We want to write these measurements in terms of ${lx('\\vec{c}')}, ${lx('A')}, and ${lx('\\vec{x}[0]')} so that we can write a system of equations that will allow us to solve for ${lx('\\vec{x}[0]')}.
+
+Using the expressions from parts (b) and (c), we can write
+${lx('y[t] = \\vec{c}^Tx[t] = \\vec{c}^TA^t\\vec{x}[0]', false)}
+
+Writing each measurement as a row of a mtrix equation we get
+${lx('\\begin{array}{c} y[0] \\\\ y[1] \\\\ \\vdots \\\\ y[T - 1] \\\\ \\end{array} = \\begin{array}{c} \\vec{c}^T \\vec{x}[0] \\\\ \\vec{c}^T A\\vec{x}[0] \\\\ \\vdots \\\\ \\vec{c}^T A^{T - 1}\\vec{x}[0] \\end{array} = \\begin{array}{c} \\vec{c}^T \\\\ \\vec{c}^T A \\\\ \\vdots \\\\ \\vec{c}^T A^{T - 1} \\end{array} \\vec{x}[0]', false)}
+
+Thus if you count the first row as row 1, the second row as row 2, etc, then the <i>j</i>th row of D, ${lx('D_j')}, can be written as
+
+${lx('D_j = \\vec{c}^T A^{j-1}', false)}
+
+It was also fine if you counted the first row as row 0, the second row as row 1, etc. In this case, ${lx('D_j')}, is given by
+
+${lx('D_j = \\vec{c}^T A^{j}', false)}
+`;
+
 const img9e = require('../img/fa16q9-2.png');
 const fa15q9e =
 `
@@ -453,6 +533,27 @@ const fa15q9e =
 <img src="${img9e}" class="problem-image" />
 
 Given this speciﬁc A matrix, <b>how many time steps \\(T\\) of observations in pool 1 will Justin need in order to recover the initial water levels \\(\\vec{x}[0]\\)? Argue why this number of observations is enough.</b>
+`;
+
+const fa15q9e_soln =
+`
+Using the equation from part (d), we can start to see when Justin will be able to recover ${lx('\\vec{x}[0]')} based on a specific ${lx('A')} matrix. In order to find a unique ${lx('\\vec{x}[0]')}, Justin needs to be able to solve the equation
+
+${lx('\\begin{array}{c} y[0] \\\\ y[1] \\\\ \\vdots \\\\ y[T - 1] \\\\ \\end{array} = \\begin{array}{c} \\vec{c}^T \\\\ \\vec{c}^T A \\\\ \\vdots \\\\ \\vec{c}^T A^{T - 1} \\\\ \\end{array} \\vec{x}[0]', false)}
+
+
+The first thing we notice is that after a few time steps, Justin will have more equations than unknowns. Often times when there are more equations than unknowns the system has no solution. However, in this case since each physical measurement y (the water level in pool 1) is the result of a physical process (water being pumped between pools according to ${lx('A')}) starting from some real initial water level, ${lx('\\vec{x}[0]')}, we know that that real initial water level, ${lx('\\vec{x}[0]')} will be a solution. Thus we know that a solution exists.<br/><br/>
+
+What is not obvious immediately is whether our system of equations gives us enough information to solve for the real solution. It is possible that there will be multiple ${lx('\\vec{x}[0]')}’s that solve this equation. In this case, we won’t be able to figure out the initial water levels.<br/><br/>
+
+To see how this might happen, suppose that all but two of the measurements summarized in the equation above are redundant, i.e. the row vectors ${lx('\\vec{c}^T, \\vec{c}^T A, \\dots, \\vec{c}^T A^{T-1}')} are linearly dependent living in some two dimensional subspace of ${lx('\\mathbb{R}^3')}. In this case if, we row reduce ${lx('D')}, we will end up with zeros in all the rows except 2. This means that we will have only 2 pivots and thus 1 free variable. Therefore, ${lx('D')} has a nullspace that contains more than just ${lx('\\vec{0}')} (${lx('D')} has a non-trivial nullspace).<br/><br/>
+
+This is problematic because multiple different initial water levels will give the same measurements. Consider the true initial water level ${lx('\\vec{x}[0]')} and a vector that lives in the nullspace of ${lx('D, \\vec{x}_{NS}[0]')}. Note that through our measurement process, we won’t be able to tell the difference between ${lx('\\vec{x}[0]')} and ${lx('\\vec{x}[0] + \\vec{x}_{NS}[0]')} since both of them will give the same sequence of measurements ${lx('y[0], y[1], \\dots, y[T - 1]')}.
+
+${lx('\\left[ D \\right] \\left( \\vec{x}[0] + \\vec{x}_{NS}[0] \\right) = \\left[ D \\right] \\vec{x}[0] + \\left[ D \\right] \\vec{x}_{NS}[0] = \\left[ D \\ right]\\vec{x}[0]', false)}
+
+Thus in order to determine ${lx('\\vec{x}[0]')} uniquely we need <b>at least 3 rows of ${lx('D')} to be linearly independent. It turns out that the first three rows ⃗cT ,⃗cT A, and ⃗cT A2 are linearly independent thus Justin needs only 3 time steps (t = 0,t = 1,t = 2) to solve for ⃗x[0]. In order to get full credit on this part, you had to show that the first three rows are linearly independent. The easiest way to show this is by doing Gaussian elimination which we will do when we solve for the answer in part (f). [It is perfectly ok to point to a later problem part when solving a problem.] Note that you could also use three other linearly independent rows to solve for the solution but the first three rows are the easiest to calculate.
+  Here we see also why we have to be careful if A is more complicated. For a complicated A, it is difficult to tell if the vectors ⃗cT ,⃗cT A,⃗cT A2 , . . . will span all of R3 until we calculate them out. If they don’t span R3, then D will have a non-trivial nullspace and this nullspace represents a set of initial water levels that are hidden from Justin’s measurements. There is a general condition called observability of A and ⃗c that tells us when this nullspace exists. It has to do with the relationship between ⃗c and the eigenvectors of the matrix A. Maybe we’ll get it to it later in the course or in EE16b.
 `;
 
 const fa15q9f =
