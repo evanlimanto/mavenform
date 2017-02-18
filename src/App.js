@@ -27,7 +27,8 @@ class App extends Component {
 
     return (
       <span>
-        <a className="return" href="/">&#8592; Return</a>
+        <a className="return" href="/">&#8592; RETURN</a>
+        <a className="feedback" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
         <div className="test-container">
           <div className="test">
             <hr className="margin" />

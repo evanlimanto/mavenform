@@ -4,6 +4,7 @@ class Home extends Component {
   render() {
     return (
       <div className="card-container center">
+        <a className="feedback feedback-home" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
         <div className="banner">
           <hr className="margin" />
           <h6>Mavenform</h6>

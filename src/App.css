@@ -88,6 +88,16 @@ h6 {
   padding: 0 50px;
 }
 
+::-moz-selection {
+  color: #fff;
+  background: #11accd;
+}
+
+::selection {
+  color: #fff;
+  background: #11accd;
+}
+
 .banner {
   position: absolute;
   background: #11accd;
@@ -103,7 +113,7 @@ h6 {
 a {
   font-family: 'Lato', sans-serif;
   text-decoration: none;
-  border-bottom: 1px dashed #333;
+  border-bottom: 1px solid #999;
   font-size: 16px;
   color: #333;
 }
@@ -111,7 +121,7 @@ a {
 a:hover {
   cursor: pointer;
   color: #11accd;
-  border-bottom: 1px dashed #11accd;
+  border-bottom: 1px solid #11accd;
 }
 
 i {
@@ -264,9 +274,47 @@ input[type=button]:hover {
   top: 25px;
   left: 25px;
   z-index: 1;
+  text-align: left;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: #ccc;
+  border-bottom: none;
+}
+
+.return:hover {
+  border-bottom: none;
+}
+
+.feedback {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  z-index: 1;
+  text-align: left;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: #ccc;
+  border-bottom: none;
+}
+
+.feedback-home {
+  color: #fff;
+}
+
+.feedback:hover {
+  border-bottom: none;
+}
+
+.feedback-home:hover {
+  color: #ccc;
 }
 
 .card-container {
+  margin: auto;
   max-width: 1200px;
 }
 
@@ -299,6 +347,11 @@ input[type=button]:hover {
 
 .card:hover .card-helper {
   color: #11accd;
+}
+
+.form-container {
+  margin: auto;
+  max-width: 800px;
 }
 
 .center {
@@ -352,7 +405,7 @@ input[type=button]:hover {
 }
 
 @media (max-width: 1019px) {
-  .return {
+  .return, .feedback {
     position: absolute;
   }
   
