@@ -193,6 +193,10 @@ img {
   border: 1px solid #11accd;
 }
 
+.solution * {
+  color: #11accd;
+}
+
 .problem-image {
   margin: 25px 0;
 }
