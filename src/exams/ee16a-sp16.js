@@ -286,9 +286,11 @@ ${lmatrix([[1, '\\alpha', 0, 0], [0, '1 - \\alpha - \\beta', '\\alpha', 0], [0, 
 const sp16q7b =
 `
 (b) In this part, we’re interested in backward inference of the state vector ${lx('\\vec{s}[n]')} from a future state vector, say ${lx('\\vec{s}[n+1]')}. As you know, this is possible only if a matrix ${lx('A^{−1}')} exists, so that
-${lx('\\vec{s}[n]')} = ${lx('A^{−1}\\vec{s}[n + 1]')}.<br/>
-Consider a model of the Technocrat migration system described above with ${lx('\\beta')} = ${lx('\\alpha')} = 1/3. Assume ${lx('\\vec{s}[1]')} = ${lx('\\vec{1}')}, where ${lx('\\vec{1}')} denotes the vector of all ones.<br/>
-${lx('\\vec{1}')} = ${lmatrix([[1], [1], [1], [1]])}<br/>
+${lx('\\vec{s}[n] = A^{−1}\\vec{s}[n + 1]', false)}.
+<hr class="s1" />
+Consider a model of the Technocrat migration system described above with ${lx('\\beta')} = ${lx('\\alpha')} = 1/3. Assume ${lx('\\vec{s}[1]')} = ${lx('\\vec{1}')}, where ${lx('\\vec{1}')} denotes the vector of all ones.
+<hr class="s1" />
+${lx('\\vec{1} = \\left[ \\begin{array}{c} 1 \\\\ 1 \\\\ 1 \\\\ 1 \\\\ \\end{array} \\right]', false)}
 For this model of the system described above, either explain why time-reversed inference of the state vector is not possible, or determine ${lx('\\vec{s}[0]')} from ${lx('\\vec{s}[1]')} explicitly by computing ${lx('A^{−1}')} first.
 `;
 
@@ -353,9 +355,10 @@ This means that, initially, the Technocrats are equally distributed among the fo
 const sp16q7e_soln =
 `
 ${lx('\\vec{s_\\infty} = \\left[ \\begin{array}{c} 1/2 \\\\ 0 \\\\ 0 \\\\ 1/2 \\\\ \\end{array} \\right]', false)}
-By symmetry, half go to SF and half go to NYC. In addition, we can think of the state vector in this part as follows:<br/>
+By symmetry, half go to SF and half go to NYC. In addition, we can think of the state vector in this part as follows:
+<hr class="s2" />
 
-${lmatrix([['1/4'], ['1/4'], ['1/4'], ['1/4']])} = ${lx('\\frac{1}{2}')}${lmatrix([['1/2'], [0], [0], ['1/2']])} + ${lx('\\frac{1}{2}')}${lmatrix([[0], ['1/2'], ['1/2'], [0]])}
+${lx('\\left[ \\begin{array}{c} 1/4 \\\\ 1/4 \\\\ 1/4 \\\\ 1/4 \\\\ \\end{array} \\right] = \\frac{1}{2} \\left[ \\begin{array}{c} 1/2 \\\\ 0 \\\\ 0 \\\\ 1/2 \\\\ \\end{array} \\right] + \\frac{1}{2} \\left[ \\begin{array}{c} 0 \\\\ 1/2 \\\\ 1/2 \\\\ 0 \\\\ \\end{array} \\right]', false)}
 Where the first vector is from part (c) and the second vector is from part (d). So in the limit ${lx('n \\to \\infty')}, we get the same distribution as before.
 `;
 
@@ -373,8 +376,8 @@ ${lx('T_2')}: Rotates ${lx('\\vec{p}')} clockwise about the origin by ${lx('45\\
 
 const sp16q8a_soln =
 `
-${lx('\\vec{a_1}')} = ${lx('T_1\\left\\begin{array}{c}1\\\\0\\\\\\\end{array}\\right')} = ${lmatrix([[0], [-1]])}<br/>
-${lx('\\vec{a_2}')} = ${lx('T_1\\left\\begin{array}{c}0\\\\1\\\\\\\end{array}\\right')} = ${lmatrix([[-1], [0]])}<br/>
+${lx('\\vec{a_1}')} = ${lx('T_1\\left(\\begin{array}{c}1 \\\\ 0 \\\\\ \\end{array}\\right)')} = ${lmatrix([[0], [-1]])}<br/>
+${lx('\\vec{a_2}')} = ${lx('T_1\\left(\\begin{array}{c}0 \\\\ 1 \\\\\ \\end{array}\\right)')} = ${lmatrix([[-1], [0]])}<br/>
 ${lx('A_1')} = ${lmatrix([['\\vec{a_1}', '\\vec{a_2}']])} = ${lmatrix([[0, -1], [-1, 0]])}
 `;
 
@@ -385,7 +388,7 @@ const sp16q8b =
 
 const sp16q8b_soln =
 `
-${lx('\\theta')} = ${lx('\\frac{\\pi}{4}')} = ${lx('-45^\\circ')}<br/>
+${lx('\\theta')} = ${lx('-\\frac{\\pi}{4}')} = ${lx('-45^\\circ')}<br/>
 ${lx('A_2')} = ${lmatrix([['cos \\theta', '-sin \\theta'], ['sin \\theta', 'cos \\theta']])} = ${lmatrix([['\\frac{1}{\\sqrt{2}}', '\\frac{1}{\\sqrt{2}}'], ['-\\frac{1}{\\sqrt{2}}', '\\frac{1}{\\sqrt{2}}']])}
 `;
 
@@ -451,7 +454,7 @@ We notie that a rotation relative to the y-axis maintains the same x-value while
 ${lmatrix([[1, 0, 0], [0, 'cos \\theta', '-sin \\theta'], [0, 'sin \\theta', 'cos \\theta']], false, false)}
 Note that since we only had two basis vectors to begin with, the new range of motion also only needs two basis vectors corresponding to the rotation of the x and y unit vectors, so our basis vectors are:
 
-${lx('\\left{\\begin{array}{c}1\\\\0\\\\0\\\\0\\end{array},\\begin{array}{c}0\\\\cos \\theta\\\\sin \\theta\\end{array}\\right}', false)}
+${lx('\\left\\{ \\left[ \\begin{array}{c} 1 \\\\ 0 \\\\ 0 \\\\ \\end{array} \\right], \\left[ \\begin{array}{c} 0 \\\\ cos \\theta \\\\ sin \\theta \\\\ \\end{array} \\right] \\right\\}', false)}
 
 In fact, all rotation matrices in ${lx('n')} dimensions can be decomposed into a series of rotations in 2 dimensions. So all rotations are products of the basic rotation matrix
 
@@ -501,9 +504,12 @@ const sp16q9c =
 
 const sp16q9c_soln =
 `
-${lmatrix([[0.5, 0.4, 'p_1'], [0.5, 0.5, 'p_2'], [0, 0.1, 'p_3']])}${lmatrix([['x_f[n]'], ['x_s[n]'], ['x_p[n]']])} = ${lx('\\vec{x}[n + 1]')}<br/>
-${lx('x_f[n]')}${lmatrix([[0.5], [0.5], [0]])} + ${lx('x_s[n]')}${lmatrix([[0.4], [0.5], [0.1]])} + ${lx('x_p[n]')}${lmatrix([['p_1'], ['p_2'], ['p_3']])} = ${lx('\\vec{x}[n + 1]')}<br/>
-${lx('x_p[n]')}${lmatrix([['p_1'], ['p_2'], ['p_3']])} = ${lx('\\vec{x}[n + 1]')} - ${lx('x_f[n]')}${lmatrix([[0.5], [0.5], [0]])} - ${lx('x_s[n]')}${lmatrix([[0.4], [0.5], [0.1]])}<br/>
+${lmatrix([[0.5, 0.4, 'p_1'], [0.5, 0.5, 'p_2'], [0, 0.1, 'p_3']])}${lmatrix([['x_f[n]'], ['x_s[n]'], ['x_p[n]']])} = ${lx('\\vec{x}[n + 1]')}
+<hr class="s2" />
+${lx('x_f[n]')}${lmatrix([[0.5], [0.5], [0]])} + ${lx('x_s[n]')}${lmatrix([[0.4], [0.5], [0.1]])} + ${lx('x_p[n]')}${lmatrix([['p_1'], ['p_2'], ['p_3']])} = ${lx('\\vec{x}[n + 1]')}
+<hr class="s2" />
+${lx('x_p[n]')}${lmatrix([['p_1'], ['p_2'], ['p_3']])} = ${lx('\\vec{x}[n + 1]')} - ${lx('x_f[n]')}${lmatrix([[0.5], [0.5], [0]])} - ${lx('x_s[n]')}${lmatrix([[0.4], [0.5], [0.1]])}
+<hr class="s2" />
 ${lx('\\vec{p}')} = ${lx('\\frac{1}{x_p[n]}')}${lx('\\left(\\vec{x}[n + 1] - x_f[n]\\begin{array}{c}0.5 \\\\ 0.5 \\\\ 0 \\\\ \\end{array} - x_s[n]\\begin{array}{c}0.4 \\\\ 0.5 \\\\ 0.1 \\\\ \\end{array} \\right)')}
 `;
 
@@ -515,7 +521,8 @@ ${lmatrix([[22], [30], [48]])} and ${lx('$vec{x}[n]')} = ${lmatrix([[20], [30], 
 
 const sp16q9d_soln =
 `
-${lx('\\vec{p}')} = ${lx('\\frac{1}{50} \\left(\\begin{array}{c} 22 \\\\ 30 \\\\ 48 \\\\ \\end{array} - 20 \\begin{array}{c} 0.5 \\\\ 0.5 \\\\ 0 \\\\ \\end{array} - 30 \\begin{array}{c} 0.4 \\\\ 0.5 \\\\ 0.1 \\\\ \\end{array} \\right)')}
+${lx('\\vec{p}')} = ${lx('\\frac{1}{50} \\left( \\left[ \\begin{array}{c} 22 \\\\ 30 \\\\ 48 \\\\ \\end{array} \\right] - 20 \\left[ \\begin{array}{c} 0.5 \\\\ 0.5 \\\\ 0 \\\\ \\end{array} \\right] - 30 \\left[ \\begin{array}{c} 0.4 \\\\ 0.5 \\\\ 0.1 \\\\ \\end{array} \\right] \\right)')}
+<hr class="s2" />
 ${lx('\\vec{p}')} = ${lmatrix([[0], [0.1], [0.9]])}
 `;
 
@@ -531,13 +538,14 @@ diagrams in Figure 2 represents a possible set of behaviors for this colony?
 
 const sp16q9e_soln =
 `
-(i) The third row in Ai consists of all zeros. This means, at any positive timestep, ${lx('\\vec{x}')} would be forced to
-have zero as its third entry. Therefore, the given ${lx('\\vec{x}[2]')} is not in the range of this matrix, and this option
+(i) The third row in ${lx('A_i')} consists of all zeros. This means, at any positive timestep, ${lx('\\vec{x}')} would be forced to have zero as its third entry. Therefore, the given ${lx('\\vec{x}[2]')} is not in the range of this matrix, and this option
 do not represent a possible set of behaviors.
+<hr class="s2" />
 
 (ii) The ﬁrst two rows in ${lx('A_{ii}')} are the same. This means, at any positive timestep, ${lx('x')} would be forced to
 have the same number in its first and second entry. Therefore, the given ${lx('\\vec{x}[2]')} is not in the range of this
 matrix, and this option do not represent a possible set of behaviors.
+<hr class="s2" />
 
 (iii) The given ${lx('\\vec{x}[2]')} is in the range of ${lx('A_{iii}')}. Therefore, full credit was given for choosing this option.
 However, number is not conserved in this option. Since it was ambiguous whether or not number
