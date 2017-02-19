@@ -382,6 +382,15 @@ class EE16ASp15 extends Component {
               5. Berkeley Forever
             </Link>
           </div>
+          <hr className="s2" />
+          <h4>SOURCES</h4>
+          <hr className="s1" />
+          <div className="sidetab-container">
+            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Asp15-exam.pdf'} target="_blank">Exam PDF</a>
+          </div>
+          <div className="sidetab-container">
+            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Asp15-soln.pdf'} target="_blank">Solutions PDF</a>
+          </div>
         </Sticky>
         <div className="sidebar mobile">
           <hr className="s5" />
@@ -411,6 +420,15 @@ class EE16ASp15 extends Component {
             <Link activeClass="active" className="sidetab" to="q5" isDynamic={true} smooth={true} duration={500}>
               5. Berkeley Forever
             </Link>
+          </div>
+          <hr className="s2" />
+          <h4>SOURCES</h4>
+          <hr className="s1" />
+          <div className="sidetab-container">
+            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Asp15-exam.pdf'} target="_blank">Exam PDF</a>
+          </div>
+          <div className="sidetab-container">
+            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Asp15-soln.pdf'} target="_blank">Solutions PDF</a>
           </div>
         </div>
         <div className="content">

@@ -722,6 +722,15 @@ class EE16AFa15 extends Component {
               9. Justin Beaver
             </Link>
           </div>
+          <hr className="s2" />
+          <h4>SOURCES</h4>
+          <hr className="s1" />
+          <div className="sidetab-container">
+            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Afa15-exam.pdf'} target="_blank">Exam PDF</a>
+          </div>
+          <div className="sidetab-container">
+            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Afa15-soln.pdf'} target="_blank">Solutions PDF</a>
+          </div>
         </Sticky>
         <div className="sidebar mobile">
           <hr className="s5" />
@@ -767,8 +776,15 @@ class EE16AFa15 extends Component {
               9. Justin Beaver
             </Link>
           </div>
-          <div><a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Afa15-exam.pdf'} target="_blank">Exam PDF</a></div>
-          <div><a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Afa15-soln.pdf'} target="_blank">Solutions PDF</a></div>
+          <hr className="s2" />
+          <h4>SOURCES</h4>
+          <hr className="s1" />
+          <div className="sidetab-container">
+            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Afa15-exam.pdf'} target="_blank">Exam PDF</a>
+          </div>
+          <div className="sidetab-container">
+            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Afa15-soln.pdf'} target="_blank">Solutions PDF</a>
+          </div>
         </div>
         <div className="content">
           <hr className="s5" />
