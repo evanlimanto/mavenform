@@ -613,9 +613,13 @@ class EE16ASp16 extends Component {
           </div>
           <hr className="s2" />
           <h4>SOURCES</h4>
-          <hr className="s2" />
-          <div className="sidetab-container"><a className="sidetab" href="https://tbp.berkeley.edu/exams/5192/download/" target="_blank">Exam PDF</a></div>
-          <div className="sidetab-container"><a className="sidetab" href="https://tbp.berkeley.edu/exams/5193/download/" target="_blank">Solutions PDF</a></div>
+          <hr className="s1" />
+          <div className="sidetab-container">
+            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Asp16-exam.pdf'} target="_blank">Exam PDF</a>
+          </div>
+          <div className="sidetab-container">
+            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Asp16-soln.pdf'} target="_blank">Solutions PDF</a>
+          </div>
         </Sticky>
         <div className="sidebar mobile">
           <hr className="s5" />
@@ -663,9 +667,13 @@ class EE16ASp16 extends Component {
           </div>
           <hr className="s2" />
           <h4>SOURCES</h4>
-          <hr className="s2" />
-          <div className="sidetab-container"><a className="sidetab" href="https://tbp.berkeley.edu/exams/5192/download/" target="_blank">Exam PDF</a></div>
-          <div className="sidetab-container"><a className="sidetab" href="https://tbp.berkeley.edu/exams/5193/download/" target="_blank">Solutions PDF</a></div>
+          <hr className="s1" />
+          <div className="sidetab-container">
+            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Asp16-exam.pdf'} target="_blank">Exam PDF</a>
+          </div>
+          <div className="sidetab-container">
+            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Asp16-soln.pdf'} target="_blank">Solutions PDF</a>
+          </div>
         </div>
         <div className="content">
           <Element name="q3">
