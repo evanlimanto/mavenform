@@ -114,9 +114,9 @@ Find the inverse of \\(A\\), if it exists. If not, explain why.
 
 const fa16q5a_soln =
 `
-This matrix is singular/noninvertible, and this can be found in a number of ways.
+This matrix is <b>singular/noninvertible</b>, and this can be found in a number of ways.
 <hr class="s2"/>
-One is that the third row is a linear combination of the two other rows - precisely, R3 = 2R1 −R2. Therefore, by the Invertible Matrix Theorem, this matrix is noninvertible.
+One is that the third row is a linear combination of the two other rows - precisely, ${lx('R_3 = 2R_1 − R_2')}. Therefore, by the Invertible Matrix Theorem, this matrix is noninvertible.
 <hr class="s2"/>
 Alternatively, this could be found by row reducing this matrix alongside an identity matrix, and stopping when the third row is reduced to entirely zeroes. A ${lx('3')} x ${lx('3')} matrix with a row of zeroes is at most of rank ${lx('2')}, and thus not invertible.
 `;

@@ -101,7 +101,7 @@ const sp16q5c_soln =
 `
 <h3>True</h3>
 
-${lx('(AB)^{−1} = B^{−1}A^{−1}', false)}.
+${lx('(AB)^{−1} = B^{−1}A^{−1}', false)}
 Note that ${lx('ABB^{-1}A^{-1}')} = ${lx('I')} and ${lx('B^{-1}A^{-1}AB')} = ${lx('B^{-1}IB')} = ${lx('B^{-1}B')} = ${lx('I')}.
 `;
 
@@ -143,7 +143,8 @@ const sp16q5f_soln =
 `
 <h3>False.</h3>
 
-Size does not determine rank! For example, if ${lx('A')} was a matrix of all ones rank(${lx('A')}) would be 1. If, on the other hand ${lx('B')} was an identity matrix it would have full rank: rank(${lx('B')}) = ${lx('4')}.<br/>
+Size does not determine rank! For example, if ${lx('A')} was a matrix of all ones rank(${lx('A')}) would be 1. If, on the other hand ${lx('B')} was an identity matrix it would have full rank: rank(${lx('B')}) = ${lx('4')}.
+<hr class="s2" />
 You can only claim larger size implies larger rank if you assume the matrices are full rank (pivots in every column, all column vectors are linearly independent from the rest.)
 `;
 
