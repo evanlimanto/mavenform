@@ -12,9 +12,24 @@ In this problem we will return one final time to examining how one might choose 
 (a) <b>(3 pts)</b> Let’s assume that the area of the photodetector is \\(A_{PD}\\), that \\(A_{PD}\\) is smaller than \\(A_{illuminated}\\), and that the photodetector is placed such that it fits entirely within the illuminated region. In this case, can you predict how the current produced by the photodetector \\(I_{PD}\\) would change as a function of \\(A_{PD}\\) and \\(A_{illuminated}\\)?
 `;
 
+const sp15q1a_soln =
+`
+In this case, increasing ${lx('A_{PD}')} captures more light (photons), so:
+<hr class="s1" />
+${lx('I_{PD} \\propto \\frac{A_{PD}}{A_{illuminated}}', false)}
+<hr class="s1" />
+(Note that answer with ${lx('I_{PD} \\propto A_{PD}')} will receive full credit as well)
+`;
+
 const sp15q1b =
 `
 (b) <b>(3 pts)</b> Now let’s assume that ${lx('A_{PD}')} is larger than ${lx('A_{illuminated}')} and that the illuminated area is fully captured by the photodetector; how does the current ${lx('I_{PD}')} depend upon on ${lx('A_{PD}')} now?
+`;
+
+const sp15q1b_soln =
+`
+Now increasing ${lx('A_{PD}')} does nothing to change the amount of light that is captured, so:
+${lx('I_{PD} \\propto constant', false)}
 `;
 
 const sp15q1c =
@@ -33,7 +48,28 @@ maximize the measured voltage? Be sure to explain your answer; some equations
 and/or plots showing how the voltage depends on ${lx('A_{PD}')} and ${lx('A_{illuminated}')} may be useful. 
 `;
 
+const imgsp15q1c_soln = require('../img/sp15q1_s.png');
+const sp15q1c_soln =
+`
+Just like in the homework, some of the charge collected by the photodetector has to go in to the measurement circuits capacitance. Conceptually, if that circuit had an equivalent area (remember ${lx('capacitance \\propto area')} of ${lx('A_{meas}')}, then for ${lx('A_{PD} < A_{illuminated}')}:
+
+${lx('V_{meas} \\propto \\frac{1}{A_{PD} + A_{meas}} \\cdot \\frac{A_{PD}}{A_{illuminated}}', false)}
+
+However, increasing ${lx('A_{PD}')} above ${lx('A_{illuminated}')} doesn't give us any more charge (since ${lx('I_PD')} is now fixed). So if ${lx('A_{PD} > A_{illuminated}')}:
+
+${lx('V_{meas} \\propto \\frac{A_{illuminated}}{A_{PD} + A_{meas}}', false)}
+
+Putting these together, the point at which we get maximum ${lx('V_{meas}')} is for ${lx('A_{PD} = A_{illuminated}')}; this choice gives us the maximum charge we can get with the smallest total capacitance.
+
+<hr class="s2"/>
+
+For completeness, if you plot ${lx('V_{meas}')} vs ${lx('A_{PD}')}, it should look like:
+
+<img src=${imgsp15q1c_soln} class="problem-image" />
+`;
+
 const imgsp15q2_1 = require('../img/sp15q2-1.png');
+const imgsp15q2_1_soln = require('../img/sp15q2-1_s.png');
 const sp15q2a =
 `
 <h3>PROBLEM 2. Sparse Images and Vector Geometry <i>(14 pts)</i></h3>
@@ -51,6 +87,12 @@ the vector ${lmatrix([['x', 'y']], true)} = ${lmatrix([[0, 1]], true)} would hav
 a) <b>(2 pts)</b> Using the same representation as the example described above, draw the image represented by the vector ${lmatrix([[1], [2]])}.
 `;
 
+const sp15q2a_soln =
+`
+<img src=${imgsp15q2_1_soln} class="problem-image" />
+`;
+
+const imgsp15q2b_soln = require('../img/sp15q2-2_s.png');
 const sp15q2b =
 `
 b) <b>(6 pts)</b> Now let’s examine what happens if we have an image with two black 
@@ -58,9 +100,33 @@ pixels and perform a transformation on this image. In particular, let’s assume
 our image consists of the vectors ${lmatrix([[1], [2]])} and ${lmatrix([[1], [1]])}. Draw both the original image and the image created by transforming that image by the matrix ${lmatrix([[1, 2], [2, 4]])}. (Recall that transformation in this context means multiplying each vector by the given matrix.) 
 `;
 
+const sp15q2b_soln =
+`
+<img src=${imgsp15q2b_soln} class="problem-image" />
+
+${lx('\\left[ \\begin{array}{c c}1 & 2 \\\\ 2 & 4 \\\\ \\end{array} \\right] \\cdot \\left[ \\begin{array}{c} 1 \\\\ 2 \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c} 5 \\\\ 10 \\\\ \\end{array} \\right]', false)}
+
+${lx('\\left[ \\begin{array}{c c}1 & 2 \\\\ 2 & 4 \\\\ \\end{array} \\right] \\cdot \\left[ \\begin{array}{c} 1 \\\\ 1 \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c} 3 \\\\ 6 \\\\ \\end{array} \\right]', false)}
+`;
+
+const imgsp15q2c_s = require('../img/sp15q2-3_s.png');
 const sp15q2c =
 `
 c) <b>(6 pts)</b> Now let’s imagine we had an image with black pixels everywhere, and that we transformed this image by the same ${lmatrix([[1, 2], [2, 4]])} matrix as in part b). Sketch the that we transformed this image by the same resulting transformed image. Note that you don’t need to know the exact size of the original image – just indicate what happens to the transformed image as this size is increased. It may help you to consider what happens when you multiply an arbitrary vector ${lmatrix([['x', 'y']], true)} by the transformation matrix. What is property of the transformation matrix makes the resulting image look the way it does? 
+`;
+
+const sp15q2c_soln =
+`
+Notice that after transformation both of the black pixels in part (b) ended up on a single line. We can see this in general because:
+${lx('\\left[ \\begin{array}{c c}1 & 2 \\\\ 2 & 4 \\\\ \\end{array} \\right] \\left[ \\begin{array}{c} x \\\\ y \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c} x + 2y \\\\ 2x + 4y \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c} x + 2y \\\\ 2 \\cdot (x + 2y) \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c} a_1 \\\\ 2a_1 \\\\ \\end{array} \\right]', false)}
+
+Therefore, an image with all black pixels will become a line defined by ${lx('y = 2x')}:
+<hr class="s2" />
+
+<img src=${imgsp15q2c_s} class="problem-image" />
+
+<hr class="s2" />
+The property of the matrix that causes this is that it is <b>non-invertible</b>.
 `;
 
 const sp15q3a =
@@ -79,6 +145,11 @@ images this way, where each image is 1000 x 1000 pixels (i.e., ${lx('n')} = 1000
 many total bytes of memory (including all three USB sticks) would Alice need? 
 `;
 
+const sp15q3a_soln =
+`
+${lx('\\begin{align} N_{bytes} &= 3 copies \\cdot 1000 images \\cdot (1000 \\cdot 1000) pixels \\cdot 3 bytes/pixel \\\\ &= 9 \\cdot 10^9 bytes \\end{align}', false)}
+`;
+
 const sp15q3b =
 `
 b) <b>(5 pts)</b> Alice realizes that if she wants to keep taking pictures, she is going to have to become efficient with her storage, she cannot simply keep replicating the data. 
@@ -88,6 +159,11 @@ Just like in the lab, we’ll express the images as vectors.
 Consider two image vectors ${lx('x')} and ${lx('y')}. Alice applies the following strategy: she 
 stores ${lx('x')} on the laptop, ${lx('y')} on the USB stick, and ${lx('x')} on her phone. Alice’s friend Elaine instead suggests that Alice use a different strategy and store ${lx('x + y')} on her 
 phone instead (while leaving the data stored on the laptop and USB the same as in Alice’s strategy). Is Elaine’s strategy better than Alice’s strategy? If so, describe at least one scenario where Elaine’s strategy can recover the data but Alice’s cannot. If not, explain why the strategies are equivalent.
+`;
+
+const sp15q3b_soln =
+`
+Elaine's strategy is better; in Alice's strategy, if the USB stick is lost, Alice cannot recover ${lx('y')}. With Elaine's strategy, any one of the storage devices can be lost while still recovering both ${lx('x')} and ${lx('y')}.
 `;
 
 const sp15q3c =
@@ -102,12 +178,31 @@ happening on each of the pixels as an ${lx('8')}x${lx('4')} matrix multiplying a
 would the entries in that ${lx('8')}x${lx('4')} matrix and ${lx('4')}x${lx('1')} vector be? 
 `;
 
+const sp15q3c_soln =
+`
+If the stored information is a vector ${lx('S_i')}:
+
+${lx('\\left[ \\begin{array}{c} S_{i1} \\\\ S_{i2} \\\\ \\vdots \\\\ \\vdots \\\\ \\vdots \\\\ \\vdots \\\\ \\vdots \\\\ S_{i8} \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c c c c} 1 & 0 & 0 & 0 \\\\ 0 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & 0 \\\\ 0 & 0 & 0 & 1 \\\\ 1 & 1 & 0 & 0 \\\\ 1 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & 1 \\\\ 1 & 0 & 1 & 0 \\\\ 0 & 1 & 0 & 1 \\\\ \\end{array} \\right] \\cdot \\left[ \\begin{array}{c} a_i \\\\ b_i \\\\ c_i \\\\ d_i \\\\ \\end{array} \\right]', false)}
+
+<hr class="s1" />
+Define the binary matrix above as ${lx('A_{store}')} for part (d).
+`;
+
 const sp15q3d =
 `
 d) <b>(Bonus: 6 pts)</b> Recalling that ${lx('a')}, ${lx('b')}, ${lx('c')}, and ${lx('d')} are all ${lx('n^2')} x ${lx('1')} vectors, show how you 
 could perform a single matrix-matrix multiplication to represent the storage action 
 of all of the pixels simultaneously. Hint: what would be the dimensions of a 
 matrix composed of ${lmatrix([['a', 'b', 'c', 'd']], true)}? 
+`;
+
+const sp15q3d_soln =
+`
+${lx('{\\left[ \\begin{array}{c c c c} a & b & c & d \\\\ \\end{array} \\right]}^T = \\left[ \\begin{array}{c} a_T \\\\ b_T \\\\ c_T \\\\ d_T \\\\ \\end{array} \\right]', false)}
+
+Since ${lx('A_{store}')} is an 8 x 4 matrix, we can actually multiply the matrix above by ${lx('A_{store}')} and get exactly what we wanted!
+
+${lx('\\left[ \\begin{array}{c} s_1^T \\\\ s_2^T \\\\ \\vdots \\\\ s_8^T \\\\ \\end{array} \\right] = A_{store} \\cdot \\left[ \\begin{array}{c} a_T \\\\ b_T \\\\ c_T \\\\ d_T \\\\ \\end{array} \\right]', false)}
 `;
 
 const sp15q4a =
@@ -128,6 +223,15 @@ The mutual fund invests fractions ${lx('\\alpha_f')}, ${lx('\\alpha_s')}, and ${
 a) <b>(3 pts)</b> Using the terms defined above, write an expression using a dot product that would compute how many dollars Alice gets back after the first day.
 `;
 
+const sp15q4a_soln =
+`
+Growth vector ${lx('\\vec{g}(1) = \\left[ \\begin{array}{c} g_f(1) \\\\ g_s(1) \\\\ g_d(1) \\\\ \\end{array} \\right]')}
+<hr class="s1" />
+Investment vector ${lx('\\vec{\\alpha} = \\left[ \\begin{array}{c} \\alpha_f \\\\ \\alpha_s \\\\ \\alpha_d \\\\ \\end{array} \\right]')}
+<hr class="s1" />
+Dollars returned after day 1: ${lx('\\vec{g}(1)^T \\cdot \\vec{\\alpha} = g_f(1)\\alpha_f + g_s(1)\\alpha_s + g_d(1)\\alpha_d')}
+`;
+
 const sp15q4b =
 `
 b) <b>(7 pts)</b> Let’s assume that on the first day, Alice got back $1.7 from her $1 investment – i.e., the result of the expression you wrote in part a) is $1.7. Alice is 
@@ -140,6 +244,24 @@ Write a matrix equation Alice could use to figure out what the mutual fund’s
 investment strategy was (i.e., to find the values of ${lx('\\alpha_f')}, ${lx('\\alpha_s')}, and ${lx('\\alpha_d')}). 
 `;
 
+const sp15q4b_soln =
+`
+<ul>
+<li>
+We know that ${lx('\\vec{g}(1)^T \\cdot \\vec{\\alpha} = 1.7')}, and that ${lx('\\vec{g}(2)^T \\cdot \\alpha = 0')}. This however gives us only two equations with 3 unknowns. To get a third equation, we need to remember that ${lx('\\alpha_f + \\alpha_s + \\alpha_d = 1')} (i.e., that all of Alice's money is invested).
+</li>
+<li>
+Writing this in matrix form:
+${lx('\\left[ \\begin{array}{c c c} 2 & 1 & 2 \\\\ 2 & 2 & -3 \\\\ 1 & 1 & 1 \\\\ \\end{array} \\right] \\left[ \\begin{array}{c} \\alpha_f \\\\ \\alpha_s \\\\ \\alpha_d \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c} 1.7 \\\\ 0 \\\\ 1 \\\\ \\end{array} \\right]', false)}
+</li>
+<li>
+So, assuming the matrix above is invertible (which it is):
+${lx('\\left[ \\begin{array}{c} \\alpha_f \\\\ \\alpha_s \\\\ \\alpha_d \\\\ \\end{array} \\right] = {\\left[ \\begin{array}{c c c} 2 & 1 & 2 \\\\ 2 & 2 & -3 \\\\ 1 & 1 & 1 \\\\ \\end{array} \\right]}^{-1} \\cdot \\left[ \\begin{array}{c} 1.7 \\\\ 0 \\\\ 1 \\\\ \\end{array} \\right]', false)}
+</li>
+</ul>
+`;
+
+const imgsp15q5a_s = require('../img/sp15q5-1_s.png');
 const sp15q5a =
 `
 <h3>PROBLEM 5. Berkeley Forever! <i>(16 pts)</i></h3>
@@ -162,10 +284,20 @@ and Boston, and the arcs between the two nodes should be annotated with the
 probabilities of moving from one node to the other. 
 `;
 
+const sp15q5a_soln =
+`
+<img src=${imgsp15q5a_s} class="problem-image" />
+`;
+
 const sp15q5b =
 `
 b) <b>(4 pts)</b> Now let’s say we set up a vector ${lx('x(i)')} = ${lmatrix([['x_{berkeley}(i)', 'x_{boston}(i)']], true)}, where ${lx('x_{berkeley}(i)')} represents the number of people living in Berkeley at month ${lx('i')} (similarly 
 for Boston and ${lx('x_{boston}(i)')}). Write a matrix ${lx('A_{transition}')} that you could multiply by this vector to predict the number of people living in each city at month ${lx('i+1')} (i.e., ${lx('x(i + 1)')} = ${lx('A_{transition}x(i)')})
+`;
+
+const sp15q5b_soln =
+`
+${lx('A_{transition} = \\left[ \\begin{array}{c c} 0.8 & 0.9 \\\\ 0.2 & 0.1 \\\\ \\end{array} \\right]', false)}
 `;
 
 const sp15q5c =
@@ -174,6 +306,36 @@ c) <b>(9 pts)</b> Now let us say the total population stays constant, and we sta
 the population in Berkeley and the other half in Boston. Use the matrix you wrote 
 above to find the steady-state populations in Berkeley and Boston. If the total 
 population is 100, calculate the number of people in Berkeley at steady state?
+`;
+
+const sp15q5c_soln =
+`
+<ul>
+<li>
+Best way to do this is to find the eigenvector of ${lx('A_{transition}')} that has an eigenvalue of 1 (we'll next find that there is one).
+</li>
+<li>
+Let's first find the eigenvalues by setting ${lx('det(A_{transition} - \\lambda I) = 0')}
+${lx('\\begin{align} det(A_{transition} - \\lambda I) &= (0.8 - \\lambda)(0.1 - \\lambda) - 0.2 \\cdot 0.9 \\\\ &= 0.08 - 0.9 \\lambda + \\lambda^2 - 0.18 \\\\ &= \\lambda^2 - 0.9\\lambda - 0.1 = 0 \\end{align}', false)}
+${lx('\\lambda_${1,2} = \\frac{0.9 \\pm \\sqrt{0.81 + 0.4}}{2} \\implies \\lambda_1 = 1, \\lambda_2 = -0.1', false)}
+</li>
+<li>
+Now let's find the eigenvector:
+${lx('A_{transition} \\cdot \\left[ \\begin{array}{c} v_1 \\\\ v_2 \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c} v_1 \\\\ v_2 \\\\ \\end{array} \\right]', false)}
+
+${lx('0.8v_1 + 0.9v_2 = v_1', false)}
+${lx('0.2v_1 + 0.1v_2 = v_2', false)}
+${lx('v_1 = 4.5v_2', false)}
+
+Remember that total population is constant, so we should renormalize the vector such that ${lx('v_1 + v_2 = 1')}.
+
+<hr class="s1" />
+
+Hence ${lx('\\left[ \\begin{array}{c} v_1 \\\\ v_2 \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c} \\frac{4.5}{5.5} \\\\ \\frac{1}{5.5} \\end{array} \\right]', false)}
+
+So if we started with 100 people, we will end up with ~82 people in Berkeley, and ~18 people in Boston.
+</li>
+</ul>
 `;
 
 var Scroll = require('react-scroll');
@@ -242,35 +404,35 @@ class EE16ASp15 extends Component {
         </div>
         <div className="content">
           <hr className="s5" />
-          <Question id={"q1a"} content={sp15q1a} hasResponse={false} examCode={examCode} image={['q1a.png']} />
+          <Question id={"q1a"} content={sp15q1a} hasResponse={false} examCode={examCode} image={['q1a.png']} solution={sp15q1a_soln} />
           <hr className="s5" />
-          <Question id={"q1b"} content={sp15q1b} hasResponse={false} examCode={examCode} image={['q1b.png']} />
+          <Question id={"q1b"} content={sp15q1b} hasResponse={false} examCode={examCode} image={['q1b.png']} solution={sp15q1b_soln} />
           <hr className="s5" />
-          <Question id={"q1c"} content={sp15q1c} hasResponse={false} examCode={examCode} image={['q1c.png']} />
+          <Question id={"q1c"} content={sp15q1c} hasResponse={false} examCode={examCode} image={['q1c.png']} solution={sp15q1c_soln} />
           <hr className="s5" />
-          <Question id={"q2a"} content={sp15q2a} hasResponse={false} examCode={examCode} image={['q2a.png']} />
+          <Question id={"q2a"} content={sp15q2a} hasResponse={false} examCode={examCode} image={['q2a.png']} solution={sp15q2a_soln}  />
           <hr className="s5" />
-          <Question id={"q2b"} content={sp15q2b} hasResponse={false} examCode={examCode} image={['q2b.png']} />
+          <Question id={"q2b"} content={sp15q2b} hasResponse={false} examCode={examCode} image={['q2b.png']} solution={sp15q2b_soln}  />
           <hr className="s5" />
-          <Question id={"q2c"} content={sp15q2c} hasResponse={false} examCode={examCode} image={['q2c.png']} />
+          <Question id={"q2c"} content={sp15q2c} hasResponse={false} examCode={examCode} image={['q2c.png']} solution={sp15q2c_soln}  />
           <hr className="s5" />
-          <Question id={"q3a"} content={sp15q3a} hasResponse={false} examCode={examCode} image={['q3a.png']} />
+          <Question id={"q3a"} content={sp15q3a} hasResponse={false} examCode={examCode} image={['q3a.png']} solution={sp15q3a_soln}  />
           <hr className="s5" />
-          <Question id={"q3b"} content={sp15q3b} hasResponse={false} examCode={examCode} image={['q3b.png']} />
+          <Question id={"q3b"} content={sp15q3b} hasResponse={false} examCode={examCode} image={['q3b.png']} solution={sp15q3b_soln}  />
           <hr className="s5" />
-          <Question id={"q3c"} content={sp15q3c} hasResponse={false} examCode={examCode} image={['q3c.png']} />
+          <Question id={"q3c"} content={sp15q3c} hasResponse={false} examCode={examCode} image={['q3c.png']} solution={sp15q3c_soln}  />
           <hr className="s5" />
-          <Question id={"q3d"} content={sp15q3d} hasResponse={false} examCode={examCode} image={['q3d.png']} />
+          <Question id={"q3d"} content={sp15q3d} hasResponse={false} examCode={examCode} image={['q3d.png']} solution={sp15q3d_soln}  />
           <hr className="s5" />
-          <Question id={"q4a"} content={sp15q4a} hasResponse={false} examCode={examCode} image={['q4a.png']} />
+          <Question id={"q4a"} content={sp15q4a} hasResponse={false} examCode={examCode} image={['q4a.png']} solution={sp15q4a_soln}  />
           <hr className="s5" />
-          <Question id={"q4b"} content={sp15q4b} hasResponse={false} examCode={examCode} image={['q4b.png']} />
+          <Question id={"q4b"} content={sp15q4b} hasResponse={false} examCode={examCode} image={['q4b.png']} solution={sp15q4b_soln}  />
           <hr className="s5" />
-          <Question id={"q5a"} content={sp15q5a} hasResponse={false} examCode={examCode} image={['q5a.png']} />
+          <Question id={"q5a"} content={sp15q5a} hasResponse={false} examCode={examCode} image={['q5a.png']} solution={sp15q5a_soln}  />
           <hr className="s5" />
-          <Question id={"q5b"} content={sp15q5b} hasResponse={false} examCode={examCode} image={['q5b.png']} />
+          <Question id={"q5b"} content={sp15q5b} hasResponse={false} examCode={examCode} image={['q5b.png']} solution={sp15q5b_soln}  />
           <hr className="s5" />
-          <Question id={"q5c"} content={sp15q5c} hasResponse={false} examCode={examCode} image={['q5c.png']} />
+          <Question id={"q5c"} content={sp15q5c} hasResponse={false} examCode={examCode} image={['q5c.png']} solution={sp15q5c_soln}  />
         </div>
       </span>
     );
