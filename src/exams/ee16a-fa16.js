@@ -95,7 +95,7 @@ If any ${lx('\\vec{a}_i')} are ${lx('\\vec{0}')}, we know immediately that the c
 Otherwise, we have that ${lx('A\\vec{a}_i')} = ${lx('0')}, which is proof of linear dependence of the columns from part a.
 `;
 
-const fa16q5 =
+const fa16q5a =
 `
 <h3>5. Inverse of a Matrix (5 points)</h3>
 Find the inverse of \\(A\\), if it exists. If not, explain why.
@@ -110,7 +110,7 @@ Find the inverse of \\(A\\), if it exists. If not, explain why.
 \\end{array}\\right]\\)
 `;
 
-const fa16q5_soln =
+const fa16q5a_soln =
 `
 This matrix is singular/noninvertible, and this can be found in a number of ways.
 <hr class="s2"/>
@@ -199,8 +199,12 @@ Nara is convinced that the axe she found is better, but Kody disagrees. Show tha
 
 const fa16q6b_soln =
 `
-Put these 3 vectors as row vectors in a matrix and row reduce. Notice that it reduces to
-${lmatrix([[1, 0, 1], [0, 1, -1], [0, 0, 0]])}. Similar to the proof in the last question of discussion 3A. This shows that row spaces are equivalent.
+Put these 3 vectors as row vectors in a matrix and row reduce.
+<hr class="s2"/>
+Notice that it reduces to
+${lmatrix([[1, 0, 1], [0, 1, -1], [0, 0, 0]])}.
+<hr class="s2"/>
+Similar to the proof in the last question of discussion 3A. This shows that row spaces are equivalent.
 <hr class="s2"/>
 Another solution is show that all of Nara’s directions can be reached by Kody’s vectors. It is easy enough to find the correct linear combinations by inspection: (2, 2), (1, −1), (3, −2)
 `;
@@ -292,7 +296,7 @@ Plugging in numerical values to the above solution:
 100${lx('k_1')} + (0.4)(200) + 200${lx('k_2')} = 100<hr class="s1"/>
 100${lx('k_3')} + (0.3)(200) + 200${lx('k_4')} = 250<hr class="s1"/>
 0.5 + ${lx('k_1')} + ${lx('k_3')} = 1<hr class="s1"/>
-0.2 + ${lx('k_2')} + ${lx('k_4')} = 1<hr class="s2"/>
+0.2 + ${lx('k_2')} + ${lx('k_4')} = 1<hr class="s4"/>
 
 In the form ${lx('T\\vec{k}')} = ${lx('\\vec{b}')}, we have:
 
@@ -305,9 +309,10 @@ ${lmatrix([[20], [190], [0.5], [0.8]])}
 
 const fa16q7d =
 `
-<b>(d)</b> Now let us redeﬁne our graph transition matrix \\(A\\) such that<br/>
-\\(A\\) = ${lmatrix([[0.6, 0.4, 0.2], [0.3, 0.2, 0.3], [0.1, 0.4, 0.5]])}.
-
+<b>(d)</b> Now let us redeﬁne our graph transition matrix \\(A\\) such that:
+<hr class="s2"/>
+\\(A\\) = ${lmatrix([[0.6, 0.4, 0.2], [0.3, 0.2, 0.3], [0.1, 0.4, 0.5]])}
+<hr class="s2"/>
 Given \\(\\vec{x}[923]\\), is it possible to find \\(\\vec{x}[2]\\)? Give a mathematical justiﬁcation and a brief explanation of how. Do not make any assumptions derived from previous parts of this problem.
 `;
 
@@ -346,8 +351,10 @@ const fa16q7e =
 <b>(e)</b> Let us redeﬁne \\(A\\) as \\(A\\) =
 
 ${lmatrix([[0.2, 0.1, 0.3], [0.4, 0.7, 0.1], [0.4, 0.2, 0.6]])}.
-
-Is \\(\\vec{x}[5]\\) = \\(\\left[\\begin{array}{c}120\\\\120\\\\260\\\\\\end{array}\\right]\\) a valid state for this system? Explain. Assume the states begin with some \\(\\vec{x}[0]\\), where \\(\\vec{x}[0]\\) is not the zero vector \\(\\vec{0}\\). Do not make any assumptions
+<hr class="s2"/>
+Is \\(\\vec{x}[5]\\) = \\(\\left[\\begin{array}{c}120\\\\120\\\\260\\\\\\end{array}\\right]\\) a valid state for this system?
+<hr class="s2"/>
+Explain. Assume the states begin with some \\(\\vec{x}[0]\\), where \\(\\vec{x}[0]\\) is not the zero vector \\(\\vec{0}\\). Do not make any assumptions
 derived from previous parts of the problem.
 `;
 
@@ -412,12 +419,22 @@ It cannot because in the case of Steph ${lmatrix([[0, 0]])} goes to a nonzero ve
 `;
 
 var Scroll = require('react-scroll');
-var scroller = Scroll.scroller;
+var Link = Scroll.Link;
+var Element = Scroll.Element;
+var Events = Scroll.Events;
+var scroll = Scroll.animateScroll;
+var scrollSpy  = Scroll.scrollSpy;
 var Sticky = require('react-stickynode');
 
 class EE16AFa16 extends Component {
   render() {
     const examCode = 'ee16a-fa16';
+
+    Events.scrollEvent.register('end', function() {
+      console.log('wtf??');
+      this.handleSetActive;
+    });
+
     return (
       <span>
         <h1>EE 16A</h1>
@@ -433,33 +450,37 @@ class EE16AFa16 extends Component {
           <hr className="s1" />
           <div className="sidetitle">Section 1</div>
           <div>
-            <a className="sidetab" onClick={() => scroller.scrollTo('q3a', {
-              duration: 500,
-              smooth: true,
-            })}>3. True/False</a></div>
+            <Link activeClass="active" className="sidetab" to="q3" spy={true} isDynamic={true} smooth={true} duration={500}>
+              3. True/False
+            </Link>
+          </div>
           <div>
-            <a className="sidetab" onClick={() => scroller.scrollTo('q4a', {
-              duration: 500,
-              smooth: true,
-            })}>4. Proof</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q5', {
-              duration: 500,
-              smooth: true,
-            })}>5. Inverse of a Matrix</a></div>
+            <Link activeClass="active" className="sidetab" to="q4" spy={true} isDynamic={true} smooth={true} duration={500}>
+              4. Proof
+            </Link>
+          </div>
+          <div>
+            <Link activeClass="active" className="sidetab" to="q5" spy={true} isDynamic={true} smooth={true} duration={500}>
+              5. Inverse of a Matrix
+            </Link>
+          </div>
           <hr className="s1" />
           <div className="sidetitle">Section 2</div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q6a', {
-              duration: 500,
-              smooth: true,
-            })}>6. Directional Shovels</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q7a', {
-              duration: 500,
-              smooth: true,
-            })}>7. Graph Majors</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q8a', {
-              duration: 500,
-              smooth: true,
-            })}>8. Transformation Basketball</a></div>
+          <div>
+            <Link activeClass="active" className="sidetab" to="q6" spy={true} isDynamic={true} smooth={true} duration={500}>
+              6. Directional Shovels
+            </Link>
+          </div>
+          <div>
+            <Link activeClass="active" className="sidetab" to="q7" spy={true} isDynamic={true} smooth={true} duration={500}>
+              7. Graph Majors
+            </Link>
+          </div>
+          <div>
+            <Link activeClass="active" className="sidetab" to="q8" spy={true} isDynamic={true} smooth={true} duration={500}>
+              8. Transformation Basketball
+            </Link>
+          </div>
           <hr className="s3" />
           <h4>SOURCES</h4>
           <hr className="s2" />
@@ -474,78 +495,98 @@ class EE16AFa16 extends Component {
           <hr className="s1" />
           <div className="sidetitle">Section 1</div>
           <div>
-            <a className="sidetab" onClick={() => scroller.scrollTo('q3a', {
-              duration: 500,
-              smooth: true,
-            })}>3. True/False</a></div>
+            <Link activeClass="active" className="sidetab" to="q3" isDynamic={true} smooth={true} duration={500}>
+              3. True/False
+            </Link>
+          </div>
           <div>
-            <a className="sidetab" onClick={() => scroller.scrollTo('q4a', {
-              duration: 500,
-              smooth: true,
-            })}>4. Proof</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q5', {
-              duration: 500,
-              smooth: true,
-            })}>5. Inverse of a Matrix</a></div>
+            <Link activeClass="active" className="sidetab" to="q4" isDynamic={true} smooth={true} duration={500}>
+              4. Proof
+            </Link>
+          </div>
+          <div>
+            <Link activeClass="active" className="sidetab" to="q5" isDynamic={true} smooth={true} duration={500}>
+              5. Inverse of a Matrix
+            </Link>
+          </div>
           <hr className="s1" />
           <div className="sidetitle">Section 2</div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q6a', {
-              duration: 500,
-              smooth: true,
-            })}>6. Directional Shovels</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q7a', {
-              duration: 500,
-              smooth: true,
-            })}>7. Graph Majors</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q8a', {
-              duration: 500,
-              smooth: true,
-            })}>8. Transformation Basketball</a></div>
+          <div>
+            <Link activeClass="active" className="sidetab" to="q6" isDynamic={true} smooth={true} duration={500}>
+              6. Directional Shovels
+            </Link>
+          </div>
+          <div>
+            <Link activeClass="active" className="sidetab" to="q7" isDynamic={true} smooth={true} duration={500}>
+              7. Graph Majors
+            </Link>
+          </div>
+          <div>
+            <Link activeClass="active" className="sidetab" to="q8" isDynamic={true} smooth={true} duration={500}>
+              8. Transformation Basketball
+            </Link>
+          </div>
+          <hr className="s3" />
+          <h4>SOURCES</h4>
+          <hr className="s2" />
+          <div><a className="sidetab" href="https://tbp.berkeley.edu/exams/5381/download/" target="_blank">Exam PDF</a></div>
+          <div><a className="sidetab" href="https://tbp.berkeley.edu/exams/5383/download/" target="_blank">Solutions PDF</a></div>
         </div>
         <div className="content">
-          <hr className="s5" />
-          <h2>Section 1 <i>(18 points)</i></h2>
-          <hr className="s3" />
-          <Question id={"q3a"} content={fa16q3a} image={['q3-1.png']} examCode={examCode} solution={fa16q3a_soln} />
-          <hr className="s5" />
-          <Question id={"q3b"} content={fa16q3b} image={['q3-2.png']} examCode={examCode} solution={fa16q3b_soln} />
-          <hr className="s5" />
-          <Question id={"q3c"} content={fa16q3c} image={['q3-1.png']} examCode={examCode} solution={fa16q3c_soln} />
-          <hr className="s5" />
-          <Question id={"q3d"} content={fa16q3d} image={['q3-1.png']} examCode={examCode} solution={fa16q3d_soln} />
-          <hr className="s5" />
-          <Question id={"q3e"} content={fa16q3e} image={['q3-2.png']} examCode={examCode} solution={fa16q3e_soln} />
-          <hr className="s5" />
-          <Question id={"q3f"} content={fa16q3f} image={['q3-1.png']} examCode={examCode} solution={fa16q3f_soln} />
-          <hr className="s5" />
-          <Question id={"q4a"} content={fa16q4a} hasResponse={false} image={['q4a.png']} examCode={examCode} solution={fa16q4a_soln} />
-          <hr className="s5" />
-          <Question id={"q4b"} content={fa16q4b} hasResponse={false} image={['q4b.png']} examCode={examCode} solution={fa16q4b_soln} />
-          <hr className="s5" />
-          <Question id={"q5"} content={fa16q5} hasResponse={false} image={['q5a.png']} examCode={examCode} solution={fa16q5_soln} />
-          <hr className="s5" />
-          <h2>Section 2 <i>(55 points)</i></h2>
-          <hr className="s3" />
-          <Question id={"q6a"} content={fa16q6a} hasResponse={false} image={['q6a.png']} examCode={examCode} solution={fa16q6a_soln} />
-          <hr className="s5" />
-          <Question id={"q6b"} content={fa16q6b} hasResponse={false} image={['q6b.png']} examCode={examCode} solution={fa16q6b_soln} />
-          <hr className="s5" />
-          <Question id={"q7a"} content={fa16q7a} rows={3} cols={3} image={['q7a.png']} examCode={examCode} solution={fa16q7a_soln} />
-          <hr className="s5" />
-          <Question id={"q7b"} content={fa16q7b} hasResponse={false} image={['q7b.png']} examCode={examCode} solution={fa16q7b_soln} />
-          <hr className="s5" />
-          <Question id={"q7c"} content={fa16q7c} hasResponse={false} image={['q7c.png']} examCode={examCode} solution={fa16q7c_soln} />
-          <hr className="s5" />
-          <Question id={"q7d"} content={fa16q7d} hasResponse={false} image={['q7d.png']} examCode={examCode} solution={fa16q7d_soln} />
-          <hr className="s5" />
-          <Question id={"q7e"} content={fa16q7e} hasResponse={false} image={['q7e.png']} examCode={examCode} solution={fa16q7e_soln} />
-          <hr className="s5" />
-          <Question id={"q8a"} content={fa16q8a} rows={2} cols={2} image={['q8a.png']} examCode={examCode} solution={fa16q8a_soln} />
-          <hr className="s5" />
-          <Question id={"q8b"} content={fa16q8b} hasResponse={false} image={['q8b.png']} examCode={examCode} solution={fa16q8b_soln} />
-          <hr className="s5" />
-          <Question id={"q8c"} content={fa16q8c} hasResponse={false} image={['q8c.png']} examCode={examCode} solution={fa16q8c_soln} />
-          <hr className="s5" />
+          <Element name="q3">
+            <hr className="s5" />
+            <h2>Section 1 <i>(18 points)</i></h2>
+            <hr className="s3" />
+            <Question id={"q3a"} content={fa16q3a} image={['q3-1.png']} examCode={examCode} solution={fa16q3a_soln} />
+            <hr className="s5" />
+            <Question id={"q3b"} content={fa16q3b} image={['q3-2.png']} examCode={examCode} solution={fa16q3b_soln} />
+            <hr className="s5" />
+            <Question id={"q3c"} content={fa16q3c} image={['q3-1.png']} examCode={examCode} solution={fa16q3c_soln} />
+            <hr className="s5" />
+            <Question id={"q3d"} content={fa16q3d} image={['q3-1.png']} examCode={examCode} solution={fa16q3d_soln} />
+            <hr className="s5" />
+            <Question id={"q3e"} content={fa16q3e} image={['q3-2.png']} examCode={examCode} solution={fa16q3e_soln} />
+            <hr className="s5" />
+            <Question id={"q3f"} content={fa16q3f} image={['q3-1.png']} examCode={examCode} solution={fa16q3f_soln} />
+          </Element>
+          <Element name="q4">
+            <hr className="s5" />
+            <Question id={"q4a"} content={fa16q4a} hasResponse={false} image={['q4a.png']} examCode={examCode} solution={fa16q4a_soln} />
+            <hr className="s5" />
+            <Question id={"q4b"} content={fa16q4b} hasResponse={false} image={['q4b.png']} examCode={examCode} solution={fa16q4b_soln} />
+          </Element>
+          <Element name="q5">
+            <hr className="s5" />
+            <Question id={"q5a"} content={fa16q5a} hasResponse={false} image={['q5a.png']} examCode={examCode} solution={fa16q5a_soln} />
+          </Element>
+          <Element name="q6">
+            <hr className="s5" />
+            <h2>Section 2 <i>(55 points)</i></h2>
+            <hr className="s3" />
+            <Question id={"q6a"} content={fa16q6a} hasResponse={false} image={['q6a.png']} examCode={examCode} solution={fa16q6a_soln} />
+            <hr className="s5" />
+            <Question id={"q6b"} content={fa16q6b} hasResponse={false} image={['q6b.png']} examCode={examCode} solution={fa16q6b_soln} />
+          </Element>
+          <Element name="q7">
+            <hr className="s5" />
+            <Question id={"q7a"} content={fa16q7a} rows={3} cols={3} image={['q7a.png']} examCode={examCode} solution={fa16q7a_soln} />
+            <hr className="s5" />
+            <Question id={"q7b"} content={fa16q7b} hasResponse={false} image={['q7b.png']} examCode={examCode} solution={fa16q7b_soln} />
+            <hr className="s5" />
+            <Question id={"q7c"} content={fa16q7c} hasResponse={false} image={['q7c.png']} examCode={examCode} solution={fa16q7c_soln} />
+            <hr className="s5" />
+            <Question id={"q7d"} content={fa16q7d} hasResponse={false} image={['q7d.png']} examCode={examCode} solution={fa16q7d_soln} />
+            <hr className="s5" />
+            <Question id={"q7e"} content={fa16q7e} hasResponse={false} image={['q7e.png']} examCode={examCode} solution={fa16q7e_soln} />
+          </Element>
+          <Element name="q8">
+            <hr className="s5" />
+            <Question id={"q8a"} content={fa16q8a} rows={2} cols={2} image={['q8a.png']} examCode={examCode} solution={fa16q8a_soln} />
+            <hr className="s5" />
+            <Question id={"q8b"} content={fa16q8b} hasResponse={false} image={['q8b.png']} examCode={examCode} solution={fa16q8b_soln} />
+            <hr className="s5" />
+            <Question id={"q8c"} content={fa16q8c} hasResponse={false} image={['q8c.png']} examCode={examCode} solution={fa16q8c_soln} />
+          </Element>
         </div>
       </span>
     );
