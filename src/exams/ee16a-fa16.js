@@ -68,7 +68,7 @@ True.
 
 const fa16q4a =
 `
-<h3>4. Proof (7 points)</h3>
+<h3>4. Proof <i>(7 points)</i></h3>
 
 <b>(a)</b> Prove that if \\(A\\vec{x}\\) = 0 for some nonzero \\(\\vec{x}\\), then the columns of A are linearly dependent. <br/>
 `;
@@ -97,7 +97,7 @@ Otherwise, we have that ${lx('A\\vec{a}_i')} = ${lx('0')}, which is proof of lin
 
 const fa16q5a =
 `
-<h3>5. Inverse of a Matrix (5 points)</h3>
+<h3>5. Inverse of a Matrix <i>(5 points)</i></h3>
 Find the inverse of \\(A\\), if it exists. If not, explain why.
 
 \\(A\\) =
@@ -121,7 +121,7 @@ Alternatively, this could be found by row reducing this matrix alongside an iden
 
 const fa16q6a =
 `
-<h3>6. Directional Shovels (10 points)</h3>
+<h3>6. Directional Shovels <i>(10 points)</i></h3>
 
 Kody and Nara were found exceptional at taking measurements to ﬁgure out light intensities, and they were both granted admission to a graduate school. Unfortunately, they both supported their new school’s football team while they were playing against Berkeley and angry Berkeley fans found them and left them in a room at an unknown location under the ground. As compassionate people, Berkeley fans left some tools in the room that can help them escape.
 
@@ -212,7 +212,7 @@ Another solution is show that all of Nara’s directions can be reached by Kody�
 const imgfa16q7_1 = require("../img/fa16q7-1.png");
 const fa16q7a =
 `
-<h3>7. Graph Majors (30 points)</h3>
+<h3>7. Graph Majors <i>(30 points)</i></h3>
 
 We’d like to understand how engineering undergrads change their majors. For simplicity, there are three majors we’ll look at: EECS, CS, and MechE. Let’s assume that students can only be studying one major at a time, and must be studying one of these three majors. Let’s also assume that once a week, students can choose to switch to another major, or stick with what they’re studying. So, a discrete time step represents one week.
 
@@ -366,7 +366,7 @@ No, because the third row is two times the first row of ${lx('A')}. Thus, at any
 const imgfa16q8_1 = require('../img/fa16q8-1.png');
 const fa16q8a =
 `
-<h3>8. Transformation Basketball (15 points)</h3>
+<h3>8. Transformation Basketball <i>(15 points)</i></h3>
 
 Kevin Bancroft just joined the Column Space Warriors. In order to better learn how to cooperate with the team before the season starts, he and his teammates are practicing some basketball drills.
 
