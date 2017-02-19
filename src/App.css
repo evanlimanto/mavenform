@@ -86,7 +86,7 @@ li {
   margin-left: 40px;
 }
 
-.small-text {
+.small-text, .small-text * {
   font-size: 14px;
 }
 
@@ -99,16 +99,16 @@ li {
 
 ::-moz-selection {
   color: #fff;
-  background: #11accd;
+  background: #11accc;
 }
 
 ::selection {
   color: #fff;
-  background: #11accd;
+  background: #11accc;
 }
 
 .banner {
-  background: #11accd;
+  background: #11accc;
   width: 100%;
 }
 
@@ -122,8 +122,8 @@ a {
 
 a:hover {
   cursor: pointer;
-  color: #11accd;
-  border-bottom: 1px solid #11accd;
+  color: #11accc;
+  border-bottom: 1px solid #11accc;
 }
 
 i {
@@ -143,7 +143,7 @@ input {
 }
 
 input:focus {
-  border: 1px solid #11accd;
+  border: 1px solid #11accc;
 }
 
 input[type=button] {
@@ -179,7 +179,7 @@ label {
 }
 
 .blue, .btn-primary {
-  background: #11accd;
+  background: #11accc;
 }
 
 .gray, .btn-default {
@@ -205,13 +205,13 @@ img {
   margin: 15px 0;
   border-radius: 5px;
   padding: 25px;
-  color: #11accd;
-  border: 1px solid #11accd;
+  color: #11accc;
+  border: 1px solid #11accc;
   overflow-x: scroll;
 }
 
 .solution * {
-  color: #11accd;
+  color: #11accc;
 }
 
 .problem-image {
@@ -229,7 +229,7 @@ input[type=button]:hover {
 }
 
 .no-input {
-  color: #11accd;
+  color: #11accc;
 }
 
 .cell {
@@ -346,7 +346,7 @@ input[type=button]:hover {
 .card:hover {
   cursor: pointer;
   background: #eee;
-  border: 1px solid #11accd;
+  border: 1px solid #11accc;
 }
 
 .card-helper {
@@ -358,7 +358,7 @@ input[type=button]:hover {
 }
 
 .card:hover .card-helper {
-  color: #11accd;
+  color: #11accc;
 }
 
 .form-container {
@@ -440,8 +440,8 @@ input[type=button]:hover {
 }
 
 .active {
-  color: #11accd;
-  border-color: #11accd;
+  color: #11accc;
+  border-color: #11accc;
 }
 
 .screen {
