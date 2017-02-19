@@ -396,6 +396,11 @@ input[type=button]:hover {
   display: none;
 }
 
+.active {
+  color: #11accd;
+  border-color: #11accd;
+}
+
 .screen {
   display: initial;
 }
@@ -414,6 +419,7 @@ input[type=button]:hover {
   }
 
   .sidebar {
+    position: relative !important;
     padding: 0;
     width: 100%;
   }
