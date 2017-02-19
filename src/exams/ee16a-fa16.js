@@ -303,7 +303,7 @@ Plugging in numerical values to the above solution:
 100${lx('k_1')} + (0.4)(200) + 200${lx('k_2')} = 100<hr class="s1"/>
 100${lx('k_3')} + (0.3)(200) + 200${lx('k_4')} = 250<hr class="s1"/>
 0.5 + ${lx('k_1')} + ${lx('k_3')} = 1<hr class="s1"/>
-0.2 + ${lx('k_2')} + ${lx('k_4')} = 1<hr class="s4"/>
+0.2 + ${lx('k_2')} + ${lx('k_4')} = 1<hr class="s2"/>
 
 In the form ${lx('T\\vec{k}')} = ${lx('\\vec{b}')}, we have:
 

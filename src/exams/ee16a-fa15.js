@@ -174,7 +174,7 @@ Thus the nullspace of the matrix is:
 ${lx('span \\left\\{ \\left[ \\begin{array}{c} -1 \\\\ 1 \\\\ 0 \\\\ 0 \\\\ \\end{array} \\right] , \\left[ \\begin{array}{c} 1 \\\\ 0 \\\\ 2 \\\\ 1 \\\\ \\end{array} \\right] \\right\\}', false)}
 `;
 
-const img7a = require('../img/fa16q7-1.png');
+const img7a = require('../img/fa15q7-1.png');
 const fa15q7a =
 `
 <h3>7. Finding the Bright Cave <i>(27pts total)</i></h3>
@@ -257,7 +257,7 @@ ${lmatrix([[1, 0, 1, 0], [0, 1, -1, 0], [0, 0, 1, 1], [0, 0, 0, 0], [0, 0, 0, -1
 Notice here that in spite of the row of zeros, we still have four pivot columns. In other words, we have a system of four unkowns and four linearly independent equations. Therefore, we can uniquely determine all four light intensities given Nara’s added measurement.
 `;
 
-const img8a = require('../img/fa16q8-1.png');
+const img8a = require('../img/fa15q8-1.png');
 const fa15q8a =
 `
 <h3>8. A Tale of Two Cities <i>(24pts +15pts)</i></h3>
@@ -296,7 +296,7 @@ ${lx('B = \\left[ \\begin{array}{c c c c c c} -1 & 0 & +1 & 0 & 0 & 0 \\\\ +1 & 
 There is one row per node, corresponding to the constraint that the net flow of traffic into the node is 0. In the above ${lx('B')}, we ordered nodes as ${lx('A, B, C, D, E, F')}, and used the convention that a positive value of ${lx('t_i')} means a positive net flow directed along the arrow of ${lx('t_7')}. Any matrix row-equivalent to ${lx('B')} is correct. (In particular, this means the sum of each column of ${lx('B')} must be 0.)
 `;
 
-const img8b = require('../img/fa16q8-2.png');
+const img8b = require('../img/fa15q8-2.png');
 const fa15q8b =
 `
 <div className="sidetab-container">
@@ -393,7 +393,7 @@ Which is just the constrant ${lx('-t_7 = 0')}.
 <b>Alternate Solutions:</b> Any correct formal argument received full credit. For example, noticing that ${lx('t_1 = t_2 = t_3')}, and therefore ${lx('t_7 = 0')}, by considering the constraint of node ${lx('C')}. It was also possible to row-reduce ${lx("B'")}, find a basis for the nullspace, and argue that all basis vectors have ${lx('t_7 = 0')}.
 `;
 
-const img8d = require('../img/fa16q8-3.png');
+const img8d = require('../img/fa15q8-3.png');
 const fa15q8d =
 `
 <div className="sidetab-container">
@@ -464,7 +464,7 @@ Notice that in this problem, we do not know the exact sensor placements of each 
 Some students argued that it is sufficient to have one sensor per “independent loop”. And since the cities already had sensors on their individual loops (necessarily, by assumption), it is sufficient to have one sensor on the new “independent loop” created by adding the two new roads. This is correct intuition. However, the concept of “independent loop” was not defined or developed in this class, so any argument using “independent loops” without definition only received partial credit.
 `;
 
-const img9a = require('../img/fa16q9-1.png');
+const img9a = require('../img/fa15q9-1.png');
 const fa15q9a =
 `
 <h3>9. Justin Beaver <i>(43pts)</i></h3>
@@ -582,7 +582,7 @@ It was also fine if you counted the first row as row 0, the second row as row 1,
 ${lx('D_j = \\vec{c}^T A^{j}', false)}
 `;
 
-const img9e = require('../img/fa16q9-2.png');
+const img9e = require('../img/fa15q9-2.png');
 const fa15q9e =
 `
 <div className="sidetab-container">
@@ -792,55 +792,55 @@ class EE16AFa15 extends Component {
           <p>Unless told otherwise, you must show work to get credit. There will be very little partial credit given in this section. You get one drop: do 3 out of the following 4 questions. (We will grade all 4 and keep the best 3 scores.) Each problem is worth 8 points. Students who get all 4 questions correct will receive some bonus points (6 points).</p>
           <Element name="q3">
             <hr className="s5" />
-            <Question id={"q3"} content={fa15q3} variables={['x_1', 'x_2']} image={['q3.png']} examCode={examCode} solution={fa15q3_soln} />
+            <Question id={"q3"} content={fa15q3} variables={['x_1', 'x_2']} examCode={examCode} solution={fa15q3_soln} />
           </Element>
           <Element name="q4">
             <hr className="s5" />
-            <Question id={"q4"} content={fa15q4} rows={2} cols={2} image={['q4-1.png', 'q4-2.png']} examCode={examCode} solution={fa15q4_soln}  />
+            <Question id={"q4"} content={fa15q4} rows={2} cols={2} examCode={examCode} solution={fa15q4_soln}  />
           </Element>
           <Element name="q5">
             <hr className="s5" />
-            <Question id={"q5"} content={fa15q5} hasResponse={false} image={['q5-1.png', 'q5-2.png']} examCode={examCode} solution={fa15q5_soln}  />
+            <Question id={"q5"} content={fa15q5} hasResponse={false} examCode={examCode} solution={fa15q5_soln}  />
           </Element>
           <Element name="q6">
             <hr className="s5" />
-            <Question id={"q6"} content={fa15q6} hasResponse={false} image={['q6-1.png', 'q6-2.png']} examCode={examCode} solution={fa15q6_soln}  />
+            <Question id={"q6"} content={fa15q6} hasResponse={false} examCode={examCode} solution={fa15q6_soln}  />
           </Element>
           <Element name="q7">
             <hr className="s5" />
             <h2>Free-form Problems <i>(94 + 15 points)</i></h2>
             <hr className="s5" />
-            <Question id={"q7a"} content={fa15q7a} rows={4} cols={4} image={['q7a.png']} examCode={examCode} solution={fa15q7a_soln}  />
+            <Question id={"q7a"} content={fa15q7a} rows={4} cols={4} examCode={examCode} solution={fa15q7a_soln}  />
             <hr className="s5" />
-            <Question id={"q7b"} content={fa15q7b} on="Yes" off="No" image={['q7b.png']} examCode={examCode} solution={fa15q7b_soln}  />
+            <Question id={"q7b"} content={fa15q7b} on="Yes" off="No" examCode={examCode} solution={fa15q7b_soln}  />
             <hr className="s5" />
-            <Question id={"q7c"} content={fa15q7c} on="Yes" off="No" image={['q7c.png']} examCode={examCode} solution={fa15q7c_soln}  />
+            <Question id={"q7c"} content={fa15q7c} on="Yes" off="No" examCode={examCode} solution={fa15q7c_soln}  />
           </Element>
           <Element name="q8">
             <hr className="s5" />
-            <Question id={"q8a"} content={fa15q8a} rows={6} cols={6} image={['q8a.png']} examCode={examCode} solution={fa15q8a_soln}  />
+            <Question id={"q8a"} content={fa15q8a} rows={6} cols={6} examCode={examCode} solution={fa15q8a_soln}  />
             <hr className="s5" />
-            <Question id={"q8b"} content={fa15q8b} rows={6} cols={1} image={['q8b-1.png', 'q8b-2.png']} examCode={examCode} solution={fa15q8b_soln}  />
+            <Question id={"q8b"} content={fa15q8b} rows={6} cols={1} examCode={examCode} solution={fa15q8b_soln}  />
             <hr className="s5" />
-            <Question id={"q8c"} content={fa15q8c} hasResponse={false} image={['q8c.png']} examCode={examCode} solution={fa15q8c_soln}  />
+            <Question id={"q8c"} content={fa15q8c} hasResponse={false} examCode={examCode} solution={fa15q8c_soln}  />
             <hr className="s5" />
-            <Question id={"q8d"} content={fa15q8d} hasResponse={false} image={['q8d.png']} examCode={examCode} solution={fa15q8d_soln}  />
+            <Question id={"q8d"} content={fa15q8d} hasResponse={false} examCode={examCode} solution={fa15q8d_soln}  />
             <hr className="s5" />
-            <Question id={"q8e"} content={fa15q8e} on="Yes" off="No" image={['q8e-1.png', 'q8e-2.png']} examCode={examCode} solution={fa15q8e_soln}  />
+            <Question id={"q8e"} content={fa15q8e} on="Yes" off="No" examCode={examCode} solution={fa15q8e_soln}  />
           </Element>
           <Element name="q9">
             <hr className="s5" />
-            <Question id={"q9a"} content={fa15q9a} on="Yes" off="No" image={['q9a.png']} examCode={examCode} solution={fa15q9a_soln}  />
+            <Question id={"q9a"} content={fa15q9a} on="Yes" off="No" examCode={examCode} solution={fa15q9a_soln}  />
             <hr className="s5" />
-            <Question id={"q9b"} content={fa15q9b} hasResponse={false} image={['q9b.png']} examCode={examCode} solution={fa15q9b_soln}  />
+            <Question id={"q9b"} content={fa15q9b} hasResponse={false} examCode={examCode} solution={fa15q9b_soln}  />
             <hr className="s5" />
-            <Question id={"q9c"} content={fa15q9c} rows={3} cols={1} image={['q9c.png']} examCode={examCode} solution={fa15q9c_soln}  />
+            <Question id={"q9c"} content={fa15q9c} rows={3} cols={1} examCode={examCode} solution={fa15q9c_soln}  />
             <hr className="s5" />
-            <Question id={"q9d"} content={fa15q9d} hasResponse={false} image={['q9d.png']} examCode={examCode} solution={fa15q9d_soln}  />
+            <Question id={"q9d"} content={fa15q9d} hasResponse={false} examCode={examCode} solution={fa15q9d_soln}  />
             <hr className="s5" />
-            <Question id={"q9e"} content={fa15q9e} hasResponse={true} image={['q9e-1.png', 'q9e-2.png']} examCode={examCode} solution={fa15q9e_soln}  />
+            <Question id={"q9e"} content={fa15q9e} hasResponse={true} examCode={examCode} solution={fa15q9e_soln}  />
             <hr className="s5" />
-            <Question id={"q9f"} content={fa15q9f} rows={3} cols={1} image={['q9f-1.png', 'q9f-2.png']} examCode={examCode} solution={fa15q9f_soln}  />
+            <Question id={"q9f"} content={fa15q9f} rows={3} cols={1} examCode={examCode} solution={fa15q9f_soln}  />
           </Element>
         </div>
       </span>

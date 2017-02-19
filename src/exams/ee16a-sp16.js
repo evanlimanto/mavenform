@@ -75,7 +75,7 @@ You only need to write True or False under each subpart.</br>
 
 const sp16q5a_soln =
 `
-<h3>False</h3>
+<h3>False.</h3>
 
 Let’s left multiply and right multiply ${lx('A^2')} by ${lx('A^{-1}')} so we have ${lx('A^{−1} AAA^{−1}')}. By associativity of matrix multiplication, we have ${lx('(A^{−1}A)(AA^{−1})')} = ${lx('I_nI_n')} = ${lx('I_n')} where ${lx('I')} is the identity matrix. However, if ${lx('A^2')} were ${lx('0')}, then ${lx('(A^{−1}A)(AA^{−1})')} = ${lx('A^{−1} A^{2} A^{−1}')} = ${lx('0')} where ${lx('0')} is a matrix of all zeros, hence resulting in a contradiction.
 `;
@@ -87,7 +87,7 @@ const sp16q5b =
 
 const sp16q5b_soln =
 `
-<h3>True</h3>
+<h3>True.</h3>
 
 If ${lx('A')} is invertible, then there is a unique matrix ${lx('A^{-1}')}. Left multiply the equation by ${lx('A^{−1}')}, and we will have ${lx('A^{−1}A\\vec{x}')} = ${lx('A^{−1}\\vec{b} \\implies \\vec{x} = A^{−1}\\vec{b}')}, where ${lx('\\vec{x}')} is a unique vector.
 `;
@@ -99,7 +99,7 @@ const sp16q5c =
 
 const sp16q5c_soln =
 `
-<h3>True</h3>
+<h3>True.</h3>
 
 ${lx('(AB)^{−1} = B^{−1}A^{−1}', false)}
 Note that ${lx('ABB^{-1}A^{-1}')} = ${lx('I')} and ${lx('B^{-1}A^{-1}AB')} = ${lx('B^{-1}IB')} = ${lx('B^{-1}B')} = ${lx('I')}.
@@ -108,14 +108,14 @@ Note that ${lx('ABB^{-1}A^{-1}')} = ${lx('I')} and ${lx('B^{-1}A^{-1}AB')} = ${l
 const sp16q5d =
 `
 (d) The two vectors ${lx('v_1')} = ${lmatrix([[1], [1], [0]])} and ${lx('v_2')} = ${lmatrix([[1], [-1], [0]])} form a basis for the 
-subspace Span(${lx('\\{')}${lmatrix([[1], [1], [0]])}, ${lmatrix([[1], [-1], [0]])}${lx('\\}')}).
+subspace Span(${lx('\\{')}${lmatrix([[1], [0], [0]])}, ${lmatrix([[0], [1], [0]])}${lx('\\}')}).
 `;
 
 const sp16q5d_soln =
 `
 <h3>True.</h3>
 
-Span(${lx('\\{')}${lmatrix([[1], [0], [1]])},${lmatrix([[0], [1], [0]])}${lx('\\}')}) spans the ${lx('x')}-${lx('y')} plane in ${lx('\\mathbb{R}^3')} as well.
+Span(${lx('\\{')}${lmatrix([[1], [0], [0]])},${lmatrix([[0], [1], [0]])}${lx('\\}')}) spans the ${lx('x')}-${lx('y')} plane in ${lx('\\mathbb{R}^3')}. Since ${lx('v_1 = \\left[ \\begin{array}{c} 1 \\\\ 1 \\\\ 0 \\\\ \\end{array} \\right]')} and ${lx('v_2 = \\left[ \\begin{array}{c} 1 \\\\ -1 \\\\ 0 \\\\ \\end{array} \\right]')} are linearly independent, they form a basis for the ${lx('x')}-${lx('y')} plane in ${lx('\\mathbb{R}^3')} as well.
 `;
 
 const sp16q5e =
@@ -136,7 +136,7 @@ vector, and a set of vectors spans some subspace (potentially the entire space.)
 
 const sp16q5f =
 `
-(f) For all matrices \\(A\\) and \\(B\\), where \\(A\\) is ${lx('5')}×${lx('5')} and \\(B\\) is ${lx('4')}×${lx('4')}, it is always the case that Rank(\\(A\\)) > Rank(\\(A\\)).
+(f) For all matrices \\(A\\) and \\(B\\), where \\(A\\) is ${lx('5')}×${lx('5')} and \\(B\\) is ${lx('4')}×${lx('4')}, it is always the case that Rank(\\(A\\)) > Rank(\\(B\\)).
 `;
 
 const sp16q5f_soln =
@@ -154,10 +154,11 @@ const sp16q6a =
 
 In a war of civilizations, the light dragons are fighting for survival against the invading evil imp empire. It
 is the night before the deciding battle, and Ela Dalon the Human Hobo has proposed using faerie lights to
-determine enemy numbers. There are four enemy camps. </br></br>
-
+determine enemy numbers. There are four enemy camps.
+<hr class="s2" />
 The faerie lights begin completely dark and get brighter directly proportional to the number of imps present
 around them, i.e. if Camp X has \\(n\\)  imps, any faerie light that visits Camp X will gain \\(n\\)  brightness units.
+<hr class="s2"/>
 Unfortunately, faerie lights are notoriously difficult to control, and they are so small that the dragons can
 only measure the total brightness of groups of faerie lights. The Human Hobo therefore proposes to send
 four groups of faerie lights, and is fortunately able to keep track of how many faerie lights he sent and which
@@ -231,6 +232,7 @@ not.
 const sp16q6c_soln =
 `
 No, you cannot determine how many imps are at each campsite.
+<hr class="s1" />
 <ul>
 <li>The new team does not pass through Camp A so you have no way of determining the number of imps in Camp A.</li>
 <li>The new measurement conﬂicts with an existing measurement. The system of equations is inconsistent, so there is no solution.</li>
@@ -266,9 +268,8 @@ The following diagram summarizes these restrictions graphically.
 <img src="${imgsp16q7_1}" class="problem-image"/>
 
 Let the state vector for this system be at time \\(n\\) be:
-\\(\\vec{s}\\)[\\(n\\)] = ${lmatrix([[('s_1[n]')], [('s_2[n]')], [('s_3[n]')], [('s_4[n]')]])}
+${lx('\\vec{s}[n] = \\left[ \\begin{array}{c} s_1[n] \\\\ s_2[n] \\\\ s_3[n] \\\\ s_4[n] \\\\ \\end{array} \\right]', false)}
 
-,
 where ${lx('s_l')}[\\(n\\)] denotes number of Technocrats in City \\(l\\) at time \\(n\\); for example, ${lx('s_3')}[\\(n\\)] denotes the Technocrat
 population in Chicago at time \\(n\\).
 The state-evolution equation for this system is given by
@@ -303,7 +304,7 @@ ${lx('A_1 = \\left[ \\begin{array}{c c c c} 1 & 1/3 & 0 & 0 \\\\ 0 & 1/3 & 1/3 &
 Rows 2 and 3 are identical, so ${lx('A_1')} is not invertible. In other words, the row vectors are linearly dependent and Gaussian Elimination would result in a row of 0’s, which can’t be inverted.<br/><br/>
 
 <h3>Model 2</h3>
-${lx('A_1 = \\left[ \\begin{array}{c c c c} 1 & 1/4 & 0 & 0 \\\\ 0 & 1/2 & 1/4 & 0 \\\\ 0 & 1/2 & 1/2 & 0 \\\\ 0 & 0 & 1/4 & 1 \\\\ \\end{array} \\right]', false)}
+${lx('A_2 = \\left[ \\begin{array}{c c c c} 1 & 1/4 & 0 & 0 \\\\ 0 & 1/2 & 1/4 & 0 \\\\ 0 & 1/2 & 1/2 & 0 \\\\ 0 & 0 & 1/4 & 1 \\\\ \\end{array} \\right]', false)}
 This is full rank, so it's invertible. In other words, there is a pivot in every row; every row vector is linearly independent from the rest.
 
 ${lx('A_2^{-1} = \\left[ \\begin{array}{c c c c} 1 & -2/3 & 1/3 & 0 \\\\ 0 & 8/3 & -4/3 & 0 \\\\ 0 & -4/3 & 8/3 & 0 \\\\ 0 & 1/3 & -2/3 & 1 \\\\ \\end{array} \\right]', false)}
@@ -337,7 +338,7 @@ const sp16q7d =
 (d) Now suppose the initial state of the system is given by the vector
 ${lx('\\vec{s}[0] = \\left[ \\begin{array}{c} 0 \\\\ 1/2 \\\\ 1/2 \\\\ 0 \\end{array} \\right]', false)}
 This means that, initially, 500,000 Technocrats are in Denver, and the other 500,000 are in Chicago.<br/>
-Without complicated mathematical derivations, determine the limiting state vector ${lx('\\lim\\limits_{n \\to \\infty} \\vec{s}[n]')}
+Without complicated mathematical derivations, determine the limiting state vector ${lx('\\lim\\limits_{n \\to \\infty} \\vec{s}[n]')}.
 `;
 
 const sp16q7d_soln =
@@ -369,16 +370,18 @@ const sp16q8a =
 You are involved in the design of a robot called SIXTEEN-AYY that has arms with a certain range of motion and certain operations that the arms can perform.<br/>
 For parts (a)–(e) of this problem, we will look at a simplified case where we pretend that the robot’s arm can move only in a 2-dimensional space. Thus, we will represent the position of the end of the robot’s arm with a vector ${lx('\\vec{p}')} = ${lmatrix([['p_x'], ['p_y']])}.
 Let’s further assume that the robot will be built to perform two movement commands
-determined by the following transformations:<br/><br/>
+determined by the following transformations:
+<hr class="s2" />
 ${lx('T_1')}: Reflects ${lx('\\vec{p}')} about the line ${lx('y')} = ${lx('−x')}.<br/>
-${lx('T_2')}: Rotates ${lx('\\vec{p}')} clockwise about the origin by ${lx('45\\circ')}.
+${lx('T_2')}: Rotates ${lx('\\vec{p}')} clockwise about the origin by ${lx('45^{\\circ}')}.
+<hr class="s2" />
 (a) Write the matrix ${lx('A_1')} that applies the transformation ${lx('T_1')}.
 `;
 
 const sp16q8a_soln =
 `
-${lx('\\vec{a_1}')} = ${lx('T_1\\left(\\begin{array}{c}1 \\\\ 0 \\\\\ \\end{array}\\right)')} = ${lmatrix([[0], [-1]])}<br/>
-${lx('\\vec{a_2}')} = ${lx('T_1\\left(\\begin{array}{c}0 \\\\ 1 \\\\\ \\end{array}\\right)')} = ${lmatrix([[-1], [0]])}<br/>
+${lx('\\vec{a_1}')} = ${lx('T_1\\left( \\left[ \\begin{array}{c}1 \\\\ 0 \\\\\ \\end{array} \\right] \\right)')} = ${lmatrix([[0], [-1]])}<br/>
+${lx('\\vec{a_2}')} = ${lx('T_1\\left(\\left[\\begin{array}{c}0 \\\\ 1 \\\\\ \\end{array}\\right]\\right)')} = ${lmatrix([[-1], [0]])}<br/>
 ${lx('A_1')} = ${lmatrix([['\\vec{a_1}', '\\vec{a_2}']])} = ${lmatrix([[0, -1], [-1, 0]])}
 `;
 
@@ -401,7 +404,7 @@ const sp16q8c =
 const sp16q8c_soln =
 `
 ${lx('A_{12}')} = ${lx('A_2A_1')} = ${lmatrix([['\\frac{1}{\\sqrt{2}}', '\\frac{1}{\\sqrt{2}}'], ['-\\frac{1}{\\sqrt{2}}', '\\frac{1}{\\sqrt{2}}']])}
-${lmatrix([[0, -1], [-1, 0]])} = ${lmatrix([['-\\frac{1}{\\sqrt{2}}', '-\\frac{1}{\\sqrt{2}}'], ['-\\frac{1}{\\sqrt{2}}', '\\frac{1}{\\sqrt{2}}']])}
+${lmatrix([[0, -1], [-1, 0]])} = ${lmatrix([['-\\frac{1}{\\sqrt{2}}', '-\\frac{1}{\\sqrt{2}}'], ['-\\frac{1}{\\sqrt{2}}', '-\\frac{1}{\\sqrt{2}}']])}
 `;
 
 const sp16q8d =
@@ -511,13 +514,13 @@ ${lx('x_f[n]')}${lmatrix([[0.5], [0.5], [0]])} + ${lx('x_s[n]')}${lmatrix([[0.4]
 <hr class="s2" />
 ${lx('x_p[n]')}${lmatrix([['p_1'], ['p_2'], ['p_3']])} = ${lx('\\vec{x}[n + 1]')} - ${lx('x_f[n]')}${lmatrix([[0.5], [0.5], [0]])} - ${lx('x_s[n]')}${lmatrix([[0.4], [0.5], [0.1]])}
 <hr class="s2" />
-${lx('\\vec{p}')} = ${lx('\\frac{1}{x_p[n]}')}${lx('\\left(\\vec{x}[n + 1] - x_f[n]\\begin{array}{c}0.5 \\\\ 0.5 \\\\ 0 \\\\ \\end{array} - x_s[n]\\begin{array}{c}0.4 \\\\ 0.5 \\\\ 0.1 \\\\ \\end{array} \\right)')}
+${lx('\\vec{p}')} = ${lx('\\frac{1}{x_p[n]}')}${lx('\\left(\\vec{x}[n + 1] - x_f[n] \\left[ \\begin{array}{c}0.5 \\\\ 0.5 \\\\ 0 \\\\ \\end{array} \\right] - x_s[n] \\left[ \\begin{array}{c}0.4 \\\\ 0.5 \\\\ 0.1 \\\\ \\end{array} \\right] \\right)')}
 `;
 
 const sp16q9d =
 `
 (d) Using part (c), solve for ${lx('\\vec{p}')} given that ${lx('\\vec{x}[n+1]')} =
-${lmatrix([[22], [30], [48]])} and ${lx('$vec{x}[n]')} = ${lmatrix([[20], [30], [50]])}.
+${lmatrix([[22], [30], [48]])} and ${lx('\\vec{x}[n]')} = ${lmatrix([[20], [30], [50]])}.
 `;
 
 const sp16q9d_soln =
