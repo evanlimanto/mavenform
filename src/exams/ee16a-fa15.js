@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Question } from '../components/question';
 import { lmatrix, lx } from '../utils';
 
-const examCode = 'ee16a-fa15';
-
 const fa15q3 =
 `
 <h3>3. Solve It</h3>
@@ -769,6 +767,8 @@ class EE16AFa15 extends Component {
               9. Justin Beaver
             </Link>
           </div>
+          <div><a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Afa15-exam.pdf'} target="_blank">Exam PDF</a></div>
+          <div><a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Afa15-soln.pdf'} target="_blank">Solutions PDF</a></div>
         </div>
         <div className="content">
           <hr className="s5" />

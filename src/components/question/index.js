@@ -6,7 +6,7 @@ class Solution extends Component {
     super(props); 
 
     this.state = {
-      showImage: false
+      showSolution: false
     };
 
     this.toggleSolution = this.toggleSolution.bind(this);
@@ -14,14 +14,13 @@ class Solution extends Component {
 
   toggleSolution() {
     this.setState({
-      showImage: !this.state.showImage
+      showSolution: !this.state.showSolution
     });
   }
 
   render() {
     const hasResponse = this.props.hasResponse;
     const examCode = this.props.examCode;
-    const solution = this.props.solution;
     var check = null;
     var solutionButton = null;
     var solutionContent = null;
@@ -30,25 +29,15 @@ class Solution extends Component {
     }
    
     if (this.props.solution) { 
-      const solutionClass = "solution" + ((this.state.showImage) ? "" : " hidden");
+      const solutionClass = "solution" + ((this.state.showSolution) ? "" : " hidden");
       solutionContent = (
         <div className={solutionClass}>
           <span dangerouslySetInnerHTML={{'__html': this.props.solution}}></span>
         </div>
       );
-    } else if (this.props.image) {
-      solutionContent = (
-        <div>
-          {_.map(this.props.image, (file) => {
-            const path = require('../../solutions/' + examCode + '/' + file);
-            const solutionClass = "solution" + ((this.state.showImage) ? "" : " hidden");
-            return <img className={solutionClass} src={path} role="presentation" />;
-          })}
-        </div>
-      );
-    }
+    } 
 
-    if (!this.state.showImage) {
+    if (!this.state.showSolution) {
       solutionButton = (
         <input className="blue" type="button" value="Show Solution" onClick={() => this.toggleSolution()}/>
       );
@@ -75,7 +64,7 @@ class Question extends Component {
     return (
       <div id={this.props.id}>
         <div dangerouslySetInnerHTML={{__html: content}}></div>
-        <Solution solution={this.props.solution} image={this.props.image} examCode={this.props.examCode} />
+        <Solution solution={this.props.solution} examCode={this.props.examCode} />
       </div>
     );
   }
@@ -93,7 +82,7 @@ class VariablesQuestion extends Component {
             const str = `\\(${variable} =\\)`;
             return <span key={key}>{str}<input className="cell" type="text" /></span>;
           })}
-        <Solution hasResponse={true} image={this.props.image} examCode={this.props.examCode} />
+        <Solution hasResponse={true} examCode={this.props.examCode} />
       </div>
     );
   }
@@ -115,7 +104,7 @@ class MatrixQuestion extends Component {
           });
           return <div key={rowKey}>{row}</div>
         })}
-        <Solution hasResponse={true} image={this.props.image} examCode={this.props.examCode} />
+        <Solution hasResponse={true} examCode={this.props.examCode} />
       </div>
     );
   }
@@ -132,7 +121,7 @@ class ToggleQuestion extends Component {
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <hr className="s3" />
         <input type="checkbox" data-toggle="toggle" data-on={on} data-off={off} />
-        <Solution hasResponse={true} image={this.props.image} examCode={this.props.examCode} />
+        <Solution hasResponse={true} examCode={this.props.examCode} />
       </div>
     );
   }
@@ -155,7 +144,7 @@ class FreeFormQuestion extends Component {
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <hr className="s3" />
         {solution} 
-        <Solution hasResponse={hasResponse} solution={this.props.solution} image={this.props.image} examCode={this.props.examCode} />
+        <Solution hasResponse={hasResponse} solution={this.props.solution} examCode={this.props.examCode} />
       </div>
     );
   }

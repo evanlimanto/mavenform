@@ -664,8 +664,12 @@ class EE16ASp16 extends Component {
           <hr className="s2" />
           <h4>SOURCES</h4>
           <hr className="s2" />
-          <div className="sidetab-container"><a className="sidetab" href="https://tbp.berkeley.edu/exams/5192/download/" target="_blank">Exam PDF</a></div>
-          <div className="sidetab-container"><a className="sidetab" href="https://tbp.berkeley.edu/exams/5193/download/" target="_blank">Solutions PDF</a></div>
+          <div className="sidetab-container">
+            <a className="sidetab" href="https://tbp.berkeley.edu/exams/5192/download/" target="_blank">Exam PDF</a>
+          </div>
+          <div className="sidetab-container">
+            <a className="sidetab" href="https://tbp.berkeley.edu/exams/5193/download/" target="_blank">Solutions PDF</a>
+          </div>
         </div>
         <div className="content">
           <Element name="q3">

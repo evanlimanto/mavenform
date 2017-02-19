@@ -488,8 +488,8 @@ class EE16AFa16 extends Component {
           <hr className="s2" />
           <h4>SOURCES</h4>
           <hr className="s2" />
-          <div className="sidetab-container"><a className="sidetab" href="https://tbp.berkeley.edu/exams/5381/download/" target="_blank">Exam PDF</a></div>
-          <div className="sidetab-container"><a className="sidetab" href="https://tbp.berkeley.edu/exams/5383/download/" target="_blank">Solutions PDF</a></div>
+          <div><a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Afa16-exam.pdf'} target="_blank">Exam PDF</a></div>
+          <div><a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Afa16-soln.pdf'} target="_blank">Solutions PDF</a></div>
         </Sticky>
         <div className="sidebar mobile">
           <hr className="s5" />
@@ -541,55 +541,55 @@ class EE16AFa16 extends Component {
             <hr className="s5" />
             <h2>Section 1 <i>(18 points)</i></h2>
             <hr className="s3" />
-            <Question id={"q3a"} content={fa16q3a} image={['q3-1.png']} examCode={examCode} solution={fa16q3a_soln} />
+            <Question id={"q3a"} content={fa16q3a} examCode={examCode} solution={fa16q3a_soln} />
             <hr className="s5" />
-            <Question id={"q3b"} content={fa16q3b} image={['q3-2.png']} examCode={examCode} solution={fa16q3b_soln} />
+            <Question id={"q3b"} content={fa16q3b} examCode={examCode} solution={fa16q3b_soln} />
             <hr className="s5" />
-            <Question id={"q3c"} content={fa16q3c} image={['q3-1.png']} examCode={examCode} solution={fa16q3c_soln} />
+            <Question id={"q3c"} content={fa16q3c} examCode={examCode} solution={fa16q3c_soln} />
             <hr className="s5" />
-            <Question id={"q3d"} content={fa16q3d} image={['q3-1.png']} examCode={examCode} solution={fa16q3d_soln} />
+            <Question id={"q3d"} content={fa16q3d} examCode={examCode} solution={fa16q3d_soln} />
             <hr className="s5" />
-            <Question id={"q3e"} content={fa16q3e} image={['q3-2.png']} examCode={examCode} solution={fa16q3e_soln} />
+            <Question id={"q3e"} content={fa16q3e} examCode={examCode} solution={fa16q3e_soln} />
             <hr className="s5" />
-            <Question id={"q3f"} content={fa16q3f} image={['q3-1.png']} examCode={examCode} solution={fa16q3f_soln} />
+            <Question id={"q3f"} content={fa16q3f} examCode={examCode} solution={fa16q3f_soln} />
           </Element>
           <Element name="q4">
             <hr className="s5" />
-            <Question id={"q4a"} content={fa16q4a} hasResponse={false} image={['q4a.png']} examCode={examCode} solution={fa16q4a_soln} />
+            <Question id={"q4a"} content={fa16q4a} hasResponse={false} examCode={examCode} solution={fa16q4a_soln} />
             <hr className="s5" />
-            <Question id={"q4b"} content={fa16q4b} hasResponse={false} image={['q4b.png']} examCode={examCode} solution={fa16q4b_soln} />
+            <Question id={"q4b"} content={fa16q4b} hasResponse={false} examCode={examCode} solution={fa16q4b_soln} />
           </Element>
           <Element name="q5">
             <hr className="s5" />
-            <Question id={"q5a"} content={fa16q5a} hasResponse={false} image={['q5a.png']} examCode={examCode} solution={fa16q5a_soln} />
+            <Question id={"q5a"} content={fa16q5a} hasResponse={false} examCode={examCode} solution={fa16q5a_soln} />
           </Element>
           <Element name="q6">
             <hr className="s5" />
             <h2>Section 2 <i>(55 points)</i></h2>
             <hr className="s3" />
-            <Question id={"q6a"} content={fa16q6a} hasResponse={false} image={['q6a.png']} examCode={examCode} solution={fa16q6a_soln} />
+            <Question id={"q6a"} content={fa16q6a} hasResponse={false} examCode={examCode} solution={fa16q6a_soln} />
             <hr className="s5" />
-            <Question id={"q6b"} content={fa16q6b} hasResponse={false} image={['q6b.png']} examCode={examCode} solution={fa16q6b_soln} />
+            <Question id={"q6b"} content={fa16q6b} hasResponse={false} examCode={examCode} solution={fa16q6b_soln} />
           </Element>
           <Element name="q7">
             <hr className="s5" />
-            <Question id={"q7a"} content={fa16q7a} rows={3} cols={3} image={['q7a.png']} examCode={examCode} solution={fa16q7a_soln} />
+            <Question id={"q7a"} content={fa16q7a} rows={3} cols={3} examCode={examCode} solution={fa16q7a_soln} />
             <hr className="s5" />
-            <Question id={"q7b"} content={fa16q7b} hasResponse={false} image={['q7b.png']} examCode={examCode} solution={fa16q7b_soln} />
+            <Question id={"q7b"} content={fa16q7b} hasResponse={false} examCode={examCode} solution={fa16q7b_soln} />
             <hr className="s5" />
-            <Question id={"q7c"} content={fa16q7c} hasResponse={false} image={['q7c.png']} examCode={examCode} solution={fa16q7c_soln} />
+            <Question id={"q7c"} content={fa16q7c} hasResponse={false} examCode={examCode} solution={fa16q7c_soln} />
             <hr className="s5" />
-            <Question id={"q7d"} content={fa16q7d} hasResponse={false} image={['q7d.png']} examCode={examCode} solution={fa16q7d_soln} />
+            <Question id={"q7d"} content={fa16q7d} hasResponse={false} examCode={examCode} solution={fa16q7d_soln} />
             <hr className="s5" />
-            <Question id={"q7e"} content={fa16q7e} hasResponse={false} image={['q7e.png']} examCode={examCode} solution={fa16q7e_soln} />
+            <Question id={"q7e"} content={fa16q7e} hasResponse={false} examCode={examCode} solution={fa16q7e_soln} />
           </Element>
           <Element name="q8">
             <hr className="s5" />
-            <Question id={"q8a"} content={fa16q8a} rows={2} cols={2} image={['q8a.png']} examCode={examCode} solution={fa16q8a_soln} />
+            <Question id={"q8a"} content={fa16q8a} rows={2} cols={2} examCode={examCode} solution={fa16q8a_soln} />
             <hr className="s5" />
-            <Question id={"q8b"} content={fa16q8b} hasResponse={false} image={['q8b.png']} examCode={examCode} solution={fa16q8b_soln} />
+            <Question id={"q8b"} content={fa16q8b} hasResponse={false} examCode={examCode} solution={fa16q8b_soln} />
             <hr className="s5" />
-            <Question id={"q8c"} content={fa16q8c} hasResponse={false} image={['q8c.png']} examCode={examCode} solution={fa16q8c_soln} />
+            <Question id={"q8c"} content={fa16q8c} hasResponse={false} examCode={examCode} solution={fa16q8c_soln} />
           </Element>
         </div>
       </span>
