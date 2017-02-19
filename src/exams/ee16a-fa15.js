@@ -59,7 +59,7 @@ const fa15q4_soln =
 We can find the inverse by row reducing the augmented system (process omitted for brevity):
 <hr class="s2" />
 
-${lx('\\left[ \\begin{array}{c c c c c} 1 & 0 & \\vdots & 1 & 3 \\\\ 0 & 1 & \\vdots & -2 & -5 \\end{array} \\right] \\implies \\left[ \\begin{array}{c c c c c} -5 & -3 & \\vdots 1 & 0 \\\\ 2 & 1 & \\vdots & 0 & 1 \\\\ \\end{array} \\right]', false)}
+${lx('\\left[ \\begin{array}{c c c c c} 1 & 0 & \\vdots & 1 & 3 \\\\ 0 & 1 & \\vdots & -2 & -5 \\end{array} \\right] \\implies \\left[ \\begin{array}{c c c c c} -5 & -3 & \\vdots & 1 & 0 \\\\ 2 & 1 & \\vdots & 0 & 1 \\\\ \\end{array} \\right]', false)}
 
 Thus the inverse is given by:
 
@@ -191,7 +191,8 @@ Kody proposes an imaging strategy where he uses his hand to completely block the
 <p align="center">Figure 1: Four image masks.</p>
 <hr class="s1" />
 
-<b>(a)</b> <i>(5pts)</i> Let \\(\\vec{x}\\) be the four-element vector that represents the magnitude of light emanating from the four cave entrances. <b>Write a matrix \\(K\\) that performs the masking process in Fig. 1 on the vector \\(\\vec{x}\\), such that \\(K\\vec{x}\\) is the result of the four measurements.</b>
+<div className="sidetab-container">
+(a) <i>(5pts)</i> Let \\(\\vec{x}\\) be the four-element vector that represents the magnitude of light emanating from the four cave entrances. <b>Write a matrix \\(K\\) that performs the masking process in Fig. 1 on the vector \\(\\vec{x}\\), such that \\(K\\vec{x}\\) is the result of the four measurements.</b>
 `;
 
 const fa15q7a_soln =
@@ -204,7 +205,8 @@ Note here that ${lx('\\vec{m}')} is the vector of Kody's measurements. The order
 
 const fa15q7b =
 `
-<b>(b)</b> <i>(10pts)</i> Does Kody’s set of masks give us a unique solution for all four caves’ light intensities? Why or why not?
+<div className="sidetab-container">
+(b) <i>(10pts)</i> Does Kody’s set of masks give us a unique solution for all four caves’ light intensities? Why or why not?
 `;
 
 const fa15q7b_soln =
@@ -225,7 +227,8 @@ ${lmatrix([[1, 0, 1, 0], [0, 1, -1, 0], [0, 0, 1, 1], [0, 0, 0, 0]], false, fals
 
 const fa15q7c =
 `
-<b>(c)</b> <i>(12pts)</i> Nara, in her inﬁnite wisdom, places her one hand diagonally across the entrances, covering two of the cave entrances. However her hand is not wide enough, letting in 50% of the light from the caves covered and 100% of the light from the caves not covered. The following diagram shows the percentage of light let through from each cave:
+<div className="sidetab-container">
+(c) <i>(12pts)</i> Nara, in her inﬁnite wisdom, places her one hand diagonally across the entrances, covering two of the cave entrances. However her hand is not wide enough, letting in 50% of the light from the caves covered and 100% of the light from the caves not covered. The following diagram shows the percentage of light let through from each cave:
 
 $$
 \\begin{array}{|c|c|c|c|}
@@ -270,7 +273,8 @@ There are two isolated cities in the desert. They each have their own network of
 <p align="center">Figure 2: The trafﬁc networks of two isolated cities.</p>
 <hr class="s1" />
 
-<b>(a)</b> <i>(7pts)</i> We know how to model the net trafﬁc ﬂows within each city individually (from the Homework). We would like to jointly model the net trafﬁc ﬂows of both cities. That is, let the net trafﬁc ﬂow (cars/hr) along all roads be described by a vector
+<div className="sidetab-container">
+(a) <i>(7pts)</i> We know how to model the net trafﬁc ﬂows within each city individually (from the Homework). We would like to jointly model the net trafﬁc ﬂows of both cities. That is, let the net trafﬁc ﬂow (cars/hr) along all roads be described by a vector
 
 $$
 \\vec{t} =
@@ -298,7 +302,8 @@ There is one row per node, corresponding to the constraint that the net flow of 
 const img8b = require('../img/fa16q8-2.png');
 const fa15q8b =
 `
-<b>(b)</b> <i>(5pts)</i> A new road is constructed between the two cities, as shown in Figure 3.
+<div className="sidetab-container">
+(b) <i>(5pts)</i> A new road is constructed between the two cities, as shown in Figure 3.
 
 <img src="${img8b}" class="problem-image" />
 
@@ -355,7 +360,8 @@ Any explicit ${lx("B'")} that is row-equivalent to this is also correct.
 
 const fa15q8c =
 `
-<b>(c)</b> <i>(12pts)</i> Does adding this additional road change the possible trafﬁc ﬂows of the two cities? That is,
+<div className="sidetab-container">
+(c) <i>(12pts)</i> Does adding this additional road change the possible trafﬁc ﬂows of the two cities? That is,
 is there any valid ﬂow \\(\\vec{t}\\) for which the additional road has non-zero ﬂow (\\(t_7 \\ne 0\\))? <b>Give an explicit example of such a ﬂow or an argument why one cannot exist.</b>
 <hr class="s2" />
 (<i>Hint: One way of doing this is to recall that each row in the incidence matrix corresponds to the constraint that the total ﬂow into an intersection is zero. Can you interpret the constraint resulting from the sum of all the rows corresponding to intersections in a city?</i>)
@@ -391,7 +397,8 @@ Which is just the constrant ${lx('-t_7 = 0')}.
 const img8d = require('../img/fa16q8-3.png');
 const fa15q8d =
 `
-<b>(d)</b> <i>(BONUS 5pts)</i> Now suppose instead that <i>two</i> roads are constructed between the cities, as shown in Figure 4.
+<div className="sidetab-container">
+(d) <i>(BONUS 5pts)</i> Now suppose instead that <i>two</i> roads are constructed between the cities, as shown in Figure 4.
 
 <img src="${img8d}" class="problem-image" />
 
@@ -414,7 +421,8 @@ Any <i>explicit</i> valid flow vector ${lx('\\vec{t}')} with ${lx('t_7 \\ne 0')}
 
 const fa15q8e =
 `
-<b>(e)</b> <i>(BONUS 10pts)</i> Before they were connected, both cities individually had sensors set up to measure their trafﬁc ﬂows. That is, they measured the ﬂows along some set of roads, and were able to re-construct the ﬂows along all roads in their <i>isolated</i> city. After the two new roads of Figure 4 were constructed, the state’s engineers added two additional sensors, one on each road (on \\(t_7\\) and \\(t_8\\)). Using the data from each city’s sensors, and these two new sensors, they were able to recover the ﬂows of all roads in the network.
+<div className="sidetab-container">
+(e) <i>(BONUS 10pts)</i> Before they were connected, both cities individually had sensors set up to measure their trafﬁc ﬂows. That is, they measured the ﬂows along some set of roads, and were able to re-construct the ﬂows along all roads in their <i>isolated</i> city. After the two new roads of Figure 4 were constructed, the state’s engineers added two additional sensors, one on each road (on \\(t_7\\) and \\(t_8\\)). Using the data from each city’s sensors, and these two new sensors, they were able to recover the ﬂows of all roads in the network.
 <hr class="s2" />
 However, one day the sensor on \\(t_7\\) breaks. <b>Can they still recover all the ﬂows, using only the remaining sensors? Give an argument for why or why not.</b>
 `;
@@ -440,7 +448,9 @@ ${lx("\\left[ \\begin{array}{c c c c c c}1 & 1 & 1 & 0 & 0 & 0 \\\\ \\end{array}
 Which simplifies to:
 ${lx("\\left[ \\begin{array}{c c c c c c}1 & 1 & 1 & 0 & 0 & 0 \\\\ \\end{array} \\right] B''\\vec{t} = \\vec{0}")}
 
+<span class="small-text">
 ${lx("\\left[ \\begin{array}{c c c c c c}1 & 1 & 1 & 0 & 0 & 0 \\\\ \\end{array} \\right] \\left[ \\begin{array}{c c c c c c} -1 & 0 & +1 & 0 & 0 & 0 & 0 & 0 \\\\ +1 & -1 & 0 & 0 & 0 & 0 & 0 & +1 \\\\ 0 & +1 & -1 & 0 & 0 & 0 & -1 & 0 \\\\ 0 & +1 & -1 & 0 & 0 & 0 & -1 & 0 \\\\ 0 & 0 & 0 & -1 & 0 & +1 & 0 & 0 \\\\ 0 & 0 & 0 & +1 & -1 & 0 & +1 & 0 \\\\ 0 & 0 & 0 & 0 & +1 & -1 & 0 & -1 \\\\ \\end{array} \\right] \\vec{t} = \\vec{0}", false)}
+</span>
 
 ${lx("\\left[ \\begin{array}{c c c c c c c}0 & 0 & 0 & 0 & 0 & 0 & -1 & +1 \\\\ \\end{array} \\right] \\vec{t} = 0", false)}
 
@@ -468,7 +478,8 @@ Suppose there is a network of pumps connecting the three different pools, given 
 
 <img src="${img9a}" class="problem-image" />
 
-<b>(a)</b> <i>(5pts)</i> Justin lives in pool 1 so he can watch the water level in this pool. He also knows exactly how the pumps work — i.e., knows the pump matrix A. <b>Can Justin ﬁgure out the initial water levels in all three pools just by watching the water levels in his pool as time goes by? Describe (brieﬂy) in words how to do this. How many times does Justin need to observe the water in his own pool to
+<div className="sidetab-container">
+(a) <i>(5pts)</i> Justin lives in pool 1 so he can watch the water level in this pool. He also knows exactly how the pumps work — i.e., knows the pump matrix A. <b>Can Justin ﬁgure out the initial water levels in all three pools just by watching the water levels in his pool as time goes by? Describe (brieﬂy) in words how to do this. How many times does Justin need to observe the water in his own pool to
 ﬁgure this out?</b>
 <hr class="s2" />
 <i>(Hint: No “linear algebra” machinery is needed here. Just think about what Justin observes as time goes by.)</i>
@@ -483,7 +494,8 @@ In this case, however, Justin’s analysis is straight-forward. At each time ste
 
 const fa15q9b =
 `
-<b>(b)</b> <i>(5pts)</i> Consider now a general pump matrix A that is known to Justin, not necessarily the one in the example above. Just for this part, suppose Justin had been told the initial water levels \\(\\vec{x}[0]\\) by someone else. Could he ﬁgure out \\(\\vec{x}[t]\\)?
+<div className="sidetab-container">
+(b) <i>(5pts)</i> Consider now a general pump matrix A that is known to Justin, not necessarily the one in the example above. Just for this part, suppose Justin had been told the initial water levels \\(\\vec{x}[0]\\) by someone else. Could he ﬁgure out \\(\\vec{x}[t]\\)?
 <hr class="s1" />
 <b>Write an expression for \\(\\vec{x}[t]\\) given the initial levels \\(\\vec{x}[0]\\) and the pump matrix \\(A\\)</b>.
 `;
@@ -505,7 +517,8 @@ This expression is useful for calculating the initial water levels (as we will s
 
 const fa15q9c =
 `
-<b>(c)</b> <i>(5pts)</i> Suppose we use \\(y[t]\\) to denote Justin’s measurement of the water level in pool 1 at time t. We know that \\(y[t] = x_1[t]\\). <b>Find a vector \\(\\vec{c}\\) such that
+<div className="sidetab-container">
+(c) <i>(5pts)</i> Suppose we use \\(y[t]\\) to denote Justin’s measurement of the water level in pool 1 at time t. We know that \\(y[t] = x_1[t]\\). <b>Find a vector \\(\\vec{c}\\) such that
 $$y[t] = \\vec{c}_T\\vec{x}[t]$$
 `;
 
@@ -524,7 +537,8 @@ as desired.
 
 const fa15q9d =
 `
-<b>(d)</b> <i>(5pts)</i> We want to know if tracking the water level in pool 1 is enough to eventually ﬁgure out the initial water level in all the pools. First <b>find a matrix \\(D\\) in terms of \\(c\\) and \\(A\\) (and powers of \\(A\\)) such that</b>
+<div className="sidetab-container">
+(d) <i>(5pts)</i> We want to know if tracking the water level in pool 1 is enough to eventually ﬁgure out the initial water level in all the pools. First <b>find a matrix \\(D\\) in terms of \\(c\\) and \\(A\\) (and powers of \\(A\\)) such that</b>
 
 $$
 \\begin{bmatrix}
@@ -573,7 +587,8 @@ ${lx('D_j = \\vec{c}^T A^{j}', false)}
 const img9e = require('../img/fa16q9-2.png');
 const fa15q9e =
 `
-<b>(e)</b> <i>(13pts)</i> Now assume we have a speciﬁc network of pumps with a different pump matrix.
+<div className="sidetab-container">
+(e) <i>(13pts)</i> Now assume we have a speciﬁc network of pumps with a different pump matrix.
 
 <img src="${img9e}" class="problem-image" />
 
@@ -608,7 +623,8 @@ Here we see also why we have to be careful if A is more complicated. For a compl
 
 const fa15q9f =
 `
-<b>(f)</b> <i>(10pts)</i> For the T chosen in the previous part and the pump matrix \\(A\\) given there, suppose Justin measures
+<div className="sidetab-container">
+(f) <i>(10pts)</i> For the T chosen in the previous part and the pump matrix \\(A\\) given there, suppose Justin measures
 
 $$
 y[t] = 1 \\qquad for \\; t = 0, \\, 1, \\, \\dots, \\, (T − 1)
@@ -650,7 +666,8 @@ or using your initial knowledge that ${lx('x_1[0] = 1')} to write a system of 2 
 `;
 
 var Scroll = require('react-scroll');
-var scroller = Scroll.scroller;
+var Link = Scroll.Link;
+var Element = Scroll.Element;
 var Sticky = require('react-stickynode');
 
 class EE16AFa15 extends Component {
@@ -670,36 +687,43 @@ class EE16AFa15 extends Component {
           <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
           <hr className="s1" />
           <div className="sidetitle">Straightforward Questions</div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q3', {
-              duration: 500,
-              smooth: true,
-            })}>3. Solve It</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q4', {
-              duration: 500,
-              smooth: true,
-            })}>4. Invert It</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q5', {
-              duration: 500,
-              smooth: true,
-            })}>5. Show It</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q6', {
-              duration: 500,
-              smooth: true,
-            })}>6. Null It</a></div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q3" spy={true} isDynamic={true} smooth={true} duration={500}>
+              3. Solve It
+            </Link>
+          </div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q4" spy={true} isDynamic={true} smooth={true} duration={500}>
+              4. Invert It
+            </Link>
+          </div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q5" spy={true} isDynamic={true} smooth={true} duration={500}>
+              5. Show It
+            </Link>
+          </div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q6" spy={true} isDynamic={true} smooth={true} duration={500}>
+              6. Null It
+            </Link>
+          </div>
           <hr className="s1" />
           <div className="sidetitle">Free-form Problems</div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q7a', {
-              duration: 500,
-              smooth: true,
-            })}>7. Finding the Bright Cave</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q8a', {
-              duration: 500,
-              smooth: true,
-            })}>8. A Tale of Two Cities</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q9a', {
-              duration: 500,
-              smooth: true,
-            })}>9. Justin Beaver</a></div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q7" spy={true} isDynamic={true} smooth={true} duration={500}>
+              7. Finding the Bright Cave
+            </Link>
+          </div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q8" spy={true} isDynamic={true} smooth={true} duration={500}>
+              8. A Tale of Two Cities
+            </Link>
+          </div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q9" spy={true} isDynamic={true} smooth={true} duration={500}>
+              9. Justin Beaver
+            </Link>
+          </div>
         </Sticky>
         <div className="sidebar mobile">
           <hr className="s5" />
@@ -708,80 +732,101 @@ class EE16AFa15 extends Component {
           <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
           <hr className="s1" />
           <div className="sidetitle">Straightforward Questions</div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q3', {
-              duration: 500,
-              smooth: true,
-            })}>3. Solve It</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q4', {
-              duration: 500,
-              smooth: true,
-            })}>4. Invert It</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q5', {
-              duration: 500,
-              smooth: true,
-            })}>5. Show It</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q6', {
-              duration: 500,
-              smooth: true,
-            })}>6. Null It</a></div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q3" isDynamic={true} smooth={true} duration={500}>
+              3. Solve It
+            </Link>
+          </div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q4" isDynamic={true} smooth={true} duration={500}>
+              4. Invert It
+            </Link>
+          </div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q5" isDynamic={true} smooth={true} duration={500}>
+              5. Show It
+            </Link>
+          </div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q6" isDynamic={true} smooth={true} duration={500}>
+              6. Null It
+            </Link>
+          </div>
           <hr className="s1" />
           <div className="sidetitle">Free-form Problems</div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q7a', {
-              duration: 500,
-              smooth: true,
-            })}>7. Finding the Bright Cave</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q8a', {
-              duration: 500,
-              smooth: true,
-            })}>8. A Tale of Two Cities</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q9a', {
-              duration: 500,
-              smooth: true,
-            })}>9. Justin Beaver</a></div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q7" isDynamic={true} smooth={true} duration={500}>
+              7. Finding the Bright Cave
+            </Link>
+          </div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q8" isDynamic={true} smooth={true} duration={500}>
+              8. A Tale of Two Cities
+            </Link>
+          </div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q9" isDynamic={true} smooth={true} duration={500}>
+              9. Justin Beaver
+            </Link>
+          </div>
         </div>
         <div className="content">
           <hr className="s5" />
           <h2>Straightforward questions <i>(24 points)</i></h2>
           <hr className="s2" />
           <p>Unless told otherwise, you must show work to get credit. There will be very little partial credit given in this section. You get one drop: do 3 out of the following 4 questions. (We will grade all 4 and keep the best 3 scores.) Each problem is worth 8 points. Students who get all 4 questions correct will receive some bonus points (6 points).</p>
-          <hr className="s5" />
-          <Question id={"q3"} content={fa15q3} variables={['x_1', 'x_2']} image={['q3.png']} examCode={examCode} solution={fa15q3_soln} />
-          <hr className="s5" />
-          <Question id={"q4"} content={fa15q4} rows={2} cols={2} image={['q4-1.png', 'q4-2.png']} examCode={examCode} solution={fa15q4_soln}  />
-          <hr className="s5" />
-          <Question id={"q5"} content={fa15q5} hasResponse={false} image={['q5-1.png', 'q5-2.png']} examCode={examCode} solution={fa15q5_soln}  />
-          <hr className="s5" />
-          <Question id={"q6"} content={fa15q6} hasResponse={false} image={['q6-1.png', 'q6-2.png']} examCode={examCode} solution={fa15q6_soln}  />
-          <hr className="s5" />
-          <h2>Free-form Problems <i>(94 + 15 points)</i></h2>
-          <hr className="s5" />
-          <Question id={"q7a"} content={fa15q7a} rows={4} cols={4} image={['q7a.png']} examCode={examCode} solution={fa15q7a_soln}  />
-          <hr className="s5" />
-          <Question id={"q7b"} content={fa15q7b} on="Yes" off="No" image={['q7b.png']} examCode={examCode} solution={fa15q7b_soln}  />
-          <hr className="s5" />
-          <Question id={"q7c"} content={fa15q7c} on="Yes" off="No" image={['q7c.png']} examCode={examCode} solution={fa15q7c_soln}  />
-          <hr className="s5" />
-          <Question id={"q8a"} content={fa15q8a} rows={6} cols={6} image={['q8a.png']} examCode={examCode} solution={fa15q8a_soln}  />
-          <hr className="s5" />
-          <Question id={"q8b"} content={fa15q8b} rows={6} cols={1} image={['q8b-1.png', 'q8b-2.png']} examCode={examCode} solution={fa15q8b_soln}  />
-          <hr className="s5" />
-          <Question id={"q8c"} content={fa15q8c} hasResponse={false} image={['q8c.png']} examCode={examCode} solution={fa15q8c_soln}  />
-          <hr className="s5" />
-          <Question id={"q8d"} content={fa15q8d} hasResponse={false} image={['q8d.png']} examCode={examCode} solution={fa15q8d_soln}  />
-          <hr className="s5" />
-          <Question id={"q8e"} content={fa15q8e} on="Yes" off="No" image={['q8e-1.png', 'q8e-2.png']} examCode={examCode} solution={fa15q8e_soln}  />
-          <hr className="s5" />
-          <Question id={"q9a"} content={fa15q9a} on="Yes" off="No" image={['q9a.png']} examCode={examCode} solution={fa15q9a_soln}  />
-          <hr className="s5" />
-          <Question id={"q9b"} content={fa15q9b} hasResponse={false} image={['q9b.png']} examCode={examCode} solution={fa15q9b_soln}  />
-          <hr className="s5" />
-          <Question id={"q9c"} content={fa15q9c} rows={3} cols={1} image={['q9c.png']} examCode={examCode} solution={fa15q9c_soln}  />
-          <hr className="s5" />
-          <Question id={"q9d"} content={fa15q9d} hasResponse={false} image={['q9d.png']} examCode={examCode} solution={fa15q9d_soln}  />
-          <hr className="s5" />
-          <Question id={"q9e"} content={fa15q9e} hasResponse={true} image={['q9e-1.png', 'q9e-2.png']} examCode={examCode} solution={fa15q9e_soln}  />
-          <hr className="s5" />
-          <Question id={"q9f"} content={fa15q9f} rows={3} cols={1} image={['q9f-1.png', 'q9f-2.png']} examCode={examCode} solution={fa15q9f_soln}  />
+          <Element name="q3">
+            <hr className="s5" />
+            <Question id={"q3"} content={fa15q3} variables={['x_1', 'x_2']} image={['q3.png']} examCode={examCode} solution={fa15q3_soln} />
+          </Element>
+          <Element name="q4">
+            <hr className="s5" />
+            <Question id={"q4"} content={fa15q4} rows={2} cols={2} image={['q4-1.png', 'q4-2.png']} examCode={examCode} solution={fa15q4_soln}  />
+          </Element>
+          <Element name="q5">
+            <hr className="s5" />
+            <Question id={"q5"} content={fa15q5} hasResponse={false} image={['q5-1.png', 'q5-2.png']} examCode={examCode} solution={fa15q5_soln}  />
+          </Element>
+          <Element name="q6">
+            <hr className="s5" />
+            <Question id={"q6"} content={fa15q6} hasResponse={false} image={['q6-1.png', 'q6-2.png']} examCode={examCode} solution={fa15q6_soln}  />
+          </Element>
+          <Element name="q7">
+            <hr className="s5" />
+            <h2>Free-form Problems <i>(94 + 15 points)</i></h2>
+            <hr className="s5" />
+            <Question id={"q7a"} content={fa15q7a} rows={4} cols={4} image={['q7a.png']} examCode={examCode} solution={fa15q7a_soln}  />
+            <hr className="s5" />
+            <Question id={"q7b"} content={fa15q7b} on="Yes" off="No" image={['q7b.png']} examCode={examCode} solution={fa15q7b_soln}  />
+            <hr className="s5" />
+            <Question id={"q7c"} content={fa15q7c} on="Yes" off="No" image={['q7c.png']} examCode={examCode} solution={fa15q7c_soln}  />
+          </Element>
+          <Element name="q8">
+            <hr className="s5" />
+            <Question id={"q8a"} content={fa15q8a} rows={6} cols={6} image={['q8a.png']} examCode={examCode} solution={fa15q8a_soln}  />
+            <hr className="s5" />
+            <Question id={"q8b"} content={fa15q8b} rows={6} cols={1} image={['q8b-1.png', 'q8b-2.png']} examCode={examCode} solution={fa15q8b_soln}  />
+            <hr className="s5" />
+            <Question id={"q8c"} content={fa15q8c} hasResponse={false} image={['q8c.png']} examCode={examCode} solution={fa15q8c_soln}  />
+            <hr className="s5" />
+            <Question id={"q8d"} content={fa15q8d} hasResponse={false} image={['q8d.png']} examCode={examCode} solution={fa15q8d_soln}  />
+            <hr className="s5" />
+            <Question id={"q8e"} content={fa15q8e} on="Yes" off="No" image={['q8e-1.png', 'q8e-2.png']} examCode={examCode} solution={fa15q8e_soln}  />
+          </Element>
+          <Element name="q9">
+            <hr className="s5" />
+            <Question id={"q9a"} content={fa15q9a} on="Yes" off="No" image={['q9a.png']} examCode={examCode} solution={fa15q9a_soln}  />
+            <hr className="s5" />
+            <Question id={"q9b"} content={fa15q9b} hasResponse={false} image={['q9b.png']} examCode={examCode} solution={fa15q9b_soln}  />
+            <hr className="s5" />
+            <Question id={"q9c"} content={fa15q9c} rows={3} cols={1} image={['q9c.png']} examCode={examCode} solution={fa15q9c_soln}  />
+            <hr className="s5" />
+            <Question id={"q9d"} content={fa15q9d} hasResponse={false} image={['q9d.png']} examCode={examCode} solution={fa15q9d_soln}  />
+            <hr className="s5" />
+            <Question id={"q9e"} content={fa15q9e} hasResponse={true} image={['q9e-1.png', 'q9e-2.png']} examCode={examCode} solution={fa15q9e_soln}  />
+            <hr className="s5" />
+            <Question id={"q9f"} content={fa15q9f} rows={3} cols={1} image={['q9f-1.png', 'q9f-2.png']} examCode={examCode} solution={fa15q9f_soln}  />
+          </Element>
         </div>
       </span>
     );

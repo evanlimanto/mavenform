@@ -9,7 +9,7 @@ In this problem we will return one final time to examining how one might choose 
 
 (Recall that in the rain analogy, the area of the photodetector is analogous to the area of the bucket, the current is analogous to the amount of water per unit time being captured in the bucket, and the voltage is analogous to the height of the water accumulated within the bucket.)<br/><br/>
 
-(a) <b>(3 pts)</b> Let’s assume that the area of the photodetector is \\(A_{PD}\\), that \\(A_{PD}\\) is smaller than \\(A_{illuminated}\\), and that the photodetector is placed such that it fits entirely within the illuminated region. In this case, can you predict how the current produced by the photodetector \\(I_{PD}\\) would change as a function of \\(A_{PD}\\) and \\(A_{illuminated}\\)?
+(a) <i>(3 pts)</i> Let’s assume that the area of the photodetector is \\(A_{PD}\\), that \\(A_{PD}\\) is smaller than \\(A_{illuminated}\\), and that the photodetector is placed such that it fits entirely within the illuminated region. In this case, can you predict how the current produced by the photodetector \\(I_{PD}\\) would change as a function of \\(A_{PD}\\) and \\(A_{illuminated}\\)?
 `;
 
 const sp15q1a_soln =
@@ -23,7 +23,7 @@ ${lx('I_{PD} \\propto \\frac{A_{PD}}{A_{illuminated}}', false)}
 
 const sp15q1b =
 `
-(b) <b>(3 pts)</b> Now let’s assume that ${lx('A_{PD}')} is larger than ${lx('A_{illuminated}')} and that the illuminated area is fully captured by the photodetector; how does the current ${lx('I_{PD}')} depend upon on ${lx('A_{PD}')} now?
+(b) <i>(3 pts)</i> Now let’s assume that ${lx('A_{PD}')} is larger than ${lx('A_{illuminated}')} and that the illuminated area is fully captured by the photodetector; how does the current ${lx('I_{PD}')} depend upon on ${lx('A_{PD}')} now?
 `;
 
 const sp15q1b_soln =
@@ -34,7 +34,7 @@ ${lx('I_{PD} \\propto constant', false)}
 
 const sp15q1c =
 `
-c) <b>(6 pts)</b> Let’s now assume that in order to read out its voltage, we have to connect 
+c) <i>(6 pts)</i> Let’s now assume that in order to read out its voltage, we have to connect 
 the photodetector device to a circuit with a fixed capacitance, and that we operate 
 the photodetector the same way as we did in homework 0. In other words, before 
 each measurement, we discharge both the photodetector and the measurement 
@@ -84,7 +84,7 @@ the vector ${lmatrix([['x', 'y']], true)} = ${lmatrix([[0, 1]], true)} would hav
 
 <img src=${imgsp15q2_1} className="problem-image" /> 
 
-a) <b>(2 pts)</b> Using the same representation as the example described above, draw the image represented by the vector ${lmatrix([[1], [2]])}.
+a) <i>(2 pts)</i> Using the same representation as the example described above, draw the image represented by the vector ${lmatrix([[1], [2]])}.
 `;
 
 const sp15q2a_soln =
@@ -95,7 +95,7 @@ const sp15q2a_soln =
 const imgsp15q2b_soln = require('../img/sp15q2-2_s.png');
 const sp15q2b =
 `
-b) <b>(6 pts)</b> Now let’s examine what happens if we have an image with two black 
+b) <i>(6 pts)</i> Now let’s examine what happens if we have an image with two black 
 pixels and perform a transformation on this image. In particular, let’s assume that 
 our image consists of the vectors ${lmatrix([[1], [2]])} and ${lmatrix([[1], [1]])}. Draw both the original image and the image created by transforming that image by the matrix ${lmatrix([[1, 2], [2, 4]])}. (Recall that transformation in this context means multiplying each vector by the given matrix.) 
 `;
@@ -112,7 +112,7 @@ ${lx('\\left[ \\begin{array}{c c}1 & 2 \\\\ 2 & 4 \\\\ \\end{array} \\right] \\c
 const imgsp15q2c_s = require('../img/sp15q2-3_s.png');
 const sp15q2c =
 `
-c) <b>(6 pts)</b> Now let’s imagine we had an image with black pixels everywhere, and that we transformed this image by the same ${lmatrix([[1, 2], [2, 4]])} matrix as in part b). Sketch the that we transformed this image by the same resulting transformed image. Note that you don’t need to know the exact size of the original image – just indicate what happens to the transformed image as this size is increased. It may help you to consider what happens when you multiply an arbitrary vector ${lmatrix([['x', 'y']], true)} by the transformation matrix. What is property of the transformation matrix makes the resulting image look the way it does? 
+c) <i>(6 pts)</i> Now let’s imagine we had an image with black pixels everywhere, and that we transformed this image by the same ${lmatrix([[1, 2], [2, 4]])} matrix as in part b). Sketch the that we transformed this image by the same resulting transformed image. Note that you don’t need to know the exact size of the original image – just indicate what happens to the transformed image as this size is increased. It may help you to consider what happens when you multiply an arbitrary vector ${lmatrix([['x', 'y']], true)} by the transformation matrix. What is property of the transformation matrix makes the resulting image look the way it does? 
 `;
 
 const sp15q2c_soln =
@@ -138,7 +138,7 @@ Francisco. She’s hoping to sell these pictures to make some extra money, and s
 wants to make sure she doesn’t lose the data. The images she captures are all square 
 images of ${lx('n')} x ${lx('n')} pixels. Each pixel contains a positive number indicating the intensity of light, and for the rest of this problem, you can assume that it takes 3 bytes of memory to store such a number.<br/><br/>
 
-a) <b>(2 pts)</b> Alice is known to be clumsy with her laptop and so she doesn’t want to 
+a) <i>(2 pts)</i> Alice is known to be clumsy with her laptop and so she doesn’t want to 
 just store all the pictures in one place. Instead, she makes 3 copies of the image, 
 and stores each copy on a different USB stick. If Alice wanted to store 1000 
 images this way, where each image is 1000 x 1000 pixels (i.e., ${lx('n')} = 1000), how 
@@ -152,7 +152,7 @@ ${lx('\\begin{align} N_{bytes} &= 3 copies \\cdot 1000 images \\cdot (1000 \\cdo
 
 const sp15q3b =
 `
-b) <b>(5 pts)</b> Alice realizes that if she wants to keep taking pictures, she is going to have to become efficient with her storage, she cannot simply keep replicating the data. 
+b) <i>(5 pts)</i> Alice realizes that if she wants to keep taking pictures, she is going to have to become efficient with her storage, she cannot simply keep replicating the data. 
 So she focuses on first understanding how she can efficiently store two images. 
 Just like in the lab, we’ll express the images as vectors. 
  
@@ -168,7 +168,7 @@ Elaine's strategy is better; in Alice's strategy, if the USB stick is lost, Alic
 
 const sp15q3c =
 `
-c) <b>(6 pts)</b> Let’s now consider a more advanced storage strategy that uses 8 storage 
+c) <i>(6 pts)</i> Let’s now consider a more advanced storage strategy that uses 8 storage 
 devices to handle four images ${lx('a')}, ${lx('b')}, ${lx('c')}, and ${lx('d')}. If each pixel (which contains a real 
 number representing the intensity) in each of the four image vectors is ${lx('a_i')}, ${lx('b_i')}, ${lx('c_i')}, ${lx('d_i')}, 
 the information stored in each pixel location of the 8 storage devices will be ${lx('a_i')}, ${lx('b_i')}, 
@@ -190,7 +190,7 @@ Define the binary matrix above as ${lx('A_{store}')} for part (d).
 
 const sp15q3d =
 `
-d) <b>(Bonus: 6 pts)</b> Recalling that ${lx('a')}, ${lx('b')}, ${lx('c')}, and ${lx('d')} are all ${lx('n^2')} x ${lx('1')} vectors, show how you 
+d) <i>(Bonus: 6 pts)</i> Recalling that ${lx('a')}, ${lx('b')}, ${lx('c')}, and ${lx('d')} are all ${lx('n^2')} x ${lx('1')} vectors, show how you 
 could perform a single matrix-matrix multiplication to represent the storage action 
 of all of the pixels simultaneously. Hint: what would be the dimensions of a 
 matrix composed of ${lmatrix([['a', 'b', 'c', 'd']], true)}? 
@@ -220,7 +220,7 @@ Each company has a growth ${lx('g_f(i)')}, ${lx('g_s(i)')}, and ${lx('g_d(i)')} 
 invests $1 in Friendly Faces on day i, then she gets back ${lx('g_f(i)')} dollars at the end of day ${lx('i')}. 
 The mutual fund invests fractions ${lx('\\alpha_f')}, ${lx('\\alpha_s')}, and ${lx('\\alpha_d')} of Alice’s money in each of the three  companies; note that these fractions are always the same (i.e., they do not change from one day to the next), and that <b>all of her money is always invested in the market.</b><br/><br/>
 
-a) <b>(3 pts)</b> Using the terms defined above, write an expression using a dot product that would compute how many dollars Alice gets back after the first day.
+a) <i>(3 pts)</i> Using the terms defined above, write an expression using a dot product that would compute how many dollars Alice gets back after the first day.
 `;
 
 const sp15q4a_soln =
@@ -234,7 +234,7 @@ Dollars returned after day 1: ${lx('\\vec{g}(1)^T \\cdot \\vec{\\alpha} = g_f(1)
 
 const sp15q4b =
 `
-b) <b>(7 pts)</b> Let’s assume that on the first day, Alice got back $1.7 from her $1 investment – i.e., the result of the expression you wrote in part a) is $1.7. Alice is 
+b) <i>(7 pts)</i> Let’s assume that on the first day, Alice got back $1.7 from her $1 investment – i.e., the result of the expression you wrote in part a) is $1.7. Alice is 
 quite happy with the increase, and decides to continue investing.<br/><br/>
 On the second day, Alice again invests $1 at the beginning of the day, but at the end of the day she finds out that all of her money was lost – i.e., she will be getting $0 back!<br/><br/>
 This makes Alice angry and she wants to find out the investment strategy of the 
@@ -279,7 +279,7 @@ place. In a given month, 80% will continue to stay in Berkeley, but there is a 2
 that they will choose to move to Boston. For every person in Boston, there is only a 10% 
 chance they will choose to stay in Boston, but 90% will choose to move to Berkeley.<br/><br/>
 
-a) <b>(3 pts)</b> Draw a graph that models this setup. The nodes in the graph are Berkeley 
+a) <i>(3 pts)</i> Draw a graph that models this setup. The nodes in the graph are Berkeley 
 and Boston, and the arcs between the two nodes should be annotated with the 
 probabilities of moving from one node to the other. 
 `;
@@ -291,7 +291,7 @@ const sp15q5a_soln =
 
 const sp15q5b =
 `
-b) <b>(4 pts)</b> Now let’s say we set up a vector ${lx('x(i)')} = ${lmatrix([['x_{berkeley}(i)', 'x_{boston}(i)']], true)}, where ${lx('x_{berkeley}(i)')} represents the number of people living in Berkeley at month ${lx('i')} (similarly 
+b) <i>(4 pts)</i> Now let’s say we set up a vector ${lx('x(i)')} = ${lmatrix([['x_{berkeley}(i)', 'x_{boston}(i)']], true)}, where ${lx('x_{berkeley}(i)')} represents the number of people living in Berkeley at month ${lx('i')} (similarly 
 for Boston and ${lx('x_{boston}(i)')}). Write a matrix ${lx('A_{transition}')} that you could multiply by this vector to predict the number of people living in each city at month ${lx('i+1')} (i.e., ${lx('x(i + 1)')} = ${lx('A_{transition}x(i)')})
 `;
 
@@ -302,7 +302,7 @@ ${lx('A_{transition} = \\left[ \\begin{array}{c c} 0.8 & 0.9 \\\\ 0.2 & 0.1 \\\\
 
 const sp15q5c =
 `
-c) <b>(9 pts)</b> Now let us say the total population stays constant, and we start with half 
+c) <i>(9 pts)</i> Now let us say the total population stays constant, and we start with half 
 the population in Berkeley and the other half in Boston. Use the matrix you wrote 
 above to find the steady-state populations in Berkeley and Boston. If the total 
 population is 100, calculate the number of people in Berkeley at steady state?
@@ -339,7 +339,8 @@ So if we started with 100 people, we will end up with ~82 people in Berkeley, an
 `;
 
 var Scroll = require('react-scroll');
-var scroller = Scroll.scroller;
+var Link = Scroll.Link;
+var Element = Scroll.Element;
 var Sticky = require('react-stickynode');
 
 class EE16ASp15 extends Component {
@@ -356,83 +357,103 @@ class EE16ASp15 extends Component {
           <hr className="s5" />
           <h4>CONTENTS</h4>
           <hr className="s1" />
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q1a', {
-              duration: 500,
-              smooth: true,
-            })}>1. Imaging Circuit</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q2a', {
-              duration: 500,
-              smooth: true,
-            })}>2. Sparse Images and Vector Geometry</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q3a', {
-              duration: 500,
-              smooth: true,
-            })}>3. Coding for Storage</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q4a', {
-              duration: 500,
-              smooth: true,
-            })}>4. Investment Strategy</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q5a', {
-              duration: 500,
-              smooth: true,
-            })}>5. Berkeley Forever</a></div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q1" spy={true} isDynamic={true} smooth={true} duration={500}>
+              1. Imaging Circuit
+            </Link>
+          </div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q2" spy={true} isDynamic={true} smooth={true} duration={500}>
+              2. Sparse Images and Vector Geometry
+            </Link>
+          </div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q3" spy={true} isDynamic={true} smooth={true} duration={500}>
+              3. Coding for Storage
+            </Link>
+          </div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q4" spy={true} isDynamic={true} smooth={true} duration={500}>
+              4. Investment Strategy
+            </Link>
+          </div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q5" spy={true} isDynamic={true} smooth={true} duration={500}>
+              5. Berkeley Forever
+            </Link>
+          </div>
         </Sticky>
         <div className="sidebar mobile">
           <hr className="s5" />
           <h4>CONTENTS</h4>
           <hr className="s1" />
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q1a', {
-              duration: 500,
-              smooth: true,
-            })}>1. Imaging Circuit</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q2a', {
-              duration: 500,
-              smooth: true,
-            })}>2. Sparse Images and Vector Geometry</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q3a', {
-              duration: 500,
-              smooth: true,
-            })}>3. Coding for Storage</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q4a', {
-              duration: 500,
-              smooth: true,
-            })}>4. Investment Strategy</a></div>
-          <div><a className="sidetab" onClick={() => scroller.scrollTo('q5a', {
-              duration: 500,
-              smooth: true,
-            })}>5. Berkeley Forever</a></div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q1" isDynamic={true} smooth={true} duration={500}>
+              1. Imaging Circuit
+            </Link>
+          </div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q2" isDynamic={true} smooth={true} duration={500}>
+              2. Sparse Images and Vector Geometry
+            </Link>
+          </div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q3" isDynamic={true} smooth={true} duration={500}>
+              3. Coding for Storage
+            </Link>
+          </div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q4" isDynamic={true} smooth={true} duration={500}>
+              4. Investment Strategy
+            </Link>
+          </div>
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to="q5" isDynamic={true} smooth={true} duration={500}>
+              5. Berkeley Forever
+            </Link>
+          </div>
         </div>
         <div className="content">
-          <hr className="s5" />
-          <Question id={"q1a"} content={sp15q1a} hasResponse={false} examCode={examCode} image={['q1a.png']} solution={sp15q1a_soln} />
-          <hr className="s5" />
-          <Question id={"q1b"} content={sp15q1b} hasResponse={false} examCode={examCode} image={['q1b.png']} solution={sp15q1b_soln} />
-          <hr className="s5" />
-          <Question id={"q1c"} content={sp15q1c} hasResponse={false} examCode={examCode} image={['q1c.png']} solution={sp15q1c_soln} />
-          <hr className="s5" />
-          <Question id={"q2a"} content={sp15q2a} hasResponse={false} examCode={examCode} image={['q2a.png']} solution={sp15q2a_soln}  />
-          <hr className="s5" />
-          <Question id={"q2b"} content={sp15q2b} hasResponse={false} examCode={examCode} image={['q2b.png']} solution={sp15q2b_soln}  />
-          <hr className="s5" />
-          <Question id={"q2c"} content={sp15q2c} hasResponse={false} examCode={examCode} image={['q2c.png']} solution={sp15q2c_soln}  />
-          <hr className="s5" />
-          <Question id={"q3a"} content={sp15q3a} hasResponse={false} examCode={examCode} image={['q3a.png']} solution={sp15q3a_soln}  />
-          <hr className="s5" />
-          <Question id={"q3b"} content={sp15q3b} hasResponse={false} examCode={examCode} image={['q3b.png']} solution={sp15q3b_soln}  />
-          <hr className="s5" />
-          <Question id={"q3c"} content={sp15q3c} hasResponse={false} examCode={examCode} image={['q3c.png']} solution={sp15q3c_soln}  />
-          <hr className="s5" />
-          <Question id={"q3d"} content={sp15q3d} hasResponse={false} examCode={examCode} image={['q3d.png']} solution={sp15q3d_soln}  />
-          <hr className="s5" />
-          <Question id={"q4a"} content={sp15q4a} hasResponse={false} examCode={examCode} image={['q4a.png']} solution={sp15q4a_soln}  />
-          <hr className="s5" />
-          <Question id={"q4b"} content={sp15q4b} hasResponse={false} examCode={examCode} image={['q4b.png']} solution={sp15q4b_soln}  />
-          <hr className="s5" />
-          <Question id={"q5a"} content={sp15q5a} hasResponse={false} examCode={examCode} image={['q5a.png']} solution={sp15q5a_soln}  />
-          <hr className="s5" />
-          <Question id={"q5b"} content={sp15q5b} hasResponse={false} examCode={examCode} image={['q5b.png']} solution={sp15q5b_soln}  />
-          <hr className="s5" />
-          <Question id={"q5c"} content={sp15q5c} hasResponse={false} examCode={examCode} image={['q5c.png']} solution={sp15q5c_soln}  />
+          <Element name="q1">
+            <hr className="s5" />
+            <Question id={"q1a"} content={sp15q1a} hasResponse={false} examCode={examCode} image={['q1a.png']} solution={sp15q1a_soln} />
+            <hr className="s5" />
+            <Question id={"q1b"} content={sp15q1b} hasResponse={false} examCode={examCode} image={['q1b.png']} solution={sp15q1b_soln} />
+            <hr className="s5" />
+            <Question id={"q1c"} content={sp15q1c} hasResponse={false} examCode={examCode} image={['q1c.png']} solution={sp15q1c_soln} />
+          </Element>
+          <Element name="q2">
+            <hr className="s5" />
+            <Question id={"q2a"} content={sp15q2a} hasResponse={false} examCode={examCode} image={['q2a.png']} solution={sp15q2a_soln}  />
+            <hr className="s5" />
+            <Question id={"q2b"} content={sp15q2b} hasResponse={false} examCode={examCode} image={['q2b.png']} solution={sp15q2b_soln}  />
+            <hr className="s5" />
+            <Question id={"q2c"} content={sp15q2c} hasResponse={false} examCode={examCode} image={['q2c.png']} solution={sp15q2c_soln}  />
+          </Element>
+          <Element name="q3">
+            <hr className="s5" />
+            <Question id={"q3a"} content={sp15q3a} hasResponse={false} examCode={examCode} image={['q3a.png']} solution={sp15q3a_soln}  />
+            <hr className="s5" />
+            <Question id={"q3b"} content={sp15q3b} hasResponse={false} examCode={examCode} image={['q3b.png']} solution={sp15q3b_soln}  />
+            <hr className="s5" />
+            <Question id={"q3c"} content={sp15q3c} hasResponse={false} examCode={examCode} image={['q3c.png']} solution={sp15q3c_soln}  />
+            <hr className="s5" />
+            <Question id={"q3d"} content={sp15q3d} hasResponse={false} examCode={examCode} image={['q3d.png']} solution={sp15q3d_soln}  />
+          </Element>
+          <Element name="q4">  
+            <hr className="s5" />
+            <Question id={"q4a"} content={sp15q4a} hasResponse={false} examCode={examCode} image={['q4a.png']} solution={sp15q4a_soln}  />
+            <hr className="s5" />
+            <Question id={"q4b"} content={sp15q4b} hasResponse={false} examCode={examCode} image={['q4b.png']} solution={sp15q4b_soln}  />
+          </Element>
+          <Element name="q5">
+            <hr className="s5" />
+            <Question id={"q5a"} content={sp15q5a} hasResponse={false} examCode={examCode} image={['q5a.png']} solution={sp15q5a_soln}  />
+            <hr className="s5" />
+            <Question id={"q5b"} content={sp15q5b} hasResponse={false} examCode={examCode} image={['q5b.png']} solution={sp15q5b_soln}  />
+            <hr className="s5" />
+            <Question id={"q5c"} content={sp15q5c} hasResponse={false} examCode={examCode} image={['q5c.png']} solution={sp15q5c_soln}  />
+          </Element>
         </div>
       </span>
     );

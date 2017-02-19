@@ -15,6 +15,7 @@ body {
   font-weight: 400;
   font-size: 16px;
   line-height: 22px;
+  overflow-x: hidden;
   color: #333;
 }
 
@@ -83,6 +84,10 @@ h6 {
 
 li {
   margin-left: 40px;
+}
+
+.small-text {
+  font-size: 14px;
 }
 
 .h5-alt {
@@ -202,6 +207,7 @@ img {
   padding: 25px;
   color: #11accd;
   border: 1px solid #11accd;
+  overflow-x: scroll;
 }
 
 .solution * {
