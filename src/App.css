@@ -99,15 +99,8 @@ h6 {
 }
 
 .banner {
-  position: absolute;
   background: #11accd;
   width: 100%;
-  top: 0;
-  left: 0;
-}
-
-.shadow-banner {
-  opacity: 0;
 }
 
 a {
@@ -182,6 +175,10 @@ label {
 
 .gray, .btn-default {
   background: #999;
+}
+
+.light-gray {
+  background: #eaeaea;
 }
 
 .toggle-handle {
@@ -302,6 +299,7 @@ input[type=button]:hover {
 }
 
 .feedback-home {
+  position: absolute;
   color: #fff;
 }
 
@@ -354,6 +352,16 @@ input[type=button]:hover {
   max-width: 800px;
 }
 
+.column {
+  padding: 10px;
+  display: inline-block;
+  max-width: 320px;
+}
+
+.column * {
+  text-align: center;
+}
+
 .center {
   text-align: center;
   margin: auto;
@@ -390,6 +398,27 @@ input[type=button]:hover {
   width: 100%;
   clear: both;
   height: 100px;
+}
+
+.margin-alt {
+  display: block;
+  width: 100%;
+  clear: both;
+  height: 75px;
+}
+
+.white-text {
+  color: #fff;
+}
+
+.footer-link {
+  color: #fff;
+  border-bottom: 1px dashed #fff;
+}
+
+.footer-link:hover {
+  color: #ccc;
+  border-bottom: 1px dashed #ccc;
 }
 
 .hidden {
