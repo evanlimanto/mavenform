@@ -328,21 +328,23 @@ const fa16q7d_soln =
 `
 Yes, because given those values for ${lx('A')}, ${lx('A')} is invertible.
 <hr class="s2"/>
-This can be shown by row reducing to see that there is a pivot in every row and column of ${lx('A')}: Multiplying each row of ${lx('A')} by ten gives:
+This can be shown by row reducing to see that there is a pivot in every row and column of ${lx('A')}:
 <hr class="s1"/>
-${lmatrix([[6, 4, 2], [3, 2, 3], [1, 4, 5]])}
+Multiplying each row of ${lx('A')} by ten gives:
+<hr class="s1"/>
+${lmatrix([[6, 4, 2], [3, 2, 3], [1, 4, 5]], false, false)}
 <hr class="s1"/>
 Swapping ${lx('R_1')} and ${lx('R_3')} gives:
 <hr class="s1"/>
-${lmatrix([[1, 4, 5], [6, 4, 2], [3, 2, 3]])}
+${lmatrix([[1, 4, 5], [6, 4, 2], [3, 2, 3]], false, false)}
 <hr class="s1"/>
 ${lx('R_2')} - ${lx('2 * R_3')} gives:
 <hr class="s1"/>
-${lmatrix([[1, 4, 5], [0, 0, -4], [3, 2, 3]])}
+${lmatrix([[1, 4, 5], [0, 0, -4], [3, 2, 3]], false, false)}
 <hr class="s1"/>
 ${lx('R_3')} - ${lx('3 * R_1')} gives:
 <hr class="s1"/>
-${lmatrix([[1, 4, 5], [0, 0, -4], [0, -10, -12]])}
+${lmatrix([[1, 4, 5], [0, 0, -4], [0, -10, -12]], false, false)}
 <hr class="s2"/>
 From here, we see there is a nonzero pivot in every row and column in ${lx('A')}.
 Another way to show that ${lx('A')} is invertible would be to calculate ${lx('A^{−1}')}. This can be done by row reducing ${lx('A|I')} (this calculation is more involved). 
@@ -351,7 +353,7 @@ ${lx('A^{−1}')} is found to be:
 
 ${lx('A^{-1}')} = ${lmatrix([[0.5, 3, '-2\\frac{1}{3}'], [3, -7, 3], [-2.5, 5, '0\\frac{2}{3}']])}
 <hr class="s2"/>
-This means you can back infer based on the equation ${lx('A^{-1}\\vec{x}[n + 1]')} = ${lx('\\vec[n]')}.
+This means you can back infer based on the equation ${lx('A^{-1}\\vec{x}[n + 1]')} = ${lx('\\vec{x}[n]')}.
 `;
 
 const fa16q7e =
@@ -413,7 +415,7 @@ Describe what transformation matrix ${lx('B')} performs to an input position in 
 
 const fa16q8b_soln =
 `
-After applying the matrix to some sample coordinates such as the standard basis vectors, we can see that the matrix rotates by -45 and scales by ${lx('2\\sqrt{2}')}.
+After applying the matrix to some sample coordinates such as the standard basis vectors, we can see that the matrix rotates by ${lx('45^{\\circ}')} and scales by ${lx('2\\sqrt{2}')}.
 `;
 
 const imgfa16q8_2 = require('../img/fa16q8-2.png');
@@ -488,8 +490,8 @@ class EE16AFa16 extends Component {
           <hr className="s2" />
           <h4>SOURCES</h4>
           <hr className="s2" />
-          <div><a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Afa16-exam.pdf'} target="_blank">Exam PDF</a></div>
-          <div><a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Afa16-soln.pdf'} target="_blank">Solutions PDF</a></div>
+          <div className="sidetab-container"><a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Afa16-exam.pdf'} target="_blank">Exam PDF</a></div>
+          <div className="sidetab-container"><a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Afa16-soln.pdf'} target="_blank">Solutions PDF</a></div>
         </Sticky>
         <div className="sidebar mobile">
           <hr className="s5" />

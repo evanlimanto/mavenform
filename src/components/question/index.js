@@ -6,7 +6,7 @@ class Solution extends Component {
     super(props); 
 
     this.state = {
-      showSolution: false
+      showSolution: (process.env.NODE_ENV === 'development')
     };
 
     this.toggleSolution = this.toggleSolution.bind(this);
