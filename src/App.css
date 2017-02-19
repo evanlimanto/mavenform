@@ -10,6 +10,8 @@
 }
 
 body {
+  position: relative;
+  left: 125px;
   text-align: left;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
@@ -207,7 +209,7 @@ img {
   padding: 25px;
   color: #11accc;
   border: 1px solid #11accc;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 .solution * {
@@ -298,6 +300,23 @@ input[type=button]:hover {
   border-bottom: none;
 }
 
+.collapse {
+  position: fixed;
+  top: 25px;
+  left: 275px;
+  text-align: left;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: #ccc;
+  border-bottom: none;
+}
+
+.return:hover, .collapse:hover {
+  border-bottom: none;
+}
+
 .feedback {
   position: fixed;
   top: 25px;
@@ -364,6 +383,79 @@ input[type=button]:hover {
 .form-container {
   margin: auto;
   max-width: 800px;
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 250px;
+  padding: 120px 30px;
+  background: #333;
+}
+
+.menu h4 {
+  color: #ccc;
+}
+
+.menu .sidetitle {
+  color: #ddd;
+}
+
+.menu .sidetab {
+  color: #aaa;
+  border-bottom: 1px solid #888;
+}
+
+.menu .sidetab:hover {
+  color: #11accd;
+  border-bottom: 1px solid #11accd;
+}
+
+.menu .active {
+  color: #11accd;
+  border-bottom: 1px solid #11accd;
+}
+
+.home {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 250px;
+  display: block;
+  padding: 40px;
+  color: #eee;
+  background: #222;
+  font-weight: 400;
+  font-size: 22px;
+  border-bottom: none;
+}
+
+.home:hover {
+  border-bottom: none;
+  background: #111;
+}
+
+.index {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 250px;
+  display: block;
+  padding: 15px 25px;
+  color: #aaa;
+  background: #444;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 1px;
+  border-bottom: none;
+}
+
+.index:hover {
+  border-bottom: none;
+  background: #222;
 }
 
 .column {
@@ -450,6 +542,16 @@ input[type=button]:hover {
 
 .mobile {
   display: none;
+}
+
+@media (max-width: 1199px) {
+  body {
+    left: 0;
+  }
+
+  .menu {
+    display: none;
+  }
 }
 
 @media (max-width: 1019px) {
