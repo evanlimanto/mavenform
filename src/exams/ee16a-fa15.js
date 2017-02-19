@@ -29,8 +29,8 @@ $$\\left[
 
 const fa15q3_soln =
 `
-We can solve this by row reducing the augmented system (process omitted for brevity): <br/><br/>
-
+We can solve this by row reducing the augmented system (process omitted for brevity):
+<hr class="s2" />
 ${lmatrix([[1, 3, '\\vdots', 4], [-2, -5, '\\vdots', -6]], false, false)}
 
 which gives
@@ -56,7 +56,8 @@ $$\\left[
 
 const fa15q4_soln =
 `
-We can find the inverse by row reducing the augmented system (process omitted for brevity): <br/><br/>
+We can find the inverse by row reducing the augmented system (process omitted for brevity):
+<hr class="s2" />
 
 ${lx('\\left[ \\begin{array}{c c c c c} 1 & 0 & \\vdots & 1 & 3 \\\\ 0 & 1 & \\vdots & -2 & -5 \\end{array} \\right] \\implies \\left[ \\begin{array}{c c c c c} -5 & -3 & \\vdots 1 & 0 \\\\ 2 & 1 & \\vdots & 0 & 1 \\\\ \\end{array} \\right]', false)}
 
@@ -68,7 +69,8 @@ We can check our answer by calculating
 
 ${lx('\\left[ \\begin{array}{c c} 1 & 3 \\\\ -2 & -5 \\\\ \\end{array} \\right] \\left[ \\begin{array}{c c} -5 & -3 \\\\ 2 & 1 \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c c} 1 & 0 \\\\ 0 & 1 \\\\ \\end{array} \\right]', false)}
 
-You could also have used the equation for the inverse of a 2x2 matrix if you know it<br/>
+You could also have used the equation for the inverse of a 2x2 matrix if you know it
+<hr class="s1" />
 ${lx('{\\left[ \\begin{array}{c c}a & b \\\\ c & d \\\\ \\end{array} \\right]}^{-1} = \\frac{1}{ad - bc} \\left[ \\begin{array}{c c}d & -b \\\\ -c & a \\\\ \\end{array} \\right]', false)}
 ${lx('{\\left[ \\begin{array}{c c} 1 & 3 \\\\ -2 & -5 \\\\ \\end{array} \\right]}^{-1} = \\frac{1}{1} \\left[ \\begin{array}{c c}-5 & -3 \\\\ 2 & 1 \\\\ \\end{array} \\right]', false)}
 `;
@@ -83,7 +85,8 @@ any (\\(n × n\\)) matrix A, the set \\(\\{\\vec{Av_1}, \\vec{Av_2}, . . . , \\v
 
 const fa15q5_soln =
 `
-it is given that ${lx('{\\vec{v_1}, \\vec{v-2}, \\dots, \\vec{v_k} | \\vec{v_i} \\in \\mathbb{R}^{n}}')} are linearly dependent. This implies that there exist ${lx('k')} scalars, ${lx('{\\vec{\\alpha_1}, \\vec{\\alpha_2}, \\dots, \\vec{\\alpha_k}}')} from ${lx('\\mathbb{R}')} that are <i>not all equal to zero simultaneously</i> (or equivalently <i>at least one of them is not equal to zero</i>), such that<br/>
+it is given that ${lx('{\\vec{v_1}, \\vec{v-2}, \\dots, \\vec{v_k} | \\vec{v_i} \\in \\mathbb{R}^{n}}')} are linearly dependent. This implies that there exist ${lx('k')} scalars, ${lx('{\\vec{\\alpha_1}, \\vec{\\alpha_2}, \\dots, \\vec{\\alpha_k}}')} from ${lx('\\mathbb{R}')} that are <i>not all equal to zero simultaneously</i> (or equivalently <i>at least one of them is not equal to zero</i>), such that
+<hr class="s1" />
 ${lx('\\alpha_1·\\vec{v_1} + \\alpha_2·\\vec{v_2} + \\cdots + \\alpha_k·\\vec{v_k} = \\vec{0}', false)}
 
 By multiplying Equation 9 by ${lx('A')} from the left side, we get
@@ -101,9 +104,11 @@ Since scalar-matrix multiplication is commutative, we get
 By using associativity of multiplication again, we get
   ${lx('\\alpha_1 · (A · \\vec{v_1}) + \\alpha_2 · (A · \\vec{v_2}) + \\cdots + \\alpha_k · (A · \\vec{v_k}) = \\vec{0}', false)}
 
-Therefore, the same k scalars, ${lx('{\\alpha_1, \\alpha_2, \\dots, \\alpha_k}')} show the linear dependence of the vectors ${lx('{A\\vec{v_1}, A\\vec{v_2}, \\dots, A\\vec{v_k}}')} as requested.<br/>
+Therefore, the same k scalars, ${lx('{\\alpha_1, \\alpha_2, \\dots, \\alpha_k}')} show the linear dependence of the vectors ${lx('{A\\vec{v_1}, A\\vec{v_2}, \\dots, A\\vec{v_k}}')} as requested.
+<hr class="s1" />
 
-Note: There are alternative and equivalent implications of linear dependence that can be used in the proof (in place of Equation 9). Here are a few of them:<br/>
+Note: There are alternative and equivalent implications of linear dependence that can be used in the proof (in place of Equation 9). Here are a few of them:
+<hr class="s1" />
 (a) The vector ${lx('\\vec{v_k}')} can be represented as a linear combination of the other vectors as follows: There exist scalars ${lx('\\vec{\\alpha_1} + \\vec{\\alpha_2} + \\dots + \\vec{\\alpha_{k-1}}')} such that
 ${lx('\\alpha_1 · \\vec{v_1} + \\alpha_2 · \\vec{v_2} + \\dots + \\alpha_{k-1} · \\vec{k - 1} = \\vec{k}', false)}
 (in this alternative, the scalars may all be zeros, and the linear combination in the left hand side must exclude ${lx('\\vec{v_k}')})
@@ -124,7 +129,7 @@ ${lx('\\sum_{i=1}^{j-1} \\alpha_i · \\vec{v_i} = \\vec{v_j}')}
 
 <hr class="s2" />
 
-For any of these alternatives, the rest of the proof is similar to the one demonstrated above (multiply both sides by ${lx('A')} and then apply the linearity of matrix multiplication to push the ${lx('A')} inside the relevant sum and next to the ${lx('\\vec{v_i}')}) and will result in an equation similar to Equation 14 (that matches the alternative chosen).<br/>
+For any of these alternatives, the rest of the proof is similar to the one demonstrated above (multiply both sides by ${lx('A')} and then apply the linearity of matrix multiplication to push the ${lx('A')} inside the relevant sum and next to the ${lx('\\vec{v_i}')}) and will result in an equation similar to Equation 14 (that matches the alternative chosen).
 
 <hr class="s1" />
 
@@ -153,11 +158,13 @@ What is the null space of the matrix
 
 const fa15q6_soln =
 `
-We solve ${lmatrix([[1, 1, -2, 3], [0, 0, -1, 2], [0, 0, 3, -6]])} · ${lmatrix([['x_1'], ['x_2'], ['x_3'], ['x_4']])} = ${lmatrix([[0], [0], [0]])}<br/>
+We solve ${lmatrix([[1, 1, -2, 3], [0, 0, -1, 2], [0, 0, 3, -6]])} · ${lmatrix([['x_1'], ['x_2'], ['x_3'], ['x_4']])} = ${lmatrix([[0], [0], [0]])}
+<hr class="s1" />
 
 ${lx('\\left[ \\begin{array}{c c c c c c} 1 & 1 & -2 & 3 & \\vdots & 0 \\\\ 0 & 0 & -1 & 2 & \\vdots & 0 \\\\ 0 & 0 & 3 & -6 & \\vdots & 0 \\\\ \\end{array} \\right] \\implies \\left[ \\begin{array}{c c c c c c} 1 & 1 & 0 & -1 & \\vdots & 0 \\\\ 0 & 0 & 1 & -2 & \\vdots & 0 \\\\ 0 & 0 & 0 & 0 & \\vdots & 0 \\\\ \\end{array} \\right]', false)}
 
-Now we can set ${lx('x_2')} and ${lx('x_4')} as free variables and write the following system of equations:<br/>
+Now we can set ${lx('x_2')} and ${lx('x_4')} as free variables and write the following system of equations:
+<hr class="s1" />
 
 ${lx('\\left\\{ \\begin{array}{c} x_1 = -a + b \\\\ x_2 = a \\\\ x_3 = 2b \\\\ x_4 = b \\\\ \\end{array} \\right.', false)}
 
@@ -174,13 +181,15 @@ const fa15q7a =
 `
 <h3>7. Finding the Bright Cave <i>(27pts total)</i></h3>
 
-Nara the one-handed druid and Kody the one-handed ranger ﬁnd themselves in dire straits. Before them is a cliff with four cave entrances arranged in a square: two upper caves and two lower caves. Each entrance emits a certain amount of light, and the two wish to ﬁnd exactly the amount of light coming from each cave. Here’s the catch: after contracting a particularly potent strain of ghoul fever, our intrepid heroes are only able to see the total intensity of light before them (so their eyes operate like a single-pixel camera). Kody and Nara are capable adventurers. But they don’t know any linear algebra - and they need your help.<br/><br/>
+Nara the one-handed druid and Kody the one-handed ranger ﬁnd themselves in dire straits. Before them is a cliff with four cave entrances arranged in a square: two upper caves and two lower caves. Each entrance emits a certain amount of light, and the two wish to ﬁnd exactly the amount of light coming from each cave. Here’s the catch: after contracting a particularly potent strain of ghoul fever, our intrepid heroes are only able to see the total intensity of light before them (so their eyes operate like a single-pixel camera). Kody and Nara are capable adventurers. But they don’t know any linear algebra - and they need your help.
+<hr class="s2" />
 
 Kody proposes an imaging strategy where he uses his hand to completely block the light from two caves at a time. He is able to take measurements using the following four masks (black means the light is blocked from that cave):
 
 <img src="${img7a}" class="problem-image" />
 
-<p align="center">Figure 1: Four image masks.</p><br/>
+<p align="center">Figure 1: Four image masks.</p>
+<hr class="s1" />
 
 <b>(a)</b> <i>(5pts)</i> Let \\(\\vec{x}\\) be the four-element vector that represents the magnitude of light emanating from the four cave entrances. <b>Write a matrix \\(K\\) that performs the masking process in Fig. 1 on the vector \\(\\vec{x}\\), such that \\(K\\vec{x}\\) is the result of the four measurements.</b>
 `;
@@ -200,9 +209,12 @@ const fa15q7b =
 
 const fa15q7b_soln =
 `
-Nope!<br/>
-Two solutions are acceptable:<br/>
-1) Notice that the sum of masks 1 and 3 will hvae exactly the same result as sum of masks 2 and 4. So the four rows must be linearly dependent and hence ${lx('K')} has a nontrivial nullspace. Consequently, there would be infinitely valid solutions to any measurements taken.<br/>
+Nope!
+<hr class="s1" />
+Two solutions are acceptable:
+<hr class="s1" />
+1) Notice that the sum of masks 1 and 3 will hvae exactly the same result as sum of masks 2 and 4. So the four rows must be linearly dependent and hence ${lx('K')} has a nontrivial nullspace. Consequently, there would be infinitely valid solutions to any measurements taken.
+<hr class="s1" />
 2) Perform row reduction to see that the rows (and therefore the columns) do not span ${lx('\\mathbb{R}^4')}; In this case, ${lx('\\mathbb{R}^4')} is equivalent to all possible light intensities of the caves.
 
 ${lmatrix([[1, 0, 1, 0], [1, 1, 0, 0], [0, 1, 0, 1], [0, 0, 1, 1]], false, false)}
@@ -229,8 +241,9 @@ why not?</b>
 
 const fa15q7c_soln =
 `
-The answer is yes, the additional measurement does give them enough information to solve the problem. Since Nara’s measurement is linearly independent from the other four, we are now able to solve for all four light intensities uniquely.<br/>
-This can be shown using Gaussian elimination with the addition of the following equation:<br/>
+The answer is yes, the additional measurement does give them enough information to solve the problem. Since Nara’s measurement is linearly independent from the other four, we are now able to solve for all four light intensities uniquely.
+<hr class="s1" />
+This can be shown using Gaussian elimination with the addition of the following equation:
 ${lx('m_5 = \\frac{1}{2}x_1 + x_2 + x_3 + \\frac{1}{2}', false)}
 
 At this point you can either add this equation to make a 5x4 system of equations, or you can remove one of Kody’s masks to make a 4x4 system of equations. Here, we write it as a 5x4 matrix:
@@ -248,12 +261,14 @@ const fa15q8a =
 `
 <h3>8. A Tale of Two Cities <i>(24pts +15pts)</i></h3>
 
-<b>[NOTE: The last two parts of this problem are extra credit. Do them if you have time, but don’t get stuck on them if you don’t.]</b><br/><br/>
+<b>[NOTE: The last two parts of this problem are extra credit. Do them if you have time, but don’t get stuck on them if you don’t.]</b>
+<hr class="s2" />
 There are two isolated cities in the desert. They each have their own network of roads and intersections, as shown in Figure 2. (Note: The arrows are oriented arbitrarily – net trafﬁc can ﬂow in either direction along a road). The citizens of these cities are careful drivers, and consequently, the net trafﬁc ﬂows along roads always obey the ﬂow conservation constraints (net cars per hour into an intersection equals the net cars per hour leaving that intersection).
 
 <img src="${img8a}" class="problem-image" />
 
-<p align="center">Figure 2: The trafﬁc networks of two isolated cities.</p><br/>
+<p align="center">Figure 2: The trafﬁc networks of two isolated cities.</p>
+<hr class="s1" />
 
 <b>(a)</b> <i>(7pts)</i> We know how to model the net trafﬁc ﬂows within each city individually (from the Homework). We would like to jointly model the net trafﬁc ﬂows of both cities. That is, let the net trafﬁc ﬂow (cars/hr) along all roads be described by a vector
 
@@ -287,7 +302,8 @@ const fa15q8b =
 
 <img src="${img8b}" class="problem-image" />
 
-<p align="center">Figure 3: The trafﬁc network after a new road is constructed.</p><br/>
+<p align="center">Figure 3: The trafﬁc network after a new road is constructed.</p>
+<hr class="s1" />
 
 Let trafﬁc ﬂows be described by a vector
 
@@ -304,7 +320,8 @@ t_7 \\\\
 \\end{bmatrix}
 $$
 
-<b>Find a matrix \\(B\\) such that the valid trafﬁc ﬂows are exactly the nullspace of \\(B'\\).</b><br/>
+<b>Find a matrix \\(B\\) such that the valid trafﬁc ﬂows are exactly the nullspace of \\(B'\\).</b>
+<hr class="s1" />
 <i>Hint: \\(B'\\) will have the form</i>
 
 $$
@@ -326,7 +343,8 @@ The column ${lx('\\vec{b}')} corresponds to the road ${lx('t_7')}, which exits n
 
 ${lx('\\vec{b} = \\left[ \\begin{array}{c} 0 \\\\ 0 \\\\ -1 \\\\ 0 \\\\ +1 \\\\ 0 \\\\ \\end{array} \\right]', false)}
 
-(In our ${lx('B')} from the previous part, node ${lx('C')} corresponds to the third row, and node ${lx('E')} corresponds to the fifth row). Note that this must be consistent with the previous part: If you constructed ${lx('B')} using a different ordering of nodes (that is, if the rows of ${lx('B')} were permuted), then the entries in ${lx('\\vec{b}')} must be permuted accordingly.<br/>
+(In our ${lx('B')} from the previous part, node ${lx('C')} corresponds to the third row, and node ${lx('E')} corresponds to the fifth row). Note that this must be consistent with the previous part: If you constructed ${lx('B')} using a different ordering of nodes (that is, if the rows of ${lx('B')} were permuted), then the entries in ${lx('\\vec{b}')} must be permuted accordingly.
+<hr class="s1" />
 
 Written explicitly, ${lx("B'")} is:
 
@@ -338,19 +356,23 @@ Any explicit ${lx("B'")} that is row-equivalent to this is also correct.
 const fa15q8c =
 `
 <b>(c)</b> <i>(12pts)</i> Does adding this additional road change the possible trafﬁc ﬂows of the two cities? That is,
-is there any valid ﬂow \\(\\vec{t}\\) for which the additional road has non-zero ﬂow (\\(t_7 \\ne 0\\))? <b>Give an explicit example of such a ﬂow or an argument why one cannot exist.</b><br/><br/>
+is there any valid ﬂow \\(\\vec{t}\\) for which the additional road has non-zero ﬂow (\\(t_7 \\ne 0\\))? <b>Give an explicit example of such a ﬂow or an argument why one cannot exist.</b>
+<hr class="s2" />
 (<i>Hint: One way of doing this is to recall that each row in the incidence matrix corresponds to the constraint that the total ﬂow into an intersection is zero. Can you interpret the constraint resulting from the sum of all the rows corresponding to intersections in a city?</i>)
 `;
 
 const fa15q8c_soln =
 `
 No, any valid flow ${lx('\\vec{t}')} must have ${lx('t_7 = 0')}.
-There are several ways to see this. First, intuitively: If for example ${lx('t_7 > 0')}, then there is a net flow of cars from the first city to the second. Thus, at least intuitively, some conservation constraint must be violated, because cars are “draining” from the first city and “accumulating” in the second. But our conservation constraints say that this accumulation cannot happen at any single intersection, and so it cannot happen at all within a city (which is a collection of intersections). Development of this intuitive argument received partial credit.<br/><br/>
-The formal argument suggested in the hint is: Consider summing all the constraints corresponding to nodes in the first city (that is, the first 3 rows of ${lx("B'")}). Each row corresponds to the constraint that the net flow into an intersection is zero. Summing a set of rows corresponds to the constraint that the net flow into a <i>set of intersections</i> is zero. Thus, summing the first three rows will yield the constraint that the net flow into the first city is zero. But ${lx('t_7')} is the only road out of the first city, so ${lx('t_7 = 0')}.<br/><br/>
+There are several ways to see this. First, intuitively: If for example ${lx('t_7 > 0')}, then there is a net flow of cars from the first city to the second. Thus, at least intuitively, some conservation constraint must be violated, because cars are “draining” from the first city and “accumulating” in the second. But our conservation constraints say that this accumulation cannot happen at any single intersection, and so it cannot happen at all within a city (which is a collection of intersections). Development of this intuitive argument received partial credit.
+<hr class="s2" />
+The formal argument suggested in the hint is: Consider summing all the constraints corresponding to nodes in the first city (that is, the first 3 rows of ${lx("B'")}). Each row corresponds to the constraint that the net flow into an intersection is zero. Summing a set of rows corresponds to the constraint that the net flow into a <i>set of intersections</i> is zero. Thus, summing the first three rows will yield the constraint that the net flow into the first city is zero. But ${lx('t_7')} is the only road out of the first city, so ${lx('t_7 = 0')}.
+<hr class="s2" />
 Explicitly, any valid ${lx('\\vec{t}')} satisfies
 ${lx("B'\\vec{t} = \\vec{0}", false)}
 
-Therefore, it must also satisfy:<br/>
+Therefore, it must also satisfy:
+<hr class="s1" />
 ${lx("\\left[ \\begin{array}{c c c c c c}1 & 1 & 1 & 0 & 0 & 0 \\\\ \\end{array} \\right] B' \\vec{t} = \\left[ \\begin{array}{c c c c c c}1 & 1 & 1 & 0 & 0 & 0 \\\\ \\end{array} \\right] \\vec{0}", false)}
 
 Which simplifies to:
@@ -361,7 +383,8 @@ ${lx("\\left[ \\begin{array}{c c c c c c}1 & 1 & 1 & 0 & 0 & 0 \\\\ \\end{array}
 ${lx("\\left[ \\begin{array}{c c c c c c c}0 & 0 & 0 & 0 & 0 & 0 & -1 \\\\ \\end{array} \\right] \\vec{t} = 0", false)}
 
 Which is just the constrant ${lx('-t_7 = 0')}.
-<i>Remark</i>: Notice that this argument easily generalizes to the case of two arbitrarily-complex isolated cities, connected by a single road.<br/>
+<i>Remark</i>: Notice that this argument easily generalizes to the case of two arbitrarily-complex isolated cities, connected by a single road.
+<hr class="s1" />
 <b>Alternate Solutions:</b> Any correct formal argument received full credit. For example, noticing that ${lx('t_1 = t_2 = t_3')}, and therefore ${lx('t_7 = 0')}, by considering the constraint of node ${lx('C')}. It was also possible to row-reduce ${lx("B'")}, find a basis for the nullspace, and argue that all basis vectors have ${lx('t_7 = 0')}.
 `;
 
@@ -372,9 +395,11 @@ const fa15q8d =
 
 <img src="${img8d}" class="problem-image" />
 
-<p align="center">Figure 4: The trafﬁc network after two new roads are constructed.</p><br/>
+<p align="center">Figure 4: The trafﬁc network after two new roads are constructed.</p>
+<hr class="s1" />
 
-Let trafﬁc ﬂows be described by a vector \\(\\vec{t} \\in R^8\\).<br/>
+Let trafﬁc ﬂows be described by a vector \\(\\vec{t} \\in R^8\\).
+<hr class="s1" />
 Does adding this additional pair of roads change the possible trafﬁc ﬂows of the two cities (beyond the case when the two cities were not connected)? That is, is there any valid ﬂow \\(\\vec{t}\\) for which at least one of the additional roads has non-zero ﬂow (\\(t_7 \\ne 0\\) or \\(t_8 \\ne 0\\))? <b>Give an explicit example of such a ﬂow or an argument why one cannot exist.</b>
 `;
 
@@ -389,7 +414,8 @@ Any <i>explicit</i> valid flow vector ${lx('\\vec{t}')} with ${lx('t_7 \\ne 0')}
 
 const fa15q8e =
 `
-<b>(e)</b> <i>(BONUS 10pts)</i> Before they were connected, both cities individually had sensors set up to measure their trafﬁc ﬂows. That is, they measured the ﬂows along some set of roads, and were able to re-construct the ﬂows along all roads in their <i>isolated</i> city. After the two new roads of Figure 4 were constructed, the state’s engineers added two additional sensors, one on each road (on \\(t_7\\) and \\(t_8\\)). Using the data from each city’s sensors, and these two new sensors, they were able to recover the ﬂows of all roads in the network.<br/><br/>
+<b>(e)</b> <i>(BONUS 10pts)</i> Before they were connected, both cities individually had sensors set up to measure their trafﬁc ﬂows. That is, they measured the ﬂows along some set of roads, and were able to re-construct the ﬂows along all roads in their <i>isolated</i> city. After the two new roads of Figure 4 were constructed, the state’s engineers added two additional sensors, one on each road (on \\(t_7\\) and \\(t_8\\)). Using the data from each city’s sensors, and these two new sensors, they were able to recover the ﬂows of all roads in the network.
+<hr class="s2" />
 However, one day the sensor on \\(t_7\\) breaks. <b>Can they still recover all the ﬂows, using only the remaining sensors? Give an argument for why or why not.</b>
 `;
 
@@ -402,11 +428,13 @@ In this case, the incidence matrix is the following:
 
 ${lx('B\'\' = \\left[ \\begin{array}{c c c c c c} -1 & 0 & +1 & 0 & 0 & 0 & 0 & 0 \\\\ +1 & -1 & 0 & 0 & 0 & 0 & 0 & +1 \\\\ 0 & +1 & -1 & 0 & 0 & 0 & -1 & 0 \\\\ 0 & +1 & -1 & 0 & 0 & 0 & -1 & 0 \\\\ 0 & 0 & 0 & -1 & 0 & +1 & 0 & 0 \\\\ 0 & 0 & 0 & +1 & -1 & 0 & +1 & 0 \\\\ 0 & 0 & 0 & 0 & +1 & -1 & 0 & -1 \\\\ \\end{array} \\right]', false)}
 
-(Which has two additional columns over ${lx('B')} from the first part).<br/>
+(Which has two additional columns over ${lx('B')} from the first part).
+<hr class="s1" />
 Now, any valid ${lx('\\vec{t}')} satisfies
 ${lx('B\'\'\\vec{t} = \\vec{0}', false)}
 
-Therefore, it must also satisfy:<br/>
+Therefore, it must also satisfy:
+<hr class="s1" />
 ${lx("\\left[ \\begin{array}{c c c c c c}1 & 1 & 1 & 0 & 0 & 0 \\\\ \\end{array} \\right] B''\\vec{t} = \\left[ \\begin{array}{c c c c c c}1 & 1 & 1 & 0 & 0 & 0 \\\\ \\end{array} \\vec{0} \\right]", false)}
 
 Which simplifies to:
@@ -416,11 +444,14 @@ ${lx("\\left[ \\begin{array}{c c c c c c}1 & 1 & 1 & 0 & 0 & 0 \\\\ \\end{array}
 
 ${lx("\\left[ \\begin{array}{c c c c c c c}0 & 0 & 0 & 0 & 0 & 0 & -1 & +1 \\\\ \\end{array} \\right] \\vec{t} = 0", false)}
 
-Which is just the constrant ${lx('-t_7 + t_8 = 0')}.<br/><br/>
+Which is just the constrant ${lx('-t_7 + t_8 = 0')}.
+<hr class="s2" />
 
 <b>Alternate Solutions:</b>
-It was also possible to row-reduce ${lx("B''")}, find a basis for the nullspace, and show that all basis vectors have t7 = t8 (and therefore all valid flows must have ${lx('t_7')} = ${lx('t_8')} as well).<br/>
-Notice that in this problem, we do not know the exact sensor placements of each city. Solutions which made assumptions about the particular sensor arrangements of the cities received partial credit. (In theory, it was possible to enumerate all possible valid sensor arrangements, and confirm that each one works by the procedure of Homework 3.)<br/>
+It was also possible to row-reduce ${lx("B''")}, find a basis for the nullspace, and show that all basis vectors have t7 = t8 (and therefore all valid flows must have ${lx('t_7')} = ${lx('t_8')} as well).
+<hr class="s1" />
+Notice that in this problem, we do not know the exact sensor placements of each city. Solutions which made assumptions about the particular sensor arrangements of the cities received partial credit. (In theory, it was possible to enumerate all possible valid sensor arrangements, and confirm that each one works by the procedure of Homework 3.)
+<hr class="s1" />
 Some students argued that it is sufficient to have one sensor per “independent loop”. And since the cities already had sensors on their individual loops (necessarily, by assumption), it is sufficient to have one sensor on the new “independent loop” created by adding the two new roads. This is correct intuition. However, the concept of “independent loop” was not defined or developed in this class, so any argument using “independent loops” without definition only received partial credit.
 `;
 
@@ -429,14 +460,17 @@ const fa15q9a =
 `
 <h3>9. Justin Beaver <i>(43pts)</i></h3>
 
-In Homework 3, there was a question about Justin Bieber’s Segway — that was about controlling a multi-dimensional system with one control input. In this problem, we will instead think about a curious and superintelligent beaver watching the water level in a pool — this is implicitly about how many sensors are needed to measure the state of a multi-dimensional system.<br/><br/>
-Three superintelligent rodents live in a network of pools. Justin Beaver lives in pool 1. Selena Gopher lives in pool 2. And Mousey Cyrus lives in pool 3. They are sadly not on talking terms, but Justin really wants to know about the other pools.<br/><br/>
+In Homework 3, there was a question about Justin Bieber’s Segway — that was about controlling a multi-dimensional system with one control input. In this problem, we will instead think about a curious and superintelligent beaver watching the water level in a pool — this is implicitly about how many sensors are needed to measure the state of a multi-dimensional system.
+<hr class="s2" />
+Three superintelligent rodents live in a network of pools. Justin Beaver lives in pool 1. Selena Gopher lives in pool 2. And Mousey Cyrus lives in pool 3. They are sadly not on talking terms, but Justin really wants to know about the other pools.
+<hr class="s2" />
 Suppose there is a network of pumps connecting the three different pools, given in the ﬁgure. \\(x_1[t]\\), \\(x_2[t]\\), and \\(x_3[t]\\) is the water level in each pool at time step \\(t\\). At each time step, the water from each pool is pumped along the arrows. The water levels are updated according to the matrix
 
 <img src="${img9a}" class="problem-image" />
 
 <b>(a)</b> <i>(5pts)</i> Justin lives in pool 1 so he can watch the water level in this pool. He also knows exactly how the pumps work — i.e., knows the pump matrix A. <b>Can Justin ﬁgure out the initial water levels in all three pools just by watching the water levels in his pool as time goes by? Describe (brieﬂy) in words how to do this. How many times does Justin need to observe the water in his own pool to
-ﬁgure this out?</b><br/><br/>
+ﬁgure this out?</b>
+<hr class="s2" />
 <i>(Hint: No “linear algebra” machinery is needed here. Just think about what Justin observes as time goes by.)</i>
 `;
 
@@ -460,7 +494,7 @@ If Justin knows ${lx('\\vec{x}[0]')}, he can use what he knows about how the sys
 
 ${lx('\\vec{x}[1] = A\\vec{x}[0]', false)}
 ${lx('\\vec{x}[2] = A\\vec{x}[1] = A(A\\vec{x}[0]) = A^2\\vec[0]', false)}
-${lx('\\vec{x}[3] = A\\vec{x}[2] = A^3(\\vec{x}[0])', false)},
+${lx('\\vec{x}[3] = A\\vec{x}[2] = A^3(\\vec{x}[0])', false)}
 
 Thus the general expression for ${lx('\\vec{x}[t]')} in terms of ${lx('A')} and ${lx('\\vec{x}[0]')} is
 
@@ -510,12 +544,14 @@ x3[0] \\\\
 \\end{bmatrix}
 $$
 
-<i>(Hint: Think about what the rows of \\(D\\) should be. It sufﬁces to give an expression for the ${lx('j^{th}')} row \\(D_j\\) of \\(D\\).)</i><br/><br/>
+<i>(Hint: Think about what the rows of \\(D\\) should be. It sufﬁces to give an expression for the ${lx('j^{th}')} row \\(D_j\\) of \\(D\\).)</i>
+<hr class="s2" />
 `;
 
 const fa15q9d_soln =
 `
-Now we start getting into the heart of the problem. We want to figure out how Justin can calculate the initial water levels even if the pump matrix A is not as simple as in part (a).<br/>
+Now we start getting into the heart of the problem. We want to figure out how Justin can calculate the initial water levels even if the pump matrix A is not as simple as in part (a).
+<hr class="s1" />
 Over time Justin will acquire a bunch of measurements of the water level in his pool,
 ${lx('y[0], y[1], \\dots , y[t]')}. We want to write these measurements in terms of ${lx('\\vec{c}')}, ${lx('A')}, and ${lx('\\vec{x}[0]')} so that we can write a system of equations that will allow us to solve for ${lx('\\vec{x}[0]')}.
 
@@ -551,18 +587,22 @@ Using the equation from part (d), we can start to see when Justin will be able t
 ${lx('\\left[ \\begin{array}{c} y[0] \\\\ y[1] \\\\ \\vdots \\\\ y[T - 1] \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c} \\vec{c}^T \\\\ \\vec{c}^T A \\\\ \\vdots \\\\ \\vec{c}^T A^{T - 1} \\\\ \\end{array} \\right] \\vec{x}[0]', false)}
 
 
-The first thing we notice is that after a few time steps, Justin will have more equations than unknowns. Often times when there are more equations than unknowns the system has no solution. However, in this case since each physical measurement y (the water level in pool 1) is the result of a physical process (water being pumped between pools according to ${lx('A')}) starting from some real initial water level, ${lx('\\vec{x}[0]')}, we know that that real initial water level, ${lx('\\vec{x}[0]')} will be a solution. Thus we know that a solution exists.<br/><br/>
+The first thing we notice is that after a few time steps, Justin will have more equations than unknowns. Often times when there are more equations than unknowns the system has no solution. However, in this case since each physical measurement y (the water level in pool 1) is the result of a physical process (water being pumped between pools according to ${lx('A')}) starting from some real initial water level, ${lx('\\vec{x}[0]')}, we know that that real initial water level, ${lx('\\vec{x}[0]')} will be a solution. Thus we know that a solution exists.
+<hr class="s2" />
 
-What is not obvious immediately is whether our system of equations gives us enough information to solve for the real solution. It is possible that there will be multiple ${lx('\\vec{x}[0]')}’s that solve this equation. In this case, we won’t be able to figure out the initial water levels.<br/><br/>
+What is not obvious immediately is whether our system of equations gives us enough information to solve for the real solution. It is possible that there will be multiple ${lx('\\vec{x}[0]')}’s that solve this equation. In this case, we won’t be able to figure out the initial water levels.
+<hr class="s2" />
 
-To see how this might happen, suppose that all but two of the measurements summarized in the equation above are redundant, i.e. the row vectors ${lx('\\vec{c}^T, \\vec{c}^T A, \\dots, \\vec{c}^T A^{T-1}')} are linearly dependent living in some two dimensional subspace of ${lx('\\mathbb{R}^3')}. In this case if, we row reduce ${lx('D')}, we will end up with zeros in all the rows except 2. This means that we will have only 2 pivots and thus 1 free variable. Therefore, ${lx('D')} has a nullspace that contains more than just ${lx('\\vec{0}')} (${lx('D')} has a non-trivial nullspace).<br/><br/>
+To see how this might happen, suppose that all but two of the measurements summarized in the equation above are redundant, i.e. the row vectors ${lx('\\vec{c}^T, \\vec{c}^T A, \\dots, \\vec{c}^T A^{T-1}')} are linearly dependent living in some two dimensional subspace of ${lx('\\mathbb{R}^3')}. In this case if, we row reduce ${lx('D')}, we will end up with zeros in all the rows except 2. This means that we will have only 2 pivots and thus 1 free variable. Therefore, ${lx('D')} has a nullspace that contains more than just ${lx('\\vec{0}')} (${lx('D')} has a non-trivial nullspace).
+<hr class="s2" />
 
 This is problematic because multiple different initial water levels will give the same measurements. Consider the true initial water level ${lx('\\vec{x}[0]')} and a vector that lives in the nullspace of ${lx('D, \\vec{x}_{NS}[0]')}. Note that through our measurement process, we won’t be able to tell the difference between ${lx('\\vec{x}[0]')} and ${lx('\\vec{x}[0] + \\vec{x}_{NS}[0]')} since both of them will give the same sequence of measurements ${lx('y[0], y[1], \\dots, y[T - 1]')}.
 
 ${lx('\\left[ D \\right] \\left( \\vec{x}[0] + \\vec{x}_{NS}[0] \\right) = \\left[ D \\right] \\vec{x}[0] + \\left[ D \\right] \\vec{x}_{NS}[0] = \\left[ D \\right] \\vec{x}[0]', false)}
 
 Thus in order to determine ${lx('\\vec{x}[0]')} uniquely we need <b>at least 3 rows of ${lx('D')} to be linearly independent</b>.
-It turns out that the first three rows ${lx('\\vec{c}^T, \\vec{c}^T A')}, and ${lx('\\vec{c}^T A^2')} are linearly independent <b>thus Justin needs only 3 time steps</b> (t = 0, t = 1, t = 2) <b>to solve for</b> ${lx('\\vec{x}[0]')}. In order to get full credit on this part, you had to show that the first three rows are linearly independent. The easiest way to show this is by doing Gaussian elimination which we will do when we solve for the answer in part (f). [It is perfectly ok to point to a later problem part when solving a problem.] Note that you could also use three other linearly independent rows to solve for the solution but the first three rows are the easiest to calculate.<br/><br/>
+It turns out that the first three rows ${lx('\\vec{c}^T, \\vec{c}^T A')}, and ${lx('\\vec{c}^T A^2')} are linearly independent <b>thus Justin needs only 3 time steps</b> (t = 0, t = 1, t = 2) <b>to solve for</b> ${lx('\\vec{x}[0]')}. In order to get full credit on this part, you had to show that the first three rows are linearly independent. The easiest way to show this is by doing Gaussian elimination which we will do when we solve for the answer in part (f). [It is perfectly ok to point to a later problem part when solving a problem.] Note that you could also use three other linearly independent rows to solve for the solution but the first three rows are the easiest to calculate.
+<hr class="s2" />
 Here we see also why we have to be careful if A is more complicated. For a complicated A, it is difficult to tell if the vectors ${lx('\\vec{c}^T, \\vec{c}^T A, \\vec{c}^T A^2, \\dots')} will span all of ${lx('\\mathbb{R}^3')} until we calculate them out. If they don’t span ${lx('\\mathbb{R}^3')}, then D will have a non-trivial nullspace and this nullspace represents a set of initial water levels that are <i>hidden</i> from Justin’s measurements. There is a general condition called <i>observability of ${lx('A')} and ${lx('\\vec{c}')}</i> that tells us when this nullspace exists. It has to do with the relationship between ${lx('\\vec{c}')} and the eigenvectors of the matrix ${lx('A')}. Maybe we’ll get it to it later in the course or in EE16b.
 `;
 
@@ -579,9 +619,10 @@ $$
 
 const fa15q9f_soln =
 `
-In this part we will solve for ${lx('\\vec{x}[0]')} using Gaussian Elimination and in doing so we will show that the first three rows of ${lx('D')} are linearly independent.<br/>
+In this part we will solve for ${lx('\\vec{x}[0]')} using Gaussian Elimination and in doing so we will show that the first three rows of ${lx('D')} are linearly independent.
+<hr class="s1" />
 We want to solve the system of equations
-${lx('\\begin{array}{c} y[0] \\\\ y[1] \\\\ y[2] \\\\ \\end{array} = \\begin{array}{c} \\vec{c}^T \\\\ \\vec{c}^T A \\\\ \\vec{c}^T A^2 \\\\ \\end{array} \\begin{array}{c} x_1[0] \\\\ x_2[0] \\\\ x_3[0] \\\\ \\end{array}', false)}
+${lx('\\left[ \\begin{array}{c} y[0] \\\\ y[1] \\\\ y[2] \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c} \\vec{c}^T \\\\ \\vec{c}^T A \\\\ \\vec{c}^T A^2 \\\\ \\end{array} \\right] \\left[ \\begin{array}{c} x_1[0] \\\\ x_2[0] \\\\ x_3[0] \\\\ \\end{array} \\right]', false)}
 
 We first need to calculate ${lx('\\vec{c}^T A')} and ${lx('\\vec{c}^T A^2')}.
 
