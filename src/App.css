@@ -86,8 +86,8 @@ li {
   margin-left: 40px;
 }
 
-.small-text {
-  font-size: 12px;
+.small-text, .small-text * {
+  font-size: 14px;
 }
 
 .h5-alt {
