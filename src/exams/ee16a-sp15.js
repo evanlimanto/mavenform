@@ -409,35 +409,35 @@ class EE16ASp15 extends Component {
         </div>
         <div className="content">
           <hr className="s5" />
-          <Question id={"q1a"} content={sp15q1a} hasResponse={false} examCode={examCode} image={['q1a.png']} solution={sp15q1a_soln} />
+          <Question id={"q1a"} content={sp15q1a} hasResponse={false} examCode={examCode} solution={sp15q1a_soln} />
           <hr className="s5" />
-          <Question id={"q1b"} content={sp15q1b} hasResponse={false} examCode={examCode} image={['q1b.png']} solution={sp15q1b_soln} />
+          <Question id={"q1b"} content={sp15q1b} hasResponse={false} examCode={examCode} solution={sp15q1b_soln} />
           <hr className="s5" />
-          <Question id={"q1c"} content={sp15q1c} hasResponse={false} examCode={examCode} image={['q1c.png']} solution={sp15q1c_soln} />
+          <Question id={"q1c"} content={sp15q1c} hasResponse={false} examCode={examCode} solution={sp15q1c_soln} />
           <hr className="s5" />
-          <Question id={"q2a"} content={sp15q2a} hasResponse={false} examCode={examCode} image={['q2a.png']} solution={sp15q2a_soln}  />
+          <Question id={"q2a"} content={sp15q2a} hasResponse={false} examCode={examCode} solution={sp15q2a_soln}  />
           <hr className="s5" />
-          <Question id={"q2b"} content={sp15q2b} hasResponse={false} examCode={examCode} image={['q2b.png']} solution={sp15q2b_soln}  />
+          <Question id={"q2b"} content={sp15q2b} hasResponse={false} examCode={examCode} solution={sp15q2b_soln}  />
           <hr className="s5" />
-          <Question id={"q2c"} content={sp15q2c} hasResponse={false} examCode={examCode} image={['q2c.png']} solution={sp15q2c_soln}  />
+          <Question id={"q2c"} content={sp15q2c} hasResponse={false} examCode={examCode} solution={sp15q2c_soln}  />
           <hr className="s5" />
-          <Question id={"q3a"} content={sp15q3a} hasResponse={false} examCode={examCode} image={['q3a.png']} solution={sp15q3a_soln}  />
+          <Question id={"q3a"} content={sp15q3a} hasResponse={false} examCode={examCode} solution={sp15q3a_soln}  />
           <hr className="s5" />
-          <Question id={"q3b"} content={sp15q3b} hasResponse={false} examCode={examCode} image={['q3b.png']} solution={sp15q3b_soln}  />
+          <Question id={"q3b"} content={sp15q3b} hasResponse={false} examCode={examCode} solution={sp15q3b_soln}  />
           <hr className="s5" />
-          <Question id={"q3c"} content={sp15q3c} hasResponse={false} examCode={examCode} image={['q3c.png']} solution={sp15q3c_soln}  />
+          <Question id={"q3c"} content={sp15q3c} hasResponse={false} examCode={examCode} solution={sp15q3c_soln}  />
           <hr className="s5" />
-          <Question id={"q3d"} content={sp15q3d} hasResponse={false} examCode={examCode} image={['q3d.png']} solution={sp15q3d_soln}  />
+          <Question id={"q3d"} content={sp15q3d} hasResponse={false} examCode={examCode} solution={sp15q3d_soln}  />
           <hr className="s5" />
-          <Question id={"q4a"} content={sp15q4a} hasResponse={false} examCode={examCode} image={['q4a.png']} solution={sp15q4a_soln}  />
+          <Question id={"q4a"} content={sp15q4a} hasResponse={false} examCode={examCode} solution={sp15q4a_soln}  />
           <hr className="s5" />
-          <Question id={"q4b"} content={sp15q4b} hasResponse={false} examCode={examCode} image={['q4b.png']} solution={sp15q4b_soln}  />
+          <Question id={"q4b"} content={sp15q4b} hasResponse={false} examCode={examCode} solution={sp15q4b_soln}  />
           <hr className="s5" />
-          <Question id={"q5a"} content={sp15q5a} hasResponse={false} examCode={examCode} image={['q5a.png']} solution={sp15q5a_soln}  />
+          <Question id={"q5a"} content={sp15q5a} hasResponse={false} examCode={examCode} solution={sp15q5a_soln}  />
           <hr className="s5" />
-          <Question id={"q5b"} content={sp15q5b} hasResponse={false} examCode={examCode} image={['q5b.png']} solution={sp15q5b_soln}  />
+          <Question id={"q5b"} content={sp15q5b} hasResponse={false} examCode={examCode} solution={sp15q5b_soln}  />
           <hr className="s5" />
-          <Question id={"q5c"} content={sp15q5c} hasResponse={false} examCode={examCode} image={['q5c.png']} solution={sp15q5c_soln}  />
+          <Question id={"q5c"} content={sp15q5c} hasResponse={false} examCode={examCode} solution={sp15q5c_soln}  />
         </div>
       </span>
     );
