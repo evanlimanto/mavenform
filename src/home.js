@@ -53,11 +53,6 @@ class Home extends Component {
           <h5>Why view exams in Mavenform?</h5>
           <hr className="s3" />
           <div className="column">
-            <h2>Navigable</h2>
-            <hr className="s2" />
-            <p>Instead struggling to manage 10 or more tabs of individual PDFs, just browse a single web app that easily navigates between any relevant exam</p>
-          </div>
-          <div className="column">
             <h2>Interactive</h2>
             <hr className="s2" />
             <p>Use interactable elements like solution toggling and a live table of contents to make it easier and faster to check your answers and find specific problems.</p>
@@ -66,6 +61,11 @@ class Home extends Component {
             <h2>Responsive</h2>
             <hr className="s2" />
             <p>No more need to zoom in and pan around. Unlike static document types, Mavenform is intuitive and legible with any device type and any screen width.</p>
+          </div>
+          <div className="column">
+            <h2>Navigable</h2>
+            <hr className="s2" />
+            <p>Instead struggling to manage 10 or more tabs of individual PDFs, just browse a single web app that easily navigates between any relevant exam</p>
           </div>
           <hr className="margin-alt" />
         </div>
