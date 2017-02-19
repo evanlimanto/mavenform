@@ -6,7 +6,7 @@ class Solution extends Component {
     super(props); 
 
     this.state = {
-      showImage: true
+      showImage: false
     };
 
     this.toggleSolution = this.toggleSolution.bind(this);
