@@ -8,7 +8,7 @@ const fa16q3a =
 
 Answer each of the following questions by circling True or False. No work is necessary for credit on this part.<br/>
 <hr class="s2" />
-<b>(a)</b> <i>(True) (False)</i> The pivot columns of matrix \\(A\\) forms a basis for the column space of \\(A\\).<br/>
+(a) <i>(True) (False)</i> The pivot columns of matrix \\(A\\) forms a basis for the column space of \\(A\\).<br/>
 `;
 
 const fa16q3a_soln =
@@ -18,7 +18,7 @@ True.
 
 const fa16q3b =
 `
-<b>(b)</b> <i>(True) (False)</i> Let \\(A\\) be a \\(2 × 2\\) matrix, where \\(A^2\\) = ${lx('0')}. Then \\(A\\) is the zero matrix.<br/>
+(b) <i>(True) (False)</i> Let \\(A\\) be a \\(2 × 2\\) matrix, where \\(A^2\\) = ${lx('0')}. Then \\(A\\) is the zero matrix.<br/>
 `;
 
 const fa16q3b_soln =
@@ -28,7 +28,7 @@ False.
 
 const fa16q3c =
 `
-<b>(c)</b> <i>(True) (False)</i> Let \\(A\\), \\(B\\), \\(C\\) be some arbitrary matrices. Then, \\((AB)C\\) = \\(A(BC)\\).<br/>
+(c) <i>(True) (False)</i> Let \\(A\\), \\(B\\), \\(C\\) be some arbitrary matrices. Then, \\((AB)C\\) = \\(A(BC)\\).<br/>
 `;
 
 const fa16q3c_soln =
@@ -38,7 +38,7 @@ True.
 
 const fa16q3d =
 `
-<b>(d)</b> <i>(True) (False)</i> An \\(M × N\\) matrix has at most \\(N\\) pivots.<br/>
+(d) <i>(True) (False)</i> An \\(M × N\\) matrix has at most \\(N\\) pivots.<br/>
 `;
 
 const fa16q3d_soln =
@@ -48,7 +48,7 @@ True.
 
 const fa16q3e =
 `
-<b>(e)</b> <i>(True) (False)</i> \\(AB\\) = \\(BA\\) where \\(A\\) and \\(B\\) are \\(N × N\\) matrices.<br/>
+(e) <i>(True) (False)</i> \\(AB\\) = \\(BA\\) where \\(A\\) and \\(B\\) are \\(N × N\\) matrices.<br/>
 `;
 
 const fa16q3e_soln =
@@ -58,7 +58,8 @@ False.
 
 const fa16q3f =
 `
-<b>(f)</b> <i>(True) (False)</i> Applying any pair of \\(2 × 2\\) rotation matrices to an input vector is a commutative operation.<br/>
+<div className="sidetab-container">
+(f) <i>(True) (False)</i> Applying any pair of \\(2 × 2\\) rotation matrices to an input vector is a commutative operation.<br/>
 `;
 
 const fa16q3f_soln =
@@ -70,7 +71,8 @@ const fa16q4a =
 `
 <h3>4. Proof <i>(7 points)</i></h3>
 
-<b>(a)</b> Prove that if \\(A\\vec{x}\\) = 0 for some nonzero \\(\\vec{x}\\), then the columns of A are linearly dependent. <br/>
+<div className="sidetab-container">
+(a) Prove that if \\(A\\vec{x}\\) = 0 for some nonzero \\(\\vec{x}\\), then the columns of A are linearly dependent. <br/>
 `;
 
 const fa16q4a_soln =
@@ -127,7 +129,8 @@ Kody and Nara were found exceptional at taking measurements to ﬁgure out light
 
 <hr class="s2"/>
 
-<b>(a)</b> Kody found a shovel in the room and ﬁgured that it can operate in the following directions:
+<div className="sidetab-container">
+(a) Kody found a shovel in the room and ﬁgured that it can operate in the following directions:
 
 $$
 \\{
@@ -171,7 +174,8 @@ const fa16q6a_soln =
 
 const fa16q6b =
 `
-<b>(b)</b> While Kody was busy planning his escape to Berkeley, Nara found a pick-axe in the room that can operate in the following directions: 
+<div className="sidetab-container">
+(b) While Kody was busy planning his escape to Berkeley, Nara found a pick-axe in the room that can operate in the following directions: 
 
 $$\\{
 \\left[
@@ -243,7 +247,8 @@ k_1 \\\\ k_2 \\\\ k_3 \\\\ k_4 \\\\\
 
 <hr class="s3"/>
 
-<b>(a)</b> Write the transition matrix, A, such that \\(\\vec{x}[n + 1]\\) = \\(A\\vec{x}[n]\\).
+<div className="sidetab-container">
+(a) Write the transition matrix, A, such that \\(\\vec{x}[n + 1]\\) = \\(A\\vec{x}[n]\\).
 `;
 
 const fa16q7a_soln =
@@ -255,7 +260,8 @@ const fa16q7b =
 `
 <img src="${imgfa16q7_1}" className="problem-image" />
 <hr class="s3"/>
-<b>(b)</b> Assume that from one week to the next, no students drop out or are enrolled to the system – in other
+<div className="sidetab-container">
+(b) Assume that from one week to the next, no students drop out or are enrolled to the system – in other
 words, the total number of students is conserved. Write a system of four linear equations that relate \\(k_1\\), \\(k_2\\), \\(k_3\\), \\(k_4\\).
 <hr class="s2"/>
 <i>Hint: you should use \\(x_e[n]\\), \\(x_c[n]\\), \\(x_m[n]\\), \\(x_e[n + 1]\\), \\(x_c[n + 1]\\), \\(x_m[n + 1]\\) in your answer.
@@ -284,7 +290,8 @@ const fa16q7c =
 
 <hr class="s1"/>
 
-<b>(c)</b> Let \\(\\vec{x}[10]\\) = \\(\\left[\\begin{array}{c}100\\\\200\\\\200\\\\\\end{array}\\right]\\) and \\(\\vec{x}[11]\\) = \\(\\left[\\begin{array}{c}150\\\\100\\\\250\\\\\\end{array}\\right]\\). Rewrite your four linear equations from part (b) in the form \\(T\\vec{k}\\) = \\(\\vec{b}\\), where \\(\\vec{k}\\) is the vector defined above and \\(\\vec{b}\\) is a vector of constants. Do not solve for \\(\\vec{k}\\).
+<div className="sidetab-container">
+(c) Let \\(\\vec{x}[10]\\) = \\(\\left[\\begin{array}{c}100\\\\200\\\\200\\\\\\end{array}\\right]\\) and \\(\\vec{x}[11]\\) = \\(\\left[\\begin{array}{c}150\\\\100\\\\250\\\\\\end{array}\\right]\\). Rewrite your four linear equations from part (b) in the form \\(T\\vec{k}\\) = \\(\\vec{b}\\), where \\(\\vec{k}\\) is the vector defined above and \\(\\vec{b}\\) is a vector of constants. Do not solve for \\(\\vec{k}\\).
 `;
 
 const fa16q7c_soln =
@@ -309,7 +316,8 @@ ${lmatrix([[20], [190], [0.5], [0.8]])}
 
 const fa16q7d =
 `
-<b>(d)</b> Now let us redeﬁne our graph transition matrix \\(A\\) such that:
+<div className="sidetab-container">
+(d) Now let us redeﬁne our graph transition matrix \\(A\\) such that:
 <hr class="s2"/>
 \\(A\\) = ${lmatrix([[0.6, 0.4, 0.2], [0.3, 0.2, 0.3], [0.1, 0.4, 0.5]])}
 <hr class="s2"/>
@@ -348,7 +356,8 @@ This means you can back infer based on the equation ${lx('A^{-1}\\vec{x}[n + 1]'
 
 const fa16q7e =
 `
-<b>(e)</b> Let us redeﬁne \\(A\\) as \\(A\\) =
+<div className="sidetab-container">
+(e) Let us redeﬁne \\(A\\) as \\(A\\) =
 
 ${lmatrix([[0.2, 0.1, 0.3], [0.4, 0.7, 0.1], [0.4, 0.2, 0.6]])}.
 <hr class="s2"/>
@@ -372,7 +381,8 @@ Kevin Bancroft just joined the Column Space Warriors. In order to better learn h
 
 <hr class="s3"/>
 
-<b>(a)</b> Kevin Bancroft and Draymond Blue-Gold are running a drill where they each have to run from a
+<div className="sidetab-container">
+(a) Kevin Bancroft and Draymond Blue-Gold are running a drill where they each have to run from a
 starting coordinate to an end coordinate. Kevin starts at point \\(ks\\) = ${lmatrix([[3, 7]], true)} and wants to go to point \\(k_e\\) = ${lmatrix([[-4, 10]], true)}. Draymond starts at point \\(d_s\\) = ${lmatrix([[-6, 1]], true)} and wants to go to point \\(d_e\\) = ${lmatrix([[-7, -5]], true)}.
 <hr class="s1"/>
 <img src="${imgfa16q8_1}" className="problem-image" />
@@ -393,7 +403,8 @@ ${lx('T')} = ${lmatrix([[1, -1], [1, 1]])}
 
 const fa16q8b =
 `
-<b>(b)</b> Steph Current noticed Kevin and Draymond running this drill, and decided to join them. For their next move, they will be using transformation matrix:
+<div className="sidetab-container">
+(b) Steph Current noticed Kevin and Draymond running this drill, and decided to join them. For their next move, they will be using transformation matrix:
 <hr class="s2"/>
 ${lx('B')} = ${lmatrix([[2, 2], [-2, 2]])}
 <hr class="s2"/>
@@ -408,7 +419,8 @@ After applying the matrix to some sample coordinates such as the standard basis 
 const imgfa16q8_2 = require('../img/fa16q8-2.png');
 const fa16q8c =
 `
-<b>(c)</b> After a couple of drills, Kevin Bancroft came up with a new idea – he decided to race his teammates across the court to see who is faster. Kevin starts at point ${lx('k_s')} = ${lmatrix([[-2, 1]], true)} and ends at ${lx('k_e')} = ${lmatrix([[3, 2]], true)}. Steph starts at ${lx('s_s')} = ${lmatrix([[0, 0]], true)} and ends at ${lx('s_e')} = ${lmatrix([[-6, -3]], true)}. Can this be represented by a transformation matrix? Brieﬂy justify why or why not.
+<div className="sidetab-container">
+(c) After a couple of drills, Kevin Bancroft came up with a new idea – he decided to race his teammates across the court to see who is faster. Kevin starts at point ${lx('k_s')} = ${lmatrix([[-2, 1]], true)} and ends at ${lx('k_e')} = ${lmatrix([[3, 2]], true)}. Steph starts at ${lx('s_s')} = ${lmatrix([[0, 0]], true)} and ends at ${lx('s_e')} = ${lmatrix([[-6, -3]], true)}. Can this be represented by a transformation matrix? Brieﬂy justify why or why not.
   <hr class="s1"/>
   <img src="${imgfa16q8_2}" className="problem-image" />
 `;
@@ -421,19 +433,11 @@ It cannot because in the case of Steph ${lmatrix([[0, 0]])} goes to a nonzero ve
 var Scroll = require('react-scroll');
 var Link = Scroll.Link;
 var Element = Scroll.Element;
-var Events = Scroll.Events;
-var scroll = Scroll.animateScroll;
-var scrollSpy  = Scroll.scrollSpy;
 var Sticky = require('react-stickynode');
 
 class EE16AFa16 extends Component {
   render() {
     const examCode = 'ee16a-fa16';
-
-    Events.scrollEvent.register('end', function() {
-      console.log('wtf??');
-      this.handleSetActive;
-    });
 
     return (
       <span>
@@ -449,43 +453,43 @@ class EE16AFa16 extends Component {
           <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
           <hr className="s1" />
           <div className="sidetitle">Section 1</div>
-          <div>
+          <div className="sidetab-container">
             <Link activeClass="active" className="sidetab" to="q3" spy={true} isDynamic={true} smooth={true} duration={500}>
               3. True/False
             </Link>
           </div>
-          <div>
+          <div className="sidetab-container">
             <Link activeClass="active" className="sidetab" to="q4" spy={true} isDynamic={true} smooth={true} duration={500}>
               4. Proof
             </Link>
           </div>
-          <div>
+          <div className="sidetab-container">
             <Link activeClass="active" className="sidetab" to="q5" spy={true} isDynamic={true} smooth={true} duration={500}>
               5. Inverse of a Matrix
             </Link>
           </div>
           <hr className="s1" />
           <div className="sidetitle">Section 2</div>
-          <div>
+          <div className="sidetab-container">
             <Link activeClass="active" className="sidetab" to="q6" spy={true} isDynamic={true} smooth={true} duration={500}>
               6. Directional Shovels
             </Link>
           </div>
-          <div>
+          <div className="sidetab-container">
             <Link activeClass="active" className="sidetab" to="q7" spy={true} isDynamic={true} smooth={true} duration={500}>
               7. Graph Majors
             </Link>
           </div>
-          <div>
+          <div className="sidetab-container">
             <Link activeClass="active" className="sidetab" to="q8" spy={true} isDynamic={true} smooth={true} duration={500}>
               8. Transformation Basketball
             </Link>
           </div>
-          <hr className="s3" />
+          <hr className="s2" />
           <h4>SOURCES</h4>
           <hr className="s2" />
-          <div><a className="sidetab" href="https://tbp.berkeley.edu/exams/5381/download/" target="_blank">Exam PDF</a></div>
-          <div><a className="sidetab" href="https://tbp.berkeley.edu/exams/5383/download/" target="_blank">Solutions PDF</a></div>
+          <div className="sidetab-container"><a className="sidetab" href="https://tbp.berkeley.edu/exams/5381/download/" target="_blank">Exam PDF</a></div>
+          <div className="sidetab-container"><a className="sidetab" href="https://tbp.berkeley.edu/exams/5383/download/" target="_blank">Solutions PDF</a></div>
         </Sticky>
         <div className="sidebar mobile">
           <hr className="s5" />
@@ -494,34 +498,34 @@ class EE16AFa16 extends Component {
           <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
           <hr className="s1" />
           <div className="sidetitle">Section 1</div>
-          <div>
+          <div className="sidetab-container">
             <Link activeClass="active" className="sidetab" to="q3" isDynamic={true} smooth={true} duration={500}>
               3. True/False
             </Link>
           </div>
-          <div>
+          <div className="sidetab-container">
             <Link activeClass="active" className="sidetab" to="q4" isDynamic={true} smooth={true} duration={500}>
               4. Proof
             </Link>
           </div>
-          <div>
+          <div className="sidetab-container">
             <Link activeClass="active" className="sidetab" to="q5" isDynamic={true} smooth={true} duration={500}>
               5. Inverse of a Matrix
             </Link>
           </div>
           <hr className="s1" />
           <div className="sidetitle">Section 2</div>
-          <div>
+          <div className="sidetab-container">
             <Link activeClass="active" className="sidetab" to="q6" isDynamic={true} smooth={true} duration={500}>
               6. Directional Shovels
             </Link>
           </div>
-          <div>
+          <div className="sidetab-container">
             <Link activeClass="active" className="sidetab" to="q7" isDynamic={true} smooth={true} duration={500}>
               7. Graph Majors
             </Link>
           </div>
-          <div>
+          <div className="sidetab-container">
             <Link activeClass="active" className="sidetab" to="q8" isDynamic={true} smooth={true} duration={500}>
               8. Transformation Basketball
             </Link>
@@ -529,8 +533,8 @@ class EE16AFa16 extends Component {
           <hr className="s3" />
           <h4>SOURCES</h4>
           <hr className="s2" />
-          <div><a className="sidetab" href="https://tbp.berkeley.edu/exams/5381/download/" target="_blank">Exam PDF</a></div>
-          <div><a className="sidetab" href="https://tbp.berkeley.edu/exams/5383/download/" target="_blank">Solutions PDF</a></div>
+          <div className="sidetab-container"><a className="sidetab" href="https://tbp.berkeley.edu/exams/5381/download/" target="_blank">Exam PDF</a></div>
+          <div className="sidetab-container"><a className="sidetab" href="https://tbp.berkeley.edu/exams/5383/download/" target="_blank">Solutions PDF</a></div>
         </div>
         <div className="content">
           <Element name="q3">

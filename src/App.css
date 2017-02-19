@@ -81,6 +81,10 @@ h6 {
   color: #fff;
 }
 
+li {
+  margin-left: 40px;
+}
+
 .h5-alt {
   font-size: 22px;
   color: #fff;
@@ -178,7 +182,7 @@ label {
 }
 
 .light-gray {
-  background: #eaeaea;
+  background: #ececec;
 }
 
 .toggle-handle {
@@ -246,12 +250,16 @@ input[type=button]:hover {
   color: #333;
 }
 
+.sidetab-container {
+  margin: 5px 0 10px;
+}
+
 .sidetab {
   font-size: 14px;
   position: relative;
   left: 16px;
   margin-right: 16px;
-  line-height: 32px;
+  line-height: 22px;
 }
 
 .selector {
