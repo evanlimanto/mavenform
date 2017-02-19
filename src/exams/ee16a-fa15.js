@@ -39,7 +39,7 @@ ${lmatrix([[1, 0, '\\vdots', -2], [0, 1, '\\vdots', 2]], false, false)}
 
 and yields the solution
 
-${lmatrix([['x_1'], ['x_2']])} = ${lmatrix([[-2], [2]], false, false)}
+${lmatrix([['x_1'], ['x_2']])} = ${lmatrix([[-2], [2]])}
 `;
 
 const fa15q4 =
@@ -58,7 +58,7 @@ const fa15q4_soln =
 `
 We can find the inverse by row reducing the augmented system (process omitted for brevity): <br/><br/>
 
-${lx('\\left[ \\begin{array}{c c c c c} 1 & 0 & \\vdots & 1 & 3 \\\\ 0 & 1 & \\vdots & -2 & -5 \\end{array} \\right] \\implies \\left[ \\begin{array}{c c c c c} -5 & -3 \\vdots 1 & 0 \\\\ 2 & 1 & \\vdots & 0 & 1 \\\\ \\end{array} \\right]', false)}
+${lx('\\left[ \\begin{array}{c c c c c} 1 & 0 & \\vdots & 1 & 3 \\\\ 0 & 1 & \\vdots & -2 & -5 \\end{array} \\right] \\implies \\left[ \\begin{array}{c c c c c} -5 & -3 & \\vdots 1 & 0 \\\\ 2 & 1 & \\vdots & 0 & 1 \\\\ \\end{array} \\right]', false)}
 
 Thus the inverse is given by:
 
