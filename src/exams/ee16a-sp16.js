@@ -494,7 +494,7 @@ const sp16q9b =
 
 const sp16q9b_soln =
 `
-If number is conserved, this means each column vector in the matrix sums to 1. Therefore: ${lx('p_1')} + ${lx('p_2')} + ${lx('p_3')} = 1
+If number is conserved, this means each column vector in the matrix sums to 1. Therefore: ${lx('p_1')} + ${lx('p_2')} + ${lx('p_3')} = 1.
 `;
 
 const sp16q9c =
