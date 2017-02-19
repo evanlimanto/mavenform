@@ -401,6 +401,11 @@ class EE16ASp15 extends Component {
               duration: 500,
               smooth: true,
             })}>5. Berkeley Forever</a></div>
+          <hr className="s3" />
+          <h4>SOURCES</h4>
+          <hr className="s2" />
+          <div><a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Asp16-exam.pdf'} target="_blank">Exam PDF</a></div>
+          <div><a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Asp16-soln.pdf'} target="_blank">Solutions PDF</a></div>
         </div>
         <div className="content">
           <hr className="s5" />

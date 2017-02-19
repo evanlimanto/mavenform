@@ -484,8 +484,8 @@ class EE16AFa16 extends Component {
           <hr className="s3" />
           <h4>SOURCES</h4>
           <hr className="s2" />
-          <div><a className="sidetab" href="https://tbp.berkeley.edu/exams/5381/download/" target="_blank">Exam PDF</a></div>
-          <div><a className="sidetab" href="https://tbp.berkeley.edu/exams/5383/download/" target="_blank">Solutions PDF</a></div>
+          <div><a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Afa16-exam.pdf'} target="_blank">Exam PDF</a></div>
+          <div><a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Afa16-soln.pdf'} target="_blank">Solutions PDF</a></div>
         </Sticky>
         <div className="sidebar mobile">
           <hr className="s5" />
