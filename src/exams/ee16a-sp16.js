@@ -21,10 +21,7 @@ Thus the inverse is given by:<br/>
 ${lmatrix([[3, -2, -1], [-4, 1, 2], [1, 0, '-1/2']], false, false)}<br/>
 
 We can check our answer by calculating:<br/><br/>
-${lmatrix([[1, 2, 6], [0, 1, 4], [2, 4, 10]])}
-${lmatrix([[3, -2, -1], [-4, 1, 2], [1, 0, '-1/2']])}
-=
-${lmatrix([[1, 0, 0], [0, 1, 0], [0, 0, 1]])}
+${lx('\\left[ \\begin{array}{c c c} 1 & 2 & 6 \\\\ 0 & 1 & 4 \\\\ 2 & 4 & 10 \\\\ \\end{array} \\right] \\left[ \\begin{array}{c c c} 3 & -2 & -1 \\\\ -4 & 1 & 2 \\\\ 1 & 0 & -1/2 \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c c c} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ \\end{array} \\right]', false)}
 `;
 
 const sp16q4 = 
@@ -36,26 +33,26 @@ Let \\(A\\) and \\(B\\) be \\(n × n\\) matrices. Suppose \\(A\\) is invertible,
 
 const sp16q4_soln =
 `
-Proof 1:
-Since ${lx('B')} is rank deﬁcient, it has linearly dependent columns. This means that there exists a nonzero vector ${lx('\\vec{x}')} such that ${lx('B\\vec{x} = \\vec{0}', false)}.
+<h3>Proof 1:</h3>
+Since ${lx('B')} is rank deﬁcient, it has linearly dependent columns. This means that there exists a nonzero vector ${lx('\\vec{x}')} such that ${lx('B\\vec{x} = \\vec{0}', false)}
 
 Premultiplying this equation by the matrix ${lx('A')} gives
-${lx('A(B\\vec{x}) = A\\vec{0} = \\vec{0}', false)}.
+${lx('A(B\\vec{x}) = A\\vec{0} = \\vec{0}', false)}
 
-But ${lx('A(B\\vec{x}) = (AB)\\vec{x})', false)},
+But ${lx('A(B\\vec{x}) = (AB)\\vec{x}', false)}
 
 so we've shown that
-${lx('(AB)\\vec{x}) = \\vec{0}', false)}
+${lx('(AB)\\vec{x} = \\vec{0}', false)}
 
-for some nonzero vector ${lx('\\vec{x}')}. This proves that the columns of the ${lx('n x n')} matrix ${lx('AB')} are linearly dependent, which in turn means that rank(${lx('AB')}) < ${lx('n')}.<br/><br/>
+for some nonzero vector ${lx('\\vec{x}')}. This proves that the columns of the <i>n x n</i> matrix ${lx('AB')} are linearly dependent, which in turn means that rank(${lx('AB')}) < ${lx('n')}.<br/><br/>
 
-Proof 2:
+<h3>Proof 2:</h3>
 Define the product matrix ${lx('C')} = ${lx('AB')}. Writing the matrix ${lx('B')} in column form, we ﬁnd that
 
 ${lx('\\begin{align}C & = AB \\\\ & = A \\begin{bmatrix} \\vec{b_1} & \\cdots & \\vec{b_l} \\cdots & \\vec{b_n} \\end{bmatrix} \\\\ & = \\begin{bmatrix} A\\vec{b_1} & \\cdots & A\\vec{b_l} & \\cdots & A\\vec{b_n} \\end{bmatrix} \\\\ & = \\begin{bmatrix} \\vec{c_1} & \\cdots & \\vec{c_l} & \\cdots & \\vec{c_n} \\end{bmatrix} \\\\ \\end{align}', false)}
 
-where ${lx('\\vec{c_l}')} = ${lx('A\\vec{b_l}')} denotes the ${lx('l_{th}')} column of the matrix ${lx('C')} = ${lx('AB')}.
-Since ${lx('B')} is rank deﬁcient its columns must be linearly dependent. This means that we can write any column of ${lx('B')} as a nontrivial linear combination of the others (by nontrivial we mean that not all the coefﬁcients in the linear combination are zero). For example, let’s write the last column of B as a linear combination of the first ${lx('n')} − ${lx('1')} columns. That is,
+where ${lx('\\vec{c_l}')} = ${lx('A\\vec{b_l}')} denotes the ${lx('l_{th}')} column of the matrix ${lx('C')} = ${lx('AB')}.<br/><br/>
+Since ${lx('B')} is rank deﬁcient its columns must be linearly dependent. This means that we can write any column of ${lx('B')} as a nontrivial linear combination of the others (by nontrivial we mean that not all the coefﬁcients in the linear combination are zero). For example, let’s write the last column of ${lx('B')} as a linear combination of the first ${lx('n - 1')} columns. That is,
 
 ${lx('\\vec{b_n} = \\sum_{l = 1}^{n - 1}{a_l \\vec{b_l}}', false)}
 
@@ -64,7 +61,7 @@ Now let’s look at the last column of the product matrix ${lx('C')} = ${lx('AB'
 
 ${lx('\\begin{align} \\vec{c_n} & = A\\vec{b_n} \\\\ & = A \\sum_{l = 1}^{n - 1}{a_l\\vec{b_l}} \\\\ & = \\sum_{l = 1}^{n - 1}{a_l \\underbrace{A \\vec{b_l}}_{\\vec{c_l}}} \\\\ & = \\sum_{l = 1}^{n - 1}{a_l\\vec{c_l}} \\\\ \\end{align}', false)}
 
-which shows that the nth column of ${lx('C')} = ${lx('AB')} is a nontrivial linear combination of the ﬁrst ${lx('n')} - ${lx('1')} columns.<br/>
+which shows that the ${lx('n^{th}')} column of ${lx('C')} = ${lx('AB')} is a nontrivial linear combination of the ﬁrst ${lx('n - 1')} columns.<br/>
 This means that ${lx('C')} has linearly dependent columns, which in turn implies that ${lx('AB')} is rank deficient.
 `;
 
@@ -80,7 +77,7 @@ const sp16q5a_soln =
 `
 <h3>False</h3>
 
-Let’s left multiply and right multiply ${lx('A_2')} by ${lx('A^{-1}')} so we have ${lx('A^{−1} AAA^{−1}')}. By associativity of matrix multiplication, we have ${lx('(A^{−1}A)(AA^{−1})')} = ${lx('I_nI_n')} = ${lx('I_n')} where ${lx('I')} is the identity matrix. However, if ${lx('A^2')} were ${lx('0')}, then ${lx('(A^{−1}A)(AA^{−1})')} = ${lx('A^{−1} A^{2} A^{−1}')} = ${lx('0')} where ${lx('0')} is a matrix of all zeros, hence resulting in a contradiction.
+Let’s left multiply and right multiply ${lx('A^2')} by ${lx('A^{-1}')} so we have ${lx('A^{−1} AAA^{−1}')}. By associativity of matrix multiplication, we have ${lx('(A^{−1}A)(AA^{−1})')} = ${lx('I_nI_n')} = ${lx('I_n')} where ${lx('I')} is the identity matrix. However, if ${lx('A^2')} were ${lx('0')}, then ${lx('(A^{−1}A)(AA^{−1})')} = ${lx('A^{−1} A^{2} A^{−1}')} = ${lx('0')} where ${lx('0')} is a matrix of all zeros, hence resulting in a contradiction.
 `;
 
 const sp16q5b =
@@ -104,8 +101,8 @@ const sp16q5c_soln =
 `
 <h3>True</h3>
 
-${lx('(AB)^{−1} = B^{−1}A^{−1}')}.
-Note that ${lx('ABB^{-1}A^{-1}')} = ${lx('I')} and ${lx('B^{-1}A^{-1}AB')} = ${lx('B^{-1}IB')} = ${lx('B^{-1}B')} = ${lx('I')}
+${lx('(AB)^{−1} = B^{−1}A^{−1}', false)}.
+Note that ${lx('ABB^{-1}A^{-1}')} = ${lx('I')} and ${lx('B^{-1}A^{-1}AB')} = ${lx('B^{-1}IB')} = ${lx('B^{-1}B')} = ${lx('I')}.
 `;
 
 const sp16q5d =
@@ -118,7 +115,7 @@ const sp16q5d_soln =
 `
 <h3>True.</h3>
 
-Span(${lx('{')}${lmatrix([[1], [0], [1]])},${lmatrix([[0], [1], [0]])}${lx('}')}) spans the ${lx('x')}-${lx('y')} plane in ${lx('\\mathbb{R}^3')} as well.
+Span(${lx('\\{')}${lmatrix([[1], [0], [1]])},${lmatrix([[0], [1], [0]])}${lx('\\}')}) spans the ${lx('x')}-${lx('y')} plane in ${lx('\\mathbb{R}^3')} as well.
 `;
 
 const sp16q5e =
@@ -130,7 +127,7 @@ const sp16q5e_soln =
 `
 <h3>False.</h3>
 
-A set of ${lx('n')} linearly dependent vectors span some subspace of dimension ${lx('0')} < dim(${lx('A')}) < ${lx('n')} in ${lx('\\mathbb{R}^n')}.<br/>
+A set of ${lx('n')} linearly dependent vectors span some subspace of dimension ${lx('0')} < dim(${lx('A')}) < ${lx('n')} in ${lx('\\mathbb{R}^n')}.<br/><br/>
 <b>Note</b>: It is incorrect to say the set of linearly dependent vectors spans ${lx('\\mathbb{R}^{n−1}')} for two reasons. First, you
 don’t know what the dimension is of the subspace it spans, which could be less than ${lx('n')} − ${lx('1')}. Second, there is no such thing as ${lx('\\mathbb{R}^{n−1} \\in \\mathbb{R}^n')}. The vectors are “in” ${lx('\\mathbb{R}^n')} based on how many elements are in the
 vector, and a set of vectors spans some subspace (potentially the entire space.)
@@ -188,7 +185,7 @@ brightness units from each group.
 
 const sp16q6a_soln =
 `
-${lx('\\left \\begin{aligned} A + 5B + C &= 7 \\\\ 2B + 4C + 6D &= 26 \\\\ 2C + 2D &= 10 \\\\ 3D = 9 \\\\ \\end{aligned}')}
+${lx('\\begin{aligned} A + 5B + C & = 7 \\\\ 2B + 4C + 6D & = 26 \\\\ 2C + 2D & = 10 \\\\ 3D & = 9 \\\\ \\end{aligned}')}
 `;
 
 const sp16q6b =
@@ -211,10 +208,10 @@ Thus, we discover that:
 <ul><li>Camp A has 5 imps</li><li>Camp B has 0 imps</li><li>Camp C has 2 imps</li><li>Camp D has 3 imps</li></ul><br/>
 We can check our answer by substituting our answers into the original equations:
 
-1·5 + 5·0 + 1·2 = 5 + 2 = 7<br/>
-2·0 + 4·2 + 6·3 = 8 + 18 = 26<br/>
-2·2 + 2·3 = 4 + 6 = 10<br/>
-3·3 = 9<br/>
+${lx('1·5 + 5·0 + 1·2 = 5 + 2 = 7', false)}
+${lx('2·0 + 4·2 + 6·3 = 8 + 18 = 26', false)}
+${lx('2·2 + 2·3 = 4 + 6 = 10', false)}
+${lx('3·3 = 9', false)}
 `;
 
 const sp16q6c =
@@ -232,7 +229,7 @@ not.
 
 const sp16q6c_soln =
 `
-No you cannot determine how many imps are at each campsite.
+No, you cannot determine how many imps are at each campsite.
 <ul>
 <li>The new team does not pass through Camp A so you have no way of determining the number of imps in Camp A.</li>
 <li>The new measurement conﬂicts with an existing measurement. The system of equations is inconsistent, so there is no solution.</li>
@@ -283,7 +280,7 @@ where ${lx('A')} is the state-transition matrix. </br></br>
 
 const sp16q7a_soln =
 `
-${lmatrix([[1, '\\alpha', 0, 0], [0, '1 - \\alpha - \\beta', '\\alpha', 0], [0, '\\beta', '1 - \\alpha - \\beta', 0], [0, '\\beta', '1 - \\alpha - \\beta', 0], [0, 0, '\\beta', 1]])}
+${lmatrix([[1, '\\alpha', 0, 0], [0, '1 - \\alpha - \\beta', '\\alpha', 0], [0, '\\beta', '1 - \\alpha - \\beta', 0], [0, 0, '\\beta', 1]])}
 `;
 
 const sp16q7b =
@@ -298,61 +295,64 @@ For this model of the system described above, either explain why time-reversed i
 const sp16q7b_soln =
 `
 <h3>Model 1</h3>
-${lx('A_1')} = ${lmatrix([[1, '1/3', 0, 0], [0, '1/3', '1/3', 0] [0, '1/3', '1/3', 0], [0, 0, '1/3', 1]])}<br/>
+${lx('A_1 = \\left[ \\begin{array}{c c c c} 1 & 1/3 & 0 & 0 \\\\ 0 & 1/3 & 1/3 & 0 \\\\ 0 & 1/3 & 1/3 & 0 \\\\ 0 & 0 & 1/3 & 1 \\\\ \\end{array} \\right]', false)}
 
-Rows 2 and 3 are identical, so A1 is not invertible. In other words, the row vectors are linearly dependent and Gaussian Elimination would result in a row of 0’s, which can’t be inverted.
+Rows 2 and 3 are identical, so ${lx('A_1')} is not invertible. In other words, the row vectors are linearly dependent and Gaussian Elimination would result in a row of 0’s, which can’t be inverted.<br/><br/>
 
 <h3>Model 2</h3>
-${lx('A_2')} = ${lmatrix([[1, '1/4', 0, 0], [0, '1/2', '1/4', 0], [0, '1/2', '1/2', 0], [0, 0, '1/4', 1]])}<br/>
+${lx('A_1 = \\left[ \\begin{array}{c c c c} 1 & 1/4 & 0 & 0 \\\\ 0 & 1/2 & 1/4 & 0 \\\\ 0 & 1/2 & 1/2 & 0 \\\\ 0 & 0 & 1/4 & 1 \\\\ \\end{array} \\right]', false)}
 This is full rank, so it's invertible. In other words, there is a pivot in every row; every row vector is linearly independent from the rest.
 
-${lx('A_2^{-1}')} = ${lmatrix([[1, '-2/3', '1/3', 0], [0, '8/3', '-4/3', 0], [0, '-4/3', '8/3', 0], [0, '1/3', '-2/3', 1]], false, false)}
+${lx('A_2^{-1} = \\left[ \\begin{array}{c c c c} 1 & -2/3 & 1/3 & 0 \\\\ 0 & 8/3 & -4/3 & 0 \\\\ 0 & -4/3 & 8/3 & 0 \\\\ 0 & 1/3 & -2/3 & 1 \\\\ \\end{array} \\right]', false)}
 
-${lx('\\vec{s}[0]')} = ${lx('A_2^{-1}\\vec{1}')} = ${lmatrix([['2/3'], ['4/3'], ['4/3'], ['2/3']])}
+${lx('\\vec{s}[0] = A_2^{-1}\\vec{1} = \\left[ \\begin{array}{c} 2/3 \\\\ 4/3 \\\\ 4/3 \\\\ 2/3 \\end{array} \\right]', false)}
 `;
 
 const sp16q7c =
 `
 For the remainder of the problem, assume ${lx('\\beta')} = ${lx('\\alpha')} = 1/4 and that the state transition matrix ${lx('A')} is:
-${lx('A')} = ${lmatrix([[1, '1/4', 0, 0], [0, '1/2', '1/4', 0], [0, '1/4', '1/2', 0], [0, 0, '1/4', 1]])}.<br/>
+
+${lx('A = \\left[ \\begin{array}{c c c c} 1 & 1/4 & 0 & 0 \\\\ 0 & 1/2 & 1/4 & 0 \\\\ 0 & 1/4 & 1/2 & 0 \\\\ 0 & 0 & 1/4 & 1 \\\\ \\end{array} \\right]', false)}
+
 Recall that the following equation governs ${lx('\\vec{s}[n]')}, the state of the system at time ${lx('n')}, and the initial state ${lx('\\vec{s}[0]')}:
-${lx('\\vec{s}[n]')} = ${lx('A^n\\vec{s}[0]')}.<br/>
+${lx('\\vec{s}[n] = A^n\\vec{s}[0]', false)}
 For each of the remaining parts, assume that a limiting state vector exists, given by
-${lx('\\lim\\limits_{n \\to \\infty} \\vec{s}[n]')} = ${lx('\\vec{s}_\\infty')}
+${lx('\\lim\\limits_{n \\to \\infty} \\vec{s}[n] = \\vec{s}_\\infty', false)}
 (c) Suppose the initial state of the system is given by the vector
-${lx('\\vec{s}[0]')} = ${lmatrix([['1/2'], [0], [0], ['1/2']])}.
+${lx('\\vec{s}[0] = \\left[ \\begin{array}{c} 1/2 \\\\ 0 \\\\ 0 \\\\ 1/2 \\\\ \\end{array} \\right]', false)}
 This means that, initially, 500,000 Technocrats are in San Francisco, and the other 500,000 are in New York City. Without complicated mathematical derivations, determine the state vector ${lx('\\vec{s}[n]')} for all ${lx('n \\geq 1')}.
 `;
 
 const sp16q7c_soln =
 `
-${lx('\\vec{s_\\infty}')} = ${lmatrix([['1/2'], [0], [0], ['1/2']])}
+${lx('\\vec{s_\\infty} = \\left[ \\begin{array}{c} 1/2 \\\\ 0 \\\\ 0 \\\\ 1/2 \\\\ \\end{array} \\right] ', false)}
 With the given state transition diagram, no technocrats would move so ${lx('\\vec{s_0}')} = ${lx('\\vec{s_t}')} = ${lx('\\vec{s_\\infty}')}.
 `;
 
 const sp16q7d =
 `
-(d) Now suppose the initial state of the system is given by the vector ${lx('\\vec{s}[0]')} = ${lmatrix([[0], ['1/2'], ['1/2'], [0]])}.<br/>
+(d) Now suppose the initial state of the system is given by the vector
+${lx('\\vec{s}[0] = \\left[ \\begin{array}{c} 0 \\\\ 1/2 \\\\ 1/2 \\\\ 0 \\end{array} \\right]', false)}
 This means that, initially, 500,000 Technocrats are in Denver, and the other 500,000 are in Chicago.<br/>
 Without complicated mathematical derivations, determine the limiting state vector ${lx('\\lim\\limits_{n \\to \\infty} \\vec{s}[n]')}
 `;
 
 const sp16q7d_soln =
 `
-${lx('\\vec{s_\\infty}')} = ${lmatrix([['1/2'], [0], [0], ['1/2']])}
+${lx('\\vec{s_\\infty} = \\left[ \\begin{array}{c} 1/2 \\\\ 0 \\\\ 0 \\\\ 1/2 \\\\ \\end{array} \\right]', false)}
 By symmetry, half go to SF and half go to NYC.
 `;
 
 const sp16q7e =
 `
 (e) Finally, now suppose the initial state of the system is given by the vector
-${lx('\\vec{s}[0]')} = ${lmatrix([['1/4'], ['1/4'], ['1/4'], ['1/4']])}.
+${lx('\\vec{s}[0] = \\left[ \\begin{array}{c} 1/2 \\\\ 0 \\\\ 0 \\\\ 1/2 \\\\ \\end{array} \\right]', false)}
 This means that, initially, the Technocrats are equally distributed among the four Dream Cities. Without complicated mathematical derivations, determine ${lx('\\lim\\limits_{n \\to \\infty} \\vec{s}[n]')}.
 `;
 
 const sp16q7e_soln =
 `
-${lx('\\vec{s_\\infty}')} = ${lmatrix([['1/2'], [0], [0], ['1/2']])}
+${lx('\\vec{s_\\infty} = \\left[ \\begin{array}{c} 1/2 \\\\ 0 \\\\ 0 \\\\ 1/2 \\\\ \\end{array} \\right]', false)}
 By symmetry, half go to SF and half go to NYC. In addition, we can think of the state vector in this part as follows:<br/>
 
 ${lmatrix([['1/4'], ['1/4'], ['1/4'], ['1/4']])} = ${lx('\\frac{1}{2}')}${lmatrix([['1/2'], [0], [0], ['1/2']])} + ${lx('\\frac{1}{2}')}${lmatrix([[0], ['1/2'], ['1/2'], [0]])}
