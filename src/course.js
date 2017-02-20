@@ -76,29 +76,71 @@ class Course extends Component {
                   </tr>
                   <tr>
                     <td>Midterm 1</td>
+                    <td>Spring 2016</td>
+                    <td>Alon, Ayazifar</td>
+                    <td><a>PDF</a></td>
+                    <td><a>PDF</a></td>
+                  </tr>
+                  <tr>
+                    <td>Midterm 1</td>
+                    <td>Fall 2015</td>
+                    <td>Niknejad, Sahai</td>
+                    <td><a>PDF</a></td>
+                    <td><a>PDF</a></td>
+                  </tr>
+                  <tr>
+                    <td>Midterm 1</td>
+                    <td>Spring 2015</td>
+                    <td>Alon, Ayazifar, Subramanian</td>
+                    <td><a>PDF</a></td>
+                    <td><a>PDF</a></td>
+                  </tr>
+                  <tr>
+                    <td>Midterm 2</td>
                     <td>Fall 2016</td>
                     <td>Ayazifar, Stojanovic</td>
                     <td><a>PDF</a></td>
                     <td><a>PDF</a></td>
                   </tr>
                   <tr>
-                    <td>Midterm 1</td>
-                    <td>Fall 2016</td>
-                    <td>Ayazifar, Stojanovic</td>
+                    <td>Midterm 2</td>
+                    <td>Spring 2016</td>
+                    <td>Alon, Ayazifar</td>
                     <td><a>PDF</a></td>
                     <td><a>PDF</a></td>
                   </tr>
                   <tr>
-                    <td>Midterm 1</td>
-                    <td>Fall 2016</td>
-                    <td>Ayazifar, Stojanovic</td>
+                    <td>Midterm 2</td>
+                    <td>Fall 2015</td>
+                    <td>Niknejad, Sahai</td>
                     <td><a>PDF</a></td>
                     <td><a>PDF</a></td>
                   </tr>
                   <tr>
-                    <td>Midterm 1</td>
-                    <td>Fall 2016</td>
-                    <td>Ayazifar, Stojanovic</td>
+                    <td>Midterm 2</td>
+                    <td>Spring 2015</td>
+                    <td>Alon, Ayazifar, Subramanian</td>
+                    <td><a>PDF</a></td>
+                    <td><a>PDF</a></td>
+                  </tr>
+                  <tr>
+                    <td>Final</td>
+                    <td>Spring 2016</td>
+                    <td>Alon, Ayazifar</td>
+                    <td><a>PDF</a></td>
+                    <td><a>PDF</a></td>
+                  </tr>
+                  <tr>
+                    <td>Final</td>
+                    <td>Fall 2015</td>
+                    <td>Niknejad, Sahai</td>
+                    <td><a>PDF</a></td>
+                    <td><a>PDF</a></td>
+                  </tr>
+                  <tr>
+                    <td>Final</td>
+                    <td>Spring 2015</td>
+                    <td>Alon, Ayazifar, Subramanian</td>
                     <td><a>PDF</a></td>
                     <td><a>PDF</a></td>
                   </tr>
