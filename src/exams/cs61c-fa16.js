@@ -1,18 +1,9 @@
-import React, { Component } from 'react'; import { Question } from '../components/question';
-import { lx } from '../utils';
+import React, { Component } from 'react';
+import { Question } from '../components/question';
+import { lx, longblank, blank, onespace, twospace, threespace, fourspace, fivespace, sixspace } from '../utils';
 
 const _ = require('lodash');
-
 const examCode = 'cs61cfa16';
-
-const blank = _.repeat('_', 8);
-const longblank= _.repeat('_', 30);
-const sixspace = _.repeat('&nbsp;', 6);
-const fivespace = _.repeat('&nbsp;', 5);
-const fourspace = _.repeat('&nbsp;', 4);
-const threespace = _.repeat('&nbsp;', 3);
-const twospace = _.repeat('&nbsp;', 2);
-const onespace = _.repeat('&nbsp;', 1);
 
 const q1_1 =
 `
@@ -648,23 +639,23 @@ class CS61CFa16 extends Component {
             <Question id={"q1-4"} content={q1_4} solution={q1_4_soln} />
           </Element>
           <Element name="q2">
-            <hr className="h5" />
+            <hr className="s5" />
             <Question id={"q2-1"} content={q2_1} solution={q2_1_soln} />
           </Element>
           <Element name="q3">
-            <hr className="h5" />
+            <hr className="s5" />
             <Question id={"q3-1"} content={q3_1} solution={q3_1_soln} />
           </Element>
           <Element name="q4">
-            <hr className="h5" />
+            <hr className="s5" />
             <Question id={"q4-1"} content={q4_1} solution={q4_1_soln} />
           </Element>
           <Element name="q5">
-            <hr className="h5" />
+            <hr className="s5" />
             <Question id={"q5-1"} content={q5_1} solution={q5_1_soln} />
           </Element>
           <Element name="q6">
-            <hr className="h5" />
+            <hr className="s5" />
             <Question id={"q6-1"} content={q6_1} solution={q6_1_soln} />
           </Element>
         </div>

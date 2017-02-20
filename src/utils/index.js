@@ -1,4 +1,14 @@
 const _ = require('lodash');
+const longblank = _.repeat('_', 30);
+const blank = _.repeat('_', 8);
+const eightspace = _.repeat('&nbsp;', 8);
+const sevenspace = _.repeat('&nbsp;', 7);
+const sixspace = _.repeat('&nbsp;', 6);
+const fivespace = _.repeat('&nbsp;', 5);
+const fourspace = _.repeat('&nbsp;', 4);
+const threespace = _.repeat('&nbsp;', 3);
+const twospace = _.repeat('&nbsp;', 2);
+const onespace = _.repeat('&nbsp;', 1);
 
 function lmatrix(values, transpose=false, inline=true) {
   var s;
@@ -36,4 +46,7 @@ function lx(s, inline=true) {
   return `${ (inline) ? "\\(" : "$$"}${s}${ (inline) ? "\\)" : "$$" }`;
 }
 
-export { lmatrix, lx };
+export {
+  lmatrix, lx,
+  longblank, blank, onespace, twospace, threespace, fourspace, fivespace, sixspace, sevenspace, eightspace
+};
