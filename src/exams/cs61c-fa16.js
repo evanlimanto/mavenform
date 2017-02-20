@@ -3,6 +3,8 @@ import { lx } from '../utils';
 
 const _ = require('lodash');
 
+const examCode = 'cs61cfa16';
+
 const blank = _.repeat('_', 8);
 const longblank= _.repeat('_', 30);
 const sixspace = _.repeat('&nbsp;', 6);
@@ -89,7 +91,6 @@ const q1_4 =
 0 through 9 plus the letters A (10), B (11), C(12), D(13), E (14), F (15), G (16), H (17), I (18), J (19), K (20), L (21), M (22), N (23), O (24), P (25), Q (26), R (27), S (28), T (29), U (30), and V (31).
 
 Convert ${lx('FUN_{32}')} to:
-<h3>Answers</h3>
 <hr class="s1" />
 Binary: ${blank}
 <hr class="s1" />
@@ -131,9 +132,9 @@ $s3 holds the C pointer to an array of integers a;
 The code is as follows, with space for comments following the # sign at the right:
 <hr class="s1" />
 <code>
-${threespace}add  $s0, $zero, $zero   # b = 0;
+${threespace}add  $s0, $zero, $zero  ${onespace} # b = 0;
 <hr class="s1" />
-${threespace}add  $s1, $zero, $zero   # i = 0;
+${threespace}add  $s1, $zero, $zero  ${onespace} # i = 0;
 <hr class="s1" />
 ${threespace}addi $s2, $zero, 10 ${twospace} #
 <hr class="s1" />
@@ -613,64 +614,29 @@ class CS61CFa16 extends Component {
           <h4>SOURCES</h4>
           <hr className="s1" />
           <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Afa15-exam.pdf'} target="_blank">Exam PDF</a>
+            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-exam.pdf`} target="_blank">Exam PDF</a>
           </div>
           <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Afa15-soln.pdf'} target="_blank">Solutions PDF</a>
+            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-soln.pdf`} target="_blank">Solutions PDF</a>
           </div>
         </Sticky>
         <div className="sidebar mobile">
           <hr className="s5" />
           <h4>CONTENTS</h4>
           <hr className="s2" />
-          <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
-          <hr className="s1" />
-          <div className="sidetitle">Straightforward Questions</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q3" isDynamic={true} smooth={true} duration={500}>
-              Q1. Number Representation
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q4" isDynamic={true} smooth={true} duration={500}>
-              Q2. Reverse Engineering
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q5" isDynamic={true} smooth={true} duration={500}>
-              Q3. Number Pushing and Popping
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q6" isDynamic={true} smooth={true} duration={500}>
-              Q4. Branches are for N00Bs
-            </Link>
-          </div>
-          <hr className="s1" />
-          <div className="sidetitle">Free-form Problems</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q7" isDynamic={true} smooth={true} duration={500}>
-              Q5. DIPS ISA
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q8" isDynamic={true} smooth={true} duration={500}>
-              Q6. Mishmash, Hodgepodge, Potpourri
-            </Link>
-          </div>
+          {sidetabContainers}
           <hr className="s2" />
           <h4>SOURCES</h4>
           <hr className="s1" />
           <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Afa15-exam.pdf'} target="_blank">Exam PDF</a>
+            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-exam.pdf`} target="_blank">Exam PDF</a>
           </div>
           <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Afa15-soln.pdf'} target="_blank">Solutions PDF</a>
+            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/{$examCode}-soln.pdf`} target="_blank">Solutions PDF</a>
           </div>
         </div>
         <div className="content">
           <div className="content-spacer" />
-          <hr className="s5" />
           <Element name="q1">
             <hr className="s5" />
             <Question id={"q1-1"} content={q1_1} solution={q1_1_soln} />
