@@ -313,6 +313,10 @@ input[type=button]:hover {
   border-bottom: none;
 }
 
+.iscollapsed {
+  left: 25px;
+}
+
 .return:hover, .collapse:hover {
   border-bottom: none;
 }

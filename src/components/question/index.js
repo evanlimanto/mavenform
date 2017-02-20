@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
 const _ = require('lodash');
 
 class Solution extends Component {
@@ -20,7 +21,6 @@ class Solution extends Component {
 
   render() {
     const hasResponse = this.props.hasResponse;
-    const examCode = this.props.examCode;
     var check = null;
     var solutionButton = null;
     var solutionContent = null;
@@ -29,7 +29,10 @@ class Solution extends Component {
     }
    
     if (this.props.solution) { 
-      const solutionClass = "solution" + ((this.state.showSolution) ? "" : " hidden");
+      const solutionClass = classnames({
+        solution: true,
+        hidden: !this.state.showSolution,
+      });
       solutionContent = (
         <div className={solutionClass}>
           <span dangerouslySetInnerHTML={{'__html': this.props.solution}}></span>

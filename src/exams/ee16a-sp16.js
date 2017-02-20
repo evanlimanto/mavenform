@@ -380,8 +380,8 @@ ${lx('T_2')}: Rotates ${lx('\\vec{p}')} clockwise about the origin by ${lx('45^{
 
 const sp16q8a_soln =
 `
-${lx('\\vec{a_1}')} = ${lx('T_1\\left( \\left[ \\begin{array}{c}1 \\\\ 0 \\\\\ \\end{array} \\right] \\right)')} = ${lmatrix([[0], [-1]])}<br/>
-${lx('\\vec{a_2}')} = ${lx('T_1\\left(\\left[\\begin{array}{c}0 \\\\ 1 \\\\\ \\end{array}\\right]\\right)')} = ${lmatrix([[-1], [0]])}<br/>
+${lx('\\vec{a_1}')} = ${lx('T_1\\left( \\left[ \\begin{array}{c}1 \\\\ 0 \\\\ \\end{array} \\right] \\right)')} = ${lmatrix([[0], [-1]])}<br/>
+${lx('\\vec{a_2}')} = ${lx('T_1\\left(\\left[\\begin{array}{c}0 \\\\ 1 \\\\ \\end{array}\\right]\\right)')} = ${lmatrix([[-1], [0]])}<br/>
 ${lx('A_1')} = ${lmatrix([['\\vec{a_1}', '\\vec{a_2}']])} = ${lmatrix([[0, -1], [-1, 0]])}
 `;
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
 import { Question } from '../components/question';
 import { lmatrix, lx } from '../utils';
 
@@ -426,8 +427,27 @@ var Element = Scroll.Element;
 var Sticky = require('react-stickynode');
 
 class EE16AFa16 extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeFirstSideTab: true
+    };
+    this.removeActiveClass = this.removeActiveClass.bind(this);
+  }
+
+  removeActiveClass() {
+    this.setState({
+      activeFirstSideTab: false
+    });
+  }
+
   render() {
     const examCode = 'ee16a-fa16';
+    const firstSideTabClass = classnames({
+      sidetab: true,
+      active: this.state.activeFirstSideTab
+    })
 
     return (
       <span>
@@ -444,7 +464,7 @@ class EE16AFa16 extends Component {
           <hr className="s1" />
           <div className="sidetitle">Section 1</div>
           <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q3" spy={true} isDynamic={true} smooth={true} duration={500}>
+            <Link activeClass="active" className={firstSideTabClass} to="q3" spy={true} isDynamic={true} smooth={true} duration={500} onSetInactive={this.removeActiveClass}>
               3. True/False
             </Link>
           </div>

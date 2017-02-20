@@ -317,7 +317,7 @@ Best way to do this is to find the eigenvector of ${lx('A_{transition}')} that h
 <li>
 Let's first find the eigenvalues by setting ${lx('det(A_{transition} - \\lambda I) = 0')}
 ${lx('\\begin{align} det(A_{transition} - \\lambda I) &= (0.8 - \\lambda)(0.1 - \\lambda) - 0.2 \\cdot 0.9 \\\\ &= 0.08 - 0.9 \\lambda + \\lambda^2 - 0.18 \\\\ &= \\lambda^2 - 0.9\\lambda - 0.1 = 0 \\end{align}', false)}
-${lx('\\lambda_${1,2} = \\frac{0.9 \\pm \\sqrt{0.81 + 0.4}}{2} \\implies \\lambda_1 = 1, \\lambda_2 = -0.1', false)}
+${lx('\\lambda_{1,2} = \\frac{0.9 \\pm \\sqrt{0.81 + 0.4}}{2} \\implies \\lambda_1 = 1, \\lambda_2 = -0.1', false)}
 </li>
 <li>
 Now let's find the eigenvector:

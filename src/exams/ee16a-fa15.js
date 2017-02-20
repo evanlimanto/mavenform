@@ -49,7 +49,7 @@ $$\\left[
 \\begin{array}{ c c }
 1 & 3 \\\\
 −2 & −5 \\\\
-\\\end{array} \\right]$$
+\\end{array} \\right]$$
 `;
 
 const fa15q4_soln =
