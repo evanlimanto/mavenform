@@ -20,9 +20,9 @@ class App extends Component {
       sidebar: !this.state.sidebar
     });
     if (this.state.sidebar) {
-      document.body.style.left = "0";
+      document.body.style.left = '-125px';
     } else {
-      document.body.style.left = "125px";
+      document.body.style.left = '0';
     }
   }
 
@@ -56,7 +56,7 @@ class App extends Component {
       iscollapsed: !this.state.sidebar
     });
     const collapser = (
-      <a className={collapserClass} onClick={() => this.toggleCollapse()}>&#9776; {(this.state.sidebar) ? "COLLAPSE" : "SIDEBAR"}</a>
+      <a className={collapserClass} onClick={() => this.toggleCollapse()}>&#9776; {(this.state.sidebar) ? "COLLAPSE" : "MENU"}</a>
     );
 
     const menuClass = classnames({
@@ -75,14 +75,14 @@ class App extends Component {
         active: (index === examIndex)
       });
       return (
-        <div className="sidetab-container">
-          <a key={index} className={sideTabClass} href={url}>{title}</a>
+        <div key={index} className="sidetab-container">
+          <a className={sideTabClass} href={url}>{title}</a>
         </div>
       );
     });
 
     return (
-      <span>
+      <span className="shift">
         <a className="return" href="/">&#8592; RETURN</a>
         {collapser}
         <div className={menuClass}>

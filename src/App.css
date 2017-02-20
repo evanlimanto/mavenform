@@ -11,7 +11,6 @@
 
 body {
   position: relative;
-  left: 125px;
   text-align: left;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
@@ -19,6 +18,13 @@ body {
   line-height: 22px;
   overflow-x: hidden;
   color: #333;
+}
+
+.shift {
+  display: block;
+  max-width: 100%;
+  position: relative;
+  left: 125px;
 }
 
 .test {
@@ -282,7 +288,18 @@ input[type=button]:hover {
   max-width: 580px;
 }
 
+/*super savant hack*/
+.content {
+  position: relative;
+  top: -240px;
+}
+
+.first-q {
+  padding-top: 240px;
+}
+
 .return {
+  display: none;
   position: fixed;
   top: 25px;
   left: 25px;
@@ -304,6 +321,7 @@ input[type=button]:hover {
   position: fixed;
   top: 25px;
   left: 275px;
+  z-index: 1;
   text-align: left;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
@@ -549,12 +567,16 @@ input[type=button]:hover {
 }
 
 @media (max-width: 1199px) {
-  body {
-    left: 0;
+  body, .shift {
+    left: 0 !important;
   }
 
-  .menu {
+  .menu, .collapse {
     display: none;
+  }
+
+  .return {
+    display: initial;
   }
 }
 
