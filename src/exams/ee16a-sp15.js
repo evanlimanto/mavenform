@@ -341,9 +341,14 @@ So if we started with 100 people, we will end up with ~82 people in Berkeley, an
 var Scroll = require('react-scroll');
 var Link = Scroll.Link;
 var Element = Scroll.Element;
+var scrollSpy = Scroll.scrollSpy;
 var Sticky = require('react-stickynode');
 
 class EE16ASp15 extends Component {
+  componentDidMount() {
+    scrollSpy.update();
+  }
+
   render() {
     const examCode = 'ee16a-sp15';
     return (
@@ -432,7 +437,7 @@ class EE16ASp15 extends Component {
           </div>
         </div>
         <div className="content">
-          <Element name="q1">
+          <Element name="q1" className="first-q">
             <hr className="s5" />
             <Question id={"q1a"} content={sp15q1a} hasResponse={false} examCode={examCode} solution={sp15q1a_soln} />
             <hr className="s5" />

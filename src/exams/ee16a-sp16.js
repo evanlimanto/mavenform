@@ -559,9 +559,14 @@ was meant to be conserved in the question, partial credit was given for excludin
 var Scroll = require('react-scroll');
 var Link = Scroll.Link;
 var Element = Scroll.Element;
+var scrollSpy = Scroll.scrollSpy;
 var Sticky = require('react-stickynode');
 
 class EE16ASp16 extends Component {
+  componentDidMount() {
+    scrollSpy.update();
+  }
+
   render() {
     return (
       <span>
@@ -679,7 +684,7 @@ class EE16ASp16 extends Component {
           </div>
         </div>
         <div className="content">
-          <Element name="q3">
+          <Element name="q3" className="first-q">
             <hr className="s5" />
             <h2>Straightforward questions <i>(24 points)</i></h2>
             <hr className="s2" />

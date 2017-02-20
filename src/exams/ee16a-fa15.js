@@ -665,9 +665,14 @@ or using your initial knowledge that ${lx('x_1[0] = 1')} to write a system of 2 
 var Scroll = require('react-scroll');
 var Link = Scroll.Link;
 var Element = Scroll.Element;
+var scrollSpy = Scroll.scrollSpy;
 var Sticky = require('react-stickynode');
 
 class EE16AFa15 extends Component {
+  componentDidMount() {
+    scrollSpy.update();
+  }
+
   render() {
     const examCode = 'ee16a-fa15';
     return (
@@ -786,11 +791,11 @@ class EE16AFa15 extends Component {
           </div>
         </div>
         <div className="content">
-          <hr className="s5" />
-          <h2>Straightforward questions <i>(24 points)</i></h2>
-          <hr className="s2" />
-          <p>Unless told otherwise, you must show work to get credit. There will be very little partial credit given in this section. You get one drop: do 3 out of the following 4 questions. (We will grade all 4 and keep the best 3 scores.) Each problem is worth 8 points. Students who get all 4 questions correct will receive some bonus points (6 points).</p>
-          <Element name="q3">
+          <Element name="q3" className="first-q">
+            <hr className="s5" />
+            <h2>Straightforward questions <i>(24 points)</i></h2>
+            <hr className="s2" />
+            <p>Unless told otherwise, you must show work to get credit. There will be very little partial credit given in this section. You get one drop: do 3 out of the following 4 questions. (We will grade all 4 and keep the best 3 scores.) Each problem is worth 8 points. Students who get all 4 questions correct will receive some bonus points (6 points).</p>
             <hr className="s5" />
             <Question id={"q3"} content={fa15q3} variables={['x_1', 'x_2']} examCode={examCode} solution={fa15q3_soln} />
           </Element>

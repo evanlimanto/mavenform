@@ -424,30 +424,16 @@ It cannot because in the case of Steph ${lmatrix([[0, 0]])} goes to a nonzero ve
 var Scroll = require('react-scroll');
 var Link = Scroll.Link;
 var Element = Scroll.Element;
+var scrollSpy = Scroll.scrollSpy;
 var Sticky = require('react-stickynode');
 
 class EE16AFa16 extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeFirstSideTab: true
-    };
-    this.removeActiveClass = this.removeActiveClass.bind(this);
-  }
-
-  removeActiveClass() {
-    this.setState({
-      activeFirstSideTab: false
-    });
+  componentDidMount() {
+    scrollSpy.update();
   }
 
   render() {
     const examCode = 'ee16a-fa16';
-    const firstSideTabClass = classnames({
-      sidetab: true,
-      active: this.state.activeFirstSideTab
-    })
 
     return (
       <span>
@@ -464,7 +450,7 @@ class EE16AFa16 extends Component {
           <hr className="s1" />
           <div className="sidetitle">Section 1</div>
           <div className="sidetab-container">
-            <Link activeClass="active" className={firstSideTabClass} to="q3" spy={true} isDynamic={true} smooth={true} duration={500} onSetInactive={this.removeActiveClass}>
+            <Link activeClass="active" className="sidetab" to="q3" spy={true} isDynamic={true} smooth={true} duration={500} onSetInactive={this.removeActiveClass}>
               3. True/False
             </Link>
           </div>
@@ -555,7 +541,7 @@ class EE16AFa16 extends Component {
           </div>
         </div>
         <div className="content">
-          <Element name="q3">
+          <Element name="q3" className="first-q">
             <hr className="s5" />
             <h2>Section 1 <i>(18 points)</i></h2>
             <hr className="s3" />
