@@ -242,6 +242,211 @@ correct. A very large number of students only made the first error, and
 got the rest of the question completely correct.
 `;
 
+const q3_1 =
+`
+<h3>Q3: Number Pushing and Popping (10 points)</h3>
+Your task is to implement a simple stack adding machine that uses a stack data structure (this is
+independent of the stack for calling/returning from subroutines). For example, Push 2, Push 3,
+PopAdd yields 5 in the top of the stack. Following this with Push 1, PopAdd would yield 6. Fill in the
+code for functions <b><i>push</i></b> and <b><i>popadd</i></b> so they meet the specifications stated in the comments. Do not
+make other code modifications. Calls to <b><i>malloc</i></b> always return a valid address. You may not need all
+the lines for your code solution, but do include comments for partial credit consideration.
+
+<hr class="s2" />
+
+/* Each item on the stack is represented
+   by a pointer to the previous element
+   (NULL if none) and its value. */
+typedef struct stack_el {
+    struct stack_el *prev;
+    double val;
+} stack_el;
+
+/* PUSH: Push new value to top of stack. Return
+   pointer to new top of stack. */
+stack_el* push(stack_el *top_of_stack, double v) {
+
+}
+
+/* POPADD: Pop top stack element and add its value
+   to the new top’s value. Return new top of stack.
+   Free no longer used memory. Do not change
+   the stack if it has fewer than 2 elements. */
+stack_el* popadd(stack_el *top_of_stack) {
+
+}
+`;
+
+const q3_1_soln =
+`
+stack_el* se = (stack_el*) malloc(sizeof(stack_el));
+se->prev = top_of_stack;
+se->val = v;
+return se;
+
+<hr class="s2" />
+
+if (!top_of_stack || !top_of_stack->prev) {
+  return top_of_stack;
+}
+top_of_stack->prev->val += top_of_stack->val;
+stack_el *prev = top_of_stack->prev;
+free(top_of_stack);
+return prev;
+`;
+
+const q4_1 =
+`
+<h3>Q4: Branches are for N00Bs (15 points)</h3>
+
+Consider the discrete-value function ${lx('f(x)')}, defined on the integers {−3,−2,−1,0,1,2,3}:
+<hr class="s2" />
+f(−3)	=	6 f(−2)	=	61 f(−1)=	17 f(0)	=	−38
+f(1)	=	19 f(2)	=	42 f(3)	=	5
+<hr class="s2" />
+
+Your task is to implement this function in MIPS assembly language (including pseudo-instructions), but you
+may NOT use ANY conditional branch instructions (that is, no <i>beq, bne, blt, bgt, ble, or bge</i>). To assist in
+accomplishing this, we have stored the return values in contiguous words in the program’s data segment.
+<hr class="s2" />
+
+You may assume that the input ${lx('x')} is always one of the integers for which the function is defined (between -3 and 3). Assume ${lx('x')} is stored in $a0 and ${lx('f(x)')} is to be returned in $v0. Comment your code for possible partial credit. You may not need all the lines given.
+<hr class="s2" />
+
+<code>
+.data
+output: .word 6 61 17 -38 19 42 5
+<hr class="s2" />
+.text
+f:
+${blank}
+${blank}
+${blank}
+${blank}
+${blank}
+${blank}
+</code>
+`;
+
+const q4_1_soln =
+`
+<code>
+.data
+output: .word 6 61 17 -38 19 42 5
+<hr class="s2" />
+.text
+f:
+la $t0, output     // Load the address of “output” from the data segments
+addiu $a0 $a0 3     // Shift the argument range to all non-negative integers
+sll $a0 $a0 2      // Multiply argument value by 4 to index by word
+addu $t0 $t0 $a0    // Add the argument index to the data address
+lw $v0 0($t0)      // Load the indexed data address into return val register
+jr $ra
+</code>
+
+<h3>Alternate Solution</h3>
+<code>
+.data
+output: .word 6 61 17 -38 19 42 5
+<hr class="s2" />
+.text
+la $t0, output     // Load the address of “output” from the data segments
+addiu $t0 $t0 12    // Move the output address to index 0
+sll $a0 $a0 2      // ultiply argument value by 4 to index by word
+addu $t0 $t0 $a0    // Add the argument index to the data address
+lw $v0 0($t0)      // Load the indexed data address into return val register
+jr $ra
+</code>
+`;
+
+const imgq5_1 = require('../img/cs61cfa16-5.png');
+const q5_1 =
+`
+<h3>Q5: DIPS ISA (15 points)</h3>
+
+Archeologists uncover an ancient binary machine based on 4-bit entities (called nibbles rather than
+bytes) as its fundamental building block. Reverse engineering this machine, engineers discover that it
+has words, registers, and instructions consisting of <b>six nibbles (a <i>24 bit word machine</i>)</b>. The
+machine is <b>nibble addressed</b>, but instructions and data words always begin at a nibble address that
+is a <b>multiple of 6</b> (word 0 is at nibble 0, word 1 at nibble 6, word 2 at nibble 12, and so on). The
+machine happens to have <b>10 by 24-bit registers</b>. The discoverers name the machine “DIPS.”
+<hr class="s2" />
+
+You are asked to reformat the MIPS 32-bit ISA for the smaller DIPS 24-bit instruction word, which
+looks remarkably similar (but not identical) to MIPS in terms of its instruction formats and fields. It is
+still nibble addressed with 24-bit words and instructions, but you are not otherwise constrained.
+<hr class="s2" />
+
+1)  In the boxes below, specify the sizes of the fields for R- and I-type instructions to best utilize the constrained <b>24-bit</b> instructions in the DIPS ISA.
+
+<img src=${imgq5_1} class="problem-image" />
+
+Given your encoding for the R and I instructions above:
+<hr class="s2" />
+2) What is the maximum number of registers you can address in the width of your r fields?
+<hr class="s2" />
+3)  What is the maximum number of distinct operations you can encode in the top instruction format?
+<hr class="s2" />
+4)  If the PC points to the nibble address 156610, what is the highest (largest) nibble address <b>in decimal</b> you can branch to? (NOTE: 1566 is a multiple of 6 and thus a proper DIPS word
+address.)
+<hr class="s2" />
+5)  Translate the following line of DIPS 24-bit machine code into MIPS assembly language, using
+your encoding from above. Use $register_number as your register names (e.g., $0, $1, …), and
+assume the same opcodes as in the MIPS ISA. <b>Remember instructions are only 24 bits (6 nibbles/hex digits)!</b>
+
+0x8C2408
+`;
+
+const q5_1_soln =
+`
+16
+
+${lx('2^1 = 2')}  <i>R-type instructions have a 0 opcode.</i>
+
+${lx('463810_{10}')}  <i>PC + 6 = ${lx('1572_{10}')}; largest positive offset in 10 bits = 0b0111111111 = 0x1FF = ${lx('2^9')}-1 = 511
+words or 3066 nibbles (6 nibbles per word). So max nibble address is ${lx('1572_{10}')} + ${lx('3066_{10}')} = ${lx('4638_{10}')}</i>
+
+1000 11|00 00|10 01|00 0000 10002 = <b>lw $9, 8($0)</b>
+`;
+
+const q6_1 =
+`
+<h3>Q6: Mishmash, Hodgepodge, Potpourri (5 points)</h3>
+
+The following are some multiple choice questions about CALL. Clearly circle the correct answer:
+<hr class="s2" />
+A system program that combines separately compiled modules of a program into a form suitable for execution is ${blank}.
+<hr class="s2" />
+A. Assembler
+B. Loader
+C. Linker
+D. None of the Above
+<hr class="s2" />
+Which flag would you put in a compilation command to include debugging information?
+A. -o
+B. -d
+C. -g
+D. --debug
+<hr class="s2" />
+At the end of the compiling stage, the symbol table contains the ___ of each symbol.
+A. relative address
+B. absolute address
+C. the stack segment beginning address
+D. the global segment beginning address
+<hr class="s2" />
+beq and bne instructions produce ${blank} and they ${blank}.
+A. PC-relative addressing, never relocate
+B. PC-relative addressing, always relocate
+C. Absolute addressing, never relocate
+D. Absolute addressing, always relocate
+<hr class="s2" />
+j and jal instructions add symbols and ${blank} to ${blank}.
+A. instruction addresses, the symbol table
+B. symbol addresses, the symbol table
+C. instruction addresses, the relocation table
+D. symbol addresses, the relocation table
+`;
+
 var Scroll = require('react-scroll');
 var Link = Scroll.Link;
 var Element = Scroll.Element;
@@ -365,12 +570,36 @@ class CS61CFa16 extends Component {
           </div>
         </div>
         <div className="content">
-          <p><hr className="s5" /></p>
+          <hr className="s5" />
           <Element name="q1">
             <hr className="s5" />
             <Question id={"q1-1"} content={q1_1} />
             <hr className="s5" />
             <Question id={"q1-2"} content={q1_2} />
+            <hr className="s5" />
+            <Question id={"q1-3"} content={q1_3} />
+            <hr className="s5" />
+            <Question id={"q1-4"} content={q1_4} />
+          </Element>
+          <Element name="q2">
+            <hr className="h5" />
+            <Question id={"q2-1"} content={q2_1} />
+          </Element>
+          <Element name="q3">
+            <hr className="h5" />
+            <Question id={"q3-1"} content={q3_1} />
+          </Element>
+          <Element name="q4">
+            <hr className="h5" />
+            <Question id={"q4-1"} content={q4_1} />
+          </Element>
+          <Element name="q5">
+            <hr className="h5" />
+            <Question id={"q5-1"} content={q5_1} />
+          </Element>
+          <Element name="q6">
+            <hr className="h5" />
+            <Question id={"q6-1"} content={q6_1} />
           </Element>
         </div>
       </span>
