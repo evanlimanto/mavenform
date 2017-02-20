@@ -17,9 +17,9 @@ ReactDOM.render((
   <Router history={browserHistory} onUpdate={logPageView}>
     <Route path="/" component={App}>
     </Route>
-    <Route path="ee16a" component={Course}>
+    <Route path="/ee16a" component={Course}>
     </Route>
-    <Route path="cs61c" component={Course}>
+    <Route path="/cs61c" component={Course}>
     </Route>
   </Router>
 ), document.getElementById('root'));
