@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { CS61CFa16, EE16ASp15, EE16AFa15, EE16AFa16, EE16ASp16 } from './exams';
 import classnames from 'classnames';
 import Home from './home';
+import Course from './course';
 const _ = require('lodash');
 
 import './App.css';
@@ -28,9 +29,11 @@ class App extends Component {
 
   render() {
     var exam = null;
+    var course = null;
     var examIndex = -1;
     if (this.props.location.query) {
       exam = this.props.location.query.exam;
+      course = this.props.location.query.course;
     }
 
     if (exam === 'cs61cfa16') {
@@ -47,6 +50,8 @@ class App extends Component {
     } else if (exam === 'ee16asp15') {
       exam = <EE16ASp15 />;
       examIndex = 3;
+    } else if (course === 'ee16a') {
+      return <Course />
     } else {
       return <Home />;
     }
@@ -83,7 +88,7 @@ class App extends Component {
 
     return (
       <span className="shift">
-        <a className="return" href="ee16a">&#8592; RETURN</a>
+        <a className="return" href="/?course=ee16a">&#8592; RETURN</a>
         {collapser}
         <div className={menuClass}>
           <a className="home center" href="/">Mavenform</a>
@@ -92,7 +97,7 @@ class App extends Component {
           <hr className="s2" />
           <div className="sidetitle">Midterm 1</div>
           {sideTabs}
-          <a className="index" href="ee16a">&#8592; RETURN</a>
+          <a className="index" href="/?course=ee16a">&#8592; RETURN</a>
         </div>
         <a className="feedback" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
         <div className="test-container">
