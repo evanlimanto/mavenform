@@ -14,7 +14,7 @@ Answer each of the following questions by circling True or False. No work is nec
 
 const fa16q3a_soln =
 `
-True. (Sorry, there weren't any explanations for any of the True/False questions on the original PDF either; we'll try our best to add some on our own later).
+True. (Sorry, there weren't any explanations for any of the True/False questions on the original PDF either; we'll try our best to add some of our own later).
 `;
 
 const fa16q3b =
