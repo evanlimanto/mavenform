@@ -650,12 +650,11 @@ class CS61CFa16 extends Component {
             <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-exam.pdf`} target="_blank">Exam PDF</a>
           </div>
           <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/{$examCode}-soln.pdf`} target="_blank">Solutions PDF</a>
+            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-soln.pdf`} target="_blank">Solutions PDF</a>
           </div>
         </div>
         <div className="content">
           <div className="content-spacer" />
-          <div dangerouslySetInnerHTML={{'__html': clarifications}}></div>
           <Element name="q1">
             <hr className="s5" />
             <Question id={"q1-1"} content={q1_1} solution={q1_1_soln} />

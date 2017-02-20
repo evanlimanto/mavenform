@@ -31,9 +31,11 @@ class App extends Component {
 
   render() {
     var exam = null;
+    var examId = null;
     var course = null;
     if (this.props.location.query) {
       exam = this.props.location.query.id;
+      examId = exam;
       course = this.props.location.query.courseId;
     }
 
@@ -70,12 +72,12 @@ class App extends Component {
     const titles = ["Fall 2016", "Spring 2016", "Fall 2015", "Spring 2015"];
 
     const sideTabs = _.map(exams[course], (courseExams, examType) => {
-      const content = _.map(courseExams, (info, semester) => {
-        const url = `/exam?id=${info['url']}`;
+      const content =  _.map(courseExams, (info, semester) => {
+        const url = `${info['url']}&courseId=${course}`;
         const title = semester;
         const sideTabClass = classnames({
           sidetab: true,
-          active: false,
+          active: (examId === info['id']),
         });
         return (
           <div key={semester} className="sidetab-container">

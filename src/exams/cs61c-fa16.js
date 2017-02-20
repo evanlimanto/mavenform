@@ -623,7 +623,7 @@ class CS61CFa16 extends Component {
             <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-exam.pdf`} target="_blank">Exam PDF</a>
           </div>
           <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/{$examCode}-soln.pdf`} target="_blank">Solutions PDF</a>
+            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-soln.pdf`} target="_blank">Solutions PDF</a>
           </div>
         </div>
         <div className="content">
