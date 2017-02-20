@@ -356,22 +356,45 @@ input[type=button]:hover {
   border-bottom: none;
 }
 
-.feedback-home {
-  position: absolute;
-  color: #fff;
-}
-
 .feedback:hover {
   border-bottom: none;
 }
 
-.feedback-home:hover {
+.home-link {
+  position: absolute;
+  color: #fff;
+}
+
+.home-link:hover {
   color: #ccc;
 }
 
 .card-container {
   margin: auto;
   max-width: 1200px;
+}
+
+.course-card {
+  position: relative;
+  vertical-align: top;
+  display: inline-block;
+  padding: 30px;
+  width: 400px;
+  height: 250px;
+  margin: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.course-card:hover {
+  cursor: pointer;
+  background: #fafafa;
+  border: 1px solid #11accc;
+}
+
+.course-card:hover .card-helper {
+  color: #11accc;
 }
 
 .card {
@@ -389,7 +412,7 @@ input[type=button]:hover {
 
 .card:hover {
   cursor: pointer;
-  background: #eee;
+  background: #fafafa;
   border: 1px solid #11accc;
 }
 
@@ -614,5 +637,11 @@ input[type=button]:hover {
 @media (max-width: 599px) {
   .test {
     padding: 0 25px;
+  }
+}
+
+@media (max-width: 449px) {
+  .course-card {
+    width: 300px;
   }
 }

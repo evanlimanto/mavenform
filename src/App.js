@@ -83,7 +83,7 @@ class App extends Component {
 
     return (
       <span className="shift">
-        <a className="return" href="/">&#8592; RETURN</a>
+        <a className="return" href="ee16a">&#8592; RETURN</a>
         {collapser}
         <div className={menuClass}>
           <a className="home center" href="/">Mavenform</a>
@@ -92,7 +92,7 @@ class App extends Component {
           <hr className="s2" />
           <div className="sidetitle">Midterm 1</div>
           {sideTabs}
-          <a className="index" href="/">&#8592; RETURN</a>
+          <a className="index" href="ee16a">&#8592; RETURN</a>
         </div>
         <a className="feedback" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
         <div className="test-container">

@@ -4,7 +4,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <a className="feedback feedback-home" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
+        <a className="feedback home-link" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
         <div className="banner">
           <hr className="margin" />
           <h6>Mavenform</h6>
@@ -16,32 +16,20 @@ class Home extends Component {
         </div>
         <div className="card-container center">
           <hr className="margin-alt" />
-          <h1 className="center">EE 16A</h1>
+          <h1 className="center">Courses</h1>
           <hr className="s1" />
-          <h5>Available Mavenform Exams</h5>
+          <h5>Currently available exam sets</h5>
           <hr className="s2" />
-          <a className="card" href="/?exam=ee16afa16">
-            <h2>Midterm 1</h2>
-            <h3>Fall 2016</h3>
-            <i>Ayazifar, Stojanovic</i>
+          <a className="course-card" href="ee16a">
+            <h2>EE 16A</h2>
+            <hr className="s1" />
+            <h5><i>University of California, Berkeley</i></h5>
             <h4 className="card-helper">CLICK TO VIEW &#8594;</h4>
           </a>
-          <a className="card" href="/?exam=ee16asp16">
-            <h2>Midterm 1</h2>
-            <h3>Spring 2016</h3>
-            <i>Alon, Ayazifar</i>
-            <h4 className="card-helper">CLICK TO VIEW &#8594;</h4>
-          </a>
-          <a className="card" href="/?exam=ee16afa15">
-            <h2>Midterm 1</h2>
-            <h3>Fall 2015</h3>
-            <i>Niknejad, Sahai</i>
-            <h4 className="card-helper">CLICK TO VIEW &#8594;</h4>
-          </a>
-          <a className="card" href="/?exam=ee16asp15">
-            <h2>Midterm 1</h2>
-            <h3>Spring 2015</h3>
-            <i>Alon, Ayazifar, Subramanian</i>
+          <a className="course-card" href="cs61c">
+            <h2>CS 61C</h2>
+            <hr className="s1" />
+            <h5><i>University of California, Berkeley</i></h5>
             <h4 className="card-helper">CLICK TO VIEW &#8594;</h4>
           </a>
           <hr className="margin-alt" />
