@@ -639,23 +639,23 @@ class CS61CFa16 extends Component {
             <Question id={"q1-4"} content={q1_4} solution={q1_4_soln} />
           </Element>
           <Element name="q2">
-            <hr className="h5" />
+            <hr className="s5" />
             <Question id={"q2-1"} content={q2_1} solution={q2_1_soln} />
           </Element>
           <Element name="q3">
-            <hr className="h5" />
+            <hr className="s5" />
             <Question id={"q3-1"} content={q3_1} solution={q3_1_soln} />
           </Element>
           <Element name="q4">
-            <hr className="h5" />
+            <hr className="s5" />
             <Question id={"q4-1"} content={q4_1} solution={q4_1_soln} />
           </Element>
           <Element name="q5">
-            <hr className="h5" />
+            <hr className="s5" />
             <Question id={"q5-1"} content={q5_1} solution={q5_1_soln} />
           </Element>
           <Element name="q6">
-            <hr className="h5" />
+            <hr className="s5" />
             <Question id={"q6-1"} content={q6_1} solution={q6_1_soln} />
           </Element>
         </div>
