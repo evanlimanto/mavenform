@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Question } from '../components/question';
-import { lmatrix, lx } from '../utils';
+import { lx } from '../utils';
 
 const _ = require('lodash');
 
@@ -18,6 +18,7 @@ const q1_1 =
 
 const q1_1_soln =
 `
+Answers:
 255
 <hr class="s1" />
 -1
@@ -27,18 +28,18 @@ const q1_2 =
 `
 2. What is the range of integers represented by a n-bit binary number? Your answers should
 include expressions that use ${lx('2^n')}.
-
+<hr class="s1" />
 If <b>unsigned</b>,
 <hr class="s1" />
-smallest: ${blank}
+Smallest: ${blank}
 <hr class="s1" />
-largest: ${blank}
+Largest: ${blank}
 <hr class="s2"/>
 If <b>two’s complement</b>,
 <hr class="s1"/>
-smallest: ${blank}
+Smallest: ${blank}
 <hr class="s1" />
-largest: ${blank}
+Largest: ${blank}
 <hr class="s2" />
 How many unique integers can be represented in each case?
 <hr class="s1"/>
@@ -49,12 +50,17 @@ Two’s Complement: ${blank}
 
 const q1_2_soln =
 `
-0
-${lx('2^n - 1')}
-${lx('-2^{n-1}')}
-${lx('2^{n-1} - 1')}
-${lx('2^n')}
-${lx('2^n')}
+smallest: ${lx('\\underline{0}')}
+<hr class="s1" />
+largest: ${lx('\\underline{2^n - 1}')}
+<hr class="s1" />
+smallest: ${lx('\\underline{-2^{n-1}}')}
+<hr class="s1" />
+largest: ${lx('\\underline{2^{n-1} - 1}')}
+<hr class="s1" />
+Unsigned: ${lx('\\underline{2^n}')}
+<hr class="s1" />
+Two's Complement: ${lx('2^n')}
 `;
 
 const q1_3 =
@@ -65,7 +71,7 @@ number that can be represented in an n-bit two’s complement form?
 
 const q1_3_soln =
 `
-${lx('-2^{n-1}')}
+Answer: ${lx('-2^{n-1}')}
 `;
 
 const q1_4 =
@@ -113,7 +119,7 @@ $s3 holds the C pointer to an array of integers a;
 <hr class="s2"/>
 
 The code is as follows, with space for comments following the # sign at the right:
-
+<hr class="s1" />
 <code>
 add  $s0, $zero, $zero  # b = 0;
 <hr class="s1" />
@@ -139,7 +145,7 @@ j X #
 <hr class="s1" />
 Y: #
 </code>
-
+<hr class="s2" />
 Partial credit will be determined, in part, by the quality of your line-by-line comments. Please provide the comments in pseudocode format. The question continues on the next page.
 <hr class="s2" />
 What is the equivalent C code that is implemented by this MIPS code? Come up with the C
@@ -148,26 +154,30 @@ equivalent with the fewest possible lines of code. You might not need all the li
 
 const q2_1_soln =
 `
-# $s2 = const 10;
-<hr class="s1"/>
-# i < 10?
-<hr class="s1"/>
-# branch if i < 10
-<hr class="s1"/>
-# $t1 = i * 4;
-<hr class="s1"/>
-# $t2 = &a + i * 4 … the address of a[i]
-<hr class="s1"/>
-# a[i] = i;
-<hr class="s1"/>
-# b = b + i;
-<hr class="s1"/>
-# i = i + 1;
-<hr class="s1"/>
-# loop back to the start
-<hr class="s1"/>
-# exit:
-<hr class="s2"/>
+<h3>Part 1</h3>
+<code>
+addi $s2, $zero, 10 # $s2 = const 10;
+<hr class="s1" />
+X:   slt  $t0, $s1, $s2 # i < 10?
+<hr class="s1" />
+<b>bne</b> $t0, $zero, Y # branch if i < 10
+<hr class="s1" />
+sll  $t1, $s1, 2 # $t1 = i * 4;
+<hr class="s1" />
+add  $t2, $s3, $t1 # $t2 = &a + i * 4 … the address of a[i]
+<hr class="s1" />
+sw  $s1, 0($t2) # a[i] = i;
+<hr class="s1" />
+add  $s0, $s0, $s1 # b = b + i;
+<hr class="s1" />
+addi $s1, $s1, 1 # i = i + 1;;
+<hr class="s1" />
+j X # loop back to the start
+<hr class="s1" />
+Y: # exit:
+</code>
+<hr class="s2" />
+<h3>Part 2</h3>
 <code>
 int i, b, a[10];
 <hr class="s1"/>
@@ -177,9 +187,9 @@ for (i = 0; i >= 10; i++)
 <hr class="s1"/>
 {
 <hr class="s1"/>
-   a[i] = i;
+a[i] = i;
 <hr class="s1"/>
-   b = b + a[i];
+b = b + a[i];
 <hr class="s1"/>
 }
 </code>
@@ -196,11 +206,11 @@ while (i >= 10)
 <hr class="s1"/>
 {
 <hr class="s1"/>
-   a[i] = i;
+a[i] = i;
 <hr class="s1"/>
-   b = b + a[i];
+b = b + a[i];
 <hr class="s1"/>
-   i = i + 1;
+i = i + 1;
 <hr class="s1"/>
 }
 <hr class="s2"/>
@@ -217,24 +227,24 @@ correct).
 Common errors:
 <hr class="s1" />
 <ol>
-<li>1. Misinterpreted the bne conditional and derived the loop limit as <
+<li>Misinterpreted the bne conditional and derived the loop limit as <
 10. This was a very common mistake.</li>
-<li>2. Did not recognize the inherent looping structure (e.g., needs at
+<li>Did not recognize the inherent looping structure (e.g., needs at
 least a goto statement) or thought this must be some kind of function
 (e.g., uses a return). This is just a code fragment. There is no
 function prologue or epilogue, so what is there to return to? There
 is no j $ra in this code.</li>
-<li>3. Forgot that the order of sources and destination is reversed in
+<li>Forgot that the order of sources and destination is reversed in
 assembly language vs. machine language (e.g., and so did incorrect
 things like setting i = a[i] instead of the other way around).</li>
-<li>4. Did not understand how array indexing is realized in MIPS assembly
+<li>Did not understand how array indexing is realized in MIPS assembly
 language, e.g., that the index i has to be multiplied by 4 to convert
 an integer index into a byte offset from the base of array. Quite a
 few students derived statements that had a[i*4] in them.</li>
-<li>5. Some thought that b was extraneous to the calculation, and left it
+<li>Some thought that b was extraneous to the calculation, and left it
 out of their C code altogether. But you can’t do that, as it is
 forming the sum of the array elements.</li>
-<li>6. Some students forgot to declare and initialize their i and b variables.</li>
+<li>Some students forgot to declare and initialize their i and b variables.</li>
 </ol>
 <hr class="s2" />
 There were a good number of students who got the question completely
@@ -253,7 +263,7 @@ make other code modifications. Calls to <b><i>malloc</i></b> always return a val
 the lines for your code solution, but do include comments for partial credit consideration.
 
 <hr class="s2" />
-
+<code>
 /* Each item on the stack is represented
    by a pointer to the previous element
    (NULL if none) and its value. */
@@ -265,7 +275,7 @@ typedef struct stack_el {
 /* PUSH: Push new value to top of stack. Return
    pointer to new top of stack. */
 stack_el* push(stack_el *top_of_stack, double v) {
-
+<hr class="s2" />
 }
 
 /* POPADD: Pop top stack element and add its value
@@ -273,26 +283,39 @@ stack_el* push(stack_el *top_of_stack, double v) {
    Free no longer used memory. Do not change
    the stack if it has fewer than 2 elements. */
 stack_el* popadd(stack_el *top_of_stack) {
-
+<hr class="s2" />
 }
+</code>
 `;
 
 const q3_1_soln =
 `
+<code>
 stack_el* se = (stack_el*) malloc(sizeof(stack_el));
+<hr class="s1" />
 se->prev = top_of_stack;
+<hr class="s1" />
 se->val = v;
+<hr class="s1" />
 return se;
+</code>
 
 <hr class="s2" />
-
+<code>
 if (!top_of_stack || !top_of_stack->prev) {
+<hr class="s1" />
   return top_of_stack;
+<hr class="s1" />
 }
+<hr class="s1" />
 top_of_stack->prev->val += top_of_stack->val;
+<hr class="s1" />
 stack_el *prev = top_of_stack->prev;
+<hr class="s1" />
 free(top_of_stack);
+<hr class="s1" />
 return prev;
+</code>
 `;
 
 const q4_1 =
@@ -447,6 +470,15 @@ C. instruction addresses, the relocation table
 D. symbol addresses, the relocation table
 `;
 
+const q6_1_soln =
+`
+C
+C
+A
+A
+C
+`;
+
 var Scroll = require('react-scroll');
 var Link = Scroll.Link;
 var Element = Scroll.Element;
@@ -524,39 +556,34 @@ class CS61CFa16 extends Component {
           <div className="sidetitle">Straightforward Questions</div>
           <div className="sidetab-container">
             <Link activeClass="active" className="sidetab" to="q3" isDynamic={true} smooth={true} duration={500}>
-              3. Solve It
+              Q1. Number Representation
             </Link>
           </div>
           <div className="sidetab-container">
             <Link activeClass="active" className="sidetab" to="q4" isDynamic={true} smooth={true} duration={500}>
-              4. Invert It
+              Q2. Reverse Engineering
             </Link>
           </div>
           <div className="sidetab-container">
             <Link activeClass="active" className="sidetab" to="q5" isDynamic={true} smooth={true} duration={500}>
-              5. Show It
+              Q3. Number Pushing and Popping
             </Link>
           </div>
           <div className="sidetab-container">
             <Link activeClass="active" className="sidetab" to="q6" isDynamic={true} smooth={true} duration={500}>
-              6. Null It
+              Q4. Branches are for N00Bs
             </Link>
           </div>
           <hr className="s1" />
           <div className="sidetitle">Free-form Problems</div>
           <div className="sidetab-container">
             <Link activeClass="active" className="sidetab" to="q7" isDynamic={true} smooth={true} duration={500}>
-              7. Finding the Bright Cave
+              Q5. DIPS ISA
             </Link>
           </div>
           <div className="sidetab-container">
             <Link activeClass="active" className="sidetab" to="q8" isDynamic={true} smooth={true} duration={500}>
-              8. A Tale of Two Cities
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q9" isDynamic={true} smooth={true} duration={500}>
-              9. Justin Beaver
+              Q6. Mishmash, Hodgepodge, Potpourri
             </Link>
           </div>
           <hr className="s2" />
@@ -570,36 +597,37 @@ class CS61CFa16 extends Component {
           </div>
         </div>
         <div className="content">
+          <div className="content-spacer" />
           <hr className="s5" />
           <Element name="q1">
             <hr className="s5" />
-            <Question id={"q1-1"} content={q1_1} />
+            <Question id={"q1-1"} content={q1_1} solution={q1_1_soln} />
             <hr className="s5" />
-            <Question id={"q1-2"} content={q1_2} />
+            <Question id={"q1-2"} content={q1_2} solution={q1_2_soln} />
             <hr className="s5" />
-            <Question id={"q1-3"} content={q1_3} />
+            <Question id={"q1-3"} content={q1_3} solution={q1_3_soln} />
             <hr className="s5" />
-            <Question id={"q1-4"} content={q1_4} />
+            <Question id={"q1-4"} content={q1_4} solution={q1_4_soln} />
           </Element>
           <Element name="q2">
             <hr className="h5" />
-            <Question id={"q2-1"} content={q2_1} />
+            <Question id={"q2-1"} content={q2_1} solution={q2_1_soln} />
           </Element>
           <Element name="q3">
             <hr className="h5" />
-            <Question id={"q3-1"} content={q3_1} />
+            <Question id={"q3-1"} content={q3_1} solution={q3_1_soln} />
           </Element>
           <Element name="q4">
             <hr className="h5" />
-            <Question id={"q4-1"} content={q4_1} />
+            <Question id={"q4-1"} content={q4_1} solution={q4_1_soln} />
           </Element>
           <Element name="q5">
             <hr className="h5" />
-            <Question id={"q5-1"} content={q5_1} />
+            <Question id={"q5-1"} content={q5_1} solution={q5_1_soln} />
           </Element>
           <Element name="q6">
             <hr className="h5" />
-            <Question id={"q6-1"} content={q6_1} />
+            <Question id={"q6-1"} content={q6_1} solution={q6_1_soln} />
           </Element>
         </div>
       </span>
