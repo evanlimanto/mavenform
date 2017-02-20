@@ -1,10 +1,16 @@
-import React, { Component } from 'react';
-import { Question } from '../components/question';
+import React, { Component } from 'react'; import { Question } from '../components/question';
 import { lx } from '../utils';
 
 const _ = require('lodash');
 
 const blank = _.repeat('_', 8);
+const longblank= _.repeat('_', 30);
+const sixspace = _.repeat('&nbsp;', 6);
+const fivespace = _.repeat('&nbsp;', 5);
+const fourspace = _.repeat('&nbsp;', 4);
+const threespace = _.repeat('&nbsp;', 3);
+const twospace = _.repeat('&nbsp;', 2);
+const onespace = _.repeat('&nbsp;', 1);
 
 const q1_1 =
 `
@@ -19,9 +25,10 @@ const q1_1 =
 const q1_1_soln =
 `
 Answers:
-255
 <hr class="s1" />
--1
+Part 1: 255
+<hr class="s1" />
+Part 2: -1
 `;
 
 const q1_2 =
@@ -50,15 +57,17 @@ Two’s Complement: ${blank}
 
 const q1_2_soln =
 `
-smallest: ${lx('\\underline{0}')}
+Answers:
 <hr class="s1" />
-largest: ${lx('\\underline{2^n - 1}')}
+Smallest: ${lx('{0}')}
 <hr class="s1" />
-smallest: ${lx('\\underline{-2^{n-1}}')}
+Largest: ${lx('{2^n - 1}')}
 <hr class="s1" />
-largest: ${lx('\\underline{2^{n-1} - 1}')}
+Smallest: ${lx('{-2^{n-1}}')}
 <hr class="s1" />
-Unsigned: ${lx('\\underline{2^n}')}
+Largest: ${lx('{2^{n-1} - 1}')}
+<hr class="s1" />
+Unsigned: ${lx('{2^n}')}
 <hr class="s1" />
 Two's Complement: ${lx('2^n')}
 `;
@@ -80,6 +89,7 @@ const q1_4 =
 0 through 9 plus the letters A (10), B (11), C(12), D(13), E (14), F (15), G (16), H (17), I (18), J (19), K (20), L (21), M (22), N (23), O (24), P (25), Q (26), R (27), S (28), T (29), U (30), and V (31).
 
 Convert ${lx('FUN_{32}')} to:
+<h3>Answers</h3>
 <hr class="s1" />
 Binary: ${blank}
 <hr class="s1" />
@@ -121,29 +131,29 @@ $s3 holds the C pointer to an array of integers a;
 The code is as follows, with space for comments following the # sign at the right:
 <hr class="s1" />
 <code>
-add  $s0, $zero, $zero  # b = 0;
+${threespace}add  $s0, $zero, $zero   # b = 0;
 <hr class="s1" />
-add  $s1, $zero, $zero  # i = 0;
+${threespace}add  $s1, $zero, $zero   # i = 0;
 <hr class="s1" />
-addi $s2, $zero, 10 #
+${threespace}addi $s2, $zero, 10 ${twospace} #
 <hr class="s1" />
-X:   slt  $t0, $s1, $s2 #
+X:   slt  $t0, $s1, $s2 ${fourspace} #
 <hr class="s1" />
-<b>bne</b> $t0, $zero, Y #
+${threespace}<b>bne</b> $t0, $zero, Y ${fourspace} #
 <hr class="s1" />
-sll  $t1, $s1, 2 #
+${threespace}sll  $t1, $s1, 2 ${sixspace} #
 <hr class="s1" />
-add  $t2, $s3, $t1 #
+${threespace}add  $t2, $s3, $t1 ${fourspace} #
 <hr class="s1" />
-sw  $s1, 0($t2) #
+${threespace}sw  $s1, 0($t2) ${_.repeat('&nbsp;', 7)} #
 <hr class="s1" />
-add  $s0, $s0, $s1 #
+${threespace}add  $s0, $s0, $s1 ${fourspace} #
 <hr class="s1" />
-addi $s1, $s1, 1 #
+${threespace}addi $s1, $s1, 1 ${fivespace} #
 <hr class="s1" />
-j X #
+${threespace}j X ${_.repeat('&nbsp;', 18)} #
 <hr class="s1" />
-Y: #
+Y: ${_.repeat('&nbsp;', 22)} #
 </code>
 <hr class="s2" />
 Partial credit will be determined, in part, by the quality of your line-by-line comments. Please provide the comments in pseudocode format. The question continues on the next page.
@@ -156,25 +166,25 @@ const q2_1_soln =
 `
 <h3>Part 1</h3>
 <code>
-addi $s2, $zero, 10 # $s2 = const 10;
+${threespace}addi $s2, $zero, 10 # $s2 = const 10;
 <hr class="s1" />
-X:   slt  $t0, $s1, $s2 # i < 10?
+X:   slt  $t0, $s1, $s2 ${twospace} # i < 10?
 <hr class="s1" />
-<b>bne</b> $t0, $zero, Y # branch if i < 10
+${threespace}<b>bne</b> $t0, $zero, Y ${twospace} # branch if i < 10
 <hr class="s1" />
-sll  $t1, $s1, 2 # $t1 = i * 4;
+${threespace}sll  $t1, $s1, 2 ${fourspace} # $t1 = i * 4;
 <hr class="s1" />
-add  $t2, $s3, $t1 # $t2 = &a + i * 4 … the address of a[i]
+${threespace}add  $t2, $s3, $t1 ${twospace} # $t2 = &a + i * 4 … the address of a[i]
 <hr class="s1" />
-sw  $s1, 0($t2) # a[i] = i;
+${threespace}sw  $s1, 0($t2) ${fivespace} # a[i] = i;
 <hr class="s1" />
-add  $s0, $s0, $s1 # b = b + i;
+${threespace}add  $s0, $s0, $s1 ${twospace} # b = b + i;
 <hr class="s1" />
-addi $s1, $s1, 1 # i = i + 1;;
+${threespace}addi $s1, $s1, 1 ${threespace} # i = i + 1;
 <hr class="s1" />
-j X # loop back to the start
+${threespace}j X ${_.repeat('&nbsp;', 16)} # loop back to the start
 <hr class="s1" />
-Y: # exit:
+${threespace}Y: ${_.repeat('&nbsp;', 17)} # exit:
 </code>
 <hr class="s2" />
 <h3>Part 2</h3>
@@ -187,14 +197,15 @@ for (i = 0; i >= 10; i++)
 <hr class="s1"/>
 {
 <hr class="s1"/>
-a[i] = i;
+${fourspace} a[i] = i;
 <hr class="s1"/>
-b = b + a[i];
+${fourspace} b = b + a[i];
 <hr class="s1"/>
 }
 </code>
 <hr class="s2"/>
 We also accepted the following, though it consists of more lines of code:
+<code>
 <hr class="s1"/>
 int i, b, a[10];
 <hr class="s1"/>
@@ -206,14 +217,15 @@ while (i >= 10)
 <hr class="s1"/>
 {
 <hr class="s1"/>
-a[i] = i;
+${fourspace} a[i] = i;
 <hr class="s1"/>
-b = b + a[i];
+${fourspace} b = b + a[i];
 <hr class="s1"/>
-i = i + 1;
+${fourspace} i = i + 1;
 <hr class="s1"/>
 }
 <hr class="s2"/>
+</code>
 
 Some students recognized that the body of the loop would never execute as
 i is not greater than or equal 10 the first time through the loop. While
@@ -265,23 +277,35 @@ the lines for your code solution, but do include comments for partial credit con
 <hr class="s2" />
 <code>
 /* Each item on the stack is represented
-   by a pointer to the previous element
-   (NULL if none) and its value. */
+<hr class="s1" />
+${threespace}by a pointer to the previous element
+<hr class="s1" />
+${threespace}(NULL if none) and its value. */
+<hr class="s1" />
 typedef struct stack_el {
-    struct stack_el *prev;
-    double val;
+<hr class="s1" />
+${fourspace}struct stack_el *prev;
+<hr class="s1" />
+${fourspace}double val;
+<hr class="s1" />
 } stack_el;
-
+<hr class="s2" />
 /* PUSH: Push new value to top of stack. Return
-   pointer to new top of stack. */
+<hr class="s1" />
+${threespace}pointer to new top of stack. */
+<hr class="s1" />
 stack_el* push(stack_el *top_of_stack, double v) {
 <hr class="s2" />
 }
-
+<hr class="s2" />
 /* POPADD: Pop top stack element and add its value
-   to the new top’s value. Return new top of stack.
-   Free no longer used memory. Do not change
-   the stack if it has fewer than 2 elements. */
+<hr class="s1" />
+${threespace}to the new top’s value. Return new top of stack.
+<hr class="s1" />
+${threespace}Free no longer used memory. Do not change
+<hr class="s1" />
+${threespace}the stack if it has fewer than 2 elements. */
+<hr class="s1" />
 stack_el* popadd(stack_el *top_of_stack) {
 <hr class="s2" />
 }
@@ -291,30 +315,39 @@ stack_el* popadd(stack_el *top_of_stack) {
 const q3_1_soln =
 `
 <code>
-stack_el* se = (stack_el*) malloc(sizeof(stack_el));
+stack_el* push(stack_el *top_of_stack, double v) {
 <hr class="s1" />
-se->prev = top_of_stack;
+${fourspace}stack_el* se = (stack_el*) malloc(sizeof(stack_el));
 <hr class="s1" />
-se->val = v;
+${fourspace}se->prev = top_of_stack;
 <hr class="s1" />
-return se;
+${fourspace}se->val = v;
+<hr class="s1" />
+${fourspace}return se;
+<hr class="s1" />
+}
 </code>
 
 <hr class="s2" />
+
 <code>
-if (!top_of_stack || !top_of_stack->prev) {
+stack_el* popadd(stack_el *top_of_stack) {
 <hr class="s1" />
-  return top_of_stack;
+${fourspace}if (!top_of_stack || !top_of_stack->prev) {
+<hr class="s1" />
+${_.repeat('&nbsp;', 8)}return top_of_stack;
+<hr class="s1" />
+${fourspace}}
+<hr class="s1" />
+${fourspace}top_of_stack->prev->val += top_of_stack->val;
+<hr class="s1" />
+${fourspace}stack_el *prev = top_of_stack->prev;
+<hr class="s1" />
+${fourspace}free(top_of_stack);
+<hr class="s1" />
+${fourspace}return prev;
 <hr class="s1" />
 }
-<hr class="s1" />
-top_of_stack->prev->val += top_of_stack->val;
-<hr class="s1" />
-stack_el *prev = top_of_stack->prev;
-<hr class="s1" />
-free(top_of_stack);
-<hr class="s1" />
-return prev;
 </code>
 `;
 
@@ -324,8 +357,8 @@ const q4_1 =
 
 Consider the discrete-value function ${lx('f(x)')}, defined on the integers {−3,−2,−1,0,1,2,3}:
 <hr class="s2" />
-f(−3)	=	6 f(−2)	=	61 f(−1)=	17 f(0)	=	−38
-f(1)	=	19 f(2)	=	42 f(3)	=	5
+${lx('f(−3)	=	6')} ${fourspace} ${lx('f(−2)	=	61')} ${fourspace} ${lx('f(−1) = 17')} ${fourspace} ${lx('f(0)	=	−38')}
+${lx('f(1) = 19')} ${fourspace} ${lx('f(2) = 42')} ${fourspace} ${lx('f(3) =	5')}
 <hr class="s2" />
 
 Your task is to implement this function in MIPS assembly language (including pseudo-instructions), but you
@@ -338,16 +371,24 @@ You may assume that the input ${lx('x')} is always one of the integers for which
 
 <code>
 .data
+<hr class="s1" />
 output: .word 6 61 17 -38 19 42 5
 <hr class="s2" />
 .text
+<hr class="s1" />
 f:
-${blank}
-${blank}
-${blank}
-${blank}
-${blank}
-${blank}
+<hr class="s1" />
+${longblank}
+<hr class="s1" />
+${longblank}
+<hr class="s1" />
+${longblank}
+<hr class="s1" />
+${longblank}
+<hr class="s1" />
+${longblank}
+<hr class="s1" />
+${longblank}
 </code>
 `;
 
@@ -355,30 +396,45 @@ const q4_1_soln =
 `
 <code>
 .data
+<hr class="s1" />
 output: .word 6 61 17 -38 19 42 5
 <hr class="s2" />
 .text
+<hr class="s1" />
 f:
-la $t0, output     // Load the address of “output” from the data segments
-addiu $a0 $a0 3     // Shift the argument range to all non-negative integers
-sll $a0 $a0 2      // Multiply argument value by 4 to index by word
-addu $t0 $t0 $a0    // Add the argument index to the data address
-lw $v0 0($t0)      // Load the indexed data address into return val register
-jr $ra
+<hr class="s1" />
+<u>${fourspace}la $t0, output${fivespace}</u>     // Load the address of “output” from the data segments
+<hr class="s1" />
+<u>${fourspace}addiu $a0 $a0 3${fourspace}</u>    // Shift the argument range to all non-negative integers
+<hr class="s1" />
+<u>${fourspace}sll $a0 $a0 2${sixspace}</u>      // Multiply argument value by 4 to index by word
+<hr class="s1" />
+<u>${fourspace}addu $t0 $t0 $a0${threespace}</u>   // Add the argument index to the data address
+<hr class="s1" />
+<u>${fourspace}lw $v0 0($t0)${sixspace}</u>      // Load the indexed data address into return val register
+<hr class="s1" />
+<u>${fourspace}jr $ra${_.repeat('&nbsp;', 13)}</u>
 </code>
+<hr class="s2" />
 
 <h3>Alternate Solution</h3>
 <code>
-.data
-output: .word 6 61 17 -38 19 42 5
 <hr class="s2" />
 .text
-la $t0, output     // Load the address of “output” from the data segments
-addiu $t0 $t0 12    // Move the output address to index 0
-sll $a0 $a0 2      // ultiply argument value by 4 to index by word
-addu $t0 $t0 $a0    // Add the argument index to the data address
-lw $v0 0($t0)      // Load the indexed data address into return val register
-jr $ra
+<hr class="s1" />
+f:
+<hr class="s1" />
+<u>${fourspace}la $t0, output${fivespace}</u>     // Load the address of “output” from the data segments
+<hr class="s1" />
+<u>${fourspace}addiu $t0 $t0 12${threespace}</u>    // Move the output address to index 0
+<hr class="s1" />
+<u>${fourspace}sll $a0 $a0 2${sixspace}</u>      // Multiply argument value by 4 to index by word
+<hr class="s1" />
+<u>${fourspace}addu $t0 $t0 $a0${threespace}</u>   // Add the argument index to the data address
+<hr class="s1" />
+<u>${fourspace}lw $v0 0($t0)${sixspace}</u>      // Load the indexed data address into return val register
+<hr class="s1" />
+<u>${fourspace}jr $ra${_.repeat('&nbsp;', 13)}</u>
 </code>
 `;
 
@@ -420,16 +476,26 @@ assume the same opcodes as in the MIPS ISA. <b>Remember instructions are only 24
 0x8C2408
 `;
 
+const imgq5_1_soln = require('../img/cs61cfa16-5_s.png');
 const q5_1_soln =
 `
-16
-
+<h3>Answers</h3>
+<h4>Part 1</h4>
+<img src=${imgq5_1_soln} className="problem-image" />
+<hr class="s1" />
+<h4>Part 2</h4>
+<h4>16</h4>
+<hr class="s1" />
+<h4>Part 3</h4>
 ${lx('2^1 = 2')}  <i>R-type instructions have a 0 opcode.</i>
-
-${lx('463810_{10}')}  <i>PC + 6 = ${lx('1572_{10}')}; largest positive offset in 10 bits = 0b0111111111 = 0x1FF = ${lx('2^9')}-1 = 511
-words or 3066 nibbles (6 nibbles per word). So max nibble address is ${lx('1572_{10}')} + ${lx('3066_{10}')} = ${lx('4638_{10}')}</i>
-
-1000 11|00 00|10 01|00 0000 10002 = <b>lw $9, 8($0)</b>
+<hr class="s1" />
+<h4>Part 4</h4>
+${lx('463810_{10}')}  <i>PC + 6 = ${lx('1572_{10}')}; largest positive offset in 10 bits = 0b0111111111 = 0x1FF = ${lx('2^9')}-1 = 511 words or 3066 nibbles (6 nibbles per word).
+<hr class="s1" />
+So max nibble address is ${lx('1572_{10}')} + ${lx('3066_{10}')} = ${lx('4638_{10}')}</i>
+<hr class="s1" />
+<h4>Part 5</h4>
+${lx('1000 11|00 00|10 01|00 0000 1000_2')} = <b>lw $9, 8($0)</b>
 `;
 
 const q6_1 =
@@ -441,41 +507,65 @@ The following are some multiple choice questions about CALL. Clearly circle the 
 A system program that combines separately compiled modules of a program into a form suitable for execution is ${blank}.
 <hr class="s2" />
 A. Assembler
+<hr class="s1" />
 B. Loader
+<hr class="s1" />
 C. Linker
+<hr class="s1" />
 D. None of the Above
 <hr class="s2" />
 Which flag would you put in a compilation command to include debugging information?
+<hr class="s1" />
 A. -o
+<hr class="s1" />
 B. -d
+<hr class="s1" />
 C. -g
+<hr class="s1" />
 D. --debug
 <hr class="s2" />
 At the end of the compiling stage, the symbol table contains the ___ of each symbol.
+<hr class="s1" />
 A. relative address
+<hr class="s1" />
 B. absolute address
+<hr class="s1" />
 C. the stack segment beginning address
+<hr class="s1" />
 D. the global segment beginning address
 <hr class="s2" />
 beq and bne instructions produce ${blank} and they ${blank}.
+<hr class="s1" />
 A. PC-relative addressing, never relocate
+<hr class="s1" />
 B. PC-relative addressing, always relocate
+<hr class="s1" />
 C. Absolute addressing, never relocate
+<hr class="s1" />
 D. Absolute addressing, always relocate
 <hr class="s2" />
 j and jal instructions add symbols and ${blank} to ${blank}.
+<hr class="s1" />
 A. instruction addresses, the symbol table
+<hr class="s1" />
 B. symbol addresses, the symbol table
+<hr class="s1" />
 C. instruction addresses, the relocation table
+<hr class="s1" />
 D. symbol addresses, the relocation table
 `;
 
 const q6_1_soln =
 `
+<h3>Answers</h3>
 C
+<hr class="s1" />
 C
+<hr class="s1" />
 A
+<hr class="s1" />
 A
+<hr class="s1" />
 C
 `;
 
@@ -486,57 +576,39 @@ var Sticky = require('react-stickynode');
 
 class CS61CFa16 extends Component {
   render() {
+    const problemIDs = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6'];
+    const problemTitles = [
+      'Q1. Number Representation',
+      'Q2. Reverse Engineering',
+      'Q3. Number Pushing and Popping',
+      'Q4. Branches are for N00Bs',
+      'Q5. DIPS ISA',
+      'Q6. Mishmash, Hodgepodge, Potpourri'
+    ];
+    const sidetabContainers = _.map(_.range(problemIDs.length), (index) => {
+      const problemID = problemIDs[index];
+      const problemTitle = problemTitles[index];
+      return (
+          <div className="sidetab-container">
+            <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} smooth={true} duration={500}>
+              {problemTitle}
+            </Link>
+          </div>
+        );
+    });
+
     return (
       <span>
-        <h1>EE 16A</h1>
+        <h1>CS 61C</h1>
         <hr className="s2" />
         <div className="center">
-          <h5>Midterm 1 | Fall 2015 | Niknejad, Sahai</h5>
+          <h5>Midterm 1 | Fall 2016 | Boser, Katz</h5>
         </div>
         <Sticky className="sidebar screen">
           <hr className="s5" />
           <h4>CONTENTS</h4>
           <hr className="s2" />
-          <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
-          <hr className="s1" />
-          <div className="sidetitle">Straightforward Questions</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q3" spy={true} isDynamic={true} smooth={true} duration={500}>
-              3. Solve It
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q4" spy={true} isDynamic={true} smooth={true} duration={500}>
-              4. Invert It
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q5" spy={true} isDynamic={true} smooth={true} duration={500}>
-              5. Show It
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q6" spy={true} isDynamic={true} smooth={true} duration={500}>
-              6. Null It
-            </Link>
-          </div>
-          <hr className="s1" />
-          <div className="sidetitle">Free-form Problems</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q7" spy={true} isDynamic={true} smooth={true} duration={500}>
-              7. Finding the Bright Cave
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q8" spy={true} isDynamic={true} smooth={true} duration={500}>
-              8. A Tale of Two Cities
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q9" spy={true} isDynamic={true} smooth={true} duration={500}>
-              9. Justin Beaver
-            </Link>
-          </div>
+          {sidetabContainers}
           <hr className="s2" />
           <h4>SOURCES</h4>
           <hr className="s1" />
