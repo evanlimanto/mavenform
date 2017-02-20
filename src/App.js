@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { CS61CFa15, CS61CFa16, EE16ASp15, EE16AFa15, EE16AFa16, EE16ASp16 } from './exams';
 import classnames from 'classnames';
-import Home from './home';
-import Course from './course';
+import Home from './Home';
+import Course from './Course';
+import { exams } from './exams';
+
 const _ = require('lodash');
 
 import './App.css';
@@ -30,10 +32,9 @@ class App extends Component {
   render() {
     var exam = null;
     var course = null;
-    var examIndex = -1;
     if (this.props.location.query) {
-      exam = this.props.location.query.exam;
-      course = this.props.location.query.course;
+      exam = this.props.location.query.id;
+      course = this.props.location.query.courseId;
     }
 
     if (exam === 'cs61cfa16') {
@@ -42,18 +43,12 @@ class App extends Component {
       exam = <CS61CFa15 />;
     } else if (exam === 'ee16afa16') {
       exam = <EE16AFa16 />;
-      examIndex = 0;
     } else if (exam === 'ee16asp16') {
       exam = <EE16ASp16 />;
-      examIndex = 1;
     } else if (exam === 'ee16afa15') {
       exam = <EE16AFa15 />;
-      examIndex = 2;
     } else if (exam === 'ee16asp15') {
       exam = <EE16ASp15 />;
-      examIndex = 3;
-    } else if (course === 'ee16a') {
-      return <Course />
     } else {
       return <Home />;
     }
@@ -74,32 +69,39 @@ class App extends Component {
     const urls = ["ee16afa16", "ee16asp16", "ee16afa15", "ee16asp15"];
     const titles = ["Fall 2016", "Spring 2016", "Fall 2015", "Spring 2015"];
 
-    const sideTabs = _.range(urls.length).map((index) => {
-      const url = `/?exam=${urls[index]}`;
-      const title = titles[index];
-      const sideTabClass = classnames({
-        sidetab: true,
-        active: (index === examIndex)
+    const sideTabs = _.map(exams[course], (courseExams, examType) => {
+      const content = _.map(courseExams, (info, semester) => {
+        const url = `/exam?id=${info['url']}`;
+        const title = semester;
+        const sideTabClass = classnames({
+          sidetab: true,
+          active: false,
+        });
+        return (
+          <div key={semester} className="sidetab-container">
+            <a className={sideTabClass} href={url}>{title}</a>
+          </div>
+        );
       });
       return (
-        <div key={index} className="sidetab-container">
-          <a className={sideTabClass} href={url}>{title}</a>
-        </div>
+        <span>
+          <div className="sideTitle">{_.capitalize(_.replace(examType, '-', ' '))}</div>
+          {content}
+        </span>
       );
     });
 
     return (
       <span className="shift">
-        <a className="return" href="/?course=ee16a">&#8592; RETURN</a>
+        <a className="return" href={"/course?id=" + course}>&#8592; RETURN</a>
         {collapser}
         <div className={menuClass}>
           <a className="home center" href="/">Mavenform</a>
           <hr className="s1" />
-          <h4>EE 16A</h4>
+          <h4>{_.toUpper(course)}</h4>
           <hr className="s2" />
-          <div className="sidetitle">Midterm 1</div>
           {sideTabs}
-          <a className="index" href="/?course=ee16a">&#8592; RETURN</a>
+          <a className="index" href={"/course?id=" + course}>&#8592; RETURN</a>
         </div>
         <a className="feedback" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
         <div className="test-container">
