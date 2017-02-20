@@ -23,7 +23,7 @@ function lmatrix(values, transpose=false, inline=true) {
           return _.join(list, ' & ') + "\\\\";
         }), '')
       }\\end{array}\\right]${
-        (transpose) ? "^T" : ""  
+        (transpose) ? "^T" : ""
       }
     `;
     return lx(s, inline);

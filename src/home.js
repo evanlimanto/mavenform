@@ -20,13 +20,13 @@ class Home extends Component {
           <hr className="s1" />
           <h5>Currently available exam sets</h5>
           <hr className="s2" />
-          <a className="course-card" href="/?course=ee16a">
+          <a className="course-card" href="/course?id=ee16a">
             <h2>EE 16A</h2>
             <hr className="s1" />
             <i className="course-subtitle">Designing Information Devices and Systems I</i>
             <h4 className="card-helper">CLICK TO VIEW &#8594;</h4>
           </a>
-          <a className="course-card">
+          <a className="course-card" href="/course?id=cs61c">
             <h2>CS 61C</h2>
             <hr className="s1" />
             <i className="course-subtitle">Great Ideas in Computer Architecture </i>

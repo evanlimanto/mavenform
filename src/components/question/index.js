@@ -4,7 +4,7 @@ const _ = require('lodash');
 
 class Solution extends Component {
   constructor(props) {
-    super(props); 
+    super(props);
 
     this.state = {
       showSolution: (process.env.NODE_ENV === 'development')
@@ -27,8 +27,8 @@ class Solution extends Component {
     if (hasResponse) {
        check = <input className="blue" type="button" value="Check" />;
     }
-   
-    if (this.props.solution) { 
+
+    if (this.props.solution) {
       const solutionClass = classnames({
         solution: true,
         hidden: !this.state.showSolution,
@@ -38,7 +38,7 @@ class Solution extends Component {
           <span dangerouslySetInnerHTML={{'__html': this.props.solution}}></span>
         </div>
       );
-    } 
+    }
 
     if (!this.state.showSolution) {
       solutionButton = (
@@ -146,7 +146,7 @@ class FreeFormQuestion extends Component {
       <div id={this.props.id}>
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <hr className="s3" />
-        {solution} 
+        {solution}
         <Solution hasResponse={hasResponse} solution={this.props.solution} examCode={this.props.examCode} />
       </div>
     );
