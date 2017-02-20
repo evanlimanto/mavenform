@@ -397,6 +397,10 @@ input[type=button]:hover {
   color: #11accc;
 }
 
+.course-subtitle {
+  font-size: 18px;
+}
+
 .card {
   position: relative;
   vertical-align: top;

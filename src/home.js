@@ -23,13 +23,13 @@ class Home extends Component {
           <a className="course-card" href="ee16a">
             <h2>EE 16A</h2>
             <hr className="s1" />
-            <h5><i>University of California, Berkeley</i></h5>
+            <i className="course-subtitle">Designing Information Devices and Systems I</i>
             <h4 className="card-helper">CLICK TO VIEW &#8594;</h4>
           </a>
           <a className="course-card" href="cs61c">
             <h2>CS 61C</h2>
             <hr className="s1" />
-            <h5><i>University of California, Berkeley</i></h5>
+            <i className="course-subtitle">Great Ideas in Computer Architecture </i>
             <h4 className="card-helper">CLICK TO VIEW &#8594;</h4>
           </a>
           <hr className="margin-alt" />
