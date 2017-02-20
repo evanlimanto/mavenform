@@ -6,7 +6,6 @@ import Course from './Course';
 import { exams } from './exams';
 
 const _ = require('lodash');
-
 import './App.css';
 
 class App extends Component {
