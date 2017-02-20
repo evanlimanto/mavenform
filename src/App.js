@@ -3,6 +3,7 @@ import { CS61CFa15, CS61CFa16, EE16ASp15, EE16AFa15, EE16AFa16, EE16ASp16 } from
 import classnames from 'classnames';
 import Home from './Home';
 import Course from './Course';
+import { exams } from './exams';
 
 const _ = require('lodash');
 
@@ -30,8 +31,10 @@ class App extends Component {
 
   render() {
     var exam = null;
+    var course = null;
     if (this.props.location.query) {
       exam = this.props.location.query.id;
+      course = this.props.location.query.courseId;
     }
 
     if (exam === 'cs61cfa16') {
@@ -66,32 +69,39 @@ class App extends Component {
     const urls = ["ee16afa16", "ee16asp16", "ee16afa15", "ee16asp15"];
     const titles = ["Fall 2016", "Spring 2016", "Fall 2015", "Spring 2015"];
 
-    const sideTabs = _.range(urls.length).map((index) => {
-      const url = `/exam?id=${urls[index]}`;
-      const title = titles[index];
-      const sideTabClass = classnames({
-        sidetab: true,
-        active: false,
+    const sideTabs = _.map(exams[course], (courseExams, examType) => {
+      const content = _.map(courseExams, (info, semester) => {
+        const url = `/exam?id=${info['url']}`;
+        const title = semester;
+        const sideTabClass = classnames({
+          sidetab: true,
+          active: false,
+        });
+        return (
+          <div key={semester} className="sidetab-container">
+            <a className={sideTabClass} href={url}>{title}</a>
+          </div>
+        );
       });
       return (
-        <div key={index} className="sidetab-container">
-          <a className={sideTabClass} href={url}>{title}</a>
-        </div>
+        <span>
+          <div className="sideTitle">{_.capitalize(_.replace(examType, '-', ' '))}</div>
+          {content}
+        </span>
       );
     });
 
     return (
       <span className="shift">
-        <a className="return" href="/?course=ee16a">&#8592; RETURN</a>
+        <a className="return" href={"/course?id=" + course}>&#8592; RETURN</a>
         {collapser}
         <div className={menuClass}>
           <a className="home center" href="/">Mavenform</a>
           <hr className="s1" />
-          <h4>EE 16A</h4>
+          <h4>{_.toUpper(course)}</h4>
           <hr className="s2" />
-          <div className="sidetitle">Midterm 1</div>
           {sideTabs}
-          <a className="index" href="/?course=ee16a">&#8592; RETURN</a>
+          <a className="index" href={"/course?id=" + course}>&#8592; RETURN</a>
         </div>
         <a className="feedback" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
         <div className="test-container">

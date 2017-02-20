@@ -12,7 +12,7 @@ class Course extends Component {
     const examType = 'midterm-1'; // hardcoded for now
     const cards = _.values(_.mapValues(exams[course][examType], (dict, semester) => {
       return (
-        <a className="card" href={dict['url']}>
+        <a className="card" href={dict['url'] + '&courseId=' + course}>
           <h2>{_.replace(_.capitalize(examType), '-', ' ')}</h2>
           <h3 className="card-subtitle">{semester}</h3>
           <i>{dict['profs']}</i>
