@@ -254,6 +254,8 @@ input[type=button]:hover {
   margin-right: 40px;
   width: 200px;
   top: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .sidetitle {

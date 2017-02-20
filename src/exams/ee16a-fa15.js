@@ -9,8 +9,7 @@ Solve the following system of linear equations:
 
 $$\\left[
 \\begin{array}{ c c }
-   1 & 3 \\\\
-   -2 & -5
+   1 & 3 \\\\ -2 & -5 \\\\
 \\end{array} \\right]
 \\left[
 \\begin{array}{ c }
