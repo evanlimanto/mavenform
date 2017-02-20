@@ -71,29 +71,29 @@ class Course extends Component {
                     <td>Midterm 1</td>
                     <td>Fall 2016</td>
                     <td>Ayazifar, Stojanovic</td>
-                    <td><a>PDF</a></td>
-                    <td><a>PDF</a></td>
+                    <td><a href={process.env.PUBLIC_URL + `/exams/ee16a-mt1-fa16.pdf`} target="_blank">PDF</a></td>
+                    <td><a href={process.env.PUBLIC_URL + `/exams/ee16a-mt1-fa16-sol.pdf`} target="_blank">PDF</a></td>
                   </tr>
                   <tr>
                     <td>Midterm 1</td>
                     <td>Spring 2016</td>
                     <td>Alon, Ayazifar</td>
-                    <td><a>PDF</a></td>
-                    <td><a>PDF</a></td>
+                    <td><a href={process.env.PUBLIC_URL + `/exams/ee16a-mt1-sp16.pdf`} target="_blank">PDF</a></td>
+                    <td><a href={process.env.PUBLIC_URL + `/exams/ee16a-mt1-sp16-sol.pdf`} target="_blank">PDF</a></td>
                   </tr>
                   <tr>
                     <td>Midterm 1</td>
                     <td>Fall 2015</td>
                     <td>Niknejad, Sahai</td>
-                    <td><a>PDF</a></td>
-                    <td><a>PDF</a></td>
+                    <td><a href={process.env.PUBLIC_URL + `/exams/ee16a-mt1-fa15.pdf`} target="_blank">PDF</a></td>
+                    <td><a href={process.env.PUBLIC_URL + `/exams/ee16a-mt1-fa15-sol.pdf`} target="_blank">PDF</a></td>
                   </tr>
                   <tr>
                     <td>Midterm 1</td>
                     <td>Spring 2015</td>
                     <td>Alon, Ayazifar, Subramanian</td>
-                    <td><a>PDF</a></td>
-                    <td><a>PDF</a></td>
+                    <td><a href={process.env.PUBLIC_URL + `/exams/ee16a-mt1-sp15.pdf`} target="_blank">PDF</a></td>
+                    <td><a href={process.env.PUBLIC_URL + `/exams/ee16a-mt1-sp15-sol.pdf`} target="_blank">PDF</a></td>
                   </tr>
                   <tr>
                     <td>Midterm 2</td>

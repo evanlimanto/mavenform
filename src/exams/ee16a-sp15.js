@@ -350,7 +350,6 @@ class EE16ASp15 extends Component {
   }
 
   render() {
-    const examCode = 'ee16a-sp15';
     return (
       <span>
         <h1>EE 16A</h1>
@@ -391,10 +390,10 @@ class EE16ASp15 extends Component {
           <h4>SOURCES</h4>
           <hr className="s1" />
           <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Asp15-exam.pdf'} target="_blank">Exam PDF</a>
+            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-sp15.pdf'} target="_blank">Exam PDF</a>
           </div>
           <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Asp15-soln.pdf'} target="_blank">Solutions PDF</a>
+            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-sp15-sol.pdf'} target="_blank">Solutions PDF</a>
           </div>
         </Sticky>
         <div className="sidebar mobile">
@@ -430,52 +429,52 @@ class EE16ASp15 extends Component {
           <h4>SOURCES</h4>
           <hr className="s1" />
           <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Asp15-exam.pdf'} target="_blank">Exam PDF</a>
+            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-sp15.pdf'} target="_blank">Exam PDF</a>
           </div>
           <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16Asp15-soln.pdf'} target="_blank">Solutions PDF</a>
+            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-sp15-sol.pdf'} target="_blank">Solutions PDF</a>
           </div>
         </div>
         <div className="content">
           <Element name="q1" className="first-q">
             <hr className="s5" />
-            <Question id={"q1a"} content={sp15q1a} hasResponse={false} examCode={examCode} solution={sp15q1a_soln} />
+            <Question id={"q1a"} content={sp15q1a} hasResponse={false} solution={sp15q1a_soln} />
             <hr className="s5" />
-            <Question id={"q1b"} content={sp15q1b} hasResponse={false} examCode={examCode} solution={sp15q1b_soln} />
+            <Question id={"q1b"} content={sp15q1b} hasResponse={false} solution={sp15q1b_soln} />
             <hr className="s5" />
-            <Question id={"q1c"} content={sp15q1c} hasResponse={false} examCode={examCode} solution={sp15q1c_soln} />
+            <Question id={"q1c"} content={sp15q1c} hasResponse={false} solution={sp15q1c_soln} />
           </Element>
           <Element name="q2">
             <hr className="s5" />
-            <Question id={"q2a"} content={sp15q2a} hasResponse={false} examCode={examCode} solution={sp15q2a_soln}  />
+            <Question id={"q2a"} content={sp15q2a} hasResponse={false} solution={sp15q2a_soln}  />
             <hr className="s5" />
-            <Question id={"q2b"} content={sp15q2b} hasResponse={false} examCode={examCode} solution={sp15q2b_soln}  />
+            <Question id={"q2b"} content={sp15q2b} hasResponse={false} solution={sp15q2b_soln}  />
             <hr className="s5" />
-            <Question id={"q2c"} content={sp15q2c} hasResponse={false} examCode={examCode} solution={sp15q2c_soln}  />
+            <Question id={"q2c"} content={sp15q2c} hasResponse={false} solution={sp15q2c_soln}  />
           </Element>
           <Element name="q3">
             <hr className="s5" />
-            <Question id={"q3a"} content={sp15q3a} hasResponse={false} examCode={examCode} solution={sp15q3a_soln}  />
+            <Question id={"q3a"} content={sp15q3a} hasResponse={false} solution={sp15q3a_soln}  />
             <hr className="s5" />
-            <Question id={"q3b"} content={sp15q3b} hasResponse={false} examCode={examCode} solution={sp15q3b_soln}  />
+            <Question id={"q3b"} content={sp15q3b} hasResponse={false} solution={sp15q3b_soln}  />
             <hr className="s5" />
-            <Question id={"q3c"} content={sp15q3c} hasResponse={false} examCode={examCode} solution={sp15q3c_soln}  />
+            <Question id={"q3c"} content={sp15q3c} hasResponse={false} solution={sp15q3c_soln}  />
             <hr className="s5" />
-            <Question id={"q3d"} content={sp15q3d} hasResponse={false} examCode={examCode} solution={sp15q3d_soln}  />
+            <Question id={"q3d"} content={sp15q3d} hasResponse={false} solution={sp15q3d_soln}  />
           </Element>
           <Element name="q4">
             <hr className="s5" />
-            <Question id={"q4a"} content={sp15q4a} hasResponse={false} examCode={examCode} solution={sp15q4a_soln}  />
+            <Question id={"q4a"} content={sp15q4a} hasResponse={false} solution={sp15q4a_soln}  />
             <hr className="s5" />
-            <Question id={"q4b"} content={sp15q4b} hasResponse={false} examCode={examCode} solution={sp15q4b_soln}  />
+            <Question id={"q4b"} content={sp15q4b} hasResponse={false} solution={sp15q4b_soln}  />
           </Element>
           <Element name="q5">
             <hr className="s5" />
-            <Question id={"q5a"} content={sp15q5a} hasResponse={false} examCode={examCode} solution={sp15q5a_soln}  />
+            <Question id={"q5a"} content={sp15q5a} hasResponse={false} solution={sp15q5a_soln}  />
             <hr className="s5" />
-            <Question id={"q5b"} content={sp15q5b} hasResponse={false} examCode={examCode} solution={sp15q5b_soln}  />
+            <Question id={"q5b"} content={sp15q5b} hasResponse={false} solution={sp15q5b_soln}  />
             <hr className="s5" />
-            <Question id={"q5c"} content={sp15q5c} hasResponse={false} examCode={examCode} solution={sp15q5c_soln}  />
+            <Question id={"q5c"} content={sp15q5c} hasResponse={false} solution={sp15q5c_soln}  />
           </Element>
         </div>
       </span>
