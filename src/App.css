@@ -567,8 +567,8 @@ input[type=button]:hover {
 }
 
 @media (max-width: 1199px) {
-  .shift {
-    left: 0;
+  body, .shift {
+    left: 0 !important;
   }
 
   .menu, .collapse {
