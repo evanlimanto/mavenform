@@ -4,8 +4,8 @@ class Course extends Component {
   render() {
     return (
       <div>
-        <a className="return screen home-link" href="/">&#8592; RETURN</a>
-        <a className="return mobile home-link" href="/">&#8592; RETURN</a>
+        <a className="return screen home-link" href="/">&#8592; HOME</a>
+        <a className="return mobile home-link" href="/">&#8592; HOME</a>
         <a className="feedback home-link" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
         <div className="banner">
           <hr className="margin" />
@@ -24,25 +24,25 @@ class Course extends Component {
           <hr className="s2" />
           <a className="card" href="/?exam=ee16afa16">
             <h2>Midterm 1</h2>
-            <h3>Fall 2016</h3>
+            <h3 className="card-subtitle">Fall 2016</h3>
             <i>Ayazifar, Stojanovic</i>
             <h4 className="card-helper">CLICK TO VIEW &#8594;</h4>
           </a>
           <a className="card" href="/?exam=ee16asp16">
             <h2>Midterm 1</h2>
-            <h3>Spring 2016</h3>
+            <h3 className="card-subtitle">Spring 2016</h3>
             <i>Alon, Ayazifar</i>
             <h4 className="card-helper">CLICK TO VIEW &#8594;</h4>
           </a>
           <a className="card" href="/?exam=ee16afa15">
             <h2>Midterm 1</h2>
-            <h3>Fall 2015</h3>
+            <h3 className="card-subtitle">Fall 2015</h3>
             <i>Niknejad, Sahai</i>
             <h4 className="card-helper">CLICK TO VIEW &#8594;</h4>
           </a>
           <a className="card" href="/?exam=ee16asp15">
             <h2>Midterm 1</h2>
-            <h3>Spring 2015</h3>
+            <h3 className="card-subtitle">Spring 2015</h3>
             <i>Alon, Ayazifar, Subramanian</i>
             <h4 className="card-helper">CLICK TO VIEW &#8594;</h4>
           </a>

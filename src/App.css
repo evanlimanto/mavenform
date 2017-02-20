@@ -420,6 +420,11 @@ input[type=button]:hover {
   border: 1px solid #11accc;
 }
 
+.card-subtitle {
+  padding-top: 1px;
+  color: #666;
+}
+
 .card-helper {
   position: absolute;
   bottom: 30px;
