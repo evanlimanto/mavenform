@@ -1,18 +1,9 @@
-import React, { Component } from 'react'; import { Question } from '../components/question';
-import { lx } from '../utils';
+import React, { Component } from 'react';
+import { Question } from '../components/question';
+import { lx, longblank, blank, onespace, twospace, threespace, fourspace, fivespace, sixspace } from '../utils';
 
 const _ = require('lodash');
-
 const examCode = 'cs61cfa16';
-
-const blank = _.repeat('_', 8);
-const longblank= _.repeat('_', 30);
-const sixspace = _.repeat('&nbsp;', 6);
-const fivespace = _.repeat('&nbsp;', 5);
-const fourspace = _.repeat('&nbsp;', 4);
-const threespace = _.repeat('&nbsp;', 3);
-const twospace = _.repeat('&nbsp;', 2);
-const onespace = _.repeat('&nbsp;', 1);
 
 const q1_1 =
 `
