@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { EE16ASp15, EE16AFa15, EE16AFa16, EE16ASp16 } from './exams';
+import { CS61CFa16, EE16ASp15, EE16AFa15, EE16AFa16, EE16ASp16 } from './exams';
 import classnames from 'classnames';
 import Home from './home';
 const _ = require('lodash');
@@ -16,14 +16,13 @@ class App extends Component {
   }
 
   toggleCollapse() {
-    console.log(this.state.sidebar);
     this.setState({
       sidebar: !this.state.sidebar
     });
     if (this.state.sidebar) {
-      document.body.classList.toggle('left', 0);
+      document.body.style.left = "0";
     } else {
-      document.body.classList.remove('left');
+      document.body.style.left = "125px";
     }
   }
 
@@ -33,9 +32,11 @@ class App extends Component {
     if (this.props.location.query) {
       exam = this.props.location.query.exam;
     }
-    
-    if (exam === 'ee16afa16') {
-      exam = <EE16AFa16 />; 
+
+    if (exam === 'cs61cfa16') {
+      exam = <CS61CFa16 />;
+    } else if (exam === 'ee16afa16') {
+      exam = <EE16AFa16 />;
       examIndex = 0;
     } else if (exam === 'ee16asp16') {
       exam = <EE16ASp16 />;
@@ -75,7 +76,7 @@ class App extends Component {
       });
       return (
         <div className="sidetab-container">
-          <a className={sideTabClass} href={url}>{title}</a>
+          <a key={index} className={sideTabClass} href={url}>{title}</a>
         </div>
       );
     });
