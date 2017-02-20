@@ -9,17 +9,17 @@ const fa16q3a =
 
 Answer each of the following questions by circling True or False. No work is necessary for credit on this part.<br/>
 <hr class="s2" />
-(a) <i>(True) (False)</i> The pivot columns of matrix \\(A\\) forms a basis for the column space of \\(A\\).<br/>
+(a) The pivot columns of matrix \\(A\\) forms a basis for the column space of \\(A\\).<br/>
 `;
 
 const fa16q3a_soln =
 `
-True.
+True. (Sorry, there weren't any explanations for these solutions on the original PDF either; we'll try our best to add some on our own later).
 `;
 
 const fa16q3b =
 `
-(b) <i>(True) (False)</i> Let \\(A\\) be a \\(2 × 2\\) matrix, where \\(A^2\\) = ${lx('0')}. Then \\(A\\) is the zero matrix.<br/>
+(b) Let \\(A\\) be a \\(2 × 2\\) matrix, where \\(A^2\\) = ${lx('0')}. Then \\(A\\) is the zero matrix.<br/>
 `;
 
 const fa16q3b_soln =
@@ -29,7 +29,7 @@ False.
 
 const fa16q3c =
 `
-(c) <i>(True) (False)</i> Let \\(A\\), \\(B\\), \\(C\\) be some arbitrary matrices. Then, \\((AB)C\\) = \\(A(BC)\\).<br/>
+(c) Let \\(A\\), \\(B\\), \\(C\\) be some arbitrary matrices. Then, \\((AB)C\\) = \\(A(BC)\\).<br/>
 `;
 
 const fa16q3c_soln =
@@ -39,7 +39,7 @@ True.
 
 const fa16q3d =
 `
-(d) <i>(True) (False)</i> An \\(M × N\\) matrix has at most \\(N\\) pivots.<br/>
+(d) An \\(M × N\\) matrix has at most \\(N\\) pivots.<br/>
 `;
 
 const fa16q3d_soln =
@@ -49,7 +49,7 @@ True.
 
 const fa16q3e =
 `
-(e) <i>(True) (False)</i> \\(AB\\) = \\(BA\\) where \\(A\\) and \\(B\\) are \\(N × N\\) matrices.<br/>
+(e) \\(AB\\) = \\(BA\\) where \\(A\\) and \\(B\\) are \\(N × N\\) matrices.<br/>
 `;
 
 const fa16q3e_soln =
@@ -59,7 +59,7 @@ False.
 
 const fa16q3f =
 `
-(f) <i>(True) (False)</i> Applying any pair of \\(2 × 2\\) rotation matrices to an input vector is a commutative operation.<br/>
+(f) Applying any pair of \\(2 × 2\\) rotation matrices to an input vector is a commutative operation.<br/>
 `;
 
 const fa16q3f_soln =
