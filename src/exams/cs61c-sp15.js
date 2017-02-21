@@ -21,13 +21,19 @@ const q1_1 =
 0xFF = -1
 <hr class="s1" />
 0x0F = 15
+`;
 
+const q1_2 =
+`
 2) For two n-bit numbers, what is the difference between the largest unsigned number and the largest two’s-complement number? In other words, what is <code><b>MAX_UNSIGNED_INT – MAX_SIGNED_INT</b></code>? Write your answer in terms of <code>n</code>.
 
 <hr class="s2" />
 2n – 1 – (2n-1 – 1) = 2n-1
 <hr class="s2" />
+`;
 
+const q1_3 =
+`
 3) Fill in the blanks to return the largest positive number a 32-bit two’s-complement number can
 represent.
 
@@ -38,7 +44,10 @@ ${fourspace}return ((1 << 31) - 1);
 <hr class="s1" />
 }
 </code>
+`;
 
+const q1_4 =
+`
 4) Consider a new type of notation for representing signed numbers, biased notation. The formula for obtaining the value from a number written in biased notation is:
 <hr class="s1" />
 <p align="center"><b>value = value_as_unsigned – b</b></p>
@@ -92,9 +101,10 @@ c) *(p+5)	+	p[3] = 0x5000
 d) *(int*)(p[1]) = 0xd(13)
 <hr class="s1" />
 e) *(int*)(*(p+5)) = error(out of bounds)
+`;
 
-<hr class="s2" />
-
+const q2_2 =
+`
 2) Consider the following code and its output. Fill in the blanks.
 <hr class="s2" />
 <code>
@@ -136,9 +146,15 @@ const q3_1 =
 For each of the following functions, answer the questions below in the corresponding box to the right:
 <hr class="s2" />
 1)  Does this function return a usable pointer to a string containing “asdf”?
-<hr class="s1" />
+`;
+
+const q3_2 =
+`
 2)  Which area of memory does the returned pointer point to?
-<hr class="s1" />
+`;
+
+const q3_3 =
+`
 3)  Does this function leak memory?
 <hr class="s2" />
 You may assume that malloc calls will always return a non-<code>NULL</code> pointer.
@@ -206,7 +222,10 @@ ${fourspace}struct node* next; //pointer to the next element
 <hr class="s1" />
 } sll_node;
 </code>
-<hr class="s2" />
+`;
+
+const q4_2 =
+`
 2) Let's convert the linked list to an array. Fill in the missing code.
 <hr class="s1" />
 <code>
@@ -226,7 +245,10 @@ ${eightspace}${blank};
 ${fourspace}return arr;
 <hr class="s1" />
 }
-<hr class="s2" />
+`;
+
+const q4_3 =
+`
 3) Finally, complete <code>delete_even()</code> that will delete every second element of the list. FOr example, given the lists below:
 <hr class="s2" />
 <code>

@@ -22,15 +22,28 @@ representation with the <b><u>smallest</u></b> unsigned distance
 between -1 and 0.
 
 <hr class="s2" />
-<code><b>int64_t:</b></code>
+<b>int64_t:</b>
 <hr class="s1" />
-64-bit One's Complement
+64-bit One's Complement:
 <hr class="s1" />
-64-bit Sign and Magnitude
+64-bit Sign and Magnitude:
 <hr class="s1" />
-64-bit Bias notation
+64-bit Bias notation:
 <hr class="s1" />
-<code><b>double</b></code>
+<b>double:</b>
+`;
+
+const q1_1_soln =
+`
+<b>int64_t:</b> <b>5</b>
+<hr class="s1" />
+64-bit One's Complement: <b>4</b>
+<hr class="s1" />
+64-bit Sign and Magnitude: <b>2</b>
+<hr class="s1" />
+64-bit Bias notation: <b>1</b>
+<hr class="s1" />
+<b>double:</b> <b>3</b>
 `;
 
 const q1_2 =
@@ -41,16 +54,31 @@ representation: 1 sign bit, 5 exponent bits, and 10 significand bits. The expone
 0b${longblank} = ${longblank}
 `;
 
+const q1_2_soln =
+`
+0b <b>0 01111 0000000001</b> = <b>1 + ${lx('2^{-10}')}</b>
+`;
+
 const q1_3 =
 `
 c)  How would J-type instructions be affected (in terms of their “reach”) if we relaxed the requirement
 that instructions be placed on word boundaries, and instead required them to be placed on <i>half-word</i> boundaries.
 `;
 
+const q1_3_soln =
+`
+The range over which we can jump would be cut in half.
+`;
+
 const q1_4 =
 `
 d)  Building on the idea from the previous question, give a minor tweak to the MIPS ISA to allow us to
 use <i>true absolute addressing</i> (i.e., maximal “reach”) for all J-type instructions.
+`;
+
+const q1_4_soln =
+`
+Only allow jumps to addresses which are multiples of ${lx('2^6')}.
 `;
 
 const q1_5 =
@@ -64,9 +92,21 @@ In the worst case, <i>how many clock cycles</i> would it take to <b>allocate</b>
 <b>Heap:</b>${blank} because ${longblank}
 `;
 
+const q1_5_soln =
+`
+<b>Stack:</b> <b>1</b> because <b>it's just addiu $sp $sp -100</b>.
+<hr class="s1" />
+<b>Heap:</b> <b>Thousands+</b> because <b>the freelist might contain lots of slivers to check</b>.
+`;
+
 const q1_6 =
 `
 You have a program that can achieve almost a 20x speedup with millions of processors, so what is the percent of the parallel portion of its code?
+`;
+
+const q1_6_soln =
+`
+95
 `;
 
 const q1_7 =
@@ -78,22 +118,35 @@ pass(es) to translate a MAL file, and ${blank} pass(es) to translate a TAL file.
 because of ${longblank} (write n/a if they don't differ).
 `;
 
+const q1_7_soln =
+`
+2, 1, pseudoinstructions
+`;
+
 const q1_8 =
 `
 Complete the code below, using <i>only one TAL instruction</i>, so that it returns true iff <b>$a0</b> is an I-type instruction or a J-type instruction, and then translate the instruction into binary then hexadecimal.
 <hr class="s2" />
 <code>
 IJ-instr: ${blank} -> 0b${longblank} -> 0x${blank}
+<hr class="s1" />
+${_.repeat(' ', 10)}jr $ra
+</code>
 `;
+
+const q1_8_soln =
+`
+IJ-instr: <b>srl $v0 $a0 26</b> -> 0b <b>0000|00 00|000 0|0100 0001|0 110|10 00|0010</b> -> 0x <b>0004 1682</b>
+`
 
 const q1_9 =
 `
 What is one thing Google did to increase their Power Usage Efficiency (PUE)?
 `;
 
-const q1_1_soln =
+const q1_9_soln =
 `
-
+Careful airflow handling, elevated cold aisle temp, use free cooling, per-server ups.
 `;
 
 const q2_1 =
@@ -110,8 +163,10 @@ ${fourspace}if (!ptr)
 ${eightspace}return 0;
 <hr class="s1" />
 ${fourspace}return has_cycle(ptr, ptr->next);
+<hr class="s1" />
+}
 <hr class="s2" />
-int has_cycle(node *tortoise, node * hare) {
+int has_cycle(node *tortoise, node *hare) {
 <hr class="s1" />
 ${fourspace}if (${longblank})
 <hr class="s1" />
@@ -121,8 +176,18 @@ ${fourspace}if (${longblank})
 <hr class="s1" />
 ${eightspace}return 0;
 <hr class="s1" />
-${fourspace}return has_cycle(tortoise->next, hare->next->next); 
+${fourspace}return has_cycle(tortoise->next, hare->next->next);
+<hr class="s1" />
 }
+</code>
+`;
+
+const q2_1_soln =
+`
+<code>
+hare == tortoise
+<hr class="s1" />
+!hare || !hare->next
 </code>
 `;
 
@@ -134,31 +199,66 @@ b)  Now that you've warmed up on the C version of this code, let’s convert has
 <code>
 # $a0 contains the pointer to the tortoise, $a1 contains the pointer to the hare.
 <hr class="s2" />
+has_cycle: ${onespace}li $v0 1
+<hr class="s1" />
+${twelvespace}beq $a0 $a1 done
+<hr class="s1" />
+${twelvespace}li $v0 0
+<hr class="s1" />
+${twelvespace}beq ${_.repeat('_', 10)} ${_.repeat('_', 10)} done
+<hr class="s1" />
+${twelvespace}${longblank}
+<hr class="s1" />
+${twelvespace}beq ${_.repeat('_', 10)} ${_.repeat('_', 10)} done
+<hr class="s1" />
+${twelvespace}${longblank}
+<hr class="s1" />
+${twelvespace}${longblank}
+<hr class="s1" />
+${twelvespace}addiu ${_.repeat('_', 7)} ${_.repeat('_', 7)} ${_.repeat('_', 8)}
+<hr class="s1" />
+${twelvespace}${longblank}
+<hr class="s1" />
+${twelvespace}${longblank}
+<hr class="s1" />
+${twelvespace}${longblank}
+<hr class="s1" />
+${twelvespace}addiu ${_.repeat('_', 7)} ${_.repeat('_', 7)} ${_.repeat('_', 8)}
+<hr class="s1" />
+done: ${sixspace}jr return a
+</code>
+`;
+
+const q2_2_soln =
+`
+<code>
+# $a0 contains the pointer to the tortoise, $a1 contains the pointer to the hare.
+<hr class="s2" />
 has_cycle: li $v0 1
 <hr class="s1" />
 ${twelvespace}beq $a0 $a1 done
 <hr class="s1" />
 ${twelvespace}li $v0 0
 <hr class="s1" />
-${twelvespace}beq ${blank} ${blank} done
+${twelvespace}beq <b>$a1</b> <b>$0</b> done
 <hr class="s1" />
-${twelvespace}${longblank}
+${twelvespace}<b>lw $a1 4($a1)</b>
 <hr class="s1" />
-${twelvespace}beq ${blank} ${blank} done
+${twelvespace}beq <b>$a1</b> <b>$0</b> done
 <hr class="s1" />
-${twelvespace}${longblank}
+${twelvespace}<b>lw $a0 4($a0)</b>
 <hr class="s1" />
-${twelvespace}${longblank}
+${twelvespace}<b>lw $a1 4($a1)</b>
 <hr class="s1" />
-${twelvespace}addiu ${blank} ${blank} ${blank}
+${twelvespace}addiu <b>$sp</b> <b>$sp</b> <b>-4</b> <b><- circled, changed to nop</b>
 <hr class="s1" />
-${twelvespace}${longblank}
+${twelvespace}<b>sw $ra 0($sp)</b> ${threespace} <b><- circled, changed to nop</b>
 <hr class="s1" />
-${twelvespace}${longblank}
+${twelvespace}<b>jal has_cycle</b> ${threespace} <b><- change to j has_cycle</b>
 <hr class="s1" />
-${twelvespace}${longblank}
+${twelvespace}<b>lw $ra 0($sp)</b>
 <hr class="s1" />
-${twelvespace}addiu ${blank} ${blank} ${blank}
+${twelvespace}addiu <b>$sp</b> <b>$sp</b> <b>4</b>
 <hr class="s1" />
 done: ${sixspace}jr return a
 </code>
@@ -169,9 +269,8 @@ const q2_3 =
 c) You want to change this to be an <i>iterative</i> MIPS solution, but you want to <i>change the fewest lines</I> you can. Circle those lines you would change to make the program work <i>iteratively</i>.
 `;
 
-const q2_1_soln =
-`
-
+const q2_3_soln = `
+See part (b).
 `;
 
 const q3_1 =
@@ -208,9 +307,19 @@ ${eightspace}*d = c;
 <hr class="s1" />
 ${eightspace}s++; d++;
 <hr class="s1" />
-$f{fourspace}} while (c);
+${fourspace}} while (c);
+<hr class="s1" />
 }
 </code>
+`;
+
+const q3_1_soln =
+`
+Tag: <b>22</b>
+<hr class="s1" />
+Index: <b>6</b>
+<hr class="s1" />
+Offset: <b>4</b>
 `;
 
 const q3_2 =
@@ -218,9 +327,19 @@ const q3_2 =
 b) What is the <i>lowest</i> possible cache hit rate for <code><b>our_strcpy</b></code>?
 `;
 
+const q3_2_soln =
+`
+<b>0</b>
+`;
+
 const q3_3 =
 `
 c) What <i>types</i> of misses are there?
+`;
+
+const q3_3_soln =
+`
+<b>Compulsory and conflict</b>
 `;
 
 const q3_4 =
@@ -228,9 +347,19 @@ const q3_4 =
 d) What is the <i>smallest possible</i> value of <code>(d - s)</code> that would get this hit rate?
 `;
 
+const q3_4_soln =
+`
+<b>1 KiB</b>
+`;
+
 const q3_5 =
 `
 e) What is the <i>highest</i> possible cache hit rate for <code><b>our_strcpy</b></code>?
+`;
+
+const q3_5_soln =
+`
+<b>31/32</b>
 `;
 
 const q3_6 =
@@ -238,20 +367,28 @@ const q3_6 =
 f) What is one possible value of <code><b>(d - s)</b></code> where we would get this hit rate?
 `;
 
+const q3_6_soln =
+`
+<b>0</b>
+<hr class="s1" />
+<b>2 misses per block * 2^6 blocks/cache * 2^13 caches = 2^20 misses</b>
+`;
+
 const q3_7 =
 `
 g) If we ran <code><b>our_strcpy</b></code> with a 4-way set-associative LRU cache, and the sizes of both <code><b>d</b></code> and <code><b>s</b></code> are 8MiB, what is the <i>most # of misses</i> possible?
 `;
 
-const q3_1_soln =
+const q3_7_soln =
 `
-
+<b>1 Mebi</b>
 `;
 
 const q4_1 =
 `
-Question 4: A bad case of Not Invented Here Syndrome... (24 min)
-a)  A colleague of yours has implemented some homebrew C99 string manipulation functions, while
+<h3>Question 4: A bad case of Not Invented Here Syndrome... (15 pts)</h3>
+<hr class="s1" />
+a) A colleague of yours has implemented some homebrew C99 string manipulation functions, while
 
 steadfastly refusing to use any standard libraries, but they’re buggy!  We've marked each
 potentially problematic line with <code>// <number></code>.  Your job is to fill in a correct replacement line in the
@@ -260,7 +397,7 @@ corresponding row of the following table, or write <i>'OK' if there is nothing w
 <hr class="s2" />
 
 <table>
-<thead><tr><th>Line number</th></tr></thead>
+<thead><tr><th width="2">Line number</th><th>Replacement Code</th></tr></thead>
 <tbody>
 <tr><td>1</td><td></td></tr>
 <tr><td>2</td><td></td></tr>
@@ -277,11 +414,11 @@ corresponding row of the following table, or write <i>'OK' if there is nothing w
 <hr class="s1" />
 void string_to_lowercase(char *s) {
 <hr class="s1" />
-${fourspace}for (char c = *s; c != '\0'; s++) { ${eightspace} // 1
+${fourspace}for (char c = *s; c != '\0'; s++) { ${sixspace} // 1
 <hr class="s1" />
 ${eightspace}if (c >= 'A' && c <= 'S') {
 <hr class="s1" />
-${twelvespace}s += 'a' - 'A';${_.repeat(' ', 20)} // 2
+${twelvespace}s += 'a' - 'A';${_.repeat('&nbsp;', 17)} // 2
 <hr class="s1" />
 ${eightspace}}
 <hr class="s1" />
@@ -295,9 +432,9 @@ size_t string_length(char *s) {
 <hr class="s1" />
 ${fourspace}char *s2 = s;
 <hr class="s1" />
-${fourspace}while (*s2++); ${twelvespace} // 3
+${fourspace}while (*s2++); ${_.repeat('&nbsp;', 25)} // 3
 <hr class="s1" />
-return s2 - s - 1; ${twelvespace} // 4
+${fourspace}return s2 - s - 1; ${_.repeat('&nbsp;', 21)} // 4
 <hr class="s1" />
 }
 <hr class="s2" />
@@ -309,16 +446,26 @@ ${fourspace}uint32_t odds = 0;
 <hr class="s1" />
 ${fourspace}for (uint32_t i = 0; i < size; i++)
 <hr class="s1" />
-${eightspace}odds += *numbers+i && 1; ${twelvespace} // 5
+${eightspace}odds += *numbers+i && 1; ${_.repeat('&nbsp;', 11)} // 5
 <hr class="s1" />
 ${fourspace}return odds;
 <hr class="s1" />
+}
 </code>
 `;
 
 const q4_1_soln =
 `
-
+<table>
+<thead><tr><th width="1">Line number</th><th>Replacement Code</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><code>for (char c = *s; (c = *s) != '\0'; s++) {</code></td></tr>
+<tr><td>2</td><td><code>*s += 'a' - 'A';</code></td></tr>
+<tr><td>3</td><td><code>OK</code></td></tr>
+<tr><td>4</td><td><code>OK</code></td></tr>
+<tr><td>5</td><td><code>odds += numbers[i] & 1${twospace}...${twospace}odds += *(numbers+i) & 1</code></td></tr>
+</tbody>
+</table>
 `;
 
 var Scroll = require('react-scroll');
@@ -389,14 +536,46 @@ class CS61CSp14 extends Component {
           <Element name="q1">
             <hr className="s5" />
             <Question id={"q1-1"} content={q1_1} solution={q1_1_soln} />
+            <hr className="s5" />
+            <Question id={"q1-2"} content={q1_2} solution={q1_2_soln} />
+            <hr className="s5" />
+            <Question id={"q1-3"} content={q1_3} solution={q1_3_soln} />
+            <hr className="s5" />
+            <Question id={"q1-4"} content={q1_4} solution={q1_4_soln} />
+            <hr className="s5" />
+            <Question id={"q1-5"} content={q1_5} solution={q1_5_soln} />
+            <hr className="s5" />
+            <Question id={"q1-6"} content={q1_6} solution={q1_6_soln} />
+            <hr className="s5" />
+            <Question id={"q1-7"} content={q1_7} solution={q1_7_soln} />
+            <hr className="s5" />
+            <Question id={"q1-8"} content={q1_8} solution={q1_8_soln} />
+            <hr className="s5" />
+            <Question id={"q1-9"} content={q1_9} solution={q1_9_soln} />
           </Element>
           <Element name="q2">
             <hr className="s5" />
             <Question id={"q2-1"} content={q2_1} solution={q2_1_soln} />
+            <hr className="s5" />
+            <Question id={"q2-2"} content={q2_2} solution={q2_2_soln} />
+            <hr className="s5" />
+            <Question id={"q2-3"} content={q2_3} solution={q2_3_soln} />
           </Element>
           <Element name="q3">
             <hr className="s5" />
             <Question id={"q3-1"} content={q3_1} solution={q3_1_soln} />
+            <hr className="s5" />
+            <Question id={"q3-2"} content={q3_2} solution={q3_2_soln} />
+            <hr className="s5" />
+            <Question id={"q3-3"} content={q3_3} solution={q3_3_soln} />
+            <hr className="s5" />
+            <Question id={"q3-4"} content={q3_4} solution={q3_4_soln} />
+            <hr className="s5" />
+            <Question id={"q3-5"} content={q3_5} solution={q3_5_soln} />
+            <hr className="s5" />
+            <Question id={"q3-6"} content={q3_6} solution={q3_6_soln} />
+            <hr className="s5" />
+            <Question id={"q3-7"} content={q3_7} solution={q3_7_soln} />
           </Element>
           <Element name="q4">
             <hr className="s5" />
