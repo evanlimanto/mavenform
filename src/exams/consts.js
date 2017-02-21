@@ -37,9 +37,14 @@ const exams = {
         'url': '/exam?id=cs61cfa15',
       },
       'Spring 2015': {
-        'id': 'cs61csp16',
+        'id': 'cs61csp15',
         'profs': 'Asanovic, Stojanovic',
         'url': '/exam?id=cs61csp15',
+      },
+      'Spring 2014': {
+        'id': 'cs61csp14',
+        'profs': 'Garcia',
+        'url': '/exam?id=cs61csp14',
       }
     },
   },

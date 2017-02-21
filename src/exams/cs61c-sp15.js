@@ -3,7 +3,7 @@ import { Question } from '../components/question';
 import { lx, longblank, blank, onespace, twospace, threespace, fourspace, fivespace, sixspace, sevenspace, eightspace } from '../utils';
 
 const _ = require('lodash');
-const examCode = 'cs61cfa15';
+const examCode = 'cs61csp15';
 
 const tenspace = _.repeat('&nbsp;', 10);
 const twelvespace = _.repeat('&nbsp;', 12);
@@ -622,7 +622,7 @@ class CS61CSp15 extends Component {
         <h1>CS 61C</h1>
         <hr className="s2" />
         <div className="center">
-          <h5>Midterm 1 | Fall 2015 | Stojanovic, Wawrzynek</h5>
+          <h5>Midterm 1 | Spring 2015 | Asanovic, Stojanovic</h5>
         </div>
         <Sticky className="sidebar screen">
           <hr className="s5" />

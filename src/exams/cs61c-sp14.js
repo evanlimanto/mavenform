@@ -3,7 +3,7 @@ import { Question } from '../components/question';
 import { lx, longblank, blank, onespace, twospace, threespace, fourspace, fivespace, sixspace, sevenspace, eightspace } from '../utils';
 
 const _ = require('lodash');
-const examCode = 'cs61cfa15';
+const examCode = 'cs61csp14';
 
 const tenspace = _.repeat('&nbsp;', 10);
 const twelvespace = _.repeat('&nbsp;', 12);
