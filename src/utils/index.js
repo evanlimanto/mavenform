@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const longblank = _.repeat('_', 30);
-const blank = _.repeat('_', 8);
+const blank = '<code>________</code>';
 const eightspace = _.repeat('&nbsp;', 8);
 const sevenspace = _.repeat('&nbsp;', 7);
 const sixspace = _.repeat('&nbsp;', 6);

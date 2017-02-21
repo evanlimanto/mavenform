@@ -127,31 +127,51 @@ ${threespace}add  $s0, $zero, $zero  ${onespace} # b = 0;
 <hr class="s1" />
 ${threespace}add  $s1, $zero, $zero  ${onespace} # i = 0;
 <hr class="s1" />
-${threespace}addi $s2, $zero, 10 ${twospace} #
+${threespace}addi $s2, $zero, 10 ${twospace} # ${blank}
 <hr class="s1" />
-X:   slt  $t0, $s1, $s2 ${fourspace} #
+X:   slt  $t0, $s1, $s2 ${fourspace} # ${blank}
 <hr class="s1" />
-${threespace}<b>bne</b> $t0, $zero, Y ${fourspace} #
+${threespace}<b>bne</b> $t0, $zero, Y ${fourspace} # ${blank}
 <hr class="s1" />
-${threespace}sll  $t1, $s1, 2 ${sixspace} #
+${threespace}sll  $t1, $s1, 2 ${sixspace} # ${blank}
 <hr class="s1" />
-${threespace}add  $t2, $s3, $t1 ${fourspace} #
+${threespace}add  $t2, $s3, $t1 ${fourspace} # ${blank}
 <hr class="s1" />
-${threespace}sw  $s1, 0($t2) ${_.repeat('&nbsp;', 7)} #
+${threespace}sw  $s1, 0($t2) ${_.repeat('&nbsp;', 7)} # ${blank}
 <hr class="s1" />
-${threespace}add  $s0, $s0, $s1 ${fourspace} #
+${threespace}add  $s0, $s0, $s1 ${fourspace} # ${blank}
 <hr class="s1" />
-${threespace}addi $s1, $s1, 1 ${fivespace} #
+${threespace}addi $s1, $s1, 1 ${fivespace} # ${blank}
 <hr class="s1" />
-${threespace}j X ${_.repeat('&nbsp;', 18)} #
+${threespace}j X ${_.repeat('&nbsp;', 18)} # ${blank}
 <hr class="s1" />
-Y: ${_.repeat('&nbsp;', 22)} #
+Y: ${_.repeat('&nbsp;', 22)} # ${blank}
 </code>
 <hr class="s2" />
 Partial credit will be determined, in part, by the quality of your line-by-line comments. Please provide the comments in pseudocode format. The question continues on the next page.
 <hr class="s2" />
 What is the equivalent C code that is implemented by this MIPS code? Come up with the C
 equivalent with the fewest possible lines of code. You might not need all the lines.
+<hr class="s2" />
+<code>
+${longblank}
+<hr class="s1" />
+${longblank}
+<hr class="s1" />
+${longblank}
+<hr class="s1" />
+${longblank}
+<hr class="s1" />
+${longblank}
+<hr class="s1" />
+${longblank}
+<hr class="s1" />
+${longblank}
+<hr class="s1" />
+${longblank}
+<hr class="s1" />
+${longblank}
+</code>
 `;
 
 const q2_1_soln =
@@ -287,7 +307,7 @@ ${fourspace}double val;
 ${threespace}pointer to new top of stack. */
 <hr class="s1" />
 stack_el* push(stack_el *top_of_stack, double v) {
-<hr class="s2" />
+<hr class="s5" />
 }
 <hr class="s2" />
 /* POPADD: Pop top stack element and add its value
@@ -299,7 +319,7 @@ ${threespace}Free no longer used memory. Do not change
 ${threespace}the stack if it has fewer than 2 elements. */
 <hr class="s1" />
 stack_el* popadd(stack_el *top_of_stack) {
-<hr class="s2" />
+<hr class="s5" />
 }
 </code>
 `;
