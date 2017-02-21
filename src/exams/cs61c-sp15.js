@@ -16,20 +16,30 @@ const q1_1 =
 1) Convert the following 8-bit two’s-complement numbers from hexadecimal to decimal:
 <hr class="s2" />
 
-0x80 = -128
+0x80 =
 <hr class="s1" />
-0xFF = -1
+0xFF =
 <hr class="s1" />
-0x0F = 15
+0x0F =
+`;
+
+const q1_1_soln =
+`
+0x80 = <b>-128</b>
+<hr class="s1" />
+0xFF = <b>-1</b>
+<hr class="s1" />
+0x0F = <b>15</b>
 `;
 
 const q1_2 =
 `
 2) For two n-bit numbers, what is the difference between the largest unsigned number and the largest two’s-complement number? In other words, what is <code><b>MAX_UNSIGNED_INT – MAX_SIGNED_INT</b></code>? Write your answer in terms of <code>n</code>.
+`;
 
-<hr class="s2" />
-2n – 1 – (2n-1 – 1) = 2n-1
-<hr class="s2" />
+const q1_2_soln =
+`
+${lx('2^n')} – 1 – (${lx('2^{n-1}')} – 1) = ${lx('2^{n-1}')}
 `;
 
 const q1_3 =
@@ -40,7 +50,18 @@ represent.
 <code>
 unsigned int max_twos() {
 <hr class="s1" />
-${fourspace}return ((1 << 31) - 1);
+${fourspace}return ((1 << ${blank}) - ${blank});
+<hr class="s1" />
+}
+</code>
+`;
+
+const q1_3_soln =
+`
+<code>
+unsigned int max_twos() {
+<hr class="s1" />
+${fourspace}return ((1 << <b>31</b>) - <b>1</b>);
 <hr class="s1" />
 }
 </code>
@@ -62,12 +83,11 @@ ${eightspace}0b1110 = 14 – 4 = 10
 
 If we wanted an n-bit biased system to represent the same range as two’s complement numbers,
 what is the value of b?
-<hr class="s1" />
-The most negative number needs to be ${lx('-2^{n-1}')}. The most negative number in biased notation is 0 – b so our bias is ${lx('2^{n-1}')}.
 `;
 
-const q1_1_soln =
+const q1_4_soln =
 `
+The most negative number needs to be ${lx('-2^{n-1}')}. The most negative number in biased notation is 0 – b so our bias is ${lx('2^{n-1}')}.
 `;
 
 const imgq2_1 = require('../img/cs61csp15-2.png');
@@ -92,15 +112,28 @@ Suppose <code>arr</code> is at location <code>0x5000</code> in memory, i.e., the
 Assume that integers and pointers are both 32 bits. What are the values of the following
 expressions? If an expression may cause an error, write “Error” instead.
 <hr class="s1" />
-a) *(p+3) =	0x4
+a) *(p+3) =
 <hr class="s1" />
-b) p[4]	=	0x3
+b) p[4]	=
 <hr class="s1" />
-c) *(p+5)	+	p[3] = 0x5000
+c) *(p+5)	+	p[3] =
 <hr class="s1" />
-d) *(int*)(p[1]) = 0xd(13)
+d) *(int*)(p[1]) =
 <hr class="s1" />
-e) *(int*)(*(p+5)) = error(out of bounds)
+e) *(int*)(*(p+5)) =
+`
+
+const q2_1_soln =
+`
+a) *(p+3) =	<b>0x4</b>
+<hr class="s1" />
+b) p[4]	=	<b>0x3</b>
+<hr class="s1" />
+c) *(p+5)	+	p[3] = <b>0x5000</b>
+<hr class="s1" />
+d) *(int*)(p[1]) = <b>0xd(13)</b>
+<hr class="s1" />
+e) *(int*)(*(p+5)) = <b>error(out of bounds)</b>
 `;
 
 const q2_2 =
@@ -136,25 +169,20 @@ The output of this code is:
 ${blank}, ${blank}, 8
 `;
 
-const q2_1_soln =
+const q2_2_soln =
 `
+<code><b>int*</b>, <b>int**</b>, <b>4</b>, <b>5</b>, <b>6</b>
 `;
 
 const q3_1 =
 `
 <h3>Q3: C Memory Model (6 points)</h3>
-For each of the following functions, answer the questions below in the corresponding box to the right:
+For each of the following functions, answer the questions below.
 <hr class="s2" />
 1)  Does this function return a usable pointer to a string containing “asdf”?
-`;
-
-const q3_2 =
-`
+<hr class="s1" />
 2)  Which area of memory does the returned pointer point to?
-`;
-
-const q3_3 =
-`
+<hr class="s1" />
 3)  Does this function leak memory?
 <hr class="s2" />
 You may assume that malloc calls will always return a non-<code>NULL</code> pointer.
@@ -185,7 +213,6 @@ ${fourspace}a[4]='\0';
 return a;
 <hr class="s1" />
 }
-</code>
 <hr class="s2" />
 char * get_asdf_string_3() {
 <hr class="s1" />
@@ -200,17 +227,21 @@ ${fourspace}return a;
 char * g = "asdf";
 <hr class="s1" />
 char * get_asdf_string_4() {
+<hr class="s1" />
 ${fourspace}return g;
+<hr class="s1" />
 }
+</code>
 `;
 
 const q3_1_soln =
 `
+Solutions not provided in PDF.
 `;
 
 const q4_1 =
 `
-<h3>Linked Lists (12 points)</h3>
+<h3>Q4: Linked Lists (12 points)</h3>
 1) Fill out the declaration of a singly linked linked-list node below.
 <hr class="s1" />
 <code>
@@ -218,10 +249,15 @@ typedef struct node {
 <hr class="s1" />
 ${fourspace}int value;
 <hr class="s1" />
-${fourspace}struct node* next; //pointer to the next element
+${fourspace}${blank} next; //pointer to the next element
 <hr class="s1" />
 } sll_node;
 </code>
+`;
+
+const q4_1_soln =
+`
+<code><b>struct node*</b></code>
 `;
 
 const q4_2 =
@@ -230,6 +266,7 @@ const q4_2 =
 <hr class="s1" />
 <code>
 int * to_array(sll_node *sll int size) {
+<hr class="s1" />
 ${fourspace}int i = 0;
 <hr class="s1" />
 ${fourspace}int *arr = ${blank};
@@ -242,9 +279,16 @@ ${eightspace}sll = ${blank};
 <hr class="s1" />
 ${eightspace}${blank};
 <hr class="s1" />
+}
+<hr class="s1" />
 ${fourspace}return arr;
 <hr class="s1" />
 }
+`;
+
+const q4_2_soln =
+`
+<code><b>malloc(size * sizeof(int))</b>, <b>sll->value</b>, <b>sll->next</b>, <b>i++</b></code>
 `;
 
 const q4_3 =
@@ -273,17 +317,19 @@ ${fourspace}sll->next = ${blank};
 ${fourspace}free(${blank});
 <hr class="s1" />
 ${fourspace}delete_even(${blank});
+<hr class="s1" />
 }
 </code>
 `;
 
-const q4_1_soln =
+const q4_3_soln =
 `
+<code><b>sll->next</b>, <b>temp->next (or sll->next->next)</b>, <b>temp</b>, <b>sll->next</b></code>
 `;
 
 const q5_1 =
 `
-<h3>MIPS with FUNctions (18 points)</h3>
+<h3>Q5: MIPS with FUNctions (18 points)</h3>
 
 The function <code><b>countChars(char *str, char *target)</b></code> returns the number of times characters in <code><b>target</b></code> appear in <code><b>str</b></code>. For example:
 <hr class="s2" />
@@ -318,7 +364,7 @@ Finish the implementation of <code>countChars</code> in TAL MIPS below. You may 
 <code>
 countChars:
 <hr class="s1" />
-${fivespace}addiu $sp, $sp, ${blank}
+${fivespace}addiu $sp, $sp, ${_.repeat('_', 14)}
 <hr class="s1" />
 ${fivespace}${longblank}${onespace}# Store onto the stack if needed
 <hr class="s1" />
@@ -330,26 +376,28 @@ ${fivespace}${longblank}
 <hr class="s1" />
 ${fivespace}${longblank}
 <hr class="s1" />
-${fivespace}${longblank}
-<hr class="s1" />
-${fivespace}addiu $s0, $zero, 0${fourspace}# We'll store the count in $s0
+${fivespace}addiu $s0, $zero, 0${twelvespace}# We'll store the count in $s0
 <hr class="s1" />
 ${fivespace}addiu $s1, $a0, 0
 <hr class="s1" />
 ${fivespace}addiu $s2, $a1, 0
+<hr class="s1" />
 loop:
 <hr class="s1" />
 ${fivespace}addiu $a0, $s0, 0
 <hr class="s1" />
 ${fivespace}${longblank}
 <hr class="s1" />
-${fivespace}beq ${longblank}
+${fivespace}beq ${_.repeat('_', 26)}
+<hr class="s1" />
+${fivespace}jal isCharInStr
 <hr class="s1" />
 ${fivespace}${longblank}
 <hr class="s1" />
 ${fivespace}${longblank}
 <hr class="s1" />
 ${fivespace}${longblank}
+<hr class="s1" />
 done:
 <hr class="s1" />
 ${fivespace}${longblank}${twospace}# Load from the stack if needed
@@ -364,7 +412,7 @@ ${fivespace}${longblank}
 <hr class="s1" />
 ${fivespace}${longblank}
 <hr class="s1" />
-${fivespace}addiu $sp, $sp, ${blank}
+${fivespace}addiu $sp, $sp, ${_.repeat('_', 14)}
 <hr class="s1" />
 ${fivespace}jr $ra
 </code>
@@ -372,6 +420,61 @@ ${fivespace}jr $ra
 
 const q5_1_soln =
 `
+<code>
+countChars:
+<hr class="s1" />
+${fivespace}addiu $sp, $sp, <b>-16</b>
+<hr class="s1" />
+${fivespace}<b>sw $ra, 0($sp)</b>${_.repeat('&nbsp;', 11)}# Store onto the stack if needed
+<hr class="s1" />
+${fivespace}<b>sw $s0, 0($sp)</b>
+<hr class="s1" />
+${fivespace}<b>sw $s1, 4($sp)</b>
+<hr class="s1" />
+${fivespace}<b>sw $s2, 8($sp)</b>
+<hr class="s1" />
+${fivespace}${_.repeat('_', 20)}
+<hr class="s1" />
+${fivespace}addiu $s0, $zero, 0${sixspace}# We'll store the count in $s0
+<hr class="s1" />
+${fivespace}addiu $s1, $a0, 0
+<hr class="s1" />
+${fivespace}addiu $s2, $a1, 0
+<hr class="s1" />
+loop:
+<hr class="s1" />
+${fivespace}addiu $a0, $s0, 0
+<hr class="s1" />
+${fivespace}<b>lb $a1, 0($s1)</b>
+<hr class="s1" />
+${fivespace}beq <b>$a1, $zero, done</b>
+<hr class="s1" />
+${fivespace}jal isCharInStr
+<hr class="s1" />
+${fivespace}<b>addu $s0, $s0, $v0</b>
+<hr class="s1" />
+${fivespace}<b>addiu $s1, $s1, 1</b>
+<hr class="s1" />
+${fivespace}<b>j loop</b>
+<hr class="s1" />
+done:
+<hr class="s1" />
+${fivespace}<b>addiu $v0, $s0, 0</b>${eightspace}# Load from the stack if needed
+<hr class="s1" />
+${fivespace}<b>lw $ra, 0($sp)</b>
+<hr class="s1" />
+${fivespace}<b>lw $s0, 4($sp)</b>
+<hr class="s1" />
+${fivespace}<b>lw $s1, 8($sp)</b>
+<hr class="s1" />
+${fivespace}<b>lw $s2, 12($sp)</b>
+<hr class="s1" />
+${fivespace}${_.repeat('_', 20)}
+<hr class="s1" />
+${fivespace}addiu $sp, $sp, <b>16</b>
+<hr class="s1" />
+${fivespace}jr $ra
+</code>
 `;
 
 const imgq6_1 = require('../img/cs61csp15-6.png');
@@ -390,6 +493,7 @@ right that you should fill in with the appropriate fields (in binary):
 
 const q6_1_soln =
 `
+Solutions not provided in PDF.
 `;
 
 const q7_1 =
@@ -419,7 +523,7 @@ Write <code>branchAmount</code> in TAL MIPS (no pseudoinstructions). You may not
 <code>
 branchAmount:
 <hr class="s1" />
-${fivespace}andi $t0, $a0, 0x8000${eightspace}#Mask out a certain bit
+${fivespace}andi $t0, $a0, 0x8000${_.repeat('&nbsp;', 10)}# Mask out a certain bit
 <hr class="s1" />
 ${fivespace}bne ____, _______, label1
 <hr class="s1" />
@@ -439,17 +543,49 @@ ${fivespace}or $v0, $a0, $t1
 <hr class="s1" />
 label2:
 <hr class="s1" />
-${fivespace}sll _______, ______, _____${twospace}# Convert to byte addressing
+${fivespace}sll _______, ______, _________${twospace}# Convert to byte addressing
+<hr class="s1" />
+${fivespace}${longblank}
 <hr class="s1" />
 label3:
 <hr class="s1" />
-${fivespace}
-jr $ra
+${fivespace}jr $ra
 </code>
 `;
 
 const q7_1_soln =
 `
+<code>
+branchAmount:
+<hr class="s1" />
+${fivespace}andi $t0, $a0, 0x8000${twelvespace}# Mask out a certain bit
+<hr class="s1" />
+${fivespace}bne <b>$t0</b>, <b>$zero</b>, label1
+<hr class="s1" />
+${fivespace}<b>andi $v0, $a0, 0xFFFF</b>
+<hr class="s1" />
+${fivespace}${longblank}
+<hr class="s1" />
+${fivespace}j label2
+<hr class="s1" />
+label1:
+<hr class="s1" />
+${fivespace}<b>lui $t1, 0xFFFF</b>
+<hr class="s1" />
+${fivespace}${longblank}
+<hr class="s1" />
+${fivespace}or $v0, $a0, $t1
+<hr class="s1" />
+label2:
+<hr class="s1" />
+${fivespace}sll <b>$v0</b>, <b>$v0</b>, <b>2</b>${_.repeat('&nbsp;', 18)}# Convert to byte addressing
+<hr class="s1" />
+${fivespace}<b>addiu $v0, $v0, 4</b>
+<hr class="s1" />
+label3:
+<hr class="s1" />
+${fivespace}jr $ra
+</code>
 `;
 
 var Scroll = require('react-scroll');
@@ -523,6 +659,12 @@ class CS61CSp15 extends Component {
           <Element name="q1">
             <hr className="s5" />
             <Question id={"q1-1"} content={q1_1} solution={q1_1_soln} />
+            <hr className="s5" />
+            <Question id={"q1-1"} content={q1_2} solution={q1_2_soln} />
+            <hr className="s5" />
+            <Question id={"q1-1"} content={q1_3} solution={q1_3_soln} />
+            <hr className="s5" />
+            <Question id={"q1-1"} content={q1_4} solution={q1_4_soln} />
           </Element>
           <Element name="q2">
             <hr className="s5" />
@@ -535,6 +677,10 @@ class CS61CSp15 extends Component {
           <Element name="q4">
             <hr className="s5" />
             <Question id={"q4-1"} content={q4_1} solution={q4_1_soln} />
+            <hr className="s5" />
+            <Question id={"q4-2"} content={q4_2} solution={q4_2_soln} />
+            <hr className="s5" />
+            <Question id={"q4-3"} content={q4_3} solution={q4_3_soln} />
           </Element>
           <Element name="q5">
             <hr className="s5" />
