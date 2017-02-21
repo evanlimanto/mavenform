@@ -683,7 +683,7 @@ class CS61CFa15 extends Component {
         <h1>CS 61C</h1>
         <hr className="s2" />
         <div className="center">
-          <h5>Midterm 1 | Fall 2016 | Stojanovic, Wawrzynek</h5>
+          <h5>Midterm 1 | Fall 2015 | Stojanovic, Wawrzynek</h5>
         </div>
         <Sticky className="sidebar screen">
           <hr className="s5" />

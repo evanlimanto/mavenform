@@ -3,7 +3,7 @@ import { Question } from '../components/question';
 import { lx, longblank, blank, onespace, twospace, threespace, fourspace, fivespace, sixspace, sevenspace, eightspace } from '../utils';
 
 const _ = require('lodash');
-const examCode = 'cs61cfa15';
+const examCode = 'cs61csp15';
 
 const tenspace = _.repeat('&nbsp;', 10);
 const twelvespace = _.repeat('&nbsp;', 12);
@@ -591,9 +591,14 @@ ${fivespace}jr $ra
 var Scroll = require('react-scroll');
 var Link = Scroll.Link;
 var Element = Scroll.Element;
+var scrollSpy = Scroll.scrollSpy;
 var Sticky = require('react-stickynode');
 
 class CS61CSp15 extends Component {
+  componentDidMount() {
+    scrollSpy.update();
+  }
+
   render() {
     const problemIDs = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7'];
     const problemTitles = [
@@ -622,7 +627,7 @@ class CS61CSp15 extends Component {
         <h1>CS 61C</h1>
         <hr className="s2" />
         <div className="center">
-          <h5>Midterm 1 | Fall 2015 | Stojanovic, Wawrzynek</h5>
+          <h5>Midterm 1 | Spring 2015 | Stojanovic, Wawrzynek</h5>
         </div>
         <Sticky className="sidebar screen">
           <hr className="s5" />
@@ -655,8 +660,8 @@ class CS61CSp15 extends Component {
           </div>
         </div>
         <div className="content">
-          <div className="content-spacer" />
           <Element name="q1">
+            <div className="content-spacer" />
             <hr className="s5" />
             <Question id={"q1-1"} content={q1_1} solution={q1_1_soln} />
             <hr className="s5" />
