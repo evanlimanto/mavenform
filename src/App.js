@@ -100,7 +100,6 @@ class App extends Component {
     return (
       <span className="shift">
         <a className="return" href={"/course?id=" + course}>&#8592; INDEX</a>
-        <a className="return big-screen return-bottom" href={"/course?id=" + course}>&#8592; INDEX</a>
         {collapser}
         <div className={menuClass}>
           <a className="home center" href="/">Mavenform</a>
