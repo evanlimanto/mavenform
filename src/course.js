@@ -53,50 +53,14 @@ class Course extends Component {
       `
       <tr>
         <td>Midterm 2</td>
-        <td>Fall 2016</td>
-        <td>Ayazifar, Stojanovic</td>
-        <td><i>In progress</i></td>
-      </tr>
-      <tr>
-        <td>Midterm 2</td>
-        <td>Spring 2016</td>
-        <td>Alon, Ayazifar</td>
-        <td><i>In progress</i></td>
-      </tr>
-      <tr>
-        <td>Midterm 2</td>
-        <td>Fall 2015</td>
-        <td>Niknejad, Sahai</td>
-        <td><i>In progress</i></td>
-      </tr>
-      <tr>
-        <td>Midterm 2</td>
-        <td>Spring 2015</td>
-        <td>Alon, Ayazifar, Subramanian</td>
+        <td>2015 - 2016</td>
+        <td>Miscellaneous</td>
         <td><i>In progress</i></td>
       </tr>
       <tr>
         <td>Final</td>
-        <td>Fall 2016</td>
-        <td>Niknejad, Sahai</td>
-        <td><i>No public release</i></td>
-      </tr>
-      <tr>
-        <td>Final</td>
-        <td>Spring 2016</td>
-        <td>Alon, Ayazifar</td>
-        <td><i>In progress</i></td>
-      </tr>
-      <tr>
-        <td>Final</td>
-        <td>Fall 2015</td>
-        <td>Niknejad, Sahai</td>
-        <td><i>In progress</i></td>
-      </tr>
-      <tr>
-        <td>Final</td>
-        <td>Spring 2015</td>
-        <td>Alon, Ayazifar, Subramanian</td>
+        <td>2015 - 2016</td>
+        <td>Miscellaneous</td>
         <td><i>In progress</i></td>
       </tr>
       `;
@@ -111,74 +75,20 @@ class Course extends Component {
       </tr>
       <tr>
         <td>Midterm 1</td>
-        <td>Spring 2015</td>
-        <td>Asanovic, Stojanovic</td>
-        <td><i>No solutions released</i></td>
-      </tr>
-      <tr>
-        <td>Midterm 1</td>
         <td>Fall 2014</td>
         <td>Garcia, Lustig</td>
         <td><i>In progress</i></td>
       </tr>
       <tr>
         <td>Midterm 2</td>
-        <td>Fall 2016</td>
-        <td>Boser, Katz</td>
-        <td><i>In progress</i></td>
-      </tr>
-      <tr>
-        <td>Midterm 2</td>
-        <td>Spring 2016</td>
-        <td>Stojanovic, Weaver</td>
-        <td><i>No public release</i></td>
-      </tr>
-      <tr>
-        <td>Midterm 2</td>
-        <td>Fall 2015</td>
-        <td>Stojanovic, Wawrzynek</td>
-        <td><i>In progress</i></td>
-      </tr>
-      <tr>
-        <td>Midterm 2</td>
-        <td>Spring 2015</td>
-        <td>Asanovic, Stojanovic</td>
-        <td><i>In progress</i></td>
-      </tr>
-      <tr>
-        <td>Midterm 2</td>
-        <td>Fall 2014</td>
-        <td>Garcia, Lustig</td>
+        <td>2014 - 2016</td>
+        <td>Miscellaneous</td>
         <td><i>In progress</i></td>
       </tr>
       <tr>
         <td>Final</td>
-        <td>Fall 2016</td>
-        <td>Boser, Katz</td>
-        <td><i>No public release</i></td>
-      </tr>
-      <tr>
-        <td>Final</td>
-        <td>Spring 2016</td>
-        <td>Stojanovic, Weaver</td>
-        <td><i>No public release</i></td>
-      </tr>
-      <tr>
-        <td>Final</td>
-        <td>Fall 2015</td>
-        <td>Stojanovic, Wawrzynek</td>
-        <td><i>In progress</i></td>
-      </tr>
-      <tr>
-        <td>Final</td>
-        <td>Spring 2015</td>
-        <td>Asanovic, Stojanovic</td>
-        <td><i>In progress</i></td>
-      </tr>
-      <tr>
-        <td>Final</td>
-        <td>Fall 2014</td>
-        <td>Garcia, Lustig</td>
+        <td>2014 - 2016</td>
+        <td>Miscellaneous</td>
         <td><i>In progress</i></td>
       </tr>
       `;
@@ -248,11 +158,11 @@ class Course extends Component {
           </div>
           <hr className="s5" />
           <div className="center">
-            <p className="test">Status of every exam from TBP, HKN, and all other sources <i>(up to the last 5 standard academic terms)</i></p>
+            <p className="test">Status of every exam from TBP, HKN, and all other sources <i>(up to the last 3 academic years)</i></p>
             <hr className="s3" />
             <div className="table-container-container">
               <div className="table-container">
-                <table className="center">
+                <table className="exams center">
                   <thead>
                     <tr>
                       <th>Type</th>

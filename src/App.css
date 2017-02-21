@@ -628,47 +628,47 @@ input[type=button]:hover {
   overflow-x: auto;
 }
 
-table {
+.exams {
   width: 100%;
   border-collapse: collapse;
 }
 
-th:last-child, td:last-child {
+.exams th:last-child, .exams td:last-child {
   width: 200px;
   padding-right: 0;
 }
 
-thead tr:first-child th:first-child {
+.exams thead tr:first-child th:first-child {
   border-radius: 5px 0 0 0;
 }
 
-thead tr:first-child th:last-child {
+.exams thead tr:first-child th:last-child {
   border-radius: 0 5px 0 0;
 }
 
-tbody tr:last-child td:first-child {
+.exams tbody tr:last-child td:first-child {
   border-radius: 0 0 0 5px;
 }
 
-tbody tr:last-child td:last-child {
+.exams tbody tr:last-child td:last-child {
   border-radius: 0 0 5px 0;
 }
 
-th, td {
+.exams th, .exams td {
   padding: 15px;
   text-align: left;
 }
 
-td {
+.exams td {
   opacity: 0.4;
 }
 
-tr.available td {
+.exams tr.available td {
   padding: 0;
   opacity: 1;
 }
 
-table tr td a {
+.exams tr td a {
   border-bottom: none;
   text-align: left;
   padding: 15px;
@@ -677,21 +677,21 @@ table tr td a {
   width: 100%;
 }
 
-table tr td a:hover {
+.exams tr td a:hover {
   color: #333;
   border-bottom: none;
 }
 
-th {
+.exams th {
   background: #11accc;
   color: white;
 }
 
-tr {
+.exams tr {
   background: #fff;
 }
 
-tr:nth-child(even) {
+.exams tr:nth-child(even) {
   background: #efefef;
 }
 
@@ -713,6 +713,17 @@ tr.available:hover {
 
 tr.available:hover .table-link {
   color: #11accc;
+}
+
+.test table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.test th, .test td {
+  border: 1px solid #ccc;
+  padding: 10px;
 }
 
 @media (max-width: 1599px) {

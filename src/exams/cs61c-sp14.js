@@ -11,7 +11,7 @@ const sixteenspace = _.repeat('&nbsp;', 16);
 
 const q1_1 =
 `
-<h3>Question 1: What’s that funky smell?! Oh yeah, it’s potpourri... (30 pts)</h3>
+<h3>Q1: What’s that funky smell?! Oh yeah, it’s potpourri... (30 pts)</h3>
 a)  The unsigned distance between two bit patterns is
 the absolute value of the difference of their values,
 interpreted as unsigned numbers.  Rank the following
@@ -22,7 +22,7 @@ representation with the <b><u>smallest</u></b> unsigned distance
 between -1 and 0.
 
 <hr class="s2" />
-<b>int64_t:</b>
+int64_t:
 <hr class="s1" />
 64-bit One's Complement:
 <hr class="s1" />
@@ -30,12 +30,12 @@ between -1 and 0.
 <hr class="s1" />
 64-bit Bias notation:
 <hr class="s1" />
-<b>double:</b>
+double:
 `;
 
 const q1_1_soln =
 `
-<b>int64_t:</b> <b>5</b>
+int64_t: <b>5</b>
 <hr class="s1" />
 64-bit One's Complement: <b>4</b>
 <hr class="s1" />
@@ -43,7 +43,7 @@ const q1_1_soln =
 <hr class="s1" />
 64-bit Bias notation: <b>1</b>
 <hr class="s1" />
-<b>double:</b> <b>3</b>
+double: <b>3</b>
 `;
 
 const q1_2 =
@@ -51,12 +51,12 @@ const q1_2 =
 b)  As defined in IEEE 754-2008 standard, <u>half-precision floating point</u> (FP) is a 16-bit FP
 representation: 1 sign bit, 5 exponent bits, and 10 significand bits. The exponent bias of 15. What is the binary representation of the <i>smallest half-precision float which is strictly larger than 1</i>? What is its value? Leave your answer in terms of powers of two.
 <hr class="s2" />
-0b${longblank} = ${longblank}
+0b<code>${longblank}</code> = ${blank}
 `;
 
 const q1_2_soln =
 `
-0b <b>0 01111 0000000001</b> = <b>1 + ${lx('2^{-10}')}</b>
+0b <b>0${threespace}01111${threespace}0000000001</b> = <b>1 + ${lx('2^{-10}')}</b>
 `;
 
 const q1_3 =
@@ -115,7 +115,7 @@ g)  Suppose the assembler knew the file line numbers of all labels before it beg
 
 file, and that every line in the file contains an instruction. Then the assembler would need ${blank}
 pass(es) to translate a MAL file, and ${blank} pass(es) to translate a TAL file. These numbers differ
-because of ${longblank} (write n/a if they don't differ).
+because of <code>${longblank}</code> (write n/a if they don't differ).
 `;
 
 const q1_7_soln =
@@ -471,16 +471,21 @@ const q4_1_soln =
 var Scroll = require('react-scroll');
 var Link = Scroll.Link;
 var Element = Scroll.Element;
+var scrollSpy = Scroll.scrollSpy;
 var Sticky = require('react-stickynode');
 
 class CS61CSp14 extends Component {
+  componentDidMount() {
+    scrollSpy.update();
+  }
+
   render() {
-    const problemIDs = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7'];
+    const problemIDs = ['q1', 'q2', 'q3', 'q4'];
     const problemTitles = [
-      'Question 1: What\'s that funky smell?! Oh yeah, it\'s popourri..',
-      'Question 2: Running in circles',
-      'Question 3: Our band is called 1023MiB... We haven\'t had any gigs yet.',
-      'Question 4: A bad case of Not Invented Here Syndrome...'
+      'Q1. What\'s that funky smell?! Oh yeah, it\'s popourri..',
+      'Q2. Running in circles',
+      'Q3. Our band is called 1023MiB... We haven\'t had any gigs yet.',
+      'Q4. A bad case of Not Invented Here Syndrome...'
     ];
     const sidetabContainers = _.map(_.range(problemIDs.length), (index) => {
       const problemID = problemIDs[index];
@@ -532,8 +537,8 @@ class CS61CSp14 extends Component {
           </div>
         </div>
         <div className="content">
-          <div className="content-spacer" />
           <Element name="q1">
+            <div className="content-spacer" />
             <hr className="s5" />
             <Question id={"q1-1"} content={q1_1} solution={q1_1_soln} />
             <hr className="s5" />

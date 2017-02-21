@@ -46,7 +46,7 @@ const q1_3 =
 `
 3) Fill in the blanks to return the largest positive number a 32-bit two’s-complement number can
 represent.
-
+<hr class="s2" />
 <code>
 unsigned int max_twos() {
 <hr class="s1" />
@@ -72,6 +72,7 @@ const q1_4 =
 4) Consider a new type of notation for representing signed numbers, biased notation. The formula for obtaining the value from a number written in biased notation is:
 <hr class="s1" />
 <p align="center"><b>value = value_as_unsigned – b</b></p>
+<hr class="s1" />
 Where <code>b</code> is a constant called the bias. Example with 4 bits and a bias of 4:
 <hr class="s2" />
 <code>
