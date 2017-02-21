@@ -225,7 +225,6 @@ class Course extends Component {
     return (
       <div className="shift">
         <a className="return" href="/">&#8592; RETURN</a>
-        <a className="return big-screen return-bottom" href="/">&#8592; RETURN</a>
         {collapser}
         <div className={menuClass}>
           <a className="home center" href="/">Mavenform</a>
