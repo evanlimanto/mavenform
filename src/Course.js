@@ -29,6 +29,7 @@ class Course extends Component {
     var examId = null;
     var courseName = null;
     var unavailable = null;
+    var note = null;
     if (this.props.location.query) {
       course = this.props.location.query.id;
     }
@@ -64,6 +65,7 @@ class Course extends Component {
         <td><i>In progress</i></td>
       </tr>
       `;
+      note = '';
     } else {
       unavailable =
       `
@@ -92,6 +94,7 @@ class Course extends Component {
         <td><i>In progress</i></td>
       </tr>
       `;
+      note = '<i>(up to the last 3 academic years)</i>';
     }
 
     const collapserClass = classnames({
@@ -158,7 +161,7 @@ class Course extends Component {
           </div>
           <hr className="s5" />
           <div className="center">
-            <p className="test">Status of every exam from TBP, HKN, and all other sources <i>(up to the last 3 academic years)</i></p>
+            <p className="test">Status of every exam from TBP, HKN, and all other sources <span dangerouslySetInnerHTML={{__html: note}}></span></p>
             <hr className="s3" />
             <div className="table-container-container">
               <div className="table-container">
