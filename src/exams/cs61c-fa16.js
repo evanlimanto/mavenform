@@ -188,7 +188,7 @@ ${threespace}addi $s1, $s1, 1 ${threespace} # i = i + 1;
 <hr class="s1" />
 ${threespace}j X ${_.repeat('&nbsp;', 16)} # loop back to the start
 <hr class="s1" />
-${threespace}Y: ${_.repeat('&nbsp;', 17)} # exit:
+Y: ${_.repeat('&nbsp;', 17)} # exit:
 </code>
 `
 
