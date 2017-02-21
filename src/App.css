@@ -617,7 +617,7 @@ input[type=button]:hover {
 .table-container-container {
   margin: auto;
   max-width: 1230px;
-  padding: 0 50px;
+  padding: 0 25px;
 }
 
 .table-container {
@@ -770,6 +770,10 @@ tr.available:hover .table-link {
 @media (max-width: 599px) {
   .test {
     padding: 0 25px;
+  }
+
+  td:nth-child(3), th:nth-child(3) {
+    display: none;
   }
 }
 
