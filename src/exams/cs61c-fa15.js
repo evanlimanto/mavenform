@@ -474,7 +474,7 @@ works correctly on strings. Do not write down any extraneous line numbers.
 const q5_1_soln =
 `
 <code>
-${threespace}1${twospace}mystery:${twospace}addiu $sp $sp ________<b>-16</b>_______
+${threespace}1${twospace}mystery:${twospace}addiu $sp $sp ________<b>-16</b>________
 <hr class="s1" />
 ${threespace}2${twelvespace}__________<b>sw $s0 0($sp)</b>__________
 <hr class="s1" />
@@ -484,7 +484,7 @@ ${threespace}4${twelvespace}__________<b>sw $s2 8($sp)</b>__________
 <hr class="s1" />
 ${threespace}5${twelvespace}__________<b>sw $ra 12($sp)</b>_________
 <hr class="s1" />
-${threespace}6${twelvespace}${longblank}____
+${threespace}6${twelvespace}${longblank}___
 <hr class="s1" />
 ${threespace}7${twelvespace}addu $s0 $0 $0
 <hr class="s1" />
