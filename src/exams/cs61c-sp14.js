@@ -199,7 +199,7 @@ b)  Now that you've warmed up on the C version of this code, let’s convert has
 <code>
 # $a0 contains the pointer to the tortoise, $a1 contains the pointer to the hare.
 <hr class="s2" />
-has_cycle: ${onespace}li $v0 1
+has_cycle: ${twospace}li $v0 1
 <hr class="s1" />
 ${twelvespace}beq $a0 $a1 done
 <hr class="s1" />
@@ -234,7 +234,7 @@ const q2_2_soln =
 <code>
 # $a0 contains the pointer to the tortoise, $a1 contains the pointer to the hare.
 <hr class="s2" />
-has_cycle: li $v0 1
+has_cycle: ${onespace}li $v0 1
 <hr class="s1" />
 ${twelvespace}beq $a0 $a1 done
 <hr class="s1" />
@@ -250,7 +250,7 @@ ${twelvespace}<b>lw $a0 4($a0)</b>
 <hr class="s1" />
 ${twelvespace}<b>lw $a1 4($a1)</b>
 <hr class="s1" />
-${twelvespace}addiu <b>$sp</b> <b>$sp</b> <b>-4</b> <b><- circled, changed to nop</b>
+${twelvespace}addiu <b>$sp</b> <b>$sp</b> <b>-4</b> ${onespace}<b><- circled, changed to nop</b>
 <hr class="s1" />
 ${twelvespace}<b>sw $ra 0($sp)</b> ${threespace} <b><- circled, changed to nop</b>
 <hr class="s1" />
@@ -260,7 +260,7 @@ ${twelvespace}<b>lw $ra 0($sp)</b>
 <hr class="s1" />
 ${twelvespace}addiu <b>$sp</b> <b>$sp</b> <b>4</b>
 <hr class="s1" />
-done: ${sixspace}jr return a
+done: ${sixspace}jr $ra
 </code>
 `;
 
@@ -288,7 +288,19 @@ Tag? ${blank}
 Index? ${blank}
 <hr class="s1" />
 Offset? ${blank}
-<hr class="s2" />
+`;
+
+const q3_1_soln =
+`
+Tag: <b>22</b>
+<hr class="s1" />
+Index: <b>6</b>
+<hr class="s1" />
+Offset: <b>4</b>
+`;
+
+const q3_2 =
+`
 Consider the following C code, and answer the questions below. <code><b>d</b></code> and <code><b>s</b></code> are pointers to 8-bit unsigned integer arrays, of the same size (a multiple of the cache size) that are aligned on 16-byte
 boundaries. The arrays contain only one <code><b>0x00</b></code>, in the last byte.<code><b>d</b></code> and <code><b>s</b></code> are not necessarily distinct.
 
@@ -311,19 +323,8 @@ ${fourspace}} while (c);
 <hr class="s1" />
 }
 </code>
-`;
 
-const q3_1_soln =
-`
-Tag: <b>22</b>
-<hr class="s1" />
-Index: <b>6</b>
-<hr class="s1" />
-Offset: <b>4</b>
-`;
-
-const q3_2 =
-`
+<hr class="s2" />
 b) What is the <i>lowest</i> possible cache hit rate for <code><b>our_strcpy</b></code>?
 `;
 
@@ -414,7 +415,7 @@ corresponding row of the following table, or write <i>'OK' if there is nothing w
 <hr class="s1" />
 void string_to_lowercase(char *s) {
 <hr class="s1" />
-${fourspace}for (char c = *s; c != '\0'; s++) { ${sixspace} // 1
+${fourspace}for (char c = *s; c != '\\0'; s++) { ${sixspace} // 1
 <hr class="s1" />
 ${eightspace}if (c >= 'A' && c <= 'S') {
 <hr class="s1" />
@@ -459,7 +460,7 @@ const q4_1_soln =
 <table>
 <thead><tr><th width="1">Line number</th><th>Replacement Code</th></tr></thead>
 <tbody>
-<tr><td>1</td><td><code>for (char c = *s; (c = *s) != '\0'; s++) {</code></td></tr>
+<tr><td>1</td><td><code>for (char c = *s; (c = *s) != '\\0'; s++) {</code></td></tr>
 <tr><td>2</td><td><code>*s += 'a' - 'A';</code></td></tr>
 <tr><td>3</td><td><code>OK</code></td></tr>
 <tr><td>4</td><td><code>OK</code></td></tr>

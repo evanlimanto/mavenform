@@ -79,7 +79,7 @@ e) ii) ${lx('-2^{n-1}')}
 const q1_2_soln =
 `
 <code>
-return x & 15;
+return <b>x & 15</b>;
 </code>
 `;
 
@@ -140,15 +140,15 @@ b < &a < c < &temp < &b
 
 const q2_2_soln =
 `
-s1: stack
+s1: <b>stack</b>
 <hr class="s1" />
-s2: stack
+s2: <b>stack</b>
 <hr class="s1" />
-s1[0]: static
+s1[0]: <b>static</b>
 <hr class="s1" />
-s2[0]: stack
+s2[0]: <b>stack</b>
 <hr class="s1" />
-c[0]: heap
+c[0]: <b>heap</b>
 `;
 
 const q3_1 =
@@ -287,7 +287,7 @@ initialized to 0 before the call to ISCOMMITOK.
 
 <code>
 ${fourspace}const char* go_bears = "THIS IS BEAR TERRITORY!";
-<hr class="s1" />
+<hr class="s2" />
 ${fourspace}int is_commit_msg_ok(const char* msg, const char* go_bears) {
 <hr class="s1" />
 ${eightspace}for (int i = 0; msg[i] && go_bears[i]; i++) {
@@ -474,15 +474,15 @@ works correctly on strings. Do not write down any extraneous line numbers.
 const q5_1_soln =
 `
 <code>
-${threespace}1${twospace}mystery:${twospace}addiu $sp $sp ________-16_______
+${threespace}1${twospace}mystery:${twospace}addiu $sp $sp ________<b>-16</b>_______
 <hr class="s1" />
-${threespace}2${twelvespace}__________sw $s0 0($sp)__________
+${threespace}2${twelvespace}__________<b>sw $s0 0($sp)</b>__________
 <hr class="s1" />
-${threespace}3${twelvespace}__________sw $s1 4($sp)__________
+${threespace}3${twelvespace}__________<b>sw $s1 4($sp)</b>__________
 <hr class="s1" />
-${threespace}4${twelvespace}__________sw $s2 8($sp)__________
+${threespace}4${twelvespace}__________<b>sw $s2 8($sp)</b>__________
 <hr class="s1" />
-${threespace}5${twelvespace}__________sw $ra 12($sp)_________
+${threespace}5${twelvespace}__________<b>sw $ra 12($sp)</b>_________
 <hr class="s1" />
 ${threespace}6${twelvespace}${longblank}____
 <hr class="s1" />
@@ -520,17 +520,17 @@ ${twospace}22${twelvespace}addiu $s0 $s0 4
 <hr class="s1" />
 ${twospace}23${twelvespace}j loop
 <hr class="s1" />
-${twospace}24${twospace}exit:${fivespace}__________lw $s0 0($sp)__________
+${twospace}24${twospace}exit:${fivespace}__________<b>lw $s0 0($sp)</b>__________
 <hr class="s1" />
-${twospace}25${twelvespace}__________lw $s1 4($sp)__________
+${twospace}25${twelvespace}__________<b>lw $s1 4($sp)</b>__________
 <hr class="s1" />
-${twospace}26${twelvespace}__________lw $s2 8($sp)__________
+${twospace}26${twelvespace}__________<b>lw $s2 8($sp)</b>__________
 <hr class="s1" />
-${twospace}27${twelvespace}__________lw $ra 12($sp)_________
+${twospace}27${twelvespace}__________<b>lw $ra 12($sp)</b>_________
 <hr class="s1" />
-${twospace}28${twelvespace}_________addiu $sp $sp 16________
+${twospace}28${twelvespace}_________<b>addiu $sp $sp 16</b>________
 <hr class="s1" />
-${twospace}29${twelvespace}______________jr $ra_____________
+${twospace}29${twelvespace}______________<b>jr $ra</b>_____________
 <hr class="s1" />
 ${twospace}30${twelvespace}${longblank}___
 </code>

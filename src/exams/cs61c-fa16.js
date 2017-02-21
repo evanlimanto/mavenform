@@ -120,6 +120,7 @@ calling conventions, such as saving registers on the stack.
 <hr class="s2" />
 
 Assume the following:
+<hr class="s1" />
 $s0 holds the C integer variable b;
 <hr class="s1"/>
 $s1 holds the C integer variable i;
@@ -137,7 +138,7 @@ ${threespace}add  $s0, $zero, $zero  ${onespace}<i># b = 0;</i>
 <hr class="s1" />
 ${threespace}add  $s1, $zero, $zero  ${onespace}<i># i = 0;</i>
 <hr class="s1" />
-${threespace}addi $s2, $zero, 10 ${twospace} <i># ${blank}</i>
+${threespace}addi $s2, $zero, 10 ${twospace} <i># $s2 = const 10;</i>
 <hr class="s1" />
 X:   slt  $t0, $s1, $s2 ${fourspace} <i># ${blank}</i>
 <hr class="s1" />
@@ -170,25 +171,30 @@ equivalent with the fewest possible lines of code.
 const q2_1_1_soln =
 `
 <code>
+${threespace}add  $s0, $zero, $zero  ${onespace}<i># b = 0;</i>
+<hr class="s1" />
+${threespace}add  $s1, $zero, $zero  ${onespace}<i># i = 0;</i>
+<hr class="s1" />
 ${threespace}addi $s2, $zero, 10${onespace} # $s2 = const 10;
 <hr class="s1" />
-X:   slt  $t0, $s1, $s2 ${twospace} # i < 10?
+X:   slt  $t0, $s1, $s2 ${twospace} # <b>i < 10?</b>
 <hr class="s1" />
-${threespace}<b>bne</b> $t0, $zero, Y ${twospace} # branch if i < 10
+${threespace}<b>bne</b> $t0, $zero, Y ${twospace} # <b>branch if i < 10</b>
 <hr class="s1" />
-${threespace}sll  $t1, $s1, 2 ${fourspace} # $t1 = i * 4;
+${threespace}sll  $t1, $s1, 2 ${fourspace} # <b>$t1 = i * 4;
+</b>
 <hr class="s1" />
-${threespace}add  $t2, $s3, $t1 ${twospace} # $t2 = &a + i * 4 … the address of a[i]
+${threespace}add  $t2, $s3, $t1 ${twospace} # <b>$t2 = &a + i * 4 … the address of a[i]</b>
 <hr class="s1" />
-${threespace}sw  $s1, 0($t2) ${fivespace} # a[i] = i;
+${threespace}sw  $s1, 0($t2) ${fivespace} # <b>a[i] = i;</b>
 <hr class="s1" />
-${threespace}add  $s0, $s0, $s1 ${twospace} # b = b + i;
+${threespace}add  $s0, $s0, $s1 ${twospace} # <b>b = b + i;</b>
 <hr class="s1" />
-${threespace}addi $s1, $s1, 1 ${threespace} # i = i + 1;
+${threespace}addi $s1, $s1, 1 ${threespace} # <b>i = i + 1;</b>
 <hr class="s1" />
-${threespace}j X ${_.repeat('&nbsp;', 16)} # loop back to the start
+${threespace}j X ${_.repeat('&nbsp;', 16)} # <b>loop back to the start</b>
 <hr class="s1" />
-Y: ${_.repeat('&nbsp;', 17)}${threespace} # exit:
+Y: ${_.repeat('&nbsp;', 17)}${threespace} # <b>exit:</b>
 </code>
 `
 
@@ -368,8 +374,9 @@ const q4_1 =
 
 Consider the discrete-value function ${lx('f(x)')}, defined on the integers {−3,−2,−1,0,1,2,3}:
 <hr class="s2" />
-${lx('f(−3)	=	6')} ${fourspace} ${lx('f(−2)	=	61')} ${fourspace} ${lx('f(−1) = 17')} ${fourspace} ${lx('f(0)	=	−38')}
-${lx('f(1) = 19')} ${fourspace} ${lx('f(2) = 42')} ${fourspace} ${lx('f(3) =	5')}
+${lx('f(−3)	=	6')}, ${fourspace} ${lx('f(−2)	=	61')}, ${fourspace} ${lx('f(−1) = 17')}, ${fourspace} ${lx('f(0)	=	−38')}
+<hr class="s1" />
+${lx('f(1) = 19')}, ${fourspace} ${lx('f(2) = 42')}, ${fourspace} ${lx('f(3) =	5')}
 <hr class="s2" />
 
 Your task is to implement this function in MIPS assembly language (including pseudo-instructions), but you
@@ -414,17 +421,19 @@ output: .word 6 61 17 -38 19 42 5
 <hr class="s1" />
 f:
 <hr class="s1" />
-<u>${fourspace}la $t0, output${fivespace}</u>     // Load the address of “output” from the data segments
+<b>
+${fourspace}la $t0, output${fivespace}     // Load the address of “output” from the data segments
 <hr class="s1" />
-<u>${fourspace}addiu $a0 $a0 3${fourspace}</u>    // Shift the argument range to all non-negative integers
+${fourspace}addiu $a0 $a0 3${fourspace}    // Shift the argument range to all non-negative integers
 <hr class="s1" />
-<u>${fourspace}sll $a0 $a0 2${sixspace}</u>      // Multiply argument value by 4 to index by word
+${fourspace}sll $a0 $a0 2${sixspace}      // Multiply argument value by 4 to index by word
 <hr class="s1" />
-<u>${fourspace}addu $t0 $t0 $a0${threespace}</u>   // Add the argument index to the data address
+${fourspace}addu $t0 $t0 $a0${threespace}   // Add the argument index to the data address
 <hr class="s1" />
-<u>${fourspace}lw $v0 0($t0)${sixspace}</u>      // Load the indexed data address into return val register
+${fourspace}lw $v0 0($t0)${sixspace}      // Load the indexed data address into return val register
 <hr class="s1" />
-<u>${fourspace}jr $ra${_.repeat('&nbsp;', 13)}</u>
+${fourspace}jr $ra${_.repeat('&nbsp;', 13)}
+</b>
 </code>
 <hr class="s2" />
 
@@ -435,17 +444,19 @@ f:
 <hr class="s1" />
 f:
 <hr class="s1" />
-<u>${fourspace}la $t0, output${fivespace}</u>     // Load the address of “output” from the data segments
+<b>
+${fourspace}la $t0, output${fivespace}     // Load the address of “output” from the data segments
 <hr class="s1" />
-<u>${fourspace}addiu $t0 $t0 12${threespace}</u>    // Move the output address to index 0
+${fourspace}addiu $t0 $t0 12${threespace}    // Move the output address to index 0
 <hr class="s1" />
-<u>${fourspace}sll $a0 $a0 2${sixspace}</u>      // Multiply argument value by 4 to index by word
+${fourspace}sll $a0 $a0 2${sixspace}      // Multiply argument value by 4 to index by word
 <hr class="s1" />
-<u>${fourspace}addu $t0 $t0 $a0${threespace}</u>   // Add the argument index to the data address
+${fourspace}addu $t0 $t0 $a0${threespace}   // Add the argument index to the data address
 <hr class="s1" />
-<u>${fourspace}lw $v0 0($t0)${sixspace}</u>      // Load the indexed data address into return val register
+${fourspace}lw $v0 0($t0)${sixspace}      // Load the indexed data address into return val register
 <hr class="s1" />
-<u>${fourspace}jr $ra${_.repeat('&nbsp;', 13)}</u>
+${fourspace}jr $ra${_.repeat('&nbsp;', 13)}
+</b>
 </code>
 `;
 
@@ -532,7 +543,7 @@ So max nibble address is ${lx('1572_{10}')} + ${lx('3066_{10}')} = ${lx('4638_{1
 
 const q5_5_soln =
 `
-${lx('1000 11|00 00|10 01|00 0000 1000_2')} = <code><b>lw $9, 8($0)</b></code>
+1000&nbsp;11|00&nbsp;00|10&nbsp;01|00&nbsp;0000&nbsp;1000${lx('_2')} = <code><b>lw $9, 8($0)</b></code>
 `;
 
 const q6_1 =

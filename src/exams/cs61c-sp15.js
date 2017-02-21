@@ -157,12 +157,19 @@ ${fourspace}}
 void foo2(${blank} p) { p++; }
 <hr class="s2" />
 int main() {
+<hr class="s1" />
 ${fourspace}int x = ${blank};
+<hr class="s1" />
 ${fourspace}int a[] = {1, 2, 3, 4, 5};
+<hr class="s1" />
 ${fourspace}int *p = &a[1];
+<hr class="s1" />
 ${fourspace}foo1(a, sizeof(a) / sizeof(int));
+<hr class="s1" />
 ${fourspace}foo2(&p);
+<hr class="s1" />
 ${fourspace}printf("%d, %d, %d\n", a[1], *(++p), a[x]);
+<hr class="s1" />
 }
 <hr class="s2" />
 The output of this code is:
@@ -172,7 +179,7 @@ ${blank}, ${blank}, 8
 
 const q2_2_soln =
 `
-<code><b>int*</b>, <b>int**</b>, <b>4</b>, <b>5</b>, <b>6</b>
+<code><b>int*</b>, <b>int**</b>, <b>5</b>, <b>6</b>
 `;
 
 const q3_1 =
@@ -211,7 +218,7 @@ ${fourspace}a[3]='f';
 <hr class="s1" />
 ${fourspace}a[4]='\0';
 <hr class="s1" />
-return a;
+${fourspace}return a;
 <hr class="s1" />
 }
 <hr class="s2" />
@@ -270,26 +277,47 @@ int * to_array(sll_node *sll int size) {
 <hr class="s1" />
 ${fourspace}int i = 0;
 <hr class="s1" />
-${fourspace}int *arr = ${blank};
+${fourspace}int *arr = ${longblank};
 <hr class="s1" />
 ${fourspace}while (sll) {
 <hr class="s1" />
-${eightspace}arr[i] = ${blank};
+${eightspace}arr[i] = ${longblank};
 <hr class="s1" />
-${eightspace}sll = ${blank};
+${eightspace}sll ${twospace} = ${longblank};
 <hr class="s1" />
-${eightspace}${blank};
+${eightspace}${longblank};
 <hr class="s1" />
-}
+${fourspace}}
 <hr class="s1" />
 ${fourspace}return arr;
 <hr class="s1" />
 }
+</code>
 `;
 
 const q4_2_soln =
 `
-<code><b>malloc(size * sizeof(int))</b>, <b>sll->value</b>, <b>sll->next</b>, <b>i++</b></code>
+<code>
+int * to_array(sll_node *sll int size) {
+<hr class="s1" />
+${fourspace}int i = 0;
+<hr class="s1" />
+${fourspace}int *arr = <b>malloc(size * sizeof(int))</b>;
+<hr class="s1" />
+${fourspace}while (sll) {
+<hr class="s1" />
+${eightspace}arr[i] = <b>sll->value</b>;
+<hr class="s1" />
+${eightspace}sll ${twospace} = <b>sll->next</b>;
+<hr class="s1" />
+${eightspace}<b>i++</b>;
+<hr class="s1" />
+${fourspace}}
+<hr class="s1" />
+${fourspace}return arr;
+<hr class="s1" />
+}
+</code>
 `;
 
 const q4_3 =
@@ -325,7 +353,23 @@ ${fourspace}delete_even(${blank});
 
 const q4_3_soln =
 `
-<code><b>sll->next</b>, <b>temp->next (or sll->next->next)</b>, <b>temp</b>, <b>sll->next</b></code>
+<code>
+void delete_even(sll_node *sll) {
+<hr class="s1" />
+${fourspace}sll_node *temp;
+<hr class="s1" />
+${fourspace}if (!sll || !sll->next) return;
+<hr class="s1" />
+${fourspace}temp = <b>sll->next</b>;
+<hr class="s1" />
+${fourspace}sll->next = <b>temp->next (or sll->next->next)</b>;
+<hr class="s1" />
+${fourspace}free(<b>temp</b>);
+<hr class="s1" />
+${fourspace}delete_even(<b>sll->next</b>);
+<hr class="s1" />
+}
+</code>
 `;
 
 const q5_1 =
@@ -428,11 +472,11 @@ ${fivespace}addiu $sp, $sp, <b>-16</b>
 <hr class="s1" />
 ${fivespace}<b>sw $ra, 0($sp)</b>${_.repeat('&nbsp;', 11)}# Store onto the stack if needed
 <hr class="s1" />
-${fivespace}<b>sw $s0, 0($sp)</b>
+${fivespace}<b>sw $s0, 4($sp)</b>
 <hr class="s1" />
-${fivespace}<b>sw $s1, 4($sp)</b>
+${fivespace}<b>sw $s1, 8($sp)</b>
 <hr class="s1" />
-${fivespace}<b>sw $s2, 8($sp)</b>
+${fivespace}<b>sw $s2, 12($sp)</b>
 <hr class="s1" />
 ${fivespace}${_.repeat('_', 20)}
 <hr class="s1" />
@@ -526,7 +570,7 @@ branchAmount:
 <hr class="s1" />
 ${fivespace}andi $t0, $a0, 0x8000${_.repeat('&nbsp;', 10)}# Mask out a certain bit
 <hr class="s1" />
-${fivespace}bne ____, _______, label1
+${fivespace}bne ________, ________, label1
 <hr class="s1" />
 ${fivespace}${longblank}
 <hr class="s1" />
@@ -675,6 +719,8 @@ class CS61CSp15 extends Component {
           <Element name="q2">
             <hr className="s5" />
             <Question id={"q2-1"} content={q2_1} solution={q2_1_soln} />
+            <hr className="s5" />
+            <Question id={"q2-2"} content={q2_2} solution={q2_2_soln} />
           </Element>
           <Element name="q3">
             <hr className="s5" />
