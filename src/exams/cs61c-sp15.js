@@ -627,7 +627,7 @@ class CS61CSp15 extends Component {
         <h1>CS 61C</h1>
         <hr className="s2" />
         <div className="center">
-          <h5>Midterm 1 | Spring 2015 | Stojanovic, Wawrzynek</h5>
+          <h5>Midterm 1 | Spring 2015 | Asanovic, Stojanovic</h5>
         </div>
         <Sticky className="sidebar screen">
           <hr className="s5" />
