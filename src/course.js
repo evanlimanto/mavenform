@@ -49,7 +49,7 @@ class Course extends Component {
       );
     }));
     if (course === 'ee16a') {
-      unavailable = 
+      unavailable =
       `
       <tr>
         <td>Midterm 2</td>
@@ -101,7 +101,7 @@ class Course extends Component {
       </tr>
       `;
     } else {
-      unavailable = 
+      unavailable =
       `
       <tr>
         <td>Midterm 1</td>
