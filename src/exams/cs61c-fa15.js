@@ -45,8 +45,12 @@ e) In general, for an n-bit, two’s complement integer:
 ${fourspace}i) What is the largest value you can represent, in decimal?
 <hr class="s1" />
 ${fourspace}ii) What is the smallest value you can represent, in decimal?
-<hr class="s2" />
+`;
+
+const q1_2 =
+`
 2) Fill in the blank below so that the function mod16 will return the remainder of x when divided by 16. The first blank should be a <b>bitwise</b> operator, and the second blank should be a single decimal number:
+<hr class="s2" />
 <code>
 unsigned int mod16(unsigned int x) {
 <hr class="s1" />
@@ -58,8 +62,6 @@ ${fourspace}return x ________ ________________;
 
 const q1_1_soln =
 `
-<h3>Answers</h3>
-<h4>Part 1</h4>
 <hr class="s1" />
 a) 2047
 <hr class="s1" />
@@ -72,9 +74,13 @@ d) 0x800
 e) i) ${lx('2^{n-1} - 1')}
 <hr class="s1" />
 e) ii) ${lx('-2^{n-1}')}
-<hr class="s1" />
-<h4>Part 2</h4>
-Answer: &, 15
+`;
+
+const q1_2_soln =
+`
+<code>
+return x & 15;
+</code>
 `;
 
 const q2_1 =
@@ -108,28 +114,41 @@ ${fourspace}return 0;
 <hr class="s1" />
 }
 </code>
-<hr class="s1" />
-1) Sort the following values from least to greatest: <b>&b, c, b, &temp, &a</b>.
 <hr class="s2" />
+1) Sort the following values from least to greatest: <b>&b, c, b, &temp, &a</b>.
+`;
+
+const q2_2 =
+`
 2) For each of the following values, state the location in the memory layout where they are stored. Answer with <i>code, static, heap, or stack</i>.
 <hr class="s2" />
-<b>s1</b>:${eightspace}${longblank}
+<b>s1</b>:${eightspace}${blank}
 <hr class="s1" />
-<b>s2</b>:${eightspace}${longblank}
+<b>s2</b>:${eightspace}${blank}
 <hr class="s1" />
-<b>s1[0]</b>:${twospace}${longblank}
+<b>s1[0]</b>:${twospace} ${blank}
 <hr class="s1" />
-<b>s2[0]</b>:${twospace}${longblank}
+<b>s2[0]</b>:${twospace} ${blank}
 <hr class="s1" />
-<b>c[0]</b>:${fourspace}${longblank}
+<b>c[0]</b>:${fourspace} ${blank}
 `;
 
 const q2_1_soln =
 `
-<h3>Answers</h3>
-1) b < &a < c < &temp < &b
+b < &a < c < &temp < &b
+`
+
+const q2_2_soln =
+`
+s1: stack
 <hr class="s1" />
-2) stack, stack, static, stack, heap
+s2: stack
+<hr class="s1" />
+s1[0]: static
+<hr class="s1" />
+s2[0]: stack
+<hr class="s1" />
+c[0]: heap
 `;
 
 const q3_1 =
@@ -159,9 +178,10 @@ For the remainder of the questions, assume that the <code>struct ll_node</code> 
 1) We are given a <code>struct ll_node <b>current_node</b></code>. Assuming that the type <code>unsigned short</code> is 2
 bytes wide and that we are working with a 32-bit memory address space, what can we expect the
 function call <code><b>sizeof</b>(current_node)</code> to return?
+`;
 
-<hr class="s2" />
-
+const q3_2 =
+`
 2) Assume that we have access to <code><b>id_addr</b></code>, the address of the id of <code><b>current_node</b></code> in memory.
 Using only <code><b>id_addr</b></code>, fill in the blank line so that <code><b>next_node</b></code> is equivalent to <code><b>current_node.next</b></code>.
 
@@ -172,9 +192,10 @@ ${fourspace}unsigned short *id_addr = &(current_node.id);
 <hr class="s1" />
 ${fourspace}struct ll_node *next_node = *(${blank});
 </code>
+`;
 
-<hr class="s2" />
-
+const q3_3 =
+`
 3) Now, fill in the blanks to complete this function that, given a random node in the list, frees all
 reachable nodes from that given node. Keep in mind that the node may be the <code>HEAD</code> of the list, the
 <code>TAIL</code> of the list, or a node in between the <code>HEAD</code> and <code>TAIL</code>. You may not need every blank.
@@ -212,12 +233,16 @@ ${fourspace}}
 
 const q3_1_soln =
 `
-<h3>Answers</h3>
-1) 10
-<hr class="s1" />
-2) <code>(struct ll_node **) (id_addr + 3)</code>
-<hr class="s1" />
-3)
+10
+`;
+
+const q3_2_soln =
+`
+<code>struct ll_node *next_node = *(_(struct ll_node **) (id_addr + 3)_);</code>
+`;
+
+const q3_3_soln =
+`
 <code>
 void free_twosided_ll(struct ll_node *node) {
 <hr class="s1" />
@@ -240,6 +265,8 @@ ${twelvespace}<b>free_twosided_ll(node->next);</b>
 ${eightspace}}
 <hr class="s1" />
 ${fourspace}<b>free(node);</b>
+<hr class="s1" />
+${fourspace}}
 <hr class="s1" />
 }
 </code>
@@ -308,6 +335,7 @@ ${sixteenspace}________________________
 ${eightspace}FAILED: li $v0 0
 <hr class="s1" />
 ${_.repeat('&nbsp;', 11)}END: ________________________
+<hr class="s1" />
 ${sixteenspace}________________________
 </code>
 `;
@@ -348,6 +376,8 @@ ${sixteenspace}____<b>j END</b>________________
 ${eightspace}FAILED: li $v0 0
 <hr class="s1" />
 ${_.repeat('&nbsp;', 11)}END: ____<b>jr $ra</b>_______________
+<hr class="s1" />
+${sixteenspace}_________________________
 </code>
 `;
 
@@ -426,11 +456,16 @@ ${twospace}30${twelvespace}${longblank}
 
 1) Fill in the prologue and the epilogue of this MIPS function. Assume that <code><b>random</b></code> follows proper
 calling conventions, and that it may make its own function calls. You may not need all of the lines.
-<hr class="s1" />
+`;
+
+const q5_2 =
+`
 2) What operation does this function perform on an integer array? Assume that both the integer array
 and the length of the array are passed into the function.
+`;
 
-<hr class="s1" />
+const q5_3 =
+`
 3) Would this function work as expected if a string was passed into the function instead? Write down
 the line numbers of all lines of MIPS code that must be changed (if any at all), so that the function
 works correctly on strings. Do not write down any extraneous line numbers.
@@ -438,8 +473,6 @@ works correctly on strings. Do not write down any extraneous line numbers.
 
 const q5_1_soln =
 `
-<h3>Answers</h3>
-1)
 <code>
 ${threespace}1${twospace}mystery:${twospace}addiu $sp $sp ________-16_______
 <hr class="s1" />
@@ -501,10 +534,15 @@ ${twospace}29${twelvespace}______________jr $ra_____________
 <hr class="s1" />
 ${twospace}30${twelvespace}${longblank}
 </code>
-<hr class="s1" />
-2) The function shuffles the integer array in place.
-<hr class="s1" />
-3) 10, 14, 18, 19, 20, 21, 22
+`;
+
+const q5_2_soln =
+`The function shuffles the integer array in place.
+`;
+
+const q5_3_soln =
+`
+10, 14, 18, 19, 20, 21, 22
 `;
 
 const imgq6_1 = require('../img/cs61cfa15-6.png');
@@ -518,11 +556,20 @@ You decide that instead of having 32, 32-bit registers, you would like to build 
 architecture. Do not modify the size of the opcode.
 <hr class="s1" />
 <img src=${imgq6_1} class="problem-image" />
-<hr class="s1" />
+`;
+
+const q6_2 =
+`
 2) How many different R-type instructions can we now have?
-<hr class="s1" />
+`;
+
+const q6_3 =
+`
 3) If PC = 0x061C, what is the largest address that we can branch to?
-<hr class="s1" />
+`;
+
+const q6_4 =
+`
 4) Translate the following machine code into MIPS using your new field sizes. Use register numbers
 instead of register names, since we’d have to think of a new convention for the names…
 <hr class="s1" />
@@ -532,12 +579,22 @@ instead of register names, since we’d have to think of a new convention for th
 const imgq6_1_soln = require('../img/cs61cfa15-6_s.png');
 const q6_1_soln =
 `
-1) <img src=${imgq6_1_soln} class="problem-image" />
-<hr class="s1" />
-2) <b>2^8</b>
-3) 0x61c + 4 + (2^17 – 1)*4 = 0x61C + 2^19 = 0x61C + 2^(4*4)*8 = <b>0x8061C</b>
-<hr class="s1" />
-4) 0xAE9FFFF8 = 101011 | 1010 | 0111 | 111…1000 = <b>sw $7 -8($10)</b>
+<img src=${imgq6_1_soln} class="problem-image" />
+`;
+
+const q6_2_soln =
+`
+${lx('{2^8}')}
+`;
+
+const q6_3_soln =
+`
+0x61c + 4 + (2^17 – 1)*4 = 0x61C + 2^19 = 0x61C + 2^(4*4)*8 = <b>0x8061C</b>
+`;
+
+const q6_4_soln =
+`
+0xAE9FFFF8 = 101011 | 1010 | 0111 | 111…1000 = <code>sw $7 -8($10)</code>
 `;
 
 const q7_1 =
@@ -590,9 +647,14 @@ const q7_1_soln =
 var Scroll = require('react-scroll');
 var Link = Scroll.Link;
 var Element = Scroll.Element;
+var scrollSpy = Scroll.scrollSpy;
 var Sticky = require('react-stickynode');
 
-class CS61CFa16 extends Component {
+class CS61CFa15 extends Component {
+  componentDidMount() {
+    scrollSpy.update();
+  }
+
   render() {
     const problemIDs = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7'];
     const problemTitles = [
@@ -654,18 +716,26 @@ class CS61CFa16 extends Component {
           </div>
         </div>
         <div className="content">
-          <div className="content-spacer" />
           <Element name="q1">
+            <div className="content-spacer" />
             <hr className="s5" />
             <Question id={"q1-1"} content={q1_1} solution={q1_1_soln} />
+            <hr className="s5" />
+            <Question id={"q1-2"} content={q1_2} solution={q1_2_soln} />
           </Element>
           <Element name="q2">
             <hr className="s5" />
             <Question id={"q2-1"} content={q2_1} solution={q2_1_soln} />
+            <hr className="s5" />
+            <Question id={"q2-2"} content={q2_2} solution={q2_2_soln} />
           </Element>
           <Element name="q3">
             <hr className="s5" />
             <Question id={"q3-1"} content={q3_1} solution={q3_1_soln} />
+            <hr className="s5" />
+            <Question id={"q3-2"} content={q3_2} solution={q3_2_soln} />
+            <hr className="s5" />
+            <Question id={"q3-3"} content={q3_3} solution={q3_3_soln} />
           </Element>
           <Element name="q4">
             <hr className="s5" />
@@ -674,10 +744,20 @@ class CS61CFa16 extends Component {
           <Element name="q5">
             <hr className="s5" />
             <Question id={"q5-1"} content={q5_1} solution={q5_1_soln} />
+            <hr className="s5" />
+            <Question id={"q5-2"} content={q5_2} solution={q5_2_soln} />
+            <hr className="s5" />
+            <Question id={"q5-3"} content={q5_3} solution={q5_3_soln} />
           </Element>
           <Element name="q6">
             <hr className="s5" />
             <Question id={"q6-1"} content={q6_1} solution={q6_1_soln} />
+            <hr className="s5" />
+            <Question id={"q6-2"} content={q6_2} solution={q6_2_soln} />
+            <hr className="s5" />
+            <Question id={"q6-3"} content={q6_3} solution={q6_3_soln} />
+            <hr className="s5" />
+            <Question id={"q6-4"} content={q6_4} solution={q6_4_soln} />
           </Element>
           <Element name="q7">
             <hr className="s5" />
@@ -689,4 +769,4 @@ class CS61CFa16 extends Component {
   }
 }
 
-export default CS61CFa16;
+export default CS61CFa15;

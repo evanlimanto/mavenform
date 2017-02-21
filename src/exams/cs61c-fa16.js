@@ -632,9 +632,14 @@ C
 var Scroll = require('react-scroll');
 var Link = Scroll.Link;
 var Element = Scroll.Element;
+var scrollSpy = Scroll.scrollSpy;
 var Sticky = require('react-stickynode');
 
 class CS61CFa16 extends Component {
+  componentDidMount() {
+    scrollSpy.update();
+  }
+
   render() {
     const problemIDs = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6'];
     const problemTitles = [
@@ -695,8 +700,8 @@ class CS61CFa16 extends Component {
           </div>
         </div>
         <div className="content">
-          <div className="content-spacer" />
           <Element name="q1">
+            <div className="content-spacer" />
             <hr className="s5" />
             <Question id={"q1-1"} content={q1_1} solution={q1_1_soln} />
             <hr className="s5" />
