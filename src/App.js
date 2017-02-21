@@ -94,15 +94,20 @@ class App extends Component {
 
     return (
       <span className="shift">
-        <a className="return" href={"/course?id=" + course}>&#8592; RETURN</a>
+        <a className="return" href={"/course?id=" + course}>&#8592; INDEX</a>
+        <a className="return big-screen return-bottom" href={"/course?id=" + course}>&#8592; INDEX</a>
         {collapser}
         <div className={menuClass}>
           <a className="home center" href="/">Mavenform</a>
           <hr className="s1" />
           <h4>{_.toUpper(course)}</h4>
-          <hr className="s2" />
+          <hr className="s1" />
+          <div className="sidetab-container">
+            <a className="sidetab" href={"/course?id=" + course}>Index</a>
+          </div>
+          <hr className="s1" />
           {sideTabs}
-          <a className="index" href={"/course?id=" + course}>&#8592; RETURN</a>
+          <a className="index" href="/">&#8592; RETURN</a>
         </div>
         <a className="feedback" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
         <div className="test-container">

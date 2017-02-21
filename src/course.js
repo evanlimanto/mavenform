@@ -1,167 +1,280 @@
 import React, { Component } from 'react';
-import { exams, captions } from './exams'
+import classnames from 'classnames';
+import { exams } from './exams';
 
 const _ = require('lodash');
 
 class Course extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      sidebar: true,
+    };
+  }
+
+  toggleCollapse() {
+    this.setState({
+      sidebar: !this.state.sidebar
+    });
+    if (this.state.sidebar) {
+      document.body.style.left = '-125px';
+    } else {
+      document.body.style.left = '0';
+    }
+  }
+
   render() {
     var course = null;
+    var examId = null;
     var courseName = null;
+    var unavailable = null;
     if (this.props.location.query) {
       course = this.props.location.query.id;
     }
-    if (course == 'ee16a') {
+    if (course === 'ee16a') {
       courseName = 'EE 16A';
     } else {
       courseName = 'CS 61C';
     }
-    const examType = 'midterm-1'; // hardcoded for now
-    const cards = _.values(_.mapValues(exams[course][examType], (dict, semester) => {
+    const examType = 'midterm-1';
+    const available = _.values(_.mapValues(exams[course][examType], (dict, semester) => {
       return (
-        <a className="card" href={dict['url'] + '&courseId=' + course}>
-          <h2>{_.replace(_.capitalize(examType), '-', ' ')}</h2>
-          <h3 className="card-subtitle">{semester}</h3>
-          <i>{dict['profs']}</i>
-          <h4 className="card-helper">CLICK TO VIEW &#8594;</h4>
-        </a>
+        <tr className="available">
+          <td><a href={dict['url'] + '&courseId=' + course}>{_.replace(_.capitalize(examType), '-', ' ')}</a></td>
+          <td><a href={dict['url'] + '&courseId=' + course}>{semester}</a></td>
+          <td><a href={dict['url'] + '&courseId=' + course}>{dict['profs']}</a></td>
+          <td><h4><a className="table-link" href={dict['url'] + '&courseId=' + course}>CLICK TO VIEW &#8594;</a></h4></td>
+        </tr>
       );
     }));
+    if (course === 'ee16a') {
+      unavailable = 
+      `
+      <tr>
+        <td>Midterm 2</td>
+        <td>Fall 2016</td>
+        <td>Ayazifar, Stojanovic</td>
+        <td><i>In progress</i></td>
+      </tr>
+      <tr>
+        <td>Midterm 2</td>
+        <td>Spring 2016</td>
+        <td>Alon, Ayazifar</td>
+        <td><i>In progress</i></td>
+      </tr>
+      <tr>
+        <td>Midterm 2</td>
+        <td>Fall 2015</td>
+        <td>Niknejad, Sahai</td>
+        <td><i>In progress</i></td>
+      </tr>
+      <tr>
+        <td>Midterm 2</td>
+        <td>Spring 2015</td>
+        <td>Alon, Ayazifar, Subramanian</td>
+        <td><i>In progress</i></td>
+      </tr>
+      <tr>
+        <td>Final</td>
+        <td>Fall 2016</td>
+        <td>Niknejad, Sahai</td>
+        <td><i>No public release</i></td>
+      </tr>
+      <tr>
+        <td>Final</td>
+        <td>Spring 2016</td>
+        <td>Alon, Ayazifar</td>
+        <td><i>In progress</i></td>
+      </tr>
+      <tr>
+        <td>Final</td>
+        <td>Fall 2015</td>
+        <td>Niknejad, Sahai</td>
+        <td><i>In progress</i></td>
+      </tr>
+      <tr>
+        <td>Final</td>
+        <td>Spring 2015</td>
+        <td>Alon, Ayazifar, Subramanian</td>
+        <td><i>In progress</i></td>
+      </tr>
+      `;
+    } else {
+      unavailable = 
+      `
+      <tr>
+        <td>Midterm 1</td>
+        <td>Spring 2016</td>
+        <td>Stojanovic, Weaver</td>
+        <td><i>No public release</i></td>
+      </tr>
+      <tr>
+        <td>Midterm 1</td>
+        <td>Spring 2015</td>
+        <td>Asanovic, Stojanovic</td>
+        <td><i>No solutions released</i></td>
+      </tr>
+      <tr>
+        <td>Midterm 1</td>
+        <td>Fall 2014</td>
+        <td>Garcia, Lustig</td>
+        <td><i>In progress</i></td>
+      </tr>
+      <tr>
+        <td>Midterm 2</td>
+        <td>Fall 2016</td>
+        <td>Boser, Katz</td>
+        <td><i>In progress</i></td>
+      </tr>
+      <tr>
+        <td>Midterm 2</td>
+        <td>Spring 2016</td>
+        <td>Stojanovic, Weaver</td>
+        <td><i>No public release</i></td>
+      </tr>
+      <tr>
+        <td>Midterm 2</td>
+        <td>Fall 2015</td>
+        <td>Stojanovic, Wawrzynek</td>
+        <td><i>In progress</i></td>
+      </tr>
+      <tr>
+        <td>Midterm 2</td>
+        <td>Spring 2015</td>
+        <td>Asanovic, Stojanovic</td>
+        <td><i>In progress</i></td>
+      </tr>
+      <tr>
+        <td>Midterm 2</td>
+        <td>Fall 2014</td>
+        <td>Garcia, Lustig</td>
+        <td><i>In progress</i></td>
+      </tr>
+      <tr>
+        <td>Final</td>
+        <td>Fall 2016</td>
+        <td>Boser, Katz</td>
+        <td><i>No public release</i></td>
+      </tr>
+      <tr>
+        <td>Final</td>
+        <td>Spring 2016</td>
+        <td>Stojanovic, Weaver</td>
+        <td><i>No public release</i></td>
+      </tr>
+      <tr>
+        <td>Final</td>
+        <td>Fall 2015</td>
+        <td>Stojanovic, Wawrzynek</td>
+        <td><i>In progress</i></td>
+      </tr>
+      <tr>
+        <td>Final</td>
+        <td>Spring 2015</td>
+        <td>Asanovic, Stojanovic</td>
+        <td><i>In progress</i></td>
+      </tr>
+      <tr>
+        <td>Final</td>
+        <td>Fall 2014</td>
+        <td>Garcia, Lustig</td>
+        <td><i>In progress</i></td>
+      </tr>
+      `;
+    }
+
+    const collapserClass = classnames({
+      collapse: true,
+      iscollapsed: !this.state.sidebar
+    });
+    const collapser = (
+      <a className={collapserClass} onClick={() => this.toggleCollapse()}>&#9776; {(this.state.sidebar) ? "COLLAPSE" : "MENU"}</a>
+    );
+
+    const menuClass = classnames({
+      menu: true,
+      hidden: !this.state.sidebar
+    });
+
+    const urls = ["ee16afa16", "ee16asp16", "ee16afa15", "ee16asp15"];
+    const titles = ["Fall 2016", "Spring 2016", "Fall 2015", "Spring 2015"];
+
+    const sideTabs = _.map(exams[course], (courseExams, examType) => {
+      const content =  _.map(courseExams, (info, semester) => {
+        const url = `${info['url']}&courseId=${course}`;
+        const title = semester;
+        const sideTabClass = classnames({
+          sidetab: true,
+          active: (examId === info['id']),
+        });
+        return (
+          <div key={semester} className="sidetab-container">
+            <a className={sideTabClass} href={url}>{title}</a>
+          </div>
+        );
+      });
+      return (
+        <span>
+          <div className="sideTitle">{_.capitalize(_.replace(examType, '-', ' '))}</div>
+          {content}
+        </span>
+      );
+    });
 
     return (
-      <div>
-        <a className="return screen home-link" href="/">&#8592; HOME</a>
-        <a className="return mobile home-link" href="/">&#8592; HOME</a>
-        <a className="feedback home-link" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
-        <div className="banner">
+      <div className="shift">
+        <a className="return" href="/">&#8592; RETURN</a>
+        <a className="return big-screen return-bottom" href="/">&#8592; RETURN</a>
+        {collapser}
+        <div className={menuClass}>
+          <a className="home center" href="/">Mavenform</a>
+          <hr className="s1" />
+          <h4>{_.toUpper(course)}</h4>
+          <hr className="s1" />
+          <div className="sidetab-container">
+            <a className="sidetab active" href={"/course?id=" + course}>Index</a>
+          </div>
+          <hr className="s1" />
+          {sideTabs}
+          <a className="index" href="/">&#8592; RETURN</a>
+        </div>
+        <a className="feedback" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
+        <div>
           <hr className="margin" />
-          <h6>{courseName}</h6>
+          <h1 className="center">{courseName}</h1>
           <hr className="s2" />
           <div className="center">
-            <h5 className="h5-alt">{captions[course]}</h5>
+            <h5>Index of all exams</h5>
           </div>
-          <hr className="margin" />
-        </div>
-        <div className="card-container center">
-          <hr className="margin-alt" />
-          <h1 className="center">Exams</h1>
-          <hr className="s1" />
-          <h5>Available Mavenform exams</h5>
-          <hr className="s2" />
-          {cards}
-          <hr className="margin-alt" />
-        </div>
-        <div className="banner center">
-          <hr className="s2" />
-          <p className="white-text">Made by <a className="footer-link" href="http://www.kevinandstuff.com/" target="_blank">Kevin</a> & <a className="footer-link" href="http://evanlimanto.github.io/" target="_blank">Evan</a></p>
-          <hr className="s2" />
+          <hr className="s5" />
+          <div className="center">
+            <p className="test">Status of every exam from TBP, HKN, and all other sources <i>(up to the last 5 standard academic terms)</i></p>
+            <hr className="s3" />
+            <div className="table-container-container">
+              <div className="table-container">
+                <table className="center">
+                  <thead>
+                    <tr>
+                      <th>Type</th>
+                      <th>Term</th>
+                      <th>Instructors</th>
+                      <th>Mavenform</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {available}
+                  </tbody>
+                  <tbody dangerouslySetInnerHTML={{__html: unavailable}}></tbody>
+                </table>
+              </div>
+            </div>
+            <hr className="margin" />
+          </div>
         </div>
       </div>
     );
   }
 }
-
-// Table to add later:
-// <div className="light-gray center">
-//   <hr className="margin-alt" />
-//   <h1 className="center">Sources</h1>
-//   <hr className="s1" />
-//   <h5>All publicly listed PDF exams</h5>
-//   <hr className="s4" />
-//   <div className="table-container-container">
-//     <div className="table-container">
-//       <table className="center">
-//         <thead>
-//           <tr>
-//             <th>Type</th>
-//             <th>Term</th>
-//             <th>Instructors</th>
-//             <th>Exam</th>
-//             <th>Solutions</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           <tr>
-//             <td>Midterm 1</td>
-//             <td>Fall 2016</td>
-//             <td>Ayazifar, Stojanovic</td>
-//             <td><a href={process.env.PUBLIC_URL + `/exams/ee16a-mt1-fa16.pdf`} target="_blank">PDF</a></td>
-//             <td><a href={process.env.PUBLIC_URL + `/exams/ee16a-mt1-fa16-sol.pdf`} target="_blank">PDF</a></td>
-//           </tr>
-//           <tr>
-//             <td>Midterm 1</td>
-//             <td>Spring 2016</td>
-//             <td>Alon, Ayazifar</td>
-//             <td><a href={process.env.PUBLIC_URL + `/exams/ee16a-mt1-sp16.pdf`} target="_blank">PDF</a></td>
-//             <td><a href={process.env.PUBLIC_URL + `/exams/ee16a-mt1-sp16-sol.pdf`} target="_blank">PDF</a></td>
-//           </tr>
-//           <tr>
-//             <td>Midterm 1</td>
-//             <td>Fall 2015</td>
-//             <td>Niknejad, Sahai</td>
-//             <td><a href={process.env.PUBLIC_URL + `/exams/ee16a-mt1-fa15.pdf`} target="_blank">PDF</a></td>
-//             <td><a href={process.env.PUBLIC_URL + `/exams/ee16a-mt1-fa15-sol.pdf`} target="_blank">PDF</a></td>
-//           </tr>
-//           <tr>
-//             <td>Midterm 1</td>
-//             <td>Spring 2015</td>
-//             <td>Alon, Ayazifar, Subramanian</td>
-//             <td><a href={process.env.PUBLIC_URL + `/exams/ee16a-mt1-sp15.pdf`} target="_blank">PDF</a></td>
-//             <td><a href={process.env.PUBLIC_URL + `/exams/ee16a-mt1-sp15-sol.pdf`} target="_blank">PDF</a></td>
-//           </tr>
-//           <tr>
-//             <td>Midterm 2</td>
-//             <td>Fall 2016</td>
-//             <td>Ayazifar, Stojanovic</td>
-//             <td><a>PDF</a></td>
-//             <td><a>PDF</a></td>
-//           </tr>
-//           <tr>
-//             <td>Midterm 2</td>
-//             <td>Spring 2016</td>
-//             <td>Alon, Ayazifar</td>
-//             <td><a>PDF</a></td>
-//             <td><a>PDF</a></td>
-//           </tr>
-//           <tr>
-//             <td>Midterm 2</td>
-//             <td>Fall 2015</td>
-//             <td>Niknejad, Sahai</td>
-//             <td><a>PDF</a></td>
-//             <td><a>PDF</a></td>
-//           </tr>
-//           <tr>
-//             <td>Midterm 2</td>
-//             <td>Spring 2015</td>
-//             <td>Alon, Ayazifar, Subramanian</td>
-//             <td><a>PDF</a></td>
-//             <td><a>PDF</a></td>
-//           </tr>
-//           <tr>
-//             <td>Final</td>
-//             <td>Spring 2016</td>
-//             <td>Alon, Ayazifar</td>
-//             <td><a>PDF</a></td>
-//             <td><a>PDF</a></td>
-//           </tr>
-//           <tr>
-//             <td>Final</td>
-//             <td>Fall 2015</td>
-//             <td>Niknejad, Sahai</td>
-//             <td><a>PDF</a></td>
-//             <td><a>PDF</a></td>
-//           </tr>
-//           <tr>
-//             <td>Final</td>
-//             <td>Spring 2015</td>
-//             <td>Alon, Ayazifar, Subramanian</td>
-//             <td><a>PDF</a></td>
-//             <td><a>PDF</a></td>
-//           </tr>
-//         </tbody>
-//       </table>
-//     </div>
-//     <hr className="margin" />
-//   </div>
-// </div>
 
 export default Course;

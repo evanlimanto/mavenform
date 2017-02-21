@@ -1,10 +1,3 @@
-const classes = ['ee16a', 'cs61c'];
-
-const captions = {
-  'ee16a': 'Designing Information Devices and Systems I',
-  'cs61c': 'Great Ideas in Computer Architecture (Machine Structures)',
-};
-
 const exams = {
   'ee16a': {
     'midterm-1': {
@@ -45,6 +38,13 @@ const exams = {
       },
     },
   },
+};
+
+const classes = ['ee16a', 'cs61c'];
+
+const captions = {
+  'ee16a': 'Designing Information Devices and Systems I',
+  'cs61c': 'Great Ideas in Computer Architecture (Machine Structures)',
 };
 
 export { classes, exams, captions };

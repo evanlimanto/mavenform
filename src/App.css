@@ -322,6 +322,13 @@ input[type=button]:hover {
   border-bottom: none;
 }
 
+.return-bottom {
+  position: fixed;
+  top: auto;
+  bottom: 20px;
+  left: 25px;
+}
+
 .collapse {
   position: fixed;
   top: 25px;
@@ -595,6 +602,10 @@ input[type=button]:hover {
   border-color: #11accc;
 }
 
+.big-screen {
+  display: initial;
+}
+
 .screen {
   display: initial;
 }
@@ -621,6 +632,11 @@ table {
   border-collapse: collapse;
 }
 
+th:last-child, td:last-child {
+  width: 200px;
+  padding-right: 0;
+}
+
 thead tr:first-child th:first-child {
   border-radius: 5px 0 0 0;
 }
@@ -642,6 +658,29 @@ th, td {
   text-align: left;
 }
 
+td {
+  opacity: 0.4;
+}
+
+tr.available td {
+  padding: 0;
+  opacity: 1;
+}
+
+table tr td a {
+  border-bottom: none;
+  text-align: left;
+  padding: 15px;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+table tr td a:hover {
+  color: #333;
+  border-bottom: none;
+}
+
 th {
   background: #11accc;
   color: white;
@@ -655,6 +694,33 @@ tr:nth-child(even) {
   background: #efefef;
 }
 
+.table-link {
+  display: block;
+  margin-top: -5px;
+  border-bottom: none;
+  color: #999;
+}
+
+.table-link:hover {
+  border-bottom: none;
+}
+
+tr.available:hover {
+  cursor: pointer;
+  background: #ddd;
+}
+
+tr.available:hover .table-link {
+  color: #11accc;
+}
+
+@media (max-width: 1449px) {
+  .table-container {
+    max-width: 900px;
+    margin: auto;
+  }
+}
+
 @media (max-width: 1199px) {
   body, .shift {
     left: 0 !important;
@@ -666,6 +732,10 @@ tr:nth-child(even) {
 
   .return {
     display: initial;
+  }
+
+  .big-screen {
+    display: none;
   }
 }
 
