@@ -36,6 +36,11 @@ const exams = {
         'profs': 'Stojanovic, Wawrzynek',
         'url': '/exam?id=cs61cfa15',
       },
+      'Spring 2015': {
+        'id': 'cs61csp16',
+        'profs': 'Asanovic, Stojanovic',
+        'url': '/exam?id=cs61csp15',
+      }
     },
   },
 };

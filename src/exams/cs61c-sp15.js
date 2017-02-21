@@ -61,6 +61,7 @@ const q1_1_soln =
 `
 `;
 
+const imgq2_1 = require('../img/cs61csp15-2.png');
 const q2_1 =
 `
 <h3>Q2: Pointers and Memory (12 points)</h3>
@@ -260,14 +261,110 @@ const q4_1_soln =
 
 const q5_1 =
 `
+<h3>MIPS with FUNctions (18 points)</h3>
+
+The function <code><b>countChars(char *str, char *target)</b></code> returns the number of times characters in <code><b>target</b></code> appear in <code><b>str</b></code>. For example:
+<hr class="s2" />
+<code>
+countChars("abc abc abc", "a") = 3
+<hr class="s1" />
+countChars("abc abc abc", "abc") = 6
+<hr class="s1" />
+countChars("abc abc abc", "abcd") = 9
+</code>
+<hr class="s2" />
+The C code for <code>countChars</code> is given to you below. The helper function <code><b>isCharInStr(char *target, char)</b></code> returns 1 if <code><b>c</b></code> is present in <code><b>target</b></code> and 0 if not.
+<hr class="s2" />
+<code>
+int countChars(char *str, char *target) {
+<hr class="s1" />
+${fourspace}int count = 0;
+<hr class="s1" />
+${fourspace}while (*str) {
+<hr class="s1" />
+${eightspace}count += isCharInStr(target, *str);
+<hr class="s1" />
+${eightspace}str++;
+<hr class="s1" />
+${fourspace}}
+<hr class="s1" />
+}
+</code>
+<hr class="s2" />
+Finish the implementation of <code>countChars</code> in TAL MIPS below. You may not need every blank.
+<hr class="s2" />
+<code>
+countChars:
+<hr class="s1" />
+${fivespace}addiu $sp, $sp, ${blank}
+<hr class="s1" />
+${fivespace}${longblank}${onespace}# Store onto the stack if needed
+<hr class="s1" />
+${fivespace}${longblank}
+<hr class="s1" />
+${fivespace}${longblank}
+<hr class="s1" />
+${fivespace}${longblank}
+<hr class="s1" />
+${fivespace}${longblank}
+<hr class="s1" />
+${fivespace}${longblank}
+<hr class="s1" />
+${fivespace}addiu $s0, $zero, 0${fourspace}# We'll store the count in $s0
+<hr class="s1" />
+${fivespace}addiu $s1, $a0, 0
+<hr class="s1" />
+${fivespace}addiu $s2, $a1, 0
+loop:
+<hr class="s1" />
+${fivespace}addiu $a0, $s0, 0
+<hr class="s1" />
+${fivespace}${longblank}
+<hr class="s1" />
+${fivespace}beq ${longblank}
+<hr class="s1" />
+${fivespace}${longblank}
+<hr class="s1" />
+${fivespace}${longblank}
+<hr class="s1" />
+${fivespace}${longblank}
+done:
+<hr class="s1" />
+${fivespace}${longblank}${twospace}# Load from the stack if needed
+<hr class="s1" />
+${fivespace}${longblank}
+<hr class="s1" />
+${fivespace}${longblank}
+<hr class="s1" />
+${fivespace}${longblank}
+<hr class="s1" />
+${fivespace}${longblank}
+<hr class="s1" />
+${fivespace}${longblank}
+<hr class="s1" />
+${fivespace}addiu $sp, $sp, ${blank}
+<hr class="s1" />
+${fivespace}jr $ra
+</code>
 `;
 
 const q5_1_soln =
 `
 `;
 
+const imgq6_1 = require('../img/cs61csp15-6.png');
 const q6_1 =
 `
+<h3>Q6: MIPS Instruction Formats (16 points)</h3>
+
+Convert the following TAL MIPS instructions into their machine code representation (binary format) or
+vice versa. For rows where you convert instructions to machine code, we’ve provided boxes to the
+right that you should fill in with the appropriate fields (in binary):
+
+<hr class="s2" />
+
+<img src=${imgq6_1} class="problem-image" />
+`;
 
 const q6_1_soln =
 `
@@ -275,6 +372,58 @@ const q6_1_soln =
 
 const q7_1 =
 `
+<h3>Q7: MIPS Addressing Modes (16 points)</h3>
+
+We have a function that, when given a branch instruction, returns the number of bytes that the Program Counter (PC) would change by, i.e. <code><b>(PC_of_branch_target - PC_of_branch_instruction)</b></code>.
+
+<hr class="s2" />
+
+<code>
+branchAmount(branch_inst):
+<hr class="s1" />
+${fourspace}calculate the instruction offset from branch_inst
+<hr class="s1" />
+${fourspace}convert the offset to byte addressing
+<hr class="s1" />
+${fourspace}return PC_of_branch_target - PC_of_branch_instruction
+</code>
+
+<hr class="s2" />
+
+Write <code>branchAmount</code> in TAL MIPS (no pseudoinstructions). You may not need all the blanks. Assume that register <code><b>$a0</b></code> contains a valid branch instruction.
+
+<hr class="s2" />
+
+<code>
+branchAmount:
+<hr class="s1" />
+${fivespace}andi $t0, $a0, 0x8000${eightspace}#Mask out a certain bit
+<hr class="s1" />
+${fivespace}bne ____, _______, label1
+<hr class="s1" />
+${fivespace}${longblank}
+<hr class="s1" />
+${fivespace}${longblank}
+<hr class="s1" />
+${fivespace}j label2
+<hr class="s1" />
+label1:
+<hr class="s1" />
+${fivespace}${longblank}
+<hr class="s1" />
+${fivespace}${longblank}
+<hr class="s1" />
+${fivespace}or $v0, $a0, $t1
+<hr class="s1" />
+label2:
+<hr class="s1" />
+${fivespace}sll _______, ______, _____${twospace}# Convert to byte addressing
+<hr class="s1" />
+label3:
+<hr class="s1" />
+${fivespace}
+jr $ra
+</code>
 `;
 
 const q7_1_soln =
@@ -290,13 +439,13 @@ class CS61CSp15 extends Component {
   render() {
     const problemIDs = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7'];
     const problemTitles = [
-      'Q1. A dozen ways to ask about bits',
-      'Q2. Wow! If only you could C the main memory',
-      'Q3. Links, Links, and Lists',
-      'Q4. beargit redux',
-      'Q5. MIPS Sleuth',
-      'Q6. Registers: bigger is not always better',
-      'Q7. After, this, you\'re CALL done!'
+      'Q1. Number Representation',
+      'Q2. Pointers and Memory',
+      'Q3. C Memory Model',
+      'Q4. Linked Lists',
+      'Q5. MIPS with FUNctions',
+      'Q6. MIPS Instruction Formats',
+      'Q7. MIPS Addressing Modes'
     ];
     const sidetabContainers = _.map(_.range(problemIDs.length), (index) => {
       const problemID = problemIDs[index];
@@ -315,7 +464,7 @@ class CS61CSp15 extends Component {
         <h1>CS 61C</h1>
         <hr className="s2" />
         <div className="center">
-          <h5>Midterm 1 | Fall 2016 | Stojanovic, Wawrzynek</h5>
+          <h5>Midterm 1 | Fall 2015 | Stojanovic, Wawrzynek</h5>
         </div>
         <Sticky className="sidebar screen">
           <hr className="s5" />
@@ -383,4 +532,4 @@ class CS61CSp15 extends Component {
   }
 }
 
-export default CS61CFa16;
+export default CS61CSp15;
