@@ -238,7 +238,7 @@ const q3_1_soln =
 
 const q3_2_soln =
 `
-<code>struct ll_node *next_node = *(_(struct ll_node **) (id_addr + 3)_);</code>
+<code>struct ll_node *next_node = *((struct ll_node **)(id_addr + 3));</code>
 `;
 
 const q3_3_soln =
@@ -365,7 +365,7 @@ ${sixteenspace}_____<b>j ISCOMMITOK</b>_______
 <hr class="s1" />
 ${sixteenspace}________________________
 <hr class="s1" />
-${tenspace}EXIT: _or_ $t2 $t0 $t1
+${tenspace}EXIT: _<b>or</b>_ $t2 $t0 $t1
 <hr class="s1" />
 ${sixteenspace}____<b>bne $t2 $0 FAILED</b>___
 <hr class="s1" />
@@ -532,7 +532,7 @@ ${twospace}28${twelvespace}_________addiu $sp $sp 16________
 <hr class="s1" />
 ${twospace}29${twelvespace}______________jr $ra_____________
 <hr class="s1" />
-${twospace}30${twelvespace}${longblank}
+${twospace}30${twelvespace}${longblank}___
 </code>
 `;
 
