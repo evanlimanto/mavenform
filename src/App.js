@@ -113,8 +113,7 @@ class App extends Component {
         <div className="test-container">
           <div className="test">
             <hr className="margin" />
-              {exam}
-            <hr className="margin" />
+            {exam}
           </div>
         </div>
       </span>

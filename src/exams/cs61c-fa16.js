@@ -7,8 +7,10 @@ const examCode = 'cs61cfa16';
 
 const q1_1 =
 `
+<hr class="s1" />
 <h3>Q1: Number Representation (5 points)</h3>
 1. Given the binary number <code>0b11111111</code>:
+<hr class="s1" />
 <ul>
 <li>If unsigned, then what is the number in decimal?</li>
 <li>If two’s complement, then what is the number in decimal?</li>
@@ -17,30 +19,34 @@ const q1_1 =
 
 const q1_1_soln =
 `
-Answers:
+If unsigned, it is 255.
 <hr class="s1" />
-Part 1: 255
-<hr class="s1" />
-Part 2: -1
+If two’s complement, it is -1.
 `;
 
-const q1_2 =
+const q1_2_1 =
 `
 2. What is the range of integers represented by a n-bit binary number? Your answers should
 include expressions that use ${lx('2^n')}.
-<hr class="s1" />
+<hr class="s2" />
 If <b>unsigned</b>,
 <hr class="s1" />
 Smallest: ${blank}
 <hr class="s1" />
 Largest: ${blank}
-<hr class="s2"/>
+`
+
+const q1_2_2 =
+`
 If <b>two’s complement</b>,
 <hr class="s1"/>
 Smallest: ${blank}
 <hr class="s1" />
 Largest: ${blank}
-<hr class="s2" />
+`
+
+const q1_2_3 =
+`
 How many unique integers can be represented in each case?
 <hr class="s1"/>
 Unsigned: ${blank}
@@ -48,18 +54,22 @@ Unsigned: ${blank}
 Two’s Complement: ${blank}
 `;
 
-const q1_2_soln =
+const q1_2_1_soln =
 `
-Answers:
-<hr class="s1" />
 Smallest: ${lx('{0}')}
 <hr class="s1" />
 Largest: ${lx('{2^n - 1}')}
-<hr class="s1" />
+`
+
+const q1_2_2_soln =
+`
 Smallest: ${lx('{-2^{n-1}}')}
 <hr class="s1" />
 Largest: ${lx('{2^{n-1} - 1}')}
-<hr class="s1" />
+`
+
+const q1_2_3_soln =
+`
 Unsigned: ${lx('{2^n}')}
 <hr class="s1" />
 Two's Complement: ${lx('2^n')}
@@ -73,7 +83,7 @@ number that can be represented in an n-bit two’s complement form?
 
 const q1_3_soln =
 `
-Answer: ${lx('-2^{n-1}')}
+${lx('-2^{n-1}')}
 `;
 
 const q1_4 =
@@ -99,7 +109,7 @@ Hexadecimal: 0x3fd7
 Decimal: ${lx('3*16^3 + 15*16^2 + 13*16^1 + 7*16^0 = 16343')}
 `;
 
-const q2_1 =
+const q2_1_1 =
 `
 <h3>Q2: Reverse Engineering (10 points)</h3>
 
@@ -123,62 +133,44 @@ $s3 holds the C pointer to an array of integers a;
 The code is as follows, with space for comments following the # sign at the right:
 <hr class="s1" />
 <code>
-${threespace}add  $s0, $zero, $zero  ${onespace} # b = 0;
+${threespace}add  $s0, $zero, $zero  ${onespace}<i># b = 0;</i>
 <hr class="s1" />
-${threespace}add  $s1, $zero, $zero  ${onespace} # i = 0;
+${threespace}add  $s1, $zero, $zero  ${onespace}<i># i = 0;</i>
 <hr class="s1" />
-${threespace}addi $s2, $zero, 10 ${twospace} # ${blank}
+${threespace}addi $s2, $zero, 10 ${twospace} <i># ${blank}</i>
 <hr class="s1" />
-X:   slt  $t0, $s1, $s2 ${fourspace} # ${blank}
+X:   slt  $t0, $s1, $s2 ${fourspace} <i># ${blank}</i>
 <hr class="s1" />
-${threespace}<b>bne</b> $t0, $zero, Y ${fourspace} # ${blank}
+${threespace}<b>bne</b> $t0, $zero, Y ${fourspace} <i># ${blank}</i>
 <hr class="s1" />
-${threespace}sll  $t1, $s1, 2 ${sixspace} # ${blank}
+${threespace}sll  $t1, $s1, 2 ${sixspace} <i># ${blank}</i>
 <hr class="s1" />
-${threespace}add  $t2, $s3, $t1 ${fourspace} # ${blank}
+${threespace}add  $t2, $s3, $t1 ${fourspace} <i># ${blank}</i>
 <hr class="s1" />
-${threespace}sw  $s1, 0($t2) ${_.repeat('&nbsp;', 7)} # ${blank}
+${threespace}sw  $s1, 0($t2) ${_.repeat('&nbsp;', 7)} <i># ${blank}</i>
 <hr class="s1" />
-${threespace}add  $s0, $s0, $s1 ${fourspace} # ${blank}
+${threespace}add  $s0, $s0, $s1 ${fourspace} <i># ${blank}</i>
 <hr class="s1" />
-${threespace}addi $s1, $s1, 1 ${fivespace} # ${blank}
+${threespace}addi $s1, $s1, 1 ${fivespace} <i># ${blank}</i>
 <hr class="s1" />
-${threespace}j X ${_.repeat('&nbsp;', 18)} # ${blank}
+${threespace}j X ${_.repeat('&nbsp;', 18)} <i># ${blank}</i>
 <hr class="s1" />
-Y: ${_.repeat('&nbsp;', 22)} # ${blank}
+Y: ${_.repeat('&nbsp;', 22)} <i># ${blank}</i>
 </code>
 <hr class="s2" />
 Partial credit will be determined, in part, by the quality of your line-by-line comments. Please provide the comments in pseudocode format. The question continues on the next page.
-<hr class="s2" />
+`
+
+const q2_1_2 =
+`
 What is the equivalent C code that is implemented by this MIPS code? Come up with the C
-equivalent with the fewest possible lines of code. You might not need all the lines.
-<hr class="s2" />
-<code>
-${longblank}
-<hr class="s1" />
-${longblank}
-<hr class="s1" />
-${longblank}
-<hr class="s1" />
-${longblank}
-<hr class="s1" />
-${longblank}
-<hr class="s1" />
-${longblank}
-<hr class="s1" />
-${longblank}
-<hr class="s1" />
-${longblank}
-<hr class="s1" />
-${longblank}
-</code>
+equivalent with the fewest possible lines of code.
 `;
 
-const q2_1_soln =
+const q2_1_1_soln =
 `
-<h3>Part 1</h3>
 <code>
-${threespace}addi $s2, $zero, 10 # $s2 = const 10;
+${threespace}addi $s2, $zero, 10${onespace} # $s2 = const 10;
 <hr class="s1" />
 X:   slt  $t0, $s1, $s2 ${twospace} # i < 10?
 <hr class="s1" />
@@ -198,8 +190,10 @@ ${threespace}j X ${_.repeat('&nbsp;', 16)} # loop back to the start
 <hr class="s1" />
 ${threespace}Y: ${_.repeat('&nbsp;', 17)} # exit:
 </code>
-<hr class="s2" />
-<h3>Part 2</h3>
+`
+
+const q2_1_2_soln =
+`
 <code>
 int i, b, a[10];
 <hr class="s1"/>
@@ -276,7 +270,7 @@ correct. A very large number of students only made the first error, and
 got the rest of the question completely correct.
 `;
 
-const q3_1 =
+const q3_1_1 =
 `
 <h3>Q3: Number Pushing and Popping (10 points)</h3>
 Your task is to implement a simple stack adding machine that uses a stack data structure (this is
@@ -288,11 +282,11 @@ the lines for your code solution, but do include comments for partial credit con
 
 <hr class="s2" />
 <code>
-/* Each item on the stack is represented
+<i>/* Each item on the stack is represented
 <hr class="s1" />
 ${threespace}by a pointer to the previous element
 <hr class="s1" />
-${threespace}(NULL if none) and its value. */
+${threespace}(NULL if none) and its value. */</i>
 <hr class="s1" />
 typedef struct stack_el {
 <hr class="s1" />
@@ -302,21 +296,25 @@ ${fourspace}double val;
 <hr class="s1" />
 } stack_el;
 <hr class="s2" />
-/* PUSH: Push new value to top of stack. Return
+<i>/* PUSH: Push new value to top of stack. Return
 <hr class="s1" />
-${threespace}pointer to new top of stack. */
+${threespace}pointer to new top of stack. */</i>
 <hr class="s1" />
 stack_el* push(stack_el *top_of_stack, double v) {
 <hr class="s5" />
 }
+`
+const q3_1_2 =
+`
+<code>
 <hr class="s2" />
-/* POPADD: Pop top stack element and add its value
+<i>/* POPADD: Pop top stack element and add its value
 <hr class="s1" />
 ${threespace}to the new top’s value. Return new top of stack.
 <hr class="s1" />
 ${threespace}Free no longer used memory. Do not change
 <hr class="s1" />
-${threespace}the stack if it has fewer than 2 elements. */
+${threespace}the stack if it has fewer than 2 elements. */</i>
 <hr class="s1" />
 stack_el* popadd(stack_el *top_of_stack) {
 <hr class="s5" />
@@ -324,7 +322,7 @@ stack_el* popadd(stack_el *top_of_stack) {
 </code>
 `;
 
-const q3_1_soln =
+const q3_1_1_soln =
 `
 <code>
 stack_el* push(stack_el *top_of_stack, double v) {
@@ -339,9 +337,10 @@ ${fourspace}return se;
 <hr class="s1" />
 }
 </code>
+`
 
-<hr class="s2" />
-
+const q3_1_2_soln =
+`
 <code>
 stack_el* popadd(stack_el *top_of_stack) {
 <hr class="s1" />
@@ -474,40 +473,66 @@ still nibble addressed with 24-bit words and instructions, but you are not other
 
 Given your encoding for the R and I instructions above:
 <hr class="s2" />
+`
+
+const q5_2 =
+`
 2) What is the maximum number of registers you can address in the width of your r fields?
-<hr class="s2" />
+`
+
+const q5_3 =
+`
 3)  What is the maximum number of distinct operations you can encode in the top instruction format?
-<hr class="s2" />
+`
+
+const q5_4 =
+`
 4)  If the PC points to the nibble address 156610, what is the highest (largest) nibble address <b>in decimal</b> you can branch to? (NOTE: 1566 is a multiple of 6 and thus a proper DIPS word
 address.)
-<hr class="s2" />
+`
+
+const q5_5 =
+`
 5)  Translate the following line of DIPS 24-bit machine code into MIPS assembly language, using
 your encoding from above. Use $register_number as your register names (e.g., $0, $1, …), and
 assume the same opcodes as in the MIPS ISA. <b>Remember instructions are only 24 bits (6 nibbles/hex digits)!</b>
-
+<hr class="s1" />
 0x8C2408
 `;
 
 const imgq5_1_soln = require('../img/cs61cfa16-5_s.png');
 const q5_1_soln =
 `
-<h3>Answers</h3>
-<h4>Part 1</h4>
 <img src=${imgq5_1_soln} className="problem-image" />
-<hr class="s1" />
-<h4>Part 2</h4>
-<h4>16</h4>
-<hr class="s1" />
-<h4>Part 3</h4>
-${lx('2^1 = 2')}  <i>R-type instructions have a 0 opcode.</i>
-<hr class="s1" />
-<h4>Part 4</h4>
-${lx('463810_{10}')}  <i>PC + 6 = ${lx('1572_{10}')}; largest positive offset in 10 bits = 0b0111111111 = 0x1FF = ${lx('2^9')}-1 = 511 words or 3066 nibbles (6 nibbles per word).
+`
+
+const q5_2_soln =
+`
+16
+`
+
+
+const q5_3_soln =
+`
+${lx('2^1 = 2')} 
+<hr class="s2" />
+<i>R-type instructions have a 0 opcode.</i>
+`
+
+
+const q5_4_soln =
+`
+${lx('4638_{10}')} 
+<hr class="s2" />
+<i>PC + 6 = ${lx('1572_{10}')}; largest positive offset in 10 bits = 0b0111111111 = 0x1FF = ${lx('2^9')}-1 = 511 words or 3066 nibbles (6 nibbles per word).
 <hr class="s1" />
 So max nibble address is ${lx('1572_{10}')} + ${lx('3066_{10}')} = ${lx('4638_{10}')}</i>
-<hr class="s1" />
-<h4>Part 5</h4>
-${lx('1000 11|00 00|10 01|00 0000 1000_2')} = <b>lw $9, 8($0)</b>
+`
+
+
+const q5_5_soln =
+`
+${lx('1000 11|00 00|10 01|00 0000 1000_2')} = <code><b>lw $9, 8($0)</b></code>
 `;
 
 const q6_1 =
@@ -525,7 +550,10 @@ B. Loader
 C. Linker
 <hr class="s1" />
 D. None of the Above
-<hr class="s2" />
+`
+
+const q6_2 =
+`
 Which flag would you put in a compilation command to include debugging information?
 <hr class="s1" />
 A. -o
@@ -535,7 +563,10 @@ B. -d
 C. -g
 <hr class="s1" />
 D. --debug
-<hr class="s2" />
+`
+
+const q6_3 =
+`
 At the end of the compiling stage, the symbol table contains the ___ of each symbol.
 <hr class="s1" />
 A. relative address
@@ -545,8 +576,11 @@ B. absolute address
 C. the stack segment beginning address
 <hr class="s1" />
 D. the global segment beginning address
-<hr class="s2" />
-beq and bne instructions produce ${blank} and they ${blank}.
+`
+
+const q6_4 =
+`
+<code>beq</code> and <code>bne</code> instructions produce ${blank} and they ${blank}.
 <hr class="s1" />
 A. PC-relative addressing, never relocate
 <hr class="s1" />
@@ -555,8 +589,11 @@ B. PC-relative addressing, always relocate
 C. Absolute addressing, never relocate
 <hr class="s1" />
 D. Absolute addressing, always relocate
-<hr class="s2" />
-j and jal instructions add symbols and ${blank} to ${blank}.
+`
+
+const q6_5 =
+`
+<code>j</code> and <code>jal</code> instructions add symbols and ${blank} to ${blank}.
 <hr class="s1" />
 A. instruction addresses, the symbol table
 <hr class="s1" />
@@ -569,15 +606,26 @@ D. symbol addresses, the relocation table
 
 const q6_1_soln =
 `
-<h3>Answers</h3>
 C
-<hr class="s1" />
+`
+
+const q6_2_soln =
+`
 C
-<hr class="s1" />
+`
+
+const q6_3_soln =
+`
 A
-<hr class="s1" />
+`
+
+const q6_4_soln =
+`
 A
-<hr class="s1" />
+`
+
+const q6_5_soln =
+`
 C
 `;
 
@@ -652,7 +700,11 @@ class CS61CFa16 extends Component {
             <hr className="s5" />
             <Question id={"q1-1"} content={q1_1} solution={q1_1_soln} />
             <hr className="s5" />
-            <Question id={"q1-2"} content={q1_2} solution={q1_2_soln} />
+            <Question id={"q1-2-1"} content={q1_2_1} solution={q1_2_1_soln} />
+            <hr className="s5" />
+            <Question id={"q1-2-2"} content={q1_2_2} solution={q1_2_2_soln} />
+            <hr className="s5" />
+            <Question id={"q1-2-3"} content={q1_2_3} solution={q1_2_3_soln} />
             <hr className="s5" />
             <Question id={"q1-3"} content={q1_3} solution={q1_3_soln} />
             <hr className="s5" />
@@ -660,11 +712,14 @@ class CS61CFa16 extends Component {
           </Element>
           <Element name="q2">
             <hr className="s5" />
-            <Question id={"q2-1"} content={q2_1} solution={q2_1_soln} />
+            <Question id={"q2-1-1"} content={q2_1_1} solution={q2_1_1_soln} />
+            <hr className="s5" />
+            <Question id={"q2-1-2"} content={q2_1_2} solution={q2_1_2_soln} />
           </Element>
           <Element name="q3">
             <hr className="s5" />
-            <Question id={"q3-1"} content={q3_1} solution={q3_1_soln} />
+            <Question id={"q3-1-1"} content={q3_1_1} solution={q3_1_1_soln} />
+            <Question id={"q3-1-2"} content={q3_1_2} solution={q3_1_2_soln} />
           </Element>
           <Element name="q4">
             <hr className="s5" />
@@ -673,10 +728,26 @@ class CS61CFa16 extends Component {
           <Element name="q5">
             <hr className="s5" />
             <Question id={"q5-1"} content={q5_1} solution={q5_1_soln} />
+            <hr className="s5" />
+            <Question id={"q5-2"} content={q5_2} solution={q5_2_soln} />
+            <hr className="s5" />
+            <Question id={"q5-3"} content={q5_3} solution={q5_3_soln} />
+            <hr className="s5" />
+            <Question id={"q5-4"} content={q5_4} solution={q5_4_soln} />
+            <hr className="s5" />
+            <Question id={"q5-5"} content={q5_5} solution={q5_5_soln} />
           </Element>
           <Element name="q6">
             <hr className="s5" />
             <Question id={"q6-1"} content={q6_1} solution={q6_1_soln} />
+            <hr className="s5" />
+            <Question id={"q6-2"} content={q6_2} solution={q6_2_soln} />
+            <hr className="s5" />
+            <Question id={"q6-3"} content={q6_3} solution={q6_3_soln} />
+            <hr className="s5" />
+            <Question id={"q6-4"} content={q6_4} solution={q6_4_soln} />
+            <hr className="s5" />
+            <Question id={"q6-5"} content={q6_5} solution={q6_5_soln} />
           </Element>
         </div>
       </span>

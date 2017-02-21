@@ -90,6 +90,12 @@ h6 {
   color: #fff;
 }
 
+code {
+  font-size: 14px;
+  line-height: 10px;
+  white-space: nowrap;
+}
+
 li {
   margin-left: 40px;
 }
@@ -220,6 +226,11 @@ img {
 
 .solution * {
   color: #11accc;
+}
+
+.solution img {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
 }
 
 .problem-image {
