@@ -726,6 +726,11 @@ tr.available:hover .table-link {
   padding: 10px;
 }
 
+.special-table {
+  position: relative;
+  left: -7px;
+}
+
 @media (max-width: 1599px) {
   .table-container {
     max-width: 800px;
