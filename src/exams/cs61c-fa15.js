@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Question } from '../components/question';
+import { Sidebar } from '../components';
 import { lx, longblank, blank, onespace, twospace, threespace, fourspace, fivespace, sixspace, sevenspace, eightspace } from '../utils';
 
 const _ = require('lodash');
-const examCode = 'cs61cfa15';
 
 const tenspace = _.repeat('&nbsp;', 10);
 const twelvespace = _.repeat('&nbsp;', 12);
@@ -644,11 +644,9 @@ const q7_1_soln =
 9) c
 `;
 
-var Scroll = require('react-scroll');
-var Link = Scroll.Link;
+const Scroll = require('react-scroll');
 var Element = Scroll.Element;
 var scrollSpy = Scroll.scrollSpy;
-var Sticky = require('react-stickynode');
 
 class CS61CFa15 extends Component {
   componentDidMount() {
@@ -656,6 +654,7 @@ class CS61CFa15 extends Component {
   }
 
   render() {
+    const examCode = 'cs61cfa15';
     const problemIDs = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7'];
     const problemTitles = [
       'Q1. A dozen ways to ask about bits',
@@ -666,17 +665,6 @@ class CS61CFa15 extends Component {
       'Q6. Registers: bigger is not always better',
       'Q7. After, this, you\'re CALL done!'
     ];
-    const sidetabContainers = _.map(_.range(problemIDs.length), (index) => {
-      const problemID = problemIDs[index];
-      const problemTitle = problemTitles[index];
-      return (
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} smooth={true} duration={500}>
-              {problemTitle}
-            </Link>
-          </div>
-        );
-    });
 
     return (
       <span>
@@ -685,36 +673,7 @@ class CS61CFa15 extends Component {
         <div className="center">
           <h5>Midterm 1 | Fall 2015 | Stojanovic, Wawrzynek</h5>
         </div>
-        <Sticky className="sidebar screen">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s2" />
-          {sidetabContainers}
-          <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-exam.pdf`} target="_blank">Exam PDF</a>
-          </div>
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-soln.pdf`} target="_blank">Solutions PDF</a>
-          </div>
-        </Sticky>
-        <div className="sidebar mobile">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s2" />
-          {sidetabContainers}
-          <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-exam.pdf`} target="_blank">Exam PDF</a>
-          </div>
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-soln.pdf`} target="_blank">Solutions PDF</a>
-          </div>
-        </div>
+        <Sidebar examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} />
         <div className="content">
           <Element name="q1">
             <div className="content-spacer" />

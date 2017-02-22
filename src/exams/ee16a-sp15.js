@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Question } from '../components/question';
+import { Sidebar } from '../components';
 import { lmatrix, lx } from '../utils';
+
+const _ = require('lodash');
 
 const sp15q1a =
 `
@@ -338,11 +341,9 @@ So if we started with 100 people, we will end up with ~82 people in Berkeley, an
 </ul>
 `;
 
-var Scroll = require('react-scroll');
-var Link = Scroll.Link;
+const Scroll = require('react-scroll');
 var Element = Scroll.Element;
 var scrollSpy = Scroll.scrollSpy;
-var Sticky = require('react-stickynode');
 
 class EE16ASp15 extends Component {
   componentDidMount() {
@@ -350,6 +351,16 @@ class EE16ASp15 extends Component {
   }
 
   render() {
+    const examCode = 'ee16a-mt1-sp16';
+    const problemIDs = ['q1', 'q2', 'q3', 'q4', 'q5']
+    const problemTitles = [
+      '1. Imaging Circuit',
+      '2. Sparse Images and Vector Geometry',
+      '3. Coding for Storage',
+      '4. Investment Strategy',
+      '5. Berkeley Forever'
+    ];
+
     return (
       <span>
         <h1>EE 16A</h1>
@@ -357,84 +368,7 @@ class EE16ASp15 extends Component {
         <div className="center">
           <h5>Midterm 1 | Spring 2015 | Alon, Ayazifar, Subramanian</h5>
         </div>
-        <Sticky className="sidebar screen">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q1" spy={true} isDynamic={true} smooth={true} duration={500}>
-              1. Imaging Circuit
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q2" spy={true} isDynamic={true} smooth={true} duration={500}>
-              2. Sparse Images and Vector Geometry
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q3" spy={true} isDynamic={true} smooth={true} duration={500}>
-              3. Coding for Storage
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q4" spy={true} isDynamic={true} smooth={true} duration={500}>
-              4. Investment Strategy
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q5" spy={true} isDynamic={true} smooth={true} duration={500}>
-              5. Berkeley Forever
-            </Link>
-          </div>
-          <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-sp15.pdf'} target="_blank">Exam PDF</a>
-          </div>
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-sp15-sol.pdf'} target="_blank">Solutions PDF</a>
-          </div>
-        </Sticky>
-        <div className="sidebar mobile">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q1" isDynamic={true} smooth={true} duration={500}>
-              1. Imaging Circuit
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q2" isDynamic={true} smooth={true} duration={500}>
-              2. Sparse Images and Vector Geometry
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q3" isDynamic={true} smooth={true} duration={500}>
-              3. Coding for Storage
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q4" isDynamic={true} smooth={true} duration={500}>
-              4. Investment Strategy
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q5" isDynamic={true} smooth={true} duration={500}>
-              5. Berkeley Forever
-            </Link>
-          </div>
-          <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-sp15.pdf'} target="_blank">Exam PDF</a>
-          </div>
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-sp15-sol.pdf'} target="_blank">Solutions PDF</a>
-          </div>
-        </div>
+        <Sidebar examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} />
         <div className="content">
           <Element name="q1" className="first-q">
             <hr className="s5" />

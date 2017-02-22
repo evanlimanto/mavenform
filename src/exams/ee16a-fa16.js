@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import { Question } from '../components/question';
+import { Sidebar } from '../components';
 import { lmatrix, lx } from '../utils';
+
+const _ = require('lodash');
 
 const fa16q3a =
 `
@@ -421,11 +424,9 @@ const fa16q8c_soln =
 It cannot because in the case of Steph ${lmatrix([[0, 0]])} goes to a nonzero vector. This transformation cannot be a linear transformation, so there is no matrix representation.
 `;
 
-var Scroll = require('react-scroll');
-var Link = Scroll.Link;
+const Scroll = require('react-scroll');
 var Element = Scroll.Element;
 var scrollSpy = Scroll.scrollSpy;
-var Sticky = require('react-stickynode');
 
 class EE16AFa16 extends Component {
   componentDidMount() {
@@ -433,7 +434,18 @@ class EE16AFa16 extends Component {
   }
 
   render() {
-    const examCode = 'ee16a-fa16';
+    const examCode = 'ee16a-mt1-fa16';
+    const problemIDs = ['', 'q3', 'q4', 'q5', 'q6', '', 'q7', 'q8', 'q9'];
+    const problemTitles = [
+      'Section 1',
+      '3. True/False',
+      '4. Proof',
+      '5. Show It',
+      '6. Inverse of a Matrix',
+      'Section 2',
+      '7. Directional Shovels',
+      '8. Transformation Basketball'
+    ];
 
     return (
       <span>
@@ -442,104 +454,7 @@ class EE16AFa16 extends Component {
         <div className="center">
           <h5>Midterm 1 | Fall 2016 | Ayazifar, Stojanovic</h5>
         </div>
-        <Sticky className="sidebar screen">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s2" />
-          <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
-          <hr className="s1" />
-          <div className="sidetitle">Section 1</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q3" spy={true} isDynamic={true} smooth={true} duration={500} onSetInactive={this.removeActiveClass}>
-              3. True/False
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q4" spy={true} isDynamic={true} smooth={true} duration={500}>
-              4. Proof
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q5" spy={true} isDynamic={true} smooth={true} duration={500}>
-              5. Inverse of a Matrix
-            </Link>
-          </div>
-          <hr className="s1" />
-          <div className="sidetitle">Section 2</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q6" spy={true} isDynamic={true} smooth={true} duration={500}>
-              6. Directional Shovels
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q7" spy={true} isDynamic={true} smooth={true} duration={500}>
-              7. Graph Majors
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q8" spy={true} isDynamic={true} smooth={true} duration={500}>
-              8. Transformation Basketball
-            </Link>
-          </div>
-          <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-fa16.pdf'} target="_blank">Exam PDF</a>
-          </div>
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-fa16-sol.pdf'} target="_blank">Solutions PDF</a>
-          </div>
-        </Sticky>
-        <div className="sidebar mobile">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s2" />
-          <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
-          <hr className="s1" />
-          <div className="sidetitle">Section 1</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q3" isDynamic={true} smooth={true} duration={500}>
-              3. True/False
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q4" isDynamic={true} smooth={true} duration={500}>
-              4. Proof
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q5" isDynamic={true} smooth={true} duration={500}>
-              5. Inverse of a Matrix
-            </Link>
-          </div>
-          <hr className="s1" />
-          <div className="sidetitle">Section 2</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q6" isDynamic={true} smooth={true} duration={500}>
-              6. Directional Shovels
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q7" isDynamic={true} smooth={true} duration={500}>
-              7. Graph Majors
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q8" isDynamic={true} smooth={true} duration={500}>
-              8. Transformation Basketball
-            </Link>
-          </div>
-          <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-fa16.pdf'} target="_blank">Exam PDF</a>
-          </div>
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-fa16-sol.pdf'} target="_blank">Solutions PDF</a>
-          </div>
-        </div>
+        <Sidebar examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} />
         <div className="content">
           <Element name="q3" className="first-q">
             <hr className="s5" />

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Question } from '../components/question';
+import { Sidebar } from '../components';
 import { lmatrix, lx } from '../utils';
+
+const _ = require('lodash');
 
 const fa15q3 =
 `
@@ -661,11 +664,9 @@ ${lx('\\vec{x}[0] = \\left[ \\bar{D}^{-1} \\right] \\left[ \\begin{array}{c} y[0
 or using your initial knowledge that ${lx('x_1[0] = 1')} to write a system of 2 equations in the 2 unknowns, ${lx('x_2[0]')} and ${lx('x_3[0]')}, and solve that system. (This is equivalent to starting at the third step of the row reduction shown above. )
 `;
 
-var Scroll = require('react-scroll');
-var Link = Scroll.Link;
+const Scroll = require('react-scroll');
 var Element = Scroll.Element;
 var scrollSpy = Scroll.scrollSpy;
-var Sticky = require('react-stickynode');
 
 class EE16AFa15 extends Component {
   componentDidMount() {
@@ -673,7 +674,20 @@ class EE16AFa15 extends Component {
   }
 
   render() {
-    const examCode = 'ee16a-fa15';
+    const examCode = 'ee16a-mt1-fa15';
+    const problemIDs = ['', 'q3', 'q4', 'q5', 'q6', '', 'q7', 'q8', 'q9'];
+    const problemTitles = [
+      'Straightforward Questions',
+      '3. Solve It',
+      '4. Invert It',
+      '5. Show It',
+      '6. Null It',
+      'Free-form Problems',
+      '7. Finding the Bright Cave',
+      '8. A Tale of Two Cities',
+      '9. Justin Beaver'
+    ];
+
     return (
       <span>
         <h1>EE 16A</h1>
@@ -681,114 +695,7 @@ class EE16AFa15 extends Component {
         <div className="center">
           <h5>Midterm 1 | Fall 2015 | Niknejad, Sahai</h5>
         </div>
-        <Sticky className="sidebar screen">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s2" />
-          <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
-          <hr className="s1" />
-          <div className="sidetitle">Straightforward Questions</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q3" spy={true} isDynamic={true} smooth={true} duration={500}>
-              3. Solve It
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q4" spy={true} isDynamic={true} smooth={true} duration={500}>
-              4. Invert It
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q5" spy={true} isDynamic={true} smooth={true} duration={500}>
-              5. Show It
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q6" spy={true} isDynamic={true} smooth={true} duration={500}>
-              6. Null It
-            </Link>
-          </div>
-          <hr className="s1" />
-          <div className="sidetitle">Free-form Problems</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q7" spy={true} isDynamic={true} smooth={true} duration={500}>
-              7. Finding the Bright Cave
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q8" spy={true} isDynamic={true} smooth={true} duration={500}>
-              8. A Tale of Two Cities
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q9" spy={true} isDynamic={true} smooth={true} duration={500}>
-              9. Justin Beaver
-            </Link>
-          </div>
-          <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-fa15.pdf'} target="_blank">Exam PDF</a>
-          </div>
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-fa15-sol.pdf'} target="_blank">Solutions PDF</a>
-          </div>
-        </Sticky>
-        <div className="sidebar mobile">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s2" />
-          <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
-          <hr className="s1" />
-          <div className="sidetitle">Straightforward Questions</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q3" isDynamic={true} smooth={true} duration={500}>
-              3. Solve It
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q4" isDynamic={true} smooth={true} duration={500}>
-              4. Invert It
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q5" isDynamic={true} smooth={true} duration={500}>
-              5. Show It
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q6" isDynamic={true} smooth={true} duration={500}>
-              6. Null It
-            </Link>
-          </div>
-          <hr className="s1" />
-          <div className="sidetitle">Free-form Problems</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q7" isDynamic={true} smooth={true} duration={500}>
-              7. Finding the Bright Cave
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q8" isDynamic={true} smooth={true} duration={500}>
-              8. A Tale of Two Cities
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q9" isDynamic={true} smooth={true} duration={500}>
-              9. Justin Beaver
-            </Link>
-          </div>
-          <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-fa15.pdf'} target="_blank">Exam PDF</a>
-          </div>
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-fa15-sol.pdf'} target="_blank">Solutions PDF</a>
-          </div>
-        </div>
+        <Sidebar examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} />
         <div className="content">
           <Element name="q3" className="first-q">
             <hr className="s5" />

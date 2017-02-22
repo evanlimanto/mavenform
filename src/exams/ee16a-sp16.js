@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Question } from '../components/question';
+import { Sidebar } from '../components';
 import { lmatrix, lx } from '../utils';
+
+const _ = require('lodash');
 
 const sp16q3 =
 `
@@ -24,7 +27,7 @@ We can check our answer by calculating:<br/><br/>
 ${lx('\\left[ \\begin{array}{c c c} 1 & 2 & 6 \\\\ 0 & 1 & 4 \\\\ 2 & 4 & 10 \\\\ \\end{array} \\right] \\left[ \\begin{array}{c c c} 3 & -2 & -1 \\\\ -4 & 1 & 2 \\\\ 1 & 0 & -1/2 \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c c c} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ \\end{array} \\right]', false)}
 `;
 
-const sp16q4 = 
+const sp16q4 =
 `
 <h3>4. Freedom!</h3>
 Let \\(A\\) and \\(B\\) be \\(n × n\\) matrices. Suppose \\(A\\) is invertible, but \\(B\\) is not. <b>Prove that Rank</b>(\\(AB\\)) < <b>Rank</b>(\\(A\\)).<br/><br/>
@@ -556,11 +559,9 @@ However, number is not conserved in this option. Since it was ambiguous whether 
 was meant to be conserved in the question, partial credit was given for excluding this option with this explanation.
 `;
 
-var Scroll = require('react-scroll');
-var Link = Scroll.Link;
+const Scroll = require('react-scroll');
 var Element = Scroll.Element;
 var scrollSpy = Scroll.scrollSpy;
-var Sticky = require('react-stickynode');
 
 class EE16ASp16 extends Component {
   componentDidMount() {
@@ -568,6 +569,20 @@ class EE16ASp16 extends Component {
   }
 
   render() {
+    const examCode = 'ee16a-mt1-sp16';
+    const problemIDs = ['', 'q3', 'q4', 'q5', '', 'q6', 'q7', 'q8', 'q9']
+    const problemTitles = [
+      'Straightforward Questions',
+      '3. Mechanical Johann',
+      '4. Freedom!',
+      '5. True or False?',
+      'Free-form Problems',
+      '6. Faerie Battles',
+      '7. A Tale of a Million Technocrats and the Four Dream Cities',
+      '8. Ayy - Reflections on SIXTEEN',
+      '9. Goodness Gracious, Great Balls of Fur!'
+    ];
+
     return (
       <span>
         <h1>EE 16A</h1>
@@ -575,114 +590,7 @@ class EE16ASp16 extends Component {
         <div className="center">
           <h5>Midterm 1 | Spring 2016 | Alon, Ayazifar</h5>
         </div>
-        <Sticky className="sidebar screen">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s2" />
-          <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
-          <hr className="s1" />
-          <div className="sidetitle">Straightforward Questions</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q3" spy={true} isDynamic={true} smooth={true} duration={500}>
-              3. Mechanical Johann
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q4" spy={true} isDynamic={true} smooth={true} duration={500}>
-              4. Freedom!
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q5" spy={true} isDynamic={true} smooth={true} duration={500}>
-              5. True or False?
-            </Link>
-          </div>
-          <hr className="s1" />
-          <div className="sidetitle">Free-form Problems</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q6" spy={true} isDynamic={true} smooth={true} duration={500}>
-              6. Faerie Battles
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q7" spy={true} isDynamic={true} smooth={true} duration={500}>
-              7. A Tale of a Million Technocrats and the Four Dream Cities
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q8" spy={true} isDynamic={true} smooth={true} duration={500}>
-              8. Ayy - Reflections on SIXTEEN
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q9" spy={true} isDynamic={true} smooth={true} duration={500}>
-              9. Goodness Gracious, Great Balls of Fur!
-            </Link>
-          </div>
-          <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-sp16.pdf'} target="_blank">Exam PDF</a>
-          </div>
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-sp16-sol.pdf'} target="_blank">Solutions PDF</a>
-          </div>
-        </Sticky>
-        <div className="sidebar mobile">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s2" />
-          <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
-          <hr className="s1" />
-          <div className="sidetitle">Straightforward Questions</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q3" isDynamic={true} smooth={true} duration={500}>
-              3. Mechanical Johann
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q4" isDynamic={true} smooth={true} duration={500}>
-              4. Freedom!
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q5" isDynamic={true} smooth={true} duration={500}>
-              5. True or False?
-            </Link>
-          </div>
-          <hr className="s1" />
-          <div className="sidetitle">Free-form Problems</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q6" isDynamic={true} smooth={true} duration={500}>
-              6. Faerie Battles
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q7" isDynamic={true} smooth={true} duration={500}>
-              7. A Tale of a Million Technocrats and the Four Dream Cities
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q8" isDynamic={true} smooth={true} duration={500}>
-              8. Ayy - Reflections on SIXTEEN
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q9" isDynamic={true} smooth={true} duration={500}>
-              9. Goodness Gracious, Great Balls of Fur!
-            </Link>
-          </div>
-          <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-sp16.pdf'} target="_blank">Exam PDF</a>
-          </div>
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-sp16-sol.pdf'} target="_blank">Solutions PDF</a>
-          </div>
-        </div>
+        <Sidebar examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} />
         <div className="content">
           <Element name="q3" className="first-q">
             <hr className="s5" />
