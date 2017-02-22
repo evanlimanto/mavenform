@@ -294,6 +294,7 @@ ${fourspace}jr $ra
 
 const q3_1_soln =
 `
+<code>
 filter_array:
 <hr class="s1" />
 ${fourspace}addiu $sp, $sp, <b>-8</b>
