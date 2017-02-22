@@ -569,7 +569,7 @@ class EE16ASp16 extends Component {
   }
 
   render() {
-    const examCode = 'ee16asp16';
+    const examCode = 'ee16a-mt1-sp16';
     const problemIDs = ['', 'q3', 'q4', 'q5', '', 'q6', 'q7', 'q8', 'q9']
     const problemTitles = [
       'Straightforward Questions',

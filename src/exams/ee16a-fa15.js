@@ -674,7 +674,7 @@ class EE16AFa15 extends Component {
   }
 
   render() {
-    const examCode = 'ee16afa15';
+    const examCode = 'ee16a-mt1-fa15';
     const problemIDs = ['', 'q3', 'q4', 'q5', 'q6', '', 'q7', 'q8', 'q9'];
     const problemTitles = [
       'Straightforward Questions',

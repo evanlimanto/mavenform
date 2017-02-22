@@ -351,7 +351,7 @@ class EE16ASp15 extends Component {
   }
 
   render() {
-    const examCode = 'ee16asp16';
+    const examCode = 'ee16a-mt1-sp16';
     const problemIDs = ['q1', 'q2', 'q3', 'q4', 'q5']
     const problemTitles = [
       '1. Imaging Circuit',
