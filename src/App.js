@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CS61CFa14, CS61CFa15, CS61CFa16, CS61CSp14, CS61CSp15,
+import { CS61CFa14, CS61CFa15, CS61CFa16, CS61CSp14, CS61CSp15, CS61CSp16,
          EE16ASp15, EE16AFa15, EE16AFa16, EE16ASp16 } from './exams';
 import classnames from 'classnames';
 import Home from './Home';
@@ -44,6 +44,8 @@ class App extends Component {
       exam = <CS61CFa16 />;
     } else if (exam === 'cs61cfa15') {
       exam = <CS61CFa15 />;
+    } else if (exam === 'cs61csp16') {
+      exam = <CS61CSp16 />;
     } else if (exam === 'cs61csp15') {
       exam = <CS61CSp15 />;
     } else if (exam === 'cs61csp14') {
@@ -74,9 +76,6 @@ class App extends Component {
       menu: true,
       hidden: !this.state.sidebar
     });
-
-    const urls = ["ee16afa16", "ee16asp16", "ee16afa15", "ee16asp15"];
-    const titles = ["Fall 2016", "Spring 2016", "Fall 2015", "Spring 2015"];
 
     const sideTabs = _.map(exams[course], (courseExams, examType) => {
       const content =  _.map(courseExams, (info, semester) => {
