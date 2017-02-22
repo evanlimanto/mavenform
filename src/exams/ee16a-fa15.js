@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Question } from '../components/question';
 import { lmatrix, lx } from '../utils';
 
+const _ = require('lodash');
+
 const fa15q3 =
 `
 <h3>3. Solve It</h3>
@@ -672,8 +674,54 @@ class EE16AFa15 extends Component {
     scrollSpy.update();
   }
 
+  generateSidetabContainers(is_mobile) {
+    const problemIDs = ['', 'q3', 'q4', 'q5', 'q6', '', 'q7', 'q8', 'q9'];
+    const problemTitles = [
+      'Straightforward Questions',
+      '3. Solve It',
+      '4. Invert It',
+      '5. Show It',
+      '6. Null It',
+      'Free-form Problems',
+      '7. Finding the Bright Cave',
+      '8. A Tale of Two Cities',
+      '9. Justin Beaver'
+    ];
+    return _.map(_.range(problemIDs.length), (index) => {
+      const problemID = problemIDs[index];
+      const problemTitle = problemTitles[index];
+
+      if (problemID.length === 0) {
+        return (
+          <span><hr className="s1" /><div className="sidetitle">{problemTitle}</div></span>
+        );
+      }
+
+      return (
+        <div className="sidetab-container">
+          {
+            (is_mobile) ?
+            (
+              <Link className="sidetab" to={problemID} isDynamic={true} smooth={true} duration={500}>
+                {problemTitle}
+              </Link>
+            ) :
+            (
+              <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} smooth={true} duration={500}>
+                {problemTitle}
+              </Link>
+            )
+          }
+        </div>
+      );
+    });
+  }
+
   render() {
     const examCode = 'ee16a-fa15';
+    const webSidetabContainers = this.generateSidetabContainers(false);
+    const mobileSidetabContainers = this.generateSidetabContainers(true);
+
     return (
       <span>
         <h1>EE 16A</h1>
@@ -686,45 +734,7 @@ class EE16AFa15 extends Component {
           <h4>CONTENTS</h4>
           <hr className="s2" />
           <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
-          <hr className="s1" />
-          <div className="sidetitle">Straightforward Questions</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q3" spy={true} isDynamic={true} smooth={true} duration={500}>
-              3. Solve It
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q4" spy={true} isDynamic={true} smooth={true} duration={500}>
-              4. Invert It
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q5" spy={true} isDynamic={true} smooth={true} duration={500}>
-              5. Show It
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q6" spy={true} isDynamic={true} smooth={true} duration={500}>
-              6. Null It
-            </Link>
-          </div>
-          <hr className="s1" />
-          <div className="sidetitle">Free-form Problems</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q7" spy={true} isDynamic={true} smooth={true} duration={500}>
-              7. Finding the Bright Cave
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q8" spy={true} isDynamic={true} smooth={true} duration={500}>
-              8. A Tale of Two Cities
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q9" spy={true} isDynamic={true} smooth={true} duration={500}>
-              9. Justin Beaver
-            </Link>
-          </div>
+          {webSidetabContainers}
           <hr className="s2" />
           <h4>SOURCES</h4>
           <hr className="s1" />
@@ -740,45 +750,7 @@ class EE16AFa15 extends Component {
           <h4>CONTENTS</h4>
           <hr className="s2" />
           <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
-          <hr className="s1" />
-          <div className="sidetitle">Straightforward Questions</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q3" isDynamic={true} smooth={true} duration={500}>
-              3. Solve It
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q4" isDynamic={true} smooth={true} duration={500}>
-              4. Invert It
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q5" isDynamic={true} smooth={true} duration={500}>
-              5. Show It
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q6" isDynamic={true} smooth={true} duration={500}>
-              6. Null It
-            </Link>
-          </div>
-          <hr className="s1" />
-          <div className="sidetitle">Free-form Problems</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q7" isDynamic={true} smooth={true} duration={500}>
-              7. Finding the Bright Cave
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q8" isDynamic={true} smooth={true} duration={500}>
-              8. A Tale of Two Cities
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q9" isDynamic={true} smooth={true} duration={500}>
-              9. Justin Beaver
-            </Link>
-          </div>
+          {mobileSidetabContainers}
           <hr className="s2" />
           <h4>SOURCES</h4>
           <hr className="s1" />
