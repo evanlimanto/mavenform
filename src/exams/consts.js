@@ -45,7 +45,12 @@ const exams = {
         'id': 'cs61csp14',
         'profs': 'Garcia',
         'url': '/exam?id=cs61csp14',
-      }
+      },
+      'Fall 2014': {
+        'id': 'cs61cfa14',
+        'profs': 'Garcia, Lustig',
+        'url': '/exam?id=cs61cfa14',
+      },
     },
   },
 };

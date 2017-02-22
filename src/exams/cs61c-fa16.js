@@ -525,7 +525,7 @@ const q5_2_soln =
 
 const q5_3_soln =
 `
-${lx('2^1 = 2')} 
+${lx('2^1 = 2')}
 <hr class="s2" />
 <i>R-type instructions have a 0 opcode.</i>
 `
@@ -533,7 +533,7 @@ ${lx('2^1 = 2')}
 
 const q5_4_soln =
 `
-${lx('4638_{10}')} 
+${lx('4638_{10}')}
 <hr class="s2" />
 <i>PC + 6 = ${lx('1572_{10}')}; largest positive offset in 10 bits = 0b0111111111 = 0x1FF = ${lx('2^9')}-1 = 511 words or 3066 nibbles (6 nibbles per word).
 <hr class="s1" />

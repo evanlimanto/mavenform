@@ -110,9 +110,6 @@ class Course extends Component {
       hidden: !this.state.sidebar
     });
 
-    const urls = ["ee16afa16", "ee16asp16", "ee16afa15", "ee16asp15"];
-    const titles = ["Fall 2016", "Spring 2016", "Fall 2015", "Spring 2015"];
-
     const sideTabs = _.map(exams[course], (courseExams, examType) => {
       const content =  _.map(courseExams, (info, semester) => {
         const url = `${info['url']}&courseId=${course}`;
