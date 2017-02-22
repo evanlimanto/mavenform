@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Question } from '../components/question';
 import { lmatrix, lx } from '../utils';
 
+const _ = require('lodash');
+
 const sp15q1a =
 `
 <h3>PROBLEM 1. Imaging Circuit <i>(12 points)</i></h3>
@@ -349,7 +351,49 @@ class EE16ASp15 extends Component {
     scrollSpy.update();
   }
 
+  generateSidetabContainers(is_mobile) {
+    const problemIDs = ['q1', 'q2', 'q3', 'q4', 'q5']
+    const problemTitles = [
+      '1. Imaging Circuit',
+      '2. Sparse Images and Vector Geometry',
+      '3. Coding for Storage',
+      '4. Investment Strategy',
+      '5. Berkeley Forever'
+    ];
+    return _.map(_.range(problemIDs.length), (index) => {
+      const problemID = problemIDs[index];
+      const problemTitle = problemTitles[index];
+
+      if (problemID.length === 0) {
+        return (
+          <span><hr className="s1" /><div className="sidetitle">Straightforward Questions</div></span>
+        );
+      }
+
+      return (
+        <div className="sidetab-container">
+          {
+            (is_mobile) ?
+            (
+              <Link className="sidetab" to={problemID} isDynamic={true} smooth={true} duration={500}>
+                {problemTitle}
+              </Link>
+            ) :
+            (
+              <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} smooth={true} duration={500}>
+                {problemTitle}
+              </Link>
+            )
+          }
+        </div>
+      );
+    });
+  }
+
   render() {
+    const webSidetabContainers = this.generateSidetabContainers(false);
+    const mobileSidetabContainers = this.generateSidetabContainers(true);
+
     return (
       <span>
         <h1>EE 16A</h1>
@@ -360,33 +404,7 @@ class EE16ASp15 extends Component {
         <Sticky className="sidebar screen">
           <hr className="s5" />
           <h4>CONTENTS</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q1" spy={true} isDynamic={true} smooth={true} duration={500}>
-              1. Imaging Circuit
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q2" spy={true} isDynamic={true} smooth={true} duration={500}>
-              2. Sparse Images and Vector Geometry
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q3" spy={true} isDynamic={true} smooth={true} duration={500}>
-              3. Coding for Storage
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q4" spy={true} isDynamic={true} smooth={true} duration={500}>
-              4. Investment Strategy
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q5" spy={true} isDynamic={true} smooth={true} duration={500}>
-              5. Berkeley Forever
-            </Link>
-          </div>
-          <hr className="s2" />
+          {webSidetabContainers}
           <h4>SOURCES</h4>
           <hr className="s1" />
           <div className="sidetab-container">
@@ -399,32 +417,7 @@ class EE16ASp15 extends Component {
         <div className="sidebar mobile">
           <hr className="s5" />
           <h4>CONTENTS</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q1" isDynamic={true} smooth={true} duration={500}>
-              1. Imaging Circuit
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q2" isDynamic={true} smooth={true} duration={500}>
-              2. Sparse Images and Vector Geometry
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q3" isDynamic={true} smooth={true} duration={500}>
-              3. Coding for Storage
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q4" isDynamic={true} smooth={true} duration={500}>
-              4. Investment Strategy
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q5" isDynamic={true} smooth={true} duration={500}>
-              5. Berkeley Forever
-            </Link>
-          </div>
+          {mobileSidetabContainers}
           <hr className="s2" />
           <h4>SOURCES</h4>
           <hr className="s1" />

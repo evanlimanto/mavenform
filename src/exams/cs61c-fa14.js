@@ -285,23 +285,38 @@ class CS61CFa14 extends Component {
     scrollSpy.update();
   }
 
-  render() {
+  generateSidetabContainers(is_mobile) {
     const problemIDs = ['q1', 'q2', 'q3', 'q4'];
     const problemTitles = [
       'Question 1: Running in circles',
       'Question 2: I can C clearly now, the rain is gone...',
     ];
-    const sidetabContainers = _.map(_.range(problemIDs.length), (index) => {
+    return _.map(_.range(problemIDs.length), (index) => {
       const problemID = problemIDs[index];
       const problemTitle = problemTitles[index];
       return (
           <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} smooth={true} duration={500}>
-              {problemTitle}
-            </Link>
+            {
+              (is_mobile) ?
+              (
+                <Link className="sidetab" to={problemID} isDynamic={true} smooth={true} duration={500}>
+                  {problemTitle}
+                </Link>
+              ) :
+              (
+                <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} smooth={true} duration={500}>
+                  {problemTitle}
+                </Link>
+              )
+            }
           </div>
         );
     });
+  }
+
+  render() {
+    const webSidetabContainers = this.generateSidetabContainers(false);
+    const mobileSidetabContainers = this.generateSidetabContainers(true);
 
     return (
       <span>
@@ -314,7 +329,7 @@ class CS61CFa14 extends Component {
           <hr className="s5" />
           <h4>CONTENTS</h4>
           <hr className="s2" />
-          {sidetabContainers}
+          {webSidetabContainers}
           <hr className="s2" />
           <h4>SOURCES</h4>
           <hr className="s1" />
@@ -329,7 +344,7 @@ class CS61CFa14 extends Component {
           <hr className="s5" />
           <h4>CONTENTS</h4>
           <hr className="s2" />
-          {sidetabContainers}
+          {mobileSidetabContainers}
           <hr className="s2" />
           <h4>SOURCES</h4>
           <hr className="s1" />

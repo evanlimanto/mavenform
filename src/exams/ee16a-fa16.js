@@ -3,6 +3,8 @@ import classnames from 'classnames';
 import { Question } from '../components/question';
 import { lmatrix, lx } from '../utils';
 
+const _ = require('lodash');
+
 const fa16q3a =
 `
 <h3>3. True/False <i>(6 points, 1 point for each question)</i></h3>
@@ -432,8 +434,52 @@ class EE16AFa16 extends Component {
     scrollSpy.update();
   }
 
+  generateSidetabContainers(is_mobile) {
+    const problemIDs = ['', 'q3', 'q4', 'q5', 'q6', '', 'q7', 'q8', 'q9'];
+    const problemTitles = [
+      'Section 1',
+      '3. True/False',
+      '4. Proof',
+      '5. Show It',
+      '6. Inverse of a Matrix',
+      'Section 2',
+      '7. Directional Shovels',
+      '8. Transformation Basketball'
+    ];
+    return _.map(_.range(problemIDs.length), (index) => {
+      const problemID = problemIDs[index];
+      const problemTitle = problemTitles[index];
+
+      if (problemID.length === 0) {
+        return (
+          <span><hr className="s1" /><div className="sidetitle">Straightforward Questions</div></span>
+        );
+      }
+
+      return (
+        <div className="sidetab-container">
+          {
+            (is_mobile) ?
+            (
+              <Link className="sidetab" to={problemID} isDynamic={true} smooth={true} duration={500}>
+                {problemTitle}
+              </Link>
+            ) :
+            (
+              <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} smooth={true} duration={500}>
+                {problemTitle}
+              </Link>
+            )
+          }
+        </div>
+      );
+    });
+  }
+
   render() {
     const examCode = 'ee16a-fa16';
+    const webSidetabContainers = this.generateSidetabContainers(false);
+    const mobileSidetabContainers = this.generateSidetabContainers(true);
 
     return (
       <span>
@@ -447,40 +493,7 @@ class EE16AFa16 extends Component {
           <h4>CONTENTS</h4>
           <hr className="s2" />
           <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
-          <hr className="s1" />
-          <div className="sidetitle">Section 1</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q3" spy={true} isDynamic={true} smooth={true} duration={500} onSetInactive={this.removeActiveClass}>
-              3. True/False
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q4" spy={true} isDynamic={true} smooth={true} duration={500}>
-              4. Proof
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q5" spy={true} isDynamic={true} smooth={true} duration={500}>
-              5. Inverse of a Matrix
-            </Link>
-          </div>
-          <hr className="s1" />
-          <div className="sidetitle">Section 2</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q6" spy={true} isDynamic={true} smooth={true} duration={500}>
-              6. Directional Shovels
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q7" spy={true} isDynamic={true} smooth={true} duration={500}>
-              7. Graph Majors
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q8" spy={true} isDynamic={true} smooth={true} duration={500}>
-              8. Transformation Basketball
-            </Link>
-          </div>
+          {webSidetabContainers}
           <hr className="s2" />
           <h4>SOURCES</h4>
           <hr className="s1" />
@@ -496,40 +509,7 @@ class EE16AFa16 extends Component {
           <h4>CONTENTS</h4>
           <hr className="s2" />
           <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
-          <hr className="s1" />
-          <div className="sidetitle">Section 1</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q3" isDynamic={true} smooth={true} duration={500}>
-              3. True/False
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q4" isDynamic={true} smooth={true} duration={500}>
-              4. Proof
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q5" isDynamic={true} smooth={true} duration={500}>
-              5. Inverse of a Matrix
-            </Link>
-          </div>
-          <hr className="s1" />
-          <div className="sidetitle">Section 2</div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q6" isDynamic={true} smooth={true} duration={500}>
-              6. Directional Shovels
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q7" isDynamic={true} smooth={true} duration={500}>
-              7. Graph Majors
-            </Link>
-          </div>
-          <div className="sidetab-container">
-            <Link activeClass="active" className="sidetab" to="q8" isDynamic={true} smooth={true} duration={500}>
-              8. Transformation Basketball
-            </Link>
-          </div>
+          {mobileSidetabContainers}
           <hr className="s2" />
           <h4>SOURCES</h4>
           <hr className="s1" />
