@@ -288,8 +288,8 @@ class CS61CFa14 extends Component {
     const examCode = 'cs61cfa14';
     const problemIDs = ['q1', 'q2'];
     const problemTitles = [
-      'Question 1: Running in circles',
-      'Question 2: I can C clearly now, the rain is gone...',
+      'Q1. Running in circles',
+      'Q2. I can C clearly now, the rain is gone...',
     ];
 
     return (
