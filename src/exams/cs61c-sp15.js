@@ -244,7 +244,7 @@ ${fourspace}return g;
 
 const q3_1_soln =
 `
-Solutions not provided in PDF.
+Solutions not provided in PDF. Super sorry :(
 `;
 
 const q4_1 =
@@ -478,8 +478,6 @@ ${fivespace}<b>sw $s1, 8($sp)</b>
 <hr class="s1" />
 ${fivespace}<b>sw $s2, 12($sp)</b>
 <hr class="s1" />
-${fivespace}${_.repeat('_', 20)}
-<hr class="s1" />
 ${fivespace}addiu $s0, $zero, 0${sixspace}# We'll store the count in $s0
 <hr class="s1" />
 ${fivespace}addiu $s1, $a0, 0
@@ -514,8 +512,6 @@ ${fivespace}<b>lw $s1, 8($sp)</b>
 <hr class="s1" />
 ${fivespace}<b>lw $s2, 12($sp)</b>
 <hr class="s1" />
-${fivespace}${_.repeat('_', 20)}
-<hr class="s1" />
 ${fivespace}addiu $sp, $sp, <b>16</b>
 <hr class="s1" />
 ${fivespace}jr $ra
@@ -538,7 +534,7 @@ right that you should fill in with the appropriate fields (in binary):
 
 const q6_1_soln =
 `
-Solutions not provided in PDF.
+Solutions not provided in PDF. Super sorry :(
 `;
 
 const q7_1 =
@@ -603,13 +599,11 @@ const q7_1_soln =
 <code>
 branchAmount:
 <hr class="s1" />
-${fivespace}andi $t0, $a0, 0x8000${twelvespace}# Mask out a certain bit
+${fivespace}andi $t0, $a0, 0x8000${fivespace}# Mask out a certain bit
 <hr class="s1" />
 ${fivespace}bne <b>$t0</b>, <b>$zero</b>, label1
 <hr class="s1" />
 ${fivespace}<b>andi $v0, $a0, 0xFFFF</b>
-<hr class="s1" />
-${fivespace}${longblank}
 <hr class="s1" />
 ${fivespace}j label2
 <hr class="s1" />
@@ -617,13 +611,11 @@ label1:
 <hr class="s1" />
 ${fivespace}<b>lui $t1, 0xFFFF</b>
 <hr class="s1" />
-${fivespace}${longblank}
-<hr class="s1" />
 ${fivespace}or $v0, $a0, $t1
 <hr class="s1" />
 label2:
 <hr class="s1" />
-${fivespace}sll <b>$v0</b>, <b>$v0</b>, <b>2</b>${_.repeat('&nbsp;', 18)}# Convert to byte addressing
+${fivespace}sll <b>$v0</b>, <b>$v0</b>, <b>2</b>${_.repeat('&nbsp;', 11)}# Convert to byte addressing
 <hr class="s1" />
 ${fivespace}<b>addiu $v0, $v0, 4</b>
 <hr class="s1" />
@@ -678,6 +670,8 @@ class CS61CSp15 extends Component {
           <hr className="s5" />
           <h4>CONTENTS</h4>
           <hr className="s2" />
+          <i>Question 3 and 6 are missing solutions since they are also missing in the source PDF.</i>
+          <hr className="s1" />
           {sidetabContainers}
           <hr className="s2" />
           <h4>SOURCES</h4>

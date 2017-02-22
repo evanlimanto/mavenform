@@ -136,7 +136,12 @@ ${_.repeat(' ', 10)}jr $ra
 
 const q1_8_soln =
 `
-IJ-instr: <b>srl $v0 $a0 26</b> -> 0b <b>0000|00 00|000 0|0100 0001|0 110|10 00|0010</b> -> 0x <b>0004 1682</b>
+<code>IJ-instr: <b>srl $v0 $a0 26</b></code>
+<hr class="s2" />
+<code>0b <b>0000|00 00|000 0|0100 0001|0 110|10 00|0010</b></code>
+<hr class="s2" />
+<code>0x <b>0004 1682</b></code>
+
 `
 
 const q1_9 =
@@ -197,7 +202,9 @@ b)  Now that you've warmed up on the C version of this code, let’s convert has
 
 <hr class="s2" />
 <code>
-# $a0 contains the pointer to the tortoise, $a1 contains the pointer to the hare.
+# $a0 contains the pointer to the tortoise.
+<hr class="s1" />
+# $a1 contains the pointer to the hare.
 <hr class="s2" />
 has_cycle: ${twospace}li $v0 1
 <hr class="s1" />
@@ -232,7 +239,9 @@ done: ${sixspace}jr return a
 const q2_2_soln =
 `
 <code>
-# $a0 contains the pointer to the tortoise, $a1 contains the pointer to the hare.
+# $a0 contains the pointer to the tortoise.
+<hr class="s1" />
+# $a1 contains the pointer to the hare.
 <hr class="s2" />
 has_cycle: ${onespace}li $v0 1
 <hr class="s1" />
@@ -250,11 +259,11 @@ ${twelvespace}<b>lw $a0 4($a0)</b>
 <hr class="s1" />
 ${twelvespace}<b>lw $a1 4($a1)</b>
 <hr class="s1" />
-${twelvespace}addiu <b>$sp</b> <b>$sp</b> <b>-4</b> ${onespace}<b><- circled, changed to nop</b>
+${twelvespace}addiu <b>$sp</b> <b>$sp</b> <b>-4</b>
 <hr class="s1" />
-${twelvespace}<b>sw $ra 0($sp)</b> ${threespace} <b><- circled, changed to nop</b>
+${twelvespace}<b>sw $ra 0($sp)</b>
 <hr class="s1" />
-${twelvespace}<b>jal has_cycle</b> ${threespace} <b><- change to j has_cycle</b>
+${twelvespace}<b>jal has_cycle</b>
 <hr class="s1" />
 ${twelvespace}<b>lw $ra 0($sp)</b>
 <hr class="s1" />
@@ -270,7 +279,39 @@ c) You want to change this to be an <i>iterative</i> MIPS solution, but you want
 `;
 
 const q2_3_soln = `
-See part (b).
+<code>
+# $a0 contains the pointer to the tortoise.
+<hr class="s1" />
+# $a1 contains the pointer to the hare.
+<hr class="s2" />
+has_cycle: ${onespace}li $v0 1
+<hr class="s1" />
+${twelvespace}beq $a0 $a1 done
+<hr class="s1" />
+${twelvespace}li $v0 0
+<hr class="s1" />
+${twelvespace}beq <b>$a1</b> <b>$0</b> done
+<hr class="s1" />
+${twelvespace}<b>lw $a1 4($a1)</b>
+<hr class="s1" />
+${twelvespace}beq <b>$a1</b> <b>$0</b> done
+<hr class="s1" />
+${twelvespace}<b>lw $a0 4($a0)</b>
+<hr class="s1" />
+${twelvespace}<b>lw $a1 4($a1)</b>
+<hr class="s1" />
+${twelvespace}addiu <b>$sp</b> <b>$sp</b> <b>-4</b> ${onespace}<i><- circled, changed to nop</i>
+<hr class="s1" />
+${twelvespace}<b>sw $ra 0($sp)</b> ${threespace} <i><- circled, changed to nop</i>
+<hr class="s1" />
+${twelvespace}<b>jal has_cycle</b> ${threespace} <i><- change to j has_cycle</i>
+<hr class="s1" />
+${twelvespace}<b>lw $ra 0($sp)</b>
+<hr class="s1" />
+${twelvespace}addiu <b>$sp</b> <b>$sp</b> <b>4</b>
+<hr class="s1" />
+done: ${sixspace}jr $ra
+</code>
 `;
 
 const q3_1 =
@@ -370,9 +411,9 @@ f) What is one possible value of <code><b>(d - s)</b></code> where we would get 
 
 const q3_6_soln =
 `
-<b>0</b>
+<h3>0</h3>
 <hr class="s1" />
-<b>2 misses per block * 2^6 blocks/cache * 2^13 caches = 2^20 misses</b>
+<i>2 misses per block * 2^6 blocks/cache * 2^13 caches = 2^20 misses</i>
 `;
 
 const q3_7 =
@@ -457,7 +498,7 @@ ${fourspace}return odds;
 
 const q4_1_soln =
 `
-<table>
+<table class="special-table">
 <thead><tr><th width="1">Line number</th><th>Replacement Code</th></tr></thead>
 <tbody>
 <tr><td>1</td><td><code>for (char c = *s; (c = *s) != '\\0'; s++) {</code></td></tr>

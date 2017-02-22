@@ -30,7 +30,7 @@ body {
 .test {
   margin: auto;
   max-width: 1020px;
-  padding: 0 100px;
+  padding: 0 95px;
 }
 
 h1 {
@@ -724,6 +724,11 @@ tr.available:hover .table-link {
 .test th, .test td {
   border: 1px solid #ccc;
   padding: 10px;
+}
+
+.special-table {
+  position: relative;
+  left: -7px;
 }
 
 @media (max-width: 1599px) {

@@ -171,30 +171,30 @@ equivalent with the fewest possible lines of code.
 const q2_1_1_soln =
 `
 <code>
-${threespace}add  $s0, $zero, $zero  ${onespace}<i># b = 0;</i>
+${threespace}add  $s0, $zero, $zero  <i># b = 0;</i>
 <hr class="s1" />
-${threespace}add  $s1, $zero, $zero  ${onespace}<i># i = 0;</i>
+${threespace}add  $s1, $zero, $zero  <i># i = 0;</i>
 <hr class="s1" />
-${threespace}addi $s2, $zero, 10${onespace} # $s2 = const 10;
+${threespace}addi $s2, $zero, 10 ${onespace} # $s2 = const 10;
 <hr class="s1" />
-X:   slt  $t0, $s1, $s2 ${twospace} # <b>i < 10?</b>
+X:   slt  $t0, $s1, $s2 ${threespace} # <b>i < 10?</b>
 <hr class="s1" />
-${threespace}<b>bne</b> $t0, $zero, Y ${twospace} # <b>branch if i < 10</b>
+${threespace}<b>bne</b> $t0, $zero, Y ${threespace} # <b>branch if i < 10</b>
 <hr class="s1" />
-${threespace}sll  $t1, $s1, 2 ${fourspace} # <b>$t1 = i * 4;
+${threespace}sll  $t1, $s1, 2 ${fivespace} # <b>$t1 = i * 4;
 </b>
 <hr class="s1" />
-${threespace}add  $t2, $s3, $t1 ${twospace} # <b>$t2 = &a + i * 4 … the address of a[i]</b>
+${threespace}add  $t2, $s3, $t1 ${threespace} # <b>$t2 = &a + i * 4 … the address of a[i]</b>
 <hr class="s1" />
-${threespace}sw  $s1, 0($t2) ${fivespace} # <b>a[i] = i;</b>
+${threespace}sw  $s1, 0($t2) ${onespace}${fivespace} # <b>a[i] = i;</b>
 <hr class="s1" />
-${threespace}add  $s0, $s0, $s1 ${twospace} # <b>b = b + i;</b>
+${threespace}add  $s0, $s0, $s1 ${threespace} # <b>b = b + i;</b>
 <hr class="s1" />
-${threespace}addi $s1, $s1, 1 ${threespace} # <b>i = i + 1;</b>
+${threespace}addi $s1, $s1, 1 ${fourspace} # <b>i = i + 1;</b>
 <hr class="s1" />
-${threespace}j X ${_.repeat('&nbsp;', 16)} # <b>loop back to the start</b>
+${threespace}j X ${_.repeat('&nbsp;', 16)} ${onespace}# <b>loop back to the start</b>
 <hr class="s1" />
-Y: ${_.repeat('&nbsp;', 17)}${threespace} # <b>exit:</b>
+Y: ${_.repeat('&nbsp;', 17)} ${threespace} # <b>exit:</b>
 </code>
 `
 
