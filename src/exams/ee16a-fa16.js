@@ -452,7 +452,7 @@ class EE16AFa16 extends Component {
 
       if (problemID.length === 0) {
         return (
-          <span><hr className="s1" /><div className="sidetitle">Straightforward Questions</div></span>
+          <span><hr className="s1" /><div className="sidetitle">{problemTitle}</div></span>
         );
       }
 
