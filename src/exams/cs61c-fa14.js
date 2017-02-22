@@ -1,8 +1,9 @@
-import React, { Component } from 'react'; import { Question } from '../components/question';
+import React, { Component } from 'react';
+import { Question } from '../components/question';
+import { Sidebar } from '../components';
 import { lx, longblank, blank, onespace, twospace, threespace, fourspace, fivespace, sixspace, sevenspace, eightspace } from '../utils';
 
 const _ = require('lodash');
-const examCode = 'cs61cfa14';
 
 const tenspace = _.repeat('&nbsp;', 10);
 const twelvespace = _.repeat('&nbsp;', 12);
@@ -274,49 +275,22 @@ ${fourspace}}
 </code>
 `;
 
-var Scroll = require('react-scroll');
-var Link = Scroll.Link;
+const Scroll = require('react-scroll');
 var Element = Scroll.Element;
 var scrollSpy = Scroll.scrollSpy;
-var Sticky = require('react-stickynode');
 
 class CS61CFa14 extends Component {
   componentDidMount() {
     scrollSpy.update();
   }
 
-  generateSidetabContainers(is_mobile) {
-    const problemIDs = ['q1', 'q2', 'q3', 'q4'];
+  render() {
+    const examCode = 'cs61cfa14';
+    const problemIDs = ['q1', 'q2'];
     const problemTitles = [
       'Question 1: Running in circles',
       'Question 2: I can C clearly now, the rain is gone...',
     ];
-    return _.map(_.range(problemIDs.length), (index) => {
-      const problemID = problemIDs[index];
-      const problemTitle = problemTitles[index];
-      return (
-          <div className="sidetab-container">
-            {
-              (is_mobile) ?
-              (
-                <Link className="sidetab" to={problemID} isDynamic={true} smooth={true} duration={500}>
-                  {problemTitle}
-                </Link>
-              ) :
-              (
-                <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} smooth={true} duration={500}>
-                  {problemTitle}
-                </Link>
-              )
-            }
-          </div>
-        );
-    });
-  }
-
-  render() {
-    const webSidetabContainers = this.generateSidetabContainers(false);
-    const mobileSidetabContainers = this.generateSidetabContainers(true);
 
     return (
       <span>
@@ -325,36 +299,7 @@ class CS61CFa14 extends Component {
         <div className="center">
           <h5>Midterm 1 | Fall 2014 | Garcia, Lustig</h5>
         </div>
-        <Sticky className="sidebar screen">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s2" />
-          {webSidetabContainers}
-          <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-exam.pdf`} target="_blank">Exam PDF</a>
-          </div>
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-soln.pdf`} target="_blank">Solutions PDF</a>
-          </div>
-        </Sticky>
-        <div className="sidebar mobile">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s2" />
-          {mobileSidetabContainers}
-          <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-exam.pdf`} target="_blank">Exam PDF</a>
-          </div>
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-soln.pdf`} target="_blank">Solutions PDF</a>
-          </div>
-        </div>
+        <Sidebar examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} />
         <div className="content">
           <Element name="q1">
             <div className="content-spacer" />

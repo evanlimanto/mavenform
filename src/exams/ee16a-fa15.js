@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Question } from '../components/question';
+import { Sidebar } from '../components';
 import { lmatrix, lx } from '../utils';
 
 const _ = require('lodash');
@@ -663,18 +664,17 @@ ${lx('\\vec{x}[0] = \\left[ \\bar{D}^{-1} \\right] \\left[ \\begin{array}{c} y[0
 or using your initial knowledge that ${lx('x_1[0] = 1')} to write a system of 2 equations in the 2 unknowns, ${lx('x_2[0]')} and ${lx('x_3[0]')}, and solve that system. (This is equivalent to starting at the third step of the row reduction shown above. )
 `;
 
-var Scroll = require('react-scroll');
-var Link = Scroll.Link;
+const Scroll = require('react-scroll');
 var Element = Scroll.Element;
 var scrollSpy = Scroll.scrollSpy;
-var Sticky = require('react-stickynode');
 
 class EE16AFa15 extends Component {
   componentDidMount() {
     scrollSpy.update();
   }
 
-  generateSidetabContainers(is_mobile) {
+  render() {
+    const examCode = 'ee16afa15';
     const problemIDs = ['', 'q3', 'q4', 'q5', 'q6', '', 'q7', 'q8', 'q9'];
     const problemTitles = [
       'Straightforward Questions',
@@ -687,40 +687,6 @@ class EE16AFa15 extends Component {
       '8. A Tale of Two Cities',
       '9. Justin Beaver'
     ];
-    return _.map(_.range(problemIDs.length), (index) => {
-      const problemID = problemIDs[index];
-      const problemTitle = problemTitles[index];
-
-      if (problemID.length === 0) {
-        return (
-          <span><hr className="s1" /><div className="sidetitle">{problemTitle}</div></span>
-        );
-      }
-
-      return (
-        <div className="sidetab-container">
-          {
-            (is_mobile) ?
-            (
-              <Link className="sidetab" to={problemID} isDynamic={true} smooth={true} duration={500}>
-                {problemTitle}
-              </Link>
-            ) :
-            (
-              <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} smooth={true} duration={500}>
-                {problemTitle}
-              </Link>
-            )
-          }
-        </div>
-      );
-    });
-  }
-
-  render() {
-    const examCode = 'ee16a-fa15';
-    const webSidetabContainers = this.generateSidetabContainers(false);
-    const mobileSidetabContainers = this.generateSidetabContainers(true);
 
     return (
       <span>
@@ -729,38 +695,7 @@ class EE16AFa15 extends Component {
         <div className="center">
           <h5>Midterm 1 | Fall 2015 | Niknejad, Sahai</h5>
         </div>
-        <Sticky className="sidebar screen">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s2" />
-          <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
-          {webSidetabContainers}
-          <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-fa15.pdf'} target="_blank">Exam PDF</a>
-          </div>
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-fa15-sol.pdf'} target="_blank">Solutions PDF</a>
-          </div>
-        </Sticky>
-        <div className="sidebar mobile">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s2" />
-          <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
-          {mobileSidetabContainers}
-          <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-fa15.pdf'} target="_blank">Exam PDF</a>
-          </div>
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-fa15-sol.pdf'} target="_blank">Solutions PDF</a>
-          </div>
-        </div>
+        <Sidebar examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} />
         <div className="content">
           <Element name="q3" className="first-q">
             <hr className="s5" />

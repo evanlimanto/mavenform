@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import { Question } from '../components/question';
+import { Sidebar } from '../components';
 import { lmatrix, lx } from '../utils';
 
 const _ = require('lodash');
@@ -423,18 +424,17 @@ const fa16q8c_soln =
 It cannot because in the case of Steph ${lmatrix([[0, 0]])} goes to a nonzero vector. This transformation cannot be a linear transformation, so there is no matrix representation.
 `;
 
-var Scroll = require('react-scroll');
-var Link = Scroll.Link;
+const Scroll = require('react-scroll');
 var Element = Scroll.Element;
 var scrollSpy = Scroll.scrollSpy;
-var Sticky = require('react-stickynode');
 
 class EE16AFa16 extends Component {
   componentDidMount() {
     scrollSpy.update();
   }
 
-  generateSidetabContainers(is_mobile) {
+  render() {
+    const examCode = 'ee16afa16';
     const problemIDs = ['', 'q3', 'q4', 'q5', 'q6', '', 'q7', 'q8', 'q9'];
     const problemTitles = [
       'Section 1',
@@ -446,40 +446,6 @@ class EE16AFa16 extends Component {
       '7. Directional Shovels',
       '8. Transformation Basketball'
     ];
-    return _.map(_.range(problemIDs.length), (index) => {
-      const problemID = problemIDs[index];
-      const problemTitle = problemTitles[index];
-
-      if (problemID.length === 0) {
-        return (
-          <span><hr className="s1" /><div className="sidetitle">{problemTitle}</div></span>
-        );
-      }
-
-      return (
-        <div className="sidetab-container">
-          {
-            (is_mobile) ?
-            (
-              <Link className="sidetab" to={problemID} isDynamic={true} smooth={true} duration={500}>
-                {problemTitle}
-              </Link>
-            ) :
-            (
-              <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} smooth={true} duration={500}>
-                {problemTitle}
-              </Link>
-            )
-          }
-        </div>
-      );
-    });
-  }
-
-  render() {
-    const examCode = 'ee16a-fa16';
-    const webSidetabContainers = this.generateSidetabContainers(false);
-    const mobileSidetabContainers = this.generateSidetabContainers(true);
 
     return (
       <span>
@@ -488,38 +454,7 @@ class EE16AFa16 extends Component {
         <div className="center">
           <h5>Midterm 1 | Fall 2016 | Ayazifar, Stojanovic</h5>
         </div>
-        <Sticky className="sidebar screen">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s2" />
-          <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
-          {webSidetabContainers}
-          <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-fa16.pdf'} target="_blank">Exam PDF</a>
-          </div>
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-fa16-sol.pdf'} target="_blank">Solutions PDF</a>
-          </div>
-        </Sticky>
-        <div className="sidebar mobile">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s2" />
-          <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
-          {mobileSidetabContainers}
-          <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-fa16.pdf'} target="_blank">Exam PDF</a>
-          </div>
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-fa16-sol.pdf'} target="_blank">Solutions PDF</a>
-          </div>
-        </div>
+        <Sidebar examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} />
         <div className="content">
           <Element name="q3" className="first-q">
             <hr className="s5" />

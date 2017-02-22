@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Question } from '../components/question';
+import { Sidebar } from '../components';
 import { lmatrix, lx } from '../utils';
 
 const _ = require('lodash');
@@ -558,18 +559,17 @@ However, number is not conserved in this option. Since it was ambiguous whether 
 was meant to be conserved in the question, partial credit was given for excluding this option with this explanation.
 `;
 
-var Scroll = require('react-scroll');
-var Link = Scroll.Link;
+const Scroll = require('react-scroll');
 var Element = Scroll.Element;
 var scrollSpy = Scroll.scrollSpy;
-var Sticky = require('react-stickynode');
 
 class EE16ASp16 extends Component {
   componentDidMount() {
     scrollSpy.update();
   }
 
-  generateSidetabContainers(is_mobile) {
+  render() {
+    const examCode = 'ee16asp16';
     const problemIDs = ['', 'q3', 'q4', 'q5', '', 'q6', 'q7', 'q8', 'q9']
     const problemTitles = [
       'Straightforward Questions',
@@ -582,39 +582,6 @@ class EE16ASp16 extends Component {
       '8. Ayy - Reflections on SIXTEEN',
       '9. Goodness Gracious, Great Balls of Fur!'
     ];
-    return _.map(_.range(problemIDs.length), (index) => {
-      const problemID = problemIDs[index];
-      const problemTitle = problemTitles[index];
-
-      if (problemID.length === 0) {
-        return (
-          <span><hr className="s1" /><div className="sidetitle">{problemTitle}</div></span>
-        );
-      }
-
-      return (
-        <div className="sidetab-container">
-          {
-            (is_mobile) ?
-            (
-              <Link className="sidetab" to={problemID} isDynamic={true} smooth={true} duration={500}>
-                {problemTitle}
-              </Link>
-            ) :
-            (
-              <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} smooth={true} duration={500}>
-                {problemTitle}
-              </Link>
-            )
-          }
-        </div>
-      );
-    });
-  }
-
-  render() {
-    const webSidetabContainers = this.generateSidetabContainers(false);
-    const mobileSidetabContainers = this.generateSidetabContainers(true);
 
     return (
       <span>
@@ -623,38 +590,7 @@ class EE16ASp16 extends Component {
         <div className="center">
           <h5>Midterm 1 | Spring 2016 | Alon, Ayazifar</h5>
         </div>
-        <Sticky className="sidebar screen">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s2" />
-          <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
-          {webSidetabContainers}
-          <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-sp16.pdf'} target="_blank">Exam PDF</a>
-          </div>
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-sp16-sol.pdf'} target="_blank">Solutions PDF</a>
-          </div>
-        </Sticky>
-        <div className="sidebar mobile">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s2" />
-          <i>Question 1 and 2 only ask for personal information such as name and hobbies, so they have been omitted.</i>
-          {mobileSidetabContainers}
-          <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-sp16.pdf'} target="_blank">Exam PDF</a>
-          </div>
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + '/exams/ee16a-mt1-sp16-sol.pdf'} target="_blank">Solutions PDF</a>
-          </div>
-        </div>
+        <Sidebar examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} />
         <div className="content">
           <Element name="q3" className="first-q">
             <hr className="s5" />
