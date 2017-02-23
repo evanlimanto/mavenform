@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { Question } from '../components/question';
 import { Sidebar } from '../components';
-import { lx, longblank, blank, onespace, twospace, threespace, fourspace, fivespace, sixspace, sevenspace, eightspace } from '../utils';
+import { lx, longblank, blank, onespace, twospace, threespace, fourspace, sixspace, eightspace } from '../utils';
 
 const _ = require('lodash');
 
-const tenspace = _.repeat('&nbsp;', 10);
 const twelvespace = _.repeat('&nbsp;', 12);
-const sixteenspace = _.repeat('&nbsp;', 16);
 
 const q1_1 =
 `

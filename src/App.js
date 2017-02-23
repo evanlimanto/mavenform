@@ -3,7 +3,6 @@ import { CS61CFa14, CS61CFa15, CS61CFa16, CS61CSp14, CS61CSp15, CS61CSp16,
          EE16ASp15, EE16AFa15, EE16AFa16, EE16ASp16 } from './exams';
 import classnames from 'classnames';
 import Home from './Home';
-import Course from './Course';
 import { exams } from './exams';
 
 const _ = require('lodash');
@@ -39,7 +38,6 @@ class App extends Component {
       course = this.props.location.query.courseId;
     }
 
-    console.log(exam);
     if (exam === 'cs61cfa16') {
       exam = <CS61CFa16 />;
     } else if (exam === 'cs61cfa15') {

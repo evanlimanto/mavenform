@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 class Exam extends Component {
- render() {
+  render() {
 
- }
+  }
 }
 
 export default Exam;

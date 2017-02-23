@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { Question } from '../components/question';
 import { Sidebar } from '../components';
-import { lx, longblank, blank, onespace, twospace, threespace, fourspace, fivespace, sixspace, sevenspace, eightspace } from '../utils';
+import { longblank, blank, onespace, twospace, threespace, fourspace, sevenspace, eightspace } from '../utils';
 
 const _ = require('lodash');
 
-const tenspace = _.repeat('&nbsp;', 10);
 const twelvespace = _.repeat('&nbsp;', 12);
 const fifteenspace = _.repeat('&nbsp;', 15);
-const sixteenspace = _.repeat('&nbsp;', 16);
 
 const q1_1 =
 `
@@ -94,7 +92,7 @@ ${fourspace}Address of students[0].id: <b>0x1004</b>
 <hr class="s1" />
 ${fourspace}students + 1: <b>0x100C</b>
 <hr class="s1" />
-${fourspace}Address of students[1].grade: <b>0x10104</b>
+${fourspace}Address of students[1].grade: <b>0x1014</b>
 </code>
 `;
 
@@ -717,11 +715,9 @@ iv. ${twospace}<b>False</b>
 v. ${threespace}<b>True</b>
 `;
 
-var Scroll = require('react-scroll');
-var Link = Scroll.Link;
+const Scroll = require('react-scroll');
 var Element = Scroll.Element;
 var scrollSpy = Scroll.scrollSpy;
-var Sticky = require('react-stickynode');
 
 class CS61CSp16 extends Component {
   componentDidMount() {
@@ -777,6 +773,8 @@ class CS61CSp16 extends Component {
             <Question id={"q5-1"} content={q5_1} solution={q5_1_soln} />
             <hr className="s5" />
             <Question id={"q5-2"} content={q5_2} solution={q5_2_soln} />
+            <hr className="s5" />
+            <Question id={"q5-3"} content={q5_3} solution={q5_3_soln} />
           </Element>
           <Element name="q6">
             <hr className="s5" />

@@ -1,31 +1,13 @@
 import React, { Component } from 'react';
 import { Question } from '../components/question';
 import { Sidebar } from '../components';
-import { lx, longblank, blank, onespace, twospace, threespace, fourspace, fivespace, sixspace, sevenspace, eightspace } from '../utils';
+import { lx, longblank, blank, twospace, threespace, fourspace, fivespace, eightspace } from '../utils';
 
 const _ = require('lodash');
 
 const tenspace = _.repeat('&nbsp;', 10);
 const twelvespace = _.repeat('&nbsp;', 12);
 const sixteenspace = _.repeat('&nbsp;', 16);
-
-const clarifications =
-`
-<h3>Exam Clarifications</h3>
-Q3-3. The node should free itself also.
-<hr class="s1" />
-- If you can traverse to a node through a series of prev and/or next, that node is reachable.
-<hr class="s1" />
-Q4. If you see a 90 under the “Exit” label, please ignore it.
-<hr class="s1" />
-beargit redux - In is_commit_msg_ok(), int i is declared before the for loop.
-<hr class="s1" />
-- If you need to use it, you can use $sp, $ra, $gp, $fp
-<hr class="s1" />
-Q6-3 - Give the address in hex
-<hr class="s1" />
-Q6-1 - Instructions are still 32 bits
-`;
 
 const q1_1 =
 `

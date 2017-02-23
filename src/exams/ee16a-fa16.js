@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
 import { Question } from '../components/question';
 import { Sidebar } from '../components';
 import { lmatrix, lx } from '../utils';

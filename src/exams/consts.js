@@ -60,11 +60,12 @@ const exams = {
   },
 };
 
-const classes = ['ee16a', 'cs61c'];
+const addedClasses = ['ee16a', 'cs61c'];
+const remainingClasses = [];
 
 const captions = {
   'ee16a': 'Designing Information Devices and Systems I',
   'cs61c': 'Great Ideas in Computer Architecture (Machine Structures)',
 };
 
-export { classes, exams, captions };
+export { exams, captions };
