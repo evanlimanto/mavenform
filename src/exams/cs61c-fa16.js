@@ -498,7 +498,7 @@ const q5_3 =
 
 const q5_4 =
 `
-4)  If the PC points to the nibble address 156610, what is the highest (largest) nibble address <b>in decimal</b> you can branch to? (NOTE: 1566 is a multiple of 6 and thus a proper DIPS word
+4)  If the PC points to the nibble address ${lx('1566_{10}')}, what is the highest (largest) nibble address <b>in decimal</b> you can branch to? (NOTE: 1566 is a multiple of 6 and thus a proper DIPS word
 address.)
 `
 
