@@ -353,7 +353,7 @@ By symmetry, half go to SF and half go to NYC.
 const sp16q7e =
 `
 (e) Finally, now suppose the initial state of the system is given by the vector
-${lx('\\vec{s}[0] = \\left[ \\begin{array}{c} 1/2 \\\\ 0 \\\\ 0 \\\\ 1/2 \\\\ \\end{array} \\right]', false)}
+${lx('\\vec{s}[0] = \\left[ \\begin{array}{c} 1/4 \\\\ 1/4 \\\\ 1/4 \\\\ 1/4 \\\\ \\end{array} \\right]', false)}
 This means that, initially, the Technocrats are equally distributed among the four Dream Cities. Without complicated mathematical derivations, determine ${lx('\\lim\\limits_{n \\to \\infty} \\vec{s}[n]')}.
 `;
 
@@ -407,7 +407,7 @@ const sp16q8c =
 const sp16q8c_soln =
 `
 ${lx('A_{12}')} = ${lx('A_2A_1')} = ${lmatrix([['\\frac{1}{\\sqrt{2}}', '\\frac{1}{\\sqrt{2}}'], ['-\\frac{1}{\\sqrt{2}}', '\\frac{1}{\\sqrt{2}}']])}
-${lmatrix([[0, -1], [-1, 0]])} = ${lmatrix([['-\\frac{1}{\\sqrt{2}}', '-\\frac{1}{\\sqrt{2}}'], ['-\\frac{1}{\\sqrt{2}}', '-\\frac{1}{\\sqrt{2}}']])}
+${lmatrix([[0, -1], [-1, 0]])} = ${lmatrix([['-\\frac{1}{\\sqrt{2}}', '-\\frac{1}{\\sqrt{2}}'], ['-\\frac{1}{\\sqrt{2}}', '\\frac{1}{\\sqrt{2}}']])}
 `;
 
 const sp16q8d =
@@ -418,7 +418,7 @@ const sp16q8d =
 const sp16q8d_soln =
 `
 ${lx('A_{21}')} = ${lx('A_1A_2')} = ${lmatrix([[0, -1], [-1, 0]])} ${lmatrix([['\\frac{1}{\\sqrt{2}}', '\\frac{1}{\\sqrt{2}}'], ['-\\frac{1}{\\sqrt{2}}', '\\frac{1}{\\sqrt{2}}']])}
- = ${lmatrix([['\\frac{1}{\\sqrt{2}}', '-\\frac{1}{\\sqrt{2}}'], ['-\\frac{1}{\\sqrt{2}}', '\\frac{1}{\\sqrt{2}}']])}
+ = ${lmatrix([['\\frac{1}{\\sqrt{2}}', '-\\frac{1}{\\sqrt{2}}'], ['-\\frac{1}{\\sqrt{2}}', '-\\frac{1}{\\sqrt{2}}']])}
 `;
 
 const sp16q8e =
