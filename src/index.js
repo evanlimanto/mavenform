@@ -11,8 +11,9 @@ ReactGA.initialize('UA-20131732-5');
 
 function logPageView() {
   if (window.location.hostname !== "localhost") {
-    ReactGA.set({ page: window.location.pathname });
-    ReactGA.pageview(window.location.pathname);
+    const path = window.location.pathname + window.location.search;
+    ReactGA.set({ path });
+    ReactGA.pageview(path);
   }
 }
 
