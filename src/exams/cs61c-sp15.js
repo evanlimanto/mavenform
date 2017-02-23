@@ -240,11 +240,13 @@ ${fourspace}return g;
 <hr class="s1" />
 }
 </code>
+<hr class="s2" />
+<i>No solution available, since no solution was available on the original PDF.</i>
 `;
 
 const q3_1_soln =
 `
-Solutions not provided in PDF. Super sorry :(
+Super sorry :(
 `;
 
 const q4_1 =
@@ -530,11 +532,13 @@ right that you should fill in with the appropriate fields (in binary):
 <hr class="s2" />
 
 <img src=${imgq6_1} class="problem-image" />
+<hr class="s2" />
+<i>No solution available, since no solution was available on the original PDF.</i>
 `;
 
 const q6_1_soln =
 `
-Solutions not provided in PDF. Super sorry :(
+Super sorry :(
 `;
 
 const q7_1 =

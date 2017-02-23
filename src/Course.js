@@ -70,18 +70,6 @@ class Course extends Component {
       unavailable =
       `
       <tr>
-        <td>Midterm 1</td>
-        <td>Spring 2016</td>
-        <td>Stojanovic, Weaver</td>
-        <td><i>No public release</i></td>
-      </tr>
-      <tr>
-        <td>Midterm 1</td>
-        <td>Fall 2014</td>
-        <td>Garcia, Lustig</td>
-        <td><i>In progress</i></td>
-      </tr>
-      <tr>
         <td>Midterm 2</td>
         <td>2014 - 2016</td>
         <td>Miscellaneous</td>

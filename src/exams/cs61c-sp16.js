@@ -107,7 +107,7 @@ i.e. <code>&students < students</code>
 
 const q1_2_soln =
 `
-<>False</b>
+<b>False</b>
 `;
 
 const q2_1 =
@@ -533,9 +533,9 @@ Line 8: ${longblank}
 
 const q5_2_soln =
 `
-Line 6: <b>add $t2 $t2 $t3</b>
+Line 6: <code>add $t2 $t2 $t3</code>
 <hr class="s1" />
-Line 8: <b>j LabelB</b>
+Line 8: <code>j LabelB</code>
 `;
 
 const q5_3 =
@@ -617,7 +617,8 @@ ${fourspace}printf("===end===\\n");
 </code>
 
 <hr class="s2" />
-<h4>Output:</h4>
+<b>What is the output?</b>
+<hr class="s2" />
 ===begin===
 <hr class="s1" />
 i.
@@ -711,9 +712,9 @@ ii. ${twospace} <b>False</b>
 <hr class="s1" />
 iii. ${onespace} <b>False</b>
 <hr class="s1" />
-iv. ${twospace} <b>False</b>
+iv. ${twospace}<b>False</b>
 <hr class="s1" />
-v. ${threespace} <b>True</b>
+v. ${threespace}<b>True</b>
 `;
 
 var Scroll = require('react-scroll');
@@ -728,15 +729,15 @@ class CS61CSp16 extends Component {
   }
 
   render() {
-    const examCode = 'cs61cfa14';
+    const examCode = 'cs61csp16';
     const problemIDs = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6'];
     const problemTitles = [
-      'Q1: Instructors keep their students aligned',
-      'Q2: This tree question need acory pun',
-      'Q3: A filter in the blank question',
-      'Q4: Have you seen this MIPStery before?',
-      'Q5: MIPS Instructions Per Second',
-      'Q6: Mishmash, Hodgepodge, Potpourri'
+      'Q1. Instructors keep their students aligned',
+      'Q2. This tree question need acory pun',
+      'Q3. A filter in the blank question',
+      'Q4. Have you seen this MIPStery before?',
+      'Q5. MIPS Instructions Per Second',
+      'Q6. Mishmash, Hodgepodge, Potpourri'
     ];
 
     return (
