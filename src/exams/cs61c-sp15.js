@@ -203,6 +203,21 @@ ${fourspace}char *a = "asdf";
 ${fourspace}return a;
 <hr class="s1" />
 }
+</code>
+`;
+
+const q3_1_soln =
+`
+1)  Does this function return a usable pointer to a string containing “asdf”? <b>Yes</b>
+<hr class="s1" />
+2)  Which area of memory does the returned pointer point to? <b>Static</b>
+<hr class="s1" />
+3)  Does this function leak memory? <b>No</b>
+`;
+
+const q3_2 =
+`
+<code>
 <hr class="s2" />
 char * get_asdf_string_2() {
 <hr class="s1" />
@@ -221,7 +236,21 @@ ${fourspace}a[4]='\0';
 ${fourspace}return a;
 <hr class="s1" />
 }
-<hr class="s2" />
+</code>
+`
+
+const q3_2_soln =
+`
+1)  Does this function return a usable pointer to a string containing “asdf”? <b>No</b>
+<hr class="s1" />
+2)  Which area of memory does the returned pointer point to? <b>Stack</b>
+<hr class="s1" />
+3)  Does this function leak memory? <b>No</b>
+`;
+
+const q3_3 =
+`
+<code>
 char * get_asdf_string_3() {
 <hr class="s1" />
 ${fourspace}char * a = malloc(sizeof(char) * 5);
@@ -231,7 +260,21 @@ ${fourspace}a = "asdf";
 ${fourspace}return a;
 <hr class="s1" />
 }
-<hr class="s2" />
+</code>
+`;
+
+const q3_3_soln =
+`
+1)  Does this function return a usable pointer to a string containing “asdf”? <b>Yes</b>
+<hr class="s1" />
+2)  Which area of memory does the returned pointer point to? <b>Static</b>
+<hr class="s1" />
+3)  Does this function leak memory? <b>Yes</b>
+`;
+
+const q3_4 =
+`
+<code>
 char * g = "asdf";
 <hr class="s1" />
 char * get_asdf_string_4() {
@@ -240,13 +283,15 @@ ${fourspace}return g;
 <hr class="s1" />
 }
 </code>
-<hr class="s2" />
-<i>No solution available, since no solution was available on the original PDF.</i>
 `;
 
-const q3_1_soln =
+const q3_4_soln =
 `
-Super sorry :(
+1)  Does this function return a usable pointer to a string containing “asdf”? <b>Yes</b>
+<hr class="s1" />
+2)  Which area of memory does the returned pointer point to? <b>Static</b>
+<hr class="s1" />
+3)  Does this function leak memory? <b>No</b>
 `;
 
 const q4_1 =
@@ -680,6 +725,12 @@ class CS61CSp15 extends Component {
           <Element name="q3">
             <hr className="s5" />
             <Question id={"q3-1"} content={q3_1} solution={q3_1_soln} />
+            <hr className="s5" />
+            <Question id={"q3-2"} content={q3_2} solution={q3_2_soln} />
+            <hr className="s5" />
+            <Question id={"q3-3"} content={q3_3} solution={q3_3_soln} />
+            <hr className="s5" />
+            <Question id={"q3-4"} content={q3_4} solution={q3_4_soln} />
           </Element>
           <Element name="q4">
             <hr className="s5" />
