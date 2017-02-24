@@ -72,6 +72,8 @@ const q2_1 =
 Consider the following C program:
 <hr class="s1" />
 <code>
+int a = 5;
+<hr class="s1" />
 void foo(){
 <hr class="s1" />
 ${fourspace}int temp;
