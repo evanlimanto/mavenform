@@ -8,8 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>
-<!--   <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script> -->
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -17,8 +15,15 @@
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
     ga('create', 'UA-20131732-5', 'auto');
+    ga('require', 'cleanUrlTracker');
+    ga('require', 'impressionTracker');
+    ga('require', 'maxScrollTracker');
+    ga('require', 'pageVisibilityTracker');
+    ga('require', 'urlChangeTracker');
     ga('send', 'pageview');
   </script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+  <script async type="text/javascript" src="%PUBLIC_URL%/autotrack.js"></script>
   <meta property="og:url" content="http://www.mavenform.com"/>
   <meta property="og:title" content="Mavenform"/>
   <meta property="og:type" content="website"/>
