@@ -434,7 +434,7 @@ class EE16AFa16 extends Component {
 
   render() {
     const examCode = 'ee16a-mt1-fa16';
-    const problemIDs = ['', 'q3', 'q4', 'q5', 'q6', '', 'q7', 'q8', 'q9'];
+    const problemIDs = ['', 'q3', 'q4', 'q5', '', 'q6', 'q7', 'q8'];
     const problemTitles = [
       'Section 1',
       '3. True/False',
