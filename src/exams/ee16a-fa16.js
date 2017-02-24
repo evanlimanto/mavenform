@@ -439,10 +439,10 @@ class EE16AFa16 extends Component {
       'Section 1',
       '3. True/False',
       '4. Proof',
-      '5. Show It',
-      '6. Inverse of a Matrix',
+      '5. Inverse of a Matrix',
       'Section 2',
-      '7. Directional Shovels',
+      '6. Directional Shovels',
+      '7. Graph Majors',
       '8. Transformation Basketball'
     ];
 
