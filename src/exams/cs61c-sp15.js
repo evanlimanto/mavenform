@@ -426,7 +426,7 @@ The function <code><b>countChars(char *str, char *target)</b></code> returns the
 <code>
 countChars("abc abc abc", "a") = 3
 <hr class="s1" />
-countChars("abc abc abc", "abc") = 6
+countChars("abc abc abc", "ab") = 6
 <hr class="s1" />
 countChars("abc abc abc", "abcd") = 9
 </code>
