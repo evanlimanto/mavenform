@@ -94,7 +94,7 @@ ${fourspace}Address of students[0].id: <b>0x1004</b>
 <hr class="s1" />
 ${fourspace}students + 1: <b>0x100C</b>
 <hr class="s1" />
-${fourspace}Address of students[1].grade: <b>0x10104</b>
+${fourspace}Address of students[1].grade: <b>0x1014</b>
 </code>
 `;
 
