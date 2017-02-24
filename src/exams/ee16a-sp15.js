@@ -185,7 +185,7 @@ const sp15q3c_soln =
 `
 If the stored information is a vector ${lx('S_i')}:
 
-${lx('\\left[ \\begin{array}{c} S_{i1} \\\\ S_{i2} \\\\ \\vdots \\\\ \\vdots \\\\ \\vdots \\\\ \\vdots \\\\ \\vdots \\\\ S_{i8} \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c c c c} 1 & 0 & 0 & 0 \\\\ 0 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & 0 \\\\ 0 & 0 & 0 & 1 \\\\ 1 & 1 & 0 & 0 \\\\ 1 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & 1 \\\\ 1 & 0 & 1 & 0 \\\\ 0 & 1 & 0 & 1 \\\\ \\end{array} \\right] \\cdot \\left[ \\begin{array}{c} a_i \\\\ b_i \\\\ c_i \\\\ d_i \\\\ \\end{array} \\right]', false)}
+${lx('\\left[ \\begin{array}{c} S_{i1} \\\\ S_{i2} \\\\ \\vdots \\\\ \\vdots \\\\ \\vdots \\\\ \\vdots \\\\ \\vdots \\\\ S_{i8} \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c c c c} 1 & 0 & 0 & 0 \\\\ 0 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & 0 \\\\ 0 & 0 & 0 & 1 \\\\ 1 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & 1 \\\\ 1 & 0 & 1 & 0 \\\\ 0 & 1 & 0 & 1 \\\\ \\end{array} \\right] \\cdot \\left[ \\begin{array}{c} a_i \\\\ b_i \\\\ c_i \\\\ d_i \\\\ \\end{array} \\right]', false)}
 
 <hr class="s1" />
 Define the binary matrix above as ${lx('A_{store}')} for part (d).
