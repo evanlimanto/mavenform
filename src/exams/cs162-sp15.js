@@ -3,6 +3,21 @@ import { Question } from '../components/question';
 import { Sidebar } from '../components';
 import { lx, longblank, blank, onespace, twospace, threespace, fourspace, fivespace, sixspace } from '../utils';
 
+// Kevin is transcribing this one very very slowly. Please do not touch for fear
+// of merge conflicts! Thanks.
+// Kevin is transcribing this one very very slowly. Please do not touch for fear
+// of merge conflicts! Thanks.
+// Kevin is transcribing this one very very slowly. Please do not touch for fear
+// of merge conflicts! Thanks.
+// Kevin is transcribing this one very very slowly. Please do not touch for fear
+// of merge conflicts! Thanks.
+// Kevin is transcribing this one very very slowly. Please do not touch for fear
+// of merge conflicts! Thanks.
+// Kevin is transcribing this one very very slowly. Please do not touch for fear
+// of merge conflicts! Thanks.
+// Kevin is transcribing this one very very slowly. Please do not touch for fear
+// of merge conflicts! Thanks.
+
 const _ = require('lodash');
 
 const q1_1 =
