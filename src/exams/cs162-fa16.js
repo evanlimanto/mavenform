@@ -719,6 +719,10 @@ class CS162Fa16 extends Component {
         <div className="content">
           <Element name="q1">
             <div className="content-spacer" />
+            <hr className="s5" />
+            <h2>General Information</h2>
+            <hr className="s2" />
+            <p>This is a closed book exam. You are allowed one 2-sided hand-written notes. You have 80 minutes to complete as much of the exam as possible. Make sure to read all of the questions first, as some of the questions are substantially more time consuming.</p>
             <Question id={"q1-1"} content={q1_1} solution={q1_1_soln} examCode={examCode} />
             <Question id={"q1-2"} content={q1_2} solution={q1_2_soln} examCode={examCode} />
             <Question id={"q1-3"} content={q1_3} solution={q1_3_soln} examCode={examCode} />
