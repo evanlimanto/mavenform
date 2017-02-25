@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { CS61CFa14, CS61CFa15, CS61CFa16, CS61CSp14, CS61CSp15, CS61CSp16,
          EE16ASp15, EE16AFa15, EE16AFa16, EE16ASp16,
          CS162Fa16, CS162Sp16, CS162Fa15, CS162Sp15 } from './exams';
-import { handleEvent } from './utils';  
+import { handleEvent } from './utils';
 import Home from './Home';
 import { exams } from './exams';
 
