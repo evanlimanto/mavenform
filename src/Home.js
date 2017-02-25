@@ -27,6 +27,12 @@ class Home extends Component {
             <i className="course-subtitle">Designing Information Devices and Systems I</i>
             <h4 className="card-helper">CLICK TO VIEW &#8594;</h4>
           </a>
+          <a className="course-card" href="/course?id=cs162" onClick={() => handleEvent('Click', 'Course', 'CS 162')}>
+            <h2>CS 162</h2>
+            <hr className="s1" />
+            <i className="course-subtitle">Operating Systems and Systems Programming </i>
+            <h4 className="card-helper">CLICK TO VIEW &#8594;</h4>
+          </a>
           <a className="course-card" href="/course?id=cs61c" onClick={() => handleEvent('Click', 'Course', 'CS 61C')}>
             <h2>CS 61C</h2>
             <hr className="s1" />

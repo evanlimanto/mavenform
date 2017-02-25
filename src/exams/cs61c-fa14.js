@@ -295,7 +295,7 @@ class CS61CFa14 extends Component {
         <h1>CS 61C</h1>
         <hr className="s2" />
         <div className="center">
-          <h5>Midterm 1 | Fall 2014 | Garcia, Lustig</h5>
+          <h5>Midterm 1 | Fall 2014 | Culler</h5>
         </div>
         <Sidebar examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} />
         <div className="content">

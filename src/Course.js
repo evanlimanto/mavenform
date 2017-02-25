@@ -37,8 +37,10 @@ class Course extends Component {
     }
     if (course === 'ee16a') {
       courseName = 'EE 16A';
-    } else {
+    } else if (course === 'cs61c') {
       courseName = 'CS 61C';
+    } else {
+      courseName = 'CS 162';
     }
     const examType = 'midterm-1';
     const available = _.values(_.mapValues(exams[course][examType], (dict, semester) => {
@@ -68,7 +70,7 @@ class Course extends Component {
       </tr>
       `;
       note = '';
-    } else {
+    } else if (course === 'cs61c') {
       unavailable =
       `
       <tr>
@@ -85,6 +87,9 @@ class Course extends Component {
       </tr>
       `;
       note = '<i>(up to the last 3 academic years)</i>';
+    } else {
+      unavailable = '';
+      note = '<i>(up to the last 5 academic terms)</i>';
     }
 
     const collapserClass = classnames({
