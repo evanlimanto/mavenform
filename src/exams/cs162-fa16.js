@@ -77,7 +77,7 @@ const q1_5_soln =
 Dual mode operation combined with address translation prevents user
 programs from overwriting kernel data structures by limiting the operations
 that user programs can perform. In particular, they cannot execute the
-privileged instructions that change address translation..
+privileged instructions that change address translation.
 `;
 
 const q1_6 =
@@ -176,11 +176,13 @@ const q2_1_soln =
 The key part of this question is that exec will replace the current process, so no
 more threads will be created. The output will be:
 <hr class="s1" />
+<code>
 Thread: 1
 <hr class="s1" />
 Thread: 2
 <hr class="s1" />
 (contents of current directory)
+</code>
 `;
 
 const q2_2 =
@@ -194,9 +196,11 @@ const q2_2_soln =
 Because the threads are created but aren’t waited for, they will execute in a non-
 deterministic order. So, we could get 0 or more printings of:
 <hr class="s1" />
+<code>
 Thread: {1…10}
 <hr class="s1" />
 ${twospace}(contents of current directory zero or one times)
+</code>
 `;
 
 const q3_1 =
@@ -236,6 +240,18 @@ ${fourspace}node *next;
 
 b. (3 points) Modify the <code>FSQ struct</code> to support a Finite Synchronized Queue.
 <i>You may assume that you have <code>struct</code> types for the components of a monitor.</i>
+<hr class="s1" />
+<code>
+typedef struct {
+<hr class="s1" />
+${fourspace}Node *head; ${onespace} /* pointer to head of queue */
+<hr class="s1" />
+${fourspace}int length; ${onespace} /* number of nodes in queue */
+<hr class="s1" />
+${fourspace}int capacity; /* max size of queue */
+<hr class="s5" />
+} FSQ;
+</code>
 `;
 
 const q3_2_soln =
@@ -262,12 +278,17 @@ ${fourspace}Condition spaceAvailable;
 const q3_3 =
 `
 We have implemented the <code>CreateQueue(int size)</code> function for you. You may
-assume that the <code>head, length, capacity, and monitor</code> components are initialized.
+assume that the <code>head, length, capacity,</code> and monitor components are initialized.
 
 <hr class="s2" />
 
 c. (5 points) Implement the <code>AddToQueue()</code> function. Feel free to use pseudocode for
 monitor operations.
+<hr class="s2" />
+<code>
+void AddToQueue(FSQ *queue, Node *data) {
+<hr class="s5" />
+}
 </code>
 `;
 
@@ -298,7 +319,13 @@ ${fourspace}LockRelease(&queue->lock);
 
 const q3_4 =
 `
-d. (5 points) Implement the RemoveFromQueue() function. <i>Feel free to use pseudocode for monitor operations.</i>
+d. (5 points) Implement the <code>RemoveFromQueue()</code> function. <i>Feel free to use pseudocode for monitor operations.</i>
+<hr class="s2" />
+<code>
+Node *RemoveFromQueue(FSQ *queue) {
+<hr class="s5" />
+}
+</code>
 `;
 
 const q3_4_soln =

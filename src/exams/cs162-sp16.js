@@ -258,7 +258,9 @@ void mon_lock(mon_t *m) ${fourspace} /* Acquires the monitor's lock */
 <hr class="s1" />
 void mon_release(mon_t *m) ${onespace} /* Releases the monitor's lock */
 <hr class="s2" />
-cv_t *cv_create(mon_t *m) ${twospace} /* Creates a condition variable associated with monitor m */
+cv_t *cv_create(mon_t *m) ${twospace} /* Creates a condition variable
+<hr class="s1" />
+${twelvespace}${twelvespace}${eightspace}associated with monitor m */
 <hr class="s1" />
 void cv_wait(cv_t *cv) ${fivespace} /* Blocks on the condition variable */
 <hr class="s1" />
@@ -322,7 +324,6 @@ ${fourspace}s->value--;
 ${fourspace}mon_release(s->m);
 <hr class="s1" />
 }
-</code>
 
 <hr class="s2" />
 

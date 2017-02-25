@@ -401,6 +401,24 @@ const q3_2 =
 `
 <b>Problem 3b[5pts]</b>: Complete the following sketch for the lock function.  Think carefully about the
 state of the lock; when you should wait, when you can grab the lock.
+<hr class="s2" />
+<code>
+/* Grab a BG lock.
+<hr class="s1" />
+${onespace}*
+<hr class="s1" />
+${onespace}* Args: (pointer to a bglock, enum lock type)
+<hr class="s1" />
+${onespace}* Returns: 0 (lock acquired)
+<hr class="s1" />
+${onespace}* non-zero (errno code from synchronization functions) 
+<hr class="s1" />
+${onespace}*/
+<hr class="s1" />
+int bglock_lock(struct bglock *lock, enum bglock_type type) {
+<hr class="s5" />
+}
+</code>
 `;
 
 const q3_2_soln =
@@ -414,7 +432,7 @@ ${onespace}* Args: (pointer to a bglock, enum lock type)
 <hr class="s1" />
 ${onespace}* Returns: 0 (lock acquired)
 <hr class="s1" />
-${onespace}*
+${onespace}* non-zero (errno code from synchronization functions) 
 <hr class="s1" />
 ${onespace}*/
 <hr class="s1" />
@@ -1035,12 +1053,12 @@ invalid/attempt to write a read only page).  A few answers are given:
 <tbody>
 <tr><td>Load [0x30115]</td><td>0x3115</td><td>0x57</td></tr>
 <tr><td>Store [0x10345]</td><td>0x3145</td><td>Access violation</td></tr>
-<tr><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td></tr>
+<tr><td>Store [0x30316]</td><td></td><td></td></tr>
+<tr><td>Load [0x01202]</td><td></td><td></td></tr>
+<tr><td>Store [0x31231]</td><td></td><td></td></tr>
+<tr><td>Store [0x21202]</td><td></td><td></td></tr>
+<tr><td>Load [0x11213]</td><td></td><td></td></tr>
+<tr><td>Load [0x01515]</td><td></td><td></td></tr>
 </tbody>
 </table>
 `;
