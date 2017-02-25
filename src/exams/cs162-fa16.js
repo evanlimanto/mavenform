@@ -699,7 +699,7 @@ class CS162Fa16 extends Component {
   }
 
   render() {
-    const examCode = 'cs162/mt1-fa16';
+    const examCode = 'cs162fa16';
     const problemIDs = ['q1', 'q2', 'q3', 'q4', 'q5'];
     const problemTitles = [
       'Q1. True/False and Why?',
@@ -708,7 +708,6 @@ class CS162Fa16 extends Component {
       'Q4. PintOS Questions',
       'Q5. Santa Claus problem (from Operating Systems: Internals and Design Principles',
     ];
-
     return (
       <span>
         <h1>CS 162</h1>
@@ -716,7 +715,7 @@ class CS162Fa16 extends Component {
         <div className="center">
           <h5>Midterm 1 | Fall 2016 | Joseph</h5>
         </div>
-        <Sidebar examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} />
+        <Sidebar examCode='cs162/mt1-fa16' problemIDs={problemIDs} problemTitles={problemTitles} />
         <div className="content">
           <Element name="q1">
             <div className="content-spacer" />

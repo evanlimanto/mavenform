@@ -731,6 +731,23 @@ tr.available:hover .table-link {
   left: -7px;
 }
 
+.question {
+  position: relative;
+}
+
+.link {
+  position: absolute;
+  border-bottom: 1px solid #ddd;
+  left: 590px;
+  color: #ccc;
+}
+
+.link:hover {
+  cursor: pointer;
+  color: #11accc;
+  border-bottom: 1px solid #11accc;
+}
+
 @media (max-width: 1599px) {
   .table-container {
     max-width: 800px;
