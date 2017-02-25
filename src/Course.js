@@ -89,7 +89,7 @@ class Course extends Component {
       note = '<i>(up to the last 3 academic years)</i>';
     } else {
       unavailable = '';
-      note = '<i>(up to the last 5 academic terms)</i>';
+      note = '<i>(up to the last 2 years)</i>';
     }
 
     const collapserClass = classnames({

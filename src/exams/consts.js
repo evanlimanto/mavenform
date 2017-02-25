@@ -81,11 +81,6 @@ const exams = {
         'profs': 'Kubiatowicz',
         'url': '/exam?id=cs162sp15',
       },
-      'Fall 2014': {
-        'id': 'cs162fa14',
-        'profs': 'Culler',
-        'url': '/exam?id=cs162fa14',
-      },
     },
   },
 };

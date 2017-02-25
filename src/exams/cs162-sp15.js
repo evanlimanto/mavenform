@@ -860,6 +860,7 @@ solution in (4f), since it would never interfere with acquisition of unrelated p
 const imgq5_1 = require('../img/cs162sp15-5-1.png');
 const q5_1 = 
 `
+<h3>Problem 5: Address Translation [20 pts]</h3>
 Consider a multi-level memory management scheme with the following format for virtual
 addresses: 
 <hr class="s2" />
@@ -1074,10 +1075,13 @@ class CS162Sp15 extends Component {
 
   render() {
     const examCode = 'cs162/mt1-sp15';
-    const problemIDs = ['q1', 'q2'];
+    const problemIDs = ['q1', 'q2', 'q3', 'q4', 'q5'];
     const problemTitles = [
-      'P1. True/False',
-      'P2. Short Answer'
+      'Q1. True/False',
+      'Q2. Short Answer',
+      'Q3. Atomic Synchronization Primitives',
+      'Q4. Scheduling and Deadlock',
+      'Q5. Address Translation'
     ];
 
     return (
