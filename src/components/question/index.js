@@ -1,7 +1,46 @@
 import React, { Component } from 'react';
 import { handleEvent } from '../../utils';
 import classnames from 'classnames';
+import copy from 'copy-to-clipboard';
 const _ = require('lodash');
+
+var Expire = React.createClass({
+  getDefaultProps: function() {
+    return {delay: 1000};
+  },
+  getInitialState: function(){
+    return {visible: true};
+  },
+  componentWillReceiveProps: function(nextProps) {
+    // reset the timer if children are changed
+    if (nextProps.children !== this.props.children) {
+      this.setTimer();
+      this.setState({visible: true});
+    }
+  },
+  componentDidMount: function() {
+      this.setTimer();
+  },
+  setTimer: function() {
+    // clear any existing timer
+    this._timer != null ? clearTimeout(this._timer) : null;
+
+    // hide after `delay` milliseconds
+    this._timer = setTimeout(function(){
+      this.setState({visible: false});
+      this.props.callback();
+      this._timer = null;
+    }.bind(this), this.props.delay);
+  },
+  componentWillUnmount: function() {
+    clearTimeout(this._timer);
+  },
+  render: function() {
+    return this.state.visible
+           ? <div>{this.props.children}</div>
+           : <span />;
+  }
+});
 
 class Solution extends Component {
   constructor(props) {
@@ -63,12 +102,40 @@ class Solution extends Component {
   }
 }
 
+// Replace the href with whatever you are going to use to copy
 class Question extends Component {
+  constructor(props) {
+    super(props);
+    this.copyToClipboard = this.copyToClipboard.bind(this);
+    this.clearCopied = this.clearCopied.bind(this);
+
+    this.state = {
+      copied: false
+    }
+  }
+
+  copyToClipboard(url) {
+    copy(url);
+    handleEvent("Click", "Copy Question", this.props.examCode + "/" + this.props.id);
+
+    this.setState({
+      copied: true
+    });
+  }
+
+  clearCopied() {
+    this.setState({
+      copied: false
+    });
+  }
+
   render() {
     const examCode = this.props.examCode;
     const content = this.props.content;
     return (
-      <div id={this.props.id}>
+      <div id={this.props.id} className="question">
+        <a className="link" onClick={() => this.copyToClipboard(`${document.location.origin}/exam?id=${this.props.examCode}&courseId=cs162#${this.props.id}`)}>Share</a>
+        {(this.state.copied) ? (<Expire delay={1800} callback={this.clearCopied}><div className="tooltip">Link copied to clipboard!</div></Expire>) : null}
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <Solution solution={this.props.solution} examCode={this.props.examCode} />
       </div>

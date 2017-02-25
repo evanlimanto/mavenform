@@ -10,6 +10,7 @@
     "autotrack": "^2.0.1",
     "browserify": "^14.1.0",
     "classnames": "^2.2.5",
+    "copy-to-clipboard": "^3.0.5",
     "express": "^4.14.1",
     "fs": "0.0.1-security",
     "glob": "^7.1.1",
