@@ -71,7 +71,7 @@ class Question extends Component {
     console.log(this.props.examCode);
     return (
       <div id={this.props.id} className="question">
-        <a className="link" href={process.env.PUBLIC_URL + `exam?id=${this.props.examCode}&courseId=cs162/#${this.props.id}`}>Share</a>
+        <a className="link" href={process.env.PUBLIC_URL + `exam?id=${this.props.examCode}&courseId=cs162#${this.props.id}`}>Share</a>
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <Solution solution={this.props.solution} examCode={this.props.examCode} />
       </div>
