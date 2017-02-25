@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import { exams } from './exams';
+import { handleEvent } from './utils';
 
 const _ = require('lodash');
 
@@ -13,7 +14,8 @@ class Course extends Component {
     };
   }
 
-  toggleCollapse() {
+  toggleCollapse(courseName) {
+    handleEvent('Click', 'Toggle Sidebar', courseName);
     this.setState({
       sidebar: !this.state.sidebar
     });
@@ -35,13 +37,15 @@ class Course extends Component {
     }
     if (course === 'ee16a') {
       courseName = 'EE 16A';
-    } else {
+    } else if (course === 'cs61c') {
       courseName = 'CS 61C';
+    } else {
+      courseName = 'CS 162';
     }
     const examType = 'midterm-1';
     const available = _.values(_.mapValues(exams[course][examType], (dict, semester) => {
       return (
-        <tr className="available">
+        <tr className="available" onClick={handleEvent("Click", "Exam", course)}>
           <td><a href={dict['url'] + '&courseId=' + course}>{_.replace(_.capitalize(examType), '-', ' ')}</a></td>
           <td><a href={dict['url'] + '&courseId=' + course}>{semester}</a></td>
           <td><a href={dict['url'] + '&courseId=' + course}>{dict['profs']}</a></td>
@@ -66,7 +70,7 @@ class Course extends Component {
       </tr>
       `;
       note = '';
-    } else {
+    } else if (course === 'cs61c') {
       unavailable =
       `
       <tr>
@@ -83,6 +87,9 @@ class Course extends Component {
       </tr>
       `;
       note = '<i>(up to the last 3 academic years)</i>';
+    } else {
+      unavailable = '';
+      note = '<i>(up to the last 5 academic terms)</i>';
     }
 
     const collapserClass = classnames({
@@ -90,7 +97,7 @@ class Course extends Component {
       iscollapsed: !this.state.sidebar
     });
     const collapser = (
-      <a className={collapserClass} onClick={() => this.toggleCollapse()}>&#9776; {(this.state.sidebar) ? "COLLAPSE" : "MENU"}</a>
+      <a className={collapserClass} onClick={() => this.toggleCollapse(courseName)}>&#9776; {(this.state.sidebar) ? "COLLAPSE" : "MENU"}</a>
     );
 
     const menuClass = classnames({
@@ -108,7 +115,7 @@ class Course extends Component {
         });
         return (
           <div key={semester} className="sidetab-container">
-            <a className={sideTabClass} href={url}>{title}</a>
+            <a className={sideTabClass} href={url} onClick={() => handleEvent('Click', 'Sidebar', course)}>{title}</a>
           </div>
         );
       });

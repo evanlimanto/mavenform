@@ -1,3 +1,5 @@
+import ReactGA from 'react-ga';
+
 const _ = require('lodash');
 const longblank = _.repeat('_', 30);
 const blank = '<code>________</code>';
@@ -47,7 +49,15 @@ function lx(s, inline=true) {
   return `${ (inline) ? "\\(" : "$$"}${s}${ (inline) ? "\\)" : "$$" }`;
 }
 
+function handleEvent(category, action, label="") {
+  ReactGA.event({
+    category,
+    action,
+    label,
+  });
+}
+
 export {
   lmatrix, lx,
-  longblank, blank, onespace, twospace, threespace, fourspace, fivespace, sixspace, sevenspace, eightspace, twelvespace
+  longblank, blank, onespace, twospace, threespace, fourspace, fivespace, sixspace, sevenspace, eightspace, twelvespace, handleEvent
 };

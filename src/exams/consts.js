@@ -66,6 +66,26 @@ const exams = {
         'profs': 'Joseph',
         'url': '/exam?id=cs162fa16',
       },
+      'Spring 2016': {
+        'id': 'cs162sp16',
+        'profs': 'Joseph',
+        'url': '/exam?id=cs162sp16',
+      },
+      'Fall 2015': {
+        'id': 'cs162fa15',
+        'profs': 'Kubiatowicz',
+        'url': '/exam?id=cs162fa15',
+      },
+      'Spring 2015': {
+        'id': 'cs162sp15',
+        'profs': 'Kubiatowicz',
+        'url': '/exam?id=cs162sp15',
+      },
+      'Fall 2014': {
+        'id': 'cs162fa14',
+        'profs': 'Culler',
+        'url': '/exam?id=cs162fa14',
+      },
     },
   },
 };
@@ -76,7 +96,7 @@ const remainingClasses = [];
 const captions = {
   'ee16a': 'Designing Information Devices and Systems I',
   'cs61c': 'Great Ideas in Computer Architecture (Machine Structures)',
-  'cs162': 'Test',
+  'cs162': 'Operating Systems and Systems Programming',
 };
 
 export { exams, captions };

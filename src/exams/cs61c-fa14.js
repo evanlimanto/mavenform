@@ -295,26 +295,26 @@ class CS61CFa14 extends Component {
         <h1>CS 61C</h1>
         <hr className="s2" />
         <div className="center">
-          <h5>Midterm 1 | Fall 2014 | Garcia, Lustig</h5>
+          <h5>Midterm 1 | Fall 2014 | Culler</h5>
         </div>
         <Sidebar examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} />
         <div className="content">
           <Element name="q1">
             <div className="content-spacer" />
             <hr className="s5" />
-            <Question id={"q1-1"} content={q1_1} solution={q1_1_soln} />
+            <Question id={"q1-1"} content={q1_1} solution={q1_1_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q1-2"} content={q1_2} solution={q1_2_soln} />
+            <Question id={"q1-2"} content={q1_2} solution={q1_2_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q1-3"} content={q1_3} solution={q1_3_soln} />
+            <Question id={"q1-3"} content={q1_3} solution={q1_3_soln} examCode={examCode} />
           </Element>
           <Element name="q2">
             <hr className="s5" />
-            <Question id={"q2-1"} content={q2_1} solution={q2_1_soln} />
+            <Question id={"q2-1"} content={q2_1} solution={q2_1_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q2-2"} content={q2_2} solution={q2_2_soln} />
+            <Question id={"q2-2"} content={q2_2} solution={q2_2_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q2-3"} content={q2_3} solution={q2_3_soln} />
+            <Question id={"q2-3"} content={q2_3} solution={q2_3_soln} examCode={examCode} />
           </Element>
         </div>
       </span>

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { CS61CFa14, CS61CFa15, CS61CFa16, CS61CSp14, CS61CSp15, CS61CSp16,
-         EE16ASp15, EE16AFa15, EE16AFa16, EE16ASp16, CS162Fa16 } from './exams';
 import classnames from 'classnames';
+import { CS61CFa14, CS61CFa15, CS61CFa16, CS61CSp14, CS61CSp15, CS61CSp16,
+         EE16ASp15, EE16AFa15, EE16AFa16, EE16ASp16,
+         CS162Fa16, CS162Sp16, CS162Fa15, CS162Sp15, CS162Fa14 } from './exams';
+import { handleEvent } from './utils';  
 import Home from './Home';
 import { exams } from './exams';
 
@@ -60,6 +62,14 @@ class App extends Component {
       exam = <EE16ASp15 />;
     } else if (exam === 'cs162fa16') {
       exam = <CS162Fa16 />;
+    } else if (exam === 'cs162sp16') {
+      exam = <CS162Sp16 />;
+    } else if (exam === 'cs162fa15') {
+      exam = <CS162Fa15 />;
+    } else if (exam === 'cs162sp15') {
+      exam = <CS162Sp15 />;
+    } else if (exam === 'cs162fa14') {
+      exam = <CS162Fa14 />;
     } else {
       return <Home />;
     }
@@ -101,7 +111,7 @@ class App extends Component {
 
     return (
       <span className="shift">
-        <a className="return" href={"/course?id=" + course}>&#8592; INDEX</a>
+        <a className="return" href={"/course?id=" + course} onClick={handleEvent("Click", "Exam Index", examId)}>&#8592; INDEX</a>
         {collapser}
         <div className={menuClass}>
           <a className="home center" href="/">Mavenform</a>
@@ -109,11 +119,11 @@ class App extends Component {
           <h4>{_.toUpper(course)}</h4>
           <hr className="s1" />
           <div className="sidetab-container">
-            <a className="sidetab" href={"/course?id=" + course}>Index</a>
+            <a className="sidetab" href={"/course?id=" + course} onClick={handleEvent("Click", "Home")}>Index</a>
           </div>
           <hr className="s1" />
           {sideTabs}
-          <a className="index" href="/">&#8592; RETURN</a>
+          <a className="index" href="/" >&#8592; RETURN</a>
         </div>
         <a className="feedback" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
         <div className="test-container">
