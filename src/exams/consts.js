@@ -58,14 +58,25 @@ const exams = {
       },
     },
   },
+
+  'cs162': {
+    'midterm-1': {
+      'Fall 2016': {
+        'id': 'cs162fa16',
+        'profs': 'Joseph',
+        'url': '/exam?id=cs162fa16',
+      },
+    },
+  },
 };
 
-const addedClasses = ['ee16a', 'cs61c'];
+const addedClasses = ['ee16a', 'cs61c', 'cs162'];
 const remainingClasses = [];
 
 const captions = {
   'ee16a': 'Designing Information Devices and Systems I',
   'cs61c': 'Great Ideas in Computer Architecture (Machine Structures)',
+  'cs162': 'Test',
 };
 
 export { exams, captions };

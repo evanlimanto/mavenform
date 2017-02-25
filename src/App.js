@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import { CS61CFa14, CS61CFa15, CS61CFa16, CS61CSp14, CS61CSp15, CS61CSp16,
-         EE16ASp15, EE16AFa15, EE16AFa16, EE16ASp16 } from './exams';
-import { handleEvent } from './utils';
+         EE16ASp15, EE16AFa15, EE16AFa16, EE16ASp16, CS162Fa16 } from './exams';
+import { handleEvent } from './utils';  
 import Home from './Home';
 import { exams } from './exams';
 
@@ -59,6 +59,8 @@ class App extends Component {
       exam = <EE16AFa15 />;
     } else if (exam === 'ee16asp15') {
       exam = <EE16ASp15 />;
+    } else if (exam === 'cs162fa16') {
+      exam = <CS162Fa16 />;
     } else {
       return <Home />;
     }
