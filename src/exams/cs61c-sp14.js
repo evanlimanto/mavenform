@@ -539,51 +539,51 @@ class CS61CSp14 extends Component {
           <Element name="q1">
             <div className="content-spacer" />
             <hr className="s5" />
-            <Question id={"q1-1"} content={q1_1} solution={q1_1_soln} />
+            <Question id={"q1-1"} content={q1_1} solution={q1_1_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q1-2"} content={q1_2} solution={q1_2_soln} />
+            <Question id={"q1-2"} content={q1_2} solution={q1_2_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q1-3"} content={q1_3} solution={q1_3_soln} />
+            <Question id={"q1-3"} content={q1_3} solution={q1_3_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q1-4"} content={q1_4} solution={q1_4_soln} />
+            <Question id={"q1-4"} content={q1_4} solution={q1_4_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q1-5"} content={q1_5} solution={q1_5_soln} />
+            <Question id={"q1-5"} content={q1_5} solution={q1_5_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q1-6"} content={q1_6} solution={q1_6_soln} />
+            <Question id={"q1-6"} content={q1_6} solution={q1_6_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q1-7"} content={q1_7} solution={q1_7_soln} />
+            <Question id={"q1-7"} content={q1_7} solution={q1_7_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q1-8"} content={q1_8} solution={q1_8_soln} />
+            <Question id={"q1-8"} content={q1_8} solution={q1_8_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q1-9"} content={q1_9} solution={q1_9_soln} />
+            <Question id={"q1-9"} content={q1_9} solution={q1_9_soln} examCode={examCode} />
           </Element>
           <Element name="q2">
             <hr className="s5" />
-            <Question id={"q2-1"} content={q2_1} solution={q2_1_soln} />
+            <Question id={"q2-1"} content={q2_1} solution={q2_1_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q2-2"} content={q2_2} solution={q2_2_soln} />
+            <Question id={"q2-2"} content={q2_2} solution={q2_2_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q2-3"} content={q2_3} solution={q2_3_soln} />
+            <Question id={"q2-3"} content={q2_3} solution={q2_3_soln} examCode={examCode} />
           </Element>
           <Element name="q3">
             <hr className="s5" />
-            <Question id={"q3-1"} content={q3_1} solution={q3_1_soln} />
+            <Question id={"q3-1"} content={q3_1} solution={q3_1_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q3-2"} content={q3_2} solution={q3_2_soln} />
+            <Question id={"q3-2"} content={q3_2} solution={q3_2_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q3-3"} content={q3_3} solution={q3_3_soln} />
+            <Question id={"q3-3"} content={q3_3} solution={q3_3_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q3-4"} content={q3_4} solution={q3_4_soln} />
+            <Question id={"q3-4"} content={q3_4} solution={q3_4_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q3-5"} content={q3_5} solution={q3_5_soln} />
+            <Question id={"q3-5"} content={q3_5} solution={q3_5_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q3-6"} content={q3_6} solution={q3_6_soln} />
+            <Question id={"q3-6"} content={q3_6} solution={q3_6_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q3-7"} content={q3_7} solution={q3_7_soln} />
+            <Question id={"q3-7"} content={q3_7} solution={q3_7_soln} examCode={examCode} />
           </Element>
           <Element name="q4">
             <hr className="s5" />
-            <Question id={"q4-1"} content={q4_1} solution={q4_1_soln} />
+            <Question id={"q4-1"} content={q4_1} solution={q4_1_soln} examCode={examCode} />
           </Element>
         </div>
       </span>

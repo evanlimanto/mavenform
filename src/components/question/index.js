@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { handleEvent } from '../../utils';
 import classnames from 'classnames';
 const _ = require('lodash');
 
@@ -14,6 +15,7 @@ class Solution extends Component {
   }
 
   toggleSolution() {
+    handleEvent("Click", "Toggle Solution", this.props.examCode);
     this.setState({
       showSolution: !this.state.showSolution
     });
@@ -63,6 +65,7 @@ class Solution extends Component {
 
 class Question extends Component {
   render() {
+    const examCode = this.props.examCode;
     const content = this.props.content;
     return (
       <div id={this.props.id}>

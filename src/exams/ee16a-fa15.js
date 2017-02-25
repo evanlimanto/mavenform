@@ -703,55 +703,55 @@ class EE16AFa15 extends Component {
             <hr className="s2" />
             <p>Unless told otherwise, you must show work to get credit. There will be very little partial credit given in this section. You get one drop: do 3 out of the following 4 questions. (We will grade all 4 and keep the best 3 scores.) Each problem is worth 8 points. Students who get all 4 questions correct will receive some bonus points (6 points).</p>
             <hr className="s5" />
-            <Question id={"q3"} content={fa15q3} variables={['x_1', 'x_2']} examCode={examCode} solution={fa15q3_soln} />
+            <Question id={"q3"} content={fa15q3} variables={['x_1', 'x_2']} examCode={examCode} solution={fa15q3_soln} examCode={examCode} />
           </Element>
           <Element name="q4">
             <hr className="s5" />
-            <Question id={"q4"} content={fa15q4} rows={2} cols={2} examCode={examCode} solution={fa15q4_soln}  />
+            <Question id={"q4"} content={fa15q4} rows={2} cols={2} examCode={examCode} solution={fa15q4_soln} examCode={examCode} />
           </Element>
           <Element name="q5">
             <hr className="s5" />
-            <Question id={"q5"} content={fa15q5} hasResponse={false} examCode={examCode} solution={fa15q5_soln}  />
+            <Question id={"q5"} content={fa15q5} hasResponse={false} examCode={examCode} solution={fa15q5_soln} examCode={examCode} />
           </Element>
           <Element name="q6">
             <hr className="s5" />
-            <Question id={"q6"} content={fa15q6} hasResponse={false} examCode={examCode} solution={fa15q6_soln}  />
+            <Question id={"q6"} content={fa15q6} hasResponse={false} examCode={examCode} solution={fa15q6_soln} examCode={examCode} />
           </Element>
           <Element name="q7">
             <hr className="s5" />
             <h2>Free-form Problems <i>(94 + 15 points)</i></h2>
             <hr className="s5" />
-            <Question id={"q7a"} content={fa15q7a} rows={4} cols={4} examCode={examCode} solution={fa15q7a_soln}  />
+            <Question id={"q7a"} content={fa15q7a} rows={4} cols={4} examCode={examCode} solution={fa15q7a_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q7b"} content={fa15q7b} on="Yes" off="No" examCode={examCode} solution={fa15q7b_soln}  />
+            <Question id={"q7b"} content={fa15q7b} on="Yes" off="No" examCode={examCode} solution={fa15q7b_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q7c"} content={fa15q7c} on="Yes" off="No" examCode={examCode} solution={fa15q7c_soln}  />
+            <Question id={"q7c"} content={fa15q7c} on="Yes" off="No" examCode={examCode} solution={fa15q7c_soln} examCode={examCode} />
           </Element>
           <Element name="q8">
             <hr className="s5" />
-            <Question id={"q8a"} content={fa15q8a} rows={6} cols={6} examCode={examCode} solution={fa15q8a_soln}  />
+            <Question id={"q8a"} content={fa15q8a} rows={6} cols={6} examCode={examCode} solution={fa15q8a_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q8b"} content={fa15q8b} rows={6} cols={1} examCode={examCode} solution={fa15q8b_soln}  />
+            <Question id={"q8b"} content={fa15q8b} rows={6} cols={1} examCode={examCode} solution={fa15q8b_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q8c"} content={fa15q8c} hasResponse={false} examCode={examCode} solution={fa15q8c_soln}  />
+            <Question id={"q8c"} content={fa15q8c} hasResponse={false} examCode={examCode} solution={fa15q8c_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q8d"} content={fa15q8d} hasResponse={false} examCode={examCode} solution={fa15q8d_soln}  />
+            <Question id={"q8d"} content={fa15q8d} hasResponse={false} examCode={examCode} solution={fa15q8d_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q8e"} content={fa15q8e} on="Yes" off="No" examCode={examCode} solution={fa15q8e_soln}  />
+            <Question id={"q8e"} content={fa15q8e} on="Yes" off="No" examCode={examCode} solution={fa15q8e_soln} examCode={examCode} />
           </Element>
           <Element name="q9">
             <hr className="s5" />
-            <Question id={"q9a"} content={fa15q9a} on="Yes" off="No" examCode={examCode} solution={fa15q9a_soln}  />
+            <Question id={"q9a"} content={fa15q9a} on="Yes" off="No" examCode={examCode} solution={fa15q9a_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q9b"} content={fa15q9b} hasResponse={false} examCode={examCode} solution={fa15q9b_soln}  />
+            <Question id={"q9b"} content={fa15q9b} hasResponse={false} examCode={examCode} solution={fa15q9b_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q9c"} content={fa15q9c} rows={3} cols={1} examCode={examCode} solution={fa15q9c_soln}  />
+            <Question id={"q9c"} content={fa15q9c} rows={3} cols={1} examCode={examCode} solution={fa15q9c_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q9d"} content={fa15q9d} hasResponse={false} examCode={examCode} solution={fa15q9d_soln}  />
+            <Question id={"q9d"} content={fa15q9d} hasResponse={false} examCode={examCode} solution={fa15q9d_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q9e"} content={fa15q9e} hasResponse={true} examCode={examCode} solution={fa15q9e_soln}  />
+            <Question id={"q9e"} content={fa15q9e} hasResponse={true} examCode={examCode} solution={fa15q9e_soln} examCode={examCode} />
             <hr className="s5" />
-            <Question id={"q9f"} content={fa15q9f} rows={3} cols={1} examCode={examCode} solution={fa15q9f_soln}  />
+            <Question id={"q9f"} content={fa15q9f} rows={3} cols={1} examCode={examCode} solution={fa15q9f_soln} examCode={examCode} />
           </Element>
         </div>
       </span>
