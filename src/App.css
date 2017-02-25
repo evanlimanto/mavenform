@@ -799,6 +799,11 @@ tr.available:hover .table-link {
   .mobile {
     display: initial;
   }
+
+  .link {
+    left: auto;
+    right: -40px;
+  }
 }
 
 @media (max-width: 599px) {
@@ -807,6 +812,10 @@ tr.available:hover .table-link {
   }
 
   td:nth-child(3), th:nth-child(3) {
+    display: none;
+  }
+
+  .link {
     display: none;
   }
 }
