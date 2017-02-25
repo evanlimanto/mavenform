@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const longblank = _.repeat('_', 30);
 const blank = '<code>________</code>';
+const twelvespace = _.repeat('&nbsp;', 12);
 const eightspace = _.repeat('&nbsp;', 8);
 const sevenspace = _.repeat('&nbsp;', 7);
 const sixspace = _.repeat('&nbsp;', 6);
@@ -48,5 +49,5 @@ function lx(s, inline=true) {
 
 export {
   lmatrix, lx,
-  longblank, blank, onespace, twospace, threespace, fourspace, fivespace, sixspace, sevenspace, eightspace
+  longblank, blank, onespace, twospace, threespace, fourspace, fivespace, sixspace, sevenspace, eightspace, twelvespace
 };
