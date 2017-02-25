@@ -88,7 +88,21 @@ class Course extends Component {
       `;
       note = '<i>(up to the last 3 academic years)</i>';
     } else {
-      unavailable = '';
+      unavailable =
+      `
+      <tr>
+        <td>Midterm 2</td>
+        <td>2015 - 2016</td>
+        <td>Miscellaneous</td>
+        <td><i>In progress</i></td>
+      </tr>
+      <tr>
+        <td>Final</td>
+        <td>2015 - 2016</td>
+        <td>Miscellaneous</td>
+        <td><i>In progress</i></td>
+      </tr>
+      `;
       note = '<i>(up to the last 2 years)</i>';
     }
 
