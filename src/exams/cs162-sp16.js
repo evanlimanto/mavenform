@@ -597,53 +597,33 @@ class CS162Sp16 extends Component {
             <h2>General Information</h2>
             <hr className="s2" />
             <p>This is a closed book exam. You are allowed one 2-sided hand-written notes. You have 80 minutes to complete as much of the exam as possible. Make sure to read all of the questions first, as some of the questions are substantially more time consuming.</p>
-            <hr className="s5" />
             <Question id={"q1-1"} content={q1_1} solution={q1_1_soln} examCode={examCode} />
-            <hr className="s5" />
             <Question id={"q1-2"} content={q1_2} solution={q1_2_soln} examCode={examCode} />
-            <hr className="s5" />
             <Question id={"q1-3"} content={q1_3} solution={q1_3_soln} examCode={examCode} />
-            <hr className="s5" />
             <Question id={"q1-4"} content={q1_4} solution={q1_4_soln} examCode={examCode} />
-            <hr className="s5" />
             <Question id={"q1-5"} content={q1_5} solution={q1_5_soln} examCode={examCode} />
-            <hr className="s5" />
             <Question id={"q1-6"} content={q1_6} solution={q1_6_soln} examCode={examCode} />
           </Element>
           <Element name="q2">
-            <hr className="s5" />
             <Question id={"q2-1"} content={q2_1} solution={q2_1_soln} examCode={examCode} />
           </Element>
           <Element name="q3">
-            <hr className="s5" />
             <Question id={"q3-1"} content={q3_1} solution={q3_1_soln} examCode={examCode} />
-            <hr className="s5" />
             <Question id={"q3-2"} content={q3_2} solution={q3_2_soln} examCode={examCode} />
-            <hr className="s5" />
             <Question id={"q3-3"} content={q3_3} solution={q3_3_soln} examCode={examCode} />
-            <hr className="s5" />
             <Question id={"q3-4"} content={q3_4} solution={q3_4_soln} examCode={examCode} />
-            <hr className="s5" />
             <Question id={"q3-5"} content={q3_5} solution={q3_5_soln} examCode={examCode} />
           </Element>
           <Element name="q4">
-            <hr className="s5" />
             <Question id={"q4-1"} content={q4_1} solution={q4_1_soln} examCode={examCode} />
-            <hr className="s5" />
             <Question id={"q4-2"} content={q4_2} solution={q4_2_soln} examCode={examCode} />
-            <hr className="s5" />
             <Question id={"q4-3"} content={q4_3} solution={q4_3_soln} examCode={examCode} />
-            <hr className="s5" />
             <Question id={"q4-4"} content={q4_4} solution={q4_4_soln} examCode={examCode} />
-            <hr className="s5" />
             <Question id={"q4-5"} content={q4_5} solution={q4_5_soln} examCode={examCode} />
-            <hr className="s5" />
             <Question id={"q4-6"} content={q4_6} solution={q4_6_soln} examCode={examCode} />
           </Element>
           <Element name="q5">
-            <hr className="s5" />
             <Question id={"q5-1"} content={q5_1} solution={q5_1_soln} examCode={examCode} />
-            <hr className="s5" />
             <Question id={"q5-2"} content={q5_2} solution={q5_2_soln} examCode={examCode} />
           </Element>
         </div>

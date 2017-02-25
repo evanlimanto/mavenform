@@ -379,6 +379,8 @@ input[type=button]:hover {
 .home-link {
   position: absolute;
   color: #fff;
+  background: transparent;
+  box-shadow: none;
 }
 
 .home-link:hover {
@@ -735,6 +737,7 @@ tr.available:hover .table-link {
 
 .question {
   position: relative;
+  padding-top: 50px;
 }
 
 .link {
@@ -742,7 +745,7 @@ tr.available:hover .table-link {
   border-bottom: 1px solid #ddd;
   right: -50px;
   color: #ccc;
-  top: -1px;
+  top: 50px;
 }
 
 .link:hover {
@@ -757,7 +760,7 @@ tr.available:hover .table-link {
   position: absolute;
   z-index: 2;
   right: -50px;
-  top: -40px;
+  top: 10px;
   background: #11accc;
   color: #fff;
   border-radius: 5px;
