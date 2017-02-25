@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
 import { CS61CFa14, CS61CFa15, CS61CFa16, CS61CSp14, CS61CSp15, CS61CSp16,
          EE16ASp15, EE16AFa15, EE16AFa16, EE16ASp16 } from './exams';
-import classnames from 'classnames';
+import { handleEvent } from './utils';
 import Home from './Home';
 import { exams } from './exams';
 
@@ -99,7 +100,7 @@ class App extends Component {
 
     return (
       <span className="shift">
-        <a className="return" href={"/course?id=" + course}>&#8592; INDEX</a>
+        <a className="return" href={"/course?id=" + course} onClick={handleEvent("Click", "Exam Index", examId)}>&#8592; INDEX</a>
         {collapser}
         <div className={menuClass}>
           <a className="home center" href="/">Mavenform</a>
@@ -107,11 +108,11 @@ class App extends Component {
           <h4>{_.toUpper(course)}</h4>
           <hr className="s1" />
           <div className="sidetab-container">
-            <a className="sidetab" href={"/course?id=" + course}>Index</a>
+            <a className="sidetab" href={"/course?id=" + course} onClick={handleEvent("Click", "Home")}>Index</a>
           </div>
           <hr className="s1" />
           {sideTabs}
-          <a className="index" href="/">&#8592; RETURN</a>
+          <a className="index" href="/" >&#8592; RETURN</a>
         </div>
         <a className="feedback" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
         <div className="test-container">

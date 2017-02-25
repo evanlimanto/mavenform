@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { handleEvent } from '../../utils';
 
 const Scroll = require('react-scroll');
 const Sticky = require('react-stickynode');
@@ -16,6 +17,7 @@ class Sidebar extends Component {
   generateSidetabContainers(is_mobile) {
     const problemIDs = this.props.problemIDs;
     const problemTitles = this.props.problemTitles;
+    const examCode = this.props.examCode;
     return _.map(_.range(problemIDs.length), (index) => {
       const problemID = problemIDs[index];
       const problemTitle = problemTitles[index];
@@ -31,7 +33,7 @@ class Sidebar extends Component {
           {
             (is_mobile) ?
             (
-              <Link className="sidetab" to={problemID} isDynamic={true} smooth={true} duration={500}>
+              <Link className="sidetab" to={problemID} isDynamic={true} smooth={true} duration={500} onClick={() => handleEvent("Click", "Sidebar", examCode)}>
                 {problemTitle}
               </Link>
             ) :
