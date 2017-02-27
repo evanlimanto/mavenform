@@ -24,27 +24,27 @@ class Sidebar extends Component {
 
       if (problemID.length === 0) {
         return (
-          <span><hr className="s1" /><div className="sidetitle">{problemTitle}</div></span>
+          <span key={index}><hr className="s1" /><div className="sidetitle">{problemTitle}</div></span>
+        );
+      } else {
+        return (
+          <div className="sidetab-container" key={index}>
+            {
+              (is_mobile) ?
+              (
+                <Link className="sidetab" to={problemID} isDynamic={true} smooth={true} duration={500} onClick={() => handleEvent("Click", "Sidebar", examCode)}>
+                  {problemTitle}
+                </Link>
+              ) :
+              (
+                <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} smooth={true} duration={500}>
+                  {problemTitle}
+                </Link>
+              )
+            }
+          </div>
         );
       }
-
-      return (
-        <div className="sidetab-container">
-          {
-            (is_mobile) ?
-            (
-              <Link className="sidetab" to={problemID} isDynamic={true} smooth={true} duration={500} onClick={() => handleEvent("Click", "Sidebar", examCode)}>
-                {problemTitle}
-              </Link>
-            ) :
-            (
-              <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} smooth={true} duration={500}>
-                {problemTitle}
-              </Link>
-            )
-          }
-        </div>
-      );
     });
   }
 

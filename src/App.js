@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { CS61CFa14, CS61CFa15, CS61CFa16, CS61CSp14, CS61CSp15, CS61CSp16,
-         EE16ASp15, EE16AFa15, EE16AFa16, EE16ASp16,
-         CS162Fa16, CS162Sp16, CS162Fa15, CS162Sp15 } from './exams';
+import { ExamsMap } from './exams';
 import { handleEvent } from './utils';
 import Home from './Home';
 import { exams } from './exams';
@@ -32,42 +30,15 @@ class App extends Component {
 
   render() {
     var exam = null;
-    var examId = null;
     var course = null;
+    var ExamComponent = null;
     if (this.props.location.query) {
       exam = this.props.location.query.id;
-      examId = exam;
       course = this.props.location.query.courseId;
     }
 
-    if (exam === 'cs61cfa16') {
-      exam = <CS61CFa16 />;
-    } else if (exam === 'cs61cfa15') {
-      exam = <CS61CFa15 />;
-    } else if (exam === 'cs61csp16') {
-      exam = <CS61CSp16 />;
-    } else if (exam === 'cs61csp15') {
-      exam = <CS61CSp15 />;
-    } else if (exam === 'cs61csp14') {
-      exam = <CS61CSp14 />;
-    } else if (exam === 'cs61cfa14') {
-      exam = <CS61CFa14 />;
-    } else if (exam === 'ee16afa16') {
-      exam = <EE16AFa16 />;
-    } else if (exam === 'ee16asp16') {
-      exam = <EE16ASp16 />;
-    } else if (exam === 'ee16afa15') {
-      exam = <EE16AFa15 />;
-    } else if (exam === 'ee16asp15') {
-      exam = <EE16ASp15 />;
-    } else if (exam === 'cs162fa16') {
-      exam = <CS162Fa16 />;
-    } else if (exam === 'cs162sp16') {
-      exam = <CS162Sp16 />;
-    } else if (exam === 'cs162fa15') {
-      exam = <CS162Fa15 />;
-    } else if (exam === 'cs162sp15') {
-      exam = <CS162Sp15 />;
+    if (exam in ExamsMap) {
+      ExamComponent = ExamsMap[exam];
     } else {
       return <Home />;
     }
@@ -91,7 +62,7 @@ class App extends Component {
         const title = semester;
         const sideTabClass = classnames({
           sidetab: true,
-          active: (examId === info['id']),
+          active: (exam === info['id']),
         });
         return (
           <div key={semester} className="sidetab-container">
@@ -100,7 +71,7 @@ class App extends Component {
         );
       });
       return (
-        <span>
+        <span key={examType}>
           <div className="sideTitle">{_.capitalize(_.replace(examType, '-', ' '))}</div>
           {content}
         </span>
@@ -109,7 +80,7 @@ class App extends Component {
 
     return (
       <span className="shift">
-        <a className="return" href={"/course?id=" + course} onClick={handleEvent("Click", "Exam Index", examId)}>&#8592; INDEX</a>
+        <a className="return" href={"/course?id=" + course} onClick={handleEvent("Click", "Exam Index", exam)}>&#8592; INDEX</a>
         {collapser}
         <div className={menuClass}>
           <a className="home center" href="/">Mavenform</a>
@@ -127,7 +98,7 @@ class App extends Component {
         <div className="test-container">
           <div className="test">
             <hr className="margin" />
-            {exam}
+            <ExamComponent />
           </div>
         </div>
       </span>

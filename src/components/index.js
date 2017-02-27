@@ -1,3 +1,4 @@
-import Sidebar from './sidebar/sidebar';
+import Sidebar from './sidebar';
+import Question from './question';
 
-export { Sidebar };
+export { Question, Sidebar };
