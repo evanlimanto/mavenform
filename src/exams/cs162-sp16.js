@@ -115,7 +115,7 @@ Consider the following set of processes, with associated processing times and pr
 <tr><td>B</td><td>1</td><td>1</td></tr>
 <tr><td>C</td><td>2</td><td>3</td></tr>
 <tr><td>D</td><td>1</td><td>4</td></tr>
-<tr><td>E</td><td>4</td><td>3</td></tr>
+<tr><td>E</td><td>4</td><td>2</td></tr>
 </tbody>
 </table>
 
