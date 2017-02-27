@@ -647,7 +647,10 @@ real CPU time.  The scheduler attempts to make sure that every thread has an equ
 virtual time.  Thus, to decide which thread to run next, it simply picks the thread with the least
 amount of accumulated virtual time. This behavior is considered “fair” because it attempts to
 distribute the same total virtual time to every thread.
-<hr class="s2" />
+`;
+
+const q4_3 =
+`
 <code>
 ${twospace}void main (void) {
 <hr class="s1" />
@@ -703,10 +706,7 @@ ${twospace}void func(void* lock_) {
 <hr class="s1" />
 ${twospace}}
 </code>
-`;
-
-const q4_3 =
-`
+<hr class="s2" />
 <b>Problem 4c[2pts]</b>: Consider the above PintOS test that exercises your priority scheduler.   Assume
 that no priority donation has been implemented.  What does it output to the terminal?   Is the output
 affected by priorities in any way?  Explain.

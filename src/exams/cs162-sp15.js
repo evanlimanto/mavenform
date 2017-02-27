@@ -570,7 +570,7 @@ ${eightspace}oldtail = tail; // Tentative pointer to tail
 <hr class="s1" />
 ${fourspace}} while {!CAS(tail,oldtail,newEntry);}
 <hr class="s1" />
-${fourspace}oldtail.net = newEntry;
+${fourspace}oldtail.next = newEntry;
 <hr class="s1" />
 }  
  </code>
