@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import { Question, Sidebar } from '../../components';
-import { lx, onespace, twospace, fourspace, sixspace, eightspace, twelvespace } from '../../utils';
 
 const _ = require('lodash');
 
@@ -131,37 +130,37 @@ int thread_count = 0;
 <hr class="s1" />
 void *thread_start(void *arg) {
 <hr class="s1" />
-${fourspace}thread_count++;
+&nbsp;&nbsp;&nbsp;&nbsp;thread_count++;
 <hr class="s1" />
-${fourspace}if (thread_count == 3) {
+&nbsp;&nbsp;&nbsp;&nbsp;if (thread_count == 3) {
 <hr class="s1" />
-${eightspace}char *argv[] = {"/bin/ls", NULL};
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *argv[] = {"/bin/ls", NULL};
 <hr class="s1" />
-${eightspace}execv(*argv, argv);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;execv(*argv, argv);
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}printf("Thread: %d\\n", thread_count);
+&nbsp;&nbsp;&nbsp;&nbsp;printf("Thread: %d\\n", thread_count);
 <hr class="s1" />
-${fourspace}return NULL;
+&nbsp;&nbsp;&nbsp;&nbsp;return NULL;
 <hr class="s1" />
 }
 <hr class="s2" />
 int main(int argc, char *argv[]) {
 <hr class="s1" />
-${fourspace}int i;
+&nbsp;&nbsp;&nbsp;&nbsp;int i;
 <hr class="s1" />
-${fourspace}for (i = 0; i < 10; i++) {
+&nbsp;&nbsp;&nbsp;&nbsp;for (i = 0; i < 10; i++) {
 <hr class="s1" />
-${eightspace}pthread_t *thread = malloc(sizeof(pthread_t));
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pthread_t *thread = malloc(sizeof(pthread_t));
 <hr class="s1" />
-${eightspace}pthread_create(thread, NULL, &thread_start, NULL);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pthread_create(thread, NULL, &thread_start, NULL);
 <hr class="s1" />
-${eightspace}pthread_join(*thread, NULL);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pthread_join(*thread, NULL);
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}return 0;
+&nbsp;&nbsp;&nbsp;&nbsp;return 0;
 <hr class="s1" />
 }
 </code>
@@ -199,7 +198,7 @@ deterministic order. So, we could get 0 or more printings of:
 <code>
 Thread: {1…10}
 <hr class="s1" />
-${twospace}(contents of current directory zero or one times)
+&nbsp;&nbsp;(contents of current directory zero or one times)
 </code>
 `;
 
@@ -230,9 +229,9 @@ Each element of the FSQ is a node:
 <code>
 typedef struct {
 <hr class="s1" />
-${fourspace}int data;
+&nbsp;&nbsp;&nbsp;&nbsp;int data;
 <hr class="s1" />
-${fourspace}node *next;
+&nbsp;&nbsp;&nbsp;&nbsp;node *next;
 <hr class="s1" />
 } Node;
 </code>
@@ -244,11 +243,11 @@ b. (3 points) Modify the <code>FSQ struct</code> to support a Finite Synchroniz
 <code>
 typedef struct {
 <hr class="s1" />
-${fourspace}Node *head; ${onespace} /* pointer to head of queue */
+&nbsp;&nbsp;&nbsp;&nbsp;Node *head; &nbsp; /* pointer to head of queue */
 <hr class="s1" />
-${fourspace}int length; ${onespace} /* number of nodes in queue */
+&nbsp;&nbsp;&nbsp;&nbsp;int length; &nbsp; /* number of nodes in queue */
 <hr class="s1" />
-${fourspace}int capacity; /* max size of queue */
+&nbsp;&nbsp;&nbsp;&nbsp;int capacity; /* max size of queue */
 <hr class="s5" />
 } FSQ;
 </code>
@@ -259,17 +258,17 @@ const q3_2_soln =
 <code>
 typedef struct {
 <hr class="s1" />
-${fourspace}Node *head; ${onespace} /* pointer to head of queue */
+&nbsp;&nbsp;&nbsp;&nbsp;Node *head; &nbsp; /* pointer to head of queue */
 <hr class="s1" />
-${fourspace}int length; ${onespace} /* number of nodes in queue */
+&nbsp;&nbsp;&nbsp;&nbsp;int length; &nbsp; /* number of nodes in queue */
 <hr class="s1" />
-${fourspace}int capacity; /* max size of queue */
+&nbsp;&nbsp;&nbsp;&nbsp;int capacity; /* max size of queue */
 <hr class="s1" />
-${fourspace}Lock lock;
+&nbsp;&nbsp;&nbsp;&nbsp;Lock lock;
 <hr class="s1" />
-${fourspace}Condition dataAvailable;
+&nbsp;&nbsp;&nbsp;&nbsp;Condition dataAvailable;
 <hr class="s1" />
-${fourspace}Condition spaceAvailable;
+&nbsp;&nbsp;&nbsp;&nbsp;Condition spaceAvailable;
 <hr class="s1" />
 } FSQ;
 </code>
@@ -297,21 +296,21 @@ const q3_3_soln =
 <code>
 void AddToQueue(FSQ *queue, Node *data) {
 <hr class="s1" />
-${fourspace}LockAcquire(&queue->lock);
+&nbsp;&nbsp;&nbsp;&nbsp;LockAcquire(&queue->lock);
 <hr class="s1" />
-${fourspace}while(queue->length == queue->capacity)
+&nbsp;&nbsp;&nbsp;&nbsp;while(queue->length == queue->capacity)
 <hr class="s1" />
-${eightspace}wait(&queue->spaceAvailable, &queue->lock);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wait(&queue->spaceAvailable, &queue->lock);
 <hr class="s1" />
-${fourspace}data->next = queue->head;
+&nbsp;&nbsp;&nbsp;&nbsp;data->next = queue->head;
 <hr class="s1" />
-${fourspace}queue->head = data;
+&nbsp;&nbsp;&nbsp;&nbsp;queue->head = data;
 <hr class="s1" />
-${fourspace}queue->length++;
+&nbsp;&nbsp;&nbsp;&nbsp;queue->length++;
 <hr class="s1" />
-${fourspace}signal(&queue->dataAvailable);
+&nbsp;&nbsp;&nbsp;&nbsp;signal(&queue->dataAvailable);
 <hr class="s1" />
-${fourspace}LockRelease(&queue->lock);
+&nbsp;&nbsp;&nbsp;&nbsp;LockRelease(&queue->lock);
 <hr class="s1" />
 }
 </code>
@@ -333,23 +332,23 @@ const q3_4_soln =
 <code>
 Node *RemoveFromQueue(FSQ *queue) {
 <hr class="s1" />
-${fourspace}Node *data;
+&nbsp;&nbsp;&nbsp;&nbsp;Node *data;
 <hr class="s1" />
-${fourspace}LockAcquire(&queue->lock);
+&nbsp;&nbsp;&nbsp;&nbsp;LockAcquire(&queue->lock);
 <hr class="s1" />
-${fourspace}while(queue‐>length == 0)
+&nbsp;&nbsp;&nbsp;&nbsp;while(queue‐>length == 0)
 <hr class="s1" />
-${eightspace}wait(&queue->dataAvailable, &queue->lock);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wait(&queue->dataAvailable, &queue->lock);
 <hr class="s1" />
-${fourspace}data = queue‐>head;
+&nbsp;&nbsp;&nbsp;&nbsp;data = queue‐>head;
 <hr class="s1" />
-${fourspace}queue->head = data->next;
+&nbsp;&nbsp;&nbsp;&nbsp;queue->head = data->next;
 <hr class="s1" />
-${fourspace}signal(&queue‐>spaceAvailable);
+&nbsp;&nbsp;&nbsp;&nbsp;signal(&queue‐>spaceAvailable);
 <hr class="s1" />
-${fourspace}LockRelease(&queue->lock);
+&nbsp;&nbsp;&nbsp;&nbsp;LockRelease(&queue->lock);
 <hr class="s1" />
-${fourspace}return data;
+&nbsp;&nbsp;&nbsp;&nbsp;return data;
 <hr class="s1" />
 }
 </code>
@@ -358,9 +357,7 @@ ${fourspace}return data;
 const q4_1 =
 `
 <h3>4. (22 points total) PintOS questions</h3>
-
-a. (3 points) What is the maximum number of threads you can create in a user process
-in PintOS?
+a. (3 points) What is the maximum number of threads you can create in a user process in PintOS?
 `;
 
 const q4_1_soln =
@@ -431,19 +428,19 @@ struct switch_threads_frame
 <hr class="s1" />
 {
 <hr class="s1" />
-${fourspace}uint32_t edi; ${sixspace} /* 0: Saved %edi. */
+&nbsp;&nbsp;&nbsp;&nbsp;uint32_t edi; ${sixspace} /* 0: Saved %edi. */
 <hr class="s1" />
-${fourspace}uint32_t esi; ${sixspace} /* 4: Saved %esi. */
+&nbsp;&nbsp;&nbsp;&nbsp;uint32_t esi; ${sixspace} /* 4: Saved %esi. */
 <hr class="s1" />
-${fourspace}uint32_t ebp; ${sixspace} /* 8: Saved %ebp. */
+&nbsp;&nbsp;&nbsp;&nbsp;uint32_t ebp; ${sixspace} /* 8: Saved %ebp. */
 <hr class="s1" />
-${fourspace}uint32_t ebx; ${sixspace} /* 12: Saved %ebx. */
+&nbsp;&nbsp;&nbsp;&nbsp;uint32_t ebx; ${sixspace} /* 12: Saved %ebx. */
 <hr class="s1" />
-${fourspace}void (*eip) (void); ${onespace}/* 16: Return address. */
+&nbsp;&nbsp;&nbsp;&nbsp;void (*eip) (void); &nbsp;/* 16: Return address. */
 <hr class="s1" />
-${fourspace}struct thread *cur; ${onespace}/* 20: switch_threads()'s CUR argument. */
+&nbsp;&nbsp;&nbsp;&nbsp;struct thread *cur; &nbsp;/* 20: switch_threads()'s CUR argument. */
 <hr class="s1" />
-${fourspace}struct thread *next;${onespace}/* 24: switch_threads()'s NEXT argument. */
+&nbsp;&nbsp;&nbsp;&nbsp;struct thread *next;&nbsp;/* 24: switch_threads()'s NEXT argument. */
 <hr class="s1" />
 };
 </code>
@@ -456,29 +453,29 @@ f. (4 points) Consider the following code for the thread_exit() function in Pint
 <code>
 void thread_exit (void) {
 <hr class="s1" />
-${fourspace}ASSERT (!intr_context ());
+&nbsp;&nbsp;&nbsp;&nbsp;ASSERT (!intr_context ());
 <hr class="s2" />
 #ifdef USERPROG
 <hr class="s1" />
-${fourspace}process_exit ();
+&nbsp;&nbsp;&nbsp;&nbsp;process_exit ();
 <hr class="s1" />
 #endif
 <hr class="s2" />
-${fourspace}/* Remove thread from all threads list, set our status to
+&nbsp;&nbsp;&nbsp;&nbsp;/* Remove thread from all threads list, set our status to
 <hr class="s1" />
 ${sixspace}dying, and schedule another process.That process
 <hr class="s1" />
 ${sixspace}will destroy us when it calls thread_schedule_tail(). */
 <hr class="s1" />
-${fourspace}intr_disable ();
+&nbsp;&nbsp;&nbsp;&nbsp;intr_disable ();
 <hr class="s1" />
-${fourspace}list_remove (&thread_current()->allelem);
+&nbsp;&nbsp;&nbsp;&nbsp;list_remove (&thread_current()->allelem);
 <hr class="s1" />
-${fourspace}thread_current ()->status = THREAD_DYING;
+&nbsp;&nbsp;&nbsp;&nbsp;thread_current ()->status = THREAD_DYING;
 <hr class="s1" />
-${fourspace}schedule ();
+&nbsp;&nbsp;&nbsp;&nbsp;schedule ();
 <hr class="s1" />
-${fourspace}NOT_REACHED ();
+&nbsp;&nbsp;&nbsp;&nbsp;NOT_REACHED ();
 <hr class="s1" />
 }
 </code>
@@ -501,9 +498,9 @@ Principles</i>)</h3>
 
 Santa Claus sleeps in his shop and can only be woken up by either:
 <hr class="s2" />
-${fourspace}(1) all ten reindeer being back from their vacation or
+&nbsp;&nbsp;&nbsp;&nbsp;(1) all ten reindeer being back from their vacation or
 <hr class="s1" />
-${fourspace}(2) some of the elves having difficulty making toys.
+&nbsp;&nbsp;&nbsp;&nbsp;(2) some of the elves having difficulty making toys.
 <hr class="s2" />
 The elves can only wake Santa up when 5 of them have a problem. While Santa is
 helping the 5 elves with their problems, any other elf who needs to meet Santa must
@@ -574,29 +571,29 @@ const q5_3_soln =
 <code>
 Santa() {
 <hr class="s1" />
-${fourspace}while(1) {
+&nbsp;&nbsp;&nbsp;&nbsp;while(1) {
 <hr class="s1" />
-${eightspace}santaSem.P();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;santaSem.P();
 <hr class="s1" />
-${eightspace}lock.P();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lock.P();
 <hr class="s1" />
-${eightspace}if (num_reindeer == 10) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (num_reindeer == 10) {
 <hr class="s1" />
-${twelvespace}prepareSleigh();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prepareSleigh();
 <hr class="s1" />
-${twelvespace}reindeerSem.V(); // do this 10 times
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reindeerSem.V(); // do this 10 times
 <hr class="s1" />
-${twelvespace}num_reindeer -= 10;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num_reindeer -= 10;
 <hr class="s1" />
-${eightspace}} else if (num_elves == 5) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else if (num_elves == 5) {
 <hr class="s1" />
-${twelvespace}helpElves();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;helpElves();
 <hr class="s1" />
-${eightspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${eightspace}lock.V();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lock.V();
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
 }
 </code>
@@ -629,21 +626,21 @@ const q5_4_soln =
 <code>
 ReindeerComesHome() {
 <hr class="s1" />
-${fourspace}lock.P();
+&nbsp;&nbsp;&nbsp;&nbsp;lock.P();
 <hr class="s1" />
-${fourspace}num_reindeer += 1;
+&nbsp;&nbsp;&nbsp;&nbsp;num_reindeer += 1;
 <hr class="s1" />
-${fourspace}if (num_reindeer == 10) {
+&nbsp;&nbsp;&nbsp;&nbsp;if (num_reindeer == 10) {
 <hr class="s1" />
-${eightspace}santaSem.V();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;santaSem.V();
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}lock.V();
+&nbsp;&nbsp;&nbsp;&nbsp;lock.V();
 <hr class="s1" />
-${fourspace}reindeerSem.P();
+&nbsp;&nbsp;&nbsp;&nbsp;reindeerSem.P();
 <hr class="s1" />
-${fourspace}getHitched();
+&nbsp;&nbsp;&nbsp;&nbsp;getHitched();
 <hr class="s1" />
 }
 </code>
@@ -673,37 +670,37 @@ const q5_5_soln =
 <code>
 ElfRequestsHelp() {
 <hr class="s1" />
-${fourspace}elfSem.P();
+&nbsp;&nbsp;&nbsp;&nbsp;elfSem.P();
 <hr class="s1" />
-${fourspace}lock.P();
+&nbsp;&nbsp;&nbsp;&nbsp;lock.P();
 <hr class="s1" />
-${fourspace}num_elves += 1;
+&nbsp;&nbsp;&nbsp;&nbsp;num_elves += 1;
 <hr class="s1" />
-${fourspace}if (num_elves == 5) {
+&nbsp;&nbsp;&nbsp;&nbsp;if (num_elves == 5) {
   <hr class="s1" />
-${eightspace}santaSem.V();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;santaSem.V();
 <hr class="s1" />
-${fourspace}} else {
+&nbsp;&nbsp;&nbsp;&nbsp;} else {
 <hr class="s1" />
-${eightspace}elfSem.V();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elfSem.V();
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}lock.V();
+&nbsp;&nbsp;&nbsp;&nbsp;lock.V();
 <hr class="s1" />
-${fourspace}getHelp();
+&nbsp;&nbsp;&nbsp;&nbsp;getHelp();
 <hr class="s1" />
-${fourspace}lock.P();
+&nbsp;&nbsp;&nbsp;&nbsp;lock.P();
 <hr class="s1" />
-${fourspace}num_elves -= 1;
+&nbsp;&nbsp;&nbsp;&nbsp;num_elves -= 1;
 <hr class="s1" />
-${fourspace}if (num_elves == 0) {
+&nbsp;&nbsp;&nbsp;&nbsp;if (num_elves == 0) {
   <hr class="s1" />
-${eightspace}elfSem.V();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elfSem.V();
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}lock.V();
+&nbsp;&nbsp;&nbsp;&nbsp;lock.V();
 <hr class="s1" />
 }
 </code>

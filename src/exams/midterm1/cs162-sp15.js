@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Question, Sidebar } from '../../components';
-import { lx, longblank, blank, onespace, twospace, threespace, fourspace, fivespace, sixspace, eightspace } from '../../utils';
+import { lx } from '../../utils';
 
 const _ = require('lodash');
 
@@ -183,7 +183,7 @@ conditions after waking (typically with a “while” loop):
 <code>
 while (condition not satisfied)
 <hr class="s1" />
-${fourspace}condition.wait();
+&nbsp;&nbsp;&nbsp;&nbsp;condition.wait();
 </code>
 <hr class="s2" />
 With Hoare-scheduled monitors, the “while” statement can often be replaced with an “if”
@@ -303,15 +303,15 @@ SWAP. For instance, consider the following implementation of TSET with CAS:
 <code>
 TSET(&addr) {
 <hr class="s1" />
-${fourspace}int temp;
+&nbsp;&nbsp;&nbsp;&nbsp;int temp;
 <hr class="s1" />
-${fourspace}do {
+&nbsp;&nbsp;&nbsp;&nbsp;do {
   <hr class="s1" />
-${eightspace}temp = M[addr];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;temp = M[addr];
 <hr class="s1" />
-${fourspace}} while (!CAS(addr,temp,1));
+&nbsp;&nbsp;&nbsp;&nbsp;} while (!CAS(addr,temp,1));
 <hr class="s1" />
-${fourspace}return temp;
+&nbsp;&nbsp;&nbsp;&nbsp;return temp;
 <hr class="s1" />
 } 
 </code>
@@ -362,15 +362,15 @@ const q3_2_soln =
 <code>
 SWAP(&addr, reg1) {
 <hr class="s1" />
-${fourspace}Object returnvalue;
+&nbsp;&nbsp;&nbsp;&nbsp;Object returnvalue;
 <hr class="s1" />
-${fourspace}do {
+&nbsp;&nbsp;&nbsp;&nbsp;do {
 <hr class="s1" />
-${eightspace}return = M[addr];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return = M[addr];
 <hr class="s1" />
-${fourspace}} while (!CAS(addr, returnvalue, reg1));
+&nbsp;&nbsp;&nbsp;&nbsp;} while (!CAS(addr, returnvalue, reg1));
 <hr class="s1" />
-${fourspace}Return returnvalue;
+&nbsp;&nbsp;&nbsp;&nbsp;Return returnvalue;
 <hr class="s1" />
 }
 </code>
@@ -424,15 +424,15 @@ straightforward:
 <hr class="s1" />
 class QueueEntry {
 <hr class="s1" />
-${fourspace}QueueEntry next = null;
+&nbsp;&nbsp;&nbsp;&nbsp;QueueEntry next = null;
 <hr class="s1" />
-${fourspace}Object stored;
+&nbsp;&nbsp;&nbsp;&nbsp;Object stored;
 <hr class="s1" />
-${fourspace}QueueEntry(Object newobject) {
+&nbsp;&nbsp;&nbsp;&nbsp;QueueEntry(Object newobject) {
   <hr class="s1" />
-${eightspace}stored = newobject;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stored = newobject;
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
 }
 <hr class="s1" />
@@ -440,37 +440,37 @@ ${fourspace}}
 <hr class="s1" />
 class Queue {
 <hr class="s1" />
-${fourspace}QueueEntry prevHead = new QueueEntry(null);
+&nbsp;&nbsp;&nbsp;&nbsp;QueueEntry prevHead = new QueueEntry(null);
 <hr class="s1" />
-${fourspace}QueueEntry tail = prevHead;
+&nbsp;&nbsp;&nbsp;&nbsp;QueueEntry tail = prevHead;
 <hr class="s1" />
-${fourspace}void Enqueue(Object newobject) {
+&nbsp;&nbsp;&nbsp;&nbsp;void Enqueue(Object newobject) {
 <hr class="s1" />
-${eightspace}QueueEntry newEntry = new QueueEntry(newobject);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;QueueEntry newEntry = new QueueEntry(newobject);
 <hr class="s1" />
-${eightspace}QueneEntry oldtail = tail;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;QueneEntry oldtail = tail;
 <hr class="s1" />
-${eightspace}tail = newEntry;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tail = newEntry;
 <hr class="s1" />
-${eightspace}oldtail.next = newEntry;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;oldtail.next = newEntry;
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}Object Dequeue() {
+&nbsp;&nbsp;&nbsp;&nbsp;Object Dequeue() {
 <hr class="s1" />
-${eightspace}QueueEntry oldprevHead = prevHead;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;QueueEntry oldprevHead = prevHead;
 <hr class="s1" />
-${eightspace}QueueEntry nextEntry = oldprevHead.next;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;QueueEntry nextEntry = oldprevHead.next;
 <hr class="s1" />
-${eightspace}if (nextEntry == null)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (nextEntry == null)
 <hr class="s1" />
-${eightspace}${fourspace}return null;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return null;
 <hr class="s1" />
-${eightspace}prevHead = nextEntry;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prevHead = nextEntry;
 <hr class="s1" />
-${eightspace}return nextEntry.stored;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return nextEntry.stored;
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
 }
 </code>
@@ -522,9 +522,9 @@ around vulnerable parts of the code identified above.
 <code>
 void Enqueue(Object newobject) {
 <hr class="s1" />
-${fourspace}QueueEntry newEntry = new QueueEntry(newobject);
+&nbsp;&nbsp;&nbsp;&nbsp;QueueEntry newEntry = new QueueEntry(newobject);
 <hr class="s1" />
-${fourspace}// Insert code here
+&nbsp;&nbsp;&nbsp;&nbsp;// Insert code here
 <hr class="s1" />
 } 
 </code>
@@ -535,27 +535,27 @@ const q3_6_soln =
 <code>
 void Enqueue(Object newobject) {
 <hr class="s1" />
-${fourspace}QueueEntry newEntry = new QueueEntry(newobject);
+&nbsp;&nbsp;&nbsp;&nbsp;QueueEntry newEntry = new QueueEntry(newobject);
 <hr class="s1" />
-${fourspace}// Insert code here
+&nbsp;&nbsp;&nbsp;&nbsp;// Insert code here
 <hr class="s1" />
-${fourspace}// Here, ‘tail’ is the shared variable that needs to be
+&nbsp;&nbsp;&nbsp;&nbsp;// Here, ‘tail’ is the shared variable that needs to be
 <hr class="s1" />
-${fourspace}// protected by CAS. We must atomically swap in ‘newEntry’
+&nbsp;&nbsp;&nbsp;&nbsp;// protected by CAS. We must atomically swap in ‘newEntry’
 <hr class="s1" />
-${fourspace}// to ‘tail’, giving us the old value so that we can link
+&nbsp;&nbsp;&nbsp;&nbsp;// to ‘tail’, giving us the old value so that we can link
 <hr class="s1" />
-${fourspace}// it to the new item.
+&nbsp;&nbsp;&nbsp;&nbsp;// it to the new item.
 <hr class="s1" />
-${fourspace}QueueEntry oldtail;
+&nbsp;&nbsp;&nbsp;&nbsp;QueueEntry oldtail;
 <hr class="s1" />
-${fourspace}do {
+&nbsp;&nbsp;&nbsp;&nbsp;do {
 <hr class="s1" />
-${eightspace}oldtail = tail; // Tentative pointer to tail
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;oldtail = tail; // Tentative pointer to tail
 <hr class="s1" />
-${fourspace}} while {!CAS(tail,oldtail,newEntry);}
+&nbsp;&nbsp;&nbsp;&nbsp;} while {!CAS(tail,oldtail,newEntry);}
 <hr class="s1" />
-${fourspace}oldtail.next = newEntry;
+&nbsp;&nbsp;&nbsp;&nbsp;oldtail.next = newEntry;
 <hr class="s1" />
 }  
  </code>
@@ -598,7 +598,7 @@ above and add back the null-check from the original code.</i>
 <code>
 Object Dequeue() {
 <hr class="s1" />
-${fourspace}// Insert code here 
+&nbsp;&nbsp;&nbsp;&nbsp;// Insert code here 
 <hr class="s1" />
 }
 </code>
@@ -609,35 +609,35 @@ const q3_8_soln =
 <code>
 Object Dequeue() {
 <hr class="s1" />
-${fourspace}// Here, ‘prevHead’ is the shared variable that needs to be
+&nbsp;&nbsp;&nbsp;&nbsp;// Here, ‘prevHead’ is the shared variable that needs to be
 <hr class="s1" />
-${fourspace}// protected by CAS. We must atomically grab the value of
+&nbsp;&nbsp;&nbsp;&nbsp;// protected by CAS. We must atomically grab the value of
 <hr class="s1" />
-${fourspace}// prevHead.next and swap it into prevHead. The CAS lets
+&nbsp;&nbsp;&nbsp;&nbsp;// prevHead.next and swap it into prevHead. The CAS lets
 <hr class="s1" />
-${fourspace}// us do this operation by making sure that prevHead is
+&nbsp;&nbsp;&nbsp;&nbsp;// us do this operation by making sure that prevHead is
 <hr class="s1" />
-${fourspace}// still equal to oldprevHead at the time that we swap
+&nbsp;&nbsp;&nbsp;&nbsp;// still equal to oldprevHead at the time that we swap
 <hr class="s1" />
-${fourspace}// in prevHead.next. Note that we have included a check to
+&nbsp;&nbsp;&nbsp;&nbsp;// in prevHead.next. Note that we have included a check to
 <hr class="s1" />
-${fourspace}// handle empty queues (not required for your solution)
+&nbsp;&nbsp;&nbsp;&nbsp;// handle empty queues (not required for your solution)
 <hr class="s1" />
-${fourspace}QueueEntry oldprevHead, nextEntry;
+&nbsp;&nbsp;&nbsp;&nbsp;QueueEntry oldprevHead, nextEntry;
 <hr class="s1" />
-${fourspace}do {
+&nbsp;&nbsp;&nbsp;&nbsp;do {
 <hr class="s1" />
-${eightspace}oldprevHead = prevHead;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;oldprevHead = prevHead;
 <hr class="s1" />
-${eightspace}nextEntry = oldprevHead.next;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nextEntry = oldprevHead.next;
 <hr class="s1" />
-${eightspace}if (nextEntry == null) // handle empty queue
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (nextEntry == null) // handle empty queue
 <hr class="s1" />
-${eightspace}${fourspace}return null;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return null;
 <hr class="s1" />
-${fourspace}} while (!CAS(prevHead, oldprevHead, nextEntry));
+&nbsp;&nbsp;&nbsp;&nbsp;} while (!CAS(prevHead, oldprevHead, nextEntry));
 <hr class="s1" />
-${fourspace}return oldprevHead.stored;
+&nbsp;&nbsp;&nbsp;&nbsp;return oldprevHead.stored;
 <hr class="s1" />
 }
 </code>
@@ -736,15 +736,15 @@ void smash (fighter_t* first, fighter_t* second)
 <hr class="s1" />
 {
 <hr class="s1" />
-${fourspace}pthread_mutex_lock (&first->lock);
+&nbsp;&nbsp;&nbsp;&nbsp;pthread_mutex_lock (&first->lock);
 <hr class="s1" />
-${fourspace}pthread_mutex_lock (&second->lock);
+&nbsp;&nbsp;&nbsp;&nbsp;pthread_mutex_lock (&second->lock);
 <hr class="s1" />
-${fourspace}fight (first, second);
+&nbsp;&nbsp;&nbsp;&nbsp;fight (first, second);
 <hr class="s1" />
-${fourspace}pthread_mutex_unlock (&second->lock);
+&nbsp;&nbsp;&nbsp;&nbsp;pthread_mutex_unlock (&second->lock);
 <hr class="s1" />
-${fourspace}pthread_mutex_unlock (&first->lock);
+&nbsp;&nbsp;&nbsp;&nbsp;pthread_mutex_unlock (&first->lock);
 <hr class="s1" />
 }
 </code>
@@ -789,19 +789,19 @@ void smash (fighter_t* first, fighter_t* second)
 <hr class="s1" />
 {
 <hr class="s1" />
-${fourspace}pthread_mutex_lock (&global_lock);
+&nbsp;&nbsp;&nbsp;&nbsp;pthread_mutex_lock (&global_lock);
 <hr class="s1" />
-${fourspace}pthread_mutex_lock (&first->lock);
+&nbsp;&nbsp;&nbsp;&nbsp;pthread_mutex_lock (&first->lock);
 <hr class="s1" />
-${fourspace}pthread_mutex_lock (&second->lock);
+&nbsp;&nbsp;&nbsp;&nbsp;pthread_mutex_lock (&second->lock);
 <hr class="s1" />
-${fourspace}pthread_mutex_unlock (&global_lock);
+&nbsp;&nbsp;&nbsp;&nbsp;pthread_mutex_unlock (&global_lock);
 <hr class="s1" />
-${fourspace}fight (first, second);
+&nbsp;&nbsp;&nbsp;&nbsp;fight (first, second);
 <hr class="s1" />
-${fourspace}pthread_mutex_unlock (&second->lock);
+&nbsp;&nbsp;&nbsp;&nbsp;pthread_mutex_unlock (&second->lock);
 <hr class="s1" />
-${fourspace}pthread_mutex_unlock (&first->lock);
+&nbsp;&nbsp;&nbsp;&nbsp;pthread_mutex_unlock (&first->lock);
 <hr class="s1" />
 }
 </code>

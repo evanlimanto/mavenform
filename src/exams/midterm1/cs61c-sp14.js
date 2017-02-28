@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Question, Sidebar } from '../../components';
-import { lx, longblank, blank, onespace, twospace, threespace, fourspace, sixspace, eightspace } from '../../utils';
+import { lx, longblank, blank } from '../../utils';
 
 const _ = require('lodash');
 
@@ -54,7 +54,7 @@ representation: 1 sign bit, 5 exponent bits, and 10 significand bits. The expone
 
 const q1_2_soln =
 `
-0b <b>0${threespace}01111${threespace}0000000001</b> = <b>1 + ${lx('2^{-10}')}</b>
+0b <b>0&nbsp;&nbsp;&nbsp;01111&nbsp;&nbsp;&nbsp;0000000001</b> = <b>1 + ${lx('2^{-10}')}</b>
 `;
 
 const q1_3 =
@@ -161,25 +161,25 @@ a)  Recall the exercise <code><b>ll_cycle</b></code> from lab 2, in which we che
 <code>
 int ll_has_cycle(node *ptr) {
 <hr class="s1" />
-${fourspace}if (!ptr)
+&nbsp;&nbsp;&nbsp;&nbsp;if (!ptr)
 <hr class="s1" />
-${eightspace}return 0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;
 <hr class="s1" />
-${fourspace}return has_cycle(ptr, ptr->next);
+&nbsp;&nbsp;&nbsp;&nbsp;return has_cycle(ptr, ptr->next);
 <hr class="s1" />
 }
 <hr class="s2" />
 int has_cycle(node *tortoise, node *hare) {
 <hr class="s1" />
-${fourspace}if (${longblank})
+&nbsp;&nbsp;&nbsp;&nbsp;if (${longblank})
 <hr class="s1" />
-${eightspace}return 1;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1;
 <hr class="s1" />
-${fourspace}if (${longblank})
+&nbsp;&nbsp;&nbsp;&nbsp;if (${longblank})
 <hr class="s1" />
-${eightspace}return 0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;
 <hr class="s1" />
-${fourspace}return has_cycle(tortoise->next, hare->next->next);
+&nbsp;&nbsp;&nbsp;&nbsp;return has_cycle(tortoise->next, hare->next->next);
 <hr class="s1" />
 }
 </code>
@@ -204,31 +204,31 @@ b)  Now that you've warmed up on the C version of this code, let’s convert has
 <hr class="s1" />
 # $a1 contains the pointer to the hare.
 <hr class="s2" />
-has_cycle: ${twospace}li $v0 1
+has_cycle: &nbsp;&nbsp;li $v0 1
 <hr class="s1" />
-${twelvespace}beq $a0 $a1 done
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq $a0 $a1 done
 <hr class="s1" />
-${twelvespace}li $v0 0
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;li $v0 0
 <hr class="s1" />
-${twelvespace}beq ${_.repeat('_', 10)} ${_.repeat('_', 10)} done
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq ${_.repeat('_', 10)} ${_.repeat('_', 10)} done
 <hr class="s1" />
-${twelvespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${twelvespace}beq ${_.repeat('_', 10)} ${_.repeat('_', 10)} done
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq ${_.repeat('_', 10)} ${_.repeat('_', 10)} done
 <hr class="s1" />
-${twelvespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${twelvespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${twelvespace}addiu ${_.repeat('_', 7)} ${_.repeat('_', 7)} ${_.repeat('_', 8)}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu ${_.repeat('_', 7)} ${_.repeat('_', 7)} ${_.repeat('_', 8)}
 <hr class="s1" />
-${twelvespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${twelvespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${twelvespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${twelvespace}addiu ${_.repeat('_', 7)} ${_.repeat('_', 7)} ${_.repeat('_', 8)}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu ${_.repeat('_', 7)} ${_.repeat('_', 7)} ${_.repeat('_', 8)}
 <hr class="s1" />
 done: ${sixspace}jr return a
 </code>
@@ -241,31 +241,31 @@ const q2_2_soln =
 <hr class="s1" />
 # $a1 contains the pointer to the hare.
 <hr class="s2" />
-has_cycle: ${onespace}li $v0 1
+has_cycle: &nbsp;li $v0 1
 <hr class="s1" />
-${twelvespace}beq $a0 $a1 done
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq $a0 $a1 done
 <hr class="s1" />
-${twelvespace}li $v0 0
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;li $v0 0
 <hr class="s1" />
-${twelvespace}beq <b>$a1</b> <b>$0</b> done
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq <b>$a1</b> <b>$0</b> done
 <hr class="s1" />
-${twelvespace}<b>lw $a1 4($a1)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lw $a1 4($a1)</b>
 <hr class="s1" />
-${twelvespace}beq <b>$a1</b> <b>$0</b> done
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq <b>$a1</b> <b>$0</b> done
 <hr class="s1" />
-${twelvespace}<b>lw $a0 4($a0)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lw $a0 4($a0)</b>
 <hr class="s1" />
-${twelvespace}<b>lw $a1 4($a1)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lw $a1 4($a1)</b>
 <hr class="s1" />
-${twelvespace}addiu <b>$sp</b> <b>$sp</b> <b>-4</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu <b>$sp</b> <b>$sp</b> <b>-4</b>
 <hr class="s1" />
-${twelvespace}<b>sw $ra 0($sp)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>sw $ra 0($sp)</b>
 <hr class="s1" />
-${twelvespace}<b>jal has_cycle</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>jal has_cycle</b>
 <hr class="s1" />
-${twelvespace}<b>lw $ra 0($sp)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lw $ra 0($sp)</b>
 <hr class="s1" />
-${twelvespace}addiu <b>$sp</b> <b>$sp</b> <b>4</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu <b>$sp</b> <b>$sp</b> <b>4</b>
 <hr class="s1" />
 done: ${sixspace}jr $ra
 </code>
@@ -282,31 +282,31 @@ const q2_3_soln = `
 <hr class="s1" />
 # $a1 contains the pointer to the hare.
 <hr class="s2" />
-has_cycle: ${onespace}li $v0 1
+has_cycle: &nbsp;li $v0 1
 <hr class="s1" />
-${twelvespace}beq $a0 $a1 done
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq $a0 $a1 done
 <hr class="s1" />
-${twelvespace}li $v0 0
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;li $v0 0
 <hr class="s1" />
-${twelvespace}beq <b>$a1</b> <b>$0</b> done
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq <b>$a1</b> <b>$0</b> done
 <hr class="s1" />
-${twelvespace}<b>lw $a1 4($a1)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lw $a1 4($a1)</b>
 <hr class="s1" />
-${twelvespace}beq <b>$a1</b> <b>$0</b> done
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq <b>$a1</b> <b>$0</b> done
 <hr class="s1" />
-${twelvespace}<b>lw $a0 4($a0)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lw $a0 4($a0)</b>
 <hr class="s1" />
-${twelvespace}<b>lw $a1 4($a1)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lw $a1 4($a1)</b>
 <hr class="s1" />
-${twelvespace}addiu <b>$sp</b> <b>$sp</b> <b>-4</b> ${onespace}<i><- circled, changed to nop</i>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu <b>$sp</b> <b>$sp</b> <b>-4</b> &nbsp;<i><- circled, changed to nop</i>
 <hr class="s1" />
-${twelvespace}<b>sw $ra 0($sp)</b> ${threespace} <i><- circled, changed to nop</i>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>sw $ra 0($sp)</b> &nbsp;&nbsp;&nbsp; <i><- circled, changed to nop</i>
 <hr class="s1" />
-${twelvespace}<b>jal has_cycle</b> ${threespace} <i><- change to j has_cycle</i>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>jal has_cycle</b> &nbsp;&nbsp;&nbsp; <i><- change to j has_cycle</i>
 <hr class="s1" />
-${twelvespace}<b>lw $ra 0($sp)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lw $ra 0($sp)</b>
 <hr class="s1" />
-${twelvespace}addiu <b>$sp</b> <b>$sp</b> <b>4</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu <b>$sp</b> <b>$sp</b> <b>4</b>
 <hr class="s1" />
 done: ${sixspace}jr $ra
 </code>
@@ -348,17 +348,17 @@ boundaries. The arrays contain only one <code><b>0x00</b></code>, in the last by
 <code>
 void our_strcpy(uint8_t *d, uint8_t *s) {
 <hr class="s1" />
-${fourspace}char c;
+&nbsp;&nbsp;&nbsp;&nbsp;char c;
 <hr class="s1" />
-${fourspace}do {
+&nbsp;&nbsp;&nbsp;&nbsp;do {
 <hr class="s1" />
-${eightspace}c = *s;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c = *s;
 <hr class="s1" />
-${eightspace}*d = c;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*d = c;
 <hr class="s1" />
-${eightspace}s++; d++;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s++; d++;
 <hr class="s1" />
-${fourspace}} while (c);
+&nbsp;&nbsp;&nbsp;&nbsp;} while (c);
 <hr class="s1" />
 }
 </code>
@@ -454,15 +454,15 @@ corresponding row of the following table, or write <i>'OK' if there is nothing w
 <hr class="s1" />
 void string_to_lowercase(char *s) {
 <hr class="s1" />
-${fourspace}for (char c = *s; c != '\\0'; s++) { ${sixspace} // 1
+&nbsp;&nbsp;&nbsp;&nbsp;for (char c = *s; c != '\\0'; s++) { ${sixspace} // 1
 <hr class="s1" />
-${eightspace}if (c >= 'A' && c <= 'S') {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (c >= 'A' && c <= 'S') {
 <hr class="s1" />
-${twelvespace}s += 'a' - 'A';${_.repeat('&nbsp;', 17)} // 2
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s += 'a' - 'A';${_.repeat('&nbsp;', 17)} // 2
 <hr class="s1" />
-${eightspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
 }
 <hr class="s2" />
@@ -470,11 +470,11 @@ ${fourspace}}
 <hr class="s1" />
 size_t string_length(char *s) {
 <hr class="s1" />
-${fourspace}char *s2 = s;
+&nbsp;&nbsp;&nbsp;&nbsp;char *s2 = s;
 <hr class="s1" />
-${fourspace}while (*s2++); ${_.repeat('&nbsp;', 25)} // 3
+&nbsp;&nbsp;&nbsp;&nbsp;while (*s2++); ${_.repeat('&nbsp;', 25)} // 3
 <hr class="s1" />
-${fourspace}return s2 - s - 1; ${_.repeat('&nbsp;', 21)} // 4
+&nbsp;&nbsp;&nbsp;&nbsp;return s2 - s - 1; ${_.repeat('&nbsp;', 21)} // 4
 <hr class="s1" />
 }
 <hr class="s2" />
@@ -482,13 +482,13 @@ ${fourspace}return s2 - s - 1; ${_.repeat('&nbsp;', 21)} // 4
 <hr class="s1" />
 uint32_t number_odds(uint32_t *numbers, uint32_t size) {
 <hr class="s1" />
-${fourspace}uint32_t odds = 0;
+&nbsp;&nbsp;&nbsp;&nbsp;uint32_t odds = 0;
 <hr class="s1" />
-${fourspace}for (uint32_t i = 0; i < size; i++)
+&nbsp;&nbsp;&nbsp;&nbsp;for (uint32_t i = 0; i < size; i++)
 <hr class="s1" />
-${eightspace}odds += *numbers+i && 1; ${_.repeat('&nbsp;', 11)} // 5
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;odds += *numbers+i && 1; ${_.repeat('&nbsp;', 11)} // 5
 <hr class="s1" />
-${fourspace}return odds;
+&nbsp;&nbsp;&nbsp;&nbsp;return odds;
 <hr class="s1" />
 }
 </code>
@@ -503,7 +503,7 @@ const q4_1_soln =
 <tr><td>2</td><td><code>*s += 'a' - 'A';</code></td></tr>
 <tr><td>3</td><td><code>OK</code></td></tr>
 <tr><td>4</td><td><code>OK</code></td></tr>
-<tr><td>5</td><td><code>odds += numbers[i] & 1${twospace}...${twospace}odds += *(numbers+i) & 1</code></td></tr>
+<tr><td>5</td><td><code>odds += numbers[i] & 1&nbsp;&nbsp;...&nbsp;&nbsp;odds += *(numbers+i) & 1</code></td></tr>
 </tbody>
 </table>
 `;

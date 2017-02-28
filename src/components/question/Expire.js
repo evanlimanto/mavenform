@@ -26,7 +26,9 @@ class Expire extends Component {
 
   setTimer() {
     // clear any existing timer
-    this._timer != null ? clearTimeout(this._timer) : null;
+    if (this._timer != null) {
+      clearTimeout(this._timer);
+    }
 
     // hide after `delay` milliseconds
     this._timer = setTimeout(function(){

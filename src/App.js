@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 import { ExamsMap } from './exams';
 import { handleEvent } from './utils';
+import { Exam } from './components';
 import Home from './Home';
 import { exams } from './exams';
 
@@ -37,8 +38,11 @@ class App extends Component {
       course = this.props.location.query.courseId;
     }
 
-    if (exam in ExamsMap) {
-      ExamComponent = ExamsMap[exam];
+    if (exam === 'cs162fa15') {
+      ExamComponent = <Exam code={exam} type="midterm1" />;
+    } else if (exam in ExamsMap) {
+      const EC = ExamsMap[exam];
+      ExamComponent = <EC />;
     } else {
       return <Home />;
     }
@@ -98,7 +102,7 @@ class App extends Component {
         <div className="test-container">
           <div className="test">
             <hr className="margin" />
-            <ExamComponent />
+            {ExamComponent}
           </div>
         </div>
       </span>

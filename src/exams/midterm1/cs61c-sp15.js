@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Question, Sidebar } from '../../components';
-import { lx, longblank, blank, onespace, twospace, fourspace, fivespace, sixspace, eightspace } from '../../utils';
+import { lx, longblank, blank } from '../../utils';
 
 const _ = require('lodash');
 
@@ -48,7 +48,7 @@ represent.
 <code>
 unsigned int max_twos() {
 <hr class="s1" />
-${fourspace}return ((1 << ${blank}) - ${blank});
+&nbsp;&nbsp;&nbsp;&nbsp;return ((1 << ${blank}) - ${blank});
 <hr class="s1" />
 }
 </code>
@@ -59,7 +59,7 @@ const q1_3_soln =
 <code>
 unsigned int max_twos() {
 <hr class="s1" />
-${fourspace}return ((1 << <b>31</b>) - <b>1</b>);
+&nbsp;&nbsp;&nbsp;&nbsp;return ((1 << <b>31</b>) - <b>1</b>);
 <hr class="s1" />
 }
 </code>
@@ -74,9 +74,9 @@ const q1_4 =
 Where <code>b</code> is a constant called the bias. Example with 4 bits and a bias of 4:
 <hr class="s2" />
 <code>
-${eightspace}0b0011 = 3 – 4 = -1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0b0011 = 3 – 4 = -1
 <hr class="s1" />
-${eightspace}0b1110 = 14 – 4 = 10
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0b1110 = 14 – 4 = 10
 </code>
 <hr class="s2" />
 
@@ -142,13 +142,13 @@ const q2_2 =
 <code>
 void foo1(${blank} a, int n) {
 <hr class="s1" />
-${fourspace}int i;
+&nbsp;&nbsp;&nbsp;&nbsp;int i;
 <hr class="s1" />
-${fourspace}for (i = 0; i < n; i++) {
+&nbsp;&nbsp;&nbsp;&nbsp;for (i = 0; i < n; i++) {
 <hr class="s1" />
-${eightspace}(*(a+i)) += 3;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(*(a+i)) += 3;
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
 }
 <hr class="s2" />
@@ -156,17 +156,17 @@ void foo2(${blank} p) { p++; }
 <hr class="s2" />
 int main() {
 <hr class="s1" />
-${fourspace}int x = ${blank};
+&nbsp;&nbsp;&nbsp;&nbsp;int x = ${blank};
 <hr class="s1" />
-${fourspace}int a[] = {1, 2, 3, 4, 5};
+&nbsp;&nbsp;&nbsp;&nbsp;int a[] = {1, 2, 3, 4, 5};
 <hr class="s1" />
-${fourspace}int *p = &a[1];
+&nbsp;&nbsp;&nbsp;&nbsp;int *p = &a[1];
 <hr class="s1" />
-${fourspace}foo1(a, sizeof(a) / sizeof(int));
+&nbsp;&nbsp;&nbsp;&nbsp;foo1(a, sizeof(a) / sizeof(int));
 <hr class="s1" />
-${fourspace}foo2(&p);
+&nbsp;&nbsp;&nbsp;&nbsp;foo2(&p);
 <hr class="s1" />
-${fourspace}printf("%d, %d, %d\n", a[1], *(++p), a[x]);
+&nbsp;&nbsp;&nbsp;&nbsp;printf("%d, %d, %d\n", a[1], *(++p), a[x]);
 <hr class="s1" />
 }
 <hr class="s2" />
@@ -196,9 +196,9 @@ You may assume that malloc calls will always return a non-<code>NULL</code> poin
 <code>
 char * get_asdf_string_1() {
 <hr class="s1" />
-${fourspace}char *a = "asdf";
+&nbsp;&nbsp;&nbsp;&nbsp;char *a = "asdf";
 <hr class="s1" />
-${fourspace}return a;
+&nbsp;&nbsp;&nbsp;&nbsp;return a;
 <hr class="s1" />
 }
 </code>
@@ -219,19 +219,19 @@ const q3_2 =
 <hr class="s2" />
 char * get_asdf_string_2() {
 <hr class="s1" />
-${fourspace}char a[5];
+&nbsp;&nbsp;&nbsp;&nbsp;char a[5];
 <hr class="s1" />
-${fourspace}a[0]='a';
+&nbsp;&nbsp;&nbsp;&nbsp;a[0]='a';
 <hr class="s1" />
-${fourspace}a[1]='s';
+&nbsp;&nbsp;&nbsp;&nbsp;a[1]='s';
 <hr class="s1" />
-${fourspace}a[2]='d';
+&nbsp;&nbsp;&nbsp;&nbsp;a[2]='d';
 <hr class="s1" />
-${fourspace}a[3]='f';
+&nbsp;&nbsp;&nbsp;&nbsp;a[3]='f';
 <hr class="s1" />
-${fourspace}a[4]='\0';
+&nbsp;&nbsp;&nbsp;&nbsp;a[4]='\0';
 <hr class="s1" />
-${fourspace}return a;
+&nbsp;&nbsp;&nbsp;&nbsp;return a;
 <hr class="s1" />
 }
 </code>
@@ -251,11 +251,11 @@ const q3_3 =
 <code>
 char * get_asdf_string_3() {
 <hr class="s1" />
-${fourspace}char * a = malloc(sizeof(char) * 5);
+&nbsp;&nbsp;&nbsp;&nbsp;char * a = malloc(sizeof(char) * 5);
 <hr class="s1" />
-${fourspace}a = "asdf";
+&nbsp;&nbsp;&nbsp;&nbsp;a = "asdf";
 <hr class="s1" />
-${fourspace}return a;
+&nbsp;&nbsp;&nbsp;&nbsp;return a;
 <hr class="s1" />
 }
 </code>
@@ -277,7 +277,7 @@ char * g = "asdf";
 <hr class="s1" />
 char * get_asdf_string_4() {
 <hr class="s1" />
-${fourspace}return g;
+&nbsp;&nbsp;&nbsp;&nbsp;return g;
 <hr class="s1" />
 }
 </code>
@@ -300,9 +300,9 @@ const q4_1 =
 <code>
 typedef struct node {
 <hr class="s1" />
-${fourspace}int value;
+&nbsp;&nbsp;&nbsp;&nbsp;int value;
 <hr class="s1" />
-${fourspace}${blank} next; //pointer to the next element
+&nbsp;&nbsp;&nbsp;&nbsp;${blank} next; //pointer to the next element
 <hr class="s1" />
 } sll_node;
 </code>
@@ -320,21 +320,21 @@ const q4_2 =
 <code>
 int * to_array(sll_node *sll int size) {
 <hr class="s1" />
-${fourspace}int i = 0;
+&nbsp;&nbsp;&nbsp;&nbsp;int i = 0;
 <hr class="s1" />
-${fourspace}int *arr = ${longblank};
+&nbsp;&nbsp;&nbsp;&nbsp;int *arr = ${longblank};
 <hr class="s1" />
-${fourspace}while (sll) {
+&nbsp;&nbsp;&nbsp;&nbsp;while (sll) {
 <hr class="s1" />
-${eightspace}arr[i] = ${longblank};
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr[i] = ${longblank};
 <hr class="s1" />
-${eightspace}sll ${twospace} = ${longblank};
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sll &nbsp;&nbsp; = ${longblank};
 <hr class="s1" />
-${eightspace}${longblank};
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank};
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}return arr;
+&nbsp;&nbsp;&nbsp;&nbsp;return arr;
 <hr class="s1" />
 }
 </code>
@@ -345,21 +345,21 @@ const q4_2_soln =
 <code>
 int * to_array(sll_node *sll int size) {
 <hr class="s1" />
-${fourspace}int i = 0;
+&nbsp;&nbsp;&nbsp;&nbsp;int i = 0;
 <hr class="s1" />
-${fourspace}int *arr = <b>malloc(size * sizeof(int))</b>;
+&nbsp;&nbsp;&nbsp;&nbsp;int *arr = <b>malloc(size * sizeof(int))</b>;
 <hr class="s1" />
-${fourspace}while (sll) {
+&nbsp;&nbsp;&nbsp;&nbsp;while (sll) {
 <hr class="s1" />
-${eightspace}arr[i] = <b>sll->value</b>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr[i] = <b>sll->value</b>;
 <hr class="s1" />
-${eightspace}sll ${twospace} = <b>sll->next</b>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sll &nbsp;&nbsp; = <b>sll->next</b>;
 <hr class="s1" />
-${eightspace}<b>i++</b>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>i++</b>;
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}return arr;
+&nbsp;&nbsp;&nbsp;&nbsp;return arr;
 <hr class="s1" />
 }
 </code>
@@ -380,17 +380,17 @@ Calling <code>delete_even()</code> on the list labeled "Before" will change it i
 <code>
 void delete_even(sll_node *sll) {
 <hr class="s1" />
-${fourspace}sll_node *temp;
+&nbsp;&nbsp;&nbsp;&nbsp;sll_node *temp;
 <hr class="s1" />
-${fourspace}if (!sll || !sll->next) return;
+&nbsp;&nbsp;&nbsp;&nbsp;if (!sll || !sll->next) return;
 <hr class="s1" />
-${fourspace}temp = ${blank};
+&nbsp;&nbsp;&nbsp;&nbsp;temp = ${blank};
 <hr class="s1" />
-${fourspace}sll->next = ${blank};
+&nbsp;&nbsp;&nbsp;&nbsp;sll->next = ${blank};
 <hr class="s1" />
-${fourspace}free(${blank});
+&nbsp;&nbsp;&nbsp;&nbsp;free(${blank});
 <hr class="s1" />
-${fourspace}delete_even(${blank});
+&nbsp;&nbsp;&nbsp;&nbsp;delete_even(${blank});
 <hr class="s1" />
 }
 </code>
@@ -401,17 +401,17 @@ const q4_3_soln =
 <code>
 void delete_even(sll_node *sll) {
 <hr class="s1" />
-${fourspace}sll_node *temp;
+&nbsp;&nbsp;&nbsp;&nbsp;sll_node *temp;
 <hr class="s1" />
-${fourspace}if (!sll || !sll->next) return;
+&nbsp;&nbsp;&nbsp;&nbsp;if (!sll || !sll->next) return;
 <hr class="s1" />
-${fourspace}temp = <b>sll->next</b>;
+&nbsp;&nbsp;&nbsp;&nbsp;temp = <b>sll->next</b>;
 <hr class="s1" />
-${fourspace}sll->next = <b>temp->next (or sll->next->next)</b>;
+&nbsp;&nbsp;&nbsp;&nbsp;sll->next = <b>temp->next (or sll->next->next)</b>;
 <hr class="s1" />
-${fourspace}free(<b>temp</b>);
+&nbsp;&nbsp;&nbsp;&nbsp;free(<b>temp</b>);
 <hr class="s1" />
-${fourspace}delete_even(<b>sll->next</b>);
+&nbsp;&nbsp;&nbsp;&nbsp;delete_even(<b>sll->next</b>);
 <hr class="s1" />
 }
 </code>
@@ -436,15 +436,15 @@ The C code for <code>countChars</code> is given to you below. The helper functio
 <code>
 int countChars(char *str, char *target) {
 <hr class="s1" />
-${fourspace}int count = 0;
+&nbsp;&nbsp;&nbsp;&nbsp;int count = 0;
 <hr class="s1" />
-${fourspace}while (*str) {
+&nbsp;&nbsp;&nbsp;&nbsp;while (*str) {
 <hr class="s1" />
-${eightspace}count += isCharInStr(target, *str);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += isCharInStr(target, *str);
 <hr class="s1" />
-${eightspace}str++;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;str++;
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
 }
 </code>
@@ -456,7 +456,7 @@ countChars:
 <hr class="s1" />
 ${fivespace}addiu $sp, $sp, ${_.repeat('_', 14)}
 <hr class="s1" />
-${fivespace}${longblank}${onespace}# Store onto the stack if needed
+${fivespace}${longblank}&nbsp;# Store onto the stack if needed
 <hr class="s1" />
 ${fivespace}${longblank}
 <hr class="s1" />
@@ -466,7 +466,7 @@ ${fivespace}${longblank}
 <hr class="s1" />
 ${fivespace}${longblank}
 <hr class="s1" />
-${fivespace}addiu $s0, $zero, 0${twelvespace}# We'll store the count in $s0
+${fivespace}addiu $s0, $zero, 0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# We'll store the count in $s0
 <hr class="s1" />
 ${fivespace}addiu $s1, $a0, 0
 <hr class="s1" />
@@ -490,7 +490,7 @@ ${fivespace}${longblank}
 <hr class="s1" />
 done:
 <hr class="s1" />
-${fivespace}${longblank}${twospace}# Load from the stack if needed
+${fivespace}${longblank}&nbsp;&nbsp;# Load from the stack if needed
 <hr class="s1" />
 ${fivespace}${longblank}
 <hr class="s1" />
@@ -547,7 +547,7 @@ ${fivespace}<b>j loop</b>
 <hr class="s1" />
 done:
 <hr class="s1" />
-${fivespace}<b>addiu $v0, $s0, 0</b>${eightspace}# Load from the stack if needed
+${fivespace}<b>addiu $v0, $s0, 0</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Load from the stack if needed
 <hr class="s1" />
 ${fivespace}<b>lw $ra, 0($sp)</b>
 <hr class="s1" />
@@ -595,11 +595,11 @@ We have a function that, when given a branch instruction, returns the number of 
 <code>
 branchAmount(branch_inst):
 <hr class="s1" />
-${fourspace}calculate the instruction offset from branch_inst
+&nbsp;&nbsp;&nbsp;&nbsp;calculate the instruction offset from branch_inst
 <hr class="s1" />
-${fourspace}convert the offset to byte addressing
+&nbsp;&nbsp;&nbsp;&nbsp;convert the offset to byte addressing
 <hr class="s1" />
-${fourspace}return PC_of_branch_target - PC_of_branch_instruction
+&nbsp;&nbsp;&nbsp;&nbsp;return PC_of_branch_target - PC_of_branch_instruction
 </code>
 
 <hr class="s2" />
@@ -631,7 +631,7 @@ ${fivespace}or $v0, $a0, $t1
 <hr class="s1" />
 label2:
 <hr class="s1" />
-${fivespace}sll _______, ______, _________${twospace}# Convert to byte addressing
+${fivespace}sll _______, ______, _________&nbsp;&nbsp;# Convert to byte addressing
 <hr class="s1" />
 ${fivespace}${longblank}
 <hr class="s1" />

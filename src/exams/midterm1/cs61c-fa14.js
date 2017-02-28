@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Question, Sidebar } from '../../components';
-import { longblank, blank, onespace, fourspace, sixspace, eightspace } from '../../utils';
+import { longblank, blank } from '../../utils';
 
 const _ = require('lodash');
 
@@ -39,17 +39,17 @@ b)  Implement <code><b>LoadNibble</b></code> by filling in the blanks:
 <code>
 LoadNibble: ${blank} $t0 ${blank} ${blank} # figure out which byte contains that nibble
 <hr class="s1" />
-${twelvespace}${blank} $a1 0(${blank})
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${blank} $a1 0(${blank})
 <hr class="s1" />
-${twelvespace}${blank} $a0 ${blank} ${blank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${blank} $a0 ${blank} ${blank}
 <hr class="s1" />
-${twelvespace}sll $a0 $a0 2
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sll $a0 $a0 2
 <hr class="s1" />
 gone1:${sixspace}${blank} ${blank} ${blank} ${blank}
 <hr class="s1" />
 gone2:${sixspace}${blank} ${blank} ${blank} ${blank}
 <hr class="s1" />
-${twelvespace}jr $ra
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jr $ra
 </code>
 `;
 
@@ -58,17 +58,17 @@ const q1_2_soln =
 <code>
 LoadNibble: <b>srl</b> $t0 <b>$a0</b> <b>1</b> # figure out which byte contains that nibble
 <hr class="s1" />
-${twelvespace}<b>lbu</b> $a1 0(<b>$t0</b>)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lbu</b> $a1 0(<b>$t0</b>)
 <hr class="s1" />
-${twelvespace}<b>andi</b> $a0 <b>$a0</b> <b>0x1</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>andi</b> $a0 <b>$a0</b> <b>0x1</b>
 <hr class="s1" />
-${twelvespace}sll $a0 $a0 2
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sll $a0 $a0 2
 <hr class="s1" />
 gone1:${sixspace}<b>srlv $v0 $a1 $a0</b>
 <hr class="s1" />
 gone2:${sixspace}<b>andi $v0 $v0 0xF</b>
 <hr class="s1" />
-${twelvespace}jr $ra
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jr $ra
 </code>
 `;
 
@@ -134,17 +134,17 @@ prefix/postfix operators, or function calls. You may assume that the given numbe
 <code>
 uint64_t parse_octal(char *s) {
 <hr class="s1" />
-${fourspace}uint64_t r = 0;
+&nbsp;&nbsp;&nbsp;&nbsp;uint64_t r = 0;
 <hr class="s1" />
-${fourspace}while (*s) {
+&nbsp;&nbsp;&nbsp;&nbsp;while (*s) {
 <hr class="s1" />
-${eightspace}r = ${longblank};
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r = ${longblank};
 <hr class="s1" />
-${eightspace}s++;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s++;
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}return r;
+&nbsp;&nbsp;&nbsp;&nbsp;return r;
 <hr class="s1" />
 }
 </code>
@@ -163,13 +163,13 @@ only the pointer <code><b>s</b></code>, pointer arithmetic, casting, and the fun
 <code>
 struct {
 <hr class="s1" />
-${fourspace}int16_t a;
+&nbsp;&nbsp;&nbsp;&nbsp;int16_t a;
 <hr class="s1" />
-${fourspace}char b[2+(UNKNOWN_LENGTH*4)];
+&nbsp;&nbsp;&nbsp;&nbsp;char b[2+(UNKNOWN_LENGTH*4)];
 <hr class="s1" />
-${fourspace}int32_t c;
+&nbsp;&nbsp;&nbsp;&nbsp;int32_t c;
 <hr class="s1" />
-${fourspace}int32_t d;
+&nbsp;&nbsp;&nbsp;&nbsp;int32_t d;
 <hr class="s1" />
 } data;
 <hr class="s2" />
@@ -190,7 +190,7 @@ char *s = data.b; /* s is a char, so it counts by 1 byte by default if in parens
 <hr class="s1" />
 *( (int16_t *) <b>(s - 1) /* or (s - 2) */</b> ) = -1; // data.a = -1;
 <hr class="s1" />
-*( (int32_t *) <b>(s + strlen(s) + 1 + 4)</b> ) = -1;${onespace} // data.d = -1;
+*( (int32_t *) <b>(s + strlen(s) + 1 + 4)</b> ) = -1;&nbsp; // data.d = -1;
 </code>
 `;
 
@@ -210,37 +210,37 @@ blanks possible. Do not use the comma operator, nested assignment, or prefix/pos
 <code>
 struct lr_tree {
 <hr class="s1" />
-${fourspace}char *name;
+&nbsp;&nbsp;&nbsp;&nbsp;char *name;
 <hr class="s1" />
-${fourspace}uint64_t ID;
+&nbsp;&nbsp;&nbsp;&nbsp;uint64_t ID;
 <hr class="s1" />
-${fourspace}struct lr_tree *left_children[2];
+&nbsp;&nbsp;&nbsp;&nbsp;struct lr_tree *left_children[2];
 <hr class="s1" />
-${fourspace}struct lr_tree *right_children[2];
+&nbsp;&nbsp;&nbsp;&nbsp;struct lr_tree *right_children[2];
 <hr class="s1" />
-${fourspace}struct lr_tree *parent;
+&nbsp;&nbsp;&nbsp;&nbsp;struct lr_tree *parent;
 <hr class="s1" />
 };
 <hr class="s2" />
 void free_lr_tree (struct lr_tree *p) {
 <hr class="s1" />
-${fourspace}if (${longblank}) {
+&nbsp;&nbsp;&nbsp;&nbsp;if (${longblank}) {
 <hr class="s1" />
-${eightspace}for (size_t x = 0; x < 2; x++) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (size_t x = 0; x < 2; x++) {
 <hr class="s1" />
-${twelvespace}${longblank};
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank};
 <hr class="s1" />
-${twelvespace}${longblank};
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank};
 <hr class="s1" />
-${eightspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${eightspace}${longblank};
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank};
 <hr class="s1" />
-${eightspace}${longblank};
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank};
 <hr class="s1" />
-${eightspace}${longblank};
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank};
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
 }
 </code>
@@ -251,23 +251,23 @@ const q2_3_soln =
 <code>
 void free_lr_tree (struct lr_tree *p) {
 <hr class="s1" />
-${fourspace}if (<b>p != NULL</b>) {
+&nbsp;&nbsp;&nbsp;&nbsp;if (<b>p != NULL</b>) {
 <hr class="s1" />
-${eightspace}for (size_t x = 0; x < 2; x++) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (size_t x = 0; x < 2; x++) {
 <hr class="s1" />
-${twelvespace}<b>free_lr_tree(p->left_children[x])</b>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>free_lr_tree(p->left_children[x])</b>;
 <hr class="s1" />
-${twelvespace}<b>free_lr_tree(p->right_children[x])</b>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>free_lr_tree(p->right_children[x])</b>;
 <hr class="s1" />
-${eightspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${eightspace}<b>free(p->name)</b>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>free(p->name)</b>;
 <hr class="s1" />
-${eightspace}<b>free(p)</b>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>free(p)</b>;
 <hr class="s1" />
-${eightspace}${longblank};
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank};
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
 }
 </code>

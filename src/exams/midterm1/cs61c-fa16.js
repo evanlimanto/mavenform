@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Question, Sidebar } from '../../components';
-import { lx, longblank, blank, onespace, twospace, threespace, fourspace, fivespace, sixspace } from '../../utils';
+import { lx, longblank, blank } from '../../utils';
 
 const _ = require('lodash');
 
@@ -134,27 +134,27 @@ $s3 holds the C pointer to an array of integers a;
 The code is as follows, with space for comments following the # sign at the right:
 <hr class="s1" />
 <code>
-${threespace}add  $s0, $zero, $zero  ${onespace}<i># b = 0;</i>
+&nbsp;&nbsp;&nbsp;add  $s0, $zero, $zero  &nbsp;<i># b = 0;</i>
 <hr class="s1" />
-${threespace}add  $s1, $zero, $zero  ${onespace}<i># i = 0;</i>
+&nbsp;&nbsp;&nbsp;add  $s1, $zero, $zero  &nbsp;<i># i = 0;</i>
 <hr class="s1" />
-${threespace}addi $s2, $zero, 10 ${twospace} <i># $s2 = const 10;</i>
+&nbsp;&nbsp;&nbsp;addi $s2, $zero, 10 &nbsp;&nbsp; <i># $s2 = const 10;</i>
 <hr class="s1" />
-X:   slt  $t0, $s1, $s2 ${fourspace} <i># ${blank}</i>
+X:   slt  $t0, $s1, $s2 &nbsp;&nbsp;&nbsp;&nbsp; <i># ${blank}</i>
 <hr class="s1" />
-${threespace}<b>bne</b> $t0, $zero, Y ${fourspace} <i># ${blank}</i>
+&nbsp;&nbsp;&nbsp;<b>bne</b> $t0, $zero, Y &nbsp;&nbsp;&nbsp;&nbsp; <i># ${blank}</i>
 <hr class="s1" />
-${threespace}sll  $t1, $s1, 2 ${sixspace} <i># ${blank}</i>
+&nbsp;&nbsp;&nbsp;sll  $t1, $s1, 2 ${sixspace} <i># ${blank}</i>
 <hr class="s1" />
-${threespace}add  $t2, $s3, $t1 ${fourspace} <i># ${blank}</i>
+&nbsp;&nbsp;&nbsp;add  $t2, $s3, $t1 &nbsp;&nbsp;&nbsp;&nbsp; <i># ${blank}</i>
 <hr class="s1" />
-${threespace}sw  $s1, 0($t2) ${_.repeat('&nbsp;', 7)} <i># ${blank}</i>
+&nbsp;&nbsp;&nbsp;sw  $s1, 0($t2) ${_.repeat('&nbsp;', 7)} <i># ${blank}</i>
 <hr class="s1" />
-${threespace}add  $s0, $s0, $s1 ${fourspace} <i># ${blank}</i>
+&nbsp;&nbsp;&nbsp;add  $s0, $s0, $s1 &nbsp;&nbsp;&nbsp;&nbsp; <i># ${blank}</i>
 <hr class="s1" />
-${threespace}addi $s1, $s1, 1 ${fivespace} <i># ${blank}</i>
+&nbsp;&nbsp;&nbsp;addi $s1, $s1, 1 ${fivespace} <i># ${blank}</i>
 <hr class="s1" />
-${threespace}j X ${_.repeat('&nbsp;', 18)} <i># ${blank}</i>
+&nbsp;&nbsp;&nbsp;j X ${_.repeat('&nbsp;', 18)} <i># ${blank}</i>
 <hr class="s1" />
 Y: ${_.repeat('&nbsp;', 22)} <i># ${blank}</i>
 </code>
@@ -171,30 +171,30 @@ equivalent with the fewest possible lines of code.
 const q2_1_1_soln =
 `
 <code>
-${threespace}add  $s0, $zero, $zero  <i># b = 0;</i>
+&nbsp;&nbsp;&nbsp;add  $s0, $zero, $zero  <i># b = 0;</i>
 <hr class="s1" />
-${threespace}add  $s1, $zero, $zero  <i># i = 0;</i>
+&nbsp;&nbsp;&nbsp;add  $s1, $zero, $zero  <i># i = 0;</i>
 <hr class="s1" />
-${threespace}addi $s2, $zero, 10 ${onespace} # $s2 = const 10;
+&nbsp;&nbsp;&nbsp;addi $s2, $zero, 10 &nbsp; # $s2 = const 10;
 <hr class="s1" />
-X:   slt  $t0, $s1, $s2 ${threespace} # <b>i < 10?</b>
+X:   slt  $t0, $s1, $s2 &nbsp;&nbsp;&nbsp; # <b>i < 10?</b>
 <hr class="s1" />
-${threespace}<b>bne</b> $t0, $zero, Y ${threespace} # <b>branch if i < 10</b>
+&nbsp;&nbsp;&nbsp;<b>bne</b> $t0, $zero, Y &nbsp;&nbsp;&nbsp; # <b>branch if i < 10</b>
 <hr class="s1" />
-${threespace}sll  $t1, $s1, 2 ${fivespace} # <b>$t1 = i * 4;
+&nbsp;&nbsp;&nbsp;sll  $t1, $s1, 2 ${fivespace} # <b>$t1 = i * 4;
 </b>
 <hr class="s1" />
-${threespace}add  $t2, $s3, $t1 ${threespace} # <b>$t2 = &a + i * 4 … the address of a[i]</b>
+&nbsp;&nbsp;&nbsp;add  $t2, $s3, $t1 &nbsp;&nbsp;&nbsp; # <b>$t2 = &a + i * 4 … the address of a[i]</b>
 <hr class="s1" />
-${threespace}sw  $s1, 0($t2) ${onespace}${fivespace} # <b>a[i] = i;</b>
+&nbsp;&nbsp;&nbsp;sw  $s1, 0($t2) &nbsp;${fivespace} # <b>a[i] = i;</b>
 <hr class="s1" />
-${threespace}add  $s0, $s0, $s1 ${threespace} # <b>b = b + i;</b>
+&nbsp;&nbsp;&nbsp;add  $s0, $s0, $s1 &nbsp;&nbsp;&nbsp; # <b>b = b + i;</b>
 <hr class="s1" />
-${threespace}addi $s1, $s1, 1 ${fourspace} # <b>i = i + 1;</b>
+&nbsp;&nbsp;&nbsp;addi $s1, $s1, 1 &nbsp;&nbsp;&nbsp;&nbsp; # <b>i = i + 1;</b>
 <hr class="s1" />
-${threespace}j X ${_.repeat('&nbsp;', 16)} ${onespace}# <b>loop back to the start</b>
+&nbsp;&nbsp;&nbsp;j X ${_.repeat('&nbsp;', 16)} &nbsp;# <b>loop back to the start</b>
 <hr class="s1" />
-Y: ${_.repeat('&nbsp;', 17)} ${threespace} # <b>exit:</b>
+Y: ${_.repeat('&nbsp;', 17)} &nbsp;&nbsp;&nbsp; # <b>exit:</b>
 </code>
 `
 
@@ -209,9 +209,9 @@ for (i = 0; i >= 10; i++)
 <hr class="s1"/>
 {
 <hr class="s1"/>
-${fourspace} a[i] = i;
+&nbsp;&nbsp;&nbsp;&nbsp; a[i] = i;
 <hr class="s1"/>
-${fourspace} b = b + a[i];
+&nbsp;&nbsp;&nbsp;&nbsp; b = b + a[i];
 <hr class="s1"/>
 }
 </code>
@@ -229,11 +229,11 @@ while (i >= 10)
 <hr class="s1"/>
 {
 <hr class="s1"/>
-${fourspace} a[i] = i;
+&nbsp;&nbsp;&nbsp;&nbsp; a[i] = i;
 <hr class="s1"/>
-${fourspace} b = b + a[i];
+&nbsp;&nbsp;&nbsp;&nbsp; b = b + a[i];
 <hr class="s1"/>
-${fourspace} i = i + 1;
+&nbsp;&nbsp;&nbsp;&nbsp; i = i + 1;
 <hr class="s1"/>
 }
 <hr class="s2"/>
@@ -290,21 +290,21 @@ the lines for your code solution, but do include comments for partial credit con
 <code>
 <i>/* Each item on the stack is represented
 <hr class="s1" />
-${threespace}by a pointer to the previous element
+&nbsp;&nbsp;&nbsp;by a pointer to the previous element
 <hr class="s1" />
-${threespace}(NULL if none) and its value. */</i>
+&nbsp;&nbsp;&nbsp;(NULL if none) and its value. */</i>
 <hr class="s1" />
 typedef struct stack_el {
 <hr class="s1" />
-${fourspace}struct stack_el *prev;
+&nbsp;&nbsp;&nbsp;&nbsp;struct stack_el *prev;
 <hr class="s1" />
-${fourspace}double val;
+&nbsp;&nbsp;&nbsp;&nbsp;double val;
 <hr class="s1" />
 } stack_el;
 <hr class="s2" />
 <i>/* PUSH: Push new value to top of stack. Return
 <hr class="s1" />
-${threespace}pointer to new top of stack. */</i>
+&nbsp;&nbsp;&nbsp;pointer to new top of stack. */</i>
 <hr class="s1" />
 stack_el* push(stack_el *top_of_stack, double v) {
 <hr class="s5" />
@@ -316,11 +316,11 @@ const q3_1_2 =
 <hr class="s2" />
 <i>/* POPADD: Pop top stack element and add its value
 <hr class="s1" />
-${threespace}to the new top’s value. Return new top of stack.
+&nbsp;&nbsp;&nbsp;to the new top’s value. Return new top of stack.
 <hr class="s1" />
-${threespace}Free no longer used memory. Do not change
+&nbsp;&nbsp;&nbsp;Free no longer used memory. Do not change
 <hr class="s1" />
-${threespace}the stack if it has fewer than 2 elements. */</i>
+&nbsp;&nbsp;&nbsp;the stack if it has fewer than 2 elements. */</i>
 <hr class="s1" />
 stack_el* popadd(stack_el *top_of_stack) {
 <hr class="s5" />
@@ -333,13 +333,13 @@ const q3_1_1_soln =
 <code>
 stack_el* push(stack_el *top_of_stack, double v) {
 <hr class="s1" />
-${fourspace}stack_el* se = (stack_el*) malloc(sizeof(stack_el));
+&nbsp;&nbsp;&nbsp;&nbsp;stack_el* se = (stack_el*) malloc(sizeof(stack_el));
 <hr class="s1" />
-${fourspace}se->prev = top_of_stack;
+&nbsp;&nbsp;&nbsp;&nbsp;se->prev = top_of_stack;
 <hr class="s1" />
-${fourspace}se->val = v;
+&nbsp;&nbsp;&nbsp;&nbsp;se->val = v;
 <hr class="s1" />
-${fourspace}return se;
+&nbsp;&nbsp;&nbsp;&nbsp;return se;
 <hr class="s1" />
 }
 </code>
@@ -350,19 +350,19 @@ const q3_1_2_soln =
 <code>
 stack_el* popadd(stack_el *top_of_stack) {
 <hr class="s1" />
-${fourspace}if (!top_of_stack || !top_of_stack->prev) {
+&nbsp;&nbsp;&nbsp;&nbsp;if (!top_of_stack || !top_of_stack->prev) {
 <hr class="s1" />
 ${_.repeat('&nbsp;', 8)}return top_of_stack;
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}top_of_stack->prev->val += top_of_stack->val;
+&nbsp;&nbsp;&nbsp;&nbsp;top_of_stack->prev->val += top_of_stack->val;
 <hr class="s1" />
-${fourspace}stack_el *prev = top_of_stack->prev;
+&nbsp;&nbsp;&nbsp;&nbsp;stack_el *prev = top_of_stack->prev;
 <hr class="s1" />
-${fourspace}free(top_of_stack);
+&nbsp;&nbsp;&nbsp;&nbsp;free(top_of_stack);
 <hr class="s1" />
-${fourspace}return prev;
+&nbsp;&nbsp;&nbsp;&nbsp;return prev;
 <hr class="s1" />
 }
 </code>
@@ -374,9 +374,9 @@ const q4_1 =
 
 Consider the discrete-value function ${lx('f(x)')}, defined on the integers {−3,−2,−1,0,1,2,3}:
 <hr class="s2" />
-${lx('f(−3)	=	6')}, ${fourspace} ${lx('f(−2)	=	61')}, ${fourspace} ${lx('f(−1) = 17')}, ${fourspace} ${lx('f(0)	=	−38')}
+${lx('f(−3)	=	6')}, &nbsp;&nbsp;&nbsp;&nbsp; ${lx('f(−2)	=	61')}, &nbsp;&nbsp;&nbsp;&nbsp; ${lx('f(−1) = 17')}, &nbsp;&nbsp;&nbsp;&nbsp; ${lx('f(0)	=	−38')}
 <hr class="s1" />
-${lx('f(1) = 19')}, ${fourspace} ${lx('f(2) = 42')}, ${fourspace} ${lx('f(3) =	5')}
+${lx('f(1) = 19')}, &nbsp;&nbsp;&nbsp;&nbsp; ${lx('f(2) = 42')}, &nbsp;&nbsp;&nbsp;&nbsp; ${lx('f(3) =	5')}
 <hr class="s2" />
 
 Your task is to implement this function in MIPS assembly language (including pseudo-instructions), but you
@@ -422,17 +422,17 @@ output: .word 6 61 17 -38 19 42 5
 f:
 <hr class="s1" />
 <b>
-${fourspace}la $t0, output${fivespace}     // Load the address of “output” from the data segments
+&nbsp;&nbsp;&nbsp;&nbsp;la $t0, output${fivespace}     // Load the address of “output” from the data segments
 <hr class="s1" />
-${fourspace}addiu $a0 $a0 3${fourspace}    // Shift the argument range to all non-negative integers
+&nbsp;&nbsp;&nbsp;&nbsp;addiu $a0 $a0 3&nbsp;&nbsp;&nbsp;&nbsp;    // Shift the argument range to all non-negative integers
 <hr class="s1" />
-${fourspace}sll $a0 $a0 2${sixspace}      // Multiply argument value by 4 to index by word
+&nbsp;&nbsp;&nbsp;&nbsp;sll $a0 $a0 2${sixspace}      // Multiply argument value by 4 to index by word
 <hr class="s1" />
-${fourspace}addu $t0 $t0 $a0${threespace}   // Add the argument index to the data address
+&nbsp;&nbsp;&nbsp;&nbsp;addu $t0 $t0 $a0&nbsp;&nbsp;&nbsp;   // Add the argument index to the data address
 <hr class="s1" />
-${fourspace}lw $v0 0($t0)${sixspace}      // Load the indexed data address into return val register
+&nbsp;&nbsp;&nbsp;&nbsp;lw $v0 0($t0)${sixspace}      // Load the indexed data address into return val register
 <hr class="s1" />
-${fourspace}jr $ra${_.repeat('&nbsp;', 13)}
+&nbsp;&nbsp;&nbsp;&nbsp;jr $ra${_.repeat('&nbsp;', 13)}
 </b>
 </code>
 <hr class="s2" />
@@ -445,17 +445,17 @@ ${fourspace}jr $ra${_.repeat('&nbsp;', 13)}
 f:
 <hr class="s1" />
 <b>
-${fourspace}la $t0, output${fivespace}     // Load the address of “output” from the data segments
+&nbsp;&nbsp;&nbsp;&nbsp;la $t0, output${fivespace}     // Load the address of “output” from the data segments
 <hr class="s1" />
-${fourspace}addiu $t0 $t0 12${threespace}    // Move the output address to index 0
+&nbsp;&nbsp;&nbsp;&nbsp;addiu $t0 $t0 12&nbsp;&nbsp;&nbsp;    // Move the output address to index 0
 <hr class="s1" />
-${fourspace}sll $a0 $a0 2${sixspace}      // Multiply argument value by 4 to index by word
+&nbsp;&nbsp;&nbsp;&nbsp;sll $a0 $a0 2${sixspace}      // Multiply argument value by 4 to index by word
 <hr class="s1" />
-${fourspace}addu $t0 $t0 $a0${threespace}   // Add the argument index to the data address
+&nbsp;&nbsp;&nbsp;&nbsp;addu $t0 $t0 $a0&nbsp;&nbsp;&nbsp;   // Add the argument index to the data address
 <hr class="s1" />
-${fourspace}lw $v0 0($t0)${sixspace}      // Load the indexed data address into return val register
+&nbsp;&nbsp;&nbsp;&nbsp;lw $v0 0($t0)${sixspace}      // Load the indexed data address into return val register
 <hr class="s1" />
-${fourspace}jr $ra${_.repeat('&nbsp;', 13)}
+&nbsp;&nbsp;&nbsp;&nbsp;jr $ra${_.repeat('&nbsp;', 13)}
 </b>
 </code>
 `;

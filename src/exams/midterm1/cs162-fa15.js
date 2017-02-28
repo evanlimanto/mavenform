@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-
 import { Question, Sidebar } from '../../components';
-import { lx, longblank, blank, onespace, twospace, threespace, fourspace, fivespace, sixspace, eightspace, twelvespace } from '../../utils';
+import { lx } from '../../utils';
 
 const _ = require('lodash');
 
@@ -246,17 +245,6 @@ const q2_8_soln =
 There are a number of differences: (1) There is at least one status bit (the “kernel mode bit”) which changes between kernel mode and user mode. In an x86 processor, there are 2 bits which change (since there a 4 modes). (2) Additional kernel-mode instructions are available (such as those that modify the page table registers, those that enable and disable interrupts, etc). (3) Pages marked as kernel-mode in their PTEs are only available in kernel mode. (4) Control for I/O devices (such as the timer, interrupt controllers, and device controllers) are typically only available from kernel mode.
 `;
 
-const q2_9 =
-`
-There are a number of differences: (1) There is at least one status bit (the “kernel mode
-bit”) which changes between kernel mode and user mode.  In an x86 processor, there are 2
-bits  which  change  (since  there  a  4  modes).  (2)  Additional  kernel-mode  instructions  are
-available (such as those that modify the page table registers, those that enable and disable
-interrupts, etc). (3) Pages marked as kernel-mode in their PTEs are only available in kernel
-mode.  (4)  Control  for  I/O  devices  (such  as  the  timer,  interrupt  controllers,  and  device
-controllers) are typically only available from kernel mode.
-`;
-
 const imgq3_1 = require("../../img/cs162fa15-3.png");
 const q3_1 =
 `
@@ -282,13 +270,13 @@ Our first take at this lock is going to utilize the following structure and enum
 <hr class="s1" />
 struct bglock {
 <hr class="s1" />
-${fourspace}pthread_mutex_t lock;
+&nbsp;&nbsp;&nbsp;&nbsp;pthread_mutex_t lock;
 <hr class="s1" />
-${fourspace}pthread_cond_t wait_var;
+&nbsp;&nbsp;&nbsp;&nbsp;pthread_cond_t wait_var;
 <hr class="s2" />
-${fourspace}// Simple state variable
+&nbsp;&nbsp;&nbsp;&nbsp;// Simple state variable
 <hr class="s1" />
-${fourspace}int state;
+&nbsp;&nbsp;&nbsp;&nbsp;int state;
 <hr class="s1" />
 };
 <hr class="s1" />
@@ -298,9 +286,9 @@ ${fourspace}int state;
 <hr class="s1" />
 enum bglock_type {
 <hr class="s1" />
-${fourspace}BGLOCK_BOY = 0;
+&nbsp;&nbsp;&nbsp;&nbsp;BGLOCK_BOY = 0;
 <hr class="s1" />
-${fourspace}BGLOCK_GIRL = 1;
+&nbsp;&nbsp;&nbsp;&nbsp;BGLOCK_GIRL = 1;
 <hr class="s1" />
 };
 <hr class="s1" />
@@ -322,9 +310,9 @@ Note that the lock requestor specifies the type of lock that they want at the ti
 <hr class="s1" />
 if (bglock_lock(mylock, BGLOCK_BOY) {
 <hr class="s1" />
-${fourspace}printf("Lock request failed!");
+&nbsp;&nbsp;&nbsp;&nbsp;printf("Lock request failed!");
 <hr class="s1" />
-${fourspace}exit(1);
+&nbsp;&nbsp;&nbsp;&nbsp;exit(1);
 <hr class="s1" />
 }
 <hr class="s1" />
@@ -346,15 +334,15 @@ failure code, if you encounter one, from the various synchronization functions).
 <code>
 /* Initialize the BG lock.
 <hr class="s1" />
-${onespace}*
+&nbsp;*
 <hr class="s1" />
-${onespace}* Args: pointer to a bglock
+&nbsp;* Args: pointer to a bglock
 <hr class="s1" />
-${onespace}* Returns: 0 (success)
+&nbsp;* Returns: 0 (success)
 <hr class="s1" />
-${onespace}*          non-zero (errno code from synchronization functions)
+&nbsp;*          non-zero (errno code from synchronization functions)
 <hr class="s1" />
-${onespace}*/
+&nbsp;*/
 <hr class="s1" />
 int bglock_init(struct bglock *lock) {
 <hr class="s2" />
@@ -369,29 +357,29 @@ const q3_1_soln =
 <code>
 /* Initialize the BG lock.
 <hr class="s1" />
-${onespace}*
+&nbsp;*
 <hr class="s1" />
-${onespace}* Args: pointer to a bglock
+&nbsp;* Args: pointer to a bglock
 <hr class="s1" />
-${onespace}* Returns: 0 (success)
+&nbsp;* Returns: 0 (success)
 <hr class="s1" />
-${onespace}*          non-zero (errno code from synchronization functions)
+&nbsp;*          non-zero (errno code from synchronization functions)
 <hr class="s1" />
-${onespace}*/
+&nbsp;*/
 <hr class="s1" />
 int bglock_init(struct bglock *lock) {
 <hr class="s1" />
-${fourspace}int result;
+&nbsp;&nbsp;&nbsp;&nbsp;int result;
 <hr class="s2" />
-${fourspace}lock->state = 0; // No lock holders of any type
+&nbsp;&nbsp;&nbsp;&nbsp;lock->state = 0; // No lock holders of any type
 <hr class="s2" />
-${fourspace}if (result = pthread_mutex_init(&(lock->lock), NULL))
+&nbsp;&nbsp;&nbsp;&nbsp;if (result = pthread_mutex_init(&(lock->lock), NULL))
 <hr class="s1" />
-${eightspace}return result; // Error
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return result; // Error
 <hr class="s2" />
-${fourspace}result = pthread_cond_init(&(lock->wait_var), NULL);
+&nbsp;&nbsp;&nbsp;&nbsp;result = pthread_cond_init(&(lock->wait_var), NULL);
 <hr class="s1" />
-${fourspace}return result;
+&nbsp;&nbsp;&nbsp;&nbsp;return result;
 <hr class="s1" />
 }
 </code>
@@ -405,15 +393,15 @@ state of the lock; when you should wait, when you can grab the lock.
 <code>
 /* Grab a BG lock.
 <hr class="s1" />
-${onespace}*
+&nbsp;*
 <hr class="s1" />
-${onespace}* Args: (pointer to a bglock, enum lock type)
+&nbsp;* Args: (pointer to a bglock, enum lock type)
 <hr class="s1" />
-${onespace}* Returns: 0 (lock acquired)
+&nbsp;* Returns: 0 (lock acquired)
 <hr class="s1" />
-${onespace}* non-zero (errno code from synchronization functions) 
+&nbsp;* non-zero (errno code from synchronization functions) 
 <hr class="s1" />
-${onespace}*/
+&nbsp;*/
 <hr class="s1" />
 int bglock_lock(struct bglock *lock, enum bglock_type type) {
 <hr class="s5" />
@@ -426,45 +414,45 @@ const q3_2_soln =
 <code>
 /* Grab a BG lock.
 <hr class="s1" />
-${onespace}*
+&nbsp;*
 <hr class="s1" />
-${onespace}* Args: (pointer to a bglock, enum lock type)
+&nbsp;* Args: (pointer to a bglock, enum lock type)
 <hr class="s1" />
-${onespace}* Returns: 0 (lock acquired)
+&nbsp;* Returns: 0 (lock acquired)
 <hr class="s1" />
-${onespace}* non-zero (errno code from synchronization functions) 
+&nbsp;* non-zero (errno code from synchronization functions) 
 <hr class="s1" />
-${onespace}*/
+&nbsp;*/
 <hr class="s1" />
 int bglock_lock(struct bglock *lock, enum bglock_type type) {
 <hr class="s1" />
-${fourspace}int dir = (type == BGLOCK_BOY) ? 1 : -1; // Direction
+&nbsp;&nbsp;&nbsp;&nbsp;int dir = (type == BGLOCK_BOY) ? 1 : -1; // Direction
 <hr class="s1" />
-${fourspace}int result;
+&nbsp;&nbsp;&nbsp;&nbsp;int result;
 <hr class="s2" />
-${fourspace}// Grab monitor lock
+&nbsp;&nbsp;&nbsp;&nbsp;// Grab monitor lock
 <hr class="s1" />
-${fourspace}if (result = pthread_mutex_lock(&(lock->lock)))
+&nbsp;&nbsp;&nbsp;&nbsp;if (result = pthread_mutex_lock(&(lock->lock)))
 <hr class="s1" />
-${eightspace}return result; // error
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return result; // error
 <hr class="s2" />
-${fourspace}while (lock->state * dir < 0) {
+&nbsp;&nbsp;&nbsp;&nbsp;while (lock->state * dir < 0) {
 <hr class="s1" />
-${eightspace}// Incompatible threads already have bglock, must sleep
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Incompatible threads already have bglock, must sleep
 <hr class="s1" />
-${eightspace}if (result = pthread_cond_wait(&(lock->wait_var), &(lock->lock)))
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (result = pthread_cond_wait(&(lock->wait_var), &(lock->lock)))
 <hr class="s1" />
-${twelvespace}return result; // error
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return result; // error
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}lock->state += dir; // register new bglock holder of this type
+&nbsp;&nbsp;&nbsp;&nbsp;lock->state += dir; // register new bglock holder of this type
 <hr class="s2" />
-${fourspace}// Release monitor lock
+&nbsp;&nbsp;&nbsp;&nbsp;// Release monitor lock
 <hr class="s1" />
-${fourspace}result = pthread_mutex_unlock(&(lock->lock));
+&nbsp;&nbsp;&nbsp;&nbsp;result = pthread_mutex_unlock(&(lock->lock));
 <hr class="s1" />
-${fourspace}return result;
+&nbsp;&nbsp;&nbsp;&nbsp;return result;
 <hr class="s1" />
 }
 </code>
@@ -479,15 +467,15 @@ const q3_3 =
 <code>
 /* Release a BG lock.
 <hr class="s1" />
-${onespace}*
+&nbsp;*
 <hr class="s1" />
-${onespace}* Args: pointer to a bglock
+&nbsp;* Args: pointer to a bglock
 <hr class="s1" />
-${onespace}* Returns: 0 (lock acquired)
+&nbsp;* Returns: 0 (lock acquired)
 <hr class="s1" />
-${onespace}*
+&nbsp;*
 <hr class="s1" />
-${onespace}*/
+&nbsp;*/
 <hr class="s1" />
 int bglock_unlock(struct bglock *lock) {
 <hr class="s2" />
@@ -502,43 +490,43 @@ const q3_3_soln =
 <code>
 /* Release a BG lock.
 <hr class="s1" />
-${onespace}*
+&nbsp;*
 <hr class="s1" />
-${onespace}* Args: pointer to a bglock
+&nbsp;* Args: pointer to a bglock
 <hr class="s1" />
-${onespace}* Returns: 0 (lock acquired)
+&nbsp;* Returns: 0 (lock acquired)
 <hr class="s1" />
-${onespace}*
+&nbsp;*
 <hr class="s1" />
-${onespace}*/
+&nbsp;*/
 <hr class="s1" />
 int bglock_unlock(struct bglock *lock) {
 <hr class="s1" />
-${fourspace}int result;
+&nbsp;&nbsp;&nbsp;&nbsp;int result;
 <hr class="s2" />
-${fourspace}// Grab monitor lock
+&nbsp;&nbsp;&nbsp;&nbsp;// Grab monitor lock
 <hr class="s1" />
-${fourspace}if (result = pthread_mutex_locK(&(lock->lock)))
+&nbsp;&nbsp;&nbsp;&nbsp;if (result = pthread_mutex_locK(&(lock->lock)))
 <hr class="s1" />
-${eightspace}return result; // error
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return result; // error
 <hr class="s2" />
-${fourspace}// one less bglock holder of this type
+&nbsp;&nbsp;&nbsp;&nbsp;// one less bglock holder of this type
 <hr class="s1" />
-${fourspace}lock->state -= (lock->state > 0) ? 1 : -1; // Direction
+&nbsp;&nbsp;&nbsp;&nbsp;lock->state -= (lock->state > 0) ? 1 : -1; // Direction
 <hr class="s2" />
-${fourspace}// If returning to neutral status, signal any waiters
+&nbsp;&nbsp;&nbsp;&nbsp;// If returning to neutral status, signal any waiters
 <hr class="s1" />
-${fourspace}if (lock->state == 0)
+&nbsp;&nbsp;&nbsp;&nbsp;if (lock->state == 0)
 <hr class="s1" />
-${eightspace}if (result = pthread_cond_broadcast(&(lock->wait_var)))
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (result = pthread_cond_broadcast(&(lock->wait_var)))
 <hr class="s1" />
-${twelvespace}return result; // error
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return result; // error
 <hr class="s2" />
-${fourspace}// Release monitor lock
+&nbsp;&nbsp;&nbsp;&nbsp;// Release monitor lock
 <hr class="s1" />
-${fourspace}result = pthread_mutex_unlock(&(lock->lock));
+&nbsp;&nbsp;&nbsp;&nbsp;result = pthread_mutex_unlock(&(lock->lock));
 <hr class="s1" />
-${fourspace}return result;
+&nbsp;&nbsp;&nbsp;&nbsp;return result;
 <hr class="s1" />
 }
 </code>
@@ -588,13 +576,13 @@ like this:
 <code>
 struct bglock {
 <hr class="s1" />
-${fourspace}pthread_mutex_t lock;
+&nbsp;&nbsp;&nbsp;&nbsp;pthread_mutex_t lock;
 <hr class="s1" />
-${fourspace}pthread_cond_t wait_var;
+&nbsp;&nbsp;&nbsp;&nbsp;pthread_cond_t wait_var;
 <hr class="s2" />
-${fourspace}int headphase, tailphase;
+&nbsp;&nbsp;&nbsp;&nbsp;int headphase, tailphase;
 <hr class="s1" />
-${fourspace}int state[MAX_PHASES+1];
+&nbsp;&nbsp;&nbsp;&nbsp;int state[MAX_PHASES+1];
 <hr class="s1" />
 };
 </code>
@@ -652,59 +640,59 @@ distribute the same total virtual time to every thread.
 const q4_3 =
 `
 <code>
-${twospace}void main (void) {
+&nbsp;&nbsp;void main (void) {
 <hr class="s1" />
-1 ${fourspace}thread_set_priority(10);
+1 &nbsp;&nbsp;&nbsp;&nbsp;thread_set_priority(10);
 <hr class="s1" />
-2 ${fourspace}struct lock a, b, c;
+2 &nbsp;&nbsp;&nbsp;&nbsp;struct lock a, b, c;
 <hr class="s1" />
-3 ${fourspace}lock_init(&a);
+3 &nbsp;&nbsp;&nbsp;&nbsp;lock_init(&a);
 <hr class="s1" />
-4 ${fourspace}lock_init(&b);
+4 &nbsp;&nbsp;&nbsp;&nbsp;lock_init(&b);
 <hr class="s1" />
-5 ${fourspace}lock_init(&c);
+5 &nbsp;&nbsp;&nbsp;&nbsp;lock_init(&c);
 <hr class="s1" />
-6 ${fourspace}lock_acquire(&a);
+6 &nbsp;&nbsp;&nbsp;&nbsp;lock_acquire(&a);
 <hr class="s1" />
-7 ${fourspace}lock_acquire(&b);
+7 &nbsp;&nbsp;&nbsp;&nbsp;lock_acquire(&b);
 <hr class="s1" />
-8 ${fourspace}lock_acquire(&c);
+8 &nbsp;&nbsp;&nbsp;&nbsp;lock_acquire(&c);
 <hr class="s1" />
-9 ${fourspace}printf(“1”);
+9 &nbsp;&nbsp;&nbsp;&nbsp;printf(“1”);
 <hr class="s1" />
-10${fourspace}thread_create(“a”,15,func,&a);
+10&nbsp;&nbsp;&nbsp;&nbsp;thread_create(“a”,15,func,&a);
 <hr class="s1" />
-11${fourspace}printf(“6”);
+11&nbsp;&nbsp;&nbsp;&nbsp;printf(“6”);
 <hr class="s1" />
-12${fourspace}thread_create(“b”,20,func,&b);
+12&nbsp;&nbsp;&nbsp;&nbsp;thread_create(“b”,20,func,&b);
 <hr class="s1" />
-13${fourspace}printf(“2”);
+13&nbsp;&nbsp;&nbsp;&nbsp;printf(“2”);
 <hr class="s1" />
-14${fourspace}thread_create(“c”,25,func,&c);
+14&nbsp;&nbsp;&nbsp;&nbsp;thread_create(“c”,25,func,&c);
 <hr class="s1" />
-15${fourspace}lock_release(&c);
+15&nbsp;&nbsp;&nbsp;&nbsp;lock_release(&c);
 <hr class="s1" />
-16${fourspace}lock_release(&a);
+16&nbsp;&nbsp;&nbsp;&nbsp;lock_release(&a);
 <hr class="s1" />
-17${fourspace}lock_release(&b);
+17&nbsp;&nbsp;&nbsp;&nbsp;lock_release(&b);
 <hr class="s1" />
-18${fourspace}printf(“!”);
+18&nbsp;&nbsp;&nbsp;&nbsp;printf(“!”);
 <hr class="s1" />
-${twospace}}
+&nbsp;&nbsp;}
 <hr class="s2" />
-${twospace}void func(void* lock_) {
+&nbsp;&nbsp;void func(void* lock_) {
 <hr class="s1" />
-19${fourspace}struct lock *lock = lock_;
+19&nbsp;&nbsp;&nbsp;&nbsp;struct lock *lock = lock_;
 <hr class="s2" />
-20${fourspace}lock_acquire(&lock);
+20&nbsp;&nbsp;&nbsp;&nbsp;lock_acquire(&lock);
 <hr class="s1" />
-21${fourspace}lock_release(&lock);
+21&nbsp;&nbsp;&nbsp;&nbsp;lock_release(&lock);
 <hr class="s2" />
-22${fourspace}printf("%s", thread_current()->name);
+22&nbsp;&nbsp;&nbsp;&nbsp;printf("%s", thread_current()->name);
 <hr class="s2" />
-23${fourspace}thread_exit();
+23&nbsp;&nbsp;&nbsp;&nbsp;thread_exit();
 <hr class="s1" />
-${twospace}}
+&nbsp;&nbsp;}
 </code>
 <hr class="s2" />
 <b>Problem 4c[2pts]</b>: Consider the above PintOS test that exercises your priority scheduler.   Assume
@@ -916,13 +904,13 @@ const q4_8_soln =
 `
 We discussed several possible ways of preventing deadlock in class.  Possibilities include:
 <hr class="s1" />
-${fourspace}1)  Pick a fixed order of allocation (say ${lx('R_1')} then ${lx('R_2')} then ... ${lx('R_m')}). All threads should allocate resources in this order.
+&nbsp;&nbsp;&nbsp;&nbsp;1)  Pick a fixed order of allocation (say ${lx('R_1')} then ${lx('R_2')} then ... ${lx('R_m')}). All threads should allocate resources in this order.
 <hr class="s1" />
-${fourspace}2)  Every thread should indicate which resources they want at the beginning of execution.
+&nbsp;&nbsp;&nbsp;&nbsp;2)  Every thread should indicate which resources they want at the beginning of execution.
 Then, the thread is not allowed to start until after the requested resources are all
 available.
 <hr class="s1" />
-${fourspace}3)  Use the Bankers algorithm on every allocation request to make sure that the system stays in a safe state.
+&nbsp;&nbsp;&nbsp;&nbsp;3)  Use the Bankers algorithm on every allocation request to make sure that the system stays in a safe state.
 `;
 
 const imgq5_1 = require('../../img/cs162fa15-5-1.png');

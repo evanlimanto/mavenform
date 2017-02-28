@@ -20,7 +20,7 @@ class Sidebar extends Component {
     const examCode = this.props.examCode;
     return _.map(_.range(problemIDs.length), (index) => {
       const problemID = problemIDs[index];
-      const problemTitle = problemTitles[index];
+      const problemTitle = `Q${index + 1}. ${problemTitles[index]}`;
 
       if (problemID.length === 0) {
         return (

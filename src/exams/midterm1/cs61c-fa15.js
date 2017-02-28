@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Question, Sidebar } from '../../components';
-import { lx, longblank, blank, twospace, threespace, fourspace, fivespace, eightspace } from '../../utils';
+import { lx, longblank, blank } from '../../utils';
 
 const _ = require('lodash');
 
@@ -24,9 +24,9 @@ d) Hex representation of that number:
 <hr class="s1" />
 e) In general, for an n-bit, two’s complement integer:
 <hr class="s1" />
-${fourspace}i) What is the largest value you can represent, in decimal?
+&nbsp;&nbsp;&nbsp;&nbsp;i) What is the largest value you can represent, in decimal?
 <hr class="s1" />
-${fourspace}ii) What is the smallest value you can represent, in decimal?
+&nbsp;&nbsp;&nbsp;&nbsp;ii) What is the smallest value you can represent, in decimal?
 `;
 
 const q1_2 =
@@ -36,7 +36,7 @@ const q1_2 =
 <code>
 unsigned int mod16(unsigned int x) {
 <hr class="s1" />
-${fourspace}return x ________ ________________;
+&nbsp;&nbsp;&nbsp;&nbsp;return x ________ ________________;
 <hr class="s1" />
 }
 </code>
@@ -76,7 +76,7 @@ int a = 5;
 <hr class="s1" />
 void foo(){
 <hr class="s1" />
-${fourspace}int temp;
+&nbsp;&nbsp;&nbsp;&nbsp;int temp;
 <hr class="s1" />
 }
 <hr class="s1" />
@@ -84,17 +84,17 @@ int main()
 <hr class="s1" />
 {
 <hr class="s1" />
-${fourspace}int b = 0;
+&nbsp;&nbsp;&nbsp;&nbsp;int b = 0;
 <hr class="s1" />
-${fourspace}char* s1 = “cs61c”;
+&nbsp;&nbsp;&nbsp;&nbsp;char* s1 = “cs61c”;
 <hr class="s1" />
-${fourspace}char s2[] = “cs61c”;
+&nbsp;&nbsp;&nbsp;&nbsp;char s2[] = “cs61c”;
 <hr class="s1" />
-${fourspace}char* c = malloc(sizeof(char) * 100);
+&nbsp;&nbsp;&nbsp;&nbsp;char* c = malloc(sizeof(char) * 100);
 <hr class="s1" />
-${fourspace}foo();
+&nbsp;&nbsp;&nbsp;&nbsp;foo();
 <hr class="s1" />
-${fourspace}return 0;
+&nbsp;&nbsp;&nbsp;&nbsp;return 0;
 <hr class="s1" />
 }
 </code>
@@ -106,15 +106,15 @@ const q2_2 =
 `
 2) For each of the following values, state the location in the memory layout where they are stored. Answer with <i>code, static, heap, or stack</i>.
 <hr class="s2" />
-<b>s1</b>:${eightspace}${blank}
+<b>s1</b>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${blank}
 <hr class="s1" />
-<b>s2</b>:${eightspace}${blank}
+<b>s2</b>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${blank}
 <hr class="s1" />
-<b>s1[0]</b>:${twospace} ${blank}
+<b>s1[0]</b>:&nbsp;&nbsp; ${blank}
 <hr class="s1" />
-<b>s2[0]</b>:${twospace} ${blank}
+<b>s2[0]</b>:&nbsp;&nbsp; ${blank}
 <hr class="s1" />
-<b>c[0]</b>:${fourspace} ${blank}
+<b>c[0]</b>:&nbsp;&nbsp;&nbsp;&nbsp; ${blank}
 `;
 
 const q2_1_soln =
@@ -148,11 +148,11 @@ the list is defined as the node with a <code>NULL</code> next pointer.
 <code>
 struct ll_node {
 <hr class="s1" />
-${fourspace}unsigned short id;
+&nbsp;&nbsp;&nbsp;&nbsp;unsigned short id;
 <hr class="s1" />
-${fourspace}struct ll_node *prev;
+&nbsp;&nbsp;&nbsp;&nbsp;struct ll_node *prev;
 <hr class="s1" />
-${fourspace}struct ll_node *next;
+&nbsp;&nbsp;&nbsp;&nbsp;struct ll_node *next;
 <hr class="s1" />
 };
 </code>
@@ -172,9 +172,9 @@ Using only <code><b>id_addr</b></code>, fill in the blank line so that <code><b>
 <hr class="s2" />
 
 <code>
-${fourspace}unsigned short *id_addr = &(current_node.id);
+&nbsp;&nbsp;&nbsp;&nbsp;unsigned short *id_addr = &(current_node.id);
 <hr class="s1" />
-${fourspace}struct ll_node *next_node = *(${blank});
+&nbsp;&nbsp;&nbsp;&nbsp;struct ll_node *next_node = *(${blank});
 </code>
 `;
 
@@ -187,29 +187,29 @@ reachable nodes from that given node. Keep in mind that the node may be the <cod
 <code>
 void free_twosided_ll(struct ll_node *node) {
 <hr class="s1" />
-${fourspace}if (node != NULL) {
+&nbsp;&nbsp;&nbsp;&nbsp;if (node != NULL) {
 <hr class="s1" />
-${eightspace}if (node->prev != NULL) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (node->prev != NULL) {
 <hr class="s1" />
-${twelvespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${twelvespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${eightspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${eightspace}if (node->next != NULL) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (node->next != NULL) {
 <hr class="s1" />
-${twelvespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${twelvespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${eightspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${fourspace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
 }
 </code>
@@ -230,27 +230,27 @@ const q3_3_soln =
 <code>
 void free_twosided_ll(struct ll_node *node) {
 <hr class="s1" />
-${fourspace}if (node != NULL) {
+&nbsp;&nbsp;&nbsp;&nbsp;if (node != NULL) {
 <hr class="s1" />
-${eightspace}if (node->prev != NULL) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (node->prev != NULL) {
 <hr class="s1" />
-${twelvespace}<b>(node->prev)->next = NULL;</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>(node->prev)->next = NULL;</b>
 <hr class="s1" />
-${twelvespace}<b>free_twosided_ll(node->prev);</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>free_twosided_ll(node->prev);</b>
 <hr class="s1" />
-${eightspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${eightspace}if (node->next != NULL) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (node->next != NULL) {
 <hr class="s1" />
-${twelvespace}<b>(node->next)->prev = NULL;</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>(node->next)->prev = NULL;</b>
 <hr class="s1" />
-${twelvespace}<b>free_twosided_ll(node->next);</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>free_twosided_ll(node->next);</b>
 <hr class="s1" />
-${eightspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}<b>free(node);</b>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>free(node);</b>
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
 }
 </code>
@@ -270,23 +270,23 @@ initialized to 0 before the call to ISCOMMITOK.
 <hr class="s2" />
 
 <code>
-${fourspace}const char* go_bears = "THIS IS BEAR TERRITORY!";
+&nbsp;&nbsp;&nbsp;&nbsp;const char* go_bears = "THIS IS BEAR TERRITORY!";
 <hr class="s2" />
-${fourspace}int is_commit_msg_ok(const char* msg, const char* go_bears) {
+&nbsp;&nbsp;&nbsp;&nbsp;int is_commit_msg_ok(const char* msg, const char* go_bears) {
 <hr class="s1" />
-${eightspace}for (int i = 0; msg[i] && go_bears[i]; i++) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; msg[i] && go_bears[i]; i++) {
 <hr class="s1" />
-${twelvespace}if (go_bears[i] != msg[i]) return 0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (go_bears[i] != msg[i]) return 0;
 <hr class="s1" />
-${eightspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${eightspace}if (!msg[i] && !go_bears[i]) return 1;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!msg[i] && !go_bears[i]) return 1;
 <hr class="s1" />
-${eightspace}return 0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s2" />
-${fourspace}ISCOMMITOK: ________________________
+&nbsp;&nbsp;&nbsp;&nbsp;ISCOMMITOK: ________________________
 <hr class="s1" />
 ${sixteenspace}________________________
 <hr class="s1" />
@@ -316,7 +316,7 @@ ${sixteenspace}li $v0 1
 <hr class="s1" />
 ${sixteenspace}________________________
 <hr class="s1" />
-${eightspace}FAILED: li $v0 0
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAILED: li $v0 0
 <hr class="s1" />
 ${_.repeat('&nbsp;', 11)}END: ________________________
 <hr class="s1" />
@@ -327,7 +327,7 @@ ${sixteenspace}________________________
 const q4_1_soln =
 `
 <code>
-${fourspace}ISCOMMITOK: ________________________
+&nbsp;&nbsp;&nbsp;&nbsp;ISCOMMITOK: ________________________
 <hr class="s1" />
 ${sixteenspace}________________________
 <hr class="s1" />
@@ -357,7 +357,7 @@ ${sixteenspace}li $v0 1
 <hr class="s1" />
 ${sixteenspace}____<b>j END</b>________________
 <hr class="s1" />
-${eightspace}FAILED: li $v0 0
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAILED: li $v0 0
 <hr class="s1" />
 ${_.repeat('&nbsp;', 11)}END: ____<b>jr $ra</b>_______________
 <hr class="s1" />
@@ -375,65 +375,65 @@ returns a random integer in the range <code>[0, i - 1]</code> inclusive.
 
 <hr class="s2" />
 <code>
-${threespace}1${twospace}mystery:${twospace}addiu $sp $sp ${_.repeat('_', 16)}
+&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;mystery:&nbsp;&nbsp;addiu $sp $sp ${_.repeat('_', 16)}
 <hr class="s1" />
-${threespace}2${twelvespace}${longblank}
+&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${threespace}3${twelvespace}${longblank}
+&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${threespace}4${twelvespace}${longblank}
+&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${threespace}5${twelvespace}${longblank}
+&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${threespace}6${twelvespace}${longblank}
+&nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${threespace}7${twelvespace}addu $s0 $0 $0
+&nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addu $s0 $0 $0
 <hr class="s1" />
-${threespace}8${twelvespace}move $s1 $a0
+&nbsp;&nbsp;&nbsp;8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move $s1 $a0
 <hr class="s1" />
-${threespace}9${twelvespace}move $s2 $a1
+&nbsp;&nbsp;&nbsp;9&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move $s2 $a1
 <hr class="s1" />
-${twospace}10${twospace}loop:${fivespace}srl $t0 $s0 2
+&nbsp;&nbsp;10&nbsp;&nbsp;loop:${fivespace}srl $t0 $s0 2
 <hr class="s1" />
-${twospace}11${twelvespace}beq $t0 $s2 exit
+&nbsp;&nbsp;11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq $t0 $s2 exit
 <hr class="s1" />
-${twospace}12${twelvespace}subu $a0 $s2 $t0
+&nbsp;&nbsp;12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subu $a0 $s2 $t0
 <hr class="s1" />
-${twospace}13${twelvespace}jal random
+&nbsp;&nbsp;13&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jal random
 <hr class="s1" />
-${twospace}14${twelvespace}sll $v0 $v0 2
+&nbsp;&nbsp;14&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sll $v0 $v0 2
 <hr class="s1" />
-${twospace}15${twelvespace}addu $v0 $v0 $s0
+&nbsp;&nbsp;15&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addu $v0 $v0 $s0
 <hr class="s1" />
-${twospace}16${twelvespace}addu $t0 $s1 $s0
+&nbsp;&nbsp;16&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addu $t0 $s1 $s0
 <hr class="s1" />
-${twospace}17${twelvespace}addu $t1 $s1 $v0
+&nbsp;&nbsp;17&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addu $t1 $s1 $v0
 <hr class="s1" />
-${twospace}18${twelvespace}lw $t2 0($t0)
+&nbsp;&nbsp;18&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lw $t2 0($t0)
 <hr class="s1" />
-${twospace}19${twelvespace}lw $t3 0($t1)
+&nbsp;&nbsp;19&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lw $t3 0($t1)
 <hr class="s1" />
-${twospace}20${twelvespace}sw $t2 0($t1)
+&nbsp;&nbsp;20&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sw $t2 0($t1)
 <hr class="s1" />
-${twospace}21${twelvespace}sw $t3 0($t0)
+&nbsp;&nbsp;21&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sw $t3 0($t0)
 <hr class="s1" />
-${twospace}22${twelvespace}addiu $s0 $s0 4
+&nbsp;&nbsp;22&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $s0 $s0 4
 <hr class="s1" />
-${twospace}23${twelvespace}j loop
+&nbsp;&nbsp;23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j loop
 <hr class="s1" />
-${twospace}24${twospace}exit:${fivespace}${longblank}
+&nbsp;&nbsp;24&nbsp;&nbsp;exit:${fivespace}${longblank}
 <hr class="s1" />
-${twospace}25${twelvespace}${longblank}
+&nbsp;&nbsp;25&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${twospace}26${twelvespace}${longblank}
+&nbsp;&nbsp;26&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${twospace}27${twelvespace}${longblank}
+&nbsp;&nbsp;27&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${twospace}28${twelvespace}${longblank}
+&nbsp;&nbsp;28&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${twospace}29${twelvespace}${longblank}
+&nbsp;&nbsp;29&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${twospace}30${twelvespace}${longblank}
+&nbsp;&nbsp;30&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 </code>
 
 <hr class="s2" />
@@ -458,65 +458,65 @@ works correctly on strings. Do not write down any extraneous line numbers.
 const q5_1_soln =
 `
 <code>
-${threespace}1${twospace}mystery:${twospace}addiu $sp $sp ________<b>-16</b>________
+&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;mystery:&nbsp;&nbsp;addiu $sp $sp ________<b>-16</b>________
 <hr class="s1" />
-${threespace}2${twelvespace}__________<b>sw $s0 0($sp)</b>__________
+&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________<b>sw $s0 0($sp)</b>__________
 <hr class="s1" />
-${threespace}3${twelvespace}__________<b>sw $s1 4($sp)</b>__________
+&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________<b>sw $s1 4($sp)</b>__________
 <hr class="s1" />
-${threespace}4${twelvespace}__________<b>sw $s2 8($sp)</b>__________
+&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________<b>sw $s2 8($sp)</b>__________
 <hr class="s1" />
-${threespace}5${twelvespace}__________<b>sw $ra 12($sp)</b>_________
+&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________<b>sw $ra 12($sp)</b>_________
 <hr class="s1" />
-${threespace}6${twelvespace}${longblank}___
+&nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}___
 <hr class="s1" />
-${threespace}7${twelvespace}addu $s0 $0 $0
+&nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addu $s0 $0 $0
 <hr class="s1" />
-${threespace}8${twelvespace}move $s1 $a0
+&nbsp;&nbsp;&nbsp;8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move $s1 $a0
 <hr class="s1" />
-${threespace}9${twelvespace}move $s2 $a1
+&nbsp;&nbsp;&nbsp;9&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move $s2 $a1
 <hr class="s1" />
-${twospace}10${twospace}loop:${fivespace}srl $t0 $s0 2
+&nbsp;&nbsp;10&nbsp;&nbsp;loop:${fivespace}srl $t0 $s0 2
 <hr class="s1" />
-${twospace}11${twelvespace}beq $t0 $s2 exit
+&nbsp;&nbsp;11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq $t0 $s2 exit
 <hr class="s1" />
-${twospace}12${twelvespace}subu $a0 $s2 $t0
+&nbsp;&nbsp;12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subu $a0 $s2 $t0
 <hr class="s1" />
-${twospace}13${twelvespace}jal random
+&nbsp;&nbsp;13&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jal random
 <hr class="s1" />
-${twospace}14${twelvespace}sll $v0 $v0 2
+&nbsp;&nbsp;14&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sll $v0 $v0 2
 <hr class="s1" />
-${twospace}15${twelvespace}addu $v0 $v0 $s0
+&nbsp;&nbsp;15&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addu $v0 $v0 $s0
 <hr class="s1" />
-${twospace}16${twelvespace}addu $t0 $s1 $s0
+&nbsp;&nbsp;16&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addu $t0 $s1 $s0
 <hr class="s1" />
-${twospace}17${twelvespace}addu $t1 $s1 $v0
+&nbsp;&nbsp;17&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addu $t1 $s1 $v0
 <hr class="s1" />
-${twospace}18${twelvespace}lw $t2 0($t0)
+&nbsp;&nbsp;18&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lw $t2 0($t0)
 <hr class="s1" />
-${twospace}19${twelvespace}lw $t3 0($t1)
+&nbsp;&nbsp;19&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lw $t3 0($t1)
 <hr class="s1" />
-${twospace}20${twelvespace}sw $t2 0($t1)
+&nbsp;&nbsp;20&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sw $t2 0($t1)
 <hr class="s1" />
-${twospace}21${twelvespace}sw $t3 0($t0)
+&nbsp;&nbsp;21&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sw $t3 0($t0)
 <hr class="s1" />
-${twospace}22${twelvespace}addiu $s0 $s0 4
+&nbsp;&nbsp;22&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $s0 $s0 4
 <hr class="s1" />
-${twospace}23${twelvespace}j loop
+&nbsp;&nbsp;23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j loop
 <hr class="s1" />
-${twospace}24${twospace}exit:${fivespace}__________<b>lw $s0 0($sp)</b>__________
+&nbsp;&nbsp;24&nbsp;&nbsp;exit:${fivespace}__________<b>lw $s0 0($sp)</b>__________
 <hr class="s1" />
-${twospace}25${twelvespace}__________<b>lw $s1 4($sp)</b>__________
+&nbsp;&nbsp;25&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________<b>lw $s1 4($sp)</b>__________
 <hr class="s1" />
-${twospace}26${twelvespace}__________<b>lw $s2 8($sp)</b>__________
+&nbsp;&nbsp;26&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________<b>lw $s2 8($sp)</b>__________
 <hr class="s1" />
-${twospace}27${twelvespace}__________<b>lw $ra 12($sp)</b>_________
+&nbsp;&nbsp;27&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________<b>lw $ra 12($sp)</b>_________
 <hr class="s1" />
-${twospace}28${twelvespace}_________<b>addiu $sp $sp 16</b>________
+&nbsp;&nbsp;28&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_________<b>addiu $sp $sp 16</b>________
 <hr class="s1" />
-${twospace}29${twelvespace}______________<b>jr $ra</b>_____________
+&nbsp;&nbsp;29&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________<b>jr $ra</b>_____________
 <hr class="s1" />
-${twospace}30${twelvespace}${longblank}___
+&nbsp;&nbsp;30&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}___
 </code>
 `;
 
@@ -587,13 +587,13 @@ const q7_1 =
 
 Connect the definition with the name of the process that describes it.
 <hr class="s1" />
-${fourspace}a) Compiler
+&nbsp;&nbsp;&nbsp;&nbsp;a) Compiler
 <hr class="s1" />
-${fourspace}b) Assembler
+&nbsp;&nbsp;&nbsp;&nbsp;b) Assembler
 <hr class="s1" />
-${fourspace}c) Linker
+&nbsp;&nbsp;&nbsp;&nbsp;c) Linker
 <hr class="s1" />
-${fourspace}d) Loader
+&nbsp;&nbsp;&nbsp;&nbsp;d) Loader
 <hr class="s1" />
 1) Outputs code that may still contain pseudoinstructions.
 <hr class="s1" />

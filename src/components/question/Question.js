@@ -39,7 +39,7 @@ class Solution extends Component {
       });
       solutionContent = (
         <div className={solutionClass}>
-          <span dangerouslySetInnerHTML={{'__html': this.props.solution}}></span>
+          <span dangerouslySetInnerHTML={{'__html': this.props.solution}} />
         </div>
       );
     }
@@ -97,10 +97,10 @@ class Question extends Component {
     const content = this.props.content;
     return (
       <div id={this.props.id} className="question">
-        <a className="link" onClick={() => this.copyToClipboard(`${document.location.origin}/exam?id=${this.props.examCode}&courseId=cs162#${this.props.id}`)}>Share</a>
+        <a className="link" onClick={() => this.copyToClipboard(`${document.location.origin}/exam?id=${examCode}&courseId=cs162#${this.props.id}`)}>Share</a>
         {(this.state.copied) ? (<Expire delay={1800} callback={this.clearCopied}><div className="tooltip">Link copied to clipboard!</div></Expire>) : null}
         <div dangerouslySetInnerHTML={{__html: content}}></div>
-        <Solution solution={this.props.solution} examCode={this.props.examCode} />
+        <Solution solution={this.props.solution} examCode={examCode} />
       </div>
     );
   }

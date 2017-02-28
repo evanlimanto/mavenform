@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Question, Sidebar } from '../../components';
-import { longblank, blank, onespace, twospace, threespace, fourspace, sevenspace, eightspace } from '../../utils';
+import { longblank, blank } from '../../utils';
 
 const _ = require('lodash');
 
@@ -23,43 +23,43 @@ padding at the end for alignment. Each struct is located at a memory address tha
 <hr class="s2" />
 typedef struct {
 <hr class="s1" />
-${fourspace}char *name;
+&nbsp;&nbsp;&nbsp;&nbsp;char *name;
 <hr class="s1" />
-${fourspace}unsigned int id;
+&nbsp;&nbsp;&nbsp;&nbsp;unsigned int id;
 <hr class="s1" />
-${fourspace}char grade;
+&nbsp;&nbsp;&nbsp;&nbsp;char grade;
 <hr class="s1" />
 } Student;
 <hr class="s2" />
 int main(void) {
 <hr class="s1" />
-${fourspace}Student *students = malloc(2 * sizeof(Student));
+&nbsp;&nbsp;&nbsp;&nbsp;Student *students = malloc(2 * sizeof(Student));
 <hr class="s1" />
-${fourspace}students[0].name = "Oski Bear";
+&nbsp;&nbsp;&nbsp;&nbsp;students[0].name = "Oski Bear";
 <hr class="s1" />
-${fourspace}students[0].id = 12345;
+&nbsp;&nbsp;&nbsp;&nbsp;students[0].id = 12345;
 <hr class="s1" />
-${fourspace}students[0].grade = 'A';
+&nbsp;&nbsp;&nbsp;&nbsp;students[0].grade = 'A';
 <hr class="s1" />
-${fourspace}students[1].name = "Ken Thompson";
+&nbsp;&nbsp;&nbsp;&nbsp;students[1].name = "Ken Thompson";
 <hr class="s1" />
-${fourspace}students[1].id = 5678;
+&nbsp;&nbsp;&nbsp;&nbsp;students[1].id = 5678;
 <hr class="s1" />
-${fourspace}students[1].grade = 'A';
+&nbsp;&nbsp;&nbsp;&nbsp;students[1].grade = 'A';
 <hr class="s2" />
-${fourspace}printf("students: %p\n", students);
+&nbsp;&nbsp;&nbsp;&nbsp;printf("students: %p\n", students);
 <hr class="s1" />
-${fourspace}printf("Address of students[0]: %p\n", &(students[0]));
+&nbsp;&nbsp;&nbsp;&nbsp;printf("Address of students[0]: %p\n", &(students[0]));
 <hr class="s1" />
-${fourspace}printf("Address of students[0].id: %p\n", &(students[0].id));
+&nbsp;&nbsp;&nbsp;&nbsp;printf("Address of students[0].id: %p\n", &(students[0].id));
 <hr class="s2" />
-${fourspace}printf("students + 1: %p\n", students + 1);
+&nbsp;&nbsp;&nbsp;&nbsp;printf("students + 1: %p\n", students + 1);
 <hr class="s1" />
-${fourspace}printf("Address of students[1].grade: %p\n",
+&nbsp;&nbsp;&nbsp;&nbsp;printf("Address of students[1].grade: %p\n",
 <hr class="s1" />
-${twelvespace}&(students[1].grade));
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&(students[1].grade));
 <hr class="s2" />
-${fourspace}return 0;
+&nbsp;&nbsp;&nbsp;&nbsp;return 0;
 <hr class="s1" />
 }
 </code>
@@ -84,15 +84,15 @@ Address of students[1].grade: ${blank}
 const q1_1_soln =
 `
 <code>
-${fourspace}students: 0x1000
+&nbsp;&nbsp;&nbsp;&nbsp;students: 0x1000
 <hr class="s1" />
-${fourspace}Address of students[0]: <b>0x1000</b>
+&nbsp;&nbsp;&nbsp;&nbsp;Address of students[0]: <b>0x1000</b>
 <hr class="s1" />
-${fourspace}Address of students[0].id: <b>0x1004</b>
+&nbsp;&nbsp;&nbsp;&nbsp;Address of students[0].id: <b>0x1004</b>
 <hr class="s1" />
-${fourspace}students + 1: <b>0x100C</b>
+&nbsp;&nbsp;&nbsp;&nbsp;students + 1: <b>0x100C</b>
 <hr class="s1" />
-${fourspace}Address of students[1].grade: <b>0x1014</b>
+&nbsp;&nbsp;&nbsp;&nbsp;Address of students[1].grade: <b>0x1014</b>
 </code>
 `;
 
@@ -119,11 +119,11 @@ tree_node <code>struct</code> as defined. Each node can have an arbitrary number
 <code>
 struct tree_node {
 <hr class="s1" />
-${fourspace}int value;
+&nbsp;&nbsp;&nbsp;&nbsp;int value;
 <hr class="s1" />
-${fourspace}struct tree_node ** children;
+&nbsp;&nbsp;&nbsp;&nbsp;struct tree_node ** children;
 <hr class="s1" />
-${fourspace}int num_children;
+&nbsp;&nbsp;&nbsp;&nbsp;int num_children;
 <hr class="s1" />
 }
 
@@ -131,31 +131,31 @@ ${fourspace}int num_children;
 
 int sum_and_free_tree( struct tree_node * root ) {
 <hr class="s1" />
-${fourspace}int i, sum;
+&nbsp;&nbsp;&nbsp;&nbsp;int i, sum;
 <hr class="s1" />
-${fourspace}if ( root == NULL ) { // This is equivalent to being stumped
+&nbsp;&nbsp;&nbsp;&nbsp;if ( root == NULL ) { // This is equivalent to being stumped
 <hr class="s1" />
-${eightspace}return 0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}sum = _______________________________________________;
+&nbsp;&nbsp;&nbsp;&nbsp;sum = _______________________________________________;
 <hr class="s1" />
-${fourspace}for ( i = ____________;
+&nbsp;&nbsp;&nbsp;&nbsp;for ( i = ____________;
 <hr class="s1" />
 ${_.repeat('&nbsp;', 14)}____________;
 <hr class="s1" />
 ${_.repeat('&nbsp;', 14)}____________ ) {
 <hr class="s1" />
-${eightspace}_______________________________________________;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_______________________________________________;
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}free( _______________________________________________ );
+&nbsp;&nbsp;&nbsp;&nbsp;free( _______________________________________________ );
 <hr class="s1" />
-${fourspace}free( _______________________________________________ );
+&nbsp;&nbsp;&nbsp;&nbsp;free( _______________________________________________ );
 <hr class="s1" />
-${fourspace}return sum;
+&nbsp;&nbsp;&nbsp;&nbsp;return sum;
 <hr class="s1" />
 }
 </code>
@@ -166,31 +166,31 @@ const q2_1_soln =
 <code>
 int sum_and_free_tree( struct tree_node * root ) {
 <hr class="s1" />
-${fourspace}int i, sum;
+&nbsp;&nbsp;&nbsp;&nbsp;int i, sum;
 <hr class="s1" />
-${fourspace}if ( root == NULL ) { // This is equivalent to being stumped
+&nbsp;&nbsp;&nbsp;&nbsp;if ( root == NULL ) { // This is equivalent to being stumped
 <hr class="s1" />
-${eightspace}return 0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}sum = <b>root->value</b>;
+&nbsp;&nbsp;&nbsp;&nbsp;sum = <b>root->value</b>;
 <hr class="s1" />
-${fourspace}for ( i = <b>0</b>;
+&nbsp;&nbsp;&nbsp;&nbsp;for ( i = <b>0</b>;
 <hr class="s1" />
 ${_.repeat('&nbsp;', 14)}<b>i < root->num_children</b>;
 <hr class="s1" />
 ${_.repeat('&nbsp;', 14)}<b>i++</b> ) {
 <hr class="s1" />
-${eightspace}<b>sum += sum_and_free_tree((root->children)[i])</b>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>sum += sum_and_free_tree((root->children)[i])</b>;
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}free( <b>root->children</b> );
+&nbsp;&nbsp;&nbsp;&nbsp;free( <b>root->children</b> );
 <hr class="s1" />
-${fourspace}free( <b>root</b> );
+&nbsp;&nbsp;&nbsp;&nbsp;free( <b>root</b> );
 <hr class="s1" />
-${fourspace}return sum;
+&nbsp;&nbsp;&nbsp;&nbsp;return sum;
 <hr class="s1" />
 }
 </code>
@@ -211,17 +211,17 @@ Assume <code>$a0 = arr, $a1 = n, $a2 = min_val</code>.
 <code>
 int filter_array(int* arr, size_t n, int min_val) {
 <hr class="s1" />
-${fourspace}int count = 0, i;
+&nbsp;&nbsp;&nbsp;&nbsp;int count = 0, i;
 <hr class="s1" />
-${fourspace}for (i=0; i < n; i++){
+&nbsp;&nbsp;&nbsp;&nbsp;for (i=0; i < n; i++){
 <hr class="s1" />
-${eightspace}if (arr[i] > min_val)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (arr[i] > min_val)
 <hr class="s1" />
-${twelvespace}count++;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count++;
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}return count;
+&nbsp;&nbsp;&nbsp;&nbsp;return count;
 <hr class="s1" />
 }
 
@@ -245,49 +245,49 @@ printf("%d\n", filter_array(p,3,1))
 
 filter_array:
 <hr class="s1" />
-${fourspace}addiu $sp, $sp, ____
+&nbsp;&nbsp;&nbsp;&nbsp;addiu $sp, $sp, ____
 <hr class="s1" />
-${fourspace}___________________
+&nbsp;&nbsp;&nbsp;&nbsp;___________________
 <hr class="s1" />
-${fourspace}___________________
+&nbsp;&nbsp;&nbsp;&nbsp;___________________
 <hr class="s1" />
-${fourspace}___________________
+&nbsp;&nbsp;&nbsp;&nbsp;___________________
 <hr class="s1" />
-${fourspace}addiu $s0, $zero, 0  <b># We’ll store the count in $s0</b>
+&nbsp;&nbsp;&nbsp;&nbsp;addiu $s0, $zero, 0  <b># We’ll store the count in $s0</b>
 <hr class="s1" />
-${fourspace}addiu $s1, $zero, 0  <b># We'll store i in $s1</b>
+&nbsp;&nbsp;&nbsp;&nbsp;addiu $s1, $zero, 0  <b># We'll store i in $s1</b>
 <hr class="s1" />
-${fourspace}addiu $t0, $a0, 0
+&nbsp;&nbsp;&nbsp;&nbsp;addiu $t0, $a0, 0
 <hr class="s1" />
 loop:
 <hr class="s1" />
-${fourspace}beq _______________
+&nbsp;&nbsp;&nbsp;&nbsp;beq _______________
 <hr class="s1" />
-${fourspace}lw $t1, ___________
+&nbsp;&nbsp;&nbsp;&nbsp;lw $t1, ___________
 <hr class="s1" />
-${fourspace}slt $t2, _____, ___
+&nbsp;&nbsp;&nbsp;&nbsp;slt $t2, _____, ___
 <hr class="s1" />
-${fourspace}___________________
+&nbsp;&nbsp;&nbsp;&nbsp;___________________
 <hr class="s1" />
-${fourspace}___________________
+&nbsp;&nbsp;&nbsp;&nbsp;___________________
 <hr class="s1" />
-${fourspace}___________________
+&nbsp;&nbsp;&nbsp;&nbsp;___________________
 <hr class="s1" />
-${fourspace}j loop
+&nbsp;&nbsp;&nbsp;&nbsp;j loop
 <hr class="s1" />
 done:
 <hr class="s1" />
-${fourspace}___________________
+&nbsp;&nbsp;&nbsp;&nbsp;___________________
 <hr class="s1" />
-${fourspace}___________________
+&nbsp;&nbsp;&nbsp;&nbsp;___________________
 <hr class="s1" />
-${fourspace}___________________
+&nbsp;&nbsp;&nbsp;&nbsp;___________________
 <hr class="s1" />
-${fourspace}___________________
+&nbsp;&nbsp;&nbsp;&nbsp;___________________
 <hr class="s1" />
-${fourspace}addiu $sp, $sp, ___
+&nbsp;&nbsp;&nbsp;&nbsp;addiu $sp, $sp, ___
 <hr class="s1" />
-${fourspace}jr $ra
+&nbsp;&nbsp;&nbsp;&nbsp;jr $ra
 </code>
 `;
 
@@ -296,49 +296,49 @@ const q3_1_soln =
 <code>
 filter_array:
 <hr class="s1" />
-${fourspace}addiu $sp, $sp, <b>-8</b>
+&nbsp;&nbsp;&nbsp;&nbsp;addiu $sp, $sp, <b>-8</b>
 <hr class="s1" />
-${fourspace}<b>sw $s0, 0($sp)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>sw $s0, 0($sp)</b>
 <hr class="s1" />
-${fourspace}<b>sw $s1, 4($sp)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>sw $s1, 4($sp)</b>
 <hr class="s1" />
-${fourspace}___________________
+&nbsp;&nbsp;&nbsp;&nbsp;___________________
 <hr class="s1" />
-${fourspace}addiu $s0, $zero, 0 ${fourspace} <b># We’ll store the count in $s0</b>
+&nbsp;&nbsp;&nbsp;&nbsp;addiu $s0, $zero, 0 &nbsp;&nbsp;&nbsp;&nbsp; <b># We’ll store the count in $s0</b>
 <hr class="s1" />
-${fourspace}addiu $s1, $zero, 0 ${fourspace} <b># We'll store i in $s1</b>
+&nbsp;&nbsp;&nbsp;&nbsp;addiu $s1, $zero, 0 &nbsp;&nbsp;&nbsp;&nbsp; <b># We'll store i in $s1</b>
 <hr class="s1" />
-${fourspace}addiu $t0, $a0, 0
+&nbsp;&nbsp;&nbsp;&nbsp;addiu $t0, $a0, 0
 <hr class="s1" />
 loop:
 <hr class="s1" />
-${fourspace}beq <b>$s1, $a1, done</b>
+&nbsp;&nbsp;&nbsp;&nbsp;beq <b>$s1, $a1, done</b>
 <hr class="s1" />
-${fourspace}lw $t1, <b>0($t0)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;lw $t1, <b>0($t0)</b>
 <hr class="s1" />
-${fourspace}slt $t2, <b>$a2</b>, <b>$t1</b>
+&nbsp;&nbsp;&nbsp;&nbsp;slt $t2, <b>$a2</b>, <b>$t1</b>
 <hr class="s1" />
-${fourspace}<b>addu $s0, $s0, $t2</b>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>addu $s0, $s0, $t2</b>
 <hr class="s1" />
-${fourspace}<b>addiu $s1, $s1, 1</b>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>addiu $s1, $s1, 1</b>
 <hr class="s1" />
-${fourspace}<b>addiu $t0, $t0, 4</b>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>addiu $t0, $t0, 4</b>
 <hr class="s1" />
-${fourspace}j loop
+&nbsp;&nbsp;&nbsp;&nbsp;j loop
 <hr class="s1" />
 done:
 <hr class="s1" />
-${fourspace}<b>addiu $v0, $s0, 0</b>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>addiu $v0, $s0, 0</b>
 <hr class="s1" />
-${fourspace}<b>lw $s0, 0($sp)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>lw $s0, 0($sp)</b>
 <hr class="s1" />
-${fourspace}<b>lw $s1, 4($sp)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>lw $s1, 4($sp)</b>
 <hr class="s1" />
-${fourspace}___________________
+&nbsp;&nbsp;&nbsp;&nbsp;___________________
 <hr class="s1" />
-${fourspace}addiu $sp, $sp, <b>8</b>
+&nbsp;&nbsp;&nbsp;&nbsp;addiu $sp, $sp, <b>8</b>
 <hr class="s1" />
-${fourspace}jr $ra
+&nbsp;&nbsp;&nbsp;&nbsp;jr $ra
 </code>
 `;
 
@@ -353,35 +353,35 @@ The following is a recursive function that saves its arguments and return addres
 <code>
 ${sevenspace}mystery:
 <hr class="s1" />
-0x4000${fourspace}bne $a0, $0, recurse
+0x4000&nbsp;&nbsp;&nbsp;&nbsp;bne $a0, $0, recurse
 <hr class="s1" />
-0x4004${fourspace}li $v0, 1
+0x4004&nbsp;&nbsp;&nbsp;&nbsp;li $v0, 1
 <hr class="s1" />
-0x4008${fourspace}jr $ra
+0x4008&nbsp;&nbsp;&nbsp;&nbsp;jr $ra
 <hr class="s1" />
 ${sevenspace}recurse:
 <hr class="s1" />
-0x400C${fourspace}addiu $sp, $sp, -8
+0x400C&nbsp;&nbsp;&nbsp;&nbsp;addiu $sp, $sp, -8
 <hr class="s1" />
-0x4010${fourspace}sw $ra, 0($sp)
+0x4010&nbsp;&nbsp;&nbsp;&nbsp;sw $ra, 0($sp)
 <hr class="s1" />
-0x4014${fourspace}sw $a0, 4($sp)
+0x4014&nbsp;&nbsp;&nbsp;&nbsp;sw $a0, 4($sp)
 <hr class="s1" />
-0x4018${fourspace}addiu $a0, $a0, -1
+0x4018&nbsp;&nbsp;&nbsp;&nbsp;addiu $a0, $a0, -1
 <hr class="s1" />
-0x401C${fourspace}jal mystery
+0x401C&nbsp;&nbsp;&nbsp;&nbsp;jal mystery
 <hr class="s1" />
-0x4020${fourspace}lw $ra, 0($sp)
+0x4020&nbsp;&nbsp;&nbsp;&nbsp;lw $ra, 0($sp)
 <hr class="s1" />
-0x4024${fourspace}lw $a0, 4($sp)
+0x4024&nbsp;&nbsp;&nbsp;&nbsp;lw $a0, 4($sp)
 <hr class="s1" />
-0x4028${fourspace}addiu $sp, $sp, 8
+0x4028&nbsp;&nbsp;&nbsp;&nbsp;addiu $sp, $sp, 8
 <hr class="s1" />
-0x402C${fourspace}mult $a0, $v0
+0x402C&nbsp;&nbsp;&nbsp;&nbsp;mult $a0, $v0
 <hr class="s1" />
-0x4030${fourspace}mflo $v0
+0x4030&nbsp;&nbsp;&nbsp;&nbsp;mflo $v0
 <hr class="s1" />
-0x4034${fourspace}jr $ra
+0x4034&nbsp;&nbsp;&nbsp;&nbsp;jr $ra
 </code>
 
 <hr class="s2" />
@@ -461,25 +461,25 @@ the address of the instruction on line 0 is <code>0x00000000</code>. Consider th
 instruction format representation:
 <hr class="s2" />
 <code>
-0${fifteenspace}add $t0 $a0 $0${eightspace}<=>${eightspace}0x00804020
+0${fifteenspace}add $t0 $a0 $0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x00804020
 <hr class="s1" />
-1${fifteenspace}add $t1 $a1 $0${eightspace}<=>${eightspace}${_.repeat('_', 10)}
+1${fifteenspace}add $t1 $a1 $0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${_.repeat('_', 10)}
 <hr class="s1" />
-2${fourspace}LabelA:${fourspace}add $t2 $0 $0${_.repeat('&nbsp;', 9)}<=>${eightspace}0x00005020
+2&nbsp;&nbsp;&nbsp;&nbsp;LabelA:&nbsp;&nbsp;&nbsp;&nbsp;add $t2 $0 $0${_.repeat('&nbsp;', 9)}<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x00005020
 <hr class="s1" />
-3${fourspace}LabelB:${fourspace}beq $t0 $0 END${eightspace}<=>${eightspace}${_.repeat('_', 10)}
+3&nbsp;&nbsp;&nbsp;&nbsp;LabelB:&nbsp;&nbsp;&nbsp;&nbsp;beq $t0 $0 END&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${_.repeat('_', 10)}
 <hr class="s1" />
-4${fourspace}LabelC:${fourspace}addi $t0 $t0 -1${sevenspace}<=>${eightspace}${_.repeat('_', 10)}
+4&nbsp;&nbsp;&nbsp;&nbsp;LabelC:&nbsp;&nbsp;&nbsp;&nbsp;addi $t0 $t0 -1${sevenspace}<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${_.repeat('_', 10)}
 <hr class="s1" />
-5${fifteenspace}lw $t3 0($t1)${_.repeat('&nbsp;', 9)}<=>${eightspace}${_.repeat('_', 10)}
+5${fifteenspace}lw $t3 0($t1)${_.repeat('&nbsp;', 9)}<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${_.repeat('_', 10)}
 <hr class="s1" />
-6${fifteenspace}${_.repeat('_', 14)}${eightspace}<=>${eightspace}0x014b5020
+6${fifteenspace}${_.repeat('_', 14)}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x014b5020
 <hr class="s1" />
-7${fifteenspace}addi $t1 $t1 4${eightspace}<=>${eightspace}0x21290004
+7${fifteenspace}addi $t1 $t1 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x21290004
 <hr class="s1" />
-8${fifteenspace}${_.repeat('_', 14)}${eightspace}<=>${eightspace}0x08000003
+8${fifteenspace}${_.repeat('_', 14)}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x08000003
 <hr class="s1" />
-9${fourspace}END:${sevenspace}add $v0 $t2 $0${eightspace}<=>${eightspace}0x01201020
+9&nbsp;&nbsp;&nbsp;&nbsp;END:${sevenspace}add $v0 $t2 $0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x01201020
 <hr class="s1" />
 </code>
 <hr class="s2" />
@@ -491,14 +491,14 @@ Line 1:
 <hr class="s1" />
 Line 3:
 <hr class="s1" />
-<table><tbody><tr><td>${fourspace}</td><td>${fourspace}</td><td>${fourspace}</td><td>${fourspace}</td></tr></tbody></table>
+<table><tbody><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></tbody></table>
 <hr class="s1" />
 Line 4:
 <hr class="s1" />
-<table><tbody><tr><td>${fourspace}</td><td>${fourspace}</td><td>${fourspace}</td><td>${fourspace}</td></tr></tbody></table>
+<table><tbody><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></tbody></table>
 Line 5:
 <hr class="s1" />
-<table><tbody><tr><td>${fourspace}</td><td>${fourspace}</td><td>${fourspace}</td><td>${fourspace}</td></tr></tbody></table>
+<table><tbody><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></tbody></table>
 `;
 
 const q5_1_soln =
@@ -558,7 +558,7 @@ returns false for <code>0x1A1A</code> but true for <code>0x1A1B</code>. No condi
 <code>
 int f( uint16_t n ) {
 <hr class="s1" />
-${fourspace}return ${longblank};
+&nbsp;&nbsp;&nbsp;&nbsp;return ${longblank};
 <hr class="s1" />
 }
 </code>
@@ -569,7 +569,7 @@ const q6_1_soln =
 <code>
 int f( uint16_t n ) {
 <hr class="s1" />
-${fourspace}return <b>((n >> 8) ^ n) & 0xFF</b>;
+&nbsp;&nbsp;&nbsp;&nbsp;return <b>((n >> 8) ^ n) & 0xFF</b>;
 <hr class="s1" />
 }
 </code>
@@ -583,33 +583,33 @@ b) What is the output of the following snippet of code? <code>%d</code> prints a
 <code>
 int main(){
 <hr class="s1" />
-${fourspace}int8_t x = -1;
+&nbsp;&nbsp;&nbsp;&nbsp;int8_t x = -1;
 <hr class="s1"/>
-${fourspace}uint8_t y = 255;
+&nbsp;&nbsp;&nbsp;&nbsp;uint8_t y = 255;
 <hr class="s2"/>
-${fourspace}printf("===begin===\\n");
+&nbsp;&nbsp;&nbsp;&nbsp;printf("===begin===\\n");
 <hr class="s1" />
-${fourspace}printf("i. %u\\n", (uint8_t) x--);
+&nbsp;&nbsp;&nbsp;&nbsp;printf("i. %u\\n", (uint8_t) x--);
 <hr class="s1" />
-${fourspace}printf("ii. %u\\n", (uint8_t) x);
+&nbsp;&nbsp;&nbsp;&nbsp;printf("ii. %u\\n", (uint8_t) x);
 <hr class="s1" />
-${fourspace}printf("iii. %u\\n", ++y);
+&nbsp;&nbsp;&nbsp;&nbsp;printf("iii. %u\\n", ++y);
 <hr class="s1" />
-${fourspace}printf("iv. %u\\n", y);
+&nbsp;&nbsp;&nbsp;&nbsp;printf("iv. %u\\n", y);
 <hr class="s2" />
-${fourspace}printf("===break===\\n");
+&nbsp;&nbsp;&nbsp;&nbsp;printf("===break===\\n");
 <hr class="s2" />
-${fourspace}uint8_t z = 255;
+&nbsp;&nbsp;&nbsp;&nbsp;uint8_t z = 255;
 <hr class="s1" />
-${fourspace}printf("v. %d\\n", (int8_t) z);
+&nbsp;&nbsp;&nbsp;&nbsp;printf("v. %d\\n", (int8_t) z);
 <hr class="s1" />
-${fourspace}printf("vi. %u\\n", (uint8_t) z);
+&nbsp;&nbsp;&nbsp;&nbsp;printf("vi. %u\\n", (uint8_t) z);
 <hr class="s2" />
-${fourspace}z -= 256;
+&nbsp;&nbsp;&nbsp;&nbsp;z -= 256;
 <hr class="s1" />
-${fourspace}printf("vii. %d\\n", z);
+&nbsp;&nbsp;&nbsp;&nbsp;printf("vii. %d\\n", z);
 <hr class="s1" />
-${fourspace}printf("===end===\\n");
+&nbsp;&nbsp;&nbsp;&nbsp;printf("===end===\\n");
 <hr class="s1" />
 }
 </code>
@@ -691,28 +691,28 @@ const q6_4 =
 `
 d) The following questions refer to the job of the loader. Circle true or false.
 <hr class="s2" />
-i. ${threespace} True | False - Creates an address space for the program.
+i. &nbsp;&nbsp;&nbsp; True | False - Creates an address space for the program.
 <hr class="s1" />
-ii. ${twospace} True | False - Reads the object file to determine the size of text and data segments.
+ii. &nbsp;&nbsp; True | False - Reads the object file to determine the size of text and data segments.
 <hr class="s1" />
-iii. ${onespace} True | False - Initializes all machine registers to 0.
+iii. &nbsp; True | False - Initializes all machine registers to 0.
 <hr class="s1" />
-iv. ${twospace} True | False - Copies the instructions from the executable file into the stack.
+iv. &nbsp;&nbsp; True | False - Copies the instructions from the executable file into the stack.
 <hr class="s1" />
-v. ${threespace} True | False - Is currently implemented as part of the OS.
+v. &nbsp;&nbsp;&nbsp; True | False - Is currently implemented as part of the OS.
 `;
 
 const q6_4_soln =
 `
-i. ${threespace} <b>True</b>
+i. &nbsp;&nbsp;&nbsp; <b>True</b>
 <hr class="s1" />
-ii. ${twospace} <b>False</b>
+ii. &nbsp;&nbsp; <b>False</b>
 <hr class="s1" />
-iii. ${onespace} <b>False</b>
+iii. &nbsp; <b>False</b>
 <hr class="s1" />
-iv. ${twospace}<b>False</b>
+iv. &nbsp;&nbsp;<b>False</b>
 <hr class="s1" />
-v. ${threespace}<b>True</b>
+v. &nbsp;&nbsp;&nbsp;<b>True</b>
 `;
 
 const Scroll = require('react-scroll');

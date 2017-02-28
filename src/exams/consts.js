@@ -85,9 +85,6 @@ const exams = {
   },
 };
 
-const addedClasses = ['ee16a', 'cs61c', 'cs162'];
-const remainingClasses = [];
-
 const captions = {
   'ee16a': 'Designing Information Devices and Systems I',
   'cs61c': 'Great Ideas in Computer Architecture (Machine Structures)',

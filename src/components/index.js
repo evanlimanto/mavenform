@@ -1,4 +1,5 @@
+import Exam from './exam';
 import Sidebar from './sidebar';
 import Question from './question';
 
-export { Question, Sidebar };
+export { Exam, Question, Sidebar };

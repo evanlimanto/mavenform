@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Question, Sidebar } from '../../components';
-import { lx, longblank, blank, onespace, twospace, threespace, fourspace, fivespace, sixspace, eightspace, twelvespace } from '../../utils';
+import { longblank } from '../../utils';
 
 const _ = require('lodash');
 
@@ -198,13 +198,13 @@ a. (5 points) Consider the following procedure written in C:
 <hr class="s2" />
 <b>struct X</b> *getX(<b>const char</b> key[]) {
 <hr class="s1" />
-${fourspace}computeDatafromKey(key, &data);
+&nbsp;&nbsp;&nbsp;&nbsp;computeDatafromKey(key, &data);
 <hr class="s1" />
-${fourspace}// a value, based on key, is computed
+&nbsp;&nbsp;&nbsp;&nbsp;// a value, based on key, is computed
 <hr class="s1" />
-${fourspace}// and stored in data
+&nbsp;&nbsp;&nbsp;&nbsp;// and stored in data
 <hr class="s1" />
-${fourspace}<b>return</b> &data;
+&nbsp;&nbsp;&nbsp;&nbsp;<b>return</b> &data;
 <hr class="s1" />
 }
 </code>
@@ -231,17 +231,17 @@ const q3_2_soln =
 <code>
 struct X *getX(const char key[]) {
 <hr class="s1" />
-${fourspace}// The solution is to allocate a structure from the heap:
+&nbsp;&nbsp;&nbsp;&nbsp;// The solution is to allocate a structure from the heap:
 <hr class="s1" />
-${fourspace}struct X *newdata = malloc(sizeof(struct X));
+&nbsp;&nbsp;&nbsp;&nbsp;struct X *newdata = malloc(sizeof(struct X));
 <hr class="s1" />
-${fourspace}computeDatafromKey(key, &newdata);
+&nbsp;&nbsp;&nbsp;&nbsp;computeDatafromKey(key, &newdata);
 <hr class="s1" />
-${eightspace}// value, based on key, is computed
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// value, based on key, is computed
 <hr class="s1" />
-${eightspace}// and stored in data
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// and stored in data
 <hr class="s1" />
-${fourspace}return newdata;
+&nbsp;&nbsp;&nbsp;&nbsp;return newdata;
 <hr class="s1" />
 }
 </code>
@@ -252,21 +252,21 @@ const q3_3 =
 b.  (15 points) Consider a multithreaded operating system that includes monitors and condition variables with the following primitives:
 <hr class="s2" />
 <code>
-mon_t *mon_create() ${eightspace} /* Creates a new monitor */
+mon_t *mon_create() &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* Creates a new monitor */
 <hr class="s1" />
-void mon_lock(mon_t *m) ${fourspace} /* Acquires the monitor's lock */
+void mon_lock(mon_t *m) &nbsp;&nbsp;&nbsp;&nbsp; /* Acquires the monitor's lock */
 <hr class="s1" />
-void mon_release(mon_t *m) ${onespace} /* Releases the monitor's lock */
+void mon_release(mon_t *m) &nbsp; /* Releases the monitor's lock */
 <hr class="s2" />
-cv_t *cv_create(mon_t *m) ${twospace} /* Creates a condition variable
+cv_t *cv_create(mon_t *m) &nbsp;&nbsp; /* Creates a condition variable
 <hr class="s1" />
-${twelvespace}${twelvespace}${eightspace}associated with monitor m */
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;associated with monitor m */
 <hr class="s1" />
 void cv_wait(cv_t *cv) ${fivespace} /* Blocks on the condition variable */
 <hr class="s1" />
-void cv_signal(cv_t *cv) ${threespace} /* Wakes a thread waiting on cv */
+void cv_signal(cv_t *cv) &nbsp;&nbsp;&nbsp; /* Wakes a thread waiting on cv */
 <hr class="s1" />
-void cv_broadcast(cv_t *cv) ${onespace}/* Wakes all threads waiting on cv */
+void cv_broadcast(cv_t *cv) &nbsp;/* Wakes all threads waiting on cv */
 </code>
 
 <hr class="s2" />
@@ -276,11 +276,11 @@ Your task is to implement general purpose semaphores under this system.
 <code>
 typedef struct {
 <hr class="s1" />
-${fourspace}mon_t *m;
+&nbsp;&nbsp;&nbsp;&nbsp;mon_t *m;
 <hr class="s1" />
-${fourspace}cv_t *c;
+&nbsp;&nbsp;&nbsp;&nbsp;cv_t *c;
 <hr class="s1" />
-${fourspace}int value;
+&nbsp;&nbsp;&nbsp;&nbsp;int value;
 <hr class="s1" />
 } sema_t;
 </code>
@@ -293,19 +293,19 @@ const q3_3_soln =
 <code>
 sema_t *sema_create(int initval) {
 <hr class="s1" />
-${fourspace}sema_t *s;
+&nbsp;&nbsp;&nbsp;&nbsp;sema_t *s;
 <hr class="s1" />
-${fourspace}if (initval < 0) return NULLL;
+&nbsp;&nbsp;&nbsp;&nbsp;if (initval < 0) return NULLL;
 <hr class="s1" />
-${fourspace}s = (sema_t *) malloc(sizeof(sema_t));
+&nbsp;&nbsp;&nbsp;&nbsp;s = (sema_t *) malloc(sizeof(sema_t));
 <hr class="s1" />
-${fourspace}s->m = mon_create();
+&nbsp;&nbsp;&nbsp;&nbsp;s->m = mon_create();
 <hr class="s1" />
-${fourspace}s->c = cv_create(s->m);
+&nbsp;&nbsp;&nbsp;&nbsp;s->c = cv_create(s->m);
 <hr class="s1" />
-${fourspace}s->value = initavll;
+&nbsp;&nbsp;&nbsp;&nbsp;s->value = initavll;
 <hr class="s1" />
-${fourspace}return s;
+&nbsp;&nbsp;&nbsp;&nbsp;return s;
 <hr class="s1" />
 }
 
@@ -315,13 +315,13 @@ void sema_down(sema_t *s)
 <hr class="s1" />
 {
 <hr class="s1" />
-${fourspace}mon_lock(s->m);
+&nbsp;&nbsp;&nbsp;&nbsp;mon_lock(s->m);
 <hr class="s1" />
-${fourspace}while (s->value <= 0) cv_wait(s->c);
+&nbsp;&nbsp;&nbsp;&nbsp;while (s->value <= 0) cv_wait(s->c);
 <hr class="s1" />
-${fourspace}s->value--;
+&nbsp;&nbsp;&nbsp;&nbsp;s->value--;
 <hr class="s1" />
-${fourspace}mon_release(s->m);
+&nbsp;&nbsp;&nbsp;&nbsp;mon_release(s->m);
 <hr class="s1" />
 }
 
@@ -331,13 +331,13 @@ void sema_up(sema_t *s)
 <hr class="s1" />
 {
 <hr class="s1" />
-${fourspace}mon_lock(s->m);
+&nbsp;&nbsp;&nbsp;&nbsp;mon_lock(s->m);
 <hr class="s1" />
-${fourspace}s->value++;
+&nbsp;&nbsp;&nbsp;&nbsp;s->value++;
 <hr class="s1" />
-${fourspace}cv_signal(s->c);
+&nbsp;&nbsp;&nbsp;&nbsp;cv_signal(s->c);
 <hr class="s1" />
-${fourspace}mon_release(s->m);
+&nbsp;&nbsp;&nbsp;&nbsp;mon_release(s->m);
 <hr class="s1" />
 }
 </code>
@@ -355,31 +355,31 @@ semaphores Sem1, Sem2, and Sem3.
 <hr class="s1" />
 L1: sema_down(Sem3);
 <hr class="s1" />
-${fourspace}print("2");
+&nbsp;&nbsp;&nbsp;&nbsp;print("2");
 <hr class="s1" />
-${fourspace}sema_up(Sem2);
+&nbsp;&nbsp;&nbsp;&nbsp;sema_up(Sem2);
 <hr class="s1" />
-${fourspace}goto L1;
+&nbsp;&nbsp;&nbsp;&nbsp;goto L1;
 <hr class="s2" />
 <u>Thread 2</u>
 <hr class="s1" />
 L2: sema_down(Sem1);
 <hr class="s1" />
-${fourspace}print("6");
+&nbsp;&nbsp;&nbsp;&nbsp;print("6");
 <hr class="s1" />
-${fourspace}sema_up(Sem3);
+&nbsp;&nbsp;&nbsp;&nbsp;sema_up(Sem3);
 <hr class="s1" />
-${fourspace}goto L2;
+&nbsp;&nbsp;&nbsp;&nbsp;goto L2;
 <hr class="s2" />
 <u>Thread 3</u>
 <hr class="s1" />
 L2: sema_down(Sem2);
 <hr class="s1" />
-${fourspace}print("1");
+&nbsp;&nbsp;&nbsp;&nbsp;print("1");
 <hr class="s1" />
-${fourspace}sema_up(Sem1);
+&nbsp;&nbsp;&nbsp;&nbsp;sema_up(Sem1);
 <hr class="s1" />
-${fourspace}goto L3;
+&nbsp;&nbsp;&nbsp;&nbsp;goto L3;
 </code>
 
 <hr class="s2" />
@@ -430,31 +430,31 @@ char buffer[1024];
 <hr class="s1" />
 int main(int argc, char **argv) {
 <hr class="s1" />
-${fourspace}int files[argc];
+&nbsp;&nbsp;&nbsp;&nbsp;int files[argc];
 <hr class="s1" />
-${fourspace}files[0] = ${longblank};
+&nbsp;&nbsp;&nbsp;&nbsp;files[0] = ${longblank};
 <hr class="s1" />
-${fourspace}for (int i = 1; i < argc; i++) {
+&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 1; i < argc; i++) {
 <hr class="s1" />
-${eightspace}files[i] = fileno(fopen(argv[i], "w"));
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;files[i] = fileno(fopen(argv[i], "w"));
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}while (1) {
+&nbsp;&nbsp;&nbsp;&nbsp;while (1) {
 <hr class="s1" />
-${eightspace}int error = read(${longblank});
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int error = read(${longblank});
 <hr class="s1" />
-${eightspace}if (error <= 0) break;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (error <= 0) break;
 <hr class="s1" />
-${eightspace}for (int i = 0; i < argc; i++) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i < argc; i++) {
 <hr class="s1" />
-${twelvespace}write(${longblank});
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;write(${longblank});
 <hr class="s1" />
-${eightspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}}
+&nbsp;&nbsp;&nbsp;&nbsp;}
 <hr class="s1" />
-${fourspace}return 0;
+&nbsp;&nbsp;&nbsp;&nbsp;return 0;
 <hr class="s1" />
 }
 </code>
