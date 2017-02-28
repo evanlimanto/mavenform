@@ -3,7 +3,7 @@ prof: 'Kubiatowicz'
 type: 'Midterm 1'
 
 titles: {
-  'q1': 'True/False'.
+  'q1': 'True/False',
   'q2': 'Short Answer',
   'q3': 'Atomic Synchronization Primitives',
   'q4': 'Scheduling and Deadlock',
@@ -35,7 +35,7 @@ q1_1_s: |
 
 q1_2: |
   <b>Problem 1b[2pts]:</b> Simultaneous Multithreading is a hardware mechanism that can switch threads
-  every cycle. 
+  every cycle.
 
 q1_2_s: |
   <b>True.</b>
@@ -47,7 +47,7 @@ q1_2_s: |
 q1_3: |
   <b>Problem 1c[2pts]:</b> In a multi-process HTTP server (like in HW#2), only the child process is
   responsible for closing the client socket (e.g. the file descriptor returned by <code>accept()</code>), since the
-  parent doesn’t know when the child is done using the socket. 
+  parent doesn’t know when the child is done using the socket.
 
 q1_3_s: |
   <b>False.</b>
@@ -58,7 +58,7 @@ q1_3_s: |
 
 q1_4: |
   <b>Problem 1d[2pts]:</b> A user-level library implements each system call by first executing a “transition
-  to kernel mode” instruction. The library routine then calls an appropriate subroutine in the kernel.  
+  to kernel mode” instruction. The library routine then calls an appropriate subroutine in the kernel.
 
 q1_4_s: |
   <b>False.</b>
@@ -69,7 +69,7 @@ q1_4_s: |
   well-defined entry point in the kernel.
 
 q1_5: |
-  <b>Problem 1e[2pts]:</b> A thread can be blocked on multiple condition variables simultaneously.  
+  <b>Problem 1e[2pts]:</b> A thread can be blocked on multiple condition variables simultaneously.
 
 q1_5_s: |
   <b>False.</b>
@@ -121,7 +121,7 @@ q1_9_s: |
 q2_1: |
   <h3>Problem 2: Short Answer [18pts]</h3>
   <b>Problem 2a[3pts]:</b> Name at least two disadvantages of disabling interrupts to serialize access to a
-  critical section. When does it make sense to use interrupt disable/enable around a critical section? 
+  critical section. When does it make sense to use interrupt disable/enable around a critical section?
 
 q2_1_s: |
   Some possible answers include:
@@ -139,7 +139,7 @@ q2_1_s: |
 
 q2_2: |
   <b>Problem 2b[2pts]:</b> What is the difference between Mesa and Hoare scheduling for monitors? How
-  does this affect the programming pattern used by programmers (be explicit)? 
+  does this affect the programming pattern used by programmers (be explicit)?
 
 q2_2_s: |
   With Hoare scheduling, a <code>signal()</code> operation from one thread immediately wakes up a
@@ -171,7 +171,7 @@ q2_3_s: |
 
 q2_4: |
   <b>Problem 2d[3pts]:</b> Name three ways in which the processor can transition from user mode to
-  kernel mode. Can the user execute arbitrary code after the transition? 
+  kernel mode. Can the user execute arbitrary code after the transition?
 
 q2_4_s: |
   The processor transitions from user mode to kernel mode when (1) the user executes a system
@@ -180,16 +180,16 @@ q2_4_s: |
   because entry into the kernel is through controlled entry points (not under control of the user).
 
 q2_5: |
-  <b>Problem 2e[2pts]:</b> What is the difference between fork() and exec() on Unix? 
+  <b>Problem 2e[2pts]:</b> What is the difference between fork() and exec() on Unix?
 
 q2_5_s: |
   The fork() system call creates a new child process whose address space duplicates that of the
   parent. In contrast, the exec() system call throws away the contents of a process’ address space
-  and replaces it by loading an executable (new program) from the filesystem. 
+  and replaces it by loading an executable (new program) from the filesystem.
 
 q2_6: |
   <b>Problem 2f[2pts]:</b> List two reasons why overuse of threads is bad (i.e. using too many threads for
-  different tasks). Be explicit in your answers. 
+  different tasks). Be explicit in your answers.
 
 q2_6_s: |
   There are a number of reasons that overuse of threads is bad. Some of them include:
@@ -200,10 +200,10 @@ q2_6_s: |
   2) Excessive threading can waste memory for stacks and TCBs
   <hr class="s1" />
   3) The overhead of splitting tasks into threads (the launching/exit process) may not be offset by
-  the resulting gain in performance from parallelism. 
+  the resulting gain in performance from parallelism.
 
 q2_7: |
-  <b>Problem 2g[2pts]:</b> What is the default scheduler in PintOS? 
+  <b>Problem 2g[2pts]:</b> What is the default scheduler in PintOS?
 
 q2_7_s: |
   The default scheduler in PintOS round-robin (with quantum = 4).
@@ -223,7 +223,7 @@ q3_1: |
   In class, we discussed a number of atomic hardware primitives that are available on modern
   architectures. In particular, we discussed “test and set” (TSET), SWAP, and “compare and swap”
   (CAS). They can be defined as follows (let “expr” be an expression, “&addr” be an address of a
-  memory location, and “M[addr]” be the actual memory location at address addr): 
+  memory location, and “M[addr]” be the actual memory location at address addr):
   <hr class="s1" />
   <img src="/img/cs162sp15-3-1.png" class="problem-image" />
   <hr class="s1" />
@@ -237,11 +237,11 @@ q3_1: |
   <hr class="s2" />
   // Later: acquire lock
   <hr class="s1" />
-  while (TSET(lock)); 
+  while (TSET(lock));
   </code>
   <hr class="s2" />
   CAS is general enough as an atomic operation that it can be used to implement both TSET and
-  SWAP. For instance, consider the following implementation of TSET with CAS: 
+  SWAP. For instance, consider the following implementation of TSET with CAS:
   <hr class="s2" />
   <code>
   TSET(&addr) {
@@ -256,7 +256,7 @@ q3_1: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;return temp;
   <hr class="s1" />
-  } 
+  }
   </code>
   <hr class="s5" />
   <b>Problem 3a[3pts]:</b>
@@ -319,7 +319,7 @@ q3_3: |
   spinlocks were a bad idea because they can waste a lot of processor cycles. The alternative is to put
   a waiting process to sleep while it is waiting for the lock (using a blocking lock). Contrary to what
   we implied in class, there are cases in which spinlocks would be more efficient than blocking locks.
-  Give a circumstance in which this is true and explain why a spinlock is more efficient. 
+  Give a circumstance in which this is true and explain why a spinlock is more efficient.
 
 q3_3_s: |
   If the expected wait time of the lock is very short (such as because the lock is rarely contested or the
@@ -408,7 +408,7 @@ q3_4: |
   <hr class="s2" />
   <b>Problem 3d[3pts]:</b>
   <hr class="s1" />
-  For this non-multithreaded code, draw the state of a queue with 2 queued items on it: 
+  For this non-multithreaded code, draw the state of a queue with 2 queued items on it:
 
 q3_4_s : |
   <img src="/img/cs162sp15-3-5.png" class="problem-image" />
@@ -417,7 +417,7 @@ q3_5: |
   <b>Problem 3e[3pts]:</b>
   <hr class="s1" />
   For each of the following potential context switch points, state whether or not a
-  context switch at that point could cause incorrect behavior of Enqueue(); Explain! 
+  context switch at that point could cause incorrect behavior of Enqueue(); Explain!
   <img src="/img/cs162sp15-3-6.png" class="problem-image" />
 
 q3_5_s: |
@@ -447,7 +447,7 @@ q3_6 : |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;// Insert code here
   <hr class="s1" />
-  } 
+  }
   </code>
 
 q3_6_s: |
@@ -476,7 +476,7 @@ q3_6_s: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;oldtail.next = newEntry;
   <hr class="s1" />
-  }  
+  }
    </code>
 
 q3_7 : |
@@ -494,7 +494,7 @@ q3_7_s: |
   that we are returning; consequently we end up dequeing the same entry multiple times.
   <hr class="s1" />
   <b>Point 3:</b> No. The nextEntry has already been detached from the queue and is purely local. Thus, all that we
-  are doing is removing the stored value from nextEntry for returning it. 
+  are doing is removing the stored value from nextEntry for returning it.
 
 q3_8: |
   <b>Problem 3h[4pts]:</b> Rewrite code for Dequeue(), using the CAS() operation, such that it will work
@@ -510,7 +510,7 @@ q3_8: |
   <code>
   Object Dequeue() {
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;// Insert code here 
+  &nbsp;&nbsp;&nbsp;&nbsp;// Insert code here
   <hr class="s1" />
   }
   </code>
@@ -566,7 +566,7 @@ q4_1_s: |
   Priorities do not have to be changed when a task finishes
 
 q4_2 : |
-  <b>Problem 4b[2pts]:</b> What is a multi-level feedback scheduler and how can it approximate SRTF? 
+  <b>Problem 4b[2pts]:</b> What is a multi-level feedback scheduler and how can it approximate SRTF?
 
 q4_2_s: |
   A multi-level feedback scheduler is one that includes multiple queues sorted in a priority order.
@@ -582,7 +582,7 @@ q4_2_s: |
 q4_3 : |
   <b>Problem 4c[3pts]:</b> What is priority donation? What sort of information must the OS track to allow
   it to perform priority donation? Is priority donation targeted at preventing a deadlock or a
-  livelock? 
+  livelock?
 
 q4_3_s: |
   Priority donation is a process by which a thread blocked on a synchronization construct (e.g. a
@@ -596,7 +596,7 @@ q4_3_s: |
 q4_4 : |
   <b>Problem 4d[3pts]:</b> Suppose that you utilize a scheme that schedules threads within a process at
   user level. Why might a naïve scheduling scheme run into problems when accessing I/O? Can the
-  operating system help resolve this problem? Explain 
+  operating system help resolve this problem? Explain
 
 q4_4_s: |
   Because a naïve scheme would utilize one “kernel” thread for all of the user-level threads.
@@ -643,7 +643,7 @@ q4_5 : |
   <hr class="s5" />
   <b>Problem 4e[4pts]:</b> Despite Gill’s effort, her algorithm has an obvious flaw: it can lead to deadlock!
   Present an example of how this can happen. List the four conditions for deadlock and show how
-  they are satisfied by this example: 
+  they are satisfied by this example:
 
 q4_5_s: |
   Simple case: two consoles request the same two players, but in reverse order. In this case, the
@@ -659,7 +659,7 @@ q4_5_s: |
   <hr class="s1" />
   3) No Premption: Resources are only released by the owner (never preempted).
   <hr class="s1" />
-  4) Circular wait: We have a circular wait since Console #1 (${lx('T_1')}) is waiting for Console #2 (${lx('T_2')}) which is waiting for Console #1 (${lx('T_1')}). 
+  4) Circular wait: We have a circular wait since Console #1 (${lx('T_1')}) is waiting for Console #2 (${lx('T_2')}) which is waiting for Console #1 (${lx('T_1')}).
 
 q4_6 : |
   <b>Problem 4f[3pts]:</b> Redesign the <code>smash()</code> function to avoid deadlock. Write your new version in
@@ -710,7 +710,7 @@ q4_7 : |
   <b>Problem 4g[3pts]:</b> Explain how the Banker’s algorithm could prevent the deadlock identified in
   Problem (4e) and what changes would need to be made to the code to support it. Clearly identify
   the behavior that would result, and why the four conditions for deadlock are not simultaneously
-  satisfied. Would this solution be better or worse than your solution to Problem (4f)? 
+  satisfied. Would this solution be better or worse than your solution to Problem (4f)?
 
 q4_7_s: |
   The bankers algorithm would prevent deadlock because it would never grant either Player A to
@@ -726,27 +726,27 @@ q4_7_s: |
 q5_1 : |
   <h3>Problem 5: Address Translation [20 pts]</h3>
   Consider a multi-level memory management scheme with the following format for virtual
-  addresses: 
+  addresses:
   <hr class="s2" />
   <table>
-    <tbody>
-      <tr>
-        <td>Virtual Page #<hr class="s1" />(10 bits)</td>
-        <td>Virtual Page #<hr class="s1" />(10 bits)</td>
-        <td>Offset #<hr class="s1" />(12 bits)</td>
-      </tr>
-    </tbody>
+  <tbody>
+  <tr>
+  <td>Virtual Page #<hr class="s1" />(10 bits)</td>
+  <td>Virtual Page #<hr class="s1" />(10 bits)</td>
+  <td>Offset #<hr class="s1" />(12 bits)</td>
+  </tr>
+  </tbody>
   </table>
   <hr class="s2" />
   Virtual addresses are translated into physical addresses of the following form:
   <hr class="s2" />
   <table>
-    <tbody>
-      <tr>
-        <td>Physical Page #<hr class="s1" />(20 bits)</td>
-        <td>Virtual Page #<hr class="s1" />(10 bits)</td>
-      </tr>
-    </tbody>
+  <tbody>
+  <tr>
+  <td>Physical Page #<hr class="s1" />(20 bits)</td>
+  <td>Virtual Page #<hr class="s1" />(10 bits)</td>
+  </tr>
+  </tbody>
   </table>
   <hr class="s2" />
   Page table entries (PTE) are 32 bits in the following format, <b>stored in big-endian form</b> in memory
@@ -774,7 +774,7 @@ q5_2_s: |
 q5_3 : |
   <b>Problem 5c[2pts]:</b> Suppose that we want an address space with one physical page at the top of the
   address space and one physical page at the bottom of the address space. How big would the page
-  table be (in bytes)? Explain. 
+  table be (in bytes)? Explain.
 
 q5_3_s : |
   To address a physical page at the top and bottom of the address space, we would need at least 3
@@ -783,7 +783,7 @@ q5_3_s : |
 
 q5_4 : |
   <b>Problem 5d[2pts]:</b> What is the maximum amount of physical memory that can be addressed by this
-  page table. Explain. 
+  page table. Explain.
 
 q5_4_s : |
   This page table scheme can address all of physical memory, which is ${lx('2^{32} = 4294967296')} bytes.
@@ -803,106 +803,106 @@ q5_5 : |
   <i>Hints: (1) Don’t forget that Hexidecimal digits contain 4 bits! (2) PTEs are 4 bytes!</i>
   <hr class="s1" />
   <table>
-    <thead>
-      <tr>
-        <th>Instruction</th>
-        <th>Physical Address</th>
-        <th>Result</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>Load<hr class="s1" />[0x00001047]</code></td>
-        <td><code>0x00002047</code></td>
-        <td><code>0x50</code></td>
-      </tr>
-      <tr>
-        <td><code>Store<hr class="s1" />[0x00C07665]</code></td>
-        <td><code>0xEEFF0665</code></td>
-        <td><code>ok</code></td>
-      </tr>
-      <tr>
-        <td><code>Store<hr class="s1" />[0x00C005FF]</code></td>
-        <td><code>0x112205FF</code></td>
-        <td><code>ERROR:<hr class="s1" />read-only</code></td>
-      </tr>
-      <tr>
-        <td><code>Load<hr class="s1" />[0x00003012]</code></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><code>Store<hr class="s1" />[0x02001345]</code></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><code>Load<hr class="s1" />[0xFF80078F]</code></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><code>Load<hr class="s1" />[0xFFFFF005]</code></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><code>Test-And-Set<hr class="s1" />[0xFFFFF006]</code></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tbody>
+  <thead>
+  <tr>
+  <th>Instruction</th>
+  <th>Physical Address</th>
+  <th>Result</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>Load<hr class="s1" />[0x00001047]</code></td>
+  <td><code>0x00002047</code></td>
+  <td><code>0x50</code></td>
+  </tr>
+  <tr>
+  <td><code>Store<hr class="s1" />[0x00C07665]</code></td>
+  <td><code>0xEEFF0665</code></td>
+  <td><code>ok</code></td>
+  </tr>
+  <tr>
+  <td><code>Store<hr class="s1" />[0x00C005FF]</code></td>
+  <td><code>0x112205FF</code></td>
+  <td><code>ERROR:<hr class="s1" />read-only</code></td>
+  </tr>
+  <tr>
+  <td><code>Load<hr class="s1" />[0x00003012]</code></td>
+  <td></td>
+  <td></td>
+  </tr>
+  <tr>
+  <td><code>Store<hr class="s1" />[0x02001345]</code></td>
+  <td></td>
+  <td></td>
+  </tr>
+  <tr>
+  <td><code>Load<hr class="s1" />[0xFF80078F]</code></td>
+  <td></td>
+  <td></td>
+  </tr>
+  <tr>
+  <td><code>Load<hr class="s1" />[0xFFFFF005]</code></td>
+  <td></td>
+  <td></td>
+  </tr>
+  <tr>
+  <td><code>Test-And-Set<hr class="s1" />[0xFFFFF006]</code></td>
+  <td></td>
+  <td></td>
+  </tr>
+  </tbody>
   </table>
 
 q5_5_s : |
   <table>
-    <thead>
-      <tr>
-        <th>Instruction</th>
-        <th>Physical Address</th>
-        <th>Result</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>Load<hr class="s1" />[0x00001047]</code></td>
-        <td><code>0x00002047</code></td>
-        <td><code>0x50</code></td>
-      </tr>
-      <tr>
-        <td><code>Store<hr class="s1" />[0x00C07665]</code></td>
-        <td><code>0xEEFF0665</code></td>
-        <td><code>ok</code></td>
-      </tr>
-      <tr>
-        <td><code>Store<hr class="s1" />[0x00C005FF]</code></td>
-        <td><code>0x112205FF</code></td>
-        <td><code>ERROR:<hr class="s1" />read-only</code></td>
-      </tr>
-      <tr>
-        <td><code>Load<hr class="s1" />[0x00003012]</code></td>
-        <td><code>0x00004012</code></td>
-        <td><code>0x36</code></td>
-      </tr>
-      <tr>
-        <td><code>Store<hr class="s1" />[0x02001345]</code></td>
-        <td><code>0x00002345</code></td>
-        <td><code>ok</code></td>
-      </tr>
-      <tr>
-        <td><code>Load<hr class="s1" />[0xFF80078F]</code></td>
-        <td><code>0x0415078F</code></td>
-        <td><code>ERROR:<hr class="s1" />Invalid</code></td>
-      </tr>
-      <tr>
-        <td><code>Load<hr class="s1" />[0xFFFFF005]</code></td>
-        <td><code>0x00103005</code></td>
-        <td><code>0x66</code></td>
-      </tr>
-      <tr>
-        <td><code>Test-And-Set<hr class="s1" />[0xFFFFF006]</code></td>
-        <td><code>0x00103006</code></td>
-        <td><code>0x77</code></td>
-      </tr>
-    </tbody>
+  <thead>
+  <tr>
+  <th>Instruction</th>
+  <th>Physical Address</th>
+  <th>Result</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>Load<hr class="s1" />[0x00001047]</code></td>
+  <td><code>0x00002047</code></td>
+  <td><code>0x50</code></td>
+  </tr>
+  <tr>
+  <td><code>Store<hr class="s1" />[0x00C07665]</code></td>
+  <td><code>0xEEFF0665</code></td>
+  <td><code>ok</code></td>
+  </tr>
+  <tr>
+  <td><code>Store<hr class="s1" />[0x00C005FF]</code></td>
+  <td><code>0x112205FF</code></td>
+  <td><code>ERROR:<hr class="s1" />read-only</code></td>
+  </tr>
+  <tr>
+  <td><code>Load<hr class="s1" />[0x00003012]</code></td>
+  <td><code>0x00004012</code></td>
+  <td><code>0x36</code></td>
+  </tr>
+  <tr>
+  <td><code>Store<hr class="s1" />[0x02001345]</code></td>
+  <td><code>0x00002345</code></td>
+  <td><code>ok</code></td>
+  </tr>
+  <tr>
+  <td><code>Load<hr class="s1" />[0xFF80078F]</code></td>
+  <td><code>0x0415078F</code></td>
+  <td><code>ERROR:<hr class="s1" />Invalid</code></td>
+  </tr>
+  <tr>
+  <td><code>Load<hr class="s1" />[0xFFFFF005]</code></td>
+  <td><code>0x00103005</code></td>
+  <td><code>0x66</code></td>
+  </tr>
+  <tr>
+  <td><code>Test-And-Set<hr class="s1" />[0xFFFFF006]</code></td>
+  <td><code>0x00103006</code></td>
+  <td><code>0x77</code></td>
+  </tr>
+  </tbody>
   </table>

@@ -9,7 +9,7 @@ titles: {
   'q4': 'beargit redux',
   'q5': 'MIPS Sleuth',
   'q6': 'Registers: bigger is not always better',
-  'q7': 'After, this, you\'re CALL done!'
+  'q7': 'After, this, you''re CALL done!',
 }
 
 parts: {

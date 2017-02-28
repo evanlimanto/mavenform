@@ -25,8 +25,8 @@ const ExamsMap = {
 
   'ee16asp15': EE16ASP15,
   'ee16afa15': EE16AFA15,
-  'ee16aSp16': EE16ASP16,
-  'ee16aFa16': EE16AFA16,
+  'ee16asp16': EE16ASP16,
+  'ee16afa16': EE16AFA16,
 
   'cs162sp15': CS162SP15,
   'cs162fa15': CS162FA15,

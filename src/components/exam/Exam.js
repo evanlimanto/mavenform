@@ -71,8 +71,13 @@ class Exam extends Component {
           if (!_.has(examContent, key)) {
             return null;
           }
+          console.log(key);
+          console.log(examContent[key]);
           const content = marked(examContent[key]);
+          console.log(key);
+          console.log(examContent[key + "_s"]);
           const solution = marked(examContent[key + "_s"]);
+          console.log(key);
           return <Question id={_.replace(key, '_', '-')} content={content} solution={solution} examCode={examCode} key={key} />
         });
         return <Element name={part} key={part}>{subparts}</Element>;

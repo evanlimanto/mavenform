@@ -3,10 +3,10 @@ prof: 'Garcia'
 type: 'Midterm 1'
 
 titles: {
-  'q1': 'What\'s that funky smell?! Oh yeah, it\'s popourri..',
+  'q1': 'What''s that funky smell?! Oh yeah, it''s popourri..',
   'q2': 'Running in circles',
-  'q3': 'Our band is called 1023MiB... We haven\'t had any gigs yet.',
-  'q4': 'A bad case of Not Invented Here Syndrome...'
+  'q3': 'Our band is called 1023MiB... We haven''t had any gigs yet.',
+  'q4': 'A bad case of Not Invented Here Syndrome...',
 }
 
 parts: {
@@ -117,7 +117,6 @@ q1_8_s: |
   <code>0b <b>0000|00 00|000 0|0100 0001|0 110|10 00|0010</b></code>
   <hr class="s2" />
   <code>0x <b>0004 1682</b></code>
-
 
 q1_9: |
   What is one thing Google did to increase their Power Usage Efficiency (PUE)?
@@ -239,11 +238,11 @@ q2_2_s: |
 q2_3: |
   c) You want to change this to be an <i>iterative</i> MIPS solution, but you want to <i>change the fewest lines</I> you can. Circle those lines you would change to make the program work <i>iteratively</i>.
 
-q2_3_s =: |
+q2_3_s: |
   <code>
-  # $a0 contains the pointer to the tortoise.
+  \# $a0 contains the pointer to the tortoise.
   <hr class="s1" />
-  # $a1 contains the pointer to the hare.
+  \# $a1 contains the pointer to the hare.
   <hr class="s2" />
   has_cycle: &nbsp;li $v0 1
   <hr class="s1" />

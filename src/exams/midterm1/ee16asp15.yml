@@ -26,7 +26,7 @@ q1_1: |
 
   (a) <i>(3 pts)</i> Let’s assume that the area of the photodetector is \\(A_{PD}\\), that \\(A_{PD}\\) is smaller than \\(A_{illuminated}\\), and that the photodetector is placed such that it fits entirely within the illuminated region. In this case, can you predict how the current produced by the photodetector \\(I_{PD}\\) would change as a function of \\(A_{PD}\\) and \\(A_{illuminated}\\)?
 
-q1_1_soln: |
+q1_1_s: |
   In this case, increasing ${lx('A_{PD}')} captures more light (photons), so:
   <hr class="s1" />
   ${lx('I_{PD} \\propto \\frac{A_{PD}}{A_{illuminated}}', false)}
@@ -36,7 +36,7 @@ q1_1_soln: |
 q1_2: |
   (b) <i>(3 pts)</i> Now let’s assume that ${lx('A_{PD}')} is larger than ${lx('A_{illuminated}')} and that the illuminated area is fully captured by the photodetector; how does the current ${lx('I_{PD}')} depend upon on ${lx('A_{PD}')} now?
 
-q1_2_soln: |
+q1_2_s: |
   Now increasing ${lx('A_{PD}')} does nothing to change the amount of light that is captured, so:
   ${lx('I_{PD} \\propto constant', false)}
 
@@ -54,7 +54,7 @@ q1_3: |
   maximize the measured voltage? Be sure to explain your answer; some equations 
   and/or plots showing how the voltage depends on ${lx('A_{PD}')} and ${lx('A_{illuminated}')} may be useful. 
 
-q1_3_soln: |
+q1_3_s: |
   Just like in the homework, some of the charge collected by the photodetector has to go in to the measurement circuits capacitance. Conceptually, if that circuit had an equivalent area (remember ${lx('capacitance \\propto area')} of ${lx('A_{meas}')}, then for ${lx('A_{PD} < A_{illuminated}')}:
 
   ${lx('V_{meas} \\propto \\frac{1}{A_{PD} + A_{meas}} \\cdot \\frac{A_{PD}}{A_{illuminated}}', false)}
@@ -86,7 +86,7 @@ q2_1: |
 
   a) <i>(2 pts)</i> Using the same representation as the example described above, draw the image represented by the vector ${lmatrix([[1], [2]])}.
 
-q2_1_soln: |
+q2_1_s: |
   <img src="/img/q2-1_s.png" class="problem-image" />
 
 q2_2: |
@@ -94,7 +94,7 @@ q2_2: |
   pixels and perform a transformation on this image. In particular, let’s assume that 
   our image consists of the vectors ${lmatrix([[1], [2]])} and ${lmatrix([[1], [1]])}. Draw both the original image and the image created by transforming that image by the matrix ${lmatrix([[1, 2], [2, 4]])}. (Recall that transformation in this context means multiplying each vector by the given matrix.) 
 
-q2_2_soln: |
+q2_2_s: |
   <img src="/img/q2-2_s.png" class="problem-image" />
 
   ${lx('\\left[ \\begin{array}{c c}1 & 2 \\\\ 2 & 4 \\\\ \\end{array} \\right] \\cdot \\left[ \\begin{array}{c} 1 \\\\ 2 \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c} 5 \\\\ 10 \\\\ \\end{array} \\right]', false)}
@@ -104,7 +104,7 @@ q2_2_soln: |
 q2c: |
   c) <i>(6 pts)</i> Now let’s imagine we had an image with black pixels everywhere, and that we transformed this image by the same ${lmatrix([[1, 2], [2, 4]])} matrix as in part b). Sketch the that we transformed this image by the same resulting transformed image. Note that you don’t need to know the exact size of the original image – just indicate what happens to the transformed image as this size is increased. It may help you to consider what happens when you multiply an arbitrary vector ${lmatrix([['x', 'y']], true)} by the transformation matrix. What is property of the transformation matrix makes the resulting image look the way it does? 
 
-q2_3_soln: |
+q2_3_s: |
   Notice that after transformation both of the black pixels in part (b) ended up on a single line. We can see this in general because:
   ${lx('\\left[ \\begin{array}{c c}1 & 2 \\\\ 2 & 4 \\\\ \\end{array} \\right] \\left[ \\begin{array}{c} x \\\\ y \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c} x + 2y \\\\ 2x + 4y \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c} x + 2y \\\\ 2 \\cdot (x + 2y) \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c} a_1 \\\\ 2a_1 \\\\ \\end{array} \\right]', false)}
 
@@ -130,7 +130,7 @@ q3_1: |
   images this way, where each image is 1000 x 1000 pixels (i.e., ${lx('n')} = 1000), how 
   many total bytes of memory (including all three USB sticks) would Alice need? 
 
-q3_1_soln: |
+q3_1_s: |
   ${lx('\\begin{align} N_{bytes} &= 3 copies \\cdot 1000 images \\cdot (1000 \\cdot 1000) pixels \\cdot 3 bytes/pixel \\\\ &= 9 \\cdot 10^9 bytes \\end{align}', false)}
 
 q3_2: |
@@ -142,7 +142,7 @@ q3_2: |
   stores ${lx('x')} on the laptop, ${lx('y')} on the USB stick, and ${lx('x')} on her phone. Alice’s friend Elaine instead suggests that Alice use a different strategy and store ${lx('x + y')} on her 
   phone instead (while leaving the data stored on the laptop and USB the same as in Alice’s strategy). Is Elaine’s strategy better than Alice’s strategy? If so, describe at least one scenario where Elaine’s strategy can recover the data but Alice’s cannot. If not, explain why the strategies are equivalent.
 
-q3_2_soln: |
+q3_2_s: |
   Elaine's strategy is better; in Alice's strategy, if the USB stick is lost, Alice cannot recover ${lx('y')}. With Elaine's strategy, any one of the storage devices can be lost while still recovering both ${lx('x')} and ${lx('y')}.
 
 q3_3: |
@@ -155,7 +155,7 @@ q3_3: |
   happening on each of the pixels as an ${lx('8')}x${lx('4')} matrix multiplying a ${lx('4')}x${lx('1')} vector, what 
   would the entries in that ${lx('8')}x${lx('4')} matrix and ${lx('4')}x${lx('1')} vector be? 
 
-q3_3_soln: |
+q3_3_s: |
   If the stored information is a vector ${lx('S_i')}:
 
   ${lx('\\left[ \\begin{array}{c} S_{i1} \\\\ S_{i2} \\\\ \\vdots \\\\ \\vdots \\\\ \\vdots \\\\ \\vdots \\\\ \\vdots \\\\ S_{i8} \\\\ \\end{array} \\right] = \\left[ \\begin{array}{c c c c} 1 & 0 & 0 & 0 \\\\ 0 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & 0 \\\\ 0 & 0 & 0 & 1 \\\\ 1 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & 1 \\\\ 1 & 0 & 1 & 0 \\\\ 0 & 1 & 0 & 1 \\\\ \\end{array} \\right] \\cdot \\left[ \\begin{array}{c} a_i \\\\ b_i \\\\ c_i \\\\ d_i \\\\ \\end{array} \\right]', false)}
@@ -169,7 +169,7 @@ q3_4: |
   of all of the pixels simultaneously. Hint: what would be the dimensions of a 
   matrix composed of ${lmatrix([['a', 'b', 'c', 'd']], true)}? 
 
-q3_4_soln: |
+q3_4_s: |
   ${lx('{\\left[ \\begin{array}{c c c c} a & b & c & d \\\\ \\end{array} \\right]}^T = \\left[ \\begin{array}{c} a_T \\\\ b_T \\\\ c_T \\\\ d_T \\\\ \\end{array} \\right]', false)}
 
   Since ${lx('A_{store}')} is an 8 x 4 matrix, we can actually multiply the matrix above by ${lx('A_{store}')} and get exactly what we wanted!
@@ -192,7 +192,7 @@ q4_1: |
 
   a) <i>(3 pts)</i> Using the terms defined above, write an expression using a dot product that would compute how many dollars Alice gets back after the first day.
 
-q4_1_soln: |
+q4_1_s: |
   Growth vector ${lx('\\vec{g}(1) = \\left[ \\begin{array}{c} g_f(1) \\\\ g_s(1) \\\\ g_d(1) \\\\ \\end{array} \\right]')}
   <hr class="s1" />
   Investment vector ${lx('\\vec{\\alpha} = \\left[ \\begin{array}{c} \\alpha_f \\\\ \\alpha_s \\\\ \\alpha_d \\\\ \\end{array} \\right]')}
@@ -209,7 +209,7 @@ q4_2: |
   Write a matrix equation Alice could use to figure out what the mutual fund’s 
   investment strategy was (i.e., to find the values of ${lx('\\alpha_f')}, ${lx('\\alpha_s')}, and ${lx('\\alpha_d')}). 
 
-q4_2_soln: |
+q4_2_s: |
   <ul>
   <li>
   We know that ${lx('\\vec{g}(1)^T \\cdot \\vec{\\alpha} = 1.7')}, and that ${lx('\\vec{g}(2)^T \\cdot \\alpha = 0')}. This however gives us only two equations with 3 unknowns. To get a third equation, we need to remember that ${lx('\\alpha_f + \\alpha_s + \\alpha_d = 1')} (i.e., that all of Alice's money is invested).
@@ -244,14 +244,14 @@ q5_1: |
   and Boston, and the arcs between the two nodes should be annotated with the 
   probabilities of moving from one node to the other. 
 
-q5_1_soln: |
+q5_1_s: |
   <img src="/img/q5-1_s.png" class="problem-image" />
 
 q5_2: |
   b) <i>(4 pts)</i> Now let’s say we set up a vector ${lx('x(i)')} = ${lmatrix([['x_{berkeley}(i)', 'x_{boston}(i)']], true)}, where ${lx('x_{berkeley}(i)')} represents the number of people living in Berkeley at month ${lx('i')} (similarly 
   for Boston and ${lx('x_{boston}(i)')}). Write a matrix ${lx('A_{transition}')} that you could multiply by this vector to predict the number of people living in each city at month ${lx('i+1')} (i.e., ${lx('x(i + 1)')} = ${lx('A_{transition}x(i)')})
 
-q5_2_soln: |
+q5_2_s: |
   ${lx('A_{transition} = \\left[ \\begin{array}{c c} 0.8 & 0.9 \\\\ 0.2 & 0.1 \\\\ \\end{array} \\right]', false)}
 
 q5_3: |
@@ -260,7 +260,7 @@ q5_3: |
   above to find the steady-state populations in Berkeley and Boston. If the total 
   population is 100, calculate the number of people in Berkeley at steady state?
 
-q5_3_soln: |
+q5_3_s: |
   <ul>
   <li>
   Best way to do this is to find the eigenvector of ${lx('A_{transition}')} that has an eigenvalue of 1 (we'll next find that there is one).
