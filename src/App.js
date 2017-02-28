@@ -38,11 +38,8 @@ class App extends Component {
       course = this.props.location.query.courseId;
     }
 
-    if (exam === 'cs162fa15') {
+    if (exam in ExamsMap) {
       ExamComponent = <Exam code={exam} type="midterm1" />;
-    } else if (exam in ExamsMap) {
-      const EC = ExamsMap[exam];
-      ExamComponent = <EC />;
     } else {
       return <Home />;
     }
