@@ -144,7 +144,7 @@ X:   slt  $t0, $s1, $s2 &nbsp;&nbsp;&nbsp;&nbsp; <i># ${blank}</i>
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;<b>bne</b> $t0, $zero, Y &nbsp;&nbsp;&nbsp;&nbsp; <i># ${blank}</i>
 <hr class="s1" />
-&nbsp;&nbsp;&nbsp;sll  $t1, $s1, 2 ${sixspace} <i># ${blank}</i>
+&nbsp;&nbsp;&nbsp;sll  $t1, $s1, 2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i># ${blank}</i>
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;add  $t2, $s3, $t1 &nbsp;&nbsp;&nbsp;&nbsp; <i># ${blank}</i>
 <hr class="s1" />
@@ -152,7 +152,7 @@ X:   slt  $t0, $s1, $s2 &nbsp;&nbsp;&nbsp;&nbsp; <i># ${blank}</i>
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;add  $s0, $s0, $s1 &nbsp;&nbsp;&nbsp;&nbsp; <i># ${blank}</i>
 <hr class="s1" />
-&nbsp;&nbsp;&nbsp;addi $s1, $s1, 1 ${fivespace} <i># ${blank}</i>
+&nbsp;&nbsp;&nbsp;addi $s1, $s1, 1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i># ${blank}</i>
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;j X ${_.repeat('&nbsp;', 18)} <i># ${blank}</i>
 <hr class="s1" />
@@ -181,12 +181,12 @@ X:   slt  $t0, $s1, $s2 &nbsp;&nbsp;&nbsp; # <b>i < 10?</b>
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;<b>bne</b> $t0, $zero, Y &nbsp;&nbsp;&nbsp; # <b>branch if i < 10</b>
 <hr class="s1" />
-&nbsp;&nbsp;&nbsp;sll  $t1, $s1, 2 ${fivespace} # <b>$t1 = i * 4;
+&nbsp;&nbsp;&nbsp;sll  $t1, $s1, 2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # <b>$t1 = i * 4;
 </b>
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;add  $t2, $s3, $t1 &nbsp;&nbsp;&nbsp; # <b>$t2 = &a + i * 4 … the address of a[i]</b>
 <hr class="s1" />
-&nbsp;&nbsp;&nbsp;sw  $s1, 0($t2) &nbsp;${fivespace} # <b>a[i] = i;</b>
+&nbsp;&nbsp;&nbsp;sw  $s1, 0($t2) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # <b>a[i] = i;</b>
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;add  $s0, $s0, $s1 &nbsp;&nbsp;&nbsp; # <b>b = b + i;</b>
 <hr class="s1" />
@@ -422,15 +422,15 @@ output: .word 6 61 17 -38 19 42 5
 f:
 <hr class="s1" />
 <b>
-&nbsp;&nbsp;&nbsp;&nbsp;la $t0, output${fivespace}     // Load the address of “output” from the data segments
+&nbsp;&nbsp;&nbsp;&nbsp;la $t0, output&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     // Load the address of “output” from the data segments
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;&nbsp;addiu $a0 $a0 3&nbsp;&nbsp;&nbsp;&nbsp;    // Shift the argument range to all non-negative integers
 <hr class="s1" />
-&nbsp;&nbsp;&nbsp;&nbsp;sll $a0 $a0 2${sixspace}      // Multiply argument value by 4 to index by word
+&nbsp;&nbsp;&nbsp;&nbsp;sll $a0 $a0 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      // Multiply argument value by 4 to index by word
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;&nbsp;addu $t0 $t0 $a0&nbsp;&nbsp;&nbsp;   // Add the argument index to the data address
 <hr class="s1" />
-&nbsp;&nbsp;&nbsp;&nbsp;lw $v0 0($t0)${sixspace}      // Load the indexed data address into return val register
+&nbsp;&nbsp;&nbsp;&nbsp;lw $v0 0($t0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      // Load the indexed data address into return val register
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;&nbsp;jr $ra${_.repeat('&nbsp;', 13)}
 </b>
@@ -445,15 +445,15 @@ f:
 f:
 <hr class="s1" />
 <b>
-&nbsp;&nbsp;&nbsp;&nbsp;la $t0, output${fivespace}     // Load the address of “output” from the data segments
+&nbsp;&nbsp;&nbsp;&nbsp;la $t0, output&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     // Load the address of “output” from the data segments
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;&nbsp;addiu $t0 $t0 12&nbsp;&nbsp;&nbsp;    // Move the output address to index 0
 <hr class="s1" />
-&nbsp;&nbsp;&nbsp;&nbsp;sll $a0 $a0 2${sixspace}      // Multiply argument value by 4 to index by word
+&nbsp;&nbsp;&nbsp;&nbsp;sll $a0 $a0 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      // Multiply argument value by 4 to index by word
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;&nbsp;addu $t0 $t0 $a0&nbsp;&nbsp;&nbsp;   // Add the argument index to the data address
 <hr class="s1" />
-&nbsp;&nbsp;&nbsp;&nbsp;lw $v0 0($t0)${sixspace}      // Load the indexed data address into return val register
+&nbsp;&nbsp;&nbsp;&nbsp;lw $v0 0($t0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      // Load the indexed data address into return val register
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;&nbsp;jr $ra${_.repeat('&nbsp;', 13)}
 </b>

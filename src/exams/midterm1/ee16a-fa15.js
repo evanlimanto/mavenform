@@ -677,12 +677,10 @@ class EE16AFA15 extends Component {
     const examCode = 'ee16a-mt1-fa15';
     const problemIDs = ['', 'q3', 'q4', 'q5', 'q6', '', 'q7', 'q8', 'q9'];
     const problemTitles = [
-      'Straightforward Questions',
       '3. Solve It',
       '4. Invert It',
       '5. Show It',
       '6. Null It',
-      'Free-form Problems',
       '7. Finding the Bright Cave',
       '8. A Tale of Two Cities',
       '9. Justin Beaver'

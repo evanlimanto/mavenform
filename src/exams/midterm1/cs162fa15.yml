@@ -3,11 +3,11 @@ prof: 'Kubiatowicz'
 type: 'Midterm 1'
 
 titles: {
-  'q1': 'True/False and Why?',
-  'q2': 'C Programming',
-  'q3': 'Finite Synchronized Queue using Monitors',
-  'q4': 'PintOS Questions',
-  'q5': 'Santa Claus problem (from Operating Systems: Internals and Design Principles',
+  'q1': 'True/False',
+  'q2': 'Short Answer',
+  'q3': 'Boy-Girl Lock',
+  'q4': 'Scheduling and Deadlock',
+  'q5': 'Address Translation',
 }
 
 parts: {

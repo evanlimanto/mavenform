@@ -5,8 +5,6 @@ import { lx, longblank, blank } from '../../utils';
 
 const _ = require('lodash');
 
-const twelvespace = _.repeat('&nbsp;', 12);
-
 const q1_1 =
 `
 <h3>Q1: What’s that funky smell?! Oh yeah, it’s potpourri... (30 pts)</h3>
@@ -230,7 +228,7 @@ has_cycle: &nbsp;&nbsp;li $v0 1
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu ${_.repeat('_', 7)} ${_.repeat('_', 7)} ${_.repeat('_', 8)}
 <hr class="s1" />
-done: ${sixspace}jr return a
+done: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jr return a
 </code>
 `;
 
@@ -267,7 +265,7 @@ has_cycle: &nbsp;li $v0 1
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu <b>$sp</b> <b>$sp</b> <b>4</b>
 <hr class="s1" />
-done: ${sixspace}jr $ra
+done: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jr $ra
 </code>
 `;
 
@@ -308,7 +306,7 @@ has_cycle: &nbsp;li $v0 1
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu <b>$sp</b> <b>$sp</b> <b>4</b>
 <hr class="s1" />
-done: ${sixspace}jr $ra
+done: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jr $ra
 </code>
 `;
 
@@ -454,7 +452,7 @@ corresponding row of the following table, or write <i>'OK' if there is nothing w
 <hr class="s1" />
 void string_to_lowercase(char *s) {
 <hr class="s1" />
-&nbsp;&nbsp;&nbsp;&nbsp;for (char c = *s; c != '\\0'; s++) { ${sixspace} // 1
+&nbsp;&nbsp;&nbsp;&nbsp;for (char c = *s; c != '\\0'; s++) { &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 1
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (c >= 'A' && c <= 'S') {
 <hr class="s1" />

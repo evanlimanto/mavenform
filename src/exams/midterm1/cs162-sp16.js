@@ -262,7 +262,7 @@ cv_t *cv_create(mon_t *m) &nbsp;&nbsp; /* Creates a condition variable
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;associated with monitor m */
 <hr class="s1" />
-void cv_wait(cv_t *cv) ${fivespace} /* Blocks on the condition variable */
+void cv_wait(cv_t *cv) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* Blocks on the condition variable */
 <hr class="s1" />
 void cv_signal(cv_t *cv) &nbsp;&nbsp;&nbsp; /* Wakes a thread waiting on cv */
 <hr class="s1" />

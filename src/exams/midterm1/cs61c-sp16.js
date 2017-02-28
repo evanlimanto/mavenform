@@ -5,9 +5,6 @@ import { longblank, blank } from '../../utils';
 
 const _ = require('lodash');
 
-const twelvespace = _.repeat('&nbsp;', 12);
-const fifteenspace = _.repeat('&nbsp;', 15);
-
 const q1_1 =
 `
 <h3>Q1: Instructors keep their students aligned (10 points)</h3>
@@ -351,7 +348,7 @@ The following is a recursive function that saves its arguments and return addres
 <hr class="s2" />
 
 <code>
-${sevenspace}mystery:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mystery:
 <hr class="s1" />
 0x4000&nbsp;&nbsp;&nbsp;&nbsp;bne $a0, $0, recurse
 <hr class="s1" />
@@ -359,7 +356,7 @@ ${sevenspace}mystery:
 <hr class="s1" />
 0x4008&nbsp;&nbsp;&nbsp;&nbsp;jr $ra
 <hr class="s1" />
-${sevenspace}recurse:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;recurse:
 <hr class="s1" />
 0x400C&nbsp;&nbsp;&nbsp;&nbsp;addiu $sp, $sp, -8
 <hr class="s1" />
@@ -461,25 +458,25 @@ the address of the instruction on line 0 is <code>0x00000000</code>. Consider th
 instruction format representation:
 <hr class="s2" />
 <code>
-0${fifteenspace}add $t0 $a0 $0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x00804020
+0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add $t0 $a0 $0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x00804020
 <hr class="s1" />
-1${fifteenspace}add $t1 $a1 $0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${_.repeat('_', 10)}
+1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add $t1 $a1 $0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${_.repeat('_', 10)}
 <hr class="s1" />
 2&nbsp;&nbsp;&nbsp;&nbsp;LabelA:&nbsp;&nbsp;&nbsp;&nbsp;add $t2 $0 $0${_.repeat('&nbsp;', 9)}<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x00005020
 <hr class="s1" />
 3&nbsp;&nbsp;&nbsp;&nbsp;LabelB:&nbsp;&nbsp;&nbsp;&nbsp;beq $t0 $0 END&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${_.repeat('_', 10)}
 <hr class="s1" />
-4&nbsp;&nbsp;&nbsp;&nbsp;LabelC:&nbsp;&nbsp;&nbsp;&nbsp;addi $t0 $t0 -1${sevenspace}<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${_.repeat('_', 10)}
+4&nbsp;&nbsp;&nbsp;&nbsp;LabelC:&nbsp;&nbsp;&nbsp;&nbsp;addi $t0 $t0 -1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${_.repeat('_', 10)}
 <hr class="s1" />
-5${fifteenspace}lw $t3 0($t1)${_.repeat('&nbsp;', 9)}<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${_.repeat('_', 10)}
+5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lw $t3 0($t1)${_.repeat('&nbsp;', 9)}<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${_.repeat('_', 10)}
 <hr class="s1" />
-6${fifteenspace}${_.repeat('_', 14)}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x014b5020
+6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${_.repeat('_', 14)}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x014b5020
 <hr class="s1" />
-7${fifteenspace}addi $t1 $t1 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x21290004
+7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addi $t1 $t1 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x21290004
 <hr class="s1" />
-8${fifteenspace}${_.repeat('_', 14)}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x08000003
+8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${_.repeat('_', 14)}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x08000003
 <hr class="s1" />
-9&nbsp;&nbsp;&nbsp;&nbsp;END:${sevenspace}add $v0 $t2 $0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x01201020
+9&nbsp;&nbsp;&nbsp;&nbsp;END:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add $v0 $t2 $0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x01201020
 <hr class="s1" />
 </code>
 <hr class="s2" />

@@ -5,8 +5,6 @@ import { lx, longblank, blank } from '../../utils';
 
 const _ = require('lodash');
 
-const twelvespace = _.repeat('&nbsp;', 12);
-
 const q1_1 =
 `
 <h3>Q1: Number Representation (10 points)</h3>
@@ -454,57 +452,57 @@ Finish the implementation of <code>countChars</code> in TAL MIPS below. You may 
 <code>
 countChars:
 <hr class="s1" />
-${fivespace}addiu $sp, $sp, ${_.repeat('_', 14)}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $sp, $sp, ${_.repeat('_', 14)}
 <hr class="s1" />
-${fivespace}${longblank}&nbsp;# Store onto the stack if needed
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}&nbsp;# Store onto the stack if needed
 <hr class="s1" />
-${fivespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${fivespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${fivespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${fivespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${fivespace}addiu $s0, $zero, 0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# We'll store the count in $s0
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $s0, $zero, 0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# We'll store the count in $s0
 <hr class="s1" />
-${fivespace}addiu $s1, $a0, 0
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $s1, $a0, 0
 <hr class="s1" />
-${fivespace}addiu $s2, $a1, 0
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $s2, $a1, 0
 <hr class="s1" />
 loop:
 <hr class="s1" />
-${fivespace}addiu $a0, $s0, 0
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $a0, $s0, 0
 <hr class="s1" />
-${fivespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${fivespace}beq ${_.repeat('_', 26)}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq ${_.repeat('_', 26)}
 <hr class="s1" />
-${fivespace}jal isCharInStr
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jal isCharInStr
 <hr class="s1" />
-${fivespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${fivespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${fivespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
 done:
 <hr class="s1" />
-${fivespace}${longblank}&nbsp;&nbsp;# Load from the stack if needed
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}&nbsp;&nbsp;# Load from the stack if needed
 <hr class="s1" />
-${fivespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${fivespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${fivespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${fivespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${fivespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${fivespace}addiu $sp, $sp, ${_.repeat('_', 14)}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $sp, $sp, ${_.repeat('_', 14)}
 <hr class="s1" />
-${fivespace}jr $ra
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jr $ra
 </code>
 `;
 
@@ -513,53 +511,53 @@ const q5_1_soln =
 <code>
 countChars:
 <hr class="s1" />
-${fivespace}addiu $sp, $sp, <b>-16</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $sp, $sp, <b>-16</b>
 <hr class="s1" />
-${fivespace}<b>sw $ra, 0($sp)</b>${_.repeat('&nbsp;', 11)}# Store onto the stack if needed
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>sw $ra, 0($sp)</b>${_.repeat('&nbsp;', 11)}# Store onto the stack if needed
 <hr class="s1" />
-${fivespace}<b>sw $s0, 4($sp)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>sw $s0, 4($sp)</b>
 <hr class="s1" />
-${fivespace}<b>sw $s1, 8($sp)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>sw $s1, 8($sp)</b>
 <hr class="s1" />
-${fivespace}<b>sw $s2, 12($sp)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>sw $s2, 12($sp)</b>
 <hr class="s1" />
-${fivespace}addiu $s0, $zero, 0${sixspace}# We'll store the count in $s0
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $s0, $zero, 0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# We'll store the count in $s0
 <hr class="s1" />
-${fivespace}addiu $s1, $a0, 0
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $s1, $a0, 0
 <hr class="s1" />
-${fivespace}addiu $s2, $a1, 0
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $s2, $a1, 0
 <hr class="s1" />
 loop:
 <hr class="s1" />
-${fivespace}addiu $a0, $s0, 0
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $a0, $s0, 0
 <hr class="s1" />
-${fivespace}<b>lb $a1, 0($s1)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lb $a1, 0($s1)</b>
 <hr class="s1" />
-${fivespace}beq <b>$a1, $zero, done</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq <b>$a1, $zero, done</b>
 <hr class="s1" />
-${fivespace}jal isCharInStr
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jal isCharInStr
 <hr class="s1" />
-${fivespace}<b>addu $s0, $s0, $v0</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>addu $s0, $s0, $v0</b>
 <hr class="s1" />
-${fivespace}<b>addiu $s1, $s1, 1</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>addiu $s1, $s1, 1</b>
 <hr class="s1" />
-${fivespace}<b>j loop</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>j loop</b>
 <hr class="s1" />
 done:
 <hr class="s1" />
-${fivespace}<b>addiu $v0, $s0, 0</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Load from the stack if needed
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>addiu $v0, $s0, 0</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Load from the stack if needed
 <hr class="s1" />
-${fivespace}<b>lw $ra, 0($sp)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lw $ra, 0($sp)</b>
 <hr class="s1" />
-${fivespace}<b>lw $s0, 4($sp)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lw $s0, 4($sp)</b>
 <hr class="s1" />
-${fivespace}<b>lw $s1, 8($sp)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lw $s1, 8($sp)</b>
 <hr class="s1" />
-${fivespace}<b>lw $s2, 12($sp)</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lw $s2, 12($sp)</b>
 <hr class="s1" />
-${fivespace}addiu $sp, $sp, <b>16</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $sp, $sp, <b>16</b>
 <hr class="s1" />
-${fivespace}jr $ra
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jr $ra
 </code>
 `;
 
@@ -611,33 +609,33 @@ Write <code>branchAmount</code> in TAL MIPS (no pseudoinstructions). You may not
 <code>
 branchAmount:
 <hr class="s1" />
-${fivespace}andi $t0, $a0, 0x8000${_.repeat('&nbsp;', 10)}# Mask out a certain bit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;andi $t0, $a0, 0x8000${_.repeat('&nbsp;', 10)}# Mask out a certain bit
 <hr class="s1" />
-${fivespace}bne ________, ________, label1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bne ________, ________, label1
 <hr class="s1" />
-${fivespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${fivespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${fivespace}j label2
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j label2
 <hr class="s1" />
 label1:
 <hr class="s1" />
-${fivespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${fivespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
-${fivespace}or $v0, $a0, $t1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or $v0, $a0, $t1
 <hr class="s1" />
 label2:
 <hr class="s1" />
-${fivespace}sll _______, ______, _________&nbsp;&nbsp;# Convert to byte addressing
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sll _______, ______, _________&nbsp;&nbsp;# Convert to byte addressing
 <hr class="s1" />
-${fivespace}${longblank}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
 label3:
 <hr class="s1" />
-${fivespace}jr $ra
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jr $ra
 </code>
 `;
 
@@ -646,29 +644,29 @@ const q7_1_soln =
 <code>
 branchAmount:
 <hr class="s1" />
-${fivespace}andi $t0, $a0, 0x8000${fivespace}# Mask out a certain bit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;andi $t0, $a0, 0x8000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Mask out a certain bit
 <hr class="s1" />
-${fivespace}bne <b>$t0</b>, <b>$zero</b>, label1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bne <b>$t0</b>, <b>$zero</b>, label1
 <hr class="s1" />
-${fivespace}<b>andi $v0, $a0, 0xFFFF</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>andi $v0, $a0, 0xFFFF</b>
 <hr class="s1" />
-${fivespace}j label2
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j label2
 <hr class="s1" />
 label1:
 <hr class="s1" />
-${fivespace}<b>lui $t1, 0xFFFF</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>lui $t1, 0xFFFF</b>
 <hr class="s1" />
-${fivespace}or $v0, $a0, $t1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or $v0, $a0, $t1
 <hr class="s1" />
 label2:
 <hr class="s1" />
-${fivespace}sll <b>$v0</b>, <b>$v0</b>, <b>2</b>${_.repeat('&nbsp;', 11)}# Convert to byte addressing
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sll <b>$v0</b>, <b>$v0</b>, <b>2</b>${_.repeat('&nbsp;', 11)}# Convert to byte addressing
 <hr class="s1" />
-${fivespace}<b>addiu $v0, $v0, 4</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>addiu $v0, $v0, 4</b>
 <hr class="s1" />
 label3:
 <hr class="s1" />
-${fivespace}jr $ra
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jr $ra
 </code>
 `;
 

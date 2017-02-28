@@ -5,8 +5,6 @@ import { longblank, blank } from '../../utils';
 
 const _ = require('lodash');
 
-const twelvespace = _.repeat('&nbsp;', 12);
-
 const q1_1 =
 `
 <h3>Question 1: Running in circles (18 pts)</h3>
@@ -45,9 +43,9 @@ LoadNibble: ${blank} $t0 ${blank} ${blank} # figure out which byte contains that
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sll $a0 $a0 2
 <hr class="s1" />
-gone1:${sixspace}${blank} ${blank} ${blank} ${blank}
+gone1:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${blank} ${blank} ${blank} ${blank}
 <hr class="s1" />
-gone2:${sixspace}${blank} ${blank} ${blank} ${blank}
+gone2:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${blank} ${blank} ${blank} ${blank}
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jr $ra
 </code>
@@ -64,9 +62,9 @@ LoadNibble: <b>srl</b> $t0 <b>$a0</b> <b>1</b> # figure out which byte contains 
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sll $a0 $a0 2
 <hr class="s1" />
-gone1:${sixspace}<b>srlv $v0 $a1 $a0</b>
+gone1:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>srlv $v0 $a1 $a0</b>
 <hr class="s1" />
-gone2:${sixspace}<b>andi $v0 $v0 0xF</b>
+gone2:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>andi $v0 $v0 0xF</b>
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jr $ra
 </code>

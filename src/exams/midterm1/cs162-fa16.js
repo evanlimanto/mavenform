@@ -428,13 +428,13 @@ struct switch_threads_frame
 <hr class="s1" />
 {
 <hr class="s1" />
-&nbsp;&nbsp;&nbsp;&nbsp;uint32_t edi; ${sixspace} /* 0: Saved %edi. */
+&nbsp;&nbsp;&nbsp;&nbsp;uint32_t edi; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 0: Saved %edi. */
 <hr class="s1" />
-&nbsp;&nbsp;&nbsp;&nbsp;uint32_t esi; ${sixspace} /* 4: Saved %esi. */
+&nbsp;&nbsp;&nbsp;&nbsp;uint32_t esi; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 4: Saved %esi. */
 <hr class="s1" />
-&nbsp;&nbsp;&nbsp;&nbsp;uint32_t ebp; ${sixspace} /* 8: Saved %ebp. */
+&nbsp;&nbsp;&nbsp;&nbsp;uint32_t ebp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 8: Saved %ebp. */
 <hr class="s1" />
-&nbsp;&nbsp;&nbsp;&nbsp;uint32_t ebx; ${sixspace} /* 12: Saved %ebx. */
+&nbsp;&nbsp;&nbsp;&nbsp;uint32_t ebx; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 12: Saved %ebx. */
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;&nbsp;void (*eip) (void); &nbsp;/* 16: Return address. */
 <hr class="s1" />
@@ -463,9 +463,9 @@ void thread_exit (void) {
 <hr class="s2" />
 &nbsp;&nbsp;&nbsp;&nbsp;/* Remove thread from all threads list, set our status to
 <hr class="s1" />
-${sixspace}dying, and schedule another process.That process
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dying, and schedule another process.That process
 <hr class="s1" />
-${sixspace}will destroy us when it calls thread_schedule_tail(). */
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will destroy us when it calls thread_schedule_tail(). */
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;&nbsp;intr_disable ();
 <hr class="s1" />

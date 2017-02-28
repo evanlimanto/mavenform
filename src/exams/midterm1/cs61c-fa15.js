@@ -5,10 +5,6 @@ import { lx, longblank, blank } from '../../utils';
 
 const _ = require('lodash');
 
-const tenspace = _.repeat('&nbsp;', 10);
-const twelvespace = _.repeat('&nbsp;', 12);
-const sixteenspace = _.repeat('&nbsp;', 16);
-
 const q1_1 =
 `
 <h3>Q1: A dozen ways to ask about bits (10 points)</h3>
@@ -288,39 +284,39 @@ initialized to 0 before the call to ISCOMMITOK.
 <hr class="s2" />
 &nbsp;&nbsp;&nbsp;&nbsp;ISCOMMITOK: ________________________
 <hr class="s1" />
-${sixteenspace}________________________
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
 <hr class="s1" />
-${sixteenspace}____ $t0   ____($a0)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____ $t0   ____($a0)
 <hr class="s1" />
-${sixteenspace}____ $t1   ____($a1)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____ $t1   ____($a1)
 <hr class="s1" />
-${tenspace}COND: ____and_________________
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COND: ____and_________________
 <hr class="s1" />
-${sixteenspace}________________________
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
 <hr class="s1" />
-${sixteenspace}________________________
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
 <hr class="s1" />
-${sixteenspace}addiu $a0 $a0 1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $a0 $a0 1
 <hr class="s1" />
-${sixteenspace}addiu $a1 $a1 1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $a1 $a1 1
 <hr class="s1" />
-${sixteenspace}________________________
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
 <hr class="s1" />
-${sixteenspace}________________________
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
 <hr class="s1" />
-${tenspace}EXIT: ____ $t2 $t0 $t1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EXIT: ____ $t2 $t0 $t1
 <hr class="s1" />
-${sixteenspace}________________________
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
 <hr class="s1" />
-${sixteenspace}li $v0 1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;li $v0 1
 <hr class="s1" />
-${sixteenspace}________________________
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAILED: li $v0 0
 <hr class="s1" />
 ${_.repeat('&nbsp;', 11)}END: ________________________
 <hr class="s1" />
-${sixteenspace}________________________
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
 </code>
 `;
 
@@ -329,39 +325,39 @@ const q4_1_soln =
 <code>
 &nbsp;&nbsp;&nbsp;&nbsp;ISCOMMITOK: ________________________
 <hr class="s1" />
-${sixteenspace}________________________
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
 <hr class="s1" />
-${sixteenspace}_<b>lb</b>_ $t0   __<b>0</b>_($a0)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_<b>lb</b>_ $t0   __<b>0</b>_($a0)
 <hr class="s1" />
-${sixteenspace}_<b>lb</b>_ $t1   __<b>0</b>_($a1)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_<b>lb</b>_ $t1   __<b>0</b>_($a1)
 <hr class="s1" />
-${tenspace}COND: ____and <b>$t2 $t0 $t1</b>_____
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COND: ____and <b>$t2 $t0 $t1</b>_____
 <hr class="s1" />
-${sixteenspace}____<b>beq $t2 $0 EXIT</b>_____
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<b>beq $t2 $0 EXIT</b>_____
 <hr class="s1" />
-${sixteenspace}____<b>bne $t0 $t1 FAILED</b>__
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<b>bne $t0 $t1 FAILED</b>__
 <hr class="s1" />
-${sixteenspace}addiu $a0 $a0 1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $a0 $a0 1
 <hr class="s1" />
-${sixteenspace}addiu $a1 $a1 1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $a1 $a1 1
 <hr class="s1" />
-${sixteenspace}_____<b>j ISCOMMITOK</b>_______
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_____<b>j ISCOMMITOK</b>_______
 <hr class="s1" />
-${sixteenspace}________________________
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
 <hr class="s1" />
-${tenspace}EXIT: _<b>or</b>_ $t2 $t0 $t1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EXIT: _<b>or</b>_ $t2 $t0 $t1
 <hr class="s1" />
-${sixteenspace}____<b>bne $t2 $0 FAILED</b>___
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<b>bne $t2 $0 FAILED</b>___
 <hr class="s1" />
-${sixteenspace}li $v0 1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;li $v0 1
 <hr class="s1" />
-${sixteenspace}____<b>j END</b>________________
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<b>j END</b>________________
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAILED: li $v0 0
 <hr class="s1" />
 ${_.repeat('&nbsp;', 11)}END: ____<b>jr $ra</b>_______________
 <hr class="s1" />
-${sixteenspace}_________________________
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_________________________
 </code>
 `;
 
@@ -393,7 +389,7 @@ returns a random integer in the range <code>[0, i - 1]</code> inclusive.
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;9&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move $s2 $a1
 <hr class="s1" />
-&nbsp;&nbsp;10&nbsp;&nbsp;loop:${fivespace}srl $t0 $s0 2
+&nbsp;&nbsp;10&nbsp;&nbsp;loop:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;srl $t0 $s0 2
 <hr class="s1" />
 &nbsp;&nbsp;11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq $t0 $s2 exit
 <hr class="s1" />
@@ -421,7 +417,7 @@ returns a random integer in the range <code>[0, i - 1]</code> inclusive.
 <hr class="s1" />
 &nbsp;&nbsp;23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j loop
 <hr class="s1" />
-&nbsp;&nbsp;24&nbsp;&nbsp;exit:${fivespace}${longblank}
+&nbsp;&nbsp;24&nbsp;&nbsp;exit:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
 &nbsp;&nbsp;25&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
 <hr class="s1" />
@@ -476,7 +472,7 @@ const q5_1_soln =
 <hr class="s1" />
 &nbsp;&nbsp;&nbsp;9&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move $s2 $a1
 <hr class="s1" />
-&nbsp;&nbsp;10&nbsp;&nbsp;loop:${fivespace}srl $t0 $s0 2
+&nbsp;&nbsp;10&nbsp;&nbsp;loop:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;srl $t0 $s0 2
 <hr class="s1" />
 &nbsp;&nbsp;11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq $t0 $s2 exit
 <hr class="s1" />
@@ -504,7 +500,7 @@ const q5_1_soln =
 <hr class="s1" />
 &nbsp;&nbsp;23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j loop
 <hr class="s1" />
-&nbsp;&nbsp;24&nbsp;&nbsp;exit:${fivespace}__________<b>lw $s0 0($sp)</b>__________
+&nbsp;&nbsp;24&nbsp;&nbsp;exit:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________<b>lw $s0 0($sp)</b>__________
 <hr class="s1" />
 &nbsp;&nbsp;25&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________<b>lw $s1 4($sp)</b>__________
 <hr class="s1" />

@@ -1,0 +1,576 @@
+examcode: 'cs61c/mt1-fa15'
+prof: 'Joseph'
+type: 'Midterm 1'
+
+titles: {
+  'q1': 'A dozen ways to ask about bits',
+  'q2': 'Wow! If only you could C the main memory',
+  'q3': 'Links, Links, and Lists',
+  'q4': 'beargit redux',
+  'q5': 'MIPS Sleuth',
+  'q6': 'Registers: bigger is not always better',
+  'q7': 'After, this, you\'re CALL done!'
+}
+
+parts: {
+  'q1': 2,
+  'q2': 2,
+  'q3': 3,
+  'q4': 1,
+  'q5': 3,
+  'q6': 4,
+  'q7': 1,
+}
+
+q1_1: |
+  <h3>Q1: A dozen ways to ask about bits (10 points)</h3>
+  1) For a 12-bit integer represented with two’s complement, what is the:
+  <hr class="s2" />
+  a) Most positive value (in decimal):
+  <hr class="s1" />
+  b) Binary representation of that number:
+  <hr class="s1" />
+  c) Most negative value (in decimal):
+  <hr class="s1" />
+  d) Hex representation of that number:
+  <hr class="s1" />
+  e) In general, for an n-bit, two’s complement integer:
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;i) What is the largest value you can represent, in decimal?
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;ii) What is the smallest value you can represent, in decimal?
+
+q1_2: |
+  2) Fill in the blank below so that the function mod16 will return the remainder of x when divided by 16. The first blank should be a <b>bitwise</b> operator, and the second blank should be a single decimal number:
+  <hr class="s2" />
+  <code>
+  unsigned int mod16(unsigned int x) {
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;return x ________ ________________;
+  <hr class="s1" />
+  }
+  </code>
+
+q1_1_s: |
+  <hr class="s1" />
+  a) 2047
+  <hr class="s1" />
+  b) 0b011111111111
+  <hr class="s1" />
+  c) -2048
+  <hr class="s1" />
+  d) 0x800
+  <hr class="s1" />
+  e) i) ${lx('2^{n-1} - 1')}
+  <hr class="s1" />
+  e) ii) ${lx('-2^{n-1}')}
+
+q1_2_s: |
+  <code>
+  return <b>x & 15</b>;
+  </code>
+
+q2_1: |
+  <h3>Q2: Wow! If only you could C the main memory (10 points)</h3>
+
+  Consider the following C program:
+  <hr class="s1" />
+  <code>
+  int a = 5;
+  <hr class="s1" />
+  void foo(){
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;int temp;
+  <hr class="s1" />
+  }
+  <hr class="s1" />
+  int main()
+  <hr class="s1" />
+  {
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;int b = 0;
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;char* s1 = “cs61c”;
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;char s2[] = “cs61c”;
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;char* c = malloc(sizeof(char) * 100);
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;foo();
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;return 0;
+  <hr class="s1" />
+  }
+  </code>
+  <hr class="s2" />
+  1) Sort the following values from least to greatest: <b>&b, c, b, &temp, &a</b>.
+
+q2_2: |
+  2) For each of the following values, state the location in the memory layout where they are stored. Answer with <i>code, static, heap, or stack</i>.
+  <hr class="s2" />
+  <b>s1</b>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${blank}
+  <hr class="s1" />
+  <b>s2</b>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${blank}
+  <hr class="s1" />
+  <b>s1[0]</b>:&nbsp;&nbsp; ${blank}
+  <hr class="s1" />
+  <b>s2[0]</b>:&nbsp;&nbsp; ${blank}
+  <hr class="s1" />
+  <b>c[0]</b>:&nbsp;&nbsp;&nbsp;&nbsp; ${blank}
+
+q2_1_s: |
+  b < &a < c < &temp < &b
+
+q2_2_s: |
+  s1: <b>stack</b>
+  <hr class="s1" />
+  s2: <b>stack</b>
+  <hr class="s1" />
+  s1[0]: <b>static</b>
+  <hr class="s1" />
+  s2[0]: <b>stack</b>
+  <hr class="s1" />
+  c[0]: <b>heap</b>
+
+q3_1: |
+  <h3>Q3: Links, Links, and Lists (15 points)</h3>
+
+  Here, we have a two-sided linked list, where each node has a reference to both the previous and next
+  node in the list. The <code>HEAD</code> of the list is defined as the node with a <code>NULL</code> prev pointer, and the <code>TAIL</code> of
+  the list is defined as the node with a <code>NULL</code> next pointer.
+
+  <hr class="s2" />
+
+  <code>
+  struct ll_node {
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;unsigned short id;
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;struct ll_node *prev;
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;struct ll_node *next;
+  <hr class="s1" />
+  };
+  </code>
+  <hr class="s2" />
+  For the remainder of the questions, assume that the <code>struct ll_node</code> is tightly-packed (i.e, all its elements are contiguous in memory).
+  <hr class="s2" />
+  1) We are given a <code>struct ll_node <b>current_node</b></code>. Assuming that the type <code>unsigned short</code> is 2
+  bytes wide and that we are working with a 32-bit memory address space, what can we expect the
+  function call <code><b>sizeof</b>(current_node)</code> to return?
+
+q3_2: |
+  2) Assume that we have access to <code><b>id_addr</b></code>, the address of the id of <code><b>current_node</b></code> in memory.
+  Using only <code><b>id_addr</b></code>, fill in the blank line so that <code><b>next_node</b></code> is equivalent to <code><b>current_node.next</b></code>.
+
+  <hr class="s2" />
+
+  <code>
+  &nbsp;&nbsp;&nbsp;&nbsp;unsigned short *id_addr = &(current_node.id);
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;struct ll_node *next_node = *(${blank});
+  </code>
+
+q3_3: |
+  3) Now, fill in the blanks to complete this function that, given a random node in the list, frees all
+  reachable nodes from that given node. Keep in mind that the node may be the <code>HEAD</code> of the list, the
+  <code>TAIL</code> of the list, or a node in between the <code>HEAD</code> and <code>TAIL</code>. You may not need every blank.
+  <hr class="s2" />
+  <code>
+  void free_twosided_ll(struct ll_node *node) {
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;if (node != NULL) {
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (node->prev != NULL) {
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (node->next != NULL) {
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;}
+  <hr class="s1" />
+  }
+  </code>
+
+q3_1_s: |
+  10
+
+q3_2_s: |
+  <code>struct ll_node *next_node = *((struct ll_node **)(id_addr + 3));</code>
+
+q3_3_s: |
+  <code>
+  void free_twosided_ll(struct ll_node *node) {
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;if (node != NULL) {
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (node->prev != NULL) {
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>(node->prev)->next = NULL;</b>
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>free_twosided_ll(node->prev);</b>
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (node->next != NULL) {
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>(node->next)->prev = NULL;</b>
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>free_twosided_ll(node->next);</b>
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;<b>free(node);</b>
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;}
+  <hr class="s1" />
+  }
+  </code>
+
+q4_1: |
+  <h3>Q4: beargit redux (15 points)</h3>
+
+  From project 1, you may remember the function <code>is_commit_msg_ok()</code> that you needed to implement
+  in C. Here is a simpler rendition where commit messages are deemed okay <i>if and only if</i> those null-
+  terminated commit messages exactly match <code>go_bears</code>. Using the <b>fewest number of empty lines</b>
+  possible, finish writing the code below. You are only allowed to use the registers already provided
+  <b>and</b> registers <b>$t0-3</b>, and <b>$s0-s2</b> (but you will not need all of them). Assume these registers are
+  initialized to 0 before the call to ISCOMMITOK.
+
+  <hr class="s2" />
+
+  <code>
+  &nbsp;&nbsp;&nbsp;&nbsp;char* go_bears = "THIS IS BEAR TERRITORY!: |
+  <hr class="s2" />
+  &nbsp;&nbsp;&nbsp;&nbsp;int is_commit_msg_ok(char* msg, char* go_bears): |
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; msg[i] && go_bears[i]; i++) {
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (go_bears[i] != msg[i]) return 0;
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!msg[i] && !go_bears[i]) return 1;
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;}
+  <hr class="s2" />
+  &nbsp;&nbsp;&nbsp;&nbsp;ISCOMMITOK: ________________________
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____ $t0   ____($a0)
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____ $t1   ____($a1)
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COND: ____and_________________
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $a0 $a0 1
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $a1 $a1 1
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EXIT: ____ $t2 $t0 $t1
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;li $v0 1
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAILED: li $v0 0
+  <hr class="s1" />
+  ${_.repeat('&nbsp;', 11)}END: ________________________
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
+  </code>
+
+q4_1_s: |
+  <code>
+  &nbsp;&nbsp;&nbsp;&nbsp;ISCOMMITOK: ________________________
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_<b>lb</b>_ $t0   __<b>0</b>_($a0)
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_<b>lb</b>_ $t1   __<b>0</b>_($a1)
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COND: ____and <b>$t2 $t0 $t1</b>_____
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<b>beq $t2 $0 EXIT</b>_____
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<b>bne $t0 $t1 FAILED</b>__
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $a0 $a0 1
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $a1 $a1 1
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_____<b>j ISCOMMITOK</b>_______
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EXIT: _<b>or</b>_ $t2 $t0 $t1
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<b>bne $t2 $0 FAILED</b>___
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;li $v0 1
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<b>j END</b>________________
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAILED: li $v0 0
+  <hr class="s1" />
+  ${_.repeat('&nbsp;', 11)}END: ____<b>jr $ra</b>_______________
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_________________________
+  </code>
+
+q5_1: |
+  <h3>5: MIPS Sleuth (15 points)</h3>
+
+  <code>mystery</code>, a mysterious MIPS function outlined below, is written without proper calling conventions.
+  <code>mystery</code> calls a correctly written function, <b>random</b>, that takes an integer <code>i</code> as its only argument, and
+  returns a random integer in the range <code>[0, i - 1]</code> inclusive.
+
+  <hr class="s2" />
+  <code>
+  &nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;mystery:&nbsp;&nbsp;addiu $sp $sp ${_.repeat('_', 16)}
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addu $s0 $0 $0
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move $s1 $a0
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;9&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move $s2 $a1
+  <hr class="s1" />
+  &nbsp;&nbsp;10&nbsp;&nbsp;loop:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;srl $t0 $s0 2
+  <hr class="s1" />
+  &nbsp;&nbsp;11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq $t0 $s2 exit
+  <hr class="s1" />
+  &nbsp;&nbsp;12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subu $a0 $s2 $t0
+  <hr class="s1" />
+  &nbsp;&nbsp;13&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jal random
+  <hr class="s1" />
+  &nbsp;&nbsp;14&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sll $v0 $v0 2
+  <hr class="s1" />
+  &nbsp;&nbsp;15&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addu $v0 $v0 $s0
+  <hr class="s1" />
+  &nbsp;&nbsp;16&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addu $t0 $s1 $s0
+  <hr class="s1" />
+  &nbsp;&nbsp;17&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addu $t1 $s1 $v0
+  <hr class="s1" />
+  &nbsp;&nbsp;18&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lw $t2 0($t0)
+  <hr class="s1" />
+  &nbsp;&nbsp;19&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lw $t3 0($t1)
+  <hr class="s1" />
+  &nbsp;&nbsp;20&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sw $t2 0($t1)
+  <hr class="s1" />
+  &nbsp;&nbsp;21&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sw $t3 0($t0)
+  <hr class="s1" />
+  &nbsp;&nbsp;22&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $s0 $s0 4
+  <hr class="s1" />
+  &nbsp;&nbsp;23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j loop
+  <hr class="s1" />
+  &nbsp;&nbsp;24&nbsp;&nbsp;exit:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  <hr class="s1" />
+  &nbsp;&nbsp;25&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  <hr class="s1" />
+  &nbsp;&nbsp;26&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  <hr class="s1" />
+  &nbsp;&nbsp;27&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  <hr class="s1" />
+  &nbsp;&nbsp;28&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  <hr class="s1" />
+  &nbsp;&nbsp;29&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  <hr class="s1" />
+  &nbsp;&nbsp;30&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  </code>
+
+  <hr class="s2" />
+
+  1) Fill in the prologue and the epilogue of this MIPS function. Assume that <code><b>random</b></code> follows proper
+  calling conventions, and that it may make its own function calls. You may not need all of the lines.
+
+q5_2: |
+  2) What operation does this function perform on an integer array? Assume that both the integer array
+  and the length of the array are passed into the function.
+
+q5_3: |
+  3) Would this function work as expected if a string was passed into the function instead? Write down
+  the line numbers of all lines of MIPS code that must be changed (if any at all), so that the function
+  works correctly on strings. Do not write down any extraneous line numbers.
+
+q5_1_s: |
+  <code>
+  &nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;mystery:&nbsp;&nbsp;addiu $sp $sp ________<b>-16</b>________
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________<b>sw $s0 0($sp)</b>__________
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________<b>sw $s1 4($sp)</b>__________
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________<b>sw $s2 8($sp)</b>__________
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________<b>sw $ra 12($sp)</b>_________
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}___
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addu $s0 $0 $0
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move $s1 $a0
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;9&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move $s2 $a1
+  <hr class="s1" />
+  &nbsp;&nbsp;10&nbsp;&nbsp;loop:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;srl $t0 $s0 2
+  <hr class="s1" />
+  &nbsp;&nbsp;11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq $t0 $s2 exit
+  <hr class="s1" />
+  &nbsp;&nbsp;12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subu $a0 $s2 $t0
+  <hr class="s1" />
+  &nbsp;&nbsp;13&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jal random
+  <hr class="s1" />
+  &nbsp;&nbsp;14&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sll $v0 $v0 2
+  <hr class="s1" />
+  &nbsp;&nbsp;15&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addu $v0 $v0 $s0
+  <hr class="s1" />
+  &nbsp;&nbsp;16&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addu $t0 $s1 $s0
+  <hr class="s1" />
+  &nbsp;&nbsp;17&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addu $t1 $s1 $v0
+  <hr class="s1" />
+  &nbsp;&nbsp;18&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lw $t2 0($t0)
+  <hr class="s1" />
+  &nbsp;&nbsp;19&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lw $t3 0($t1)
+  <hr class="s1" />
+  &nbsp;&nbsp;20&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sw $t2 0($t1)
+  <hr class="s1" />
+  &nbsp;&nbsp;21&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sw $t3 0($t0)
+  <hr class="s1" />
+  &nbsp;&nbsp;22&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $s0 $s0 4
+  <hr class="s1" />
+  &nbsp;&nbsp;23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j loop
+  <hr class="s1" />
+  &nbsp;&nbsp;24&nbsp;&nbsp;exit:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________<b>lw $s0 0($sp)</b>__________
+  <hr class="s1" />
+  &nbsp;&nbsp;25&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________<b>lw $s1 4($sp)</b>__________
+  <hr class="s1" />
+  &nbsp;&nbsp;26&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________<b>lw $s2 8($sp)</b>__________
+  <hr class="s1" />
+  &nbsp;&nbsp;27&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________<b>lw $ra 12($sp)</b>_________
+  <hr class="s1" />
+  &nbsp;&nbsp;28&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_________<b>addiu $sp $sp 16</b>________
+  <hr class="s1" />
+  &nbsp;&nbsp;29&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________<b>jr $ra</b>_____________
+  <hr class="s1" />
+  &nbsp;&nbsp;30&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}___
+  </code>
+
+q5_2_s: |
+
+q5_3_s: |
+  10, 14, 18, 19, 20, 21, 22
+
+q6_1: |
+  <h3>Q6: Registers: bigger is not always better (16 points)</h3>
+
+  You decide that instead of having 32, 32-bit registers, you would like to build a machine with 16, 64-bit registers. You also need to make a modified MIPS instruction set for this architecture.
+  <hr class="s1" />
+  1) In the box below, specify the size of the fields to best utilize the 32-bit instructions on this new
+  architecture. Do not modify the size of the opcode.
+  <hr class="s1" />
+  <img src="/img/cs61cfa15-6.png" class="problem-image" />
+
+q6_2: |
+  2) How many different R-type instructions can we now have?
+
+q6_3: |
+  3) If PC = 0x061C, what is the largest address that we can branch to?
+
+q6_4: |
+  4) Translate the following machine code into MIPS using your new field sizes. Use register numbers
+  instead of register names, since we’d have to think of a new convention for the names…
+  <hr class="s1" />
+  0xAE9FFFF8 = ${longblank}
+
+q6_1_s: |
+  <img src="/img/cs61cfa15-6_s.png" class="problem-image" />
+
+q6_2_s: |
+  ${lx('{2^8}')}
+
+q6_3_s: |
+  0x61c + 4 + (2^17 – 1)*4 = 0x61C + 2^19 = 0x61C + 2^(4*4)*8 = <b>0x8061C</b>
+
+q6_4_s: |
+  0xAE9FFFF8 = 101011 | 1010 | 0111 | 111…1000 = <code>sw $7 -8($10)</code>
+
+q7_1: |
+  <h3>Q7: After this, you’re CALL done! (9 points)</h3>
+
+  Connect the definition with the name of the process that describes it.
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;a) Compiler
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;b) Assembler
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;c) Linker
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;d) Loader
+  <hr class="s1" />
+  1) Outputs code that may still contain pseudoinstructions.
+  <hr class="s1" />
+  2) Takes binaries stored on disk and places them in memory to run.
+  <hr class="s1" />
+  3) Makes two passes over the code to solve the "forward reference" problem.
+  <hr class="s1" />
+  4) Creates a symbol table.
+  <hr class="s1" />
+  5) Combines multiple text and data segments.
+  <hr class="s1" />
+  6) Generates assembly language code.
+  <hr class="s1" />
+  7) Generates machine language code.
+  <hr class="s1" />
+  8) Only allows generation of TAL.
+  <hr class="s1" />
+  9) Only allows generation of binary machine code.
+
+q7_1_s: |
+  <h3>Answers</h3>
+  1) a <hr class="s1" />
+  2) d <hr class="s1" />
+  3) b <hr class="s1" />
+  4) b <hr class="s1" />
+  5) c <hr class="s1" />
+  6) a <hr class="s1" />
+  7) b <hr class="s1" />
+  8) b <hr class="s1" />
+  9) c
