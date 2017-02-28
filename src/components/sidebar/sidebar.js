@@ -38,7 +38,7 @@ class Sidebar extends Component {
               </Link>
             ) :
             (
-              <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} smooth={true} duration={500}>
+              <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} smooth={true} duration={500} onClick={() => handleEvent("Click", "Sidebar", examCode)}>
                 {problemTitle}
               </Link>
             )

@@ -20,6 +20,11 @@ class App extends Component {
   }
 
   toggleCollapse() {
+    if (this.state.sidebar) {
+      handleEvent("Click", "Close Sidebar", this.props.location.query.id);
+    } else {
+      handleEvent("Click", "Open Sidebar", this.props.location.query.id);
+    }
     this.setState({
       sidebar: !this.state.sidebar
     });

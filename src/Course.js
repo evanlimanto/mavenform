@@ -129,7 +129,7 @@ class Course extends Component {
         });
         return (
           <div key={semester} className="sidetab-container">
-            <a className={sideTabClass} href={url} onClick={() => handleEvent('Click', 'Sidebar', course)}>{title}</a>
+            <a className={sideTabClass} href={url} onClick={() => handleEvent('Click', 'Navigation Menu', course)}>{title}</a>
           </div>
         );
       });
@@ -151,7 +151,7 @@ class Course extends Component {
           <h4>{_.toUpper(course)}</h4>
           <hr className="s1" />
           <div className="sidetab-container">
-            <a className="sidetab active" href={"/course?id=" + course}>Index</a>
+            <a className="sidetab active" href={"/course?id=" + course} onClick={handleEvent("Click", "Index", course)}>Index</a>
           </div>
           <hr className="s1" />
           {sideTabs}
