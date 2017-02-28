@@ -575,12 +575,13 @@ class CS162Sp16 extends Component {
 
   render() {
     const examCode = 'cs162sp16';
-    const problemIDs = ['q1', 'q2', 'q3', 'q4'];
+    const problemIDs = ['q1', 'q2', 'q3', 'q4', 'q5'];
     const problemTitles = [
       'Q1. Short Answer',
       'Q2. Scheduling',
       'Q3. Synchronization',
       'Q4. Coding Questions',
+      'Q5. Resource Allocation',
     ];
 
     return (
