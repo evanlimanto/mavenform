@@ -134,8 +134,14 @@ class Question extends Component {
     const content = this.props.content;
     return (
       <div id={this.props.id} className="question">
-        <a className="link" onClick={() => this.copyToClipboard(`${document.location.origin}/exam?id=${this.props.examCode}&courseId=cs162#${this.props.id}`)}>Share</a>
-        {(this.state.copied) ? (<Expire delay={1800} callback={this.clearCopied}><div className="tooltip">Link copied to clipboard!</div></Expire>) : null}
+        <div className="tooltip-container">
+          <a className="link material-icons" onClick={() => this.copyToClipboard(`${document.location.origin}/exam?id=${this.props.examCode}&courseId=cs162#${this.props.id}`)}>link</a>
+            {(this.state.copied) ? 
+              (<span className="tooltip-link blue"><Expire delay={2000} callback={this.clearCopied}>Link Copied!</Expire></span>) : 
+              (<span className="tooltip-link">Copy Link</span>)
+            }
+        </div>
+        
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <Solution solution={this.props.solution} examCode={this.props.examCode} />
       </div>

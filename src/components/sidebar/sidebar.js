@@ -31,17 +31,9 @@ class Sidebar extends Component {
       return (
         <div className="sidetab-container">
           {
-            (is_mobile) ?
-            (
-              <Link className="sidetab" to={problemID} isDynamic={true} smooth={true} duration={500} onClick={() => handleEvent("Click", "Sidebar", examCode)}>
-                {problemTitle}
-              </Link>
-            ) :
-            (
-              <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} smooth={true} duration={500}>
-                {problemTitle}
-              </Link>
-            )
+            <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} offset={-50} smooth={true} duration={500}>
+              {problemTitle}
+            </Link>
           }
         </div>
       );
@@ -55,29 +47,11 @@ class Sidebar extends Component {
 
     return (
       <span>
-        <Sticky className="sidebar screen">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s2" />
+        <div className="sidebar">
+          <h6>CONTENTS</h6>
           {webSidetabContainers}
           <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-exam.pdf`} target="_blank">Exam PDF</a>
-          </div>
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-soln.pdf`} target="_blank">Solutions PDF</a>
-          </div>
-        </Sticky>
-        <div className="sidebar mobile">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s2" />
-          {mobileSidetabContainers}
-          <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
+          <h6>SOURCES</h6>
           <div className="sidetab-container">
             <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-exam.pdf`} target="_blank">Exam PDF</a>
           </div>

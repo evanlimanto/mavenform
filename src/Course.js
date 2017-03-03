@@ -49,7 +49,7 @@ class Course extends Component {
           <td><a href={dict['url'] + '&courseId=' + course}>{_.replace(_.capitalize(examType), '-', ' ')}</a></td>
           <td><a href={dict['url'] + '&courseId=' + course}>{semester}</a></td>
           <td><a href={dict['url'] + '&courseId=' + course}>{dict['profs']}</a></td>
-          <td><h4><a className="table-link" href={dict['url'] + '&courseId=' + course}>CLICK TO VIEW &#8594;</a></h4></td>
+          <td><h6><a className="table-link" href={dict['url'] + '&courseId=' + course}>CLICK TO VIEW &#8594;</a></h6></td>
         </tr>
       );
     }));
@@ -142,33 +142,37 @@ class Course extends Component {
     });
 
     return (
-      <div className="shift">
-        <a className="return" href="/">&#8592; RETURN</a>
-        {collapser}
+      <div>
+        <div className="nav">
+          <a className="logo">Mavenform</a>
+          <a className="material-icons mobile-back">home</a>
+          <div className="tooltip-container">
+            <a className="material-icons">sms</a>
+            <span className="tooltip">Send Feedback</span>
+          </div>
+          <div className="tooltip-container reader-mode">
+            <a className="material-icons">subject</a>
+            <span className="tooltip">Reader Mode</span>
+          </div>
+        </div>
         <div className={menuClass}>
-          <a className="home center" href="/">Mavenform</a>
-          <hr className="s1" />
-          <h4>{_.toUpper(course)}</h4>
-          <hr className="s1" />
+          <h6>{_.toUpper(course)}</h6>
           <div className="sidetab-container">
             <a className="sidetab active" href={"/course?id=" + course}>Index</a>
           </div>
-          <hr className="s1" />
           {sideTabs}
-          <a className="index" href="/">&#8592; RETURN</a>
         </div>
-        <a className="feedback" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
+        <div className="sidebar">
+          <h6>NOTE</h6>
+          <i>This index accounts for every exam from HKN, TBP, and other sources from the past 2 academic years.</i>
+        </div>
         <div>
-          <hr className="margin" />
-          <h1 className="center">{courseName}</h1>
-          <hr className="s2" />
+          <h4 className="center">{courseName}</h4>
           <div className="center">
-            <h5>Index of all exams</h5>
+            <h5>Index of exams</h5>
           </div>
           <hr className="s5" />
           <div className="center">
-            <p className="test">Status of every exam from TBP, HKN, and all other sources <span dangerouslySetInnerHTML={{__html: note}}></span></p>
-            <hr className="s3" />
             <div className="table-container-container">
               <div className="table-container">
                 <table className="exams center">

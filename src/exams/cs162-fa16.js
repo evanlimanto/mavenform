@@ -7,19 +7,48 @@ const _ = require('lodash');
 
 const q1_1 =
 `
-<h3>1. (21 points total) True/False and Why?</h3>
-<h3>a. (8 points) True/False and Why?</h3>
+<h1>1. (21 points total) True/False and Why?</h1>
+<h2>a. (8 points) True/False and Why?</h2>
 
 i) When a user program performs a system call, it must first put the system call
 arguments onto the kernel stack and then run a special instruction to switch to
 kernel mode.
+<hr class="s2" />
+<table>
+<thead>
+<tr><th><code>thread_current()</code></th><th>Line at which yielded</th><th>Thread which it yielded to</th><th>Main</th><th>a</th><th>b</th><th>c</th></tr></thead>
+<tbody>
+<tr><td>main</td><td>10</td><td>a</td><td>10</td><td>15</td><td>N/A</td><td>N/A</td></tr>
+<tr><td>a</td><td>20</td><td>main</td><td>15</td><td>15</td><td>N/A</td><td>N/A</td></tr>
+<tr><td>main</td><td>12</td><td>b</td><td>15</td><td>15</td><td>20</td><td>N/A</td></tr>
+<tr><td>b</td><td>20</td><td>main</td><td>20</td><td>15</td><td>20</td><td></td></tr>
+<tr><td>main</td><td>14</td><td>c</td><td>20</td><td>15</td><td>20</td><td>25</td></tr>
+<tr><td>c</td><td>20</td><td>main</td><td>25</td><td>15</td><td>20</td><td>25</td></tr>
+<tr><td>main</td><td>15</td><td>c</td><td>20</td><td>15</td><td>20</td><td>25</td></tr>
+<tr><td>c</td><td>23</td><td>main</td><td>20</td><td>15</td><td>20</td><td>N/A</td></tr>
+<tr><td>main</td><td>17</td><td>b</td><td>10</td><td>15</td><td>20</td><td>N/A</td></tr>
+<tr><td>b</td><td>23</td><td>a</td><td>10</td><td>15</td><td>N/A</td><td>N/A</td></tr>
+<tr><td>a</td><td>23</td><td>main</td><td>10</td><td>N/A</td><td>N/A</td><td>N/A</td></tr>
+</tbody>
+</table>
 `;
 
 const q1_1_soln =
 `
-<b>FALSE</b>. Arguments are put on the thread’s stack, not kernel stack. The
+<h3>FALSE.</h3>
+<hr class="s1" />
+Arguments are put on the thread’s stack, not kernel stack. The
 correct answer was worth 1 point and the justification was worth an
 additional 1 point.
+<hr class="s2" />
+<table>
+<thead>
+<tr><th><code>thread_current()</code></th><th>Line at which yielded</th><th>Thread which it yielded to</th><th>Main</th><th>a</th><th>b</th><th>c</th></tr></thead>
+<tbody>
+<tr><td>main</td><td>10</td><td>a</td><td>10</td><td>15</td><td>N/A</td><td>N/A</td></tr>
+${_.repeat('<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>', 10)}
+</tbody>
+</table>
 `;
 
 const q1_2 =
@@ -725,67 +754,65 @@ class CS162Fa16 extends Component {
     scrollSpy.update();
   }
 
+  // <Sidebar examCode='cs162/mt1-fa16' problemIDs={problemIDs} problemTitles={problemTitles} />
+
   render() {
     const examCode = 'cs162fa16';
     const problemIDs = ['q1', 'q2', 'q3', 'q4', 'q5'];
     const problemTitles = [
-      'Q1. True/False and Why?',
-      'Q2. C Programming',
-      'Q3. Finite Synchronized Queue using Monitors',
-      'Q4. PintOS Questions',
-      'Q5. Santa Claus problem (from Operating Systems: Internals and Design Principles',
+      'Question 1',
+      'Question 2',
+      'Question 3',
+      'Question 4',
+      'Question 5',
     ];
     return (
-      <span>
-        <h1>CS 162</h1>
-        <hr className="s2" />
-        <div className="center">
-          <h5>Midterm 1 | Fall 2016 | Joseph</h5>
-        </div>
-        <Sidebar examCode='cs162/mt1-fa16' problemIDs={problemIDs} problemTitles={problemTitles} />
-        <div className="content">
-          <Element name="q1">
-            <div className="content-spacer" />
-            <hr className="s5" />
-            <h2>General Information</h2>
-            <hr className="s2" />
+      <div className="content">
+        <Element name="q1">
+          <h4>CS 162</h4>
+          <div className="center">
+            <h5>Midterm 1 | Fall 2016 | Joseph</h5>
+          </div>
+          <div className="question">
+            <h1>General Information</h1>
             <p>This is a closed book exam. You are allowed one 2-sided hand-written notes. You have 80 minutes to complete as much of the exam as possible. Make sure to read all of the questions first, as some of the questions are substantially more time consuming.</p>
-            <Question id={"q1-1"} content={q1_1} solution={q1_1_soln} examCode={examCode} />
-            <Question id={"q1-2"} content={q1_2} solution={q1_2_soln} examCode={examCode} />
-            <Question id={"q1-3"} content={q1_3} solution={q1_3_soln} examCode={examCode} />
-            <Question id={"q1-4"} content={q1_4} solution={q1_4_soln} examCode={examCode} />
-            <Question id={"q1-5"} content={q1_5} solution={q1_5_soln} examCode={examCode} />
-            <Question id={"q1-6"} content={q1_6} solution={q1_6_soln} examCode={examCode} />
-            <Question id={"q1-7"} content={q1_7} solution={q1_7_soln} examCode={examCode} />
-            <Question id={"q1-8"} content={q1_8} solution={q1_8_soln} examCode={examCode} />
-          </Element>
-          <Element name="q2">
-            <Question id={"q2-1"} content={q2_1} solution={q2_1_soln} examCode={examCode} />
-            <Question id={"q2-2"} content={q2_2} solution={q2_2_soln} examCode={examCode} />
-          </Element>
-          <Element name="q3">
-            <Question id={"q3-1"} content={q3_1} solution={q3_1_soln} examCode={examCode} />
-            <Question id={"q3-2"} content={q3_2} solution={q3_2_soln} examCode={examCode} />
-            <Question id={"q3-3"} content={q3_3} solution={q3_3_soln} examCode={examCode} />
-            <Question id={"q3-4"} content={q3_4} solution={q3_4_soln} examCode={examCode} />
-          </Element>
-          <Element name="q4">
-            <Question id={"q4-1"} content={q4_1} solution={q4_1_soln} examCode={examCode} />
-            <Question id={"q4-2"} content={q4_2} solution={q4_2_soln} examCode={examCode} />
-            <Question id={"q4-3"} content={q4_3} solution={q4_3_soln} examCode={examCode} />
-            <Question id={"q4-4"} content={q4_4} solution={q4_4_soln} examCode={examCode} />
-            <Question id={"q4-5"} content={q4_5} solution={q4_5_soln} examCode={examCode} />
-            <Question id={"q4-6"} content={q4_6} solution={q4_6_soln} examCode={examCode} />
-          </Element>
-          <Element name="q5">
-            <Question id={"q5-1"} content={q5_1} solution={q5_1_soln} examCode={examCode} />
-            <Question id={"q5-2"} content={q5_2} solution={q5_2_soln} examCode={examCode} />
-            <Question id={"q5-3"} content={q5_3} solution={q5_3_soln} examCode={examCode} />
-            <Question id={"q5-4"} content={q5_4} solution={q5_4_soln} examCode={examCode} />
-            <Question id={"q5-5"} content={q5_5} solution={q5_5_soln} examCode={examCode} />
-          </Element>
-        </div>
-      </span>
+          </div>
+          <Question id={"q1-1"} content={q1_1} solution={q1_1_soln} examCode={examCode} />
+          <Question id={"q1-2"} content={q1_2} solution={q1_2_soln} examCode={examCode} />
+          <Question id={"q1-3"} content={q1_3} solution={q1_3_soln} examCode={examCode} />
+          <Question id={"q1-4"} content={q1_4} solution={q1_4_soln} examCode={examCode} />
+          <Question id={"q1-5"} content={q1_5} solution={q1_5_soln} examCode={examCode} />
+          <Question id={"q1-6"} content={q1_6} solution={q1_6_soln} examCode={examCode} />
+          <Question id={"q1-7"} content={q1_7} solution={q1_7_soln} examCode={examCode} />
+          <Question id={"q1-8"} content={q1_8} solution={q1_8_soln} examCode={examCode} />
+        </Element>
+        <Element name="q2">
+          <Question id={"q2-1"} content={q2_1} solution={q2_1_soln} examCode={examCode} />
+          <Question id={"q2-2"} content={q2_2} solution={q2_2_soln} examCode={examCode} />
+        </Element>
+        <Element name="q3">
+          <Question id={"q3-1"} content={q3_1} solution={q3_1_soln} examCode={examCode} />
+          <Question id={"q3-2"} content={q3_2} solution={q3_2_soln} examCode={examCode} />
+          <Question id={"q3-3"} content={q3_3} solution={q3_3_soln} examCode={examCode} />
+          <Question id={"q3-4"} content={q3_4} solution={q3_4_soln} examCode={examCode} />
+        </Element>
+        <Element name="q4">
+          <Question id={"q4-1"} content={q4_1} solution={q4_1_soln} examCode={examCode} />
+          <Question id={"q4-2"} content={q4_2} solution={q4_2_soln} examCode={examCode} />
+          <Question id={"q4-3"} content={q4_3} solution={q4_3_soln} examCode={examCode} />
+          <Question id={"q4-4"} content={q4_4} solution={q4_4_soln} examCode={examCode} />
+          <Question id={"q4-5"} content={q4_5} solution={q4_5_soln} examCode={examCode} />
+          <Question id={"q4-6"} content={q4_6} solution={q4_6_soln} examCode={examCode} />
+        </Element>
+        <Element name="q5">
+          <Question id={"q5-1"} content={q5_1} solution={q5_1_soln} examCode={examCode} />
+          <Question id={"q5-2"} content={q5_2} solution={q5_2_soln} examCode={examCode} />
+          <Question id={"q5-3"} content={q5_3} solution={q5_3_soln} examCode={examCode} />
+          <Question id={"q5-4"} content={q5_4} solution={q5_4_soln} examCode={examCode} />
+          <Question id={"q5-5"} content={q5_5} solution={q5_5_soln} examCode={examCode} />
+        </Element>
+        <Sidebar examCode='cs162/mt1-fa15' problemIDs={problemIDs} problemTitles={problemTitles} />
+      </div>
     );
   }
 }

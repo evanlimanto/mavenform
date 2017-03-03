@@ -23,11 +23,11 @@ class App extends Component {
     this.setState({
       sidebar: !this.state.sidebar
     });
-    if (this.state.sidebar) {
-      document.body.style.left = '-125px';
-    } else {
-      document.body.style.left = '0';
-    }
+    // if (this.state.sidebar) {
+    //   document.body.style.left = '-125px';
+    // } else {
+    //   document.body.style.left = '0';
+    // }
   }
 
   render() {
@@ -101,34 +101,44 @@ class App extends Component {
       });
       return (
         <span>
-          <div className="sideTitle">{_.capitalize(_.replace(examType, '-', ' '))}</div>
+          <div className="sideTitle"><span className="material-icons sideArrow">keyboard_arrow_down</span> {_.capitalize(_.replace(examType, '-', ' '))}</div>
           {content}
+          <div className="sideTitle"><span className="material-icons sideArrow">keyboard_arrow_right</span> Midterm 2 </div>
+          <div className="sideTitle"><span className="material-icons sideArrow">keyboard_arrow_right</span> Final </div>
         </span>
       );
     });
 
+
+    // <a className="home center" href="/">Mavenform</a>
+    // <a className="feedback" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
+    // <a className="index" href="/" >&#8592; RETURN</a>
+    // <a className="return" href={"/course?id=" + course} onClick={handleEvent("Click", "Exam Index", examId)}>&#8592; INDEX</a>
+    // {collapser}
+
     return (
-      <span className="shift">
-        <a className="return" href={"/course?id=" + course} onClick={handleEvent("Click", "Exam Index", examId)}>&#8592; INDEX</a>
-        {collapser}
+      <span>
+        <div className="nav">
+          <a className="logo">Mavenform</a>
+          <a className="material-icons mobile-back">keyboard_backspace</a>
+          <div className="tooltip-container">
+            <a className="material-icons">sms</a>
+            <span className="tooltip">Send Feedback</span>
+          </div>
+          <div className="tooltip-container reader-mode">
+            <a className="material-icons">subject</a>
+            <span className="tooltip">Reader Mode</span>
+          </div>
+        </div>
         <div className={menuClass}>
-          <a className="home center" href="/">Mavenform</a>
-          <hr className="s1" />
-          <h4>{_.toUpper(course)}</h4>
-          <hr className="s1" />
+          <h6>CS 162</h6>
           <div className="sidetab-container">
             <a className="sidetab" href={"/course?id=" + course} onClick={handleEvent("Click", "Home")}>Index</a>
           </div>
-          <hr className="s1" />
           {sideTabs}
-          <a className="index" href="/" >&#8592; RETURN</a>
         </div>
-        <a className="feedback" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
-        <div className="test-container">
-          <div className="test">
-            <hr className="margin" />
-            {exam}
-          </div>
+        <div>
+          {exam}
         </div>
       </span>
     );
