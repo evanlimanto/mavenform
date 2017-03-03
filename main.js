@@ -18,6 +18,8 @@ app.use(express.static('./build'));
 const mjAPI = require("mathjax-node/lib/mj-page.js");
 mjAPI.start();
 
+const useCache = false;
+console.log(process.env.NODE_ENV + " " + useCache);
 const examCache = new NodeCache({ stdTTL: 30 * 60, checkperiod: 10 * 60 });
 
 // Read Exam .yaml files from disk
@@ -30,7 +32,7 @@ app.get('/getExam/:course/:type/:exam', function(req, res) {
   const cachedValue = examCache.get(examKey);
   var doc = null;
   var error = false;
-  if (cachedValue !== undefined) {
+  if (useCache && cachedValue !== undefined) {
     doc = cachedValue;
   } else {
     try {

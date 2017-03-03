@@ -20,6 +20,22 @@ marked.setOptions({
   smartypants: false,
 });
 
+const renderer = new marked.Renderer();
+renderer.heading = function(text, level) {
+  if (level === 1) {
+    level = 3;
+  }
+  return `<h${level}>${text}</h${level}>`;
+};
+renderer.code = function(code, language) {
+  code = _.replace(code, /\r\n|\r|\n/g, '<hr class="s1" />');
+  console.log(JSON.stringify(code));
+  return `<code>${code}</code>`;
+};
+renderer.em = function(text) {
+  return `<i>${text}</i>`;
+};
+
 const Scroll = require('react-scroll');
 const Element = Scroll.Element;
 const scrollSpy = Scroll.scrollSpy;
@@ -65,11 +81,11 @@ class ExamContent extends Component {
     const prof = (examContent && _.has(examContent, 'prof')) ? (examContent.prof) : null;
     const type = (examContent && _.has(examContent, 'type')) ? (examContent.type) : null;
     const term = (examContent && _.has(examContent, 'term')) ? (examContent.term) : null;
-    const useMarkdown = (examContent && _.has(examContent, 'md')) ? (examContent.markdown) : true;
+    const useMarkdown = (examContent && _.has(examContent, 'md')) ? (examContent.md) : true;
 
     // General information about the exam
     const pre = (examContent && _.has(examContent, 'pre')) ?
-      (<div dangerouslySetInnerHTML={{'__html': marked(examContent.pre)}} />) : null;
+      (<div dangerouslySetInnerHTML={{'__html': marked(examContent.pre, {renderer})}} />) : null;
     const content = (examContent && _.has(examContent, 'parts')) ?
       _.map(examContent.parts, (num_parts, part) => {
         const subparts = _.map(_.range(1, num_parts + 1), subpart => {
@@ -81,8 +97,8 @@ class ExamContent extends Component {
           var content = examContent[key];
           var solution = examContent[key + "_s"];
           if (useMarkdown) {
-              content = marked(content);
-              solution = marked(solution);
+              content = marked(content, {renderer});
+              solution = marked(solution, {renderer});
           }
           return <Question id={`${part}_${subpart}`} course={course} content={content} solution={solution} term={term} examType={type} key={key} />
         });

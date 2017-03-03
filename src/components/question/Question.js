@@ -97,7 +97,6 @@ class Question extends Component {
     const examType = this.props.examType;
     const term = this.props.term;
     const examCode = `${examType}${term}${course}`;
-    console.log(this.props.id);
 
     return (
       <div id={this.props.id} className="question">
