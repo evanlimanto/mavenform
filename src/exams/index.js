@@ -1,5 +1,5 @@
-import { exams, captions } from './consts';
+import { exams, courses } from './consts';
 
 export {
-  exams, captions
+  exams, courses
 };

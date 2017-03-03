@@ -27,7 +27,7 @@ class Exam extends Component {
   }
 
   componentDidMount() {
-    fetch(`/exam?id=${this.props.code}&type=${this.props.type}`).then(function(response) {
+    fetch(`/getExam?id=${this.props.code}&type=${this.props.type}`).then(function(response) {
       return response.json();
     }).then((json) => {
       this.setState({ examContent: json });

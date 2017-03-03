@@ -27,14 +27,11 @@ class Course extends Component {
   }
 
   render() {
-    var course = null;
+    var course = this.props.params.courseid;
     var examId = null;
     var courseName = null;
     var unavailable = null;
     var note = null;
-    if (this.props.location.query) {
-      course = this.props.location.query.id;
-    }
     if (course === 'ee16a') {
       courseName = 'EE 16A';
     } else if (course === 'cs61c') {
@@ -42,69 +39,19 @@ class Course extends Component {
     } else {
       courseName = 'CS 162';
     }
-    const examType = 'midterm-1';
-    const available = _.values(_.mapValues(exams[course][examType], (dict, semester) => {
-      return (
-        <tr className="available" onClick={handleEvent("Click", "Exam", course)}>
-          <td><a href={dict['url'] + '&courseId=' + course}>{_.replace(_.capitalize(examType), '-', ' ')}</a></td>
-          <td><a href={dict['url'] + '&courseId=' + course}>{semester}</a></td>
-          <td><a href={dict['url'] + '&courseId=' + course}>{dict['profs']}</a></td>
-          <td><h4><a className="table-link" href={dict['url'] + '&courseId=' + course}>CLICK TO VIEW &#8594;</a></h4></td>
-        </tr>
-      );
-    }));
-    if (course === 'ee16a') {
-      unavailable =
-      `
-      <tr>
-        <td>Midterm 2</td>
-        <td>2015 - 2016</td>
-        <td>Miscellaneous</td>
-        <td><i>In progress</i></td>
-      </tr>
-      <tr>
-        <td>Final</td>
-        <td>2015 - 2016</td>
-        <td>Miscellaneous</td>
-        <td><i>In progress</i></td>
-      </tr>
-      `;
-      note = '';
-    } else if (course === 'cs61c') {
-      unavailable =
-      `
-      <tr>
-        <td>Midterm 2</td>
-        <td>2014 - 2016</td>
-        <td>Miscellaneous</td>
-        <td><i>In progress</i></td>
-      </tr>
-      <tr>
-        <td>Final</td>
-        <td>2014 - 2016</td>
-        <td>Miscellaneous</td>
-        <td><i>In progress</i></td>
-      </tr>
-      `;
-      note = '<i>(up to the last 3 academic years)</i>';
-    } else {
-      unavailable =
-      `
-      <tr>
-        <td>Midterm 2</td>
-        <td>2015 - 2016</td>
-        <td>Miscellaneous</td>
-        <td><i>In progress</i></td>
-      </tr>
-      <tr>
-        <td>Final</td>
-        <td>2015 - 2016</td>
-        <td>Miscellaneous</td>
-        <td><i>In progress</i></td>
-      </tr>
-      `;
-      note = '<i>(up to the last 2 years)</i>';
-    }
+    const available = _.map(exams[course], (examsOfType, examType) => {
+      return _.map(examsOfType, (dict, semester) => {
+        const url = `/exam/${course}/${examType}/${dict['id']}`;
+        return (
+          <tr className="available" onClick={handleEvent("Click", "Exam", course)} key={semester}>
+            <td><a href={url}>{_.replace(_.capitalize(examType), '-', ' ')}</a></td>
+            <td><a href={url}>{semester}</a></td>
+            <td><a href={url}>{dict['profs']}</a></td>
+            <td><h4><a className="table-link" href={dict['url'] + '&courseId=' + course}>CLICK TO VIEW &#8594;</a></h4></td>
+          </tr>
+        );
+      });
+    });
 
     const collapserClass = classnames({
       collapse: true,
@@ -134,7 +81,7 @@ class Course extends Component {
         );
       });
       return (
-        <span>
+        <span key={examType}>
           <div className="sideTitle">{_.capitalize(_.replace(examType, '-', ' '))}</div>
           {content}
         </span>
@@ -167,7 +114,7 @@ class Course extends Component {
           </div>
           <hr className="s5" />
           <div className="center">
-            <p className="test">Status of every exam from TBP, HKN, and all other sources <span dangerouslySetInnerHTML={{__html: note}}></span></p>
+            <p className="test">Status of every exam from TBP, HKN, and all other sources.</p>
             <hr className="s3" />
             <div className="table-container-container">
               <div className="table-container">

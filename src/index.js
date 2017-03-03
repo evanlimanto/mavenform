@@ -34,7 +34,7 @@ window.addEventListener('scroll', function(e) {
 ReactDOM.render((
   <Router history={browserHistory} onUpdate={logPageView}>
     <Route path="/" component={Home} />
-    <Route path="/course" component={Course} />
-    <Route path="/exam" component={App} />
+    <Route path="/course/:courseid" component={Course} />
+    <Route path="/exam/:courseid/:examtype/:examid" component={App} />
   </Router>
 ), document.getElementById('root'));

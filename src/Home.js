@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
 import { handleEvent } from '../src/utils';
+import { courses } from './exams';
+
+const _ = require('lodash');
 
 class Home extends Component {
   render() {
+    const courseBoxes = _.map(courses, (desc, course) => {
+      console.log(desc + " " + course);
+      return (
+        <a className="course-card" href={`/course/${course}`} onClick={() => handleEvent('Click', 'Course', course)}>
+          <h2>{course}</h2>
+          <hr className="s1" />
+          <i className="course-subtitle">{desc}</i>
+          <h4 className="card-helper">CLICK TO VIEW &#8594;</h4>
+        </a>
+      );
+    });
+
     return (
       <div>
         <a className="feedback home-link" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
@@ -21,24 +36,7 @@ class Home extends Component {
           <hr className="s1" />
           <h5>Currently available exam sets</h5>
           <hr className="s2" />
-          <a className="course-card" href="/course?id=cs162" onClick={() => handleEvent('Click', 'Course', 'CS 162')}>
-            <h2>CS 162</h2>
-            <hr className="s1" />
-            <i className="course-subtitle">Operating Systems and Systems Programming </i>
-            <h4 className="card-helper">CLICK TO VIEW &#8594;</h4>
-          </a>
-          <a className="course-card" href="/course?id=ee16a" onClick={() => handleEvent('Click', 'Course', 'CS 61C')}>
-            <h2>EE 16A</h2>
-            <hr className="s1" />
-            <i className="course-subtitle">Designing Information Devices and Systems I</i>
-            <h4 className="card-helper">CLICK TO VIEW &#8594;</h4>
-          </a>
-          <a className="course-card" href="/course?id=cs61c" onClick={() => handleEvent('Click', 'Course', 'CS 61C')}>
-            <h2>CS 61C</h2>
-            <hr className="s1" />
-            <i className="course-subtitle">Great Ideas in Computer Architecture </i>
-            <h4 className="card-helper">CLICK TO VIEW &#8594;</h4>
-          </a>
+          {courseBoxes}
           <hr className="margin-alt" />
         </div>
         <div className="light-gray center">
