@@ -1,8 +1,11 @@
-examcode: 'cs61c/mt1-fa15'
-prof: 'Joseph'
-type: 'Midterm 1'
+course: 'cs61c'
+ref: 'mt1-fa15'
 
-titles: {
+type: 'Midterm 1'
+term: 'Fall 2015'
+prof: 'Joseph'
+
+questions: {
   'q1': 'A dozen ways to ask about bits',
   'q2': 'Wow! If only you could C the main memory',
   'q3': 'Links, Links, and Lists',
@@ -21,6 +24,9 @@ parts: {
   'q6': 4,
   'q7': 1,
 }
+
+pre: |
+  <div class="content-spacer"></div>
 
 q1_1: |
   <h3>Q1: A dozen ways to ask about bits (10 points)</h3>
@@ -61,9 +67,9 @@ q1_1_s: |
   <hr class="s1" />
   d) 0x800
   <hr class="s1" />
-  e) i) ${lx('2^{n-1} - 1')}
+  e) i) $2^{n-1} - 1$
   <hr class="s1" />
-  e) ii) ${lx('-2^{n-1}')}
+  e) ii) $-2^{n-1}$
 
 q1_2_s: |
   <code>
@@ -524,7 +530,7 @@ q6_1_s: |
   <img src="/img/cs61cfa15-6_s.png" class="problem-image" />
 
 q6_2_s: |
-  ${lx('{2^8}')}
+  ${2^8}$
 
 q6_3_s: |
   0x61c + 4 + (2^17 – 1)*4 = 0x61C + 2^19 = 0x61C + 2^(4*4)*8 = <b>0x8061C</b>

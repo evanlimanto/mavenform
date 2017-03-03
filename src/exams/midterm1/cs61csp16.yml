@@ -1,8 +1,11 @@
-examcode: 'cs61c/mt1-sp16'
-prof: 'Stojanovic, Weaver'
-type: 'Midterm 1'
+course: 'cs61c'
+ref: 'mt1-sp16'
 
-titles: {
+type: 'Midterm 1'
+term: 'Spring 2016'
+prof: 'Stojanovic, Weaver'
+
+questions: {
   'q1': 'Instructors keep their students aligned',
   'q2': 'This tree question need acory pun',
   'q3': 'A filter in the blank question',
@@ -19,6 +22,9 @@ parts: {
   'q5': 3,
   'q6': 4
 }
+
+pre: |
+  <div class="content-spacer"></div>
 
 q1_1: |
   <h3>Q1: Instructors keep their students aligned (10 points)</h3>
@@ -554,29 +560,29 @@ q6_2: |
   <hr class="s1"/>
   &nbsp;&nbsp;&nbsp;&nbsp;uint8_t y = 255;
   <hr class="s2"/>
-  &nbsp;&nbsp;&nbsp;&nbsp;printf("===begin===\\n");
+  &nbsp;&nbsp;&nbsp;&nbsp;printf("===begin===\n");
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;printf("i. %u\\n", (uint8_t) x--);
+  &nbsp;&nbsp;&nbsp;&nbsp;printf("i. %u\n", (uint8_t) x--);
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;printf("ii. %u\\n", (uint8_t) x);
+  &nbsp;&nbsp;&nbsp;&nbsp;printf("ii. %u\n", (uint8_t) x);
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;printf("iii. %u\\n", ++y);
+  &nbsp;&nbsp;&nbsp;&nbsp;printf("iii. %u\n", ++y);
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;printf("iv. %u\\n", y);
+  &nbsp;&nbsp;&nbsp;&nbsp;printf("iv. %u\n", y);
   <hr class="s2" />
-  &nbsp;&nbsp;&nbsp;&nbsp;printf("===break===\\n");
+  &nbsp;&nbsp;&nbsp;&nbsp;printf("===break===\n");
   <hr class="s2" />
   &nbsp;&nbsp;&nbsp;&nbsp;uint8_t z = 255;
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;printf("v. %d\\n", (int8_t) z);
+  &nbsp;&nbsp;&nbsp;&nbsp;printf("v. %d\n", (int8_t) z);
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;printf("vi. %u\\n", (uint8_t) z);
+  &nbsp;&nbsp;&nbsp;&nbsp;printf("vi. %u\n", (uint8_t) z);
   <hr class="s2" />
   &nbsp;&nbsp;&nbsp;&nbsp;z -= 256;
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;printf("vii. %d\\n", z);
+  &nbsp;&nbsp;&nbsp;&nbsp;printf("vii. %d\n", z);
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;printf("===end===\\n");
+  &nbsp;&nbsp;&nbsp;&nbsp;printf("===end===\n");
   <hr class="s1" />
   }
   </code>

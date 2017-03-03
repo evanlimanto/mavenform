@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "autotrack": "^2.0.1",
+    "backtick-template": "^0.1.1",
     "browserify": "^14.1.0",
     "classnames": "^2.2.5",
     "copy-to-clipboard": "^3.0.5",
@@ -17,6 +18,7 @@
     "js-yaml": "^3.8.1",
     "lodash": "^4.17.4",
     "marked": "^0.3.6",
+    "mustache": "^2.3.0",
     "node-cache": "^4.1.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",

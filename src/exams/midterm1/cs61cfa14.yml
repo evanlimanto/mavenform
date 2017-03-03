@@ -1,8 +1,11 @@
-examcode: 'cs61c/mt1-fa14'
-prof: 'Culler'
-type: 'Midterm 1'
+course: 'cs61c'
+ref: 'mt1-fa14'
 
-titles: {
+type: 'Midterm 1'
+term: 'Fall 2014'
+prof: 'Culler'
+
+questions: {
   'q1': 'Running in Circles',
   'q2': 'I can C clearly now, the rain is gone...',
 }
@@ -11,6 +14,9 @@ parts: {
   'q1': 3,
   'q2': 3,
 }
+
+pre: |
+  <div class="content-spacer"></div>
 
 q1_1: |
   <h3>Question 1: Running in circles (18 pts)</h3>

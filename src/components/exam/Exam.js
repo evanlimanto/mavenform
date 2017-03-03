@@ -32,35 +32,30 @@ class Exam extends Component {
     }).then((json) => {
       this.setState({ examContent: json });
     });
+
+    window.renderMJ();
   }
 
   componentDidUpdate() {
     scrollSpy.update();
   }
 
-  formatSemester(sem) {
-    return _.replace(_.replace(sem, 'fa', 'Fall '), 'sp', 'Spring ');
-  }
-
   render() {
     const examContent = this.state.examContent;
     const examCode =
-      (examContent && _.has(examContent, 'examcode')) ?
-      (examContent.examcode) : [];
+      (examContent && _.has(examContent, 'course') && _.has(examContent, 'ref')) ?
+      (`${examContent.course}${examContent.ref}`) : [];
     const problemIDs =
       (examContent && _.has(examContent, 'parts')) ?
       (_.keys(examContent.parts)) : [];
     const problemTitles =
-      (examContent && _.has(examContent, 'titles')) ?
-      (_.values(examContent.titles)) : [];
+      (examContent && _.has(examContent, 'questions')) ?
+      (_.values(examContent.questions)) : [];
     const course =
-      (examContent && _.has(examContent, 'examcode')) ?
-      (examContent.examcode.split('/')[0]) : null;
+      (examContent && _.has(examContent, 'course')) ? examContent.course : null;
     const prof = (examContent && _.has(examContent, 'prof')) ? (examContent.prof) : null;
     const type = (examContent && _.has(examContent, 'type')) ? (examContent.type) : null;
-    const semester =
-      (examContent && _.has(examContent, 'examcode')) ?
-      (examContent.examcode.split('-')[1]) : null;
+    const term = (examContent && _.has(examContent, 'term')) ? (examContent.term) : null;
 
     const pre = (examContent && _.has(examContent, 'pre')) ?
       (<div dangerouslySetInnerHTML={{'__html': marked(examContent.pre)}} />) : null;
@@ -69,15 +64,11 @@ class Exam extends Component {
         const subparts = _.map(_.range(1, num_parts + 1), subpart => {
           const key = `${part}_${subpart}`;
           if (!_.has(examContent, key)) {
+            console.warn(`${key} doesn't exist in exam!`);
             return null;
           }
-          console.log(key);
-          console.log(examContent[key]);
-          const content = marked(examContent[key]);
-          console.log(key);
-          console.log(examContent[key + "_s"]);
-          const solution = marked(examContent[key + "_s"]);
-          console.log(key);
+          const content = examContent[key];
+          const solution = examContent[key + "_s"];
           return <Question id={_.replace(key, '_', '-')} content={content} solution={solution} examCode={examCode} key={key} />
         });
         return <Element name={part} key={part}>{subparts}</Element>;
@@ -88,7 +79,7 @@ class Exam extends Component {
         <h1>{_.toUpper(course)}</h1>
         <hr className="s2" />
         <div className="center">
-          <h5>{type} | {this.formatSemester(semester)} | {prof}</h5>
+          <h5>{type} | {term} | {prof}</h5>
         </div>
         <Sidebar examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} />
         <div className="content">

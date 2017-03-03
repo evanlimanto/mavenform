@@ -1,8 +1,11 @@
-examcode: 'cs162/mt1-fa15'
-prof: 'Kubiatowicz'
-type: 'Midterm 1'
+course: 'cs162'
+ref: 'mt1-fa15'
 
-titles: {
+type: 'Midterm 1'
+term: 'Fall 2015'
+prof: 'Kubiatowicz'
+
+questions: {
   'q1': 'True/False',
   'q2': 'Short Answer',
   'q3': 'Boy-Girl Lock',
@@ -463,7 +466,7 @@ q3_4: |
 q3_4_s: |
   All of the boy requests will go first, followed by girl requests:
   <hr class="s2" />
-  $\\{ B_1, B_2, B_3, B_4, B_5, B_6, B_7 \\}, \\{ G_1, G_2, G_3 \\}$
+  $\{ B_1, B_2, B_3, B_4, B_5, B_6, B_7 \}, \{ G_1, G_2, G_3 \}$
   <hr class="s2" />
   This implementation experiences starvation because a series of waiting girl lock requests could be arbitrarily held off if there is a stream of boy requests (and vice-versa).
 
@@ -474,7 +477,7 @@ q3_5: |
   <hr class="s2" />
   $B_1, B_2, G_1, G_2, G_3, G_4, B_3, G_5, B_4, B_5$
   will get granted in groups such as this:
-  $\\{B_1, B_2\\}, \\{G_1, G_2, G_3, G_4\\}, \\{B_3\\}, \\{G_5\\}, \\{B_4, B_5\\}$
+  $\{B_1, B_2\}, \{G_1, G_2, G_3, G_4\}, \{B_3\}, \{G_5\}, \{B_4, B_5\}$
   Explain what the minimum changes are that you would need to make to the bglock structure to meet  these  requirements  and  sketch  out  what  you  would  do  during  <code>bglock_init()</code>  and
   <code>bglock_lock()</code> and <code>bglock_unlock()</code> routines.  You do not need to write actual code, but
   should be explicit about what your bglock structure would look like and how you would use its
@@ -779,8 +782,8 @@ q4_7_s: |
   At this point, the available allocation is insufficient to start any of the threads, much less find a safe sequence that finishes all of them.
 
 q4_8: |
-  <b>Problem 4h[2pts]</b>: Assume that a set of threads ($T_1, T_2, \\dots T_n$) contend for a set of non-
-  preemptable resources ($R_1, R_2, \\dots R_m$) that may or may not be unique. Name at least two techniques
+  <b>Problem 4h[2pts]</b>: Assume that a set of threads ($T_1, T_2, \dots T_n$) contend for a set of non-
+  preemptable resources ($R_1, R_2, \dots R_m$) that may or may not be unique. Name at least two techniques
   to prevent this system from deadlocking:
 
 q4_8_s: |

@@ -1,8 +1,11 @@
-examcode: 'cs61c/mt1-sp14'
-prof: 'Garcia'
-type: 'Midterm 1'
+course: 'cs61c'
+ref: 'mt1-sp14'
 
-titles: {
+type: 'Midterm 1'
+term: 'Spring 2014'
+prof: 'Garcia'
+
+questions: {
   'q1': 'What''s that funky smell?! Oh yeah, it''s popourri..',
   'q2': 'Running in circles',
   'q3': 'Our band is called 1023MiB... We haven''t had any gigs yet.',
@@ -15,6 +18,9 @@ parts: {
   'q3': 7,
   'q4': 1,
 }
+
+pre: |
+  <div class="content-spacer"></div>
 
 q1_1: |
   <h3>Q1: What’s that funky smell?! Oh yeah, it’s potpourri... (30 pts)</h3>
@@ -56,7 +62,7 @@ q1_2: |
   0b<code>${longblank}</code> = ${blank}
 
 q1_2_s: |
-  0b <b>0&nbsp;&nbsp;&nbsp;01111&nbsp;&nbsp;&nbsp;0000000001</b> = <b>1 + ${lx('2^{-10}')}</b>
+  0b <b>0&nbsp;&nbsp;&nbsp;01111&nbsp;&nbsp;&nbsp;0000000001</b> = <b>1 + $2^{-10}$</b>
 
 q1_3: |
   c)  How would J-type instructions be affected (in terms of their “reach”) if we relaxed the requirement
@@ -70,7 +76,7 @@ q1_4: |
   use <i>true absolute addressing</i> (i.e., maximal “reach”) for all J-type instructions.
 
 q1_4_s: |
-  Only allow jumps to addresses which are multiples of ${lx('2^6')}.
+  Only allow jumps to addresses which are multiples of $2^6$.
 
 q1_5: |
   e)  Assume a request for 100 Bytes on either the <b>Stack</b> and <b>Heap</b> would succeed.
@@ -167,11 +173,11 @@ q2_2: |
 
   <hr class="s2" />
   <code>
-  # $a0 contains the pointer to the tortoise.
+  \# $a0 contains the pointer to the tortoise.
   <hr class="s1" />
-  # $a1 contains the pointer to the hare.
+  \# $a1 contains the pointer to the hare.
   <hr class="s2" />
-  has_cycle: &nbsp;&nbsp;li $v0 1
+  has_cycle: &nbsp;li $v0 1
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq $a0 $a1 done
   <hr class="s1" />
@@ -202,9 +208,9 @@ q2_2: |
 
 q2_2_s: |
   <code>
-  # $a0 contains the pointer to the tortoise.
+  \# $a0 contains the pointer to the tortoise.
   <hr class="s1" />
-  # $a1 contains the pointer to the hare.
+  \# $a1 contains the pointer to the hare.
   <hr class="s2" />
   has_cycle: &nbsp;li $v0 1
   <hr class="s1" />
@@ -386,7 +392,7 @@ q4_1: |
   <hr class="s1" />
   void string_to_lowercase(char *s) {
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;for (char c = *s; c != '\\0'; s++) { &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 1
+  &nbsp;&nbsp;&nbsp;&nbsp;for (char c = *s; c != '\0'; s++) { &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 1
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (c >= 'A' && c <= 'S') {
   <hr class="s1" />
@@ -429,7 +435,7 @@ q4_1_s: |
   <table class="special-table">
   <thead><tr><th width="1">Line number</th><th>Replacement Code</th></tr></thead>
   <tbody>
-  <tr><td>1</td><td><code>for (char c = *s; (c = *s) != '\\0'; s++) {</code></td></tr>
+  <tr><td>1</td><td><code>for (char c = *s; (c = *s) != '\0'; s++) {</code></td></tr>
   <tr><td>2</td><td><code>*s += 'a' - 'A';</code></td></tr>
   <tr><td>3</td><td><code>OK</code></td></tr>
   <tr><td>4</td><td><code>OK</code></td></tr>

@@ -1,3 +1,4 @@
+/*
 import CS61CFA16 from './cs61c-fa16';
 import CS61CFA15 from './cs61c-fa15';
 import CS61CFA14 from './cs61c-fa14';
@@ -35,3 +36,4 @@ const ExamsMap = {
 };
 
 export { ExamsMap };
+*/

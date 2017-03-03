@@ -1,8 +1,11 @@
-examcode: 'cs162/mt1-sp15'
-prof: 'Kubiatowicz'
-type: 'Midterm 1'
+course: 'cs162'
+ref: 'mt1-sp15'
 
-titles: {
+type: 'Midterm 1'
+term: 'Spring 2015'
+prof: 'Kubiatowicz'
+
+questions: {
   'q1': 'True/False',
   'q2': 'Short Answer',
   'q3': 'Atomic Synchronization Primitives',
@@ -17,6 +20,13 @@ parts: {
   'q4': 7,
   'q5': 5,
 }
+
+pre: |
+  <div class="content-spacer"></div>
+  <hr class="s5" />
+  <h2>General Information</h2>
+  <hr class="s2" />
+  <p>This is a closed book exam. You are allowed 1 page of hand-written notes (both sides). You have 3 hours to complete as much of the exam as possible. Make sure to read all of the questions first, as some of the questions are substantially more time consuming.</p>
 
 q1_1: |
   <h3>Problem 1: TRUE/FALSE [18 pts]</h3>
@@ -659,7 +669,7 @@ q4_5_s: |
   <hr class="s1" />
   3) No Premption: Resources are only released by the owner (never preempted).
   <hr class="s1" />
-  4) Circular wait: We have a circular wait since Console #1 (${lx('T_1')}) is waiting for Console #2 (${lx('T_2')}) which is waiting for Console #1 (${lx('T_1')}).
+  4) Circular wait: We have a circular wait since Console #1 ($T_1$) is waiting for Console #2 ($T_2$) which is waiting for Console #1 ($T_1$).
 
 q4_6 : |
   <b>Problem 4f[3pts]:</b> Redesign the <code>smash()</code> function to avoid deadlock. Write your new version in
@@ -760,7 +770,7 @@ q5_1 : |
   <b>Problem 5a[2pts]:</b> How big is a page? Explain.
 
 q5_1_s: |
-  Pages are 4K in size, since the offset is 12 bits (${lx('2^{12} = 4096')}).
+  Pages are 4K in size, since the offset is 12 bits ($2^{12} = 4096$).
 
 q5_2 : |
   Draw a picture of the page table. What good property(s) result from dividing
@@ -786,7 +796,7 @@ q5_4 : |
   page table. Explain.
 
 q5_4_s : |
-  This page table scheme can address all of physical memory, which is ${lx('2^{32} = 4294967296')} bytes.
+  This page table scheme can address all of physical memory, which is $2^{32} = 4294967296$ bytes.
   For those of you who thought we were talking about the particular page table organization in
   (5c), we would also accept an answer of 2 pages = 8192 bytes.
 

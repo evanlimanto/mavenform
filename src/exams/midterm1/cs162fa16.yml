@@ -1,8 +1,11 @@
-examcode: 'cs162/mt1-fa16'
-prof: 'Joseph'
-type: 'Midterm 1'
+course: 'cs162'
+ref: 'mt1-fa16'
 
-titles: {
+type: 'Midterm 1'
+term: 'Fall 2016'
+prof: 'Joseph'
+
+questions: {
   'q1': 'True/False and Why?',
   'q2': 'C Programming',
   'q3': 'Finite Synchronized Queue using Monitors',
@@ -17,6 +20,13 @@ parts: {
   'q4': 6,
   'q5': 5,
 }
+
+pre: |
+  <div class="content-spacer"></div>
+  <hr class="s5" />
+  <h2>General Information</h2>
+  <hr class="s2" />
+  <p>This is a closed book exam. You are allowed 1 page of hand-written notes (both sides). You have 3 hours to complete as much of the exam as possible. Make sure to read all of the questions first, as some of the questions are substantially more time consuming.</p>
 
 q1_1: |
   <h3>1. (21 points total) True/False and Why?</h3>
@@ -121,7 +131,7 @@ q2_1: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;}
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;printf("Thread: %d\\n", thread_count);
+  &nbsp;&nbsp;&nbsp;&nbsp;printf("Thread: %d\n", thread_count);
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;return NULL;
   <hr class="s1" />

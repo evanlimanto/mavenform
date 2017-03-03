@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { ExamsMap } from './exams';
 import { handleEvent } from './utils';
 import { Exam } from './components';
 import Home from './Home';
@@ -38,11 +37,8 @@ class App extends Component {
       course = this.props.location.query.courseId;
     }
 
-    if (exam in ExamsMap) {
-      ExamComponent = <Exam code={exam} type="midterm1" />;
-    } else {
-      return <Home />;
-    }
+    // TODO: Check if exam exists in list of transcriptions
+    ExamComponent = <Exam code={exam} type="midterm1" />;
 
     const collapserClass = classnames({
       collapse: true,

@@ -1,8 +1,11 @@
-examcode: 'cs61c/mt1-fa16'
-prof: 'Boser, Katz'
-type: 'Midterm 1'
+course: 'cs61c'
+ref: 'mt1-fa16'
 
-titles: {
+type: 'Midterm 1'
+term: 'Fall 2016'
+prof: 'Boser, Katz'
+
+questions: {
   'q1': 'Number Representation',
   'q2': 'Reverse Engineering',
   'q3': 'Number Pushing and Popping',
@@ -19,6 +22,9 @@ parts: {
   'q5': 5,
   'q6': 5,
 }
+
+pre: |
+  <div class="content-spacer"></div>
 
 q1_1: |
   <hr class="s1" />
@@ -37,7 +43,7 @@ q1_1_s: |
 
 q1_2: |
   2. What is the range of integers represented by a n-bit binary number? Your answers should
-  include expressions that use ${lx('2^n')}.
+  include expressions that use $2^n$.
   <hr class="s2" />
   If <b>unsigned</b>,
   <hr class="s1" />
@@ -60,32 +66,32 @@ q1_4: |
   Two’s Complement: ${blank}
 
 q1_2_s: |
-  Smallest: ${lx('{0}')}
+  Smallest: ${0}$
   <hr class="s1" />
-  Largest: ${lx('{2^n - 1}')}
+  Largest: ${2^n - 1}$
 
 q1_3_s: |
-  Smallest: ${lx('{-2^{n-1}}')}
+  Smallest: ${-2^{n-1}}$
   <hr class="s1" />
-  Largest: ${lx('{2^{n-1} - 1}')}
+  Largest: ${2^{n-1} - 1}$
 
 q1_4_s: |
-  Unsigned: ${lx('{2^n}')}
+  Unsigned: ${2^n}$
   <hr class="s1" />
-  Two's Complement: ${lx('2^n')}
+  Two's Complement: $2^n$
 
 q1_5: |
   3.  What is the result of the two’s complement negation applied to the most negative binary
   number that can be represented in an n-bit two’s complement form?
 
 q1_5_s: |
-  ${lx('-2^{n-1}')}
+  $-2^{n-1}$
 
 q1_6: |
   4. Consider we have a base 32 number, with each number position represented by the numerals
   0 through 9 plus the letters A (10), B (11), C(12), D(13), E (14), F (15), G (16), H (17), I (18), J (19), K (20), L (21), M (22), N (23), O (24), P (25), Q (26), R (27), S (28), T (29), U (30), and V (31).
 
-  Convert ${lx('FUN_{32}')} to:
+  Convert $FUN_{32}$ to:
   <hr class="s1" />
   Binary: ${blank}
   <hr class="s1" />
@@ -98,7 +104,7 @@ q1_6_s: |
   <hr class="s1" />
   Hexadecimal: 0x3fd7
   <hr class="s1" />
-  Decimal: ${lx('3*16^3 + 15*16^2 + 13*16^1 + 7*16^0 = 16343')}
+  Decimal: $3*16^3 + 15*16^2 + 13*16^1 + 7*16^0 = 16343$
 
 q2_1: |
   <h3>Q2: Reverse Engineering (10 points)</h3>
@@ -346,11 +352,11 @@ q3_2_s: |
 q4_1: |
   <h3>Q4: Branches are for N00Bs (15 points)</h3>
 
-  Consider the discrete-value function ${lx('f(x)')}, defined on the integers {−3,−2,−1,0,1,2,3}:
+  Consider the discrete-value function $f(x)$, defined on the integers {−3,−2,−1,0,1,2,3}:
   <hr class="s2" />
-  ${lx('f(−3) = 6')}, &nbsp;&nbsp;&nbsp;&nbsp; ${lx('f(−2)  = 61')}, &nbsp;&nbsp;&nbsp;&nbsp; ${lx('f(−1) = 17')}, &nbsp;&nbsp;&nbsp;&nbsp; ${lx('f(0)  = −38')}
+  $f(−3) = 6$, &nbsp;&nbsp;&nbsp;&nbsp; $f(−2)  = 61$, &nbsp;&nbsp;&nbsp;&nbsp; $f(−1) = 17$, &nbsp;&nbsp;&nbsp;&nbsp; $f(0)  = −38$
   <hr class="s1" />
-  ${lx('f(1) = 19')}, &nbsp;&nbsp;&nbsp;&nbsp; ${lx('f(2) = 42')}, &nbsp;&nbsp;&nbsp;&nbsp; ${lx('f(3) =  5')}
+  $f(1) = 19$, &nbsp;&nbsp;&nbsp;&nbsp; $f(2) = 42$, &nbsp;&nbsp;&nbsp;&nbsp; $f(3) =  5$
   <hr class="s2" />
 
   Your task is to implement this function in MIPS assembly language (including pseudo-instructions), but you
@@ -358,7 +364,7 @@ q4_1: |
   accomplishing this, we have stored the return values in contiguous words in the program’s data segment.
   <hr class="s2" />
 
-  You may assume that the input ${lx('x')} is always one of the integers for which the function is defined (between -3 and 3). Assume ${lx('x')} is stored in $a0 and ${lx('f(x)')} is to be returned in $v0. Comment your code for possible partial credit. You may not need all the lines given.
+  You may assume that the input $x$ is always one of the integers for which the function is defined (between -3 and 3). Assume $x$ is stored in $a0 and $f(x)$ is to be returned in $v0. Comment your code for possible partial credit. You may not need all the lines given.
   <hr class="s2" />
 
   <code>
@@ -461,7 +467,7 @@ q5_3: |
   3)  What is the maximum number of distinct operations you can encode in the top instruction format?
 
 q5_4: |
-  4)  If the PC points to the nibble address ${lx('1566_{10}')}, what is the highest (largest) nibble address <b>in decimal</b> you can branch to? (NOTE: 1566 is a multiple of 6 and thus a proper DIPS word
+  4)  If the PC points to the nibble address $1566_{10}$, what is the highest (largest) nibble address <b>in decimal</b> you can branch to? (NOTE: 1566 is a multiple of 6 and thus a proper DIPS word
   address.)
 
 q5_5: |
@@ -479,21 +485,21 @@ q5_2_s: |
 
 
 q5_3_s: |
-  ${lx('2^1 = 2')}
+  $2^1 = 2$
   <hr class="s2" />
   <i>R-type instructions have a 0 opcode.</i>
 
 
 q5_4_s: |
-  ${lx('4638_{10}')}
+  $4638_{10}$
   <hr class="s2" />
-  <i>PC + 6 = ${lx('1572_{10}')}; largest positive offset in 10 bits = 0b0111111111 = 0x1FF = ${lx('2^9')}-1 = 511 words or 3066 nibbles (6 nibbles per word).
+  <i>PC + 6 = $1572_{10}$; largest positive offset in 10 bits = 0b0111111111 = 0x1FF = $2^9$-1 = 511 words or 3066 nibbles (6 nibbles per word).
   <hr class="s1" />
-  So max nibble address is ${lx('1572_{10}')} + ${lx('3066_{10}')} = ${lx('4638_{10}')}</i>
+  So max nibble address is $1572_{10}$ + $3066_{10}$ = $4638_{10}$</i>
 
 
 q5_5_s: |
-  1000&nbsp;11|00&nbsp;00|10&nbsp;01|00&nbsp;0000&nbsp;1000${lx('_2')} = <code><b>lw $9, 8($0)</b></code>
+  1000&nbsp;11|00&nbsp;00|10&nbsp;01|00&nbsp;0000&nbsp;1000$_2$ = <code><b>lw $9, 8($0)</b></code>
 
 q6_1: |
   <h3>Q6: Mishmash, Hodgepodge, Potpourri (5 points)</h3>

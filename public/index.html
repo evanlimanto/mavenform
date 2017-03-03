@@ -8,8 +8,8 @@
   <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900,900i" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script>
-    window.MathJax = {
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
       extensions: ["tex2jax.js"],
       jax: ["input/TeX", "output/HTML-CSS"],
       tex2jax: {
@@ -18,7 +18,12 @@
         processEscapes: true
       },
       "HTML-CSS": { availableFonts: ["TeX"] }
-    };
+    });
+  </script>
+  <script>
+    function renderMJ() {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub, "root"]);
+    }
   </script>
   <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>
   <meta property="og:url" content="http://www.mavenform.com"/>

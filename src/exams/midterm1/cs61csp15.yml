@@ -1,8 +1,11 @@
-examcode: 'cs61c/mt1-sp15'
-prof: 'Asanovic, Stojanovic'
-type: 'Midterm 1'
+course: 'cs61c'
+ref: 'mt1-sp15'
 
-titles: {
+type: 'Midterm 1'
+term: 'Spring 2015'
+prof: 'Asanovic, Stojanovic'
+
+questions: {
   'q1': 'Number Representation',
   'q2': 'Pointers and Memory',
   'q3': 'C Memory Model',
@@ -21,6 +24,9 @@ parts: {
   'q6': 1,
   'q7': 1,
 }
+
+pre: |
+  <div class="content-spacer"></div>
 
 q1_1: |
   <h3>Q1: Number Representation (10 points)</h3>
@@ -45,7 +51,7 @@ q1_2: |
   2) For two n-bit numbers, what is the difference between the largest unsigned number and the largest two’s-complement number? In other words, what is <code><b>MAX_UNSIGNED_INT – MAX_SIGNED_INT</b></code>? Write your answer in terms of <code>n</code>.
 
 q1_2_s: |
-  ${lx('2^n')} – 1 – (${lx('2^{n-1}')} – 1) = ${lx('2^{n-1}')}
+  $2^n$ – 1 – ($2^{n-1}$ – 1) = $2^{n-1}$
 
 q1_3: |
   3) Fill in the blanks to return the largest positive number a 32-bit two’s-complement number can
@@ -86,7 +92,7 @@ q1_4: |
   what is the value of b?
 
 q1_4_s: |
-  The most negative number needs to be ${lx('-2^{n-1}')}. The most negative number in biased notation is 0 – b so our bias is ${lx('2^{n-1}')}.
+  The most negative number needs to be $-2^{n-1}$. The most negative number in biased notation is 0 – b so our bias is $2^{n-1}$.
 
 q2_1: |
   <h3>Q2: Pointers and Memory (12 points)</h3>

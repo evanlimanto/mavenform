@@ -1,8 +1,11 @@
-examcode: 'cs162/mt1-sp16'
-prof: 'Joseph'
-type: 'Midterm 1'
+course: 'cs162'
+ref: 'mt1-sp16'
 
-titles: {
+type: 'Midterm 1'
+term: 'Spring 2016'
+prof: 'Joseph'
+
+questions: {
   'q1': 'Short Answer',
   'q2': 'Scheduling',
   'q3': 'Synchronization',
@@ -16,6 +19,13 @@ parts: {
   'q4': 6,
   'q5': 2,
 }
+
+pre: |
+  <div class="content-spacer"></div>
+  <hr class="s5" />
+  <h2>General Information</h2>
+  <hr class="s2" />
+  <p>This is a closed book exam. You are allowed 1 page of hand-written notes (both sides). You have 3 hours to complete as much of the exam as possible. Make sure to read all of the questions first, as some of the questions are substantially more time consuming.</p>
 
 q1_1: |
   <h3>1. (18 points total) Short answer</h3>
