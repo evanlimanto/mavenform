@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { exams } from './exams';
+import { exams, examTypeToLabel, courseIDToLabel } from './exams';
 import { handleEvent } from './utils';
 
 const _ = require('lodash');
@@ -29,22 +29,14 @@ class Course extends Component {
   render() {
     var course = this.props.params.courseid;
     var examId = null;
-    var courseName = null;
     var unavailable = null;
     var note = null;
-    if (course === 'ee16a') {
-      courseName = 'EE 16A';
-    } else if (course === 'cs61c') {
-      courseName = 'CS 61C';
-    } else {
-      courseName = 'CS 162';
-    }
     const available = _.map(exams[course], (examsOfType, examType) => {
       return _.map(examsOfType, (dict, semester) => {
         const url = `/exam/${course}/${examType}/${dict['id']}`;
         return (
           <tr className="available" onClick={handleEvent("Click", "Exam", course)} key={semester}>
-            <td><a href={url}>{_.replace(_.capitalize(examType), '-', ' ')}</a></td>
+            <td><a href={url}>{examTypeToLabel[examType]}</a></td>
             <td><a href={url}>{semester}</a></td>
             <td><a href={url}>{dict['profs']}</a></td>
             <td><h4><a className="table-link" href={dict['url'] + '&courseId=' + course}>CLICK TO VIEW &#8594;</a></h4></td>
@@ -58,7 +50,7 @@ class Course extends Component {
       iscollapsed: !this.state.sidebar
     });
     const collapser = (
-      <a className={collapserClass} onClick={() => this.toggleCollapse(courseName)}>&#9776; {(this.state.sidebar) ? "COLLAPSE" : "MENU"}</a>
+      <a className={collapserClass} onClick={() => this.toggleCollapse(courseIDToLabel[course])}>&#9776; {(this.state.sidebar) ? "COLLAPSE" : "MENU"}</a>
     );
 
     const menuClass = classnames({
@@ -68,7 +60,7 @@ class Course extends Component {
 
     const sideTabs = _.map(exams[course], (courseExams, examType) => {
       const content =  _.map(courseExams, (info, semester) => {
-        const url = `${info['url']}&courseId=${course}`;
+        const url = `/exam/${course}/${examType}/${info.id}`;
         const title = semester;
         const sideTabClass = classnames({
           sidetab: true,
@@ -82,7 +74,7 @@ class Course extends Component {
       });
       return (
         <span key={examType}>
-          <div className="sideTitle">{_.capitalize(_.replace(examType, '-', ' '))}</div>
+          <div className="sideTitle">{examTypeToLabel[examType]}</div>
           {content}
         </span>
       );
@@ -98,7 +90,7 @@ class Course extends Component {
           <h4>{_.toUpper(course)}</h4>
           <hr className="s1" />
           <div className="sidetab-container">
-            <a className="sidetab active" href={"/course?id=" + course}>Index</a>
+            <a className="sidetab active" href={`/course/${course}`}>Index</a>
           </div>
           <hr className="s1" />
           {sideTabs}
@@ -107,7 +99,7 @@ class Course extends Component {
         <a className="feedback" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
         <div>
           <hr className="margin" />
-          <h1 className="center">{courseName}</h1>
+          <h1 className="center">{courseIDToLabel[course]}</h1>
           <hr className="s2" />
           <div className="center">
             <h5>Index of all exams</h5>

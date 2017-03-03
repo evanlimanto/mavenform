@@ -83,4 +83,15 @@ const courses = {
   'cs162': 'Operating Systems and Systems Programming',
 };
 
-export { exams, courses };
+const examTypeToLabel = {
+  'midterm1': 'Midterm 1',
+  'midterm2': 'Midterm 2',
+};
+
+const courseIDToLabel = {
+  'ee16a': 'EE 16A',
+  'cs61c': 'CS 61C',
+  'cs162': 'CS 162',
+};
+
+export { exams, courses, examTypeToLabel, courseIDToLabel };

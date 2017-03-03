@@ -7,10 +7,9 @@ const _ = require('lodash');
 class Home extends Component {
   render() {
     const courseBoxes = _.map(courses, (desc, course) => {
-      console.log(desc + " " + course);
       return (
         <a className="course-card" href={`/course/${course}`} onClick={() => handleEvent('Click', 'Course', course)}>
-          <h2>{course}</h2>
+          <h2>{_.upperCase(course)}</h2>
           <hr className="s1" />
           <i className="course-subtitle">{desc}</i>
           <h4 className="card-helper">CLICK TO VIEW &#8594;</h4>

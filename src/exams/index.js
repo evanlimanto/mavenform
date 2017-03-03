@@ -1,5 +1,5 @@
-import { exams, courses } from './consts';
+import { exams, courses, examTypeToLabel, courseIDToLabel } from './consts';
 
 export {
-  exams, courses
+  exams, courses, examTypeToLabel, courseIDToLabel
 };
