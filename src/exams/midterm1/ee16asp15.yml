@@ -4,6 +4,7 @@ ref: 'mt1-sp15'
 type: 'Midterm 1'
 term: 'Spring 2015'
 prof: 'Alon, Ayazifar, Subramanian'
+md: false
 
 questions: {
   'q1': 'Imaging Circuit',

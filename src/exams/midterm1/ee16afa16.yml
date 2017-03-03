@@ -4,6 +4,7 @@ ref: 'mt1-fa16'
 type: 'Midterm 1'
 term: 'Fall 2016'
 prof: 'Ayazifar, Stojanovic'
+md: false
 
 questions: {
   'q3': 'True/False',

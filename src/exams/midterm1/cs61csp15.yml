@@ -4,6 +4,7 @@ ref: 'mt1-sp15'
 type: 'Midterm 1'
 term: 'Spring 2015'
 prof: 'Asanovic, Stojanovic'
+md: false
 
 questions: {
   'q1': 'Number Representation',
@@ -60,7 +61,7 @@ q1_3: |
   <code>
   unsigned int max_twos() {
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;return ((1 << ${blank}) - ${blank});
+  &nbsp;&nbsp;&nbsp;&nbsp;return ((1 << <code>________</code>) - <code>________</code>);
   <hr class="s1" />
   }
   </code>
@@ -139,7 +140,7 @@ q2_2: |
   2) Consider the following code and its output. Fill in the blanks.
   <hr class="s2" />
   <code>
-  void foo1(${blank} a, int n) {
+  void foo1(<code>________</code> a, int n) {
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;int i;
   <hr class="s1" />
@@ -151,11 +152,11 @@ q2_2: |
   <hr class="s1" />
   }
   <hr class="s2" />
-  void foo2(${blank} p) { p++; }
+  void foo2(<code>________</code> p) { p++; }
   <hr class="s2" />
   int main() {
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;int x = ${blank};
+  &nbsp;&nbsp;&nbsp;&nbsp;int x = <code>________</code>;
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;int a[] = {1, 2, 3, 4, 5};
   <hr class="s1" />
@@ -171,7 +172,7 @@ q2_2: |
   <hr class="s2" />
   The output of this code is:
   <hr class="s1" />
-  ${blank}, ${blank}, 8
+  <code>________</code>, <code>________</code>, 8
 
 q2_2_s: |
   <code><b>int*</b>, <b>int**</b>, <b>5</b>, <b>6</b>
@@ -281,7 +282,7 @@ q4_1: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;int value;
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;${blank} next; //pointer to the next element
+  &nbsp;&nbsp;&nbsp;&nbsp;<code>________</code> next; //pointer to the next element
   <hr class="s1" />
   } sll_node;
   </code>
@@ -297,15 +298,15 @@ q4_2: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;int i = 0;
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;int *arr = ${longblank};
+  &nbsp;&nbsp;&nbsp;&nbsp;int *arr = ______________________________;
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;while (sll) {
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr[i] = ${longblank};
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr[i] = ______________________________;
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sll &nbsp;&nbsp; = ${longblank};
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sll &nbsp;&nbsp; = ______________________________;
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank};
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________;
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;}
   <hr class="s1" />
@@ -355,13 +356,13 @@ q4_3: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;if (!sll || !sll->next) return;
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;temp = ${blank};
+  &nbsp;&nbsp;&nbsp;&nbsp;temp = <code>________</code>;
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;sll->next = ${blank};
+  &nbsp;&nbsp;&nbsp;&nbsp;sll->next = <code>________</code>;
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;free(${blank});
+  &nbsp;&nbsp;&nbsp;&nbsp;free(<code>________</code>);
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;delete_even(${blank});
+  &nbsp;&nbsp;&nbsp;&nbsp;delete_even(<code>________</code>);
   <hr class="s1" />
   }
   </code>
@@ -421,17 +422,17 @@ q5_1: |
   <code>
   countChars:
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $sp, $sp, ${_.repeat('_', 14)}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $sp, $sp, ______________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}&nbsp;# Store onto the stack if needed
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________&nbsp;# Store onto the stack if needed
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $s0, $zero, 0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# We'll store the count in $s0
   <hr class="s1" />
@@ -443,33 +444,33 @@ q5_1: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $a0, $s0, 0
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq ${_.repeat('_', 26)}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq __________________________
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jal isCharInStr
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
   done:
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}&nbsp;&nbsp;# Load from the stack if needed
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________&nbsp;&nbsp;# Load from the stack if needed
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $sp, $sp, ${_.repeat('_', 14)}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $sp, $sp, ______________
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jr $ra
   </code>
@@ -480,7 +481,7 @@ q5_1_s: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu $sp, $sp, <b>-16</b>
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>sw $ra, 0($sp)</b>${_.repeat('&nbsp;', 11)}# Store onto the stack if needed
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>sw $ra, 0($sp)</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Store onto the stack if needed
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>sw $s0, 4($sp)</b>
   <hr class="s1" />
@@ -569,21 +570,21 @@ q7_1: |
   <code>
   branchAmount:
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;andi $t0, $a0, 0x8000${_.repeat('&nbsp;', 10)}# Mask out a certain bit
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;andi $t0, $a0, 0x8000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Mask out a certain bit
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bne ________, ________, label1
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j label2
   <hr class="s1" />
   label1:
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or $v0, $a0, $t1
   <hr class="s1" />
@@ -591,7 +592,7 @@ q7_1: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sll _______, ______, _________&nbsp;&nbsp;# Convert to byte addressing
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
   label3:
   <hr class="s1" />
@@ -618,7 +619,7 @@ q7_1_s: |
   <hr class="s1" />
   label2:
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sll <b>$v0</b>, <b>$v0</b>, <b>2</b>${_.repeat('&nbsp;', 11)}# Convert to byte addressing
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sll <b>$v0</b>, <b>$v0</b>, <b>2</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Convert to byte addressing
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>addiu $v0, $v0, 4</b>
   <hr class="s1" />

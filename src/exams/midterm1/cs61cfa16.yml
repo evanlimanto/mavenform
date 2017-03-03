@@ -4,6 +4,7 @@ ref: 'mt1-fa16'
 type: 'Midterm 1'
 term: 'Fall 2016'
 prof: 'Boser, Katz'
+md: false
 
 questions: {
   'q1': 'Number Representation',
@@ -47,23 +48,23 @@ q1_2: |
   <hr class="s2" />
   If <b>unsigned</b>,
   <hr class="s1" />
-  Smallest: ${blank}
+  Smallest: <code>________</code>
   <hr class="s1" />
-  Largest: ${blank}
+  Largest: <code>________</code>
 
 q1_3: |
   If <b>two’s complement</b>,
   <hr class="s1"/>
-  Smallest: ${blank}
+  Smallest: <code>________</code>
   <hr class="s1" />
-  Largest: ${blank}
+  Largest: <code>________</code>
 
 q1_4: |
   How many unique integers can be represented in each case?
   <hr class="s1"/>
-  Unsigned: ${blank}
+  Unsigned: <code>________</code>
   <hr class="s1"/>
-  Two’s Complement: ${blank}
+  Two’s Complement: <code>________</code>
 
 q1_2_s: |
   Smallest: ${0}$
@@ -93,11 +94,11 @@ q1_6: |
 
   Convert $FUN_{32}$ to:
   <hr class="s1" />
-  Binary: ${blank}
+  Binary: <code>________</code>
   <hr class="s1" />
-  Hexadecimal: ${blank}
+  Hexadecimal: <code>________</code>
   <hr class="s1" />
-  Decimal: ${blank}
+  Decimal: <code>________</code>
 
 q1_6_s: |
   Binary: 011|1111|1101|0111
@@ -136,23 +137,23 @@ q2_1: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;addi $s2, $zero, 10 &nbsp;&nbsp; <i># $s2 = 10;</: |
   <hr class="s1" />
-  X:   slt  $t0, $s1, $s2 &nbsp;&nbsp;&nbsp;&nbsp; <i># ${blank}</i>
+  X:   slt  $t0, $s1, $s2 &nbsp;&nbsp;&nbsp;&nbsp; <i># <code>________</code></i>
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;<b>bne</b> $t0, $zero, Y &nbsp;&nbsp;&nbsp;&nbsp; <i># ${blank}</i>
+  &nbsp;&nbsp;&nbsp;<b>bne</b> $t0, $zero, Y &nbsp;&nbsp;&nbsp;&nbsp; <i># <code>________</code></i>
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;sll  $t1, $s1, 2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i># ${blank}</i>
+  &nbsp;&nbsp;&nbsp;sll  $t1, $s1, 2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i># <code>________</code></i>
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;add  $t2, $s3, $t1 &nbsp;&nbsp;&nbsp;&nbsp; <i># ${blank}</i>
+  &nbsp;&nbsp;&nbsp;add  $t2, $s3, $t1 &nbsp;&nbsp;&nbsp;&nbsp; <i># <code>________</code></i>
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;sw  $s1, 0($t2) ${_.repeat('&nbsp;', 7)} <i># ${blank}</i>
+  &nbsp;&nbsp;&nbsp;sw  $s1, 0($t2) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i># <code>________</code></i>
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;add  $s0, $s0, $s1 &nbsp;&nbsp;&nbsp;&nbsp; <i># ${blank}</i>
+  &nbsp;&nbsp;&nbsp;add  $s0, $s0, $s1 &nbsp;&nbsp;&nbsp;&nbsp; <i># <code>________</code></i>
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;addi $s1, $s1, 1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i># ${blank}</i>
+  &nbsp;&nbsp;&nbsp;addi $s1, $s1, 1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i># <code>________</code></i>
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;j X ${_.repeat('&nbsp;', 18)} <i># ${blank}</i>
+  &nbsp;&nbsp;&nbsp;j X &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i># <code>________</code></i>
   <hr class="s1" />
-  Y: ${_.repeat('&nbsp;', 22)} <i># ${blank}</i>
+  Y: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i># <code>________</code></i>
   </code>
   <hr class="s2" />
   Partial credit will be determined, in part, by the quality of your line-by-line comments. Please provide the comments in pseudocode format. The question continues on the next page.
@@ -184,9 +185,9 @@ q2_1_s: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;addi $s1, $s1, 1 &nbsp;&nbsp;&nbsp;&nbsp; # <b>i = i + 1;</b>
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;j X ${_.repeat('&nbsp;', 16)} &nbsp;# <b>loop back to the start</b>
+  &nbsp;&nbsp;&nbsp;j X &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;# <b>loop back to the start</b>
   <hr class="s1" />
-  Y: ${_.repeat('&nbsp;', 17)} &nbsp;&nbsp;&nbsp; # <b>exit:</b>
+  Y: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; # <b>exit:</b>
   </code>
 
 q2_2_s: |
@@ -334,7 +335,7 @@ q3_2_s: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;if (!top_of_stack || !top_of_stack->prev) {
   <hr class="s1" />
-  ${_.repeat('&nbsp;', 8)}return top_of_stack;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return top_of_stack;
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;}
   <hr class="s1" />
@@ -376,17 +377,17 @@ q4_1: |
   <hr class="s1" />
   f:
   <hr class="s1" />
-  ${longblank}
+  ______________________________
   <hr class="s1" />
-  ${longblank}
+  ______________________________
   <hr class="s1" />
-  ${longblank}
+  ______________________________
   <hr class="s1" />
-  ${longblank}
+  ______________________________
   <hr class="s1" />
-  ${longblank}
+  ______________________________
   <hr class="s1" />
-  ${longblank}
+  ______________________________
   </code>
 
 q4_1_s: |
@@ -410,7 +411,7 @@ q4_1_s: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;lw $v0 0($t0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      // Load the indexed data address into return val register
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;jr $ra${_.repeat('&nbsp;', 13)}
+  &nbsp;&nbsp;&nbsp;&nbsp;jr $ra&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </b>
   </code>
   <hr class="s2" />
@@ -433,7 +434,7 @@ q4_1_s: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;lw $v0 0($t0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      // Load the indexed data address into return val register
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;jr $ra${_.repeat('&nbsp;', 13)}
+  &nbsp;&nbsp;&nbsp;&nbsp;jr $ra&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </b>
   </code>
 
@@ -506,7 +507,7 @@ q6_1: |
 
   The following are some multiple choice questions about CALL. Clearly circle the correct answer:
   <hr class="s2" />
-  A system program that combines separately compiled modules of a program into a form suitable for execution is ${blank}.
+  A system program that combines separately compiled modules of a program into a form suitable for execution is <code>________</code>.
   <hr class="s2" />
   A. Assembler
   <hr class="s1" />
@@ -539,7 +540,7 @@ q6_3: |
   D. the global segment beginning address
 
 q6_4: |
-  <code>beq</code> and <code>bne</code> instructions produce ${blank} and they ${blank}.
+  <code>beq</code> and <code>bne</code> instructions produce <code>________</code> and they <code>________</code>.
   <hr class="s1" />
   A. PC-relative addressing, never relocate
   <hr class="s1" />
@@ -550,7 +551,7 @@ q6_4: |
   D. Absolute addressing, always relocate
 
 q6_5: |
-  <code>j</code> and <code>jal</code> instructions add symbols and ${blank} to ${blank}.
+  <code>j</code> and <code>jal</code> instructions add symbols and <code>________</code> to <code>________</code>.
   <hr class="s1" />
   A. instruction addresses, the symbol table
   <hr class="s1" />

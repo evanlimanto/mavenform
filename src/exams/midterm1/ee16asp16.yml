@@ -4,6 +4,7 @@ ref: 'mt1-sp16'
 type: 'Midterm 1'
 term: 'Spring 2016'
 prof: 'Ayazifar, Stojanovic'
+md: false
 
 questions: {
   'q3': 'Mechanical Johann',

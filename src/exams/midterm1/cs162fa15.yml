@@ -4,6 +4,7 @@ ref: 'mt1-fa15'
 type: 'Midterm 1'
 term: 'Fall 2015'
 prof: 'Kubiatowicz'
+md: false
 
 questions: {
   'q1': 'True/False',
@@ -24,28 +25,28 @@ parts: {
 pre: |
   <div class="content-spacer"></div>
   <hr class="s5" />
-  ## General Information
+  <h2>General Information</h2>
   <hr class="s2" />
   <p>This is a closed book exam. You are allowed 1 page of hand-written notes (both sides). You have 3 hours to complete as much of the exam as possible. Make sure to read all of the questions first, as some of the questions are substantially more time consuming.</p>
 
 q1_1: |
-  ### Problem 1: TRUE/FALSE [18 pts]
+  <h3>Problem 1: TRUE/FALSE [18 pts]</h3>
   In the following, it is important that you EXPLAIN your answer in TWO SENTENCES OR LESS
   (Answers  longer  than  this  may  not  get  credit!). Also, answers without an explanation GET NO CREDIT.
   <hr class="s2" />
   <b>Problem 1a[2pts]</b>: When you type Ctrl+C to quit a program in your terminal, you are actually sending a SIGINT signal to the program, which makes it quit.
 
 q1_1_s: |
-  **True.**
+  <b>True.</b>
   Explain: SIGINT is a vehicle for conveying a Ctrl-C requests from the terminal to
   the program.  Assuming that the SIGINT handler has not be redirected, this will cause the
   program to quit. Note: we would also take “False” if you explain that the SIGINT handler might have been redirected.
 
 q1_2: |
-  **Problem 1b[2pts]**: The function <code>pthread_intr_disable()</code> is a crude but viable way for user programs to implement an atomic section.
+  <b>Problem 1b[2pts]</b>: The function <code>pthread_intr_disable()</code> is a crude but viable way for user programs to implement an atomic section.
 
 q1_2_s: |
-  **False.**
+  <b>False.</b>
   <hr class="s1" />
   Explain:  This  function  does  not exist.  However,  you  cannot  disable  interrupt at user  level  in  any  case. A similarly-named  routine  (<code>pthread_setintr()</code>) simply disables  the  delivery  of  signals;  it  does  not  prevent  multiple  threads  from  executing concurrently—thus it could not be used to implement a critical section.
 
@@ -629,7 +630,16 @@ q4_4: |
   <tr><th><code>thread_current()</code></th><th>Line at which yielded</th><th>Thread which it yielded to</th><th>Main</th><th>a</th><th>b</th><th>c</th></tr></thead>
   <tbody>
   <tr><td>main</td><td>10</td><td>a</td><td>10</td><td>15</td><td>N/A</td><td>N/A</td></tr>
-  ${_.repeat('<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>', 10)}
+  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
   </tbody>
   </table>
 

@@ -4,6 +4,7 @@ ref: 'mt1-fa14'
 type: 'Midterm 1'
 term: 'Fall 2014'
 prof: 'Culler'
+md: false
 
 questions: {
   'q1': 'Running in Circles',
@@ -42,17 +43,17 @@ q1_2: |
   <img src="/img/cs61cfa14-1-1.png" class="problem-image" />
 
   <code>
-  LoadNibble: ${blank} $t0 ${blank} ${blank} # figure out which byte contains that nibble
+  LoadNibble: <code>________</code> $t0 <code>________</code> <code>________</code> # figure out which byte contains that nibble
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${blank} $a1 0(${blank})
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>________</code> $a1 0(<code>________</code>)
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${blank} $a0 ${blank} ${blank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>________</code> $a0 <code>________</code> <code>________</code>
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sll $a0 $a0 2
   <hr class="s1" />
-  gone1:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${blank} ${blank} ${blank} ${blank}
+  gone1:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>________</code> <code>________</code> <code>________</code> <code>________</code>
   <hr class="s1" />
-  gone2:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${blank} ${blank} ${blank} ${blank}
+  gone2:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>________</code> <code>________</code> <code>________</code> <code>________</code>
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jr $ra
   </code>
@@ -86,38 +87,38 @@ q1_3: |
   possible.
   <hr class="s2" />
   <code>
-  ${longblank} # this line may not be necessary
+  ______________________________ # this line may not be necessary
   <hr class="s1" />
-  ${longblank} # this line may not be necessary
+  ______________________________ # this line may not be necessary
   <hr class="s1" />
-  ${longblank} # this line may not be necessary
+  ______________________________ # this line may not be necessary
   <hr class="s1" />
-  ${blank} Helper
+  <code>________</code> Helper
   <hr class="s1" />
-  ${longblank} # this line may not be necessary
+  ______________________________ # this line may not be necessary
   <hr class="s1" />
-  ${longblank} # this line may not be necessary
+  ______________________________ # this line may not be necessary
   <hr class="s1" />
-  ${longblank} # this line may not be necessary
+  ______________________________ # this line may not be necessary
   </code>
 
 q1_3_s: |
   <code>
-  <b>addiu $sp $sp -4</b> ${_.repeat('&nbsp;', 3)} # this line may not be necessary
+  <b>addiu $sp $sp -4</b> &nbsp;&nbsp;&nbsp; # this line may not be necessary
   <hr class="s1" />
-  <b>sw $ra 0($sp)</b> ${_.repeat('&nbsp;', 6)} # this line may not be necessary
+  <b>sw $ra 0($sp)</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # this line may not be necessary
   <hr class="s1" />
-  ${_.repeat('_', 20)} # this line may not be necessary
+  ____________________ # this line may not be necessary
   <hr class="s1" />
-  <b>jal</b> Helper ${_.repeat('&nbsp;', 9)} # j works too, all other lines
+  <b>jal</b> Helper &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # j works too, all other lines
   <hr class="s1" />
-  ${_.repeat('&nbsp;', 20)} # blank (since $ra = LoadNibble's caller)!
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # blank (since $ra = LoadNibble's caller)!
   <hr class="s1" />
-  <b>lw $ra 0($sp)</b> ${_.repeat('&nbsp;', 6)} # this line may not be necessary
+  <b>lw $ra 0($sp)</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # this line may not be necessary
   <hr class="s1" />
-  <b>addiu $sp $sp 4</b> ${_.repeat('&nbsp;', 4)} # this line may not be necessary
+  <b>addiu $sp $sp 4</b> &nbsp;&nbsp;&nbsp;&nbsp; # this line may not be necessary
   <hr class="s1" />
-  ${_.repeat('_', 20)} # this line may not be necessary
+  ____________________ # this line may not be necessary
   </code>
 
 q2_1: |
@@ -135,7 +136,7 @@ q2_1: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;while (*s) {
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r = ${longblank};
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r = ______________________________;
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s++;
   <hr class="s1" />
@@ -170,9 +171,9 @@ q2_2: |
   <hr class="s2" />
   char *s = data.b;
   <hr class="s1" />
-  *( (int16_t *) ${longblank} ) = -1; // data.a = -1;
+  *( (int16_t *) ______________________________ ) = -1; // data.a = -1;
   <hr class="s1" />
-  *( (int32_t *) ${longblank} ) = -1; // data.d = -1;
+  *( (int32_t *) ______________________________ ) = -1; // data.d = -1;
   </code>
 
 q2_2_s: |
@@ -213,21 +214,21 @@ q2_3: |
   <hr class="s2" />
   void free_lr_tree (struct lr_tree *p) {
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;if (${longblank}) {
+  &nbsp;&nbsp;&nbsp;&nbsp;if (______________________________) {
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (size_t x = 0; x < 2; x++) {
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank};
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________;
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank};
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________;
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank};
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________;
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank};
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________;
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank};
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________;
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;}
   <hr class="s1" />
@@ -252,7 +253,7 @@ q2_3_s: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>free(p)</b>;
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank};
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________;
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;}
   <hr class="s1" />

@@ -4,6 +4,7 @@ ref: 'mt1-sp14'
 type: 'Midterm 1'
 term: 'Spring 2014'
 prof: 'Garcia'
+md: false
 
 questions: {
   'q1': 'What''s that funky smell?! Oh yeah, it''s popourri..',
@@ -59,7 +60,7 @@ q1_2: |
   b)  As defined in IEEE 754-2008 standard, <u>half-precision floating point</u> (FP) is a 16-bit FP
   representation: 1 sign bit, 5 exponent bits, and 10 significand bits. The exponent bias of 15. What is the binary representation of the <i>smallest half-precision float which is strictly larger than 1</i>? What is its value? Leave your answer in terms of powers of two.
   <hr class="s2" />
-  0b<code>${longblank}</code> = ${blank}
+  0b<code>______________________________</code> = <code>________</code>
 
 q1_2_s: |
   0b <b>0&nbsp;&nbsp;&nbsp;01111&nbsp;&nbsp;&nbsp;0000000001</b> = <b>1 + $2^{-10}$</b>
@@ -83,9 +84,9 @@ q1_5: |
   In the worst case, <i>how many clock cycles</i> would it take to <b>allocate</b> 100 Bytes in each area & <i>why</i>?
   (“How many” should be answered with one of: {1, tens, thousands+})
   <hr class="s2" />
-  <b>Stack:</b>${blank} because ${longblank}
+  <b>Stack:</b><code>________</code> because ______________________________
   <hr class="s1" />
-  <b>Heap:</b>${blank} because ${longblank}
+  <b>Heap:</b><code>________</code> because ______________________________
 
 q1_5_s: |
   <b>Stack:</b> <b>1</b> because <b>it's just addiu $sp $sp -100</b>.
@@ -101,9 +102,9 @@ q1_6_s: |
 q1_7: |
   g)  Suppose the assembler knew the file line numbers of all labels before it began its first pass over a
 
-  file, and that every line in the file contains an instruction. Then the assembler would need ${blank}
-  pass(es) to translate a MAL file, and ${blank} pass(es) to translate a TAL file. These numbers differ
-  because of <code>${longblank}</code> (write n/a if they don't differ).
+  file, and that every line in the file contains an instruction. Then the assembler would need <code>________</code>
+  pass(es) to translate a MAL file, and <code>________</code> pass(es) to translate a TAL file. These numbers differ
+  because of <code>______________________________</code> (write n/a if they don't differ).
 
 q1_7_s: |
   2, 1, pseudoinstructions
@@ -112,9 +113,9 @@ q1_8: |
   Complete the code below, using <i>only one TAL instruction</i>, so that it returns true iff <b>$a0</b> is an I-type instruction or a J-type instruction, and then translate the instruction into binary then hexadecimal.
   <hr class="s2" />
   <code>
-  IJ-instr: ${blank} -> 0b${longblank} -> 0x${blank}
+  IJ-instr: <code>________</code> -> 0b______________________________ -> 0x<code>________</code>
   <hr class="s1" />
-  ${_.repeat(' ', 10)}jr $ra
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jr $ra
   </code>
 
 q1_8_s: |
@@ -148,11 +149,11 @@ q2_1: |
   <hr class="s2" />
   int has_cycle(node *tortoise, node *hare) {
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;if (${longblank})
+  &nbsp;&nbsp;&nbsp;&nbsp;if (______________________________)
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1;
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;if (${longblank})
+  &nbsp;&nbsp;&nbsp;&nbsp;if (______________________________)
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;
   <hr class="s1" />
@@ -173,9 +174,9 @@ q2_2: |
 
   <hr class="s2" />
   <code>
-  \# $a0 contains the pointer to the tortoise.
+  # $a0 contains the pointer to the tortoise.
   <hr class="s1" />
-  \# $a1 contains the pointer to the hare.
+  # $a1 contains the pointer to the hare.
   <hr class="s2" />
   has_cycle: &nbsp;li $v0 1
   <hr class="s1" />
@@ -183,34 +184,34 @@ q2_2: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;li $v0 0
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq ${_.repeat('_', 10)} ${_.repeat('_', 10)} done
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq __________ __________ done
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq ${_.repeat('_', 10)} ${_.repeat('_', 10)} done
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beq __________ __________ done
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu ${_.repeat('_', 7)} ${_.repeat('_', 7)} ${_.repeat('_', 8)}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu _______ _______ ________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu ${_.repeat('_', 7)} ${_.repeat('_', 7)} ${_.repeat('_', 8)}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addiu _______ _______ ________
   <hr class="s1" />
   done: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jr return a
   </code>
 
 q2_2_s: |
   <code>
-  \# $a0 contains the pointer to the tortoise.
+  # $a0 contains the pointer to the tortoise.
   <hr class="s1" />
-  \# $a1 contains the pointer to the hare.
+  # $a1 contains the pointer to the hare.
   <hr class="s2" />
   has_cycle: &nbsp;li $v0 1
   <hr class="s1" />
@@ -246,9 +247,9 @@ q2_3: |
 
 q2_3_s: |
   <code>
-  \# $a0 contains the pointer to the tortoise.
+  # $a0 contains the pointer to the tortoise.
   <hr class="s1" />
-  \# $a1 contains the pointer to the hare.
+  # $a1 contains the pointer to the hare.
   <hr class="s2" />
   has_cycle: &nbsp;li $v0 1
   <hr class="s1" />
@@ -288,11 +289,11 @@ q3_1: |
 
   a)  How many bits are used for the:
   <hr class="s1" />
-  Tag? ${blank}
+  Tag? <code>________</code>
   <hr class="s1" />
-  Index? ${blank}
+  Index? <code>________</code>
   <hr class="s1" />
-  Offset? ${blank}
+  Offset? <code>________</code>
 
 q3_1_s: |
   Tag: <b>22</b>
@@ -396,7 +397,7 @@ q4_1: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (c >= 'A' && c <= 'S') {
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s += 'a' - 'A';${_.repeat('&nbsp;', 17)} // 2
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s += 'a' - 'A';&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 2
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
   <hr class="s1" />
@@ -410,9 +411,9 @@ q4_1: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;char *s2 = s;
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;while (*s2++); ${_.repeat('&nbsp;', 25)} // 3
+  &nbsp;&nbsp;&nbsp;&nbsp;while (*s2++); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 3
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;return s2 - s - 1; ${_.repeat('&nbsp;', 21)} // 4
+  &nbsp;&nbsp;&nbsp;&nbsp;return s2 - s - 1; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 4
   <hr class="s1" />
   }
   <hr class="s2" />
@@ -424,7 +425,7 @@ q4_1: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;for (uint32_t i = 0; i < size; i++)
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;odds += *numbers+i && 1; ${_.repeat('&nbsp;', 11)} // 5
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;odds += *numbers+i && 1; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 5
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;return odds;
   <hr class="s1" />

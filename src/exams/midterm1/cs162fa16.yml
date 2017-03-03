@@ -4,6 +4,7 @@ ref: 'mt1-fa16'
 type: 'Midterm 1'
 term: 'Fall 2016'
 prof: 'Joseph'
+md: false
 
 questions: {
   'q1': 'True/False and Why?',

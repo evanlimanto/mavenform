@@ -4,6 +4,7 @@ ref: 'mt1-fa15'
 type: 'Midterm 1'
 term: 'Fall 2015'
 prof: 'Joseph'
+md: false
 
 questions: {
   'q1': 'A dozen ways to ask about bits',
@@ -114,15 +115,15 @@ q2_1: |
 q2_2: |
   2) For each of the following values, state the location in the memory layout where they are stored. Answer with <i>code, static, heap, or stack</i>.
   <hr class="s2" />
-  <b>s1</b>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${blank}
+  <b>s1</b>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>________</code>
   <hr class="s1" />
-  <b>s2</b>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${blank}
+  <b>s2</b>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>________</code>
   <hr class="s1" />
-  <b>s1[0]</b>:&nbsp;&nbsp; ${blank}
+  <b>s1[0]</b>:&nbsp;&nbsp; <code>________</code>
   <hr class="s1" />
-  <b>s2[0]</b>:&nbsp;&nbsp; ${blank}
+  <b>s2[0]</b>:&nbsp;&nbsp; <code>________</code>
   <hr class="s1" />
-  <b>c[0]</b>:&nbsp;&nbsp;&nbsp;&nbsp; ${blank}
+  <b>c[0]</b>:&nbsp;&nbsp;&nbsp;&nbsp; <code>________</code>
 
 q2_1_s: |
   b < &a < c < &temp < &b
@@ -174,7 +175,7 @@ q3_2: |
   <code>
   &nbsp;&nbsp;&nbsp;&nbsp;unsigned short *id_addr = &(current_node.id);
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;struct ll_node *next_node = *(${blank});
+  &nbsp;&nbsp;&nbsp;&nbsp;struct ll_node *next_node = *(<code>________</code>);
   </code>
 
 q3_3: |
@@ -189,23 +190,23 @@ q3_3: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (node->prev != NULL) {
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (node->next != NULL) {
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;}
   <hr class="s1" />
@@ -308,7 +309,7 @@ q4_1: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAILED: li $v0 0
   <hr class="s1" />
-  ${_.repeat('&nbsp;', 11)}END: ________________________
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;END: ________________________
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________
   </code>
@@ -347,7 +348,7 @@ q4_1_s: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAILED: li $v0 0
   <hr class="s1" />
-  ${_.repeat('&nbsp;', 11)}END: ____<b>jr $ra</b>_______________
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;END: ____<b>jr $ra</b>_______________
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_________________________
   </code>
@@ -361,17 +362,17 @@ q5_1: |
 
   <hr class="s2" />
   <code>
-  &nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;mystery:&nbsp;&nbsp;addiu $sp $sp ${_.repeat('_', 16)}
+  &nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;mystery:&nbsp;&nbsp;addiu $sp $sp ________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addu $s0 $0 $0
   <hr class="s1" />
@@ -407,19 +408,19 @@ q5_1: |
   <hr class="s1" />
   &nbsp;&nbsp;23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j loop
   <hr class="s1" />
-  &nbsp;&nbsp;24&nbsp;&nbsp;exit:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;24&nbsp;&nbsp;exit:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;25&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;25&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;26&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;26&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;27&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;27&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;28&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;28&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;29&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;29&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   <hr class="s1" />
-  &nbsp;&nbsp;30&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}
+  &nbsp;&nbsp;30&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________________
   </code>
 
   <hr class="s2" />
@@ -448,7 +449,7 @@ q5_1_s: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________<b>sw $ra 12($sp)</b>_________
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}___
+  &nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_________________________________
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addu $s0 $0 $0
   <hr class="s1" />
@@ -496,7 +497,7 @@ q5_1_s: |
   <hr class="s1" />
   &nbsp;&nbsp;29&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________<b>jr $ra</b>_____________
   <hr class="s1" />
-  &nbsp;&nbsp;30&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${longblank}___
+  &nbsp;&nbsp;30&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_________________________________
   </code>
 
 q5_2_s: |
@@ -524,7 +525,7 @@ q6_4: |
   4) Translate the following machine code into MIPS using your new field sizes. Use register numbers
   instead of register names, since we’d have to think of a new convention for the names…
   <hr class="s1" />
-  0xAE9FFFF8 = ${longblank}
+  0xAE9FFFF8 = ______________________________
 
 q6_1_s: |
   <img src="/img/cs61cfa15-6_s.png" class="problem-image" />

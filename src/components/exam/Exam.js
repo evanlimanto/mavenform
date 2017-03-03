@@ -57,6 +57,8 @@ class Exam extends Component {
     const type = (examContent && _.has(examContent, 'type')) ? (examContent.type) : null;
     const term = (examContent && _.has(examContent, 'term')) ? (examContent.term) : null;
 
+    const useMarkdown = (examContent && _.has(examContent, 'md')) ? (examContent.markdown) : true;
+
     const pre = (examContent && _.has(examContent, 'pre')) ?
       (<div dangerouslySetInnerHTML={{'__html': marked(examContent.pre)}} />) : null;
     const content = (examContent && _.has(examContent, 'parts')) ?
@@ -67,8 +69,12 @@ class Exam extends Component {
             console.warn(`${key} doesn't exist in exam!`);
             return null;
           }
-          const content = examContent[key];
-          const solution = examContent[key + "_s"];
+          var content = examContent[key];
+          var solution = examContent[key + "_s"];
+          if (useMarkdown) {
+              content = marked(content);
+              solution = marked(solution);
+          }
           return <Question id={_.replace(key, '_', '-')} content={content} solution={solution} examCode={examCode} key={key} />
         });
         return <Element name={part} key={part}>{subparts}</Element>;

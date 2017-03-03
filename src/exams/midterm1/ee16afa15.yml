@@ -4,6 +4,7 @@ ref: 'mt1-fa15'
 type: 'Midterm 1'
 term: 'Fall 2015'
 prof: 'Niknejad, Sahai'
+md: false
 
 questions: {
   'q3': 'Solve It',

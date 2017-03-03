@@ -4,6 +4,7 @@ ref: 'mt1-sp16'
 type: 'Midterm 1'
 term: 'Spring 2016'
 prof: 'Stojanovic, Weaver'
+md: false
 
 questions: {
   'q1': 'Instructors keep their students aligned',
@@ -88,13 +89,13 @@ q1_1: |
   <code>
   students: 0x1000
   <hr class="s1" />
-  Address of students[0]: ${blank}
+  Address of students[0]: <code>________</code>
   <hr class="s1" />
-  Address of students[0].id: ${blank}
+  Address of students[0].id: <code>________</code>
   <hr class="s1" />
-  students + 1: ${blank}
+  students + 1: <code>________</code>
   <hr class="s1" />
-  Address of students[1].grade: ${blank}
+  Address of students[1].grade: <code>________</code>
   </code>
 
 q1_1_s: |
@@ -152,9 +153,9 @@ q2_1: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;for ( i = ____________;
   <hr class="s1" />
-  ${_.repeat('&nbsp;', 14)}____________;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____________;
   <hr class="s1" />
-  ${_.repeat('&nbsp;', 14)}____________ ) {
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____________ ) {
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_______________________________________________;
   <hr class="s1" />
@@ -185,9 +186,9 @@ q2_1_s: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;for ( i = <b>0</b>;
   <hr class="s1" />
-  ${_.repeat('&nbsp;', 14)}<b>i < root->num_children</b>;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>i < root->num_children</b>;
   <hr class="s1" />
-  ${_.repeat('&nbsp;', 14)}<b>i++</b> ) {
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>i++</b> ) {
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>sum += sum_and_free_tree((root->children)[i])</b>;
   <hr class="s1" />
@@ -452,21 +453,21 @@ q5_1: |
   <code>
   0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add $t0 $a0 $0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x00804020
   <hr class="s1" />
-  1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add $t1 $a1 $0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${_.repeat('_', 10)}
+  1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add $t1 $a1 $0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________
   <hr class="s1" />
-  2&nbsp;&nbsp;&nbsp;&nbsp;LabelA:&nbsp;&nbsp;&nbsp;&nbsp;add $t2 $0 $0${_.repeat('&nbsp;', 9)}<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x00005020
+  2&nbsp;&nbsp;&nbsp;&nbsp;LabelA:&nbsp;&nbsp;&nbsp;&nbsp;add $t2 $0 $0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x00005020
   <hr class="s1" />
-  3&nbsp;&nbsp;&nbsp;&nbsp;LabelB:&nbsp;&nbsp;&nbsp;&nbsp;beq $t0 $0 END&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${_.repeat('_', 10)}
+  3&nbsp;&nbsp;&nbsp;&nbsp;LabelB:&nbsp;&nbsp;&nbsp;&nbsp;beq $t0 $0 END&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________
   <hr class="s1" />
-  4&nbsp;&nbsp;&nbsp;&nbsp;LabelC:&nbsp;&nbsp;&nbsp;&nbsp;addi $t0 $t0 -1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${_.repeat('_', 10)}
+  4&nbsp;&nbsp;&nbsp;&nbsp;LabelC:&nbsp;&nbsp;&nbsp;&nbsp;addi $t0 $t0 -1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________
   <hr class="s1" />
-  5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lw $t3 0($t1)${_.repeat('&nbsp;', 9)}<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${_.repeat('_', 10)}
+  5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lw $t3 0($t1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________
   <hr class="s1" />
-  6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${_.repeat('_', 14)}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x014b5020
+  6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x014b5020
   <hr class="s1" />
   7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addi $t1 $t1 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x21290004
   <hr class="s1" />
-  8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${_.repeat('_', 14)}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x08000003
+  8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x08000003
   <hr class="s1" />
   9&nbsp;&nbsp;&nbsp;&nbsp;END:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add $v0 $t2 $0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<=>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x01201020
   <hr class="s1" />
@@ -509,9 +510,9 @@ q5_1_s: |
 q5_2: |
   b) Convert the following lines from machine code into their MIPS instruction.
   <hr class="s1" />
-  Line 6: ${longblank}
+  Line 6: ______________________________
   <hr class="s1" />
-  Line 8: ${longblank}
+  Line 8: ______________________________
 
 q5_2_s: |
   Line 6: <code>add $t2 $t2 $t3</code>
@@ -535,7 +536,7 @@ q6_1: |
   <code>
   int f( uint16_t n ) {
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;return ${longblank};
+  &nbsp;&nbsp;&nbsp;&nbsp;return ______________________________;
   <hr class="s1" />
   }
   </code>

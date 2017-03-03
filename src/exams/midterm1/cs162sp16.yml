@@ -4,6 +4,7 @@ ref: 'mt1-sp16'
 type: 'Midterm 1'
 term: 'Spring 2016'
 prof: 'Joseph'
+md: false
 
 questions: {
   'q1': 'Short Answer',
@@ -405,7 +406,7 @@ q4_1: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;int files[argc];
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;files[0] = ${longblank};
+  &nbsp;&nbsp;&nbsp;&nbsp;files[0] = ______________________________;
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;for (int i = 1; i < argc; i++) {
   <hr class="s1" />
@@ -415,13 +416,13 @@ q4_1: |
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;while (1) {
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int error = read(${longblank});
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int error = read(______________________________);
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (error <= 0) break;
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i < argc; i++) {
   <hr class="s1" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;write(${longblank});
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;write(______________________________);
   <hr class="s1" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
   <hr class="s1" />
