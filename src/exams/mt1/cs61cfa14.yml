@@ -1,8 +1,8 @@
 course: 'cs61c'
 ref: 'mt1-fa14'
 
-type: 'Midterm 1'
-term: 'Fall 2014'
+type: 'mt1'
+term: 'fa14'
 prof: 'Culler'
 md: false
 

@@ -1,8 +1,8 @@
 course: 'cs61c'
 ref: 'mt1-sp15'
 
-type: 'Midterm 1'
-term: 'Spring 2015'
+type: 'mt1'
+term: 'sp15'
 prof: 'Asanovic, Stojanovic'
 md: false
 

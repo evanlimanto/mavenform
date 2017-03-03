@@ -1,8 +1,8 @@
 course: 'cs61c'
 ref: 'mt1-fa15'
 
-type: 'Midterm 1'
-term: 'Fall 2015'
+type: 'mt1'
+term: 'fa15'
 prof: 'Joseph'
 md: false
 

@@ -1,8 +1,8 @@
 course: 'cs61c'
 ref: 'mt1-sp14'
 
-type: 'Midterm 1'
-term: 'Spring 2014'
+type: 'mt1'
+term: 'sp14'
 prof: 'Garcia'
 md: false
 

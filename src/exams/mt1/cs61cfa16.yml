@@ -1,8 +1,8 @@
 course: 'cs61c'
 ref: 'mt1-fa16'
 
-type: 'Midterm 1'
-term: 'Fall 2016'
+type: 'mt1'
+term: 'fa16'
 prof: 'Boser, Katz'
 md: false
 

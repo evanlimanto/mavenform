@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import { handleEvent } from './utils';
+import { examTypeToLabel, termToLabel } from './exams';
 import { Question, Sidebar } from './components';
 import { exams } from './exams';
 
@@ -33,7 +34,10 @@ class ExamContent extends Component {
   }
 
   componentDidMount() {
-    fetch(`/getExam?id=${this.props.code}&type=${this.props.type}`).then(function(response) {
+    const exam = this.props.exam;
+    const course = this.props.course;
+    const type = this.props.type;
+    fetch(`/getExam/${course}/${type}/${exam}`).then(function(response) {
       return response.json();
     }).then((json) => {
       this.setState({ examContent: json });
@@ -49,8 +53,7 @@ class ExamContent extends Component {
   render() {
     const examContent = this.state.examContent;
     const examCode =
-      (examContent && _.has(examContent, 'course') && _.has(examContent, 'ref')) ?
-      (`${examContent.course}${examContent.ref}`) : [];
+      (examContent && _.has(examContent, 'course') && _.has(examContent, 'ref')) ?  (`${examContent.course}${examContent.ref}`) : [];
     const problemIDs =
       (examContent && _.has(examContent, 'parts')) ?
       (_.keys(examContent.parts)) : [];
@@ -62,9 +65,9 @@ class ExamContent extends Component {
     const prof = (examContent && _.has(examContent, 'prof')) ? (examContent.prof) : null;
     const type = (examContent && _.has(examContent, 'type')) ? (examContent.type) : null;
     const term = (examContent && _.has(examContent, 'term')) ? (examContent.term) : null;
-
     const useMarkdown = (examContent && _.has(examContent, 'md')) ? (examContent.markdown) : true;
 
+    // General information about the exam
     const pre = (examContent && _.has(examContent, 'pre')) ?
       (<div dangerouslySetInnerHTML={{'__html': marked(examContent.pre)}} />) : null;
     const content = (examContent && _.has(examContent, 'parts')) ?
@@ -81,7 +84,7 @@ class ExamContent extends Component {
               content = marked(content);
               solution = marked(solution);
           }
-          return <Question id={_.replace(key, '_', '-')} content={content} solution={solution} examCode={examCode} key={key} />
+          return <Question id={`${part}_${subpart}`} course={course} content={content} solution={solution} term={term} examType={type} key={key} />
         });
         return <Element name={part} key={part}>{subparts}</Element>;
       }) : null;
@@ -91,7 +94,7 @@ class ExamContent extends Component {
         <h1>{_.toUpper(course)}</h1>
         <hr className="s2" />
         <div className="center">
-          <h5>{type} | {term} | {prof}</h5>
+          <h5>{examTypeToLabel[type]} | {termToLabel[term]} | {prof}</h5>
         </div>
         <Sidebar examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} />
         <div className="content">
@@ -126,9 +129,10 @@ class Exam extends Component {
   render() {
     const exam = this.props.params.examid;
     const course = this.props.params.courseid;
+    const examType = this.props.params.examtype;
 
     // TODO: Check if exam exists in list of transcriptions
-    const ExamComponent = <ExamContent code={course + exam} type="midterm1" />;
+    const ExamComponent = <ExamContent exam={exam} course={course} type={examType} />;
 
     const collapserClass = classnames({
       collapse: true,

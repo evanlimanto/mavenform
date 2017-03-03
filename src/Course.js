@@ -39,7 +39,7 @@ class Course extends Component {
             <td><a href={url}>{examTypeToLabel[examType]}</a></td>
             <td><a href={url}>{semester}</a></td>
             <td><a href={url}>{dict['profs']}</a></td>
-            <td><h4><a className="table-link" href={dict['url'] + '&courseId=' + course}>CLICK TO VIEW &#8594;</a></h4></td>
+            <td><h4><a className="table-link" href={`/course/${course}`}>CLICK TO VIEW &#8594;</a></h4></td>
           </tr>
         );
       });
