@@ -65,7 +65,6 @@ class Solution extends Component {
   }
 }
 
-// Replace the href with whatever you are going to use to copy
 class Question extends Component {
   constructor(props) {
     super(props);
@@ -95,6 +94,28 @@ class Question extends Component {
   render() {
     const examCode = this.props.examCode;
     const content = this.props.content;
+    return (
+      <div id={this.props.id} className="question">
+        <a className="link" onClick={() => this.copyToClipboard(`${document.location.origin}/exam?id=${examCode}&courseId=cs162#${this.props.id}`)}>Share</a>
+        {(this.state.copied) ? (<Expire delay={1800} callback={this.clearCopied}><div className="tooltip">Link copied to clipboard!</div></Expire>) : null}
+        <div dangerouslySetInnerHTML={{__html: content}}></div>
+        <Solution solution={this.props.solution} examCode={examCode} />
+      </div>
+    );
+  }
+}
+
+class MultipleChoiceQuestion extends Question {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const examCode = this.props.examCode;
+    const content = this.props.content;
+    const choices = this.props.choices;
+    const answer = this.props.answer;
+
     return (
       <div id={this.props.id} className="question">
         <a className="link" onClick={() => this.copyToClipboard(`${document.location.origin}/exam?id=${examCode}&courseId=cs162#${this.props.id}`)}>Share</a>
