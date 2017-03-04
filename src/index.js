@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { browserHistory, Router, Route } from 'react-router';
 import { handleEvent } from './utils';
 
-import App from './App';
+import Exam from './Exam';
 import Course from './Course';
 import Home from './Home';
 
@@ -34,7 +34,7 @@ window.addEventListener('scroll', function(e) {
 ReactDOM.render((
   <Router history={browserHistory} onUpdate={logPageView}>
     <Route path="/" component={Home} />
-    <Route path="/course" component={Course} />
-    <Route path="/exam" component={App} />
+    <Route path="/course/:courseid" component={Course} />
+    <Route path="/exam/:courseid/:examtype/:examid" component={Exam} />
   </Router>
 ), document.getElementById('root'));

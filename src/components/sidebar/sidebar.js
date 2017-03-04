@@ -14,75 +14,50 @@ class Sidebar extends Component {
     this.generateSidetabContainers = this.generateSidetabContainers.bind(this);
   }
 
-  generateSidetabContainers(is_mobile) {
+  generateSidetabContainers() {
     const problemIDs = this.props.problemIDs;
     const problemTitles = this.props.problemTitles;
-    const examCode = this.props.examCode;
     return _.map(_.range(problemIDs.length), (index) => {
       const problemID = problemIDs[index];
-      const problemTitle = problemTitles[index];
+      const problemTitle = `Question ${problemID[1]}`;
 
       if (problemID.length === 0) {
         return (
-          <span><hr className="s1" /><div className="sidetitle">{problemTitle}</div></span>
+          <span key={index}><hr className="s1" /><div className="sidetitle">{problemTitle}</div></span>
+        );
+      } else {
+        return (
+          <div className="sidetab-container" key={index}>
+            {
+              <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} offset={-100} smooth={true} duration={500}>
+                {problemTitle}
+              </Link>
+            }
+          </div>
         );
       }
-
-      return (
-        <div className="sidetab-container">
-          {
-            (is_mobile) ?
-            (
-              <Link className="sidetab" to={problemID} isDynamic={true} smooth={true} duration={500} onClick={() => handleEvent("Click", "Sidebar", examCode)}>
-                {problemTitle}
-              </Link>
-            ) :
-            (
-              <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} smooth={true} duration={500} onClick={() => handleEvent("Click", "Sidebar", examCode)}>
-                {problemTitle}
-              </Link>
-            )
-          }
-        </div>
-      );
     });
   }
 
   render() {
-    const examCode = this.props.examCode;
-    const webSidetabContainers = this.generateSidetabContainers(false);
-    const mobileSidetabContainers = this.generateSidetabContainers(true);
+    const term = this.props.term;
+    const course = this.props.course;
+    const examType = this.props.examType;
+    const examDirPrefix = `${process.env.PUBLIC_URL}/exams/${course}/${examType}-${term}`;
+    const webSidetabContainers = this.generateSidetabContainers();
 
     return (
       <span>
-        <Sticky className="sidebar screen">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s2" />
+        <div className="sidebar">
+          <h6>CONTENTS</h6>
           {webSidetabContainers}
           <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
+          <h6>SOURCES</h6>
           <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-exam.pdf`} target="_blank">Exam PDF</a>
+            <a className="sidetab" href={`${examDirPrefix}-exam.pdf`} target="_blank">Exam PDF</a>
           </div>
           <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-soln.pdf`} target="_blank">Solutions PDF</a>
-          </div>
-        </Sticky>
-        <div className="sidebar mobile">
-          <hr className="s5" />
-          <h4>CONTENTS</h4>
-          <hr className="s2" />
-          {mobileSidetabContainers}
-          <hr className="s2" />
-          <h4>SOURCES</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-exam.pdf`} target="_blank">Exam PDF</a>
-          </div>
-          <div className="sidetab-container">
-            <a className="sidetab" href={process.env.PUBLIC_URL + `/exams/${examCode}-soln.pdf`} target="_blank">Solutions PDF</a>
+            <a className="sidetab" href={`${examDirPrefix}-soln.pdf`} target="_blank">Solutions PDF</a>
           </div>
         </div>
       </span>

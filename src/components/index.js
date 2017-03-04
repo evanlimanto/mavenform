@@ -1,3 +1,4 @@
-import Sidebar from './sidebar/sidebar';
+import Sidebar from './sidebar';
+import { Question, MultipleChoiceQuestion } from './question';
 
-export { Sidebar };
+export { Question, MultipleChoiceQuestion, Sidebar };

@@ -1,97 +1,121 @@
 const exams = {
   'ee16a': {
-    'midterm-1': {
+    'mt1': {
       'Fall 2016': {
-        'id': 'ee16afa16',
+        'id': 'fa16',
         'profs': 'Ayazifar, Stojanovic',
-        'url': '/exam?id=ee16afa16',
       },
       'Spring 2016': {
-        'id': 'ee16asp16',
+        'id': 'sp16',
         'profs': 'Alon, Ayazifar',
-        'url': '/exam?id=ee16asp16' ,
       },
       'Fall 2015': {
-        'id': 'ee16afa15',
+        'id': 'fa15',
         'profs': 'Niknejad, Sahai',
-        'url': '/exam?id=ee16afa15',
       },
       'Spring 2015': {
-        'id': 'ee16asp15',
+        'id': 'sp15',
         'profs': 'Alon, Ayazifar, Subramanian',
-        'url': '/exam?id=ee16asp15',
       },
     },
   },
 
   'cs61c': {
-    'midterm-1': {
+    'mt1': {
       'Fall 2016': {
-        'id': 'cs61cfa16',
+        'id': 'fa16',
         'profs': 'Boser, Katz',
-        'url': '/exam?id=cs61cfa16',
       },
       'Spring 2016': {
-        'id': 'cs61csp16',
+        'id': 'sp16',
         'profs': 'Stojanovic, Weaver',
-        'url': '/exam?id=cs61csp16',
       },
       'Fall 2015': {
-        'id': 'cs61cfa15',
+        'id': 'fa15',
         'profs': 'Stojanovic, Wawrzynek',
-        'url': '/exam?id=cs61cfa15',
       },
       'Spring 2015': {
-        'id': 'cs61csp15',
+        'id': 'sp15',
         'profs': 'Asanovic, Stojanovic',
-        'url': '/exam?id=cs61csp15',
       },
       'Fall 2014': {
-        'id': 'cs61cfa14',
+        'id': 'fa14',
         'profs': 'Garcia, Lustig',
-        'url': '/exam?id=cs61cfa14',
       },
       'Spring 2014': {
-        'id': 'cs61csp14',
+        'id': 'sp14',
         'profs': 'Garcia',
-        'url': '/exam?id=cs61csp14',
       },
     },
+    'midterm2': {
+      'Fall 2016': {
+        'id': 'fa16',
+        'profs': 'Boser, Katz',
+      }
+    }
   },
 
   'cs162': {
-    'midterm-1': {
+    'mt1': {
       'Fall 2016': {
-        'id': 'cs162fa16',
+        'id': 'fa16',
         'profs': 'Joseph',
-        'url': '/exam?id=cs162fa16',
       },
       'Spring 2016': {
-        'id': 'cs162sp16',
+        'id': 'sp16',
         'profs': 'Joseph',
-        'url': '/exam?id=cs162sp16',
       },
       'Fall 2015': {
-        'id': 'cs162fa15',
+        'id': 'fa15',
         'profs': 'Kubiatowicz',
-        'url': '/exam?id=cs162fa15',
       },
       'Spring 2015': {
-        'id': 'cs162sp15',
+        'id': 'sp15',
         'profs': 'Kubiatowicz',
-        'url': '/exam?id=cs162sp15',
       },
     },
   },
+
+  'data8': {
+    'mt1': {
+      'Spring 2016': {
+        'id': 'sp16',
+        'profs': 'DeNero, Adhikari, Jordan, Parikh, Wagner'
+      },
+      'Fall 2015': {
+        'id': 'fa15',
+        'profs': 'Adhikari'
+      }
+    }
+  }
 };
 
-const addedClasses = ['ee16a', 'cs61c', 'cs162'];
-const remainingClasses = [];
-
-const captions = {
+const courses = {
   'ee16a': 'Designing Information Devices and Systems I',
   'cs61c': 'Great Ideas in Computer Architecture (Machine Structures)',
   'cs162': 'Operating Systems and Systems Programming',
+  'data8': 'Foundations of Data Science',
 };
 
-export { exams, captions };
+const examTypeToLabel = {
+  'mt1': 'Midterm 1',
+  'mt2': 'Midterm 2',
+}
+
+const termToLabel = {
+  'sp14': 'Spring 2014',
+  'fa14': 'Fall 2014',
+  'sp15': 'Spring 2015',
+  'fa15': 'Fall 2015',
+  'sp16': 'Spring 2016',
+  'fa16': 'Fall 2016'
+};
+
+const courseIDToLabel = {
+  'ee16a': 'EE 16A',
+  'cs61c': 'CS 61C',
+  'cs162': 'CS 162',
+  'data8': 'Data 8',
+};
+
+export { exams, courses, examTypeToLabel, courseIDToLabel, termToLabel };

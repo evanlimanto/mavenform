@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { exams } from './exams';
+import { exams, examTypeToLabel, courseIDToLabel } from './exams';
 import { handleEvent } from './utils';
 
 const _ = require('lodash');
@@ -27,91 +27,30 @@ class Course extends Component {
   }
 
   render() {
-    var course = null;
+    var course = this.props.params.courseid;
     var examId = null;
-    var courseName = null;
     var unavailable = null;
     var note = null;
-    if (this.props.location.query) {
-      course = this.props.location.query.id;
-    }
-    if (course === 'ee16a') {
-      courseName = 'EE 16A';
-    } else if (course === 'cs61c') {
-      courseName = 'CS 61C';
-    } else {
-      courseName = 'CS 162';
-    }
-    const examType = 'midterm-1';
-    const available = _.values(_.mapValues(exams[course][examType], (dict, semester) => {
-      return (
-        <tr className="available" onClick={handleEvent("Click", "Exam", course)}>
-          <td><a href={dict['url'] + '&courseId=' + course}>{_.replace(_.capitalize(examType), '-', ' ')}</a></td>
-          <td><a href={dict['url'] + '&courseId=' + course}>{semester}</a></td>
-          <td><a href={dict['url'] + '&courseId=' + course}>{dict['profs']}</a></td>
-          <td><h4><a className="table-link" href={dict['url'] + '&courseId=' + course}>CLICK TO VIEW &#8594;</a></h4></td>
-        </tr>
-      );
-    }));
-    if (course === 'ee16a') {
-      unavailable =
-      `
-      <tr>
-        <td>Midterm 2</td>
-        <td>2015 - 2016</td>
-        <td>Miscellaneous</td>
-        <td><i>In progress</i></td>
-      </tr>
-      <tr>
-        <td>Final</td>
-        <td>2015 - 2016</td>
-        <td>Miscellaneous</td>
-        <td><i>In progress</i></td>
-      </tr>
-      `;
-      note = '';
-    } else if (course === 'cs61c') {
-      unavailable =
-      `
-      <tr>
-        <td>Midterm 2</td>
-        <td>2014 - 2016</td>
-        <td>Miscellaneous</td>
-        <td><i>In progress</i></td>
-      </tr>
-      <tr>
-        <td>Final</td>
-        <td>2014 - 2016</td>
-        <td>Miscellaneous</td>
-        <td><i>In progress</i></td>
-      </tr>
-      `;
-      note = '<i>(up to the last 3 academic years)</i>';
-    } else {
-      unavailable =
-      `
-      <tr>
-        <td>Midterm 2</td>
-        <td>2015 - 2016</td>
-        <td>Miscellaneous</td>
-        <td><i>In progress</i></td>
-      </tr>
-      <tr>
-        <td>Final</td>
-        <td>2015 - 2016</td>
-        <td>Miscellaneous</td>
-        <td><i>In progress</i></td>
-      </tr>
-      `;
-      note = '<i>(up to the last 2 years)</i>';
-    }
+    const available = _.map(exams[course], (examsOfType, examType) => {
+      return _.map(examsOfType, (dict, semester) => {
+        const url = `/exam/${course}/${examType}/${dict['id']}`;
+        return (
+          <tr className="available" onClick={handleEvent("Click", "Exam", course)} key={semester}>
+            <td><a href={url}>{examTypeToLabel[examType]}</a></td>
+            <td><a href={url}>{semester}</a></td>
+            <td><a href={url}>{dict['profs']}</a></td>
+            <td><h6><a className="table-link" href={`/course/${course}`}>CLICK TO VIEW &#8594;</a></h6></td>
+          </tr>
+        );
+      });
+    });
 
     const collapserClass = classnames({
       collapse: true,
       iscollapsed: !this.state.sidebar
     });
     const collapser = (
-      <a className={collapserClass} onClick={() => this.toggleCollapse(courseName)}>&#9776; {(this.state.sidebar) ? "COLLAPSE" : "MENU"}</a>
+      <a className={collapserClass} onClick={() => this.toggleCollapse(courseIDToLabel[course])}>&#9776; {(this.state.sidebar) ? "COLLAPSE" : "MENU"}</a>
     );
 
     const menuClass = classnames({
@@ -121,7 +60,7 @@ class Course extends Component {
 
     const sideTabs = _.map(exams[course], (courseExams, examType) => {
       const content =  _.map(courseExams, (info, semester) => {
-        const url = `${info['url']}&courseId=${course}`;
+        const url = `/exam/${course}/${examType}/${info.id}`;
         const title = semester;
         const sideTabClass = classnames({
           sidetab: true,
@@ -134,41 +73,45 @@ class Course extends Component {
         );
       });
       return (
-        <span>
-          <div className="sideTitle">{_.capitalize(_.replace(examType, '-', ' '))}</div>
+        <span key={examType}>
+          <div className="sideTitle">{examTypeToLabel[examType]}</div>
           {content}
         </span>
       );
     });
 
     return (
-      <div className="shift">
-        <a className="return" href="/">&#8592; RETURN</a>
-        {collapser}
-        <div className={menuClass}>
-          <a className="home center" href="/">Mavenform</a>
-          <hr className="s1" />
-          <h4>{_.toUpper(course)}</h4>
-          <hr className="s1" />
-          <div className="sidetab-container">
-            <a className="sidetab active" href={"/course?id=" + course} onClick={handleEvent("Click", "Index", course)}>Index</a>
+      <div>
+        <div className="nav">
+          <a className="logo" href="/">Mavenform</a>
+          <a className="material-icons mobile-back">home</a>
+          <div className="tooltip-container">
+            <a className="material-icons" href="https://docs.google.com/forms/d/e/1FAIpQLSfCS9McWikQ7F6syAGV9FX7Wf2-rWjqt-XMXxxEx5piTIf92Q/viewform?usp=sf_link">sms</a>
+            <span className="tooltip">Send Feedback</span>
           </div>
-          <hr className="s1" />
-          {sideTabs}
-          <a className="index" href="/">&#8592; RETURN</a>
+          <div className="tooltip-container reader-mode">
+            <a className="material-icons">subject</a>
+            <span className="tooltip">Reader Mode</span>
+          </div>
         </div>
-        <a className="feedback" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
-        <div>
-          <hr className="margin" />
-          <h1 className="center">{courseName}</h1>
-          <hr className="s2" />
-          <div className="center">
-            <h5>Index of all exams</h5>
+        <div className={menuClass}>
+          <h6>{_.toUpper(course)}</h6>
+          <div className="sidetab-container">
+            <a className="sidetab active" href={`/course/${course}`}>Index</a>
           </div>
-          <hr className="s5" />
+          {sideTabs}
+        </div>
+        <div className="sidebar">
+          <h6>Note</h6>
+          <i>This index accounts for every exam from HKN, TBP, and other sources from the past 2 academic years.</i>
+        </div>
+        <div>
+          <h4 className="center">{courseIDToLabel[course]}</h4>
           <div className="center">
-            <p className="test">Status of every exam from TBP, HKN, and all other sources <span dangerouslySetInnerHTML={{__html: note}}></span></p>
-            <hr className="s3" />
+            <h5>Index of exams</h5>
+          </div>
+          <hr className="s4" />
+          <div className="center">
             <div className="table-container-container">
               <div className="table-container">
                 <table className="exams center">
