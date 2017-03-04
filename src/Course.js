@@ -171,7 +171,7 @@ class Course extends Component {
           <div className="center">
             <h5>Index of exams</h5>
           </div>
-          <hr className="s5" />
+          <hr className="s4" />
           <div className="center">
             <div className="table-container-container">
               <div className="table-container">
