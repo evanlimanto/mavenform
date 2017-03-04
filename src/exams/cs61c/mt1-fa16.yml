@@ -24,9 +24,6 @@ parts: {
   'q6': 5,
 }
 
-pre: |
-  <div class="content-spacer"></div>
-
 q1_1: |
   <hr class="s1" />
   <h2>Q1: Number Representation (5 points)</h2>

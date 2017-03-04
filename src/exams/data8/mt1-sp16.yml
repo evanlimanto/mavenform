@@ -20,9 +20,6 @@ parts: {
   'q4': 4,
 }
 
-pre: |
-  <div class="content-spacer"></div>
-
 q1_1: |
   # 1. (12 points) Expressions
   **(a) (10 pt)** An array of integers named ca contains the (estimated) population of California every 10 years.

@@ -33,6 +33,9 @@ renderer.code = function(code, language) {
 renderer.em = function(text) {
   return `<i>${text}</i>`;
 };
+renderer.br = function() {
+  return '<hr class="s1" />';
+}
 
 const Scroll = require('react-scroll');
 const Element = Scroll.Element;
@@ -54,6 +57,7 @@ class ExamContent extends Component {
     fetch(`/getExam/${course}/${type}/${exam}`).then(function(response) {
       return response.json();
     }).then((json) => {
+      console.log(json);
       this.setState({ examContent: json });
     });
 
@@ -98,8 +102,8 @@ class ExamContent extends Component {
             console.warn(`${key} doesn't exist in exam!`);
             return null;
           }
-          var content = examContent[key];
-          var solution = examContent[key + "_s"];
+          var content = examContent[key] || '';
+          var solution = examContent[key + "_s"] || '';
           if (useMarkdown) {
               content = marked(content, {renderer});
               solution = marked(solution, {renderer});

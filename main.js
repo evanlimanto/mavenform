@@ -19,7 +19,7 @@ const useCache = false;
 const examCache = new NodeCache({ stdTTL: 30 * 60, checkperiod: 10 * 60 });
 
 // Read Exam .yaml files from disk
-app.get('/getExam/:course/:type/:exam', function(req, res) {
+app.get('/getExam/:course/:type/:exam', function(req, res, next) {
   const course = req.params.course;
   const type = req.params.type;
   const exam = req.params.exam;
@@ -34,16 +34,17 @@ app.get('/getExam/:course/:type/:exam', function(req, res) {
     try {
       doc = fs.readFileSync(`src/exams/${course}/${type}-${exam}.yml`, "utf8");
       doc = yaml.safeLoad(doc);
+      error = error || !examCache.set(examKey, doc);
     } catch(e) {
+      console.log(e);
       error = true;
       res.status(404).send('Not found.');
     }
-    const success = examCache.set(examKey, doc);
-    error = !success;
   }
   if (!error) {
     res.json(doc);
   }
+  res.end();
 });
 
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, './build/index.html'))).listen(port, () => console.log('Started server on port ' + port));

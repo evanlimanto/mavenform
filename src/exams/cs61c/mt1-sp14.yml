@@ -20,9 +20,6 @@ parts: {
   'q4': 1,
 }
 
-pre: |
-  <div class="content-spacer"></div>
-
 q1_1: |
   <h2>Q1: What’s that funky smell?! Oh yeah, it’s potpourri... (30 pts)</h2>
   a)  The unsigned distance between two bit patterns is

@@ -26,9 +26,6 @@ parts: {
   'q7': 1,
 }
 
-pre: |
-  <div class="content-spacer"></div>
-
 q1_1: |
   <h2>Q1: A dozen ways to ask about bits (10 points)</h2>
   1) For a 12-bit integer represented with two’s complement, what is the:

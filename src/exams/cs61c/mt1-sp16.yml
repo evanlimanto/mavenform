@@ -24,9 +24,6 @@ parts: {
   'q6': 4
 }
 
-pre: |
-  <div class="content-spacer"></div>
-
 q1_1: |
   <h2>Q1: Instructors keep their students aligned (10 points)</h2>
 

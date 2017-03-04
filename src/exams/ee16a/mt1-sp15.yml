@@ -22,9 +22,6 @@ parts: {
   'q5': 3,
 }
 
-pre: |
-  <div class="content-spacer"></div>
-
 q1_1: |
   <h2>PROBLEM 1. Imaging Circuit <i>(12 points)</i></h2>
   In this problem we will return one final time to examining how one might choose the area of a photodetector in order to maximize the measured voltage. This time however, let’s assume that light shines only over a fixed area $A_{illuminated}$.<br/><br/>

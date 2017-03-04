@@ -26,9 +26,6 @@ parts: {
   'q9': 5,
 }
 
-pre: |
-  <div class="content-spacer"></div>
-
 q3: |
   <h2>3. Mechanical Johann</h2>
   Invert the following matrix:

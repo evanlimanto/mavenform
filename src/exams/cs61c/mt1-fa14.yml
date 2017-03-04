@@ -16,9 +16,6 @@ parts: {
   'q2': 3,
 }
 
-pre: |
-  <div class="content-spacer"></div>
-
 q1_1: |
   <h2>Question 1: Running in circles (18 pts)</h2>
   A nibble is half of a byte (4 bits). You’d like to implement <code><b>LoadNibble</b></code> in MAL MIPS, a function that

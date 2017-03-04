@@ -24,9 +24,6 @@ parts: {
   'q8': 3,
 }
 
-pre: |
-  <div class="content-spacer"></div>
-
 q3_1: |
   <h2>3. True/False <i>(6 points, 1 point for each question)</i></h2>
 
