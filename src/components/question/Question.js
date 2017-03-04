@@ -100,28 +100,19 @@ class Question extends Component {
 
     return (
       <div id={this.props.id} className="question">
-        <a className="link" onClick={() => this.copyToClipboard(`${document.location.origin}/exam/${course}/${examType}/${term}#${this.props.id}`)}>Share</a>
-        {(this.state.copied) ? (<Expire delay={1800} callback={this.clearCopied}><div className="tooltip">Link copied to clipboard!</div></Expire>) : null}
-        <div dangerouslySetInnerHTML={{__html: content}}></div>
-        <Solution solution={this.props.solution} examCode={examCode} />
+        <div className="tooltip-container">
+          <a className="link material-icons" onClick={() => this.copyToClipboard(`${document.location.origin}/exam/${course}/${examType}/${term}#${this.props.id}`)}>link</a>
+          {(this.state.copied) ?
+            (<span className="tooltip-link blue">
+               <Expire delay={2000}
+                callback={this.clearCopied}>
+                Link copied!
+               </Expire>
+             </span>) : (<span className="tooltip-link">Copy Link</span>)}
+          <div dangerouslySetInnerHTML={{__html: content}}></div>
+          <Solution solution={this.props.solution} examCode={examCode} />
+        </div>
       </div>
-    );
-  }
-}
-
-class MultipleChoiceQuestion extends Question {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const examCode = this.props.examCode;
-    const content = this.props.content;
-    const choices = this.props.choices;
-    const answer = this.props.answer;
-
-    return (
-      <div></div>
     );
   }
 }

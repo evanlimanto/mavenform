@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import { handleEvent } from './utils';
-import { examTypeToLabel, termToLabel } from './exams';
+import { courseIDToLabel, examTypeToLabel, termToLabel } from './exams';
 import { Question, Sidebar } from './components';
 import { exams } from './exams';
 
@@ -63,6 +63,12 @@ class ExamContent extends Component {
   }
 
   componentDidUpdate() {
+    // Move header to first question element
+    var header = document.getElementsByClassName("center")[0];
+    header.parentNode.removeChild(header);
+    var firstQuestion = document.getElementsByClassName("element")[0];
+    firstQuestion.insertBefore(header, firstQuestion.firstChild);
+
     scrollSpy.update();
   }
 
@@ -102,22 +108,18 @@ class ExamContent extends Component {
           }
           return <Question id={`${part}_${subpart}`} course={course} content={content} solution={solution} term={term} examType={type} key={key} />
         });
-        return <Element name={part} key={part}>{subparts}</Element>;
+        return <Element name={part} key={part} className="element">{subparts}</Element>;
       }) : null;
 
     return (
-      <span>
-        <h1>{_.toUpper(course)}</h1>
-        <hr className="s2" />
+      <div className="content">
         <div className="center">
+          <h4>{_.toUpper(course)}</h4>
           <h5>{examTypeToLabel[type]} | {termToLabel[term]} | {prof}</h5>
         </div>
-        <Sidebar examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} />
-        <div className="content">
-          {pre}
-          {content}
-        </div>
-      </span>
+        {content}
+        <Sidebar course={course} term={term} examType={type} examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} />
+      </div>
     );
   }
 }
@@ -135,11 +137,6 @@ class Exam extends Component {
     this.setState({
       sidebar: !this.state.sidebar
     });
-    if (this.state.sidebar) {
-      document.body.style.left = '-125px';
-    } else {
-      document.body.style.left = '0';
-    }
   }
 
   render() {
@@ -147,7 +144,6 @@ class Exam extends Component {
     const course = this.props.params.courseid;
     const examType = this.props.params.examtype;
 
-    // TODO: Check if exam exists in list of transcriptions
     const ExamComponent = <ExamContent exam={exam} course={course} type={examType} />;
 
     const collapserClass = classnames({
@@ -179,35 +175,36 @@ class Exam extends Component {
       });
       return (
         <span key={examType}>
-          <div className="sideTitle">{_.capitalize(_.replace(examType, '-', ' '))}</div>
+          <div className="sideTitle"><span className="material-icons sideArrow">keyboard_arrow_down</span>{examTypeToLabel[examType]}</div>
           {content}
+          <div className="sideTitle"><span className="material-icons sideArrow">keyboard_arrow_right</span> Midterm 2 </div>
+          <div className="sideTitle"><span className="material-icons sideArrow">keyboard_arrow_right</span> Final </div>
         </span>
       );
     });
 
     return (
-      <span className="shift">
-        <a className="return" href={`/course/${course}`} onClick={handleEvent("Click", "Exam Index", exam)}>&#8592; INDEX</a>
-        {collapser}
+      <span>
+        <div className="nav">
+          <a className="logo">Mavenform</a>
+          <a className="material-icons mobile-back">keyboard_backspace</a>
+          <div className="tooltip-container">
+            <a className="material-icons">sms</a>
+            <span className="tooltip">Send Feedback</span>
+          </div>
+          <div className="tooltip-container reader-mode">
+            <a className="material-icons">subject</a>
+            <span className="tooltip">Reader Mode</span>
+          </div>
+        </div>
         <div className={menuClass}>
-          <a className="home center" href="/">Mavenform</a>
-          <hr className="s1" />
-          <h4>{_.toUpper(course)}</h4>
-          <hr className="s1" />
+          <h6>{courseIDToLabel[course]}</h6>
           <div className="sidetab-container">
             <a className="sidetab" href={`/course/${course}`} onClick={handleEvent("Click", "Home")}>Index</a>
           </div>
-          <hr className="s1" />
           {sideTabs}
-          <a className="index" href="/" >&#8592; RETURN</a>
         </div>
-        <a className="feedback" href="https://goo.gl/forms/JVXIpJ3TVhYNxMQW2" target="_blank">FEEDBACK?</a>
-        <div className="test-container">
-          <div className="test">
-            <hr className="margin" />
-            {ExamComponent}
-          </div>
-        </div>
+        <div>{ExamComponent}</div>
       </span>
     );
   }
