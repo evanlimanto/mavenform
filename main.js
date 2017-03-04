@@ -15,11 +15,7 @@ const app = express();
 app.use('/img', express.static('./src/img'));
 app.use(express.static('./build'));
 
-const mjAPI = require("mathjax-node/lib/mj-page.js");
-mjAPI.start();
-
 const useCache = false;
-console.log(process.env.NODE_ENV + " " + useCache);
 const examCache = new NodeCache({ stdTTL: 30 * 60, checkperiod: 10 * 60 });
 
 // Read Exam .yaml files from disk
