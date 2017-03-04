@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
 import { handleEvent } from '../src/utils';
-import { courses } from './exams';
+import { courseIDToLabel, courses } from './exams';
 
 const _ = require('lodash');
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      notificationBar: true
+    };
+  }
+
   render() {
     const courseBoxes = _.map(courses, (desc, course) => {
       return (
         <a className="course-card" href={`/course/${course}`} onClick={() => handleEvent('Click', 'Course', course)}>
-          <h1>{_.upperCase(course)}</h1>
+          <h1>{courseIDToLabel[course]}</h1>
           <hr className="s1" />
           <i className="course-subtitle">{desc}</i>
           <h6 className="card-helper">CLICK TO VIEW &#8594;</h6>
@@ -17,21 +25,24 @@ class Home extends Component {
       );
     });
 
+    console.log(this.state.notificationBar);
     return (
       <div className="home">
-        <div className="dark-gray center">
-          <hr className="s2" />
-          <a className="material-icons notification-x">close</a>
-          <p className="white-text notification-text">New courses are added every week. <a className="header-link">Sign up</a> to be notified when your course is available!</p>
-          <hr className="s2" />
-        </div>
+        {(this.state.notificationBar) ? (
+          <div className="dark-gray center">
+            <hr className="s2" />
+            <a className="material-icons notification-x" onClick={() => this.setState({notificationBar: false})}>close</a>
+            <p className="white-text notification-text">New courses are added every week. <a className="header-link" href="https://docs.google.com/forms/d/e/1FAIpQLSeHtnXpK0TE2z9nt_0ygAdJa1HjMoxUyk-KU-Pksxb9b6t4Pg/viewform?usp=sf_link">Sign up</a> to be notified when your course is available!</p>
+            <hr className="s2" />
+          </div>
+        ) : (null)}
         <div className="banner">
           <div className="banner-img"></div>
           <div className="banner-text">
             <div className="banner-header">Mavenform</div>
             <hr className="s2" />
             <div className="center">
-              <h5 className="h5-alt">A new an intuitive format to view and study past exams</h5>
+              <h5 className="h5-alt">A new and intuitive format to view and study past exams</h5>
             </div>
           </div>
         </div>
