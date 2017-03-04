@@ -1,0 +1,289 @@
+course: 'chem1a'
+ref: 'mt2-sp13'
+
+type: 'mt2'
+term: 'sp13'
+prof: 'Pines'
+
+questions: {
+
+}
+
+parts: {
+
+}
+
+q1_1: |
+  1\. 1\.54 g of Ne and Ar are placed in a 114\.9 mL container at 100°C.
+  What is the partial pressure in atm of Ne in the container?
+  
+q1_1_i:
+  - 5.45
+  - 786.28
+  - 210.96
+  - 20.32
+  - 10.27
+
+q1_1_s: 3
+
+
+q2_1: |
+  2\. For an ideal gas, which of the following statements is not true?
+
+q2_1_i:
+  - At constant temperature, pressure is proportional to density
+  - At constant density, pressure is proportional to T
+  - At constant temperature and number of moles, volume is proportional to pressure
+  - At standard pressure and temperature, volume is proportional to the number of moles
+  - None of the above
+
+q2_1_s: 3  
+
+
+q3_1: |
+  Consider the following reaction for questions 3 and 4\:
+  <p align="center">![Reactions](/img/chem1a/mt2-sp13-q3-1.png)</p>
+  3\. In the reaction above the hybridization around the cobal (Co) atom changes from:
+
+q3_1_i:
+  - $sp^6 \rightarrow sp^3$
+  - $sd^6 \rightarrow sd^3$
+  - $sp^6d^2 \rightarrow sp^3$
+  - $sp^3d^2 \rightarrow sd^3$
+  - No changes
+
+q3_1_s: 3
+
+
+q4_1: |
+  What wavelength of light could be used to excite complex A from the HOMO (Highest Occupied Molecular Orbital)
+  to the LUMO (Lowest Unoccupied Molecular Orbital)?
+
+q4_1_i:
+  - Radio Wave
+  - IR
+  - Pink
+  - Red
+  - Blue
+
+q4_1_s: 5
+
+
+q5_1: |
+  If 1 atm of $CH_4$ (g) and 1 atm of $O_2$ (g) (a total pressure of 2 atm) reaction
+  to form $CO_2$ (g) and $H_2O$ (g) at constant temperature and volume what is the 
+  pressure of the product mixture?
+
+q5_1_i:
+  - 0 atm
+  - 0.5 atm
+  - 1.0 atm
+  - 1.5 atm
+  - 2.0 atm
+
+q5_1_s: 5
+
+
+q6_1: |
+  One mole of $C_60$ buckminsterfullerene molecules decomposes to form carbon atoms.
+  How many moles of carbon atoms are formed?
+
+q6_1_i:
+  - $6.0 * 10^{23}$
+  - $1.0 * 10^{22}$
+  - 60
+  - 1.0
+  - $1.7 * 10^{2}$
+
+q6_1_s: 3
+
+
+q7_1: |
+  Assuming that delocalized π-systems can be modeled in the same way as 
+  particle-in-a-box problems, which of the following molecular orbitals
+  (with delocalized π-systems) has the highest energy?
+
+q7_1_i:
+  - ![a](/img/chem1a/mt2-sp13-q7-1.png)
+  - ![b](/img/chem1a/mt2-sp13-q7-2.png)
+  - ![c](/img/chem1a/mt2-sp13-q7-3.png)
+  - ![d](/img/chem1a/mt2-sp13-q7-4.png)
+  - ![e](/img/chem1a/mt2-sp13-q7-5.png)
+
+q7_1_s: 3
+  
+
+q8_1: |
+  Which of the following molecules and molecular ions would experience an increase
+  in paramagnetism through loss of an electron?
+
+q8_1_i:
+  - $F_2$
+  - $O_2$
+  - ${O_2}^+$
+  - ${N_2}^+$
+  - ${N_2}^-$
+
+q8_1_s: 1
+
+
+q9_1: |
+  Considering molecular orbital theory, which of the following has the weakest bond?
+
+q9_1_i:
+  - $F_2$
+  - $O_2$
+  - ${O_2}^+$
+  - ${N_2}^+$
+  - ${N_2}^-$
+
+q9_1_s: 1
+
+
+q10_1:
+
+q10_1_i:
+
+q10_1_s:
+
+
+q11_1:
+
+q11_1_i:
+
+q11_1_s:
+
+
+q12_1:
+
+q12_1_i:
+
+q12_1_s:
+
+
+q13_1:
+
+q13_1_i:
+
+q13_1_s:
+
+
+q14_1:
+
+q14_1_i:
+
+q14_1_s:
+
+
+q15_1:
+
+q15_1_i:
+
+q15_1_s:
+
+
+q16_1:
+
+q16_1_i:
+
+q16_1_s:
+
+
+q17_1:
+
+q17_1_i:
+
+q17_1_s:
+
+
+q18_1:
+
+q18_1_i:
+
+q18_1_s:
+
+
+q19_1:
+
+q19_1_i:
+
+q19_1_s:
+
+
+q20_1:
+
+q20_1_i:
+
+q20_1_s:
+
+
+q21_1:
+
+q21_1_i:
+
+q21_1_s:
+
+
+q22_1:
+
+q22_1_i:
+
+q22_1_s:
+
+
+q23_1:
+
+q23_1_i:
+
+q23_1_s:
+
+
+q24_1:
+
+q24_1_i:
+
+q24_1_s:
+
+
+q25_1:
+
+q25_1_i:
+
+q25_1_s:
+
+
+q26_1:
+
+q26_1_i:
+
+q26_1_s:
+
+
+q27_1:
+
+q27_1_i:
+
+q27_1_s:
+
+
+q28_1:
+
+q28_1_i:
+
+q28_1_s:
+
+
+q29_1:
+
+q29_1_i:
+
+q29_1_s:
+
+
+q30_1:
+
+q30_1_i:
+
+q30_1_s:
+
+
