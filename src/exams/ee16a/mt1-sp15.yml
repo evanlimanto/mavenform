@@ -109,7 +109,7 @@ q2_2_s: |
   $$\left[ \begin{array}{c c}1 & 2 \\ 2 & 4 \\ \end{array} \right] \cdot \left[ \begin{array}{c} 1 \\ 1 \\ \end{array} \right] = \left[ \begin{array}{c} 3 \\ 6 \\ \end{array} \right]$$
 
 q2c: |
-  c) <i>(6 pts)</i> Now let’s imagine we had an image with black pixels everywhere, and that we transformed this image by the same $\left[ \begin{array} [[1, 2], [2, 4]] \end{array} \right]$ matrix as in part b). Sketch the that we transformed this image by the same resulting transformed image. Note that you don’t need to know the exact size of the original image – just indicate what happens to the transformed image as this size is increased. It may help you to consider what happens when you multiply an arbitrary vector $\left[ \begin{array} [['x', 'y']], true \end{array} \right]$ by the transformation matrix. What is property of the transformation matrix makes the resulting image look the way it does? 
+  c) <i>(6 pts)</i> Now let’s imagine we had an image with black pixels everywhere, and that we transformed this image by the same $\left[ \begin{array}{c c} 1 & 2 \\ 2 & 4 \end{array} \right]$ matrix as in part b). Sketch the that we transformed this image by the same resulting transformed image. Note that you don’t need to know the exact size of the original image – just indicate what happens to the transformed image as this size is increased. It may help you to consider what happens when you multiply an arbitrary vector $\left[ \begin{array}{c c} x & y \end{array} \right]$ by the transformation matrix. What is property of the transformation matrix makes the resulting image look the way it does? 
 
 q2_3_s: |
   Notice that after transformation both of the black pixels in part (b) ended up on a single line. We can see this in general because:

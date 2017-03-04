@@ -32,7 +32,7 @@ app.get('/getExam/:course/:type/:exam', function(req, res) {
     doc = cachedValue;
   } else {
     try {
-      doc = fs.readFileSync(`src/exams/${type}/${course}${exam}.yml`, "utf8");
+      doc = fs.readFileSync(`src/exams/${course}/${type}-${exam}.yml`, "utf8");
       doc = yaml.safeLoad(doc);
     } catch(e) {
       error = true;

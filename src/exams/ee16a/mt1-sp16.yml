@@ -33,16 +33,16 @@ q3: |
   <h2>3. Mechanical Johann</h2>
   Invert the following matrix:
 
-  $\left[ \begin{array} [[1, 2, 6], [0, 1, 4], [2, 4, 10]] \end{array} \right]$
+  $\left[ \begin{array}{c c c} 1 & 2 & 6 \\ 0 & 1 & 4 \\ 2 & 4 & 10 \end{array} \right]$
 
 q3_s: |
   We can ﬁnd the inverse by row reducing the augmented system (process omitted for brevity): <br/><br/>
 
-  $\left[ \begin{array} [[1, 2, 6, \vdots, 1, 0, 0], [0, 1, 4, \vdots, 0, 1, 0], [2, 4, 10, \vdots, 0, 0, 1]] \end{array} \right]$
+  $\left[ \begin{array}{c c c c c c c} 1 & 2 & 6 & \vdots & 1 & 0 & 0 \\ 0 & 1 & 4 & \vdots & 0 & 1 & 0 \\ 2 & 4 & 10 & \vdots & 0 & 0 & 1 \end{array} \right]$
   <br/>
 
   Thus the inverse is given by:<br/>
-  $\left[ \begin{array} [[3, -2, -1], [-4, 1, 2], [1, 0, '-1/2']] \end{array} \right]$<br/>
+  $\left[ \begin{array}{c c c} 3 & -2 & -1 \\ -4 & 1 & 2 \\ 1 & 0 & -1/2 \end{array} \right]$<br/>
 
   We can check our answer by calculating:<br/><br/>
   $\left[ \begin{array}{c c c} 1 & 2 & 6 \\ 0 & 1 & 4 \\ 2 & 4 & 10 \\ \end{array} \right] \left[ \begin{array}{c c c} 3 & -2 & -1 \\ -4 & 1 & 2 \\ 1 & 0 & -1/2 \\ \end{array} \right] = \left[ \begin{array}{c c c} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \\ \end{array} \right]$
@@ -329,7 +329,7 @@ q7_5_s: |
 q8_1: |
   <h2>8. Ayy - Reflections on SIXTEEN <i>(28 points)</i></h2>
   You are involved in the design of a robot called SIXTEEN-AYY that has arms with a certain range of motion and certain operations that the arms can perform.<br/>
-  For parts (a)–(e) of this problem, we will look at a simplified case where we pretend that the robot’s arm can move only in a 2-dimensional space. Thus, we will represent the position of the end of the robot’s arm with a vector $\vec{p}$ = $\left[ \begin{array} [['p_x'], ['p_y']] \end{array} \right]$.
+  For parts (a)–(e) of this problem, we will look at a simplified case where we pretend that the robot’s arm can move only in a 2-dimensional space. Thus, we will represent the position of the end of the robot’s arm with a vector $\vec{p}$ = $\left[ \begin{array}{c} p_x \\ p_y \end{array} \right]$.
   Let’s further assume that the robot will be built to perform two movement commands
   determined by the following transformations:
   <hr class="s2" />
@@ -372,7 +372,7 @@ q8_5_s: |
   No, the resulting matrices won't be the same because we've just shown $A_{1}A_{2} \ne A_{2}A_{1}$; i.e. matrix multiplication is not commutative.
 
 q8_6: |
-  (f) Now let’s go back to 3-dimensional space, with the position of the end of the robot arm represented as vectors $\left[ \begin{array} [['P_x'], ['P_y'], ['P_z']] \end{array} \right]$ $\in$ $\mathbb{R}^3$. Suppose the end of the robot’s arm can reach only points in the span of the vectors $\left[ \begin{array}{c} 1 \\ 0 \\ 0 \end{array} \right]$ and $\left[ \begin{array}{c} 0 \\ 1 \\ 0 \end{array} \right]$. Circle the graph below that corresponds to this possible range of motion.
+  (f) Now let’s go back to 3-dimensional space, with the position of the end of the robot arm represented as vectors $\left[ \begin{array}{c} P_x \\ P_y \\ P_z \end{array} \right]$ $\in$ $\mathbb{R}^3$. Suppose the end of the robot’s arm can reach only points in the span of the vectors $\left[ \begin{array}{c} 1 \\ 0 \\ 0 \end{array} \right]$ and $\left[ \begin{array}{c} 0 \\ 1 \\ 0 \end{array} \right]$. Circle the graph below that corresponds to this possible range of motion.
 
   <img src="/img/sp16q8-1.png" className="problem-image" />
 

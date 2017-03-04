@@ -17,6 +17,9 @@ class Sidebar extends Component {
   generateSidetabContainers() {
     const problemIDs = this.props.problemIDs;
     const problemTitles = this.props.problemTitles;
+    const term = this.props.term;
+    const course = this.props.course;
+    const examType = this.props.examType;
     return _.map(_.range(problemIDs.length), (index) => {
       const problemID = problemIDs[index];
       const problemTitle = `Question ${problemID[1]}`;
@@ -29,7 +32,16 @@ class Sidebar extends Component {
         return (
           <div className="sidetab-container" key={index}>
             {
-              <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} offset={-100} smooth={true} duration={500}>
+              <Link
+               activeClass="active"
+               className="sidetab"
+               to={problemID}
+               spy={true}
+               isDynamic={true}
+               offset={-100}
+               smooth={true}
+               duration={500}
+               onClick={() => handleEvent('Scroll Nav', problemID, `${course}${term}-${examType}`)}>
                 {problemTitle}
               </Link>
             }
@@ -54,10 +66,10 @@ class Sidebar extends Component {
           <hr className="s2" />
           <h6>SOURCES</h6>
           <div className="sidetab-container">
-            <a className="sidetab" href={`${examDirPrefix}-exam.pdf`} target="_blank">Exam PDF</a>
+            <a className="sidetab" href={`${examDirPrefix}-exam.pdf`} target="_blank" onClick={() => handleEvent('PDF', 'Exam', `${course}${term}-${examType}`)}>Exam PDF</a>
           </div>
           <div className="sidetab-container">
-            <a className="sidetab" href={`${examDirPrefix}-soln.pdf`} target="_blank">Solutions PDF</a>
+            <a className="sidetab" href={`${examDirPrefix}-soln.pdf`} target="_blank" onClick={() => handleEvent('PDF', 'Solution', `${course}${term}-${examType}`)}>Solutions PDF</a>
           </div>
         </div>
       </span>

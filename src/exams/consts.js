@@ -47,12 +47,6 @@ const exams = {
         'profs': 'Garcia',
       },
     },
-    'midterm2': {
-      'Fall 2016': {
-        'id': 'fa16',
-        'profs': 'Boser, Katz',
-      }
-    }
   },
 
   'cs162': {
@@ -100,6 +94,7 @@ const courses = {
 const examTypeToLabel = {
   'mt1': 'Midterm 1',
   'mt2': 'Midterm 2',
+  'final': 'Final',
 }
 
 const termToLabel = {

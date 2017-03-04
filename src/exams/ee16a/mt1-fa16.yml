@@ -150,7 +150,7 @@ q6_1: |
   ? If so, ﬁnd the scalars that multiply the vectors such that they reach Berkeley.
 
 q6_1_s: |
-  (3, -2). 3 $\left[ \begin{array} [[1], [0], [1]] \end{array} \right]$ - 2 $\left[ \begin{array} [[0], [1], [-1]] \end{array} \right]$ = $\left[ \begin{array} [[3], [-2], [5]] \end{array} \right]$
+  (3, -2). 3 $\left[ \begin{array}{c} 1 \\ 0 \\ 1 \end{array} \right]$ - 2 $\left[ \begin{array}{c} 0 \\ 1 \\ -1 \end{array} \right]$ = $\left[ \begin{array}{c} 3 \\ -2 \\ 5 \end{array} \right]$
 
 q6_2: |
   (b) While Kody was busy planning his escape to Berkeley, Nara found a pick-axe in the room that can operate in the following directions: 

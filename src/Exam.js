@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
-import { handleEvent } from './utils';
 import { courseIDToLabel, examTypeToLabel, termToLabel } from './exams';
-import { MultipleChoiceQuestion, Question, Sidebar } from './components';
+import { MultipleChoiceQuestion, Navbar, NavSidebar, Question, Sidebar } from './components';
 import { exams } from './exams';
 
 const _ = require('lodash');
@@ -146,66 +144,12 @@ class Exam extends Component {
 
     const ExamComponent = <ExamContent exam={exam} course={course} type={examType} />;
 
-    const collapserClass = classnames({
-      collapse: true,
-      iscollapsed: !this.state.sidebar
-    });
-    const collapser = (
-      <a className={collapserClass} onClick={() => this.toggleCollapse()}>&#9776; {(this.state.sidebar) ? "COLLAPSE" : "MENU"}</a>
-    );
-
-    const menuClass = classnames({
-      menu: true,
-      hidden: !this.state.sidebar
-    });
-
-    const sideTabs = _.map(exams[course], (courseExams, examType) => {
-      const content =  _.map(courseExams, (info, semester) => {
-        const url = `/exam/${course}/${examType}/${info.id}`;
-        const title = semester;
-        const sideTabClass = classnames({
-          sidetab: true,
-          active: (exam === info['id']),
-        });
-        return (
-          <div key={semester} className="sidetab-container">
-            <a className={sideTabClass} href={url}>{title}</a>
-          </div>
-        );
-      });
-      return (
-        <span key={examType}>
-          <div className="sideTitle"><span className="material-icons sideArrow">keyboard_arrow_down</span>{examTypeToLabel[examType]}</div>
-          {content}
-          <div className="sideTitle"><span className="material-icons sideArrow">keyboard_arrow_right</span> Midterm 2 </div>
-          <div className="sideTitle"><span className="material-icons sideArrow">keyboard_arrow_right</span> Final </div>
-        </span>
-      );
-    });
-
     return (
-      <span>
-        <div className="nav">
-          <a className="logo">Mavenform</a>
-          <a className="material-icons mobile-back">keyboard_backspace</a>
-          <div className="tooltip-container">
-            <a className="material-icons">sms</a>
-            <span className="tooltip">Send Feedback</span>
-          </div>
-          <div className="tooltip-container reader-mode">
-            <a className="material-icons">subject</a>
-            <span className="tooltip">Reader Mode</span>
-          </div>
-        </div>
-        <div className={menuClass}>
-          <h6>{courseIDToLabel[course]}</h6>
-          <div className="sidetab-container">
-            <a className="sidetab" href={`/course/${course}`} onClick={handleEvent("Click", "Home")}>Index</a>
-          </div>
-          {sideTabs}
-        </div>
+      <div>
+        <Navbar />
+        <NavSidebar course={course} exam={exam} />
         <div>{ExamComponent}</div>
-      </span>
+      </div>
     );
   }
 }

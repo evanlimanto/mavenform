@@ -31,6 +31,39 @@ window.addEventListener('scroll', function(e) {
   }
 });
 
+function trackUserOnPage() {
+  if (window.location.hostname !== "localhost") {
+    const path = window.location.pathname + window.location.search;
+    handleEvent('Active', path);
+  }
+}
+
+var userOnPageTracker = null;
+window.addEventListener('focus', function(e) {
+  if (window.location.hostname !== "localhost") {
+    userOnPageTracker = window.setInterval(trackUserOnPage, 30 * 1000);
+  }
+});
+
+window.addEventListener('blur', function(e) {
+  if (window.location.hostname !== "localhost") {
+    window.clearInterval(userOnPageTracker);
+  }
+});
+
+var lastMouseMoveTime = 0;
+window.addEventListener('mousemove', function(e) {
+  const currentTime = Date.now();
+  // Track scroll every thirty seconds
+  if (currentTime - lastMouseMoveTime > 30 * 1000) {
+    lastMouseMoveTime = currentTime;
+    if (window.location.hostname !== "localhost") {
+      const path = window.location.pathname + window.location.search;
+      handleEvent('Mouse', path);
+    }
+  }
+});
+
 ReactDOM.render((
   <Router history={browserHistory} onUpdate={logPageView}>
     <Route path="/" component={Home} />
