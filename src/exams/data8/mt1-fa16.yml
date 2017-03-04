@@ -1,0 +1,321 @@
+course: 'data8'
+ref: 'mt1-fa16'
+
+type: 'mt1'
+term: 'fa16'
+prof: 'Adhikari'
+
+questions: {
+  'q1': '',
+  'q2': '',
+  'q3': '',
+  'q4': '',
+  'q5': '',
+  'q6': '',
+  'q7': '',
+  'q8': '',
+}
+
+parts: {
+  'q1': 2,
+  'q2': 1,
+  'q3': 1,
+  'q4': 2,
+  'q5': 1,
+  'q6': 2,
+  'q7': 1,
+  'q8': 1,
+}
+
+q1_1: |
+  **1\.** The graphic below appeard on the front page of the Daily Cal on Tuesday of last week.
+
+  <p align="center">![Campus Crime from 2013 to 2015](/img/data8/mt1-fa16-q1-1.png)</p>
+
+  **(a)** One important choice made by the graphic designers makes it difficult to visually compare the numbers of crimes in various categories. What was that choice, and why does it make visual comparisons difficult?
+
+q1_1_s: |
+  The choice was not to include a uniform height scale between different categories - each category has its own scale, so the bars in different categories cannot be compared to one another visually.
+
+q1_2: |
+  **(b)** The data have been enetered into a table called **crime**, shown below.
+  <hr class="s2" />
+
+  |Year|Robberies|Liquor Law Arrests|Hate Crimes|Sex Crimes|
+  |----|---------|------------------|-----------|----------|
+  |2013|16       |63                |9          |13        |
+  |2014|23       |35                |9          |15        |
+  |2015|9        |24                |2          |13        |
+
+  <hr class="s2" />
+  Use the table **crime** in one line of Python code that produces a graphic that corrects the problem in (a), and **explain** why the problem will be fixed.
+
+q1_2_s: |
+  The following line of code will produce a bar chart with a common horizontal scale between all categories, allowing comparison between data from different categories.
+
+  <hr class="s2" />
+
+  `daily.barh('Year')`
+
+q2_1: |
+  **2\.** The table **colors** is created as follows:
+  <hr class="s2" />
+
+  ```
+  colors = Table().with_column(
+    'Color', make_array('blue', 'green', 'red', 'purple')
+  )
+  ```
+
+  <hr class="s2" />
+  Find a numerical expression for the chance that all the entries of **colors.sample(3).column(0)** are the same. Don't simplify the arithmetic.
+
+q2_1_s: |
+  For the version where we are drawing 3 samples from a set of 4 colors:
+
+  There are 4 different ways to get all the same color on 3 samples:
+
+  $$P(\text{all same color}) = P(\text{all blue}) + P(\text{all green}) + P(\text{all red}) + P(\text{all purple})$$
+
+  Now, let’s consider one of these probabilities. In order to get 3 blue’s, we have to get a blue on the first draw, a blue on the second draw, and a blue on the third draw. Since we’re sampling with replacement, each of these happens with probability $\frac{1}{4}$:
+
+  $$P(\text{all blue}) = P(\text{first draw blue}) \* P(\text{second draw blue}) \* P(\text{third draw blue}) = \frac{1}{4} \* \frac{1}{4} \* \frac{1}{4}$$
+
+  We multiply here because we are taking proportions of possible outcomes: Out of all possible outcomes, $\frac{1}{4}$ of them draw blue on the first draw; of all outcomes that have a blue on the first draw, $\frac{1}{4}$ of them have a blue on the second draw, etc.
+
+  The same is true for all four colors, so we get
+
+  $$P (\text{all same color}) = \frac{1}{4}^{3} + \frac{1}{4}^{3} + \frac{1}{4}^{3} + \frac{1}{4}^{3} = 4 * \frac{1}{4}^{3} = \frac{1}{8}$$
+
+  **Alternate explanation:**  The chance that all the draws are the same color is the same
+  as the chance that every draw matches the first draw:
+
+  $$P(\text{all same color}) = P(draw1 = draw1) \* P(draw2 = draw1) \* P(draw3 = draw1)$$
+
+  The chance that the first draw matches itself is always 1. The chance that the second draw matches the first is the chance that the second draw is $\frac{1}{4}$, since there’s only 1 color out of 4 that matches the first draw, and the third draw is the same.
+
+  $$P (\text{all same color}) = 1 \* \frac{1}{4} \* \frac{1}{4} = 18$$
+
+  For other versions of the exam, the same reasoning applies. In each case, the solution is:
+
+  $$(\frac{1}{\lt\text{num colors}\gt})^{\lt\text{num samples}\gt - 1}$$
+
+q3_1: |
+  **3\.** Fill in each blank with the best choice from the table of items below. **No explanations are necessary.**
+  <hr class="s2" />
+  You can use items more than once, Don't write out the words or phrases you picked; just enter the item number in the answer table.
+
+  <p align="center">![Words](/img/data8/mt1-fa16-q3-1.png)</p>
+
+  - Important criteria for a statistic to be a good estimate of a population <u>(i)</u> include <u>(ii)</u> bias and low <u>(iii)</u>.
+
+  - The <u>(iv)</u> distribution of a large <u>(v)</u> is likely to resemble the <u>(vi)</u> of the population.
+
+q3_1_s: |
+  Important criteria for a statistic to be a good estimate of a population  **parameter** include **low** bias and low **variability**. The **empirical** distribution of a large **random sample** is likely to resemble the **distribution** of the population.
+
+q4_1: |
+  **4\.** The table **nba** has a column labeled **SALARY** containing the 2015-2016 salaries of NBA players. Here is the output of **nba.select('SALARY').hist(bins = make_array(0, 2, 4, 12, 18, 26))** along with the heights of the bars.
+  <hr class="s2" />
+  <p align="center">![Salary Histogram](/img/data8/mt1-fa16-q4-1.png)</p>
+  <hr class="s2" />
+
+  |bin (million dollars)|[0, 2)|[2, 4)|[4, 12)|[12, 18)|[18, 26)|
+  |---------------------|------|------|-------|--------|--------|
+  |**height (percent per million dollars)**|17.63|11.39|3.60|1.60|0.45|
+
+  <hr class="s2" />
+  The interval [a, b) contains all values that are greater than or equal to a and less than b.
+
+  **(a)** Which bin contains more players: [2, 4) or [4, 12)? **Explain** your choice.
+
+q4_1_s: |
+   Bin [4, 12) contains more players because the corresponding bar has a larger area than that of bin [2, 4).
+
+   The area of the first bar is less than 24 (2 times something less than 12) and the area of the second is greater than 24 (8 times something more than 3).
+
+q4_2: |
+  **(b)** To see some more detial in the [4, 12) range, the histogram will be redrawn with bins as shown below. The display includes the heights that are avilable from above.
+  <hr class="s2" />
+
+  |bin (million dollars)|[0, 2)|[2, 4)|[4, 6)|[6, 12)|[12, 18)|[18, 26)|
+  |---------------------|------|------|-------|--------|--------|
+  |**height (percent per million dollars)**|17.63|11.39|(i)|(ii)|1.60|0.45|
+
+  <hr class="s2" />
+  The expression **nba.num_rows** evaluates to 417.
+
+  The expression **nba.where('SALARY', are.between(4, 6)).num_rows** evaluates to 56.
+  <hr class="s2" />
+  If possible, provide a numerical expression for each imssing height (do not simplify the arithmetic). If this is not possible, explain why not.
+
+q4_2_s: |
+  4 (b) (i). For the version of the midterm where the bins are [4, 6) and [6, 12):
+
+  $$((56/417) \* 100 ) / 2$$
+
+  4 (b) (ii). For the version of the midterm where the bins are [4, 6) and [6, 12):
+
+  $$A = (2−0)\*(17.63) + (4−2)\*(11.39) + (6−4)\*(parti) + (18−12)\*(1.6) + (26−18)\*(0.45) (100 − A) / (12−6)$$
+
+  Alternatively,
+  $$((12−4)\*(3.6) − (6−4)\*(part i)) / (12−6)$$
+
+q5_1: |
+  **5\.** In a Public Health Service study of the effect of smoking, participants were separated into groups according to gender and age. In each sdubgroup, the observation was the same - those who had never smoked were on average somewhat more healthy than the current smokers, but the current smokers were on average quite a bit more healthy than those who had recently stopped smoking.
+  <hr class="s2" />
+  Based on these results, should the current smokers have been advised not to give up smoking? If not, provide at least one factor that helps explain the observation.
+
+q5_1_s: |
+  **Of course not!  They should quit.**
+
+  **Plausible explanation:**  Those who have quit had a good reason to (it’s very difficult to quit even if you know you need to): their health  <u>became so bad</u> from smoking, that this habit was impeding w/ everyday activity. They are on the path to recovery, but are coming from an even more adverse condition.
+
+q6_1: |
+  **6\.** A clinic is trying to run a randomized controlled trials of a new appointment system. The clinic is open Monday through Saturday each week. As a way of randomization, all appointment requests that come in on Mondays, Wednesdays, and Fridays are assigned to the new system. All appointment requests that come in on Tuesdays, Thursdays, and Saturdays are assigned to the old system.
+  <hr class="s2" />
+  At the end of a few weeks, 212 appointment requests have been assigned to the new system and 277 to the old one.
+  <hr class="s2" />
+  Clinician A says, "This method is biased against the people who call on Mondays, Wednesdays, and Fridays. If we had tossed a fair coin for each request, we wouldn't have ended up with so few requests assigned to the new system."
+  <hr class="s2" />
+  Clinician B says, "No, the results are just like tossing a fair coin."
+  <hr class="s2" />
+  **(a)** Provide **null** and **alternative** hypotheses that reflect the views of the two clinicians.
+  <hr class="s2" />
+  **Null:** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+  **Alternative:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+q6_1_s: |
+  **Null hypothesis**:  The method is not biased. Appointments are equally likely to be assigned to the new system as they are to the old; i.e, there is an equally likely chance that an appointment is made on Monday, Wednesday or Friday as there is on Tuesday, Thursday, Saturday. (Note: the null hypothesis must be a fully specified chance model)
+
+  **Alternative hypothesis**:  The method is biased. Appointments are  not equally likely to be assigned to the new system as they are to the old; i.e., the method is biased against appointments made on Monday, Wednesday or Friday. (Note: the alternative specifies the direction of the bias, in this case against appointments made on Monday, Wednesday or Friday)
+
+
+q6_2: |
+  **(b)** A test of the hypotheses in part (a) will be performed. The test statistic is the **number of requests assigned to the new system.**
+  <hr class="s2" />
+  Fill in the blanks in the code below so that the output of the final line is the empirical P-value of the test. Make sure your code is consistent with the hypotheses in part (a).
+
+  Two arrays have been created for you. You are welcome to use their names in your code if you wish.
+  - The array **array2** consists of two entries, one of which is the string **'New'** and the other is **'Old'**.
+  - The array **array489** consists of 489 entries, 212 of which are **'New'** and 277 are **'Old'**.
+
+  Here is the code for you to complete.
+
+  ```
+  stats = make_array()
+
+  for i in np.arange(5000):
+
+      draws = np.random.choice(____________________, ____________________)
+
+      number_new = \
+        np.count_nonzero(________________________________________)
+
+      stats = np.append(____________________, number_new)
+
+  empirical_P = \
+    np.____________________________________________________________
+
+  empirical_P
+  ```
+
+q6_2_s: |
+  ```
+  values = make_array()
+
+  for i in np.arange(10000):
+
+      sample = np.random.choice(array2, 477)
+
+      number_new = np.count_nonzero(sample == "New")
+
+      values = np.append(values, number_new)
+
+  empirical_P = np.count_nonzero(values <= 206)/10000
+
+  empirical_P
+  ```
+
+  **For other versions of the exam:**
+
+  477 corresponds to 492 (white), 489 (off-white)
+
+  sample corresponds to chosen (white), draws (off-white)
+
+  10000 corresponds to 15000 (white), 5000 (off-white)
+
+  206 corresponds to 211 (white), 212 (off-white)
+
+q7_1: |
+  **7.** My friend and I play the following gambling game repeatedly:
+  <hr class="s2" />
+  A fair die is rolled. If it shows one or six spots, I pay my friend \$1. If it shows two or five spots, my friend pays me \$1. If it shows three or four spots, neither of us pays any money.
+  <hr class="s2" />
+  One of the histograms below is an empirical histogram of my overall net winnings in 60 games, based on 10,000 repetitions of finding the overall net gain in 60 games. **Which histogram is it, and why?**
+  <hr class="s2" />
+  <p align="center">![Histograms of net winnings](/img/data8/mt1-fa16-q7-1.png)</p>
+  <hr class="s2" />
+
+  Justification:
+
+q7_1_s: |
+  "Based on probability (+1 = $\frac{1}{3}$, -1 = $\frac{1}{3}$, 0 = $\frac{1}{3}$),
+  the net gain should be zero (not [the histogram centered at 20]). The further we deviate
+  from zero, the less the probability should be (probability of winning \$60 is $(\frac{1}{3})^{60}$,
+  which is very small, so not [the histogram that’s roughly uniform on -\$60 to \$60]).
+  There is a chance of winning -\$60 to \$60, so the range should be greater than that of
+  [the histogram that went from -\$1 to \$1]. This leaves [the histogram that’s bell-shaped and centered at 0], which makes sense, as it is central at 0, follows a Gaussian distribution, and has a reasonable range (chance of winning > \$20 and < -\$20 is too low to see)."
+
+q8_1: |
+  The table **voters** contains one row for each voter in a large national sample. There are two columns:
+  <hr class="s2" />
+  Column 0: **State** is the state where the voter is registered. The states are denoted by their two-letter abbreviations, so that California is the string **'CA'** and Florida is **'FL'**.
+  <hr class="s2" />
+  Column 1: **Choice** has three categories: **'Candidate A'**, **'Candidate B'**, and **'Undecided'**.
+  <hr class="s2" />
+  Write code to calculate the total variation distance between the **Choice** distributions of California and Florida. You can assume that the table contains at least one voter in each **Choice** category for both the states.
+  <hr class="s2" />
+  Use the following steps.
+
+  ```
+  # A table of the data for all the California voters,
+  # containing just one column: Choice
+
+  ca_voters = voters.________________________________
+
+  # An array containing the Choice distribution (in proportions)
+  # for California
+
+  ca_dist = ca_voters.________________________________
+  ```
+
+  Now assume you have created **fl_voters** and **fl_dist** correspondingly for Florida. There is no need to write out the code for those.
+
+  Find the total variation distance:
+
+  ```
+  tvd = ________________________________
+  ```
+
+q8_1_s: |
+  ```
+  where(‘State’, are.equal_to(‘NY’)).select(‘Opinion’)
+
+  where(‘State’, are.equal_to(‘CA’)).select(‘Choice’)
+
+  where(‘State’, are.equal_to(‘TX’)).select(‘Preference’)
+
+  group(‘Opinion’).column(‘count’) / voters_NY.num_rows
+
+  group(‘Choice’).column(‘count’) / ca_voters.num_rows
+
+  group(‘Preference’).column(‘count’) / voters_tx.num_rows
+
+  0.5 * np.sum(np.abs(dist_CA - dist_NY))
+
+  0.5 * np.sum(np.abs(fl_dist - ca_dist))
+
+  0.5 * np.sum(np.abs(dist_ca - dist_tx))
+  ```

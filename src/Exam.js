@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { courseIDToLabel, examTypeToLabel, termToLabel } from './exams';
 import { MultipleChoiceQuestion, Navbar, NavSidebar, Question, Sidebar } from './components';
-import { exams } from './exams';
 
 const _ = require('lodash');
 import './Exam.css';
@@ -27,8 +26,7 @@ renderer.heading = function(text, level) {
 };
 renderer.code = function(code, language) {
   code = _.replace(code, /\r\n|\r|\n/g, '<hr class="s1" />');
-  console.log(JSON.stringify(code));
-  return `<code>${code}</code>`;
+  return `<hr class="s2" /><code>${code}</code><hr class="s2" />`;
 };
 renderer.em = function(text) {
   return `<i>${text}</i>`;
@@ -57,7 +55,6 @@ class ExamContent extends Component {
     fetch(`/getExam/${course}/${type}/${exam}`).then(function(response) {
       return response.json();
     }).then((json) => {
-      console.log(json);
       this.setState({ examContent: json });
     });
 
@@ -91,9 +88,6 @@ class ExamContent extends Component {
     const term = (examContent && _.has(examContent, 'term')) ? (examContent.term) : null;
     const useMarkdown = (examContent && _.has(examContent, 'md')) ? (examContent.md) : true;
 
-    // General information about the exam
-    const pre = (examContent && _.has(examContent, 'pre')) ?
-      (<div dangerouslySetInnerHTML={{'__html': marked(examContent.pre, {renderer})}} />) : null;
     const content = (examContent && _.has(examContent, 'parts')) ?
       _.map(examContent.parts, (num_parts, part) => {
         const subparts = _.map(_.range(1, num_parts + 1), subpart => {

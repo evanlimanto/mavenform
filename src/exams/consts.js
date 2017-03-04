@@ -72,6 +72,10 @@ const exams = {
 
   'data8': {
     'mt1': {
+      'Fall 2016': {
+        'id': 'fa16',
+        'profs': 'Adhikari'
+      },
       'Spring 2016': {
         'id': 'sp16',
         'profs': 'DeNero, Adhikari, Jordan, Parikh, Wagner'

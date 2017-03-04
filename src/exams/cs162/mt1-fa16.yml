@@ -463,7 +463,13 @@ q5_1: |
   <hr class="s2" />
   <b>You MUST implement the problem using semaphores.</b>
   <hr class="s2" />
-  constraint: |
+  a. (6 points) What are the correctness constraints?
+  <hr class="s2" />
+  1.
+  <hr class="s2" />
+  2.
+  <hr class="s2" />
+  3.
 
 q5_1_s: |
   1. After the 10th reindeer arrives, Santa must call <code>prepareSleigh()</code>, then all ten

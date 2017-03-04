@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { handleEvent } from '../../utils';
 
 const Scroll = require('react-scroll');
-const Sticky = require('react-stickynode');
 var Link = Scroll.Link;
 
 const _ = require('lodash');
@@ -16,7 +15,6 @@ class Sidebar extends Component {
 
   generateSidetabContainers() {
     const problemIDs = this.props.problemIDs;
-    const problemTitles = this.props.problemTitles;
     const term = this.props.term;
     const course = this.props.course;
     const examType = this.props.examType;

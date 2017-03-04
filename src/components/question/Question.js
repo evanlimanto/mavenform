@@ -8,7 +8,7 @@ const _ = require('lodash');
 class Solution extends Component {
   constructor(props) {
     super(props);
-
+    console.log(process.env.NODE_ENV);
     this.state = {
       showSolution: (process.env.NODE_ENV === 'development')
     };
@@ -44,15 +44,9 @@ class Solution extends Component {
       );
     }
 
-    if (!this.state.showSolution) {
-      solutionButton = (
-        <input className="blue" type="button" value="Show Solution" onClick={() => this.toggleSolution()}/>
-      );
-    } else {
-      solutionButton = (
-        <input className="gray" type="button" value="Hide Solution" onClick={() => this.toggleSolution()}/>
-      );
-    }
+    solutionButton = (
+      <input className={(this.state.showSolution) ? "gray" : "blue"} type="button" value="Show Solution" onClick={() => this.toggleSolution()}/>
+    );
 
     return (
       <div>
@@ -144,12 +138,14 @@ class MultipleChoiceQuestion extends Component {
   }
 
   render() {
-    const examCode = this.props.examCode;
+    const course = this.props.course;
     const content = this.props.content;
+    const examType = this.props.examType;
+    const term = this.props.term;
     return (
       <div id={this.props.id} className="question mc-question">
         <div className="tooltip-container">
-          <a className="link material-icons" onClick={() => this.copyToClipboard(`${document.location.origin}/exam?id=${this.props.examCode}&courseId=cs162#${this.props.id}`)}>link</a>
+          <a className="link material-icons" onClick={() => this.copyToClipboard(`${document.location.origin}/exam/${course}/${examType}/${term}#${this.props.id}`)}>link</a>
             {(this.state.copied) ? 
               (<span className="tooltip-link blue"><Expire delay={2000} callback={this.clearCopied}>Link Copied!</Expire></span>) : 
               (<span className="tooltip-link">Copy Link</span>)

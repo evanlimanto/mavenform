@@ -12,11 +12,11 @@ const _ = require('lodash')
 const port = process.env.PORT || 8080;
 const app = express();
 
-app.use('/img', express.static('./src/img'));
-app.use(express.static('./build'));
-
-const useCache = false;
+const useCache = (process.env.NODE_ENV !== 'development');
 const examCache = new NodeCache({ stdTTL: 30 * 60, checkperiod: 10 * 60 });
+
+app.use('/img', express.static(path.join(__dirname, '/src/img')));
+app.use(express.static(path.join(__dirname, '/build')));
 
 // Read Exam .yaml files from disk
 app.get('/getExam/:course/:type/:exam', function(req, res, next) {
