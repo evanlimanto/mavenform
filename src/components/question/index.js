@@ -102,7 +102,6 @@ class Solution extends Component {
   }
 }
 
-// Replace the href with whatever you are going to use to copy
 class Question extends Component {
   constructor(props) {
     super(props);
@@ -143,6 +142,56 @@ class Question extends Component {
         </div>
         
         <div dangerouslySetInnerHTML={{__html: content}}></div>
+        <Solution solution={this.props.solution} examCode={this.props.examCode} />
+      </div>
+    );
+  }
+}
+
+class MultipleChoiceQuestion extends Component {
+  constructor(props) {
+    super(props);
+    this.copyToClipboard = this.copyToClipboard.bind(this);
+    this.clearCopied = this.clearCopied.bind(this);
+
+    this.state = {
+      copied: false
+    }
+  }
+
+  copyToClipboard(url) {
+    copy(url);
+    handleEvent("Click", "Copy Question", this.props.examCode + "/" + this.props.id);
+
+    this.setState({
+      copied: true
+    });
+  }
+
+  clearCopied() {
+    this.setState({
+      copied: false
+    });
+  }
+
+  render() {
+    const examCode = this.props.examCode;
+    const content = this.props.content;
+    return (
+      <div id={this.props.id} className="question mc-question">
+        <div className="tooltip-container">
+          <a className="link material-icons" onClick={() => this.copyToClipboard(`${document.location.origin}/exam?id=${this.props.examCode}&courseId=cs162#${this.props.id}`)}>link</a>
+            {(this.state.copied) ? 
+              (<span className="tooltip-link blue"><Expire delay={2000} callback={this.clearCopied}>Link Copied!</Expire></span>) : 
+              (<span className="tooltip-link">Copy Link</span>)
+            }
+        </div>
+        <div dangerouslySetInnerHTML={{__html: content}}></div>
+        <hr className="s1" />
+        <input type="submit" className="option" value="A) Potato" readonly/>
+        <input type="submit" className="option right" value="B) Potato" readonly/>
+        <input type="submit" className="option" value="C) Potato" readonly/>
+        <input type="submit" className="option" value="D) Potato" readonly/>
         <Solution solution={this.props.solution} examCode={this.props.examCode} />
       </div>
     );
@@ -229,4 +278,4 @@ class FreeFormQuestion extends Component {
   }
 }
 
-export { Question, VariablesQuestion, MatrixQuestion, ToggleQuestion, FreeFormQuestion };
+export { Question, MultipleChoiceQuestion, VariablesQuestion, MatrixQuestion, ToggleQuestion, FreeFormQuestion };

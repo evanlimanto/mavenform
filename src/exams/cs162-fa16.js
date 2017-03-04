@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Question } from '../components/question';
+import { Question, MultipleChoiceQuestion } from '../components/question';
 import { Sidebar } from '../components';
 import { lx, onespace, twospace, fourspace, sixspace, eightspace, twelvespace } from '../utils';
 
@@ -13,42 +13,11 @@ const q1_1 =
 i) When a user program performs a system call, it must first put the system call
 arguments onto the kernel stack and then run a special instruction to switch to
 kernel mode.
-<hr class="s2" />
-<table>
-<thead>
-<tr><th><code>thread_current()</code></th><th>Line at which yielded</th><th>Thread which it yielded to</th><th>Main</th><th>a</th><th>b</th><th>c</th></tr></thead>
-<tbody>
-<tr><td>main</td><td>10</td><td>a</td><td>10</td><td>15</td><td>N/A</td><td>N/A</td></tr>
-<tr><td>a</td><td>20</td><td>main</td><td>15</td><td>15</td><td>N/A</td><td>N/A</td></tr>
-<tr><td>main</td><td>12</td><td>b</td><td>15</td><td>15</td><td>20</td><td>N/A</td></tr>
-<tr><td>b</td><td>20</td><td>main</td><td>20</td><td>15</td><td>20</td><td></td></tr>
-<tr><td>main</td><td>14</td><td>c</td><td>20</td><td>15</td><td>20</td><td>25</td></tr>
-<tr><td>c</td><td>20</td><td>main</td><td>25</td><td>15</td><td>20</td><td>25</td></tr>
-<tr><td>main</td><td>15</td><td>c</td><td>20</td><td>15</td><td>20</td><td>25</td></tr>
-<tr><td>c</td><td>23</td><td>main</td><td>20</td><td>15</td><td>20</td><td>N/A</td></tr>
-<tr><td>main</td><td>17</td><td>b</td><td>10</td><td>15</td><td>20</td><td>N/A</td></tr>
-<tr><td>b</td><td>23</td><td>a</td><td>10</td><td>15</td><td>N/A</td><td>N/A</td></tr>
-<tr><td>a</td><td>23</td><td>main</td><td>10</td><td>N/A</td><td>N/A</td><td>N/A</td></tr>
-</tbody>
-</table>
 `;
 
 const q1_1_soln =
 `
-<h3>FALSE.</h3>
-<hr class="s1" />
-Arguments are put on the thread’s stack, not kernel stack. The
-correct answer was worth 1 point and the justification was worth an
-additional 1 point.
-<hr class="s2" />
-<table>
-<thead>
-<tr><th><code>thread_current()</code></th><th>Line at which yielded</th><th>Thread which it yielded to</th><th>Main</th><th>a</th><th>b</th><th>c</th></tr></thead>
-<tbody>
-<tr><td>main</td><td>10</td><td>a</td><td>10</td><td>15</td><td>N/A</td><td>N/A</td></tr>
-${_.repeat('<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>', 10)}
-</tbody>
-</table>
+B) Potato
 `;
 
 const q1_2 =
@@ -777,7 +746,7 @@ class CS162Fa16 extends Component {
             <h1>General Information</h1>
             <p>This is a closed book exam. You are allowed one 2-sided hand-written notes. You have 80 minutes to complete as much of the exam as possible. Make sure to read all of the questions first, as some of the questions are substantially more time consuming.</p>
           </div>
-          <Question id={"q1-1"} content={q1_1} solution={q1_1_soln} examCode={examCode} />
+          <MultipleChoiceQuestion id={"q1-1"} content={q1_1} solution={q1_1_soln} examCode={examCode} />
           <Question id={"q1-2"} content={q1_2} solution={q1_2_soln} examCode={examCode} />
           <Question id={"q1-3"} content={q1_3} solution={q1_3_soln} examCode={examCode} />
           <Question id={"q1-4"} content={q1_4} solution={q1_4_soln} examCode={examCode} />
