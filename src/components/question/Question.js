@@ -8,7 +8,6 @@ const _ = require('lodash');
 class Solution extends Component {
   constructor(props) {
     super(props);
-    console.log(process.env.NODE_ENV);
     this.state = {
       showSolution: (process.env.NODE_ENV === 'development')
     };
@@ -142,21 +141,29 @@ class MultipleChoiceQuestion extends Component {
     const content = this.props.content;
     const examType = this.props.examType;
     const term = this.props.term;
+    const solutionNum = this.props.solutionNum;
+    const choices = this.props.choices;
+
+    const options = _.map(choices, (choice, index) => {
+      choice = `${String.fromCharCode(index + 65)}) ${choice}`;
+      const optionClass = classnames({
+        option: true,
+        right: (index == solutionNum - 1),
+      });
+      return <input key={index} type="submit" className={optionClass} value={choice} readOnly />;
+    });
     return (
       <div id={this.props.id} className="question mc-question">
         <div className="tooltip-container">
           <a className="link material-icons" onClick={() => this.copyToClipboard(`${document.location.origin}/exam/${course}/${examType}/${term}#${this.props.id}`)}>link</a>
-            {(this.state.copied) ? 
-              (<span className="tooltip-link blue"><Expire delay={2000} callback={this.clearCopied}>Link Copied!</Expire></span>) : 
+            {(this.state.copied) ?
+              (<span className="tooltip-link blue"><Expire delay={2000} callback={this.clearCopied}>Link Copied!</Expire></span>) :
               (<span className="tooltip-link">Copy Link</span>)
             }
         </div>
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <hr className="s1" />
-        <input type="submit" className="option" value="A) Potato" readonly/>
-        <input type="submit" className="option right" value="B) Potato" readonly/>
-        <input type="submit" className="option" value="C) Potato" readonly/>
-        <input type="submit" className="option" value="D) Potato" readonly/>
+        {options}
         <Solution solution={this.props.solution} examCode={this.props.examCode} />
       </div>
     );

@@ -4,17 +4,11 @@ ref: 'mt2-sp13'
 type: 'mt2'
 term: 'sp13'
 prof: 'Pines'
-
-questions: {
-
-}
-
-parts: {
-
-}
+mcq: true
+num: 29
 
 q1_1: |
-  1\. 1\.54 g of Ne and Ar are placed in a 114\.9 mL container at 100°C.
+  1\. 54 g of Ne and Ar are placed in a 114\.9 mL container at 100°C.
   What is the partial pressure in atm of Ne in the container?
   
 q1_1_i:
@@ -41,7 +35,7 @@ q2_1_s: 3
 
 
 q3_1: |
-  Consider the following reaction for questions 3 and 4\:
+  Consider the following reaction for questions 3 and 4:
   <p align="center">![Reactions](/img/chem1a/mt2-sp13-q3-1.png)</p>
   3\. In the reaction above the hybridization around the cobal (Co) atom changes from:
 
@@ -56,7 +50,7 @@ q3_1_s: 3
 
 
 q4_1: |
-  What wavelength of light could be used to excite complex A from the HOMO (Highest Occupied Molecular Orbital)
+  4\. What wavelength of light could be used to excite complex A from the HOMO (Highest Occupied Molecular Orbital)
   to the LUMO (Lowest Unoccupied Molecular Orbital)?
 
 q4_1_i:
@@ -70,7 +64,7 @@ q4_1_s: 5
 
 
 q5_1: |
-  If 1 atm of $CH_4$ (g) and 1 atm of $O_2$ (g) (a total pressure of 2 atm) reaction
+  5\. If 1 atm of $CH_4$ (g) and 1 atm of $O_2$ (g) (a total pressure of 2 atm) reaction
   to form $CO_2$ (g) and $H_2O$ (g) at constant temperature and volume what is the 
   pressure of the product mixture?
 
@@ -85,7 +79,7 @@ q5_1_s: 5
 
 
 q6_1: |
-  One mole of $C_60$ buckminsterfullerene molecules decomposes to form carbon atoms.
+  6\. One mole of $C_60$ buckminsterfullerene molecules decomposes to form carbon atoms.
   How many moles of carbon atoms are formed?
 
 q6_1_i:
@@ -104,11 +98,11 @@ q7_1: |
   (with delocalized π-systems) has the highest energy?
 
 q7_1_i:
-  - ![a](/img/chem1a/mt2-sp13-q7-1.png)
-  - ![b](/img/chem1a/mt2-sp13-q7-2.png)
-  - ![c](/img/chem1a/mt2-sp13-q7-3.png)
-  - ![d](/img/chem1a/mt2-sp13-q7-4.png)
-  - ![e](/img/chem1a/mt2-sp13-q7-5.png)
+  - \![a](/img/chem1a/mt2-sp13-q7-1.png)
+  - \![b](/img/chem1a/mt2-sp13-q7-2.png)
+  - \![c](/img/chem1a/mt2-sp13-q7-3.png)
+  - \![d](/img/chem1a/mt2-sp13-q7-4.png)
+  - \![e](/img/chem1a/mt2-sp13-q7-5.png)
 
 q7_1_s: 3
   
@@ -140,150 +134,270 @@ q9_1_i:
 q9_1_s: 1
 
 
-q10_1:
+q10_1: |
+  Which graph depicts the dependence of pressure on volume for dilute He (g) at a constant temperature?
 
 q10_1_i:
+  - \![a](/img/chem1a/mt2-sp13-q10-1.png)
+  - \![b](/img/chem1a/mt2-sp13-q10-2.png)
+  - \![c](/img/chem1a/mt2-sp13-q10-3.png)
+  - \![d](/img/chem1a/mt2-sp13-q10-4.png)
+  - \![e](/img/chem1a/mt2-sp13-q10-5.png)
 
-q10_1_s:
+q10_1_s: 5
+  
 
-
-q11_1:
+q11_1: |
+  What is the bond order of the S-O bonds in $SO_4^{2-}$?
 
 q11_1_i:
+  - 0.0
+  - 0.5
+  - 1.0
+  - 1.5
+  - 2.0
 
-q11_1_s:
+q11_1_s: 4
 
 
-q12_1:
+q12_1: |
+  How many structural isomers (not counting stereoisomers) of $C_4H_9Cl$ exist? Two
+  structural isomers of pentane ($C_5H_{12}$) are shown below as an example:
+  <p align="center">![structural isomers of pentane](/img/chem1a/mt2-sp13-q11-1.png)</p>
 
 q12_1_i:
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
 
-q12_1_s:
+q12_1_s: 3
 
 
-q13_1:
+q13_1: |
+  Which of the following is chiral?
 
 q13_1_i:
+  - \![a](/img/chem1a/mt2-sp13-q13-1.png)
+  - \![b](/img/chem1a/mt2-sp13-q13-2.png)
+  - \![c](/img/chem1a/mt2-sp13-q13-3.png)
+  - All of the above
+  - None of the above
 
-q13_1_s:
+q13_1_s: 2
 
 
-q14_1:
+q14_1: |
+  A flask of fixed volume contains oxygen *atoms* at 6.00 atm pressure. What is the
+  new pressure when all the atoms react to form $O_3$ molecules at constant temperature?
 
 q14_1_i:
+  - 1.0 atm
+  - 1.3 atm
+  - 1.5 atm
+  - 2.0 atm
+  - 2.3 atm
 
-q14_1_s:
+q14_1_s: 4
 
 
-q15_1:
+q15_1: |
+  What is the formal charge on the carbon in CO?
 
 q15_1_i:
+  - -2
+  - -1
+  - 0
+  - +1
+  - +2
 
-q15_1_s:
+q15_1_s: 2
 
 
-q16_1:
+q16_1: |
+  Helium gas taken from a nuclear experiment contains ${}^{3}He$ and ${}^{4}He$.
+  One mole of gas weights 3.75 g and has a pressure of 1 atm inside a fixed volume.
+  What is the partial pressure of ${}^{3}He$?
 
 q16_1_i:
+  - 1.25 atm
+  - 0.75 atm
+  - 0.50 atm
+  - 0.25 atm
+  - 0.0125 atm
 
-q16_1_s:
+q16_1_s: 4
 
 
-q17_1:
+q17_1: |
+  Which is the proper ordering of the following elements from highest ionization energy
+  to lowest?
 
 q17_1_i:
+  - Na, Mg, Si, S, Ar
+  - Ar, Na, Si, S, Mg
+  - Ar, S, Si, Mg, Na
+  - Mg, Na, Si, Ar, S
+  - Si, S, Ar, Na, Mg
 
-q17_1_s:
+q17_1_s: 3
 
 
-q18_1:
+q18_1: |
+  Which of the following molecules has a central atom with $sp^3$ hybridization?
 
 q18_1_i:
+  - $PH_3$
+  - $BeF_3$
+  - $XeF_4$
+  - $SF_4$
+  - $SbF_6^-$
 
-q18_1_s:
+q18_1_s: 1
 
 
-q19_1:
+q19_1: |
+  How does the H-N-H bond angle change when $NH_3$ is protonated to $NH_4^+$?
 
 q19_1_i:
+  - Increases
+  - Decreases
+  - No change
+  - All of the above
+  - None of the above
 
-q19_1_s:
+q19_1_s: 1
 
 
-q20_1:
+q20_1: |
+  What is the steric number and electron pair configuration about tellurium in $TeF_4$?
 
 q20_1_i:
+  - 2, linear
+  - 3, trigonal planar
+  - 4, tetrahedral
+  - 5, trigonal bipyramid
+  - 6, octahedral
 
-q20_1_s:
+q20_1_s: 4
 
 
-q21_1:
+q21_1: |
+  Which of the following molecules does not have a dipole moment?
 
 q21_1_i:
+  - $H_2CO$
+  - $PCl_3$
+  - $XeF_4$
+  - $CH_2Cl_2$
+  - $IF_3$
 
-q21_1_s:
+q21_1_s: 3
 
 
-q22_1:
+q22_1: |
+  By how much does the oxidation number for Nitrogen change when $NO_2$ is oxidized to $NO_3^-$?
 
 q22_1_i:
+  - +2
+  - +1
+  - 0
+  - -1
+  - -2
 
-q22_1_s:
+q22_1_s: 2
 
 
-q23_1:
+q23_1: |
+  Which has a linear structure?
 
 q23_1_i:
+  - $HCN$
+  - $NO_2^+$
+  - $ICl_2^-$
+  - A, B and C
+  - None
 
-q23_1_s:
+q23_1_s: 4
 
 
-q24_1:
+q24_1: |
+  How much energy is required for a mole each of atomic K and Br atoms to form ionic $K^+$ and $Br^-$?
 
 q24_1_i:
+  - 94 kJ
+  - 325 kJ
+  - 419 kJ
+  - 744 kJ
+  - 1188 kJ
 
-q24_1_s:
+q24_1_s: 1
 
 
-q25_1:
+q25_1: |
+  Which of the following has the strongest bond?
 
 q25_1_i:
+  - $O_2^{2-}$
+  - $O_2^{-}$
+  - $O_2$
+  - $O_2^{+}$
+  - $O_2^{2+}$
 
-q25_1_s:
+q25_1_s: 5
 
 
-q26_1:
+q26_1: |
+  Which of the following is the correct Lewis structure for HCN?
 
 q26_1_i:
+  - \![a](/img/chem1a/mt2-sp13-q26-1.png)
+  - \![b](/img/chem1a/mt2-sp13-q26-2.png)
+  - \![c](/img/chem1a/mt2-sp13-q26-3.png)
+  - \![d](/img/chem1a/mt2-sp13-q26-4.png)
+  - \![e](/img/chem1a/mt2-sp13-q26-5.png)
 
-q26_1_s:
+q26_1_s: 1
 
 
-q27_1:
+q27_1: |
+  Which has the highest average speed?
 
 q27_1_i:
+  - Ne at 100 K
+  - Ar at 100 K
+  - Ar at 212 K
+  - $Br_2$ at 212 K
+  - $Br_2$ at 298 K
 
-q27_1_s:
+q27_1_s: 3
 
 
-q28_1:
+q28_1: |
+  Which of the following shows the HOMO (Highest Occupied Molecular Orbital) to
+  LUMO (Lowest Unoccupied Molecular Orbital) for 1,3-butadiene $(C_4H_6)$?
+  (bottom to top: HOMO to LUMO)
 
 q28_1_i:
+  - \![a](/img/chem1a/mt2-sp13-q28-1.png)
+  - \![b](/img/chem1a/mt2-sp13-q28-2.png)
+  - \![c](/img/chem1a/mt2-sp13-q28-3.png)
+  - \![d](/img/chem1a/mt2-sp13-q28-4.png)
+  - \![e](/img/chem1a/mt2-sp13-q28-5.png)
 
-q28_1_s:
+q28_1_s: 3
 
 
-q29_1:
+q29_1: |
+  What phase transition is depicted in the phase diagram below?
+  <p align="center">![phase diagram](/img/chem1a/mt2-sp13-q29-1.png)</p>
 
 q29_1_i:
+  - Melting
+  - Freezing
+  - Condensation
+  - Sublimation
+  - Deposition
 
-q29_1_s:
-
-
-q30_1:
-
-q30_1_i:
-
-q30_1_s:
-
-
+q29_1_s: 4

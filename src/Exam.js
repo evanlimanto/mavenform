@@ -3,6 +3,7 @@ import { courseIDToLabel, examTypeToLabel, termToLabel } from './exams';
 import { MultipleChoiceQuestion, Navbar, NavSidebar, Question, Sidebar } from './components';
 
 const _ = require('lodash');
+const isString = require('is-string');
 import './Exam.css';
 
 const marked = require('marked');
@@ -87,25 +88,41 @@ class ExamContent extends Component {
     const type = (examContent && _.has(examContent, 'type')) ? (examContent.type) : null;
     const term = (examContent && _.has(examContent, 'term')) ? (examContent.term) : null;
     const useMarkdown = (examContent && _.has(examContent, 'md')) ? (examContent.md) : true;
+    const isMCQ = (examContent && _.has(examContent, 'mcq')) ? (examContent.mcq) : false;
 
-    const content = (examContent && _.has(examContent, 'parts')) ?
-      _.map(examContent.parts, (num_parts, part) => {
-        const subparts = _.map(_.range(1, num_parts + 1), subpart => {
-          const key = `${part}_${subpart}`;
-          if (!_.has(examContent, key)) {
-            console.warn(`${key} doesn't exist in exam!`);
-            return null;
-          }
-          var content = examContent[key] || '';
-          var solution = examContent[key + "_s"] || '';
-          if (useMarkdown) {
-              content = marked(content, {renderer});
-              solution = marked(solution, {renderer});
-          }
-          return <Question id={`${part}_${subpart}`} course={course} content={content} solution={solution} term={term} examType={type} key={key} />
-        });
-        return <Element name={part} key={part} className="element">{subparts}</Element>;
-      }) : null;
+    var content = null;
+    if (isMCQ) {
+      content = _.map(_.range(1, examContent.num + 1), (num) => {
+        const key = `q${num}_1`;
+        var qcontent = examContent[key] || '';
+        var choices = examContent[key + "_i"] || [];
+        if (useMarkdown) {
+          qcontent = marked(qcontent, {renderer});
+          choices = _.map(choices, (choice) => (isString(choice)) ? marked(choice, {renderer}) : (choice));
+        }
+        const solutionNum = examContent[key + "_s"] || 1;
+        return <Element name={num} key={num} className="element"><MultipleChoiceQuestion course={course} content={qcontent} solutionNum={solutionNum} choices={choices} examType={type} term={term} key={num} /></Element>;
+      });
+    } else {
+      content = (examContent && _.has(examContent, 'parts')) ?
+        _.map(examContent.parts, (num_parts, part) => {
+          const subparts = _.map(_.range(1, num_parts + 1), subpart => {
+            const key = `${part}_${subpart}`;
+            if (!_.has(examContent, key)) {
+              console.warn(`${key} doesn't exist in exam!`);
+              return null;
+            }
+            var qcontent = examContent[key] || '';
+            var solution = examContent[key + "_s"] || '';
+            if (useMarkdown) {
+                qcontent = marked(qcontent, {renderer});
+                solution = marked(solution, {renderer});
+            }
+            return <Question id={`${part}_${subpart}`} course={course} content={qcontent} solution={solution} term={term} examType={type} key={key} />
+          });
+          return <Element name={part} key={part} className="element">{subparts}</Element>;
+        }) : null;
+    }
 
     return (
       <div className="content">

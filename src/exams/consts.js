@@ -1,4 +1,13 @@
 const exams = {
+  'chem1a': {
+    'mt2': {
+      'Spring 2013': {
+        'id': 'sp13',
+        'profs': 'Pines',
+      }
+    }
+  },
+
   'ee16a': {
     'mt1': {
       'Fall 2016': {
@@ -89,6 +98,7 @@ const exams = {
 };
 
 const courses = {
+  'chem1a': 'General Chemistry',
   'ee16a': 'Designing Information Devices and Systems I',
   'cs61c': 'Great Ideas in Computer Architecture (Machine Structures)',
   'cs162': 'Operating Systems and Systems Programming',
@@ -102,6 +112,8 @@ const examTypeToLabel = {
 }
 
 const termToLabel = {
+  'sp13': 'Spring 2013',
+  'fa13': 'Fall 2013',
   'sp14': 'Spring 2014',
   'fa14': 'Fall 2014',
   'sp15': 'Spring 2015',
@@ -111,6 +123,7 @@ const termToLabel = {
 };
 
 const courseIDToLabel = {
+  'chem1a': 'Chem 1A',
   'ee16a': 'EE 16A',
   'cs61c': 'CS 61C',
   'cs162': 'CS 162',
