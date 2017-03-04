@@ -30,7 +30,7 @@ pre: |
   <p>This is a closed book exam. You are allowed 1 page of hand-written notes (both sides). You have 3 hours to complete as much of the exam as possible. Make sure to read all of the questions first, as some of the questions are substantially more time consuming.</p>
 
 q1_1: |
-  <h3>Problem 1: TRUE/FALSE [18 pts]</h3>
+  <h2>Problem 1: TRUE/FALSE [18 pts]</h2>
   In the following, it is important that you EXPLAIN your answer in TWO SENTENCES OR LESS
   (Answers  longer  than  this  may  not  get  credit!). Also, answers without an explanation GET NO CREDIT.
   <hr class="s2" />
@@ -111,7 +111,7 @@ q1_9_s: |
   Explain: The server calls <code>listen()</code> only once, then <code>accept()</code> multiple times in a loop.
 
 q2_1: |
-  <h3>Problem 2: Short Answer [18pts]</h3>
+  <h2>Problem 2: Short Answer [18pts]</h2>
   <b>Problem 2a[2pts]</b>: How does a modern OS regain control of the CPU from a program stuck in an infinite loop?
 q2_1_s: |
   Assuming that we are talking about a user-level program (or a kernel thread with interrupts
@@ -183,7 +183,7 @@ q2_8_s: |
   There are a number of differences: (1) There is at least one status bit (the “kernel mode bit”) which changes between kernel mode and user mode. In an x86 processor, there are 2 bits which change (since there a 4 modes). (2) Additional kernel-mode instructions are available (such as those that modify the page table registers, those that enable and disable interrupts, etc). (3) Pages marked as kernel-mode in their PTEs are only available in kernel mode. (4) Control for I/O devices (such as the timer, interrupt controllers, and device controllers) are typically only available from kernel mode.
 
 q3_1: |
-  <h3>Problem 3: Boy-Girl Lock [20pts]</h3>
+  <h2>Problem 3: Boy-Girl Lock [20pts]</h2>
 
   A boy-girl lock is a sort of generalized reader-writer lock: in a reader-writer lock there can be any
   number of readers or a single writer (but not both readers and writers at the same time), while in a
@@ -520,7 +520,7 @@ q3_5_s: |
   well, although this will increase the amount of state in the bglock.
 
 q4_1: |
-  <h3>Problem 4: Scheduling and Deadlock [24 pts]</h3>
+  <h2>Problem 4: Scheduling and Deadlock [24 pts]</h2>
 
   <b>Problem 4a[3pts]</b>: What is priority inversion and why is it an important problem? Present a
   priority inversion scenario in which a lower priority process can prevent a higher-priority process
@@ -672,7 +672,7 @@ q4_5_s: |
   priority order.
 
 q4_6_: |
-  <h3>Problem 4f[4pts]:</h3>
+  <h2>Problem 4f[4pts]:</h2>
   Suppose  that  we  have  the  following  resources:  A,  B,  C  and  threads  T1,  T2,  T3,  T4.    The  total
   number of each resource is:
 
@@ -755,7 +755,7 @@ q4_6_s: |
   </table>
 
 q4_7: |
-  <h3>Problem 4g[3pts]:</h3>
+  <h2>Problem 4g[3pts]:</h2>
   Assume that we start with a system in the state of (4f). Suppose that T1 asks for 2 more copies of
   resource A.  Can the system grant this if it wants to avoid deadlock? Explain.
 
@@ -808,7 +808,7 @@ q4_8_s: |
   &nbsp;&nbsp;&nbsp;&nbsp;3)  Use the Bankers algorithm on every allocation request to make sure that the system stays in a safe state.
 
 q5_1: |
-  <h3>Problem 5: Address Translation [20 pts]</h3>
+  <h2>Problem 5: Address Translation [20 pts]</h2>
 
   <b>Problem 5a[3pts]</b>: In class, we discussed the “magic” address format for a multi-level page table
   on a 32-bit machine, namely one that divided the address as follows:

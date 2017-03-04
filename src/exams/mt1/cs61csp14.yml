@@ -24,7 +24,7 @@ pre: |
   <div class="content-spacer"></div>
 
 q1_1: |
-  <h3>Q1: What’s that funky smell?! Oh yeah, it’s potpourri... (30 pts)</h3>
+  <h2>Q1: What’s that funky smell?! Oh yeah, it’s potpourri... (30 pts)</h2>
   a)  The unsigned distance between two bit patterns is
   the absolute value of the difference of their values,
   interpreted as unsigned numbers.  Rank the following
@@ -132,7 +132,7 @@ q1_9_s: |
   Careful airflow handling, elevated cold aisle temp, use free cooling, per-server ups.
 
 q2_1: |
-  <h3>Question 2: Running in circles (15 pts)</h3>
+  <h2>Question 2: Running in circles (15 pts)</h2>
   a)  Recall the exercise <code><b>ll_cycle</b></code> from lab 2, in which we checked if a linked list contained a cycle using the tortoise and hare algorithm.  We’ve provided you with most of a simple <i>recursive</i> implementation in the space below. Fill in the base cases.
 
   <hr class="s2" />
@@ -281,7 +281,7 @@ q2_3_s: |
   </code>
 
 q3_1: |
-  <h3>Question 3: Our band is called 1023MiB... We haven’t had any gigs yet. (15 pts)</h3>
+  <h2>Question 3: Our band is called 1023MiB... We haven’t had any gigs yet. (15 pts)</h2>
 
   We have a standard 32-bit byte-addressed MIPS machine with a 1KiB direct-mapped write-back
   cache and 16B block size.
@@ -354,7 +354,7 @@ q3_6: |
   f) What is one possible value of <code><b>(d - s)</b></code> where we would get this hit rate?
 
 q3_6_s: |
-  <h3>0</h3>
+  <h2>0</h2>
   <hr class="s1" />
   <i>2 misses per block * 2^6 blocks/cache * 2^13 caches = 2^20 misses</i>
 
@@ -365,7 +365,7 @@ q3_7_s: |
   <b>1 Mebi</b>
 
 q4_1: |
-  <h3>Question 4: A bad case of Not Invented Here Syndrome... (15 pts)</h3>
+  <h2>Question 4: A bad case of Not Invented Here Syndrome... (15 pts)</h2>
   <hr class="s1" />
   a) A colleague of yours has implemented some homebrew C99 string manipulation functions, while
 

@@ -29,7 +29,7 @@ pre: |
 
 q1_1: |
   <hr class="s1" />
-  <h3>Q1: Number Representation (5 points)</h3>
+  <h2>Q1: Number Representation (5 points)</h2>
   1. Given the binary number <code>0b11111111</code>:
   <hr class="s1" />
   <ul>
@@ -108,7 +108,7 @@ q1_6_s: |
   Decimal: $3*16^3 + 15*16^2 + 13*16^1 + 7*16^0 = 16343$
 
 q2_1: |
-  <h3>Q2: Reverse Engineering (10 points)</h3>
+  <h2>Q2: Reverse Engineering (10 points)</h2>
 
   The following MIPS code snippet implements a common coding design pattern in C. Your task is to
   reverse engineer the code to determine what this pattern is. Do not be concerned about the MIPS
@@ -267,7 +267,7 @@ q2_2_s: |
   got the rest of the question completely correct.
 
 q3_1: |
-  <h3>Q3: Number Pushing and Popping (10 points)</h3>
+  <h2>Q3: Number Pushing and Popping (10 points)</h2>
   Your task is to implement a simple stack adding machine that uses a stack data structure (this is
   independent of the stack for calling/returning from subroutines). For example, Push 2, Push 3,
   PopAdd yields 5 in the top of the stack. Following this with Push 1, PopAdd would yield 6. Fill in the
@@ -351,7 +351,7 @@ q3_2_s: |
   </code>
 
 q4_1: |
-  <h3>Q4: Branches are for N00Bs (15 points)</h3>
+  <h2>Q4: Branches are for N00Bs (15 points)</h2>
 
   Consider the discrete-value function $f(x)$, defined on the integers {−3,−2,−1,0,1,2,3}:
   <hr class="s2" />
@@ -416,7 +416,7 @@ q4_1_s: |
   </code>
   <hr class="s2" />
 
-  <h3>Alternate Solution</h3>
+  <h2>Alternate Solution</h2>
   <code>
   <hr class="s2" />
   .text
@@ -439,7 +439,7 @@ q4_1_s: |
   </code>
 
 q5_1: |
-  <h3>Q5: DIPS ISA (15 points)</h3>
+  <h2>Q5: DIPS ISA (15 points)</h2>
 
   Archeologists uncover an ancient binary machine based on 4-bit entities (called nibbles rather than
   bytes) as its fundamental building block. Reverse engineering this machine, engineers discover that it
@@ -503,7 +503,7 @@ q5_5_s: |
   1000&nbsp;11|00&nbsp;00|10&nbsp;01|00&nbsp;0000&nbsp;1000$_2$ = <code><b>lw $9, 8($0)</b></code>
 
 q6_1: |
-  <h3>Q6: Mishmash, Hodgepodge, Potpourri (5 points)</h3>
+  <h2>Q6: Mishmash, Hodgepodge, Potpourri (5 points)</h2>
 
   The following are some multiple choice questions about CALL. Clearly circle the correct answer:
   <hr class="s2" />

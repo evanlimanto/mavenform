@@ -83,10 +83,10 @@ class Course extends Component {
     return (
       <div>
         <div className="nav">
-          <a className="logo">Mavenform</a>
+          <a className="logo" href="/">Mavenform</a>
           <a className="material-icons mobile-back">home</a>
           <div className="tooltip-container">
-            <a className="material-icons">sms</a>
+            <a className="material-icons" href="https://docs.google.com/forms/d/e/1FAIpQLSfCS9McWikQ7F6syAGV9FX7Wf2-rWjqt-XMXxxEx5piTIf92Q/viewform?usp=sf_link">sms</a>
             <span className="tooltip">Send Feedback</span>
           </div>
           <div className="tooltip-container reader-mode">
@@ -110,7 +110,7 @@ class Course extends Component {
           <div className="center">
             <h5>Index of exams</h5>
           </div>
-          <hr className="s5" />
+          <hr className="s4" />
           <div className="center">
             <div className="table-container-container">
               <div className="table-container">

@@ -29,8 +29,8 @@ pre: |
   <p>This is a closed book exam. You are allowed 1 page of hand-written notes (both sides). You have 3 hours to complete as much of the exam as possible. Make sure to read all of the questions first, as some of the questions are substantially more time consuming.</p>
 
 q1_1: |
-  <h3>1. (18 points total) Short answer</h3>
-  <h3>a. (9 points) True/False and Why?</h3>
+  <h2>1. (18 points total) Short answer</h2>
+  <h2>a. (9 points) True/False and Why?</h2>
 
   i) If every thread acquires locks in the same order (for example, <hr class="s1" /><code>sema_down(A); sema_down(X); sema_down(Y)</code>), deadlock cannot occur.
 
@@ -58,7 +58,7 @@ q1_3_s: |
   points.
 
 q1_4: |
-  <h3>b. (6 points) Kernels.</h3>
+  <h2>b. (6 points) Kernels.</h2>
 
   i) Briefly, in two to three sentences, explain what a kernel panic is and why it
   causes a system crash.
@@ -101,7 +101,7 @@ q1_6_s: |
   that included incorrect errors (e.g., priority inversion or deadlock).
 
 q2_1: |
-  <h3>2. (24 points total) Scheduling.</h3>
+  <h2>2. (24 points total) Scheduling.</h2>
   Consider the following set of processes, with associated processing times and priorities:
 
   <hr class="s2" />
@@ -183,7 +183,7 @@ q2_1_s: |
   for the final two points.
 
 q3_1: |
-  <h3>3. (27 points total) Synchronization</h3>
+  <h2>3. (27 points total) Synchronization</h2>
   a. (5 points) Consider the following procedure written in C:
   <hr class="s2" />
 
@@ -382,7 +382,7 @@ q3_5_s: |
   No. (No explanation given)
 
 q4_1: |
-  <h3>4. (19 points) Coding questions.</h3>
+  <h2>4. (19 points) Coding questions.</h2>
   a. (13 points) We would like to implement the Unix utility, tee, which reads data
   from standard input and writes that data to standard output, as well as all of the
   files that are passed on the command line. For example, if you run the following
@@ -461,7 +461,7 @@ q4_4_s: |
   its own position in the file.
 
 q4_5: |
-  <h3>b. (6 points) PintOS questions.</h3>
+  <h2>b. (6 points) PintOS questions.</h2>
   i) (3 points) Will the PintOS implementation of semaphores work on a multiprocessor machine? Explain why they will work, or explain how you could fix them.
 
 q4_5_s: |
@@ -480,7 +480,7 @@ q4_6_s: |
 
 imgq5_1 = require('../../img/cs162sp16-5.png': |
 q5_1: |
-  <h3>5. (12 points total) Resource Allocation.</h3>
+  <h2>5. (12 points total) Resource Allocation.</h2>
   Suppose we have the following snapshot of a system with five processes (P1, P2, P3,
   P4, P5) and 4 resources (R1, R2, R3, R4). There are no outstanding queued
   unsatisfied requests.

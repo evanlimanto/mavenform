@@ -1,3 +1,3 @@
-import Question from './Question';
+import { Question, MultipleChoiceQuestion } from './Question';
 
-export default Question;
+export { Question, MultipleChoiceQuestion };

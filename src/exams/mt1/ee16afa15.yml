@@ -27,7 +27,7 @@ parts: {
 }
 
 q3_1: |
-  <h3>3. Solve It</h3>
+  <h2>3. Solve It</h2>
   Solve the following system of linear equations:
 
   $$\left[
@@ -60,7 +60,7 @@ q3_1_s: |
   $\left[ \begin{array}{c} x_1 \\ x_2 \\ \end{array} \right] = \left[ \begin{array} -2 \\ 2 \end{array} \right]$
 
 q4_1: |
-  <h3>4. Invert It</h3>
+  <h2>4. Invert It</h2>
 
   What is the inverse of the matrix?
   $$\left[
@@ -89,7 +89,7 @@ q4_1_s: |
   $${\left[ \begin{array}{c c} 1 & 3 \\ -2 & -5 \\ \end{array} \right]}^{-1} = \frac{1}{1} \left[ \begin{array}{c c}-5 & -3 \\ 2 & 1 \\ \end{array} \right]$$
 
 q5_1: |
-  <h3>5. Show It</h3>
+  <h2>5. Show It</h2>
 
   Let $n$ be a positive integer. Let $\{\vec{v_1}, \vec{v_2}, . . . , \vec{v_k}\}$ be a set of $k$ linearly dependent vectors in $\mathbb{R}^n$. Show that for
   any ($n × n$) matrix A, the set $\{\vec{Av_1}, \vec{Av_2}, . . . , \vec{Av_k}\}$ is a set of linearly dependent vectors.
@@ -152,7 +152,7 @@ q5_1_s: |
   </ul>
 
 q6_1: |
-  <h3>6. Null It</h3>
+  <h2>6. Null It</h2>
 
   What is the null space of the matrix
   \(\left[
@@ -182,7 +182,7 @@ q6_1_s: |
   $$span \left\{ \left[ \begin{array}{c} -1 \\ 1 \\ 0 \\ 0 \\ \end{array} \right] , \left[ \begin{array}{c} 1 \\ 0 \\ 2 \\ 1 \\ \end{array} \right] \right\}$$
 
 q7_1: |
-  <h3>7. Finding the Bright Cave <i>(27pts total)</i></h3>
+  <h2>7. Finding the Bright Cave <i>(27pts total)</i></h2>
 
   Nara the one-handed druid and Kody the one-handed ranger ﬁnd themselves in dire straits. Before them is a cliff with four cave entrances arranged in a square: two upper caves and two lower caves. Each entrance emits a certain amount of light, and the two wish to ﬁnd exactly the amount of light coming from each cave. Here’s the catch: after contracting a particularly potent strain of ghoul fever, our intrepid heroes are only able to see the total intensity of light before them (so their eyes operate like a single-pixel camera). Kody and Nara are capable adventurers. But they don’t know any linear algebra - and they need your help.
   <hr class="s2" />
@@ -249,7 +249,7 @@ q7_3_s: |
   Notice here that in spite of the row of zeros, we still have four pivot columns. In other words, we have a system of four unkowns and four linearly independent equations. Therefore, we can uniquely determine all four light intensities given Nara’s added measurement.
 
 q8_1: |
-  <h3>8. A Tale of Two Cities <i>(24pts +15pts)</i></h3>
+  <h2>8. A Tale of Two Cities <i>(24pts +15pts)</i></h2>
 
   <b>[NOTE: The last two parts of this problem are extra credit. Do them if you have time, but don’t get stuck on them if you don’t.]</b>
   <hr class="s2" />
@@ -430,7 +430,7 @@ q8_5_s: |
   Some students argued that it is sufficient to have one sensor per “independent loop”. And since the cities already had sensors on their individual loops (necessarily, by assumption), it is sufficient to have one sensor on the new “independent loop” created by adding the two new roads. This is correct intuition. However, the concept of “independent loop” was not defined or developed in this class, so any argument using “independent loops” without definition only received partial credit.
 
 q9_1: |
-  <h3>9. Justin Beaver <i>(43pts)</i></h3>
+  <h2>9. Justin Beaver <i>(43pts)</i></h2>
 
   In Homework 3, there was a question about Justin Bieber’s Segway — that was about controlling a multi-dimensional system with one control input. In this problem, we will instead think about a curious and superintelligent beaver watching the water level in a pool — this is implicitly about how many sensors are needed to measure the state of a multi-dimensional system.
   <hr class="s2" />

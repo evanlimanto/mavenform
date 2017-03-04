@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 import { handleEvent } from './utils';
 import { courseIDToLabel, examTypeToLabel, termToLabel } from './exams';
-import { Question, Sidebar } from './components';
+import { MultipleChoiceQuestion, Question, Sidebar } from './components';
 import { exams } from './exams';
 
 const _ = require('lodash');
@@ -114,7 +114,7 @@ class ExamContent extends Component {
     return (
       <div className="content">
         <div className="center">
-          <h4>{_.toUpper(course)}</h4>
+          <h4>{courseIDToLabel[course]}</h4>
           <h5>{examTypeToLabel[type]} | {termToLabel[term]} | {prof}</h5>
         </div>
         {content}

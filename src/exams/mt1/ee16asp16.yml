@@ -30,7 +30,7 @@ pre: |
   <div class="content-spacer"></div>
 
 q3: |
-  <h3>3. Mechanical Johann</h3>
+  <h2>3. Mechanical Johann</h2>
   Invert the following matrix:
 
   $\left[ \begin{array} [[1, 2, 6], [0, 1, 4], [2, 4, 10]] \end{array} \right]$
@@ -48,12 +48,12 @@ q3_s: |
   $\left[ \begin{array}{c c c} 1 & 2 & 6 \\ 0 & 1 & 4 \\ 2 & 4 & 10 \\ \end{array} \right] \left[ \begin{array}{c c c} 3 & -2 & -1 \\ -4 & 1 & 2 \\ 1 & 0 & -1/2 \\ \end{array} \right] = \left[ \begin{array}{c c c} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \\ \end{array} \right]$
 
 q4: |
-  <h3>4. Freedom!</h3>
+  <h2>4. Freedom!</h2>
   Let $A$ and $B$ be $n × n$ matrices. Suppose $A$ is invertible, but $B$ is not. <b>Prove that Rank</b>($AB$) < <b>Rank</b>($A$).<br/><br/>
   (That is, show that the number of linearly independent columns in $AB$ is strictly less than the number of linearly independent columns in $A$).
 
 q4_s: |
-  <h3>Proof 1:</h3>
+  <h2>Proof 1:</h2>
   Since $B$ is rank deﬁcient, it has linearly dependent columns. This means that there exists a nonzero vector $\vec{x}$ such that $B\vec{x} = \vec{0}$
 
   Premultiplying this equation by the matrix $A$ gives
@@ -66,7 +66,7 @@ q4_s: |
 
   for some nonzero vector $\vec{x}$. This proves that the columns of the <i>n x n</i> matrix $AB$ are linearly dependent, which in turn means that rank($AB$) < $n$.<br/><br/>
 
-  <h3>Proof 2:</h3>
+  <h2>Proof 2:</h2>
   Define the product matrix $C$ = $AB$. Writing the matrix $B$ in column form, we ﬁnd that
 
   $\begin{align}C & = AB \\ & = A \begin{bmatrix} \vec{b_1} & \cdots & \vec{b_l} \cdots & \vec{b_n} \end{bmatrix} \\ & = \begin{bmatrix} A\vec{b_1} & \cdots & A\vec{b_l} & \cdots & A\vec{b_n} \end{bmatrix} \\ & = \begin{bmatrix} \vec{c_1} & \cdots & \vec{c_l} & \cdots & \vec{c_n} \end{bmatrix} \\ \end{align}$
@@ -85,13 +85,13 @@ q4_s: |
   This means that $C$ has linearly dependent columns, which in turn implies that $AB$ is rank deficient.
 
 q5_1 : |
-  <h3>5. True or False?</h3>
+  <h2>5. True or False?</h2>
   You only need to write True or False under each subpart.</br>
 
   (a) There exists an invertible $n × n$ matrix $A$ for which $A^2$ = 0. 
 
 q5_1_s: |
-  <h3>False.</h3>
+  <h2>False.</h2>
 
   Let’s left multiply and right multiply $A^2$ by $A^{-1}$ so we have $A^{−1} AAA^{−1}$. By associativity of matrix multiplication, we have $(A^{−1}A)(AA^{−1})$ = $I_{n}I_n$ = $I_n$ where $I$ is the identity matrix. However, if $A^2$ were $0$, then $(A^{−1}A)(AA^{−1})$ = $A^{−1} A^{2} A^{−1}$ = $0$ where $0$ is a matrix of all zeros, hence resulting in a contradiction.
 
@@ -99,7 +99,7 @@ q5_2: |
   (b) If $A$ is an invertible $n × n$ matrix, then for all vectors $\vec{b}$ ∈ $R^n$, the system $A$$\vec{x}$=$\vec{b}$ has a unique solution.
 
 q5_2_s: |
-  <h3>True.</h3>
+  <h2>True.</h2>
 
   If $A$ is invertible, then there is a unique matrix $A^{-1}$. Left multiply the equation by $A^{−1}$, and we will have $A^{−1}A\vec{x}$ = $A^{−1}\vec{b} \implies \vec{x} = A^{−1}\vec{b}$, where $\vec{x}$ is a unique vector.
 
@@ -107,7 +107,7 @@ q5_3: |
   (c) If $A$ and $B$ are invertible $n × n$ matrices, then the product $AB$ is invertible.
 
 q5_3_s: |
-  <h3>True.</h3>
+  <h2>True.</h2>
 
   $(AB)^{−1} = B^{−1}A^{−1}$
   Note that $ABB^{-1}A^{-1}$ = $I$ and $B^{-1}A^{-1}AB$ = $B^{-1}IB$ = $B^{-1}B$ = $I$.
@@ -117,7 +117,7 @@ q5_4: |
   subspace Span($\{$$\left[ \begin{array}{c} 1 \\ 0 \\ 0 \end{array} \right]$, $\left[ \begin{array}{c} 0 \\ 1 \\ 0 \end{array} \right]$$\}$).
 
 q5_4_s: |
-  <h3>True.</h3>
+  <h2>True.</h2>
 
   Span($\{$$\left[ \begin{array}{c} 1 \\ 0 \\ 0 \end{array} \right]$,$\left[ \begin{array} 0 \\ 1 \\ 0 \end{array} \right]$$\}$) spans the $x$-$y$ plane in $\mathbb{R}^3$. Since $v_1 = \left[ \begin{array}{c} 1 \\ 1 \\ 0 \\ \end{array} \right]$ and $v_2 = \left[ \begin{array}{c} 1 \\ -1 \\ 0 \\ \end{array} \right]$ are linearly independent, they form a basis for the $x$-$y$ plane in $\mathbb{R}^3$ as well.
 
@@ -125,7 +125,7 @@ q5_5: |
   (e) A set of $n$ linearly dependent vectors in $\mathbb{R}^n$ can span $\mathbb{R}^n$.
 
 q5_5_s: |
-  <h3>False.</h3>
+  <h2>False.</h2>
 
   A set of $n$ linearly dependent vectors span some subspace of dimension $0$ < $dim(A)$ < $n$ in $\mathbb{R}^n$.<br/><br/>
   <b>Note</b>: It is incorrect to say the set of linearly dependent vectors spans $\mathbb{R}^{n−1}$ for two reasons. First, you
@@ -137,14 +137,14 @@ q5_6: |
   (f) For all matrices $A$ and $B$, where $A$ is $5$×$5$ and $B$ is $4$×$4$, it is always the case that Rank($A$) > Rank($B$).
 
 q5_6_s: |
-  <h3>False.</h3>
+  <h2>False.</h2>
 
   Size does not determine rank! For example, if $A$ was a matrix of all ones rank($A$) would be 1. If, on the other hand $B$ was an identity matrix it would have full rank: rank($B$) = $4$.
   <hr class="s2" />
   You can only claim larger size implies larger rank if you assume the matrices are full rank (pivots in every column, all column vectors are linearly independent from the rest.)
 
 q6_1: |
-  <h3>6. Faerie Battles <i>(20 points)</i></h3>
+  <h2>6. Faerie Battles <i>(20 points)</i></h2>
 
   In a war of civilizations, the light dragons are fighting for survival against the invading evil imp empire. It
   is the night before the deciding battle, and Ela Dalon the Human Hobo has proposed using faerie lights to
@@ -225,7 +225,7 @@ q6_3_s: |
   </ul>
 
 q7_1: |
-  <h3>7. A Tale of a Million Technocrats and the Four Dream Cities <i>(24 points)</i></h3>
+  <h2>7. A Tale of a Million Technocrats and the Four Dream Cities <i>(24 points)</i></h2>
 
   This problem is a tale of one million Technocrats and four Dream Cities. Listed in order from West to East,
   the four cities are (I) San Francisco, (II) Denver, (III) Chicago, and (IV) New York City. </br></br>
@@ -273,12 +273,12 @@ q7_2: |
   For this model of the system described above, either explain why time-reversed inference of the state vector is not possible, or determine $\vec{s}[0]$ from $\vec{s}[1]$ explicitly by computing $A^{−1}$ first.
 
 q7_2_s: |
-  <h3>Model 1</h3>
+  <h2>Model 1</h2>
   $$A_1 = \left[ \begin{array}{c c c c} 1 & 1/3 & 0 & 0 \\ 0 & 1/3 & 1/3 & 0 \\ 0 & 1/3 & 1/3 & 0 \\ 0 & 0 & 1/3 & 1 \\ \end{array} \right]$$
 
   Rows 2 and 3 are identical, so $A_1$ is not invertible. In other words, the row vectors are linearly dependent and Gaussian Elimination would result in a row of 0’s, which can’t be inverted.<br/><br/>
 
-  <h3>Model 2</h3>
+  <h2>Model 2</h2>
   $$A_2 = \left[ \begin{array}{c c c c} 1 & 1/4 & 0 & 0 \\ 0 & 1/2 & 1/4 & 0 \\ 0 & 1/2 & 1/2 & 0 \\ 0 & 0 & 1/4 & 1 \\ \end{array} \right]$$
   This is full rank, so it's invertible. In other words, there is a pivot in every row; every row vector is linearly independent from the rest.
 
@@ -327,7 +327,7 @@ q7_5_s: |
   Where the first vector is from part (c) and the second vector is from part (d). So in the limit $n \to \infty$, we get the same distribution as before.
 
 q8_1: |
-  <h3>8. Ayy - Reflections on SIXTEEN <i>(28 points)</i></h3>
+  <h2>8. Ayy - Reflections on SIXTEEN <i>(28 points)</i></h2>
   You are involved in the design of a robot called SIXTEEN-AYY that has arms with a certain range of motion and certain operations that the arms can perform.<br/>
   For parts (a)–(e) of this problem, we will look at a simplified case where we pretend that the robot’s arm can move only in a 2-dimensional space. Thus, we will represent the position of the end of the robot’s arm with a vector $\vec{p}$ = $\left[ \begin{array} [['p_x'], ['p_y']] \end{array} \right]$.
   Let’s further assume that the robot will be built to perform two movement commands
@@ -400,7 +400,7 @@ q8_7_s: |
   generalized to a larger $n$ x $n$ matrix with 1's in the dimensions that aren't being rotated. Read more on <b>Wikipedia!</b>
 
 q9_1: |
-  <h3>9. Goodness Gracious, Great Balls of Fur! <i>(28 points)</i></h3>
+  <h2>9. Goodness Gracious, Great Balls of Fur! <i>(28 points)</i></h2>
   You are a biologist who has discovered a new species of rodents that live in tunnels underground, and you have named the species "furballs". You have been observing a particular network of tunnels. Figure 1 shows
   the network of tunnels with three chambers in it. To document their behavior, you observe the number of
   furballs in each chamber at every minute. After observing the furballs’ behavior for a while, you have figured

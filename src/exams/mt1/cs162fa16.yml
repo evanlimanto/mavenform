@@ -30,8 +30,8 @@ pre: |
   <p>This is a closed book exam. You are allowed 1 page of hand-written notes (both sides). You have 3 hours to complete as much of the exam as possible. Make sure to read all of the questions first, as some of the questions are substantially more time consuming.</p>
 
 q1_1: |
-  <h3>1. (21 points total) True/False and Why?</h3>
-  <h3>a. (8 points) True/False and Why?</h3>
+  <h2>1. (21 points total) True/False and Why?</h2>
+  <h2>a. (8 points) True/False and Why?</h2>
 
   i) When a user program performs a system call, it must first put the system call
   arguments onto the kernel stack and then run a special instruction to switch to
@@ -73,7 +73,7 @@ q1_4_s: |
   point.
 
 q1_5: |
-  <h3>b. (13 points) Short answer.</h3>
+  <h2>b. (13 points) Short answer.</h2>
   i) (4 points) <u>Briefly</u>, in two to three sentences, explain how an Operating System
   kernel uses dual mode operation to prevent user programs from overwriting
   kernel data structures.
@@ -114,7 +114,7 @@ q1_8_s: |
   By making an I/O call, or calling <code>wait()</code> on a child process.
 
 q2_1: |
-  <h3>2. (11 points total) C Programming.</h3>
+  <h2>2. (11 points total) C Programming.</h2>
   Consider the following C program:
   <hr class="s2" />
   <code>
@@ -188,7 +188,7 @@ q2_2_s: |
   </code>
 
 q3_1: |
-  <h3>3. (19 points total) Finite Synchronized Queue using Monitors.</h3>
+  <h2>3. (19 points total) Finite Synchronized Queue using Monitors.</h2>
   In lecture we implemented an Infinite Synchronized Queue using a monitor. In this
   exam question you will implement a Finite Synchronized Queue (FSQ) using a
   monitor. The FSQ has Last-In, First-Out semantics  (like a stack), a fixed maximum
@@ -324,7 +324,7 @@ q3_4_s: |
   </code>
 
 q4_1: |
-  <h3>4. (22 points total) PintOS questions</h3>
+  <h2>4. (22 points total) PintOS questions</h2>
 
   a. (3 points) What is the maximum number of threads you can create in a user process
   in PintOS?
@@ -439,8 +439,8 @@ q4_6_s: |
   it can never be run again.
 
 q5_1: |
-  <h3>5. (27 points total) Santa Claus problem (from <i>Operating Systems: Internals and Design
-  Principles</i>)</h3>
+  <h2>5. (27 points total) Santa Claus problem (from <i>Operating Systems: Internals and Design
+  Principles</i>)</h2>
 
   Santa Claus sleeps in his shop and can only be woken up by either:
   <hr class="s2" />

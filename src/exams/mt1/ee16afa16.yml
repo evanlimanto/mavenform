@@ -28,7 +28,7 @@ pre: |
   <div class="content-spacer"></div>
 
 q3_1: |
-  <h3>3. True/False <i>(6 points, 1 point for each question)</i></h3>
+  <h2>3. True/False <i>(6 points, 1 point for each question)</i></h2>
 
   Answer each of the following questions by circling True or False. No work is necessary for credit on this part.<br/>
   <hr class="s2" />
@@ -68,7 +68,7 @@ q3_6_s: |
   True.
 
 q4_1: |
-  <h3>4. Proof <i>(7 points)</i></h3>
+  <h2>4. Proof <i>(7 points)</i></h2>
 
   (a) Prove that if $A\vec{x}$ = 0 for some nonzero $\vec{x}$, then the columns of A are linearly dependent. <br/>
 
@@ -89,7 +89,7 @@ q4_2_s: |
   Otherwise, we have that $A\vec{a}_i$ = $0$, which is proof of linear dependence of the columns from part a.
 
 q5_1: |
-  <h3>5. Inverse of a Matrix <i>(5 points)</i></h3>
+  <h2>5. Inverse of a Matrix <i>(5 points)</i></h2>
   Find the inverse of $A$, if it exists. If not, explain why.
 
   $A$ =
@@ -109,7 +109,7 @@ q5_1_s: |
   Alternatively, this could be found by row reducing this matrix alongside an identity matrix, and stopping when the third row is reduced to entirely zeroes. A $3$ x $3$ matrix with a row of zeroes is at most of rank $2$, and thus not invertible.
 
 q6_1: |
-  <h3>6. Directional Shovels <i>(10 points)</i></h3>
+  <h2>6. Directional Shovels <i>(10 points)</i></h2>
 
   Kody and Nara were found exceptional at taking measurements to ﬁgure out light intensities, and they were both granted admission to a graduate school. Unfortunately, they both supported their new school’s football team while they were playing against Berkeley and angry Berkeley fans found them and left them in a room at an unknown location under the ground. As compassionate people, Berkeley fans left some tools in the room that can help them escape.
 
@@ -185,7 +185,7 @@ q6_2_s: |
   Another solution is show that all of Nara’s directions can be reached by Kody’s vectors. It is easy enough to find the correct linear combinations by inspection: (2, 2), (1, −1), (3, −2)
 
 q7_1: |
-  <h3>7. Graph Majors <i>(30 points)</i></h3>
+  <h2>7. Graph Majors <i>(30 points)</i></h2>
 
   We’d like to understand how engineering undergrads change their majors. For simplicity, there are three majors we’ll look at: EECS, CS, and MechE. Let’s assume that students can only be studying one major at a time, and must be studying one of these three majors. Let’s also assume that once a week, students can choose to switch to another major, or stick with what they’re studying. So, a discrete time step represents one week.
 
@@ -316,7 +316,7 @@ q7_5_s: |
   No, because the third row is two times the first row of $A$. Thus, at any state that is not the initial state, $2∗x_e[t]$ = $x_m[t]$ must be true by the state transitions. The given $\vec{x}[5]$ violates this.
 
 q8_1: |
-  <h3>8. Transformation Basketball <i>(15 points)</i></h3>
+  <h2>8. Transformation Basketball <i>(15 points)</i></h2>
 
   Kevin Bancroft just joined the Column Space Warriors. In order to better learn how to cooperate with the team before the season starts, he and his teammates are practicing some basketball drills.
 

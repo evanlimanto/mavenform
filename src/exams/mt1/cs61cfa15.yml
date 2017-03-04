@@ -30,7 +30,7 @@ pre: |
   <div class="content-spacer"></div>
 
 q1_1: |
-  <h3>Q1: A dozen ways to ask about bits (10 points)</h3>
+  <h2>Q1: A dozen ways to ask about bits (10 points)</h2>
   1) For a 12-bit integer represented with two’s complement, what is the:
   <hr class="s2" />
   a) Most positive value (in decimal):
@@ -78,7 +78,7 @@ q1_2_s: |
   </code>
 
 q2_1: |
-  <h3>Q2: Wow! If only you could C the main memory (10 points)</h3>
+  <h2>Q2: Wow! If only you could C the main memory (10 points)</h2>
 
   Consider the following C program:
   <hr class="s1" />
@@ -140,7 +140,7 @@ q2_2_s: |
   c[0]: <b>heap</b>
 
 q3_1: |
-  <h3>Q3: Links, Links, and Lists (15 points)</h3>
+  <h2>Q3: Links, Links, and Lists (15 points)</h2>
 
   Here, we have a two-sided linked list, where each node has a reference to both the previous and next
   node in the list. The <code>HEAD</code> of the list is defined as the node with a <code>NULL</code> prev pointer, and the <code>TAIL</code> of
@@ -249,7 +249,7 @@ q3_3_s: |
   </code>
 
 q4_1: |
-  <h3>Q4: beargit redux (15 points)</h3>
+  <h2>Q4: beargit redux (15 points)</h2>
 
   From project 1, you may remember the function <code>is_commit_msg_ok()</code> that you needed to implement
   in C. Here is a simpler rendition where commit messages are deemed okay <i>if and only if</i> those null-
@@ -354,7 +354,7 @@ q4_1_s: |
   </code>
 
 q5_1: |
-  <h3>5: MIPS Sleuth (15 points)</h3>
+  <h2>5: MIPS Sleuth (15 points)</h2>
 
   <code>mystery</code>, a mysterious MIPS function outlined below, is written without proper calling conventions.
   <code>mystery</code> calls a correctly written function, <b>random</b>, that takes an integer <code>i</code> as its only argument, and
@@ -506,7 +506,7 @@ q5_3_s: |
   10, 14, 18, 19, 20, 21, 22
 
 q6_1: |
-  <h3>Q6: Registers: bigger is not always better (16 points)</h3>
+  <h2>Q6: Registers: bigger is not always better (16 points)</h2>
 
   You decide that instead of having 32, 32-bit registers, you would like to build a machine with 16, 64-bit registers. You also need to make a modified MIPS instruction set for this architecture.
   <hr class="s1" />
@@ -540,7 +540,7 @@ q6_4_s: |
   0xAE9FFFF8 = 101011 | 1010 | 0111 | 111…1000 = <code>sw $7 -8($10)</code>
 
 q7_1: |
-  <h3>Q7: After this, you’re CALL done! (9 points)</h3>
+  <h2>Q7: After this, you’re CALL done! (9 points)</h2>
 
   Connect the definition with the name of the process that describes it.
   <hr class="s1" />
@@ -571,7 +571,7 @@ q7_1: |
   9) Only allows generation of binary machine code.
 
 q7_1_s: |
-  <h3>Answers</h3>
+  <h2>Answers</h2>
   1) a <hr class="s1" />
   2) d <hr class="s1" />
   3) b <hr class="s1" />

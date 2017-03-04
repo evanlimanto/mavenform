@@ -26,7 +26,7 @@ pre: |
   <div class="content-spacer"></div>
 
 q1_1: |
-  <h3>PROBLEM 1. Imaging Circuit <i>(12 points)</i></h3>
+  <h2>PROBLEM 1. Imaging Circuit <i>(12 points)</i></h2>
   In this problem we will return one final time to examining how one might choose the area of a photodetector in order to maximize the measured voltage. This time however, let’s assume that light shines only over a fixed area $A_{illuminated}$.<br/><br/>
 
   (Recall that in the rain analogy, the area of the photodetector is analogous to the area of the bucket, the current is analogous to the amount of water per unit time being captured in the bucket, and the voltage is analogous to the height of the water accumulated within the bucket.)<br/><br/>
@@ -79,7 +79,7 @@ q1_3_s: |
   <img src="/img/sp15q1_s.png" class="problem-image" />
 
 q2_1: |
-  <h3>PROBLEM 2. Sparse Images and Vector Geometry <i>(14 pts)</i></h3>
+  <h2>PROBLEM 2. Sparse Images and Vector Geometry <i>(14 pts)</i></h2>
    
   So far we've usually represented images as data grids. However, sometimes this can be 
   very expensive in cases where most of the image pixels are exactly identical.
@@ -124,7 +124,7 @@ q2_3_s: |
   The property of the matrix that causes this is that it is <b>non-invertible</b>.
 
 q3_1: |
-  <h3>PROBLEM 3. Coding for Storage <i>(13 points)</i></h3>
+  <h2>PROBLEM 3. Coding for Storage <i>(13 points)</i></h2>
   Alice is a budding young photographer. Given the beautiful weather over the weekend 
   she goes up into the Berkeley hills and takes a bunch of gorgeous pictures of San 
   Francisco. She’s hoping to sell these pictures to make some extra money, and so she 
@@ -184,7 +184,7 @@ q3_4_s: |
   $$\left[ \begin{array}{c} s_1^T \\ s_2^T \\ \vdots \\ s_8^T \\ \end{array} \right] = A_{store} \cdot \left[ \begin{array}{c} a^T \\ b^T \\ c^T \\ d^T \\ \end{array} \right]$$
 
 q4_1: |
-  <h3>PROBLEM 4. Investment Strategy <i>(10 pts)</i></h3>
+  <h2>PROBLEM 4. Investment Strategy <i>(10 pts)</i></h2>
    
   Alice finally sells some of her photographs and makes a bunch of money. In fact, she is 
   so rich that at the beginning of every day she can put \$1 of her money into the stock 
@@ -232,7 +232,7 @@ q4_2_s: |
   </ul>
 
 q5_1: |
-  <h3>PROBLEM 5. Berkeley Forever! <i>(16 pts)</i></h3>
+  <h2>PROBLEM 5. Berkeley Forever! <i>(16 pts)</i></h2>
    
   Berkeley, as we all know, is a great place to live. But sometimes people make silly 
   decisions, and move to places on the east coast (say Boston) and get stuck in blizzards. 

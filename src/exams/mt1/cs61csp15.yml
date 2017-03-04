@@ -30,7 +30,7 @@ pre: |
   <div class="content-spacer"></div>
 
 q1_1: |
-  <h3>Q1: Number Representation (10 points)</h3>
+  <h2>Q1: Number Representation (10 points)</h2>
 
   1) Convert the following 8-bit two’s-complement numbers from hexadecimal to decimal:
   <hr class="s2" />
@@ -96,7 +96,7 @@ q1_4_s: |
   The most negative number needs to be $-2^{n-1}$. The most negative number in biased notation is 0 – b so our bias is $2^{n-1}$.
 
 q2_1: |
-  <h3>Q2: Pointers and Memory (12 points)</h3>
+  <h2>Q2: Pointers and Memory (12 points)</h2>
 
   1) Assume you are given an int array arr, with a pointer p to its beginning:
   <hr class="s2" />
@@ -178,7 +178,7 @@ q2_2_s: |
   <code><b>int*</b>, <b>int**</b>, <b>5</b>, <b>6</b>
 
 q3_1: |
-  <h3>Q3: C Memory Model (6 points)</h3>
+  <h2>Q3: C Memory Model (6 points)</h2>
   For each of the following functions, answer the questions below.
   <hr class="s2" />
   1)  Does this function return a usable pointer to a string containing “asdf”?
@@ -274,7 +274,7 @@ q3_4_s: |
   3)  Does this function leak memory? <b>No</b>
 
 q4_1: |
-  <h3>Q4: Linked Lists (12 points)</h3>
+  <h2>Q4: Linked Lists (12 points)</h2>
   1) Fill out the declaration of a singly linked linked-list node below.
   <hr class="s1" />
   <code>
@@ -387,7 +387,7 @@ q4_3_s: |
   </code>
 
 q5_1: |
-  <h3>Q5: MIPS with FUNctions (18 points)</h3>
+  <h2>Q5: MIPS with FUNctions (18 points)</h2>
 
   The function <code><b>countChars(char *str, char *target)</b></code> returns the number of times characters in <code><b>target</b></code> appear in <code><b>str</b></code>. For example:
   <hr class="s2" />
@@ -529,7 +529,7 @@ q5_1_s: |
   </code>
 
 q6_1: |
-  <h3>Q6: MIPS Instruction Formats (16 points)</h3>
+  <h2>Q6: MIPS Instruction Formats (16 points)</h2>
 
   Convert the following TAL MIPS instructions into their machine code representation (binary format) or
   vice versa. For rows where you convert instructions to machine code, we’ve provided boxes to the
@@ -545,7 +545,7 @@ q6_1_s: |
   Super sorry :(
 
 q7_1: |
-  <h3>Q7: MIPS Addressing Modes (16 points)</h3>
+  <h2>Q7: MIPS Addressing Modes (16 points)</h2>
 
   We have a function that, when given a branch instruction, returns the number of bytes that the Program Counter (PC) would change by, i.e. <code><b>(PC_of_branch_target - PC_of_branch_instruction)</b></code>.
 

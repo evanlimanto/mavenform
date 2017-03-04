@@ -20,7 +20,7 @@ pre: |
   <div class="content-spacer"></div>
 
 q1_1: |
-  <h3>Question 1: Running in circles (18 pts)</h3>
+  <h2>Question 1: Running in circles (18 pts)</h2>
   A nibble is half of a byte (4 bits). You’d like to implement <code><b>LoadNibble</b></code> in MAL MIPS, a function that
   takes one <code>uint32_t</code> argument <code><b>N</b></code> and returns the <b>Nth</b> nibble of memory in the lowest 4 bits of the return
   register  (the  other  28  bits  should  be  0).  Note:  The  <b>Nth</b>  nibble  immediately  follows  the  <b>(N-1)-th</b> nibble
@@ -122,7 +122,7 @@ q1_3_s: |
   </code>
 
 q2_1: |
-  <h3>Question 2: I can C clearly now, the rain is gone... (18 pts)</h3>
+  <h2>Question 2: I can C clearly now, the rain is gone... (18 pts)</h2>
   A)  Fill in the blank to complete this function that parses a string of octal digits (base 8) into a <code><b>uint64_t</b></code>. For example,
   calling <code><b>parse_octal("71")</b></code> should return the number 57. Do not use the comma operator, nested assignment,
   prefix/postfix operators, or function calls. You may assume that the given number “fits” into a <code><b>uint64_t</b></code>. (<b>Hint</b>: The backside of the MIPS green sheet may help.)

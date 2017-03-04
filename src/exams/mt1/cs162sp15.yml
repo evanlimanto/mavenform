@@ -30,7 +30,7 @@ pre: |
   <p>This is a closed book exam. You are allowed 1 page of hand-written notes (both sides). You have 3 hours to complete as much of the exam as possible. Make sure to read all of the questions first, as some of the questions are substantially more time consuming.</p>
 
 q1_1: |
-  <h3>Problem 1: TRUE/FALSE [18 pts]</h3>
+  <h2>Problem 1: TRUE/FALSE [18 pts]</h2>
   In the following, it is important that you EXPLAIN your answer in TWO SENTENCES OR LESS
   (Answers longer than this may not get credit!). Also, answers without an explanation GET NO
   CREDIT.
@@ -130,7 +130,7 @@ q1_9_s: |
   . Consequently, many calls to <code>printf()</code> exit without ever entering the kernel
 
 q2_1: |
-  <h3>Problem 2: Short Answer [18pts]</h3>
+  <h2>Problem 2: Short Answer [18pts]</h2>
   <b>Problem 2a[3pts]:</b> Name at least two disadvantages of disabling interrupts to serialize access to a
   critical section. When does it make sense to use interrupt disable/enable around a critical section?
 
@@ -230,7 +230,7 @@ q2_8_s: |
   threads
 
 q3_1: |
-  <h3>Problem 3: Atomic Synchronization Primitives [24pts] </h3>
+  <h2>Problem 3: Atomic Synchronization Primitives [24pts] </h2>
   In class, we discussed a number of atomic hardware primitives that are available on modern
   architectures. In particular, we discussed “test and set” (TSET), SWAP, and “compare and swap”
   (CAS). They can be defined as follows (let “expr” be an expression, “&addr” be an address of a
@@ -564,7 +564,7 @@ q3_8_s: |
   </code>
 
 q4_1 : |
-  <h3>Problem 4: Scheduling and Deadlock [20 pts]</h3>
+  <h2>Problem 4: Scheduling and Deadlock [20 pts]</h2>
   <b>Problem 4a[2pts]:</b> How could a priority scheduler be used to emulate Earliest Deadline First
   (EDF) scheduling? Would computing of priorities be an expensive operation (assume that we
   schedule periodic tasks characterized by period T and computational time of C)? Explain.
@@ -735,7 +735,7 @@ q4_7_s: |
   solution in (4f), since it would never interfere with acquisition of unrelated players.
 
 q5_1 : |
-  <h3>Problem 5: Address Translation [20 pts]</h3>
+  <h2>Problem 5: Address Translation [20 pts]</h2>
   Consider a multi-level memory management scheme with the following format for virtual
   addresses:
   <hr class="s2" />
