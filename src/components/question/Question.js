@@ -23,13 +23,9 @@ class Solution extends Component {
   }
 
   render() {
-    const hasResponse = this.props.hasResponse;
     var check = null;
     var solutionButton = null;
     var solutionContent = null;
-    if (hasResponse) {
-       check = <input className="blue" type="button" value="Check" />;
-    }
 
     if (this.props.solution) {
       const solutionClass = classnames({
@@ -150,7 +146,7 @@ class MultipleChoiceQuestion extends Component {
         option: true,
         right: (index == solutionNum - 1),
       });
-      return <input key={index} type="submit" className={optionClass} value={choice} readOnly />;
+      return <div key={index} tabindex="0" className={optionClass} dangerouslySetInnerHTML={{__html: choice}}></div>;
     });
     return (
       <div id={this.props.id} className="question mc-question">
