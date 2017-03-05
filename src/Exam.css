@@ -1,7 +1,7 @@
 /*GENERAL*/
 
 * {
-  vertical-align: center;
+  vertical-align: middle;
   font-style: normal;
   border: 0 none;
   outline: 0;
@@ -338,6 +338,11 @@ img {
 .option.right:focus {
   border: 1px solid #1fab54;
   color: #1fab54;
+}
+
+.option img {
+  padding-left: 10px;
+  max-height: 80px;
 }
 
 .mc-question .solution {
