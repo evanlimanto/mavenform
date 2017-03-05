@@ -464,6 +464,14 @@ img {
   visibility: visible;
 }
 
+.tooltip-container .tooltip-long {
+  width: 160px;
+}
+
+.tooltip-container .tooltip-long::after {
+  left: 62%;
+}
+
 .app-mode {
   position: fixed;
   top: 10px;
