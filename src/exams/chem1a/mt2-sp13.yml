@@ -8,21 +8,21 @@ mcq: true
 num: 29
 
 q1_1: |
-  1\. 54 g of Ne and Ar are placed in a 114\.9 mL container at 100°C.
+  54 g of Ne and Ar are placed in a 114 mL container at 100°C.
   What is the partial pressure in atm of Ne in the container?
-  
+
 q1_1_i:
-  - 5.45
-  - 786.28
-  - 210.96
-  - 20.32
-  - 10.27
+  - "5.45"
+  - "786.28"
+  - "210.96"
+  - "20.32"
+  - "10.27"
 
 q1_1_s: 3
 
 
 q2_1: |
-  2\. For an ideal gas, which of the following statements is not true?
+  For an ideal gas, which of the following statements is not true?
 
 q2_1_i:
   - At constant temperature, pressure is proportional to density
@@ -31,13 +31,13 @@ q2_1_i:
   - At standard pressure and temperature, volume is proportional to the number of moles
   - None of the above
 
-q2_1_s: 3  
+q2_1_s: 3
 
 
 q3_1: |
   Consider the following reaction for questions 3 and 4:
   <p align="center">![Reactions](/img/chem1a/mt2-sp13-q3-1.png)</p>
-  3\. In the reaction above the hybridization around the cobal (Co) atom changes from:
+  In the reaction above the hybridization around the cobal (Co) atom changes from:
 
 q3_1_i:
   - $sp^6 \rightarrow sp^3$
@@ -50,7 +50,7 @@ q3_1_s: 3
 
 
 q4_1: |
-  4\. What wavelength of light could be used to excite complex A from the HOMO (Highest Occupied Molecular Orbital)
+  What wavelength of light could be used to excite complex A from the HOMO (Highest Occupied Molecular Orbital)
   to the LUMO (Lowest Unoccupied Molecular Orbital)?
 
 q4_1_i:
@@ -64,7 +64,7 @@ q4_1_s: 5
 
 
 q5_1: |
-  5\. If 1 atm of $CH_4$ (g) and 1 atm of $O_2$ (g) (a total pressure of 2 atm) reaction
+  If 1 atm of $CH_4$ (g) and 1 atm of $O_2$ (g) (a total pressure of 2 atm) reaction
   to form $CO_2$ (g) and $H_2O$ (g) at constant temperature and volume what is the 
   pressure of the product mixture?
 
@@ -79,7 +79,7 @@ q5_1_s: 5
 
 
 q6_1: |
-  6\. One mole of $C_60$ buckminsterfullerene molecules decomposes to form carbon atoms.
+  One mole of $C_60$ buckminsterfullerene molecules decomposes to form carbon atoms.
   How many moles of carbon atoms are formed?
 
 q6_1_i:
@@ -87,7 +87,7 @@ q6_1_i:
   - $1.0 * 10^{22}$
   - 60
   - 1.0
-  - $1.7 * 10^{2}$
+  - $1.7 * 10^{-2}$
 
 q6_1_s: 3
 
@@ -98,14 +98,14 @@ q7_1: |
   (with delocalized π-systems) has the highest energy?
 
 q7_1_i:
-  - \![a](/img/chem1a/mt2-sp13-q7-1.png)
-  - \![b](/img/chem1a/mt2-sp13-q7-2.png)
-  - \![c](/img/chem1a/mt2-sp13-q7-3.png)
-  - \![d](/img/chem1a/mt2-sp13-q7-4.png)
-  - \![e](/img/chem1a/mt2-sp13-q7-5.png)
+  - "![a](/img/chem1a/mt2-sp13-q7-1.png)"
+  - "![b](/img/chem1a/mt2-sp13-q7-2.png)"
+  - "![c](/img/chem1a/mt2-sp13-q7-3.png)"
+  - "![d](/img/chem1a/mt2-sp13-q7-4.png)"
+  - "![e](/img/chem1a/mt2-sp13-q7-5.png)"
 
 q7_1_s: 3
-  
+
 
 q8_1: |
   Which of the following molecules and molecular ions would experience an increase
@@ -138,11 +138,11 @@ q10_1: |
   Which graph depicts the dependence of pressure on volume for dilute He (g) at a constant temperature?
 
 q10_1_i:
-  - \![a](/img/chem1a/mt2-sp13-q10-1.png)
-  - \![b](/img/chem1a/mt2-sp13-q10-2.png)
-  - \![c](/img/chem1a/mt2-sp13-q10-3.png)
-  - \![d](/img/chem1a/mt2-sp13-q10-4.png)
-  - \![e](/img/chem1a/mt2-sp13-q10-5.png)
+  - "![a](/img/chem1a/mt2-sp13-q10-1.png)"
+  - "![b](/img/chem1a/mt2-sp13-q10-2.png)"
+  - "![c](/img/chem1a/mt2-sp13-q10-3.png)"
+  - "![d](/img/chem1a/mt2-sp13-q10-4.png)"
+  - "![e](/img/chem1a/mt2-sp13-q10-5.png)"
 
 q10_1_s: 5
   
@@ -151,11 +151,11 @@ q11_1: |
   What is the bond order of the S-O bonds in $SO_4^{2-}$?
 
 q11_1_i:
-  - 0.0
-  - 0.5
-  - 1.0
-  - 1.5
-  - 2.0
+  - "0.0"
+  - "0.5"
+  - "1.0"
+  - "1.5"
+  - "2.0"
 
 q11_1_s: 4
 
@@ -179,9 +179,9 @@ q13_1: |
   Which of the following is chiral?
 
 q13_1_i:
-  - \![a](/img/chem1a/mt2-sp13-q13-1.png)
-  - \![b](/img/chem1a/mt2-sp13-q13-2.png)
-  - \![c](/img/chem1a/mt2-sp13-q13-3.png)
+  - "![a](/img/chem1a/mt2-sp13-q13-1.png)"
+  - "![b](/img/chem1a/mt2-sp13-q13-2.png)"
+  - "![c](/img/chem1a/mt2-sp13-q13-3.png)"
   - All of the above
   - None of the above
 
@@ -206,11 +206,11 @@ q15_1: |
   What is the formal charge on the carbon in CO?
 
 q15_1_i:
-  - -2
-  - -1
-  - 0
-  - +1
-  - +2
+  - "-2"
+  - "-1"
+  - "0"
+  - "+1"
+  - "+2"
 
 q15_1_s: 2
 
@@ -300,11 +300,11 @@ q22_1: |
   By how much does the oxidation number for Nitrogen change when $NO_2$ is oxidized to $NO_3^-$?
 
 q22_1_i:
-  - +2
-  - +1
-  - 0
-  - -1
-  - -2
+  - "+2"
+  - "+1"
+  - "0"
+  - "-1"
+  - "-2"
 
 q22_1_s: 2
 
@@ -352,11 +352,11 @@ q26_1: |
   Which of the following is the correct Lewis structure for HCN?
 
 q26_1_i:
-  - \![a](/img/chem1a/mt2-sp13-q26-1.png)
-  - \![b](/img/chem1a/mt2-sp13-q26-2.png)
-  - \![c](/img/chem1a/mt2-sp13-q26-3.png)
-  - \![d](/img/chem1a/mt2-sp13-q26-4.png)
-  - \![e](/img/chem1a/mt2-sp13-q26-5.png)
+  - "![a](/img/chem1a/mt2-sp13-q26-1.png)"
+  - "![b](/img/chem1a/mt2-sp13-q26-2.png)"
+  - "![c](/img/chem1a/mt2-sp13-q26-3.png)"
+  - "![d](/img/chem1a/mt2-sp13-q26-4.png)"
+  - "![e](/img/chem1a/mt2-sp13-q26-5.png)"
 
 q26_1_s: 1
 
@@ -380,11 +380,11 @@ q28_1: |
   (bottom to top: HOMO to LUMO)
 
 q28_1_i:
-  - \![a](/img/chem1a/mt2-sp13-q28-1.png)
-  - \![b](/img/chem1a/mt2-sp13-q28-2.png)
-  - \![c](/img/chem1a/mt2-sp13-q28-3.png)
-  - \![d](/img/chem1a/mt2-sp13-q28-4.png)
-  - \![e](/img/chem1a/mt2-sp13-q28-5.png)
+  - "![a](/img/chem1a/mt2-sp13-q28-1.png)"
+  - "![b](/img/chem1a/mt2-sp13-q28-2.png)"
+  - "![c](/img/chem1a/mt2-sp13-q28-3.png)"
+  - "![d](/img/chem1a/mt2-sp13-q28-4.png)"
+  - "![e](/img/chem1a/mt2-sp13-q28-5.png)"
 
 q28_1_s: 3
 

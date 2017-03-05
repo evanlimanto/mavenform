@@ -34,7 +34,20 @@ renderer.em = function(text) {
 };
 renderer.br = function() {
   return '<hr class="s1" />';
-}
+};
+renderer.paragraph = function(text) {
+  return `${text}`;
+};
+renderer.image = function(href, title, text) {
+  return `<img src="${href}" title="${title}" alt="${text}" />`;
+};
+renderer.list = function(body, ordered) {
+  if (ordered) {
+    return `${_.replace(_.replace(body, '<li>', ''), '</li>', '')}`;
+  } else {
+    return `<ul>${body}</ul>`;
+  }
+};
 
 const Scroll = require('react-scroll');
 const Element = Scroll.Element;
@@ -96,12 +109,16 @@ class ExamContent extends Component {
         const key = `q${num}_1`;
         var qcontent = examContent[key] || '';
         var choices = examContent[key + "_i"] || [];
+        if (num === 7) {
+          console.log(choices[0]);
+          console.log(marked(choices[0], {renderer}));
+        }
         if (useMarkdown) {
           qcontent = marked(qcontent, {renderer});
           choices = _.map(choices, (choice) => (isString(choice)) ? marked(choice, {renderer}) : (choice));
         }
         const solutionNum = examContent[key + "_s"] || 1;
-        return <Element name={num} key={num} className="element"><MultipleChoiceQuestion course={course} content={qcontent} solutionNum={solutionNum} choices={choices} examType={type} term={term} key={num} /></Element>;
+        return <Element key={num} className="element"><MultipleChoiceQuestion course={course} content={qcontent} solutionNum={solutionNum} choices={choices} examType={type} term={term} key={num} /></Element>;
       });
     } else {
       content = (examContent && _.has(examContent, 'parts')) ?
