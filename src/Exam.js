@@ -19,12 +19,6 @@ marked.setOptions({
 });
 
 const renderer = new marked.Renderer();
-renderer.heading = function(text, level) {
-  if (level === 1) {
-    level = 3;
-  }
-  return `<h${level}>${text}</h${level}>`;
-};
 renderer.code = function(code, language) {
   code = _.replace(code, /\r\n|\r|\n/g, '<hr class="s1" />');
   return `<hr class="s2" /><code>${code}</code><hr class="s2" />`;
@@ -104,6 +98,7 @@ class ExamContent extends Component {
     const isMCQ = (examContent && _.has(examContent, 'mcq')) ? (examContent.mcq) : false;
     const numProblems = (examContent && _.has(examContent, 'num')) ? (examContent.num) : problemIDs.length;
     const appMode = this.props.appMode;
+    const showSolutions = this.props.showSolutions;
 
     var content = null;
     if (isMCQ) {
@@ -118,7 +113,7 @@ class ExamContent extends Component {
         const solutionNum = examContent[key + "_s"] || 1;
         return (
           <Element key={num} className="element">
-            <MultipleChoiceQuestion id={`q${num}`} course={course} content={qcontent} solutionNum={solutionNum} choices={choices} examType={type} term={term} key={num} appMode={appMode} />
+            <MultipleChoiceQuestion id={`q${num}`} course={course} content={qcontent} solutionNum={solutionNum} choices={choices} examType={type} term={term} key={num} appMode={appMode} showSolutions={showSolutions} />
           </Element>
         );
       });
@@ -137,7 +132,7 @@ class ExamContent extends Component {
                 qcontent = marked(qcontent, {renderer});
                 solution = marked(solution, {renderer});
             }
-            return <Question id={`${part}_${subpart}`} course={course} content={qcontent} solution={solution} term={term} examType={type} key={key} appMode={appMode} />
+            return <Question id={`${part}_${subpart}`} course={course} content={qcontent} solution={solution} term={term} examType={type} key={key} appMode={appMode} showSolutions={showSolutions} />
           });
           return <Element name={part} key={part} className="element">{subparts}</Element>;
         }) : null;
@@ -171,9 +166,11 @@ class Exam extends Component {
 
     this.state = {
       appMode: false,
+      showSolutions: false,
     };
 
     this.toggleAppMode = this.toggleAppMode.bind(this);
+    this.toggleAllSolutions = this.toggleAllSolutions.bind(this);
   }
 
   toggleAppMode() {
@@ -182,11 +179,17 @@ class Exam extends Component {
     });
   }
 
+  toggleAllSolutions() {
+    this.setState({
+      showSolutions: !this.state.showSolutions
+    });
+  }
+
   render() {
     const exam = this.props.params.examid;
     const course = this.props.params.courseid;
     const examType = this.props.params.examtype;
-    const ExamComponent = <ExamContent exam={exam} course={course} type={examType} appMode={this.state.appMode} />;
+    const ExamComponent = <ExamContent exam={exam} course={course} type={examType} appMode={this.state.appMode} showSolutions={this.state.showSolutions} />;
     const navComponents = (this.state.appMode) ? (
       <div className="tooltip-container app-mode" onClick={() => this.toggleAppMode()}>
         <a className="material-icons">dashboard</a>
@@ -194,7 +197,7 @@ class Exam extends Component {
       </div>
     ) : (
       <span>
-        <Navbar isExam={true} toggleAppModeCallback={this.toggleAppMode} />
+        <Navbar isExam={true} showSolutions={this.state.showSolutions} toggleAppModeCallback={this.toggleAppMode} toggleAllSolutionsCallback={this.toggleAllSolutions} />
         <NavSidebar course={course} exam={exam} isExam={true} />
       </span>
     );

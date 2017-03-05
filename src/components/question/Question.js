@@ -22,6 +22,12 @@ class Solution extends Component {
     });
   }
 
+  componentWillReceiveProps(props) {
+    if (_.has(props, 'showSolutions')) {
+      this.setState({showSolution: props.showSolutions});
+    }
+  }
+
   render() {
     var check = null;
     var solutionButton = null;
@@ -41,7 +47,7 @@ class Solution extends Component {
 
     solutionButton = (
       <input className={(this.state.showSolution) ? "gray" : "blue"} type="button"
-       value={(this.props.solution) ? "Hide Solution" : "Show Solution"} onClick={() => this.toggleSolution()}/>
+       value={(this.state.showSolution) ? "Hide Solution" : "Show Solution"} onClick={() => this.toggleSolution()}/>
     );
 
     return (
@@ -89,7 +95,7 @@ class Question extends Component {
     const examCode = `${examType}${term}${course}`;
 
     const SolutionComponent = (this.props.appMode) ? (null) : (
-      <Solution solution={this.props.solution} examCode={this.props.examCode} />
+      <Solution solution={this.props.solution} examCode={examCode} showSolutions={this.props.showSolutions} />
     );
 
     return (
@@ -150,12 +156,13 @@ class MultipleChoiceQuestion extends Component {
       choice = `${String.fromCharCode(index + 65)}) ${choice}`;
       const optionClass = classnames({
         option: true,
-        right: (index == solutionNum - 1),
+        right: (index === solutionNum - 1),
       });
       return <div key={index} tabIndex="0" className={optionClass} dangerouslySetInnerHTML={{__html: choice}}></div>;
     });
+
     const SolutionComponent = (this.props.appMode) ? (null) : (
-      <Solution solution={String.fromCharCode(solutionNum + 65)} examCode={this.props.examCode} />
+      <Solution solution={String.fromCharCode(solutionNum + 65)} examCode={examCode} showSolutions={this.props.showSolutions} />
     );
 
     return (

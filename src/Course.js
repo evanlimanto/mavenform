@@ -10,8 +10,16 @@ class Course extends Component {
     super(props);
 
     this.state = {
-      sidebar: true,
+      appMode: false,
     };
+
+    this.toggleAppMode = this.toggleAppMode.bind(this);
+  }
+
+  toggleAppMode() {
+    this.setState({
+      appMode: !this.state.appMode
+    });
   }
 
   render() {
@@ -29,15 +37,25 @@ class Course extends Component {
         );
       });
     });
-
-    return (
-      <div>
-        <Navbar />
-        <NavSidebar course={course} />
+    const navComponents = (this.state.appMode) ? (
+      <div className="tooltip-container app-mode" onClick={() => this.toggleAppMode()}>
+        <a className="material-icons">dashboard</a>
+        <span className="tooltip">App Mode</span>
+      </div>
+    ) : (
+      <span>
+        <Navbar isExam={false} toggleAppModeCallback={this.toggleAppMode} />
+        <NavSidebar course={course} isExam={false} />
         <div className="sidebar">
           <h6>NOTE</h6>
           <i>This index accounts for every exam from HKN, TBP, and other sources from the past 2 academic years.</i>
         </div>
+      </span>
+    );
+
+    return (
+      <div>
+        {navComponents}
         <div>
           <h4 className="center">{courseIDToLabel[course]}</h4>
           <div className="center">
