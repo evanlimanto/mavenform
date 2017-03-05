@@ -9,6 +9,7 @@ class NavSidebar extends Component {
   render() {
     const course = this.props.course;
     const exam = this.props.exam;
+    const isExam = this.props.isExam;
 
     const sideTabs = _.map(exams[course], (courseExams, examType) => {
       const content =  _.map(courseExams, (info, semester) => {
@@ -31,12 +32,16 @@ class NavSidebar extends Component {
         </span>
       );
     });
+    const sidetabClass = classnames({
+      sidetab: true,
+      active: !isExam,
+    });
 
     return (
       <div className="menu">
         <h6>{courseIDToLabel[course]}</h6>
         <div className="sidetab-container">
-          <a className="sidetab active" href={`/course/${course}`} onClick={() => handleEvent('Click', 'Index')}>Index</a>
+          <a className={sidetabClass} href={`/course/${course}`} onClick={() => handleEvent('Click', 'Index')}>Index</a>
         </div>
         {sideTabs}
       </div>

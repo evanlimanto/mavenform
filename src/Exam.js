@@ -182,7 +182,7 @@ class Exam extends Component {
     return (
       <div>
         <Navbar />
-        <NavSidebar course={course} exam={exam} />
+        <NavSidebar course={course} exam={exam} isExam={true} />
         <div>{ExamComponent}</div>
       </div>
     );
