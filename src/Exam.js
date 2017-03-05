@@ -103,6 +103,7 @@ class ExamContent extends Component {
     const useMarkdown = (examContent && _.has(examContent, 'md')) ? (examContent.md) : true;
     const isMCQ = (examContent && _.has(examContent, 'mcq')) ? (examContent.mcq) : false;
     const numProblems = (examContent && _.has(examContent, 'num')) ? (examContent.num) : problemIDs.length;
+    const appMode = this.props.appMode;
 
     var content = null;
     if (isMCQ) {
@@ -115,7 +116,11 @@ class ExamContent extends Component {
           choices = _.map(choices, (choice) => (isString(choice)) ? marked(choice, {renderer}) : (choice));
         }
         const solutionNum = examContent[key + "_s"] || 1;
-        return <Element key={num} className="element"><MultipleChoiceQuestion id={`q${num}`} course={course} content={qcontent} solutionNum={solutionNum} choices={choices} examType={type} term={term} key={num} /></Element>;
+        return (
+          <Element key={num} className="element">
+            <MultipleChoiceQuestion id={`q${num}`} course={course} content={qcontent} solutionNum={solutionNum} choices={choices} examType={type} term={term} key={num} appMode={appMode} />
+          </Element>
+        );
       });
     } else {
       content = (examContent && _.has(examContent, 'parts')) ?
@@ -132,7 +137,7 @@ class ExamContent extends Component {
                 qcontent = marked(qcontent, {renderer});
                 solution = marked(solution, {renderer});
             }
-            return <Question id={`${part}_${subpart}`} course={course} content={qcontent} solution={solution} term={term} examType={type} key={key} />
+            return <Question id={`${part}_${subpart}`} course={course} content={qcontent} solution={solution} term={term} examType={type} key={key} appMode={appMode} />
           });
           return <Element name={part} key={part} className="element">{subparts}</Element>;
         }) : null;
@@ -146,7 +151,7 @@ class ExamContent extends Component {
         </h5>
       </div>
     ) : null;
-    const SidebarComponent = (this.props.appMode) ? (null) : (
+    const SidebarComponent = (appMode) ? (null) : (
       <Sidebar course={course} term={term} examType={type} examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} numProblems={numProblems} isMCQ={isMCQ} />
     );
 
