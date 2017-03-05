@@ -4,14 +4,6 @@ import { handleEvent } from '../../utils';
 class Navbar extends Component {
   render() {
     const toggleAppModeCallback = this.props.toggleAppModeCallback;
-    const isExam = this.props.isExam;
-
-    const appModeElement = (isExam) ? (
-      <div className="tooltip-container reader-mode" onClick={() => toggleAppModeCallback()}>
-        <a className="material-icons">subject</a>
-        <span className="tooltip">App Mode</span>
-      </div>
-    ) : null;
 
     return (
       <div className="nav">
@@ -21,7 +13,10 @@ class Navbar extends Component {
           <a className="material-icons" href="https://docs.google.com/forms/d/e/1FAIpQLSfCS9McWikQ7F6syAGV9FX7Wf2-rWjqt-XMXxxEx5piTIf92Q/viewform?usp=sf_link">sms</a>
           <span className="tooltip">Send Feedback</span>
         </div>
-        {appModeElement}
+        <div className="tooltip-container reader-mode" onClick={() => toggleAppModeCallback()}>
+          <a className="material-icons">subject</a>
+          <span className="tooltip">Reader Mode</span>
+        </div>
       </div>
     );
   }
