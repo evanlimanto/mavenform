@@ -18,7 +18,6 @@ class Sidebar extends Component {
     const term = this.props.term;
     const course = this.props.course;
     const examType = this.props.examType;
-    const isMCQ = this.props.isMCQ;
 
     return _.map(_.range(problemIDs.length), (index) => {
       const problemID = problemIDs[index];

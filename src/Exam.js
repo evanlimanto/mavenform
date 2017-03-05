@@ -146,12 +146,15 @@ class ExamContent extends Component {
         </h5>
       </div>
     ) : null;
+    const SidebarComponent = (this.props.appMode) ? (null) : (
+      <Sidebar course={course} term={term} examType={type} examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} numProblems={numProblems} isMCQ={isMCQ} />
+    );
 
     return (
       <div className="content">
         {examDesc}
         {content}
-        <Sidebar course={course} term={term} examType={type} examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} numProblems={numProblems} isMCQ={isMCQ} />
+        {SidebarComponent}
       </div>
     );
   }
@@ -162,13 +165,15 @@ class Exam extends Component {
     super(props);
 
     this.state = {
-      sidebar: true,
+      appMode: false,
     };
+
+    this.toggleAppMode = this.toggleAppMode.bind(this);
   }
 
-  toggleCollapse() {
+  toggleAppMode() {
     this.setState({
-      sidebar: !this.state.sidebar
+      appMode: !this.state.appMode
     });
   }
 
@@ -176,13 +181,22 @@ class Exam extends Component {
     const exam = this.props.params.examid;
     const course = this.props.params.courseid;
     const examType = this.props.params.examtype;
-
-    const ExamComponent = <ExamContent exam={exam} course={course} type={examType} />;
+    const ExamComponent = <ExamContent exam={exam} course={course} type={examType} appMode={this.state.appMode} />;
+    const navComponents = (this.state.appMode) ? (
+      <div style={{float: 'right', position: 'relative', right: '50px', top: '50px'}} className="tooltip-container reader-mode" onClick={() => this.toggleAppMode()}>
+        <a className="material-icons">subject</a>
+        <span className="tooltip">App Mode</span>
+      </div>
+    ) : (
+      <span>
+        <Navbar isExam={true} toggleAppModeCallback={this.toggleAppMode} />
+        <NavSidebar course={course} exam={exam} isExam={true} />
+      </span>
+    );
 
     return (
       <div>
-        <Navbar />
-        <NavSidebar course={course} exam={exam} isExam={true} />
+        {navComponents}
         <div>{ExamComponent}</div>
       </div>
     );

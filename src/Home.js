@@ -25,7 +25,6 @@ class Home extends Component {
       );
     });
 
-    console.log(this.state.notificationBar);
     return (
       <div className="home">
         {(this.state.notificationBar) ? (
