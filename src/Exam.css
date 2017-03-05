@@ -1,7 +1,7 @@
 /*GENERAL*/
 
 * {
-  vertical-align: middle;
+  vertical-align: baseline;
   font-style: normal;
   border: 0 none;
   outline: 0;
@@ -341,6 +341,7 @@ img {
 }
 
 .option img {
+  vertical-align: middle;
   padding-left: 10px;
   max-height: 80px;
 }
@@ -461,6 +462,24 @@ img {
 
 .tooltip-container .material-icons:hover + .tooltip-link {
   visibility: visible;
+}
+
+.app-mode {
+  position: fixed;
+  top: 10px;
+  right: 25px;
+  width: 30px;
+  height: 30px;
+  padding: 4px;
+}
+
+.app-mode * {
+  color: #ccc;
+}
+
+.app-mode .tooltip {
+  top: 135%;
+  left: -65%;
 }
 
 .menu {

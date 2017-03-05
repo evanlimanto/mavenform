@@ -31,7 +31,7 @@ class Home extends Component {
           <div className="dark-gray center">
             <hr className="s2" />
             <a className="material-icons notification-x" onClick={() => this.setState({notificationBar: false})}>close</a>
-            <p className="white-text notification-text">New courses are added every week. <a className="header-link" href="https://docs.google.com/forms/d/e/1FAIpQLSeHtnXpK0TE2z9nt_0ygAdJa1HjMoxUyk-KU-Pksxb9b6t4Pg/viewform?usp=sf_link">Sign up</a> to be notified when your course is available!</p>
+            <p className="white-text notification-text">New courses are added every week. <a className="header-link" href="https://docs.google.com/forms/d/e/1FAIpQLSeHtnXpK0TE2z9nt_0ygAdJa1HjMoxUyk-KU-Pksxb9b6t4Pg/viewform?usp=sf_link" target="_blank">Sign up</a> to be notified when your course is available!</p>
             <hr className="s2" />
           </div>
         ) : (null)}

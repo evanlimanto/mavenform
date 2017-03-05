@@ -183,8 +183,8 @@ class Exam extends Component {
     const examType = this.props.params.examtype;
     const ExamComponent = <ExamContent exam={exam} course={course} type={examType} appMode={this.state.appMode} />;
     const navComponents = (this.state.appMode) ? (
-      <div style={{float: 'right', position: 'relative', right: '50px', top: '50px'}} className="tooltip-container reader-mode" onClick={() => this.toggleAppMode()}>
-        <a className="material-icons">subject</a>
+      <div className="tooltip-container app-mode" onClick={() => this.toggleAppMode()}>
+        <a className="material-icons">dashboard</a>
         <span className="tooltip">App Mode</span>
       </div>
     ) : (
