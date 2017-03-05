@@ -102,23 +102,20 @@ class ExamContent extends Component {
     const term = (examContent && _.has(examContent, 'term')) ? (examContent.term) : null;
     const useMarkdown = (examContent && _.has(examContent, 'md')) ? (examContent.md) : true;
     const isMCQ = (examContent && _.has(examContent, 'mcq')) ? (examContent.mcq) : false;
+    const numProblems = (examContent && _.has(examContent, 'num')) ? (examContent.num) : problemIDs.length;
 
     var content = null;
     if (isMCQ) {
-      content = _.map(_.range(1, examContent.num + 1), (num) => {
+      content = _.map(_.range(1, numProblems + 1), (num) => {
         const key = `q${num}_1`;
         var qcontent = examContent[key] || '';
         var choices = examContent[key + "_i"] || [];
-        if (num === 7) {
-          console.log(choices[0]);
-          console.log(marked(choices[0], {renderer}));
-        }
         if (useMarkdown) {
           qcontent = marked(qcontent, {renderer});
           choices = _.map(choices, (choice) => (isString(choice)) ? marked(choice, {renderer}) : (choice));
         }
         const solutionNum = examContent[key + "_s"] || 1;
-        return <Element key={num} className="element"><MultipleChoiceQuestion course={course} content={qcontent} solutionNum={solutionNum} choices={choices} examType={type} term={term} key={num} /></Element>;
+        return <Element key={num} className="element"><MultipleChoiceQuestion id={`q${num}`} course={course} content={qcontent} solutionNum={solutionNum} choices={choices} examType={type} term={term} key={num} /></Element>;
       });
     } else {
       content = (examContent && _.has(examContent, 'parts')) ?
@@ -148,7 +145,7 @@ class ExamContent extends Component {
           <h5>{examTypeToLabel[type]} | {termToLabel[term]} | {prof}</h5>
         </div>
         {content}
-        <Sidebar course={course} term={term} examType={type} examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} />
+        <Sidebar course={course} term={term} examType={type} examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} numProblems={numProblems} isMCQ={isMCQ} />
       </div>
     );
   }

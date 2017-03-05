@@ -18,6 +18,8 @@ class Sidebar extends Component {
     const term = this.props.term;
     const course = this.props.course;
     const examType = this.props.examType;
+    const isMCQ = this.props.isMCQ;
+
     return _.map(_.range(problemIDs.length), (index) => {
       const problemID = problemIDs[index];
       const problemTitle = `Question ${problemID[1]}`;
@@ -53,15 +55,21 @@ class Sidebar extends Component {
     const term = this.props.term;
     const course = this.props.course;
     const examType = this.props.examType;
+    const isMCQ = this.props.isMCQ;
     const examDirPrefix = `${process.env.PUBLIC_URL}/exams/${course}/${examType}-${term}`;
-    const webSidetabContainers = this.generateSidetabContainers();
+    const sidetabContainers = this.generateSidetabContainers();
+    const toc = (isMCQ) ? (null) : (
+      <span>
+        <h6>CONTENTS</h6>
+        {sidetabContainers}
+        <hr className="s2" />
+      </span>
+    );
 
     return (
       <span>
         <div className="sidebar">
-          <h6>CONTENTS</h6>
-          {webSidetabContainers}
-          <hr className="s2" />
+          {toc}
           <h6>SOURCES</h6>
           <div className="sidetab-container">
             <a className="sidetab" href={`${examDirPrefix}-exam.pdf`} target="_blank" onClick={() => handleEvent('PDF', 'Exam', `${course}${term}-${examType}`)}>Exam PDF</a>

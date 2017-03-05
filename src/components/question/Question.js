@@ -139,6 +139,7 @@ class MultipleChoiceQuestion extends Component {
     const term = this.props.term;
     const solutionNum = this.props.solutionNum;
     const choices = this.props.choices;
+    const examCode = `${examType}${term}${course}`;
 
     const options = _.map(choices, (choice, index) => {
       choice = `${String.fromCharCode(index + 65)}) ${choice}`;
@@ -153,14 +154,18 @@ class MultipleChoiceQuestion extends Component {
         <div className="tooltip-container">
           <a className="link material-icons" onClick={() => this.copyToClipboard(`${document.location.origin}/exam/${course}/${examType}/${term}#${this.props.id}`)}>link</a>
             {(this.state.copied) ?
-              (<span className="tooltip-link blue"><Expire delay={2000} callback={this.clearCopied}>Link Copied!</Expire></span>) :
-              (<span className="tooltip-link">Copy Link</span>)
+              (<span className="tooltip-link blue">
+                <Expire
+                 delay={2000}
+                 callback={this.clearCopied}
+                >Link Copied!</Expire>
+               </span>) : (<span className="tooltip-link">Copy Link</span>)
             }
         </div>
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <hr className="s1" />
         {options}
-        <Solution solution={this.props.solution} examCode={this.props.examCode} />
+        <Solution solution={String.fromCharCode(solutionNum + 65)} examCode={this.props.examCode} />
       </div>
     );
   }
