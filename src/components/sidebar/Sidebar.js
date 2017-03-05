@@ -37,7 +37,7 @@ class Sidebar extends Component {
                to={problemID}
                spy={true}
                isDynamic={true}
-               offset={-100}
+               offset={-50}
                smooth={true}
                duration={500}
                onClick={() => handleEvent('Scroll Nav', problemID, `${course}${term}-${examType}`)}>

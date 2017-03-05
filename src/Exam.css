@@ -24,7 +24,7 @@ body {
 
 .content {
   margin: auto;
-  padding: 0 50px;
+  padding: 0 50px 125px;
   /*80 monospaced characters*/
   max-width: 775px;
 }
