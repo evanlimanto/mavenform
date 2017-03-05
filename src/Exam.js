@@ -138,12 +138,18 @@ class ExamContent extends Component {
         }) : null;
     }
 
+    const examDesc = (examContent) ? (
+      <div className="center">
+        <h4>{courseIDToLabel[course]}</h4>
+        <h5>
+          {examTypeToLabel[type]} | {termToLabel[term]} | {prof}
+        </h5>
+      </div>
+    ) : null;
+
     return (
       <div className="content">
-        <div className="center">
-          <h4>{courseIDToLabel[course]}</h4>
-          <h5>{examTypeToLabel[type]} | {termToLabel[term]} | {prof}</h5>
-        </div>
+        {examDesc}
         {content}
         <Sidebar course={course} term={term} examType={type} examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} numProblems={numProblems} isMCQ={isMCQ} />
       </div>
