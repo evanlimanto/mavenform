@@ -146,7 +146,7 @@ class MultipleChoiceQuestion extends Component {
         option: true,
         right: (index == solutionNum - 1),
       });
-      return <div key={index} tabindex="0" className={optionClass} dangerouslySetInnerHTML={{__html: choice}}></div>;
+      return <div key={index} tabIndex="0" className={optionClass} dangerouslySetInnerHTML={{__html: choice}}></div>;
     });
     return (
       <div id={this.props.id} className="question mc-question">
