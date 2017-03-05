@@ -26,10 +26,8 @@ class NavSidebar extends Component {
       });
       return (
         <span key={examType}>
-          <div className="sideTitle"><span className="material-icons sideArrow">keyboard_arrow_down</span>{examTypeToLabel[examType]}</div>
+          <div className="sideTitle">{examTypeToLabel[examType]}</div>
           {content}
-          <div className="sideTitle"><span className="material-icons sideArrow">keyboard_arrow_right</span> Midterm 2 </div>
-          <div className="sideTitle"><span className="material-icons sideArrow">keyboard_arrow_right</span> Final </div>
         </span>
       );
     });

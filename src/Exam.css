@@ -510,15 +510,12 @@ img {
 }
 
 .sidetab-container {
-  margin: 7px;
+  margin: 6px 12px 10px;
+  line-height: 18px;
 }
 
 .sidetab {
   font-size: 14px;
-  position: relative;
-  left: 22px;
-  margin-right: 16px;
-  line-height: 21px;
   color: #999;
 }
 

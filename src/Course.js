@@ -35,7 +35,7 @@ class Course extends Component {
         <Navbar />
         <NavSidebar course={course} />
         <div className="sidebar">
-          <h6>Note</h6>
+          <h6>NOTE</h6>
           <i>This index accounts for every exam from HKN, TBP, and other sources from the past 2 academic years.</i>
         </div>
         <div>
