@@ -40,7 +40,8 @@ class Solution extends Component {
     }
 
     solutionButton = (
-      <input className={(this.state.showSolution) ? "gray" : "blue"} type="button" value="Show Solution" onClick={() => this.toggleSolution()}/>
+      <input className={(this.state.showSolution) ? "gray" : "blue"} type="button"
+       value={(this.props.solution) ? "Hide Solution" : "Show Solution"} onClick={() => this.toggleSolution()}/>
     );
 
     return (
@@ -87,6 +88,10 @@ class Question extends Component {
     const term = this.props.term;
     const examCode = `${examType}${term}${course}`;
 
+    const SolutionComponent = (this.props.appMode) ? (null) : (
+      <Solution solution={this.props.solution} examCode={this.props.examCode} />
+    );
+
     return (
       <div id={this.props.id} className="question">
         <div className="tooltip-container">
@@ -99,7 +104,7 @@ class Question extends Component {
                </Expire>
              </span>) : (<span className="tooltip-link">Copy Link</span>)}
           <div dangerouslySetInnerHTML={{__html: content}}></div>
-          <Solution solution={this.props.solution} examCode={examCode} />
+          {SolutionComponent}
         </div>
       </div>
     );
@@ -149,6 +154,10 @@ class MultipleChoiceQuestion extends Component {
       });
       return <div key={index} tabIndex="0" className={optionClass} dangerouslySetInnerHTML={{__html: choice}}></div>;
     });
+    const SolutionComponent = (this.props.appMode) ? (null) : (
+      <Solution solution={String.fromCharCode(solutionNum + 65)} examCode={this.props.examCode} />
+    );
+
     return (
       <div id={this.props.id} className="question mc-question">
         <div className="tooltip-container">
@@ -165,7 +174,7 @@ class MultipleChoiceQuestion extends Component {
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <hr className="s1" />
         {options}
-        <Solution solution={String.fromCharCode(solutionNum + 65)} examCode={this.props.examCode} />
+        {SolutionComponent}
       </div>
     );
   }
