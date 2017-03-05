@@ -555,9 +555,9 @@ img {
 }
 
 .banner-img::after {
-  background: -moz-linear-gradient(45deg, #11accc 0%, rgba(17,172,204,0.3) 100%);
-  background: -webkit-linear-gradient(45deg, #11accc 0%, rgba(17,172,204,0.3) 100%);
-  background: linear-gradient(45deg, #11accc 0%, rgba(17,172,204,0.3) 100%);
+  background: -moz-linear-gradient(30deg, #11accc 30%, rgba(17,172,204,0.85) 100%);
+  background: -webkit-linear-gradient(30deg, #11accc 30%, rgba(17,172,204,0.85) 100%);
+  background: linear-gradient(30deg, #11accc 30%, rgba(17,172,204,0.85) 100%);
   content: '';
   height: 100%;
   position: absolute;
@@ -633,6 +633,10 @@ img {
   color: #11accc;
 }
 
+.course-card h6 {
+  margin-bottom: 2px;
+}
+
 .course-subtitle {
   font-size: 18px;
 }
@@ -680,9 +684,9 @@ img {
 }
 
 .column .material-icons {
-  font-size: 50px;
+  font-size: 36px;
   color: #ccc;
-  padding-bottom: 15px;
+  padding: 5px 0 15px;
 }
 
 .column * {
