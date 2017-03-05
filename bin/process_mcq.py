@@ -35,9 +35,11 @@ def main(fname, output_f):
                          imagewriter=imagewriter)
   fp = open(fname, 'rb')
   interpreter = PDFPageInterpreter(rsrcmgr, device)
-  for page in PDFPage.get_pages(fp, pagenos,
+  for (i, page) in enumerate(PDFPage.get_pages(fp, pagenos,
                                 maxpages=maxpages, password=password,
-                                caching=caching, check_extractable=True):
+                                caching=caching, check_extractable=True)):
+    if i < 2:
+      continue
     page.rotate = (page.rotate+rotation) % 360
     interpreter.process_page(page)
   fp.close()
@@ -59,7 +61,7 @@ def match_question(s, index, q_num):
   return editdistance.eval(expected, real) <= 1
 
 def match_subquestion(s, index, q_num):
-  expected = '%s)' % (chr(q_num + ord('a') - 1),)
+  expected = '%s.' % (chr(q_num + ord('a') - 1),)
   real = s[index:index + len(expected) + 1].lower()
   return editdistance.eval(expected, real) <= 1
 
@@ -73,11 +75,16 @@ class Question:
     i = 0
     cur_q = 1
     start_i = None
+    first = True
     while i < len(self.contents):
       start_i = i
       while i < len(self.contents) and not match_subquestion(self.contents, i, cur_q):
         i += 1
       if match_subquestion(self.contents, i, cur_q):
+        if first:
+          first = False
+          self.qc = self.contents[:i]
+          start_i = i
         while i + 1 < len(self.contents) and not match_subquestion(self.contents, i + 1, cur_q + 1):
           i += 1
         i += 1
@@ -92,8 +99,6 @@ class Question:
 def process(fname):
   f = open(fname, 'r')
   contents = f.read()
-
-  print(contents)
 
   i = 0
   cur_q = 1
@@ -113,6 +118,7 @@ def process(fname):
     question.parse()
 
 if __name__ == '__main__':
+  import re
   parser = argparse.ArgumentParser()
   parser.add_argument("infile")
   parser.add_argument("outfile")
@@ -131,31 +137,29 @@ ref: '%s-%s'
 
 type: '%s'
 term: '%s'
-prof: 'Adhikari'
-
-questions: {
-%s
-}
-
-parts: {
-%s
-}
+prof: 'Nitsche'
+mcq: true
+num: 40
   '''
-  qs = ',\n'.join(['  \'q%s\': \'\'' % (i + 1,) for (i, question) in enumerate(questions)])
-  parts = ',\n'.join(['  \'q%s\': %s' % (i + 1, len(question.parts)) for (i, question) in enumerate(questions)])
-  header = header % (etype, sem, etype, sem, qs, parts,)
+  header = header % (etype, sem, etype, sem)
 
   items = [header]
+  pattern = re.compile("ANS: ([A-Z])")
   for (i, question) in enumerate(questions):
-    for (j, subquestion) in enumerate(question.parts):
-      fmt = '''
+    try:
+      ans = pattern.findall(question.parts[-1].strip())[0]
+    except IndexError:
+      ans = "?"
+    fmt = '''
 q%s_%s: |
   %s
 
-q%s_%s_s: |
+q%s_%s_i: |
+%s
 
-      ''' % (i + 1, j + 1, subquestion.strip().replace('\n', '\n  '), i + 1, j + 1)
-      items.append(fmt)
+q%s_%s_s: %s
+    ''' % (i + 1, 1, question.qc.strip(), i + 1, i + 1, '\n'.join('  - %s' % subquestion.strip().replace('\n', '') for subquestion in question.parts), i + 1, 1, ord(ans) - ord('A') + 1)
+    items.append(fmt)
 
   outfile = args.outfile
   f = open(outfile, 'w')
