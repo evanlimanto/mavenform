@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { exams, examTypeToLabel, courseIDToLabel } from './exams';
+import { exams, examTypeToLabel, courseIDToLabel, courses } from './exams';
 import { handleEvent } from './utils';
 import { Navbar, NavSidebar } from './components';
 
@@ -24,6 +24,7 @@ class Course extends Component {
 
   render() {
     const course = this.props.params.courseid;
+    const desc = courses[course];
     const available = _.map(exams[course], (examsOfType, examType) => {
       return _.map(examsOfType, (dict, semester) => {
         const url = `/${course}/${examType}-${dict['id']}`;
@@ -47,8 +48,8 @@ class Course extends Component {
         <Navbar isExam={false} toggleAppModeCallback={this.toggleAppMode} />
         <NavSidebar course={course} isExam={false} />
         <div className="sidebar">
-          <h6>NOTE</h6>
-          <i>This index accounts for every exam from HKN, TBP, and other sources from the past 2 academic years.</i>
+          <h6>INFO</h6>
+          <i>{desc}</i>
         </div>
       </span>
     );
