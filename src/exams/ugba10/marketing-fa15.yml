@@ -1,0 +1,424 @@
+course: 'ugba10'
+ref: 'marketing-fa15'
+
+type: 'marketing'
+term: 'fa15'
+prof: 'Briginshaw'
+mcq: true
+num: 37
+  
+q1_1: |
+  Which of these is a reason companies want to understand the percentage of customers who reach each stage in the marketing funnel?
+
+q1_1_i:
+  - To determine optimal pricing to drive acquisition conversion
+  - To evaluate marketing effectiveness in driving customer conversion across the funnel
+  - To identify the most attractive customer segments to target with marketing
+  - To identify the celebrity who would be the best brand ambassador
+
+q1_1_s: 2
+    
+q2_1: |
+  Finish this sentence: Companies that are focused on the Market Penetration quadrant of the Product/Market Expansion Matrix
+
+q2_1_i:
+  - Are trying to find more people like their current target audience to sell their current products to
+  - Are trying to find new products to sell to their current target audience
+  - Are trying to find new target audiences to sell new products to
+  - Are trying to find new target audiences to sell their current products to
+
+q2_1_s: 1
+    
+q3_1: |
+  An organizations mission is important because it:
+
+q3_1_i:
+  - Defines its financial goals
+  - Details the specific metrics that will be used to evaluate performance
+  - Motivates employees and attracts recruits
+  - Details the tactics used to achieve its goals
+
+q3_1_s: 3
+    
+q4_1: |
+  Through the strategic planning process, departments including Marketing align their objectives, initiatives and tactics to support the overall business objectives. Imagine one of Amazons strategic objectives is to grow average revenue per customer. An example of a Marketing objective to help achieve this business objective would be:
+
+q4_1_i:
+  - Get customers to buy one more item each time they place an order
+  - Get customers to write reviews of each product they buy
+  - Create an Amazon loyalty program
+  - Let customers pick up their orders at convenient locations instead of having themdeliver
+  - ed
+
+q4_1_s: 1
+    
+q5_1: |
+  Marketing has important financial and non-financial objectives. Which of these could be one of Match.coms non-financial marketing objectives?
+
+q5_1_i:
+  - Increase the percentage of users who have paid memberships
+  - Increase the percentage of users who have gone on a date with someone they met on Mat
+  - ch.com in the past monthIncrease the percentage of paying members who renew their memberships
+  - Increase the percentage of users who refer friends that become paying members
+
+q5_1_s: 2
+    
+q6_1: |
+  Kayak segments its customers based on how many trips they take a year involving air travel. This approach is an example of which type of segmentation:
+
+q6_1_i:
+  - Psychographic-based segmentation
+  - Demographic-based segmentation
+  - Behavioral-based segmentation
+  - Needs-based segmentationlOMoARcPSD9UGBA10  Fall 2015 Marketing Module Exam
+
+q6_1_s: 3
+    
+q7_1: |
+  A brand''s value proposition is primarily used internally. Its positioning is used to guide external communications. These two have many elements in common, and differ in one key aspect. Unlike a value proposition, a positioning includes:
+
+q7_1_i:
+  - Tablestakes and differentiators that add credibility
+  - Specific metrics for measuring performance
+  - A timeframe for delivering results
+  - Names of competitors the brand wants to be lik
+  - e
+
+q7_1_s: 1
+    
+q8_1: |
+  Companies that have direct interaction with end users, like hotels, restaurants, and retailers have great insights into customer needs, brand preferences, purchase behavior, and more. Which of these is an example of information that every retailer has about its customers:
+
+q8_1_i:
+  - How many items they typically purchase at a time
+  - What their favorite TV show is
+  - What magazines they subscribe to
+  - Whether they have homeowners insuranc
+  - e
+
+q8_1_s: 1
+    
+q9_1: |
+  The best way for Yelp to find out its unaided awareness among consumers is to:
+
+q9_1_i:
+  - Have employees dressed in Yelp t-shirts stand in high traffic areas in major cities and askpeople which review sites come to mind
+  - Conduct research without revealing who is behind it and ask people which review sites come to mind
+  - Subtract the percentage of first time visitors to the Yelp website from 100% and call that unaided awareness
+  - Run a contest for Yelp frequent users to refer friends to Yelps Facebook page and ask everyone who comes whether they had heard of Yelp befor
+  - e
+
+q9_1_s: 2
+    
+q10_1: |
+  Which of these might Instacart try to increase loyalty among its users?
+
+q10_1_i:
+  - Run TV ads about its services
+  - Get a celebrity spokesperson to be the face of the brand
+  - Sponsor a cooking show on the Food Network
+  - Create its own rewards program for frequent users
+
+q10_1_s: 4
+    
+q11_1: |
+  A consumer who has a Banana Republic credit card and loyally shops there whenever the store runs storewide sales of at least 30% off would fit into which quadrant of the Customer Relationship Group framework?
+
+q11_1_i:
+  - Butterfly
+  - True Friend
+  - Barnacle
+  - Strangers
+
+q11_1_s: 3
+    
+q12_1: |
+  The main marketing challenge for brands that fall in the Cash Cow quadrant of the BCG Growth
+Share Matrix is:
+
+q12_1_i:
+  - Increasing market share
+  - Maintaining growth
+  - Increasing loyalty
+  - Staying relevantlOMoARcPSD10UGBA10  Fall 2015 Marketing Module Exam
+
+q12_1_s: 4
+    
+q13_1: |
+  Businesses in different quadrants of the Growth-Share Matrix receive different levels and types of marketing investment. If youre working in a Question Mark business like Amazon Home Services, which competes with Angies List and Yelp, you are likely to
+
+q13_1_i:
+  - Have a smaller marketing budget than colleagues working a Dog
+  - Focus your marketing spending on increasing share
+  - Focus your marketing spending on increasing relevance
+  - Focus your marketing spending on growing the mark
+  - et
+
+q13_1_s: 2
+    
+q14_1: |
+  When it comes to increasing revenues, Coca-Cola has many choices. If they were to create a line of salty snacks to sell to beverage customers, that would be an example of a decision to grow according to which of the quadrants of the Product/Market Expansion Matrix:
+
+q14_1_i:
+  - Product Development
+  - Market Development
+  - Diversification
+  - Market Penetration
+
+q14_1_s: 1
+    
+q15_1: |
+  Read this theoretical positioning statement for Snapchats advertising business:
+  For advertisers looking to reach tightly knit communities, Snapchat is an exciting new social ad platform that delivers higher engagement and conversion because only Snapchat presents personal, tiny, disappearing messages that mimic real conversations.
+  Which of these is the key benefit in this positioning statement?
+
+q15_1_i:
+  - Advertisers
+  - Higher engagement and conversion
+  - Personal, tiny, disappearing messages
+  - Social ad platform
+
+q15_1_s: 2
+    
+q16_1: |
+  Mastercards successful and long-running marketing campaign is: There are some things money can't buy. For everything else, there's MasterCarThis is a clever and non-traditional way of reminding consumers of Mastercards:
+
+q16_1_i:
+  - Customer segmentation
+  - Value proposition
+  - Marketing mix
+  - Product-market expansion strategy
+
+q16_1_s: 2
+    
+q17_1: |
+  The 4 Ps represent the levers that marketers pull to achieve their objectives. Which of these is an example of Snapples use of the PLACE lever?
+
+q17_1_i:
+  - Providing Real Facts in its bottle caps
+  - Offering Peach Tea flavor
+  - Offering in 12-pack variety packs
+  - Selling in Safeway storeslOMoARcPSD11UGBA10  Fall 2015 Marketing Module Exam
+
+q17_1_s: 4
+    
+q18_1: |
+  A driver who has a few brands of gas he thinks are best for his car and chooses based on which one is easiest to get into when he need to fill up falls into which quadrant of the Customer Relationship Group Framework?
+
+q18_1_i:
+  - True Friend
+  - Stranger
+  - Butterfly
+  - Barnacl
+  - e
+
+q18_1_s: 3
+    
+q19_1: |
+  The scandal surrounding Volkswagens falsification of the performance of its clean diesel engine technology (aka Dieselgate) has ramifications for VW as well as other carmakers. From the perspective of an all-electric car manufacturer like Tesla, which quadrant of the SWOT analysis does Dieselgate belong in?
+
+q19_1_i:
+  - Strengths
+  - Weaknesses
+  - Opportunities
+  - Threats
+
+q19_1_s: 3
+    
+q20_1: |
+  Amazon generates over 90% of its revenue from just 6 countries. They are actively working to penetrate India and Chi
+
+q20_1_i:
+  - nTheir efforts to grow in new countries are examples of growth through which quadrant of the Product/Market Expansion Matrix?Product Development
+  - Market Development
+  - Diversification
+  - Market Penetration
+
+q20_1_s: 2
+    
+q21_1: |
+  With its new Fairlife brand of milk, Coca-Cola is targeting younger adults who aspire to wholesome, mindful living. Based on just this information, what type of segmentation underlies Fairlifes marketing?
+
+q21_1_i:
+  - Demographic
+  - Behavioral
+  - Psychographic
+  - Price sensitivity
+
+q21_1_s: 3
+    
+q22_1: |
+  A companys marketing strategy answers several fundamental questions about its product offering. Which of these questions is addressed by marketing strategy?
+
+q22_1_i:
+  - When will the business break even?
+  - How will employees participate in the companys financial success?
+  - Will we allow employees to be in a union?
+  - Why will customers choose the companys products?
+
+q22_1_s: 4
+    
+q23_1: |
+  The classic positioning framework includes 4 key elements. Which of these is NOT one?
+
+q23_1_i:
+  - Performance metrics
+  - Target
+  - Tablestakes and differentiators
+  - Key benefitlOMoARcPSD12UGBA10  Fall 2015 Marketing Module Exam
+
+q23_1_s: 1
+    
+q24_1: |
+  The scandal surrounding Dieselgate obviously has ramifications for perceptions of VWs engineering capabilities and integrity. Which quadrant of VWs SWOT does Dieselgate belong in?
+
+q24_1_i:
+  - Strengths
+  - Weaknesses
+  - Opportunities
+  - Threats
+
+q24_1_s: 2
+    
+q25_1: |
+  Which of these is an example of a SMART marketing objective?
+
+q25_1_i:
+  - Increase customer lifetime value
+  - Increase the average order size
+  - Be on Fortunes top 10 best places to work in America
+  - Have half of sales come from products less than 3 years old within 18 months
+
+q25_1_s: 4
+    
+q26_1: |
+  Companies usually have a mix of financial and non-financial marketing objectives. Which of these could be a FINANCIAL marketing objective of Twitter:
+
+q26_1_i:
+  - Increase advertising revenue per user
+  - Improve tweet searchability
+  - Sponsor the Grammys
+  - Increase time spent on twitt
+  - er.com and on the twitter app
+
+q26_1_s: 1
+    
+q27_1: |
+  Imagine you have an assignment to profile homeowners who have installed solar panels on their homes. If you cant find helpful information by searching Google, your best option for finding unbiased market information is to:
+
+q27_1_i:
+  - Search Bing, Ask Jeeves and other search engines
+  - Go to the websites of companies that supply or install solar panels to see if they haveinformation about their customers
+  - Stand outside Home Depot and interview customers to find and interview those whohave installed solar
+  - Search the Universitys library system for relevant secondary source information
+
+q27_1_s: 4
+    
+q28_1: |
+  In many ways, Snapple is in the fashion business. It comes in 40 different flavors, and many are specific to a particular region of the country while others are based on the latest fruit f
+
+q28_1_i:
+  - aThe top 10 account for most of Snapples revenues. Which lever of the 4 Ps is Snapples 40-flavor offering an example of?Place
+  - Price
+  - Product
+  - Promotion
+
+q28_1_s: 3
+    
+q29_1: |
+  Marketers use a variety of qualitative research techniques to gain insight into customers. Which of these is a type of qualitative research?
+
+q29_1_i:
+  - Telephone surveys of users and prospects
+  - Ethnography
+  - Web site traffic analysis
+  - Facebook questionnaireslOMoARcPSD13UGBA10  Fall 2015 Marketing Module Exam
+
+q29_1_s: 2
+    
+q30_1: |
+  If Best Buy wanted to understand what aspects of its current online ordering experience its customers like, which these research approaches WOULD BE BEST FOR its marketers undertake?
+
+q30_1_i:
+  - A pop-up community of customers
+  - Focus groups with customers
+  - In-depth customer interviews
+  - A customer surv
+  - ey
+
+q30_1_s: 4
+    
+q31_1: |
+  Identifying the right people to include in research is one of the most important aspects of research design. Which of the following do marketers typically NOT use as a criterion for selecting research participants?
+
+q31_1_i:
+  - Role in deciding whether to buy products like the ones being researched
+  - Involvement or interest in the product category being explored
+  - Awareness of one or more key brands in the category
+  - Membership in one or more loyalty programs
+
+q31_1_s: 4
+    
+q32_1: |
+  Outward Bound is an example of a brand with high awareness among its target audience and low tri
+
+q32_1_i:
+  - al. Which of the following tactics would improve its acquisition conversion and help move potential customers further down the marketing funnel?Discounts for students who take a second trip with Outward Bound
+  - Information sessions where past trip participants share their experiences with prospective participants
+  - Glossy magazine ads showing the beautiful places Outward Bound courses are offered
+  - Sponsoring girls track teams in cities with a high percentage of Outward Bound alumni
+
+q32_1_s: 2
+    
+q33_1: |
+  Which of these is probably not a market for Airbnb?
+
+q33_1_i:
+  - College students traveling in Europe
+  - Families visiting Washington, DC for spring break
+  - Millennials going skiing in Tahoe over a long weekend
+  - Top IBM customers attending a 2-day IBM-sponsored event at a golf resort inScottsdale, Arizona
+
+q33_1_s: 4
+    
+q34_1: |
+  In the 1970s, Crocker Bank used a popular song, Weve Only Just Begun, in TV ads promoting its home mortgages. Which of these was probably one of THE Crocker MARKETING TEAMS key reasons for using this song in the ad?
+
+q34_1_i:
+  - Tapping into popular culture to make the bank seem more contemporary
+  - Avoiding the cost of creating their own music for the ad
+  - Appealing to young homebuyers who knew and liked the song, hoping those feelingswould extend to the bank
+  - Getting the ad to market faster by using already-existing music
+
+q34_1_s: 3
+    
+q35_1: |
+  Complete this sentence: Marketers use secondary research reports to:
+
+q35_1_i:
+  - Understand what is known about a industry or product
+  - Uncover competitive secrets
+  - Learn what consumers think of their new product ideas
+  - Evaluate their company management teamlOMoARcPSD14UGBA10  Fall 2015 Marketing Module Exam
+
+q35_1_s: 1
+    
+q36_1: |
+  Volkswagens Dieselgate scandal clearly has already hurt the company badly  its stock price has dropped significantly, lawsuits have been filed all over the world, key employees have resigned and been fireAnd its not over yet. What small comfort might the New Coke story offer to VW? (there are only 3 choices)
+
+q36_1_i:
+  - Consumers have short memories. They forgot about New Coke, and theyll forget about Dieselgate, too.
+  - The Coke brand had enough equity to withstand its mistake. If VW comes clean and takes dramatic enough measures, perhaps it will survive, too
+  - Product innovation is overrat
+  - eIf consumers like your product, its risky to change it too much.
+
+q36_1_s: 2
+    
+q37_1: |
+  I have carefully checked my Scantron. My Section number is correctly shown and I have checked that my name is written with last name first.
+
+q37_1_i:
+  - Yes
+  - No
+
+q37_1_s: 1

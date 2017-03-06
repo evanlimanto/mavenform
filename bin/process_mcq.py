@@ -127,9 +127,9 @@ if __name__ == '__main__':
   args = parser.parse_args()
 
   filename = args.infile
-  main(filename, 'out.txt')
+  #main(filename, 'out.txt')
   process('out.txt')
-  os.remove('out.txt')
+  #os.remove('out.txt')
 
   etype = 'mt2'
   sem = 'sp11'
@@ -156,11 +156,11 @@ num: 40
 q%s_%s: |
   %s
 
-q%s_%s_i: |
+q%s_%s_i:
 %s
 
 q%s_%s_s: %s
-    ''' % (i + 1, 1, question.qc.strip(), i + 1, i + 1, '\n'.join('  - %s' % subquestion.strip().replace('\n', '') for subquestion in question.parts), i + 1, 1, ord(ans) - ord('A') + 1)
+    ''' % (i + 1, 1, question.qc.strip(), i + 1, 1, '\n'.join('  - %s' % subquestion.strip().replace('\n', '') for subquestion in question.parts), i + 1, 1, ord(ans) - ord('A') + 1)
     items.append(fmt)
 
   outfile = args.outfile
