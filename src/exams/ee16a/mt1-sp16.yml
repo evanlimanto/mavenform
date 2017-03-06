@@ -26,13 +26,13 @@ parts: {
   'q9': 5,
 }
 
-q3: |
+q3_1: |
   <h2>3. Mechanical Johann</h2>
   Invert the following matrix:
 
   $\left[ \begin{array}{c c c} 1 & 2 & 6 \\ 0 & 1 & 4 \\ 2 & 4 & 10 \end{array} \right]$
 
-q3_s: |
+q3_1_s: |
   We can ﬁnd the inverse by row reducing the augmented system (process omitted for brevity): <br/><br/>
 
   $\left[ \begin{array}{c c c c c c c} 1 & 2 & 6 & \vdots & 1 & 0 & 0 \\ 0 & 1 & 4 & \vdots & 0 & 1 & 0 \\ 2 & 4 & 10 & \vdots & 0 & 0 & 1 \end{array} \right]$
@@ -44,12 +44,12 @@ q3_s: |
   We can check our answer by calculating:<br/><br/>
   $\left[ \begin{array}{c c c} 1 & 2 & 6 \\ 0 & 1 & 4 \\ 2 & 4 & 10 \\ \end{array} \right] \left[ \begin{array}{c c c} 3 & -2 & -1 \\ -4 & 1 & 2 \\ 1 & 0 & -1/2 \\ \end{array} \right] = \left[ \begin{array}{c c c} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \\ \end{array} \right]$
 
-q4: |
+q4_1: |
   <h2>4. Freedom!</h2>
   Let $A$ and $B$ be $n × n$ matrices. Suppose $A$ is invertible, but $B$ is not. <b>Prove that Rank</b>($AB$) < <b>Rank</b>($A$).<br/><br/>
   (That is, show that the number of linearly independent columns in $AB$ is strictly less than the number of linearly independent columns in $A$).
 
-q4_s: |
+q4_1_s: |
   <h2>Proof 1:</h2>
   Since $B$ is rank deﬁcient, it has linearly dependent columns. This means that there exists a nonzero vector $\vec{x}$ such that $B\vec{x} = \vec{0}$
 

@@ -151,7 +151,6 @@ class MultipleChoiceQuestion extends Component {
     const solutionNum = this.props.solutionNum - 1;
     const choices = this.props.choices;
     const examCode = `${examType}${term}${course}`;
-      console.log(solutionNum);
     const options = _.map(choices, (choice, index) => {
       choice = `${String.fromCharCode(index + 65)}) ${choice}`;
       const optionClass = classnames({

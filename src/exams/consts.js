@@ -4,6 +4,10 @@ const exams = {
       'Spring 2013': {
         'id': 'sp13',
         'profs': 'Pines',
+      },
+      'Spring 2011': {
+        'id': 'sp11',
+        'profs': 'Nitsche',
       }
     }
   },
@@ -99,10 +103,10 @@ const exams = {
 
 const courses = {
   'chem1a': 'General Chemistry',
+  'data8': 'Foundations of Data Science',
   'ee16a': 'Designing Information Devices and Systems I',
   'cs61c': 'Great Ideas in Computer Architecture (Machine Structures)',
   'cs162': 'Operating Systems and Systems Programming',
-  'data8': 'Foundations of Data Science',
 };
 
 const examTypeToLabel = {
@@ -112,6 +116,10 @@ const examTypeToLabel = {
 }
 
 const termToLabel = {
+  'sp11': 'Spring 2011',
+  'fa11': 'Fall 2011',
+  'sp12': 'Spring 2012',
+  'fa12': 'Fall 2012',
   'sp13': 'Spring 2013',
   'fa13': 'Fall 2013',
   'sp14': 'Spring 2014',
