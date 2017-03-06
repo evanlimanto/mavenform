@@ -1,24 +1,24 @@
 const exams = {
-  // 'chem1a': {
-  //   'mt2': {
-  //     'Spring 2013': {
-  //       'id': 'sp13',
-  //       'profs': 'Pines',
-  //     },
-  //     'Fall 2011': {
-  //       'id': 'fa11',
-  //       'profs': 'Arnold',
-  //     },
-  //     'Spring 2011': {
-  //       'id': 'sp11',
-  //       'profs': 'Nitsche',
-  //     },
-  //     'Fall 2010': {
-  //       'id': 'fa10',
-  //       'profs': 'Stacy',
-  //     },
-  //   }
-  // },
+  'chem1a': {
+    'mt2': {
+      'Spring 2013': {
+        'id': 'sp13',
+        'profs': 'Pines',
+      },
+      'Fall 2011': {
+        'id': 'fa11',
+        'profs': 'Arnold',
+      },
+      'Spring 2011': {
+        'id': 'sp11',
+        'profs': 'Nitsche',
+      },
+      'Fall 2010': {
+        'id': 'fa10',
+        'profs': 'Stacy',
+      },
+    }
+  },
 
   'data8': {
     'mt1': {
@@ -41,6 +41,10 @@ const exams = {
     'mt1': {
       'Spring 2016': {
         'id': 'sp16',
+        'profs': 'Hellerstein',
+      },
+      'Spring 2015': {
+        'id': 'sp15',
         'profs': 'Hellerstein',
       }
     }

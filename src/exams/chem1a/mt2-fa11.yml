@@ -56,19 +56,19 @@ q3_1_i:
 
 q3_1_s: 3
 
-q4_1: |
+q3_2: |
   SHORT ANSWER: At pH > 12 the red cabbage juice solution is green. Over time, the solution turns yellow. Present a hypothesis as to why this happens.
 
-q4_1_s: |
+q3_2_s: |
   Above pH 12 the major species present are $A_-$ (blue) and $B^−$(yellow) which gives a green solution. Since the solution turns yellow over time the $A^−$ must decompose.
 
-q5_1: |
+q3_3: |
   Use this hypothesis to predict what you would observe if you added acid to the yellow solution to neutralize it.
 
-q5_1_s: |
+q3_3_s: |
   If you add acid to a solution of $A^-$ and $B^-$, the pH should drop forming more HA and HB, which would turn the solution from yellow to green to blue (and maybe even purple if you add enough acid). <u>But</u> if $A^−$ has decomposed HA won’t form so the solution would probably just turn from yellow ($B^−$) to colorless (HB).
 
-q6_1: |
+q4_1: |
   ## Kitty Litter
   Cat urine has a strong, unpleasant odor due to ammonia, $NH_3$. Fortunately, kitty litter not only absorbs moisture, but it also absorbs much of the odor. Many kitty litters are made of clay, which absorbs water and ammonia.
   <hr class="s2" />
@@ -85,43 +85,47 @@ q6_1: |
   <hr class="s1" />
   Which of the following statements is true?
 
-q6_1_i:
+q4_1_i:
   - Most of the $NH_3$ is absorbed in the clay.
   - Most of the $NH_3$ remain as a gas.
   - $NH_3$ (g) is in equilibrium with $NH_3$ (clay), so both are present in equal amounts.
 
-q7_1: |
+q4_1_s: 1
+
+q5_1: |
   5. In the test described above, what happens if the volume of the container is decreased to 5 L with the same total # of moles of $NH_3$ at 25°C?
 
-q7_1_i:
+q5_1_i:
   - The partial pressure of $NH_3$ is 0.20 atm.
   - The # of moles of $NH_3$ absorbed in the caly increases.
   - There is no change because the equilibrium constant does not depend on pressure.
 
-q7_1_s: 2
+q5_1_s: 2
 
-q8_1: |
+q6_1: |
   The kitty litter is exposed to other gases. Which gas requires the smallest partial pressure to result in absorption of 1 mole of gas per 0.10 kg of clay?
 
-q8_1_i:
+q6_1_i:
   - $O_2$
   - $He$
   - $CO_2$
   - $H_2S$
 
-q9_1: |
+q6_s: 4
+
+q6_2: |
   SHORT ANSWER: Vinegar (acetic acid) can also be used to reduce the odor of cat urine. Write the reaction between vinegar ($CH_3COOH$) and ammonia ($NH_3$).
 
-q9_1_s: |
+q6_2_s: |
   $$CH_3COOH + NH_3 \rightarrow CH_3COO^-NH_4^+$$
 
-q10_1: |
+q6_3: |
   Explain why this reaction reduces the odor.
 
-q10_1_s: |
+q6_3_s: |
   The product, ammonium acetate ($CH_3COO^−NH_4^+$) is ionic and will likely not be able to go into the gas phase. It will either be an ionic solid or remain aqueous if there is enough liquid present.
 
-q11_1: |
+q7_1: |
   ## Organic Bases
   Nucleic acids, proteins, neurotransmitters, and stimulants are all organic bases that contain nitrogen atoms. Use the data below to answer the questions about organic bases.
   <hr class="s2" />
@@ -136,23 +140,23 @@ q11_1: |
   <hr class="s2" />
   7. Which solution is the most basic?
 
-q11_1_i:
+q7_1_i:
   - 0.10 M $CH_5N$
   - 0.10 M $NH_3$
   - 0.10 M $C_2H_5N$
 
-q11_1_s: 4
+q7_1_s: 1
 
-q12_1: |
+q8_1: |
   What is the pH of a 0.10 M solution of methylamine ($CH_5N$)?
 
-q12_1_i:
+q8_1_i:
   - 2
   - 5
   - 9
   - 12
 
-q12_1_s: 4
+q8_1_s: 4
 
 q13_1: |
   What is the $pK_a} for the conjuage acid of methylamine?
@@ -211,19 +215,19 @@ q18_1: |
   ![nicotine](/img/chem1a/mt2-fa11-q14-1.png)
 
 q18_1_i:
-  - ![a](/img/chem1a/mt2-fa11-q14-1.png)
-  - ![a](/img/chem1a/mt2-fa11-q14-2.png)
-  - ![a](/img/chem1a/mt2-fa11-q14-3.png)
-  - ![a](/img/chem1a/mt2-fa11-q14-4.png)
+  - "![a](/img/chem1a/mt2-fa11-q14-1.png)"
+  - "![a](/img/chem1a/mt2-fa11-q14-2.png)"
+  - "![a](/img/chem1a/mt2-fa11-q14-3.png)"
+  - "![a](/img/chem1a/mt2-fa11-q14-4.png)"
 
 q19_1: |
   15. A sample of nicotine is titrated with 0.10 M HCl solution. Which graph below best represents the titration curve? (Note: The dotted line corresponds to pH 7.)
 
 q19_1_i:
-  - ![a](/img/chem1a/mt2-fa11-q19-1.png)
-  - ![b](/img/chem1a/mt2-fa11-q19-2.png)
-  - ![c](/img/chem1a/mt2-fa11-q19-3.png)
-  - ![d](/img/chem1a/mt2-fa11-q19-4.png)
+  - "![a](/img/chem1a/mt2-fa11-q19-1.png)"
+  - "![b](/img/chem1a/mt2-fa11-q19-2.png)"
+  - "![c](/img/chem1a/mt2-fa11-q19-3.png)"
+  - "![d](/img/chem1a/mt2-fa11-q19-4.png)"
 
 q19_1_s: 4
 
@@ -314,6 +318,8 @@ q26_1_i:
   - pH ~ 3 because tannic acid is the strongest acid
   - pH ~ 2 because glucose is present in the highest concentration
 
+q26_1_s: 2
+
 q27_1: |
   When $CaCl_2$ is added to a solution of tannic acid, $CaT_2$ precipitates. What happens to the pH?
 
@@ -330,8 +336,8 @@ q28_1: |
 q28_1_s: |
   $$2 HT (aq) + Ca(OH)_2 (aq) \equiv CaT_2 (s) + 2H_2O (I)$$
 
-q28_1: |
+q29_1: |
   Next, methylene chloride, $CH_2Cl_2$, is added. Two liquid layers are observed at 25°C because $CH_2Cl_2$ is not miscible with water. Where are most of the caffeine molecules? Explain your thinking.
 
-q28_1_s: |
+q29_1_s: |
   Caffeine molecules are both in the aqueous and in the methylene chloride phase. However, judging from a higher solubility of caffeine in methylene chloride than in water, most of the caffeine molecules will be in the methylene chloride phase.
