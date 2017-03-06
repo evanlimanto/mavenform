@@ -348,12 +348,12 @@ img {
 }
 
 .reader .link, .reader input[type="button"], .reader .solution {
-  display: none;
+  visibility: hidden
 }
 
 .reader .option {
   border: none;
-  padding: 0;
+  padding: 30px 0 0;
 }
 
 .reader .option:hover {

@@ -72,7 +72,7 @@ class ExamContent extends Component {
 
   componentDidUpdate() {
     // Move header to first question element
-    var header = document.getElementsByClassName("center")[0];
+    var header = document.getElementById("header-text");
     header.parentNode.removeChild(header);
     var firstQuestion = document.getElementsByClassName("element")[0];
     firstQuestion.insertBefore(header, firstQuestion.firstChild);
@@ -142,11 +142,14 @@ class ExamContent extends Component {
     }
 
     const examDesc = (examContent) ? (
-      <div className="center">
-        <h4>{courseIDToLabel[course]}</h4>
-        <h5>
-          {examTypeToLabel[type]} | {termToLabel[term]} | {prof}
-        </h5>
+      <div id="header-text">
+        <div className="center">
+          <h4>{courseIDToLabel[course]}</h4>
+          <h5>
+            {examTypeToLabel[type]} | {termToLabel[term]} | {prof}
+          </h5>
+        </div>
+        <div dangerouslySetInnerHTML={{__html: pre}} />
       </div>
     ) : null;
     const SidebarComponent = (appMode) ? (
