@@ -34,6 +34,10 @@ const exams = {
       'Spring 2016': {
         'id': 'sp16',
         'profs': 'Briginshaw'
+      },
+      'Fall 2015': {
+        'id': 'fa15',
+        'profs': 'Briginshaw'
       }
     }
   },
