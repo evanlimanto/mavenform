@@ -1,0 +1,337 @@
+course: 'chem1a'
+ref: 'mt2-fa11'
+
+type: 'mt2'
+term: 'fa11'
+prof: 'Arnold'
+num: 21
+
+pre: |
+  <hr class="s5" />
+  <a href="/img/chem1a/mt2-fa10-q1-1.png" target="_blank"><u>Useful Equations and Constants (Image)</u></a>
+
+q1_1: |
+  ## Cabbage Juice Indicator
+  Cabbage juice indicator contains two weak acids: anthocyanin, HA, and anthoxanthin, HB. Data on red cabbage juice are given in the tables below.
+  <hr class="s2" />
+  ![acids](/img/chem1a/mt2-fa11-q1-1.png)
+  <hr class="s2" />
+  Red cabbage pH indicator colors
+  <hr class="s2" />
+
+  |pH|2|4|6|8|10|12|
+  |--|-|-|-|-|--|--|
+  |color|red|red-purple|blue|blue-green|green|
+
+  <hr class="s2" />
+  1. Use the data to estimate $K_a$ for anthocyanin.
+
+q1_1_i:
+  - 10^{7}
+  - 10^{-2}
+  - 10^{-6}
+  - 10^{-11}
+
+q1_1_s: 3
+
+q2_1: |
+  2. The major species in a cabbage juice solution at pH = 2 are:
+
+q2_1_i:
+  - $HA, A^-, HB$
+  - $A^-, HB$
+  - $A^-, B^-$
+  - $HA, HB$
+
+q2_1_s: 4
+
+q3_1: |
+  3. Suppose you have a purple solution of cabbage juice. What happens to the color if you add water?
+
+q3_1_i:
+  - Nothing
+  - Turns a lighter shade of purple
+  - Turns more blue
+  - Turns more red
+
+q3_1_s: 3
+
+q4_1: |
+  SHORT ANSWER: At pH > 12 the red cabbage juice solution is green. Over time, the solution turns yellow. Present a hypothesis as to why this happens.
+
+q4_1_s: |
+  Above pH 12 the major species present are $A_-$ (blue) and $B^−$(yellow) which gives a green solution. Since the solution turns yellow over time the $A^−$ must decompose.
+
+q5_1: |
+  Use this hypothesis to predict what you would observe if you added acid to the yellow solution to neutralize it.
+
+q5_1_s: |
+  If you add acid to a solution of $A^-$ and $B^-$, the pH should drop forming more HA and HB, which would turn the solution from yellow to green to blue (and maybe even purple if you add enough acid). <u>But</u> if $A^−$ has decomposed HA won’t form so the solution would probably just turn from yellow ($B^−$) to colorless (HB).
+
+q6_1: |
+  ## Kitty Litter
+  Cat urine has a strong, unpleasant odor due to ammonia, $NH_3$. Fortunately, kitty litter not only absorbs moisture, but it also absorbs much of the odor. Many kitty litters are made of clay, which absorbs water and ammonia.
+  <hr class="s2" />
+  A certain brand of kitty litter was tested for its ability to absorb $NH_3$ (g). The kitty litter and $NH_3$ are in a closed 10 L container at 25°C.
+  $$NH_3 (g) \equiv NH_3 (clay)$$
+  <hr class="s2" />
+
+  |# of moles of $NH_3$ absorbed|Mass of clay|Partial pressure of $NH_3$|
+  |-----------------------------|------------|--------------------------|
+  |2.7 moles|0.1 kg|0.10 atm|
+
+  <hr class="s2" />
+  4. Use the test results to determine if there is more $NH_3$ in the clay or in the gas phase.
+  <hr class="s1" />
+  Which of the following statements is true?
+
+q6_1_i:
+  - Most of the $NH_3$ is absorbed in the clay.
+  - Most of the $NH_3$ remain as a gas.
+  - $NH_3$ (g) is in equilibrium with $NH_3$ (clay), so both are present in equal amounts.
+
+q7_1: |
+  5. In the test described above, what happens if the volume of the container is decreased to 5 L with the same total # of moles of $NH_3$ at 25°C?
+
+q7_1_i:
+  - The partial pressure of $NH_3$ is 0.20 atm.
+  - The # of moles of $NH_3$ absorbed in the caly increases.
+  - There is no change because the equilibrium constant does not depend on pressure.
+
+q7_1_s: 2
+
+q8_1: |
+  The kitty litter is exposed to other gases. Which gas requires the smallest partial pressure to result in absorption of 1 mole of gas per 0.10 kg of clay?
+
+q8_1_i:
+  - $O_2$
+  - $He$
+  - $CO_2$
+  - $H_2S$
+
+q9_1: |
+  SHORT ANSWER: Vinegar (acetic acid) can also be used to reduce the odor of cat urine. Write the reaction between vinegar ($CH_3COOH$) and ammonia ($NH_3$).
+
+q9_1_s: |
+  $$CH_3COOH + NH_3 \rightarrow CH_3COO^-NH_4^+$$
+
+q10_1: |
+  Explain why this reaction reduces the odor.
+
+q10_1_s: |
+  The product, ammonium acetate ($CH_3COO^−NH_4^+$) is ionic and will likely not be able to go into the gas phase. It will either be an ionic solid or remain aqueous if there is enough liquid present.
+
+q11_1: |
+  ## Organic Bases
+  Nucleic acids, proteins, neurotransmitters, and stimulants are all organic bases that contain nitrogen atoms. Use the data below to answer the questions about organic bases.
+  <hr class="s2" />
+
+  |Name|Formula|Lewis Structure|$K_b$|$pK_b$|
+  |----|-------|---------------|-----|------|
+  |methylamine|$CH_5N$|![methylamine](/img/chem1a/mt2-fa11-q11-1.png)|$4.4 * 10^{-4}|3.4|
+  |ammonia|$NH_3$|![ammonia](/img/chem1a/mt2-fa11-q11-2.png)|$2 * 10^{-5}|4.7|
+  |methylene methanamine|$C_2H_5N$|[mm](/img/chem1a/mt2-fa11-q11-3.png)|$10^{-7}|7|
+  |acetonitrile|$C_2H_3N$|[acetonitrile](/img/chem1a/mt2-fa11-q11-4.png)|$10^{-24}$|24|
+
+  <hr class="s2" />
+  7. Which solution is the most basic?
+
+q11_1_i:
+  - 0.10 M $CH_5N$
+  - 0.10 M $NH_3$
+  - 0.10 M $C_2H_5N$
+
+q11_1_s: 4
+
+q12_1: |
+  What is the pH of a 0.10 M solution of methylamine ($CH_5N$)?
+
+q12_1_i:
+  - 2
+  - 5
+  - 9
+  - 12
+
+q12_1_s: 4
+
+q13_1: |
+  What is the $pK_a} for the conjuage acid of methylamine?
+
+q13_1_i:
+  - $2.3 * 10^{-11}$
+  - $10.6$
+  - $4.4 * 10^{-4}$
+  - $3.4$
+
+q14_1: |
+  The best explanation for the trends in $K_b$ is:
+
+q14_1_i:
+  - Changes in hydrogen bonding
+  - Changes in molar mass
+  - Changes in the hybridization around the N atom
+  - Changes in the number of H atoms attached to the C atoms
+  - Changes in the electron density around the N atom
+
+q14_1_s: 5
+
+q15_1: |
+  Which species below is the strongest acid?
+
+q15_1_i:
+  - $NH_4^+$
+  - $NH_3$
+  - $CH_5NH^+$
+  - $CH_5N$
+
+q16_1: |
+  Which statement is correct about the difference in $pK_b$ between methylamine, $CH_5N$, and ammonia, $NH_3$?
+
+q16_1_i:
+  - Methylamine is **more** basic because the $CH_3$ group shifts electron denstiy **towards** the N atom.
+  - Methylamine is **more** basic because the $CH_3$ group shifts electron density **away from** the N atom.
+  - Methylamine is **more** basic because electron density shifts **away from** the N atom due to resonance structures.
+
+q16_1_s: 1
+
+q17_1: |
+  13. Ammonium chloride, $NH_4Cl$, produces acidic solutions. When cobalt ions, $Co^{2+}$, are added to $NH_4Cl$ (aq), the complex cation, $Co(NH_3)_6^{2+}$ forms. What happens to the pH of the solution?
+
+q17_1_i:
+  - The pH **decreases** because $NH_3$ is removed and more $NH_4^+$ dissociates.
+  - The pH **decreases** because $Cl^-$ is a weak conjugate base.
+  - The pH **increases** because $Co^{2+}$ is a strong acid.
+  - The pH **stays the same** because $NH_4Cl$ (aq) is a buffer.
+
+q17_1_s: 1
+
+q18_1: |
+  14. The nicotine molecule is shown below along with $pK_b$ for each N atom. What is the predominant form of nicotine present in the blood at pH = 7.2?
+  <hr class="s2" />
+  ![nicotine](/img/chem1a/mt2-fa11-q14-1.png)
+
+q18_1_i:
+  - ![a](/img/chem1a/mt2-fa11-q14-1.png)
+  - ![a](/img/chem1a/mt2-fa11-q14-2.png)
+  - ![a](/img/chem1a/mt2-fa11-q14-3.png)
+  - ![a](/img/chem1a/mt2-fa11-q14-4.png)
+
+q19_1: |
+  15. A sample of nicotine is titrated with 0.10 M HCl solution. Which graph below best represents the titration curve? (Note: The dotted line corresponds to pH 7.)
+
+q19_1_i:
+  - ![a](/img/chem1a/mt2-fa11-q19-1.png)
+  - ![b](/img/chem1a/mt2-fa11-q19-2.png)
+  - ![c](/img/chem1a/mt2-fa11-q19-3.png)
+  - ![d](/img/chem1a/mt2-fa11-q19-4.png)
+
+q19_1_s: 4
+
+q20_1:
+  SHORT ANSWER: Nicotine is highly toxic. About 60mg can be a lethal dosage for an adult human. One cigar contains about 120 mg of nicotine. Nicotine in the gas phase can enter the bloodstream. Why doesn’t smoking a cigar kill the smoker instantly? Describe a partition equilibrium in your answer.
+
+q20_1_s: |
+  There are several possible pathways the nicotine could enter the bloodstream from a cigar and each has a possible equilibrium or partitioning. Any one of the examples below is acceptable.
+  <hr class="s1" />
+  From the smoke:
+
+  Nicotine (s) $\equiv$ Nicotine (g)
+
+  Nicotine (g) $\equiv$ Nicotine (blood)
+
+  <hr class="s2" />
+
+  From chewing on the cigar:
+
+  Nicotine (s) $\equiv$ Nicotine (aq) in saliva
+
+  Nicotine (aq) $\equiv$ Nicotine (blood)
+
+  Since the nicotine is in equilibrium between two phases (s,g, aq, blood) not all the nicotine present in a cigar will transfer over to the bloodstream. In fact the $K_{eq}$ must be small, much less than 1 since smoking a cigar doesn’t kill you.
+
+  Some may mention that a good fraction of nicotine gets combusted before it can participate in these equilibria.
+
+q21_1:
+  16. You mix 300 mL of water at 60 ̊C with 100 mL of water at 20 ̊C. What is the final temperature of the mixture?
+
+q21_1_i:
+  - 30°C
+  - 40°C
+  - 50°C
+
+q21_1_s: 3
+
+q22_1: |
+  Why do farmers spray water on oranges to protect them from freezing on a cold night?
+
+q22_1_i:
+  - When water freezes, heat is transferred to the oranges.
+  - The temperature of the oranges will stay at 0°C until all the water freezes.
+  - Solid water provides an insulating layer because ice has a high heat capacity.
+  - All of the above.
+
+q23_1: |
+  ## Extraction of Caffeine
+  When tea leaves are soaked in boiling water, several compounds dissolve in the water. Three compounds in high concentration are tannic acid (HT), glucose ($C_6H_{12}O_6$) and caffeine (C_8H_{10}N_4O_2). Use the data below to answer questions about a tea solution.
+  <hr class="s2" />
+  ![molecules](/img/chem1a/mt2-fa11-q23-1.png)
+  <hr class="s2" />
+  A solution of caffeine is prepared at 80°C by dissolving 10 g caffeine in 100 mL of water. The solution is cooled to 25°C. What is the concentration of the caffeine in that solution?
+
+q23_1_i:
+  - 180 mg/mL
+  - 100 mg/mL
+  - 78 mg/mL
+  - 22 mg/mL
+
+q23_1_s: 4
+
+q24_1: |
+  What is the pH of a $10^{-10}$ M aqueous solution of tannic acid?
+
+q24_1_i:
+  - 7
+  - 8
+  - 9
+  - 10
+
+q24_1_s: 1
+
+q25_1: |
+  A 1.0 L solution is made by mixing 0.010 mole of tannic acid, 0.0005 mole of caffeine and 0.010 mole of glucose with water. Which ion forms when you add NaOH to the solution?
+
+q25_1_i:
+  - $T^-$
+  - $C_6H_{11}O_6^-$
+  - $C_8H_{11}N_4O_2^+$
+
+q26_1: |
+  You add 0.005 mole of NaOH to the solution above. The pH of the solution is
+
+q26_1_i:
+  - pH ~ 11 because caffeine is the strongest base
+  - pH ~ 6 because there is a $HT/T^-$ buffer
+  - pH ~ 3 because tannic acid is the strongest acid
+  - pH ~ 2 because glucose is present in the highest concentration
+
+q27_1: |
+  When $CaCl_2$ is added to a solution of tannic acid, $CaT_2$ precipitates. What happens to the pH?
+
+q27_1_i:
+  - increases
+  - decreases
+  - stays the same
+
+q27_1_s: 2
+
+q28_1: |
+  SHORT ANSWER: Calcium hydroxide, $Ca(OH)_2$, is added to a tea solution containing tannic acid, glucose, and caffeine. A precipitate forms and the pH increases to 8. Write a balanced chemical equation(s) for the reaction.
+
+q28_1_s: |
+  $$2 HT (aq) + Ca(OH)_2 (aq) \equiv CaT_2 (s) + 2H_2O (I)$$
+
+q28_1: |
+  Next, methylene chloride, $CH_2Cl_2$, is added. Two liquid layers are observed at 25°C because $CH_2Cl_2$ is not miscible with water. Where are most of the caffeine molecules? Explain your thinking.
+
+q28_1_s: |
+  Caffeine molecules are both in the aqueous and in the methylene chloride phase. However, judging from a higher solubility of caffeine in methylene chloride than in water, most of the caffeine molecules will be in the methylene chloride phase.
