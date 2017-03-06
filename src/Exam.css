@@ -569,9 +569,15 @@ img {
 /*LANDING*/
 
 .banner {
+  text-align: center;
   position: relative;
   width: 100%;
-  padding: 145px 0 165px;
+  padding: 100px 0 0;
+}
+
+.banner-screen {
+  width: 100%;
+  max-width: 1020px;
 }
 
 .banner-img::after {
@@ -582,6 +588,7 @@ img {
   height: 100%;
   position: absolute;
   top: 0;
+  left: 0;
   width: 100%;
   z-index: 1;
 }
@@ -610,6 +617,39 @@ img {
   color: #fff;
 }
 
+.home-button-container {
+  padding-top: 40px;
+}
+
+.home-button {
+  background: #fff;
+  color: #11accc;
+  border: 1px solid #fff;
+  padding: 10px 0 11px;
+  margin: 15px;
+  width: 140px;
+  display: inline-block;
+  border-radius: 5px;
+  opacity: 0.8;
+}
+
+.home-button-alt {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.home-button:hover {
+  opacity: 1;
+}
+
+.home-button-alt:hover {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  opacity: 1;
+}
+
 .h5-alt {
   font-size: 22px;
   color: #fff;
@@ -623,6 +663,12 @@ img {
 
 .home h4 {
   padding: 0;
+}
+
+.card-container-container {
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
 }
 
 .card-container {
