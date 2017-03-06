@@ -97,10 +97,10 @@ class ExamContent extends Component {
     const useMarkdown = (examContent && _.has(examContent, 'md')) ? (examContent.md) : true;
     const isMCQ = (examContent && _.has(examContent, 'mcq')) ? (examContent.mcq) : false;
     const numProblems = (examContent && _.has(examContent, 'num')) ? (examContent.num) : problemIDs.length;
+    const pre = (examContent && _.has(examContent, 'pre')) ? (marked(examContent.pre, {renderer})) : null;
     const appMode = this.props.appMode;
     const showSolutions = this.props.showSolutions;
 
-    const pre = (examContent && _.has(examContent, 'pre')) ? (marked(examContent.pre, {renderer})) : null;
     var content = null;
     if (isMCQ) {
       content = _.map(_.range(1, numProblems + 1), (num) => {
@@ -112,14 +112,8 @@ class ExamContent extends Component {
           choices = _.map(choices, (choice) => (isString(choice)) ? marked(choice, {renderer}) : (choice));
         }
         const solutionNum = examContent[key + "_s"] || 1;
-        const preContent = (num === 1) ? (
-          <span>
-            <hr className="s2" /><div dangerouslySetInnerHTML={{__html: pre}}></div>
-          </span>
-        ) : null;
         return (
           <Element key={num} className="element">
-            {preContent}
             <MultipleChoiceQuestion id={`q${num}`} course={course} content={qcontent} solutionNum={solutionNum} choices={choices} examType={type} term={term} key={num} appMode={appMode} showSolutions={showSolutions} />
           </Element>
         );
@@ -142,13 +136,7 @@ class ExamContent extends Component {
             return <Question id={`${part}_${subpart}`} course={course} content={qcontent} solution={solution} term={term} examType={type} key={key} appMode={appMode} showSolutions={showSolutions} />
           });
 
-          const preContent = (part === 'q1') ? (
-            <span>
-              <hr className="s2" /><div dangerouslySetInnerHTML={{__html: pre}}></div>
-            </span>
-          ) : null;
-
-          return <Element name={part} key={part} className="element">{preContent}{subparts}</Element>;
+          return <Element name={part} key={part} className="element">{subparts}</Element>;
         }) : null;
     }
 
@@ -167,7 +155,6 @@ class ExamContent extends Component {
     return (
       <div className="content">
         {examDesc}
-        {pre}
         {content}
         {SidebarComponent}
       </div>
