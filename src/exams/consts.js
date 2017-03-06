@@ -33,7 +33,7 @@ const exams = {
     'marketing': {
       'Spring 2016': {
         'id': 'sp16',
-        'profs': ''
+        'profs': 'Briginshaw'
       }
     }
   },
@@ -120,6 +120,9 @@ const courses = {
 };
 
 const examTypeToLabel = {
+  'marketing': 'Marketing',
+  'finance': 'Finance',
+
   'mt1': 'Midterm 1',
   'mt2': 'Midterm 2',
   'final': 'Final',
@@ -146,6 +149,7 @@ const courseIDToLabel = {
   'cs61c': 'CS 61C',
   'cs162': 'CS 162',
   'data8': 'Data 8',
+  'ugba10': 'UGBA 10',
 };
 
 export { exams, courses, examTypeToLabel, courseIDToLabel, termToLabel };
