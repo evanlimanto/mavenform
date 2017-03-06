@@ -161,7 +161,7 @@ class MultipleChoiceQuestion extends Component {
     });
 
     const SolutionComponent = (this.props.appMode) ? (null) : (
-      <Solution solution={String.fromCharCode(solutionNum + 65)} examCode={examCode} showSolutions={this.props.showSolutions} />
+      <Solution solution={`${String.fromCharCode(solutionNum + 65)}) ${choices[solutionNum]}`} examCode={examCode} showSolutions={this.props.showSolutions} />
     );
 
     return (

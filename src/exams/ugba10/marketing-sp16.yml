@@ -1,0 +1,20 @@
+course: 'chem1a'
+ref: 'mt2-sp11'
+
+type: 'mt2'
+term: 'sp11'
+prof: 'Nitsche'
+mcq: true
+num: 40
+
+q1_1: |
+  In many ways, Snapple is in the fashion business. It comes in 40 different flavors, and many are specific to a particular region of the country while others are based on the latest fruit fad. The top 10 account for most of Snapple’s revenues. Which lever of the 4 P’s is Snapple’s 40-flavor offering an example of?
+
+q1_1_i: |
+  - Place
+  - Price
+  - Product
+  - Promotion
+
+q1_1_s: 3
+

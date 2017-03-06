@@ -12,6 +12,32 @@ const exams = {
     }
   },
 
+  'data8': {
+    'mt1': {
+      'Fall 2016': {
+        'id': 'fa16',
+        'profs': 'Adhikari'
+      },
+      'Spring 2016': {
+        'id': 'sp16',
+        'profs': 'DeNero, Adhikari, Jordan, Parikh, Wagner'
+      },
+      'Fall 2015': {
+        'id': 'fa15',
+        'profs': 'Adhikari'
+      }
+    }
+  },
+
+  'ugba10': {
+    'marketing': {
+      'Spring 2016': {
+        'id': 'sp16',
+        'profs': ''
+      }
+    }
+  },
+
   'ee16a': {
     'mt1': {
       'Fall 2016': {
@@ -81,23 +107,6 @@ const exams = {
         'profs': 'Kubiatowicz',
       },
     },
-  },
-
-  'data8': {
-    'mt1': {
-      'Fall 2016': {
-        'id': 'fa16',
-        'profs': 'Adhikari'
-      },
-      'Spring 2016': {
-        'id': 'sp16',
-        'profs': 'DeNero, Adhikari, Jordan, Parikh, Wagner'
-      },
-      'Fall 2015': {
-        'id': 'fa15',
-        'profs': 'Adhikari'
-      }
-    }
   }
 };
 

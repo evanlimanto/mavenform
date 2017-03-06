@@ -70,6 +70,7 @@ class Question:
   def __init__(self, contents):
     self.parts = []
     self.contents = contents
+    self.qc = ""
 
   def parse(self):
     i = 0
@@ -99,6 +100,7 @@ class Question:
 def process(fname):
   f = open(fname, 'r')
   contents = f.read()
+  print(contents)
 
   i = 0
   cur_q = 1
