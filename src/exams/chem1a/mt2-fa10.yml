@@ -8,6 +8,7 @@ mcq: true
 num: 21
 
 pre: |
+  <hr class="s5" />
   <a href="/img/chem1a/mt2-fa10-q1-1.png" target="_blank"><u>Useful Equations and Constants (Image)</u></a>
 
 q1_1: |
