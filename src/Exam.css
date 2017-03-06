@@ -97,11 +97,12 @@ h6 {
   letter-spacing: 1px;
   color: #333;
   margin-bottom: 15px;
+  text-transform: uppercase;
 }
 
 code {
   font-size: 14px;
-  line-height: 10px;
+  line-height: 14px;
   white-space: pre-wrap;
 }
 
@@ -344,6 +345,25 @@ img {
   vertical-align: middle;
   padding-left: 10px;
   max-height: 80px;
+}
+
+.reader .link {
+  display: none;
+}
+
+.reader .option {
+  border: none;
+  padding: 0;
+}
+
+.reader .option:hover {
+  cursor: pointer;
+  color: #666;
+}
+
+.reader .option:focus {
+  color: #666;
+  border: none;
 }
 
 .mc-question .solution {
@@ -633,10 +653,6 @@ img {
   color: #11accc;
 }
 
-.course-card h6 {
-  margin-bottom: 2px;
-}
-
 .course-subtitle {
   font-size: 18px;
 }
@@ -671,6 +687,7 @@ img {
   right: 30px;
   font-size: 16px;
   color: #ccc;
+  margin-bottom: 1px;
 }
 
 .card:hover .card-helper {
@@ -684,6 +701,10 @@ img {
 }
 
 .column .material-icons {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   font-size: 36px;
   color: #ccc;
   padding: 5px 0 15px;
@@ -712,9 +733,15 @@ img {
   position: relative;
   /*Pixel pushing for vertical centering*/
   top: 1px;
+  display: block;
+  padding: 0 50px;
 }
 
 .notification-x {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   position: relative;
   color: #fff;
   z-index: 2;
@@ -810,9 +837,36 @@ img {
 
 /*RESPONSIVENESS*/
 
-@media (max-width: 1279px) {
+@media (max-width: 1199px) {
+  .content {
+    max-width: 100%;
+    padding: 0 245px 125px 255px;
+  }
+
+  .table-container-container {
+    padding: 0 250px;
+  }
+}
+
+@media (max-width: 899px) {
   .nav {
     padding: 0 10px;
+  }
+
+  .app-mode {
+    right: 10px;
+  }
+
+  .exams td:nth-child(3), .exams th:nth-child(3) {
+    display: none;
+  }
+
+  .content {
+    padding: 0 25px 125px;
+  }
+
+  .table-container-container {
+    padding: 0 25px;
   }
 
   .menu, .sidebar {
@@ -831,12 +885,6 @@ img {
     display: initial;
   }
 
-  .table-container-container {
-    padding: 0 50px;
-  }
-}
-
-@media (max-width: 699px) {
   .link {
     display: none;
   }
@@ -847,5 +895,16 @@ img {
 
   .question {
     left: 0;
+  }
+}
+
+@media (max-width: 399px) {
+  .course-card {
+    width: 90%;
+    margin: 15px 5%;
+  }
+
+  .exams td:nth-child(4), .exams th:nth-child(4) {
+    display: none;
   }
 }

@@ -146,9 +146,9 @@ class ExamContent extends Component {
         </h5>
       </div>
     ) : null;
-    const SidebarComponent = (appMode) ? (null) : (
+    const SidebarComponent = (appMode) ? (
       <Sidebar course={course} term={term} examType={type} examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} numProblems={numProblems} isMCQ={isMCQ} />
-    );
+    ) : (null);
 
     return (
       <div className="content">
@@ -165,7 +165,7 @@ class Exam extends Component {
     super(props);
 
     this.state = {
-      appMode: false,
+      appMode: true,
       showSolutions: false,
     };
 
@@ -177,6 +177,8 @@ class Exam extends Component {
     this.setState({
       appMode: !this.state.appMode
     });
+
+    window.renderMJ();
   }
 
   toggleAllSolutions() {
@@ -189,17 +191,23 @@ class Exam extends Component {
     const exam = this.props.params.examid;
     const course = this.props.params.courseid;
     const examType = this.props.params.examtype;
-    const ExamComponent = <ExamContent exam={exam} course={course} type={examType} appMode={this.state.appMode} showSolutions={this.state.showSolutions} />;
-    const navComponents = (this.state.appMode) ? (
-      <div className="tooltip-container app-mode" onClick={() => this.toggleAppMode()}>
-        <a className="material-icons">dashboard</a>
-        <span className="tooltip">App Mode</span>
-      </div>
+    const ExamComponent = (this.state.appMode) ? (
+      <ExamContent exam={exam} course={course} type={examType} appMode={this.state.appMode} showSolutions={this.state.showSolutions} />
     ) : (
+      <span className="reader">
+        <ExamContent exam={exam} course={course} type={examType} appMode={this.state.appMode} showSolutions={this.state.showSolutions} />
+      </span>
+    );
+    const navComponents = (this.state.appMode) ? (
       <span>
         <Navbar isExam={true} showSolutions={this.state.showSolutions} toggleAppModeCallback={this.toggleAppMode} toggleAllSolutionsCallback={this.toggleAllSolutions} />
         <NavSidebar course={course} exam={exam} isExam={true} />
       </span>
+    ) : (
+      <div className="tooltip-container app-mode" onClick={() => this.toggleAppMode()}>
+        <a className="material-icons">dashboard</a>
+        <span className="tooltip">App Mode</span>
+      </div>
     );
 
     return (
