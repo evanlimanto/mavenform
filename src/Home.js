@@ -17,9 +17,15 @@ class Home extends Component {
   }
 
   render() {
+    console.log(courses);
+    var counter = 0;
     const courseBoxes = _.map(courses, (desc, course) => {
+      counter += 1;
+      if (counter === 6) {
+        return null;
+      }
       return (
-        <a className="course-card" href={`/${course}`} onClick={() => handleEvent('Click', 'Course', course)}>
+        <a key={course} className="course-card" href={`/${course}`} onClick={() => handleEvent('Click', 'Course', course)}>
           <h1>{courseIDToLabel[course]}</h1>
           <hr className="s1" />
           <i className="course-subtitle">{desc}</i>
