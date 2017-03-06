@@ -8,7 +8,11 @@ const exams = {
       'Spring 2011': {
         'id': 'sp11',
         'profs': 'Nitsche',
-      }
+      },
+      'Fall 2010': {
+        'id': 'fa10',
+        'profs': 'Stacy',
+      },
     }
   },
 
@@ -133,6 +137,8 @@ const examTypeToLabel = {
 }
 
 const termToLabel = {
+  'sp10': 'Spring 2010',
+  'fa10': 'Fall 2010',
   'sp11': 'Spring 2011',
   'fa11': 'Fall 2011',
   'sp12': 'Spring 2012',

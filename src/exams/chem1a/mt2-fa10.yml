@@ -1,0 +1,295 @@
+course: 'chem1a'
+ref: 'mt2-sp11'
+
+type: 'mt2'
+term: 'sp11'
+prof: 'Nitsche'
+mcq: true
+num: 21
+
+pre: |
+  <a href="/img/chem1a/mt2-fa10-q1-1.png" target="_blank"><u>Useful Equations and Constants (Image)</u></a>
+
+q1_1: |
+  Four acids found in foods are shown in the table.
+  <p align="center">![acids table](/img/chem1a/mt2-fa10-q1-2.png)</p>
+  What is the pH of a 0.0050 M solution of butyric acid?
+
+q1_1_i:
+  - 2.3
+  - 3.6
+  - 4.1
+  - 4.8
+
+q1_1_s: 2
+
+q2_1: |
+  It takes 56 mL of 0.012 M NaOH to titrate 50 mL of succinic acid to the second equivalence point. What is the concentration of succinic acid?
+
+q2_1_i:
+  - 0.0022 M
+  - 0.0067 M
+  - 0.013 M
+  - 0.026 M
+
+q2_1_s: 2
+
+q3_1: |
+  Which of the molecules or ions listed below is present in the largest concentration when equal number of moles of butyric acid and sodium hydroxide are mixed?
+
+q3_1_i:
+  - "Butyric acid $CH_3CH_2CH_2COOH$ ![butyric acid](/img/chem1a/mt2-fa10-3-1.png)"
+  - "Sodium butyrate, $CH_3CH_2CH_2COONa$ ![butyric acid](/img/chem1a/mt2-fa10-3-2.png)"
+  - $OH^-$
+  - Sodium butyrate and $OH^-$ are present in roughly equal concentrations
+
+q3_1_s: 2
+
+q4_1: |
+  Sourness is directly related to acid strength. Solid malic acid is used to coat candy to make it taste extremely sour. What could you do to make the candy taste less sour?
+
+q4_1_i:
+  - Use sodium hydrogen malate, $C_4H_5O_5Na$
+  - Use solid succinic acid, $C_4H_6O_4$
+  - Use solid tartaric acid, $C_4H_6O_6$
+  - Both A and B
+  - Both B and C
+
+q4_1_s: 4
+
+q5_1: |
+  Which H atom is the first to dissociate from malic acid?
+  <hr class="s1" />
+  ![hydrocarbon](/img/chem1a/mt2-fa10-q5-1.png)
+
+q5_1_i:
+  - ""
+  - ""
+  - ""
+  - ""
+  - ""
+
+q5_1_s: 5
+
+q6_1: |
+  A solution of succinic acid is titrated with sodium hydroxide. During the titration, 15 mL of a 0.100M NaOH solution was added to 10mL of a 0.100M succinic acid solution.
+  <hr class="s2" />
+  What is the pH of the resulting solution?
+
+q6_1_i:
+  - "3.2"
+  - "4.1"
+  - "5.6"
+  - "7.0"
+  - "12.2"
+
+q6_1_s: 3
+
+q7_1: |
+  Which indicator would you choose to detect the equivalence point of a titration of sodium butyrate, $C_4H_7O_2Na$, with hydrochloric acid, HCl?
+
+q7_1_i:
+  - methyl orange, $pK_a$ = 3.8
+  - methyl red, $pK_a$ = 5.0
+  - bromothymol blue, $pK_a$ = 7.3
+  - phenol red, $pK_a$ = 8.0
+  - phenolphthalein, $pK_a$ = 9.5
+
+q7_1_s: 1
+
+q8_1: |
+  Environmental scientists use the octanol-water partition coefficient, KOW, to predict where a compound will remain if released into the environment. If a chemical is more soluble in the octanol, it tends to accumulate in the tissues of animals. If the chemical is more soluble in water, it tends to be easily flushed as waste by the animals. The equilibrium constant expresses the relative amounts dissolved in the two solvents.
+  <hr class="s2" />
+  ![formula](/img/chem1a/mt2-fa10-q8-1.png)
+  <hr class="s2" />
+  Octanol, ![octanol](/img/chem1a/mt2-fa10-q8-2.png)
+  <hr class="s2" />
+
+  |Fuel|Structure|$logK_{OW}$|$K_{OW}$|
+  |----|---------|------------|--------|
+  |Methanol|![methanol](/img/chem1a/mt2-fa10-q8-3.png)|-0.74|0.18|
+  |Ethanol|![methanol](/img/chem1a/mt2-fa10-q8-4.png)|-0.30|0.50|
+  |1-Propanol|![methanol](/img/chem1a/mt2-fa10-q8-5.png)|0.25|1.78|
+  |Glycerol|![methanol](/img/chem1a/mt2-fa10-q8-6.png)|-1.76|0.02|
+  |2-Butanol|![methanol](/img/chem1a/mt2-fa10-q8-7.png)|0.65|4.47|
+  |Biodiesel (Methol Linoleate)|![methanol](/img/chem1a/mt2-fa10-q8-8.png)|6.82|$6.61 * 10^6$|
+  |Gasoline (isooctane)|![methanol](/img/chem1a/mt2-fa10-q8-9.png)|5.83|$6.76 * 10^5$|
+
+  <hr class="s2" />
+  Based on the data, which compounds are more soluble in octanol (fat) than water?
+
+q8_1_i:
+  - Ethanol
+  - Glycerol
+  - Methanol
+  - 2\-Butanol
+
+q8_1_s: 4
+
+q9_1: |
+  Examine the data for ethanol. A 25 gram sample of ethanol was mixed with a two- phase mixture of 1L of water and 1L of octanol. What is the concentration (mol/L) of ethanol in the water?
+
+q9_1_i:
+  - "0.18"
+  - "0.50"
+  - "0.54"
+  - "0.36"
+
+q9_1_s: 4
+
+q10_1: |
+  The boxes below show the interface between the octanol and water. Draw in 12 molecules of ethanol, showing their distribution in the two solvents.
+
+  To make the drawing easy to read use the symbol ($\cdot$) to represent the ethanol.
+  <hr class="s2" />
+
+  ![apparatus](/img/chem1a/mt2-fa10-q10-1.png)
+
+  <hr class="s2" />
+  How would the concentration of ethanol in the octanol change if the 25 grams of ethanol was added to 1L of water and only 500 mL of octanol?
+
+q10_1_i:
+  - concentration would increase
+  - concentration would decrease
+  - concentration would stay the same
+
+q10_1_s: 1
+
+q11_1: |
+  How would the number of moles of ethanol in the octanol change if the 25 grams of ethanol was added to 1L of water and only 500 mL of octanol?
+
+q11_1_i:
+  - Number of moles would increase
+  - Number of moles would decrease
+  - Number of moles would stay the same
+
+q11_1_s: 2
+
+q12_1: |
+  Estimate the equilibrium constant, $K_{OW}$, for 2-propanol (shown below).
+  <hr class="s1" />
+  ![2-propanol](/img/chem1a/mt2-fa10-q12-1.png)
+  Explain your reasoning.
+
+q12_1_i:
+  - 0.75
+  - 1.25
+  - 1.78
+  - 2.0
+
+q12_1_s: 1
+
+q13_1: |
+  Formic acid (HCOOH) is a weak acid with a Ka of 1.8×10-4 and a KOW of 0.88.
+  <hr class="s2" />
+
+  ![reaction](/img/chem1a/mt2-fa10-q13-1.png)
+
+  <hr class="s2" />
+  Which of the following scenarios would cause the concentration of formic acid in octanol to decrease?
+
+q13_1_i:
+  - Buffer the water at a pH of 2
+  - Buffer the water at a pH of 3
+  - Buffer the water at a pH of 5
+  - Adding more octanol
+
+q13_1_s: 4
+
+q14_1: |
+  ## FLOWER COLOR AND SOIL
+  The acidity of soil is thought to play an important role in determining the color of the flowers on certain plants. Gardeners control the acid base properties of the soil by the addition of metal salts, such as aluminum compounds.
+  <hr class="s2" />
+
+  |Name|Formula|$K_{sp}$|solubility|
+  |----|-------|--------|----------|
+  |Aluminum hydroxide|$Al(OH)_3$|$4.6 * 10^{-33}$|$3.4 * 10^{-9}$ M|
+  |Aluminum phosphate|$Al(PO)_4$|$6.3 * 10^{-19}$|$7.8 * 10^{-10}$ M|
+  |Aluminum sulfate|$Al_2(SO_4)_3$|$1.1 * 10^2$|1.0 M|
+
+  <hr class="s2" />
+  Which aluminum compound is the least soluble?
+
+q14_1_i:
+  - Aluminum hydroxide, $Al(OH)_3$
+  - Aluminum phosphate, $Al(PO_4)$
+  - Aluminum sulfate, $Al_2(SO_4)_3$
+
+q14_1_s: 2
+
+q15_1: |
+  Why does aluminum hydroxide, $Al\(OH\)\_3$, have a smaller $K\_{sp}$, but a larger solubility compared with aluminum phosphate, $Al\(PO\_4\)$?
+
+q15_1_i:
+  - Aluminum hydroxide, $Al(OH)_3$, is a strong base, and therefore, it dissociates completely. So it is more soluble.
+  - The relationship between solubility and Ksp is different for the two salts because of the different charges on the anions.
+  - Phosphate, $PO\_4^{3\-}$, is a weak base, and therefore, forms a buffer. The $PO\_4^{3\-}$ equilibrates with $HPO\_4^{2\-}$, thereby decreasing it solubility.
+
+q15_1_s: 2
+
+q16_1: |
+  KW for water at 100°C is $5.13 × 10^{-13}$. Use this information to answer the next 3 questions.
+  <hr class="s1" />
+  What is the pH of pure water at 100°C?
+
+q16_1_i:
+  - 6.1
+  - 7.0
+  - 7.9
+  - 12.3
+
+q16_1_s: 1
+
+q17_1: |
+  What is the pOH of pure water at 100°C?
+
+q17_1_i:
+  - 6.1
+  - 7.0
+  - 7.9
+  - 12.3
+
+q17_1_s: 1
+
+q18_1: |
+  What is the acid-base character of pure water at 100°C?
+
+q18_1_i:
+  - acidic
+  - neutral
+  - basic
+
+q18_1_s: 2
+
+q19_1: |
+  If the temperature is below -60°C, it is possible to use liquid hydrogen sulfide, $H_2S$ (l), as a solvent. The questions below ask you to consider how the solvent properties of $H_2S$ (l) differ from $H_2O$ (l).
+  <hr class="s1" />
+  Which equation represents the autodissociation reaction in pure $H_2S$ (l)?
+
+q19_1_i:
+  - $2H_2S$ (l) $\iff$ $H_3S^−$ (solvated) + $HS^-$ (solvated)
+  - $2H_2S$ (l) $\iff$ $HS^−$ (aq) + $HS^{2-}$ (aq)
+  - $H_2S$ (l) $\iff$ $H_2S$ (g)
+
+q19_1_s: 1
+
+q20_1: |
+  Will small amounts of $H_2O$ (s) dissolved in $H_2S$ (l) increase or decrease the acidity of liquid hydrogen sulfide at -60°C?
+
+q20_1_i:
+  - Increase the acidity
+  - Decrease the acidity
+  - Have no effect on the acidity
+
+q20_1_s: 3
+
+q21_1: |
+  Which reaction best describes what happens when you mix pure $H_2S$ (g) with pure $NH_3$ (g) at 25°C in a sealed container:?
+
+q21_1_i:
+  - $H_2S$ (g) + $NH_3$ (g) $\iff$ $NH_4^+$ (aq) + $HS^-$ (aq)
+  - $H_2S$ (g) + $NH_3$ (g) $\iff$ $H_3S^+$ (aq) + $NH_2^-$ (aq)
+  - $H_2S$ (g) + $NH_3$ (g) $\iff$ $NH_4SH$ (s)
+  - $H_2S$ (g) + $NH_3$ (g) $\iff$ $NH_4SH$ (g)
+
+q21_1_s: 4

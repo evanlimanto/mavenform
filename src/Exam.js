@@ -100,19 +100,26 @@ class ExamContent extends Component {
     const appMode = this.props.appMode;
     const showSolutions = this.props.showSolutions;
 
+    const pre = (examContent && _.has(examContent, 'pre')) ? (marked(examContent.pre, {renderer})) : null;
     var content = null;
     if (isMCQ) {
       content = _.map(_.range(1, numProblems + 1), (num) => {
         const key = `q${num}_1`;
-        var qcontent = examContent[key] || '';
+        var qcontent = `${num}\\. ${examContent[key]}` || '';
         var choices = examContent[key + "_i"] || [];
         if (useMarkdown) {
           qcontent = marked(qcontent, {renderer});
           choices = _.map(choices, (choice) => (isString(choice)) ? marked(choice, {renderer}) : (choice));
         }
         const solutionNum = examContent[key + "_s"] || 1;
+        const preContent = (num === 1) ? (
+          <span>
+            <hr className="s2" /><div dangerouslySetInnerHTML={{__html: pre}}></div>
+          </span>
+        ) : null;
         return (
           <Element key={num} className="element">
+            {preContent}
             <MultipleChoiceQuestion id={`q${num}`} course={course} content={qcontent} solutionNum={solutionNum} choices={choices} examType={type} term={term} key={num} appMode={appMode} showSolutions={showSolutions} />
           </Element>
         );
@@ -134,7 +141,14 @@ class ExamContent extends Component {
             }
             return <Question id={`${part}_${subpart}`} course={course} content={qcontent} solution={solution} term={term} examType={type} key={key} appMode={appMode} showSolutions={showSolutions} />
           });
-          return <Element name={part} key={part} className="element">{subparts}</Element>;
+
+          const preContent = (part === 'q1') ? (
+            <span>
+              <hr className="s2" /><div dangerouslySetInnerHTML={{__html: pre}}></div>
+            </span>
+          ) : null;
+
+          return <Element name={part} key={part} className="element">{preContent}{subparts}</Element>;
         }) : null;
     }
 
@@ -153,6 +167,7 @@ class ExamContent extends Component {
     return (
       <div className="content">
         {examDesc}
+        {pre}
         {content}
         {SidebarComponent}
       </div>
@@ -178,14 +193,15 @@ class Exam extends Component {
       appMode: !this.state.appMode
     });
 
+    var wrapper;
     if (this.state.appMode) {
-      var wrapper = document.createElement("span");
+      wrapper = document.createElement("span");
       wrapper.className = "reader";
       var examNode = document.getElementsByClassName("content")[0];
       examNode.parentNode.replaceChild(wrapper, examNode);
       wrapper.appendChild(examNode);
     } else {
-      var wrapper = document.getElementsByClassName("reader")[0];
+      wrapper = document.getElementsByClassName("reader")[0];
       var content = document.getElementsByClassName("content")[0];
       wrapper.removeChild(content);
       wrapper.parentNode.appendChild(content);
