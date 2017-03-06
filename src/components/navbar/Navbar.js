@@ -7,19 +7,21 @@ class Navbar extends Component {
     const toggleAppModeCallback = this.props.toggleAppModeCallback;
     const toggleAllSolutionsCallback = this.props.toggleAllSolutionsCallback;
     const toggleSolutionsComponent = null;
-    // const toggleSolutionsComponent = (this.props.isExam) ? (
-    //   (showSolutions) ? (
-    //     <div className="tooltip-container" onClick={() => toggleAllSolutionsCallback()}>
-    //       <a className="material-icons">indeterminate_check_box</a>
-    //       <span className="tooltip tooltip-long">Hide All Solutions</span>
-    //     </div>
-    //   ) : (
-    //     <div className="tooltip-container" onClick={() => toggleAllSolutionsCallback()}>
-    //       <a className="material-icons">done_all</a>
-    //       <span className="tooltip tooltip-long">Show All Solutions</span>
-    //     </div>
-    //   )
-    // ) : (null);
+    /*
+    const toggleSolutionsComponent = (this.props.isExam) ? (
+      (showSolutions) ? (
+        <div className="tooltip-container" onClick={() => toggleAllSolutionsCallback()}>
+          <a className="material-icons">indeterminate_check_box</a>
+          <span className="tooltip tooltip-long">Hide All Solutions</span>
+        </div>
+      ) : (
+        <div className="tooltip-container" onClick={() => toggleAllSolutionsCallback()}>
+          <a className="material-icons">done_all</a>
+          <span className="tooltip tooltip-long">Show All Solutions</span>
+        </div>
+      )
+    ) : (null);
+    */
 
     return (
       <div className="nav">

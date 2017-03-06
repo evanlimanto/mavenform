@@ -94,9 +94,9 @@ class Question extends Component {
     const term = this.props.term;
     const examCode = `${examType}${term}${course}`;
 
-    const SolutionComponent = (this.props.appMode) ? (
+    const SolutionComponent = (
       <Solution solution={this.props.solution} examCode={examCode} showSolutions={this.props.showSolutions} />
-    ) : (null);
+    );
 
     return (
       <div id={this.props.id} className="question">
@@ -160,7 +160,7 @@ class MultipleChoiceQuestion extends Component {
       return <div key={index} tabIndex="0" className={optionClass} dangerouslySetInnerHTML={{__html: choice}}></div>;
     });
 
-    const SolutionComponent = (this.props.appMode) ? (null) : (
+    const SolutionComponent = (
       <Solution solution={`${String.fromCharCode(solutionNum + 65)}) ${choices[solutionNum]}`} examCode={examCode} showSolutions={this.props.showSolutions} />
     );
 

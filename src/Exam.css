@@ -347,7 +347,7 @@ img {
   max-height: 80px;
 }
 
-.reader .link {
+.reader .link, .reader input[type="button"], .reader .solution {
   display: none;
 }
 
