@@ -1,20 +1,20 @@
 const exams = {
-  'chem1a': {
-    'mt2': {
-      'Spring 2013': {
-        'id': 'sp13',
-        'profs': 'Pines',
-      },
-      'Spring 2011': {
-        'id': 'sp11',
-        'profs': 'Nitsche',
-      },
-      'Fall 2010': {
-        'id': 'fa10',
-        'profs': 'Stacy',
-      },
-    }
-  },
+  // 'chem1a': {
+  //   'mt2': {
+  //     'Spring 2013': {
+  //       'id': 'sp13',
+  //       'profs': 'Pines',
+  //     },
+  //     'Spring 2011': {
+  //       'id': 'sp11',
+  //       'profs': 'Nitsche',
+  //     },
+  //     'Fall 2010': {
+  //       'id': 'fa10',
+  //       'profs': 'Stacy',
+  //     },
+  //   }
+  // },
 
   'data8': {
     'mt1': {
@@ -128,7 +128,7 @@ const exams = {
 };
 
 const courses = {
-  'chem1a': 'General Chemistry',
+  // 'chem1a': 'General Chemistry',
   'data8': 'Foundations of Data Science',
   'cs186': 'Introduction to Database Systems',
   'ugba10': 'Principles of Business',
@@ -164,7 +164,7 @@ const termToLabel = {
 };
 
 const courseIDToLabel = {
-  'chem1a': 'Chem 1A',
+  // 'chem1a': 'Chem 1A',
   'data8': 'Data 8',
   'cs186': 'CS 186',
   'ee16a': 'EE 16A',

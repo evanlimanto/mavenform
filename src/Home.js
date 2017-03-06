@@ -17,11 +17,10 @@ class Home extends Component {
   }
 
   render() {
-    console.log(courses);
     var counter = 0;
     const courseBoxes = _.map(courses, (desc, course) => {
-      counter += 1;
-      if (counter === 6) {
+      counter++;
+      if (counter > 6) {
         return null;
       }
       return (

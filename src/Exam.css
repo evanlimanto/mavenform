@@ -608,7 +608,7 @@ img {
   height: 100%;
   width: 100%;
   top: 0;
-  background: url('img/banner.jpg');
+  background: url('img/banner-min.jpg');
   background-size: cover;
   background-position: center;
 }
