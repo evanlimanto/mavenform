@@ -113,6 +113,7 @@ const exams = {
 const courses = {
   'chem1a': 'General Chemistry',
   'data8': 'Foundations of Data Science',
+  'ugba10': 'Principles of Business',
   'ee16a': 'Designing Information Devices and Systems I',
   'cs61c': 'Great Ideas in Computer Architecture (Machine Structures)',
   'cs162': 'Operating Systems and Systems Programming',

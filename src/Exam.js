@@ -178,6 +178,20 @@ class Exam extends Component {
       appMode: !this.state.appMode
     });
 
+    if (this.state.appMode) {
+      var wrapper = document.createElement("span");
+      wrapper.className = "reader";
+      var examNode = document.getElementsByClassName("content")[0];
+      examNode.parentNode.replaceChild(wrapper, examNode);
+      wrapper.appendChild(examNode);
+    } else {
+      var wrapper = document.getElementsByClassName("reader")[0];
+      var content = document.getElementsByClassName("content")[0];
+      wrapper.removeChild(content);
+      wrapper.parentNode.appendChild(content);
+      wrapper.parentNode.removeChild(wrapper);
+    }
+
     window.renderMJ();
   }
 
@@ -191,12 +205,8 @@ class Exam extends Component {
     const exam = this.props.params.examid;
     const course = this.props.params.courseid;
     const examType = this.props.params.examtype;
-    const ExamComponent = (this.state.appMode) ? (
+    const ExamComponent = (
       <ExamContent exam={exam} course={course} type={examType} appMode={this.state.appMode} showSolutions={this.state.showSolutions} />
-    ) : (
-      <span className="reader">
-        <ExamContent exam={exam} course={course} type={examType} appMode={this.state.appMode} showSolutions={this.state.showSolutions} />
-      </span>
     );
     const navComponents = (this.state.appMode) ? (
       <span>
