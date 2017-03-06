@@ -3,10 +3,16 @@ import { handleEvent } from '../../utils';
 
 class Navbar extends Component {
   render() {
+    const course = this.props.course;
     const showSolutions = this.props.showSolutions;
     const toggleAppModeCallback = this.props.toggleAppModeCallback;
     const toggleAllSolutionsCallback = this.props.toggleAllSolutionsCallback;
     const toggleSolutionsComponent = null;
+    const toggleBackComponent = (this.props.isExam) ? (
+        <a className="material-icons mobile-back" href={`/${course}`}  onClick={() => handleEvent('Click', 'Home - Mobile')}>keyboard_backspace</a>
+      ) : (
+        <a className="material-icons mobile-back" href="/" onClick={() => handleEvent('Click', 'Home - Mobile')}>home</a>
+      );
     /*
     const toggleSolutionsComponent = (this.props.isExam) ? (
       (showSolutions) ? (
@@ -26,7 +32,7 @@ class Navbar extends Component {
     return (
       <div className="nav">
         <a className="logo" href="/" onClick={() => handleEvent('Click', 'Home - Desktop')}>Mavenform</a>
-        <a className="material-icons mobile-back" href="/" onClick={() => handleEvent('Click', 'Home - Mobile')}>home</a>
+        {toggleBackComponent}
         {toggleSolutionsComponent}
         <div className="tooltip-container">
           <a className="material-icons" href="https://docs.google.com/forms/d/e/1FAIpQLSfCS9McWikQ7F6syAGV9FX7Wf2-rWjqt-XMXxxEx5piTIf92Q/viewform?usp=sf_link" target="_blank">sms</a>

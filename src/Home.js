@@ -19,7 +19,7 @@ class Home extends Component {
   render() {
     const courseBoxes = _.map(courses, (desc, course) => {
       return (
-        <a className="course-card" href={`/course/${course}`} onClick={() => handleEvent('Click', 'Course', course)}>
+        <a className="course-card" href={`/${course}`} onClick={() => handleEvent('Click', 'Course', course)}>
           <h1>{courseIDToLabel[course]}</h1>
           <hr className="s1" />
           <i className="course-subtitle">{desc}</i>

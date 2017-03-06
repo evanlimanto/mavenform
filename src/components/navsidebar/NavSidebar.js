@@ -13,7 +13,7 @@ class NavSidebar extends Component {
 
     const sideTabs = _.map(exams[course], (courseExams, examType) => {
       const content =  _.map(courseExams, (info, semester) => {
-        const url = `/exam/${course}/${examType}/${info.id}`;
+        const url = `/${course}/${examType}-${info.id}`;
         const title = semester;
         const sideTabClass = classnames({
           sidetab: true,
@@ -41,7 +41,7 @@ class NavSidebar extends Component {
       <div className="menu">
         <h6>{courseIDToLabel[course]}</h6>
         <div className="sidetab-container">
-          <a className={sidetabClass} href={`/course/${course}`} onClick={() => handleEvent('Click', 'Index')}>Index</a>
+          <a className={sidetabClass} href={`/${course}`} onClick={() => handleEvent('Click', 'Index')}>Index</a>
         </div>
         {sideTabs}
       </div>

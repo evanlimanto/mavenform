@@ -26,7 +26,7 @@ class Course extends Component {
     const course = this.props.params.courseid;
     const available = _.map(exams[course], (examsOfType, examType) => {
       return _.map(examsOfType, (dict, semester) => {
-        const url = `/exam/${course}/${examType}/${dict['id']}`;
+        const url = `/${course}/${examType}-${dict['id']}`;
         return (
           <tr className="available" onClick={handleEvent("Click", "Exam", course)} key={semester}>
             <td><a href={url}>{examTypeToLabel[examType]}</a></td>

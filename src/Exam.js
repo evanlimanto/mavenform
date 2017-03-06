@@ -220,7 +220,7 @@ class Exam extends Component {
     );
     const navComponents = (this.state.appMode) ? (
       <span>
-        <Navbar isExam={true} showSolutions={this.state.showSolutions} toggleAppModeCallback={this.toggleAppMode} toggleAllSolutionsCallback={this.toggleAllSolutions} />
+        <Navbar course={course} isExam={true} showSolutions={this.state.showSolutions} toggleAppModeCallback={this.toggleAppMode} toggleAllSolutionsCallback={this.toggleAllSolutions} />
         <NavSidebar course={course} exam={exam} isExam={true} />
       </span>
     ) : (

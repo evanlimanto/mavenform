@@ -67,7 +67,7 @@ window.addEventListener('mousemove', function(e) {
 ReactDOM.render((
   <Router history={browserHistory} onUpdate={logPageView}>
     <Route path="/" component={Home} />
-    <Route path="/course/:courseid" component={Course} />
-    <Route path="/exam/:courseid/:examtype/:examid" component={Exam} />
+    <Route path="/:courseid" component={Course} />
+    <Route path="/:courseid/:examtype-:examid" component={Exam} />
   </Router>
 ), document.getElementById('root'));
