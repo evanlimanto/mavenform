@@ -1,0 +1,204 @@
+course: 'cs186'
+ref: 'mt1-sp16'
+
+type: 'mt1'
+term: 'sp16'
+prof: 'Hellerstein'
+
+questions: {
+  'q1': 'Running in Circles',
+  'q2': 'I can C clearly now, the rain is gone...',
+}
+
+parts: {
+  'q1': 3,
+  'q2': 3,
+}
+
+q1_1: |
+  ## Storage: Disk, Files, Buffers [11 points]
+  1. [3 points] Write down the letters of true statements in *alphabetical* order. (If none are true, write $\emptyset$.)
+  <hr class="s2" />
+  A. When querying for a 16 byte record, exactly 16 bytes of data is read from disk.
+
+q1_2: |
+  B. Writing to an SSD drive is more costly than reading from an SSD drive.
+
+q1_3: |
+  C. In a heap file, all pages must be filled to capacity except the last page.
+
+q1_4: |
+  D. If the file size is smaller than the number of buffer frames, a sequential scan of the file using either MRU or LRU (starting wiht an empty buffer pool) will have the same hit rate.
+
+q1_5: |
+  E. Assuming integers take 4 bytes and pointers take 4 bytes, a slot directory that is 256 bytes can address 64 records in a page.
+
+q1_6: |
+  In a page containing fixed-length records with no nullable fields, the size of the bitmap never changes.
+
+q2_1: |
+  2. [2 points] Write down the true benefits of using a record header for **variable** length records *in alphabetical order* (or if none are true benefits, write $\emptyset$.)
+  <hr class="s2" />
+  A. Does not need delimiter character to separate fields in the records.
+
+q2_2: |
+  B. Always matches or beats space cost when compared to fixed-length record format.
+
+q2_3: |
+  C. Can access any field without scanning the entire record.
+
+q2_4: |
+  D. Has compact representation of null values.
+
+q3_1: |
+  3. [6 points] Assume we have 4 empty buffer frames and the following access pattern, in which pages are immediately unpinned.
+  <hr class="s2" />
+  $$\text{T A M E T E A M M A T E M E A T L I D}$$
+  <hr class="s2" />
+  Use the replacement policy listed, and list the four pages in the buffer pool at the end, *in alphabetical order*. Hint: you don't need to draw a big chart for every access - look for patterns.
+  <ul>
+    <li>A. MRU</li>
+    <li>B. MRU</li>
+    <li>C. Clock. (Assume the clock hand starts on the first buffer and does not move unless a page needs to be replaced.)</li>
+  </ul>
+
+q4_1: |
+  ## Joins [12 points]
+  1. [4 points] Alphabetically, write down the letters of statements that apply (or write $\emptyset$.)
+  <hr class="s2" />
+  A. Sometimes, adding more memory to our system **will <u>not</u>** reduce I/O costs for a sort-merge join.
+
+q4_2: |
+  B. A Grace hash join will always perform better than a naive hash join.
+
+q4_3: |
+  C. Sometimes, replacing an Alternative 2 index with an Alternative 1 index on the same key will speed up an index-nested-loops join.
+
+q4_4: |
+  D. A Grace hash join can often complete in 2 passes if the size of the smaller relation is less than roughly the square of the number of buffers available for the join.
+
+q5_1: |
+  For the following questions in this section (Joins), assume that we are streaming our join output to a terminal. **Consider the cost of the initial table scan, but do not consider the cost of writing the final output.**
+  <hr class="s2" />
+  We have the following schema:
+  <hr class="s1" />
+  ![schema](/img/cs186/mt1-sp16-q5-1.png)
+  <hr class="s2" />
+  Until instructed otherwise, assume that:
+  <ul>
+  <li>Cheesemakers has **[C] = 500 pages**</li>
+  <li>Products has **[P] = 2000 pages**</li>
+  <li>We fix **B = 102 pages** of memory for computing joins.</li>
+  </ul>
+  <hr class="s2" />
+  Consider the following query:
+  <hr class="s2" />
+
+  ```
+  SELECT C.name, C.ranking, P.ctype, P.smelliness, P.cheesiness
+
+  FROM Cheesemakers C, Products P
+
+  WHERE C.cm_id = P.cm_id
+  ```
+
+  <hr class="s2" />
+  2. [4 points] Using the smaller relation as the “outer” one, what is the I/O cost of using a block nested loops join to evaluate the query above? Please provide the final number.
+
+q5_2: |
+  3. [4 points] What is the I/O cost of using a sort-merge join to evaluate the query above? Please provide the final number. (Remember to take advantage of the “important refinement” discussed in lecture for merge-joining partitions during the last pass of sort!)
+
+q6_1: |
+  ## III. Sort/Hash [16 points]
+  For this question, consider our table of Products from the previous Joins section, but assume:
+  <ul>
+    <li>**[P] = 2000 pages**</li>
+    <li>**pc = 100 tuples/page**</li>
+    <li>**B = 40 pages** of buffer</li>
+    <li>In all parts, we’ll use **QuickSort** for our internal sort algorithm.</li>
+    <li>**Include the cost of the initial scan and cost of writing output in your I/O calculations.**</li>
+  </ul>
+  1. [3 points] Alphabetically, write down the letters of statements that apply (or write $\emptyset$.)
+  <hr class="s2" />
+  A. Given a buffer of size B, the largest file you can sort in a single pass is B.
+
+q6_2: |
+  B. All files can be externally sorted, whereas not all files can be externally hashed.
+
+q6_3: |
+  C. For sort-merge joins, quicksort is always a better choice than heapsort for the internal sort algorithm.
+
+q7_1: |
+  2. [6 points] First, let's sort our table of Products (P) using the external algorithm we learned in lecture.
+  <hr class="s2" />
+  A. How many passes are needed to sort this file?
+
+q7_2: |
+  B. What is the I/O cost (in pages) of sorting this file?
+
+q7_3: |
+  C. Suppose we want to decrease the I/O cost of sorting this file, but we want to add the minimum number of buffer pages possible. Among the numbers on the answer sheet (1, 5, 10, 50) circle the *smallest* number of additional buffers to add that decreases the I/O cost.
+
+q8_1: |
+  3. [4 points] Given the resources at the top of Question III, answer the following two questions. Do not bother to simplify arithmetic expressions over constants, like $247*(36^3+log(4))$.
+  <hr class="s2" />
+  A. What is the largest file size (in pages) that we can sort in 3 passes?
+
+q8_2: |
+  B. What is the smallest file size (in pages) that will require 3 passes to sort?
+
+q9_1: |
+  4. [3 points] Suppose I want to eliminate duplicates from our (unsorted) table of Products, using external hashing. Write down the letters of true statements. (If none are true, write $\emptyset$.)
+  <hr class="s2" />
+  A. Deduplicating the file using hashing can have a higher IO cost than sorting the file (without deduplicating).
+
+q9_2: |
+  B. Deduplicating the file using hashing can have a lower IO cost than sorting the file (without deduplicating).
+
+q9_3: |
+  C. If external hashing recursively partitions on one partition, it will do so on all partitions.
+
+q10_1: |
+  ## IV. Indexes and B+ Trees [12 points]
+  ### Note: for B+ tree page splits with an odd number of items, assume that the majority of the items is placed on the right-hand page after the split.
+  <hr class="s2" />
+  1. [4 points] Alphabetically, write down the letters of statements that apply (or write $\emptyset$.)
+  <hr class="s2" />
+  A. All internal keys in a B+ tree also appear in its leaf nodes.
+
+q10_2: |
+  B. The height of a B+ tree increases whenever any node splits.
+
+q10_3: |
+  C. An ISAM index is similar to a B+ tree, but does not allow for insertion of new values.
+
+q10_4: |
+  D. The column(s) we select for our index key must have a unique value for every row in the table.
+
+q10_5: |
+  E. An Alternative 1 index may be either clustered or unclustered.
+
+q11_1: |
+  2. [5 points] The following B+ Tree has order 1 (max fanout of 3) and each leaf node can hold up to 2 entries. Answer each of the following questions **independently of each other.**
+  <hr class="s2" />
+  ![B+ Tree](/img/cs186/mt1-sp16-q11-1.png)
+  <hr class="s2" />
+  A. What value(s) would be in the root node if we were to insert 0?
+
+q11_2: |
+  B. What value(s) woudl be in the root node if we were to insert 6?
+
+q11_3: |
+  C. Starting with the height 1 tree in the picture above, suppose we start inserting keys 6, 7, 8, ... and so on. After inserting what key will the height of the tree become 3?
+
+q12_1: |
+  3. [3 points] Assume we are trying to construct a B+ Tree of order 2 (max fanout of 5). Each leaf node can hold up to 4 entries. We insert a total of 16 unique keys via bulk loading, with a fill factor of $3/4$.
+  <hr class="s2" />
+  A. How many leaf nodes will there be?
+
+q12_2: |
+  B. How many internal (non-leaf) nodes will there be?
+
+q12_3: |
+  C. How many internal (non-leaf) nodes do we traverse to do an equality search?
+

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { courseIDToLabel, examTypeToLabel, termToLabel } from './exams';
 import { MultipleChoiceQuestion, Navbar, NavSidebar, Question, Sidebar } from './components';
+import { handleEvent } from './utils';
 
 const _ = require('lodash');
 const isString = require('is-string');
@@ -180,6 +181,9 @@ class Exam extends Component {
       appMode: !this.state.appMode
     });
 
+    handleEvent('Click', 'Toggle Reader Mode');
+
+    // Remove "Show Solution" buttons
     var wrapper;
     if (this.state.appMode) {
       wrapper = document.createElement("span");
