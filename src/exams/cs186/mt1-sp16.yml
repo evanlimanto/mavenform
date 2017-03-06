@@ -6,51 +6,87 @@ term: 'sp16'
 prof: 'Hellerstein'
 
 questions: {
-  'q1': 'Running in Circles',
-  'q2': 'I can C clearly now, the rain is gone...',
+  'q1': 'Storage: Disk, Files, Buffers',
+  'q2': 'Joins',
+  'q3': 'Sort/Hash',
+  'q4': 'SQL',
+  'q5': 'Relational Algebra'
 }
 
 parts: {
-  'q1': 3,
-  'q2': 3,
+  'q1': 11,
+  'q2': 7,
+  'q3': 11,
+  'q4': 3,
+  'q5': 2,
 }
 
 q1_1: |
-  ## Storage: Disk, Files, Buffers [11 points]
+  ## I. Storage: Disk, Files, Buffers [11 points]
   1. [3 points] Write down the letters of true statements in *alphabetical* order. (If none are true, write $\emptyset$.)
   <hr class="s2" />
   A. When querying for a 16 byte record, exactly 16 bytes of data is read from disk.
 
+q1_1_s: |
+  False, a page's worth of data is always read from disk.
+
 q1_2: |
   B. Writing to an SSD drive is more costly than reading from an SSD drive.
+
+q1_2_s: |
+  True, writes to an SSD can invole reorganization to avoid uneven wear and tear.
 
 q1_3: |
   C. In a heap file, all pages must be filled to capacity except the last page.
 
+q1_3_s: |
+  False, there is no  such requirement. With clustered indices, it is common to keep heap file pages 2/3 full to accommodate inserts.
+
 q1_4: |
   D. If the file size is smaller than the number of buffer frames, a sequential scan of the file using either MRU or LRU (starting wiht an empty buffer pool) will have the same hit rate.
+
+q1_4_s: |
+  True, our eviction policy doesn't matter because the file fits in memory.
 
 q1_5: |
   E. Assuming integers take 4 bytes and pointers take 4 bytes, a slot directory that is 256 bytes can address 64 records in a page.
 
+q1_5_s: |
+  False, as show in lecture, an entry in slot directory is 8 bytes, because a single entry constsi of both a pointer and an integer (length).
+
 q1_6: |
   In a page containing fixed-length records with no nullable fields, the size of the bitmap never changes.
 
-q2_1: |
+q1_6_s: |
+  True, the size of the records is fixed, so the number we can fit on a page is fixed.
+
+q1_7: |
   2. [2 points] Write down the true benefits of using a record header for **variable** length records *in alphabetical order* (or if none are true benefits, write $\emptyset$.)
   <hr class="s2" />
   A. Does not need delimiter character to separate fields in the records.
 
-q2_2: |
+q1_7_s: |
+  True.
+
+q1_8: |
   B. Always matches or beats space cost when compared to fixed-length record format.
 
-q2_3: |
+q1_8_s: |
+  False.
+
+q1_9: |
   C. Can access any field without scanning the entire record.
 
-q2_4: |
+q1_9_s: |
+  True.
+
+q1_10: |
   D. Has compact representation of null values.
 
-q3_1: |
+q1_10_s: |
+  True.
+
+q1_11: |
   3. [6 points] Assume we have 4 empty buffer frames and the following access pattern, in which pages are immediately unpinned.
   <hr class="s2" />
   $$\text{T A M E T E A M M A T E M E A T L I D}$$
@@ -62,22 +98,39 @@ q3_1: |
     <li>C. Clock. (Assume the clock hand starts on the first buffer and does not move unless a page needs to be replaced.)</li>
   </ul>
 
-q4_1: |
-  ## Joins [12 points]
+q1_11_s: |
+  - ADEM
+  - DILT
+  - DEIL
+
+q2_1: |
+  ## II. Joins [12 points]
   1. [4 points] Alphabetically, write down the letters of statements that apply (or write $\emptyset$.)
   <hr class="s2" />
   A. Sometimes, adding more memory to our system **will <u>not</u>** reduce I/O costs for a sort-merge join.
 
-q4_2: |
+q2_2_s: |
+  True. A simple counter example is joining two 1-tuple relations.
+
+q2_3: |
   B. A Grace hash join will always perform better than a naive hash join.
 
-q4_3: |
+q2_3_s: |
+  False. Consider the same example from (A).
+
+q2_4: |
   C. Sometimes, replacing an Alternative 2 index with an Alternative 1 index on the same key will speed up an index-nested-loops join.
 
-q4_4: |
-  D. A Grace hash join can often complete in 2 passes if the size of the smaller relation is less than roughly the square of the number of buffers available for the join.
+q2_4_s: |
+  True. Alternative 1 lookups don’t require the additional IOs to follow the record id (rid) to the data pages, which is necessary with an Alternative 2 index.
 
-q5_1: |
+q2_5: |
+  D\. A Grace hash join can often complete in 2 passes if the size of the smaller relation is less than roughly the square of the number of buffers available for the join.
+
+q2_5_s: |
+  True, if we assume a hash function which spreads evenly.
+
+q2_6: |
   For the following questions in this section (Joins), assume that we are streaming our join output to a terminal. **Consider the cost of the initial table scan, but do not consider the cost of writing the final output.**
   <hr class="s2" />
   We have the following schema:
@@ -105,10 +158,16 @@ q5_1: |
   <hr class="s2" />
   2. [4 points] Using the smaller relation as the “outer” one, what is the I/O cost of using a block nested loops join to evaluate the query above? Please provide the final number.
 
-q5_2: |
+q2_6_s: |
+  500 + 5 * 2000 = 10500 I/Os
+
+q2_7: |
   3. [4 points] What is the I/O cost of using a sort-merge join to evaluate the query above? Please provide the final number. (Remember to take advantage of the “important refinement” discussed in lecture for merge-joining partitions during the last pass of sort!)
 
-q6_1: |
+q2_7_s: |
+  Read, write, read/merge: 3 * (500 + 2000) = 7500 I/Os
+
+q3_1: |
   ## III. Sort/Hash [16 points]
   For this question, consider our table of Products from the previous Joins section, but assume:
   <ul>
@@ -122,43 +181,77 @@ q6_1: |
   <hr class="s2" />
   A. Given a buffer of size B, the largest file you can sort in a single pass is B.
 
-q6_2: |
+q3_2_s: |
+  True. This is an internal sort.
+
+q3_3: |
   B. All files can be externally sorted, whereas not all files can be externally hashed.
 
-q6_3: |
+q3_3_s: |
+  True. Consider a file with very many duplicates, such that we cannot fit all duplicates in a
+  partition.
+
+q3_4: |
   C. For sort-merge joins, quicksort is always a better choice than heapsort for the internal sort algorithm.
 
-q7_1: |
+q3_4_s: |
+  False. Recall that a tournament sort will produce runs twice as long - half as many runs, which could result in fewer passes.
+
+q3_5: |
   2. [6 points] First, let's sort our table of Products (P) using the external algorithm we learned in lecture.
   <hr class="s2" />
   A. How many passes are needed to sort this file?
 
-q7_2: |
+q3_5_s: |
+  3. ceil(log_39(ceil(2000/40))) + 1 = 3. We accepted answers written as an expression, only if the ceilings were correct (i.e. your expression must evaluate to 3 and exactly 3).
+
+q3_6: |
   B. What is the I/O cost (in pages) of sorting this file?
 
-q7_3: |
+q3_6_s: |
+  12000.2N*3=2*2000*3=12000
+
+q3_7: |
   C. Suppose we want to decrease the I/O cost of sorting this file, but we want to add the minimum number of buffer pages possible. Among the numbers on the answer sheet (1, 5, 10, 50) circle the *smallest* number of additional buffers to add that decreases the I/O cost.
 
-q8_1: |
+q3_7_s: |
+  We accepted either 5 or 10. A lower IO cost would have a maximum of 2 passes, so B(B-1) = 2000, where B = 40+x. x=5 additional buffers is an approximate answer, whereas 10 additional buffers would be a fully correct answer.
+
+q3_8: |
   3. [4 points] Given the resources at the top of Question III, answer the following two questions. Do not bother to simplify arithmetic expressions over constants, like $247*(36^3+log(4))$.
   <hr class="s2" />
   A. What is the largest file size (in pages) that we can sort in 3 passes?
 
-q8_2: |
+q3_8_s: |
+  40(39)(39). Recall that we can sort B in one pass, B(B-1) in two passes, and B(B-1)^(k-1) in k passes.
+
+q3_9: |
   B. What is the smallest file size (in pages) that will require 3 passes to sort?
 
-q9_1: |
+q3_9_s: |
+  40(39)+1. This is the largest file sortable in 2 passes, plus 1.
+
+q3_10: |
   4. [3 points] Suppose I want to eliminate duplicates from our (unsorted) table of Products, using external hashing. Write down the letters of true statements. (If none are true, write $\emptyset$.)
   <hr class="s2" />
   A. Deduplicating the file using hashing can have a higher IO cost than sorting the file (without deduplicating).
 
-q9_2: |
+q3_10_s: |
+  True. Consider a file with very, very skewed data, and/or a set of very, very poor hash functions, such that many repartitioning passes are needed.
+
+q3_11: |
   B. Deduplicating the file using hashing can have a lower IO cost than sorting the file (without deduplicating).
 
-q9_3: |
+q3_11_s: |
+  True. Consider an extreme case, where the entire file consists of duplicates - there will only be one tuple to output (and only one pass over the input).
+
+q3_12: |
   C. If external hashing recursively partitions on one partition, it will do so on all partitions.
 
-q10_1: |
+q3_12_s: |
+  False. You only need to recursively partition oversized partitions.
+
+q4_1: |
   ## IV. Indexes and B+ Trees [12 points]
   ### Note: for B+ tree page splits with an odd number of items, assume that the majority of the items is placed on the right-hand page after the split.
   <hr class="s2" />
@@ -166,39 +259,156 @@ q10_1: |
   <hr class="s2" />
   A. All internal keys in a B+ tree also appear in its leaf nodes.
 
-q10_2: |
+q4_1_s: |
+  False, a leaf node which has been copied up can be deleted.
+
+q4_2_2: |
   B. The height of a B+ tree increases whenever any node splits.
 
-q10_3: |
+q4_2_s: |
+  False, height increases when root node splits.
+
+q4_3: |
   C. An ISAM index is similar to a B+ tree, but does not allow for insertion of new values.
 
-q10_4: |
+q4_3_s: |
+  False.
+
+q4_4: |
   D. The column(s) we select for our index key must have a unique value for every row in the table.
 
-q10_5: |
+q4_4_s: |
+  False.
+
+q4_5: |
   E. An Alternative 1 index may be either clustered or unclustered.
 
-q11_1: |
+q4_5_s: |
+  False, it’s clustered by design.
+
+q4_6: |
   2. [5 points] The following B+ Tree has order 1 (max fanout of 3) and each leaf node can hold up to 2 entries. Answer each of the following questions **independently of each other.**
   <hr class="s2" />
   ![B+ Tree](/img/cs186/mt1-sp16-q11-1.png)
   <hr class="s2" />
   A. What value(s) would be in the root node if we were to insert 0?
 
-q11_2: |
+q4_6_s: |
+  2, 4
+
+q4_7: |
   B. What value(s) woudl be in the root node if we were to insert 6?
 
-q11_3: |
+q4_7_s: |
+  4
+
+q4_8: |
   C. Starting with the height 1 tree in the picture above, suppose we start inserting keys 6, 7, 8, ... and so on. After inserting what key will the height of the tree become 3?
 
-q12_1: |
+q4_8_s: |
+  10
+
+q4_9: |
   3. [3 points] Assume we are trying to construct a B+ Tree of order 2 (max fanout of 5). Each leaf node can hold up to 4 entries. We insert a total of 16 unique keys via bulk loading, with a fill factor of $3/4$.
   <hr class="s2" />
   A. How many leaf nodes will there be?
 
-q12_2: |
+q4_9_s: |
+  6
+
+q4_10: |
   B. How many internal (non-leaf) nodes will there be?
 
-q12_3: |
+q4_10_s: |
+  3
+
+q4_11: |
   C. How many internal (non-leaf) nodes do we traverse to do an equality search?
 
+q4_11_s: |
+  2
+
+q5_1: |
+  ## V. SQL [17 points]
+  Consider the following schema:
+  <hr class="s2" />
+  ![schema](/img/cs186/mt1-sp16-q13-1.png)
+  <hr class="s2" />
+  You should assume that referential integrity is being enforced, and no NULL values appear.
+  <hr class="s2" />
+  For parts 1 and 2, fill in the blanks in the SQL queries.
+  <hr class="s1" />
+  1. [7 points] Names of pairs of people who called each other on 2014-12-25.
+
+q5_1_s: |
+  ```
+  SELECT p1.name, p2.name
+    FROM People p1, People p2, Calls C
+    WHERE C.from = p1.pid
+      AND C.to = p2.pid
+      AND C.date = '12-25-2014'
+  ```
+
+q5_2: |
+  2. [7 points] Find the location to which the most phone calls have been made, and return its location name as well as the number of calls made to it.
+
+q5_2_s: |
+  ```
+  SELECT L.lname as name, COUNT(*) as NumCalls
+    FROM Location L, People P, Calls C
+    WHERE C.areacode = L.areacode
+      AND P.id = C.to
+  GROUP BY L.areacode
+    ORDER BY NumCalls DESC
+    LIMIT 1;
+  ```
+
+q5_3: |
+  3. [3 points] On the answer sheet, alphabetically write down letters of the statement(s) that find the name of the location of the person who made the longest call. (If none match, write $\emptyset$.)
+  <hr class="s2" />
+  ![sql1](/img/cs186/mt1-sp16-q13-2.png)
+  <hr class="s2" />
+  ![sql2](/img/cs186/mt1-sp16-q13-3.png)
+  <hr class="s2" />
+  ![sql3](/img/cs186/mt1-sp16-q13-4.png)
+
+q5_3_s: |
+  ```
+  WITH (SELECT P.areacode AS areacode, C.duration AS duration
+        FROM calls C, People P
+        WHERE C.from =  P.id) AS DC,
+  SELECT L.lname
+  FROM DC, Location L
+  WHERE L.areacode = DC.areacode
+  ORDER BY DC.duration DESC
+  LIMIT 1;
+  ```
+
+q6_1: |
+  ## VI. Relational Algebra [8 points]
+  Consider the schema from the SQL question, but with the relation names shortened:
+  - Location -> L
+  - People -> P
+  - Calls -> C
+  <hr class="s2" />
+  1. To answer the following two questions, put one relational algebra operator or relation name in each blank:
+  <hr class="s1" />
+  a. [3 points] Areacodes to which no call has ever been made.
+  <hr class="s1" />
+  b. [3 points] Names of people who live in the location "City of Joe".
+
+q6_1_s: |
+  a. $\pi_{areacode}L - \pi_{areacode}(P⨝_{P.id = C.to}C)$
+  <hr class="s2" />
+  b. $\pi_{name}(P⨝\sigma_{pname = "City of Joe"}(L))$
+
+q6_2: |
+  2. [2 points] The equivalence relation $\equiv$ means that two expressions produce the same results on all possible databases. Write down the letters of the equivalences below that are true. (If none are true, write $\emptyset$.)
+  <hr class="s2" />
+  ![expression1](/img/cs186/mt1-sp16-q14-1.png)
+  <hr class="s2" />
+  ![expression2](/img/cs186/mt1-sp16-q14-2.png)
+
+q6_2_s: |
+  B. $\pi_{areacode}(P) - \pi_{areacode}(\sigma_{areacode=415}(P⨝L))
+    \equiv \pi_{areacode}(P) — \pi_{areacode}(\sigma_{areacode=415}(\pi_{areacode}(P) \cap \pi{areacode}(L)))$

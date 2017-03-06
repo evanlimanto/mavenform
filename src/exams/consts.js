@@ -33,6 +33,15 @@ const exams = {
     }
   },
 
+  'cs186': {
+    'mt1': {
+      'Spring 2016': {
+        'id': 'sp16',
+        'profs': 'Hellerstein',
+      }
+    }
+  },
+
   'ugba10': {
     'marketing': {
       'Spring 2016': {
@@ -121,6 +130,7 @@ const exams = {
 const courses = {
   'chem1a': 'General Chemistry',
   'data8': 'Foundations of Data Science',
+  'cs186': 'Introduction to Database Systems',
   'ugba10': 'Principles of Business',
   'ee16a': 'Designing Information Devices and Systems I',
   'cs61c': 'Great Ideas in Computer Architecture (Machine Structures)',
@@ -150,15 +160,16 @@ const termToLabel = {
   'sp15': 'Spring 2015',
   'fa15': 'Fall 2015',
   'sp16': 'Spring 2016',
-  'fa16': 'Fall 2016'
+  'fa16': 'Fall 2016',
 };
 
 const courseIDToLabel = {
   'chem1a': 'Chem 1A',
+  'data8': 'Data 8',
+  'cs186': 'CS 186',
   'ee16a': 'EE 16A',
   'cs61c': 'CS 61C',
   'cs162': 'CS 162',
-  'data8': 'Data 8',
   'ugba10': 'UGBA 10',
 };
 
