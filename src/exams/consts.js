@@ -51,6 +51,10 @@ const exams = {
         'id': 'fa12',
         'profs': 'Franklin',
       },
+      'Spring 2012': {
+        'id': 'sp12',
+        'profs': 'Hellerstein',
+      },
     }
   },
 
