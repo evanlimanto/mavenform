@@ -41,6 +41,7 @@ renderer.paragraph = function(text) {
   return `${text}`;
 };
 renderer.image = function(href, title, text) {
+  href = _.replace(href, /\\\./g, '.'); // remove escapes
   return `<img src="${href}" title="${title}" alt="${text}" />`;
 };
 renderer.list = function(body, ordered) {

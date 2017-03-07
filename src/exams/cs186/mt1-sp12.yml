@@ -79,18 +79,20 @@ q2_1: |
   You start by setting up tables for your human users and for their dogs. **A user can have multiple dogs, but dogs can have only one user.**
   <hr class="s2" />
   ```
-  CREATE TABLE users ( userid integer,
-  name text,
-  age integer,
-  PRIMARY KEY (userid));
+  CREATE TABLE users (
+    userid integer,
+    name text,
+    age integer,
+    PRIMARY KEY (userid));
 
-  CREATE TABLE dogs ( dogid integer,
-  owner integer,
-  name text,
-  breed text,
-  age integer,
-  PRIMARY KEY (dogid),
-  FOREIGN KEY (owner) REFERENCES users);
+  CREATE TABLE dogs (
+    dogid integer,
+    owner integer,
+    name text,
+    breed text,
+    age integer,
+    PRIMARY KEY (dogid),
+    FOREIGN KEY (owner) REFERENCES users);
   ```
 
   5. It would be awesome to have a counter on your website keeping track of how many dog breeds are signed up for your service! On the answer sheet (**not here!**) mark the squares by the letters for all the queries that are guaranteed to return this number. (**Zero, one, or more than one may be correct.**) **[2.5pt]**
@@ -107,6 +109,7 @@ q2_1: |
 
 q2_1_s: |
   **e**
+  <hr class="s1" />
   The others don’t even use the “breed” column.
 
 q2_2: |
@@ -114,35 +117,35 @@ q2_2: |
 
   ```
   a. SELECT userid, COUNT(*) as cnt
-  FROM dogs, users
-  WHERE userid = dogid
-  ORDER BY cnt DESC
-  LIMIT 1;
+      FROM dogs, users
+      WHERE userid = dogid
+      ORDER BY cnt DESC
+      LIMIT 1;
 
   b. SELECT userid, MAX(dogid) as max
-  FROM dogs,users
-  WHERE userid = owner
-  GROUP BY dogid, userid
-  ORDER BY max DESC
-  LIMIT 1;
+      FROM dogs,users
+      WHERE userid = owner
+      GROUP BY dogid, userid
+      ORDER BY max DESC
+      LIMIT 1;
 
   c. SELECT userid, MAX(dogid) as max
-  FROM dogs,users
-  WHERE userid = owner
-  GROUP BY userid
-  ORDER BY max DESC
-  LIMIT 1;
+      FROM dogs,users
+      WHERE userid = owner
+      GROUP BY userid
+      ORDER BY max DESC
+      LIMIT 1;
 
   d. SELECT userid, COUNT(*) as cnt
-  FROM dogs,users
-  WHERE userid = owner
-  GROUP BY userid
-  ORDER BY cnt DESC
-  LIMIT 1;
+      FROM dogs,users
+      WHERE userid = owner
+      GROUP BY userid
+      ORDER BY cnt DESC
+      LIMIT 1;
 
   e. SELECT userid, COUNT(*) as cnt
-  FROM dogs LEFT OUTER JOIN users ON userid = dogid
-  GROUP BY userid;
+      FROM dogs LEFT OUTER JOIN users ON userid = dogid
+      GROUP BY userid;
   ```
 
 q2_2_s: |
@@ -165,26 +168,26 @@ q2_3: |
 
   ```
   a. SELECT owner
-  FROM dogs
-  WHERE breed = “greyhound”
-  AND owner NOT IN (SELECT dogid FROM photos);
+      FROM dogs
+      WHERE breed = “greyhound”
+      AND owner NOT IN (SELECT dogid FROM photos);
 
   b. SELECT owner
-  FROM dogs, photos
-  WHERE dogs.breed = “greyhound” AND dogs.dogid != photos.dogid;
+      FROM dogs, photos
+      WHERE dogs.breed = “greyhound” AND dogs.dogid != photos.dogid;
 
   c. SELECT owner
-  FROM dogs
-  WHERE breed = “greyhound”
-  AND dogid NOT IN (SELECT dogid FROM photos);
+      FROM dogs
+      WHERE breed = “greyhound”
+      AND dogid NOT IN (SELECT dogid FROM photos);
 
   d. SELECT owner
-  FROM dogs LEFT OUTER JOIN photos ON dogs.dogid = photos.dogid
-  WHERE photos.photo IS NULL;
+      FROM dogs LEFT OUTER JOIN photos ON dogs.dogid = photos.dogid
+      WHERE photos.photo IS NULL;
 
   e. SELECT owner
-  FROM dogs RIGHT OUTER JOIN photos ON dogs.dogid = photos.dogid
-  WHERE photos.photo IS NULL;
+      FROM dogs RIGHT OUTER JOIN photos ON dogs.dogid = photos.dogid
+      WHERE photos.photo IS NULL;
   ```
 
 q2_3_s: |
@@ -293,6 +296,7 @@ q3_4: |
 
 q3_4_s: |
   **a, b.**
+  <hr class="s1" />
   (c) wouldn’t help because hashing doesn’t help with ORDER BY. (d) doesn’t make sense— sometimes you need rendezvous, e.g. in sorting for ORDER BY.
   <hr class="s1" />
   (a) is likely to help since tournament sort often produces fewer runs than quicksort and (b) is almost certain to help since we could fit more records in memory.
@@ -405,6 +409,7 @@ q5_1: |
 
 q5_1_s: |
   **B.**
+  <hr class="s1" />
   (b) works: for each tweet, we scan the small set of TAs. This produces a continuous stream of outputs. We cannot use (a) or (d) because we cannot fully sort or partition an infinite tweet stream. We’d get stuck in the first phase of those algorithms forever. (c) works in this case because there’s only one chunk of TAs, though it’s a bad choice for streaming in general.
   <hr class="s2" />
   Note: during the exam, we said that (d) could include hybrid hash join, which would work in this case for the same reason as (c), even though not it’s a bad choice for streaming in general.
@@ -430,13 +435,13 @@ q5_2_s: |
 q5_3: |
   25. Now assume that Twitter guarantees that **a Tweet will be no more than k Tweets out of order**. In other words, if a Tweet is supposed to be located at position i in the stream, it will be in position i ± k in the worst case. Assuming **two tweets fit on a page of memory**, how many buffer pages do you need to output a sorted stream of tweets? **[2pt]**
   <hr class="s2" />
-  a. k buffer pages of memory
+  a. *k* buffer pages of memory
   <hr class="s1" />
-  b. k+3 buffer pages of memory
+  b. *k+3* buffer pages of memory
   <hr class="s1" />
-  c. k-2 buffer pages of memory
+  c. *k-2* buffer pages of memory
   <hr class="s1" />
-  d. 2k+2 buffer pages of memory
+  d. *2k+2* buffer pages of memory
   <hr class="s1" />
   e. It can’t be done with any finite number of buffer pages
 

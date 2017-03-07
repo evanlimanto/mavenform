@@ -47,7 +47,7 @@ q1_2: |
   b. The I/O cost (including output) will be 19,000 I/O’s. **True/False**
 
 q1_2_s: |
-  **False** - need 4N I/O’s
+  **False** - need 4N I/O’s.
 
 q1_3: |
   Adding 3 additional buffer pages will reduce the number of I/O's. **True/False**
@@ -65,7 +65,7 @@ q1_5: |
   2. [5 points] After another month, the `SurveyResponse` table has grown to **11,000 pages**. However, the budget for the servers takes a hit and the system has been downgraded such that there are **only 11 pages** available for each query operator. How many I/O's will the external merge sort (including the cost of writing the output) require with these new memory requirements?
 
 q1_5_s: |
-  (1 + log_{11 - 1} ( 11000 / 11)) * 2 (11000) = (1 + log_{10} (1000)) * 2 * 11000 = **88,000 I/O’s**
+  (1 + log_{11 - 1} ( 11000 / 11)) \* 2 (11000) = (1 + log_{10} (1000)) \* 2 \* 11000 = **88,000 I/O’s**
 
 q1_6: |
   ## (Query Processing, continued)
@@ -74,7 +74,7 @@ q1_6: |
 
   ```
   Representative(
-    rep_id int,
+    <u>rep_id</u> int,
     full_name text,
     district text,
     state text,
@@ -120,22 +120,19 @@ q1_8: |
   You have the following table:
   ```
   Messages(message_id int,
-             sender_id int,
-             receiver_id int,
-             encrypted_content text,
-             timestamp date,
-             ...)
+           sender_id int,
+           receiver_id int,
+           encrypted_content text,
+           timestamp date,
+           ...)
   ```
   You want to make a graph of people who have talked to each other. In other words, the pair (A, B) should show up in our output if person A has sent person B at least one message and person B has sent person A at least one message. You send your system this query:
   <hr class="s2" />
 
   ```
   SELECT M1.sender_id, M2.sender_id
-
     FROM Messages M1, Messages M2
-
    WHERE M1.sender_id = M2.receiver_id
-
      AND M1.receiver_id = M2.sender_id;
   ```
 
@@ -260,13 +257,13 @@ q3_3_s: |
 q3_4: |
   4. [6 points] Assume that we have a database workload that repeatedly scans a single relation R, which is much bigger than the buffer pool. We learned in class that LRU replacement performs poorly in this case. Consider the following replacement policies:
   <hr class="s2" />
-  i. Least-Recently Used (LRU): replace the page in the least-recently unpinned frame.
+  **i. Least-Recently Used (LRU)**: replace the page in the least-recently unpinned frame.
   <hr class="s1" />
-  ii. Most-Recently Used (MRU): replace the page in the most-recently unpinned frame.
+  **ii. Most-Recently Used (MRU)**: replace the page in the most-recently unpinned frame.
   <hr class="s1" />
-  iii. Pin All But One (PABO): Given B buffers, pin the first B-1 pages that you access into B-1 frames, and always replace the page in the remaining frame.
+  **iii. Pin All But One (PABO)**: Given B buffers, pin the first B-1 pages that you access into B-1 frames, and always replace the page in the remaining frame.
   <hr class="s1" />
-  iv. Random: Choose the page to replace randomly among the unpinned pages.
+  **iv. Random**: Choose the page to replace randomly among the unpinned pages.
   <hr class="s2" />
   a. Which of the five protocols performs optimally for this workload? (Note: the correct answer may be zero, one, or more than one of the above!)
   <hr class="s1" />
@@ -422,7 +419,7 @@ q5_2_s: |
 
 q5_3: |
   3. [2 points] Now for the same Query as question 2, fill in the blanks for the given relational algebra plan. Note: last three blanks are for relations.
-
+  <hr class="s2" />
   $
   \pi \text{________________________________} \( \\\\
   \quad \sigma \text{________________________________} \( \\\\

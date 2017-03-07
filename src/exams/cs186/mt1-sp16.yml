@@ -57,7 +57,7 @@ q1_5_s: |
   False, as show in lecture, an entry in slot directory is 8 bytes, because a single entry constsi of both a pointer and an integer (length).
 
 q1_6: |
-  In a page containing fixed-length records with no nullable fields, the size of the bitmap never changes.
+  F. In a page containing fixed-length records with no nullable fields, the size of the bitmap never changes.
 
 q1_6_s: |
   True, the size of the records is fixed, so the number we can fit on a page is fixed.
@@ -94,11 +94,9 @@ q1_11: |
   $$\text{T A M E T E A M M A T E M E A T L I D}$$
   <hr class="s2" />
   Use the replacement policy listed, and list the four pages in the buffer pool at the end, *in alphabetical order*. Hint: you don't need to draw a big chart for every access - look for patterns.
-  <ul>
-    <li>A. MRU</li>
-    <li>B. MRU</li>
-    <li>C. Clock. (Assume the clock hand starts on the first buffer and does not move unless a page needs to be replaced.)</li>
-  </ul>
+  - MRU
+  - LRU
+  - Clock. (Assume the clock hand starts on the first buffer and does not move unless a page needs to be replaced.)
 
 q1_11_s: |
   - ADEM
@@ -151,9 +149,7 @@ q2_5: |
 
   ```
   SELECT C.name, C.ranking, P.ctype, P.smelliness, P.cheesiness
-
   FROM Cheesemakers C, Products P
-
   WHERE C.cm_id = P.cm_id
   ```
 
@@ -174,7 +170,7 @@ q3_1: |
   For this question, consider our table of Products from the previous Joins section, but assume:
   <ul>
     <li>**[P] = 2000 pages**</li>
-    <li>**pc = 100 tuples/page**</li>
+    <li>**$p_c$ = 100 tuples/page**</li>
     <li>**B = 40 pages** of buffer</li>
     <li>In all parts, we’ll use **QuickSort** for our internal sort algorithm.</li>
     <li>**Include the cost of the initial scan and cost of writing output in your I/O calculations.**</li>
@@ -211,7 +207,7 @@ q3_5: |
   B. What is the I/O cost (in pages) of sorting this file?
 
 q3_5_s: |
-  12000.2N*3=2*2000*3=12000
+  12000. 2N\*3=2\*2000\*3=12000
 
 q3_6: |
   C. Suppose we want to decrease the I/O cost of sorting this file, but we want to add the minimum number of buffer pages possible. Among the numbers on the answer sheet (1, 5, 10, 50) circle the *smallest* number of additional buffers to add that decreases the I/O cost.
@@ -375,16 +371,7 @@ q5_3: |
   ![sql3](/img/cs186/mt1-sp16-q13-4.png)
 
 q5_3_s: |
-  ```
-  WITH (SELECT P.areacode AS areacode, C.duration AS duration
-        FROM calls C, People P
-        WHERE C.from =  P.id) AS DC,
-  SELECT L.lname
-  FROM DC, Location L
-  WHERE L.areacode = DC.areacode
-  ORDER BY DC.duration DESC
-  LIMIT 1;
-  ```
+  A.
 
 q6_1: |
   ## VI. Relational Algebra [8 points]
@@ -412,5 +399,4 @@ q6_2: |
   ![expression2](/img/cs186/mt1-sp16-q14-2.png)
 
 q6_2_s: |
-  B. $\pi_{areacode}(P) - \pi_{areacode}(\sigma_{areacode=415}(P⨝L))
-    \equiv \pi_{areacode}(P) — \pi_{areacode}(\sigma_{areacode=415}(\pi_{areacode}(P) \cap \pi{areacode}(L)))$
+  B.

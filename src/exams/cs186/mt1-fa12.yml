@@ -125,7 +125,7 @@ q2_1_s: |
   - 4 points for correct
   - 2 points for missing E or F
   - 2 points for adding another attribute
-  (No points for CD – we gave full credit to solutions without CD.)
+  - (No points for CD – we gave full credit to solutions without CD.)
 
 q2_2: |
   **b) [4 points]** There exists a single candidate key (i.e., minimal superkey) for R. What is it?
@@ -263,7 +263,7 @@ q3_1_s: |
   - -1 points for every extra answer beyond the first
 
 q3_2: |
-  **b) [4 points] You also want to view which dogs have received a cuteness rating of 10 (maximum cuteness). Which query will return all **dog names** and **owner names** of all the dogs that have received at least one maximum cuteness rating of 10? On the answer sheet list the query of your choice (one answer is correct).
+  **b) [4 points]** You also want to view which dogs have received a cuteness rating of 10 (maximum cuteness). Which query will return all **dog names** and **owner names** of all the dogs that have received at least one maximum cuteness rating of 10? On the answer sheet list the query of your choice (one answer is correct).
 
   ```
   (A) SELECT name AS dog_name, owner FROM Awwws, Dogs WHERE dog = dog_id AND num_awwws = 10;
@@ -353,7 +353,7 @@ q4_1: |
   <hr class="s1" />
   (B) $R ⋈ \pi_{S.B} (S)$
   <hr class="s1" />
-  (C) $R \cap (\pi_{A} (R) x \pi_{B} (S))
+  (C) $R \cap (\pi_{A} (R) * \pi_{B} (S))$
   <hr class="s1" />
   (D) None, they are all equivalent.
 
