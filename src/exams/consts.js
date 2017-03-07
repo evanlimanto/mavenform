@@ -55,6 +55,12 @@ const exams = {
         'id': 'sp12',
         'profs': 'Hellerstein',
       },
+    },
+    'mt2': {
+      'Spring 2016': {
+        'id': 'sp16',
+        'profs': 'Hellerstein',
+      }
     }
   },
 

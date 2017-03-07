@@ -55,7 +55,6 @@ renderer.list = function(body, ordered) {
 const preprocess = function(text) {
   text = replace(text, /\./g, '\\.');
   text = replace(text, /_/g, '\\_');
-  console.log(text);
   return marked(text, {renderer});
 };
 
