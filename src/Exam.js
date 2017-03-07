@@ -235,7 +235,7 @@ class Exam extends Component {
     const navComponents = (this.state.appMode) ? (
       <span>
         <Navbar course={course} isExam={true} showSolutions={this.state.showSolutions} toggleAppModeCallback={this.toggleAppMode} toggleAllSolutionsCallback={this.toggleAllSolutions} />
-        <NavSidebar course={course} exam={exam} isExam={true} />
+        <NavSidebar course={course} exam={exam} examType={examType} isExam={true} />
       </span>
     ) : (
       <div className="tooltip-container app-mode" onClick={() => this.toggleAppMode()}>

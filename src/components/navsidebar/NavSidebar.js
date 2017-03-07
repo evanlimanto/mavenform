@@ -9,14 +9,16 @@ class NavSidebar extends Component {
     const course = this.props.course;
     const exam = this.props.exam;
     const isExam = this.props.isExam;
+    const thisExamType = this.props.examType;
 
     const sideTabs = map(exams[course], (courseExams, examType) => {
       const content =  map(courseExams, (info, semester) => {
+        console.log(semester);
         const url = `/${course}/${examType}-${info.id}`;
         const title = semester;
         const sideTabClass = classnames({
           sidetab: true,
-          active: (exam === info['id']),
+          active: (exam === info['id'] && thisExamType === examType),
         });
         return (
           <div key={semester} className="sidetab-container">
