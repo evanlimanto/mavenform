@@ -46,7 +46,15 @@ const exams = {
       'Spring 2015': {
         'id': 'sp15',
         'profs': 'Hellerstein',
-      }
+      },
+      'Fall 2012': {
+        'id': 'fa12',
+        'profs': 'Franklin',
+      },
+      'Spring 2012': {
+        'id': 'sp12',
+        'profs': 'Hellerstein',
+      },
     }
   },
 
