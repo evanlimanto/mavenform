@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { handleEvent } from '../src/utils';
 import { courseIDToLabel, courses } from './exams';
+import { map } from 'lodash';
 
-const _ = require('lodash');
 const Scroll = require('react-scroll');
 const Element = Scroll.Element;
 var Link = Scroll.Link;
@@ -18,7 +18,7 @@ class Home extends Component {
 
   render() {
     var counter = 0;
-    const courseBoxes = _.map(courses, (desc, course) => {
+    const courseBoxes = map(courses, (desc, course) => {
       counter++;
       if (counter > 6) {
         return null;

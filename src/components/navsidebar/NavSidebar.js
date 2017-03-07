@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 import { handleEvent } from '../../utils';
 import { exams, examTypeToLabel, courseIDToLabel } from '../../exams';
-
-const _ = require('lodash');
+import { map } from 'lodash';
 
 class NavSidebar extends Component {
   render() {
@@ -11,8 +10,8 @@ class NavSidebar extends Component {
     const exam = this.props.exam;
     const isExam = this.props.isExam;
 
-    const sideTabs = _.map(exams[course], (courseExams, examType) => {
-      const content =  _.map(courseExams, (info, semester) => {
+    const sideTabs = map(exams[course], (courseExams, examType) => {
+      const content =  map(courseExams, (info, semester) => {
         const url = `/${course}/${examType}-${info.id}`;
         const title = semester;
         const sideTabClass = classnames({
@@ -21,7 +20,7 @@ class NavSidebar extends Component {
         });
         return (
           <div key={semester} className="sidetab-container">
-            <a className={sideTabClass} href={url}>{title}</a>
+            <a className={sideTabClass} href={url} onClick={handleEvent("Click", "Sidebar URL")}>{title}</a>
           </div>
         );
       });

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { handleEvent } from '../../utils';
+import { map, range } from 'lodash';
 
 const Scroll = require('react-scroll');
 var Link = Scroll.Link;
-
-const _ = require('lodash');
 
 class Sidebar extends Component {
   constructor(props) {
@@ -19,7 +18,7 @@ class Sidebar extends Component {
     const course = this.props.course;
     const examType = this.props.examType;
 
-    return _.map(_.range(problemIDs.length), (index) => {
+    return map(range(problemIDs.length), (index) => {
       const problemID = problemIDs[index];
       const problemTitle = `Question ${problemID[1]}`;
 

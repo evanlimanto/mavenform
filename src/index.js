@@ -2,16 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { browserHistory, Router, Route } from 'react-router';
 import { handleEvent } from './utils';
-
+import { lowerCase } from 'lodash';
 import Exam from './Exam';
 import Course from './Course';
 import Home from './Home';
 
+const trackLocal = false;
 var ReactGA = require('react-ga');
 ReactGA.initialize('UA-20131732-5');
 
 function logPageView() {
-  if (window.location.hostname !== "localhost") {
+  if (trackLocal || window.location.hostname !== "localhost") {
     const path = window.location.pathname + window.location.search;
     ReactGA.set({ path });
     ReactGA.pageview(path);
@@ -24,7 +25,7 @@ window.addEventListener('scroll', function(e) {
   // Track scroll every thirty seconds
   if (currentTime - lastScrollTime > 30 * 1000) {
     lastScrollTime = currentTime;
-    if (window.location.hostname !== "localhost") {
+    if (trackLocal || window.location.hostname !== "localhost") {
       const path = window.location.pathname + window.location.search;
       handleEvent('Scroll', path);
     }
@@ -40,13 +41,13 @@ function trackUserOnPage() {
 
 var userOnPageTracker = null;
 window.addEventListener('focus', function(e) {
-  if (window.location.hostname !== "localhost") {
+  if (trackLocal || window.location.hostname !== "localhost") {
     userOnPageTracker = window.setInterval(trackUserOnPage, 30 * 1000);
   }
 });
 
 window.addEventListener('blur', function(e) {
-  if (window.location.hostname !== "localhost") {
+  if (trackLocal || window.location.hostname !== "localhost") {
     window.clearInterval(userOnPageTracker);
   }
 });
@@ -57,9 +58,9 @@ window.addEventListener('mousemove', function(e) {
   // Track scroll every thirty seconds
   if (currentTime - lastMouseMoveTime > 30 * 1000) {
     lastMouseMoveTime = currentTime;
-    if (window.location.hostname !== "localhost") {
+    if (trackLocal || window.location.hostname !== "localhost") {
       const path = window.location.pathname + window.location.search;
-      handleEvent('Mouse', path);
+      handleEvent('Mouse', lowerCase(path));
     }
   }
 });

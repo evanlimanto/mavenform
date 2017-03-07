@@ -1,4 +1,5 @@
 import ReactGA from 'react-ga';
+const _ = require('lodash');
 
 function handleEvent(category, action, label="") {
   ReactGA.event({

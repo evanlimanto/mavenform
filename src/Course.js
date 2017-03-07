@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { exams, examTypeToLabel, courseIDToLabel, courses } from './exams';
 import { handleEvent } from './utils';
 import { Navbar, NavSidebar } from './components';
-
-const _ = require('lodash');
+import { lowerCase, map } from 'lodash';
 
 class Course extends Component {
   constructor(props) {
@@ -25,11 +24,11 @@ class Course extends Component {
   render() {
     const course = this.props.params.courseid;
     const desc = courses[course];
-    const available = _.map(exams[course], (examsOfType, examType) => {
-      return _.map(examsOfType, (dict, semester) => {
+    const available = map(exams[course], (examsOfType, examType) => {
+      return map(examsOfType, (dict, semester) => {
         const url = `/${course}/${examType}-${dict['id']}`;
         return (
-          <tr className="available" onClick={handleEvent("Click", "Exam", course)} key={semester}>
+          <tr className="available" onClick={handleEvent("Click", "Exam", lowerCase(course))} key={semester}>
             <td><a href={url}>{examTypeToLabel[examType]}</a></td>
             <td><a href={url}>{semester}</a></td>
             <td><a href={url}>{dict['profs']}</a></td>

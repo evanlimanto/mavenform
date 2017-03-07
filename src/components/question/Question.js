@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { handleEvent } from '../../utils';
+import { has, lowerCase, map } from 'lodash';
 import Expire from './Expire';
 import classnames from 'classnames';
 import copy from 'copy-to-clipboard';
-const _ = require('lodash');
 
 class Solution extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class Solution extends Component {
   }
 
   componentWillReceiveProps(props) {
-    if (_.has(props, 'showSolutions')) {
+    if (has(props, 'showSolutions')) {
       this.setState({showSolution: props.showSolutions});
     }
   }
@@ -73,8 +73,12 @@ class Question extends Component {
   }
 
   copyToClipboard(url) {
+    const course = this.props.course;
+    const examType = this.props.examType;
+    const term = this.props.term;
+    const examCode = lowerCase(`${course}/${examType}-${term}`);
     copy(url);
-    handleEvent("Click", "Copy Question", this.props.examCode + "/" + this.props.id);
+    handleEvent("Click", "Copy Question", examCode);
 
     this.setState({
       copied: true
@@ -92,7 +96,7 @@ class Question extends Component {
     const content = this.props.content;
     const examType = this.props.examType;
     const term = this.props.term;
-    const examCode = `${examType}${term}${course}`;
+    const examCode = lowerCase(`${examType}${term}${course}`);
 
     const SolutionComponent = (
       <Solution solution={this.props.solution} examCode={examCode} showSolutions={this.props.showSolutions} />
@@ -101,7 +105,7 @@ class Question extends Component {
     return (
       <div id={this.props.id} className="question">
         <div className="tooltip-container">
-          <a className="link material-icons" onClick={() => this.copyToClipboard(`${document.location.origin}/exam/${course}/${examType}/${term}#${this.props.id}`)}>link</a>
+          <a className="link material-icons" onClick={() => this.copyToClipboard(`${document.location.origin}/${course}/${examType}-${term}#${this.props.id}`)}>link</a>
           {(this.state.copied) ?
             (<span className="tooltip-link blue">
                <Expire delay={2000}
@@ -129,8 +133,12 @@ class MultipleChoiceQuestion extends Component {
   }
 
   copyToClipboard(url) {
+    const course = this.props.course;
+    const examType = this.props.examType;
+    const term = this.props.term;
+    const examCode = lowerCase(`${course}/${examType}-${term}`);
     copy(url);
-    handleEvent("Click", "Copy Question", this.props.examCode + "/" + this.props.id);
+    handleEvent("Click", "Copy Question", examCode);
 
     this.setState({
       copied: true
@@ -150,8 +158,8 @@ class MultipleChoiceQuestion extends Component {
     const term = this.props.term;
     const solutionNum = this.props.solutionNum - 1;
     const choices = this.props.choices;
-    const examCode = `${examType}${term}${course}`;
-    const options = _.map(choices, (choice, index) => {
+    const examCode = lowerCase(`${examType}${term}${course}`);
+    const options = map(choices, (choice, index) => {
       choice = `${String.fromCharCode(index + 65)}) ${choice}`;
       const optionClass = classnames({
         option: true,
@@ -167,7 +175,7 @@ class MultipleChoiceQuestion extends Component {
     return (
       <div id={this.props.id} className="question mc-question">
         <div className="tooltip-container">
-          <a className="link material-icons" onClick={() => this.copyToClipboard(`${document.location.origin}/exam/${course}/${examType}/${term}#${this.props.id}`)}>link</a>
+          <a className="link material-icons" onClick={() => this.copyToClipboard(`${document.location.origin}/${course}/${examType}-${term}#${this.props.id}`)}>link</a>
             {(this.state.copied) ?
               (<span className="tooltip-link blue">
                 <Expire

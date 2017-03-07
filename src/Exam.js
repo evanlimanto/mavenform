@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { courseIDToLabel, examTypeToLabel, termToLabel } from './exams';
 import { MultipleChoiceQuestion, Navbar, NavSidebar, Question, Sidebar } from './components';
 import { handleEvent } from './utils';
+import { keys, values, has, map, range, replace } from 'lodash';
 
-const _ = require('lodash');
 const isString = require('is-string');
 import './Exam.css';
 
@@ -21,14 +21,14 @@ marked.setOptions({
 
 const renderer = new marked.Renderer();
 renderer.code = function(code, language) {
-  code = _.replace(code, /\r\n|\r|\n/g, '<hr class="s1" />');
-  code = _.replace(code, /\\\_/g, '_'); // remove escapes
-  code = _.replace(code, /\\\./g, '.'); // remove escapes
+  code = replace(code, /\r\n|\r|\n/g, '<hr class="s1" />');
+  code = replace(code, /\\_/g, '_'); // remove escapes
+  code = replace(code, /\\./g, '.'); // remove escapes
   return `<hr class="s2" /><code>${code}</code><hr class="s2" />`;
 };
 renderer.codespan = function(code, language) {
-  code = _.replace(code, /\\\_/g, '_'); // remove escapes
-  code = _.replace(code, /\\\./g, '.'); // remove escapes
+  code = replace(code, /\\_/g, '_'); // remove escapes
+  code = replace(code, /\\./g, '.'); // remove escapes
   return `<code>${code}</code>`;
 };
 renderer.em = function(text) {
@@ -41,20 +41,20 @@ renderer.paragraph = function(text) {
   return `${text}`;
 };
 renderer.image = function(href, title, text) {
-  href = _.replace(href, /\\\./g, '.'); // remove escapes
+  href = replace(href, /\\\./g, '.'); // remove escapes
   return `<img src="${href}" title="${title}" alt="${text}" />`;
 };
 renderer.list = function(body, ordered) {
   if (ordered) {
-    return `${_.replace(_.replace(body, '<li>', ''), '</li>', '')}`;
+    return `${replace(replace(body, '<li>', ''), '</li>', '')}`;
   } else {
     return `<ul>${body}</ul>`;
   }
 };
 
 const preprocess = function(text) {
-  text = _.replace(text, /\./g, '\\.');
-  text = _.replace(text, /\_/g, '\\_');
+  text = replace(text, /\./g, '\\.');
+  text = replace(text, /_/g, '\\_');
   console.log(text);
   return marked(text, {renderer});
 };
@@ -98,34 +98,34 @@ class ExamContent extends Component {
   render() {
     const examContent = this.state.examContent;
     const examCode =
-      (examContent && _.has(examContent, 'course') && _.has(examContent, 'ref')) ?  (`${examContent.course}${examContent.ref}`) : [];
+      (examContent && has(examContent, 'course') && has(examContent, 'ref')) ?  (`${examContent.course}${examContent.ref}`) : [];
     const problemIDs =
-      (examContent && _.has(examContent, 'parts')) ?
-      (_.keys(examContent.parts)) : [];
+      (examContent && has(examContent, 'parts')) ?
+      (keys(examContent.parts)) : [];
     const problemTitles =
-      (examContent && _.has(examContent, 'questions')) ?
-      (_.values(examContent.questions)) : [];
+      (examContent && has(examContent, 'questions')) ?
+      (values(examContent.questions)) : [];
     const course =
-      (examContent && _.has(examContent, 'course')) ? examContent.course : null;
-    const prof = (examContent && _.has(examContent, 'prof')) ? (examContent.prof) : null;
-    const type = (examContent && _.has(examContent, 'type')) ? (examContent.type) : null;
-    const term = (examContent && _.has(examContent, 'term')) ? (examContent.term) : null;
-    const useMarkdown = (examContent && _.has(examContent, 'md')) ? (examContent.md) : true;
-    const isMCQ = (examContent && _.has(examContent, 'mcq')) ? (examContent.mcq) : false;
-    const numProblems = (examContent && _.has(examContent, 'num')) ? (examContent.num) : problemIDs.length;
-    const pre = (examContent && _.has(examContent, 'pre')) ? (preprocess(examContent.pre, {renderer})) : null;
+      (examContent && has(examContent, 'course')) ? examContent.course : null;
+    const prof = (examContent && has(examContent, 'prof')) ? (examContent.prof) : null;
+    const type = (examContent && has(examContent, 'type')) ? (examContent.type) : null;
+    const term = (examContent && has(examContent, 'term')) ? (examContent.term) : null;
+    const useMarkdown = (examContent && has(examContent, 'md')) ? (examContent.md) : true;
+    const isMCQ = (examContent && has(examContent, 'mcq')) ? (examContent.mcq) : false;
+    const numProblems = (examContent && has(examContent, 'num')) ? (examContent.num) : problemIDs.length;
+    const pre = (examContent && has(examContent, 'pre')) ? (preprocess(examContent.pre, {renderer})) : null;
     const appMode = this.props.appMode;
     const showSolutions = this.props.showSolutions;
 
     var content = null;
     if (isMCQ) {
-      content = _.map(_.range(1, numProblems + 1), (num) => {
+      content = map(range(1, numProblems + 1), (num) => {
         const key = `q${num}_1`;
         var qcontent = `${num}\\. ${examContent[key]}` || '';
         var choices = examContent[key + "_i"] || [];
         if (useMarkdown) {
           qcontent = preprocess(qcontent, {renderer});
-          choices = _.map(choices, (choice) => (isString(choice)) ? preprocess(choice, {renderer}) : (choice));
+          choices = map(choices, (choice) => (isString(choice)) ? preprocess(choice, {renderer}) : (choice));
         }
         const solutionNum = examContent[key + "_s"] || 1;
         return (
@@ -135,11 +135,11 @@ class ExamContent extends Component {
         );
       });
     } else {
-      content = (examContent && _.has(examContent, 'parts')) ?
-        _.map(examContent.parts, (num_parts, part) => {
-          const subparts = _.map(_.range(1, num_parts + 1), subpart => {
+      content = (examContent && has(examContent, 'parts')) ?
+        map(examContent.parts, (num_parts, part) => {
+          const subparts = map(range(1, num_parts + 1), subpart => {
             const key = `${part}_${subpart}`;
-            if (!_.has(examContent, key)) {
+            if (!has(examContent, key)) {
               console.warn(`${key} doesn't exist in exam!`);
               return null;
             }
