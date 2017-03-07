@@ -6,11 +6,11 @@ term: 'sp15'
 prof: 'Hellerstein'
 
 questions: {
-  'q1': 'Storage: Disk, Files, Buffers',
-  'q2': 'Joins',
-  'q3': 'Sort/Hash',
-  'q4': 'SQL',
-  'q5': 'Relational Algebra'
+  'q1': 'Query Processing',
+  'q2': 'File Organization + Indexes',
+  'q3': 'Buffer Replacement',
+  'q4': 'B+-Trees',
+  'q5': 'Query Languages'
 }
 
 parts: {
