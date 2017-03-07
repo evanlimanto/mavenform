@@ -106,7 +106,7 @@ class Question extends Component {
             (<span className="tooltip-link blue">
                <Expire delay={2000}
                 callback={this.clearCopied}>
-                Link copied!
+                Link Copied
                </Expire>
              </span>) : (<span className="tooltip-link">Copy Link</span>)}
           <div dangerouslySetInnerHTML={{__html: content}}></div>
