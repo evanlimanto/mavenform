@@ -28,7 +28,7 @@ parts: {
 }
 
 q1_1: |
-  **1\.** The graphic below appeard on the front page of the Daily Cal on Tuesday of last week.
+  **1.** The graphic below appeard on the front page of the Daily Cal on Tuesday of last week.
 
   <p align="center">![Campus Crime from 2013 to 2015](/img/data8/mt1-fa16-q1-1.png)</p>
 
@@ -58,7 +58,7 @@ q1_2_s: |
   `daily.barh('Year')`
 
 q2_1: |
-  **2\.** The table **colors** is created as follows:
+  **2.** The table **colors** is created as follows:
   <hr class="s2" />
 
   ```
@@ -101,7 +101,7 @@ q2_1_s: |
   $$(\frac{1}{\lt\text{num colors}\gt})^{\lt\text{num samples}\gt - 1}$$
 
 q3_1: |
-  **3\.** Fill in each blank with the best choice from the table of items below. **No explanations are necessary.**
+  **3.** Fill in each blank with the best choice from the table of items below. **No explanations are necessary.**
   <hr class="s2" />
   You can use items more than once, Don't write out the words or phrases you picked; just enter the item number in the answer table.
 
@@ -115,7 +115,7 @@ q3_1_s: |
   Important criteria for a statistic to be a good estimate of a population  **parameter** include **low** bias and low **variability**. The **empirical** distribution of a large **random sample** is likely to resemble the **distribution** of the population.
 
 q4_1: |
-  **4\.** The table **nba** has a column labeled **SALARY** containing the 2015-2016 salaries of NBA players. Here is the output of **nba.select('SALARY').hist(bins = make_array(0, 2, 4, 12, 18, 26))** along with the heights of the bars.
+  **4.** The table **nba** has a column labeled **SALARY** containing the 2015-2016 salaries of NBA players. Here is the output of **nba.select('SALARY').hist(bins = make_array(0, 2, 4, 12, 18, 26))** along with the heights of the bars.
   <hr class="s2" />
   <p align="center">![Salary Histogram](/img/data8/mt1-fa16-q4-1.png)</p>
   <hr class="s2" />
@@ -162,7 +162,7 @@ q4_2_s: |
   $$((12−4)\*(3.6) − (6−4)\*(part i)) / (12−6)$$
 
 q5_1: |
-  **5\.** In a Public Health Service study of the effect of smoking, participants were separated into groups according to gender and age. In each sdubgroup, the observation was the same - those who had never smoked were on average somewhat more healthy than the current smokers, but the current smokers were on average quite a bit more healthy than those who had recently stopped smoking.
+  **5.** In a Public Health Service study of the effect of smoking, participants were separated into groups according to gender and age. In each sdubgroup, the observation was the same - those who had never smoked were on average somewhat more healthy than the current smokers, but the current smokers were on average quite a bit more healthy than those who had recently stopped smoking.
   <hr class="s2" />
   Based on these results, should the current smokers have been advised not to give up smoking? If not, provide at least one factor that helps explain the observation.
 
@@ -172,7 +172,7 @@ q5_1_s: |
   **Plausible explanation:**  Those who have quit had a good reason to (it’s very difficult to quit even if you know you need to): their health  <u>became so bad</u> from smoking, that this habit was impeding w/ everyday activity. They are on the path to recovery, but are coming from an even more adverse condition.
 
 q6_1: |
-  **6\.** A clinic is trying to run a randomized controlled trials of a new appointment system. The clinic is open Monday through Saturday each week. As a way of randomization, all appointment requests that come in on Mondays, Wednesdays, and Fridays are assigned to the new system. All appointment requests that come in on Tuesdays, Thursdays, and Saturdays are assigned to the old system.
+  **6.** A clinic is trying to run a randomized controlled trials of a new appointment system. The clinic is open Monday through Saturday each week. As a way of randomization, all appointment requests that come in on Mondays, Wednesdays, and Fridays are assigned to the new system. All appointment requests that come in on Tuesdays, Thursdays, and Saturdays are assigned to the old system.
   <hr class="s2" />
   At the end of a few weeks, 212 appointment requests have been assigned to the new system and 277 to the old one.
   <hr class="s2" />
@@ -182,9 +182,9 @@ q6_1: |
   <hr class="s2" />
   **(a)** Provide **null** and **alternative** hypotheses that reflect the views of the two clinicians.
   <hr class="s2" />
-  **Null:** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+  **Null:** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ____________________
 
-  **Alternative:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+  **Alternative:** ____________________
 
 q6_1_s: |
   **Null hypothesis**:  The method is not biased. Appointments are equally likely to be assigned to the new system as they are to the old; i.e, there is an equally likely chance that an appointment is made on Monday, Wednesday or Friday as there is on Tuesday, Thursday, Saturday. (Note: the null hypothesis must be a fully specified chance model)

@@ -25,7 +25,7 @@ parts: {
 
 q1_1: |
   ## I. Storage: Disk, Files, Buffers [11 points]
-  1\. [3 points] Write down the letters of true statements in *alphabetical* order. (If none are true, write $\emptyset$.)
+  1. [3 points] Write down the letters of true statements in *alphabetical* order. (If none are true, write $\emptyset$.)
   <hr class="s2" />
   A. When querying for a 16 byte record, exactly 16 bytes of data is read from disk.
 
@@ -63,7 +63,7 @@ q1_6_s: |
   True, the size of the records is fixed, so the number we can fit on a page is fixed.
 
 q1_7: |
-  2\. [2 points] Write down the true benefits of using a record header for **variable** length records *in alphabetical order* (or if none are true benefits, write $\emptyset$.)
+  2. [2 points] Write down the true benefits of using a record header for **variable** length records *in alphabetical order* (or if none are true benefits, write $\emptyset$.)
   <hr class="s2" />
   A. Does not need delimiter character to separate fields in the records.
 
@@ -89,7 +89,7 @@ q1_10_s: |
   True.
 
 q1_11: |
-  3\. [6 points] Assume we have 4 empty buffer frames and the following access pattern, in which pages are immediately unpinned.
+  3. [6 points] Assume we have 4 empty buffer frames and the following access pattern, in which pages are immediately unpinned.
   <hr class="s2" />
   $$\text{T A M E T E A M M A T E M E A T L I D}$$
   <hr class="s2" />
@@ -107,7 +107,7 @@ q1_11_s: |
 
 q2_1: |
   ## II. Joins [12 points]
-  1\. [4 points] Alphabetically, write down the letters of statements that apply (or write $\emptyset$.)
+  1. [4 points] Alphabetically, write down the letters of statements that apply (or write $\emptyset$.)
   <hr class="s2" />
   A. Sometimes, adding more memory to our system **will <u>not</u>** reduce I/O costs for a sort-merge join.
 
@@ -127,7 +127,7 @@ q2_3_s: |
   True. Alternative 1 lookups don’t require the additional IOs to follow the record id (rid) to the data pages, which is necessary with an Alternative 2 index.
 
 q2_4: |
-  D\. A Grace hash join can often complete in 2 passes if the size of the smaller relation is less than roughly the square of the number of buffers available for the join.
+  D. A Grace hash join can often complete in 2 passes if the size of the smaller relation is less than roughly the square of the number of buffers available for the join.
 
 q2_4_s: |
   True, if we assume a hash function which spreads evenly.
@@ -158,13 +158,13 @@ q2_5: |
   ```
 
   <hr class="s2" />
-  2\. [4 points] Using the smaller relation as the “outer” one, what is the I/O cost of using a block nested loops join to evaluate the query above? Please provide the final number.
+  2. [4 points] Using the smaller relation as the “outer” one, what is the I/O cost of using a block nested loops join to evaluate the query above? Please provide the final number.
 
 q2_5_s: |
   500 + 5 * 2000 = 10500 I/Os
 
 q2_6: |
-  3\. [4 points] What is the I/O cost of using a sort-merge join to evaluate the query above? Please provide the final number. (Remember to take advantage of the “important refinement” discussed in lecture for merge-joining partitions during the last pass of sort!)
+  3. [4 points] What is the I/O cost of using a sort-merge join to evaluate the query above? Please provide the final number. (Remember to take advantage of the “important refinement” discussed in lecture for merge-joining partitions during the last pass of sort!)
 
 q2_6_s: |
   Read, write, read/merge: 3 * (500 + 2000) = 7500 I/Os
@@ -179,7 +179,7 @@ q3_1: |
     <li>In all parts, we’ll use **QuickSort** for our internal sort algorithm.</li>
     <li>**Include the cost of the initial scan and cost of writing output in your I/O calculations.**</li>
   </ul>
-  1\. [3 points] Alphabetically, write down the letters of statements that apply (or write $\emptyset$.)
+  1. [3 points] Alphabetically, write down the letters of statements that apply (or write $\emptyset$.)
   <hr class="s2" />
   A. Given a buffer of size B, the largest file you can sort in a single pass is B.
 
@@ -200,12 +200,12 @@ q3_3_s: |
   False. Recall that a tournament sort will produce runs twice as long - half as many runs, which could result in fewer passes.
 
 q3_4: |
-  2\. [6 points] First, let's sort our table of Products (P) using the external algorithm we learned in lecture.
+  2. [6 points] First, let's sort our table of Products (P) using the external algorithm we learned in lecture.
   <hr class="s2" />
   A. How many passes are needed to sort this file?
 
 q3_4_s: |
-  3\. ceil(log_39(ceil(2000/40))) + 1 = 3\. We accepted answers written as an expression, only if the ceilings were correct (i.e. your expression must evaluate to 3 and exactly 3).
+  3. ceil(log_39(ceil(2000/40))) + 1 = 3. We accepted answers written as an expression, only if the ceilings were correct (i.e. your expression must evaluate to 3 and exactly 3).
 
 q3_5: |
   B. What is the I/O cost (in pages) of sorting this file?
@@ -220,7 +220,7 @@ q3_6_s: |
   We accepted either 5 or 10. A lower IO cost would have a maximum of 2 passes, so B(B-1) = 2000, where B = 40+x. x=5 additional buffers is an approximate answer, whereas 10 additional buffers would be a fully correct answer.
 
 q3_7: |
-  3\. [4 points] Given the resources at the top of Question III, answer the following two questions. Do not bother to simplify arithmetic expressions over constants, like $247*(36^3+log(4))$.
+  3. [4 points] Given the resources at the top of Question III, answer the following two questions. Do not bother to simplify arithmetic expressions over constants, like $247*(36^3+log(4))$.
   <hr class="s2" />
   A. What is the largest file size (in pages) that we can sort in 3 passes?
 
@@ -231,10 +231,10 @@ q3_8: |
   B. What is the smallest file size (in pages) that will require 3 passes to sort?
 
 q3_8_s: |
-  40(39)+1\. This is the largest file sortable in 2 passes, plus 1\.
+  40(39)+1. This is the largest file sortable in 2 passes, plus 1.
 
 q3_9: |
-  4\. [3 points] Suppose I want to eliminate duplicates from our (unsorted) table of Products, using external hashing. Write down the letters of true statements. (If none are true, write $\emptyset$.)
+  4. [3 points] Suppose I want to eliminate duplicates from our (unsorted) table of Products, using external hashing. Write down the letters of true statements. (If none are true, write $\emptyset$.)
   <hr class="s2" />
   A. Deduplicating the file using hashing can have a higher IO cost than sorting the file (without deduplicating).
 
@@ -257,7 +257,7 @@ q4_1: |
   ## IV. Indexes and B+ Trees [12 points]
   ### Note: for B+ tree page splits with an odd number of items, assume that the majority of the items is placed on the right-hand page after the split.
   <hr class="s5" />
-  1\. [4 points] Alphabetically, write down the letters of statements that apply (or write $\emptyset$.)
+  1. [4 points] Alphabetically, write down the letters of statements that apply (or write $\emptyset$.)
   <hr class="s2" />
   A. All internal keys in a B+ tree also appear in its leaf nodes.
 
@@ -289,7 +289,7 @@ q4_5_s: |
   False, it’s clustered by design.
 
 q4_6: |
-  2\. [5 points] The following B+ Tree has order 1 (max fanout of 3) and each leaf node can hold up to 2 entries. Answer each of the following questions **independently of each other.**
+  2. [5 points] The following B+ Tree has order 1 (max fanout of 3) and each leaf node can hold up to 2 entries. Answer each of the following questions **independently of each other.**
   <hr class="s2" />
   ![B+ Tree](/img/cs186/mt1-sp16-q11-1.png)
   <hr class="s2" />
@@ -311,7 +311,7 @@ q4_8_s: |
   10
 
 q4_9: |
-  3\. [3 points] Assume we are trying to construct a B+ Tree of order 2 (max fanout of 5). Each leaf node can hold up to 4 entries. We insert a total of 16 unique keys via bulk loading, with a fill factor of $3/4$.
+  3. [3 points] Assume we are trying to construct a B+ Tree of order 2 (max fanout of 5). Each leaf node can hold up to 4 entries. We insert a total of 16 unique keys via bulk loading, with a fill factor of $3/4$.
   <hr class="s2" />
   A. How many leaf nodes will there be?
 
@@ -340,19 +340,19 @@ q5_1: |
   <hr class="s2" />
   For parts 1 and 2, fill in the blanks in the SQL queries.
   <hr class="s1" />
-  1\. [7 points] Names of pairs of people who called each other on 2014-12-25\.
+  1. [7 points] Names of pairs of people who called each other on 2014-12-25.
 
 q5_1_s: |
   ```
-  SELECT p1\.name, p2\.name
+  SELECT p1.name, p2.name
     FROM People p1, People p2, Calls C
-    WHERE C.from = p1\.pid
-      AND C.to = p2\.pid
+    WHERE C.from = p1.pid
+      AND C.to = p2.pid
       AND C.date = '12-25-2014'
   ```
 
 q5_2: |
-  2\. [7 points] Find the location to which the most phone calls have been made, and return its location name as well as the number of calls made to it.
+  2. [7 points] Find the location to which the most phone calls have been made, and return its location name as well as the number of calls made to it.
 
 q5_2_s: |
   ```
@@ -366,7 +366,7 @@ q5_2_s: |
   ```
 
 q5_3: |
-  3\. [3 points] On the answer sheet, alphabetically write down letters of the statement(s) that find the name of the location of the person who made the longest call. (If none match, write $\emptyset$.)
+  3. [3 points] On the answer sheet, alphabetically write down letters of the statement(s) that find the name of the location of the person who made the longest call. (If none match, write $\emptyset$.)
   <hr class="s2" />
   ![sql1](/img/cs186/mt1-sp16-q13-2.png)
   <hr class="s2" />
@@ -393,7 +393,7 @@ q6_1: |
   - People -> P
   - Calls -> C
   <hr class="s2" />
-  1\. To answer the following two questions, put one relational algebra operator or relation name in each blank:
+  1. To answer the following two questions, put one relational algebra operator or relation name in each blank:
   <hr class="s1" />
   a. [3 points] Areacodes to which no call has ever been made.
   <hr class="s1" />
@@ -405,7 +405,7 @@ q6_1_s: |
   b. $\pi_{name}(P⨝\sigma_{pname = "City of Joe"}(L))$
 
 q6_2: |
-  2\. [2 points] The equivalence relation $\equiv$ means that two expressions produce the same results on all possible databases. Write down the letters of the equivalences below that are true. (If none are true, write $\emptyset$.)
+  2. [2 points] The equivalence relation $\equiv$ means that two expressions produce the same results on all possible databases. Write down the letters of the equivalences below that are true. (If none are true, write $\emptyset$.)
   <hr class="s2" />
   ![expression1](/img/cs186/mt1-sp16-q14-1.png)
   <hr class="s2" />

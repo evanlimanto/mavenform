@@ -462,8 +462,8 @@ q36_1_i:
 q36_1_s: 5
     
 q37_1: |
-  In a mixture of CO\(g\) and $CO\_2$ \(g\), the mole fraction of CO\(g\) \($X\_{CO}$\)
-  is 0\.115\. If the pressure of the mixture is 2\.50 atm, the partial pressure of $CO_2$ is
+  In a mixture of CO\(g\) and $CO_2$ \(g\), the mole fraction of CO\(g\) \($X_{CO}$\)
+  is 0.115. If the pressure of the mixture is 2.50 atm, the partial pressure of $CO_2$ is
 
 q37_1_i:
   - 0.288 atm

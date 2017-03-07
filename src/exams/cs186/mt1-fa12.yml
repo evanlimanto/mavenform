@@ -195,6 +195,7 @@ q2_6: |
 
 q2_6_s: |
   <u>**AB BF CDE ACD**</u>
+  <hr class="s1" />
   **Rubric:**
   - 4 points for correct
   - 1 point for missing relation
@@ -348,11 +349,11 @@ q4_1: |
   **a) [5 points]** Consider two relations R(A, B) and S(B, C). Which one of the following
   relational algebra expressions is not equivalent to the others? Note that π eliminates duplicates.
   <hr class="s2" />
-  (A) $\pi\_{\text{R\.A, R\.B}} (R ⋈ S)$
+  (A) $\pi_{\text{R.A, R.B}} (R ⋈ S)$
   <hr class="s1" />
-  (B) $R ⋈ \pi\_{S\.B} (S)$
+  (B) $R ⋈ \pi_{S.B} (S)$
   <hr class="s1" />
-  (C) $R \cap (\pi\_{A} (R) x \pi\_{B} (S))
+  (C) $R \cap (\pi_{A} (R) x \pi_{B} (S))
   <hr class="s1" />
   (D) None, they are all equivalent.
 

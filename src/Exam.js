@@ -22,7 +22,14 @@ marked.setOptions({
 const renderer = new marked.Renderer();
 renderer.code = function(code, language) {
   code = _.replace(code, /\r\n|\r|\n/g, '<hr class="s1" />');
+  code = _.replace(code, /\\\_/g, '_'); // remove escapes
+  code = _.replace(code, /\\\./g, '.'); // remove escapes
   return `<hr class="s2" /><code>${code}</code><hr class="s2" />`;
+};
+renderer.codespan = function(code, language) {
+  code = _.replace(code, /\\\_/g, '_'); // remove escapes
+  code = _.replace(code, /\\\./g, '.'); // remove escapes
+  return `<code>${code}</code>`;
 };
 renderer.em = function(text) {
   return `<i>${text}</i>`;
@@ -42,6 +49,13 @@ renderer.list = function(body, ordered) {
   } else {
     return `<ul>${body}</ul>`;
   }
+};
+
+const preprocess = function(text) {
+  text = _.replace(text, /\./g, '\\.');
+  text = _.replace(text, /\_/g, '\\_');
+  console.log(text);
+  return marked(text, {renderer});
 };
 
 const Scroll = require('react-scroll');
@@ -98,7 +112,7 @@ class ExamContent extends Component {
     const useMarkdown = (examContent && _.has(examContent, 'md')) ? (examContent.md) : true;
     const isMCQ = (examContent && _.has(examContent, 'mcq')) ? (examContent.mcq) : false;
     const numProblems = (examContent && _.has(examContent, 'num')) ? (examContent.num) : problemIDs.length;
-    const pre = (examContent && _.has(examContent, 'pre')) ? (marked(examContent.pre, {renderer})) : null;
+    const pre = (examContent && _.has(examContent, 'pre')) ? (preprocess(examContent.pre, {renderer})) : null;
     const appMode = this.props.appMode;
     const showSolutions = this.props.showSolutions;
 
@@ -109,8 +123,8 @@ class ExamContent extends Component {
         var qcontent = `${num}\\. ${examContent[key]}` || '';
         var choices = examContent[key + "_i"] || [];
         if (useMarkdown) {
-          qcontent = marked(qcontent, {renderer});
-          choices = _.map(choices, (choice) => (isString(choice)) ? marked(choice, {renderer}) : (choice));
+          qcontent = preprocess(qcontent, {renderer});
+          choices = _.map(choices, (choice) => (isString(choice)) ? preprocess(choice, {renderer}) : (choice));
         }
         const solutionNum = examContent[key + "_s"] || 1;
         return (
@@ -131,8 +145,8 @@ class ExamContent extends Component {
             var qcontent = examContent[key] || '';
             var solution = examContent[key + "_s"] || '';
             if (useMarkdown) {
-                qcontent = marked(qcontent, {renderer});
-                solution = marked(solution, {renderer});
+                qcontent = preprocess(qcontent, {renderer});
+                solution = preprocess(solution, {renderer});
             }
             return <Question id={`${part}_${subpart}`} course={course} content={qcontent} solution={solution} term={term} examType={type} key={key} appMode={appMode} showSolutions={showSolutions} />
           });

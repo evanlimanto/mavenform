@@ -27,7 +27,7 @@ parts: {
 }
 
 q1_1: |
-  **1\.** The list **cards** contains credit card numbers. Each element is a 16-digit integer; for example,
+  **1.** The list **cards** contains credit card numbers. Each element is a 16-digit integer; for example,
   "**1234567891011121**"" and not "**1234 5678 9101 1121**".
 
   a) Write a Python expression that evaluates to the total number of cards in the list.
@@ -48,7 +48,7 @@ q1_2_s: |
   ```
 
 q2_1: |
-  **2\.** The histogram below represents data from a population of 10,000 incomes. The incomes are measured
+  **2.** The histogram below represents data from a population of 10,000 incomes. The incomes are measured
   in thousands of dollars. Note that some bars on the left and right ends of the histogram are too small
   to be visible on the scale of the figure.
 
@@ -82,7 +82,7 @@ q2_1_s: |
   the rest of the histograms are.
 
 q3_1: |
-  **3\.** The histogram of the population of incomes in Problem 2 is displayed again here for ease of reference.
+  **3.** The histogram of the population of incomes in Problem 2 is displayed again here for ease of reference.
   It shows the distribution of 10,000 incomes measured in thousands of dollars.
 
   <p align="center">![Histogram of all incomes in the population](/img/data8/mt1-fa15-q2-1.png)</p>
@@ -125,7 +125,7 @@ q3_2_s: |
   Height of missing bar: (1 − A)/(70 − 40)
 
 q4_1: |
-  **4\.** The class Data Science 1A has several discussion sections. The instructor maintains her records in
+  **4.** The class Data Science 1A has several discussion sections. The instructor maintains her records in
   a table called **students**. The table has one row for each student in the class, and several columns. The
   column labeled **SID** contains the student ID number, and the column **year** contains the year in school
   (freshman, sophomore, junior, or senior). The GSIs also have a table with one row per student. This
@@ -149,7 +149,7 @@ q4_2_s: |
   `ds1a.pivot(’section’, ’year’, ’Q4’, np.max)`
 
 q5_1: |
-  **5\.** If possible, define a function **conclusion2** that takes one numerical input and returns the conclusion
+  **5.** If possible, define a function **conclusion2** that takes one numerical input and returns the conclusion
   of any statistical test that has a P -value equal to the input and a cuto of 2%. Specically, for an input
   in the range [0, 1], the function should treat the input as a P -value and return the appropriate one of
   the two strings **"the data support the null"** and the **"data don't support the null"** depending
@@ -188,14 +188,14 @@ q6_1: |
   **Assumptions of randomness**. Each box is equally likely to contain any of the four kinds of toys,
   regardless of what is in the other boxes.
   <hr class="s2" />
-  **6\.** Suppose you buy four boxes of this cereal. Find the chance that you do not get the prize. Leave all
+  **6.** Suppose you buy four boxes of this cereal. Find the chance that you do not get the prize. Leave all
   the arithmetic unsimplied.
 
 q6_1_s: |
   1 − (4/4) \* (3/4) \* (2/4) \* (1/4)
 
 q7_1: |
-  **7\.** The calculation in Problem 6 is based on the assumptions about randomness that are stated above.
+  **7.** The calculation in Problem 6 is based on the assumptions about randomness that are stated above.
   To test these assumptions, suppose that you buy 100 boxes of the cereal, and get 27 bears, 20 ladybugs,
   21 cars, and 32 dinosaurs. Use these data to set up a test of whether the assumptions are valid, as
   follows.

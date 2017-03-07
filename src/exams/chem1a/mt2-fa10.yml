@@ -219,12 +219,12 @@ q14_1_i:
 q14_1_s: 2
 
 q15_1: |
-  Why does aluminum hydroxide, $Al\(OH\)\_3$, have a smaller $K\_{sp}$, but a larger solubility compared with aluminum phosphate, $Al\(PO\_4\)$?
+  Why does aluminum hydroxide, $Al\(OH\)_3$, have a smaller $K_{sp}$, but a larger solubility compared with aluminum phosphate, $Al\(PO_4\)$?
 
 q15_1_i:
   - Aluminum hydroxide, $Al(OH)_3$, is a strong base, and therefore, it dissociates completely. So it is more soluble.
   - The relationship between solubility and Ksp is different for the two salts because of the different charges on the anions.
-  - Phosphate, $PO\_4^{3\-}$, is a weak base, and therefore, forms a buffer. The $PO\_4^{3\-}$ equilibrates with $HPO\_4^{2\-}$, thereby decreasing it solubility.
+  - Phosphate, $PO_4^{3\-}$, is a weak base, and therefore, forms a buffer. The $PO_4^{3\-}$ equilibrates with $HPO_4^{2\-}$, thereby decreasing it solubility.
 
 q15_1_s: 2
 
