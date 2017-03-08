@@ -12,16 +12,18 @@ class NavSidebar extends Component {
     const thisExamType = this.props.examType;
 
     const sideTabs = map(exams[course], (courseExams, examType) => {
-      const content =  map(courseExams, (info, semester) => {
-        const url = `/${course}/${examType}-${info.id}`;
-        const title = semester;
+      const content =  map(courseExams, (item, index) => {
+        const term = item.term;
+        const id = item.id;
+        const url = `/${course}/${examType}/${index}`;
+        const note = item.note ? `<br/><i class="side-i" >(${item.note})</i>` : (null);
         const sideTabClass = classnames({
           sidetab: true,
-          active: (exam === info['id'] && thisExamType === examType),
+          active: (exam === item.id && thisExamType === examType),
         });
         return (
-          <div key={semester} className="sidetab-container">
-            <a className={sideTabClass} href={url} onClick={handleEvent("Click", "Sidebar URL")}>{title}</a>
+          <div key={index} className="sidetab-container">
+            <a className={sideTabClass} href={url} onClick={handleEvent("Click", "Sidebar URL")}>{term} <span dangerouslySetInnerHTML={{__html: note}} /></a>
           </div>
         );
       });

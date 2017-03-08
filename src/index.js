@@ -69,6 +69,6 @@ ReactDOM.render((
   <Router history={browserHistory} onUpdate={logPageView}>
     <Route path="/" component={Home} />
     <Route path="/:courseid" component={Course} />
-    <Route path="/:courseid/:examtype-:examid" component={Exam} />
+    <Route path="/:courseid/:examtype/:index" component={Exam} />
   </Router>
 ), document.getElementById('root'));

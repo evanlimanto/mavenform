@@ -25,13 +25,15 @@ class Course extends Component {
     const course = this.props.params.courseid;
     const desc = courses[course];
     const available = map(exams[course], (examsOfType, examType) => {
-      return map(examsOfType, (dict, semester) => {
-        const url = `/${course}/${examType}-${dict['id']}`;
+      return map(examsOfType, (item, index) => {
+        const term = item.term;
+        const note = item.note ? `(${item.note})` : (null);
+        const url = `/${course}/${examType}/${index}`;
         return (
-          <tr className="available" onClick={handleEvent("Click", "Exam", lowerCase(course))} key={semester}>
-            <td><a href={url}>{examTypeToLabel[examType]}</a></td>
-            <td><a href={url}>{semester}</a></td>
-            <td><a href={url}>{dict['profs']}</a></td>
+          <tr className="available" onClick={handleEvent("Click", "Exam", lowerCase(course))} key={index}>
+            <td><a href={url}>{examTypeToLabel[examType]} <i>{note}</i></a></td>
+            <td><a href={url}>{term}</a></td>
+            <td><a href={url}>{item.profs}</a></td>
             <td><h6><a className="table-link" href={url}>CLICK TO VIEW &#8594;</a></h6></td>
           </tr>
         );

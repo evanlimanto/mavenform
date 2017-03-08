@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { courseIDToLabel, examTypeToLabel, termToLabel } from './exams';
+import { courseIDToLabel, examTypeToLabel, termToLabel, exams } from './exams';
 import { MultipleChoiceQuestion, Navbar, NavSidebar, Question, Sidebar } from './components';
 import { handleEvent } from './utils';
 import { keys, values, has, map, range, replace } from 'lodash';
@@ -106,6 +106,7 @@ class ExamContent extends Component {
       (values(examContent.questions)) : [];
     const course =
       (examContent && has(examContent, 'course')) ? examContent.course : null;
+    const exam = this.props.exam;
     const prof = (examContent && has(examContent, 'prof')) ? (examContent.prof) : null;
     const type = (examContent && has(examContent, 'type')) ? (examContent.type) : null;
     const term = (examContent && has(examContent, 'term')) ? (examContent.term) : null;
@@ -168,7 +169,7 @@ class ExamContent extends Component {
       </div>
     ) : null;
     const SidebarComponent = (appMode) ? (
-      <Sidebar course={course} term={term} examType={type} examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} numProblems={numProblems} isMCQ={isMCQ} hasSolutions={hasSolutions} />
+      <Sidebar course={course} term={term} exam={exam} examType={type} examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} numProblems={numProblems} isMCQ={isMCQ} hasSolutions={hasSolutions} />
     ) : (null);
 
     const contentComponent = (hasSolutions) ? (
@@ -244,9 +245,11 @@ class Exam extends Component {
   }
 
   render() {
-    const exam = this.props.params.examid;
     const course = this.props.params.courseid;
+    const itemIndex = this.props.params.index;
     const examType = this.props.params.examtype;
+    const exam = exams[course][examType][itemIndex].id;
+
     const ExamComponent = (
       <ExamContent exam={exam} course={course} type={examType} appMode={this.state.appMode} showSolutions={this.state.showSolutions} />
     );

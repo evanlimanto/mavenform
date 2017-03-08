@@ -1,169 +1,202 @@
 const exams = {
   'chem1a': {
-    'mt2': {
-      'Spring 2013': {
+    'mt2': [
+      {
+        'term': 'Spring 2013',
         'id': 'sp13',
         'profs': 'Pines',
       },
-      'Fall 2011': {
+      {
+        'term': 'Fall 2011',
         'id': 'fa11',
         'profs': 'Arnold',
       },
-      'Spring 2011': {
+      {
+        'term': 'Spring 2011',
         'id': 'sp11',
         'profs': 'Nitsche',
       },
-      'Fall 2010': {
+      {
+        'term': 'Fall 2010',
         'id': 'fa10',
         'profs': 'Stacy',
       },
-    }
+    ]
   },
 
   'data8': {
-    'mt1': {
-      'Fall 2016': {
+    'mt1': [
+      {
+        'term': 'Fall 2016',
         'id': 'fa16',
         'profs': 'Adhikari'
       },
-      'Spring 2016': {
+      {
+        'term': 'Spring 2016',
         'id': 'sp16',
         'profs': 'DeNero, Adhikari, Jordan, Parikh, Wagner'
       },
-      'Fall 2015': {
+      {
+        'term': 'Fall 2015',
         'id': 'fa15',
         'profs': 'Adhikari'
       }
-    }
+    ]
   },
 
   'cs186': {
-    'mt1': {
-      'Spring 2016': {
+    'mt1': [
+      {
+        'term': 'Spring 2016',
         'id': 'sp16',
         'profs': 'Hellerstein',
       },
-      'Spring 2015': {
+      {
+        'term': 'Spring 2015',
         'id': 'sp15',
         'profs': 'Hellerstein',
       },
-      'Fall 2012': {
+      {
+        'term': 'Fall 2012',
         'id': 'fa12',
         'profs': 'Franklin',
       },
-      'Spring 2012': {
+      {
+        'term': 'Spring 2012',
         'id': 'sp12',
         'profs': 'Hellerstein',
       },
-    },
-    'mt2': {
-      'Spring 2016': {
+    ],
+    'mt2': [
+      {
+        'term': 'Spring 2016',
         'id': 'sp16',
         'profs': 'Hellerstein',
       },
-      'Spring 2015': {
+      {
+        'term': 'Spring 2015',
         'id': 'sp15',
         'profs': 'Hellerstein',
       },
-    },
+    ],
   },
 
   'ugba10': {
-    'marketing': {
-      'Spring 2016': {
+    'marketing': [
+      {
+        'term': 'Spring 2016',
         'id': 'sp16',
         'profs': 'Hopelain',
+        'note': 'Exam Only'
       },
-      'Fall 2015': {
+      {
+        'term': 'Spring 2016',
+        'id': 'sp16p',
+        'profs': 'Briginshaw',
+        'note': 'Practice'
+      },
+      {
+        'term': 'Fall 2015',
         'id': 'fa15',
         'profs': 'Briginshaw'
       },
-      'Spring 2015': {
+      {
+        'term': 'Spring 2015',
         'id': 'sp15',
         'profs': '-',
+        'note': 'Exam Only'
       },
-      'Spring 2011': {
+      {
+        'term': 'Spring 2011',
         'id': 'sp11',
         'profs': 'Robinson'
       }
-    },
-    'marketingp': {
-      'Spring 2016': {
-        'id': 'sp16',
-        'profs': 'Briginshaw'
-      },
-    }
+    ]
   },
 
   'ee16a': {
-    'mt1': {
-      'Fall 2016': {
+    'mt1': [
+      {
+        'term': 'Fall 2016',
         'id': 'fa16',
         'profs': 'Ayazifar, Stojanovic',
       },
-      'Spring 2016': {
+      {
+        'term': 'Spring 2016',
         'id': 'sp16',
         'profs': 'Alon, Ayazifar',
       },
-      'Fall 2015': {
+      {
+        'term': 'Fall 2015',
         'id': 'fa15',
         'profs': 'Niknejad, Sahai',
       },
-      'Spring 2015': {
+      {
+        'term': 'Spring 2015',
         'id': 'sp15',
         'profs': 'Alon, Ayazifar, Subramanian',
       },
-    },
+    ],
   },
 
   'cs61c': {
-    'mt1': {
-      'Fall 2016': {
+    'mt1': [
+      {
+        'term': 'Fall 2016',
         'id': 'fa16',
         'profs': 'Boser, Katz',
       },
-      'Spring 2016': {
+      {
+        'term': 'Spring 2016',
         'id': 'sp16',
         'profs': 'Stojanovic, Weaver',
       },
-      'Fall 2015': {
+      {
+        'term': 'Fall 2015',
         'id': 'fa15',
         'profs': 'Stojanovic, Wawrzynek',
       },
-      'Spring 2015': {
+      {
+        'term': 'Spring 2015',
         'id': 'sp15',
         'profs': 'Asanovic, Stojanovic',
       },
-      'Fall 2014': {
+      {
+        'term': 'Fall 2014',
         'id': 'fa14',
         'profs': 'Garcia, Lustig',
       },
-      'Spring 2014': {
+      {
+        'term': 'Spring 2014',
         'id': 'sp14',
         'profs': 'Garcia',
       },
-    },
+    ],
   },
 
   'cs162': {
-    'mt1': {
-      'Fall 2016': {
+    'mt1': [
+      {
+        'term': 'Fall 2016',
         'id': 'fa16',
         'profs': 'Joseph',
       },
-      'Spring 2016': {
+      {
+        'term': 'Spring 2016',
         'id': 'sp16',
         'profs': 'Joseph',
       },
-      'Fall 2015': {
+      {
+        'term': 'Fall 2015',
         'id': 'fa15',
         'profs': 'Kubiatowicz',
       },
-      'Spring 2015': {
+      {
+        'term': 'Spring 2015',
         'id': 'sp15',
         'profs': 'Kubiatowicz',
       },
-    },
+    ],
   }
 };
 

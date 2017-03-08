@@ -55,7 +55,9 @@ class Sidebar extends Component {
     const examType = this.props.examType;
     const isMCQ = this.props.isMCQ;
     const hasSolutions = this.props.hasSolutions;
-    const examDirPrefix = `${process.env.PUBLIC_URL}/exams/${course}/${examType}-${term}`;
+    const exam = this.props.exam;
+    console.log(exam);
+    const examDirPrefix = `${process.env.PUBLIC_URL}/exams/${course}/${examType}-${exam}`;
     const sidetabContainers = this.generateSidetabContainers();
     const toc = (isMCQ) ? (null) : (
       <span>
