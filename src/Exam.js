@@ -248,7 +248,7 @@ class Exam extends Component {
     const course = this.props.params.courseid;
     const itemIndex = this.props.params.index;
     const examType = this.props.params.examtype;
-    const exam = exams[course][examType][itemIndex].id;
+    const exam = this.props.params.id;
 
     const ExamComponent = (
       <ExamContent exam={exam} course={course} type={examType} appMode={this.state.appMode} showSolutions={this.state.showSolutions} />

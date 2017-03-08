@@ -25,12 +25,12 @@ class Course extends Component {
     const course = this.props.params.courseid;
     const desc = courses[course];
     const available = map(exams[course], (examsOfType, examType) => {
-      return map(examsOfType, (item, index) => {
+      return map(examsOfType, (item, id) => {
         const term = item.term;
         const note = item.note ? `(${item.note})` : (null);
-        const url = `/${course}/${examType}/${index}`;
+        const url = `/${course}/${examType}/${id}`;
         return (
-          <tr className="available" onClick={handleEvent("Click", "Exam", lowerCase(course))} key={index}>
+          <tr className="available" onClick={handleEvent("Click", "Exam", lowerCase(course))} key={id}>
             <td><a href={url}>{examTypeToLabel[examType]} <i>{note}</i></a></td>
             <td><a href={url}>{term}</a></td>
             <td><a href={url}>{item.profs}</a></td>
