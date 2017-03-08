@@ -6,6 +6,7 @@ import { lowerCase } from 'lodash';
 import Exam from './Exam';
 import Course from './Course';
 import Home from './Home';
+import NotFound from './NotFound';
 
 const trackLocal = false;
 var ReactGA = require('react-ga');
@@ -70,5 +71,6 @@ ReactDOM.render((
     <Route path="/" component={Home} />
     <Route path="/:courseid" component={Course} />
     <Route path="/:courseid/:examtype/:id" component={Exam} />
+    <Route path="*" component={NotFound} />
   </Router>
 ), document.getElementById('root'));

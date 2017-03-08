@@ -3,6 +3,7 @@ import { courseIDToLabel, examTypeToLabel, termToLabel, exams } from './exams';
 import { MultipleChoiceQuestion, Navbar, NavSidebar, Question, Sidebar } from './components';
 import { handleEvent } from './utils';
 import { keys, values, has, map, range, replace } from 'lodash';
+import NotFound from './NotFound';
 
 const isString = require('is-string');
 import './Exam.css';
@@ -95,6 +96,9 @@ class ExamContent extends Component {
   }
 
   render() {
+    const exam = this.props.exam;
+    const appMode = this.props.appMode;
+    const showSolutions = this.props.showSolutions;
     const examContent = this.state.examContent;
     const examCode =
       (examContent && has(examContent, 'course') && has(examContent, 'ref')) ?  (`${examContent.course}${examContent.ref}`) : [];
@@ -106,7 +110,6 @@ class ExamContent extends Component {
       (values(examContent.questions)) : [];
     const course =
       (examContent && has(examContent, 'course')) ? examContent.course : null;
-    const exam = this.props.exam;
     const prof = (examContent && has(examContent, 'prof')) ? (examContent.prof) : null;
     const type = (examContent && has(examContent, 'type')) ? (examContent.type) : null;
     const term = (examContent && has(examContent, 'term')) ? (examContent.term) : null;
@@ -115,8 +118,6 @@ class ExamContent extends Component {
     const numProblems = (examContent && has(examContent, 'num')) ? (examContent.num) : problemIDs.length;
     const pre = (examContent && has(examContent, 'pre')) ? (preprocess(examContent.pre, {renderer})) : null;
     const hasSolutions = (examContent && has(examContent, 'has_solutions')) ? (examContent.hasSolutions) : true;
-    const appMode = this.props.appMode;
-    const showSolutions = this.props.showSolutions;
 
     var content = null;
     if (isMCQ) {
@@ -257,6 +258,10 @@ class Exam extends Component {
     const itemIndex = this.props.params.index;
     const examType = this.props.params.examtype;
     const exam = this.props.params.id;
+
+    if (!has(exams, course) || !has(exams[course], examType) || !has(exams[course][examType], exam)) {
+      return <NotFound />;
+    }
 
     const ExamComponent = (
       <ExamContent exam={exam} course={course} type={examType} appMode={this.state.appMode} showSolutions={this.state.showSolutions} />

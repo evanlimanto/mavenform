@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { exams, examTypeToLabel, courseIDToLabel, courses } from './exams';
 import { handleEvent } from './utils';
 import { Navbar, NavSidebar } from './components';
-import { lowerCase, map } from 'lodash';
+import { has, lowerCase, map } from 'lodash';
+import NotFound from './NotFound';
 
 class Course extends Component {
   constructor(props) {
@@ -23,6 +24,10 @@ class Course extends Component {
 
   render() {
     const course = this.props.params.courseid;
+    if (!has(exams, course)) {
+      return <NotFound />;
+    }
+
     const desc = courses[course];
     const available = map(exams[course], (examsOfType, examType) => {
       return map(examsOfType, (item, id) => {

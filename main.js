@@ -16,7 +16,6 @@ const useCache = (process.env.NODE_ENV !== 'development');
 const examCache = new NodeCache({ stdTTL: 30 * 60, checkperiod: 10 * 60 });
 
 app.use('/img', express.static(path.join(__dirname, '/src/img')));
-app.use(express.static(path.join(__dirname, '/build')));
 
 // Read Exam .yaml files from disk
 app.get('/getExam/:course/:type/:exam', function(req, res, next) {
@@ -47,4 +46,5 @@ app.get('/getExam/:course/:type/:exam', function(req, res, next) {
   res.end();
 });
 
+app.use(express.static(path.join(__dirname, '/build')));
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, './build/index.html'))).listen(port, () => console.log('Started server on port ' + port));
