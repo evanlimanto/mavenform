@@ -1,0 +1,408 @@
+course: 'ugba10'
+ref: 'marketing-sp15'
+
+type: 'marketing'
+term: 'sp15'
+prof: '-'
+mcq: true
+num: 36
+has_solutions: false
+  
+q1_1: |
+  Marketing is the process of:
+
+q1_1_i:
+  - Creating positive associations in the minds of customers for a company and itsbrands
+  - Creating value for customers and building strong customer relationships inorder to capture value from customers in return
+  - Creating advertising that builds awareness of a companys products and/orservices
+  - Creating lifelong relationships with customers in order to capture the majorityof their purchases
+
+q1_1_s: -1
+    
+q2_1: |
+  Which of these best describes the best basis for segmenting customers? Customer segments:
+
+q2_1_i:
+  - Have similar needs or preferences
+  - Live in similar neighborhoods
+  - Are similar in age and income
+  - Have the same number of children
+
+q2_1_s: -1
+    
+q3_1: |
+  There are many sources of customer insights. Which of these is NOT generally considered to be one of them?
+
+q3_1_i:
+  - Customer service representatives
+  - Customer advisory board members
+  - Internal tech support
+  - Comments on Yelp
+
+q3_1_s: -1
+    
+q4_1: |
+  The Marketing Funnel mirrors the Customer Decision Making Process. Which of these is NOT a way that customers can enter the funnel?
+
+q4_1_i:
+  - Seeing an ad on TV
+  - Receiving a Groupon
+  - Hearing a promo on the radio
+  - Writing a review Open Table
+
+q4_1_s: -1
+    
+q5_1: |
+  The Customer Relationship Groups framework shows that different customer groups require different customer relationship management strategies. Consumers who pay full price to pre-order Apple products before they are released would be considered a:
+
+q5_1_i:
+  - Butterfly
+  - True Friend
+  - Barnacle
+  - Strangers
+
+q5_1_s: -1
+    
+q6_1: |
+  Which of these is NOT a reason companies regularly research the percentage of customers who reach each stage in the marketing funnel?
+
+q6_1_i:
+  - To know how well their marketing is driving customer conversion from each step to the next
+  - To identify where customers are getting stuck in the decision making process
+  - To adjust their marketing mix to improve conversion
+  - To determine optimal pricing to drive conversion
+
+q6_1_s: -1
+    
+q7_1: |
+  Customer insights are an important input into developing products and services, positioning and messaging, and marketing programs. Which of these is a type of information that can generate insights about customers:
+
+q7_1_i:
+  - Store maintenance schedules
+  - Customer perceptions and beliefs
+  - Product testing statistics
+  - The number of daily store transactions
+
+q7_1_s: -1
+    
+q8_1: |
+  Finish this sentence: Companies that are focused on the Diversification quadrant of the Product/Market Expansion Matrix
+
+q8_1_i:
+  - Are trying to find more people like their current customers to sell their current products to
+  - Are trying to find new products to sell to their current customers
+  - Are trying to find new customers to sell new products to
+  - Are trying to find new customers to sell their current products to
+
+q8_1_s: -1
+    
+q9_1: |
+  Which of the following is answered as part of the process of defining the company mission or noble purpose:
+
+q9_1_i:
+  - How do we make the world a better place?
+  - Who is our target audience?
+  - How do we generate profits?
+  - Where should we locate our headquarters?
+
+q9_1_s: -1
+    
+q10_1: |
+  What
+
+q10_1_i:
+  - Define the company mission, set the company objectives, design the portfolio,are the steps in the strategic planning processplan marketing & other strategies
+  - Define the company mission, allocate budgets by line of business, planmarketing & other strategies, measure results
+  - Define the company mission, generate customer insights, design plan marketing& other strategies, measure results
+  - Define the company mission, design the portfolio, plan marketing & otherstrategies, measure results
+
+q10_1_s: -1
+    
+q11_1: |
+  Which of these is NOT a dimension of The BCG Portfolio Growth Share Matrix:
+
+q11_1_i:
+  - Relative market growth rate
+  - Relative profitability
+  - Relative market share
+
+q11_1_s: -1
+    
+q12_1: |
+  The BCG Portfolio Growth Share Matrix evaluates the distinct businesses a company is in, and describes four types of businesses. Which of these statements is true about Cash Cows:
+
+q12_1_i:
+  - They enjoy high market share and are in a category that is growing slowly
+  - They represent the future growth and success of the company
+  - They are unsuccessful
+
+q12_1_s: -1
+    
+q13_1: |
+  Businesses in different quadrants of the Growth-Share Matrix receive different levels and types of marketing investment. If youre working in a Cash Cow business, you are likely to
+
+q13_1_i:
+  - Have less marketing dollars to spend than a Dog business in the companys portfolio
+  - Focus your marketing spending on increasing share
+  - Focus your marketing spending on increasing relevance
+  - Have more marketing dollars to spend than a Star business in the company's portfolio
+
+q13_1_s: -1
+    
+q14_1: |
+  When it comes to reigniting growth, Kelloggs has many choices. If they were to create a yogurt-based business for consumers who dont like breakfast cereal, that would be example of a decision to do which of the following:
+
+q14_1_i:
+  - Product Development
+  - Market Development
+  - Diversification
+
+q14_1_s: -1
+
+q15_1: |
+  Finish this sentence: Companies that are focused on the Market Development quadrant Product/Market Expansion Matrix...
+
+q15_1_i:
+  - Are trying to find more people like their current customers to sell their current products to
+  - Are trying to find new products to sell to their current customers
+  - Are trying to find new customers to sell their current products to
+  - Are trying to find new customers to sell new products to
+
+q15_1_s: -1
+
+q16_1: |
+  A companys marketing strategy answers several fundamental questions about a companys offering. Which of these questions is NOT addressed by marketing strategy?
+
+q16_1_i:
+  - What is it?
+  - When will it break even?
+  - Who will buy it?
+  - Why will they choose it?
+
+q16_1_s: -1
+
+q17_1: |
+  The classic positioning framework includes 4 key elements. Which of these is NOT one?
+
+q17_1_i:
+  - Personality
+  - Target
+  - Frame of Reference
+  - Key Benefit
+
+q17_1_s: -1
+    
+q18_1: |
+  Read this positioning statement for DeCecco pasta:
+  For serious chefs, De Cecco is the best-tasting premium pasta that falls onto the plate
+  <hr class="s1" />
+  full of taste, rough, and always al dente because, like other pasta brands, we use only
+  <hr class="s1" />
+  the best ingredients, but only DeCecco pasta is bronze-drawn and slowly dried.
+  <hr class="s1" />
+  Which of these is the target this positioning statement?
+
+q18_1_i:
+  - Best-tasting premium pasta
+  - Bronze-drawn and slowly dried
+  - Only the best ingredients
+  - For serious chefs
+
+q18_1_s: -1
+    
+q19_1: |
+  Kelloggs Rice Krispies breakfast cereal uses its name and tagline "snap, crackle, pop" to set customer expectations about which one of the 4 P's?
+
+q19_1_i:
+  - Product
+  - Price
+  - Place
+  - Promotion
+
+q19_1_s: -1
+    
+q20_1: |
+  The 4 P's represent the levers that marketers pull to achieve their objectives. Which of these is NOT an aspect of the PROMOTION lever?
+
+q20_1_i:
+  - Advertising
+  - Public Relations
+  - Personal Selling
+  - Product Features
+
+q20_1_s: -1
+
+q21_1: |
+  Which of the following is NOT true about the marketing funnel and customer relationship building:
+
+q21_1_i:
+  - The marketing funnel is a useful construct for understanding where customers are getting stuck in the path to purchase
+  - The same marketing tactics have been proven to be effective at each stage in the funnel
+  - In addition to marketing tactics, ratings and reviews and other user generated content can bring new consumers into the funnel
+  - Groupons are a way to bring new consumers into the funn
+
+q21_1_s: -1
+
+q22_1: |
+  The SWOT framework includes internal and external factors. SWOT stands for:
+
+q22_1_i:
+  - Services, Wholesaling, Operations, Technology
+  - Strengths, Weaknesses, Opportunities, Threats
+  - Strategy, Warnings, Objectives, Tactics
+  - Strategy, Worth, Operations, Tactics
+
+q22_1_s: -1
+    
+q23_1: |
+  Which of the following statements best describes the aspects of a SWOT analysis that are considered INTERNAL to the company: (there are only 3 options here)
+
+q23_1_i:
+  - With enough time and money, the company could address them
+  - While interesting, they are not important
+  - They are factors that affect all players in the industry
+
+q23_1_s: -1
+    
+q24_1: |
+  Which of these is an example of a SMART marketing objective?
+
+q24_1_i:
+  - Increase customer satisfaction
+  - Grow market share 2.0 percentage points in 18 months
+  - Increase the average order size in 12 months
+  - Increase customer perceptions of innovation
+
+q24_1_s: -1
+    
+q25_1: |
+  Companies usually have a mix of financial and non-financial marketing objectives. Which of these is an example of a NON-FINANCIAL marketing objective:
+
+q25_1_i:
+  - Increase in EBIT
+  - Increase in the average order size
+  - Increase in the number of loyalty program members
+  - Increase in the ability to attract top talent
+
+q25_1_s: -1
+    
+q26_1: |
+  Finish this sentence: The marketing plan commits the organization to strategic initiatives, which are:
+
+q26_1_i:
+  - A thorough listing of potential changes in the marketing mix to grow the business
+  - A detailed description of the marketing tactics to be used to win in the marketplace
+  - The changes in pricing required to grow the business
+  - The few things the organization needs to do to achieve its business objectives
+
+q26_1_s: -1
+    
+q27_1: |
+  In conducting marketing research, data about consumers, customers and product usage from multiple sources is collected and analyzeWhich of the following is a source of this data?
+
+q27_1_i:
+  - Mailing lists
+  - Surveys of product users
+  - Company Corporate Social Responsibility initiative results
+  - Print ads
+
+q27_1_s: -1
+    
+q28_1: |
+  When it comes to understanding customers, which of these types of organizations typically has access to MORE helpful internal information sources?
+
+q28_1_i:
+  - Wholesalers
+  - Seatbelt manufacturers
+  - Restaurants
+  - Soft drink bottlers
+
+q28_1_s: -1
+    
+q29_1: |
+  If Pizza Hut wanted to understand what consumers like about its online pizza ordering, its marketers should conduct:
+
+q29_1_i:
+  - A pop-up community of customers
+  - Focus groups with customers
+  - In-depth customer interviews
+  - A customer survey
+
+q29_1_s: -1
+    
+q30_1: |
+  Identifying the right people to include in research is one of the most important aspects of research design. Which of the following do marketers typically use as one criterion for selecting research participants?
+
+q30_1_i:
+  - College grade point average
+  - Participant name
+  - Brand awareness
+  - Ability to express ones self
+
+q30_1_s: -1
+    
+q31_1: |
+  Complete this sentence: Marketers use commercial online databases to:
+
+q31_1_i:
+  - Understand what is known about a industry or product
+  - Uncover competitive secrets
+  - Learn what consumers think of their products
+  - Evaluate their company management team
+
+q31_1_s: -1
+    
+q32_1: |
+  All brands have negative news at some point  new and old products fail, people mess up, trucks crash. Brand equity can help a company
+
+q32_1_i:
+  - Overcome a market setback or withstand a mistake
+  - Consumers were unaware anything happened
+  - The Coke brand had enough equity to withstand its mistake
+  - The management team kept it quiet
+
+q32_1_s: -1
+    
+q33_1: |
+  Complete this sentence: To gauge AIDED awareness, marketers typically ask survey respondents:
+
+q33_1_i:
+  - Which of a long list of brands they have heard of
+  - Which of a long list of brands they have ever used
+  - To make a list of the brands in the category that they have heard of
+  - To make a list of the brands in the category that they have ever used
+
+q33_1_s: -1
+    
+q34_1: |
+  Take-offs on advertising campaigns like the Sesame Street spoof of the Old Spice commercial or the song Id Like to Teach The World to Sing that was based on the Coca-Cola commercial jingle are one indication that the companys marketing has:
+
+q34_1_i:
+  - Reached a broad audience and become part of pop culture
+  - Missed its target audience
+  - Been ineffective in communicating product benefits
+  - Been created by people who are more interested in awards than impact
+
+q34_1_s: -1
+    
+q35_1: |
+  Which of these statements is FALSE about the way Marketing works within a company?
+
+q35_1_i:
+  - Marketing works best as a skunkworks, independent from the rest of theorganization
+  - Marketing depends on other departments to build favorable customerperceptions and experiences
+  - Marketing is responsible for the 4 Ps
+  - Marketing aims to create value for customers and build strong customerrelationships to capture value from customers in return7
+
+q35_1_s: -1
+    
+q36_1: |
+  Which of the following statements is NOT TRUE about how marketers think about customer relationships?
+
+q36_1_i:
+  - Marketers aim to make consumers feel something toward their brands
+  - Marketers focus on driving profitable customer relationships
+  - Marketers never want to turn away any potential customer
+  - Marketers want as broad a target audience as they can manage efficiently andeffectively
+
+q36_1_s: -1

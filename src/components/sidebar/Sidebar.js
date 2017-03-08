@@ -54,6 +54,7 @@ class Sidebar extends Component {
     const course = this.props.course;
     const examType = this.props.examType;
     const isMCQ = this.props.isMCQ;
+    const hasSolutions = this.props.hasSolutions;
     const examDirPrefix = `${process.env.PUBLIC_URL}/exams/${course}/${examType}-${term}`;
     const sidetabContainers = this.generateSidetabContainers();
     const toc = (isMCQ) ? (null) : (
@@ -64,10 +65,19 @@ class Sidebar extends Component {
       </span>
     );
 
+    const noSolutionsInfo = (hasSolutions) ? (null) : (
+      <span>
+        <h6>NOTE</h6>
+        <i>Unfortunately, no solutions are available for this exam.</i>
+        <hr className="s2" />
+      </span>
+    );
+
     return (
       <span>
         <div className="sidebar">
           {toc}
+          {noSolutionsInfo}
           <h6>SOURCES</h6>
           <div className="sidetab-container">
             <a className="sidetab" href={`${examDirPrefix}-exam.pdf`} target="_blank" onClick={() => handleEvent('PDF', 'Exam', `${course}${term}-${examType}`)}>Exam PDF</a>

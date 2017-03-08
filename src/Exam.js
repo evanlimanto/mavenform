@@ -113,6 +113,7 @@ class ExamContent extends Component {
     const isMCQ = (examContent && has(examContent, 'mcq')) ? (examContent.mcq) : false;
     const numProblems = (examContent && has(examContent, 'num')) ? (examContent.num) : problemIDs.length;
     const pre = (examContent && has(examContent, 'pre')) ? (preprocess(examContent.pre, {renderer})) : null;
+    const hasSolutions = (examContent && has(examContent, 'has_solutions')) ? (examContent.hasSolutions) : true;
     const appMode = this.props.appMode;
     const showSolutions = this.props.showSolutions;
 
@@ -167,16 +168,26 @@ class ExamContent extends Component {
       </div>
     ) : null;
     const SidebarComponent = (appMode) ? (
-      <Sidebar course={course} term={term} examType={type} examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} numProblems={numProblems} isMCQ={isMCQ} />
+      <Sidebar course={course} term={term} examType={type} examCode={examCode} problemIDs={problemIDs} problemTitles={problemTitles} numProblems={numProblems} isMCQ={isMCQ} hasSolutions={hasSolutions} />
     ) : (null);
 
-    return (
+    const contentComponent = (hasSolutions) ? (
       <div className="content">
         {examDesc}
         {content}
         {SidebarComponent}
       </div>
+    ) : (
+      <span className="reader">
+        <div className="content">
+          {examDesc}
+          {content}
+          {SidebarComponent}
+        </div>
+      </span>
     );
+
+    return contentComponent;
   }
 }
 
@@ -193,6 +204,22 @@ class Exam extends Component {
     this.toggleAllSolutions = this.toggleAllSolutions.bind(this);
   }
 
+  setReaderMode() {
+    var wrapper = document.createElement("span");
+    wrapper.className = "reader";
+    var examNode = document.getElementsByClassName("content")[0];
+    examNode.parentNode.replaceChild(wrapper, examNode);
+    wrapper.appendChild(examNode);
+  }
+
+  setAppMode() {
+    var wrapper = document.getElementsByClassName("reader")[0];
+    var content = document.getElementsByClassName("content")[0];
+    wrapper.removeChild(content);
+    wrapper.parentNode.appendChild(content);
+    wrapper.parentNode.removeChild(wrapper);
+  }
+
   toggleAppMode() {
     this.setState({
       appMode: !this.state.appMode
@@ -201,19 +228,10 @@ class Exam extends Component {
     handleEvent('Click', 'Toggle Reader Mode');
 
     // Remove "Show Solution" buttons
-    var wrapper;
     if (this.state.appMode) {
-      wrapper = document.createElement("span");
-      wrapper.className = "reader";
-      var examNode = document.getElementsByClassName("content")[0];
-      examNode.parentNode.replaceChild(wrapper, examNode);
-      wrapper.appendChild(examNode);
+      this.setReaderMode();
     } else {
-      wrapper = document.getElementsByClassName("reader")[0];
-      var content = document.getElementsByClassName("content")[0];
-      wrapper.removeChild(content);
-      wrapper.parentNode.appendChild(content);
-      wrapper.parentNode.removeChild(wrapper);
+      this.setAppMode();
     }
 
     window.renderMJ();

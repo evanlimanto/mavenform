@@ -134,7 +134,7 @@ if __name__ == '__main__':
   etype = 'mt2'
   sem = 'sp11'
   header = \
-  '''course: 'chem1a'
+  '''course: 'ugba10'
 ref: '%s-%s'
 
 type: '%s'

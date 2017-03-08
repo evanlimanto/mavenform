@@ -168,7 +168,7 @@ class MultipleChoiceQuestion extends Component {
       return <div key={index} tabIndex="0" className={optionClass} dangerouslySetInnerHTML={{__html: choice}} onClick={handleEvent("Click", "Multiple Choice", examCode)}></div>;
     });
 
-    const solution = (solutionNum) ? `${String.fromCharCode(solutionNum + 65)}) ${choices[solutionNum]}` : "Solution unavailable. Sorry!";
+    const solution = (solutionNum >= 0) ? `${String.fromCharCode(solutionNum + 65)}) ${choices[solutionNum]}` : "Solution unavailable. Sorry!";
     const SolutionComponent = (
       <Solution solution={solution} examCode={examCode} showSolutions={this.props.showSolutions} />
     );

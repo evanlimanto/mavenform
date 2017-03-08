@@ -78,6 +78,10 @@ const exams = {
         'id': 'fa15',
         'profs': 'Briginshaw'
       },
+      'Spring 2015': {
+        'id': 'sp15',
+        'profs': '-',
+      },
       'Spring 2011': {
         'id': 'sp11',
         'profs': 'Robinson'
