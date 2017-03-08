@@ -35,5 +35,14 @@
 </head>
 <body>
   <div id="root"></div>
+  <script>
+  $('div').on('click', function(e) {
+    if (e.target.className === "option") {
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).focus();
+    }
+  });
+  </script>
 </body>
 </html>

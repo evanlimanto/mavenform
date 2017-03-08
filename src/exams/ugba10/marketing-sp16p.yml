@@ -5,7 +5,7 @@ type: 'marketing'
 term: 'sp16'
 prof: 'Briginshaw'
 mcq: true
-num: 37
+num: 36
 
 q1_1: |
   In many ways, Snapple is in the fashion business. It comes in 40 different flavors, and many are specific to a particular region of the country while others are based on the latest fruit fad. The top 10 account for most of Snapple’s revenues. Which lever of the 4 P’s is Snapple’s 40-flavor offering an example of?
@@ -406,12 +406,3 @@ q36_1_i:
   - Search the University’s library system for relevant secondary source information
 
 q36_1_s: 4
-
-q37_1: |
-  I have carefully checked my Scantron. My Section number is correctly shown and I have checked that my name is written with last name first.
-
-q37_1_i:
-  - Yes
-  - No
-
-q37_1_s: 1
