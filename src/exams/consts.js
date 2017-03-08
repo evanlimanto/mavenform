@@ -38,16 +38,6 @@ const exams = {
   },
 
   'cs186': {
-    'mt2': {
-      'Spring 2016': {
-        'id': 'sp16',
-        'profs': 'Hellerstein',
-      },
-      'Spring 2015': {
-        'id': 'sp15',
-        'profs': 'Hellerstein',
-      },
-    },
     'mt1': {
       'Spring 2016': {
         'id': 'sp16',
@@ -65,19 +55,39 @@ const exams = {
         'id': 'sp12',
         'profs': 'Hellerstein',
       },
-    }
+    },
+    'mt2': {
+      'Spring 2016': {
+        'id': 'sp16',
+        'profs': 'Hellerstein',
+      },
+      'Spring 2015': {
+        'id': 'sp15',
+        'profs': 'Hellerstein',
+      },
+    },
   },
 
   'ugba10': {
     'marketing': {
       'Spring 2016': {
         'id': 'sp16',
-        'profs': 'Briginshaw'
+        'profs': 'Hopelain',
       },
       'Fall 2015': {
         'id': 'fa15',
         'profs': 'Briginshaw'
+      },
+      'Spring 2011': {
+        'id': 'sp11',
+        'profs': 'Robinson'
       }
+    },
+    'marketingp': {
+      'Spring 2016': {
+        'id': 'sp16',
+        'profs': 'Briginshaw'
+      },
     }
   },
 
@@ -165,6 +175,7 @@ const courses = {
 
 const examTypeToLabel = {
   'marketing': 'Marketing',
+  'marketingp': 'Marketing - Practice',
   'finance': 'Finance',
 
   'mt1': 'Midterm 1',

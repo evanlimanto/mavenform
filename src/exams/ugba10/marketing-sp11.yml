@@ -1,0 +1,382 @@
+course: 'ugba10'
+ref: 'marketing-sp11'
+
+type: 'marketing'
+term: 'sp11'
+prof: 'Robinson'
+mcq: true
+num: 34
+
+q1_1: |
+  What's the chief advantage of containerization?
+
+q1_1_i:
+  - Protection of the goods
+  - Light in weight so easy to ship
+  - Multi-modality transport
+  - Containers are cheap to make
+
+q1_1_s: 3
+
+q2_1: |
+  What is the "objective of marketing communication"?
+
+q2_1_i:
+  - ABC - Always be closing
+  - Inform, persuade or remind
+  - Sell, sell, sell
+  - The more you tell, the more you sell
+
+q2_1_s: 2
+
+q3_1: |
+  What's the chief limitation of Personal Selling as a part of the promotional mix?
+
+q3_1_i:
+  - It's ineffective if customers don't like the salesperson
+  - It is inflexible
+  - It's quite expensive compared with other forms of promotion
+  - It cannot be integerated with other parts of the Promotional Mix
+
+q3_1_s: 3
+
+q4_1: |
+  Tom's Shoes gives shoes to poor children. According to lecture this is a type of promotion - what part of the Promotional Mix?
+
+q4_1_i:
+  - Sales promotion
+  - Direct promotion
+  - Personal selling
+  - Public relations
+
+q4_1_s: 4
+
+q5_1: |
+  The Italian firm Benetton has been trying to get attention for its products by showing photoshopped (false) pictures of world leaders kissing in print ads. The firm has a long history of shocking ads. How well has this strategy been working for them, according to lecture?
+
+q5_1_i:
+  - They have achieved "breakthrough" and are routinely beating mass market firms like H&M
+  - They are remarkably profitable and have donated more than $2 billion to charity in the last year alone
+  - Many European leaders like Carla Bruno Sarkozy have taken to wearing Benetton's couture (fashions)
+  - They have failed to show effective growth in revenue for the last several years
+
+q5_1_s: 4
+
+q6_1: |
+  If you receive an e-mail sent to your @Berkeley account reminding you to buy tickets for ABA Mister Business it would count as what part of the Promotional Mix?
+
+q6_1_i:
+  - Direct promotion
+  - Sales promotion
+  - Mass media advertising
+  - Personal selling
+
+q6_1_s: 1
+
+q7_1: |
+  What's true of transit advertising such as posters on the side of campus shuttle buses?
+
+q7_1_i:
+  - It's relatively expensive because there aren't many buses
+  - It's cheap
+  - Most firms think of it first as their most-used ad medium
+  - It is prohibited in Hong Kong
+
+q7_1_s: 2
+
+q8_1: |
+  American firms sometimes develop brands and then sell them off. A reader article describes Proctor & Gamble's plan to sell off Pringles snacks even though this is a huge international brand with more than $1.2 billion in worldwide sales. Why does P&G sell?
+
+q8_1_i:
+  - Government anti-trust regulation
+  - They believe that growth for the Pringles brand has reached a peak
+  - They feel that the potato-chip market is now too competitive
+  - Sales for Pringes have been declining rapidly on product-safety scares
+
+q8_1_s: 2
+
+q9_1: |
+  The text discusses the concept of *environmental sacnning* which is not discussed in lecture. Which of the following would be part of this process?
+
+q9_1_i:
+  - Reviewing EPA (Environmental Protection Administration) regulations
+  - Being aware of upcoming changes in EPA regulations
+  - Developing a formal process to assess competitors product offerings and promotional strategies
+  - Conducing a "self-audit" of our own firm's competitiveness such as cost of production and measures of scrap waste
+
+q9_1_s: 3
+
+q10_1: |
+  Almost all CPGs (Consumer Packaged Goods) for sale in grocery stores in the US have a UPC (bar code) on the label. The textbook notes that large retailers such as Walmart are also requiring:
+
+q10_1_i:
+  - Bar codes on the side of each truck arriving at their loading docks
+  - QR (Quick Response) codes that can be read by smart phones
+  - RFID (radio frequency identification) chips on each pallet of boxes delivered
+  - QR codes on the side of reach truck to identify the supplier when it arrives
+
+q10_1_s: 3
+
+q11_1: |
+  Sometimes a manufacturer needs to ship a few boxes at a time, what is called a "less than container sized load." If the manufacturer wanted to use rail freight for this order, according to the text they would look for a:
+
+q11_1_i:
+  - Reverse logistics carrier
+  - Outbound logistics consultant
+  - Merchant wholesaler
+  - Freigh forwarder
+
+q11_1_s: 4
+
+q12_1: |
+  Personal selling is most effective when salespeople follow a long-established pattern of steps, well-described in the textbook. What's the first step?
+
+q12_1_i:
+  - Qualifying prospects
+  - Answering objections
+  - Making a presentation
+  - Closing the sale
+
+q12_1_s: 1
+
+q13_1: |
+  Two reader articles on Abercrombie & Fitch describe a major strategy change to respond to the prolonged downturn in the US market. What did they do?
+
+q13_1_i:
+  - Finally showed models with their shirts on as a response to the new era of austerity
+  - Heaviliy boosted their advertising spending to keep profit leves stable
+  - Added a new store line called "Ruehl" aimed at teenagers with less spending money
+  - Lowered prices to boost sales
+
+q13_1_s: 4
+
+q14_1: |
+  Many countries have national advertising campaigns designed to attract tourists. Australia's campaign had the tagline (last sentence of each advertisement) "Where the \*\*\*\*\*\* \*\*\*\* are you?" What was their thinking according to a reader article?
+
+q14_1_i:
+  - To stand out from other countries' blandly similar ads
+  - The tourist board wanted to reposition Australians as "tough talking" after electing its first woman prime minister
+  - To address perceptions of Australians as inarticulate and unwelcoming of tourists
+  - To demand action from travel agents running tour groups
+
+q14_1_s: 1
+
+q15_1: |
+  What happened when Macy's decided to almost completely eliminate broad, store-wide 15 to 20 percent off coupons?
+
+q15_1_i:
+  - Customers switched to other stores and Macy's sales fell
+  - Other retail chains followed Macy's lead and industry-wide profits rose
+  - Manufacturers filled the gap by offering many more coupons on their own branded merchandise
+  - Surprisingly, customers increased their frequency of visits to Macy's stores
+
+q15_1_s: 1
+
+q16_1: |
+  If you decide to have your brand of tractors for sale in Zynga's "Farmville" (an online virtual agriculture game) your firm would be using what type of promotion?
+
+q16_1_i:
+  - Sales promotion
+  - Internet advertising
+  - Placement
+  - Push-pull advertising
+
+q16_1_s: 3
+
+q17_1: |
+  If you were importing Cornish Pasties into the US, youo might well reduce the calorie count of each one to suit American consumers' expectations for lunchtime food. Technically you would be altering:
+
+q17_1_i:
+  - The Product form
+  - The Marketing Mix
+  - The Promotional Mix
+  - Competitive landscape
+
+q17_1_s: 2
+
+q18_1: |
+  In the definition of an "attractive market" all **except which one** of the following would be true?
+
+q18_1_i:
+  - We already have a relationship with these customers
+  - We can reach these customers through an identified promotional medium
+  - We can deliver goods to these customers through establisehd channels
+  - We can make a product at a price that they will consider a good value
+
+q18_1_s: 1
+
+q19_1: |
+  The "Jitterbug" phone has few features. As discussed in lecture it is an example of:
+
+q19_1_i:
+  - A product designed for a narrow but profitable target segment
+  - "\"The India price\" - selling for much cheaper than comparable goods"
+  - A product targeted to price sensitive students
+  - Mass marketing to people who want something "good enough" for everyday use
+
+q19_1_s: 1
+
+q20_1: |
+  Which of the following is true about ugba\-10?
+
+q20_1_i:
+  - It's a Mass Market course
+  - It is a narrowly targeted course for future Haas majors
+  - The concept of "targeting" cannot possibly apply to a course
+  - It has two distinct target segments made up of different types of students
+
+q20_1_s: 4
+
+q21_1: |
+  In class I showed two commercials for the aftershave "Old Spice". What is true of the newer of the two commercials?
+
+q21_1_i:
+  - To attract attention, it was shot on black & white film
+  - It never mentioned the actual product name - viewers had to guess that from the distinctive shape of the bottle
+  - Most people who have seen the ad viewed it on Youtube, not on TV
+  - It demonstrated the effectiveness of cartoons for advertising personal care products
+
+q21_1_s: 3
+
+q22_1: |
+  Business markets suffer from *derived demand*. What is true of the demand for the Airbus A-380 super-jumbo?
+
+q22_1_i:
+  - The demand for airplanes is derived from the demand for airline travel
+  - The demand for the A-380 is derived from the unfulfilled demand for Boeing's 747-800 due to production delays
+  - The demand for the A-380 is derived from the advertising expenditure by Airbus
+  - The demand for airplanes is derived from Airbus's production schedule
+
+q22_1_s: 1
+
+q23_1: |
+  For which class of goods is "ubiquitous distribution" (distributing to broad channels) a key success factor?
+
+q23_1_i:
+  - Unsought goods
+  - Convenience goods
+  - Expense goods
+  - Specialty goods
+
+q23_1_s: 2
+
+q24_1: |
+  In the conventional classification system of consumer goods, which category is associated with "brand insistence"?
+
+q24_1_i:
+  - Unsought goods
+  - Convenience goods
+  - Expense goods
+  - Specialty goods
+
+q24_1_s: 4
+
+q25_1: |
+  Which of the following is **not** one of the "external features of a brand"?
+
+q25_1_i:
+  - Fragrance - all Abercrombie stores smell the same
+  - Color scheme - such as the Visa blue & gold scheme
+  - The brand promise
+  - The brand name
+
+q25_1_s: 3
+
+q26_1: |
+  A recent trend in grocery reatiling has been for supermarkets to carry:
+
+q26_1_i:
+  - More "national brands"
+  - More or their own-store brands
+  - Only low-price generic brands
+  - Only heavily advertised national brands
+
+q26_1_s: 2
+
+q27_1: |
+  As we move from the Growth stage to the Maturity stage of the Product Life Cycle, what happens?
+
+q27_1_i:
+  - More competitors crowd into the market
+  - The game changes to brand switching
+  - There are fewer and fewer customers
+  - A firm needs to go after "new to the category" customers
+
+q27_1_s: 2
+
+q28_1: |
+  An in-class pricing demonstration auctioned off a breakfast. The point of the demonstration is:
+
+q28_1_i:
+  - It's important to offer customers a product line
+  - In any market, some people want to pay more
+  - There is no such thing as a free lunch
+  - Ability to pay and willingness to pay mean the same thing
+
+q28_1_s: 2
+
+q29_1: |
+  The "SF Park" program in San Francisco changed meteres so that they accept credit cards and allow up to 4 hours in parking. They are a good example of
+
+q29_1_i:
+  - Revenue generation when tax dollars are rising
+  - Revenue generationg through increased fines from enforcement
+  - Captive-product pricing
+  - Smart pricing
+
+q29_1_s: 4
+
+q30_1: |
+  What is the best way for a manufacturer to capture more of the "money left on the table" (consumer surplus)?
+
+q30_1_i:
+  - Raise price while simultaneously increasing the features of the product
+  - Decrease price of a product while simplifying it
+  - Have a product line, rather than a single product
+  - Decrease the volume of units sold
+
+q30_1_s: 3
+
+q31_1: |
+  A commercial for Shangri-La hotels shows a man not in a hotel but hiking in the mountains. As discussed in class, this long-form commercial seeks to do what?
+
+q31_1_i:
+  - Position Shangri-La as the hotel where loners can meet up with an exciting sense
+  - Differentiate the hotel chain from similar luxury loding
+  - Offer a public service announcement on the benefits of exercise
+  - Position Shagri-La as surprisingly affordable for back-packers
+
+q31_1_s: 2
+
+q32_1: |
+  What determines whether a store is a wholesaler or a retailer?
+
+q32_1_i:
+  - If they don't collect sales tax, they're a retailer
+  - If they sell to other firms, they're a retailer
+  - If they sell to end users, they're a retailer
+  - If they buy direct from manufacturers, they are a retailer
+
+q32_1_s: 3
+
+q33_1: |
+  Safeway does all **except which one** of these functions as an intermediary?
+
+q33_1_i:
+  - Recruits retailers
+  - Bulk breaking
+  - Purchasing, selection
+  - Providing information
+
+q33_1_s: 1
+
+q34_1: |
+  There is a trend that affects intermediaries: Warehouses are frequently being replaced with:
+
+q34_1_i:
+  - Cash and carry stores
+  - Internet ordering
+  - "\"Big Box\" retailers"
+  - Distribution centers
+
+q34_1_s: 4

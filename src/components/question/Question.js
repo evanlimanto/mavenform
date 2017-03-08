@@ -156,7 +156,7 @@ class MultipleChoiceQuestion extends Component {
     const content = this.props.content;
     const examType = this.props.examType;
     const term = this.props.term;
-    const solutionNum = this.props.solutionNum - 1;
+    const solutionNum = (this.props.solutionNum) ? (this.props.solutionNum - 1) : null;
     const choices = this.props.choices;
     const examCode = lowerCase(`${examType}${term}${course}`);
     const options = map(choices, (choice, index) => {
@@ -165,11 +165,12 @@ class MultipleChoiceQuestion extends Component {
         option: true,
         right: (index === solutionNum),
       });
-      return <div key={index} tabIndex="0" className={optionClass} dangerouslySetInnerHTML={{__html: choice}}></div>;
+      return <div key={index} tabIndex="0" className={optionClass} dangerouslySetInnerHTML={{__html: choice}} onClick={handleEvent("Click", "Multiple Choice", examCode)}></div>;
     });
 
+    const solution = (solutionNum) ? `${String.fromCharCode(solutionNum + 65)}) ${choices[solutionNum]}` : "Solution unavailable. Sorry!";
     const SolutionComponent = (
-      <Solution solution={`${String.fromCharCode(solutionNum + 65)}) ${choices[solutionNum]}`} examCode={examCode} showSolutions={this.props.showSolutions} />
+      <Solution solution={solution} examCode={examCode} showSolutions={this.props.showSolutions} />
     );
 
     return (

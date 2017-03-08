@@ -120,13 +120,13 @@ class ExamContent extends Component {
     if (isMCQ) {
       content = map(range(1, numProblems + 1), (num) => {
         const key = `q${num}_1`;
-        var qcontent = `${num}\\. ${examContent[key]}` || '';
+        var qcontent = `${num}. ${examContent[key]}` || '';
         var choices = examContent[key + "_i"] || [];
         if (useMarkdown) {
           qcontent = preprocess(qcontent, {renderer});
           choices = map(choices, (choice) => (isString(choice)) ? preprocess(choice, {renderer}) : (choice));
         }
-        const solutionNum = examContent[key + "_s"] || 1;
+        const solutionNum = examContent[key + "_s"] || null;
         return (
           <Element key={num} className="element">
             <MultipleChoiceQuestion id={`q${num}`} course={course} content={qcontent} solutionNum={solutionNum} choices={choices} examType={type} term={term} key={num} appMode={appMode} showSolutions={showSolutions} />
