@@ -13,7 +13,6 @@ class NavSidebar extends Component {
 
     const sideTabs = map(exams[course], (courseExams, examType) => {
       const content =  map(courseExams, (info, semester) => {
-        console.log(semester);
         const url = `/${course}/${examType}-${info.id}`;
         const title = semester;
         const sideTabClass = classnames({

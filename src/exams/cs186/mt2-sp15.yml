@@ -1,0 +1,415 @@
+course: 'cs186'
+ref: 'mt2-sp15'
+
+type: 'mt2'
+term: 'sp15'
+prof: 'Hellerstein'
+
+questions: {
+  'q1': 'ER Diagrams',
+  'q2': 'Query Optimization',
+  'q3': 'Recovery',
+}
+
+parts: {
+  'q1': 6,
+  'q2': 3,
+  'q3': 4,
+  'q4': 6,
+  'q5': 5,
+}
+
+q1_1: |
+  ## I. ER Diagrams [18 points]
+  1. [4 points] **True** or **False**:
+  - a. ER diagrams are used to model the physical schema of a database.
+  - b. An entity set E can be associated with a relationship set R more than once.
+  - c. At most 2 distinct entity sets can be associated with any relationship set R.
+  - d. A weak entity set must have total participation in its identifying relationship set.
+
+q1_1_s: |
+  - a. **False**, they are used to model the logical schema. Physical schema refers to things like
+  file and index layout.
+  - b. **True**, for example a relationship Reports_To which has the entity Employees
+  participating twice, since Managers are also Employees.
+  - c. **False**, for example, a ternary relationship “Covers” with participating entities Employees, Dependents, and Policies.
+  - d. **True**, by definition.
+
+q1_2: |
+  Chancellor Dirks wants you to explain how a relational database management system, (e.g. Postgres) works. Dirks is familiar with reading ER diagrams, so we've created the diagram below, but it is missing a few edges.
+  <hr class="s2" />
+  ![ER diagram](/img/cs186/mt2-sp15-q1-1.png)
+  <hr class="s2" />
+  Answer questions 2 to 5 choosing the best option from the following multiple choice options:
+  <hr class="s2" />
+  ![ER diagram](/img/cs186/mt2-sp15-q1-2.png)
+  <hr class="s2" />
+  2. [2 points] What is the correct edge between TableRow and Table?
+
+q1_2_s: |
+  **A** - A table has 0 or more rows.
+
+q1_3: |
+  3. [2 points] What is the correct edge between TableColumn and Table?
+
+q1_3_s: |
+  **C** - A table has 1 or more columns.
+
+q1_4: |
+  4. [2 points] What is the correct edge between Column and PrimaryKey?
+
+q1_4_s: |
+  **B** - Each column participates in at most one primary key. There is at most one primary key, there may be none, and even if there is one not every column will be in it.
+
+q1_5: |
+  5. [2 points] What is the correct edge between Table and PrimaryKey?
+
+q1_5_s: |
+  **A** - A table may have a primary key with 0 columns (meaning it doesn't have a primary key), 1 column, or many columns, so the table can participate in the PrimaryKey relationship 0 or more times.
+
+q1_6: |
+  ## ER to SQL
+  6. [6 points] On your answer sheet, fill in the blanks to convert the **Row entity set**, and the **TableColumn relationship set** in the ER diagram above into SQL tables. You may not need all the blanks.
+  ```
+  CREATE TABLE Row (
+    ________________________________
+    ________________________________
+    PRIMARY KEY (___________________)
+  );
+
+  CREATE TABLE TableColumn (
+    ________________________  STRING,
+    ________________________________,
+    col_position INTEGER,
+    FOREIGN KEY (___________________)
+      REFERENCES Table
+    FOREIGN KEY (___________________)
+      REFERENCES ___________________
+    PRIMARY KEY (___________________)
+  );
+  ```
+
+q1_6_s: |
+  ```
+  CREATE TABLE Row (
+    <b>rid INTEGER</b>
+    PRIMARY KEY (<b>rid</b>)
+  );
+  CREATE TABLE TableColumn (
+    <b>tname STRING,</b>
+    <b>cname STRING,</b>
+    col_position INTEGER,
+
+    FOREIGN KEY (<b>tname</b>)
+      REFERENCES Table
+    FOREIGN KEY (<b>cname</b>)
+      REFERENCES <b>Column</b>
+    PRIMARY KEY (<b>tname, cname</b>)
+  );
+  ```
+  Our intended answer for the PRIMARY KEY of Table Column was (tname, cname) since we usually expect a column to be identified by the table it belongs to, e.g. Students.id.
+  <hr class="s2" />
+  However, since cname was shown to be a key for the Column entity, meaning that all column
+  names are unique in this model, we also accepted `cname` and (`cname`, `col_position`) as answers for the PRIMARY KEYs.
+  <hr class="s2" />
+  To make our ER diagram more accurate for Chancellor Dirks to understand, a better choice would be to make Column a weak-entity of Table. It's a good exercise to think about what this would look like in the diagram and in SQL.
+
+q2_1: |
+  ## II. FDs & Normalization [16 points]
+  1. [4 points] Consider the attribute set R = ABCDEF and the functional dependency set F =  {AD → B, A → E, C → E, DEF → A, F → D}. Find a candidate key of R.
+
+q2_1_s: |
+  **FC**
+  <hr class="s1" />
+  Notice that FC is not on the right-hand side of any of the given FDs. This means that any key of R must contain FC. Find the closure of FC to see that FC -> R. Thus, FC is a candidate key. Any other key would be superkey, since a key must contain FC.
+
+q2_2: |
+  2. [6 points] Given the attribute set R = ABCDEFGH and the functional dependency set F = {BC → GH, AD → E, A → H, E → BCF, G → H}, decompose R into BCNF by decomposing *in the order of the given functional dependencies.*
+
+q2_2_s: |
+  **ADE, BCEF, GH, BCG**
+  <hr class="s1" />
+  BC -> GH violates BCNF, decompose.
+  <hr class="s1" />
+  Relations: ABCDEF BCGH
+  <hr class="s1" />
+  AD -> E does not violate BCNF because AD is a superkey, skip. A -> H No relation contains AH, skip.
+  <hr class="s1" />
+  E -> BCF violates BCNF, decompose.
+  <hr class="s1" />
+  Relations: ADE EBCF BCGH
+  <hr class="s1" />
+  G -> H violates BCNF, decompose. ADE EBCF BCG GH
+
+q2_3: |
+  3. [6 points] Given the attribute set R = ABCDEF and the functional dependency set F = {B → D, E → F, D → E, D → B, F → BD}.
+  <hr class="s1" />
+  a. Is the decomposition ABDE, BCDF lossless?
+  <hr class="s1" />
+  b. If not, what functional dependency could you add to make it lossless?
+
+q2_3_s: |
+  a. **No**, it is lossy.
+  <hr class="s1" />
+  ABDE $\cap$ BCDF = BD
+  <hr class="s1" />
+  BD -> BDEF, which is *not* equivalent to either ABDE or BCD
+  <hr class="s1" />
+  b. **Any or all of BDEF -> Any or all of AC**
+  <hr class="s1" />
+  For example some valid answers were: B -> C, B -> A, BEFD -> AC, etc.
+  <hr class="s1" />
+  To be lossless, we want BD -> ABDE or BD -> BCDF. We know that BD -> BDEF, so
+  either want BD -> ABDEF or BD -> CBDEF (or both!). This will be satisfied if
+  BDEF -> A and/or C.
+
+q3_1: |
+  ## III. Transactions/CC [17 points]
+  ![transactions](/img/cs186/mt2-sp15-q3-1.png)
+  <hr class="s2" />
+  1. [4 points] Consider the preceding schedule for three transactions. R indicates a read of a page, W indicates a write of a page, and COM indicates a commit.
+  <hr class="s1" />
+  a. Draw the arrows for the dependency graph for this schedule.
+  <hr class="s2" />
+  ![dependency graph](/img/cs186/mt2-sp15-q3-4.png)
+  <hr class="s2" />
+  b. Is the schedule conflict serializable?
+
+q3_1_s: |
+  a. The dependency graph is shown below.
+  <hr class="s2" />
+  ![graph](/img/cs186/mt2-sp15-q3-6.png)
+  <hr class="s2" />
+  b. Yes, it is conflict serializable, because the dependency graph has no directed cycles.
+
+q3_2: |
+  2. [5 points] Which of the following changes to the above schedule will result in a schedule that is possible using strict two-phase locking? (**Mark all that apply**)
+  <hr class="s1" />
+  A. Make T1 abort instead of commit
+  <hr class="s1" />
+  B. Make T2 abort instead of commit
+  <hr class="s1" />
+  C. Remove R(A) from T1 and T3
+  <hr class="s1" />
+  D. Remove T2 from the schedule
+  <hr class="s1" />
+  E. Make T3 write to a page D instead of page B
+
+q3_2_s: |
+  **C, D.**
+  <hr class="s1" />
+  A and B are incorrect because strict 2PL deals with acquisition of locks before a transaction commits or aborts. C is correct because if T1 and T3 do not acquire a shared lock to read page A, then T2 can acquire an exclusive lock to write page A before T1 and T3 commit. Similarly, D is correct because if we remove T2 from the schedule, then no transaction needs an exclusive lock on page A. E is incorrect because T2 and T3 can already acquire an exclusive lock to write page B, and even if T3 writes to page D instead of page B, strict 2PL still prevents T2 from completing.
+
+q3_3: |
+  ![schedule](/img/cs186/mt2-sp15-q3-2.png)
+  3. [3 points] Consider the preceding schedule. A, B, and C are positive integers. Each transaction reads in two integers, adds them, and writes the result. Which of the following statements is/are true? (**Mark all that apply**)
+  <hr class="s1" />
+  A. The schedule avoids cascading aborts.
+  <hr class="s1" />
+  B. The schedule is conflict serializable.
+  <hr class="s1" />
+  C. The schedule is equivalent to some serial schedule.
+
+q3_3_s: |
+  **A.**
+  <hr class="s1" />
+  A is correct because after each page is written, no transaction reads that page, so if any transaction aborts, then no other transactions need to abort. B is incorrect because in the dependency graph, there is an edge from T1 to T2 (A), and an edge from T2 to T1 (B), so the graph has a directed cycle. C is incorrect because there is no way to interleave the reads and writes of the transactions and have the same outputs in integers A, B, and C.
+
+q3_4: |
+  ![schedule](/img/cs186/mt2-sp15-q3-3.png)
+  4. [5 points] Assume that we are using strict two-phase locking, and the objects being locked are pages. RS indicates a request for a shared lock on a page, and RX indicates a request for an exclusive lock on a page. No transactions commit or abort during this time.
+  <hr class="s1" />
+  a. Draw the arrows for the waits-for graph at the end of this schedule.
+  <hr class="s2" />
+  ![waits-for graph](/img/cs186/mt2-sp15-q3-5.png)
+  <hr class="s2" />
+  b. Does the schedule lead to deadlock?
+
+q3_4_s: |
+  a. The waits-for graph is shown below.
+  <hr class="s2" />
+  ![schedule](/img/cs186/mt2-sp15-q3-7.png)
+  <hr class="s2" />
+  b. Yes, it leads to deadlock, because there is a cycle in the waits-for graph.
+
+q4_1: |
+  ## IV. Text Search [14 points]
+  We have a search engine with a corups containing **only** the documents:
+  - Document ID <u>1</u>: "A time to plant and a time to reap"
+  - Document ID <u>2</u>: "Time for you and time for me"
+  - Document ID <u>3</u>: "Time flies"
+  <hr class="s2" />
+  1a. [2 points] Given that the stemmed version of the word "flies" is the term "fly", what is the TF-IDF of "fly in document 3?
+
+q4_1_s: |
+  **1 log (3)**
+  <hr class="s1" />
+  “fly” appears once (stemmed from “flies”) in document 3, so its TF is 1. It appears only in document 3, so its IDF is log (3/1) = log (3).
+
+q4_2: |
+  1.b [2 points] what is the TF-IDF of "time" in document 1?
+
+q4_2_s: |
+  **2 log (1)**
+  <hr class="s1" />
+  “time” appears twice in document 1, so its TF is 2. It appears in three documents, so its IDF is log (3/3) = log (1).
+
+q4_3: |
+  2. [4 points] We want to perform cosine similarity ranking on these documents, so we represent each document with a vector containing the TF-IDFs of different terms in our documents. Which of the following lists of terms would allow us to correctly compute cosine similarity? Assume that standard stop words include “a”, "and", "to", and "for". (**Mark all that apply**)
+  - A. ("plant", "you", "fly", "me", "reap", "time")
+  - B. ("time", "plant", "reap", "you", "me", "fly")
+  - C. ("time", "plant", "you", "me", "fly")
+  - D. ("plant", "reap", "you", "me", "fly")
+
+q4_3_s: |
+  **A, B, D**
+  <hr class="s1" />
+  All we care about when making cosine similarity vectors are the sets of terms themselves, so permuting the orderings of terms in a vector will not influence cosine similarity. (You may also observe that a dot product is agnostic to the ordering of terms in a vector.) After we remove stop words and perform stemming, lists A and B contain all the relevant terms that we would care about in some query against this corpus.
+  <hr class="s1" />
+  Not all the terms need to be present, however. In fact, list D is sufficient for computing cosine similarity: with careful observation (question 1(b) is a hint) you could realize that since “time” showed up in every document, its TF-IDF would always be 0, and consequently “time” cannot affect the result of our cosine similarity ranking.
+  <hr class="s1" />
+  List C was not a valid answer; the absence of “reap” would for example cause queries including that term to rank improperly.
+
+q4_4: |
+  3. [4 points] Suppose we issue our engine the query “plant OR fly”. In the spaces provided, write **only** the document IDs which are returned by this query, in order of relevance **as determined by cosine similarity**. (You may want to leave some spaces **blank**.) Break ties with smaller document IDs first, and then larger document IDs.
+  <hr class="s1" />
+  ________, ________, ________
+
+q4_4_s: |
+  **3, 1, <blank>**
+  <hr class="s1" />
+  First, observe that document 2 is never returned by our query: it contains neither the term “plant” nor the word “fly”.
+  <hr class="s1" />
+  Now we can compute cosine similarity between the document “plant OR fly” and both documents 1 and 3. This would involve computing the TF-IDFs of each of the relevant terms in documents 1 and 3 and then normalizing the resulting vector, after which you would compute a dot product on these vectors with the query document.
+  <hr class="s1" />
+  Instead of doing the math to find these vectors, you could also have noticed that “plant” and “fly” have the same TF-IDF in documents 1 and 3, but document 1 has another “important” term in it (“reap”) while “fly” is the only important term in document 3 (discounting “time” in either document). Then since “plant” and “fly” had the same TF-IDF, but document 1 was “longer”, the TF-IDF of “plant” would have been scaled by a smaller normalizing factor than “fly”.
+
+q4_5: |
+  4a. [2 points] For this question, assume that we have a text index with the following schema:
+  ```
+  Files(<u>docID</u> text, content text)
+  InvertedFile(<u>word</u> text, docID text)
+  B+-tree Alternative 2 on Files
+  B+-Tree w/ "postings list" at leaves on InvertedFile.word
+  ```
+  If we have two terms A and B, the exclusive OR operator "XOR" returns all documents which contain *either* term "A" or term "B", but not *both*. Suppose we run the query "Berkeley XOR Stanford" on our search engine. Fill in the spots on your answer sheet corresponding to the missing parts of the generated query plan below (indicated by (i) and (ii))
+  ![query plan](/img/cs186/mt2-sp15-q4-1.png)
+
+q4_5_s: |
+  ![query plan tree](/img/cs186/mt2-sp15-q4-2.png)
+
+q4_6: |
+  4b. [2 points] One of the following join algorithms would be ideal for evaluating the logical operator at the top of our query plan $⋈_{InvertedFile.docID=Files.docID}$. Which one should we choose? (You can ignore issues of parallelism when answering this question, though they don’t really affect the answer.)
+  <hr class="s1" />
+  - A. Block Nested Loops join
+  - B. Index Nested Loops join
+  - C. Hash join
+  - D. Sort Merge join
+
+q4_6_s: |
+  **B.**
+  As specified above, and as is usual for text search engines, our Files relation is conveniently indexed (by a B+ tree). Index Nested Loops Join will work best in this scenario, streaming result document IDs against this index.
+
+q5_1: |
+  ## V. Query Optimization [17 points]
+  Suppose that "System R" assumptions about uniformity and independence from lecture hold. Assume that costs are estimated as a number of I/Os, without differentiating random and sequential I/O costs.
+  <hr class="s2" />
+  Consider the following relational schema and statistics:
+  ```
+  Students (<u>sid</u>, name, age, gpa, year)
+  Courses  (<u>cid</u>, name, professor)
+  Enrollment (<u>sid, cid</u>, credits)
+  ```
+
+  <table>
+    <thead>
+      <tr><th></th><th>Tuples</th><th>Tuples / Page</th><th>Ranges</th><th>Distinct Values</th><th>Indexes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>`Students`</td><td>40,000</td><td>20</td><td>SID: 0 to 40,000<br/>age: 15 to 44</td><td>gpa: 500<br/>age: 30</td><td>unclustered B+-tree on age<br/>(800 pages, d = 4)<br/>clustered B+-tree on sid<br/>(400 pages, d = 3)</td></tr>
+      <tr><td>`Enrollment`</td><td>60,000</td><td>5</td><td>-</td><td>-</td><td>clustered B+-tree on cid<br/>(200 pages, d = 2)</td></tr>
+      <tr><td>`Courses`</td><td>800</td><td>40</td><td>-</td><td>professor: 100<br/>name: 200</td><td>unclustered B+-tree on prof<br/>(100 pages, d = 3)</td></tr>
+    </tbody>
+  </table>
+
+  1. Suppose we run the following query. (<> is the SQL syntax for "not equals").
+  ```
+  SELECT *
+    FROM Courses
+  WHERE name <> "CS 186"
+    AND professor = "Hellerstein";
+  ```
+  a. [2 points] What is the selectivity of each conjunct inthe WHERE clause?
+
+q5_1_s: |
+  name: .995 (199/200)
+  <hr class="s1" />
+  professor: .01 (1/100)
+
+q5_2: |
+  b. [2 points] Which single table access plan would we choose?
+  - A) Sequential/File Scan on Courses
+  - B) Sequential/File Scan on Enrollment
+  - C) Index scan of unclustered B+Tree on Courses.professor
+  - D) Index scan of clustered B+Tree on Enrollment.cid
+
+q5_2_s: |
+  C) Index scan of unclustered B+Tree on Courses.professor
+
+q5_3: |
+  2. [6 points] Suppose we run the following query. On the line labeled “considered”, mark the letters of all 2-table subplans that will be considered. On the line labeled “chosen”, mark the letters of all 2-table subplans that are chosen. Ignore interesting orders.
+  ```
+  SELECT *
+    FROM Students S, Courses C, Enrollment E
+  WHERE S.age > 40
+    AND C.name LIKE "CS%"
+    AND S.sid = E.sid
+    AND E.cid = C.cid;
+  ```
+  - A) S ⨝ C (200,000 IOs)
+  - B) C ⨝ S (300,000 IOs)
+  - C) S ⨝ E (400,000,000 IOs)
+  - D) E ⨝ S (500,000,000 IOs)
+  - E) C ⨝ E (300,000 IOs)
+  - F) E ⨝ C (400,000 IOs)
+
+q5_3_s: |
+  Considered: C, D, E, F
+  <hr class="s1" />
+  Chosen: C, E
+
+q5_4: |
+  3. [3 points] Now, mark the letters for *all* three-table access plans that would be considered, and write down the letter of the final query plan that would be chosen. (Cost given are cumulative for the full query. Again, ignore interesting orders in formulating your answer.)
+  - A) E ⨝ (S ⨝ C) (3,900,000,000 IOs)
+  - B) E ⨝ (C ⨝ S) (6,000,000,000 IOs)
+  - C) (C ⨝ S) ⨝ E (5,000,000,000 IOs)
+  - D) (S ⨝ C) ⨝ E (8,000,000,000 IOs)
+  - E) C ⨝ (S ⨝ E) (7,000,000,000 IOs)
+  - F) C ⨝ (E ⨝ S) (9,000,000,000 IOs)
+  - G) (S ⨝ E) ⨝ C (7,500,000,000 IOs)
+  - H) (E ⨝ S) ⨝ C (8,000,000,000 IOs)
+  - I) S ⨝ (C ⨝ E) (3,500,000,000 IOs)
+  - J) S ⨝ (E ⨝ C) (6,000,000,000 IOs)
+  - K) (C ⨝ E) ⨝ S (4,000,000,000 IOs)
+  - L) (E ⨝ C) ⨝ S (10,000,000,000 IOs)
+
+q5_4_s: |
+  Considered: G, K
+  <hr class="s1" />
+  Chosen: K
+
+q5_5: |
+  4. [4 points] **True or False**:
+  - a. If we had considered interesting orders in the query of Question 3, it would have further
+  pruned the number of plans chosen.
+  - b. In Question 3, it would be beneficial to consider interesting orders on C.name during
+  optimization.
+  - c. In Question 3, it would be beneficial to consider interesting orders on C.cid during
+  optimization.
+  - d. A modern optimizer should consider “interesting hashes”, since the output of a hash- based operator (e.g. hash join) is organized in a way that would decrease the cost of performing a subsequent hash-based operator (e.g. group-by).
+
+q5_5_s: |
+  - a. False.
+  - b. False.
+  - c. True.
+  - d. True.

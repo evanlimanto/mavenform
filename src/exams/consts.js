@@ -38,6 +38,16 @@ const exams = {
   },
 
   'cs186': {
+    'mt2': {
+      'Spring 2016': {
+        'id': 'sp16',
+        'profs': 'Hellerstein',
+      },
+      'Spring 2015': {
+        'id': 'sp15',
+        'profs': 'Hellerstein',
+      },
+    },
     'mt1': {
       'Spring 2016': {
         'id': 'sp16',
@@ -55,12 +65,6 @@ const exams = {
         'id': 'sp12',
         'profs': 'Hellerstein',
       },
-    },
-    'mt2': {
-      'Spring 2016': {
-        'id': 'sp16',
-        'profs': 'Hellerstein',
-      }
     }
   },
 

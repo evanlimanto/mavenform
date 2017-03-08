@@ -144,6 +144,7 @@ class ExamContent extends Component {
             }
             var qcontent = examContent[key] || '';
             var solution = examContent[key + "_s"] || '';
+            console.log(solution);
             if (useMarkdown) {
                 qcontent = preprocess(qcontent, {renderer});
                 solution = preprocess(solution, {renderer});
