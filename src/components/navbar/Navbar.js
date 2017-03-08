@@ -47,4 +47,11 @@ class Navbar extends Component {
   }
 }
 
+Navbar.propTypes = {
+  course: React.PropTypes.string,
+  showSolutions: React.PropTypes.bool,
+  toggleAppModeCallback: React.PropTypes.func,
+  toggleAllSolutionsCallback: React.PropTypes.func,
+};
+
 export default Navbar;

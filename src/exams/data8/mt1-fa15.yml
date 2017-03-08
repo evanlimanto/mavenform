@@ -1,8 +1,8 @@
 course: 'data8'
-ref: 'mt1-sp15'
+ref: 'mt1-fa15'
 
 type: 'mt1'
-term: 'sp15'
+term: 'fa15'
 prof: 'Adhikari'
 
 questions: {
@@ -29,7 +29,7 @@ parts: {
 q1_1: |
   **1.** The list **cards** contains credit card numbers. Each element is a 16-digit integer; for example,
   "**1234567891011121**"" and not "**1234 5678 9101 1121**".
-
+  <hr class="s1" />
   a) Write a Python expression that evaluates to the total number of cards in the list.
 
 q1_1_s: |
@@ -43,7 +43,6 @@ q1_2: |
 q1_2_s: |
   ```
   def last_four(n):
-
     return "Card ending in " + str(n)[-4:]
   ```
 
@@ -56,17 +55,17 @@ q2_1: |
 
   Page 2 of this exam contains six empirical histograms based on samples drawn uniformly at random
   with replacement from the population of incomes above.
-
+  <hr class="s1" />
   Match each description in the list below with the number of the appropriate histogram on Page 2.
-
+  <hr class="s1" />
   Explain your choices briefly.
 
   <hr class="s2" />
   **A**: empirical distribution of the incomes in a sample of size 100.
-
+  <hr class="s1" />
   **B**: empirical distribution of the smallest income in a sample of size 100, based on 2000 replications
   of the sampling process.
-
+  <hr class="s1" />
   **C**: empirical distribution of the incomes in a sample of size 600.
   <hr class="s2" />
   ### Empirical histograms for Problem 2
@@ -74,10 +73,10 @@ q2_1: |
 
 q2_1_s: |
   **A: 2; B: 4; C: 5**
-
+  <hr class="s1" />
   **A and C**: The empirical histogram of a large random sample looks like the population; bigger samples
   look more like the population than smaller ones do.
-
+  <hr class="s1" />
   **B**: The minimum of 100 random draws will be pretty small, certainly not balancing to the right of 50 as
   the rest of the histograms are.
 
@@ -90,18 +89,18 @@ q3_1: |
   **a)** The values of the incomes are contained in an array called **incomes**. The list of four numbers
   below consists of the results of the calls **np.median(incomes)**, **np.mean(incomes)**, and **np.std(incomes)**,
   as well as an irrelevant number, in scrambled order. Which is which, and why?
-
+  <hr class="s1" />
   (i) 5.01
-
+  <hr class="s1" />
   (ii) 26.71
-
+  <hr class="s1" />
   (iii) 56.11
-
+  <hr class="s1" />
   (iv) 60.07
 
 q3_1_s: |
   **mean: 60.07; &nbsp;median: 56.11; &nbsp;SD: 26.71**
-
+  <hr class="s1" />
   The histogram won’t balance at 26 or below.
   Because of the right hand tail, the mean will be bigger than the median, so the mean is 60.07 and the median is 56.11.
   Chebychev says that “mean plus or minus 2 SDs” includes at least 75% of the data, which rules out 5.01 as a candidate for the SD.
@@ -119,9 +118,9 @@ q3_2: |
 
 q3_2_s: |
   Total area of the bars other than 40-70:
-
+  <hr class="s1" />
   0.0013 \* (20 − 0) + 0.0108 \* (40 − 20) + 0.0077 \* (100 − 70) + 0.0015 \* (200 − 100) = A, say.
-
+  <hr class="s1" />
   Height of missing bar: (1 − A)/(70 − 40)
 
 q4_1: |
@@ -162,19 +161,12 @@ q5_1: |
 q5_1_s: |
   ```
   def conclusion2(p):
-
     CUTOFF = .02
-
     if 0 <= p and p <= CUTOFF:
-
         return "the data don’t support the null"
-
     elif CUTOFF < p and p <= 1:
-
         return "the data support the null"
-
     else:
-
         return "not a P-value"
   ```
 
@@ -199,7 +191,7 @@ q7_1: |
   To test these assumptions, suppose that you buy 100 boxes of the cereal, and get 27 bears, 20 ladybugs,
   21 cars, and 32 dinosaurs. Use these data to set up a test of whether the assumptions are valid, as
   follows.
-
+  <hr class="s1" />
   **a)** State the null hypothesis as a precise statement about chances.
 
 q7_1_s: |
@@ -239,9 +231,9 @@ q8_1: |
 
 q8_1_s: |
   (i) &nbsp;&nbsp;null
-
+  <hr class="s1" />
   (ii) &nbsp;test statistic
-
+  <hr class="s1" />
   (iii) 0.09 or more, where 0.09 comes from a calculation of the TVD, which we used in problem 7b: 0.5 ∗ (|0.27 − 0.25| + |0.2 − 0.25| + |0.21 − 0.25| + |0.32 − 0.25|)
   
 q8_2: |
@@ -255,7 +247,7 @@ q8_2: |
 
 q8_2_s: |
   (iv) null
-
+  <hr class="s1" />
   (v) &nbsp;approximate
-
+  <hr class="s1" />
   (vi) empirical distribution

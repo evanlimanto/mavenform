@@ -192,6 +192,14 @@ class ExamContent extends Component {
   }
 }
 
+ExamContent.propTypes = {
+  exam: React.PropTypes.string,
+  course: React.PropTypes.string,
+  type: React.PropTypes.string,
+  appMode: React.PropTypes.bool,
+  showSolutions: React.PropTypes.bool,
+};
+
 class Exam extends Component {
   constructor(props) {
     super(props);
@@ -273,5 +281,9 @@ class Exam extends Component {
     );
   }
 }
+
+Exam.propTypes = {
+  params: React.PropTypes.object,
+};
 
 export default Exam;

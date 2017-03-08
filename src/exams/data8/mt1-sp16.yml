@@ -28,13 +28,12 @@ q1_1: |
   `array ([ 1485053 , 2377549 , 3426861 , ... , 23667902 , 29760021 , 33871648])`
   <hr class="s2" />
   **Write a Python expression below each of the following descriptions that computes its value.**
-
+  <hr class="s1" />
   The first one is provided as an example. Do not include numbers above (e.g., 1485053) in your solutions.
   <hr class="s2" />
   * The population in 1900
-
-   &nbsp;`ca.item(0)`
-
+  <hr class="s1" />
+  &nbsp;&nbsp;&nbsp;&nbsp;`ca.item(0)`
   <hr class="s1" />
   * The population change from 1940 to 1960, expressed as a number of persons (not a proportion).
 
@@ -84,15 +83,10 @@ q2_1: |
   <hr class="s2" />
   ```
   def diff( height1, height2 ):
-
   &nbsp;&nbsp;&nbsp;&nbsp;return abs( height1 - height2 )
-
   diffs = Table( [’Absolute Differences’] )
-
   for i in np.arange( twins.num_rows ):
-
   &nbsp;&nbsp;&nbsp;&nbsp;diffs.append([diff(twins.column(0).item(i), twins.column(1).item(i))])
-
   np.mean( diffs.column(0) )
   ```
   <hr class="s2" />
@@ -116,7 +110,7 @@ q2_2: |
   <hr class="s2" />
   Write a Python expression below each of the following descriptions that computes its value.
   The first one is provided for you. You *may* use up to two lines and introduce variables.
-
+  <hr class="s1" />
   * The average duration of a rental. `total_duration = sum(trip.column(2))`
     <hr class="s1" />
     `total_duration / trip.num_rows`
@@ -152,7 +146,7 @@ q3_1: |
   <hr class="s2" />
   **(a) (8 pt)** Write the proportion of trips that fall into each range of durations below. *Show your work*. If it
   is not possible to tell from the histograms, instead write **Not enough information**.
-
+  <hr class="s1" />
   * Between 200 (inclusive) and 400 (exclusive) seconds
 
 q3_1_s: |
@@ -183,7 +177,7 @@ q3_5: |
   Frank Underwood conducts a poll to estimate what proportion of voters approve of his America
   Works program. He found that the voters he polled give the program an average grade of 6.5 out of 10,
   and the Standard Deviation in the grades is 1.5.
-
+  <hr class="s1" />
   * No matter how the distribution of grades looks, what is the maximum proportion of those polled that could have given the program a grade lower than 2 according to Chebyshev’s inequality?
 
 q3_5_s: |
@@ -199,7 +193,7 @@ q3_7: |
   **(c) (3 pt)**
   A study followed 369 people with cardiovascular disease, randomly selected from hospital patients.
   A year later, those who owned a dog were four times more likely to be alive than those who didn’t.
-
+  <hr class="s1" />
   * Circle *True* or *False*: This study is a randomized controlled experiment.
 
 q3_7_s: |
@@ -265,16 +259,16 @@ q4_3_s: |
 q4_4: |
   **(b) (2 pt)** How would the fitted value of points per game for a player who played 34 minutes per game change
   if Stephen Curry were removed from the table and the regression line recomputed? *Circle one.*
-
+  <hr class="s1" />
   (a) Increase
-
+  <hr class="s1" />
   (b) Decrease
-
+  <hr class="s1" />
   (c) Stay the same
-
+  <hr class="s1" />
   (d) Not enough information
 
 q4_4_s: |
   **(b) Decrease**
-
+  <hr class="s1" />
   Since the regression line minimizes the sum of squared errors, and Stephen Curry’s squared error is positive at $ x = 34 $ minutes, removing this term from the objective function would result in a smaller fitted value.

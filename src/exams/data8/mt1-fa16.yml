@@ -72,17 +72,17 @@ q2_1: |
 
 q2_1_s: |
   For the version where we are drawing 3 samples from a set of 4 colors:
-
+  <hr class="s1" />
   There are 4 different ways to get all the same color on 3 samples:
-
+  <hr class="s1" />
   $$P(\text{all same color}) = P(\text{all blue}) + P(\text{all green}) + P(\text{all red}) + P(\text{all purple})$$
-
+  <hr class="s1" />
   Now, let’s consider one of these probabilities. In order to get 3 blue’s, we have to get a blue on the first draw, a blue on the second draw, and a blue on the third draw. Since we’re sampling with replacement, each of these happens with probability $\frac{1}{4}$:
 
   $$P(\text{all blue}) = P(\text{first draw blue}) \* P(\text{second draw blue}) \* P(\text{third draw blue}) = \frac{1}{4} \* \frac{1}{4} \* \frac{1}{4}$$
 
   We multiply here because we are taking proportions of possible outcomes: Out of all possible outcomes, $\frac{1}{4}$ of them draw blue on the first draw; of all outcomes that have a blue on the first draw, $\frac{1}{4}$ of them have a blue on the second draw, etc.
-
+  <hr class="s1" />
   The same is true for all four colors, so we get
 
   $$P (\text{all same color}) = \frac{1}{4}^{3} + \frac{1}{4}^{3} + \frac{1}{4}^{3} + \frac{1}{4}^{3} = 4 * \frac{1}{4}^{3} = \frac{1}{8}$$
@@ -126,13 +126,13 @@ q4_1: |
 
   <hr class="s2" />
   The interval [a, b) contains all values that are greater than or equal to a and less than b.
-
+  <hr class="s1" />
   **(a)** Which bin contains more players: [2, 4) or [4, 12)? **Explain** your choice.
 
 q4_1_s: |
-   Bin [4, 12) contains more players because the corresponding bar has a larger area than that of bin [2, 4).
-
-   The area of the first bar is less than 24 (2 times something less than 12) and the area of the second is greater than 24 (8 times something more than 3).
+  Bin [4, 12) contains more players because the corresponding bar has a larger area than that of bin [2, 4).
+  <hr class="s1" />
+  The area of the first bar is less than 24 (2 times something less than 12) and the area of the second is greater than 24 (8 times something more than 3).
 
 q4_2: |
   **(b)** To see some more detial in the [4, 12) range, the histogram will be redrawn with bins as shown below. The display includes the heights that are avilable from above.
@@ -144,7 +144,7 @@ q4_2: |
 
   <hr class="s2" />
   The expression **nba.num_rows** evaluates to 417.
-
+  <hr class="s1" />
   The expression **nba.where('SALARY', are.between(4, 6)).num_rows** evaluates to 56.
   <hr class="s2" />
   If possible, provide a numerical expression for each imssing height (do not simplify the arithmetic). If this is not possible, explain why not.
@@ -156,10 +156,10 @@ q4_2_s: |
 
   4 (b) (ii). For the version of the midterm where the bins are [4, 6) and [6, 12):
 
-  $$A = (2−0)\*(17.63) + (4−2)\*(11.39) + (6−4)\*(parti) + (18−12)\*(1.6) + (26−18)\*(0.45) (100 − A) / (12−6)$$
+  $$A = (2−0)\*(17.63) + (4−2)\*(11.39) + (6−4)\*(\text{part i}) + (18−12)\*(1.6) + (26−18)\*(0.45) (100 − A) / (12−6)$$
 
   Alternatively,
-  $$((12−4)\*(3.6) − (6−4)\*(part i)) / (12−6)$$
+  $$((12−4)\*(3.6) − (6−4)\*(\text{part i})) / (12−6)$$
 
 q5_1: |
   **5.** In a Public Health Service study of the effect of smoking, participants were separated into groups according to gender and age. In each sdubgroup, the observation was the same - those who had never smoked were on average somewhat more healthy than the current smokers, but the current smokers were on average quite a bit more healthy than those who had recently stopped smoking.
@@ -168,7 +168,7 @@ q5_1: |
 
 q5_1_s: |
   **Of course not!  They should quit.**
-
+  <hr class="s1" />
   **Plausible explanation:**  Those who have quit had a good reason to (it’s very difficult to quit even if you know you need to): their health  <u>became so bad</u> from smoking, that this habit was impeding w/ everyday activity. They are on the path to recovery, but are coming from an even more adverse condition.
 
 q6_1: |
@@ -183,12 +183,12 @@ q6_1: |
   **(a)** Provide **null** and **alternative** hypotheses that reflect the views of the two clinicians.
   <hr class="s2" />
   **Null:** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ____________________
-
+  <hr class="s1" />
   **Alternative:** ____________________
 
 q6_1_s: |
   **Null hypothesis**:  The method is not biased. Appointments are equally likely to be assigned to the new system as they are to the old; i.e, there is an equally likely chance that an appointment is made on Monday, Wednesday or Friday as there is on Tuesday, Thursday, Saturday. (Note: the null hypothesis must be a fully specified chance model)
-
+  <hr class="s1" />
   **Alternative hypothesis**:  The method is biased. Appointments are  not equally likely to be assigned to the new system as they are to the old; i.e., the method is biased against appointments made on Monday, Wednesday or Friday. (Note: the alternative specifies the direction of the bias, in this case against appointments made on Monday, Wednesday or Friday)
 
 
@@ -196,56 +196,43 @@ q6_2: |
   **(b)** A test of the hypotheses in part (a) will be performed. The test statistic is the **number of requests assigned to the new system.**
   <hr class="s2" />
   Fill in the blanks in the code below so that the output of the final line is the empirical P-value of the test. Make sure your code is consistent with the hypotheses in part (a).
-
+  <hr class="s1" />
   Two arrays have been created for you. You are welcome to use their names in your code if you wish.
   - The array **array2** consists of two entries, one of which is the string **'New'** and the other is **'Old'**.
   - The array **array489** consists of 489 entries, 212 of which are **'New'** and 277 are **'Old'**.
-
+  <hr class="s1" />
   Here is the code for you to complete.
 
   ```
   stats = make_array()
 
   for i in np.arange(5000):
-
       draws = np.random.choice(____________________, ____________________)
-
-      number_new = \
-        np.count_nonzero(________________________________________)
-
+      number_new = np.count_nonzero(________________________________________)
       stats = np.append(____________________, number_new)
-
-  empirical_P = \
-    np.____________________________________________________________
-
+  empirical_P = np.____________________________________________________________
   empirical_P
   ```
 
 q6_2_s: |
   ```
   values = make_array()
-
   for i in np.arange(10000):
-
       sample = np.random.choice(array2, 477)
-
       number_new = np.count_nonzero(sample == "New")
-
       values = np.append(values, number_new)
-
   empirical_P = np.count_nonzero(values <= 206)/10000
-
   empirical_P
   ```
 
   **For other versions of the exam:**
-
+  <hr class="s1" />
   477 corresponds to 492 (white), 489 (off-white)
-
+  <hr class="s1" />
   sample corresponds to chosen (white), draws (off-white)
-
+  <hr class="s1" />
   10000 corresponds to 15000 (white), 5000 (off-white)
-
+  <hr class="s1" />
   206 corresponds to 211 (white), 212 (off-white)
 
 q7_1: |
@@ -257,7 +244,6 @@ q7_1: |
   <hr class="s2" />
   <p align="center">![Histograms of net winnings](/img/data8/mt1-fa16-q7-1.png)</p>
   <hr class="s2" />
-
   Justification:
 
 q7_1_s: |
@@ -265,6 +251,7 @@ q7_1_s: |
   the net gain should be zero (not [the histogram centered at 20]). The further we deviate
   from zero, the less the probability should be (probability of winning \$60 is $(\frac{1}{3})^{60}$,
   which is very small, so not [the histogram that’s roughly uniform on -\$60 to \$60]).
+  <hr class="s1" />
   There is a chance of winning -\$60 to \$60, so the range should be greater than that of
   [the histogram that went from -\$1 to \$1]. This leaves [the histogram that’s bell-shaped and centered at 0], which makes sense, as it is central at 0, follows a Gaussian distribution, and has a reasonable range (chance of winning > \$20 and < -\$20 is too low to see)."
 
@@ -292,7 +279,7 @@ q8_1: |
   ```
 
   Now assume you have created **fl_voters** and **fl_dist** correspondingly for Florida. There is no need to write out the code for those.
-
+  <hr class="s1" />
   Find the total variation distance:
 
   ```

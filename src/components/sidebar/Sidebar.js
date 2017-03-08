@@ -56,7 +56,6 @@ class Sidebar extends Component {
     const isMCQ = this.props.isMCQ;
     const hasSolutions = this.props.hasSolutions;
     const exam = this.props.exam;
-    console.log(exam);
     const examDirPrefix = `${process.env.PUBLIC_URL}/exams/${course}/${examType}-${exam}`;
     const sidetabContainers = this.generateSidetabContainers();
     const toc = (isMCQ) ? (null) : (
@@ -92,5 +91,13 @@ class Sidebar extends Component {
     );
   }
 }
+
+Sidebar.propTypes = {
+  term: React.PropTypes.string,
+  course: React.PropTypes.string,
+  isMCQ: React.PropTypes.bool,
+  hasSolutions: React.PropTypes.bool,
+  exam: React.PropTypes.string,
+};
 
 export default Sidebar;

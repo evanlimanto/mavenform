@@ -50,4 +50,11 @@ class NavSidebar extends Component {
   }
 }
 
+NavSidebar.propTypes = {
+  course: React.PropTypes.string,
+  exam: React.PropTypes.string,
+  isExam: React.PropTypes.bool,
+  thisExamType: React.PropTypes.string,
+};
+
 export default NavSidebar;

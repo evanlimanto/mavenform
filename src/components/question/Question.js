@@ -61,6 +61,11 @@ class Solution extends Component {
   }
 }
 
+Solution.propTypes = {
+  examCode: React.PropTypes.string,
+  solution: React.PropTypes.string,
+};
+
 class Question extends Component {
   constructor(props) {
     super(props);
@@ -120,6 +125,14 @@ class Question extends Component {
     );
   }
 }
+
+Question.propTypes = {
+  course: React.PropTypes.string,
+  content: React.PropTypes.string,
+  examType: React.PropTypes.string,
+  term: React.PropTypes.string,
+  id: React.PropTypes.string,
+};
 
 class MultipleChoiceQuestion extends Component {
   constructor(props) {
@@ -194,5 +207,15 @@ class MultipleChoiceQuestion extends Component {
     );
   }
 }
+
+MultipleChoiceQuestion.propTypes = {
+  course: React.PropTypes.string,
+  content: React.PropTypes.string,
+  examType: React.PropTypes.string,
+  term: React.PropTypes.string,
+  solutionNum: React.PropTypes.number,
+  choices: React.PropTypes.array,
+  id: React.PropTypes.string,
+};
 
 export { Question, MultipleChoiceQuestion };
