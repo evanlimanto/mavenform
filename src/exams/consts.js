@@ -70,11 +70,6 @@ const exams = {
 
   'ugba10': {
     'marketing': {
-      'sp16': {
-        'term': 'Spring 2016',
-        'profs': 'Hopelain',
-        'note': 'Exam Only'
-      },
       'sp16p': {
         'term': 'Spring 2016',
         'profs': 'Briginshaw',
@@ -84,15 +79,20 @@ const exams = {
         'term': 'Fall 2015',
         'profs': 'Briginshaw'
       },
+      'sp11': {
+        'term': 'Spring 2011',
+        'profs': 'Robinson'
+      },
+      'sp16': {
+        'term': 'Spring 2016',
+        'profs': 'Hopelain',
+        'note': 'Exam Only'
+      },
       'sp15': {
         'term': 'Spring 2015',
         'profs': '-',
         'note': 'Exam Only'
       },
-      'sp11': {
-        'term': 'Spring 2011',
-        'profs': 'Robinson'
-      }
     }
   },
 
