@@ -203,9 +203,9 @@ const courses = {
   'cs186': 'Introduction to Database Systems',
   'ugba10': 'Principles of Business',
   'cs61a': 'The Structure and Interpretation of Computer Programs',
-  'ee16a': 'Designing Information Devices and Systems I',
   'cs61c': 'Great Ideas in Computer Architecture (Machine Structures)',
   'cs162': 'Operating Systems and Systems Programming',
+  'ee16a': 'Designing Information Devices and Systems I',
 };
 
 const examTypeToLabel = {
