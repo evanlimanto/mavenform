@@ -110,7 +110,7 @@ class Question extends Component {
     return (
       <div id={this.props.id} className="question">
         <div className="tooltip-container">
-          <a className="link material-icons" onClick={() => this.copyToClipboard(`${document.location.origin}/${course}/${examType}-${term}#${this.props.id}`)}>link</a>
+          <a className="link material-icons" onClick={() => this.copyToClipboard(`${document.location.origin}/${course}/${examType}/${term}#${this.props.id}`)}>link</a>
           {(this.state.copied) ?
             (<span className="tooltip-link blue">
                <Expire delay={2000}

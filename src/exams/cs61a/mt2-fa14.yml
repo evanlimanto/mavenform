@@ -70,7 +70,7 @@ q1_1_s: |
   |`Worker().work()`|`’Sir, I work’`|
   |`jack`|`Peon`|
   |`jack.work()`|`’Maam, I work’`|
-  |`john.work()[10:]`|`Peon, I work<br/>``’to gather wealth’`|
+  |`john.work()[10:]`|`Peon, I work`<br/>`’to gather wealth’`|
   |`Proletariat().work(john)`|`Comrade Peon, I work`<br/>`Peon`|
   |`john.elf.work(john)`|`’Comrade Peon, I work’`|
 
