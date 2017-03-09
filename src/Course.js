@@ -32,8 +32,11 @@ class Course extends Component {
     const available = map(exams[course], (examsOfType, examType) => {
       return map(examsOfType, (item, id) => {
         const term = item.term;
-        const note = item.note ? `(${item.note})` : (null);
+        var note = item.note ? `(${item.note})` : (null);
         const isAvailable = has(item, 'available') ? item.available : true;
+        if (has(item, 'available') && !item.available) {
+          note = '';
+        }
         const url = `/${course}/${examType}/${id}`;
         if (!isAvailable) {
           return (
@@ -41,7 +44,7 @@ class Course extends Component {
               <td><a>{examTypeToLabel[examType]} <i>{note}</i></a></td>
               <td><a>{term}</a></td>
               <td><a>{item.profs}</a></td>
-              <td><a><h6 className="table-link">AVAILABLE SOON</h6></a></td>
+              <td><a><i>(Available by 03/09)</i></a></td>
             </tr>
           );
         }

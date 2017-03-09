@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 import { handleEvent } from '../../utils';
 import { exams, examTypeToLabel, courseIDToLabel } from '../../exams';
-import { map } from 'lodash';
+import { has, map } from 'lodash';
 
 class NavSidebar extends Component {
   render() {
@@ -14,8 +14,12 @@ class NavSidebar extends Component {
     const sideTabs = map(exams[course], (courseExams, examType) => {
       const content =  map(courseExams, (item, id) => {
         const term = item.term;
-        const url = `/${course}/${examType}/${id}`;
-        const note = item.note ? `<br/><i class="side-i" >(${item.note})</i>` : (null);
+        var url = `/${course}/${examType}/${id}`;
+        var note = item.note ? `<br/><i class="side-i" >(${item.note})</i>` : (null);
+        if (has(item, 'available') && !item.available){
+          url = '#';
+          note = '';
+        }
         const sideTabClass = classnames({
           sidetab: true,
           active: (exam === id && thisExamType === examType),
