@@ -126,7 +126,7 @@ const exams = {
       },
       'sp16': {
         'term': 'Spring 2016',
-        'profs': 'DeNero',
+        'profs': 'Hilfinger',
         'available': false,
       },
       'fa15': {
