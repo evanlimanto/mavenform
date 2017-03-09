@@ -122,14 +122,12 @@ const exams = {
       'fa16': {
         'term': 'Fall 2016',
         'profs': 'DeNero',
-        'note': 'Available by 03/09',
-        'available': false
+        'available': false,
       },
       'sp16': {
         'term': 'Spring 2016',
         'profs': 'DeNero',
-        'note': 'Available by 03/09',
-        'available': false
+        'available': false,
       },
       'fa15': {
         'term': 'Fall 2015',

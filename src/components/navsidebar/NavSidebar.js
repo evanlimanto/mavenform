@@ -14,6 +14,7 @@ class NavSidebar extends Component {
     const sideTabs = map(exams[course], (courseExams, examType) => {
       const content =  map(courseExams, (item, id) => {
         const term = item.term;
+        const isAvailable = has(item, 'available') ? item.available : true;
         var url = `/${course}/${examType}/${id}`;
         var note = item.note ? `<br/><i class="side-i" >(${item.note})</i>` : (null);
         if (has(item, 'available') && !item.available){
@@ -24,11 +25,15 @@ class NavSidebar extends Component {
           sidetab: true,
           active: (exam === id && thisExamType === examType),
         });
-        return (
-          <div key={id} className="sidetab-container">
-            <a className={sideTabClass} href={url} onClick={handleEvent("Click", "Sidebar URL")}>{term} <span dangerouslySetInnerHTML={{__html: note}} /></a>
-          </div>
-        );
+        if (isAvailable) {
+          return (
+            <div key={id} className="sidetab-container">
+              <a className={sideTabClass} href={url} onClick={handleEvent("Click", "Sidebar URL")}>{term} <span dangerouslySetInnerHTML={{__html: note}} /></a>
+            </div>
+          );
+        } else {
+          return (<span key={id}></span>);
+        }
       });
       return (
         <span key={examType}>
