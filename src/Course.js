@@ -44,7 +44,7 @@ class Course extends Component {
               <td><a>{examTypeToLabel[examType]} <i>{note}</i></a></td>
               <td><a>{term}</a></td>
               <td><a>{item.profs}</a></td>
-              <td><a><i>(Available by 03/09)</i></a></td>
+              <td><a><i>Available by 03/09</i></a></td>
             </tr>
           );
         }

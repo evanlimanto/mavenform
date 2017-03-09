@@ -209,6 +209,10 @@ img {
   padding: 10px;
 }
 
+.solution th, .solution td {
+  border: 1px solid #11accc;
+}
+
 .table-container-container {
   max-width: 100%;
   padding: 0 300px;
@@ -361,7 +365,7 @@ img {
 }
 
 .reader .option:hover {
-  cursor: pointer;
+  cursor: initial;
   color: #666;
 }
 
