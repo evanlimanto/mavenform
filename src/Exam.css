@@ -365,7 +365,7 @@ img {
 }
 
 .reader .option:hover {
-  cursor: pointer;
+  cursor: initial;
   color: #666;
 }
 
