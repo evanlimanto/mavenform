@@ -779,12 +779,17 @@ img {
   border-bottom: 1px dashed #fff;
 }
 
+.error-link {
+  color: #999;
+  border-bottom: 1px dashed #999;
+}
+
 .footer-link:hover {
   color: #ccc;
   border-bottom: 1px dashed #ccc;
 }
 
-.header-link:hover {
+.header-link:hover, .error-link:hover {
   color: #11accc;
   border-bottom: 1px dashed #11accc;
 }
@@ -807,6 +812,31 @@ img {
   z-index: 2;
   float: right;
   right: 15px;
+}
+
+/*404*/
+.maven-the-raven {
+  opacity: 0.1;
+  width: 100%;
+  max-width: 500px;
+}
+
+.aligner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+}
+
+.aligner-item {
+  width: 100%;
+  color: #333;
+  text-align: center;
 }
 
 /*BASIC*/
