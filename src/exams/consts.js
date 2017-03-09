@@ -117,6 +117,35 @@ const exams = {
     }
   },
 
+  'cs61a': {
+    'mt2': {
+      'fa16': {
+        'term': 'Fall 2016',
+        'profs': 'DeNero',
+        'note': 'Available by 03/09',
+        'available': false
+      },
+      'sp16': {
+        'term': 'Spring 2016',
+        'profs': 'DeNero',
+        'note': 'Available by 03/09',
+        'available': false
+      },
+      'fa15': {
+        'term': 'Fall 2015',
+        'profs': 'DeNero',
+      },
+      'sp15': {
+        'term': 'Spring 2015',
+        'profs': 'DeNero',
+      },
+      'fa14': {
+        'term': 'Fall 2014',
+        'profs': 'DeNero',
+      },
+    }
+  },
+
   'cs61c': {
     'mt1': {
       'fa16': {
@@ -173,6 +202,7 @@ const courses = {
   'data8': 'Foundations of Data Science',
   'cs186': 'Introduction to Database Systems',
   'ugba10': 'Principles of Business',
+  'cs61a': 'The Structure and Interpretation of Computer Programs',
   'ee16a': 'Designing Information Devices and Systems I',
   'cs61c': 'Great Ideas in Computer Architecture (Machine Structures)',
   'cs162': 'Operating Systems and Systems Programming',
@@ -210,6 +240,7 @@ const courseIDToLabel = {
   'data8': 'Data 8',
   'cs186': 'CS 186',
   'ee16a': 'EE 16A',
+  'cs61a': 'CS 61A',
   'cs61c': 'CS 61C',
   'cs162': 'CS 162',
   'ugba10': 'UGBA 10',

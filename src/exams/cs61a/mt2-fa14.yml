@@ -1,0 +1,491 @@
+course: 'cs61a'
+ref: 'mt2-fa14'
+
+type: 'mt2'
+term: 'fa14'
+prof: 'DeNero'
+
+questions: {
+  'q1': 'Class Hierarchy',
+  'q2': 'Exercises',
+  'q3': 'Return of the Digits',
+}
+
+parts: {
+  'q1': 1,
+  'q2': 2,
+  'q3': 5,
+}
+
+q1_1: |
+  ## 1. (12 points) Class Hierarchy
+  For each row below, write the output displayed by the interactive Python interpreter when the expression is evaluated. Expressions are evaluated in order, and **expressions may affect later expressions.**
+  <hr class="s2" />
+  Whenever the interpreter would report an error, write Error. You *should* include any lines displayed before an error. *Reminder*: The interactive interpreter displays the `repr` string of the value of a successfully evaluated expression, unless it is `None`. Assume that you have started Python 3 and executed the following:
+
+  ```
+  class Worker:
+      greeting = ’Sir’
+      def __init__(self):
+          self.elf = Worker
+      def work(self):
+          return self.greeting + ’, I work’
+      def __repr__(self):
+          return Bourgeoisie.greeting
+
+  class Bourgeoisie(Worker):
+      greeting = ’Peon’
+      def work(self):
+          print(Worker.work(self))
+          return ’My job is to gather wealth’
+
+  class Proletariat(Worker):
+      greeting = ’Comrade’
+      def work(self, other):
+          other.greeting = self.greeting + ’ ’ + other.greeting
+          other.work() # for revolution
+          return other
+
+  jack = Worker()
+  john = Bourgeoisie()
+  jack.greeting = ’Maam’
+  ```
+
+  |Expression|Interactive Output|
+  |----------|------------------|
+  |`5*5`|`25`|
+  |`1/0`|`ERROR`|
+  |`Worker().work()`||
+  |`jack`||
+  |`jack.work()`||
+  |`john.work()[10:]`||
+  |`Proletariat().work(john)`||
+  |`john.elf.work(john)`|||
+
+q1_1_s: |
+  |Expression|Interactive Output|
+  |----------|------------------|
+  |`5*5`|`25`|
+  |`1/0`|`ERROR`|
+  |`Worker().work()`|`’Sir, I work’`|
+  |`jack`|`Peon`|
+  |`jack.work()`|`’Maam, I work’`|
+  |`john.work()[10:]`|`Peon, I work<br/>``’to gather wealth’`|
+  |`Proletariat().work(john)`|`Comrade Peon, I work`<br/>`Peon`|
+  |`john.elf.work(john)`|`’Comrade Peon, I work’`|
+
+q2_1: |
+  ## 2. (14 points) Space
+  **(a) (8 pt)** Fill in the environment diagram that results from executing the code below until the entire program is finished, an error occurs, or all frames are filled. *You may not need to use all of the spaces or frames.*
+  A complete answer will:
+  - Add all missing names and parent annotations to all local frames.
+  - Add all missing values created during execution.
+  - Show the return value for each local frame.
+  <hr class="s2" />
+  ![environment diagram](/img/cs61a/mt2-fa14-q2-1.png)
+
+q2_1_s: |
+  ![environment diagram](/img/cs61a/mt2-fa14-q2-2.png)
+
+q2_2: |
+  **(b) (6 pt)** Fill in the blanks with the shortest possible expressions that complete the code in a way that results in the environment diagram shown. You can use only brackets, commas, colons, and the names `luke, spock, and yoda`. **You \*cannot\* use integer literals, such as 0, in your answer!** You also cannot call any built-in functions or invoke any methods by name.
+
+  ```
+  spock, yoda = 1, 2
+
+  luke = [______________________________________________________________________]
+
+  yoda = 0
+
+  yoda = [______________________________________________________________________]
+
+  yoda.append(__________________________________________________________________)
+  ```
+
+  ![environment diagram](/img/cs61a/mt2-fa14-q2-3.png)
+
+q3_1: |
+  ## 3. (8 points) This One Goes to Eleven
+  (a) (4 pt) Fill in the blanks of the implementation of `sixty_ones` below, a function that takes a `Link` instance representing a sequence of integers and returns the number of times that 6 and 1 appear consecutively.
+
+  ```
+  def sixty_ones(s):
+      """Return the number of times that 1 directly follows 6 in linked list s.
+
+      >>> once = Link(4, Link(6, Link(1, Link(6, Link(0, Link(1))))))
+      >>> twice = Link(1, Link(6, Link(1, once)))
+      >>> thrice = Link(6, twice)
+      >>> apply_to_all(sixty_ones, [Link.empty, once, twice, thrice])
+      [0, 1, 2, 3]
+      """
+      if _________________________________________________________________:
+
+          return 0
+
+      elif _______________________________________________________________:
+
+          return 1 + _____________________________________________________
+
+      else:
+
+          return _________________________________________________________
+  ```
+
+q3_1_s: |
+  ```
+  def sixty_ones(s):
+      """Return the number of times that 1 directly follows 6 in linked list s.
+
+      >>> once = Link(4, Link(6, Link(1, Link(6, Link(0, Link(1))))))
+      >>> twice = Link(1, Link(6, Link(1, once)))
+      >>> thrice = Link(6, twice)
+      >>> apply_to_all(sixty_ones, [Link.empty, once, twice, thrice])
+      [0, 1, 2, 3]
+      """
+      if <b>s is Link.empty or s.rest is Link.empty</b>:
+
+          return <b>0</b>
+
+      elif <b>s.first == 6 and s.rest.first == 1</b>:
+
+          return 1 + <b>sixty_ones(s.rest.rest)</b>
+
+      else:
+
+          return <b>sixty_ones(s.rest)</b>
+  ```
+
+q3_2: |
+  **(b) (4 pt)** Fill in the blanks of the implementation of `no_eleven` below, a function that returns a list of all distinct length-`n` lists of ones and sixes in which 1 and 1 do not appear consecutively.
+
+  ```
+  def no_eleven(n):
+      """Return a list of lists of 1’s and 6’s that do not contain 1 after 1.
+      >>> no_eleven (2)
+      [[6, 6], [6, 1], [1, 6]]
+      >>> no_eleven (3)
+      [[6, 6, 6], [6, 6, 1], [6, 1, 6], [1, 6, 6], [1, 6, 1]]
+      >>> no_eleven (4)[:4] # first half
+      [[6, 6, 6, 6], [6, 6, 6, 1], [6, 6, 1, 6], [6, 1, 6, 6]]
+      >>> no_eleven (4)[4:] # second half
+      [[6, 1, 6, 1], [1, 6, 6, 6], [1, 6, 6, 1], [1, 6, 1, 6]]
+      """
+      if n == 0:
+
+          return _____________________________________________________________
+
+      elif n == 1:
+
+          return _____________________________________________________________
+
+      else:
+
+          a, b = no_eleven(___________________), no_eleven(___________________)
+
+          return [_________________ for s in a] + [_________________ for s in b]
+  ```
+
+q3_2_s: |
+  ```
+  def no_eleven(n):
+      """Return a list of lists of 1’s and 6’s that do not contain 1 after 1.
+      >>> no_eleven (2)
+      [[6, 6], [6, 1], [1, 6]]
+      >>> no_eleven (3)
+      [[6, 6, 6], [6, 6, 1], [6, 1, 6], [1, 6, 6], [1, 6, 1]]
+      >>> no_eleven (4)[:4] # first half
+      [[6, 6, 6, 6], [6, 6, 6, 1], [6, 6, 1, 6], [6, 1, 6, 6]]
+      >>> no_eleven (4)[4:] # second half
+      [[6, 1, 6, 1], [1, 6, 6, 6], [1, 6, 6, 1], [1, 6, 1, 6]]
+      """
+      if n == 0:
+
+          return <b>[[]]</b>
+
+      elif n == 1:
+
+          return <b>[[6], [1]]</b>
+
+      else:
+
+          a, b = no_eleven(<b>n-1</b>), no_eleven(<b>n-2</b>)
+
+          return [<b>[6] + s</b> for s in a] + [<b>[1, 6] + s</b> for s in b]
+  ```
+
+q4_1: |
+  ## 4. (8 points) Tree Time
+  (a) (4 pt) A `GrootTree` *g* is a binary tree that has an attribute `parent`. Its `parent` is the `GrootTree` in which g is a branch. If a `GrootTree` instance is not a branch of any other `GrootTree` instance, then its `parent` is `BinaryTree.empty`.
+  <hr class="s1" />
+  `BinaryTree.empty` should not have a `parent` attribute. Assume that every `GrootTree` instance is a branch of at most one other `GrootTree` instance and not a branch of any other kind of tree.
+  <hr class="s1" />
+  Fill in the blanks below so that the `parent` attribute is set correctly. You may not need to use all of the lines. Indentation is allowed. You *should not* include any `assert` statements. Using your solution, the doctests for `fib_groot` should pass. The `BinaryTree` class appears on your study guide.
+  <hr class="s1" />
+  *Hint:* A picture of `fib_groot(3)` appears on the next page.
+
+  ```
+  class GrootTree(BinaryTree):
+      """A binary tree with a parent."""
+
+      def __init__(self, entry, left=BinaryTree.empty, right=BinaryTree.empty):
+          BinaryTree.__init__(self, entry, left, right)
+
+          ______________________________________________________________________
+
+          ______________________________________________________________________
+
+          ______________________________________________________________________
+
+          ______________________________________________________________________
+
+          ______________________________________________________________________
+
+          ______________________________________________________________________
+
+  def fib_groot(n):
+    """Return a Fibonacci GrootTree.
+    >>> t = fib_groot (3)
+    >>> t.entry
+    2
+    >>> t.parent.is_empty
+    True
+    >>> t.left.parent.entry
+    2
+    >>> t.right.left.parent.right.parent.entry
+    1
+    """
+    if n == 0 or n == 1:
+        return GrootTree(n)
+    else:
+        left, right = fib_groot(n-2), fib_groot(n-1)
+        return GrootTree(left.entry + right.entry, left, right)
+  ```
+
+q4_1_s: |
+  ```
+  class GrootTree(BinaryTree):
+      """A binary tree with a parent."""
+
+      def __init__(self, entry, left=BinaryTree.empty, right=BinaryTree.empty):
+          BinaryTree.__init__(self, entry, left, right)
+
+          <b>self.parent = BinaryTree.Empty</b>
+
+          <b>for b in [left, right]:</b>
+
+          <b>    if b is not BinaryTree.empty:</b>
+
+          <b>        b.parent = self</b>
+  ```
+
+q4_2: |
+  **(b) (4 pt)** Fill in the blanks of the implementation of `paths`, a function that takes two arguments: a `GrootTree` instance `g` and a list `s`. It returns the number of paths through `g` whose entries are the elements of `s`. A path through a `GrootTree` can extend either to a branch or its `parent`.
+  <hr class="s1" />
+  You may assume that the `GrootTree` class is implemented correctly and that the list `s` is non-empty.
+  <hr class="s1" />
+  The two paths that have entries `[2, 1, 2, 1, 0]` in `fib_groot(3)` are shown below (left). The one path that has entries `[2, 1, 0, 1, 0]` is shown below (right).
+  <hr class="s2" />
+  ![tree diagram](/img/cs61a/mt2-fa14-q4-1.png)
+
+  ```
+  def paths(g, s):
+      """The number of paths through g with entries s.
+      >>> t = fib_groot (3)
+      >>> paths(t, [1])
+      0
+      >>> paths(t, [2])
+      1
+      >>> paths(t, [2, 1, 2, 1, 0])
+      2
+      >>> paths(t, [2, 1, 0, 1, 0])
+      1
+      >>> paths(t, [2, 1, 2, 1, 2, 1])
+      8
+      """
+      if g is BinaryTree.empty ________________________________________________:
+
+          return 0
+
+      elif ____________________________________________________________________:
+
+          return 1
+
+      else:
+
+          xs = [_______________________________________________________________]
+
+          return sum([ ___________________________________________ for x in xs])
+  ```
+
+q4_2_s: |
+  ```
+  def paths(g, s):
+      """The number of paths through g with entries s.
+
+      >>> t = fib_groot (3)
+      >>> paths(t, [1])
+      0
+      >>> paths(t, [2])
+      1
+      >>> paths(t, [2, 1, 2, 1, 0])
+      2
+      >>> paths(t, [2, 1, 0, 1, 0])
+      1
+      >>> paths(t, [2, 1, 2, 1, 2, 1])
+      8
+      """
+      if g is BinaryTree.empty <b>or s == [] or g.entry != s[0]</b>:
+
+          return 0
+
+      elif <b>len(s) == 1 and g.entry == s[0]</b>:
+
+          return 1
+
+      else:
+
+          xs = [<b>g.left, g.right, g.parent</b>]
+
+          return sum([ <b>paths(x, s[1:])</b> for x in xs])
+  ```
+
+q5_1: |
+  ## 5. (8 points) Abstraction and Growth
+  (a) (6 pt) Your project partner has invented an abstract representation of a sequence called a `slinky`, which uses a `transition` function to compute each element from the previous element. A `slinky` explicitly stores only those elements that cannot be computed by calling transition, using a `starts` dictionary. Each entry in `starts` is a pair of an index key and an element value. See the doctests for examples.
+  <hr class="s1" />
+  Help your partner fix this implementation by crossing out as many lines as possible, but leaving a program that passes the doctests. Do not change the doctests. The program continues onto the following page.
+
+  ```
+  def length(slinky):
+      return slinky [0]
+  def starts(slinky):
+      return slinky [1]
+  def transition(slinky):
+      return slinky [2]
+
+  def slinky(elements , transition):
+      """Return a slinky containing elements.
+      >>> t = slinky([2, 4, 10, 20, 40], lambda x: 2*x)
+      >>> starts(t)
+      {0: 2, 2: 10}
+      >>> get(t, 3)
+      20
+      >>> r = slinky(range(3, 10), lambda x: x+1)
+      >>> length(r)
+      7
+      >>> starts(r)
+      {0: 3}
+      >>> get(r, 2)
+      5
+      >>> slinky([], abs)
+      [0, {}, <built -in function abs >]
+      >>> slinky([5, 4, 3], abs)
+      [3, {0: 5, 1: 4, 2: 3}, <built -in function abs >]
+      """
+      starts = {}
+      last = None
+      for e in elements [1:]:
+      for index in range(len(elements)):
+          if not e:
+          if index == 0:
+              return [0, {}, transition]
+          if last is None or e != transition(last):
+          if e == 0 or e != transition(last):
+          if index == 0 or elements[index] != transition(elements[index-1]):
+              starts[index] = elements[index]
+              starts[index] = elements.pop(index)
+              starts[e] = transition(last)
+              starts[e] = last
+          last = e
+      return [len(starts), starts , transition]
+      return [len(elements), starts , transition]
+      return [len(starts), elements , transition]
+      return [len(elements), elements , transition]
+
+  def get(slinky, index):
+      """Return the element at index of slinky."""
+      if index in starts(slinky):
+          return starts(slinky)[index]
+      start = index
+      start = 0
+      f = transition(slinky)
+      while start not in starts(slinky):
+      while not f(get(start)) == index:
+          start = start + 1
+          start = start - 1
+      value = starts(slinky)[start]
+      value = starts(slinky)[0]
+      value = starts(slinky)[index]
+      while start < index:
+      while value < index:
+          value = f(value)
+          value = value + 1
+          start = start + 1
+          start = start + index
+      return value
+      return f(value)
+  ```
+
+q5_1_s: |
+  def length(slinky):
+      return slinky [0]
+  def starts(slinky):
+      return slinky [1]
+  def transition(slinky):
+      return slinky [2]
+
+  def slinky(elements , transition):
+      """Return a slinky containing elements using transition.
+      >>> s = slinky(range(3, 10), lambda x: x+1)
+      >>> length(s)
+      7
+      >>> starts(s)
+      {0: 3}
+      >>> get(s, 2)
+      5
+      >>> t = slinky([2, 4, 10, 20, 40], lambda x: 2*x)
+      >>> starts(t)
+      {0: 2, 2: 10}
+      >>> get(t, 3) 20
+      >>> slinky([], abs)
+      [0, {}, <built -in function abs >]
+      >>> slinky([5, 4, 3], abs)
+      [3, {0: 5, 1: 4, 2: 3}, <built -in function abs >]
+      """
+      starts = {}
+      for index in range(len(elements)):
+          if index == 0 or elements[index] != transition(elements[index-1]):
+              starts[index] = elements[index]
+      return [len(elements), starts , transition]
+
+  def get(slinky, index):
+      """Return the element at index of slinky."""
+      start = index
+      while start not in starts(slinky):
+          start = start - 1
+      value = starts(slinky)[start]
+      while start < index:
+          value = transition(slinky)(value)
+          start = start + 1
+      return value
+  ```
+
+q5_2: |
+  **(b) (2 pt)** Circle the `Θ` expression below that describes the number of operations required to compute `slinky(elements, transition)`, assuming that
+  - n is the initial length of `elements`,
+  - d is the final length of the `starts` dictionary created,
+  - the `transition` function requires constant time,
+  - the `pop` method of a list requires constant time,
+  - the `len` function applied to a `list` requires linear time,
+  - the `len` function applied to a `range` requires constant time,
+  - adding or updating an entry in a dictionary requires constant time,
+  - getting an element from a list by its index requires constant time,
+  - creating a list requires time that is proportional to the length of the list.
+
+  <hr class="s2" />
+  ```
+  Θ(1)        Θ(n)        Θ(d)        Θ(n^2)        Θ(d2)        Θ(n · d)
+  ```
+
+q5_2_s: |
+  `Θ(n)`

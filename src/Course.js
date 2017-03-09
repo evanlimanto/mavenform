@@ -33,7 +33,19 @@ class Course extends Component {
       return map(examsOfType, (item, id) => {
         const term = item.term;
         const note = item.note ? `(${item.note})` : (null);
+        const isAvailable = has(item, 'available') ? item.available : true;
         const url = `/${course}/${examType}/${id}`;
+        if (!isAvailable) {
+          return (
+            <tr className="available" onClick={handleEvent("Click", "Exam", lowerCase(course))} key={id}>
+              <td><a>{examTypeToLabel[examType]} <i>{note}</i></a></td>
+              <td><a>{term}</a></td>
+              <td><a>{item.profs}</a></td>
+              <td><a><h6 className="table-link">AVAILABLE SOON</h6></a></td>
+            </tr>
+          );
+        }
+
         return (
           <tr className="available" onClick={handleEvent("Click", "Exam", lowerCase(course))} key={id}>
             <td><a href={url}>{examTypeToLabel[examType]} <i>{note}</i></a></td>
