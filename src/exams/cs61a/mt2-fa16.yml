@@ -1,0 +1,531 @@
+course: 'cs61a'
+ref: 'mt2-fa16'
+
+type: 'mt2'
+term: 'fa16'
+prof: 'DeNero'
+
+questions: {
+  'q1': 'Class Hierarchy',
+  'q2': 'Exercises',
+  'q3': 'Return of the Digits',
+}
+
+parts: {
+  'q1': 1,
+  'q2': 2,
+  'q3': 5,
+}
+
+q1_1: |
+  ## 1. (8 points) Halloween
+  For each of the expressions in the table below, write the output displayed by the interactive Python interpreter when the expression is evaluated. The output may have multiple lines. If an error occurs, write “Error”, but include all output displayed before the error. The `Link` class appears on page 2 of the midterm 2 study guide.
+  <hr class="s1" />
+  The first two rows have been provided as examples.
+  <hr class="s1" />
+  Recall: The interactive interpreter displays the value of a successfully evaluated expression, unless it is `None`.
+  <hr class="s1" />
+  Assume that you have started python3 and executed the following statements:
+
+  ```
+  class Party:
+      guests = Link.empty
+
+      def __init__(self, time):
+            Party.guests = Link(time+1, Party.guests)
+
+      def attend(self):
+            self.guests.rest = Link(self.guests.rest)
+            return self.guests
+
+  class Costume(Party):
+      def __init__(self, bow, tie):
+          Party.guests.rest = Link(bow)
+          self.ie = Link(self)
+
+      def attend(self):
+          print(repr(self.ie))
+          Party.attend = lambda self: Party(9).guests
+
+      def __repr__(self):
+          print(’Nice’)
+          return ’Costume’
+  ```
+
+  |Expression|Interactive Output|
+  |----------|------------------|
+  |`Link(1, Link.empty)`|`Link(1)`|
+  |`Link(1, Link(2))`|`Link(1, Link(2))`|
+  |`Party(1).guests||
+  |`Party(3).attend()||
+  |`Costume(5, 6).attend()||
+  |`Party(7).attend()|||
+
+q1_1_s: |
+  |Expression|Interactive Output|
+  |----------|------------------|
+  |`Link(1, Link.empty)`|`Link(1)`|
+  |`Link(1, Link(2))`|`Link(1, Link(2))`|
+  |`Party(1).guests|`Link(2)`|
+  |`Party(3).attend()|`Link(4, Link(Link(2)))`|
+  |`Costume(5, 6).attend()|`Nice`<br/>`Link(Costume)`|
+  |`Party(7).attend()|`Link(10, Link(8, Link(4, Link(5))))`|
+
+q2_1: |
+  ## 2. (8 points) A List with a Twist
+  Fill in the environment diagram that results from executing the code below until the entire program is finished, an error occurs, or all frames are filled. *You may not need to use all of the spaces or frames.*
+  <hr class="s1" />
+  A complete answer will:
+  - Add all missing names and parent annotations to frames.
+  - Add all missing values created or referenced during execution.
+  - Show the return value for each local frame.
+  - Use box-and-pointer notation for list values. You do not need to write index numbers or the word “list”.
+  <hr class="s2" />
+  ![environment diagram](/img/cs61a/mt2-fa16-q2-1.png)
+
+q2_1_s: |
+  ![environment diagram](/img/cs61a/mt2-fa16-q2-2.png)
+
+q3_1: |
+  ## 3. (6 points) Return Policy
+  Implement `quota`, which takes a one-argument function `f` and a non-negative integer `limit`. The function it returns has the same behavior as `f`, except that each value is only returned up to `limit` times. After that, the function returns an “Over quota” message instead, and the `limit` is decreased by 1 for future calls.
+
+  ```
+  def quota(f, limit):
+    """A decorator that limits the number of times a value can be returned.
+
+    >>> square = lambda x: x * x
+    >>> square = quota(square , 3)
+    >>> square (6)
+    36
+    >>> [square(5) for x in range(3)]
+    [25, 25, 25]
+    >>> square(5)
+    ’Over quota! Limit is now 2’
+    >>> square(-6)
+    36
+    >>> square(-6)
+    ’Over quota! Limit is now 1’
+    >>> square(7)
+    49
+    >>> square(5)
+    ’Over quota! Limit is now 0’
+    """
+
+    values = []
+
+    def limited(n):
+
+        _______________________________________________________________________
+
+        y = ___________________________________________________________________
+
+        count = len(___________________________________________________________)
+
+        values.append(y)
+
+        if ____________________________________________________________________:
+
+            return ____________________________________________________________
+
+        limit = _______________________________________________________________
+
+        return ’Over quota! Limit is now ’ ____________________________________
+
+    return limited
+  ```
+
+q3_1_s: |
+  ```
+  def quota(f, limit):
+    """A decorator that limits the number of times a value can be returned.
+
+    >>> square = lambda x: x * x
+    >>> square = quota(square , 3)
+    >>> square (6)
+    36
+    >>> [square(5) for x in range(3)]
+    [25, 25, 25]
+    >>> square(5)
+    ’Over quota! Limit is now 2’
+    >>> square(-6)
+    36
+    >>> square(-6)
+    ’Over quota! Limit is now 1’
+    >>> square(7)
+    49
+    >>> square(5)
+    ’Over quota! Limit is now 0’
+    """
+
+    values = []
+
+    def limited(n):
+
+        <b>nonlcoal limit</b>
+
+        y = <b>f(n)</b>
+
+        count = len(<b>[x for x in values if x == y]</b>)
+
+        values.append(y)
+
+        if <b>count < limit</b>:
+
+            return <b>y</b>
+
+        limit = <b>limit - 1</b>
+
+        return ’Over quota! Limit is now ’ + <b>str(limit)</b>
+
+    return limited
+  ```
+
+q4_1: |
+  ## 4. (6 points) A Classy Election
+  Implement the `VotingMachine` and `Ballot` classes based on the doctest below. The voting machine must determine which choice has the most votes (the `winner`) and detect if a ballot is used more than once. In case of a tie, the `winner` among choices with maximal votes is the one that most recently received a vote. `Ballot.vote` takes a string, and a `VotingMachine` must handle an arbitrary number of choices.
+
+  ```
+  class VotingMachine:
+      """A machine that creates and records ballots.
+
+      >>> machine = VotingMachine (4)
+      >>> a, b, c, d = machine.ballots
+      >>> d.vote(’Bruin’)
+      ’Bruin is winning’
+      >>> b.vote(’Bruin’)
+      ’Bruin is winning’
+      >>> c.vote(’Bear’)
+      ’Bear is losing’
+      >>> a.vote(’Bear’)
+      ’Bear is winning’
+      >>> c.vote(’Tree’)
+      ’Fraud: multiple votes from the same ballot!’
+      >>> machine.winner
+      ’Bear’
+      """
+      def __init__(self, k):
+          self.ballots = [___________________________________ for i in range(k)]
+          self.votes = {}
+
+      def record(self, ballot, choice):
+          if ballot.used:
+              return ’Fraud: multiple votes from the same ballot!’
+
+          _______________________________________________________________________
+
+          self.votes[choice] = ______________________________________________ + 1
+
+      if ____________________________________________________________________:
+          return choice + ’ is losing ’
+      else:
+          ___________________________________________________________________
+          return choice + ’ is winning ’
+
+  class Ballot:
+      ___________________________________________________________________________
+
+      def __init__(self, machine):
+
+          self.machine = machine
+
+      def vote(self , x):
+
+          return ________________________________________________________________
+  ```
+
+q4_1_s: |
+  ```
+  class VotingMachine:
+      """A machine that creates and records ballots.
+
+      >>> machine = VotingMachine (4)
+      >>> a, b, c, d = machine.ballots
+      >>> d.vote(’Bruin’)
+      ’Bruin is winning’
+      >>> b.vote(’Bruin’)
+      ’Bruin is winning’
+      >>> c.vote(’Bear’)
+      ’Bear is losing’
+      >>> a.vote(’Bear’)
+      ’Bear is winning’
+      >>> c.vote(’Tree’)
+      ’Fraud: multiple votes from the same ballot!’
+      >>> machine.winner
+      ’Bear’
+      """
+      def __init__(self, k):
+          self.ballots = [<b>Ballot(self)</b> for i in range(k)]
+          self.votes = {}
+
+      def record(self, ballot, choice):
+          if ballot.used:
+              return ’Fraud: multiple votes from the same ballot!’
+
+          <b>ballot.used = True</b>
+
+          self.votes[choice] = <b>self.votes.get(choice, 0)</b> + 1
+
+      if <b>max(self.votes.values()) > self.votes[choice]</b>:
+          return choice + ’ is losing ’
+      else:
+          <b>self.winner = choice</b>
+          return choice + ’ is winning ’
+
+  class Ballot:
+      <b>used = False</b>
+
+      def __init__(self, machine):
+
+          self.machine = machine
+
+      def vote(self , x):
+
+          return <b>self.machine.record(self, x)</b>
+  ```
+
+q5_1: |
+  ## 5. (6 points) Trick or Tree
+  Implement `path`, which takes a linked list `s` and a `Tree` instance `t`. It returns whether `s` is a path from the root of t to some leaf. The `Tree` and `Link` classes are on page 2 of the midterm 2 study guide.
+  <hr class="s1" />
+  Restrictions:
+  - You may not call the built-in `len` function on a linked list or invoke its `__len__` method.
+  - You may not apply element selection (e.g., `s[2]`) on a linked list or invoke its `__getitem__` method.
+
+  ```
+  def path(s, t):
+      """Return whether Link S is a path from the root to a leaf in Tree T.
+
+      >>> t = Tree(1, [Tree(2), Tree(3, [Tree(4), Tree(5)]), Tree(6)])
+      >>> a = Link(1, Link(3, Link(4)))   # A full path
+      >>> path(a, t)
+      True
+      >>> b = Link(1, Link(3))            # A partial path
+      >>> path(b, t)
+      False
+      >>> c = Link(1, Link(2, Link(7)))   # A path and an extra value
+      >>> path(c, t)
+      False
+      >>> d = Link(3, Link(4))            # A path of a branch
+      >>> path(d, t)
+      False
+      """
+
+      if ________________________________________________________________________:
+
+         return False
+
+      if ________________________________________________________________________:
+
+          return True
+
+      return ______________([_______________________________ for b in t.branches])
+  ```
+
+q5_1_s: |
+  ```
+  from tree import *
+  from link import *
+
+  def path(s, t):
+      """Return whether Link S is a path from the root to a leaf in Tree T.
+
+      >>> t = Tree(1, [Tree(2), Tree(3, [Tree(4), Tree(5)]), Tree(6)])
+      >>> a = Link(1, Link(3, Link(4)))   # A full path
+      >>> path(a, t)
+      True
+      >>> b = Link(1, Link(3))            # A partial path
+      >>> path(b, t)
+      False
+      >>> c = Link(1, Link(2, Link(7)))   # A path and an extra value
+      >>> path(c, t)
+      False
+      >>> d = Link(3, Link(4))            # A path of a branch
+      >>> path(d, t)
+      False
+      """
+
+      if <b>s is Link.empty or t.root != s.first<b>:
+
+         return False
+
+      if <b>t.is_leaf() and s.rest is Link.empty</b>:
+
+          return True
+
+      return <b>any</b>([<b>path(s.rest,m b)</b> for b in t.branches])
+  ```
+
+q6_1: |
+  ## 6. (6 points) Left it Right There
+  **(a) (4 pt)** Implement `binary`, which takes a list `s` of unique integers. It returns a *binary search tree* containing all of those integers, represented as a `BTree` instance or `BTree.empty`. The values in any path of this tree must appear in the same order as they did in `s`. The `BTree` class is on page 2 of the midterm 2 study guide.
+
+  ```
+  def binary(s):
+      """Construct a binary search tree from S for which all paths are in order.
+
+      >>> binary([3, 5, 1])
+      BTree(3, BTree(1), BTree(5))
+      >>> binary([4, 3, 7, 6, 2, 9, 8])
+      BTree(4, BTree(3, BTree(2)), BTree(7, BTree(6), BTree(9, BTree(8))))
+      """
+
+      assert len(s) == len(set(s)), ’All elements of s should be unique’
+
+      if ________________________________________________________________________:
+
+          return ________________________________________________________________
+
+      root = ____________________________________________________________________
+
+      left = ____________________________________________________________________
+
+      right = ___________________________________________________________________
+
+      return BTree(root, binary(left), binary(right))
+  ```
+
+q6_1_s: |
+  ```
+  def binary(s):
+      """Construct a binary search tree from S for which all paths are in order.
+
+      >>> binary([3, 5, 1])
+      BTree(3, BTree(1), BTree(5))
+      >>> binary([4, 3, 7, 6, 2, 9, 8])
+      BTree(4, BTree(3, BTree(2)), BTree(7, BTree(6), BTree(9, BTree(8))))
+      """
+
+      assert len(s) == len(set(s)), ’All elements of s should be unique’
+
+      if <b>not s</b>:
+
+          return <b>BTree.empty</b>
+
+      root = <b>s[0]</b>
+
+      left = <b>[x for x in s if x < root]</b>
+
+      right = <b>[x for x in s if x > root]</b>
+
+      return BTree(root, binary(left), binary(right))
+  ```
+
+q6_2: |
+  **(b) (1 pt)** Circle the `Θ` expression that describes the **smallest** possible height of the tree returned by `binary(s)` for a list `s` of length `n`. The height of a tree is the length of the longest path from its root to a leaf.
+
+  ```
+  Θ(1)        Θ(log n)        Θ(n)        Θ(n^2)        Θ(2^n)        None of these
+  ```
+
+q6_2_s: |
+  ```
+  Θ(log n)
+  ```
+
+q6_3: |
+  **(c) (1 pt)** Circle the `Θ` expression that describes the **largest** possible height of the tree returned by `binary(s)` for a list `s` of length `n`. The height of a tree is the length of the longest path from its root to a leaf.
+
+  ```
+  Θ(1)        Θ(log n)        Θ(n)        Θ(n^2)        Θ(2^n)        None of these
+  ```
+
+q6_3_s: |
+  ```
+  Θ(n)
+  ```
+
+q7_1: |
+  ## 7. (10 points) Summer Camp
+  (a) (6 pt) Implement `sums`, which takes two positive integers `n` and `k`. It returns a list of lists containing all the ways that a list of `k` positive integers can sum to `n`. Results can appear in any order.
+
+  ```
+  def sums(n, k):
+      """Return the ways in which K positive integers can sum to N.
+      >>> sums(2, 2)
+      [[1 , 1]]
+      >>> sums(2, 3)
+      []
+      >>> sums(4, 2)
+      [[3, 1], [2, 2], [1, 3]]
+      >>> sums(5, 3)
+      [[3, 1, 1], [2, 2, 1], [1, 3, 1], [2, 1, 2], [1, 2, 2], [1, 1, 3]]
+      """
+
+      if ________________________________________________________________________:
+
+          return _________________________________________________________________
+
+      y = []
+
+      for x in __________________________________________________________________:
+
+            y.extend([______________________ for s in sums(______________________)])
+
+      return y
+  ```
+
+q7_1_s: |
+  ```
+  def sums(n, k):
+      """Return the ways in which K positive integers can sum to N.
+      >>> sums(2, 2)
+      [[1 , 1]]
+      >>> sums(2, 3)
+      []
+      >>> sums(4, 2)
+      [[3, 1], [2, 2], [1, 3]]
+      >>> sums(5, 3)
+      [[3, 1, 1], [2, 2, 1], [1, 3, 1], [2, 1, 2], [1, 2, 2], [1, 1, 3]]
+      """
+
+      if <b>k == 1</b>:
+
+          return <b>[[n]]</b
+
+      y = []
+
+      for x in <b>range(1, n)<b/>: <b># range (1, n-k+1) is OK</b>
+
+          y.extend([<b>s + [x]</b> for s in sums(<b>n-x, k-1</b>)])
+
+      return y
+
+      if <b>n == 0 and k == 0</b>:
+
+          return <b>[[]]</b>
+
+      y = []
+
+      for x in <b>range(1, n + 1)</b>:
+
+          y.extend([<b>s + [x]</b> for s in sums(<b>n-x, k-1</b>)])
+
+      return y
+  ```
+
+q7_2: |
+  **(b) (4 pt) *Why so many lines?* Implement `f` and `g` for this alternative version of the `sums` function.
+
+  ```
+  f = lambda x, y: (x and [______________ for z in y] + f(_______, _______)) or []
+
+  def sums(n, k):
+      """Return the ways in which K positive integers can sum to N."""
+
+      g = lambda w: (w and f(___________________________________________)) or [[]]
+
+      return [v for v in g(k) if sum(v) == n]
+  ```
+
+q7_2_s: |
+  ```
+  f = lambda x, y: (x and [<b>[x] + z</b> for z in y] + f(<b>x-1</b>, <b>y</b>)) or []
+
+  def sums(n, k):
+      """Return the ways in which K positive integers can sum to N."""
+
+      g = lambda w: (w and f(<b>n, g(w-1)</b>)) or [[]]
+
+      return [v for v in g(k) if sum(v) == n]
+  ```

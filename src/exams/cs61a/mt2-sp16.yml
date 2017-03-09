@@ -1,0 +1,584 @@
+course: 'cs61a'
+ref: 'mt2-sp16'
+
+type: 'mt2'
+term: 'sp16'
+prof: 'DeNero'
+
+questions: {
+  'q1': 'Pointers',
+  'q2': 'Complexity',
+  'q3': 'Seeing Double',
+  'q4': 'Extra',
+  'q5': 'Heaps of Trouble',
+  'q6': 'OOPs',
+  'q7': 'Evicted!',
+}
+
+parts: {
+  'q1': 4,
+  'q2': 4,
+  'q3': 2,
+  'q4': 1,
+  'q5': 2,
+  'q6': 1,
+  'q7': 4,
+}
+
+q1_1: |
+  ## 1. (12 points) Pointers
+  ![classes](/img/cs61a/mt2-sp16-q1-1.png)
+  For each of the following code fragments, add arrows and values to the object skeletons to the right to show the final state of the program. Single boxes are variables that contain pointers. Double boxes are `Links`. Not all boxes need be used.
+  <hr class="s2" />
+  **(a) (3 pt)**
+  <hr class="s2" />
+  ![linked lists](/img/cs61a/mt2-sp16-q1-2.png)
+
+q1_1_s: |
+  ![linked lists](/img/cs61a/mt2-sp16-q1-6.png)
+
+q1_2: |
+  **(b) (3 pt)**
+  <hr class="s2" />
+  ![linked lists](/img/cs61a/mt2-sp16-q1-3.png)
+
+q1_2_s: |
+  ![linked lists](/img/cs61a/mt2-sp16-q1-7.png)
+
+q1_3: |
+  **(c) (3 pt)** For the next two problems, show the result of executing the code on the left on the initial conditions displayed on the right. We’ve done the first statement for you in each case, so that the diagrams on the right show the state at the point marked `# START`. Use the empty object skeletons only for newly created `Link` objects. If any pointer is modified, **neatly cross out** the original pointer and draw in the replacement. Show only the final state, not any intermediate states.
+  <hr class="s2" />
+  **(c) (3 pt)**
+  ![linked lists](/img/cs61a/mt2-sp16-q1-4.png)
+
+q1_3_s: |
+  ![linked lists](/img/cs61a/mt2-sp16-q1-8.png)
+
+q1_4: |
+  **(d) (3 pt)**
+  ![linked lists](/img/cs61a/mt2-sp16-q1-5.png)
+
+q1_4_s: |
+  ![linked lists](/img/cs61a/mt2-sp16-q1-9.png)
+
+q2_1: |
+  ## 2. (6 points) Complexity
+  As indicated in lecture, an assertion such as `Θ(f(n)) ⊆ Θ(g(n))` means “any function that is in `Θ(f(n))` is also in `Θ(g(n))`.”
+  <hr class="s2" />
+  **(a) (1.5 pt)** Circle each of the following that is true.
+  - A. $Θ(f(n)) ⊆ O(f(n))$
+  - B. $Θ(2x^2 + 1000x) ⊆ Θ(x^2)$
+  - C. $Θ(x^2) \ne Θ(2x^2 + 1000x)$
+  - D. $O(1/n) ⊆ O(1)$
+  - E. $Θ(1/n) ⊆ Θ(1)$
+
+q2_1_s: |
+  A, B, D
+
+q2_2: |
+  **(b) (1.5 pt)** Assume that `M` is an `N × N` array (an `N`-long Python list of `N`-long lists). Consider the following program:
+
+  ```
+  def search(M, x):
+      N = len(M)
+      Li, Uj = 0, N-1
+      while Li < N and Uj >= 0:
+          if M[Li][Uj] < x:
+              Li += 1
+          elif M[Li][Uj] > x:
+              Uj -= 1
+          else:
+              return True
+      return False
+  ```
+
+  Circle the order of growth that best describes the worst-case execution time of a call to `search` as a function of N.
+  - A. $Θ(N)$
+  - B. $Θ(N^2)$
+  - C. $Θ(logN)$
+  - D. $Θ(2N^2)$
+  - E. $Θ(2^N)$
+
+q2_2_s: |
+  A
+
+q2_3: |
+  **(c) (1.5 pt)** Consider the following implementation of count, which takes in a linked list of numbers lst and an unordered Python list of numbers `nums`, and returns a count of the number of values in `lst` that appear in `nums`:
+
+  ```
+  def count(lst, nums):
+      """The number of elements in linked list LST that
+      appear in the unordered Python list NUMS.
+      >>> L = Link(2, Link(4, Link(2, Link(3, Link(1)))))
+      >>> count(L, [2, 1, 5])
+      3"""
+      curr = lst
+      count = 0
+      while curr != Link.empty:
+          if curr.first in nums:
+              count += 1
+          curr = curr.rest
+      return count
+  ```
+
+  Circle the order of growth that best describes the worst-case execution time of count, as a function of `n`, the length of `nums`, and `m`, the length of `lst`. Since nums is a Python list, the `in` operator uses simple linear search.
+  - A. $Θ(n)$
+  - B. $Θ(m)$
+  - C. $Θ(n^2)$
+  - D. $Θ(n+m)$
+  - E. $Θ(nm)$
+  - F. $Θ(mn^2)$
+
+q2_3_s: |
+  E
+
+q2_4: |
+  **(d) (1.5 pt)** Consider the following function for computing powers of a polynomial:
+
+  ```
+  def polypow(P, k):
+    """P ** k, where P is a polynomial and K is a
+    non-negative integer."""
+    result = Poly(1)
+    while k != 0:
+        if k % 2 == 1:
+            result = result.mult(P)
+        P = P.mult(P)
+        k = k // 2
+  ```
+
+  Circle the order of growth that best describes the worst-case execution time of `polypow`, as a function of k, where execution time is measured in the number of times that the `.mult` method is called.
+  - A. $Θ(k)$
+  - B. $Θ(k^2)$
+  - C. $Θ(√k)$
+  - D. $Θ(logk)$
+  - E. $Θ(2^k)$
+
+q2_4_s: |
+  D
+
+q3_1: |
+  ## 3. (8 points) Seeing Double
+  Fill in the functions below to produce linked lists in which each item of the original list is repeated immediately after that item. Your solutions should be iterative, not recursive.
+  <hr class="s2" />
+  **(a) (4 pt)** The function `double1` is *non-destructive*, and produces a new list without disturbing the old.
+
+  ```
+  def double1(L):
+      """Returns a list in which each item in L appears twice in sequence.
+      It is non-destructive.
+      >>> Q = Link(3, Link(4, Link(1)))
+      >>> double1(Q)
+      Link(3, Link(3, Link(4, Link(4, Link(1, Link(1))))))
+      >>> Q
+      Link(3, Link(4, Link(1)))
+      >>> double1(Link.empty)
+      ()
+      """
+
+      result = _______________________
+      last = None
+
+      while L is not Link.empty:
+
+          if last is None:
+
+              _________________________________________
+
+              _________________________________________
+
+          else:
+
+              _________________________________________
+
+              _________________________________________
+
+          _______________________________________
+
+      return result
+  ```
+
+q3_1_s: |
+  ```
+  def double1(L):
+      """Returns a list in which each item in L appears twice in sequence.
+      It is non-destructive.
+      >>> Q = Link(3, Link(4, Link(1)))
+      >>> double1(Q)
+      Link(3, Link(3, Link(4, Link(4, Link(1, Link(1))))))
+      >>> Q
+      Link(3, Link(4, Link(1)))
+      >>> double1(Link.empty)
+      ()
+      """
+
+      result = <b>Link.empty</b>
+      last = None
+
+      while L is not Link.empty:
+
+          if last is None:
+
+              <b>result = Link(L.first, Link(L.first))</b>
+
+              <b>last = result.rest</b>
+
+          else:
+
+              <b>last.rest = Link(L.first, Link(L.first))</b>
+
+              <b>last = last.rest.rest</b>
+
+          <b>L = L.rest</b>
+
+      return result
+  ```
+
+q3_2: |
+  **(b) (4 pt)** The function `double2` is *destructive*, and reuses `Link` objects in the original list wherever possible.
+
+  ```
+  def double2(L):
+      """Destructively modifies L to insert duplicates of each item immediately
+      following the item, returning the result.
+      >>> Q = Link(3, Link(4, Link(1)))
+      >>> double2(Q)
+      Link(3, Link(3, Link(4, Link(4, Link(1, Link(1))))))
+      >>> Q
+      Link(3, Link(3, Link(4, Link(4, Link(1, Link(1))))))
+      """
+
+      result = ___________________________________
+
+      while L is not Link.empty:
+
+          ____________________________________________________
+
+          ____________________________________________________
+
+      return result
+  ```
+
+q3_2_s: |
+  ```
+  def double2(L):
+      """Destructively modifies L to insert duplicates of each item immediately
+      following the item, returning the result.
+      >>> Q = Link(3, Link(4, Link(1)))
+      >>> double2(Q)
+      Link(3, Link(3, Link(4, Link(4, Link(1, Link(1))))))
+      >>> Q
+      Link(3, Link(3, Link(4, Link(4, Link(1, Link(1))))))
+      """
+
+      result = <b>L</b>
+
+      while L is not Link.empty:
+
+          <b>L.rest = Link(L.first, L.rest)</b>
+
+          <b>L = L.rest.rest</b>
+
+      return result
+  ```
+
+q4_1: |
+  ## 4. (1 points) Extra
+  Last September, twin LIGO detectors observed gravitational waves that emanated from the merger of two black holes. In the process of this merger, three solar masses (roughly 6 × 10^30 kg) were converted into gravitational energy. How many planets the size of earth (roughly 6 × 10^24 kg) could this much energy accelerate to 1% of lightspeed (about 3000 km/sec)?
+
+q4_1_s: |
+  About 20 billion earth-size planets.
+
+q5_1: |
+  ## 5. (8 points) Heaps of Trouble
+  A (min-)heap is a tree with the special property (the heap property) that every node has a label that is less than the labels of all its child nodes. This means that the minimum element of the heap is at the root, so it can be found in constant time. For example:
+  <hr class="s2" />
+  ![heap](/img/cs61a/mt2-sp16-q5-1.png)
+  <hr class="s2" />
+  Suppose we have a heap containing at least two values. To remove and return its smallest element, while maintaining the heap property, we use the following function:
+
+  ```
+  def remove_smallest(H):
+    """Destructively remove and return the smallest value from heap H,
+    restoring the heap property. Assumes H has at least two elements."""
+    result = H.label
+    H.label = remove_leaf(H)    # Step 1
+    reheapify(H)                # Step 2
+    return result
+  ```
+
+  The function `remove_leaf` removes one of the leaves from the heap, returning its label. The diagram on the left below shows the state of the heap above after executing Step 1 of `remove_smallest`. In general (as shown), this will cause the root to violate the heap property. To restore it, we use the function `reheapify`, which first swaps the root’s label with that of its smallest child (giving the tree in the middle below). If as a result, the heap property is still violated (as in the example), `reheapify` repeats the process on down the tree until the value inserted at the top reaches a point where it is smaller than all its children, which will always be true if it reaches a leaf, as happens in the example below (shown on the right), but can also happen before that.
+  <hr class="s2" />
+  ![heaps](/img/cs61a/mt2-sp16-q5-2.png)
+  <hr class="s2" />
+  **(a) (4 pt)** Write the function `remove_leaf` to remove a leaf from a heap destructively and return its label. Any leaf will do, but to be specifc, have it remove the leftmost leaf of the leftmost child of the leftmost child. . . of the root. Again, we assume that there are at least two values in the heap.
+
+  ```
+  def remove_leaf(H):
+      """Destructively remove far leftmost leaf of H, returning its label"""
+      child = H.children[0]
+
+      if _______________________:
+
+          v = child.label
+
+          H.children = __________________________________
+
+          return v
+
+      else:
+
+          return ____________________________________
+  ```
+
+q5_1_s: |
+  ```
+  def remove_leaf(H):
+      """Destructively remove far leftmost leaf of H, returning its label"""
+      child = H.children[0]
+
+      if <b>is_leaf(child)</b>:
+
+          v = child.label
+
+          H.children = <b>H.children[1:]</b>
+
+          return v
+
+      else:
+
+          return <b>remove_leaf(child)</b>
+  ```
+
+q5_2: |
+  **(b) (4 pt)** Write the function `reheapify` to restore the heap property of a heap destructively, assuming that initially it is violated (if at all) only at the root.
+
+  ```
+  def reheapify(H):
+      """Destructively restore the heap property of H, assuming it is
+      violated only at H itself, if at all."""
+
+      if _____________________:
+
+          return
+
+      else:
+
+          s = H.children[0]
+
+          for c in H.children:
+
+              if __________________________:
+
+                  s = c
+
+          if ____________________:
+
+              s.label, H.label = _____________________________
+
+              ___________________________
+  ```
+
+q5_2_s: |
+  ```
+  def reheapify(H):
+      """Destructively restore the heap property of H, assuming it is
+      violated only at H itself, if at all."""
+
+      if <b>H.is_leaf()</b>:
+
+          return
+
+      else:
+
+          s = H.children[0]
+
+          for c in H.children:
+
+              if <b>c.label < s.label</b>:
+
+                  s = c
+
+          if <b>s.label < H.label</b>:
+
+              s.label, H.label = <b>H.label, s.label</b>
+
+              <b>reheapify(s)</b>
+  ```
+
+q6_1: |
+  ## 6. (8 points) OOPs
+  Given the class definitions on the left, fill in the blanks to show what the Python interpreter would print. Print “`ERROR`” for cases that would cause an exception. Put “`<None>`” for cases where the Python interpreter would print nothing.
+
+  ![code](/img/cs61a/mt2-sp16-q6-1.png)
+
+q6_1_s: |
+  ```
+  >>> odysseus = Learner()
+  >>> odysseus.learn(’god’, ’Athena’)
+  <b>’Got it’</b>
+  >>> hipp = Beginner(’Hippothales’)
+  >>> hipp.learn(’favorite person’, ’Lysis’)
+  <b>’Got it’</b>
+  >>> odysseus.get_name()
+  <b>’Outis’</b>
+  >>> hipp.get_name()
+  <b>’Hippothales’</b>
+  >>> Person.name = "Nemo"</b>
+  >>> hipp.get_name()
+  <b>’Hippothales’</b>
+  >>> odysseus.get_name()
+  <b>’Nemo’</b>
+  >>> odysseus.set_name(odysseus.get_name())
+  >>> Person.name = "Nobody"
+  >>> odysseus.get_name()
+  <b>’Nemo’</b>
+  >>> someone = Person()
+  >>> someone.learn(’Earth mass’, ’5.972e24 kg’)
+  <b>ERROR</b>
+  >>> someone.response(’Earth mass’)
+  <b>’I do not know’</b>
+  >>> hipp.response(’favorite person’)
+  <b>’I think Lysis’</b>
+  >>> odysseus.response(’god’)
+  <b>’Athena’</b>
+  ```
+
+q7_1: |
+  ## 7. (8 points) Evicted!
+  An LRU *cache* (stands for “least recently used”) is a kind of dictionary that can only hold a fixed, finite number of keys (its *capacity*) and corresponding values. When addition of a new key would exceed that capacity, the least recently accessed key in the cache is removed (“*evicted*”) and replaced with the new value. Such caches are used to speed up access to some relatively slow, but much larger dictionaries. For example, most computers have a large main memory and various caches for saving and retrieving recently accessed memory values; the latter can be 200 times faster than the former.
+
+  **(a) (2 pt)**
+  <hr calss="s2" />
+  Consider the following “slow” dictionary implementation:
+
+  ```
+  class SlowData:
+      """
+      Simulates a basic read-only memory store of KEY => VALUE mappings
+      >>> slow_data = SlowData(((0, ’a’), (1, ’b’), (2, ’c’)))
+      >>> slow_data[1]
+      ’b’
+       >>> slow_data[2]
+      ’c’
+      """
+      def __init__(self, data):
+          self._data = data           # A sequence of (KEY, VALUE) tuples
+
+      def __getitem__(self, key):
+          """Get the value associated with KEY, or None if there is none."""
+          for curr_key, curr_value in self._data:
+              if key == curr_key:
+                  return curr_value
+          return None
+  ```
+
+  If mem is a `SlowData` containing `N` tuples, what is the worst-case execution time for the following code fragment?
+
+  ```
+  result = 0
+  for i in range(N): result += mem[i]
+  ```
+
+  Circle the correct answer below.
+  ```
+  A. Θ(N)        B. Θ(N log N)        C. Θ(N^2)        D. Θ(N^3)
+  ```
+
+q7_1_s: |
+  C
+
+q7_2: |
+  **(b) (4 pt)** An `LRUCache` object is intended to provide access to values from a `SlowData` in such a way that the results of some recent accesses to the `SlowData` object are saved and subsequently accessed quickly. To do this, the cache keeps a list of key/value tuples whose size has a fixed upper limit. If a key that is in the cache is accessed, its corresponding value is fetched from this list without consulting the `SlowData` object. If a key is not in the cache, it is fetched from the `SlowData` object. Each time a value is referenced, it is placed at or moved to the **end** of the cache list, and if that makes the list too long (longer than the capacity), the first item in the list is removed (so that it will have to be retrieved from the `SlowData` object if accessed again).
+  <hr class="s2" />
+  Fill in the code below to have this behavior. (A convenient way to remove the item at index `k` from a list `L` is `del L[k]`.)
+
+  ```
+  class LRUCache:
+      def __init__(self, capacity, slow_data):
+          self._capacity = capacity
+          self._slow_data = slow_data
+          self._cache = []
+
+      def __getitem__(self, key):
+          for i in range(len(self._cache)):
+              pair = self._cache[i]
+
+              if ______________________:
+
+                  _____________________________
+
+                  _____________________________
+
+                  return pair[1]
+
+          v = self._slow_data[key]
+
+      self._cache____________________________
+      if len(self._cache) > self._capacity:
+
+          del ________________________________
+      return v
+  ```
+
+q7_2_s: |
+  ```
+  class LRUCache:
+      def __init__(self, capacity, slow_data):
+          self._capacity = capacity
+          self._slow_data = slow_data
+          self._cache = []
+
+      def __getitem__(self, key):
+          for i in range(len(self._cache)):
+              pair = self._cache[i]
+
+              if <b>key == pair[0]</b>:
+
+                  <b>self._cache.append(pair)</b>
+
+                  <b>del self._cache[i]</b>
+
+                  return pair[1]
+
+          v = self._slow_data[key]
+
+      self._cache<b>.append((key, v))</b>
+      if len(self._cache) > self._capacity:
+
+          del <b>self._cache[0]</b>
+      return v
+  ```
+
+q7_3: |
+  **(c) (1 pt)** If `mem` is a `SlowData` containing `N` tuples, what is the worst-case execution time for the following code fragment?
+
+  ```
+  cached_mem = LRUCache(4, mem)
+  result = 0
+  for i in range(N): result += cached_mem[i]
+  ```
+
+  Circle the correct answer below.
+
+  ```
+  A. Θ(N)        B. Θ(N log N)        C. Θ(N^2)        D. Θ(N^3)
+  ```
+
+q7_3_s: |
+  C
+
+q7_4: |
+  **(d) (1 pt)** If `cached_mem` is as above, what is the worst-case execution time for the following code fragment?
+
+  ```
+  result = 0
+  for i in range(N): result += cached_mem[i % 4]
+  ```
+
+  ```
+  A. Θ(N)        B. Θ(N log N)        C. Θ(N^2)        D. Θ(N^3)
+  ```
+
+q7_4_s: |
+  A
