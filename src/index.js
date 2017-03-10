@@ -33,23 +33,36 @@ window.addEventListener('scroll', function(e) {
   }
 });
 
+// Track only for a maximum of 30 minutes at a time
+var userOnPageTracker = null;
+var userOnPageTrackerStart = 0;
 function trackUserOnPage() {
   if (window.location.hostname !== "localhost") {
     const path = window.location.pathname + window.location.search;
     handleEvent('Active', path);
+
+    const currentTime = Date.now();
+    if (currentTime - userOnPageTrackerStart > 30 * 60 * 1000) {
+      window.clearInterval(userOnPageTracker);
+      userOnPageTrackerStart = 0;
+    }
   }
 }
 
-var userOnPageTracker = null;
 window.addEventListener('focus', function(e) {
   if (trackLocal || window.location.hostname !== "localhost") {
-    userOnPageTracker = window.setInterval(trackUserOnPage, 30 * 1000);
+    if (userOnPageTrackerStart === 0) {
+      userOnPageTrackerStart = Date.now();
+    }
+    // Interval of one minute
+    userOnPageTracker = window.setInterval(trackUserOnPage, 60 * 1000);
   }
 });
 
 window.addEventListener('blur', function(e) {
   if (trackLocal || window.location.hostname !== "localhost") {
     window.clearInterval(userOnPageTracker);
+    userOnPageTrackerStart = 0;
   }
 });
 

@@ -195,7 +195,7 @@ q2_2: |
   <hr class="s2" />
   i. An alternative 1 B+-tree on SID.
   <hr class="s1" />
-  ii. An alternative 1 B+-tree on SID.
+  ii. An alternative 2 B+-tree on SID.
   <hr class="s1" />
   iii. An alternative 3, clustered B+-tree on SID.
   <hr class="s1" />
