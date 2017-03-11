@@ -1,0 +1,313 @@
+course: 'cs189'
+ref: 'mt1-sp16'
+
+type: 'mt1'
+term: 'sp16'
+prof: 'Shewchuk'
+
+questions: {
+  'q1': 'Multiple Choice',
+  'q2': 'Quadratics and Gaussian Isocontours',
+  'q3': 'Linear Regression',
+  'q4': 'Discriminant Analysis',
+}
+
+parts: {
+  'q1': 19,
+  'q2': 4,
+  'q3': 3,
+  'q4': 1,
+}
+
+q1_1: |
+  ## Q1. [60 pts] Multiple Choice
+  Fill in the bubbles for **ALL correct choices**: there may be more than one correct choice, but there is always at least one correct choice. **NO partial credit**: the set of all correct answers must be checked.
+  <hr class="s1" />
+  **(a)** [3 pts] Which of the following learning algorithms will return a classifier if the training data is not linearly separable?
+  - Hard-margin SVM
+  - Soft-margin SVM
+  - Perceptron
+  - Linear Discriminant Analysis (LDA)
+
+q1_1_s: |
+  - Soft-margin SVM
+  - Linear Discriminant Analysis (LDA)
+
+q1_2: |
+  **(b)** [3 pts] With a soft-margin SVM, which samples will have non-zero slack variables $ξ_i$?
+  - All misclassified samples
+  - All samples inside the margin
+  - All samples lying on the margin boundary
+  - All samples outside the margin
+
+q1_2_s: |
+  - All misclassified samples
+  - All samples inside the margin
+
+q1_3: |
+  **(c)** [3 pts] Recall the soft-margin SVM objective function ${\lvert w \rvert}^2 + C \sum{i}ξ_i$. Which value of $C$ is most likely to overfit the training data?
+  - $C = 0.01$
+  - $C = 1$
+  - $C = 0.00001$
+  - $C = 100$
+
+q1_3_s: |
+  - C = 100
+
+q1_4: |
+  **(d)** [3 pts] There are several ways to formulate the hard-margin SVM. Consider a formulation in which we try to directly maximize the margin β. The training samples are $X_1,X_2,...,X_n and their labels are $y_1,y_2,...,y_n. Which constraints should we impose to get a correct SVM? (Hint: Recall the formula for the distance from a point to a hyperplane.) Maximize $\beta$ subject to ...
+  - $y_i{X_i}^Tw \le \beta \; ∀i \in [1, n].$
+  - $y_i{X_i}^Tw \ge \beta \; ∀i \in [1, n].$
+  - $\lvert w \rvert \ge 1$
+  - $\lvert w \rvert = 1$
+
+q1_4_s: |
+  - $y_i{X_i}^Tw \ge \beta \; ∀i \in [1, n].$
+  - $\lvert w \rvert = 1$
+
+q1_5: |
+  **(e)** [3 pts] In the homework, you trained classifiers on the digits dataset. The features were the pixels in each image. What features could you add that would improve the performance of your classifier?
+  - Maximum pixel intensity
+  - Average pixel intensity
+  - Number of enclosed regions
+  - Presence of a long horizontal line
+
+q1_5_s: |
+  - Average pixel intensity
+  - Number of enclosed regions
+  - Presence of a long horizontal line
+
+q1_6: |
+  **(f)** [3 pts] The Bayes risk for a decision problem is zero when
+  - the class distributions $P(X|Y)$ do not overlap.
+  - the loss function $L(z, y)$ is symmetrical.
+  - the training data is linearly separable.
+  - the Bayes decision rule perfectly classifies the training data.
+
+q1_6_s: |
+  - the class distributions $P(X|Y)$ do not overlap.
+
+q1_7: |
+  **(g)** [3 pts] Let $L(z,y)$ be a loss function (where $y$ is the true class and $z$ is the predicted class). Which of the following loss functions will always lead to the same Bayes decision rule as $L$?
+  - $L_1(z,y) = aL(z,y), a > 0$
+  - $L_2(z,y) = aL(z,y), a < 0$
+  - $L_3(z,y) = L(z,y) + b, b > 0$
+  - $L_4(z,y) = L(z,y) + b, b < 0$
+
+q1_7_s: |
+  - $L_1(z,y) = aL(z,y), a > 0$
+  - $L_3(z,y) = L(z,y) + b, b > 0$
+  - $L_4(z,y) = L(z,y) + b, b < 0$
+
+q1_8: |
+  **(h)** [3 pts] Gaussian discriminant analysis
+  - models $P(Y = y|X)$ as a Gaussian.
+  - models $P(Y = y|X)$ as a logistic function.
+  - is an example of a generative model.
+  - can be used to classify points without ever computing an exponential.
+
+q1_8_s: |
+  - models $P(Y = y|X)$ as a logistic function.
+  - is an example of a generative model.
+  - can be used to classify points without ever computing an exponential.
+
+q1_9: |
+  **(i)** [3 pts] Which of the following are valid covariance matrices?
+  - $A = \left[ \begin{array}{c c} 1 & 1 \\ -1 & 1 \\ \end{array} \right]$
+  - $B = \left[ \begin{array}{c c} 1 & -1 \\ -1 & 2 \\ \end{array} \right]$
+  - $C = \left[ \begin{array}{c c} 0 & 1 \\ 1 & 2 \\ \end{array} \right]$
+  - $D = \left[ \begin{array}{c c} 1 & 1 \\ 1 & 1 \\ \end{array} \right]$
+
+q1_9_s: |
+  - $B = \left[ \begin{array}{c c} 1 & -1 \\ -1 & 2 \\ \end{array} \right]$
+  - $D = \left[ \begin{array}{c c} 1 & 1 \\ 1 & 1 \\ \end{array} \right]$
+
+q1_10: |
+  **(j)** [3 pts] Consider a $d$-dimensional multivariate normal distribution that is isotropic (i.e., its isosurfaces are spheres). Let $Σ$ be its $d × d$ covariance matrix. Let $I$ be the $d × d$ identity matrix. Let $σ$ be the standard deviation of any one component (feature). Then
+  - $Σ = σI$.
+  - $Σ = σ^2I$.
+  - $Σ = \frac{1}{σ}I$.
+  - $Σ = \frac{1}{σ^2}I$.
+  - None of the above.
+
+q1_10_s: |
+  - $Σ = σ^2I$.
+
+q1_11: |
+  **(k)** [3 pts] In least-squares linear regression, imposing a Gaussian prior on the weights is equivalent to
+  - logistic regression
+  - adding a Laplace-distributed penalty term
+  - $L_2 regularization$
+  - $L_1 regularization$
+
+q1_11_s: |
+  - $L_2 regularization$
+
+q1_12: |
+  **(l)** [3 pts] Logistic regression
+  - assumes that we impose a Gaussian prior on the weights.
+  - minimize a convex cost function.
+  - has a closed-form solution.
+  - can be used with a polynomial kernel.
+
+q1_12_s: |
+  - minimize a convex cost function.
+  - can be used with a polynomial kernel.
+
+q1_13: |
+  **(m)** [3 pts] Ridge regression
+  - is more sensitive to outliers than ordinary least-squares.
+  - reduces variance at the expense of higher bias.
+  - adds an $L_1$-norm penalty to the cost function.
+  - often sets several of the weights to zero.
+
+q1_13_s: |
+  - reduces variance at the expense of higher bias.
+
+q1_14: |
+  **(n)** [3 pts] Given a design matrix $\mathbf{X} \in \mathbb{R}^{n × d}$ and labels $y \in R^n$, which of the following techniques could potentially decrease the empirical risk on the training data (assuming the loss is the squared error)?
+  - Adding the feature "1" to each data point.
+  - Adding polynomial features to each data point.
+  - Centering the vector **y** by subtracting the mean $\overline{y}$ from each component $y_i$.
+  - Penalizing the model weights with $L_2$ regularization.
+
+q1_14_s: |
+  - Adding the feature "1" to each data point.
+  - Adding polynomial features to each data point.
+  - Centering the vector **y** by subtracting the mean $\overline{y}$ from each component $y_i$.
+
+q1_15: |
+  **(o)** [3 pts] In terms of the bias-variance trade-off, which of the following is/are substantially more harmful to the test error than the training error?
+  - Bias
+  - Variance
+  - Loss
+  - Risk
+
+q1_15_s: |
+  **(p)** [3 pts] Consider the bias-variance trade-off in fitting least-squares surfaces to two data sets. The first is US census data, in which we want to estimate household income from the other variables. The second is synthetic data we generated by writing a program that randomly creates samples from a known normal distribution, and assigns them y-values on a known smooth surface $y = f(\mathbf{x})$ plus noise drawn from a known normal distribution. We can compute or estimate with high accuracy
+  - the bias component of the empirical risk for the US census data
+  - the variance component of the empirical risk for the US census data
+  - the bias component of the empirical risk for the synthetic data
+  - the variance component of the empirical risk for the synthetic data
+
+q1_16: |
+  **(q)** [3 pts] The kernel trick
+  - is necessary if we want to add polynomial features to a learning algorithm.
+  - can be applied to any learning algorithm.
+  - can improve the speed of high-degree polynomial regression
+  - can improve the speed of learning algorithms when the number of samples is very large.
+
+q1_16_s: |
+  - can be applied to any learning algorithm.
+
+q1_17: |
+  **(r)** [3 pts] In the usual formulation of soft-margin SVMs, each training sample has a slack variable $ξ_i \ge 0$ and we impose a regularization cost $C \sum{i}ξ_i$. Consider an alternative formulation where we impose the additional constraints $ξ_i = ξ_j$ for all $i, j$. How does the minimum objective value ${\lvert \mathbf{w} \rvert}^{2} + C \sum{i}ξ_i} obtained by the new method compare to the one obtained by the original soft-margin SVM?
+  - They are always equal.
+  - New minumum $\ge$ original SVM minimum.
+  - Original SVM minimum $\ge$ new minimum.
+  - New minimum is sometimes larger and sometimes smaller.
+
+q1_17_s: |
+  - New minumum $\ge$ original SVM minimum.
+
+q1_18: |
+  **(s)** [3 pts] In Gaussian discriminant analysis, if two classes come from Gaussian distributions that have different means, may or may not have different covariance matrices, and may or may not have different priors, which decision boundary shapes are possible?
+  - a hyperplane
+  - a nonlinear quadric surface (quadric = the isosurface of a quadratic function)
+  - a surface that is not a quadric
+  - the empty set (the classifier always returns the same class)
+
+q1_18_s: |
+  - a hyperplane
+  - a nonlinear quadric surface (quadric = the isosurface of a quadratic function)
+  - the empty set (the classifier always returns the same class)
+
+q1_19: |
+  **(t)** [3 pts] Let the class conditionals be given by $P(X|Y = i) ∼ \mathcal{N}(\mathbf{0}, \sum{i})$, where $i \in \left{0, 1\right}$ and $\sum{0} = \left[ \begin{array}{c c} a & 0 \\ 0 & b \\ \end{array} \right]$ and $\sum{1} = \left[ \begin{array}{c c} b & 0 \\ 0 & a \\ \end{array} \right]$ with $a, b > 0, a \ne b$. Both conditionals have mean zero, and both classes have the prior probability $P(Y = 0) = P(Y = 1) = 0.5$. What is the shape of the decision boundary?
+  - a line
+  - a nonlinear quadratic curve
+  - multiple lines
+  - not defined
+
+q1_19_s: |
+  - multiple lines
+
+q2_1: |
+  ## Q2. [15 pts] Quadratics and Gaussian Isocontours
+  **(a)** [4 pts] Write the $2 x 2$ matrix $\sum{}$ whose unit eigenvectors are $\left[ \begin{array}{c} 1/\sqrt{5} \\ 2/\sqrt{5} \\ \end{array} \right]$ with eigenvalue 1 and $\left[ \begin{array}{c} -2/\sqrt{5} \\ 1/\sqrt{5} \\ \end{array} \right]$ with eigenvalue 4. Write out **both** the eigendecomposition of $\sum{}$ and the final $2 x 2$ matrix $\sum{}$.
+
+q2_1_s: |
+  $$\sigma = \left[ \begin{array}{c c} 1/\sqrt{5} & -2/\sqrt{5} \\ 2/\sqrt{5} & 1/\sqrt{5} \end{array} \right] \left[ \begin{array}{c c} 1 & 0 \\ 0 & 4 \\ \end{array} \right] \left[l \begin{array}{c c} 1/\sqrt{5} & 2/\sqrt{5} \\ -2/\sqrt{5} & 1/\sqrt{5} \\ \end{array} \right] = \left[ \begin{array}{c c} 17/5 & -6/5 \\ -6/5 & 8/5 \\ \\end{array} \right]$$
+
+q2_2: |
+  **(b)** [3 pts] Write the symmetric square root $\sigma^{1/2}$ of $\sigma$. (The eigendecomposition is optional, but it might earn you partial credit if you get $\sigma^{1/2}$ wrong.)
+
+q2_2_s: |
+  $$sigma^{1/2} = \left[ \begin{array}{c c} 1/\sqrt{5} & -2/\sqrt{5} \\ 2/\sqrt{5} & 1/\sqrt{5} \\ \end{array} \right] \left[ \begin{array}{c c} 1 & 0 \\ 0 & 2 \end{array} \right] \left[ \begin{array}{c c} 1/\sqrt{5} & 2/\sqrt{5} \\ -2/\sqrt{5} & 1/\sqrt{5} \\ \end{array} \right] = \left[ \begin{array}{c c} 9/5 & -2/5 \\ -2/5 & 6/5 \\ \end{array} \right]$$
+
+q2_3: |
+  **(c)** [3 pts] Consider the bivariate Gaussian distribution $X ∼ \mathcal{N}(\mu, \sum_{})$. Let $P(X = \mathbf{x})$ be its probability distribution function (PDF). Write the formula for the isocontour $P(\mathbf{x}) = e^{-\sqrt{5}/2}/(4\pi)$, substitute in the value of the determinant $\lvert Σ \rvert$ from part (a) (but leave $\mu$ and $Σ^{-1}$ as variables), and simplify the formula as much as you can.
+
+q2_3_s: |
+  $$\frac{1}{2 \pi \sqrt{\lvert Σ \rvert}} exp \left( -\frac{(x - \mu)^T Σ^{-1} (x - \mu)}{2} \right) = \frac{e^{-\sqrt{5}/2}}{4 \pi}$$
+  $$(x - \mu)^T Σ^{-1} (x - \mu) = \sqrt{5}$$
+
+q2_4: |
+  **(d)** [5 pts] Draw the isocontour $P(\mathbf{x}) = e^{-\sqrt{5}/2}/(4\pi)$ where $\mu = \left[ \begin{array}{c} 0 \\ 2 \end{array} \right]$ and $Σ$ is given in part (a).
+
+q2_4_s: |
+  ![isocontour](/img/cs189/mt1-sp16-q2-1.png)
+
+q3_1: |
+  ## Q3. [15 pts] Linear Regression
+  Recall that if we model our input data as linear plus Gaussian noise in the y-values, $Y | x ∼ \mathcal{N}(w^Tx,σ^2)$, then the maximum likelihood estimator is the w that minimizes the residual sum of squares $\sum_{i=1}^n(X_i^Tw − y_i)^2, where the training samples are $X_1,X_2,...,X_n$ and their labels are $y_1,y_2,...,y_n$.
+  <hr class="s2" />
+  Let's model noise with a Laplace distribution instead of a normal distribution. The probability density function (PDF) of $Laplace(\mu, b)$ is
+  $$P(y) = \frac{1}{2b} exp \left( - \frac{\lvert y - \mu \rvert}{b} \right)$$
+  **(a)** [6 pts] show that if we model our input data as a line plus Laplacian noise in the y-values, i.e.
+  $$Y | x ∼ Laplace(\mathbf{w^Tx}, b)$$
+  then the maximum likelihood estimator is the $\mathbf{w}$ that minimizes the *sum of absolute residuals*
+  $$\sum_{i=1}^n \lvert X_i^Tw - y_i \vert$$
+
+q3_1_s: |
+  We wish to maximize the log-likelihood
+  $$ \begin{align} &= ln \prod_{i=1}^n P(y_i|X_i) \\ &= -\frac{1}{b} \sum_{i=1}{n} \lvert y_i - X_i^Tw \rvert - n ln(2b) \end{align}$$
+  which is equivalent to minimizing $\sum_{i=1}{n}\lvert X_i^Tw - y_i \rvert$.
+
+q3_2: |
+  **(b)** [6 pts] Derive the batch gradient descent rule for minimizing the sum of absolute residuals. (*Hint*: You will probably need “**if**” statements or equations with conditionals because of the absolute value operators in the cost function. Don’t worry about points where the gradient is undefined.)
+
+q3_2_s: |
+  The batch gradient descent rule with learning rate $\epsilon$:
+  $$w \leftarrow w - \epsilon \nabla_w \sum_{i=1}^n \lvert X_i^Tw - y_i \rvert = w + \epsilon \sum_{i=1}^n \begin{cases} -X_i, & X_i^Tw - y_i > 0 \\ X_i, & X_i^Tw - y_i < 0 \end{cases}$$
+  Alternatively, it can be written as pseudocode:
+  $$for i \rightarrow 1 to n \\
+    if X_i^Tw - y_i > 0 \\
+        w \leftarrow w - \epsilon X_i \\
+    else \\
+        w \leftarrow w + \epsilon X_i$$
+  Students can get partial credit by deriving (or coming close to) the stochastic gradient descent rule:
+  $$w \leftarrow w + \begin{cases} -\epsilon X_i, & X_i^Tw - y_i > 0, \\ \epsilon X_i, & X_i^Tw - y_i < 0 \end{cases}
+
+q3_3: |
+  **(c)** [3 pts] Why might we prefer to minimize the sum of absolute residuals instead of the residual sum of squares for some data sets? (Hint: What is one of the flaws of least-squares regression?)
+
+q3_3_s: |
+  The sum of absolute residuals is less sensitive to outliers than the residual sum of squares.
+
+q4_1: |
+  ## Q4. [10 pts] Discriminant Analysis
+  Let’s derive the decision boundary when one class is Gaussian and the other class is exponential. Our feature space is one-dimensional (d = 1), so the decision boundary is a small set of points.
+  <hr class="s2" />
+  We have two classes, named $N$ for normal and $E$ for exponential. For the former class $(Y = N)$, the prior probability is $\pi_N = P(Y = N) = \frac{\sqrt{2\pi}}{1 + \sqrt{2\pi}}$ and the class conditional $P(X|Y = N)$ has the normal distribution $\mathcal(N)(0, σ^2)$. For the latter, the prior probability is $\pi_E = P(Y = E) = \frac{1}{1 + \sqrt{2\pi}}$ and the class conditional has the exponential distribution
+  $$P(X = x|Y = E) = \begin{cases} \lambda e^{-\lambda x} & \text{if } x \ge 0, \\ 0 ^ \text{if } x \lt 0. \end{cases}$$
+  Write an equation in $x$ for the decision boundary. (Only the positive solutions of your equation will be relevant; ignore all $x < 0$.) Use the 0-1 loss function. Simplify the equation until it is quadratic in $x$. (You don’t need to solve the quadratic equation. It should contain the constants $σ$ and $λ$. Ignore the fact that 0 might or might not also be a point in the decision boundary.) **Show your work**, starting from the posterior probabilities.
+
+q4_1_s: |
+  Ignoring the possibility of $x = 0$, the decision boundary is the set of positive solutions to
+  $$P(Y = N|X = x) = P(Y = E| X = x)$$
+  $$\frac{P(X = x|Y = N)P(Y = N)}{P(X = x)} = \frac{P(X = x|Y = E)P(Y = E)}{P(X = x)}$$
+  $$\frac{1}{\sqrt{2\pi}σ} exp\left( -\frac{x^2}{2 σ^2} \right) \frac{\sqrt{2 \pi}}{1 + \sqrt{2 \pi}} = λe^{-λx} \frac{1}{1 + \sqrt{2\pi}}$$
+  $$-ln σ - \frac{x^2}{2σ^2} = ln λ - λx$$
+  $$0 = \frac{x^2}{2σ^2} - λx + ln λ + ln σ$$
+  Note that the last term can be abbreviated to ln(λσ). The last line above is not necessary for full credit; the second- last line counts as a “quadratic equation.” The first line of math also is not necessary for full credit, but Bayes’ Theorem must implicitly be present.

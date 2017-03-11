@@ -68,6 +68,15 @@ const exams = {
     },
   },
 
+  'cs189': {
+    'mt1': {
+      'sp16': {
+        'term': 'Spring 2016',
+        'profs': 'Shewchuk',
+      },
+    }
+  },
+
   'ugba10': {
     'marketing': {
       'sp16p': {
@@ -195,6 +204,7 @@ const exams = {
 
 const courses = {
   // 'chem1a': 'General Chemistry',
+  'cs189': 'Introduction to Machine Learning',
   'data8': 'Foundations of Data Science',
   'cs186': 'Introduction to Database Systems',
   'ugba10': 'Principles of Business',
@@ -239,6 +249,7 @@ const courseIDToLabel = {
   'cs61a': 'CS 61A',
   'cs61c': 'CS 61C',
   'cs162': 'CS 162',
+  'cs189': 'CS 189',
   'ugba10': 'UGBA 10',
 };
 
