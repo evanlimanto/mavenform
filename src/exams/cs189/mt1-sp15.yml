@@ -3,7 +3,7 @@ ref: 'mt1-sp15'
 
 type: 'mt1'
 term: 'sp15'
-prof: 'Shewchuk'
+prof: 'Efros, Bartlett'
 
 questions: {
   'q1': 'True or False',
@@ -128,6 +128,8 @@ q1_13_s: |
 
 q2_1: |
   ## Q2. [36 pts] Multiple Choice
+  Fill in the bubbles for **ALL correct choices**: there may be more than one correct choice, but there is always at least one correct choice. **NO partial credit**: the set of all correct answers must be checked.
+  <hr class="s1" />
   **(a)** [3 pts] Which of the following algorithms can you use kernels with?
   - Support Vector Machines
   - Perceptrons

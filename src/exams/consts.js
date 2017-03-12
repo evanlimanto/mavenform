@@ -76,11 +76,11 @@ const exams = {
       },
       'fa16': {
         'term': 'Fall 2016',
-        'profs': 'Shewchuk',
+        'profs': 'Recht',
       },
       'sp15': {
         'term': 'Spring 2015',
-        'profs': 'Shewchuk',
+        'profs': 'Efros, Bartlett',
       },
       'sp14': {
         'term': 'Spring 2014',
