@@ -45,7 +45,7 @@ q1_2_s: |
   - All samples inside the margin
 
 q1_3: |
-  **(c)** [3 pts] Recall the soft-margin SVM objective function ${\lvert \mathbf{w} \rvert}^2 + C \sum{i}ξ_i$. Which value of $C$ is most likely to overfit the training data?
+  **(c)** [3 pts] Recall the soft-margin SVM objective function ${\lvert \mathbf{w} \rvert}^2 + C \sum_{i}ξ_i$. Which value of $C$ is most likely to overfit the training data?
   - $C = 0.01$
   - $C = 1$
   - $C = 0.00001$

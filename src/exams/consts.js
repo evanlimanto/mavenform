@@ -85,8 +85,8 @@ const exams = {
       'sp14': {
         'term': 'Spring 2014',
         'profs': 'Shewchuk',
-      }
-    }
+      },
+    },
   },
 
   'ugba10': {

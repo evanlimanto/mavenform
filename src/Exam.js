@@ -95,6 +95,7 @@ class ExamContent extends Component {
     firstQuestion.insertBefore(header, firstQuestion.firstChild);
 
     scrollSpy.update();
+    window.renderMJ();
   }
 
   render() {
