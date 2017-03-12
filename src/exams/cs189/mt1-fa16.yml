@@ -1,0 +1,199 @@
+course: 'cs189'
+ref: 'mt1-fa16'
+
+type: 'mt1'
+term: 'fa16'
+prof: 'Shewchuk'
+
+questions: {
+  'q1': 'Multiple Choice',
+  'q2': 'Quadratics and Gaussian Isocontours',
+  'q3': 'Linear Regression',
+  'q4': 'Discriminant Analysis',
+}
+
+parts: {
+  'q1': 5,
+  'q2': 5,
+  'q3': 4,
+}
+
+q1_1: |
+  ## Q1. [25 pts] Clip Loss
+  Let S = ${(x_1, y_1), ... (x_n, y_n)}$ be a set of $n$ points sampled i.i.d. from a distribution $\mathcal{D}$. This is the training set with $x_i \in \mathbb{R}^d$ being the features and $y_i \in \\{-1, 1\\}$ being the labels. Define the *clip loss* of a linear classifier $w \in \mathbb{R}^d$ as
+  $$\text{loss}(w^Tx, y) = clip(yw^Tx)$$
+  Where clip is the function
+  $$clip(z) = \begin{cases} 1 & \text{if} \; z \lt 0 \\\\ 0 & \text{if} \; z \ge 1 \\\\ 1 - z & otherwise. \end{cases}$$
+  For any $d$-dimensional vector $w$, define the *risk* of $w$ as
+  $$R[w] = \mathbb{E}_{\mathcal{D}}[loss(w^Tx, y)]\text{,}$$
+  and the *empirical risk* of $w$ as
+  $$R_S[w] = \frac{1}{n} \sum_{i=1}^{n} loss(w^Tx_i, y_i)\text{.}$$
+  **(a)** [5 pts] Is the function clip convex? If you would like, you can justify your answer by drawing a picture.
+
+q1_1_s: |
+  It is not convex. Drawing the function shows that the line from (−1,1) to (1,0) lies below the graph of the clip function.
+
+q1_2: |
+  **(b)** [5 pts] Show that if $R_S[w] = 0$ and $\lVert w \rVert_2^2 \lt 1$, then the margin of the hyperplane defined by $w$ is greater than 1.
+
+q1_2_s: |
+  The margin of the hyperplane is defined as
+  $$\frac{\text{min}_{1 \le i \le n}(y_i(w^Tx))}{{\lVert w \rVert}_2^2}$$
+  If $R_S[w] = 0$, then the numerator is greater than or equal to 1 for all $i$. Moreover, if ${\lVert w \rVert}_2^2 \lt 1$, the denominator is less than 1. Hence, the margin is greater than 1.
+
+q1_3: |
+  **(c)** Prove that $\mathbb{E}_S[R_S[w]] = R[w]$.
+
+q1_3_s: |
+  $$\mathbb{E}\left[\frac{1}{n}\sum_{i=1}^{n} loss(w^Tx_i, y_i) \right] = \frac{1}{n} \sum_{i=1}^{n} \mathbb{E}[loss(w^Tx_i, y_i)] = \frac{1}{n} \sum_{i=1}^{n} R[w] = R[w]$$
+
+q1_4: |
+  **(d)** [5 pts] Prove that $Var(R_S[w]) \le \frac{1}{n}$.
+
+q1_4_s: |
+  $$\begin{align} Var(R_S[w]) &= \mathbb{E}[(R_S[w] - R[w])^2] \\\\
+    &= \frac{1}{n^2} \sum_{i=1}^{n} \sum_{j=1}^{n} \mathbb{E} (loss(w^Tx_i, y_i) - R[w])(loss(w^Tx_j, y_j) - R[w]) \\\\
+    &= \frac{1}{n^2} \sum_{i=1}^{n} \mathbb{E}[(loss(w^Tx_i, y_i) - R[w])^2] \\\\
+    &= \frac{1}{n} \mathbb{E} [(loss(w^Tx, y) - R[w])^2] \\\\
+    &\le \frac{1}{n} \\end{align}$$
+
+  Here, the first line is the definition of variance, the second line expands the square, the third line follows because $(x_i, y_i)$ and $(x_j, y_j)$ are independent. The fourth line follows because the $(x_i, y_i)$ are identically distributed. The last line follows because the clip loss is nonnegative and bounded above by 1.
+  <hr class="s2" />
+  Alternate proof of first 4 steps:
+  $$\begin{align} Var(R_S[w]) &= Var(\frac{1}{n} \sum_{i=1}^{n} loss(w^Tx_i, y_i)) \\\\
+    &= \frac{1}{n^2} Var(\sum_{i=1}^{n} loss(w^Tx_i, y_i)) \\\\
+    &= \frac{1}{n^2} \sum{i=1}^{n} Var(loss(w^Tx_i, y_i),\; \text{by i.i.d} \\\\
+    &= \frac{1}{n} Var(loss(w^Tx, y))$$
+
+q1_5: |
+  **(e)** [5 pts] Is it possible to have a $w$ such that $R_S[w] = 0$, but $R[w] \gt 0$? Justify your answer.
+
+q1_5_s: |
+  Yes. Consider the case when $n = 1$. Then it is possible to classify the single data point correctly while classifying all of the opposite class incorrectly.
+
+q2_1: |
+  ## Q2. [25 pts] Regularization
+  We consider here a discriminative approach for solving the classification problem illustrated in Figure 1.
+  <hr class="s2" />
+  ![cartesian plot](/img/cs189/mt1-fa16-q2-1.png)
+  <hr class="s2" />
+  Figure 1: The two-dimensional labeled training set, where ‘+’ corresponds to class $y = 1$ and ‘O’ corresponds to class $y = 0$.
+  <hr class="s2" />
+  Suppose we attempt to solve the binary classification task depicted in Figure 1 with the simple linear logistic regression model
+  $$P(y = 1|x, \mathbf{w}) = g(w_0 + w_1x_1 + w_2x_2) = \frac{1}{1 + exp(-w_0 - w_1x_1 - w_2x_2)}$$
+  Notice that training data can be separated with *zero* training error with a linear separator.
+  <hr class="s2" />
+  Consider training a regularized logistic regression model where we try to maximize
+  $$\sum_{i=1}^{n} \text{log} P(y_i|x_i, w_0, w_1, w_2) - Cw_j^2$$
+  for very large $C$. The regularization penalties used in penalized conditional log-likelihood estimation are $−Cw_j^2$ where $j \in \\{0, 1, 2\\}$. In other words, only one of the parameters is regularized in each case. Given the training data in Figure 1, how does the training error change with regularization of each parameter $w_j$? State whether the training error increases or stays the same (zero) for each $w_j$ for large $C$. Provide a brief justification for each of your answers.
+  <hr class="s2" />
+  **(a)** [5 pts] By regularizing $w_2$
+
+q2_1_s: |
+  Remains the same. When we regularize $w_2$, the resulting boundary can rely less and less on the value of $x_2$ and therefore becomes more vertical and training data can be separated with zero training error with a vertical linear separator.
+
+q2_2: |
+  **(b)** [5 pts] By regularizing $w_1$
+
+q2_2_s: |
+  Increases. When we regularize $w_1$, the resulting boundary can rely less and less on the value of $x_1$ and therefore becomes more horizontal. For very large $C$, the training error increases as there is no good linear horizontal separator of the training data.
+
+q2_3: |
+  **(c)** [5 pts] By regularizing $w_0$
+
+q2_3_s: |
+  Increases. When we regularize $w_0$, the boundary will eventually go through the origin (bias term set to zero). Based on the figure, we can not find a linear boundary through the origin with zero error. The best we can get is one error.
+
+q2_4: |
+  Now suppose we want to regularize *both* $w_1$ and $w_2$. This means we want to maximize the penalized log-likelihood
+  $$\sum_{i=1}^{n}log P(y_i|x_i, w_0, w_1, w_2) - C(w_1^2 + w_2^2)$$
+  Consider again the problem in Figure 1 and the same linear logistic regression model $P(y = 1| x, \mathbf{w}) = g(w_0 + w_1x_1 + w_2x_2)$.
+  <hr class="s2" />
+  **(d)** [5 pts] For very large $C$, which value(s) do you expect $w_0$ to take? Explain briefly. (Note that the number of points from each class is the same.) (You can give a range of values for $w_0$ if you deem necessary).
+
+q2_4_s: |
+  For very large $C$, both $w_1$ and $w_2$ will go to zero. Note that when $w_1 = w_2 = 0$, the log-probability of labels becomes a finite value, which is equal to $n\;\text{log}(0.5)$, i.e. $w_0 = 0$. In other words, $P(y = 1|x, \mathbf{w}) = P(y = 0|x, \mathbf{w}) = 0.5$,. We expect so because the number of elements in each class is the same and so we would like to predict each one with the same probability, and $w_0 = 0$ makes $P (y = 1|x, \mathbf{w}) = 0.5$.
+
+q2_5: |
+  **(e)** [5 pts] Assume that we obtain more data points from the ‘+’ class that corresponds to $y = 1$ so that the class labels become unbalanced. Again for very large $C$, with the same regularization for $w_1$ and $w_2$ as above, which value(s) do you expect $w_0$ to take? Explain briefly. (You can give a range of values for $w_0$ if you deem necessary).
+
+q2_5_s: |
+  For very large $C$, we argued that both $w_1$ and $w_2$ will go to zero. With unbalanced classes where the number of ‘+’ labels are greater than that of ‘o’ labels, we want to have $P(y = 1|x,\mathbf{w}) \gt P(y = 0|x,\mathbf{w})$. For that to happen the value of $w_0$ should be greater than zero which makes $P (y = 1|x, \mathbf{w}) \gt 0.5$.
+
+q3_1: |
+  ## Q3. [25 pts] Bias-variance tradeoff in linear regression
+  Recall the statistical model for linear regression from lecture. Fix a set of points $x_1, x_2, ... x_n \in \mathbb{R}^d$ and an unknown regressor $\theta_{\*} \in \mathbb{R}^d$. Suppose we observe $y_1, y_2, ... y_n \in \mathbb{R}$ via the process
+  $$y_i = x_i^T\theta_{\*} + \varepsilon_i \text{,}$$
+  where the noise vector $\varepsilon \text{:}= \left[ \begin{array}{c} \varepsilon_1 \\\\ \varepsilon_2 \\\\ \vdots \\\\ \varepsilon_n \end{array} \right] \in \mathbb{R}^n$ satisfies
+  $$\mathbb{E} \varepsilon = 0, \qquad \text{Cov}(\varepsilon) = \sigma^2I_n \text{.}$$
+  Using the convention from lecture, we write
+  $$X \text{:}= \left[ \begin{array}{c} -x_1^T- \\\\ -x_2^T- \\\\ \vdots \\\\ -x_n^T- \end{array} \right] \in \mathbb{R}^{n \text{ x } d}, \qquad Y \text{:}= \left[ \begin{array}{c} y_1 \\\\ y_2 \\\\ \vdots \\\\ y_n \end{array} \right] \in \mathbb{R}^n \text{.}$$
+  With this notation, our statistical model is equivalent to
+  $$Y = X\theta_{\*} + \varepsilon \text{.}$$
+  You may assume throughout this problem that the matrix $X^TX$ is invertible. Recall the two least-squares estimators we studied in lecture
+  $$\begin{align} \widehat{\theta}_{\text{ols}} &= \text{arg} \min_{\theta \in \mathbb{R}^d} \frac{1}{2} {\lVert X\theta - Y \rVert}_2^2 \qquad (OLS) \\\\
+    \widehat{\theta}_{\text{ridge}} &= \text{arg} \min_{\theta \in \mathbb{R}^d} \frac{1}{2} {\lVert X\theta - Y \rVert}_2^2 + \frac{\lambda}{2}{\lVert \theta \rVert}_2^2 \qquad (Ridge) \text{.} \end{align}$$
+  For the Ridge estimator, you can assume that $\lambda \gt 0$ is known and fixed throughout the problem.
+  **(a)** [5 pts] Write down the closed form solutions for $\widehat{\theta}_{\text{ols}}$ and $\widehat{\theta}_{\text{ridge}}$. Simply state the answer, no need to rederive it.
+
+q3_1_s: |
+  $$\begin{align} \widehat{\theta}_{\text{ols}} &= (X^TX)^{-1}X^TY \\\\
+    \widehat{\theta}_{\text{ridge}} &= (X^TX + \lambda I_d)^{-1}X^TY \end{align}$$
+
+q3_2: |
+  **(b)** [5 pts] Let $\widehat{\theta} \in \mathbb{R}^d$ denote any estimator of $\theta_{\*}$. In the context of the problem, an estimator $\widehat{\theta} = \widehat{\theta}(X, Y)$ is any function which takes the data $X$ and a realization of $Y$, and computes a guess of $\theta_{\*}$.
+  <hr class="s2" />
+  Define the MSE (mean squared error) of the estimator of $\widehat{\theta}$ as
+  $$MSE(\widehat{\theta}) := \mathbb{E}{\lVert \widehat{\theta} - \theta_{\*} \rVert}_2^2 \text{.}$$
+  Above, the expectation is taken w.r.t. the randomness inherent in $\varepsilon$. Define $\widehat{\mu} := \mathbb{E}\widehat{\theta}$. Show that, as we did in lecutre, the MSE decomposes as such
+  $$MSE(\widehat{\theta}) = {\lVert \widehat{\mu} - \theta_{\*} \rVert}_2^2 + \mathbf{Tr}(Cov(\widehat{\theta})) \text{.}$$
+  *Hint*: Expectation and trace commute, so $\mathbb{E}\mathbf{Tr}(A) = \mathbf{Tr}(\mathbb{E}A)$ for any square matrix $A$.
+
+q3_2_s: |
+  $$\begin{align} \mathbb{E}{\lVert \widehat{\theta} - \theta_{\*} \rVert}_2^2
+  &= \mathbb{E}{\lVert (\widehat{\theta} - \widehat{\mu}) - (\theta_{\*} - \widehat{\mu}) \rVert}_2^2 \\\\
+  &= \mathbb{E}{\lVert \widehat{\theta} - \widehat{\mu} \rVert}_2^2 - 2 \mathbb{E}<\widehat{\theta} - \widehat{\mu}, \theta_{\*} - \widehat{\mu}> + \mathbb{E}{\lVert \theta_{\*} - \widehat{\mu} \rVert}_2^2 \\\\
+  &= \mathbb{E}{\lVert \widehat{\theta} - \widehat{\mu} \rVert}_2^2 + {\lVert \theta_{\*} - \widehat{\mu} \rVert}_2^2 \\\\
+  &= \mathbb{E}\mathbf{Tr}((\widehat{\theta} - \widehat{\mu})(\widehat{\theta} - \widehat{\mu})^T) + {\lVert \theta_{\*} - \widehat{\mu} \rVert}_2^2 \\\\
+  &= \mathbf{Tr}(\mathbb{E}(\widehat{\theta} - \widehat{\mu})(\widehat{\theta} - \widehat{\mu})^T) + {\lVert \theta_{\*} - \widehat{\mu} \rVert}_2^2 \\\\
+  &= \mathbf{Tr}(\text{Cov}(\widehat{\theta})) + {\lVert \theta_{\*} - \widehat{\mu} \rVert}_2^2 \text{.} \end{align}$$
+
+q3_3: |
+  **(c)** [5 pts] Show that
+  $$\mathbb{E} \widehat{\theta}_{\text{ols}} = \theta_{\*}, \qquad \mathbb{E}\widehat{\theta}_{\text{ridge}} = (X^TX + \lambda I_d)^{-1}X^TX\theta_{\*}\text{.}$$
+  That is, $\widehat{\theta}_{\text{ols}}$ is an *unbiased* estimator of $\theta_{\*}$ whereas $\widehat{\theta}_{\text{ridge}}$ is a *biased* estimator of $\theta_{\*}$.
+
+q3_3_s: |
+  For OLS,
+  $$\begin{align} \widehat{\theta}_{\text{ols}} &= (X^TX)^{-1}X^TY \\\\
+    &= (X^X)^{-1}X^T(X\theta_{\*} + \varepsilon) \\\\
+    &= \theta_{\*} + (X^TX)^{-1}X^T\varepsilon \text{.} \end{align}$$
+  Hence, since $\mathbb{E}\varepsilon = 0$, $\mathbb{E}\widehat{\theta}_{\text{ols}} = \theta_{\*}$.
+  <hr class="s2" />
+  Similarly,
+  $$\begin{align} \widehat{\theta}_{\text{ridge}} &= (X^TX + \lambda I_d)^{-1}X^TY \\\\
+    &= (X^TX + \lambda I_d)^{-1}X^T(X \theta_{\*} + \varepsilon) \\\\
+    &= (X^X + \lambda I_d)^{-1}X^TX \theta_{\*} + (X^TX + \lambda I_d)^{-1}X^T \varepsilon \end{align}\text{,}$$
+  and therefore $\mathbb{E}\widehat{\theta}_{\text{ridge}} = (X^TX + \lambda I_d)^{-1}X^TX\theta_{\*}$.
+
+q3_4: |
+  **(d)** [10 pts] Let $\gamma_1 \ge \gamma_2 \ge ... \ge \gamma_d$ denote the $d$ eigenvalues of the matrix $X^TX$ arranged in non-increasing order. First, argue that the smallest eigenvalue, $\gamma_d$ is positive (i.e. $\gamma_d \ge 0$). Then, show that
+  $$\mathbf{Tr}(Cov(\widehat{\theta}_{\text{ols}})) = \sigma^2 \sum_{i=1}^{d}\frac{1}{\gamma_i}, \qquad \mathbf{Tr}(Cov(\widehat{\theta}_{\text{ridge}})) = \sigma^2 \sum_{i=1}^{d} \frac{\gamma_i}{(\gamma_i + \lambda)^2}\text{.}$$
+  Finally, use these formulae to conclude that
+  $$\mathbf{Tr}(Cov(\widehat{\theta}_{\text{ridge}})) \lt \mathbf{Tr}(Cov(\widehat{\theta}_{\text{ols}}))\text{.}$$
+  *Hint*: For the Ridge variance, consider writing $X^TX$ in terms of its eigen-decomposition $U\sum U^T$.
+
+q3_4_s: |
+  For OLS, we simply compute
+  $$\begin{align} \mathbf{Tr}(\mathbb{E}(X^TX)^{-1}X^T\varepsilon\varepsilon^{T}X(X^TX)^{-1}) &= \sigma^2 \mathbf{Tr}((X^TX)^{-1}X^TX(X^TX)^{-1}) \\\\
+  &= \sigma^2\mathbf{Tr}((X^TX)^{-1}) \\\\
+  &= \sigma^2\sum_{i=1}^{d} \frac{1}{\gamma_i}\text{.}\end{align}$$
+  For Ridge, writing $X^TX = UΣ U^T$, observe that
+  $$\begin{align}(X^TX + \lambda I_d)^{-1} &= U(Σ + \lambda I_d)^{-1}U^T \\\\
+    (X^TX + \lambda I_d)^{-1}X^TX &= U(Σ + \lambda I_d)^{-1}Σ U^T\text{.}\\end{align}$$
+  Hence,
+  $$\begin{align}\mathbf{Tr}(\mathbb{E}(X^TX + \lambda I_d)^{-1}X^T \varepsilon \varepsilon^T X(X^TX + \lambda I_d)^{-1}) &= \sigma \mathbf{Tr}((X^X + \lambda I_d)^{-1}X^TX(X^TX + \lambda I_d)^{-1}) \\\\
+  &= \sigma^2 \mathbf{Tr}(U(Σ + \lambda I_d)^{-1} Σ(Σ + \lambda I_d)^{-1} U^T) \\\\
+  &= \sigma^2 \mathbf{Tr}(Σ(Σ + \lambda I_d)^{-2}) \\\\
+  &= \sigma^2 \sum_{i=1}^{d} \frac{\gamma_i}{(\gamma_i + \lambda)^2}\text{.} \end{align}$$
+  The inequality $\mathbf{Tr}(Cov(\widehat{\theta}_{\text{ridge}})) \lt \mathbf{Tr}(Cov(\widehat{\theta}_{\text{ols}}))$ holds because $(\gamma_i + \lambda)^2 \gt \gamma_i^2$ for all $1 \le i \le d$.

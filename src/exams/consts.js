@@ -74,6 +74,10 @@ const exams = {
         'term': 'Spring 2016',
         'profs': 'Shewchuk',
       },
+      'fa16': {
+        'term': 'Fall 2016',
+        'profs': 'Shewchuk',
+      },
     }
   },
 

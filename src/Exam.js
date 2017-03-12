@@ -56,7 +56,9 @@ renderer.list = function(body, ordered) {
 const preprocess = function(text) {
   text = replace(text, /\./g, '\\.');
   text = replace(text, /_/g, '\\_');
-  return marked(text, {renderer});
+  text = marked(text, {renderer});
+  text = replace(text, /&amp;/g, '&');
+  return text;
 };
 
 const Scroll = require('react-scroll');
@@ -116,7 +118,7 @@ class ExamContent extends Component {
     const useMarkdown = (examContent && has(examContent, 'md')) ? (examContent.md) : true;
     const isMCQ = (examContent && has(examContent, 'mcq')) ? (examContent.mcq) : false;
     const numProblems = (examContent && has(examContent, 'num')) ? (examContent.num) : problemIDs.length;
-    const pre = (examContent && has(examContent, 'pre')) ? (preprocess(examContent.pre, {renderer})) : null;
+    const pre = (examContent && has(examContent, 'pre')) ? (preprocess(examContent.pre)) : null;
     const hasSolutions = (examContent && has(examContent, 'has_solutions')) ? (examContent.hasSolutions) : true;
 
     var content = null;
@@ -126,8 +128,8 @@ class ExamContent extends Component {
         var qcontent = `${num}. ${examContent[key]}` || '';
         var choices = examContent[key + "_i"] || [];
         if (useMarkdown) {
-          qcontent = preprocess(qcontent, {renderer});
-          choices = map(choices, (choice) => (isString(choice)) ? preprocess(choice, {renderer}) : (choice));
+          qcontent = preprocess(qcontent);
+          choices = map(choices, (choice) => (isString(choice)) ? preprocess(choice) : (choice));
         }
         const solutionNum = examContent[key + "_s"] || null;
         return (
@@ -148,8 +150,8 @@ class ExamContent extends Component {
             var qcontent = examContent[key] || '';
             var solution = examContent[key + "_s"] || '';
             if (useMarkdown) {
-                qcontent = preprocess(qcontent, {renderer});
-                solution = preprocess(solution, {renderer});
+                qcontent = preprocess(qcontent);
+                solution = preprocess(solution);
             }
             return <Question id={`${part}_${subpart}`} course={course} content={qcontent} solution={solution} term={term} examType={type} key={key} appMode={appMode} showSolutions={showSolutions} />
           });
