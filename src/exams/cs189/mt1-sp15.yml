@@ -6,10 +6,11 @@ term: 'sp15'
 prof: 'Shewchuk'
 
 questions: {
-  'q1': 'Multiple Choice',
-  'q2': 'Quadratics and Gaussian Isocontours',
-  'q3': 'Linear Regression',
-  'q4': 'Discriminant Analysis',
+  'q1': 'True or False',
+  'q2': 'Multiple Choice',
+  'q3': 'Parameter Estimation',
+  'q4': 'Dual Solution for Ridge Regression',
+  'q5': 'Regularization and Priors for Linear Regression',
 }
 
 parts: {

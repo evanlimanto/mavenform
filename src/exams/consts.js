@@ -81,6 +81,10 @@ const exams = {
       'sp15': {
         'term': 'Spring 2015',
         'profs': 'Shewchuk',
+      },
+      'sp14': {
+        'term': 'Spring 2014',
+        'profs': 'Shewchuk',
       }
     }
   },
@@ -213,10 +217,10 @@ const exams = {
 const courses = {
   // 'chem1a': 'General Chemistry',
   'cs189': 'Introduction to Machine Learning',
+  'cs61a': 'The Structure and Interpretation of Computer Programs',
   'data8': 'Foundations of Data Science',
   'cs186': 'Introduction to Database Systems',
   'ugba10': 'Principles of Business',
-  'cs61a': 'The Structure and Interpretation of Computer Programs',
   'cs61c': 'Great Ideas in Computer Architecture (Machine Structures)',
   'cs162': 'Operating Systems and Systems Programming',
   'ee16a': 'Designing Information Devices and Systems I',
