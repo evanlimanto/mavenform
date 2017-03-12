@@ -13,10 +13,14 @@ questions: {
 }
 
 parts: {
-  'q1': 5,
-  'q2': 5,
+  'q1': 8,
+  'q2': 2,
   'q3': 4,
-  'q4': 20,
+  'q4': 5,
+  'q5': 2,
+  'q6': 6,
+  'q7': 6,
+  'q8': 5,
 }
 
 q1_1: |
@@ -370,3 +374,292 @@ q6_5_s: |
   <hr class="s1" />
   The expected utility of $L_{4±1}$ is $\frac{1}{2}(U_2(3) + U_2(5)) = \frac{1}{2}\left(\frac{1}{U_1(3)} + \frac{1}{U_1(5)}\right). We know that $U_1$ is linear, so write $U_1(n) = an + b$ for some $a, b$. Then substituting this into this expression for $\mathbb{E}[U_2(L_{4±1})]$ and simplifying algebraically yields $\frac{1}{2}\left(\frac{8a+2b}{15a^2+8ab+b^2}\right) = \frac{4a+b}{15a^2+8ab+b^2}. By the same computation for $L_{4±2}$, we get $\mathbb{E}[U_2(L_{4±2})] = \frac{4a+b}{12a^2+8ab+b^2}$. Since we only know that $U_1$ is increasing and linear, the only constraint on $a$ and $b$ is that $a$ is positive. So let $a = 1, b = 0$. Then $\mathbb{E}[U_2(L_{4±1})] = \frac{1}{3} \gt \frac{4}{15} = \mathbb{E}[U_2(L_{4±1})]$ and thus $L_{4±2} ≻ L_{4±1}$ (**not** first option). Similarly, for this $U_1, U_2(4) = \frac{1}{U_1(4)} = \frac{1}{4} < \frac{1}{3} = \mathbb{E}[U_2(L_{4±2})]$ and thus $L_{4±1} ≻ E_4$ (third option).
   <hr class="s1" />
+  What follows is a more general argument that could have been used to answer this question if particular numbers were not specified.
+  <hr class="s1" />
+  In order to determine PacLass’s attitude toward risk, we take the second derivative of $U_2$ with respect to $n$. By the chain rule, $\frac{dU_2(n)}{dn} = \frac{dU_2(n)}{dU_1(n)} \cdot \frac{dU_1(n)}{dn}$. Since $U_1$ is an increasing linear function of $n, \frac{dU_1(n)}{dn}$ is some positive constant $a$, so $\frac{dU_2(n)}{dn} = a\frac{dU_2(n)}{dU_1(n)} = -a\frac{1}{(U_1(n))^2}$. Taking the derivative with respect to $n$ again and using the chain rule yields $\frac{d^2U_2(n)}{dn^2} = \frac{d}{dU_1(n)}\left(-a\frac{1}{(U_1(n))^2}\right) \cdot \frac{dU_1(n)}{dn} = \frac{1}{2}a^2\frac{1}{(U_1(n))^3}. $U_1$ is always positive, so this is a positive number and thus the second derivative of PacLass’s utility function is everywhere positive.
+  <hr class="s1" />
+  This means the utility function is strictly convex (equivalently “concave up”), and thus all secant lines on the plot of the curve lie above the curve itself.
+  In general, strictly convex utility functions are risk-seeking. To see this, consider $L_{n±k}$ and $E_n$. The expected utility of $L_{n±k}$ is $\frac{1}{2}U_2(n − k) + \frac{1}{2}U_2(n + k)$, which corresponds to the midpoint of the secant line drawn between the points $(n − k, U_2(n − k))$ and $(n + k, U_2(n + k))$, which both lie on the curve. That point is $(n, \mathbb{E}[U(L_{n±k})]) = (n, \frac{1}{2} U_2(n − k) + \frac{1}{2} U_2(n + k))$. The utility of $E_n$ is $U(n)$, which lies on the curve at the point $(n,U_2(n))$. Since $U_2$ is strictly convex, the secant line lies above the curve, so we must have $\mathbb{E}[U_2(L_{n±k})] > U(n)$.
+  <hr class="s1" />
+  With that proof that PacLass is risk-seeking, we can address the remaining two options: she is not indifferent to the variance of a lottery (not the first option), and she prefers the lottery over the deterministic outcome (the third option).
+
+q6_6: |
+  PacLass is in a strange environment trying to follow a policy that will maximize her expected utility. Assume that $U$ is her utility function in terms of the number of pellets she receives.
+  <hr class="s2" />
+  In PacLass’s environment, the probability of ending up in state $s'$ after taking action a from state $s$ is $T(s,a,s')$. At every step, PacLass finds a locked chest containing $C(s,a,s')$ pellets, and she can either keep the old chest she is carrying or swap it for the new one she just found. At a terminal state(but never before) she receives the key to open the chest she is carrying and gets all the pellets inside. Each chest has the number of pellets it contains written on it, so PacLass knows how many pellets are inside without opening each chest.
+  <hr class="s2" />
+  **(c)** [3 pts] Which is the appropriate Bellman equation for PacLass’s value function? Write the correct answer next to ‘Other’ if none of the listed options are correct.
+  - $V^{\*}(s) = \text{max}_a \sum_{s'}T(s,a,s')[U(C(s,a,s')) + V^{\*}(s')]$
+  - $V^{\*}(s) = \text{max}_a \sum_{s'}T(s,a,s')U(C(s,a,s') + V^{\*}(s'))$
+  - $V^{\*}(s) = \text{max}_a \sum_{s'}T(s,a,s')\text{max}\\{U(C(s,a,s')),V^{\*}(s')\\}$
+  - $V^{\*}(s) = \text{max}_a \sum_{s'}T(s,a,s')\text{max}\\{U(C(s,a,s')),U(V^{\*}(s'))\\}$
+  - $V^{\*}(s) = \text{max}_a \sum_{s'}T(s,a,s')U(\text{max}\\{C(s,a,s'),V^{\*}(s')\\})$
+  - $V^{\*}(s) = \text{max}_a \sum_{s'}T(s,a,s')U(\text{max}\\{U(C(s,a,s')),V^{\*}(s')\\})$
+  - Other ________
+
+q6_6_s: |
+  - $V^{\*}(s) = \text{max}_a \sum_{s'}T(s,a,s')\text{max}\\{U(C(s,a,s')),V^{\*}(s')\\}$
+
+  First see that unlike in a normal MDP where we maximize the sum of rewards, PacLass only gets utility from one chest, so her utility is a function of the *maximum* reward she receives. At state $s$, we choose the action $a$ which maximizes PacLass’s expected utility, as normal. To take that expectation, we sum over each outcome $s'$ of taking action $a$ from state $s$. The terms of that sum are the probability of each outcome multiplied with the utility of each action. In a normal (undiscounted) MDP, the utility of the triple $(s,a,s')$ is $[R(s,a,s')+V^{\∗}(s')]$. Here, instead of taking the sum, we have to take the max. But in this MDP, unlike in a normal MDP, we have a unit mismatch (equivalently a type mismatch) between the rewards, which are in units of food pellets, and PacLass’s utility (which is in general units of utility). This is crucially important because PacLass’s utility is not given to be increasing; maximizing $C(s,a,s')$ directly is not guaranteed to maximize utility. 
+  Since value is defined to be the expected utility of acting optimally starting from state $s$, $V^{\∗}$ represents a utility, so it does not make sense to take $U(V^{\∗}(s'))$. We must compare the utility of taking the new chest containing $C(s,a,s')$ pellets, $U(C(s,a,s'))$ to the utility of taking some other chest, $V^{\∗}(s')$. Thus the only correct answer is the third option.
+
+q7_1: |
+  ## Q7. [17 pts] CSPs with Preferences
+  Let us formulate a CSP with variables $A, B, C, D$, and domains of $\\{1,2,3\\}$ for each of these variables. A **valid assignment** in this CSP is defined as a complete assignment of values to variables which satisfies the following constraints:
+  - 1. B will not ride in car 2.
+  - 2. A and B refuse to ride in the same car.
+  - 3. The sum of the car numbers for B and C is less than 4.
+  - 4. A’s car number must be greater than C’s car number.
+  - 5. B and D refuse to ride in the same car.
+  - 6. C’s car number must be lesser than D’s car number.
+
+  **(a)** [2 pts] Draw the corresponding constraint graph for this CSP.A
+
+q7_1_s: |
+  ![csp](/img/cs188/mt1-sp16-q7-1.png)
+
+q7_2: |
+  Although there are several valid assignments which exist for this problem, $A, B, C$ and $D$ have additional “soft” preferences on which value they prefer to be assigned. To encode these preferences, we define utility functions $U_{Var}(Val)$ which represent how preferable an assignment of the value(Val) to the variable(Var) is.
+  <hr class="s2" />
+  For a complete assignment $P = \\{A : V_A, B : V_B, .... D : V_D}$, the utility of $P$ is defined as the sum of the utility values: $U_A(V_A)+U_B(V_B)+U_C(V_C)+U_D(V_D)$. A higher utility for $P$ indicates a higher preference for that complete assignment. This scheme can be extended to an arbitrary CSP, with several variables and values.
+  <hr class="s2" />
+  We can now define a modified CSP problem, whose goal is to find the valid assignment which has the maximum utility amongst all valid assignments.
+  <hr class="s2" />
+  **(b)** [2 pts] Suppose the utilities for the assignment of values to variables is given by the table below
+  <hr class="s2" />
+  ![utilites table](/img/cs188/mt1-sp16-q7-2.png)
+  <hr class="s2" />
+  Under these preferences, given a choice between the following complete assignments which are valid solutions to the CSP, which would be the preferred solution.
+  - A:3 &nbsp;&nbsp;&nbsp;&nbsp; B:1 &nbsp;&nbsp;&nbsp;&nbsp; C:1 &nbsp;&nbsp;&nbsp;&nbsp; D:2
+  - A:3 &nbsp;&nbsp;&nbsp;&nbsp; B:1 &nbsp;&nbsp;&nbsp;&nbsp; C:2 &nbsp;&nbsp;&nbsp;&nbsp; D:3
+  - A:2 &nbsp;&nbsp;&nbsp;&nbsp; B:1 &nbsp;&nbsp;&nbsp;&nbsp; C:1 &nbsp;&nbsp;&nbsp;&nbsp; D:2
+  - A:3 &nbsp;&nbsp;&nbsp;&nbsp; B:1 &nbsp;&nbsp;&nbsp;&nbsp; C:1 &nbsp;&nbsp;&nbsp;&nbsp; D:3
+
+q7_2_s: |
+  - A:3 &nbsp;&nbsp;&nbsp;&nbsp; B:1 &nbsp;&nbsp;&nbsp;&nbsp; C:2 &nbsp;&nbsp;&nbsp;&nbsp; D:3
+
+  Solution 2 has value $U_A(3)+U_B(1)+U_C(2)+U_D(3) = 5+10+300+3000 = 3315$, which is the highest amongst the choices.
+
+q7_3: |
+  To decouple from the previous questions, for the rest of the question, the preference utilities are not necessarily the table shown above but can be arbitrary positive values.
+  <hr class="s2" />
+  This problem can be formulated as a modified search problem, where we use the modified tree search shown below to find the valid assignment with the highest utility, instead of just finding an arbitrary valid assignment.
+  <hr class="s2" />
+  The search formulation is:
+  - State space: The space of partial assignments of values to variables
+  - Start state: The empty assignment
+  - Goal Test: State $X$ is a valid assignment
+  - Successor function: The successors of a node $X$ are states which have partial assignments which are the assignment in $X$ extended by one more assignment of a value to an unassigned variable, as long as this assignment does not violate any constraints
+  - Edge weights: Utilities of the assignment made through that edge
+
+  In the algorithm below `f(node)` is an estimator of distance from `node` to `goal`, `Accumulated-Utility-From-Start(node)$ is the sum of utilities of assignments made from the `start-node` to the current `node`.
+
+  ```
+  <b>function</b> ModifiedTreeSearch(problem, start-node)
+      fringe ← Insert(key : start-node, value : f (start-node))
+      <b>do</b>
+          <b>if</b> IsEmpty(fringe) <b>then</b>
+              <b>return</b> failure
+          <b>end if</b>
+          node, cost ← remove entry with <b>maximum</b> value from fringe
+          <b>if</b> Goal-Test(node) <b>then</b>
+              <b>return</b> node
+          <b>end if</b>
+          <b>for</b> child in Successors(node) <b>do</b>
+              fringe ← Insert(key : child, value : f (child) + Accumulated-Utility-From-Start(child))
+          <b>end for</b>
+      <b>while<b> True
+  <b>end function</b>
+  ```
+
+  **(c)** Under this search formulation, for a node $X$ with assigned variables $\\{v_1,v_2....v_n\\}$ and unassigned variables $\\{u_1, u_2, u_3...u_m\\}$.
+  <hr class="s2" />
+  **(i)** [4 pts] Which of these expressions for $f(X)$ in the algorithm above, is guaranteed to give an optimal assignment according to the preference utilities. (Select **all** that apply)
+  - $f_1 = \text{min}_{Val_1,Val_2,...Val_m U_{u_1} (Val_1) + U_{u_2} (Val_2) + .... + U_{u_m} (Val_m)$
+  - $f_2 = \text{max}_{Val_1,Val_2,...Val_m U_{u_1} (Val_1) + U_{u_2} (Val_2) + .... + U_{u_m U_{u_m} (Val_m)$
+  - $f_3 = \text{min}_{Val_1,Val_2,...Val_m U_{u_1} (Val_1) + U_{u_2} (Val_2) + .... + U_{u_m U_{u_m} (Val_m)$ such that the complete assignment satisfies constraints.
+  - $f_4 = \text{max}_{Val_1,Val_2,...Val_m}U_{u_1}(Val_1) + U_{u_2}(Val_2) + .... + U_{u_m} (Val_m)$ such that the complete assignment satisfies constraints.
+  - $f_5 = Q$, a fixed extremely high value (≫ sum of all utilities) which is the same across all states.
+  - $f_6=0$
+
+q7_3_s: |
+  - $f_2 = \text{max}_{Val_1,Val_2,...Val_m U_{u_1} (Val_1) + U_{u_2} (Val_2) + .... + U_{u_m U_{u_m} (Val_m)$
+  - $f_4 = \text{max}_{Val_1,Val_2,...Val_m}U_{u_1}(Val_1) + U_{u_2}(Val_2) + .... + U_{u_m} (Val_m)$ such that the complete assignment satisfies constraints.
+  - $f_5 = Q$, a fixed extremely high value (≫ sum of all utilities) which is the same across all states.
+
+  Because we have a maximum search we need an overestimator of cost instead of an underestimator for the function f, like standard $A\∗$ search. ModifiedTreeSearch is $A\∗$ search picking the maximum node from the fringe instead of the minimum. This requires an overestimator instead of an understimator to ensure optimality of the tree search.
+
+q7_4: |
+  **(ii)** [3 pts] For the expressions for $f(X)$ which guaranteed to give an optimal solution in part(i) among $f_1, f_2, f_3, f_4, f_5, f_6$, order them in ascending order of number of nodes expanded by ModifiedTreeSearch.
+
+q7_4_s: |
+  Based on the dominance of heuristics, but modified to be an overestimate instead of an underestimate in standard $A\*$ search. Hence the closer the estimate is to the actual cost, the better it does in terms of number of nodes expanded. So the ordering is option 4 < option 2 < option 5.
+
+q7_5: |
+  **(d)** In order to make this search more efficient, we want to perform forward checking such that, for every assignment of a value to a variable, we eliminate values from the domains of other variables, which violate a constraint under this assignment. Answer the following questions formulating the state space and successor function for a search problem such that the same algorithm [1] performs forward checking under this formulation.
+  <hr class="s2" />
+  **(i)** [3 pts] Briefly describe the minimal state space representation for this problem? (No state space size is needed, just a description will suffice)
+
+q7_5_s: |
+  Each element of the state space is a partial assignment along with the domains of all variables
+
+q7_6: |
+  **(ii)** [3 pts] What is the Successor function for this problem?
+
+q7_6_s: |
+  The successors for a node $X$, are generated by picking an unassigned variable and a corresponding value to assign to it. The successor state has a partial assignment which is the partial assignment of $X$, extended by the new value assignment which we picked. It is important then to also prune the domains of the remaining unassigned variables using forward checking to remove values which would violate constraints under the new assignment. Successor states which have empty domains or violated constraints are removed from the list of successors.
+
+q8_1: |
+  ## Q8. [19 pts] Game Trees: Friendly Ghost
+  Consider a two-player game between Pacman and a ghost in which both agents alternate moves. As usual, Pacman is a maximizer agent whose goal is to win by maximizing his own utility. Unlike the usual adversarial ghost, she is friendly and helps Pacman by maximizing his utility. Pacman is unaware of this and acts as usual (i.e. as if she is playing against him). She knows that Pacman is misinformed and acts accordingly.
+  <hr class="s2" />
+  **(a)** [7 pts] In the minimax algorithm, the value of each node is determined by the game subtree hanging from that node. For this version, we instead define a value pair $(u, v)$ for each node:
+  - $u$ is the value of the subtree as determined by Pacman, who acts to win while assuming that the ghost is a minimizer agent, and
+  - $v$ is the value of the subtree as determined by the ghost, who acts to help Pacman win while **knowing** Pacman’s strategy.
+
+  For example, in the subtree below with values $(4, 6)$, Pacman believes the ghost would choose the left action which has a value of 4, but in fact the ghost chooses the right action which has a value of 6, since that is better for Pacman.
+  <hr class="s2" />
+  For the terminal states we set $u$ = $v$ = `Utility(State)`.
+  <hr class="s2" />
+  **Fill in** the remaining $(u, v)$ values in the modified minimax tree below, in which **the ghost is the root**. The ghost nodes are upside down pentagons and Pacman’s nodes are rightside up pentagons.
+  <hr class="s2" />
+  ![tree](/img/cs188/mt1-sp16-q8-1.png)
+
+q8_1_s: |
+  The $u$ value of Pacman’s nodes is the maximum of the $u$ values of the immediate children nodes since Pacman believes that the values of the nodes are given by $u$. The $v$ value of Pacman’s nodes is the $v$ value from the child node that attains the maximum $u$ value since, during Pacman’s turn, he determines the action that is taken.
+  <hr class="s2" />j
+  The $u$ value of the ghost nodes is the minimum of the $u$ values of the immediate children nodes since Pacman believes the ghost would choose the action that minimizes his utility. The $v$ value of the ghost nodes is the maximum of the $v$ values of the immediate children nodes since, during her turn, she chooses the action that maximizes Pacman’s utility.
+  <hr class="s2" />
+  The value of this game, where the goal is to act optimally given the limited information, is 8. Notice that the $u$ values are minimax values since Pacman believes he is playing a minimax game.
+  <hr class="s2" />
+  For grading purposes, we marked down points if the value of a node is incorrect given the values of the immediate children nodes. That is, we penalized only once for each mistake and propagated the error for the values above. This also means that a value that is the same as in the solutions could be marked as incorrect if its value should be different when using the values of the children nodes provided by the student.
+
+q8_2: |
+  **(b)** [3 pts] In the game tree above, put an ‘X’ on the branches that can be pruned and do not need to be explored when the ghost computes the value of the tree. Assume that the children of a node are visited in left-to-right order and that you should not prune on equality. Explicitly write down “Not possible” below if no branches can be pruned, in which case any ‘X’ marks above will be ignored.
+
+q8_2_s: |
+  Two branches can be pruned and they are marked on the tree above.
+  <hr class="s2" />
+  Branches coming down from Pacman’s nodes can never be pruned since the $v$ value from one of the children nodes might be needed by the ghost node above Pacman’s, even if the $u$ value is no longer needed. For instance, if the game was simply minimax, the branch between the nodes with values (4,8) would have been pruned. However, notice that in the modified game, the value 8 needed to be passed up the tree.
+  <hr class="s2" />
+  On the other hand, branches coming down from the ghost nodes can be pruned if we can rule out that in the previous turn Pacman would pick the action leading to this node. For instance, the branch above the leave with values (7,7) can be pruned since Pacman’s best $u$ value on path to root is 4 by the time this branch is reached, but the ghost node already explored a subtree with a $u$ value of 1.A
+
+q8_3: |
+  **(c)** [1 pt] What would the value of the game tree be if instead Pacman **knew** that the ghost is friendly?
+  <hr class="s1" />
+  Value (i.e. a single number) at the root of the game tree is ________.
+
+q8_3_s: |
+  In this game where Pacman knows that the ghost is friendly, both players are maximizer players, so the value of the game tree is the maximum of all the leaves.
+
+q8_4: |
+  **(d)** [4 pts] Complete the algorithm below, which is a modification of the minimax algorithm, to work in the **original setting** where the ghost is friendly unbeknownst to Pacman. (No pruning in this subquestion)
+
+  ```
+  <b>function</b> VALUE(state)
+      <b>if</b> state is leaf <b>then</b>
+          (u, v) ← (Utility(state), Utility(state))
+          <b>return</b> (u,v)
+      <b>end if</b>
+      <b>if</b> state is Ghost-Node <b>then</b>
+          <b>return</b> Ghost-Value(state)
+      <b>else</b>
+          <b>return</b> Pacman-Value(state)
+      <b>end if</b>
+  <b>end function</b>
+  ```
+
+  ```
+  <b>function</b> Ghost-Value(state)
+      (u,v) ← (+∞,−∞)
+      <b>for</b> successor in Successors(state) <b>do</b>
+          (u′,v′) ← Value(successor)
+          <b>(i)</b>
+          <b>(ii)</b>
+          (u,v) ← (u ̄,v ̄) end for
+      <b>end for</b>
+      <b>return</b> (u, v) end function
+  <b>end function</b>
+  ```
+
+  ```
+  <b>function</b> Pacman-Value(state)
+      (u,v) ← (−∞,+∞)
+      <b>for</b> successor in Successors(state) <b>do</b>
+          (u′,v′) ← Value(successor)
+          <b>(iii)</b>
+          <b>(iv)</b>
+          (u,v) ← (u ̄,v ̄)
+      <b>end for</b>
+      <b>return</b> (u, v)
+  <b>end function</b>
+  ```
+
+  Complete the pseudocode by choosing the option that fills in each blank above. The code blocks $\mathbf{A_1–A_8}$ update $u ̄$ and the code blocks $B_1–B_8$ update $v ̄$. If any of the code blocks are not needed, the correct answer for that question must mark the option ‘None of these code blocks are needed’.
+  <hr class="s2" />
+  ![codeblocks](/img/cs188/mt1-sp16-q8-2.png)
+  <hr class="s2" />
+  ![choices](/img/cs188/mt1-sp16-q8-3.png)
+
+q8_4_s: |
+  ![choices](/img/cs188/mt1-sp16-q8-4.png)
+  <hr class="s2" />
+  As stated in part (a), the $u$ and $v$ values for the ghost node is (i) the minimum of the u values and (ii) the maximum of the $v$ values of the children nodes, while the $u$ and $v$ values for Pacman’s node is (iii) the maximum of the $u$ values and (iv) the $v$ value that attains the maximum $u$ value among the $u$ values of the children nodes.
+
+q8_5: |
+  **(e)** [4 pts] Complete the algorithm below, which is a modification of the alpha-beta pruning algorithm, to work in the original setting where the ghost is friendly unbeknownst to Pacman.
+  <hr class="s2" />
+  We want to compute `Value(Root Node, α = −∞, β = +∞)`. You should **not** prune on equality.
+  <hr class="s1" />
+  *Hint: you might not need to use α or β, or none of them (e.g. no pruning is possible)*.
+
+  ```
+  <b>function</b> VALUE(state)
+      <b>if</b> state is leaf <b>then</b>
+          (u, v) ← (Utility(state), Utility(state))
+          <b>return</b> (u,v)
+      <b>end if</b>
+      <b>if</b> state is Ghost-Node <b>then</b>
+          <b>return</b> Ghost-Value(state)
+      <b>else</b>
+          <b>return</b> Pacman-Value(state)
+      <b>end if</b>
+  <b>end function</b>
+  ```
+
+  ```
+  <b>function</b> Ghost-Value(state)
+      (u,v) ← (+∞,−∞)
+      <b>for</b> successor in Successors(state) <b>do</b>
+          (u′,v′) ← Value(successor)
+          <b>(i)</b>
+          <b>(ii)</b>
+          (u,v) ← (u ̄,v ̄) end for
+      <b>end for</b>
+      <b>return</b> (u, v) end function
+  <b>end function</b>
+  ```
+
+  ```
+  <b>function</b> Pacman-Value(state)
+      (u,v) ← (−∞,+∞)
+      <b>for</b> successor in Successors(state) <b>do</b>
+          (u′,v′) ← Value(successor)
+          <b>(iii)</b>
+          <b>(iv)</b>
+          (u,v) ← (u ̄,v ̄)
+      <b>end for</b>
+      <b>return</b> (u, v)
+  <b>end function</b>
+  ```
+
+  Complete the pseudocode by choosing the option that fills in each blank above. The code blocks $A_1–A_8$ update $u ̄$ and the code blocks $B_1–B_8$ update $v ̄$. If any of the code blocks are not needed, the correct answer for that question must mark the option ‘None of these code blocks are needed’.
+  <hr class="s2" />
+  ![codeblocks](/img/cs188/mt1-sp16-q8-5.png)
+  <hr class="s2" />
+  ![choices](/img/cs188/mt1-sp16-q8-6.png)
+
+q8_5_s: |
+  ![choices](/img/cs188/mt1-sp16-q8-7.png)
+  <hr class="s2" />
+  As stated in part (b), it is possible to prune based on Pacman’s best option on path to root just as in minimax ((i) and (iv)), but it is not possible to prune based on the ghost’s best option on path to root ((ii) and (iii)).
