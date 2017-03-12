@@ -68,6 +68,15 @@ const exams = {
     },
   },
 
+  'cs188': {
+    'mt1': {
+      'sp16': {
+        'term': 'Spring 2016',
+        'profs': 'Abbeel',
+      },
+    }
+  },
+
   'cs189': {
     'mt1': {
       'sp16': {
@@ -217,6 +226,7 @@ const exams = {
 const courses = {
   // 'chem1a': 'General Chemistry',
   'cs189': 'Introduction to Machine Learning',
+  'cs188': 'Introduction to Artificial Intelligence',
   'cs61a': 'The Structure and Interpretation of Computer Programs',
   'data8': 'Foundations of Data Science',
   'cs186': 'Introduction to Database Systems',
@@ -261,6 +271,7 @@ const courseIDToLabel = {
   'cs61a': 'CS 61A',
   'cs61c': 'CS 61C',
   'cs162': 'CS 162',
+  'cs188': 'CS 188',
   'cs189': 'CS 189',
   'ugba10': 'UGBA 10',
 };

@@ -1,0 +1,372 @@
+course: 'cs188'
+ref: 'mt1-sp16'
+
+type: 'mt1'
+term: 'sp16'
+prof: 'Abbeel'
+
+questions: {
+  'q1': 'Multiple Choice',
+  'q2': 'Quadratics and Gaussian Isocontours',
+  'q3': 'Linear Regression',
+  'q4': 'Discriminant Analysis',
+}
+
+parts: {
+  'q1': 5,
+  'q2': 5,
+  'q3': 4,
+  'q4': 20,
+}
+
+q1_1: |
+  ## Q1. [14 pts] Bayes Nets and Joint Distributions
+  **(a)** [2 pts] Write down the joint probability distribution associated with the following Bayes Net. Express the answer as a product of terms representing individual conditional probabilities tables associated with this Bayes Net:
+  <hr class="s2" />
+  ![bayes net](/img/cs188/mt1-sp16-q1-1.png)
+
+q1_1_s: |
+  $$P(A)P(B)P(C|A,B)P(D|A,B)P(E|C,D)
+
+q1_2: |
+  **(b)** [2 pts] Draw the Bayes net associated with the following joint distribution:
+  $$P(A) \cdot P(B) \cdot P(C|A, B) \cdot P(D|C) \cdot P(E|B, C)$$
+
+q1_2_s: |
+  ![bayes net](/img/cs188/mt1-sp16-q1-2.png)
+
+q1_3: |
+  **(c)** [3 pts] Do the following products of factors correspond to a valid joint distribution over the variables A, B, C, D? (Circle TRUE or FALSE.)
+  <hr class="s2" />
+  - (i) **TRUE/FALSE** $\,\;\qquad P(A) \cdot P(B) \cdot P(C|A) \cdot P(C|B) \cdot P(D|C)$
+  - (ii) **TRUE/FALSE** $\,\qquad P(A) \cdot P(B|A) \cdot P(C) \cdot P(D|B, C)$
+  - (iii) **TRUE/FALSE** $\qquad P(A) \cdot P(B|A) \cdot P(C) \cdot P(C|A) \cdot P(D)$
+  - (iv) **TRUE/FALSE** $\qquad P(A|B) \cdot P(B|C) \cdot P(C|D) \cdot P(D|A)$
+
+q1_3_s: |
+  - (i) **FALSE**
+  - (ii) **TRUE**
+  - (iii) **FALSE**
+  - (iv) **FALSE**
+
+q1_4: |
+  **(d)** What factor can be multiplied with the following factors to form a valid joint distribution? (Write “none” if the given set of factors can’t be turned into a joint by the inclusion of exactly one more factor.)
+  <hr class="s2" />
+  **(i)** [2 pts] $P(A) \cdot P(B|A) \cdot P(C|A) \cdot P(E|B, C, D)$
+
+q1_4_s: |
+  $P(D)$ is missing. $D$ could also be conditioned on $A$, $B$, and/or $C$ without creating a cycle (e.g. $P(D|A, B, C)$). Here is an example Bayes Net that would represent the distribution after adding in $P(D)$:
+  <hr class="s2" />
+  ![bayes net](/img/cs188/mt1-sp16-q1-3.png)
+
+q1_5: |
+  **(ii)** [2 pts] $P(D) \cdot P(B) \cdot P(C|D, B) \cdot P(E|C, D, A)$
+
+q1_5_s: |
+  $P(A)$ is missing to form a valid joint distributions. $A$ could also be conditioned on $B$, $C$, and/or $D$ (e.g. $P(A|B, C, D)$). Here is a bayes net that would represent the distribution is $P(A|D)$ was added in.
+  <hr class="s2" />
+  ![bayes net](/img/cs188/mt1-sp16-q1-4.png)
+
+q1_6: |
+  **(e)** Answer the next questions based off of the Bayes Net below:
+  <hr class="s1" />
+  **All variables have domains of $\mathbf{\\{-1, 0, 1\\}}$.**
+  <hr class="s2" />
+  ![bayes net](/img/cs188/mt1-sp16-q1-5.png)
+  <hr class="s2" />
+  **(i)** [1 pt] Before eliminating any variables or including any evidence, how many entries does the factor at G have?
+
+q1_6_s: |
+  The factor is $P(G|B, C)$, so that gives $3^3 = 27$ entries.
+
+q1_7: |
+  **(ii)** [2 pts] Now we observe $e = 1$ and want to query $P(D|e = 1)$, and you get to pick the first variable to be eliminated.
+  - Which choice would create the **largest** factor $f_1$?
+
+q1_7_s: |
+  Eliminating $B$ first would give the largest $f_1$:
+  $$f_1(A,F,G,C,e) = \sum_{B=b}P(b)P(e|A,b)P(F|b)P(G|b,C)P(C|b)\text{.}$$
+  This factor has $3^4$ entries.
+
+q1_8: |
+  - Which choice would create the **smallest** factor $f_1$?
+
+q1_8_s: |
+  Eliminating $A$ or eliminating $F$ first would give smallest factors of 3 entries: either
+  $$f_1(D, e) = \sum_{a}P(D|a)P(e|a)P(a) \text{  or  } f_1(B) = \sum_{f}P(f|B)\text{.}$$
+  Eliminating $D$ is not correct because $D$ is the query variable.
+
+q2_1: |
+  ## Q2. [8 pts] Pacman's Life
+  Suppose a maze has height $M$ and width $N$ and there are $F$ food pellets at the beginning. Pacman can move North, South, East or West in the maze.
+  <hr class="s2" />
+  **(a)** [4 pts] In this subquestion, the position of Pacman is known, and he wants to pick up all $F$ food pellets in the maze. However, Pacman can move North at most two times overall.
+  <hr class="s2" />
+  What is the size of a minimal state space for this problem? Give your answer as a product of terms that reference problem quantities such as (but not limited to) $M$, $N$, $F$, etc. Below each term, state the information it encodes. For example, you might write $4 \text{ × } MN$ and write number of directions underneath the first term and Pacman’s position under the second.
+
+q2_1_s: |
+  $MN \text{ x } 2^F \text{ x } 3$. Pacman's position, a boolean vector representing whether a certain food pellet has been eaten, and the number of times Pacman has moved North (which could be 0, 1 or 2).
+
+q2_2: |
+  **(b)** In this subquestion, Pacman is lost in the maze, and does not know his location. However, Pacman still wants to visit every single square (he does not care about collecting the food pellets any more). Pacman’s task is to find a sequence of actions which guarantees that he will visit every single square.
+  <hr class="s2" />
+  What is the size of a minimal state space for this problem? As in part(a), give your answer as a product of terms along with the information encoded by each term. You will receive partial credit for a complete but non-minimal state space.
+
+q2_2_s: |
+  $2^{({(MN)}^2)}$. For every starting location, we need a boolean for every position $(MN)$ to keep track of all the visited locations. In other words, we need $MN$ sets of $MN$ booleans for a total of $(MN)^2$ booleans. Hence, the state space is $2^{({(MN)}^2)}$.
+
+q3_1: |
+  ## Q3. [13 pts] MDPs: Dice Bonanza
+  A casino is considering adding a new game to their collection, but need to analyze it before releasing it on their floor. They have hired you to execute the analysis. On each round of the game, the player has the option of rolling a fair 6-sided die. That is, the die lands on values 1 through 6 with equal probability. Each roll costs 1 dollar, and the player **must** roll the very first round. Each time the player rolls the die, the player has two possible actions:
+  <hr class="s2" />
+
+  - 1. *Stop*: Stop playing by collecting the dollar value that the die lands on, or
+  - 2. *Roll*: Roll again, paying another 1 dollar.
+
+  <hr class="s2" />
+  Having taken CS 188, you decide to model this problem using an infinite horizon Markov Decision Process (MDP). The player initially starts in state *Start*, where the player only has one possible action: *Roll*. State $s_i$ denotes the state where the die lands on *i*. Once a player decides to *Stop*, the game is over, transitioning the player to the *End* state.
+  <hr class="s2" />
+  **(a)** [4 pts] In solving this problem, you consider using policy iteration. Your initial policy $\pi$ is in the table below. Evaluate the policy at each state, with $\gamma = 1$.
+  <hr class="s2" />
+
+  |State|$s_1$|$s_2$|$s_3$|$s_4$|$s_5$|$s_6$|
+  |-----|-----|-----|-----|-----|-----|-----|
+  |$\pi(s)$|Roll|Roll|Stop|Stop|Stop|Stop|
+  |$V^{\pi}(s)$||||||||
+
+q3_1_s: |
+  |State|$s_1$|$s_2$|$s_3$|$s_4$|$s_5$|$s_6$|
+  |-----|-----|-----|-----|-----|-----|-----|
+  |$\pi(s)$|Roll|Roll|Stop|Stop|Stop|Stop|
+  |$V^{\pi}(s)$|3|3|3|4|5|6|
+
+  <hr class="s2" />
+  We have that $s_i = i$ for $i \in \\{3, 4, 5, 6\\}$, since the player will be awarded no further rewards according to the policy. From the Bellman equations, we have that $V(s_1) = −1 + \frac{1}{6}(V(s_1)+V(s_2)+3+4+5+6)$ and that $V(s_2)=−1+1(V(s_1)+V(s_2)+3+4+5+6)$. Solving this linear system yields $V(s_1) = V(s_2) = 3$.
+
+q3_2: |
+  |State|$s_1$|$s_2$|$s_3$|$s_4$|$s_5$|$s_6$|
+  |-----|-----|-----|-----|-----|-----|-----|
+  |$\pi(s)$|Roll|Roll|Stop|Stop|Stop|Stop|
+  |$\pi'(s)$|Roll|||||Stop|
+
+q3_2_s: |
+  |State|$s_1$|$s_2$|$s_3$|$s_4$|$s_5$|$s_6$|
+  |-----|-----|-----|-----|-----|-----|-----|
+  |$\pi(s)$|Roll|Roll|Stop|Stop|Stop|Stop|
+  |$\pi'(s)$|Roll|Roll|Roll/Stop|Stop|Stop|Stop|
+
+  <hr class="s2" />
+  For each $s_i$ in part (a), we compare the values obtained via Rolling and Stopping. The value of Rolling for each state $s_i$ is $−\frac{1}{6}+ 1(3+3+3+4+5+6) = 3$. The value of Stopping for each state $s_i$ is $i$. At each state $s_i$, we take the action that yields the largest value; so, for $s_1$ and $s_2$, we Roll, and for $s_4$ and $s_5$, we stop. For $s_3$, we Roll/Stop, since the values from Rolling and Stopping are equal.
+
+q3_3: |
+  **(c)** [2 pts] Is $\pi(s)$ from part (a) optimal? Explain why or why not.
+
+q3_3_s: |
+  Yes, the old policy is optimal. Looking at part (b), there is a tie between 2 equally good policies that policy iteration considers employing. One of these policies is the same as the old policy. This means that both new policies are as equally good as the old policy, and policy iteration has converged. Since policy iteration converges to the optimal policy, we can be sure that $\pi(s)$ from part (a) is optimal.
+
+q3_4: |
+  **(d)** [3 pts] Suppose that we were now working with some $\gamma \in [0, 1)$ and wanted to run **value iteration**. Select the **one** statement that would hold true at convergence, or write the correct answer next to Other if none of the options are correct.
+  - $V^{\*}(s_i) = \text{max}\left\\{ -1 + \frac{i}{6} \;,\; \sum_{j}\gamma V^{\*}(s_j)\right\\}$
+  - $V^{\*}(s_i) = \text{max}\left\\{i \;,\; \frac{i}{6} \cdot \left[ -1 + \sum_{j}\gamma V^{\*}(s_j) \right] \right\\}$
+  - $V^{\*}(s_i) = \text{max}\left\\{-\frac{1}{6} + i \;,\; \sum_{j}\gamma V^{\*}(s_j) \right\\}$
+  - $V^{\*}(s_i) = \text{max}\left\\{i \;,\; -\frac{1}{6} + \sum_{j}\gamma V^{\*}(s_j)\right\\}$
+  - $V^{\*}(s_i) = \frac{1}{6} \cdot \sum_{j} \text{max} \\{i \;,\; -1 + \gamma V^{\*}(s_j)\\}$
+  - $V^{\*}(s_i) = \frac{1}{6} \cdot \sum_{j} \text{max} \left\\{-1 + i \;,\; \sum_{k} V^{\*}(s_j) \right\\}$
+  - $V^{\*}(s_i) = \sum_{j} \text{max} \left\\{-1 + i \;,\; \frac{1}{6} \cdot \gamma V^{\*}(s_j))\right\\}$
+  - $V^{\*}(s_i) = \sum_{j} \text{max} \left\\{\frac{i}{6} \;,\; -1 + \gamma V^{\*}(s_j) \right\\}$
+  - $V^{\*}(s_i) = \text{max} \left\\{i \;,\; -1 + \frac{\gamma}{6} \sum_{j} V^{\*}(s_j)\right\\}$
+  - $V^{\*}(s_i) = \sum_{j} \text{max} \left\\{ i, \;,\; -\frac{1}{6} + \gamma V^{\*}(s_j)\right\\}$
+  - $V^{\*}(s_i) = \sum_{j} \text{max} \left\\{-\frac{i}{6} \;,\; -1 + \gamma V^{\*}(s_j) \right\\}$
+  - Other ________
+
+q3_4_s: |
+  - $V^{\*}(s_i) = \text{max} \left\\{i \;,\; -1 + \frac{\gamma}{6} \sum_{j} V^{\*}(s_j)\right\\}$
+
+q4_1: |
+  ## Q4. [12 pts] MDPs: Value Iteration
+  An agent lives in gridworld $G$ consisting of grid cells $s \in S$, and is not allowed to move into the cells colored black. In this gridworld, the agent can take actions to move to neighboring squares, when it is not on a numbered square. When the agent is on a numbered square, it is forced to exit to a terminal state (where it remains), collecting a reward equal to the number written on the square in the process.
+  <hr class="s2" />
+  ![grid](/img/cs188/mt1-sp16-q4-1.png)
+  <hr class="s2" />
+  You decide to run value iteration for gridworld $G$. The value function at iteration $k$ is $V_k(s)$. The initial value for all grid cells is 0 (that is, $V_0(s) = 0$ for all $s \in S$). When answering questions about iteration $k$ for $V_k(s)$, either answer with a finite integer or $\infty$. For all questions, the discount factor is $\gamma = 1$.
+  <hr class="s2" />
+  **(a)** Consider running value iteration in gridworld $G$. Assume all legal movement actions **will always succeed** (and so the state transition function is deterministic).
+  <hr class="s2" />
+  **(i)** [2 pts] What is the smallest iteration $k$ for which $V_k(A) \gt 0$? For this smallest iteration $k$, what is the value $V_k(A)$?
+  <hr class="s2" />
+  $k$ = ________   $\qquad V_k(A)$ = ________
+
+q4_1_s: |
+  $k$ = 3   $\qquad V_k(A)$ = 10
+  <hr class="s2" />
+  The nearest reward is 10, which is 3 steps away. Because $\gamma = 1$, there is no decay in the reward, so the value propagated is 10.
+
+q4_2: |
+  **(i)** [2 pts] What is the smallest iteration $k$ for which $V_k(B) \gt 0$? For this smallest iteration $k$, what is the value $V_k(B)$?
+  <hr class="s2" />
+  $k$ = ________   $\qquad V_k(B)$ = ________
+
+q4_2_s: |
+  $k$ = 3   $\qquad V_k(B)$ = 1
+  <hr class="s2" />
+  The nearest reward is 1, which is 3 steps away. Because $\gamma = 1$, there is no decay in the reward, so the value propagated is 1.
+
+q4_3: |
+  **(iii)** [2 pts] What is the smallest iteration $k$ for which $V_k(A) = V^{\*}(A)$? What is the value of $V^{\*}(A)$?
+  <hr class="s2" />
+  $k$ = ________   $\qquad V_k(A)$ = ________
+
+q4_3_s: |
+  $k$ = 3   $\qquad V^{\*}(A)$ = 10
+  <hr class="s2" />
+  Because $\gamma = 1$, the problem reduces to finding the distance to the highest reward (because there is no living reward). The highest reward is 10, which is 3 steps away.
+
+q4_4: |
+  **(iv)** [2 pts] What is the smallest iteration $k$ for which $V_k(B) = V^{\*}(B)$? What is the value of $V^{\*}(B)$?
+  <hr class="s2" />
+  $k$ = ________   $\qquad V^{\*}(B)$ = ________
+
+q4_4_s: |
+  $k$ = 6   $\qquad V_k(B)$ = 10
+  <hr class="s2" />
+  Because $\gamma = 1$, the problem reduces to finding the distance to the highest reward (because there is no living reward). The highest reward is 10, which is 6 steps away.
+
+q4_5: |
+  **(b)** [4 pts] Now assume all legal movement actions **succeed with probability** 0.8; with probability 0.2, the action fails and the agent remains in the same state.
+  <hr class="s1" />
+  Consider running value iteration in gridworld $G$. What is the smallest iteration $k$ for which $V_k(A) = V^{\∗}(A)$? What is the value of $V\{∗}(A)$?
+  $k$ = ________
+  <hr class="s2" />
+  V^{\*}(A)$ = ________
+
+q4_5_s: |
+  $k$ = $\infty$
+  <hr class="s2" />
+  V^{\*}(A)$ = 10
+  <hr class="s2" />
+  Because $\gamma = 1$ and the only rewards are in the exit states, the optimal policy will move to the exit state with highest reward. This is guaranteed to ultimately succeed, so the optimal value of state A is 10. However, because the transition is non-deterministic, it’s not guaranteed this reward can be collected in 3 steps. It could any number of steps from 3 through infinity, and the values will only have converged after infinitely many iterations.
+
+q5_1: |
+  ## Q5. [8 pts] Q-learning
+  Consider the following gridworld (rewards shown on left, state names shown on right).
+  <hr class="s2" />
+  ![grids](/img/cs188/mt1-sp16-q5-1.png)
+  <hr class="s2" />
+  From state $A$, the possible actions are right(→) and down(↓). From state $B$, the possible actions are left(←) and down(↓). For a numbered state $(G1, G2)$, the only action is to exit. Upon exiting from a numbered square we collect the reward specified by the number on the square and enter the end-of-game absorbing state $X$. We also know that the discount factor $\gamma = 1$, and in this MDP all actions are **deterministic** and always succeed.
+  <hr class="s2" />
+  ![episodes](/img/cs188/mt1-sp16-q5-2.png)
+  <hr class="s2" />
+  **(a)** [4 pts] Consider using temporal-difference learning to learn $V(s)$. When running TD-learning, all values are initialized to zero.
+  <hr class="s1" />
+  For which sequences of episodes, if repeated infinitely often, does $V(s)$ converge to $V^\{∗}(s)$ for all states $s$?
+  <hr class="s2" />
+  (Assume appropriate learning rates such that all values converge.)
+  <hr class="s1" />
+  Write the correct sequence under “Other” if no correct sequences of episodes are listed.
+  - $E1,E2,E3,E4$
+  - $E1,E2,E1,E2$
+  - $E1,E2,E3,E1$
+  - $E4,E4,E4,E4$
+  - $E4,E3,E2,E1$
+  - $E3,E4,E3,E4$
+  - $E1,E2,E4,E1$
+  - Other ________
+
+q5_1_s: |
+  - $E4,E4,E4,E4$
+  - Other
+
+  TD learning learns the value of the executed policy, which is $V^{\pi}(s)$. Therefore for $V^{\pi}(s)$ to converge to $V^{\∗}(s)$, it is necessary that the executing policy $\pi(s) = \π^{\∗}(s)$.
+  <hr class="s2" />
+  Because there is no discounting since $\gamma = 1$, the optimal deterministic policy is $\pi^{\∗}(A) = ↓$ and $π^{\∗}(B) = ← $ ($π^{\∗}(G1)$ and $π^{\∗}(G2)$ are trivially exit because that is the only available action). Therefore episodes $E1$ and $E4$ act according to $π^{\∗}(s)$ while episodes $E2$ and $E3$ are sampled from a suboptimal policy.
+  <hr class="s2" />
+  From the above, TD learning using episode $E4$ (and optionally $E1$) will converge to $V ^{\pi}(s) = V^{\∗}(s)$ for states $A, B, G1$. However, then we never visit $G2$, so $V(G2)$ will never converge. If we add either episode $E2$ or $E3$ to ensure that $V(G2)$ converges, then we are executing a suboptimal policy, which will then cause $V(B)$ to not converge. Therefore none of the listed sequences will learn a value function $V^{\pi}(s)$ that converges to $V^{\∗}(s)$ for all states $s$. An example of a correct sequence would be $E2, E4, E4, E4, ...$; sampling $E2$ first with the learning rate $\alpha = 1$ ensures $V^{\pi}(G2) = V^{\∗}(G2)$, and then executing $E4$ infinitely after ensures the values for states $A$, $B$, and $G1$ converge to the optimal values.
+  <hr class="s2" />
+  We also accepted the answer such that the value function $V (s)$ converges to $V^{\∗}(s)$ for states $A$ and $B$ (ignoring $G1$ and $G2$). TD learning using only episode $E4$ (and optionally $E1$) will converge to $V^{\pi}(s) = V^{\∗}(s)$ for states $A$ and $B$, therefore the only correct listed option is $E4, E4, E4, E4$.
+
+q5_2: |
+  **(b)** [4 pts] Consider using $Q$-learning to learn $Q(s, a)$. When running $Q$-learning, all values are initialized to zero. For which sequences of episodes, if repeated infinitely often, does $Q(s, a)$ converge to $Q^{\∗}(s, a)$ for all state-action pairs $(s, a)$.
+  <hr class="s2" />
+  (Assume appropriate learning rates such that all $Q$-values converge.)
+  <hr class="s1" />
+  Write the correct sequence under “Other” if no correct sequences of episodes are listed.
+  - $E1,E2,E3,E4$
+  - $E1,E2,E1,E2$
+  - $E1,E2,E3,E1$
+  - $E4,E4,E4,E4$
+  - $E4,E3,E2,E1$
+  - $E3,E4,E3,E4$
+  - $E1,E2,E4,E1$
+  - Other ________
+
+q5_2_s: |
+  - $E1,E2,E3,E4$
+  - $E4,E3,E2,E1$
+  - $E3,E4,E3,E4$
+
+  For $Q(s,a)$ to converge, we must visit all state action pairs for non-zero $Q^{\∗}(s,a)$ infinitely often. Therefore we must take the exit action in states $G1$ and $G2$, must take the down and right action in state $A$, and must take the left and down action in state $B$. Therefore the answers must include $E3$ and $E4$.
+
+q6_1: |
+  ## Q6. [9 pts] Utilites
+  PacLad and PacLass are arguing about the value of eating certain numbers of pellets. Neither knows their exact utility functions, but it is known that they are both rational and that PacLad prefers eating more pellets to eating fewer pellets. For any $n$, let $E_n$ be the event of eating $n$ pellets. So for PacLad, if $m ≥ n$, then $E_m ≽ E_n$. For any $n$ and any $k < n$, let $L_{n±k}$ refer to a lottery between $E_{n−k}$ and $E_{n+k}$, each with probability $\frac{1}{2}$.
+  <hr class="s1" />
+  *Reminder*: For events $A$ and $B$, $A ∼ B$ denotes that the agent is indifferent between $A$ and $B$, while $A ≻ B$ denotes that $A$ is preferred to $B$.
+  <hr class="s2" />
+  **(a)** [2 pts] Which of the ofllowing are guaranteed to be true? Circle TRUE or FALSE accordingly.
+  <hr class="s2" />
+  (i) **TRUE/FALSE** Under PacLad's preferences, for any $n, k, L_{n±k} ∼ E_n$.
+
+q6_1_s: |
+  **FALSE**.
+  <hr class="s2" />
+  All we know is that PacLad’s utility is an increasing function of the number of pellets. One utility function consistent with this is $U(E_n) = 2^n$. Then the expected utility of $L_{2±1}$ is $\frac{1}{2} U(E_1) + \frac{1}{2} U(E_3) = \frac{1}{2}(2+8) = 5$.
+  <hr class="s1" />
+  Since $U(E_2) = 2^2 = 4, L_{2±1} ≻ E_2$. The only class of utility functions that give the guarantee that this claim is true is linear utility functions. This is a mathematical way of writing the PacLad is risk-neutral; but this is not given as an assumption in the problem. $2^n$ is a good counterexample because it is a risk-seeking utility function. A risk-avoiding utility function would have worked just as well.
+
+q6_2: |
+  (ii) **TRUE/FALSE** Under PacLad's preferences, for any $k$, if $m \ge n$, then $L_{m±k} ≽ L_{n±k}$.
+
+q6_2_s: |
+  **TRUE**.
+  <hr class="s2" />
+  The expected utility of $L_{m±k}$ is $\frac{1}{2}U(E_{m−k}) + \frac{1}{2}U(E_{m+k})$, and that of $L_{n±k}$ is $\frac{1}{2}U(E_{n−k}) + \frac{1}{2}U(E_{n+k})$.
+  <hr class="s1" />
+  Since $m−k ≥ n−k, E_{m−k} ≽ E_{n−k}$, so $U(E_{m−k}) ≥ U(E_{n−k})$. Similarly, since $m+k ≥ n+k, E_{m+k} ≽ E_{n+k}$, so $U(E_{m+k}) ≥ U(E_{n+k})$. Thus $\frac{1}{2}U(E_{m−k}) + \frac{1}{2}U(E_{m+k}) ≥ \frac{1}{2} U(E_{n−k}) + \frac{1}{2}U(E_{n+k})$ and therefore $L_{m±k} ≽ L_{n±k}$.
+
+q6_3: |
+  (iii) **TRUE/FALSE** Under PacLad’s preferences, for any $k, l$, if $m ≥ n$, then $L_{m±k} ≽ L_{n±l}$.
+
+q6_3_s: |
+  **FALSE**.
+  <hr class="s2" />
+  Consider again the utility function $U(E_n) = 2^n$. It is a risk-seeking utility function as mentioned in part (i), so we should expect that if this were PacLad’s utility function, he would prefer a lottery with higher variance (i.e. a higher $k$ value). So for a counterexample, we look to $L_{3±1}$ and $L_{3±2}$ (i.e. $m = n = 3, k = 1, l = 2$). The expected utility of $L_{3±1}$ is $\frac{1}{2}U(E_2) + \frac{1}{2}U(E_4) = \frac{1}{2}(4 + 16) = 10$. The expected utility of $L_{3±2}$ is $\frac{1}{2}U(E_1) + \frac{1}{2}U(E_5) = \frac{1}{2}(2+32) = 17 > 10$. Thus $L_{n±l} ≻ $L_{m±k}$. Once again, this is a statement that would only be true for a risk-neutral utility function. A risk-avoiding utility function could also have been used for a counterexample.
+
+q6_4: |
+  **(b)** To decouple from the previous part, suppose we are given now that under PacLad’s preferences, for any $n, k, L_{n±k} ∼ E_{n}$. Suppose PacLad’s utility function in terms of the number of pellets eaten is $U_1$. For each of the following, suppose PacLass’s utility function, $U_2$, is defined as given in terms of $U_1$. Choose all statements which are guaranteed to be true of PacLass’s preferences under each definition. If none are guaranteed to be true, choose “None.” You should assume that all utilities are positive (greater than 0).
+  <hr class="s2" />
+  **(i)** [2 pts] $U_2(n) = aU_1(n) + b$ for some positive integers $a, b$
+  - $L_{4±1} ∼ L_{4±2}$
+  - $E_4 ≽ E_3$
+  - $L_{4±1} ≻ E_4$
+  - None
+
+q6_4_s: |
+  - $L_{4±1} ∼ L_{4±2}$
+  - $E_4 ≽ E_3$
+
+  The guarantee that under PacLad’s preferences for any $n, k, L_{n±k} ∼ E_n$ means that PacLad is risk-neutral and therefore his utility function is linear. An affine transformation, as this $aU_1(n)+b$ is called, of a linear function is still a linear function, so we have that PacLass’s utility function is also linear and thus she is also risk-neutral. Therefore she is indifferent to the variance of lotteries with the same expectation (first option) and she does not prefer a lottery to deterministically being given the expectation of that lottery (not third option). Since a is positive, $U_2$ is also an increasing function (second option).
+
+q6_5: |
+  **(ii)** [2 pts] $U_2(n) = \frac{1}{U_1(n)}$
+  - $L_{4±1} ∼ L_{4±2}$
+  - $E_4 ≽ E_3$
+  - $L_{4±1} ≻ E_4$
+  - None
+
+q6_5_s: |
+  - $L_{4±1} ≻ E_4$
+
+  Since $U_1$ is an increasing function, $U_2$ is decreasing, and thus the preferences over deterministic outcomes are flipped (**not** second option).
+  <hr class="s1" />
+  The expected utility of $L_{4±1}$ is $\frac{1}{2}(U_2(3) + U_2(5)) = \frac{1}{2}\left(\frac{1}{U_1(3)} + \frac{1}{U_1(5)}\right). We know that $U_1$ is linear, so write $U_1(n) = an + b$ for some $a, b$. Then substituting this into this expression for $\mathbb{E}[U_2(L_{4±1})]$ and simplifying algebraically yields $\frac{1}{2}\left(\frac{8a+2b}{15a^2+8ab+b^2}\right) = \frac{4a+b}{15a^2+8ab+b^2}. By the same computation for $L_{4±2}$, we get $\mathbb{E}[U_2(L_{4±2})] = \frac{4a+b}{12a^2+8ab+b^2}$. Since we only know that $U_1$ is increasing and linear, the only constraint on $a$ and $b$ is that $a$ is positive. So let $a = 1, b = 0$. Then $\mathbb{E}[U_2(L_{4±1})] = \frac{1}{3} \gt \frac{4}{15} = \mathbb{E}[U_2(L_{4±1})]$ and thus $L_{4±2} ≻ L_{4±1}$ (**not** first option). Similarly, for this $U_1, U_2(4) = \frac{1}{U_1(4)} = \frac{1}{4} < \frac{1}{3} = \mathbb{E}[U_2(L_{4±2})]$ and thus $L_{4±1} ≻ E_4$ (third option).
+  <hr class="s1" />
