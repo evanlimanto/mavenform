@@ -63,7 +63,7 @@ q1_4_s: |
   $$\begin{align} Var(R_S[w]) &= Var(\frac{1}{n} \sum_{i=1}^{n} loss(w^Tx_i, y_i)) \\\\
     &= \frac{1}{n^2} Var(\sum_{i=1}^{n} loss(w^Tx_i, y_i)) \\\\
     &= \frac{1}{n^2} \sum{i=1}^{n} Var(loss(w^Tx_i, y_i),\; \text{by i.i.d} \\\\
-    &= \frac{1}{n} Var(loss(w^Tx, y))$$
+    &= \frac{1}{n} Var(loss(w^Tx, y)) \end{align}$$
 
 q1_5: |
   **(e)** [5 pts] Is it possible to have a $w$ such that $R_S[w] = 0$, but $R[w] \gt 0$? Justify your answer.

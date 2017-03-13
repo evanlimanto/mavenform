@@ -34,7 +34,7 @@ q1_1: |
   Recall: The interactive interpreter displays the value of a successfully evaluated expression, unless it is `None`.
   <hr class="s1" />
   Assume that you have started python3 and executed the following statements:
-
+  <hr class="s4" />
   ```
   class Party:
       guests = Link.empty
@@ -66,6 +66,7 @@ q1_1: |
           print(’Nice’)
           return ’Costume’
   ```
+  <hr class="s4" />
 
   |Expression|Interactive Output|
   |----------|------------------|
@@ -104,7 +105,7 @@ q2_1_s: |
 q3_1: |
   ## 3. (6 points) Return Policy
   Implement `quota`, which takes a one-argument function `f` and a non-negative integer `limit`. The function it returns has the same behavior as `f`, except that each value is only returned up to `limit` times. After that, the function returns an “Over quota” message instead, and the `limit` is decreased by 1 for future calls.
-
+  <hr class="s4" />
   ```
   def quota(f, limit):
     """A decorator that limits the number of times a value can be returned.
@@ -148,38 +149,18 @@ q3_1: |
 q3_1_s: |
   ```
   def quota(f, limit):
-    """A decorator that limits the number of times a value can be returned.
-
-    >>> square = lambda x: x * x
-    >>> square = quota(square , 3)
-    >>> square (6)
-    36
-    >>> [square(5) for x in range(3)]
-    [25, 25, 25]
-    >>> square(5)
-    ’Over quota! Limit is now 2’
-    >>> square(-6)
-    36
-    >>> square(-6)
-    ’Over quota! Limit is now 1’
-    >>> square(7)
-    49
-    >>> square(5)
-    ’Over quota! Limit is now 0’
-    """
-
     values = []
 
 
-    def limited(n):
-        <b>nonlcoal limit</b>
-        y = <b>f(n)</b>
-        count = len(<b>[x for x in values if x == y]</b>)
-        values.append(y)
-        if <b>count < limit</b>:
-            return <b>y</b>
-        limit = <b>limit - 1</b>
-        return ’Over quota! Limit is now ’ + <b>str(limit)</b>
+  def limited(n):
+      <b>nonlcoal limit</b>
+      y = <b>f(n)</b>
+      count = len(<b>[x for x in values if x == y]</b>)
+      values.append(y)
+      if <b>count < limit</b>:
+          return <b>y</b>
+      limit = <b>limit - 1</b>
+      return ’Over quota! Limit is now ’ + <b>str(limit)</b>
  
 
     return limited
@@ -190,6 +171,7 @@ q4_1: |
   Implement the `VotingMachine` and `Ballot` classes based on the doctest below. The voting machine must determine which choice has the most votes (the `winner`) and detect if a ballot is used more than once. In case of a tie, the `winner` among choices with maximal votes is the one that most recently received a vote. `Ballot.vote` takes a string, and a `VotingMachine` must handle an arbitrary number of choices.
 
   ```
+  <hr class="s4" />
   class VotingMachine:
       """A machine that creates and records ballots.
 
@@ -244,23 +226,6 @@ q4_1: |
 q4_1_s: |
   ```
   class VotingMachine:
-      """A machine that creates and records ballots.
-
-      >>> machine = VotingMachine (4)
-      >>> a, b, c, d = machine.ballots
-      >>> d.vote(’Bruin’)
-      ’Bruin is winning’
-      >>> b.vote(’Bruin’)
-      ’Bruin is winning’
-      >>> c.vote(’Bear’)
-      ’Bear is losing’
-      >>> a.vote(’Bear’)
-      ’Bear is winning’
-      >>> c.vote(’Tree’)
-      ’Fraud: multiple votes from the same ballot!’
-      >>> machine.winner
-      ’Bear’
-      """
       def __init__(self, k):
           self.ballots = [<b>Ballot(self)</b> for i in range(k)]
           self.votes = {}
@@ -301,6 +266,7 @@ q5_1: |
   Restrictions:
   - You may not call the built-in `len` function on a linked list or invoke its `__len__` method.
   - You may not apply element selection (e.g., `s[2]`) on a linked list or invoke its `__getitem__` method.
+  <hr class="s4" />
 
   ```
   def path(s, t):
@@ -338,22 +304,6 @@ q5_1_s: |
   from link import *
 
   def path(s, t):
-      """Return whether Link S is a path from the root to a leaf in Tree T.
-
-      >>> t = Tree(1, [Tree(2), Tree(3, [Tree(4), Tree(5)]), Tree(6)])
-      >>> a = Link(1, Link(3, Link(4)))   # A full path
-      >>> path(a, t)
-      True
-      >>> b = Link(1, Link(3))            # A partial path
-      >>> path(b, t)
-      False
-      >>> c = Link(1, Link(2, Link(7)))   # A path and an extra value
-      >>> path(c, t)
-      False
-      >>> d = Link(3, Link(4))            # A path of a branch
-      >>> path(d, t)
-      False
-      """
 
       if <b>s is Link.empty or t.root != s.first</b>:
         return False
@@ -369,7 +319,7 @@ q5_1_s: |
 q6_1: |
   ## 6. (6 points) Left it Right There
   **(a) (4 pt)** Implement `binary`, which takes a list `s` of unique integers. It returns a *binary search tree* containing all of those integers, represented as a `BTree` instance or `BTree.empty`. The values in any path of this tree must appear in the same order as they did in `s`. The `BTree` class is on page 2 of the midterm 2 study guide.
-
+  <hr class="s4" />
   ```
   def binary(s):
       """Construct a binary search tree from S for which all paths are in order.
@@ -395,15 +345,6 @@ q6_1: |
 q6_1_s: |
   ```
   def binary(s):
-      """Construct a binary search tree from S for which all paths are in order.
-
-      >>> binary([3, 5, 1])
-      BTree(3, BTree(1), BTree(5))
-      >>> binary([4, 3, 7, 6, 2, 9, 8])
-      BTree(4, BTree(3, BTree(2)), BTree(7, BTree(6), BTree(9, BTree(8))))
-      """
-
-
       assert len(s) == len(set(s)), ’All elements of s should be unique’
 
 
@@ -417,7 +358,7 @@ q6_1_s: |
 
 q6_2: |
   **(b) (1 pt)** Circle the `Θ` expression that describes the **smallest** possible height of the tree returned by `binary(s)` for a list `s` of length `n`. The height of a tree is the length of the longest path from its root to a leaf.
-
+  <hr class="s4" />
   ```
   Θ(1)       Θ(log n)       Θ(n)       Θ(n^2)       Θ(2^n)       None of these
   ```
@@ -429,7 +370,7 @@ q6_2_s: |
 
 q6_3: |
   **(c) (1 pt)** Circle the `Θ` expression that describes the **largest** possible height of the tree returned by `binary(s)` for a list `s` of length `n`. The height of a tree is the length of the longest path from its root to a leaf.
-
+  <hr class="s4" />
   ```
   Θ(1)       Θ(log n)       Θ(n)       Θ(n^2)       Θ(2^n)       None of these
   ```
@@ -442,6 +383,7 @@ q6_3_s: |
 q7_1: |
   ## 7. (10 points) Summer Camp
   (a) (6 pt) Implement `sums`, which takes two positive integers `n` and `k`. It returns a list of lists containing all the ways that a list of `k` positive integers can sum to `n`. Results can appear in any order.
+  <hr class="s4" />
 
   ```
   def sums(n, k):
@@ -469,17 +411,6 @@ q7_1: |
 q7_1_s: |
   ```
   def sums(n, k):
-      """Return the ways in which K positive integers can sum to N.
-      >>> sums(2, 2)
-      [[1 , 1]]
-      >>> sums(2, 3)
-      []
-      >>> sums(4, 2)
-      [[3, 1], [2, 2], [1, 3]]
-      >>> sums(5, 3)
-      [[3, 1, 1], [2, 2, 1], [1, 3, 1], [2, 1, 2], [1, 2, 2], [1, 1, 3]]
-      """
-
       if <b>k == 1</b>:
           return <b>[[n]]</b>
       y = []
@@ -489,10 +420,11 @@ q7_1_s: |
           y.extend([<b>s + [x]</b> for s in sums(<b>n-x, k-1</b>)])
       return y
   ```
-
+  <hr class="s4" />
   <h3>OR...</h3>
-
+  <hr class="s4" />
   ```
+  def sums(n, k):
       if <b>n == 0 and k == 0</b>:
           return <b>[[]]</b>
       y = []
@@ -505,9 +437,9 @@ q7_1_s: |
 
 q7_2: |
   (b) (4 pt) Why so many lines? Implement `f` and `g` for this alternative version of the `sums` function.
-
+  <hr class="s4" />
   ```
-  
+
   f = lambda x, y: (x and [_______ for z in y] + f(_______, _______)) or []
   def sums(n, k):
       """Return the ways in which K positive integers can sum to N."""
@@ -519,7 +451,6 @@ q7_2_s: |
   ```
   f = lambda x, y: (x and [<b>[x] + z</b> for z in y] + f(<b>x-1</b>, <b>y</b>)) or []
   def sums(n, k):
-      """Return the ways in which K positive integers can sum to N."""
       g = lambda w: (w and f(<b>n, g(w-1)</b>)) or [[]]
       return [v for v in g(k) if sum(v) == n]
   ```
