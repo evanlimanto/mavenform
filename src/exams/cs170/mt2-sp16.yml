@@ -1,0 +1,317 @@
+course: 'cs188'
+ref: 'mt1-sp15'
+
+type: 'mt1'
+term: 'sp15'
+prof: 'Abbeel'
+
+questions: {
+}
+
+parts: {
+  'q1': 12,
+  'q2': 1,
+  'q3': 1,
+  'q4': 2
+}
+
+q1_1: |
+  # 1. (40 pts.) Short Answer
+  ## (a) (8 pts.) Maximum Spanning Tree
+  (i) Find a **maximum** spanning tree of the graph below (indicate it by circling the weights of the edges included in the spanning tree).
+  <hr class="s2" />
+  ![spanning tree](/img/cs170/mt2-sp16-q1-1.png)
+
+q1_1_s: |
+  ![spanning tree](/img/cs170/mt2-sp16-q1-6.png)
+  <hr class="s2" />
+  You can find the maximum spanning tree by running a variant of either Prim's or Kruskal's, but prioritizing taking the heaviest edges first.
+
+q1_2: |
+  (ii) How many different maximum spanning trees does the above graph have?
+
+q1_2_s: |
+  **Solution**: $2$ ($AB$ xor $BE$ can be in the tree).
+
+q1_3: |
+  ## (b) (10 pts.) Linear Programming Fundamentals
+  $$\text{min}\; 2x_1 + 4x_2 \\\\
+    \begin{align} x_1 + x_2 & \ge 30 \\\\
+    -x_1 + 2x_2 & \ge 0 \\\\
+    x_1, x_2 & \ge 5 \end{align}$$
+  (i) Draw the feasible region of the linear program, and find the optimum of this LP.
+
+q1_3_s: |
+  **Solution:** Optimum is $80$ at $(20, 10)$ (uppermost quadrant is shaded).
+  <hr class="s2" />
+  ![spanning tree](/img/cs170/mt2-sp16-q1-7.png)
+  <hr class="s2" />
+  Common mistakes:
+  - Forgetting to exclude the sliver between $x = 5$ and $x = 0$ from the feasible area.
+  - Getting the direction of the $2x_2 \ge x_1$ inequality incorrect.
+  - Not labeling the graph sufficiently (locations of intercepts etc).
+
+q1_4: |
+  (ii) Find the dual to the above linear program.
+
+q1_4_s: |
+  **Solution:**
+  $$\text{max}\; 30y_1 + 5y_3 + 5y_4$$
+  $$\begin{align} y_1 - y_2 + y_3 & \le 2 \\\\
+    y_1 + 2y_2 + y_4 & \le 4 \\\\
+    y_1,y_2,y_3,y_4 & \ge 0 \end{align}$$
+
+q1_5: |
+  ## (c) (6 pts.) Cut Property
+  ![graph](/img/cs170/mt2-sp16-q1-2.png)
+  <hr class="s2" />
+  Consider the cut shown above that separates vertices $1$ and $2$ from $3$ and $4$ in the given graph. Suppose we are given the weights of all $4$ edges across this cut: $w(e_1) = 1 ,w(e_2) = 2, w(e_3) = 2, w(e_4) = 3$.
+  <hr class="s1" />
+  But $w(e_5)$ and $w(e_6)$ are unknown. Circle all the answers that apply for the following questions:
+  <hr class="s2" />
+  (i) Which edge(s) **must be** part of every minimum spanning tree in $G$?
+  $$e_1 \quad e_2 \quad e_3 \quad e_4$$
+
+q1_5_s: |
+  $$(e_1)$$
+
+q1_6: |
+  (ii) Which edge(s) **can be but aren't necessarily** part of a minimum spanning tree in $G$?
+  $$e_1 \quad e_2 \quad e_3 \quad e_4$$
+
+q1_6_s: |
+  $$(e_2), (e_3)$$
+
+q1_7: |
+  (iii) Which edge(s) **must not be** part of a minimum spanning tree in $G$?
+  $$e_1 \quad e_2 \quad e_3 \quad e_4$$
+
+q1_7_s: |
+  $$(e_4)$$
+  $e_1$ is the unique lightest edge across the cut, so it must be included. $e_4$ won't be included, because it can always be swapped with one of the other three edges to get a smaller-weight spanning tree.
+
+q1_8: |
+  ## (d) (4 pts.) Min Cut
+  ![graph](/img/cs170/mt2-sp16-q1-3.png)
+  <hr class="s2" />
+  In the graph $G$ shown above, consider the cut that separates $s$ and $b$ from $a,c,d,t$. Assume that this is the min $s - t$ cut in $G$. In the max $s - t$ flow, what are the flow values through the following edges:
+  - (i) &nbsp;&nbsp;$s \rightarrow a: \quad$ ________
+  - (ii) &nbsp;$a \rightarrow b: \quad$ ________
+  - (iii) $c \rightarrow b: \quad$ ________
+  - (iv) $b \rightarrow d: \quad$ ________
+
+q1_8_s: |
+  - (i) &nbsp;&nbsp;$s \rightarrow a: \quad 2$
+  - (ii) &nbsp;$a \rightarrow b: \quad 0$
+  - (iii) $c \rightarrow b: \quad 0$
+  - (iv) $b \rightarrow d: \quad 3$
+
+  <hr class="s2" />
+  **Solution explanation:** The max flow always fully saturates any edges going in the right direction across the cut and sends no flow in the backwards direction.
+
+q1_9: |
+  ## (e) (5 pts.) Huffman Encoding
+  Below is a Huffman encoding tree of 3 symbols, where leaf values $0.2, x$ and $y$ indicate the frequencies of each symbol. Since they represent frequencies, $0.2 + x + y = 1$. Give the minimum and maximum values that $x$ can take so that this tree still minimizes the expected length of the encoding.
+  <hr class="s2" />
+  ![graph](/img/cs170/mt2-sp16-q1-4.png)
+
+q1_9_s: |
+  **Solution:** $x$ in $[0.4, 0.8]$
+  <hr class="s2" />
+  **Solution explanation:** We know $x \ge y$, otherwise, $x$ would be paired with $y$ instead. $y$ can be as low as $0$ so $x = 0.8$, and $y$ can be as high equaling $x$, so $x = y = 0.4$.
+
+q1_10: |
+  ## (f) (7 pts.) Zero-Sum Games
+  <hr class="s2" />
+  ![table](/img/cs170/mt2-sp16-q1-5.png)
+  <hr class="s2" />
+  In the zero-sum game shown above, Row seeks to maximize the value of the game, and Column seeks to minimize it. Assume that Row must announce her strategy (the probabilities $r_1$ and $r_2$) first, and Column determines his strategy ($c_1$ and $c_2$) afterwards.
+  <hr class="s1" />
+  For example, if Row announced the strategy "$r_1 = 1, r_2 = 0$", Column could respond with the strategy "$c_1 = 0.25, c_2 = 0.75$", and the value of the game would be $-0.5$.
+  <hr class="s2" />
+  (i) What strategy should Row choose?
+
+q1_10_s: |
+  **Solution:** Row should play either row randomly.
+  <hr class="s1" />
+  Given some probabilities $r_1$ and $r_2$ summing to $1$, column will minimize $(r_1 - r_2)$ and $(r_2 - r_1)$.
+  <hr class="s1" />
+  Row wants to maximize this minimum. For any $r_1$ and $r_2$, either they're the same, and the minimum is $0$, or they're different, and the minimum is less than $0$. Therefore, we must choose $r_1 = r_2 = 0.5$ (since probabilites must sum to $1$).
+
+q1_11: |
+  (ii) Assuming that Column responds optimally, what is the value of the game?
+
+q1_11_s: |
+  **Solution:** The value of the game is the value of the minimum, $0$.
+
+q1_12: |
+  Show that Row's strategy in (i) is the unique optimum strategy.
+
+q1_12_s: |
+  **Solution:** This is the unique optimum because it's the only value for which $r_1 = r_2$ (the reason for which is explained in the solution above).
+
+q2_1: |
+  # 2. (20 pts.) Matching Terminals
+  There are $n$ positive terminals and $n$ negative terminals, arranged along the $x$-axis. The location of the $t$-th terminal (moving from left toright) is $x(t)$, and its sign is $s(t)$ ($+$ or $-$).
+  <hr class="s2" />
+  You must connect each positive terminal to a distinct negative terminal, using a total of $n$ pieces of wire.
+  <hr class="s1" />
+  You wish to choose the pairing of the terminals to minimize the total length of wire used.
+  <hr class="s2" />
+  Design a greedy algorithm to solve this problem. Use an exchange argument to prove that your algorithm finds the optimal solution. What is the running time of your algorithm?
+  <hr class="s2" />
+  ![terminals](/img/cs170/mt2-sp16-q2-1.png)
+  <hr class="s2" />
+  The above picture shows a possible layout of terminals for $n = 4$. The location value $x(t)$ for each terminal $t$ is written underneath the terminal.
+
+q2_1_s: |
+  **Solution:**
+  <hr class="s1" />
+  Our algorithm is:
+  - Sort the locations of the positive terminals, and sort the locations of the negative terminals.
+  - For each value of $i$ from $1$ to $n$, connect the $i$th positive terminal to the $i$th negative terminal.
+
+  <hr class="s2" />
+  We prove that this works using an exchange argument. Let $a_1,...,a_n$ be the locations of the positive terminals, sorted by increasing coordinate, and let $b_1,...,b_n$ be the locations of the negative terminals, similarly sorted.
+  <hr class="s2" />
+  Take any different assignment, and let $i$ be the index of the first terminal in which these two assignments differ (i.e. $i$ is the first index in the alternate assignment where the $i$th positive terminal is not paired with the $i$th negative terminal). Instead, let’s say that the $i$th positive terminal is paired with the $j$th negative terminal, while the $i$th negative terminal is paired with the $k$th positive terminal. Because this is the first point at which the two assignments differ, we know $a_k > a_i$ and $b_j > b_i$.
+  <hr class="s2" />
+  Without loss of generality, assume that $a_i < b_i$ (that the $i$th positive terminal comes before the $i$th negative terminal). Examine the situation if we swap the wires and we directly connect the $i$th positive/negative terminals (as per the greedy approach) while connecting the $k$th positive terminal and the $j$th negative terminal together. The length of the wire that is connecting to ai would decrease by $b_j − b_i$, and the length of the wire connecting to $a_k$ increases by at most that amount (that increase in length is always enough to go from $a_k$ to $b_i$ to $b_j$, but this path might also double back on itself and so could use less wire).
+  <hr class="s2" />
+  This shows that there is an equivalent-or-better assignment that doesn’t disagree with the greedy algorithm on the $i$th pairing, which means that any other assignment can be converted via a series of swaps into the same assignment as what the greedy algorithm outputs, without using additional wire, so the greedy algorithm must be optimal.
+  <hr class="s2" />
+  **Common Mistakes:**
+  <hr class="s1" />
+  Incorrect greedy strategies:
+  - Connect closest +, − pair together, then repeat.
+  - Start from left to right, match each negative terminal with the closest positive terminal (A strategy very similar to this that does work, and is equivalent to the solution above is: start from left to right, match each unpaired temrinal with the leftmost unpaired terminal with an opposite sign).
+
+  <hr class="s2" />
+  These strategies fail on this counterexample:
+  $$+ \quad - \; + \quad -$$
+
+q3_1: |
+  # 3. (20 pts.) Knapsack with Weighty and Voluminous Objects
+  A thief walks into a house and notices $n$ objects with values $v_1, ..., v_n$, weights $w_1, ..., w_n$, and volumes $u_1, ..., u_n$. The thief has brought with him a bag that has a volume capacity of $U$, and can hold a total weight of $W$. He wishes to choose a subset of items whose total volume is at most $U$ and weight at most $W$, and whose total value is as large as possible, but he must decide quickly and make his getaway. Give an efficient dynamic programming algorithm to help him choose. Clearly specify the subproblems, recurrence, the order in which you would solve the subproblems, and the running time.
+
+q3_1_s: |
+  **Solution:**
+  <hr class="s1" />
+  *Subproblem:* Our subproblem is $s(i,j,k)$, which is the maximum value we can get using only the first $i$ objects, and using at most $j$ volume and $k$ weight.
+  <hr class="s2" />
+  *Recurrence*: The recurrence is $s(i,j,k) = \max (s(i - 1,j,k),s(i - 1,j - u_i,k - w_i) + v_i)$; the two cases correspond to either not taking or taking the $i$th item.
+  <hr class="s2" />
+  *Partial pseudocode (subproblem order):*
+
+  ```
+  For i := 1,...,n:
+      For j := 0,...,U:
+          For k := 0,...,W:
+              Calculate s[i][j][k]
+  ```
+
+  (Note that the three loops could be in any order.)
+  <hr class="s2" />
+  *Runtime:* We have $\Theta(nUW)$ subproblems, each of which takes constant time to solve, so the overall runtime is $\Theta(nUW)$.
+
+  <hr class="s2" />
+  **Common Mistakes:**
+  - Some students did not explicitly write out the subproblem, and either went straight to writing/explaining the recurrence, or failed to account for the roles of all three arguments.
+  - Some students chose a subproblem and recurrence that allowed for any item of the array to be taken; in order for this approach to work, the subproblem would have to keep track of the exact subset of chosen items as an argument (which some students forgot); however, it would also lead to a runtime exponential in $n$, which was too inefficient.
+  - General comment on writing recurrences: if a variable is defined via being an argument to the subproblem, it should not be redefined in the recurrence (e.g. if $i$ is a parameter to the subproblem, then the recurrence should not include have something like $\max_i$.
+  - By far the most common mistake was not specifying ”the order in which you would solve the subproblems” in a sufficient manner. Students needed to clearly and unambiguously specify the exact order to solve the subproblems in; the simplest way is to provide pseudocode (as above) and show the three loops, but an unambiguous description in words (e.g. “we iterate through all possible subproblems from i from the smallest to largest value, tiebreaking by $j$ from smallest to largest value, tiebreaking by $k...$”) would also be sufficient. Just saying “bottom-up”, giving a vague description of “from one corner of the 3D matrix that represents the subproblems to the other”, or only mentioning how one parameter varies without mentioning the other parameters (e.g. “for increasing $i$”) was insufficient.
+  - Some students realized that the runtime was a product of three numbers, and so wrote $n^3$; however, there is no guarantee that $U,W = O(n)$. (One way to think about this is: remember that we’re discussed how knapsack is a hard problem because the best-known algorithm has an *exponential* runtime, so clearly the runtime couldn’t be a polynomial like $n^3$.)
+
+q4_1: |
+  # 4. (20 pts.) Breadth requirements
+  UC Berkeley’s newly formed College of Computer Science has several categories of breadth requirements. Each class is offered by a single department, and may match multiple categories. Students must take at least one class from each category, and at most $k$ classes from each department. If a class matches multiple categories, you must choose which category you’re using it to fulfill: no class can be used to fulfill more than one category.
+  <hr class="s2" />
+  Formally, there are $m$ classes $c_1 ... c_m$, $T$ departments $D_1 ... D_T$, and $n$ categories of breadth requirements $G_1 ... G_n$. For some class $c_i$, let $H(c_i)$ be its department and $F(c_i)$ be the set of categories it can be used to fulfill. For example, you could have $H(c_{10}) = D_3$ and $F(c_{10}) = \\{G_3, G_4, G_9\\}$.
+  <hr class="s2" />
+  Given $G_1 ... G_n, D_1 ... D_T, F$, and $H$, and a subset of classes $c_1...c_p$, you want to determine whether the $p$ classes satisfy all the breadth requirements subject to the above constraints.
+  <hr class="s2" />
+  Alternatively, for $2/3$ credit, you can ignore the departmental constraints (so the input is just $c_1...c_p, G_1...G_n$, and $F$).
+  <hr class="s2" />
+  (a) Formulate the above problem as a linear program. Make sure to clearly identify and define what your variables are.
+
+q4_1_s: |
+  **Solution:**
+  <hr class="s1" />
+  For the variables, let $x_{ij}$ be an indicator that represents if the $i$th class is being used to satisfy the $j$th requirement ($1$ if so, $0$ if not).
+  <hr class="s1" />
+  Our LP is the following:
+  $$max0$$
+  $$\nabla j: \sum_{i} x_{ij} \ge 1$$
+  $$\nabla l: \sum_{\\{i|H(c_i) = D_l\\}} \sum_{j} x_{ij} \le k$$
+  $$\nabla i: \sum_{j} x_{ij} \le 1$$
+  $$\begin{align} \nabla i,j \in \\{(i,j) | G_j \in F(c_i)\\}: x_{ij} & \le 1 \\\\
+    \nabla i,j \in \\{(i,j) | G_j \notin F(c_i)\\}: x_{ij} & \le 0 \\\\
+    \nabla i,j: x_{ij} \ge 0 \end{align}$$
+
+  To explain each row of constraints:
+  - The first row of constraints makes sure that every requirement is satisfied (for every breadth requirement, there is at least one class being used to satisfy it).
+  - The second row of constraints makes sure that at most k courses from any one department are being used to satisfy requirements.
+  - The third row of constraints makes sure that each class is being used to satisfy at most one requirement. The fourth and fifth row of constraints make sure that classes are only being used to satisfy requirements that they can satisfy.
+  - The fifth row of constraints ensures that each variable makes sense as an indicator by providing a lower-bound.
+  - Finally, we only want to see if there is any feasible assignment, and aren’t trying to optimize anything, so we don’t care about our objective function.
+
+q4_2: |
+  (b) Now formulate the above problem as a network flow problem. Show how to determine from the max-flow whether the requirements are satisfied, and (if all requirements are satisfied) a mapping of which class contributes to which requirement. Prove the correctness of your reduction.
+  <hr class="s2" />
+  **Main idea of reduction, together with sketch of max-flow network:**
+  <hr class="s2" />
+  **Proof:**
+
+q4_2_s: |
+  **Main idea:**
+  <hr class="s2" />
+  We reduce this problem to a max flow instance, and solve it using a technique similar to bipartite matching.
+  **Draw a picture of your main idea:**
+  <hr class="s2" />
+  ![graph](/img/cs170/mt2-sp16-q4-1.png)
+  <hr class="s2" />
+  **Pseudocode:**
+  <hr class="s2" />
+  - Set up the following graph $G(V,E)$: let $V = \\{g_1...g_n,c_1...c_p,d_1...d_T,s,t\\}$ be the set of vertices. Where $g_1...g_n$ correspond to the categories, $c_1...c_p$ correspond to the classes, and $d_1...d_T$ correspond to the departments.
+  - For each $G_i \in F(C_j)$, add an edge of capacity $1$ between $g_i$ and $c_j$. (i.e. add an edge between a class and a category if the class satisfies the category).
+  - For each $C_j$, add an edge of capacity $1$ between $c_j$ and $d_l$ where $H_{C_j} = D_l$ (i.e. add an edge between each class and the department to which it belongs)
+  - For each $d_l$, add an edge of capacity $k$ between $d_l$ and $t$.
+  - For each $g_i$, add an edge of capacity $1$ between $s$ and $g_i$.
+  - Run max flow from $s$ to $t$, and return "satisfy" if the value of the max flow equals $n$, the number of categories.
+
+  <hr class="s2" />
+  **Proof:** First, we show that if the $p$ classes do satisfy all the requirements, then we can get a max flow value of at least $n$: Each requirement $G_i$ is satisfied by some class $c_j$, so we route one unit of flow from $s \rightarrow gi \rightarrow c_j \rightarrow d_l \rightarrow t$, where $d_l$ is the department node to which class $c_j$ belongs. Now, we verify that no edge is congested more than its capacity:
+  - $(s \rightarrow g_i)$: these edges have capacity $1$, and we only route one unit of flow for each $g_i$, so each edge only has at most $1$ unit of flow.
+  - $(g_i \rightarrow c_j)$: these edges have capacity $1$, and each requirement $g_i$ is satisfied by a unique class, and we only route $1$unit of flow for each requiremnt $g_i$, so each edge $(g_i \rightarrow c_j)$ is used at most once.
+  - $(c_j \rightarrow d_l)$: each class belongs to a unique department, and since we only route at most $1$ unit through each $c_j$, each edge $(c_j \rightarrow d_l)$ contains at most $1$ unit of flow.
+  - $(d_l \rightarrow t)$: due to the requirement that there can be at most $k$ classes from each department, we are guaranteed that no more than $k$ units of flow is routed through each $d_l$, and thus the $(d_l \rightarrow t)$ contain at most $k$ units of flow.
+
+  <hr class="s2" />
+  Next, we show that if we can find a flow value of $n$, then we can find a valid assignment of classes to requirements such that all requirements are satisfied. First, we show that the final flow produced by the max flow algorithm has integral flow value on every edge, and we route the maximum flow along the path we found in each iteration.
+  <hr class="s2" />
+
+  - each $g_i$ has a flow to a unique $c_j$. This follows from integrality, as there is only $1$ unit flowing into $g_i$, and each outgoing edge has flow value of either $0$ or $1$.
+  - each $c_j$ receives flow from most $1 g_i$: this is because each $c_j$ only has $1$ outgoing edge with capacity $1$, and we showed that the flow from $g_i$ to $c_j$ is either $1$ or $0$. This satisfies the constraint ”each class can be used to satisfy only $1$ breadth requirement”
+  - each $d_l$ receives flow from at most $k$ classes $c_j$. Once again, this is because each edge $c_j \rightarrow d_l$ has flow value either $0$ or $1$, and so there are at most $k$ classes $c_j$ with nonzero flow associated with each $d_l$. This satisfies the constraint ”one can at most take $k$ classes from each department”
+
+  <hr class="s2" />
+  Thus, from the max flow solution of value $n$, we can find a valid assignment of classes to requirements such that all constraints are satisfied, by assign to each requirement gi the unique class $c_j$ which receives flow from $g_i$.
+  <hr class="s1" />
+  **Running time and justification:** This is just the running time of max flow, which takes time $O(k|E|^2)$ or $O(|V||E|^2)$ or $O(|V|^2|E|)$ depending on implementation.
+
+  <hr class="s2" />
+  **Common Mistakes:** Most students did not include any proof that if all the breadth requirements are satisfied then the max flow is $n$. However, this direction is necessary for a fully correct proof.
+  <hr class="s2" />
+  There were also a number of incorrect reductions. For instance, putting a capacity of infinity on the edges between the category nodes ($g1,g2,...$) and the source node was incorrect because it could lead to a max flow of value $n$ even when not all requirements are satisfied by allowing a single requirement to contribute more than one to the flow.
+  <hr class="s2" />
+  Another mistake was to allow more than one unit of flow to enter the class nodes. This allows a single class to contribute flow to more than one requirement.
+  <hr class="s2" />
+  Finally, there was a mistake on our part. The question was worded unclearly so that it could be interpreted as saying that you are not allowed to take more than $k$ classes from any one department. It was supposed to be interpreted as saying that no more than $k$ classes from any one department can be used to fulfill breadth requirements. Most students interpreted it in the latter way, but the students who interpreted it in the former way were still awarded points if they had a correct solution for that interpretation.
+
+  <hr class="s2" />
+
+  **2/3 Credit Solution**
+  <hr class="s2" />
+  ![graph](/img/cs170/mt2-sp16-q4-2.png)
+  <hr class="s2" />
+  This is an instance of bipartite matching. We want to match each requirement to a class that can fulfill it. So we form a graph with a node for each class and for each requirement. Each class is connected to each requirement that it could be used to satisfy with an edge of capacity $1$. Each class node is connected to the sink with an edge of capacity $1$ and each category node is connected to the source node with an edge of capacity $1$. The proof is very similar to the proof of the full credit solution above, but without the parts about the department constraints.
