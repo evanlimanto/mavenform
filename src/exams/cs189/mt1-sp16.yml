@@ -279,7 +279,7 @@ q3_1: |
 q3_1_s: |
   We wish to maximize the log-likelihood
   $$ \begin{align} ln \prod_{i=1}^n P(y_i|X_i) &= \sum_{i=1}^{n} ln \left( \frac{1}{2b} e^{- \lvert y_i - X_i^T \mathbf{w} \rvert / b} \right) \\\\ &= -\frac{1}{b} \sum_{i=1}^{n} \lvert y_i - X_i^T \mathbf{w} \rvert - n\;ln(2b) \end{align}$$
-  which is equivalent to minimizing $\sum_{i=1}{n}\lvert X_i^T\mathbf{w} - y_i \rvert$.
+  which is equivalent to minimizing $\sum_{i=1}^{n}\lvert X_i^T\mathbf{w} - y_i \rvert$.
 
 q3_2: |
   **(b)** [6 pts] Derive the batch gradient descent rule for minimizing the sum of absolute residuals. (*Hint*: You will probably need “**if**” statements or equations with conditionals because of the absolute value operators in the cost function. Don’t worry about points where the gradient is undefined.)
