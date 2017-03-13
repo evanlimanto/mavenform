@@ -1,0 +1,823 @@
+course: 'cs188'
+ref: 'mt1-sp15'
+
+type: 'mt1'
+term: 'sp15'
+prof: 'Abbeel'
+
+questions: {
+  'q1': '',
+  'q2': 'Quadratics and Gaussian Isocontours',
+  'q3': 'Linear Regression',
+  'q4': 'Discriminant Analysis',
+}
+
+parts: {
+  'q1': 4,
+  'q2': 1,
+  'q3': 4,
+  'q4': 1,
+  'q5': 4,
+  'q6': 3,
+  'q7': 7,
+  'q8': 5,
+  'q9': 4,
+  'q10': 7,
+}
+
+q1_1: |
+  ## Q1. [12 pts] Pacman's Tour of San Francisco
+  Pacman is visiting San Francisco and decides to visit $N$ different landmarks $\\{L_1, L_2 , ... , L_N \\}$. Pacman starts at $L_1$, which can be considered visited, and it takes $t_{ij}$ minutes to travel from $L_i$ to $L_j$.
+  <hr class="s2" />
+  **(a)** [2 pts] Pacman would like to find a route that visits all landmarks while minimizing the total travel time. Formulating this as a search problem, what is the minimal state representation?
+  <hr class="s2" />
+  minimal state representation:
+
+q1_1_s: |
+  The minimal state representation is Pacman’s current location and which landmarks he has visited (boolean indicators or a set or an unordered list) OR the inverse, which landmarks Pacman has not visited.
+
+q1_2: |
+  **(b)** [2 pts] Ghosts have invaded San Francisco! If Pacman travels from $L_i$ to $L_j$, he will encounter $g_{ij}$ ghosts. Pacman wants to find a route which minimizes total travel time *without encountering more than $G_{max}$ ghosts* (while still visiting all landmarks). What is the minimal state representation?
+  <hr class="s2" />
+  minimal state representation:
+
+q1_2_s: |
+  The minimal state representation is the visited (or unvisited) landmarks (as above), Pacman’s current landmark (as above), and the number of ghosts encountered thus far (or the inverse, the number of ghosts that can be encountered in the future).
+
+q1_3: |
+  **(c)** [4 pts] The ghosts are gone, but now Pacman has brought all of his friends to take pictures of all the landmarks. Pacman would like to find routes for him and each of his $k − 1$ friends such that *all landmarks are visited by at least one individual*, while minimizing the **sum of the tour times** of all individuals. You may assume that Pacman and all his friends start at landmark $L_1$ and each travel independently at the same speed. Formulate this as a search problem and fill in the following:
+  <hr class="s2" />
+  minimal state representation:
+  <hr class="s2" />
+  actions between states:
+  <hr class="s2" />
+  cost function $c(s, s')$ between neighboring states:
+
+q1_3_s: |
+  minimal state representation:
+  <hr class="s1" />
+  The state representation is the landmarks visited by at least one agent, stored as $N$ boolean indicators, a set, or an unordered list (or the inverse – the unvisited landmarks) and the current location of each of the $k$ agents.
+  <hr class="s2" />
+  actions between states:
+  <hr class="s1" />
+  An action can be a single agent moving from one landmark to another or a number of the agents moving from their respective landmarks to new landmarks. The new landmarks need not be unvisited or unoccupied.
+  <hr class="s2" />
+  cost function $c(s, s')$ between neighboring states:
+  <hr class="s1" />
+  The cost function is the sum of the time traveled by each agent between state $s$ and $s'$ (or just a single term if only one agent moves per action)
+
+q1_4: |
+  **(d)** [4 pts] Pacman would now like to find routes for him and each of his k − 1 friends such that all landmarks are still visited by at least one individual, but now minimizing the **maximum tour time** of any individual. Formulate this as a search problem and fill in the following:
+  <hr class="s2" />
+  minimal state representation:
+  <hr class="s2" />
+  actions between states:
+  <hr class="s2" />
+  cost function $c(s, s')$ between neighboring states:
+
+q1_4_s: |
+  minimal state representation:
+  <hr class="s1" />
+  The state representation is the landmarks visited and the current location of each agent (both as above), as well as the tour time for each agent.
+  <hr class="s2" />
+  actions between states:
+  <hr class="s1" />
+  An action is when a single agents moves from one landmark to another or some number of the agents move from their current landmark to another landmark.
+  <hr class="s2" />
+  cost function c(s, s′) between neighboring states:
+  <hr class="11" />
+  Let $t_{max}$ be the maximum tour time of any individual at state $s$ and $t_{max}'$ be the equivalent at state $s'$. Then the cost between $s$ and $s'$ is $t_{max}' − t_{max}$.
+
+q2_1: |
+  ## Q2. [6 pts] Missing Heuristic Values
+  Consider the state space graph shown below in which some of the states are missing a heuristic value. Determine the possible range for each missing heuristic value so that the heuristic is admissible and consistent. If this isn’t possible, write so.
+  <hr class="s2" />
+  ![graph](/img/cs188/mt1-sp15-q2-1.png)
+  <hr class="s2" />
+
+  |State|Range for $h(s)$|
+  |-----|----------------|
+  |A|$\qquad \le h(A) \le \qquad|
+  |D|$\qquad \le h(D) \le \qquad|
+  |E|$\qquad \le h(E) \le \qquad|
+
+q2_1_s: |
+  |State|Range for $h(s)$|
+  |-----|----------------|
+  |A|$6 \le h(A) \le 6$|
+  |D|$1 \le h(D) \le 3$|
+  |E|$5 \le h(E) \le 6$|
+
+  <hr class="s2" />
+  We only need to check for consistency since admissibility is implied by consistency. A consistent heuristic is one such that $h(s) ≤ c(s, s') + h(s')$. For the search graph above, this means that:
+  <hr class="s1" />
+  For $s = A$:
+  $$\begin{align} h(Start) & \le c(Start, A) + h(A) \implies 6 \le h(A) \\\\
+    h(A) & \le c(A,B) + h(B) \implies h(A) \le 7 \\\\
+    h(A) & \le c(A,G) + h(F) \implies h(A) \le 6 \; \text{to be consistent} \end{align}$$
+  For $s = D$:
+  $$\begin{align} h(D) & \le c(D,G) + h(G) \implies h(D) \le 3 \\\\
+    \begin{align} h(B) & \le c(B,D) + h(D) \implies 0 \le h(D) \\\\
+    \begin{align} h(F) & \le c(F,D) + h(D) \implies 1 \le h(D) \; \text{to be consistent} \end{align}$$
+  For $s = E$:
+  $$\begin{align} h(E) & \le c(E,G) + h(G) \implies h(E) \le 6 \\\\
+    \begin{align} h(C) & \le c(C,E) + h(E) \implies 5 \le h(E) \\\\
+    \begin{align} h(E) & \le c(E,F) + h(F) \implies h(E) \le 6 \; \text{to be consistent} \end{align}$$
+
+q3_1: |
+  ## Q3. [10 pts] PAC-CORP Assignments
+  Your CS188 TAs have all secured jobs at PAC-CORP. Now, PAC-CORP must assign each person to exactly one team. The TAs are Alvin (A), Chelsea (C), Lisa (L), Rohin (R), Sandy (S), and Zoe (Z). We would like to formulate this as a CSP using one variable for each TA. The teams to choose from are:
+  - Team 1: Ghostbusting
+  - Team 2: Pellet Detection
+  - Team 3: Capsule Vision
+  - Team 4: Fruit Processing
+  - Team 5: R&D
+  - Team 6: Mobile
+
+  <hr class="s2" />
+  The TAs have the following preferences. Note that some of the teams may not receive a TA and some of the teams may receive more than one TA.
+  - Alvin (A) and Chelsea (C) must be on the same team.
+  - Sandy (S) must be on an even team (2, 4, or 6).
+  - Lisa (L) must be on one of the last 3 teams.
+  - Alvin (A) and Rohin (R) must be on different teams.
+  - Zoe (Z) must be on Team 1 Ghostbusting or Team 2 Pellet Detection.
+  - Chelsea’s (C) team number must be greater than than Lisa’s (L) team number.
+  - Lisa (L) cannot be on a team with any other TAs.
+
+  <hr class="s2" />
+  **(a)** [3 pts] Complete the constraint graph for this CSP (note that doing so only involves the binary constraints).
+  <hr class="s2" />
+  ![csp](/img/cs188/mt1-sp15-q3-1.png)
+
+q3_1_s: |
+  Binary constraints are 1, 4, 6, and 7. Constraint 1 connects A and C. Constraint 4 connects A and R. Constraint 6 connects C and L. Constraint 7 connects L with all other variables.
+
+q3_2: |
+  **(b)** [2 pts] On the grid below, cross out values that are removed from the domains after enforcing all unary constraints.
+  ![grid](/img/cs188/mt1-sp15-q3-2.png)
+
+q3_2_s: |
+  ![grid](/img/cs188/mt1-sp15-q3-3.png)
+  <hr class="s2" />
+  Unary constraints are constraint 2, 3, and 5. Constraint 2 removes 1, 3, and 5 from the domain of S. Constraint 3 removes 1, 2, and 3 from the domain of L. Constraint 5 removes 3, 4, and 5 from the domain of Z.
+
+q3_3: |
+  **(c)** [2 pts] Consider the filtered domains obtained in part (b) from enforcing the unary constraints. According to Minimum Remaining Values (MRV), which variable should be selected?
+  - A
+  - C
+  - S
+  - L
+  - R
+  - Z
+
+q3_3_s: |
+  Z.
+  <hr class="s2" />
+  Z has the fewest remaining values in its domain, so it will be assigned first by MRV.
+
+q3_4: |
+  **(d)** [3 pts] Assume a current set of filtered domains as shown below. Cross off the values that are eliminated by enforcing arc consistency at this stage. You should *only enforce binary constraints*.
+  <hr class="s2" />
+  ![grid](/img/cs188/mt1-sp15-q3-4.png)
+
+q3_4_s: |
+  ![grid](/img/cs188/mt1-sp15-q3-5.png)
+  <hr class="s2" />
+  The arcs that prune values are below.
+  - 1. C-L: Constraint 6 removes 1 from C.
+  - 2. A-C: Constraint 1 removes 1, 2, 3, 5 and 6 from A.
+  - 3. R-A: Constraint 4 removes 4 from R.
+  - 4. L-C: Constraint 6 removes 4, 5, and 6 from L.
+
+q4_1: |
+  ## Q4. [5 pts] k-CSPs
+  Let a $k$-CSP be a CSP where the solution is allowed to have $k$ violated constraints. We would like to modify the classic CSP algorithm to solve $k$-CSPs. The classic backtracking algorithm is shown below. To modify it to solve $k$-CSPs, we need to change line 15. Note that $k$ is used to denote the number of allowable violated constraints.
+
+  ```
+  function K-CSP-Backtracking(csp, k)
+      return Recursive-Backtracking({}, csp, k)
+  end function
+
+  function Recursive-Backtracking(assignment, csp, k)
+      if assignment is complete then
+          return assignment
+      end if
+      var ← Select-Unassigned-Variable(Variables[csp], assignment, csp)
+      for each value in Order-Domain-Values(var, assignment, csp) do
+          if value is consistent with assignment given Constraints(csp) then
+              add {var = value} to assignment
+              result ← Recursive-Backtracking(assignment, csp, k)
+              if result != failure then
+                  return result
+              end if
+              remove = {var = value} from assignment
+          else
+              continue
+          end if
+      end for
+      return failure
+  end function
+  ```
+
+  If each of the following blocks of code were to replace line 15, which code block(s) would yield a correct algorithm for solving k-CSPS?
+  <hr class="s2" />
+  ![code](/img/cs188/mt1-sp15-q4-1.png)
+
+q4_1_s: |
+  For this formulation, we want to only backtrack when more than $k$ constraints are violated. If there are fewer than $k$, we can assign the current variable to a constrained value and continue the algorithm. The first code block provides the correct implementation. The second option using a tree structured CSP algorithm will incorrectly return failure if there is no solution with only $i + 1$ constraints violated (where $i + 1$ may be less than k). The third and fourth option filter the domains of the remaining variables. If a variable’s domain is filtered, then the recursive-backtracking call will only consider values in the filtered domain rather than values which violate a constraint, potentially causing the code to miss the solution.
+  <hr class="s2" />
+  ![code](/img/cs188/mt1-sp15-q4-2.png)
+
+q5_1: |
+  ## Q5. [12 pts] One Wish Pacman
+  **(a) Power Search.** Pacman has a special power: *once* in the entire game when a ghost is selecting an action, Pacman can make the ghost choose any desired action instead of the min-action which the ghost would normally take. <u>*The ghosts know about this special power and act accordingly.</u>*
+  <hr class="s2" />
+  **(i)** [2 pts] Similar to the minimax algorithm, where the value of each node is determined by the game subtree hanging from that node, we define a value pair $(u,v)$ for each node: $u$ is the value of the subtree if the power is not used in that subtree; v is the value of the subtree if the power is used once in that subtree. For example, in the below subtree with values (-3, 5), if Pacman does not use the power, the ghost acting as a minimizer would choose -3; however, with the special power, Pacman can make the ghost choose the value more desirable to Pacman, in this case 5.
+  <hr class="s2" />
+  *Reminder*: Being allowed to use the power once during the game is different from being allowed to use the power in only one node in the game tree below. For example, if Pacman’s strategy was to always use the special power on the second ghost then that would only use the power once during execution of the game, but the power would be used in four possible different nodes in the game tree.
+  <hr class="s2" />
+  For the terminal states we set $u$ = $v$ = `Utility(State)`.
+  <hr class="s1" />
+  Fill in the $(u, v)$ values in the modified minimax tree below. Pacman is the root and there are two ghosts.
+  <hr class="s2" />
+  ![tree](/img/cs188/mt1-sp15-q5-1.png)
+
+q5_1_s: |
+  ![tree](/img/cs188/mt1-sp15-q5-2.png)
+  <hr class="s2" />
+  Please see the solution of the general algorihtm in the next part to see how the $u, v$ values get propagated up the game tree.
+
+q5_2: |
+  **(ii)** [4 pts] Complete the algorithm below, which is a modification of the minimax algorithm, to work in the general case: Pacman can use the power at most once in the game but Pacman and ghosts can have multiple turns in the game.
+
+  ```
+  function Value(state)
+      if state is leaf then
+          u ← Utility(state)
+          v ← Utility(state)
+          return (u, v)
+      end if
+      if state is Max-Node then
+          return Max-Value(state)
+      else
+          return Min-Value(state)
+      end if
+  end function
+
+  function Max-Value(state)
+      uList ← [ ], vList ← [ ]
+      for successor in Successors(state) do
+          (u′,v′) ← Value(successor)
+          uList.append(u′)
+          vList.append(v′)
+      end for
+      u ← max(uList)
+      v ← max(vList)
+      return (u, v)
+  end function
+
+  function Min-Value(state)
+      uList ← [], vList ← []
+      for successor in Successors(state) do
+          (u′,v′) ← Value(successor)
+          uList.append(u′)
+          vList.append(v′)
+      end for
+    u ←  ____________
+    v ←  ________________________
+  end function
+  ```
+
+q5_2_s: |
+  ```
+  function Min-Value(state)
+      uList ← [], vList ← []
+      for successor in Successors(state) do
+          (u′,v′) ← Value(successor)
+          uList.append(u′)
+          vList.append(v′)
+      end for
+    u ←  min(uList)
+    v ←  max(max(uList), min(vList)) return (u, v)
+  end function
+  ```
+
+  The $u$ value of a min-node corresponds to the case if Pacman does not use his power in the game subtree hanging from the current min-node. Therefore, it is equal to the minimum of the $u$ values of the children of the node.
+  <hr class="s1" />
+  The $v$ value of the min-node corresponds to the case when pacman uses his power once in the subtree. Pacman has two choices here - a) To use the power on the current node, or b) To use the power further down in the subtree.
+  <hr class="s1" />
+  In case a), the value of the node corresponds to choosing the best among the children’s $u$ `values = max(uList)` (we consider $u$ values of children as Pacman is using his power on this node and therefore, cannot use it in the subtrees of the node’s children).
+  <hr class="s1" />
+  In case b), Pacman uses his power in one of the child subtrees so we consider the $v$ values of the children, Since Pacman is not using his power on this node, the current node acts as a minimizer, making the value in case b) = `min(vList)`
+  <hr class="s1" />
+  The $v$ value at the current node is the best of the above two cases.
+
+q5_3: |
+  **(b) Weak-Power Search.** Now, rather than giving Pacman control over a ghost move once in the game, the special power allows Pacman to once make a ghost act randomly. The ghosts know about Pacman’s power and act accordingly.
+  <hr class="s2" />
+  **(i)** [2 pts] The propagated values $(u,v)$ are defined similarly as in the preceding question: $u$ is the value of the subtree if the power is not used in that subtree; $v$ is the value of the subtree if the power is used once in that subtree.
+  <hr class="s1" />
+  Fill in the $(u, v)$ values in the modified minimax tree below, where there are two ghosts.
+  <hr class="s2" />
+  ![tree](/img/cs188/mt1-sp15-q5-3.png)
+
+q5_3_s: |
+  ![tree](/img/cs188/mt1-sp15-q5-4.png)
+  <hr class="s2" />
+  Please see the solution of the general algorithm in the next part to see how the $u, v$ values get propagated up the game tree.
+
+q5_4: |
+  **(ii)** [4 pts] Complete the algorithm below, which is a modification of the minimax algorithm, to work in the general case: Pacman can use the weak power at most once in the game but Pacman and ghosts can have multiple turns in the game.
+  <hr class="s1" />
+  *Hint: you can make use of a min, max, and average function*
+
+  ```
+  function Value(state)
+      if state is leaf then
+          u ← Utility(state)
+          v ← Utility(state)
+          return (u, v)
+      end if
+      if state is Max-Node then
+          return Max-Value(state)
+      else
+          return Min-Value(state)
+      end if
+  end function
+
+  function Max-Value(state)
+      uList ← [ ], vList ← [ ]
+      for successor in Successors(state) do
+          (u′,v′) ← Value(successor)
+          uList.append(u′)
+          vList.append(v′)
+      end for
+      u ← max(uList)
+      v ← max(vList)
+      return (u, v)
+  end function
+
+  function Min-Value(state)
+      uList ← [], vList ← []
+      for successor in Successors(state) do
+          (u′,v′) ← Value(successor)
+          uList.append(u′)
+          vList.append(v′)
+      end for
+    u ←  ____________
+    v ←  ________________________
+  end function
+  ```
+
+q5_4_s: |
+  ```
+  function Min-Value(state)
+      uList ← [], vList ← []
+      for successor in Successors(state) do
+          (u′,v′) ← Value(successor)
+          uList.append(u′)
+          vList.append(v′)
+      end for
+    u ←  min(uList)
+    v ←  max(avg(uList), min(vList))
+  end function
+  ```
+
+  The solution to this scenario is same as before, except that when considering case a) for the $v$ value of a min-node, the value of the node corresponds to choosing the average of the children's $u$ values = $avg(uList)$
+
+q6_1: |
+  ## Q6. [9 pts] AlphaBetaExpinimax
+  In this question, player A is a minimizer, player B is a maximizer, and C represents a chance node. All children of a chance node are equally likely. Consider a game tree with players A, B, and C. In lecture, we considered how to prune a minimax game tree - in this question, you will consider how to prune an expinimax game tree (like a minimax game tree but with chance nodes). Assume that the children of a node are visited in left-to-right order.
+  <hr class="s2" />
+  For each of the following game trees, give an assignment of terminal values to the leaf nodes such that the bolded node can be pruned (it doesn’t matter if you prune more nodes), or write “not possible” if no such assignment exists. You may give an assignment where an ancestor of the bolded node is pruned (since then the bolded node will never be visited). You should not prune on equality, and your terminal values must be finite (including negative values). *Make your answer clear - if you write “not possible” the values in your tree will not be looked at.*
+  <hr class="s2" />
+  **Important:** The $α-β$ pruning algorithm does not deal with chance nodes. Instead, for a node n, consider all the values seen so far, and determine whether you can know *without looking at the node* that the value of the node will not affect the value at the top of the tree. If that is the case, then $n$ can be pruned.
+  <hr class="s2" />
+  **(a)** [3 pts]
+  <hr class="s2" />
+  ![tree](/img/cs188/mt1-sp15-q6-1.png)
+
+q6_1_s: |
+  In this assignment, the values of the last two leaves do not matter. When we are about to look at the last chance node, we know that the minimizer $A$ can guarantee a score of 2, but the maximizer $B$ can guarantee a score of 3, and so the last chance node is pruned.
+  <hr class="s2" />
+  ![tree](/img/cs188/mt1-sp15-q6-4.png)
+
+q6_2: |
+  **(b)** [3 pts]
+  <hr class="s2" />
+  ![tree](/img/cs188/mt1-sp15-q6-2.png)
+
+q6_2_s: |
+  In this assignment, the value of the last leaf does not matter. When we are about to look at the bolded node, we know that the minimizer $A$ can guarantee a score of 2, but the second chance node $C$ is guaranteed to have a score of at least 3 (because all of the maximizers below it can guarantee a score of 3).
+  <hr class="s2" />
+  ![tree](/img/cs188/mt1-sp15-q6-5.png)
+
+q6_3: |
+  **(c)** [3 pts]
+  <hr class="s2" />
+  ![tree](/img/cs188/mt1-sp15-q6-3.png)
+
+q6_3_s: |
+  Not possible. At the bolded node, the minimizer can guarantee a score of at most the value of its left subtree. However, since we have not visited all the children of $C$, there is no bound on the value that $C$ could attain. So, we need to continue exploring nodes until we can put a bound on $C$’s value, which means that we have to explore the bolded node.
+
+q7_1: |
+  ## Q7. [11 pts] Lotteries in Ghost Kingdom
+  **(a) Diverse Utilites.** Ghost-King (GK) was once great friends with Pacman (P) because he observed that Pacman and he shared the same preference order among all possible event outcomes. Ghost-King, therefore, assumed that he and Pacman shared the same utility function. However, he soon started realizing that he and Pacman had a different preference order when it came to lotteries and, alas, this was the end of their friendship.
+  <hr class="s2" />
+  Let Ghost-King and Pacman’s utility functions be denoted by $U_{GK}$ and $U_P$ respectively. Assume both $U_{GK}$ and $U_P$ are guaranteed to output non-negative values.
+  <hr class="s2" />
+  **(i)** [2 pts] Which of the following relations between $U_{GK}$ and $U_P$ are consistent with Ghost King’s observation that $U_{GK}$ and $U_P$ agree, with respect to all event outcomes but not all lotteries?
+  - $U_P = aU_{GK} + b (0 < a < 1, b > 0)$
+  - $U_P = aU_{GK} + b (a > 1, b > 0)$
+  - $U_P = U_{GK}^2$
+  - $U_P = \sqrt{(U_{GK})}$
+
+q7_1_s: |
+  - $U_P = U_{GK}^2$
+  - $U_P = \sqrt{(U_{GK})}$
+
+  <hr class="s2" />
+  For all the above options, $U_P$ and $U_{GK}$ result in the same preference order between two non-lottery events $(U_P(e_1) > U_P(e_2) \iff U_{GK}(e_1) > U_{GK}(e_2))$. However, options 1 and 2 also share the same preference order among all lotteries as well.
+
+q7_2: |
+  **(ii)** [2 pts] In addition to the above, Ghost-King also realized that Pacman was more risk-taking than him . Which of the relations between $U_{GK}$ and $U_P$ are possible?
+  - $U_P = aU_{GK} + b (0 < a < 1, b > 0)$
+  - $U_P = aU_{GK} + b (a > 1, b > 0)$
+  - $U_P = U_{GK}^2$
+  - $U_P = \sqrt{(U_{GK})}$
+
+q7_2_s: |
+  - $U_P = U_{GK}^2$
+
+  <hr class="s2" />
+  As an example, say Ghost-King prefers winning \$ as much as a lottery : winning \$0 or \$4 with equal probability. For option c), Pacman prefers the lottery much more (more risk-taking) and for option d), Pacman prefers the guaranteed reward.
+
+q7_3: |
+  **(b) Guaranteed Return**. Pacman often enters lotteries in the Ghost Kingdom. A particular Ghost vendor offers a lottery (for free) with three possible outcomes that are each equally likely: winning \$1, \$2, or \$5.
+  <hr class="s1" />
+  Let $U_P(m)$ denote Pacman’s utility function for \$m. Assume that Pacman always acts rationally.
+  <hr class="s2" />
+  **(i)** [2 pts] The vendor offers Pacman a special deal - if Pacman pays \$1, the vendor will manipulate the lottery such that Pacman **always gets the highest reward possible**. For which of these utility functions would Pacman choose to pay the \$1 to the vendor for the manipulated lottery over the original lottery? (Note that if Pacman pays \$1 and wins \$m in the lottery, his actual winnings are \$m-1.)
+  - $U_P(m) = m$
+  - $U_P(m) = m^2$
+
+q7_3_s: |
+  - $U_P(m) = m$
+  - $U_P(m) = m^2$
+
+  <hr class="s2" />
+  a) $U_P(m) = m$:
+  <hr class="s1" />
+  If pacman does not pay, expected utility = $\frac{1}{3}(5) + \frac{1}{3}(4) + \frac{1}{3}(1) = \frac{10}{3}$
+  <hr class="s1" />
+  If pacman pays up, expected utility = $1(5 - 1) + 0(4 - 1) + 0(1 - 1) = 4$.
+
+  <hr class="s2" />
+  a) $U_P(m) = m^2$:
+  <hr class="s1" />
+  If pacman does not pay, expected utility = $\frac{1}{3}(5)^2 + \frac{1}{3}(4)^2 + \frac{1}{3}(1)^2 = 14$
+  <hr class="s1" />
+  If pacman pays up, expected utility = $1(5 − 1)^2 + 0(4 − 1)^2 + 0(1 − 1)^2 = 16.$
+
+q7_4: |
+  **(ii)** [2 pts] Now assume that the ghost vendor can only manipulate the lottery such that Pacman **never gets the lowest reward** and the remaining two outcomes become equally likely. For which of these utility functions would Pacman choose to pay the \$1 to the vendor for the manipulated lottery over the original lottery?)
+  - $U_P(m) = m$
+  - $U_P(m) = m^2$
+
+q7_4_s: |
+  - $U_P(m) = m$
+
+  <hr class="s2" />
+  a) $U_P(m) = m$:
+  <hr class="s1" />
+  If pacman does not pay, expected utility = $\frac{1}{3}(5) + \frac{1}{3}(4) + \frac{1}{3}(1) = \frac{10}{3}$
+  <hr class="s1" />
+  If pacman pays up, expected utility = $\frac{1}{2}(5 - 1) + \frac{1}{2}(4 - 1) + 0(1 - 1) = 3.5$.
+
+  <hr class="s2" />
+  a) $U_P(m) = m^2$:
+  <hr class="s1" />
+  If pacman does not pay, expected utility = $\frac{1}{3}(5)^2 + \frac{1}{3}(4)^2 + \frac{1}{3}(1)^2 = 14$
+  <hr class="s1" />
+  If pacman pays up, expected utility = $\frac{1}{2}(5 − 1)^2 + \frac{1}{2}(4 − 1)^2 + 0(1 − 1)^2 = 12.5.$
+
+q7_5: |
+  **(c)** [3 pts] **Minimizing Other Utility.**
+  ![tree](/img/cs188/mt1-sp15-q7-1.png)
+  <hr class="s2" />
+  The Ghost-King, angered by Pacman’s continued winnings, decided to revolutionize the lotteries in his King- dom. There are now 4 lotteries (A1, A2, B1, B2), each with two equally likely outcomes. Pacman, who wants to maximize his expected utility, can pick one of two lottery types (A, B). The ghost vendor thinks that Pacman’s utility function is $U_P' (m) = m$ and minimizes accordingly. However, Pacman’s real utility function $U_P (m)$ may be different.
+  <hr class="s1" />
+  For each of the following utility functions for Pacman, select the lottery corresponding to the outcome of the game. Note that Pacman knows how the ghost vendor is going to behave.
+  <hr class="s2" />
+  *Pacman's expected utility for the 4 lotteries, under various utility functions, are as follows:*
+  <hr class="s1" />
+  $U_P(m) = m : [A1 : 10.5; A2 : 10; B1 : 9; B2 : 8]$
+  <hr class="s1" />
+  $U_P(m) = m^2 : [A1 : 200.5; A2 : 100; B1 : 90; B2 : 113]$
+  <hr class="s1" />
+  $U_P(m) = \sqrt{m} : [A1 : 2.74; A2 : 3.16; B1 : 2.96; B2 : 2.44]$
+  <hr class="s2" />
+  **(i)** [1 pt] $U_P(m) = m$ :
+  - A1
+  - A2
+  - B1
+  - B2
+
+q7_5_s: |
+  - A2
+
+q7_6: |
+  **(ii)** [1 pt] $U_P(m) = m^2$ :
+  - A1
+  - A2
+  - B1
+  - B2
+
+q7_6_s: |
+  - B2
+
+q7_7: |
+  **(iii)** [1 pt] $U_P(m) = \sqrt{m}$ :
+  - A1
+  - A2
+  - B1
+  - B2
+
+q7_7_s: |
+  - A2
+
+  <hr class="s2" />
+  Since vendor minimizes $U_P'(m) = m$, if Pacman chooses $A$, vendor would pick $A2$ and if Pacman chooses $B$, vendor would pick $B2$. For $U_P(m) = m$ and $U_P(m) = \sqrt{m}$, Pacman prefers $A2$ over $B2$ and for $U_P(m) = m^2$, Pacman prefers $B2$ over $A2$ and acts accordingly.
+
+q8_1: |
+  ## Q8. [13 pts] Indecisive Pacman
+  **(a) Simple MDP**
+  <hr class="s2" />
+  Pacman is an agent in a deterministic MDP with states $A,B,C,D,E,F$. He can deterministically choose to follow any edge pointing out of the state he is currently in, corresponding to an action *North, East, or South*. He cannot stay in place. $D, E$, and $F$ are terminal states. Let the discount factor be $\gamma = 1$. Pacman receives the reward value labeled underneath a state upon entering that state.
+  <hr class="s2" />
+  ![mdp](/img/cs188/mt1-sp15-q8-1.png)
+  <hr class="s2" />
+  **(i)** [3 pts] Write the optimal values $V^{\*}(s)$ for $s = A$ and $s = C$ and the optimal policy $\pi^{\*}(s)$ for $s = A$.
+  - $V^{\*}(A): ________
+  - $V^{\*}(C): ________
+  - $\pi^{\*}(A): ________
+
+q8_1_s: |
+  - $V^{\*}(A): 100
+  - $V^{\*}(C): 100
+  - $\pi^{\*}(A): East
+
+  The optimal plan without indecisiveness is to go East and then South, collecting no negative rewards.
+
+q8_2: |
+  **(ii)** [2 pts] Pacman is typically rational, but now becomes indecisive if he enters state $C$. In state $C$, he finds the two best actions and randomly, with equal probability, chooses between the two. Let $\overline{V}(s)$ be the values under the policy where Pacman acts according to $\pi^{\∗}(s)$ for all $s \ne C$, and follows the indecisive policy when at state $C$. What are the values $\overline{V}(s)$ for $s = A$ and $s = C$?
+  - $\overline{V}(A): ________
+  - $\overline{V}(C): ________
+
+q8_2_s: |
+  - $\overline{V}(A): 25
+  - $\overline{V}(C): 25
+
+  <hr class="s2" />
+  Pacman is unaware of his indecisiveness at state $C$. So he will follow his policy $\pi^{\∗}$ from (i) at state $A$ and go East. When he has reached $C$, his two best actions are going South and going East. He will then receive the average of the value of taking those two actions, $\frac{(100 − 50)}{2} = 25$, since he will take either one with equal probability.
+
+q8_3: |
+  **(iii)** [2 pts] Now Pacman knows that he is going to be indecisive when at state $C$ and decides to recompute the optimal policy at all other states, anticipating his indecisiveness at $C$. What is Pacman’s new policy $\tilde{\pi}(s)$ and new value $\tilde{V}(s)$ for $s = A$?
+  - $\tilde{\pi}(A)$: ________
+  - $\tilde{V}(A)$: ________
+
+q8_3_s: |
+  - $\tilde{\pi}(A)$: South
+  - $\tilde{V}(A)$: 99
+
+  <hr class="s2" />
+  Now Pacman knows about his indecisiveness as $C$, and so he can anticipate the low value (25) of being in $C$. He can therefore choose to go South and receive a reward of -1 and from there go East, to get a reward of 100, making for a value from $A$ of 99.
+
+q8_4: |
+  **(b) General Case – Indecisive everywhere**
+  <hr class="s2" />
+  Pacman enters a new non-deterministic MDP and has become indecisive in all states of this MDP: at every time-step, instead of being able to pick a single action to execute, he always picks the two distinct best actions and then flips a fair coin to randomly decide which action to execution from the two actions he picked.
+  <hr class="s2" />
+  Let $S$ be the state space of the MDP. Let $A(s)$ be the set of actions available to Pacman in state $s$. Assume for simplicity that there are always at least two actions available from each state ($|A(s)| ≥ 2$).
+  <hr class="s2" />
+  This type of agent can be formalized by modifying the Bellman Equation for optimality. Let $\hat{V}(s)$ be the value of the indecisive policy. Precisely:
+  <hr class="s2" />
+  $$\hat{V}(s_0) = E[R(s_0,a_0,s_1) + \gamma R(s_1,a_1,s_2) + \gamma^2R(s_2,a_2,s_3)) + ... ]$$
+  Let $\hat{Q}(s, a)$ be the expected utility of taking action $a$ from state $s$ and then following the indecisive policy after that step. We have that:
+  $$\hat{Q}(s, a) = \sum_{s' \in S}T(s,a,s')(R(s,a,s') + \gamma \hat{V}(s'))$$
+  **(i)** [3 pts] Which of the following optins gives $\hat{V}$ in terms of $\hat{Q}$? When combined with the above formula for $\hat{Q}(s,a)$ in terms of $\hat{V}(s')$, the answer to this question forms the Bellman Equation for this policy.
+  <hr class="s2" />
+  ![choices](/img/cs188/mt1-sp15-q8-2.png)
+
+q8_4_s: |
+  ![choices](/img/cs188/mt1-sp15-q8-3.png)
+  <hr class="s2" />
+  Pacman must select the best two actions (two maxes), and then flip a coin to determine which to perform (average their values).
+
+q8_5: |
+  **(ii)** Which of the following equations specify the relationship between $V^{\*}$ and $\hat{V}$ in general?
+  <hr class="s2" />
+  ![choices](/img/cs188/mt1-sp15-q8-4.png)
+
+q8_5_s: |
+  ![choices](/img/cs188/mt1-sp15-q8-5.png)
+  <hr class="s2" />
+  None of the above are valid relationships between $V^{\*}$ and $\hat{V}$. It may be possible to construct MDPs where some of the above are satisfied, but they won't be satisfied for all MDPs.
+
+q9_1: |
+  ## Q9. [8 pts] Reinforcement Learning
+  Imagine an unknown game which has only two states $\\{A,B\\}$ and in each state the agent has two actions to choose from: $\\{Up, Down\\}$. Suppose a game agent chooses actions according to some policy $\pi$ and generates the following sequence of actions and rewards in the unknown game:
+  <hr class="s2" />
+
+  |$t$|$s_t$|$a_t$|$s_{t+1}$|$r_t$|
+  |---|-----|-----|---------|-----|
+  |0|A|Down|B|2|
+  |1|B|Down|B|-4|
+  |2|B|Up|B|0|
+  |3|B|Up|A|0|
+  |4|A|Up|A|-1|
+
+  <hr class="s2" />
+  *Unless specified otherwise, assume a discount factor $\gamma = 0.5$ and a learning rate $\alpha = 0.5$*
+  <hr class="s2" />
+  **(a)** [2 pts] Recall the update function of $Q$-learning is:
+  $$Q(s_t,a_t) \leftarrow (1 - \alpha)Q(s_t, a_t) + \alpha(r_t + \gamma \max_{a'}Q(s_{t+1}, a'))$$
+  Assume that all $Q$-values are initialized as 0. What are the following $Q$-values learned by running $Q$-learning with the above experience sequence?
+  - $Q(A, Down)$ = ________
+  - $Q(B, Up)$ = ________
+
+q9_1_s: |
+  - $Q(A, Down)$ = 1
+  - $Q(B, Up)$ = $\frac{7}{4}$
+
+  <hr class="s2" />
+  Perform Q-learning update 4 times, once for each of the first 4 observations.
+
+q9_2: |
+  **(b)** [2 pts] In model-based reinforcement learning, we first estimate the transition function $T(s,a,s')$ and the reward function $R(s,a,s')$. Fill in the following estimates of $T$ and $R$, estimated from the experience above. Write "n/a" if not applicable or undefined.
+  - $\hat{T}(A, Up, A)$ = ________
+  - $\hat{T}(A, Up, B)$ = ________
+  - $\hat{T}(B, Up, A)$ = ________
+  - $\hat{T}(B, Up, B)$ = ________
+  - $\hat{R}(A, Up, A)$ = ________
+  - $\hat{R}(A, Up, B)$ = ________
+  - $\hat{R}(B, Up, A)$ = ________
+  - $\hat{R}(B, Up, B)$ = ________
+
+q9_2_s: |
+  - $\hat{T}(A, Up, A)$ = 1
+  - $\hat{T}(A, Up, B)$ = 0
+  - $\hat{T}(B, Up, A)$ = $\frac{1}{2}$
+  - $\hat{T}(B, Up, B)$ = $\frac{1}{2}$
+  - $\hat{R}(A, Up, A)$ = -1
+  - $\hat{R}(A, Up, B)$ = n/a
+  - $\hat{R}(B, Up, A)$ = 3
+  - $\hat{R}(B, Up, B)$ = 0
+
+  Count transitions above and calculate frequencies. Rewards are observed rewards.
+
+q9_3: |
+  **(c)** To decouple this question from the previous one, assume we had **a different experience** and ended up with the following estimates of the transition and reward functions:
+  <hr class="s2" />
+
+  |$s$|$a$|$s'$|$\hat{T}(s,a,s')$|$\hat{R}(s,a,s')$|
+  |---|---|----|-----------------|-----------------|
+  |A|Up|A|1|10|
+  |A|Down|A|0.5|2|
+  |A|Down|B|0.5|2|
+  |B|Up|A|1|-5|
+  |B|Down|B|1|8|
+
+  <hr class="s2" />
+  **(i)** [2 pts] Give the optimal policy $\hat{\pi}^{\∗}(s)$ and $\hat{V}^{\*}(s)$ for the MDP with transition function $\hat{T}$ and reward function $\hat{R}$.
+  <hr class="s1" />
+  *Hint: for any $x \in \mathbb{R}, |x| < 1$, we have $1 + x + x^2 + x^3 + x^4 + ··· = \frac{1}/{(1−x)}.*
+  - $\hat{\pi}^{\*}(A)$ = ________
+  - $\hat{\pi}^{\*}(B)$ = ________
+  - $\hat{V}^{\*}(A)$ = ________
+  - $\hat{V}^{\*}(B)$ = ________
+
+q9_3_s: |
+  - $\hat{\pi}^{\*}(A)$ = Up
+  - $\hat{\pi}^{\*}(B)$ = Down
+  - $\hat{V}^{\*}(A)$ = 20
+  - $\hat{V}^{\*}(B)$ = 16
+
+  <hr class="s2" />
+  Find the optimal policy first, and then use optimal policy to calculate the value function using a Bellman equation.
+
+q9_4: |
+  **(ii)** [2 pts] If we repeatedly feed this new experience sequence through our $Q$-learning algorithm, what values will it converge to? Assume the learning rate αt is properly chosen so that convergence is guaranteed.
+  - the values found above, $\hat{V}^{\*}$
+  - the optimal values, $\hat{V}^{\*}$
+  - neither $\hat{V}^{\*}$ nor $V^{\*}$
+  - not enough information to determine
+
+q9_4_s: |
+  - the values found above, $\hat{V}^{\*}$
+
+  <hr class="s2" />
+  The $Q$-learning algorithm will not converge to the optimal values $V^{\∗}$ for the MDP because the experience sequence and transition frequencies replayed are not necessarily representative of the underlying MDP. (For example, the true $T(A,Down,A)$ might be equal to 0.75, in which case, repeatedly feeding in the above experience would not provide an accurate sampling of the MDP.) However, for the MDP with transition function $\hat{T}$ and reward function $\hat{R}$, replaying this experience repeatedly will result in $Q$-learning converging to its optimal values $\hat{V}^{\∗}$.
+
+q10_1: |
+  ## Q10. [14 pts] Potpourri
+  **(a)** Each True/False question is worth 2 points. Leaving a question blank is worth 0 points. **Answering incorrectly is worth -2 points.**
+  <hr class="s2" />
+  **(i)** [2 pts] **[true or false]** There exists some value of $k > 0$ such that the heuristic $h(n) = k$ is admissible.
+
+q10_1_s: |
+  **False**. This heuristic is non-zero at the goal state, and so it cannot be admissible.
+
+q10_2: |
+  (ii) [2 pts] **[true or false]** $A^{\∗}$ tree search using the heuristic $h(n) = k$ for some $k > 0$ is guaranteed to find the optimal solution.
+
+q10_2_s: |
+  Each state in the fringe has priority $f(n) = g(n) + h(n) = g(n) + k$. Only the ordering of the nodes in the fringe matters, and so adding a constant $k$ to all priorities makes no difference. So, this is equivalent to using $f(n) = g(n)$, which is UCS, which will find the optimal solution.
+
+q10_3: |
+  **(b)** [2 pts] Consider a one-person game, where the one players' actions have non-deterministic outcomes. The player gets +1 utility for winning and -1 for losing. Mark *all* of the approaches that can be used to model and solve this game.
+  - Minimax with terminal values equal to +1 for wins and -1 for losses
+  - Expectimax with terminal values equal to +1 for wins and -1 for losses
+  - Value iteration with all rewards set to 0, except wins and losses, which are set to +1 and -1
+  - None of the above
+
+q10_3_s: |
+  - Expectimax with terminal values equal to +1 for wins and -1 for losses
+  - Value iteration with all rewards set to 0, except wins and losses, which are set to +1 and -1
+
+  <hr class="s2" />
+  Minimax is not a good fit, because there is no minimizer - there is only a maximizer (the player) and chance nodes (the non-deterministic actions). The existence of a maximizer and chance nodes means that this is particularly suited to expectimax and value iteration.
+
+q10_4: |
+  **(c)** [4 pts] Pacman is offered a choice between (a) playing against 2 ghosts or (b) a lottery over playing against 0 ghosts or playing against 4 ghosts (which are equally likely). Mark the rational choice according to each utility function below; if it’s a tie, mark so. Here, g is the number of ghosts Pacman has to play against.
+  <hr class="s2" />
+  ![choices](/img/cs188/mt1-sp15-q10-1.png)
+
+q10_4_s: |
+  ![choices](/img/cs188/mt1-sp15-q10-2.png)
+  <hr class="s2" />
+  $For $U(g) = g$, we get $U(2) = 2$ and $U([4,0.5;0,0.5]) = 0.5U(4) + 0.5U(0) = 0.5(4) + 0.5(0) = 2$. Since $2 = 2$, Pacman is indifferent.
+  <hr class="s1" />
+  For $U(g)=−2^g$, we get $U(2) = −2^2 = −4$ and $U([4,0.5;0,0.5]) = 0.5U(4) + 0.5U(0) = 0$.$5(−16) + 0.5(−1) = −8.5$. Since $−4 > −8.5$, Pacman prefers the 2 ghosts.
+  <hr class="s1" />
+  For $U(g) = 2 − g$, we get $U(2) = 1$ and $U([4,0.5;0,0.5]) = 0.5U(4) + 0.5U(0) = 0.5(1) + 0.5(1) = \frac{17}{32}$. Since $\frac{17}{32} > \frac{1}{4}$, Pacman prefers the lottery.
+  <hr class="s1" />
+  For $U(g) = 1$ if $g < 3$ else $0$, we get $U(2) = 1$ and $U([4,0.5;0,0.5]) = 0.5U(4) + 0.5U(0) = 0.5(0) + 0.5(1) = 0.5$. Since $1 > 0.5$, Pacman prefers the $2$ ghosts.
+
+q10_5: |
+  **(d)** Suppose we run value iteration in an MDP with only non-negative rewards (that is, $R(s,a,s′) \ge 0$ for any $(s,a,s')$). Let the values on the $k$th iteration be $V_k(s)$ and the optimal values be $V^{\∗}(s)$. Initially, the values are $0$ (that is, $V_0(s) = 0$ for any $s$).
+  <hr class="s2" />
+  **(i)** [1 pt] Mark *all* of the options that are *guaranteed* to be true.
+  - For any $s, a, s', V_1(s) = R(s, a, s')$
+  - For any $s, a, s', V_1(s) \le R(s, a, s')$
+  - For any $s, a, s', V_1(s) \ge R(s, a, s')$
+  - None of the above are guaranteed to be true.
+
+q10_5_s: |
+  - None of the above are guaranteed to be true.
+
+  <hr class="s2" />
+  $V_1(s) = \max_{a}\sum_{s'}T(s,a,s')R(s,a,s')$ (using the Bellman equation and setting $V_0(s') = 0$).
+  <hr class="s2" />
+  Now consider an MDP where the best action in state $X$ is clockwise, which goes to state $Y$ with a reward of 6 with probability 0.5 and goes to state $Z$ a reward of 4 with probability 0.5. Then $V_1(X) = 0.5(6) + 0.5(4) = 5$. Notice that setting $(s, a, s′) = (X, clockwise, Z)$ gives a counterexample for the second option and $(s, a, s′) = (X, clockwise, Y)$ gives a counterexample for the third option.
+
+q10_6: |
+  **(ii)** [1 pt] Mark *all* of the options that are *guaranteed* to be true.
+  - For any $k, s, V_k(S) = V^{\*}(s)$
+  - For any $k, s, V_k(S) \le V^{\*}(s)$
+  - For any $k, s, V_k(S) \ge V^{\*}(s)$
+  - None of the above are guaranteed to be true.
+
+q10_6_s: |
+  Intuition: Values can never decrease in an iteration. In the first iteration, since all rewards are positive, the values increase. In any other iteration, the components that contribute to $V_{k+1}(s)$ are $R(s,a,s')$ and $V(s')$. $R(s, a, s')$ is the same across all iterations, and $V(s)$ increased in the previous iteration, so we expect $V_{k+1}(s)$ to increase as well.
+  <hr class="s1" />
+  More formally, we can prove $V_k(s) ≤ V_{k+1}(s)$ by induction.
+  <hr class="s1" />
+  Base Case: $V_1(s) = \max_{a}\sum_{s'}T(s, a, s')R(s, a, s')$.
+  <hr class="s1" />
+  Since $R(s,a,s') ≥ 0, T(s,a,s') ≥ 0$, we have $V_1(s) ≥ 0$, and so $V_0(s) ≤ V_1(s)$.
+  <hr class="s1" />
+  Induction:
+  <hr class="s1" />
+  $V_{k+1}(s) = \max_{a}\sum_{s'}T(s,a,s')[R(s,a,s') + \gamma V_k(s')]
+  <hr class="s1" />
+  ≥ \max_{a}\lum_{s'} T(s,a,s')[R(s,a,s') + \gamma V_{k−1}(s')]$(using $V_k(s') ≥ V_{k−1}(s')$ from the inductive hypothesis)
+  <hr class="s1" />
+  = $V_k(s)$.
+  <hr class="s1" />
+  This immediately leads to $V_k(s) ≤ V^{\∗}(s)$ (since we can think of $V^{\∗}(s)$ as $V_{\infty}(s)$).
+
+q10_7: |
+  **(e)** [2 pts] Consider an arbitrary MDP where we perform Q-learning. Mark *all* of the options below in which we are guaranteed to learn the *optimal* Q-values. Assume that the learning rate $\alpha$ is reduced to $0$ appropriately.
+  - During learning, the agent acts according to a suboptimal policy $\pi$. The learning phase continues until convergence.
+  - During learning, the agent chooses from the available actions at random. The learning phase continues until convergence.
+  - During learning, in state $s$, the agent chooses the action $a$ that it has chosen least often in state $s$, breaking ties randomly. The learning phase continues until convergence.
+  - During learning, in state $s$, the agent chooses the action $a$ that it has chosen most often in state $s$, breaking ties randomly. The learning phase continues until convergence.
+  - During learning, the agent always chooses from the available actions at random. The learning phase continues until each $(s, a)$ pair has been seen at least 10 times.
+
+q10_7_s: |
+  - During learning, the agent chooses from the available actions at random. The learning phase continues until convergence.
+  - During learning, in state $s$, the agent chooses the action $a$ that it has chosen least often in state $s$, breaking ties randomly. The learning phase continues until convergence.
+
+  <hr class="s2" />
+  In order for $Q$-learning to converge to the optimal $Q$-values, we need every $(s, a)$ pair to be visited infinitely often. Option 5 only does this 10 times, whereas options 1 and 4 choose only one of the many actions possible for a given state s. Only options 2 and 3 visit each $(s, a)$ pair infinitely often.

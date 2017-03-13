@@ -1,0 +1,26 @@
+course: 'cs188'
+ref: 'mt1-su16'
+
+type: 'mt1'
+term: 'su16'
+prof: ''
+
+questions: {
+  'q1': 'Multiple Choice',
+  'q2': 'Quadratics and Gaussian Isocontours',
+  'q3': 'Linear Regression',
+  'q4': 'Discriminant Analysis',
+}
+
+parts: {
+  'q1': 8,
+  'q2': 2,
+  'q3': 4,
+  'q4': 5,
+  'q5': 2,
+  'q6': 6,
+  'q7': 6,
+  'q8': 5,
+}
+
+

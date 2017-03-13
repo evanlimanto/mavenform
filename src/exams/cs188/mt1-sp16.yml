@@ -6,10 +6,14 @@ term: 'sp16'
 prof: 'Abbeel'
 
 questions: {
-  'q1': 'Multiple Choice',
-  'q2': 'Quadratics and Gaussian Isocontours',
-  'q3': 'Linear Regression',
-  'q4': 'Discriminant Analysis',
+  'q1': 'Bayes Nets and Joint Distributions',
+  'q2': 'Pacman's Life',
+  'q3': 'MDPs: Dice Bonanza',
+  'q4': 'MDPs: Value Iteration',
+  'q5': 'Q-learning',
+  'q6': 'Utilities',
+  'q7': 'CSP with Preferences',
+  'q8': 'Game Trees: Friendly Ghost',
 }
 
 parts: {
