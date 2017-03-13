@@ -104,6 +104,15 @@ code {
   font-size: 14px;
   line-height: 14px;
   white-space: pre-wrap;
+  font-family: 'Cousine', monospace;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+code b {
+  font-weight: 700;
+  text-decoration: underline;
+  opacity: 1;
 }
 
 li {
