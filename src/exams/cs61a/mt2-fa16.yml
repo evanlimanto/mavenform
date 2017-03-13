@@ -423,7 +423,7 @@ q6_2: |
   **(b) (1 pt)** Circle the `Θ` expression that describes the **smallest** possible height of the tree returned by `binary(s)` for a list `s` of length `n`. The height of a tree is the length of the longest path from its root to a leaf.
 
   ```
-  Θ(1)        Θ(log n)        Θ(n)        Θ(n^2)        Θ(2^n)        None of these
+  Θ(1)       Θ(log n)       Θ(n)       Θ(n^2)       Θ(2^n)       None of these
   ```
 
 q6_2_s: |
@@ -435,7 +435,7 @@ q6_3: |
   **(c) (1 pt)** Circle the `Θ` expression that describes the **largest** possible height of the tree returned by `binary(s)` for a list `s` of length `n`. The height of a tree is the length of the longest path from its root to a leaf.
 
   ```
-  Θ(1)        Θ(log n)        Θ(n)        Θ(n^2)        Θ(2^n)        None of these
+  Θ(1)       Θ(log n)       Θ(n)       Θ(n^2)       Θ(2^n)       None of these
   ```
 
 q6_3_s: |
@@ -460,15 +460,15 @@ q7_1: |
       [[3, 1, 1], [2, 2, 1], [1, 3, 1], [2, 1, 2], [1, 2, 2], [1, 1, 3]]
       """
 
-      if ________________________________________________________________________:
+      if _________:
 
-          return _________________________________________________________________
+          return _________
 
       y = []
 
-      for x in __________________________________________________________________:
+      for x in _________:
 
-            y.extend([______________________ for s in sums(______________________)])
+            y.extend([_________ for s in sums(_________)])
 
       return y
   ```
@@ -489,11 +489,11 @@ q7_1_s: |
 
       if <b>k == 1</b>:
 
-          return <b>[[n]]</b
+          return <b>[[n]]</b>
 
       y = []
 
-      for x in <b>range(1, n)<b/>: <b># range (1, n-k+1) is OK</b>
+      for x in <b>range(1, n)</b>: <b># range (1, n-k+1) is OK</b>
 
           y.extend([<b>s + [x]</b> for s in sums(<b>n-x, k-1</b>)])
 
