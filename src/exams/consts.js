@@ -72,19 +72,19 @@ const exams = {
     'mt1': {
       'su16': {
         'term': 'Summer 2016',
-        'profs': '',
+        'profs': '-',
       },
       'sp16': {
         'term': 'Spring 2016',
         'profs': 'Abbeel',
       },
+      'su15': {
+        'term': 'Summer 2015',
+        'profs': '-',
+      },
       'sp15': {
         'term': 'Spring 2015',
         'profs': 'Abbeel',
-      },
-      'su15': {
-        'term': 'Summer 2015',
-        'profs': '',
       },
     }
   },
@@ -270,8 +270,10 @@ const termToLabel = {
   'sp14': 'Spring 2014',
   'fa14': 'Fall 2014',
   'sp15': 'Spring 2015',
+  'su15': 'Summer 2015',
   'fa15': 'Fall 2015',
   'sp16': 'Spring 2016',
+  'su16': 'Summer 2016',
   'fa16': 'Fall 2016',
 };
 
