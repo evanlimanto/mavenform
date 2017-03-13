@@ -37,6 +37,15 @@ const exams = {
     }
   },
 
+  'cs170': {
+    'mt2': {
+      'sp16': {
+        'term': 'Spring 2016',
+        'profs': 'Chiesa, Vazirani',
+      },
+    }
+  },
+
   'cs186': {
     'mt1': {
       'sp16': {
@@ -236,16 +245,17 @@ const exams = {
 };
 
 const courses = {
-  // 'chem1a': 'General Chemistry',
   'cs189': 'Introduction to Machine Learning',
   'cs61a': 'The Structure and Interpretation of Computer Programs',
   'cs188': 'Introduction to Artificial Intelligence',
+  'cs170': 'Efficient Algorithms and Intractable Problems',
   'data8': 'Foundations of Data Science',
   'cs186': 'Introduction to Database Systems',
   'ugba10': 'Principles of Business',
   'cs61c': 'Great Ideas in Computer Architecture (Machine Structures)',
   'cs162': 'Operating Systems and Systems Programming',
   'ee16a': 'Designing Information Devices and Systems I',
+  // 'chem1a': 'General Chemistry',
 };
 
 const examTypeToLabel = {
@@ -278,16 +288,17 @@ const termToLabel = {
 };
 
 const courseIDToLabel = {
-  // 'chem1a': 'Chem 1A',
   'data8': 'Data 8',
   'cs186': 'CS 186',
   'ee16a': 'EE 16A',
   'cs61a': 'CS 61A',
   'cs61c': 'CS 61C',
   'cs162': 'CS 162',
+  'cs170': 'CS 170',
   'cs188': 'CS 188',
   'cs189': 'CS 189',
   'ugba10': 'UGBA 10',
+  // 'chem1a': 'Chem 1A',
 };
 
 export { exams, courses, examTypeToLabel, courseIDToLabel, termToLabel };
