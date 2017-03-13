@@ -70,6 +70,10 @@ const exams = {
 
   'cs188': {
     'mt1': {
+      'su16': {
+        'term': 'Summer 2016',
+        'profs': '',
+      },
       'sp16': {
         'term': 'Spring 2016',
         'profs': 'Abbeel',
