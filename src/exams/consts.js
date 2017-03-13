@@ -81,7 +81,11 @@ const exams = {
       'sp15': {
         'term': 'Spring 2015',
         'profs': 'Abbeel',
-      }
+      },
+      'su15': {
+        'term': 'Summer 2015',
+        'profs': '',
+      },
     }
   },
 

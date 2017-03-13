@@ -6,10 +6,16 @@ term: 'sp15'
 prof: 'Abbeel'
 
 questions: {
-  'q1': '',
-  'q2': 'Quadratics and Gaussian Isocontours',
-  'q3': 'Linear Regression',
-  'q4': 'Discriminant Analysis',
+  'q1': 'Pacman\'s Tour of San Francisco',
+  'q2': 'Missing Heuristic Values',
+  'q3': 'PAC-CORP Assignments',
+  'q4': 'k-CSPs',
+  'q5': 'One Wish Pacman',
+  'q6': 'AlphaBetaExpinimax',
+  'q7': 'Lotteries in Ghost Kingdom',
+  'q8': 'Indecisive Pacman',
+  'q9': 'Reinforcement Learning',
+  'q10': 'Potpourri',
 }
 
 parts: {
