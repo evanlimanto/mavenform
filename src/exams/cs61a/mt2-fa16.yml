@@ -56,20 +56,20 @@ q1_1: |
   |----------|------------------|
   |`Link(1, Link.empty)`|`Link(1)`|
   |`Link(1, Link(2))`|`Link(1, Link(2))`|
-  |`Party(1).guests||
-  |`Party(3).attend()||
-  |`Costume(5, 6).attend()||
-  |`Party(7).attend()|||
+  |`Party(1).guests`||
+  |`Party(3).attend()`||
+  |`Costume(5, 6).attend()`||
+  |`Party(7).attend()`|||
 
 q1_1_s: |
   |Expression|Interactive Output|
   |----------|------------------|
   |`Link(1, Link.empty)`|`Link(1)`|
   |`Link(1, Link(2))`|`Link(1, Link(2))`|
-  |`Party(1).guests|`Link(2)`|
-  |`Party(3).attend()|`Link(4, Link(Link(2)))`|
-  |`Costume(5, 6).attend()|`Nice`<br/>`Link(Costume)`|
-  |`Party(7).attend()|`Link(10, Link(8, Link(4, Link(5))))`|
+  |`Party(1).guests`|`Link(2)`|
+  |`Party(3).attend()`|`Link(4, Link(Link(2)))`|
+  |`Costume(5, 6).attend()`|`Nice`<br/>`Link(Costume)`|
+  |`Party(7).attend()`|`Link(10, Link(8, Link(4, Link(5))))`|
 
 q2_1: |
   ## 2. (8 points) A List with a Twist

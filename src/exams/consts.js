@@ -230,8 +230,8 @@ const exams = {
 const courses = {
   // 'chem1a': 'General Chemistry',
   'cs189': 'Introduction to Machine Learning',
-  'cs188': 'Introduction to Artificial Intelligence',
   'cs61a': 'The Structure and Interpretation of Computer Programs',
+  'cs188': 'Introduction to Artificial Intelligence',
   'data8': 'Foundations of Data Science',
   'cs186': 'Introduction to Database Systems',
   'ugba10': 'Principles of Business',
