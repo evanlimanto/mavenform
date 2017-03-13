@@ -106,13 +106,20 @@ code {
   white-space: pre-wrap;
   font-family: 'Cousine', monospace;
   font-weight: 400;
-  opacity: 0.9;
+}
+
+.codediv {
+  display: block;
+  padding: 30px 0 30px;
 }
 
 code b {
   font-weight: 700;
   text-decoration: underline;
-  opacity: 1;
+}
+
+.solution .codediv {
+  padding: 0;
 }
 
 li {
@@ -183,6 +190,7 @@ img {
 .solution img {
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
+  margin: 0;
 }
 
 .link {
@@ -922,7 +930,7 @@ img {
 }
 
 .scode {
-  height: 6px;
+  height: 5px;
 }
 
 .active {

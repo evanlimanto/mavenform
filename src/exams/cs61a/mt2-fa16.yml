@@ -66,7 +66,6 @@ q1_1: |
           print(’Nice’)
           return ’Costume’
   ```
-  <hr class="s4" />
 
   |Expression|Interactive Output|
   |----------|------------------|
@@ -171,7 +170,6 @@ q4_1: |
   Implement the `VotingMachine` and `Ballot` classes based on the doctest below. The voting machine must determine which choice has the most votes (the `winner`) and detect if a ballot is used more than once. In case of a tie, the `winner` among choices with maximal votes is the one that most recently received a vote. `Ballot.vote` takes a string, and a `VotingMachine` must handle an arbitrary number of choices.
 
   ```
-  <hr class="s4" />
   class VotingMachine:
       """A machine that creates and records ballots.
 
@@ -266,7 +264,6 @@ q5_1: |
   Restrictions:
   - You may not call the built-in `len` function on a linked list or invoke its `__len__` method.
   - You may not apply element selection (e.g., `s[2]`) on a linked list or invoke its `__getitem__` method.
-  <hr class="s4" />
 
   ```
   def path(s, t):
@@ -383,7 +380,6 @@ q6_3_s: |
 q7_1: |
   ## 7. (10 points) Summer Camp
   (a) (6 pt) Implement `sums`, which takes two positive integers `n` and `k`. It returns a list of lists containing all the ways that a list of `k` positive integers can sum to `n`. Results can appear in any order.
-  <hr class="s4" />
 
   ```
   def sums(n, k):
@@ -420,9 +416,9 @@ q7_1_s: |
           y.extend([<b>s + [x]</b> for s in sums(<b>n-x, k-1</b>)])
       return y
   ```
-  
+  <hr class="s3" />
   <h3>OR...</h3>
-  
+  <hr class="s3" />
   ```
   def sums(n, k):
       if <b>n == 0 and k == 0</b>:
