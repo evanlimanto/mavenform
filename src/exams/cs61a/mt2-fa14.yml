@@ -16,7 +16,7 @@ questions: {
 parts: {
   'q1': 1,
   'q2': 2,
-  'q3': ,
+  'q3': 2,
   'q4': 2,
   'q5': 2,
 }
@@ -362,10 +362,15 @@ q5_1: |
   ```
   def length(slinky):
       return slinky [0]
+
+      
   def starts(slinky):
       return slinky [1]
+
+
   def transition(slinky):
       return slinky [2]
+
 
   def slinky(elements , transition):
       """Return a slinky containing elements.
@@ -406,6 +411,7 @@ q5_1: |
       return [len(starts), elements , transition]
       return [len(elements), elements , transition]
 
+
   def get(slinky, index):
       """Return the element at index of slinky."""
       if index in starts(slinky):
@@ -431,12 +437,18 @@ q5_1: |
   ```
 
 q5_1_s: |
+  ```
   def length(slinky):
       return slinky [0]
+
+
   def starts(slinky):
       return slinky [1]
+
+
   def transition(slinky):
       return slinky [2]
+
 
   def slinky(elements , transition):
       """Return a slinky containing elements using transition.
@@ -461,6 +473,7 @@ q5_1_s: |
           if index == 0 or elements[index] != transition(elements[index-1]):
               starts[index] = elements[index]
       return [len(elements), starts , transition]
+
 
   def get(slinky, index):
       """Return the element at index of slinky."""

@@ -94,6 +94,7 @@ q2_2: |
   ```
 
   Circle the order of growth that best describes the worst-case execution time of a call to `search` as a function of N.
+  <hr class="s2" />
   - A. $Θ(N)$
   - B. $Θ(N^2)$
   - C. $Θ(logN)$
@@ -123,6 +124,7 @@ q2_3: |
   ```
 
   Circle the order of growth that best describes the worst-case execution time of count, as a function of `n`, the length of `nums`, and `m`, the length of `lst`. Since nums is a Python list, the `in` operator uses simple linear search.
+  <hr class="s2" />
   - A. $Θ(n)$
   - B. $Θ(m)$
   - C. $Θ(n^2)$
@@ -149,6 +151,7 @@ q2_4: |
   ```
 
   Circle the order of growth that best describes the worst-case execution time of `polypow`, as a function of k, where execution time is measured in the number of times that the `.mult` method is called.
+  <hr class="s2" />
   - A. $Θ(k)$
   - B. $Θ(k^2)$
   - C. $Θ(√k)$
