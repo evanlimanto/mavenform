@@ -9,12 +9,16 @@ questions: {
   'q1': 'Class Hierarchy',
   'q2': 'Exercises',
   'q3': 'Return of the Digits',
+  'q4': 'Tree Time',
+  'q5': 'Abstraction and Growth',
 }
 
 parts: {
   'q1': 1,
   'q2': 2,
-  'q3': 5,
+  'q3': ,
+  'q4': 2,
+  'q5': 2,
 }
 
 q1_1: |

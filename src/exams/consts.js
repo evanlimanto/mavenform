@@ -87,13 +87,13 @@ const exams = {
 
   'cs189': {
     'mt1': {
-      'sp16': {
-        'term': 'Spring 2016',
-        'profs': 'Shewchuk',
-      },
       'fa16': {
         'term': 'Fall 2016',
         'profs': 'Recht',
+      },
+      'sp16': {
+        'term': 'Spring 2016',
+        'profs': 'Shewchuk',
       },
       'sp15': {
         'term': 'Spring 2015',
@@ -234,8 +234,8 @@ const exams = {
 const courses = {
   // 'chem1a': 'General Chemistry',
   'cs189': 'Introduction to Machine Learning',
-  'cs188': 'Introduction to Artificial Intelligence',
   'cs61a': 'The Structure and Interpretation of Computer Programs',
+  'cs188': 'Introduction to Artificial Intelligence',
   'data8': 'Foundations of Data Science',
   'cs186': 'Introduction to Database Systems',
   'ugba10': 'Principles of Business',

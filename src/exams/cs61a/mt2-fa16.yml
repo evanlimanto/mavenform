@@ -9,12 +9,20 @@ questions: {
   'q1': 'Class Hierarchy',
   'q2': 'Exercises',
   'q3': 'Return of the Digits',
+  'q4': 'A Classy Election',
+  'q5': 'Trick or Tree',
+  'q6': 'Left it Right There',
+  'q7': 'Summer Camp',
 }
 
 parts: {
   'q1': 1,
   'q2': 2,
   'q3': 5,
+  'q4': 1,
+  'q5': 1,
+  'q6': 3,
+  'q7': 2,
 }
 
 q1_1: |
@@ -31,21 +39,28 @@ q1_1: |
   class Party:
       guests = Link.empty
 
+
       def __init__(self, time):
             Party.guests = Link(time+1, Party.guests)
+
 
       def attend(self):
             self.guests.rest = Link(self.guests.rest)
             return self.guests
+
+
+
 
   class Costume(Party):
       def __init__(self, bow, tie):
           Party.guests.rest = Link(bow)
           self.ie = Link(self)
 
+
       def attend(self):
           print(repr(self.ie))
           Party.attend = lambda self: Party(9).guests
+
 
       def __repr__(self):
           print(’Nice’)
@@ -56,20 +71,20 @@ q1_1: |
   |----------|------------------|
   |`Link(1, Link.empty)`|`Link(1)`|
   |`Link(1, Link(2))`|`Link(1, Link(2))`|
-  |`Party(1).guests||
-  |`Party(3).attend()||
-  |`Costume(5, 6).attend()||
-  |`Party(7).attend()|||
+  |`Party(1).guests`||
+  |`Party(3).attend()`||
+  |`Costume(5, 6).attend()`||
+  |`Party(7).attend()`|||
 
 q1_1_s: |
   |Expression|Interactive Output|
   |----------|------------------|
   |`Link(1, Link.empty)`|`Link(1)`|
   |`Link(1, Link(2))`|`Link(1, Link(2))`|
-  |`Party(1).guests|`Link(2)`|
-  |`Party(3).attend()|`Link(4, Link(Link(2)))`|
-  |`Costume(5, 6).attend()|`Nice`<br/>`Link(Costume)`|
-  |`Party(7).attend()|`Link(10, Link(8, Link(4, Link(5))))`|
+  |`Party(1).guests`|`Link(2)`|
+  |`Party(3).attend()`|`Link(4, Link(Link(2)))`|
+  |`Costume(5, 6).attend()`|`Nice`<br/>`Link(Costume)`|
+  |`Party(7).attend()`|`Link(10, Link(8, Link(4, Link(5))))`|
 
 q2_1: |
   ## 2. (8 points) A List with a Twist
@@ -112,25 +127,20 @@ q3_1: |
     ’Over quota! Limit is now 0’
     """
 
+
     values = []
 
+
     def limited(n):
-
-        _______________________________________________________________________
-
-        y = ___________________________________________________________________
-
-        count = len(___________________________________________________________)
-
+        _____________________________________________
+        y = _________________________________________
+        count = len(_________________________________)
         values.append(y)
+        if __________________________________________:
+            return __________________________________
+        limit = _____________________________________
+        return ’Over quota! Limit is now ’ __________
 
-        if ____________________________________________________________________:
-
-            return ____________________________________________________________
-
-        limit = _______________________________________________________________
-
-        return ’Over quota! Limit is now ’ ____________________________________
 
     return limited
   ```
@@ -160,23 +170,17 @@ q3_1_s: |
 
     values = []
 
+
     def limited(n):
-
         <b>nonlcoal limit</b>
-
         y = <b>f(n)</b>
-
         count = len(<b>[x for x in values if x == y]</b>)
-
         values.append(y)
-
         if <b>count < limit</b>:
-
             return <b>y</b>
-
         limit = <b>limit - 1</b>
-
         return ’Over quota! Limit is now ’ + <b>str(limit)</b>
+ 
 
     return limited
   ```
@@ -205,33 +209,36 @@ q4_1: |
       ’Bear’
       """
       def __init__(self, k):
-          self.ballots = [___________________________________ for i in range(k)]
+          self.ballots = [__________ for i in range(k)]
           self.votes = {}
+
+
 
       def record(self, ballot, choice):
           if ballot.used:
               return ’Fraud: multiple votes from the same ballot!’
+          ___________________________________
+          self.votes[choice] = __________ + 1
 
-          _______________________________________________________________________
 
-          self.votes[choice] = ______________________________________________ + 1
-
-      if ____________________________________________________________________:
+      if ___________________________________:
           return choice + ’ is losing ’
       else:
-          ___________________________________________________________________
+          ___________________________________
           return choice + ’ is winning ’
 
+
+
   class Ballot:
-      ___________________________________________________________________________
+      _______________________________________
+
 
       def __init__(self, machine):
-
           self.machine = machine
 
-      def vote(self , x):
 
-          return ________________________________________________________________
+      def vote(self , x):
+          return ____________________________
   ```
 
 q4_1_s: |
@@ -258,13 +265,13 @@ q4_1_s: |
           self.ballots = [<b>Ballot(self)</b> for i in range(k)]
           self.votes = {}
 
+
       def record(self, ballot, choice):
           if ballot.used:
               return ’Fraud: multiple votes from the same ballot!’
-
           <b>ballot.used = True</b>
-
           self.votes[choice] = <b>self.votes.get(choice, 0)</b> + 1
+
 
       if <b>max(self.votes.values()) > self.votes[choice]</b>:
           return choice + ’ is losing ’
@@ -272,15 +279,18 @@ q4_1_s: |
           <b>self.winner = choice</b>
           return choice + ’ is winning ’
 
+
+
+
   class Ballot:
       <b>used = False</b>
 
-      def __init__(self, machine):
 
+      def __init__(self, machine):
           self.machine = machine
 
-      def vote(self , x):
 
+      def vote(self , x):
           return <b>self.machine.record(self, x)</b>
   ```
 
@@ -311,15 +321,15 @@ q5_1: |
       False
       """
 
-      if ________________________________________________________________________:
+      if ______________________________:
+        return False
 
-         return False
 
-      if ________________________________________________________________________:
+      if ______________________________:
+        return True
 
-          return True
 
-      return ______________([_______________________________ for b in t.branches])
+      return __________([__________ for b in t.branches])
   ```
 
 q5_1_s: |
@@ -345,13 +355,13 @@ q5_1_s: |
       False
       """
 
-      if <b>s is Link.empty or t.root != s.first<b>:
+      if <b>s is Link.empty or t.root != s.first</b>:
+        return False
 
-         return False
 
       if <b>t.is_leaf() and s.rest is Link.empty</b>:
+        return True
 
-          return True
 
       return <b>any</b>([<b>path(s.rest,m b)</b> for b in t.branches])
   ```
@@ -370,18 +380,15 @@ q6_1: |
       BTree(4, BTree(3, BTree(2)), BTree(7, BTree(6), BTree(9, BTree(8))))
       """
 
+
       assert len(s) == len(set(s)), ’All elements of s should be unique’
 
-      if ________________________________________________________________________:
 
-          return ________________________________________________________________
-
-      root = ____________________________________________________________________
-
-      left = ____________________________________________________________________
-
-      right = ___________________________________________________________________
-
+      if ____________________________________________:
+          return ____________________________________
+      root = ________________________________________
+      left = ________________________________________
+      right = _______________________________________
       return BTree(root, binary(left), binary(right))
   ```
 
@@ -396,18 +403,15 @@ q6_1_s: |
       BTree(4, BTree(3, BTree(2)), BTree(7, BTree(6), BTree(9, BTree(8))))
       """
 
+
       assert len(s) == len(set(s)), ’All elements of s should be unique’
 
+
       if <b>not s</b>:
-
           return <b>BTree.empty</b>
-
       root = <b>s[0]</b>
-
       left = <b>[x for x in s if x < root]</b>
-
       right = <b>[x for x in s if x > root]</b>
-
       return BTree(root, binary(left), binary(right))
   ```
 
@@ -415,7 +419,7 @@ q6_2: |
   **(b) (1 pt)** Circle the `Θ` expression that describes the **smallest** possible height of the tree returned by `binary(s)` for a list `s` of length `n`. The height of a tree is the length of the longest path from its root to a leaf.
 
   ```
-  Θ(1)        Θ(log n)        Θ(n)        Θ(n^2)        Θ(2^n)        None of these
+  Θ(1)       Θ(log n)       Θ(n)       Θ(n^2)       Θ(2^n)       None of these
   ```
 
 q6_2_s: |
@@ -427,7 +431,7 @@ q6_3: |
   **(c) (1 pt)** Circle the `Θ` expression that describes the **largest** possible height of the tree returned by `binary(s)` for a list `s` of length `n`. The height of a tree is the length of the longest path from its root to a leaf.
 
   ```
-  Θ(1)        Θ(log n)        Θ(n)        Θ(n^2)        Θ(2^n)        None of these
+  Θ(1)       Θ(log n)       Θ(n)       Θ(n^2)       Θ(2^n)       None of these
   ```
 
 q6_3_s: |
@@ -452,16 +456,13 @@ q7_1: |
       [[3, 1, 1], [2, 2, 1], [1, 3, 1], [2, 1, 2], [1, 2, 2], [1, 1, 3]]
       """
 
-      if ________________________________________________________________________:
-
-          return _________________________________________________________________
-
+      if ___________________:
+          return ___________
       y = []
 
-      for x in __________________________________________________________________:
 
-            y.extend([______________________ for s in sums(______________________)])
-
+      for x in _____________:
+            y.extend([_________ for s in sums(_________)])
       return y
   ```
 
@@ -480,52 +481,45 @@ q7_1_s: |
       """
 
       if <b>k == 1</b>:
-
-          return <b>[[n]]</b
-
+          return <b>[[n]]</b>
       y = []
 
-      for x in <b>range(1, n)<b/>: <b># range (1, n-k+1) is OK</b>
 
+      for x in <b>range(1, n)</b>: <b># range (1, n-k+1) is OK</b>
           y.extend([<b>s + [x]</b> for s in sums(<b>n-x, k-1</b>)])
-
       return y
+  ```
 
+  <h3>OR...</h3>
+
+  ```
       if <b>n == 0 and k == 0</b>:
-
           return <b>[[]]</b>
-
       y = []
+
 
       for x in <b>range(1, n + 1)</b>:
-
           y.extend([<b>s + [x]</b> for s in sums(<b>n-x, k-1</b>)])
-
       return y
   ```
 
 q7_2: |
-  **(b) (4 pt) *Why so many lines?* Implement `f` and `g` for this alternative version of the `sums` function.
+  (b) (4 pt) Why so many lines? Implement `f` and `g` for this alternative version of the `sums` function.
 
   ```
-  f = lambda x, y: (x and [______________ for z in y] + f(_______, _______)) or []
-
+  
+  f = lambda x, y: (x and [_______ for z in y] + f(_______, _______)) or []
   def sums(n, k):
       """Return the ways in which K positive integers can sum to N."""
-
-      g = lambda w: (w and f(___________________________________________)) or [[]]
-
+      g = lambda w: (w and f(_______)) or [[]]
       return [v for v in g(k) if sum(v) == n]
   ```
 
 q7_2_s: |
   ```
   f = lambda x, y: (x and [<b>[x] + z</b> for z in y] + f(<b>x-1</b>, <b>y</b>)) or []
-
   def sums(n, k):
       """Return the ways in which K positive integers can sum to N."""
-
       g = lambda w: (w and f(<b>n, g(w-1)</b>)) or [[]]
-
       return [v for v in g(k) if sum(v) == n]
   ```
