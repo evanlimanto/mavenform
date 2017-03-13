@@ -9,12 +9,20 @@ questions: {
   'q1': 'Class Hierarchy',
   'q2': 'Exercises',
   'q3': 'Return of the Digits',
+  'q4': 'A Classy Election',
+  'q5': 'Trick or Tree',
+  'q6': 'Left it Right There',
+  'q7': 'Summer Camp',
 }
 
 parts: {
   'q1': 1,
   'q2': 2,
   'q3': 5,
+  'q4': 1,
+  'q5': 1,
+  'q6': 3,
+  'q7': 2,
 }
 
 q1_1: |
