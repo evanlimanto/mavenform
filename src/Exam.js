@@ -22,10 +22,10 @@ marked.setOptions({
 
 const renderer = new marked.Renderer();
 renderer.code = function(code, language) {
-  code = replace(code, /\r\n|\r|\n/g, '<hr class="s1" />');
+  code = replace(code, /\r\n|\r|\n/g, '<hr class="scode" />');
   code = replace(code, /\\_/g, '_'); // remove escapes
   code = replace(code, /\\./g, '.'); // remove escapes
-  return `<hr class="s2" /><code>${code}</code><hr class="s2" />`;
+  return `<code>${code}</code>`;
 };
 renderer.codespan = function(code, language) {
   code = replace(code, /\\_/g, '_'); // remove escapes

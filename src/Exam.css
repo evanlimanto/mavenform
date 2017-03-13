@@ -152,13 +152,11 @@ input[type=button] {
   margin-right: 10px;
   border: none;
   color: #fff;
-  opacity: 0.9;
   -webkit-appearance: none;
 }
 
 input[type=button]:hover {
   cursor: pointer;
-  opacity: 1;
 }
 
 img {
@@ -893,7 +891,7 @@ img {
   background: #444;
 }
 
-.s1, .s2, .s3, .s4, .s5, .margin {
+.s1, .s2, .s3, .s4, .s5, .margin, .scode {
   display: block;
   width: 100%;
   clear: both;
@@ -921,6 +919,10 @@ img {
 
 .margin {
   height: 75px;
+}
+
+.scode {
+  height: 6px;
 }
 
 .active {
