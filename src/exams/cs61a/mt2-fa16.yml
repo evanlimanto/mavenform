@@ -34,7 +34,7 @@ q1_1: |
   Recall: The interactive interpreter displays the value of a successfully evaluated expression, unless it is `None`.
   <hr class="s1" />
   Assume that you have started python3 and executed the following statements:
-  <hr class="s4" />
+  
   ```
   class Party:
       guests = Link.empty
@@ -105,7 +105,7 @@ q2_1_s: |
 q3_1: |
   ## 3. (6 points) Return Policy
   Implement `quota`, which takes a one-argument function `f` and a non-negative integer `limit`. The function it returns has the same behavior as `f`, except that each value is only returned up to `limit` times. After that, the function returns an “Over quota” message instead, and the `limit` is decreased by 1 for future calls.
-  <hr class="s4" />
+  
   ```
   def quota(f, limit):
     """A decorator that limits the number of times a value can be returned.
@@ -319,7 +319,7 @@ q5_1_s: |
 q6_1: |
   ## 6. (6 points) Left it Right There
   **(a) (4 pt)** Implement `binary`, which takes a list `s` of unique integers. It returns a *binary search tree* containing all of those integers, represented as a `BTree` instance or `BTree.empty`. The values in any path of this tree must appear in the same order as they did in `s`. The `BTree` class is on page 2 of the midterm 2 study guide.
-  <hr class="s4" />
+  
   ```
   def binary(s):
       """Construct a binary search tree from S for which all paths are in order.
@@ -358,7 +358,7 @@ q6_1_s: |
 
 q6_2: |
   **(b) (1 pt)** Circle the `Θ` expression that describes the **smallest** possible height of the tree returned by `binary(s)` for a list `s` of length `n`. The height of a tree is the length of the longest path from its root to a leaf.
-  <hr class="s4" />
+  
   ```
   Θ(1)       Θ(log n)       Θ(n)       Θ(n^2)       Θ(2^n)       None of these
   ```
@@ -370,7 +370,7 @@ q6_2_s: |
 
 q6_3: |
   **(c) (1 pt)** Circle the `Θ` expression that describes the **largest** possible height of the tree returned by `binary(s)` for a list `s` of length `n`. The height of a tree is the length of the longest path from its root to a leaf.
-  <hr class="s4" />
+  
   ```
   Θ(1)       Θ(log n)       Θ(n)       Θ(n^2)       Θ(2^n)       None of these
   ```
@@ -420,9 +420,9 @@ q7_1_s: |
           y.extend([<b>s + [x]</b> for s in sums(<b>n-x, k-1</b>)])
       return y
   ```
-  <hr class="s4" />
+  
   <h3>OR...</h3>
-  <hr class="s4" />
+  
   ```
   def sums(n, k):
       if <b>n == 0 and k == 0</b>:
@@ -437,7 +437,7 @@ q7_1_s: |
 
 q7_2: |
   (b) (4 pt) Why so many lines? Implement `f` and `g` for this alternative version of the `sums` function.
-  <hr class="s4" />
+  
   ```
 
   f = lambda x, y: (x and [_______ for z in y] + f(_______, _______)) or []

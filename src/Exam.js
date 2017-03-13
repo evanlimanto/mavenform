@@ -25,7 +25,7 @@ renderer.code = function(code, language) {
   code = replace(code, /\r\n|\r|\n/g, '<hr class="scode" />');
   code = replace(code, /\\_/g, '_'); // remove escapes
   code = replace(code, /\\./g, '.'); // remove escapes
-  return `<code>${code}</code>`;
+  return `<hr class="s3" /><code>${code}</code><hr class="s3" />`;
 };
 renderer.codespan = function(code, language) {
   code = replace(code, /\\_/g, '_'); // remove escapes

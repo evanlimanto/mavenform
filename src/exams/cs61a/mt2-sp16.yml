@@ -66,6 +66,7 @@ q2_1: |
   As indicated in lecture, an assertion such as `Θ(f(n)) ⊆ Θ(g(n))` means “any function that is in `Θ(f(n))` is also in `Θ(g(n))`.”
   <hr class="s2" />
   **(a) (1.5 pt)** Circle each of the following that is true.
+  <hr class="s2" />
   - A. $Θ(f(n)) ⊆ O(f(n))$
   - B. $Θ(2x^2 + 1000x) ⊆ Θ(x^2)$
   - C. $Θ(x^2) \ne Θ(2x^2 + 1000x)$
