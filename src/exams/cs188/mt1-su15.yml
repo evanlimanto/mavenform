@@ -3,7 +3,7 @@ ref: 'mt1-su15'
 
 type: 'mt1'
 term: 'su15'
-prof: ''
+prof: '-'
 
 questions: {
   'q1': '',
