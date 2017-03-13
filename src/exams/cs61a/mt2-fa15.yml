@@ -303,11 +303,11 @@ q3_5: |
       """A set of nums represented as a function that takes ’entry’, 0, or 1.
 
       >>> t = bits([4, 5])        # Contains 4 and 5, but not 2
-      >>> t(0)(0)(1)(’entry’)     # 4 = 0 * pow(2, 0) + 0 * pow(2, 1) + 1 * pow(2, 2)
+      >>> t(0)(0)(1)(’entry’) # 4 = 0*pow(2, 0) + 0*pow(2, 1) + 1*pow(2, 2)
       True
-      >>> t(0)(1)(’entry’)        # 2 = 0 * pow(2, 0) + 1 * pow(2, 1)
+      >>> t(0)(1)(’entry’) # 2 = 0*pow(2, 0) + 1*pow(2, 1)
       False
-      >>> t(1)(0)(1)(’entry’)     # 5 = 1 * pow(2, 0) + 0 * pow(2, 1) + 1 * pow(2, 2)
+      >>> t(1)(0)(1)(’entry’) # 5 = 1*pow(2, 0) + 0*pow(2, 1) + 1*pow(2, 2)
       True
       """
       def branch(last):
@@ -319,6 +319,8 @@ q3_5: |
           return ________([_________ for k in nums if _________________________])
 
       return branch
+
+
 
   def int_set(contents):
       """Return a function that represents a set of non-negative integers.
@@ -349,16 +351,6 @@ q3_5: |
 q3_5_s: |
   ```
   def bits(nums):
-      """A set of nums represented as a function that takes ’entry’, 0, or 1.
-
-      >>> t = bits([4, 5]) # Contains 4 and 5, but not 2
-      >>> t(0)(0)(1)(’entry’) # 4 = 0 * pow(2, 0) + 0 * pow(2, 1) + 1 * pow(2, 2)
-      True
-      >>> t(0)(1)(’entry’) # 2 = 0 * pow(2, 0) + 1 * pow(2, 1)
-      False
-      >>> t(1)(0)(1)(’entry’) # 5 = 1 * pow(2, 0) + 0 * pow(2, 1) + 1 * pow(2, 2)
-      True
-      """
       def branch(last):
 
           if last == ’entry’:
@@ -369,15 +361,9 @@ q3_5_s: |
 
       return branch
 
-  def int_set(contents):
-      """Return a function that represents a set of non-negative integers.
-      >>> int_set([1, 2])(1) , int_set([1, 2])(3) # 1 in [1, 2] but 3 is not
-      (True, False)
-      >>> s = int_set([1, 3, 4, 7, 9])
-      >>> [s(k) for k in range (10)]
-      [False , True , False , True , True , False , False , True , False , True]
-      """
 
+
+  def int_set(contents):
       index = <b>bits(contents)</b>
 
       def contains(n):
