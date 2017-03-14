@@ -343,7 +343,7 @@ q8_1_s: |
   We denote the parameters of this model as $\theta$. The independent samples allow us to take a product over the data points.
   $$\mathcal{L}(\theta) = \prod_{n=1}^{N}\prod_{k=1}^{K}(\mathbb{P}(\mathbf{x}_n|C_k)\pi_k)^{\mathbf{y}_{n,k}}$$
   Thus,
-  $$\mathcal{l}(\theta) = \prod_{n=1}^{N}\prod_{k=1}^{K}y_{n,k}[\text{log}(\mathbb{P}(\mathbf{x}_n|C_k)) + \text{log}\pi_k]$$
+  $$\mathcal{l}(\theta) = \sum_{n=1}^{N}\sum_{k=1}^{K}y_{n,k}[\text{log}(\mathbb{P}(\mathbf{x}_n|C_k)) + \text{log}\pi_k]$$
 
 q8_2: |
   **(b)** [10 pts] What are the maximum likelihood estimates of the prior probabilities?
@@ -352,7 +352,7 @@ q8_2: |
 
 q8_2_s: |
   We want to maximize the log likelihood subject to the constraint that $\sum_{k=1}^{K}\pi_k = 1$. Thus, we must introduce Lagrange Multipliers. The parameters we are about here are the $\pi_k$'s. Here is the Lagrangian:
-  $$\mathscr{L}(\pi, \lambda) = \sum_{n=1}^{N}\sum_{k=1}^{K}y_{n,k}[\text{log}\;(\mathbb{P}(\mathbf{x}_n|C_k) + \text{log}\;\pi_k] + \lambda \left( \sum_{k-1}^{K}\pi_k - 1 \right)$$
+  $$\mathscr{L}(\pi, \lambda) = \sum_{n=1}^{N}\sum_{k=1}^{K}y_{n,k}[\text{log}\;(\mathbb{P}(\mathbf{x}_n|C_k) + \text{log}\;\pi_k] + \lambda \left( \sum_{k=1}^{K}\pi_k - 1 \right)$$
   Taking the derivative with respect to $\pi_k$ and setting it to 0, we have
   $$\frac{\partial}{\partial\pi_k}\mathscr{L}(\pi, \lambda) = \frac{1}{\pi_k}\sum_{n=1}^{N}y_{n,k} + \lambda = 0 \implies \pi_k = -\frac{1}{\lambda} \sum_{n=1}^{N}y_{n,k} = -\frac{N_k}{\lambda}$$
   where $N_k$ is the number of data points whose label is class $k$. Taking the derivative with respect to $\lambda$, we have
