@@ -201,11 +201,11 @@ q1_17: |
   **(q)** [3 pts] The kernel trick
   - is necessary if we want to add polynomial features to a learning algorithm.
   - can be applied to any learning algorithm.
-  - can improve the speed of high-degree polynomial regression
+  - can improve the speed of high-degree polynomial regression.
   - can improve the speed of learning algorithms when the number of samples is very large.
 
 q1_17_s: |
-  - can be applied to any learning algorithm.
+  - can improve the speed of high-degree polynomial regression.
 
 q1_18: |
   **(r)** [3 pts] In the usual formulation of soft-margin SVMs, each training sample has a slack variable $ξ_i \ge 0$ and we impose a regularization cost $C \sum_{i}ξ_i$. Consider an alternative formulation where we impose the additional constraints $ξ_i = ξ_j$ for all $i, j$. How does the minimum objective value ${\lvert \mathbf{w} \rvert}^{2} + C \sum_{i}ξ_i$ obtained by the new method compare to the one obtained by the original soft-margin SVM?
