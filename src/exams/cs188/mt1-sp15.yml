@@ -40,6 +40,8 @@ q1_1: |
   **minimal state representation:**
 
 q1_1_s: |
+  **minimal state representation:**
+  <hr class="s1" />
   The minimal state representation is Pacman’s current location and which landmarks he has visited (boolean indicators or a set or an unordered list) OR the inverse, which landmarks Pacman has not visited.
 
 q1_2: |
@@ -48,6 +50,8 @@ q1_2: |
   **minimal state representation:**
 
 q1_2_s: |
+  **minimal state representation:**
+  <hr class="s1" />
   The minimal state representation is the visited (or unvisited) landmarks (as above), Pacman’s current landmark (as above), and the number of ghosts encountered thus far (or the inverse, the number of ghosts that can be encountered in the future).
 
 q1_3: |
@@ -156,7 +160,7 @@ q3_1: |
   ![csp](/img/cs188/mt1-sp15-q3-1.png)
 
 q3_1_s: |
-  Binary constraints are 1, 4, 6, and 7. Constraint 1 connects A and C. Constraint 4 connects A and R. Constraint 6 connects C and L. Constraint 7 connects L with all other variables.
+  Binary constraints are $1, 4, 6,$ and $7$. Constraint $1$ connects A and C. Constraint $4$ connects $A$ and $R$. Constraint $6$ connects $C$ and $L$. Constraint $7$ connects $L$ with all other variables.
 
 q3_2: |
   **(b)** [2 pts] On the grid below, cross out values that are removed from the domains after enforcing all unary constraints.
@@ -166,7 +170,7 @@ q3_2: |
 q3_2_s: |
   ![grid](/img/cs188/mt1-sp15-q3-3.png)
   <hr class="s2" />
-  Unary constraints are constraint 2, 3, and 5. Constraint 2 removes 1, 3, and 5 from the domain of S. Constraint 3 removes 1, 2, and 3 from the domain of L. Constraint 5 removes 3, 4, and 5 from the domain of Z.
+  Unary constraints are constraint $2, 3,$ and $5$. Constraint $2$ removes $1, 3,$ and $5 $from the domain of $S$. Constraint $3$ removes $1, 2,$ and $3$ from the domain of $L$. Constraint $5$ removes $3, 4,$ and $5$ from the domain of $Z$.
 
 q3_3: |
   **(c)** [2 pts] Consider the filtered domains obtained in part (b) from enforcing the unary constraints. According to Minimum Remaining Values (MRV), which variable should be selected?
@@ -191,10 +195,10 @@ q3_4_s: |
   ![grid](/img/cs188/mt1-sp15-q3-5.png)
   <hr class="s2" />
   The arcs that prune values are below.
-  - 1. C-L: Constraint 6 removes 1 from C.
-  - 2. A-C: Constraint 1 removes 1, 2, 3, 5 and 6 from A.
-  - 3. R-A: Constraint 4 removes 4 from R.
-  - 4. L-C: Constraint 6 removes 4, 5, and 6 from L.
+  - $C-L$: Constraint $6$ removes $1$ from $C$.
+  - $A-C$: Constraint $1$ removes $1, 2, 3, 5$ and $6$ from $A$.
+  - $R-A$: Constraint $4$ removes $4$ from $R$.
+  - $L-C$: Constraint $6$ removes $4, 5,$ and $6$ from $L$.
 
 q4_1: |
   ## Q4. [5 pts] k-CSPs
@@ -231,7 +235,7 @@ q4_1: |
   ![code](/img/cs188/mt1-sp15-q4-1.png)
 
 q4_1_s: |
-  For this formulation, we want to only backtrack when more than $k$ constraints are violated. If there are fewer than $k$, we can assign the current variable to a constrained value and continue the algorithm. The first code block provides the correct implementation. The second option using a tree structured CSP algorithm will incorrectly return failure if there is no solution with only $i + 1$ constraints violated (where $i + 1$ may be less than k). The third and fourth option filter the domains of the remaining variables. If a variable’s domain is filtered, then the recursive-backtracking call will only consider values in the filtered domain rather than values which violate a constraint, potentially causing the code to miss the solution.
+  For this formulation, we want to only backtrack when more than $k$ constraints are violated. If there are fewer than $k$, we can assign the current variable to a constrained value and continue the algorithm. The first code block provides the correct implementation. The second option using a tree structured CSP algorithm will incorrectly return failure if there is no solution with only $i + 1$ constraints violated (where $i + 1$ may be less than $k$). The third and fourth option filter the domains of the remaining variables. If a variable’s domain is filtered, then the recursive-backtracking call will only consider values in the filtered domain rather than values which violate a constraint, potentially causing the code to miss the solution.
   <hr class="s2" />
   ![code](/img/cs188/mt1-sp15-q4-2.png)
 
@@ -292,6 +296,7 @@ q5_2: |
       end for
     u ←  ____________
     v ←  ________________________
+    return (u, v)
   end function
   ```
 
@@ -390,6 +395,7 @@ q5_4_s: |
       end for
     u ← min(uList)
     v ← max(avg(uList), min(vList))
+    return (u, v)
   end function
   ```
 
@@ -438,8 +444,8 @@ q7_1: |
   Let Ghost-King and Pacman’s utility functions be denoted by $U_{GK}$ and $U_P$ respectively. Assume both $U_{GK}$ and $U_P$ are guaranteed to output non-negative values.
   <hr class="s2" />
   **(i)** [2 pts] Which of the following relations between $U_{GK}$ and $U_P$ are consistent with Ghost King’s observation that $U_{GK}$ and $U_P$ agree, with respect to all event outcomes but not all lotteries?
-  - $U_P = aU_{GK} + b (0 < a < 1, b > 0)$
-  - $U_P = aU_{GK} + b (a > 1, b > 0)$
+  - $U_P = aU_{GK} + b \quad (0 < a < 1, b > 0)$
+  - $U_P = aU_{GK} + b \quad (a > 1, b > 0)$
   - $U_P = U_{GK}^2$
   - $U_P = \sqrt{(U_{GK})}$
 
@@ -461,7 +467,7 @@ q7_2_s: |
   - $U_P = U_{GK}^2$
 
   <hr class="s2" />
-  As an example, say Ghost-King prefers winning \$ as much as a lottery : winning \$0 or \$4 with equal probability. For option c), Pacman prefers the lottery much more (more risk-taking) and for option d), Pacman prefers the guaranteed reward.
+  As an example, say Ghost-King prefers winning \$2 as much as a lottery : winning \$0 or \$4 with equal probability. For option c), Pacman prefers the lottery much more (more risk-taking) and for option d), Pacman prefers the guaranteed reward.
 
 q7_3: |
   **(b) Guaranteed Return**. Pacman often enters lotteries in the Ghost Kingdom. A particular Ghost vendor offers a lottery (for free) with three possible outcomes that are each equally likely: winning \$1, \$2, or \$5.
@@ -578,6 +584,7 @@ q8_1_s: |
   - $V^{\*}(C)$: $100$
   - $\pi^{\*}(A)$: $East$
 
+  <hr class="s2" />
   The optimal plan without indecisiveness is to go East and then South, collecting no negative rewards.
 
 q8_2: |
@@ -645,7 +652,7 @@ q9_1: |
   |0|A|Down|B|2|
   |1|B|Down|B|-4|
   |2|B|Up|B|0|
-  |3|B|Up|A|0|
+  |3|B|Up|A|3|
   |4|A|Up|A|-1|
 
   <hr class="s2" />
@@ -703,7 +710,7 @@ q9_3: |
   <hr class="s2" />
   **(i)** [2 pts] Give the optimal policy $\hat{\pi}^∗(s)$ and $\hat{V}^{\*}(s)$ for the MDP with transition function $\hat{T}$ and reward function $\hat{R}$.
   <hr class="s1" />
-  *Hint: for any $x \in \mathbb{R}, |x| < 1$, we have $1 + x + x^2 + x^3 + x^4 + ··· = \frac{1}/{(1−x)}$.*
+  *Hint: for any $x \in \mathbb{R}, |x| < 1$, we have $1 + x + x^2 + x^3 + x^4 + ··· = \frac{1}{(1−x)}$.*
   <hr class="s2" />
 
   - $\hat{\pi}^{\*}(A)$ = ________
@@ -714,8 +721,8 @@ q9_3: |
 q9_3_s: |
   - $\hat{\pi}^{\*}(A)$ = Up
   - $\hat{\pi}^{\*}(B)$ = Down
-  - $\hat{V}^{\*}(A)$ = 20
-  - $\hat{V}^{\*}(B)$ = 16
+  - $\hat{V}^{\*}(A) = 20$
+  - $\hat{V}^{\*}(B) = 16$
 
   <hr class="s2" />
   Find the optimal policy first, and then use optimal policy to calculate the value function using a Bellman equation.
