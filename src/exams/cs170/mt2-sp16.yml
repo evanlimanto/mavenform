@@ -1,4 +1,4 @@
-course: 'cs188'
+course: 'cs170'
 ref: 'mt1-sp15'
 
 type: 'mt1'
@@ -6,6 +6,10 @@ term: 'sp15'
 prof: 'Abbeel'
 
 questions: {
+  'q1': 'Short Answer',
+  'q2': 'Matching Terminals',
+  'q3': 'Knapsack with Weighty and Voluminous Objects',
+  'q4': 'Breadth requirements',
 }
 
 parts: {

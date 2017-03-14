@@ -8,12 +8,13 @@ import Course from './Course';
 import Home from './Home';
 import NotFound from './NotFound';
 
-const trackLocal = false;
+const $ = require('jquery');
+const debug = true;
 var ReactGA = require('react-ga');
 ReactGA.initialize('UA-20131732-5');
 
 function logPageView() {
-  if (trackLocal || window.location.hostname !== "localhost") {
+  if (debug || window.location.hostname !== "localhost") {
     const path = window.location.pathname + window.location.search;
     ReactGA.set({ path });
     ReactGA.pageview(path);
@@ -26,9 +27,11 @@ window.addEventListener('scroll', function(e) {
   // Track scroll every thirty seconds
   if (currentTime - lastScrollTime > 30 * 1000) {
     lastScrollTime = currentTime;
-    if (trackLocal || window.location.hostname !== "localhost") {
+    if (debug || window.location.hostname !== "localhost") {
       const path = window.location.pathname + window.location.search;
-      handleEvent('Scroll', path);
+      if (!debug) {
+        handleEvent('Scroll', path);
+      }
     }
   }
 });
@@ -37,32 +40,48 @@ window.addEventListener('scroll', function(e) {
 var userOnPageTracker = null;
 var userOnPageTrackerStart = 0;
 function trackUserOnPage() {
-  if (window.location.hostname !== "localhost") {
+  if (debug || window.location.hostname !== "localhost") {
     const path = window.location.pathname + window.location.search;
-    handleEvent('Active', path);
+    if (!debug) {
+      handleEvent('Active', path);
+    } else {
+      console.log("Tracking user on page");
+    }
 
     const currentTime = Date.now();
+    console.log(currentTime - userOnPageTrackerStart);
     if (currentTime - userOnPageTrackerStart > 30 * 60 * 1000) {
       window.clearInterval(userOnPageTracker);
-      userOnPageTrackerStart = 0;
     }
   }
 }
 
 window.addEventListener('focus', function(e) {
-  if (trackLocal || window.location.hostname !== "localhost") {
-    if (userOnPageTrackerStart === 0) {
+  if (debug || window.location.hostname !== "localhost") {
+    if (userOnPageTracker === null) {
       userOnPageTrackerStart = Date.now();
+      // Interval of one minute
+      userOnPageTracker = window.setInterval(trackUserOnPage, 60 * 1000);
+      trackUserOnPage();
     }
-    // Interval of one minute
-    userOnPageTracker = window.setInterval(trackUserOnPage, 60 * 1000);
+  }
+});
+
+$(document).ready(function() {
+  if (debug || window.location.hostname !== "localhost") {
+    // This should always be true
+    if (userOnPageTracker === null) {
+      userOnPageTrackerStart = Date.now();
+      userOnPageTracker = window.setInterval(trackUserOnPage, 60 * 1000);
+      trackUserOnPage();
+    }
   }
 });
 
 window.addEventListener('blur', function(e) {
-  if (trackLocal || window.location.hostname !== "localhost") {
+  if (debug || window.location.hostname !== "localhost") {
     window.clearInterval(userOnPageTracker);
-    userOnPageTrackerStart = 0;
+    userOnPageTracker = null;
   }
 });
 
@@ -72,9 +91,11 @@ window.addEventListener('mousemove', function(e) {
   // Track scroll every thirty seconds
   if (currentTime - lastMouseMoveTime > 30 * 1000) {
     lastMouseMoveTime = currentTime;
-    if (trackLocal || window.location.hostname !== "localhost") {
+    if (debug || window.location.hostname !== "localhost") {
       const path = window.location.pathname + window.location.search;
-      handleEvent('Mouse', lowerCase(path));
+      if (!debug) {
+        handleEvent('Mouse', lowerCase(path));
+      }
     }
   }
 });
