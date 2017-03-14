@@ -21,80 +21,38 @@ function logPageView() {
   }
 }
 
-var lastScrollTime = 0;
 window.addEventListener('scroll', function(e) {
-  const currentTime = Date.now();
-  // Track scroll every thirty seconds
-  if (currentTime - lastScrollTime > 30 * 1000) {
-    lastScrollTime = currentTime;
-    if (debug || window.location.hostname !== "localhost") {
-      const path = window.location.pathname + window.location.search;
-      if (!debug) {
-        handleEvent('Scroll', path);
-      }
-    }
-  }
-});
-
-// Track only for a maximum of 30 minutes at a time
-var userOnPageTracker = null;
-var userOnPageTrackerStart = 0;
-function trackUserOnPage() {
   if (debug || window.location.hostname !== "localhost") {
     const path = window.location.pathname + window.location.search;
     if (!debug) {
-      handleEvent('Active', path);
-    } else {
-      console.log("Tracking user on page");
-    }
-
-    const currentTime = Date.now();
-    if (currentTime - userOnPageTrackerStart > 30 * 60 * 1000) {
-      window.clearInterval(userOnPageTracker);
-    }
-  }
-}
-
-window.addEventListener('focus', function(e) {
-  if (debug || window.location.hostname !== "localhost") {
-    if (userOnPageTracker === null) {
-      userOnPageTrackerStart = Date.now();
-      // Interval of one minute
-      trackUserOnPage();
-      userOnPageTracker = window.setInterval(trackUserOnPage, 60 * 1000);
+      handleEvent('Scroll', path);
     }
   }
 });
 
-$(document).ready(function() {
-  if (debug || window.location.hostname !== "localhost") {
-    // This should always be true
-    if (userOnPageTracker === null) {
-      userOnPageTrackerStart = Date.now();
-      trackUserOnPage();
-      userOnPageTracker = window.setInterval(trackUserOnPage, 60 * 1000);
-    }
-  }
-});
-
-window.addEventListener('blur', function(e) {
-  if (debug || window.location.hostname !== "localhost") {
-    window.clearInterval(userOnPageTracker);
-    userOnPageTracker = null;
-  }
-});
-
-var lastMouseMoveTime = 0;
 window.addEventListener('mousemove', function(e) {
-  const currentTime = Date.now();
-  // Track scroll every thirty seconds
-  if (currentTime - lastMouseMoveTime > 30 * 1000) {
-    lastMouseMoveTime = currentTime;
-    if (debug || window.location.hostname !== "localhost") {
-      const path = window.location.pathname + window.location.search;
-      if (!debug) {
-        handleEvent('Mouse', lowerCase(path));
-      }
+  if (debug || window.location.hostname !== "localhost") {
+    const path = window.location.pathname + window.location.search;
+    if (!debug) {
+      handleEvent('Mouse', lowerCase(path));
+    }
+  }
+});
+
+window.addEventListener('click', function(e) {
+  if (debug || window.location.hostname !== "localhost") {
+    const path = window.location.pathname + window.location.search;
+    if (!debug) {
+      handleEvent('Click', lowerCase(path));
+    }
+  }
+});
+
+window.addEventListener('keypress', function(e) {
+  if (debug || window.location.hostname !== "localhost") {
+    const path = window.location.pathname + window.location.search;
+    if (!debug) {
+      handleEvent('KeyPress', lowerCase(path));
     }
   }
 });
