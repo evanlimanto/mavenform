@@ -343,7 +343,7 @@ q8_1_s: |
   We denote the parameters of this model as $\theta$. The independent samples allow us to take a product over the data points.
   $$\mathcal{L}(\theta) = \prod_{n=1}^{N}\prod_{k=1}^{K}(\mathbb{P}(\mathbf{x}_n|C_k)\pi_k)^{\mathbf{y}_{n,k}}$$
   Thus,
-  $$\mathcal{l}(\theta) = \prod_{n=1}^{N}\prod_{k=1}^{K}y_{n,k}[\text{log}(\mathbb{P}(\mathbf{x}_n|C_k)) + \text{log}\pi_k]$$
+  $$\mathcal{l}(\theta) = \sum_{n=1}^{N}\sum_{k=1}^{K}y_{n,k}[\text{log}(\mathbb{P}(\mathbf{x}_n|C_k)) + \text{log}\pi_k]$$
 
 q8_2: |
   **(b)** [10 pts] What are the maximum likelihood estimates of the prior probabilities?
