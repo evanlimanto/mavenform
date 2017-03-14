@@ -49,7 +49,6 @@ function trackUserOnPage() {
     }
 
     const currentTime = Date.now();
-    console.log(currentTime - userOnPageTrackerStart);
     if (currentTime - userOnPageTrackerStart > 30 * 60 * 1000) {
       window.clearInterval(userOnPageTracker);
     }
@@ -61,8 +60,8 @@ window.addEventListener('focus', function(e) {
     if (userOnPageTracker === null) {
       userOnPageTrackerStart = Date.now();
       // Interval of one minute
-      userOnPageTracker = window.setInterval(trackUserOnPage, 60 * 1000);
       trackUserOnPage();
+      userOnPageTracker = window.setInterval(trackUserOnPage, 60 * 1000);
     }
   }
 });
@@ -72,8 +71,8 @@ $(document).ready(function() {
     // This should always be true
     if (userOnPageTracker === null) {
       userOnPageTrackerStart = Date.now();
-      userOnPageTracker = window.setInterval(trackUserOnPage, 60 * 1000);
       trackUserOnPage();
+      userOnPageTracker = window.setInterval(trackUserOnPage, 60 * 1000);
     }
   }
 });
