@@ -149,7 +149,7 @@ q3_1_s: |
   |$V^{\pi}(s)$|3|3|3|4|5|6|
 
   <hr class="s2" />
-  We have that $s_i = i$ for $i \in \\{3, 4, 5, 6\\}$, since the player will be awarded no further rewards according to the policy. From the Bellman equations, we have that $V(s_1) = −1 + \frac{1}{6}(V(s_1)+V(s_2)+3+4+5+6)$ and that $V(s_2)=−1+1(V(s_1)+V(s_2)+3+4+5+6)$. Solving this linear system yields $V(s_1) = V(s_2) = 3$.
+  We have that $s_i = i$ for $i \in \\{3, 4, 5, 6\\}$, since the player will be awarded no further rewards according to the policy. From the Bellman equations, we have that $V(s_1) = −1 + \frac{1}{6}(V(s_1)+V(s_2)+3+4+5+6)$ and that $V(s_2)=−1+\frac{1}{6}(V(s_1)+V(s_2)+3+4+5+6)$. Solving this linear system yields $V(s_1) = V(s_2) = 3$.
 
 q3_2: |
   **(b)** Having determined the values, perform a policy update to find the new policy $\pi'$. The table below shows the old policy $\pi$ and has filled in parts of the updated policy $\pi'$ for you. If both $Roll$ and $Stop$ are viable new actions for a state, write down both $Roll/Stop$. In this part as well, we have $\gamma = 1$.
