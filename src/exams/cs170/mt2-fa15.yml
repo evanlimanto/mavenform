@@ -1,0 +1,427 @@
+course: 'cs170'
+ref: 'mt1-fa15'
+
+type: 'mt2'
+term: 'fa15'
+prof: 'Garg, Raghavendra'
+
+questions: {
+  'q1': 'Short Answer',
+  'q2': 'Dating with Flows',
+  'q3': 'Covering with Unit Intervals',
+  'q4': 'True or False',
+  'q5': 'Water Supply via Linear Programming',
+  'q6': 'All-Pairs Shortest Path Again',
+  'q7': 'Room Rentals',
+}
+
+parts: {
+  'q1': 12,
+  'q2': 3,
+  'q3': 3,
+  'q4': 15,
+  'q5': 3,
+  'q6': 5,
+  'q7': 3,
+}
+
+q1_1: |
+  # Q1. Short Answers
+  1. Consider the following directed graph.
+  <hr class="s2" />
+  ![graph](/img/cs170/mt2-fa15-q1-1.png)
+  <hr class="s2" />
+  In the first step of the `Maximum-Flow` algorithm, we increase the flow along $S \rightarrow A \rightarrow D \rightarrow B \rightarrow C \rightarrow T$ by one unit.
+  <hr class="s2" />
+  (a) Draw the residual graph after this step.
+  <hr class="s2" />
+  ![graph](/img/cs170/mt2-fa15-q1-2.png)
+
+q1_2: |
+  (b) What happens next in the execution of the `Max-Flow` algorithm? (the algorithm does not necessarily run for three steps)
+  - Send ____ unit(s) of flow on path $S \rightarrow \qquad \qquad \rightarrow T$
+  - Send ____ unit(s) of flow on path $S \rightarrow \qquad \qquad \rightarrow T$
+  - Send ____ unit(s) of flow on path $S \rightarrow \qquad \qquad \rightarrow T$
+
+q1_2_s: |
+  (b) What happens next in the execution of the `Max-Flow` algorithm? (the algorithm does not necessarily run for three steps)
+  - Send ____ unit(s) of flow on path $S \rightarrow B \rightarrow D \rightarrow T$
+  - Send ____ unit(s) of flow on path $S \rightarrow \qquad \qquad \rightarrow T$
+  - Send ____ unit(s) of flow on path $S \rightarrow \qquad \qquad \rightarrow T$
+
+q1_3: |
+  What is the minimum $S - T$ cut in the graph?
+  - $S$-side of the partition $= \\{S, \qquad \qquad \\}$
+  - $T$-side of the partition $= \\{T, \qquad \qquad \\}$
+
+q1_3_s: |
+  **Solution:** There were two correct answers:
+  - $S$-side of the partition $= \\{S, A, B, C\\}$
+  - $T$-side of the partition $= \\{T, D\\}$
+  - $S$-side of the partition $= \\{S, B, C\\}$
+  - $T$-side of the partition $= \\{T, A, D\\}$
+
+q1_4: |
+  2. Give a set of frequencies on the four symbols $\\{A,B,C,D\\}$, for which the Huffman coding tree would be as shown below.
+  <hr class="s2" />
+  ![tree](/img/cs170/mt2-fa15-q1-3.png)
+
+q1_4_s: |
+  ![tree](/img/cs170/mt2-fa15-q1-4.png)
+
+q1_5: |
+  3. On a weirdly designed keyboard, every insertion takes $$ keystrokes, every deletion takes $3$ key strokes and every substitution takes $4$ keystrokes. Write the recurrence relation for the edit distance (minimum number of key strokes needed to edit a string $x[1,...,m]$ in to a string $y[1,...,n]$).
+  <hr class="s2" />
+  $$ED[i,j] = $$
+
+q1_5_s: |
+  $$\mathbf{Solution: } ED[i,j] = \min \begin{cases} ED[i - 1,j] + 3 \\\\ ED[i, j - 1] + 2 \\\\ ED[i - 1, j - 1] + 4 \cdot \text{diff}(i, j) \end{cases}$$
+
+q2_1: |
+  # Q2. Dating With Flows (5 points + 5 extra credit points)
+  4. A dating website has used complicated algorithms to determine the compatibility between the profiles of men and women on their website. The following graph shows the set of compatible pairs.
+  <hr class="s1" />
+  The website is trying to setup meetings between the men and the women. The $i^{th}$ man has indicated a preference of meeting exactly $m_i$ women, while the $j^{th}$ woman prefers to meet at most $w_j$ men. All meetings must be between compatible pairs.
+  <hr class="s2" />
+  (a) How would you use the `Max-flow` algorithm to set up the meetings? (Draw the graph on which you would run the `Max-flow`) Briefly justify your answer.
+  <hr class="s2" />
+  ![graph](/img/cs170/mt2-fa15-q2-1.png)
+
+q2_2: |
+  ![graph](/img/cs170/mt2-fa15-q2-2.png)
+  <hr class="s2" />
+  **Solution:** We design a flow network, shown above, such that each unit of flow indicates a meeting between a man and a women. Observe that:
+  - Edges $(S,M_i)$ have capacity $m_i$, enabling man $i$ to be matched with up to $m_i$ women.
+  - Since each man-woman pair should only be matched at most once, edges $(M_i,W_j)$ have unit capacity.
+  - Edges $(W_j,T)$ have capacity $w_j$, preventing woman $j$ from being matched with more than $w_j$ men.
+
+  <hr class="s2" />
+  We run a max flow algorithm. If the flow $f$ equals $\sum_{i} m_i$, whether there is flow on edge $(M_i,W_j)$ indicates whether that meeting takes place in the schedule. This is well-defined because the integral capacities imply an integral max flow.
+  <hr class="s1" />
+  Importantly, why does maximizing *global* flow also satisfy each individual man’s demand to meet with exactly $m_i$ women? Because the edge capacities on $(S,M_i)$ prevent any man from taking on more dates than he requires; thus if there is enough flow to accommodate all men, such a flow will be the global max flow.
+
+q2_3: |
+  (b) (*Extra Credit, Attempt at the end, 5 points*) Suppose all the meetings need to be scheduled over $3$ days and no woman wants to meet more than $l$ men on the same day. Moreover, the dating website cannot host more than $m$ meetings in total on the same day. How would you compute the schedule using Maxflow? (Assume that the men don’t mind meeting any number of women on the same day)
+  <hr class="s2" />
+  ![graph](/img/cs170/mt2-fa15-q2-3.png)
+
+q2_3_s: |
+  ![graph](/img/cs170/mt2-fa15-q2-4.png)
+  <hr class="s2" />
+  **Solution:** As in part (a), we design a flow network that models the constraints.
+  - Edges $(S, M_i)$ with capacity $m_i$ serve the same purpose as in part (a).
+  - Unit-capacity edges between men and women are also the same as in part (a).
+  - Each woman $W_j$ now has an edge to a copy $W_j'$ with capacity $w_j$. This serves the same purpose as in part (a), though now they are not routed immediately to $T$.
+  - Nodes $D_k$ model the three days. Each woman, in addition to her personal constraint $w_j$, also never wants more than $l$ dates in a single day, hence capacity $l$ on every edge $(W_j', D_k)$.
+  - Finally, each day can only take on $m$ dates, hence the final edges to $T$.
+
+  <hr class="s2" />
+  As in part (a), we can run max flow and check the assignment of flow to the man-woman edges. This time, to fully specify a schedule across the three days, we also have to look at the edges $(W_j', D_k)$ to see how many dates each woman should have on each day.
+
+q3_1: |
+  # Q3. Covering with unit intervals (10 points)
+  5. Given $n$ real numbers $x_1 < x_2 < ... < x_n$, we would like to cover them with the minimum number of intervals of length $1$.
+  <hr class="s1" />
+  For example, given $\\{0.1, 0.8, 4.3, 5.1, 7.1, 7.6, 8.1\\}$ we can cover it with three intervals $[0, 1], [4.2, 5.2]$ and $[7.1, 8.1]$.
+  <hr class="s2" />
+  (a) The greedy strategy used for the set cover problem can be applied to this problem. Give an example where this fails to find the minimum covering, and show the execution of the greedy strategy.
+
+q3_1_s: |
+  **Solution:** Let the numbers be $\\{1.0, 1.9, 2.0, 2.5, 2.9, 3.2\\}$
+  <hr class="s1" />
+  The optimal solution is to use the two intervals $[1.0, 2.0], [2.2, 3.2]$.
+  <hr class="s1" />
+  The greedy strategy would first use the interval $[1.9, 2.9]$, since this would cover $4$ points. However, this would leave the two points $1.0$ and $3.2$, which would require two additional intervals to cover.
+
+q3_2: |
+  (b) Describe a different greedy strategy that always finds the minimum covering. (no proof necessary)
+
+q3_2_s: |
+  **Solution:** While any points are not covered, add the interval that starts with the smallest uncovered point.
+
+q4_1: |
+  # Q4. True or False
+  1) **True/False** The running time of a dynamic program is at most the number of edges in its underlying DAG.
+
+q4_1_s: |
+  **Solution:** False; consider a DP algorithm that, at each subproblem, examines all *pairs* of previous subproblems (so, each node $v$ in the underlying DAG performs $(\text{indegree}($v$))^2$ work). Then the running time could be $\Omega(|E|^2)$.
+
+q4_2: |
+  2) **True/False** There are two ways to implement any DP algorithm: bottom-up, and via recursion with memoization. Both always have asymptotically the same time and space complexity.
+
+q4_2_s: |
+  **Solution:** False; a bottom-up approach can discard the results of subproblems that will never be revisisted, thus getting smaller space complexity (e.g. edit distance can be done in $O(n)$ space).
+
+q4_3: |
+  3) Someone gives you a flow $f$ on a graph $G$, claiming that $f$ is a maximum flow. It is possible to verify this claim in $O(|E|)$ time.
+
+q4_3_s: |
+  **Solution:** True; we check if the target is reachable from the source via edges that are not fully used.
+
+q4_4: |
+  4) Not all linear programs can be solved in polynomial time.
+
+q4_4_s: |
+  **Solution:** False; there exists a polynomial-time solver for all LPs.
+
+q4_5: |
+  5) If a linear program has unbounded feasible region, then it does not have an optimum solution of finite value.
+
+q4_5_s: |
+  **Solution:** False; Consider $\min x + y$ subject to the constraints $x, y ≥ 0$
+
+q4_6: |
+  6) In successive iterations of the Maxflow algorithm, the total flow passing through a vertex in the graph never decreases.
+
+q4_6_s: |
+  **Solution:** False; later iterations may reroute some existing flow so that the flow that passes through a particular vertex decreases.
+
+q4_7: |
+  7) The running time of the algorithm for All-Pairs-Shortest-Paths would increase by a factor of $1000$, if we switch the unit of measuring distances from kilometers to meters.
+
+q4_7_s: |
+  **Solution:** False; the APSP algorithm’s runtime is independent of the lengths of the edges.
+
+q4_8: |
+  8) The running time of the algorithm for Knapsack would increase by a factor of $1000$, if we switch the unit of measuring weights from kilograms to grams.
+
+q4_8_s: |
+  **Solution:** Either; the DP algorithm for Knapsack’s runtime is $O(nW)$ and proportional to the capacity of our bag, but if we use memoization, we will not have to look at every subproblem.
+
+q4_9: |
+  9) Given a Horn-SAT instance with $n$ variables $\\{x_1 , ..., x_n\\}$ and just one constraint ($x_1 \implies x_2$), the Horn-SAT algorithm would set $x_1$ and $x_2$ to true, and all other variables to false.
+
+q4_9_s: |
+  **Solution:** False; all variables would be set as false. (The alternative is also a valid solution, but not the one generated by the algorithm).
+
+q4_10: |
+  10) If $(1, 1, 1)$ and $(2, 2, 2)$ are feasible solutions to a linear program on $3$ variables then $(3, 3, 3)$ is also one.
+
+q4_10_s: |
+  **Solution:** False; imagine the LP where there are three constraints of the form $x_i ≤ 2$.
+
+q4_11: |
+  11) If $(1, 1, 1)$ and $(3, 3, 3)$ are feasible solutions to a linear program on $3$ variables then $(2, 2, 2)$ is also one.
+
+q4_11_s: |
+  **Solution:** True; any point on a line segment connecting two feasible vertices is also feasible.
+
+q4_12: |
+  12) The residual graph of a maximum flow $f$ can be strongly connected.
+
+q4_12_s: |
+  **Solution:** False; if there is a path from $s$ to $t$, the flow is not maximal.
+
+q4_13: |
+  13) The dynamic programming algorithm for the Travelling Salesman problem uses exponential amount of memory.
+
+q4_13_s: |
+  **Solution:** True; there are an exponential number of subproblems.
+
+q4_14: |
+  14) The value of edit distance between two strings of length $n$ can be computed using $O(n)$ memory.
+
+q4_14_s: |
+  **Solution:** True; at most two columns of the edit distance table need to be maintained at any given time.
+
+q4_15: |
+  15) “Dynamic programming” sounds cool.
+
+q4_15_s: |
+  **Solution:** True; however, we were lenient towards incorrect answers.
+
+q5_1: |
+  # Q5. Water Supply via Linear Programming (15 points)
+  7. There are four major cities and three water reservoirs in California.
+  - Reservoir $i$ holds $G_i$ gallons of water, while city $j$ needs $D_j$ gallons of water.
+  - It costs $p_{ij}$ dollars per gallon of water supplied from reservoir $i$ to city $j$.
+  - The capacity of the piping from reservoir $i$ and city $j$ can handle at most $c_{ij}$ gallons.
+  - In view of fairness, no city must get more than $1/3$rd of all its water demand from any single reservoir.
+
+  <hr class="s2" />
+  Write a linear program to determine how to supply the water from the reservoirs to the cities, at the lowest cost.
+  <hr class="s2" />
+  (a) What are the variables of the linear program, and what do they indicate?
+
+q5_1_s: |
+  **Solution:**
+  <hr class="s1" />
+  We define $f_{ij}$ to be the amount of water, in gallons, supplied from reservoir $i$ to city $j$.
+  <hr class="s2" />
+  **Common Mistakes:**
+  - Many students included the provided parameters (e.g. $G_i$, $p_{ij}$) or the number of cities/reservoirs as variables. These are not variables of the linear program, but parameters; the linear program cannot set these variables as part of the optimization process (e.g. if $p_{ij}$ was a variable, then the optimal solution is to set it to $0$).
+  - Some students defined multiple new groups of variables, some of which were redundant (e.g. in addition to defining $f_{ij}$ as above, but also gi as the total flow out of reservoir i). This wasn’t incorrect, but this often led to errors in part $c$, as described below.
+
+q5_2: |
+  (b) What is the objective function being maximized/minimized?
+
+q5_2_s: |
+  **Solution:**
+  <hr class="s1" />
+  We wish to minimize $\sum_{ij} p_{ij} \cdot f_{ij}$, the cost of supplying the water.
+
+q5_3: |
+  (c) What are the constraints of your linear program? (No need to list every constraint, but list one of each type and explain how the rest are generated)
+
+q5_3_s: |
+  **Solution:**
+  <hr class="s1" />
+  We have five groups of constraints. First, the constraints:
+  $$\nabla i: \sum_{j} f_{ij} \le G_i$$
+  $$\nabla j: \sum_{i} f_{ij} \ge D_i$$
+  $$\nabla i, j: f_{ij} \le c_{ij}$$
+  $$\nabla i, j: f_{ij} \le D_j/3$$
+  $$\nabla i, j: f_{ij} \ge 0$$
+  The first group corresponds to the limit on how much water each reservoir can support.
+  <hr class="s1" />
+  The second group corresponds to the requirement of how much water each city must get.
+  <hr class="s1" />
+  The third group corresponds to the maximum capacity of the piping.
+  <hr class="s1" />
+  The fourth group corresponds to the fairness requirement.
+  <hr class="s1" />
+  The fifth group corresponds to a sanity check on flow; we cannot send negative amounts of flow.
+  <hr class="s2" />
+  **Common Mistakes:**
+  - Many students did not include the fifth constraint.
+  - Conversely, some students imposed nonnegativity constraints on the input parameters. This does sanity check the input, but was not needed in the solution.
+  - Some students simply neglected one or more of the constraints, particularly the constraints for $D$ and $G$.
+  - It is important to emphasize that, in general, linear programs cannot have strict inequalities as constraints (e.g. > and < cannot appear in a linear program). None of the constraints in the problem needed a strict inequality.
+  - If in part (a), the student defined multiple variables, it was important to explicitly relate these variables as constraints. For example, if $f_{ij}$ and $g_i$ were defined as in the common mistake above, then a constraint $\sum_{i} f_{ij} = g_i$ was needed; otherwise, the two variables would not be related in the LP.
+
+q6_1: |
+  # Q6. All-Pairs Shortest Path Again (15 points)
+  8. Here we will design a slightly slower, but intuitively simpler algorithm for All-Pairs Shortest Path in a graph $G$. The input is a graph $G = (V, E)$ with edge weights $c(i, j)$ between vertices $i$ and $j$.
+  <hr class="s1" />
+  Define the subproblem as follows:
+  $$d(i,j,l) = \; \text{length of the shortest path from } i \text{ to } j \text{ that uses } < 2^l \text{ intermediate nodes.}$$
+  By definition, $d(i,j,0) = c(i,j)$.
+  <hr class="s1" />
+  (a) Length of shortest path from $i$ to $j = d(i, j, \text{________})$
+
+q6_1_s: |
+  **Solution:**
+  (a) Length of shortest path from $i$ to $j = d(i, j, \text{log}\;|V|)$
+  <hr class="s2" />
+  **Comments:**
+  - Using $\text{log} |E|, |E| \text{ or } |V|$ would work as well, but among them only $\text{log}\;|E|$ and $\text{log}\;|V|$ are tight enough and would give the proper running time.
+  - $l$ is not part of the input, so every expression including $l$ is incorrect.
+
+q6_2: |
+  (b) Write a recurrence relation for $d(i,j,l)$.
+
+q6_2_s: |
+  $$d(i,j,l) = \min_{k \in V} \\{d(i,k,l - 1) + d(k,j,l - 1)\\}$$
+  **Comments:**
+  - Adding $d(i,j,l - 1)$ in the minimum of the relation above is correct but redundant, since $d(i,j,l-1) = d(i,i,l - 1) + d(i,j,l - 1)$.
+  - Another natural approach would be to take the minimum over the edges, i.e.,:
+  $$d(i,j,l) = \min_{(u,v) \in E}\\{d(i,u,l-1) + c(u,v) + d(v,j,l-1)\\}$$
+  but note that this reucrrence is not entirely correct, since if we set $l = $ it will allow us to use $2(≮2^1)$ intermediate vertices.
+  - Some people, used the following reucurrence:
+  $$d(i,j,l) = \min_{k \in V}\\{d(i,k,l - 1) + c(k,j)\\}$$
+  this recurrence is incorrect, because it does not account for all the paths of $< 2^l$ intermediate nodes. In the recursive call we take into consideration all paths of $< 2^{l−1}$ intermediate nodes, but then we expand those paths by only one node so overall we take into account only paths of $< 2^{l−1} + 1$ intermediate nodes.
+  - A common incorrect recurrence that we came across was:
+  $$d(i,j,l) = \min\\{d(i,l,l-1) + d(l,j,l-1)\\}$$
+  Although this relation tries to capture the idea of one new intermediate node and $< 2$ · $2^{l−1}$ intermediate nodes from the recursive calls, it has a serious type error and makes no sense. The first two arguments of $d(., ., .)$ are supposed to be vertices, while the third one is supposed to be an upper bound on the log of the intermediate nodes, so as you can see the two first arguments are of different type from the third and so a recursive call using the third argument in the place of the second, could never be correct, because the types are incorrect. Another reason for which it makes no sense, is that this relation is just the minimum of one term, so actually it is just the assignement: $d(i, j, l) = d(i, l, l − 1) + d(l, j, l − 1)$.
+
+q6_3: |
+  (c) Write pseudocode for computing the All-Pair-Shortest-Paths algorithm using the above recurrence.
+
+  ```
+  for i=1 to n do
+      for j=1 to n do
+          d(i, j, 0) ← c_ij
+
+
+  for            do
+
+      for            do
+
+          for            do
+
+              for            do
+  ```
+
+q6_3_s: |
+  ```
+  for i=1 to n do
+      for j=1 to n do
+          d(i, j, 0) ← c_ij
+
+  for l = 1 to log n do
+
+      for i = 1 to n do
+
+          for j = 1 to n do
+
+              d(i,j,l) ← +∞
+
+              for k = 1 to n do
+
+                  d(i, j, l) ← min(d(i, j, l), d(i, k, l − 1) + d(k, j, l − 1))
+  ```
+
+  <hr class="s2" />
+  **Comments:**
+  - It was important that $l$ was in the outermost loop, since that was the only argument that was guaranteed to decrease; $i$ and $j$ could be swapped.
+  - In a lot of incorrect solutions there were variables $(l,k,...)$ which were not bounded to a loop. Note that $l$ is not part of the input and so it should be a loop variable.
+
+q6_4: |
+  (d) The running time of the algorithm on a graph with $n$ vertices is ________.
+
+q6_4_s: |
+  (d) The running time of the algorithm on a graph with $n$ vertices is $O(n^3 \text{ log } n)$.
+  <hr class="s2" />
+  **Comments:**
+  - Every running time below $n^3 \text{ log } n$ is incorrect. Higher running times which do not account for a tight upper bound of $l$, were granted only partial credit.
+
+q7_1: |
+  # Q7. Room Rentals (15 points + 15 extra-credit points)
+  9. You have two rooms to rent out. There are $n$ customers interested in renting the rooms. The $i^{th}$ customer wishes to rent one room (is happy with either room you have) for $t[i]$ days and is willing to pay $bid[i]$\$ for his/her entire stay.
+  <hr class="s1" />
+  Customer requests are non-negotiable in that they would not be willing to rent for a shorter or longer duration.
+  <hr class="s1" />
+  Devise a dynamic programming algorithm to determine the maximum profit that you can make from the customers over a period of $D$ days.
+  <hr class="s1" />
+  (Hint: two knapsacks?)
+  <hr class="s2" />
+  (a) Briefly and precisely define the subproblems.
+
+q7_1_s: |
+  **Solution:**
+  <hr class="s1" />
+  $P(d_1, d_2, i) := $ the maximum profit obtainable with $d_1$ remaining days for room $1$ and $d_2$ remaining days for room $2$ using the first $i$ customers.
+  <hr class="s2" />
+  **Common Mistakes:**
+  - One common incorrect subproblem was having two recurrences, one for each room. The problem with this approach is that the two subproblems have exactly the same recurrences, and thus, the same solutions; this allows the same customer to be placed in both rooms.
+  - Another common incorrect subproblem was having a recurrence that only keeps track of one room up to $2D$ days. However, if a customer wants to stay for $4$ days and there are $2$ days left in both rooms, then this approach of combining the rooms into one incorrectly suggests that the customer can stay.
+  - Some students seemed unclear on what a subproblem was. We were not looking for a re- currence, or an explanation of how to solve the subproblem. (Writing a correct recurrence without defining the subproblem received no credit in this part). The definition of a subproblem is just the smaller “problem” that we wish to solve (e.g. here we are trying to maximize profit in a specialized case).
+
+q7_2: |
+  (b) Write the recurrence relation between the subproblems.
+
+q7_2_s: |
+  **Solution:**
+  $$P(d_1, d_2, i) = \max(bid[i] + P(d_1 - t[i], d_2, i - 1), bid[i] + P(d_1, d_2 - t[i] i - 1), P(d_1, d_2, i - 1))$$
+  Intuitively, we can either give customer $i$ the first room, give customer $i$ the second room, or not give customer $i$ either room, which corresponds to the quantities being maximized over.
+  <hr class="s1" />
+  **Common Mistakes:** See the common mistakes section in part (a) for common incorrect sub- problems (and thus incorrect recurrence relations).
+
+q7_3: |
+  (c) **(Extra Credit, Attempt at the end (15 points))** Suppose every customer has a specific start date $start[i]$ and end date $end[i]$ between which he/she is interested in renting.
+  <hr class="s1" />
+  How would you modify the algorithm, and the definition of your subproblems? (Give a succinct but precise description of the modifications and the subproblems. Proof of correctness & runtime analysis not needed)
+
+q7_3_s: |
+  **Solution:**
+  <hr class="s1" />
+  Sort the customers by their $end[i]$ day, so that we have:
+  $$end[1] \le \cdots \le end[n]$$
+  For convenience, assume that $end[i] \le D$ for all customers $i$.
+  <hr class="s2" />
+  Define $P(d_1, d_2, i)$ to be the maximum profit obtainable using $d_1$ days for room $1, d_2$ days for room $2$, and the first $i$ customers.
+  <hr class="s2" />
+  Then we have the recurrence:
+  $$P(d_1, d_2, i) = \begin{cases} \max \begin{cases} P(start[i], d_2, i - 1) + bid[i], \\\\ P(d_1, start[i], i - 1) + bid[i], \\\\ P(d_1, d_2, i - 1) \end{cases} & \text{if } end[i] \le d_1, d_2 \\\\ \max \begin{cases} P(start[i], d_2, i - 1) + bid[i], \\\\ P(d_1, d_2, i - 1) \end{cases} & \text{if } d_2 < end[i] \le d_1 \\\\ \max \begin{cases} P(d_1, start[i], i - 1) + bid[i], \\\\ P(d_1, d_2, i - 1) \end{cases} & \text{if } d_1 < end[i] \le d_2 \\\\ P(d_1, d_2, i - 1) & \text{if } d_1, d_2 < end[i] \end{cases}$$
+  This can be simplified into the following:
+  $$P(d_1, d_2, i) = \max \begin{cases} \begin{cases}P(start[i], d_2, i - 1) + bid[i], & \text{if } end[i] \le d_1 \\\\ -\infty & \text{otherwise} \end{cases} \\\\ \begin{cases}P(d_1, start[i], i - 1) + bid[i], & \text{if } end[i] \le d_2 \\\\ -\infty & \text{otherwise} \end{cases} \\\\ P(d_1, d_2, i - 1, true) \end{cases}$$
