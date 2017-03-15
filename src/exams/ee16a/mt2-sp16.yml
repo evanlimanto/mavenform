@@ -6,15 +6,14 @@ term: 'fa16'
 prof: 'Ayazifar, Stojanovic'
 
 questions: {
-  'q1': 'Resistor Combinations',
-  'q2': 'Take Node of the Voltage Sources',
-  'q3': 'Thévenin and Norton Equivalence',
-  'q4': 'Superposition and Op-Amps',
-  'q5': '16A-Spice',
-  'q6': 'Charge-Sharing',
-  'q7': 'Operation^TM',
-  'q8': 'This Is Your Brain on EE',
-  'q9': 'Voltage Regulators',
+  'q1': 'You Can''t Divide Me!',
+  'q2': 'Circuits',
+  'q3': 'Look at that Bling',
+  'q4': 'Big Caps Reconnected',
+  'q5': 'Black Boxes',
+  'q6': 'IoTatron',
+  'q7': 'Fruity Fred',
+  'q8': 'Spinning Cs',
 }
 
 parts: {

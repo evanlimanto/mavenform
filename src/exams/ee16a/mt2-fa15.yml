@@ -1,0 +1,315 @@
+course: 'ee16a'
+ref: 'mt2-fa15'
+
+type: 'mt2'
+term: 'fa15'
+prof: 'Sahai, Niknejad'
+
+questions: {
+  'q1': 'Correlation',
+  'q2': 'Cascading Amplifiers',
+  'q3': 'Just solve it',
+  'q4': 'CapRank',
+  'q5': 'Thevenin In the Wild',
+  'q6': 'Designing for a child''s party',
+}
+
+parts: {
+  'q1': 1,
+  'q2': 3,
+  'q3': 1,
+  'q4': 6,
+  'q5': 3,
+  'q6': 3,
+}
+
+q1_1: |
+  # Section 1: Straightforward question (30 points)
+  # 1. Correlation (Don't need to show work)
+  Which of these plots, **(a), (b), (c)** or **(d)** depicts the circular cross correlation of the signal $\vec{s_1} = \left[ \begin{array}{c} 1 \\\\ 2 \\\\ 1 \\\\ 1 \end{array} \right]$ with signal $\vec{s_2} = \left[ \begin{array}{c} 1 \\\\ 2 \\\\ 0 \\\\ 4 \end{array} \right]$?
+  <hr class="s1" />
+  (i.e. which plot consists of the inner products of circular shifts of $\vec{s_1}$ with $\vec{s_2}$?)
+  <hr class="s2" />
+  ![plots](/img/ee16a/mt2-fa15-q1-1.png)
+
+q1_1_s: |
+  **Solution:**
+  <hr class="s1" />
+  The circular shifts of $\vec{s_1}$ can be stored in the matrix
+  $$C_{\vec{s_1}} = \left[ \begin{array}{c c c c} 1 & 1 & 1 & 2 \\\\ 2 & 1 & 1 & 1 \\\\ 1 & 2 & 1 & 1 \\\\ 1 & 1 & 2 & 1 \end{array} \right]$$
+  The cross-correlation of $\vec{s_1}$ with $\vec{s_2}$ can then be calculated
+  $$C_{\vec{s_1}^T\vec{s_2}} = \left[ \begin{array}{c c c c} 1 & 2 & 1 & 2 \\\\ 1 & 1 & 2 & 1 \\\\ 1 & 1 & 1 & 2 \\\\ 1 & 1 & 1 & 1 \end{array} \right] \left[ \begin{array}{c} 1 \\\\ 2 \\\\ 0 \\\\ 4 \end{array} \right] = \left[ \begin{array}{c} 9 \\\\ 7 \\\\ 11 \\\\ 8 \end{array} \right]$$
+  This corresponds to the first plot, plot (a).
+
+q2_1: |
+  # 2. Cascading Amplifiers
+  (a) Use the golden rules to solve for $V_{out}$. (Show work)
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa15-q2-1.png)
+
+q2_1_s: |
+  **Solution:** First, we use the Golden Rules, and the fact that the op-amp is connected in negative feedback, to see that
+  $$V_{-} = V_{+} = 0$$
+  Also, since we know that the current through each terminal of the op-amp will be $0$ (from the Golden Rules), we can write the following nodal analysis equation at the $-$ terminal of the op-amp:
+  $$\frac{2 - V_{-}}{1} - \frac{V_{-} - V_{out}}{5} = 0$$
+  which gives us
+  $$V_{out} = -5 \text{ x } 2 = -10V$$
+
+q2_2: |
+  (b) Use the golden rules to solve for $V_{sum}$. (Show work)
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa15-q2-2.png)
+
+q2_2_s: |
+  **Solution:** First, we use the Golden Rules, and the fact that the opamp is connected in negative feedback, to see that
+  $$V_{-} = V_{+} = 0$$
+  Also, since we know that the current through each terminal of the opamp will be 0 (from the Golden Rules), we can write the following nodal analysis equation at the $-$ terminal of the op-amp:
+  $$\frac{V_1 - V_{-}}{1} + \frac{V_1 - V_{-}}{1} - \frac{V_{-} - V_{out}}{1} = 0$$
+  which gives us
+  $$V_{sum} = -(V_1 + V_2)$$
+
+q2_3: |
+  (c) Solve for $V_{combo}$. Show work. (HINT: reuse what you did in earlier parts to the extent possible.)
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa15-q2-3.png)
+
+q2_3_s: |
+  **Solution:**
+  <hr class="s1" />
+  Let’s consider the circuit with the outputs of the first two op-amps labeled as $V_1$ and $V_2$ respectively:
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa15-q2-4.png)
+  <hr class="s2" />
+  Using the result of part a), $V_1 = −10V$ and $V_2 = −10V$. (Note that this would be true irrespective of what was connected to the outputs of the first two opamps. Think about why!)
+  <hr class="s1" />
+  Now, let’s look at the third opamp cascaded in the circuit. Now, using the result of part b), we’ll get
+  $$V_{combo} = -(V_1 + V_2) = 20V$$
+
+q3_1: |
+  # 3. Just solve it
+  Solve for the voltage $V_x$ where $G = \frac{1}{2}$ in units of $S$ which are $\frac{A}{V}$.
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa15-q3-1.png)
+
+q3_1_s: |
+  **Solution:**
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa15-q3-2.png)
+  <hr class="s2" />
+  Using nodal analysis, at node $1$ we get
+  $$\frac{V_x}{1\Omega} = \frac{V_2 - V_1}{4\Omega} + \frac{1}{2}\frac{A}{V}V_x$$
+  At node $2$, we get
+  $$\frac{V_2 - V_1}{4\Omega} = \frac{6V - V_2}{3\Omega} + \frac{-V_2}{6\Omega}$$
+  We also have that $V_1 = V_x$. Combining these equations we have
+  $$4V_1 = V_2 - V_1 + 2V_1 \implies 3V_1 = V_2$$
+  $$3V_2 - 3V_1 = 24V - 4V_2 - 2V_2 \implies 3V_2 - V_1 = 8V$$
+  Solving, we get that $V_1 = V_x = 1V$.
+
+q4_1: |
+  # Section 2: Free-form Problems (78 + 15 points)
+  # 4. "CapRank" (28 + 5 pts)
+  Consider the circuit below, with two switches. Initially in phase $0$, both switches are open, and the three capacitors start with charges $Q_1[0], Q_2[0]$ and $Q_3[0]$ respectively.
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa15-q4-1.png)
+  <hr class="s2" />
+  Throughout this problem, assume that when capacitors are connected, charge-sharing between them happens instantaneously.
+  <hr class="s2" />
+  (a) (4 pts) At the first time step we are in phase $1$: switch $\phi_2$ is left open, and switch $\phi_1$ is closed. **Compute the charges on all three capacitors after the first time step:** $Q_1[1],Q_2[1]$ **and** $Q_3[1]$. (Your answer should be in terms of the initial charges $Q_1[0],Q_2[0],Q_3[0]$).
+
+q4_1_s: |
+  **Solution:** With switch $1$ closed and switch $2$ open, the total charge on the left two capacitors, $Q_1[0]+Q_2[0]$ redistributes itself so that the voltage drop across the two capacitors is equal. Using this and conservation of charge, we get the equations
+  $$Q_1[1] + Q_2[1] = Q_1[0] + Q_2[0]$$
+  $$\frac{Q_1[1]}{1pF} = \frac{Q_2[1]}{1pF}$$
+  Thus we have that $Q_1[1] = Q_2[1]$ and therefore
+  $$Q_1[1] = \frac{Q_1[0] + Q_2[0]}{2}$$
+  $$Q_2[1] = \frac{Q_1[0] + Q_2[0]}{2}$$
+  Since there is no loop of the circuit containing the third capacitor no current can flow
+  $$Q_3[1] = Q_3[0]$$
+
+q4_2: |
+  (b) (4 pts) Let the vector $\vec{Q}[i]$ denote the charges on the capacitors $Q_1[i],Q_2[i],Q_3[i]$ after timestep $i$. So the initial charges are
+  $$\vec{Q}[0] = \left[ \begin{array}{c} Q_1[0] \\\\ Q_2[0] \\\\ Q_3[0] \end{array} \right]$$
+  And the charges after one timestep (as you computed above) are:
+  $$\vec{Q}[1] = \left[ \begin{array}{c} Q_1[1] \\\\ Q_2[1] \\\\ Q_3[1] \end{array} \right]$$
+  Using your answer from the previous part, we can write the relationship between $\vec{Q}[1]$ and $\vec{Q}[0]$ as a linear transformation:
+  $$\vec{Q}[1] = A\vec{Q}[0]$$
+  **Write the (3 x 3) matrix** $A$ **explicitly.**
+
+q4_2_s: |
+  **Solution:**
+  The matrix form of the equations from part (a) is
+  $$\left[ \begin{array}{c} Q_1[1] \\\\ Q_2[1] \\\\ Q_3[1] \end{array} \right] = \underbrace{\left[ \begin{array}{c c c} 1/2 & 1/2 & 0 \\\\ 1/2 & 1/2 & 0 \\\\ 0 & 0 & 1 \end{array} \right]}_{A} \left[ \begin{array}{c} Q_1[0] \\\\ Q_2[0] \\\\ Q_3[0] \end{array} \right]$$
+
+q4_3: |
+  (c) (4 pts) In the second timestep we are in phase $2$: the switch $\phi_1$ is opened, and then the switch $\phi_2$ is closed. We can express $\vec{Q}[2]$, the charges after the second time step, in terms of $\vec{Q}[1]$, as:
+  $$\vec{Q}[2] = B\vec{Q}[1]$$
+  **Write the (3 x 3) matrix** $A$ **explicitly.**
+
+q4_3_s: |
+  **Solution:**
+  <hr class="s1" />
+  Similar analysis to part (a) gives that
+  $$Q_1[2] = Q_1[1]; \quad Q_2[2] = \frac{Q_2[1] + Q_3[1]}{2}; \quad Q_3[2] = \frac{Q_2[1] + Q_3[1]}{2};$$
+  In matrix form this equation is
+  $$\left[ \begin{array}{c} Q_1[2] \\\\ Q_2[2] \\\\ Q_3[2] \end{array} \right] = \underbrace{\left[ \begin{array}{c c c} 1 & 0 & 0 \\\\ 0 & 1/2 & 1/2 \\\\ 0 & 1/2 & 1/2 \end{array} \right]}_{B} \left[ \begin{array}{c} Q_1[1] \\\\ Q_2[1] \\\\ Q_3[1] \end{array} \right]$$
+
+q4_4: |
+  (d) (2 pts) We can express $\vec{Q}[2]$, the charges after the second time step, in terms of $\vec{Q}[0]$, the initial charges, as:
+  $$\vec{Q}[2] = C\vec{Q}[0]$$
+  It turns out that $C = \left[ \begin{array}{c c c} 1/2 & 1/2 & 0 \\\\ 1/4 & 1/4 & 1/2 \\\\ 1/4 & 1/4 & 1/2 \end{array} \right]$.
+  <hr class="s1" />
+  **What is the relationship between** $C$ **and** $A$ **and** $B$ **from the previous parts?**
+
+q4_4_s: |
+  **Solution:**
+  Since $A$ represents the transition from $t = 0$ to $t = 1$ and $B$ is the transition from $t = 1$ to $t = 2$, we apply $A$ first.
+  $$\vec{Q}[1] = A\vec{Q}[0] \quad \implies \quad \vec{Q}[2] = \underbrace{BA}_{C} \vec{Q}[0]$$
+  $$C = BA = \left[ \begin{array}{c c c} 1 & 0 & 0 \\\\ 0 & 1/2 & 1/2 \\\\ 0 & 1/2 & 1/2 \end{array} \right] \left[ \begin{array}{c c c} 1/2 & 1/2 & 0 \\\\ 1/2 & 1/2 & 0 \\\\ 0 & 0 & 1 \end{array} \right] = \left[ \begin{array}{c c c} 1/2 & 1/2 & 0 \\\\ 1/4 & 1/4 & 1/2 \\\\ 1/4 & 1/4 & 1/2 \end{array} \right]$$
+
+q4_5: |
+  (e) (2 pts) In future timesteps, the same alternating-switching occurs between phases $1$ and $2$. For example, in the third timestep switch $\phi_1$ is closed and switch $\phi_2$ is opened. And in the fourth timestep switch $\phi_1$ is opened and switch $\phi_2$ is closed. And so on.
+  <hr class="s1" />
+  Now compute the charges on the capacitors after an even number of timesteps in general. That is, express $\vec{Q}[2k]$, the charges after the first $2k$ timesteps, in terms of $\vec{Q}[0]$, the initial charges:
+  $$\vec{Q}[2k] = D\vec{Q}[0]$$
+  **Express the matrix** $D$ **as some power of the matrix** $C$ **(the power will depend on** $k$**).**
+
+q4_5_s: |
+  **Solution:** $D = C^k$
+
+q4_6: |
+  (f) (12 pts) The eigenvalues of the matrix $C$ are $\lambda_1 = 1, \lambda_2 = \frac{1}{4}, \lambda_3 = 0$. The corresponding eigenvectors are $\vec{u_1} = \left[ \begin{array}{c} 1 \\\\ 1 \\\\ 1 \end{array} \right], \vec{u_2} = \left[ \begin{array}{c} -2 \\\\ 1 \\\\ 1 \end{array} \right]$, and $\vec{u_3} = \left[ \begin{array}{c} 1 \\\\ -1 \\\\ 0 \end{array} \right]$.
+  <hr class="s1" />
+  Now, suppose the actual initial charges were
+  $$\vec{Q}[0] = \left[ \begin{array}{c} 1 \\\\ 2 \\\\ 3 \end{array} \right]$$
+  **After a very large number of timesteps, what will the charges on the capacitors settle to?**
+  <hr class="s1" />
+  That is, what is
+  $$\lim_{2k \to \infty}\vec{Q}[2k]$$
+  (Hint: Write out $\vec{Q}[2k]$ in terms of $\vec{Q}[0]$, using your answer from previous parts. Express $\vec{Q}[0] = \alpha_1 \vec{u_1} + \alpha_2 \vec{u_2} + \alpha_3 \vec{u_3}$ in terms of the eigenvectors $\vec{u_i}$ found earlier. Then notice that $\lambda_2$ and $\lambda_3$ have magnitude $< 1$...)
+  <hr class="s1" />
+  (Extra Hint: Do you need to actually know/calculate all the coefficients $\alpha_1, \alpha_2, \alpha_3$? Notice that $\vec{u_1}$ is orthogonal to $\vec{u_2}, \vec{u_3}$...)
+  <hr class="s1" />
+  **BONUS (5 pts): Can you give a physical intuition for why this has to be the right answer?**
+
+q4_6_s: |
+  **Solution:**
+  <hr class="s1" />
+  We first decompose the vector of initial charges into a linear combination of the eigenvectors. That is we solve for $α_1, α_2,$ and $α_3$ such that
+  $$\vec{Q}[0] = \alpha_1 \vec{u_1} + \alpha_2 \vec{u_2} + \alpha_3 \vec{u_3}$$
+  We row reduce the system (process omitted for brevity):
+  $$\left[ \begin{array}{c c c | c} 1 & -2 & 1 & 1 \\\\ 1 & 1 & -1 & 2 \\\\ 1 & 1 & 0 & 3 \end{array} \right] \implies \left[ \begin{array}{c c c | c} 1 & 0 & 0 & 2 \\\\ 0 & 1 & 0 & 1 \\\\ 0 & 0 & 1 & 1 \end{array} \right]$$
+  $\alpha_1 = 2, \alpha_2 = 1,$ and $\alpha_3 = 1$. We now have that
+  $$\begin{align} \lim_{2k \to \infty} \vec{Q}[2k] = \lim_{k \to \infty}C^k \vec{Q}[0]
+  &= \lim_{k \to \infty}\alpha_1 C^k \vec{u_1} + \alpha_2 C^k \vec{u_2} + \alpha_3 C^k \vec{u_3} \\\\
+  &= \lim_{k \to \infty}\alpha_1 \lambda_1^k \vec{u_1} + \alpha_2 \lambda_2^k \vec{u_2} + \alpha_3 C \lambda_3^k \vec{u_3} \\\\
+  &= \alpha_1(1)^\infty \vec{u_1} + \alpha_2\left(\frac{1}{4}\right)^\infty \vec{u_2} + \alpha_3(0)^\infty \vec{u_3} \\\\
+  &= \alpha_1(1)^\infty \vec{u_1} + \alpha_2(0)\vec{u_2} + \alpha_3(0)\vec{u_3} = \alpha_1\vec{u_1} \end{align}$$
+  Thus $\lim_{2k \to \infty} \vec{Q}[2k] = [2, 2, 2]^T$.
+  <hr class="s1" />
+  Since $\vec{u_1}$ is orthogonal to $\vec{u_2}$ and $\vec{u_3}$ and the component $\vec{Q}[0]$ in the direction of $\vec{u_1}$ is all that matters (from the limiting argument shown), we could have simply projected $\vec{Q}[0]$ onto $\vec{u_1}$.
+  $$\alpha_1 \vec{u_1} = \frac{\langle\vec{Q}[0], \vec{u_1}\rangle}{||\vec{u_1}||^2}\vec{u_1} = \frac{6}{(\sqrt{3})^2} = \left[ \begin{array}{c} 2 \\\\ 2 \\\\ 2 \end{array} \right]$$
+  **Bonus:** Since the capacitors all have the same capacitance, at each time step the charge on two of the capacitors will equal each other to balance out the voltage. Over many time step this successive even distribution of charge between pairs of capacitors will cause the charges to be equal on all the capacitors. Since no charge is lost, the total charge on all three capacitors will remain $6$. Thus the equal distribution of charge on all three capacitors will be $2, 2, 2$.
+
+q5_1: |
+  # 5. Thevenin In the Wild (20 pts)
+  In this question, we will use Least-Squares to find a Thevenin equivalent circuit from (noisy) measurements.
+  <hr class="s1" />
+  Imagine we have a black box with two terminals $(a,b)$. This black box is a sensor whose input-output behavior varies with the magnetic field that it sees. (These are called Hall Effect sensors.)
+  <hr class="s1" />
+  Because this is a midterm and time is limited, we are only going to concentrate on the fact that externally, it can be modeled as a Thevenin equivalent circuit:
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa15-q5-1.png)
+  <hr class="s2" />
+  for some values of $V_{th},R_{th}$.
+  <hr class="s1" />
+  To determine $V_{th}$ and $R_{th}$, we do experiments in which we connect various resistances across the terminals $(a,b)$, and measure the voltage differences $V_{meas} = V_a - V_b$ across the terminals as well as the currents $I_{meas}$.
+  <hr class="s2" />
+  (a) (4 pts) As a warm up, suppose we measure two pairs of voltages/currents:
+  - $(i_1, v_1) = (0mA, 10mV)$.
+  - $(i_2, v_2) = (5mA, 0mV)$.
+
+  <hr class="s2" />
+  Notice the first measurement $(i_1, v_1)$ corresponds to measuring the open-circuit voltage, and the second measurement $(i_2, v_2)$ corresponds to determining the closed-circuit current. **What is the Thevenin equivalent circuit for the black-box?**
+
+q5_1_s: |
+  **Solution:**
+  <hr class="s1" />
+  Since $i_1 = 0mA$, $v_1$ is the open circuit voltage from $a$ to $b$. Thus $V_{th} = 10mV$. Since $v_2 = 0mV$, $i_2$ is the short circuit current from $a$ to $b$. Thus $I_{no} = 5mA$. $R_{th} = V_{th}/I_{no} = 2\Omega$ and the equivalent circuit has the form shown in the diagram.
+
+q5_2: |
+  (b) (6 pts) Now suppose we instead make the following two measurements:
+  - $(i_1, v_1) = (1mA, 4mV)$.
+  - $(i_2, v_2) = (2mA, 2mV)$.
+
+  <hr class="s2" />
+  **What is the Thevenin equivalent circuit for this black-box?** (It is not the same black-box as the previous part.)
+  <hr class="s1" />
+  (Hint: For a Thevenin-equivalent circuit with known values of $V_{th}$ and $R_{th}$, can you write the voltage $v$ as a function of the current $i$? It will be $v = ci+d$ for some $c,d \in R$ depending on $V_{th}, R_{th}$)
+
+q5_2_s: |
+  **Solution:**
+  <hr class="s1" />
+  Applying KVL around the loop of the diagram in part (a), we get that
+  $$V_{th} = (I_{meas})_iR_{th} + (V_{meas})_i$$
+  For $K$ measurements, the matrix form of this equation
+  $$\left[ \begin{array}{c} (V_{meas})_1 \\\\ \vdots \\\\ (V_{meas})_K \end{array} \right] = \left[ \begin{array}{c c} 1 & -(I_{meas})_1 \\\\ \vdots & \vdots \\\\ 1 & -(I_{meas})_K \end{array} \right] \left[ \begin{array}{c} V_{th} \\\\ R_{th} \end{array} \right]$$
+  For only two (linearly independent) measurements, the system has a unique solution.
+  $$\left[ \begin{array}{c} 4mV \\\\ 2mV \end{array} \right] = \left[ \begin{array}{c c} 1 & -1mA \\\\ 1 & -2mA \end{array} \right] \left[ \begin{array}{c} V_{th} \\\\ R_{th} \end{array} \right]$$
+  Solving this, we get $V_{th} = 6mV$ and $R_{th} = 2\Omega$.
+
+q5_3: |
+  (c) (10 pts) Now, suppose we collect $4$ pairs of measurements $(i,v)$ as we try to hold the external magnetic field constant:
+  - $(3mA, 0.5mV)$
+  - $(2mA, 4mV)$
+  - $(1mA, 7.5mV)$
+  - $(0mA, 13mV)$
+
+  <hr class="s2" />
+  **Set up a liner least-squares problem of the form**
+  $$\min_{\vec{x}}||A\vec{x} - \vec{b}||^2$$
+  **to determine a reasonable Thevenin equivalent circuit from the 4 measurements. What is the matrix** $A$ **? What is the vector** $\vec{b}$ **? What do the components of** $\vec{x}$ **represent?**
+
+q5_3_s: |
+  **Solution:**
+  When we have more than two measurements, we want to define a reasonable Thevenin equivalent circuit, that is we want to find $V_{th}$ and $R_{th}$ that minimize the error in our measurements. Thus we want to solve
+
+  $$\min_{[V_{th} \quad R_{th}]^T} \left|\left| \underbrace{\left[ \begin{array}{c c} 1 & -(I_{meas})_1 \\\\ \vdots & \vdots \\\\ 1 & -(I_{meas})_K \end{array} \right]}_{A} \underbrace{\left[ \begin{array}{c} V_{th} \\\\ R_{th} \end{array} \right]}_{\vec{x}} - \underbrace{\left[ \begin{array}{c} (V_{meas})_1 \\\\ \vdots \\\\ (V_{meas})_K \end{array} \right]}_{\vec{b}} \right|\right|^2$$
+
+  As shown here, the components of $\vec{x}$ are $V_{th}$ and $R_{th}$.
+  Given the measurements we've made, we write
+  $$A = \left[ \begin{array}{c c} 1 & -(I_{meas})_1 \\\\ 1 & -(I_{meas})_2 \\\\ 1 & -(I_{meas})_3 \\\\ 1 & -(I_{meas})_4 \end{array} \right] = \left[ \begin{array}{c c} 1 & -3mA \\\\ 1 & -2mA \\\\ 1 & -1mA \\\\ 1 & -0mA \end{array} \right] \qquad \vec{b} = \left[ \begin{array}{c} (V_{meas})_1 \\\\ (V_{meas})_2 \\\\ (V_{meas})_3 \\\\ (V_{meas})_4 \end{array} \right] = \left[ \begin{array}{c} 0.5mV \\\\ 4mV \\\\ 7.5mV \\\\ 13mV \end{array} \right]$$
+
+q6_1: |
+  # 6. Designing for a child's part (20 + 10 pts)
+  You are at home for winter break and are helping some friends prepare for their younger brother’s birthday party.
+  <hr class="s1" />
+  You have access to a battery of $20V$ and $1Ω$ internal resistance.
+  <hr class="s2" />
+  (a) **Doll (10 pts)**
+  <hr class="s1" />
+  You find a special talking doll, but it requires a supply of exactly $\frac{20}{3} V$. On the doll’s box, it indicates $3$ that the equivalent resistance of the doll is $21Ω$. You also have access to any resistors that you may want. **How would you use your battery and possibly other resistors to generate the appropriate voltage for powering the doll?** Draw the entire system (as an equivalent circuit diagram) including the doll and argue why it works.
+
+q6_1_s: |
+  ![circuit](/img/ee16a/mt2-fa15-q6-1.png)
+
+q6_2: |
+  (b) **Dancing Dog (10 pts)**
+  <hr class="s1" />
+  You find more toys and parts. One is a robotic dog that will dance if it is connected to a wire carrying an audio signal with an amplitude of $100mV$. You also find a microphone, but the problem is that it doesn’t have an amplitude of $100mV$. Instead, it can be modeled as a voltage source of $1mV$ and internal resistance of $50Ω$.
+  <hr class="s1" />
+  **Using a single operational amplifier with infinite gain, infinite input resistance, and zero output resistance, and as many resistors of any values that you like, please design a circuit that amplifies the microphone signal into something that will make the dog dance.** (The sign of the audio voltage into the dog doesn’t matter. As long as its absolute value is $100mV$.) Why does this work?
+
+q6_2_s: |
+  ![circuit](/img/ee16a/mt2-fa15-q6-2.png)
+
+q6_3: |
+  (c) **Baking (Bonus 10 pts)**
+  <hr class="s1" />
+  You decide to make a little oven (from scratch) for the party so the kids can bake things. In order to do this you will need a filament to radiate heat inside the oven. A filament can be modeled as a resistor with all the power dissipated by the resistor being converted into heat.
+  <hr class="s1" />
+  You find a $1m$-long strip of some filament material that has a resistance of $20 Ω$ and you want to cut a length of it to connect it directly to your $20V$ battery (which has internal resistance of $1 Ω$) to heat the play oven. (Assume that the resistance will be proportional to the length that you cut.)
+  - **How long should you cut the strip to maximize the amount of heat generated in the oven? Show your work.**
+  - **How much heat (in units of Watts) is available in the oven? Show your work.**
+
+q6_3_s: |
+  ![circuit](/img/ee16a/mt2-fa15-q6-3.png)

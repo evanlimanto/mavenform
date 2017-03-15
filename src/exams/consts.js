@@ -169,6 +169,10 @@ const exams = {
         'term': 'Spring 2016',
         'profs': 'Ayazifar, Stojanovic',
       },
+      'fa15': {
+        'term': 'Fall 2015',
+        'profs': 'Sahai, Niknejad',
+      },
     },
     'mt1': {
       'fa16': {
