@@ -160,6 +160,12 @@ const exams = {
   },
 
   'ee16a': {
+    'mt2': {
+      'fa16': {
+        'term': 'Fall 2016',
+        'profs': 'Ayazifar, Stojanovic',
+      },
+    },
     'mt1': {
       'fa16': {
         'term': 'Fall 2016',
@@ -261,12 +267,12 @@ const courses = {
   'cs61a': 'The Structure and Interpretation of Computer Programs',
   'cs188': 'Introduction to Artificial Intelligence',
   'cs170': 'Efficient Algorithms and Intractable Problems',
+  'ee16a': 'Designing Information Devices and Systems I',
   'data8': 'Foundations of Data Science',
   'cs186': 'Introduction to Database Systems',
   'ugba10': 'Principles of Business',
   'cs61c': 'Great Ideas in Computer Architecture (Machine Structures)',
   'cs162': 'Operating Systems and Systems Programming',
-  'ee16a': 'Designing Information Devices and Systems I',
   // 'chem1a': 'General Chemistry',
 };
 

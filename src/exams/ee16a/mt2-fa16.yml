@@ -1,0 +1,314 @@
+course: 'ee16a'
+ref: 'mt2-fa16'
+
+type: 'mt2'
+term: 'fa16'
+prof: 'Ayazifar, Stojanovic'
+
+questions: {
+  'q1': 'Resistor Combinations',
+  'q2': 'Take Node of the Voltage Sources',
+  'q3': 'Thévenin and Norton Equivalence',
+  'q4': 'Superposition and Op-Amps',
+  'q5': '16A-Spice',
+  'q6': 'Charge-Sharing',
+  'q7': 'Operation^TM',
+  'q8': 'This Is Your Brain on EE',
+  'q9': 'Voltage Regulators',
+}
+
+parts: {
+  'q1': 2,
+  'q2': 1,
+  'q3': 2,
+  'q4': 2,
+  'q5': 2,
+  'q6': 1,
+  'q7': 2,
+  'q8': 3,
+  'q9': 4,
+}
+
+q1_1: |
+  # Section 1 (54 points)
+  # 1. Resistor Combinations (10 points)
+  (a) **(4 points)** What is the equivalent resistance between nodes $A$ and $B$? Write your solution in terms of $R_1, R_2, R_3,$ and $R_4$. Use the parallel operator $||$ wherever applicable. What is the equivalent resistance if $R_4$ approaches infinity?
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa16-q1-1.png)
+
+q1_1_s: |
+  **Solutions:** First we combine $R_3$ and $R_4$ in series: $R_3 + R_4$.
+  <hr class="s1" />
+  Then we see that $R_3 + R_4$ is in parallel with $R_2$, resulting in $(R_3 + R_4) || R_2$.
+  <hr class="s1" />
+  Finally, we see that the $R_2, R_3, R_4$ block is in series with $R_1$, giving us
+  <hr class="s1" />
+  $R_{eq} = R_1 + (R_3 + R_4) || R_2$.
+  <hr class="s1" />
+  When $R_4$ approaches infinity, the branch becomes an open circuit. Thus $(R_3 + R_4) || R_2$ becomes just $R_2$. The equivalent resistance is then just $R_1 + R_2$.
+
+q1_2: |
+  (b) **(6 points)** What is the current $i_2$ through $R_2$? Write your solution in terms of $R_1, R_2, R_3, R_4, R_5,$ and $V_2$. Use the parallel operator $||$ in your expression whenever applicable.
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa16-q1-2.png)
+
+q1_2_s: |
+  **Solutions:** First, we find the current running through $R_1, i_1$.
+  <hr class="s1" />
+  Notice how the circuit is the same combination of the resistors from part a in series with $R_5$:
+  <hr class="s1" />
+  $i_1 = \frac{V_S}{R_{eq} + R_5}$
+  <hr class="s1" />
+  We can view this as a current divider problem, and thus use the current divider formula:
+  <hr class="s1" />
+  $i_2 = i_1 \frac{(R_3 + R_4) || R_2}{R_2}$
+  <hr class="s1" />
+  Substituting for $i_1$:
+  <hr class="s1" />
+  $i_2 = \frac{V_S}{R_{eq} + R_5} * \frac{(R_3 + R_4) || R_2}{R_2}$
+  <hr class="s1" />
+  $i_2 = \frac{V_S}{R_5 + R_1 + (R_3 + R_4) || R_2} * \frac{(R_3 + R_4) || R_2}{R_2}$
+
+q2_1: |
+  # 2. Take Node of the Voltage Sources (8 points)
+  Use nodal analysis to solve for the voltages $V_x$ and $V_y$. Use the following values for numerical calculations.
+  <hr class="s1" />
+  **Note the polarity on the voltage sources. Solutions that solve the circuit without using nodal analysis will not be awarded full credit.**
+  $$\begin{align} V_1 = 5 V & \quad R_1 = 10 \Omega \\\\
+    V_2 = 5 V & \quad R_2 = 50 \Omega \\\\
+    G = \frac{1}{4}S & \quad R_3 = 40 \Omega \end{align}$
+    <hr class="s2" />
+    ![circuit](/img/ee16a/mt2-fa16-q2-1.png)
+
+q2_1_s: |
+  **Solutions:**
+  <hr class="s2" />
+  ,![circuit](/img/ee16a/mt2-fa16-q2-2.png)
+  <hr class="s2" />
+  Set up a nodal equation setting the sum of currents out of our single node $V_y$ to zero:
+  $$i_1 + i_3 - GV_x = 0 \\\\
+    \frac{V_y + 5}{10} + \frac{V_y - 5}{40} - \frac{1}{4}(V_y + 5) = 0 \\\\
+    4(V_y + 5) + (V_y - 5) - 10(V_y + 5) = 0 \\\\
+    4V_y + 20 + V_y - 5 - 10V_y - 50 = 0 \\\\
+    -5V_y - 35 = 0 \\\\
+    V_y = -7 \\\\
+    V_x = V_y + 5 = -7 + 5 = -2$$
+  Our solution:
+  $$V_x = -2V$$
+  $$V_y = -7V$$
+
+q3_1: |
+  # 5. Thévenin and Norton Equivalence (10 points)
+  ![circuit](/img/ee16a/mt2-fa16-q3-1.png)
+  <hr class="s2" />
+  (a) **(4 points)** Redraw the circuit with all sources nulled, then calculate $R_{th}$ between terminals $a$ and $b$.
+
+q3_1_s: |
+  **Solutions:**
+  <hr class="s1" />
+  When we null the voltage source, it becomes a short circuit. When we null the current source, it becomes an open circuit. So with the nulled sources, our ciruit looks like this:
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa16-q3-1.png)
+  <hr class="s2" />
+  To calculate $R_{th}$, we simplify our circuit with nulled sources down into a single resistor, from the perspective of $R_1$. This leaves us with $R_2$ and $R_3$ in parallel with $R_1$. So,
+  $$R_{th} = (R_2 + R_3) || R_1$$
+
+q3_2: |
+  (b) **(6 points)** Find the Thévenin voltage between the terminals $a$ and $b$. Hint: superposition may be useful.
+
+q3_2_s: |
+  **Solutions:**
+  <hr class="s1" />
+  We can either determine $V_{oc}$ directly, or find $I_{sc}$ and solve for $V_{th}$ using $R_{th}$ from the previous part. Here, we will determine $V_{oc}$ with superposition.
+  <hr class="s1" />
+  With only $V_S$ on, we have a simple voltage divider. So
+  $$V_{1_V} = V_s \frac{R_1}{R_1 + R_2 + R_3}$$
+  With only $I_S$ on, we have a bit more work to do. We see a current divider, with $R_3$ in parallel with $R_2 + R_1$. So the current through resistor $R_1$ is
+  $$I_1 = I_S \frac{R_3}{R_1 + R_2 + R_3}$$
+  And the voltage drop $V_1$ across $R_1$ is $V_1 = R_1I_1 = R_1I_S \frac{R_3}{R_1 + R_2 + R_3}$
+  <hr class="s1" />
+  So
+  $$V_{th} = V_{oc} = V_{1_V} + V_{1_t} = R_1I_S \frac{R_3}{R_1 + R_2 + R_3} + V_S\frac{R_1}{R_1 + R_2 + R_3}$$
+
+q4_1: |
+  # 6. Superposition and Op-Amps (8 points)
+  ![circuit](/img/ee16a/mt2-fa16-q4-1.png)
+  <hr class="s2" />
+  (a) **(2 points)** For the circuit above, label the polarity of the terminals of the op-amp such that there is negative feedback.
+
+q4_1_s: |
+  **Solutions:** The top terminal should be the inverting input, and the bottom terminal should be the non-inverting input.
+
+q4_2: |
+  (b) **(6 points)** Find $V_O$ in terms of $V_{in,1}$ and $V_{in,2}$. (**Hint:** Assume the op-amp is in negative feedback, then use superposition and golden rules).
+
+q4_2_s: |
+  **Solutions:** Considering just the effect of $V_{in,1}$, we have
+  $$V_O = -V_{in,1} \frac{6\Omega}{2\Omega} = -3V_{in,1}$$
+  Now, considering just the effect of the voltage source $V_S$, we find
+  $$V_O = V_{in,2} + \frac{6\Omega}{2\Omega}V_{in,2} = 4V_{in,2}$$
+  Thus,
+  $$V_O = 4V_{in,2} - 3V_{in,1}$$
+
+q5_1: |
+  # 7. 16A-Spice (10 points)
+  (a) **(5 points)** Write down the incidence matrix, $\mathbf{F}$, of this circuit. Let node $v_n$ correspond to column $n$ in your incidence matrix, and current $i_m$ correspond to row $m$.
+
+q5_1_s: |
+  **Solutions:**
+  <hr class="s1" />
+  The incidence matrix is:
+  <hr class="s1" />
+  $\mathbf{F} = \left[ \begin{array}{c c c} 1 & 0 & -1 \\\\ 1 & -1 & 0 \\\\ 0 & 1 & -1 \end{array} \right]$
+
+q5_2: |
+  (b) **(5 points)** Determine the rank of $\mathbf{F}$, and a basis for the null space of $\mathbf{F}$.
+
+q5_2_s: |
+  **Solutions:**
+  <hr class="s1" />
+  The rank is $2$, because we can add a scalar to all possible resulting voltages in this circuit and still satisfy the potential difference constraints it imposes on the solutions. You could also mechanically compute the rank by row reduction.
+  <hr class="s1" />
+  A basis for the null space of $F$ is $\\{\left[ \begin{array}{c} 1 \\\\ 1 \\\\ 1 \end{array} \right]\\}$.
+
+q6_1: |
+  # 8. Charge-Sharing (8 points)
+  Initially, all capacitors are uncharged, and have the same capacitance $C$. For $t < 0$, the switch $\phi_1$ is *on* and $\phi_2$ is *off* and the circuit has achieved steady state. Later, at $t = 0$, $\phi_1$ is *off* and $\phi_2$ is *on*; then the system is allowed to reach steady state.
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa16-q6-1.png)
+  <hr class="s2" />
+  What is the voltage $V_x$ at $t ≫ 0$?
+
+q6_1_s: |
+  **Solutions:**
+  <hr class="s1" />
+  $V_x = \frac{V_S}{4}$.
+  <hr class="s1" />
+  Note that $C_{eq}$ of $2$ capacitors of capacitance $C$ in series is $C/2$ and in parallel is $2C$. Based on the symmetry of the setup, the voltage splits evenly across the capacitor on the left and the capacitor setup on the right. This implies half the initial voltage $V_S$ exists on both sides. On the capacitor network on the right, symmetry indicates a secondary split across each capacitor in series.
+
+q7_1: |
+  # Section 2 (44 points)
+  # 9. $\mathbf{\text{Operation}}^{TM}$ (10 points)
+  You’re an intern at Hasbro working on improvements to the game Operation. Operation is a board game that consists of an "operating table" (the board), overlaid with a drawing of the "patient". In the surface of the board/patient are a number of metal-lined cavities filled with plastic bones and other body parts. The player tries to remove these objects with metal tweezers without touching the edge of the cavity opening. Touching the cavity opening turns on a light and causes a loud buzzer to go off.
+  <hr class="s1" />
+  You are given the following supplies:
+  - buzzer: This can be modeled as a resistor, and it buzzes when a voltage is applied across it.
+  - lamp: The lamp can be modeled as a resistor, and it lights up when current runs through it. The brightness of the lamp is directly proportional to the current passing through it.
+  - battery: An ideal voltage source.
+  - switch: When the player makes a mistake and touches the cavity opening with the tweezers, the tweezers act as a switch and close the circuit.
+
+  <hr class="s2" />
+  ![circuit symbols](/img/ee16a/mt2-fa16-q7-1.png)
+  <hr class="s2" />
+  (a) **(4 points)** Design a circuit that makes the buzzer buzz and the lamp turn on when the player makes a mistake.
+
+q7_1_s: |
+  **Solutions:** The objective is to have it so current flows through the buzzer and lamp when the user turns on the switch, meaning any answer with no closed circuit when the switch is open works. A couple of possible solutions:
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa16-q7-2.png)
+  <hr class="s2" />
+  For putting elements in series, the order of components does not matter - closing the switch creates a closed loop for charge to flow.
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa16-q7-3.png)
+  <hr class="s2" />
+  For elements in parallel, the switch must not be parallel to the buzzer or the lamp, otherwise there will be a closed circuit independent of the switch.
+
+q7_2: |
+  (b) **(6 points)** Market research has shown that buzzers scare small children, so you've been told to <u>remove the buzzer</u> and use <u>two identical lamps</u> and use two identical lamps instead of just one. **Assuming all power dissipated by the lamps is converted to light, design a circuit that maximizes the total light emitted by the lamps. Calculate the power P dissipated by the lamps.** *Note: You do not need to rigorously prove that your circuit maximizes the light emitted, but explain your design choices.*
+
+q7_2_s: |
+  **Solutions:** First, we know that there should be no closed circuits when the switch is open. This can be written as:
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa16-q7-4.png)
+  <hr class="s2" />
+  where $R_{total}$ represents the equivalent resistance of your arrangement of lamps.
+  <hr class="s2" />
+  Next, we'll try to maximize the lamps' brightness. In other words, we're trying to maximize the power dissipated by $R_{\text{lamp, eq}}$.
+  $$\begin{align}P &= IV \\\\ &= \frac{V^2}{R} \end{align}$$
+  From the diagram above, we know the voltage is fixed at $V_{bat}$, so we need to maximize the current drawn from the battery, i.e. minimize $R_\text{lamp, eq}$. This can be done by placing the lamps in parallel:
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa16-q7-5.png)
+  <hr class="s2" />
+  From here, we know $R_{\text{lamp, eq}} = \frac{R_\text{lamp}}{2}$ and the current seen by each resistor is the same, so we can calculate the power:
+  $$\begin{align} P &= \frac{V_{\text{bat}}^2}{\frac{R_{\text{lamp}}}{2}} \\\\
+  &= 2 \left( \frac{V_{\text{bat}}^2}{R_{\text{lamp}}}\right) \end{align}$$
+
+q8_1: |
+  # 10. This Is Your Brain on EE (18 points)
+  Medical instruments such as electroencephalograms (EEG) take very small electric signals from the body and scale them into a voltage that we can measure. EEG’s take voltage readings from the scalp and are used to determine brain activity. There are some challenges in designing a circuit for measuring the brain:
+  - The human body is very noisy, so we have to take multiple sensor readings and average them.
+  - The brain’s electrical signals are very small, usually in the microvolt range.
+
+  <hr class="s2" />
+  In this problem you will design an EEG circuit that will tackle these problems.
+  <hr class="s2" />
+  (a) **(4 points)** In the circuit below, determine $V_\text{out}$ in terms of $v_1, v_2, v_3, R_1, R_2,$ and $R_3$. Use the parallel operator $||$ wherever applicable.
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa16-q8-1.png)
+
+q8_1_s: |
+  **Solutions:**
+  <hr class="s1" />
+  Using superposition:
+  <hr class="s1" />
+  $$V_\text{out} = \frac{R_2 || R_3}{R_1 + R_2 || R_3}v_1 + \frac{R_1 || R_3}{R_1 || R_3 + R_2}v_2 + \frac{R_1 || R_2}{R_1 || R_2 + R_3}v_3$$
+
+q8_2: |
+  (b) **(7 points)** Suppose we want to mitigate noise and interference from our circuit and body by averaging the reading across multiple areas of our scalp. Design a circuit that takes the average of three EEG readings. Model the $k^{\text{th}}$ EEG reading as a voltage source labelled $v_k$ in series with a source resistance of $1k\Omega$. Also, provide an equation for $V_{out}$ in terms of the $v_k$’s. You may use resistors on any value for this design.
+  <hr class="s1" />
+  **Hint: the circuit from part (a) might be useful.**
+
+q8_2_s: |
+  **Solutions:**
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa16-q8-2.png)
+
+q8_3: |
+  (c) **(7 points)** Let the typical voltage range of values for EEG signals be from $−10mV$ to $10mV$. Design a circuit that takes the output of your circuit in part (b) and scales the EEG signal, while maintaining the sign, to a voltage range of $−2.5V$ to $2.5V$. Give an equation that relates the output to the input. You may use any combination of resistors or ideal op-amps for this question.
+
+q8_3_s: |
+  **Solutions:**
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa16-q8-3.png)
+  <hr class="s2" />
+  We could have also used an inverting summer circuit and then invert the output of that with unity gain. There are several correct solutions to this problem.
+
+q9_1: |
+  # 11. Voltage Regulators (16 points)
+  In this problem we will explore how we can use charge sharing to make a better voltage regulator.
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa16-q9-1.png)
+  <hr class="s2" />
+  (a) **(4 points)** Switches $\phi_1$ are both *on* in Phase $1$. All other switches are *off*. Find the charge on and voltage across each capacitor as a function of $V_{in}, C_1,$ and $C_2$. Assume the capacitors are uncharged before Phase $1$.
+
+q9_1_s: |
+  **Solutions:** The two capacitors in series have a total capacitance of $\frac{C_1C_2}{C_1 + C_2}$. We know there is $V_S$ volts across this capacitor, and thus $V_S \frac{C_1C_2}{C_1 + C_2}$ charge. The charge on $C_1$ must be equal to the charge on $C_2$. Knowing the charge on each capacitor, we know the voltage across both. Therefore the voltage cross $C_1$ is $\frac{C_2}{C_1 + C_2}V_S$. The voltage across $C_2$ is similarly $\frac{C_1}{C_1 + C_2}V_S$.
+
+q9_2: |
+  (b) **(4 points)** In Phase $2$, switches $\phi_2$ are both *on*, all other switches are *off*. What are the charges on $C_1$ and $C_2$ in Phase $2$ as a function of $V_{out}, C_1,$ and $C_2$?
+
+q9_2_s: |
+  **Solutions:** The charge on $C_1$ is simply $C_1V_{out}$. Similarly the charge on $C_2$ is $C_2V_{out}$.
+
+q9_3: |
+  (c) **(4 points)** Find $V_{out}$ as a function of $V_{in}, C_1,$ and $C_2$.
+
+q9_3_s: |
+  **Solutions:** We know the total charge in the system is conserved between Phase $1$ and Phase $2$. There was charge $V_s \frac{C_1C_2}{C_1 + C_2}$ on each capacitor, so the total charge in Phase $1$ is $2V_s\frac{C_1C_2}{C_1 + C_2}$. Since we know charge is conserved, thus must be equal to the total charge in Phase $2$.
+  $$2V_S\frac{C_1C_2}{C_1 + C_2} = (C_1 + C_2)V_{out}$$
+  $$V_{out} = 2\frac{C_1C_2}{(C_1 + C_2)^2}V_S$$
+
+q9_4: |
+  (d) **(4 points)** Assume we have chosen $C_1 = C_2 = C$. One of the most important metrics in voltage regulators is efficiency. For a switching circuit such as this, we calculate efficiency as the total energy stored in the capacitors in Phase $2$ divided by the total energy stored in the capacitors in Phase $1$. Find the efficiency of this circuit.
+
+q9_4_s: |
+  **Solutions:** In both phases, the energy stored on the capacitors is the same.Thus there is no loss in switching. Intuitively we can see this because initially, both capacitors had $\frac{V_2}{2}$ volts on them. Then, when in parallel, they had the same $V_S$.
+  <hr class="s1" />
+  Mathematically we can see this by calculating the energy on the capacitors in each case.
+  <hr class="s1" />
+  $$E = \frac{1}{2}CV^2$$
+  $$E_1 = \frac{1}{2}C_1(V_1)^2 + \frac{1}{2}C_2(V_2)^2$$
+  $$E_1 = \frac{1}{8}C(V_{in})^2 + \frac{1}{8}C(V_{in})^2$$
+  $$E_2 = \frac{1}{2}C_1(V_{out})^2 + \frac{1}{2}C_2(V_{out})^2$$
+  $$E_2 = \frac{1}{8}C(V_{in})^2 + \frac{1}{8}C(V_{in})^2$$
+  We see the energy in both phases is equal. This system is thus $100$% efficient.
