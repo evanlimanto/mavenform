@@ -1,0 +1,466 @@
+course: 'ee16a'
+ref: 'mt2-fa16'
+
+type: 'mt2'
+term: 'fa16'
+prof: 'Ayazifar, Stojanovic'
+
+questions: {
+  'q1': 'Resistor Combinations',
+  'q2': 'Take Node of the Voltage Sources',
+  'q3': 'Thévenin and Norton Equivalence',
+  'q4': 'Superposition and Op-Amps',
+  'q5': '16A-Spice',
+  'q6': 'Charge-Sharing',
+  'q7': 'Operation^TM',
+  'q8': 'This Is Your Brain on EE',
+  'q9': 'Voltage Regulators',
+}
+
+parts: {
+  'q1': 2,
+  'q2': 3,
+  'q3': 1,
+  'q4': 3,
+  'q5': 2,
+  'q6': 3,
+  'q7': 3,
+  'q8': 5,
+}
+
+q1_1: |
+  # Section 1: Analysis questions
+  # 1. You Can't Divide Me! (9 pts)
+  (a) **(4 pts)** Find $V_{out}$ as a function of $V_{in}$.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q1-1.png)</p>
+
+q1_1_s: |
+  **Solutions:** No current flows through the $3k\Omega$ resistor, so this is a classic voltage divider. Thus,
+  $$V_{out} = \frac{5k\Omega}{4k\Omega + 5k\Omega}V_{in} = \frac{5}{9}V_{in}$$
+  Students should either state that they are using the "voltage divider equation" or derive it from KCL/KVL/Ohm’s Law.
+  $$I = \frac{V_{In}}{R_{Eq}} = \frac{V_{in}}{4k\Omega + 5k\Omega}$$
+  $$V_{out} = I \cdot 5k\Omega = \frac{5}{9}V_{in}$$
+
+q1_2: |
+  (b) **(5 pts)** Find $V_{out}$ as a function of $V_{in}$.
+  <hr class="s1" />
+  *(Hint: Pay attention to where the positive and negative terminals of $V_{out}$ are.)*
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q1-2.png)</p>
+
+q1_2_s: |
+  **Solutions:** First, combine the two bottom resistors into a single equivalent resistor:
+  $$R_{eq} = \left(\frac{1}{3k\Omega} + \frac{1}{6k\Omega} \right)^{-1} = 2k\Omega$$
+  So we simplify the circuit to:
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q1-3.png)</p>
+  <hr class="s2" />
+  This is simply a voltage divider with an inconveniently labelled $V_{out}$. Applying the voltage divider relation:
+  $$-V_{out} \frac{V_{in}R_1}{R_1 + R_2} = \frac{3V_{in}}{5}$$
+  So our solution is:
+  $$V_{out} = -\frac{3}{5}V_{in}$$
+
+q2_1: |
+  # 2. Circuits (14 pts)
+  (a) **(4 pts)** Given the circuit shown below:
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q1-2.png)</p>
+  <hr class="s2" />
+  Use **only KCL and Ohm's Law** to set up a system of equations relating each of the labeled currents $(I_1, I_2, I_3)$ and voltages $(V_1, V_2)$. Then construct a $3\text{ x }5$ matrix $A$ representing this system of equations such that $Ax = 0$ where $x$ is:
+  $$x = \left[ \begin{array}{c} I_1 \\\\ I_2 \\\\ I_3 \\\\ V_1 \\\\ V_2 \end{array} \right]$$
+
+q2_1_s: |
+  **Solutions:**
+  $$I_3 = I_1 + I_2$$
+  $$I_3 = \frac{V_2 - 0}{3 \Omega}$$
+  $$I_1 = \frac{V_1 - V_2}{2 \Omega}$$
+  $$\left[ \begin{array}{c c c c c} 1 & 1 & -1 & 0 & 0 \\\\ 0 & 0 & -1 & 0 & \frac{1}{3} \\\\ -1 & 0 & 0 & \frac{1}{2} & -\frac{1}{2} \\\\ \end{array} \right] \left[ \begin{array}{c} I_1 \\\\ I_2 \\\\ I_3 \\\\ V_1 \\\\ V_2 \end{array} \right] = \left[ \begin{array}{c} 0 \\\\ 0 \\\\ 0 \end{array} \right]$$
+
+q2_2: |
+  (b) **(6 pts)** For the matrix $A$ provided below, which may or may not be the matrix you constructed in a), find a basis for the nullspace of $A$.
+  $$A = \left[ \begin{array}{c c c c c} 0 & 0 & 1 & 0 & 3 \\\\ -1 & 1 & 1 & 0 & 0 \\\\ 0 & -1 & 0 & 2 & -5 \end{array} \right]$$
+
+q2_2_s: |
+  **Solutions:**
+  $$(1) \left[ \begin{array}{c c c c c} 0 & 0 & 1 & 0 & 3 \\\\ -1 & 1 & 1 & 0 & 0 \\\\ 0 & -1 & 0 & 2 & -5 \end{array} \right] \text{ ~ } (2) \left[ \begin{array}{c c c c c} 1 & -1 & -1 & 0 & 0 \\\\ 0 & 1 & 0 & -2 & 5 \\\\ 0 & 0 & 1 & 0 & 3 \end{array} \right] \text{ ~ } (3) \left[ \begin{array}{c c c c c} 1 & 0 & 0 & -2 & 8 \\\\ 0 & 1 & 0 & -2 & 5 \\\\ 0 & 0 & 1 & 0 & 3 \end{array} \right]$$
+  From (1) to (2), swap rows from $\left[ \begin{array}{c} \vec{a} \\\\ \vec{b} \\\\ \vec{c} \end{array} \right]$ to $\left[ \begin{array}{c} \vec{b} \\\\ -\vec{c} \\\\ \vec{a} \end{array} \right]$.
+  <hr class="s1" />
+  From (2) to (3), from $\left[ \begin{array}{c} \vec{b} \\\\ -\vec{c} \\\\ \vec{a} \end{array} \right]$ to $\left[ \begin{array}{c} \vec{b} - \vec{c} + \vec{a} \\\\ -\vec{c} \\\\ \vec{a} \end{array} \right]$.
+  <hr class="s2" />
+  Rewrite as equations:
+  $$I_1 - 2V_1 + 8V_2 = 0$$
+  $$I_2 - 2V_1 + 5V_2 = 0$$
+  $$I_3 + 3V_2 = 0$$
+  Rearrange equations:
+  $$I_1 = 2V_1 - 8V_2$$
+  $$I_2 = 2V_1 - 5V_2$$
+  $$I_3 = -3V_2$$
+  $$\vec{x} = V_1 \left[ \begin{array}{c} 2 \\\\ 2 \\\\ 0 \\\\ 1 \\\\ 0 \end{array} \right] + V_2 \left[ \begin{array}{c} -8 \\\\ -5 \\\\ -3 \\\\ 0 \\\\ 1 \end{array} \right]$$
+  $$\mathcal{N}(A) = \left\\{ \left[ \begin{array}{c} 2 \\\\ 2 \\\\ 0 \\\\ 1 \\\\ 0 \end{array} \right] , \left[ \begin{array}{c} -8 \\\\ -5 \\\\ -3 \\\\ 0 \\\\ 1 \end{array} \right] \right\\}$$
+
+q2_3: |
+  (c) **(4 pts)** Explain what the nullspace of the $A$ matrix you found in part (a) means in the context of this circuit.
+
+q2_3_s: |
+  **Solutions:** Since $A\vec{x} = 0$, the nullspace is the same as the solution space. Therefore, any linear combination of the nullspace basis forms a valid set of voltage and current values for the circuit. Notice that the nullspace is $2$-dimensional. This makes sense: the set of valid voltages/currents in this topology is exactly specified by values of the voltage sources and current source.
+
+q3_1: |
+  # 3. Look At That Bling (8 pts)
+  Use the Golden Rules to derive $V_{out}$ as a function of $V_1$ and $V_2$ for the circuit shown below:
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q3-1.png)</p>
+
+q3_1_s: |
+  **Solutions:**
+  <hr class="s2" />
+  Approach A: Use superposition
+  <hr class="s1" />
+  (1) Solve for $V_{out}$ due to $V_1$: to do this, we replace $V_2$ with a wire. The circuit look like
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q3-2.png)</p>
+  <hr class="s2" />
+  This is just an inverting amplifier, so $V_{out} = -\frac{R_2}{R_1} \cdot V_1$.
+  <hr class="s2" />
+  (2) Solve for $V_{out}$ due to $V_2$: to do this, we replace $V_1$ with a wire. The circuit looks like
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q3-3.png)</p>
+  <hr class="s2" />
+  This is just a non-inverting amplifier with a voltage divider in front of it.
+  $$V^{+} = \frac{R_2}{R_1 + R_2} \cdot V_2$$
+  $$V_{out,2} = \frac{R_1 + R_2}{R_1} \cdot V^{+} = \frac{R_2}{R_1} \cdot V_2$$
+  (3) Combine: $V_{out} = V_{out,1} + V_{out,2} = -\frac{R_2}{R_1} \cdot {V_1 - V_2}$
+  <hr class="s2" />
+  Approach B: use Golden rules + KCL/KVL/Ohm's Law
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q3-4.png)</p>
+  <hr class="s2" />
+  $$V^{+} = I_2 \cdot R_2, I_2 = \frac{V_2}{R_1 + R_2}$$
+  Hence
+  $$V^{+} = \frac{R_2}{R_1 + R_2} \cdot V_2$$
+  $$I_1 = \frac{V_1 - V^{-}}{R_1}, V^{+} = V^{-}$$
+  Hence
+  $$I_1 = \frac{V_1 - \frac{R_2}{R_1 + R_2}}{R_1}$$
+  $$\begin{align}V_{out} &= V^{-} - I_1 \cdot R_2 \\\\ &= \frac{R_2}{R_1 + R_2} \cdot V_2 - \frac{R_2}{R_1} \cdot (V_1 - \frac{R_2}{R_1 + R_2} \cdot V_2) \\\\ &= \frac{R_2}{R_1} \cdot V_2 - \frac{R_2}{R_1} \cdot V_1 \\\\ &= -\frac{R_2}{R_1}(V_1 - V_2)\end{align}$$
+
+q4_1: |
+  # 4. Big Caps Reconnected (12 pts)
+  (a) **(4 pts)** For the circuit shown below, assume that the $\phi_1$ switches are initially closed and the $\phi_2$ switch is initially open. Calculate $V_{out}$ after the $\phi_1$ switches are open and the $\phi_2$ switch is closed.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q4-1.png)</p>
+
+q4_1_s: |
+  **Solutions:**
+  <hr class="s1" />
+  In phase $1$, the source directly charges $C1$ and $C2$ is shorted.
+  <hr class="s1" />
+  phase $\phi_1$:
+  $$V_{C1} = -2V,V_{C2} = 0V$$
+  $$Q_{C1} = -2V \cdot 1\mu F,Q_{C2} = 0V \cdot 10 \mu F$$
+  $$Q_{tot1} = -2\mu C$$
+  In phase $2$, charge is shared between $C1$ and $C2$.
+  <hr class="s1" />
+  phase $\phi_2$:
+  $$V_{C1} = V_{C2} = V_{out}$$
+  $$Q_{C1} = V_{out} \cdot 1\mu F,Q_{C2} = V_{out} \cdot 10 \mu F$$
+  $$Q_{tot2} = V_{out} \cdot (1\mu F + 10\mu F) = V_{out} \cdot 11 \mu F$$
+  <hr class="s2" />
+  $$Q_{tot1} = Q_{tot2}$$
+  $$-2\mu C = V_{out} \cdot 11 \mu F$$
+  $$V_{out} = -\frac{2}{11}V$$
+
+q4_2: |
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q4-2.png)</p>
+  <hr class="s2" />
+  (b) **(4 pts)** What is the charge on each capacitor when the $\phi_1$ switches are closed and the $\phi_2$ switch is open?
+  <hr class="s1" />
+  *Hint:* Be sure to measure the voltage across each of the capacitors in the way we have indicated on the diagram, and then pay careful attention to the signs of the charges.
+
+q4_2_s: |
+  **Solutions:**
+  $$V_{C1} = -2V$$
+  $$Q_{C1} = 1\mu F \cdot (-2V) = -2 \mu C$$
+  $$V_{C2} = 1V$$
+  $$Q_{C2} = 10 \mu F \cdot 1V = 10 \mu C$$
+
+q4_3: |
+  (c) **(4 pts)** If the $\phi_2$ switch is closed and the $\phi_1$ switches are opened after the initial configuration from part (b), what is $v_{out}$?
+
+q4_3_s: |
+  **Solutions:**
+  <hr class="s2" />
+  $$Q_{tot} = -2\mu C + 10\mu C = 8\mu C$$
+  $$v_{out} = \frac{Q_{tot}}{C_{tot}} = \frac{8\mu C}{11\mu F} = \frac{8}{11}V$$
+
+q5_1: |
+  # Section 2: Free-form Problems
+  # 5. Black Boxes (11 pts)
+  (a) **(6 pts)** Derive the Thévenin equivalent of the circuit shown below; the equivalence should be found from the $+$ and $-$ terminals used to measure $V_{out}$. Be sure to provide numerical values for all the components of the equivalent circuit.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q5-1.png)</p>
+
+q5_1_s: |
+  **Solutions:** One way to find the Thévenin equivalent circuit is to find the open circuit voltage and the short circuit current, or $V_{oc}$ and $I_{sc}$, respectively.
+  <hr class="s2" />
+  We'll start by finding $V_{oc}$. Since there is only one closed loop in this configuration, there is only one current and we can solve for $V_{oc}$ using that and Ohm’s Law.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q5-1.png)</p>
+  <hr class="s2" />
+  $$I_1 = \frac{5V - V_{oc}}{1k\Omega}$$
+  $$I_2 = \frac{V_{oc} + 3V}{1k\Omega}$$
+  $$I_1 = I_2$$
+  $$5V - V_{oc} = V_{oc} + 3V$$
+  $$V_{oc} = 1V$$
+  Now to find $I_{SC}$:
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q5-1.png)</p>
+  <hr class="s2" />
+  $$\begin{align} I_{SC} &= \frac{5V}{1k} + \frac{-3V}{1k} \\\\
+    &= \frac{2V}{1k} \\\\
+    &= 2mA \end{align}$$
+  And from this, we can find $R_{Th} = \frac{V_{OC}}{I_{SC}}$:
+  $$\begin{align} R_{Th} &= \frac{V_{OC}}{I_{SC}} = \frac{1V}{2mA} \\\\
+    &= 500 \Omega \end{align}$$
+  And with this, we have our final answer:
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q5-4.png)</p>
+
+q5_2: |
+  (b) **(5 pts)** Your colleague from Stanford approaches you with the circuit shown below and claims that since they used ideal op-amps in their circuit, the circuit will always provide the same $V_L$ for any positive value of $R_L$:
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q5-5.png)</p>
+  <hr class="s2" />
+  Is your colleague's claim correct? Briefly explain why or why not.
+
+q5_2_s: |
+  **Solutions:** Your colleague’s suggestion will not work. Even is all of your op-amps are ideal, you still have a voltage divider after the last op-amp, meaning you still experience a change in voltage across $R_L$ as the value of that resistor changes. Although operational amplifiers (especially the ideal ones) are magical, they still need to be used properly for them to work their magic!
+
+q6_1: |
+  # 6. IoTatron (13 pts)
+  You are an engineer who has designed a new device called the "IoTatron" that has three electrical contacts. It has a symbol and an equivalent circuit that are pictured below. *Reminder:* A dependent current source acts just like a normal current source, but (in this case) with the value of the current being set by a control voltage.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q6-1.png)</p>
+  <hr class="s2" />
+  (a) **(4 pts)** For an IoTatron with an externally applied voltage of $V_{in}$ as shown below, write an equation for $V_{out}$ in terms of $V_{in}, g_m,$ and $R_0$.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q6-2.png)</p>
+
+q6_1_s: |
+  **Solutions:** (Note that $V_0$ in the figure should be labeled as $V_{out}$ to be consistent with the problem description. This was given as a live clarification)
+  <hr class="s2" />
+  KCL dictates that the current through $R_0$ is $-g_mV_g$. Note that this current must be negative due to passive sign conventions.
+  <hr class="s2" />
+  Hence, Ohm's law dictates that $V_{out} = -g_mV_gR_0$.
+  <hr class="s1" />
+  KVL dictates that $V_g = V_{in}$. Therefore, $V_{out} = -g_mV_{in}R_0$.
+
+q6_2: |
+  (b) **(4 pts)** You have an IoTatron with $R_o = \infty$, and have connected it in the circuit pictured below (note that $R_o = \infty$ has been removed since it is now an open-circuit). Solve for $V_c$ in terms of $g_m$ and $I_{in}$.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q6-3.png)</p>
+
+q6_2_s: |
+  **Solutions:**
+  <hr class="s1" />
+  KCL dictates that $g_mV_g = I_{in}$. Therefore, $V_g = \frac{I_{in}}{g_m}$.
+  <hr class="s1" />
+  KVL dictates that $V_c = V_g$.
+  <hr class="s1" />
+  Therefore, $V_c = \frac{I_{in}}{g_m}$.
+
+q6_3: |
+  (c) **(5 pts)** You attach another IoTatron with $R_o = \infty$ to the one in part (b), but this one also has a finite $R_L$, resulting in the circuit shown below. Solve for $I_L$ in terms of $g_m, I_{in}$, and $R_L$.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q6-4.png)</p>
+  <hr class="s2" />
+  **Solutions:** KVL dictates that $V_{g2} = V_C$.
+  <hr class="s1" />
+  We know from part (b) that $V_c = \frac{I_{in}}{g_m}$. Therefore, $g_mV_{g2} = g_m\frac{I_{in}}{g_m} = I_{in}$.
+  <hr class="s1" />
+  KCL dictates that $I_L = g_mV_{g2}$. Therefore, $I_L = I_{in}$.
+
+q7_1: |
+  # 7. Fruity Fred (12 pts + BONUS 10 pts)
+  Fruity Fred just got back from Berkeley Bowl with a bunch of mangoes, pineapples, and coconuts. He wants to sort his mangoes in order of weight, so he decides to use his knowledge from EE 16A to build a scale.
+  <hr class="s2" />
+  He finds two identical bars of material ($M_1$ and $M_2$) of length $L$ (meters) and cross-sectional area $A$ ($\text{meters}^2$), which are made of a material with resistivity $ρ$. He knows that the length of these bars decreases by $k$ meters per Newton of force applied, while the cross-sectional area remains constant.
+  <hr class="s2" />
+  He builds his scale as shown below, where the top of the bars are connected with an ideal electrical wire. The left side of the diagram shows the scale at rest (with no object placed on it), and the right side shows it when the applied force is $F$ (Newtons), causing the length to decrease by $kF$ meters. Fred’s mangoes are not very heavy, so $L ≫ kF$.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q7-1.png)</p>
+  <hr class="s2" />
+  (a) **(4 pts)** Let $R_{AB}$ be the resistance between nodes $A$ and $B$. Write an expression for $R_{AB}$ as a function of $A, L, \rho, F,$ and $k$.
+
+q7_1_s: |
+  **Solutions:** The length of each spring as a function of $f$ is $L - kf$.
+  <hr class="s1" />
+  The series combination of $R_1, R_2$ has a resistance $R_{AB} = R_1 + R_2 = \frac{2\rho (L - kf)}{A}$.
+
+q7_2: |
+  (b) **(8 pts)** Fred’s scale design is such that the resistance $R_{AB}$ changes depending on how much weight is placed on it. However, he really wants to measure a voltage rather than a resistance.
+  <hr class="s1" />
+  Design a circuit for Fred with an output voltage $V_{out} = −αR_{AB}$, where $α > 0$ is a constant with units $\frac{V}{\Omega}$. Your circuit should include $R_{AB}$, and **you may use any number of voltage sources, resistors, and op amps** in your design. Be sure to label your components and provide an expression relating their value to $\alpha$.
+
+q7_2_s: |
+  **Solutions:** One possible solution: use an inverting amplifier, which has $V_{out} = -\frac{R_{AB}}{R_1}V_{in}$. Then $\alpha = \frac{V_{in}}{R_1} > 0$.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q7-2.png)</p>
+
+q7_3: |
+  (c) **(BONUS: 10 pts)** Fruity Fred is rather fickle and now wants a circuit whose output voltage is directly proportional to the force $F$ applied on the scale.
+  <hr class="s1" />
+  Using only voltage sources, resistors, and op amps, design a circuit such that $V_{out} = βF$, where $β > 0$ is a constant of your choice with units $\frac{V}{\text{Newton}}$. Choose and label values for the components such that $β = 1 \frac{V}{\text{Newton}}$. (*Hint: you can do this by extending your circuit from the previous question.*)
+
+q7_3_s: |
+  **Solutions:** Let $V_{in}$ be the output from the circuit in (b). Then $V_1 = -\frac{R_{AB}}{R_1}V_{in} = -\frac{2\rho (L - kF)}{R_1A}V_{in} = \frac{2\rho k}{R_1A} \cdot V_{in} \cdot F - \frac{2\rho L}{R_1 A} \cdot V_{in}$.
+  <hr class="s1" />
+  Notice that to isolate the term proportional to $F$, the only thing we need to do is to get rid of the $-\frac{2\rho L}{R_1A} \cdot V_{in}$ term. We can achieve this by for example a simple voltage summer.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q7-3.png)</p>
+  <hr class="s2" />
+  $$V_{out} = \frac{V_m + V_2}{2}$$
+  $$V_{out} = \frac{\rho k}{R_1A} \cdot V_{in} \cdot F - \frac{\rho L}{R_1A} \cdot V_{in} + \frac{V_2}{2}$$
+  To get $V_{out} = 1 \frac{V}{N} \cdot F$:
+  $$\frac{\rho k}{R_1A} \cdot V_{in} = 1 \frac{V}{N}$$
+  $$\frac{\rho L}{R_1A} \cdot V_{in} = \frac{V_2}{2}$$
+  Hence:
+  $$\frac{V_{in}}{R_1} = \frac{A}{\rho k}$$
+  $$V_2 = \frac{2\rho L}{R_1 A}$$
+
+q8_1: |
+  # 8. Spinning Cs (18 pts + BONUS 10 pts)
+  In this problem, we’ll examine a stylized version of a 1D MEMS (Micro-Electro-Mechanical System) gyro- scope whose side view is shown below. It consists of a free-spinning non-conductive cylinder in the center with thickness $h$ and radius $r$. An arched conductive plate is attached to this cylinder, and there is a fixed (i.e., not rotating) arched conducting plate a small distance $d$ away. Note that air (with a dielectric constant of $\varepsilon_0$) separates the two conducting plates.
+  <hr class="s2" />
+  <p align="center">![cylinder](/img/ee16a/mt2-sp16-q8-1.png)</p>
+  <hr class="s2" />
+  For the following problems, define $C_g$ as the effective capacitance between $T_1$ and $T_2$. You can model the capacitors here as parallel plate capacitors. You can also assume that $R >> d$, so that the difference in surface area between the outer and inner plates is negligible. Ignore any capacitance that is not due to direct overlap between the plates (i.e., no fringing capacitance).
+  <hr class="s2" />
+  Since the outer plate is stationary while the cylinder is free to rotate, when the device turns, the inner and outer plates change alignment, thus changing the capacitance ($C_g$). For example, when the inner and outter plates are completely misaligned (as shown in the figure below with a top view of the gyroscope), $C_g = 0$.
+  <hr class="s2" />
+  <p align="center">![cylinder](/img/ee16a/mt2-sp16-q8-2.png)</p>
+  <hr class="s2" />
+  (a) **(4 pts)** The overlapping area between $T_1$ and $T_2$ is $Rθh$, where $θ$ is the angle of overlap in radians. Given that the conductive strips cover $\frac{1}{4}$ of the cylinder, what is the value of $C_g$ as a function of $\varepsilon_0, R, h,$ and $d$ for the configuration shown below where $θ = \frac{\pi}{4}$?
+  <hr class="s2" />
+  <p align="center">![cylinder](/img/ee16a/mt2-sp16-q8-3.png)</p>
+
+q8_1_s: |
+  **Solutions:** We model the system as a parallel plate capacitor with air as the dielectric, so we can use the equation:
+  $$C = \varepsilon_0 \frac{A}{d}$$
+  We use $A = R\theta h$ in place of the area. We only care about the overlapping angle here, which is $\theta = \frac{\pi}{4}$. Thus the capacitance is:
+  $$C_g = \varepsilon_0 \frac{R\theta h}{d} = \varepsilon_0 \frac{\pi Rh}{4d}$$
+
+q8_2: |
+  (b) **(4 pts)** Consider $\phi$ as the clockwise angle change in radians from the starting position shown in part (a), as shown below. Assuming your anwer to part (a) was that $C_g = C_{g,nom}$, write an equation for $C_g$ as a function of $\phi$ and $C_{g,nom}$.
+  <hr class="s2" />
+  <p align="center">![cylinder](/img/ee16a/mt2-sp16-q8-4.png)</p>
+
+q8_2_s: |
+  **Solutions:** We can again use the same parallel plate capacitor model, but now with a different angle. We keep $C_{g,nom}$ as the expression from the previous part.
+  <hr class="s1" />
+  We can use the changed angle in our equation:
+  $$\begin{align} C_g &= \varepsilon_0 \frac{R(\frac{\pi}{4} - \phi)h}{d} \\\\
+    &= \varepsilon_0 \frac{\pi Rh}{4d}\left( 1 - \frac{4\phi}{\pi} \right) \\\\
+    &= C_{g,nom}\left(1 - \frac{4\phi}{\pi}\right) \end{align}$$
+  Alternatively, we can look at the change in capacitance due to $\phi$.
+  $$\begin{align} C_g &= C_{g,nom} + \delta C_g \\\\
+    \delta C_g &= -C_{\phi} \\\\
+    &= -\varepsilon_0 \frac{R\phi h}{d} \\\\
+    C_g &= C_{g,nom} - \varepsilon_0 \frac{R \phi h}{d} \\\\
+    &= C_{g,nom} - \varepsilon_0 (\frac{\pi Rh}{4d})(\frac{4}{\pi} \phi) \\\\
+    &= C_{g,nom} (1 - \frac{4\phi}{\pi}) \end{align}$$
+
+q8_3: |
+  (c) **(5 pts)** Now let’s design some circuits that use the value of $C_g$ to extract some information about the gyroscope’s rotation (i.e., the current value of $\phi$). Using any combination of ideal circuit elements **except for current sources**, design a circuit that connects to $T_1$ and $T_2$, and that outputs a voltage that decreases in magnitude as the gyroscope cylinder rotates clockwise (i.e., as $\phi$ increases). You can assume that $−\frac{\pi}{4} \le \phi \le \frac{\pi}{4}$.
+
+q8_3_s: |
+  **Solutions:** We will approach this problem with the design process. There are multiple solutions,but we will use a familiar one.
+  <hr class="s1" />
+  **Goal:** When $\phi$ increases, the output voltage should decrease.
+  <hr class="s1" />
+  **Describe a solution:** As $\phi$ increases, based on the previous parts, $C_g$ will decrease. We can then use the capacitor equation $Q = CV$ to help us. Given our variable capacitance, we will need to manipulate the system in a way that gives us a variable output voltage.
+  <hr class="s1" />
+  **Implement:** Since we cannot use current sources, we cannot simply charge the capacitor up a set $Q$. Instead, we can use charge sharing just like in the capactive touchscreen we studied. Recall our simple charge sharing circuit below. Note that $\phi_1$ and $\phi_2$ here refer to the phases of charge sharing, not the gyroscope angle.
+  <hr class="s2" />
+  <p align="center">![cylinder](/img/ee16a/mt2-sp16-q8-5.png)</p>
+  <hr class="s2" />
+  The output of this circuit after the $2$ phases is $V_{out} = \frac{V_sC_g}{C_g + C_1}$. Though not linearly, $V_{out}$ definitely increases with $C_g$. Since $C_g$ decreases as $\phi$ increases, $V_{out}$ must decrease as $\phi$ increases. This meets the desired behavior!
+  <hr class="s1" />
+  There are a few aspects of this circuit that are important to notice. The capacitors must be arranged as they are, with the gyroscope capacitor charging first. While either arrangement of capacitors will let us use charge sharing, this arrangment gives us the $V_out$ behavior we desire.
+  <hr class="s1" />
+  We also need the switches to do charge sharing; otherwise, both capacitors will be charged to the same voltage.
+  <hr class="s1" />
+  The values of $V_{out}$ and $C_1$ are actually not important, as our equation is guaranteed. For simplicity, we can pick $V_{out} = 5V$ and $C_1 = C_{g,nom}$.
+  <hr class="s2" />
+  Thus a complete solution is:
+  <hr class="s2" />
+  <p align="center">![cylinder](/img/ee16a/mt2-sp16-q8-6.png)</p>
+
+q8_4: |
+  (d) **(5 pts)** Assuming your design from part (c) produces a $V_{sensor} = (0.5 − \frac{\phi}{\pi}) \cdot 1V$, design a new circuit that takes this $V_{sensor}$ as an input and that outputs $5V$ if the cylinder rotates counterclockwise from the initial position (i.e., $\phi ≤ 0$), and $−5V$ if it rotates clockwise (i.e., $\phi > 0$).
+
+q8_4_s: |
+  **Solutions:**
+  <hr class="s2" />
+  **Goal:** Given $V_{sensor}$, we want one of two outputs based on the rotation. A rotation of positive $\phi$ should yield $−5V$ and a rotation of negative $\phi$ should yield $5V$.
+  <hr class="s1" />
+  **Describe a Solution:** We want a binary output; the easiest solution to this that we know is an op amp as a comparator, so let’s see how we can use it.
+  <hr class="s1" />
+  We are provided $V_{sensor}$, so we know how the voltage out will be affected by changes in $\phi$. We want to have our threshold value of crossing from $−5V$ to $5V$ to occur when there is no rotation, so our $V_{ref}$ will be defined by $\phi = 0$.
+  <hr class="s1" />
+  **Implement:** From there, we need to see into which terminals we should plug our sensor and reference, so we look at how $V_{sensor}$ changes in $\phi$. A positive $\phi$ will give us a decrease in $V_{sensor}$, while a negative $\phi$ will gives us an increase. These follow (instead of oppose) the desired output behavior - that is, $V_{sensor}$ will increase as we output our positive voltage rail, and $V_{sensor}$ will decrease as we output our negative voltage rail. Since the change in the output has the same direction as the change in the input, we connect $V_{sensor}$ to the positive op amp terminal.
+  <hr class="s2" />
+  <p align="center">![cylinder](/img/ee16a/mt2-sp16-q8-7.png)</p>
+  <hr class="s2" />
+  All that is left is to calculate the $V_{ref}$ so we have a threshold voltage, and as we said, we can look at when $\phi = 0$.
+  $$\begin{align} V_{ref} &= (0.5 - \frac{\phi}{\pi})1V \\\\
+    &= (0.5 - \frac{0}{\pi})1V \\\\
+    &= 0.5V \end{align}$$
+  Thus a complete solution is:
+  <hr class="s2" />
+  <p align="center">![cylinder](/img/ee16a/mt2-sp16-q8-8.png)</p>
+
+q8_5: |
+  (e) **(BONUS: 10 pts)** Instead of letting the cylinder rotate freely, let’s connect it to a voltage-controlled motor that tries to keep the cylinder in its original orientation. The motor applies a torque clockwise if fed a positive voltage relative to ground, and applies a torque counterclockwise if fed a negative voltage relative to ground. At the original position, the motor should have $0V$ applied to it. In order for the motor not to apply more torque than necessary, the magnitude of the input voltage to the motor should only increase as the cylinder gets further from the original position.
+  <hr class="s2" />
+  In this problem, model the motor as a $10\Omega$ resistor. Design a circuit that drives the motor as described in order to keep the cylinder in the original orientation. You may re-use your design from part(c), but you will not receive full credit for this sub-part if the re-used design from (c) is incorrect.
+
+q8_5_s: |
+  **Solutions:** This question gets tricky if we do not keep track of everything, so let’s be very specific with the goal.
+  <hr class="s1" />
+  **Goal:**
+  - Output a $V_{motor}$ to apply torque (a rotation force). $V_{motor} > 0$ rotates the cylinder (applies torque) clockwise.
+  - Magnitude of $V_{motor}$ should change with the magnitude of rotation. It should not be a binary output.
+  - $V_{motor}$ should work to return the cylinder to the original orientation.
+
+  <hr class="s2" />
+  **Describe a Solution:** To drive the motor to keep the cylinder in the original orientation, we are going to want to apply a torque in the *opposite* direction that the cylinder rotates. That is, if $\phi$ is positive (clockwise rotation), we want to apply a negative $V_{motor}$ to get counterclockwise torque, thus opposing $\phi$.
+  <hr class="s2" />
+  Let’s start with the solution from part (c). This gives us a $V_{sensor}$ that decreases below a threshold as $\phi$ increases. Recall that as $\phi$ increases, we want to apply a negative $V_{motor}$. Equivalently, a negative $V_{motor}$ can be seen as decreasing below a threshold that happens to be $0V$! $V_{motor}$ then can be thought of as a voltage-shifted version of $V_{sensor}$.
+  <hr class="s2" />
+  **Implementation:** The goal of the shift is to center $V_{motor}$ at $0V$ so that when $\phi = 0$, $V_{motor} = 0V$, keeping the cylinder in the original orientation. Shifting effectively is adding or subtracting by a fixed amount; thus, we can use a voltage summer. Consider the output of part (c) to be $V_{sensor}$. Then the shifting circuit could look like:
+  <hr class="s2" />
+  <p align="center">![cylinder](/img/ee16a/mt2-sp16-q8-9.png)</p>
+  <hr class="s2" />
+  Using the equation for voltage summer and the constraints we have, let's solve for some values:
+  <hr class="s2" />
+  $$V_{out} = (\frac{R_2}{R_1 + R_2})V_{sensor} + (\frac{R_1}{R_1 + R_2})V_{shift}$$
+  $$V_{out} = 0 \text{ when } V_{sensor} = 2.5V$$
+  $$-(\frac{R_2}{R_1 + R_2})(2.5V) = (\frac{R_1}{R_1 + R_2})V_{shift}$$
+  $$-R_2(2.5V) = R_1V_{shift}$$
+  In this problem, we did not provide limitations on any components. For simplicity, we will choose $V_{shift} = −5V$ since we previously used a $5V$ voltage source, and we will use $R_1 = 1K\Omega$ and $R_2 = 2K\Omega$.
+  <hr class="s2" />
+  Our $V_{out}$ is now centered at $0V$ and decreases as $\phi$ increases. This mathematically satisifes our conditions for $V_{motor}$. One remaining consideration is that the motor is modeled as a resistor. If we connect it directly to the circuit at $V_{out}$, it will load the circuit, drawing more current and affecting the value at $V_{out}$.
+  <hr class="s2" />
+  <p align="center">![cylinder](/img/ee16a/mt2-sp16-q8-10.png)</p>
+  <hr class="s2" />
+  However, note that the conditions we needed to satisfy were the $0V$ centering and the non-binary scaling. Both are still satisfied by this circuit, so we can use $V_{mot}$ = $V_{out}$. No specifications were made regarding limitations on components, the necessary output gain, or the method of scaling (e.g. linear output relative to $\phi$). Thus a complete satisfactory circuit is:
+  <hr class="s2" />
+  <p align="center">![cylinder](/img/ee16a/mt2-sp16-q8-11.png)</p>
+  <hr class="s2" />
+  Note that a buffer after the charge sharing circuit is requried since we do not want current flowing out of that circuit and causing the output to decay over time. We optionally solve for the equation of output:
+  $$\frac{-V_{out}}{10\Omega} + \frac{-5V-V_{out}}{2K\Omega} + \frac{V_{sensor} - V{out}}{1K\Omega} = 0$$
+  $$\frac{203}{2000\Omega} \cdot V_{out} = \frac{2V_{sensor} - 5V}{2000\Omega}$$
+  $$V_{out} = \frac{1}{203}(2V_{sensor} - 5V)$$
+  $$V_{out} = \frac{1}{203}(2(5V\frac{C_g}{C_g + C_{g,nom}}) - 5V)$$
+  $$V_{out} = \frac{5V}{203}(2C_{g,nom}(\frac{1-\frac{4}{\pi}\phi}{2 - \frac{4}{\pi}\phi}) - 1)$$
+  Note that while this solution is the simplest correction solution, more robust (or practical) ones may include some noninverting amplifer before the motor. This is especially necessary if the motor has power/voltage requirements.

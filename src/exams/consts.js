@@ -165,6 +165,10 @@ const exams = {
         'term': 'Fall 2016',
         'profs': 'Ayazifar, Stojanovic',
       },
+      'sp16': {
+        'term': 'Spring 2016',
+        'profs': 'Ayazifar, Stojanovic',
+      },
     },
     'mt1': {
       'fa16': {
