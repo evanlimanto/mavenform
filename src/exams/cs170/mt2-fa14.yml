@@ -6,21 +6,29 @@ term: 'sp15'
 prof: 'Abbeel'
 
 questions: {
-  'q1': 'Short Answer',
-  'q2': 'Matching Terminals',
-  'q3': 'Knapsack with Weighty and Voluminous Objects',
-  'q4': 'Breadth requirements',
+  'q1': 'True or False',
+  'q2': 'Short Answer',
+  'q3': 'Max Flow',
+  'q4': 'Max flow',
+  'q5': 'Dynamic Programming',
+  'q6': '',
+  'q7': 'Tile David''s walkway',
+  'q8': 'Walkways, with more tiles',
 }
 
 parts: {
-  'q1': 12,
-  'q2': 1,
-  'q3': 1,
-  'q4': 2
+  'q1': 17,
+  'q2': 6,
+  'q3': 4,
+  'q4': 2,
+  'q5': 4,
+  'q6': 3,
+  'q7': 2,
+  'q8': 4,
 }
 
 q1_1: |
-  # Problem 1. [True or false] (9 points)
+  # Problem 1. [True or False] (9 points)
   ## Circle True or False. Do not justify your answers on this problem.
   (a) **True or False**: Let $(S, V - S)$ be a minimum $(s,t)$-cut in the network flow graph $G$. Let $(u,v)$ be an edge that crosses the cut in the forward direction, i.e., $u \in S$ and $v \in V - S$. Then increasing the capacity of the edge $(u,v)$ necessarily increases the maximum flow of $G$.
 
@@ -57,7 +65,7 @@ q1_5: |
 q1_5_s: |
   **False.**
   <hr class="s2" />
-  **Explanation:** For instance, 2SAT $\le_P$ 3 SAT (since you can solve 2SAT using an algorithm for 3SAT), but 2SAT is in $P$ and hence not $NP$-complete (unless $P = NP$).
+  **Explanation:** For instance, $2SAT$ $\le_P$ $3SAT$ (since you can solve $2SAT$ using an algorithm for $3SAT$), but $2SAT$ is in $P$ and hence not $NP$-complete (unless $P = NP$).
 
 q1_6: |
   (f) **True or False**: For every graph $G$ and every maximum flow on $G$, there always exists an edge such that increasing the capacity on that edge will increase the maximum flow that's possible in the graph.
@@ -73,7 +81,7 @@ q1_7: |
 q1_7_s: |
   **False.**
   <hr class="s2" />
-  **Explanation:** In the following graph, the maximum flow has value $f = $. Increasing the capacity of every edge by $1$ causes the maximum flow in the modified graph to have value $6$.
+  **Explanation:** In the following graph, the maximum flow has value $f = 4$. Increasing the capacity of every edge by $1$ causes the maximum flow in the modified graph to have value $6$.
   <hr class="s2" />
   ![graph](/img/cs170/mt2-fa14-q1-2.png)
 
@@ -103,7 +111,7 @@ q1_11: |
 q1_11_s: |
   **False.**
   <hr class="s2" />
-  **Explanation:** 2SAT is in $NP$ and has a polynomial-time algorithm, but that doesn't necessarily mean that 3SAT has a polynomial-time algorithm.
+  **Explanation:** $2SAT$ is in $NP$ and has a polynomial-time algorithm, but that doesn't necessarily mean that $3SAT$ has a polynomial-time algorithm.
 
 q1_12: |
   (l) **True or False**: If there is a polynomial-time algorithm for $3SAT$, then every problem in $NP$ has a polynomial-time algorithm.
@@ -111,7 +119,7 @@ q1_12: |
 q1_12_s: |
   **True.**
   <hr class="s2" />
-  **Explanation:** 3SAT is $NP$-complete.
+  **Explanation:** $3SAT$ is $NP$-complete.
 
 q1_13: |
   (m) **True or False**: We can reduce the search problem `Maximum Flow` to the search problem `Linear Programming` (in other words, `Maximum Flow` $\le_P$ `Linear Programming`).
@@ -135,18 +143,18 @@ q1_15: |
 q1_15_s: |
   **True.**
   <hr class="s2" />
-  **Explanation:** This follows from the Cook-Levin theorem. Every problem in P is in $NP$. The Cook-Levin theorem says that everything in $NP$ can be reduced to CircuitSAT, which can in turn be reduced to 3SAT. Or: Every problem in P is in $NP$, and every problem in $NP$ can be reduced to any $NP$-complete problem. 3SAT is $NP$-complete.
+  **Explanation:** This follows from the Cook-Levin theorem. Every problem in P is in $NP$. The Cook-Levin theorem says that everything in $NP$ can be reduced to CircuitSAT, which can in turn be reduced to $3SAT$. Or: Every problem in P is in $NP$, and every problem in $NP$ can be reduced to any $NP$-complete problem. $3SAT$ is $NP$-complete.
 
 q1_16: |
-  (p) **True or False**: Suppose we have a data structure where the amortized running time of Insert and Delete is $O(lg n)$. Then in any sequence of $2n$ calls to Insert and Delete, the worst-case running time for the $n$th call is $O(lg n)$.
+  (p) **True or False**: Suppose we have a data structure where the amortized running time of Insert and Delete is $O(\text{lg} n)$. Then in any sequence of $2n$ calls to Insert and Delete, the worst-case running time for the $n$th call is $O(\text{lg} n)$.
 
 q1_16_s: |
   **False.**
   <hr class="s2" />
-  **Explanation:** The first $n - 1$ calls might take $\Theta(1)$ time and the $n$th call might take $\Theta(n lg n)$ time. This would be consistent with the premises, as it would mean that the total time for the first $n$ calls is $\Theta(n lg n)$.
+  **Explanation:** The first $n - 1$ calls might take $\Theta(1)$ time and the $n$th call might take $\Theta(n \text{lg} n)$ time. This would be consistent with the premises, as it would mean that the total time for the first $n$ calls is $\Theta(n \text{lg} n)$.
 
 q1_17: |
-  (q) **True or False**: Suppose we do a sequence of $m$ calls to Find and $m$ calls to Union, in some order, using the union-find data structure with union by rank and path compression. Then the last call to Union takes $O(lg^* m)$ time.
+  (q) **True or False**: Suppose we do a sequence of $m$ calls to Find and $m$ calls to Union, in some order, using the union-find data structure with union by rank and path compression. Then the last call to Union takes $O(\text{lg}^* m)$ time.
 
 q1_17_s: |
   **False.**
@@ -160,7 +168,7 @@ q2_1: |
   (a) If $P \neq NP$, could there be a polynomial-time algorithm for $3SAT$?
 
 q2_1_s: |
-  **Answer:** No. 3SAT is $NP$-complete, so a polynomial-time algorithm for 3SAT would imply a polynomial-time algorithm for every problem in $NP$ — it would imply that $P = NP$.
+  **Answer:** No. $3SAT$ is $NP$-complete, so a polynomial-time algorithm for $3SAT$ would imply a polynomial-time algorithm for every problem in $NP$ — it would imply that $P = NP$.
 
 q2_2: |
   (b) If $P \neq NP$, could `Graph 2-Coloring` be $NP$-complete?
@@ -175,7 +183,7 @@ q2_3_s: |
   **Answer:** Yes, for instance, if the running time per subproblem is $\Theta(n)$ (or anything larger than $\Theta(1)$).
 
 q2_4: |
-  (d) If we have a dynamic programming algoirhtm with $n^2$ subproblems, is it possible that the space usage could be $O(n)$?
+  (d) If we have a dynamic programming algorithm with $n^2$ subproblems, is it possible that the space usage could be $O(n)$?
 
 q2_4_s: |
   **Answer:** Yes, if we don't need to keep the solution to all smaller subproblems but only the last $O(n)$ of them or so.
@@ -207,7 +215,7 @@ q2_6_s: |
   <hr class="s1" />
   (Incidentally, this is Q4 from HW8.)
 
-q3_1; |
+q3_1: |
   # Problem 3. [Max flow] (10 points)
   Consider the following graph $G$. The numbers on the edges represent the capacities of the edges.
   <hr class="s2" />
@@ -226,7 +234,7 @@ q3_2: |
 q3_2_s: |
   **Answer:**
   <hr class="s2" />
-  ![graph](/img/cs170/mt2-fa14-q3-5.png)
+  ![graph](/img/cs170/mt2-fa14-q3-4.png)
 
 q3_3: |
   (c) Find a maximum $(s,t)$-flow for $G$. Label each edge below with the amount of flow sent along that edge, in your flow. (You can use the blank space on the next page for scratch space if you like.)
@@ -234,9 +242,18 @@ q3_3: |
   ![graph](/img/cs170/mt2-fa14-q3-3.png)
 
 q3_3_s: |
-  **Answer:**
+  **Answer:** There are multiple valid answers. Here is one maximum flow:
+  <hr class="s2" />
+  ![graph](/img/cs170/mt2-fa14-q3-5.png)
+  <hr class="s2" />
+  Another maximum flow:
   <hr class="s2" />
   ![graph](/img/cs170/mt2-fa14-q3-6.png)
+  <hr class="s2" />
+  Yet another maximum flow:
+  <hr class="s2" />
+  ![graph](/img/cs170/mt2-fa14-q3-8.png)
+
 
 q3_4: |
   (d) Draw a minimum $(s,t)$-cut for the graph $G$ (shown below again).
@@ -244,7 +261,9 @@ q3_4: |
   ![graph](/img/cs170/mt2-fa14-q3-4.png)
 
 q3_4_s: |
-  
+  **Answer:** $S = \\{s, v, x, y\\}$.
+  <hr class="s2" />
+  ![graph](/img/cs170/mt2-fa14-q3-7.png)
 
 q4_1: |
   # Problem 4. [Max flow] (12 points)
@@ -268,8 +287,20 @@ q4_1: |
   <hr class="s2" />
   $T = $
 
+q4_1_s: |
+  **Answer:** $S = \\{v \in V : v \; \text{is reachable from} \; s \; \text{in} \; G^f\\}$.
+  <hr class="s1" />
+  $T = \\{(v,w) \in E : v \in, w \notin S\\}$. (or: $T = $ the edges that cross the cut $(S, V - S)$.)
+  <hr class="s2" />
+  **Explanation:** $(S, V - S)$ is a minimum $(s,t)$-cut, and by the min-cut max-flow theorem, its capacity is value $(f)$. If we remove any $k$ edges from $T$, then the capacity of the cut $(S, V - S)$ will drop to value $(f)$ - $k$, and it'll be a minimum $(s,t)$-cut in the modified graph. Therefore, by the min-cut max-flow theorem, the value of the maximum in the modified graph will be value$(f) - k$. (Deleting $k$ edges can't reduce the value of the maximum flow more than that, so this is optimal.)
+
 q4_2: |
-  Is there an algorithm to implement step $1$ in $O(|V||E|)$ time or less? If yes, what algorithm should we use? If no, why not? Either way, justify your answer in a sentence or two.
+  (b) Is there an algorithm to implement step $1$ in $O(|V||E|)$ time or less? If yes, what algorithm should we use? If no, why not? Either way, justify your answer in a sentence or two.
+
+q4_2_s: |
+  **Answer:** Yes. Ford-Fulkerson: the value of the max flow is at most $|V| - 1$ (since there are at most $|V| - 1$ edges out of $s$, each of which can carry at most $1$ unit of flow), so Ford-Fulkerson does at most $|V| - 1$ iterations, and each iteration takes $O(|E|)$ time.
+  <hr class="s2" />
+  **Comment:** Karp-Edmonds' running time is $O(|V||E|^2)$ in general, too slow. (There are apparently algorithms that can compute the max flow in an arbitrary graph in $O(|V||E|)$ time, but they are super-complex methods: e.g., Orlin's algorithm plus the King-Rao-Tarjan algorithm.)
 
 q5_1: |
   # Problem 5. [Dynamic programming] (12 points)
@@ -293,21 +324,53 @@ q5_1: |
   <hr class="s2" />
   $f(n - 2) = $
 
+q5_1_s: |
+  **Answer:**
+  <hr class="s1" />
+  $f(n) = 0$
+  <hr class="s1" />
+  $f(n - 1) = 0$
+  <hr class="s1" />
+  $f(n - 2) = \max(0, A[n - 2] + A[n - 1])$
+
 q5_2: |
   (b) Write a recursive formula for $f(j)$. You can assume $1 \le j \le n - 3$.
   <hr class="s2" />
   $f(j) = $
 
+q5_2_s: |
+  **Answer:**
+  <hr class="s1" />
+  $f(j) = \max(f(j + 1), A[j] + A[j + 1] + f(j + 3))$
+
 q5_3: |
   (c) Suppose we use the formulas from parts (a) and (b) to solve this problem with dynamic programming. What will the asymptotic running time of the resulting algorithm be?
+
+q5_3_s: |
+  **Answer:** $\Theta(n)$.
+  <hr class="s2" />
+  **Explanation:** We have to solve $n$ subproblems, and each one takes $\Theta(1)$ time to solve (since that is the time to evaluate the formula in part (b) for a single value of $j$).
 
 q5_4: |
   (d) Suppose we want to minimize the amount of space (memory) used by the algorithm to store intermediate values. Asymptotically, how much space will be needed, as a function of $n$? (Don’t count the amount of space to store the input.) Use $\Theta(\cdot)$ notation.
 
+q5_4_s: |
+  **Answer:** $\Theta(1)$.
+  <hr class="s2" />
+  **Explanation:** As we solve the subproblems in the order $f(n), f(n - 1), ..., f(1)$, we don't need to store all of the solutions; we only need to store the three last values of $f(\cdot)$.
+
 q6_1: |
+  # Problem 6. [Greedy cards] (12 points)
   Ning and Evan are playing a game, where there are $n$ cards in a line. The cards are all face-up (so they can both see all cards in the line) and numbered $2 - 9$. Ning and Evan take turns. Whoever’s turn it is can take one card from either the right end or the left end of the line. The goal for each player is to maximize the sum of the cards they’ve collected.
   <hr class="s2" />
   (a) Ning decides to use a greedy strategy: “on my turn, I will take the larger of the two cards available to me”. Show a small counterexample ($n ≤ 5$) where Ning will lose if he plays this greedy strategy, assuming Ning goes first and Evan plays optimally, but he could have won if he had played optimally.
+
+q6_1_s: |
+  **Answer:** $[1,1,9,2]$.
+  <hr class="s2" />
+  **Explanation:** Ning first greedily takes the $2$ from the right end, and then Evan snatches the $9$, so Evan gets $10$ and Ning gets a miserly $3$. If Ning had started by craftily taking the $1$ from the left end, he'd guarantee that he would get $10$ and poor Evan would be stuck with $3$.
+  <hr class="s1" />
+  There are many other counterexamples. They're all of length at least $4$.
 
 q6_2: |
   (b) Evan decides to use dynamic programming to find an algorithm to maximize his score, assuming he is playing against Ning and Ning is using the greedy strategy from part (a). Let $A[1..n]$ denote the n cards in the line. Evan defines $v(i, j)$ to be the highest score he can achieve if it’s his turn and the line contains cards $A[i..j]$.
@@ -320,8 +383,23 @@ q6_2: |
   <hr class="s2" />
   $\text{where} \; \begin{align} l(i,j) = \\\\ r(i, j) = \end{align}$
 
+q6_2_s: |
+  **Answer:**
+  <hr class="s1" />
+  $v(i,j) = \max(l(i,j),r(i,j))$
+  <hr class="s1" />
+  $\begin{align} \text{where} \; l(i,j) &= \begin{cases} A[i] + v(i + 1, j - 1) & \text{if} \; A[j] > A[i + 1] \\\\ A[i] + v(i + 2, j) & \text{otherwise.} \end{cases} \\\\
+  r(i, j) &= \begin{cases} A[j] + v(i + 1, j - 1) & \text{if} \; A[i] \ge A[j - 1] \\\\ A[j] + v(i, j - 2) & \text{otherwise.} \end{cases} \end{align}$.
+  <hr class="s2" />
+  **Comment:** We didn't specify how Ning resolves ties, if the card on the left end has the same value as the card on the right end. Therefore, your recursive formula can resolve ties in any manner you want: any correct formula will be accepted as correct regardless of how you decided to resolve ties. (For instance, the formula above assumes that if there is a tie, Ning takes the card on the left end.)
+
 q6_3: |
   (c) What will the running time of the dynamic programming algorithm be, if we use your formula from part (b)? You don’t need to justify your answer.
+
+q6_3_s: |
+  **Answer:** $\Theta(n^2)$.
+  <hr class="s2" />
+  **Answer:** There are $n(n + 1)/2$ subproblems and each one can be solved in $\Theta(1)$ time (that's the time to evaluate the recursive formula in part (b) for a single value of $i,j$).
 
 q7_1: |
   # Problem 7. [Tile David's walkway] (14 points)
@@ -333,7 +411,7 @@ q7_1: |
   <hr class="s1" />
   *Question:* Is there a way to tile the walkway with pattern $P$, using at most $p W$’s, $q BB$’s, and $r BWB$’s?
   <hr class="s1" />
-  For example, if the pattern $P$ is $WBWBWBBWWBWBW$ and $p = 5, q = 2$, and $r = 2$, the answer is yes: it can be tiled as follows: $W | BWB | W | BB | W | W | BWB | W$$.
+  For example, if the pattern $P$ is $WBWBWBBWWBWBW$ and $p = 5, q = 2$, and $r = 2$, the answer is yes: it can be tiled as follows: $W | BWB | W | BB | W | W | BWB | W$.
   <hr class="s1" />
   For this problem, we suggest you use dynamic programming. Define
   $$f(j, p, q, r) = \begin{cases} \text{True} \; & \text{if there's a way to tile} \; P[j..n] \; \text{using at most} \; p W\text{'s}, q BB\text{'s, and } r BWB\text{'s} \\\\
@@ -344,8 +422,25 @@ q7_1: |
   <hr class="s2" />
   $f(j, p, q, r) = $
 
+q7_1_s: |
+  **Answer:**
+  <hr class="s2" />
+  $$\begin{align} f(j,p,q,r) = & (P[j] = W ∧ p > 0 ∧ f(j + 1, p - 1, q, r)) \; ∨ \\\\
+                               & (P[j..j+1] = BB ∧ q > 0 ∧ f(j + 2, p, q - 1, r)) \; ∨ \\\\
+                               & (P[j..j+2] = BWB ∧ r > 0 ∧ f(j + 2, p, q, r - 1))\text{.}
+    \end{align}$$
+
 q7_2: |
   (b) If we use your formula from part (a) to create a dynamic programming algorithm for this problem, what will its asymptotic running time be?
+
+q7_2_s: |
+  **Answer:** $\Theta(n(p + 1)(q + 1)(r + 1))$.
+  <hr class="s1" />
+  We'll also accept $\Theta(n^4)$ (since without loss of generality we can assume $p < n, q < n,$ and $r < n$; there's no way to use more than $n$ tiles).
+  <hr class="s1" />
+  $\Theta(npqr)$ is technically not quite right if $p,q,$ or $r$ is zero, but if we had a promise that they were non-zero it would also be correct.
+  <hr class="s2" />
+  **Explanation:** There are $n(p + 1)(q + 1)(r + 1)$ subproblems. Each subproblem can be solved in $\Theta(1)$ time using the formula in part (a).
 
 q8_1: |
   # Problem 8. [Walkways, with more tiles] (13 points)
@@ -361,11 +456,20 @@ q8_1: |
   <hr class="s2" />
   (a) Is `SuperTile` in $NP$? Justify your answer in a sentence or two.
 
+q8_1_s: |
+  **Answer:** Yes. There is a polynomial-time solution-checking algorithm: check that the tiles used are a subset of $t_1,...,t_m$ and no tile is used more times than it appears in $t_1,...,t_m$.
+
 q8_2: |
-  (b) Prof. Mauve believes she has found a way to reduce `SuperTile` to $SAT$. In other words, she believes she has proven that `SuperTile` $\le_P$ SAT. If she is correct, does this imply that `SuperTile` is $NP$-hard? Justify your answer in a sentence or two.
+  (b) Prof. Mauve believes she has found a way to reduce `SuperTile` to $SAT$. In other words, she believes she has proven that `SuperTile` $\le_P$ $SAT$. If she is correct, does this imply that `SuperTile` is $NP$-hard? Justify your answer in a sentence or two.
+
+q8_2_s: |
+  **Answer:** No. `SuperTile` could be much easier than $SAT$. $SAT$ is $NP$-complete, so everything in $NP$ reduces to $SAT$.
 
 q8_3: |
   (c) Prof. Argyle believes he has found a way to reduce $SAT$ to `SuperTile`. In other words, he believes he has proven that $SAT \le_P$ `SuperTile`. If he is correct, does this imply that `SuperTile` is $NP$-hard? Justify your answer in a sentence or two.
+
+q8_3_s: |
+  **Answer:** Yes. This reduction shows that `SuperTile` is at least as hard as $SAT$, which is $NP$-complete.
 
 q8_4: |
   (d) Consider the following variant problem, `OrderedTile`:
@@ -377,3 +481,10 @@ q8_4: |
   In this variant, you cannot re-order the tiles. For instance, if $P$ is $WBBBWWB$ and the tiles are $t_1 = BBW, t_2 = B, t_3 = WB, t_4 = WB$, then the output is “NO”; however, if the tiles are $t_1 = WB, t_2 = B, t_3 = BBW, t_4 = WB$, then the answer is yes, $t_1t_3t_4$.
   <hr class="s2" />
   Rohit’s advisor asked him to prove that `OrderedTile` is $NP$-complete. Rohit has spent the past few days trying to prove it, but without any success. He’s wondering whether he just needs to try harder or if it’s hopeless. Based on what you’ve learned from this class, should you encourage him to keep trying, or should you advise him to give up? Explain why, in $2 - 3$ sentences.
+
+q8_4_s: |
+  **Answer:** Give up. There's a polynomial-time algorithm for `OrderedTile` using dynamic programming, so any proof that `OrderedTile` is NP-complete would imply that $P = NP$. Given how many other researchers have tried, it's not reasonable to ask Rohit to prove $P = NP$.
+  <hr class="s2" />
+  **Explanation:** The dynamic progrmaming algorithm: let $f(i,j)$ be true if there is away to tile $P[i..n]$ using tiles $t_j,...,t_m$. Then
+  $$f(i,j) = f(i,j + 1) ∨ (P[i..i + len(t_j) - 1] = t_j ∧ f(i + len(t_j), j + 1)),$$
+  so we obtain a $\Theta(nm)$ time algorithm for `OrderedTile`.

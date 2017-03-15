@@ -43,6 +43,10 @@ const exams = {
         'term': 'Spring 2016',
         'profs': 'Chiesa, Vazirani',
       },
+      'fa14': {
+        'term': 'Fall 2014',
+        'profs': 'Wagner',
+      },
     }
   },
 
