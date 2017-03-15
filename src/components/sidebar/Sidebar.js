@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { handleEvent } from '../../utils';
-import { map, range } from 'lodash';
+import { map, range, replace } from 'lodash';
 
 const Scroll = require('react-scroll');
 var Link = Scroll.Link;
@@ -20,7 +20,7 @@ class Sidebar extends Component {
 
     return map(range(problemIDs.length), (index) => {
       const problemID = problemIDs[index];
-      const problemTitle = `Question ${problemID[1]}`;
+      const problemTitle = `Question ${replace(problemID, 'q', '')}`;
 
       if (problemID.length === 0) {
         return (
