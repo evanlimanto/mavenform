@@ -470,7 +470,7 @@ q7_2_s: |
   As an example, say Ghost-King prefers winning \$2 as much as a lottery : winning \$0 or \$4 with equal probability. For option c), Pacman prefers the lottery much more (more risk-taking) and for option d), Pacman prefers the guaranteed reward.
 
 q7_3: |
-  **(b) Guaranteed Return**. Pacman often enters lotteries in the Ghost Kingdom. A particular Ghost vendor offers a lottery (for free) with three possible outcomes that are each equally likely: winning \$1, \$2, or \$5.
+  **(b) Guaranteed Return**. Pacman often enters lotteries in the Ghost Kingdom. A particular Ghost vendor offers a lottery (for free) with three possible outcomes that are each equally likely: winning \$1, \$4, or \$5.
   <hr class="s1" />
   Let $U_P(m)$ denote Pacman’s utility function for \$m. Assume that Pacman always acts rationally.
   <hr class="s2" />

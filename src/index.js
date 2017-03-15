@@ -8,7 +8,6 @@ import Course from './Course';
 import Home from './Home';
 import NotFound from './NotFound';
 
-const $ = require('jquery');
 const debug = false;
 var ReactGA = require('react-ga');
 ReactGA.initialize('UA-20131732-5');
