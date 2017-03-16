@@ -255,6 +255,12 @@ const exams = {
   },
 
   'cs162': {
+    'mt2': {
+      'fa16': {
+        'term': 'Fall 2016',
+        'profs': 'Joseph',
+      },
+    },
     'mt1': {
       'fa16': {
         'term': 'Fall 2016',
