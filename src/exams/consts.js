@@ -160,6 +160,12 @@ const exams = {
   },
 
   'ee16a': {
+    'mt2p': {
+      'sp16': {
+        'term': 'Spring 2016',
+        'profs': 'Alon, Ayazifar',
+      },
+    },
     'mt2': {
       'fa16': {
         'term': 'Fall 2016',
@@ -291,6 +297,7 @@ const examTypeToLabel = {
 
   'mt1': 'Midterm 1',
   'mt2': 'Midterm 2',
+  'mt2p': 'Midterm 2 (Practice)',
   'final': 'Final',
 }
 

@@ -1,0 +1,801 @@
+course: 'ee16a'
+ref: 'mt2-sp16'
+
+type: 'mt2'
+term: 'fa15'
+prof: 'Sahai, Niknejad'
+
+questions: {
+  'q1': 'Correlation',
+  'q2': 'Cascading Amplifiers',
+  'q3': 'Just solve it',
+  'q4': 'CapRank',
+  'q5': 'Thevenin In the Wild',
+  'q6': 'Designing for a child''s party',
+}
+
+parts: {
+  'q1': 5,
+  'q2': 3,
+  'q3': 2,
+  'q4': 2,
+  'q5': 5,
+  'q6': 1,
+  'q7': 4,
+  'q8': 5,
+}
+
+q1_1: |
+  # 1. KVL/KCL Practice
+  **Note:** A box represents a resistor.
+  <hr class="s1" />
+  (a) Use KCL to find the values of $i_a$ (the current through element $A$), $i_c$, and $i_d$ for the circuit shown below. Use the arrows as the sign convention for currents. Which elements are connected in series?
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q1-1.png)</p>
+
+q1_1_s: |
+  **Solutions:** Elements $A$ and $B$ are connected in series, so $i_a = -1A$. By KCL on the $DEF$-node, $i_d = 2A - 0.5A = 1.5A$. Then by KCL on the $BCD$ node, $i_c = -1A - 1.5A = -2.5A$.
+
+q1_2: |
+  (b) Use KCL to find the values of $i_e, i_f,$ and $i_g$ for the circuit shown below. Which elements are connected in series?
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q1-2.png)</p>
+
+q1_2_s: |
+  **Solutions:** Applying KCL to the $ABE$-node, $5A + i_e = 1A$, so $i_e = −4A$. Then, applying KCL to the $DEF$-node, $3A + i_f = −4A$, so $i_f = −7A$. Finally, applying KCL to $BDGC$-node, $i_g +2A = 3A+5A$, so $i_g = 6A$. There are no elements connected in series here (no elements through which the same current is flowing). One might be tempted to conclude that elements $G$ and $F$ are connected in series. But note that this is not actually the case. There is a wire connected between node $FG$ and the ground, meaning that the voltage at that node is set to $0$. This means that some current can flow in that wire! (This is why we did not consider KCL at this node; the current flowing in that wire is a priori unknown, and we were only able to infer after solving for the other currents that it is actually $1A$ flowing into node $FG$.
+
+q1_3: |
+  (c) In the circuit below, $x$ denotes some unknown real number. Use KVL to find the values of $v_b$ (the voltage difference across element $B$), $v_c$, and $v_e$ for the circuit shown below. Which elements are connected in shunt (i.e. parallel)?
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q1-3.png)</p>
+
+q1_3_s: |
+  **Solutions:** Applying KVL to the loop $DEB$, we get $5 − 6x + x = 0$, giving us $x = 1$. Therefore, $v_b =x=1V$ and $v_e =6x=6V$. Next, we apply KVL to the loop $ABC$, getting $5 − 1 − v_c = 0$, giving us $v_c = 4V$. The series combination of $D$ and $E$, the series combination of $A$ and $C$, and the element $B$ are in parallel. (If you didn’t put these because you interpreted the question as which individual elements were in parallel, that’s fine. Give yourself full credit.) We can see this because the voltage difference across the series combination of $D$ and $E$, which is $−5 + 6 = 1V$, is the same as the voltage difference across $B$ (also $1V$).
+
+q1_4: |
+  (d) Use KVL to find the values of $v_b, v_d, v_e$ and $v_f$ for the circuit shown below. Which elements are connected in shunt?
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q1-4.png)</p>
+
+q1_4_s: |
+  **Solutions:** Since the bottom ends of elements $A$ and $C$ are both connected to the ground, they are at the same potential. Therefore, we can apply KVL to the branch $ABC$ as follows (another way of saying is this that $ABC$ effectively form a loop): $3 − v_b − 1 = 0$, therefore $v_b = 2V$. Similarly, we apply KVL to the branch $CD$ as follows: $1−v_d = 0$,therefore $v_d = 1V$ and to the branch $AE$: $3−v_e = 0$,therefore $v_e = 3V$. Finally, we apply KVL to the loop $BEF$: $2−3−v_f = 0$, giving $v_f = −1V$. We can see that $A$ and $E$ are in parallel, and $C, D$ and $F$ are in parallel.
+
+q2_1: |
+  # 2. More KCL/KVL Analysis
+  Using techniques presented in class, label all unknown voltages (for every node/junction) and apply KCL to find them all (with respect to ground).
+  <hr class="s2" />
+  (a) Solve for all node voltages (with respect to ground) using KCL/KVL analysis. Verify with superposition.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q2-1.png)</p>
+
+q2_1_s: |
+  **Solutions:**
+  <hr class="s1" />
+  **Method 1: KCL/KVL Analysis**
+  <hr class="s1" />
+  Applying KCL at Node $1$, we get
+  $$\frac{0 - V_1}{10} + \frac{V_2 - V_1}{20} + 1 = 0$$
+  which gives
+  $$2V_1 + V_1 - V_2 - 20 = 0$$
+  implying
+  $$3V_1 - V_2 = 20$$
+  Applying KCL at Node $2$, we get
+  $$\frac{V_1 - V_2}{20} + \frac{0 - V_2}{50} - 2 = 0$$
+  which gives
+  $$5V_2 - 5V_1 + 2V_2 + 200 = 0$$
+  implying
+  $$-5V_1 + 7V_2 = -200$$
+  Writing equation $3$ and $6$ in matrix form we get
+  $$\left[ \begin{array}{c c} 3 & -1 \\\\ -5 & 7 \end{array} \right] \left[ \begin{array}{c} V_1 \\\\ V_2 \end{array} \right] = \left[ \begin{array}{c} 20 \\\\ -200 \end{array} \right]$$
+  Solving the system of equations, we will get $V_1 = -3.75V$ and $V_2 = -31.25V$.
+  <hr class="s2" />
+  **Method 2 (verification): Superposition**
+  <hr class="s1" />
+  First, consider the effect of only $1A$ current source on. Using the current divider rule, we have
+  $$i_1 = \frac{70}{10 + 70} \text{ x } 1A = 0.875A$$
+  and
+  $$i_2 = 1A - 0.875A = 0.125A$$
+  Therefore,
+  $$V_1^a = i_1 \text{ x } 10\Omega = 0.875A \text{ x } 10\Omega = 8.75V$$
+  and
+  $$V_2^a = i_2 \text{ x } 50\Omega = 0.125A \text{ x } 50\Omega = 6.25V$$
+  Second, consider the effect of only $2A$ current source on. Using the current divider rule, we have
+  $$i_1 = \frac{50}{50 + 30} \text{ x } 2A = 1.25A$$
+  and
+  $$i_2 = 2A - 1.25A = 0.75A$$
+  Therefore,
+  $$V_1^b = 0 - i_1 \text{ x } 10\Omega = -1.25A \text{ x } 10\Omega = -12.5V$$
+  and
+  $$V_1^b = 0 - i_2 \text{ x } 50\Omega = -0.75A \text{ x } 50\Omega = -37.5V$$
+  Since the circuit is linear (i.e. we have linear elements and sources), we can use the *principle of superposition* to get $V_1 = V_1^a + V_1^b$ and $V_2 = V_2^a + V_2^b$. So, we get $V_1 = 8.75V - 12.5V$ and $V_2 = 6.25V - 37.5V$. Finally, $V_1 = -3.75V$ and $V_2 = -31.25V$.
+  <hr class="s1" />
+  This solution agrees with the solution we obtained using nodal analysis :)
+
+q2_2: |
+  (b) Solve for all node voltages (with respect to ground) using KCL/KVL analysis.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q2-2.png)</p>
+
+q2_2_s: |
+  **Solutions:** We assign the two nodes $1$ and $2$, and note that $V_x = V_2$ (because we have set the bottom wire as ground). Applying KCL at node $1$ (ensuring that currents flowing into node $1$ sum to zero), we get
+  $$\frac{1 - V_1}{10} + \frac{0 - V_1}{20} + \frac{10 + V_2 - V_1}{105} + 10V_2 = 0$$
+  which gives
+  $$\frac{V_1 - 1}{2} + \frac{V_1 - 0}{4} + \frac{V_1 - V_2 - 10}{21} - 50V_2 = 0$$
+  implying
+  $$67V_1 - 4204V_2 = 82$$
+  Applying KCL to Node $2$ (ensuring that currents flowing into node $2$ sum to zero), we get
+  $$\frac{0 - V_2}{60} + \frac{-10 + V_1 - V_2}{105} = 0$$
+  which gives
+  $$\frac{V_2}{4} + \frac{V_2 + 10 - V_1}{7} = 0$$
+  implying
+  $$-4V_1 + 11V_2 = -40$$
+  Writing the equations in matrix form, we get
+  $$\left[ \begin{array}{c c} 67 & -4204 \\\\ -4 & 11 \end{array} \right] \left[ \begin{array}{c} V_1 \\\\ V_2 \end{array} \right] = \left[ \begin{array}{c} 82 \\\\ -40 \end{array} \right]$$
+  Solving the system of equations, we will get $V_1 = 10.4023V$ and $V_2 = 0.1463V$.
+
+q2_3: |
+  (c) Setup a matrix of equations in the form $Av = b_s$ using KCL/KVL analysis. The vector $v = (v_1 v_2 \cdots)T$ (use the node numbers given in the schematic).
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q2-3.png)</p>
+
+q2_3_s: |
+  **Solutions:** Let's define $\vec{x} = [V_1 \; V_2 \; \dots V_7]^T$. The nodes are indicated in the circuit diagram. We apply KCL to:
+  <hr class="s1" />
+  Node 1:
+  $$\frac{V_2 - V_1}{r_3} + \frac{V_7 - V_1}{r_2} + i_s + \frac{V_3 - V_1}{r_4} = 0$$
+  Node 2:
+  $$\frac{V_6 - V_2}{r_6} + \frac{V_1 - V_2}{r_3} + \frac{V_3 - V_2}{r_5} = 0$$
+  Node 3:
+  $$\frac{V_2 - V_3}{r_5} + \frac{V_1 - V_3}{r_4} - i_s + \frac{V_4 - V_3}{r_8} = 0$$
+  Node 4:
+  $$\frac{V_5 - V_4}{r_9} + \frac{V_6 - V_4}{r_7} + \frac{V_3 - V_4}{r_8} + 5\frac{(V_7 - V_6)}{r_1} = 0$$
+  We get the following $2$ equations from inspection:
+  $$V_7 - V_6 = V_s$$
+  and
+  $$V_5 - V_6 = 10(V_4 - V_5) \implies -10V_4 + 11V_5 - V_6 = 0$$
+  Note that we have $7$ variables but only $6$ equations! this means that we need to ground one of the nodes to give us another equation. It is valid to choose any node, we choose node $6$ here:
+  $$V_6 = 0$$
+  We can now write the equations in matrix form $A\vec{x} = \vec{b}$, as:
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q2-4.png)</p>
+  <hr class="s2" />
+  Any system equivalent to this is fine.
+
+q3_1: |
+  # 3. KCL\KVL Analysis + Capacitors
+  (a) Solve the following circuit in steady state using KCL/KVL analysis.
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q3-1.png)</p>
+
+q3_1_s: |
+  **Solutions:**
+  - i. Identify the nodes (refer to the circuit below for our selection)
+  - ii. Select a reference node if not set (in this case, done)
+  - iii. Select current flow directions (arbitrary) and match them with voltage signs according to the passive sign convention (if you want to follow the solution here, the signs can be found in the circuit below)
+  - iv. For each node with an unknown voltage write KCL in terms of currents (simple $\sum$ entering currents = $\sum$ leaving currents)
+  - v. Translate each KCL equation using Ohm's law as follows: for resistor $R_{ij}$ connecting nodes $i$ ($+$ voltage sign) and $j$ ($-$ voltage sign): $I_{R_{ij}} = \frac{u_i - u_j}{R_{ij}}$
+  - vi. Sanity check, verify that you have as many equations (KCLs translated using Ohm's law) as variables (number of unknown node voltages).
+  - vii. Solve a system of linear equations (you can set it up in matrix form, by copying the coefficients).
+
+  <hr class="s2" />
+  By following the recipe above, we get for KCL equations (note that in steady state, currents through capacitors is equal to $0$)
+  - (1) No need for KCL: voltage nown and is equal to $10V$
+  - (2) $I_1 + I_2 = I_6$
+  - (3) $I_3 + I_5 = I_2$
+  - (4) $I_4 = I_3$
+  - (5) $8mS \cdot V_x = I_4 + I_5$
+
+  <hr class="s2" />
+  When translated using node voltages - by Ohm's law mostly, except for the dependent source - we get
+  - (2) $\frac{10V - u_2}{R_1} + \frac{u_3 - u_2}{R_2} = \frac{u_2}{R_6}$
+  - (3) $\frac{u_4 - u_3}{R_3} + \frac{u_5 - u_3}{R_5} = \frac{u_3 - u_2}{R_2}$
+  - (4) $\frac{u_5 - u_4}{R_4} + \frac{u_4 - u_3}{R_3}$
+  - (5) $8mS \cdot (10V - u_4) = \frac{u_5 - u_4}{R_4} + \frac{u_5 - u_3}{R_5}$
+
+  <hr class="s2" />
+  or if you would like to plug in the values of the resistors:
+  - (2) $\frac{10V - u_2}{200\Omega} + \frac{u_3 - u_2}{50\Omega} = \frac{u_2}{25\Omega}$
+  - (3) $\frac{u_4 - u-3}{100\Omega} + \frac{u_5 - u_3}{100\Omega} = \frac{u_3 - u_2}{50\Omega}$
+  - (4) $\frac{u_5 - u_4}{200\Omega} = \frac{u_4 - u_3}{100\Omega}$
+  - (5) $8mS \cdot (10V - u_4) = \frac{u_5 - u_4}{200\Omega} + \frac{u_5 - u_3}{100\Omega}$
+
+  <hr class="s2" />
+  which can also be translated in matrix form as:
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q3-2.png)</p>
+  <hr class="s2" />
+  or even simplified, which yields the solution (augmenting the known $u_1$ too)
+  $$\left[ \begin{array}{c} u_1 \\\\ u_2 \\\\ u_3 \\\\ u_4 \\\\ u_5 \end{array}\ right] = \left[ \begin{arary}{c} 10V \\\\ 2V \\\\ 4V \\\\ 5V \\\\ 7V \end{array} \right]$$
+  You can check the solution by inspection too.
+  <hr class="s1" />
+  The circuit with the solution and annotations is:
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q3-3.png)</p>
+
+q3_2: |
+  (b) After the circuit settles in steady-state from the previous part, disconnect the charged capacitors from the circuit and connect them in the configuration shown below. Polarity from part (a) is preserved. What are the voltages across, currents through and charge stored in each of the capacitors $C_1, C_2, C_3$ and $C_4$ in steady-state after the charge redistributes itself?
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q3-4.png)</p>
+
+q3_2_s: |
+  **Solutions:**
+  - i. Identify the nodes (refer to the circuit below for our selection)
+  - ii. Select a reference node if not set (in this case, done)
+  - iii. For each node with an unknown voltage write a charge conservation equation (simple $\sum$ charges on node before $\sum$ charges on node after). Pay attention to the signs.
+  - iv. Translate each equation using node voltages: $q = \C \cdot (v_i - v_j)$ assuming $C$ is connected between nodes $i$ (with $+$ sign) and $j$ (with $-$ sign).
+  - v. Sanity check, verify that you have as many equations (charge conservation) as variables (number of unknown node voltages).
+  - vi. Solve a sytem of linear equations (you can set it up in matrix form, by copying the coefficients).
+
+  <hr class="s2" />
+  We first note that in stead state (DC), no current flows through the capacitors. Therefore, by writing a KCL equation between $C_2$ and $R_2$ we get that there is no current flowing through the resistor either. This means that there is no voltage across this resistor and therefore we can define just one node between $C_4, C_3$ and $C_2$.
+  <hr class="s1" />
+  Following the recipe, we get the following equations (superscript $b$ means before and $a$ means after)
+  $$(1) - q_1^b + q_4^b = -q_1^a + q_4^a$$
+  $$(2) q_2^b + q_3^b - q_4^b = q_2^a + q_3^a - q_4^a$$
+  Which translates to
+  $$(1) - (10 - 5V)C_1 + (4V - 7V)C_4 = -(0 - u_1)C_1 + (u_1 - u_2)C_4$$
+  $$(2) - 2VC_2 + (4V - 7V)C_3 - (4V - 7V)C_4 = u_2C_2 + u_2C_3 - (u_1 - u_2)C_4$$
+  By plugging in the capacitor values and solving you get:
+  $$u_1 = -3V$$
+  $$u_2 = 1V$$
+  The reference circuit:
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q3-5.png)</p>
+  <hr class="s2" />
+  This means that the charges on the "positive" (\+) plates of the capacitors are
+  $$q_1 = -3pC$$
+  $$q_2 = 10pC$$
+  $$q_3 = 2pC$$
+  $$q_4 = -8pC$$
+
+q4_1: |
+  # 4. KCL/KVL or Superposition?
+  (a) Solve for the current through the 3Ω resistor, marked as i, using superposition. Verify using nodal analysis. You can use IPython to solve the system of equations if you wish. Where did you place your ground, and why?
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q4-1.png)</p>
+
+q4_1_s: |
+  **Solutions:** $i = \frac{-1}{3} A$.
+  <hr class="s1" />
+  **Method 1: Superposition**
+  <hr class="s1" />
+  Consider the circuits obtained by:
+  - i. Turning off the $1A$ current source:
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q4-2.png)</p>
+  <hr class="s2" />
+  In the above circuit, no current is going to flow through the middle branch, as it is an open circuit. Thus this is just a $5V$ voltage source connected to two $3\Omega$ resistors in series so
+  $$i_1 = -\frac{5}{6}A$$
+  - ii. Turning off the $5V$ voltage source:
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q4-3.png)</p>
+  <hr class="s2" />
+  In the above circuit, notice that the $3\Omega$ resistors are in parallel and therefore form a current divider. Since the values of the resistances are equal, the current flowing through them will also be equal, that is $i_2 = i'$. Applying KCL to node $O$, we get
+  $$1 - i_2 - i' = 0$$
+  which gives us
+  $$i_2 = \frac{1}{2}A$$
+  Now, applying the principle of superposition, we have $i = i_1 + i_2 = -\frac{5}{6} + \frac{1}{2} = -\frac{1}{3}A$.
+
+  <hr class="s2" />
+  **Method 2: Nodal Analysis** First, let’s identify and label the nodes on the circuit. (Note that the numbers are arbitrary.) We also ground node $1$. (Our choice of ground is arbitrary (whatever you chose is fine) but node $1$ is a convenient choice because node $5$ will turn out to be $5V$ from the voltage source, the voltage at node $4$ can be calculated quickly from the current source and the $1.5\Omega$ resistor using Ohm’s law, and $i$ can be calculated quickly once we know the voltage at node $2$.)
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q4-4.png)</p>
+  <hr class="s2" />
+  First, we write KCL at each node. At nodes $1$ and $2$, we get the same equation.
+  $$i + i' = 1A$$
+  At nodes $3$ and $4$, we get the trivial equation
+  $1A = 1A$$
+  We now write the voltage drops across the circuit elements in terms of the currents using Ohm's law or in terms of known voltages:
+  $$V_5 - V_1 = 5$$
+  $$V_5 - V_2 = i'(3\Omega)$$
+  $$V_2 - V_3 = 1A(1.5\Omega)$$
+  $$V_4 - V_1 = 1A(1.5\Omega)$$
+  $$V_2 - V_1 = -i(3\Omega)$$
+  Since we've chosen node $1$ as ground ($V_1 = 0$), we can rewrite the equations involving $V_1$ which gives us values for $V_5$ and $V_4$.
+  $$V_5 = 5$$
+  $$V_4 = 1A(1.5\Omega)$$
+  $$V_2 = -i(3\Omega)$$
+  We next combine the KCL equations and the Ohm’s Law equations to solve for $V_$2 and $V_3$. (We don’t actually need to solve for $V_3$ once we know $V_2$ but the calculation is easy.)
+  $$-\frac{V_2}{3\Omega} + \frac{5V - V_2}{3\Omega} = 1A \implies V_2 = 1V$$
+  and
+  $$V_3 = V_2 - 1A(1.5\Omega)$$
+  $$V_3 = -0.5V$$
+  Finally, we use $V_2$ to solve for $i$
+  $$i = -\frac{V_2}{3\Omega} = -\frac{1}{3}A$$
+
+q4_2: |
+  (b) Solve for the current through the $3k\Omega$ resistor, marked as $i$, using whatever method you want. This problem is more mechanically tedious than the rest, so we recommend using iPython. Which method did you use, and why did you chose it?
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q4-5.png)</p>
+
+q4_2_s: |
+  **Solutions:**
+  <hr class="s1" />
+  **Method 1:** Nodal Analysis First, let’s identify and label the nodes on the circuit. One of the nodes has already been grounded for us. Note that vertices connected by short circuits are marked with same number – ask yourself why!
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q4-6.png)</p>
+  Now, let's write KCL at all nodes:
+  $$(1) i_1 = 2mA$$
+  $$(2) i_h + i_j = i_i$$
+  $$(3) i_g = i_h + i$$
+  $$(4) 4 + i_f = i_g$$
+  $$(5) i_e = i_f$$
+  $$(6a) i_c = 4 + i_d$$
+  $$(6b) i_d = i_e$$
+  $$6(6a + 6b) i_c = 4mA + i_e$$
+  $$(7a) i_a = i_b + i_j$$
+  $$(7b) i_b + i = i_c$$
+  $$7(7a + 7b) i_a + i = i_c + i_j$$
+  $$(8) 2mA = i_a$$
+  Now, let's write Ohm's Law for all the currents that are flowing through resistors in terms of the node voltages:
+  $$i_a = \frac{V_8 - V_7}{4k\Omega}$$
+  $$i_c = \frac{V_7 - V_6}{5k\Omega}$$
+  $$i_e = \frac{V_6 - V_5}{6k\Omega}$$
+  $$i_f = \frac{V_5 - V_4}{7k\Omega}$$
+  $$i_g = \frac{V_4 - V_3}{2k\Omega}$$
+  $$i_i = \frac{V_2 - V_1}{1k\Omega}$$
+  $$i_j = \frac{V_7 - V_2}{8k\Omega}$$
+  $$i = \frac{V_3 - V_7}{3k\Omega}$$
+  Putting it together, we get the equations for node voltages (note that we set $V_3 = 0$ and $V_2 = 12V$ by inspection, and because nodes $2$ and $3$ are connected to voltage sources, we do not retain the KCL equations for those nodes.)
+  $$\frac{V_2 - V_1}{1k\Omega} = 2mA$$
+  $$V_2 - V_3 = 12V$$
+  $$V_3 = 0V$$
+  $$4mA + \frac{V_5 - V_4}{7k\Omega} = \frac{V_4 - V_3}{2k\Omega}$$
+  $$\frac{V_6 - V_5}{6k\Omega} = \frac{V_5 - V_4}{7k\Omega}$$
+  $$\frac{V_7 - V_6}{5k\Omega} = 4mA + \frac{V_6 - V_5}{6k\Omega}$$
+  $$\frac{V_8 - V_7}{4k\Omega} + \frac{V_3 - V_7}{3k\Omega} = \frac{V_7 - V_6}{5k\Omega} + \frac{V_7 - V_2}{8k\Omega}$$
+  $$2mA = \frac{V_8 - V_7}{4k\Omega}$$
+  We can see that this is a system of $8$ equations in $8$ variables, $V_1,V_2,V_3,...,V_8$. We can express the system of equations as a matrix, and solve using IPython. This gives us the following solution: $V_1 = 10V, V-2 = 12V, V_3 = 0V, V_4 = 5.3770V, V_5 = −3.8033V, V_6 = −11.6721V, V_7 = 1.7705V, V_8 = 9.7705V$. Finally, $i = \frac{V_3 - V_7}{3k\Omega} = \frac{-1.7705}{3k\Omega} = -0.5902mA$.
+  <hr class="s2" />
+  **Method 2: Superposition (and then Nodal Analysis)**
+  Another method we can use is to make use of the superposition principle and analyze the circuit with each voltage or current source separately. For each source, we will zero out the other sources and solve for the portion of $i$ that comes from the individual source we are considering, $i_{12V}, i_{2mA},$ and $i_{4mA}$ respectively. We then compute the full value of $i$ by adding them up.
+  $$i = i_{12V} + i_{2mA} + i_{4mA}$$
+  We zero out voltage sources by treating them like a short circuit (a wire with no resistance – $0$ voltage jump) and we zero out current sources by treating them like an open circuit (a break in the circuit – $0$ current flowing).
+  <hr class="s1" />
+  The advantage of using superposition is that we can often simplify the circuit significantly and just use equivalent resistance rules and Ohm’s law rather than a full nodal analysis to calculate the quantity that we’re interested in.
+  - $12V$ **Voltage Source**
+  <hr class="s1" />
+  We start by zeroing out all sources except the voltage source.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q4-7.png)</p>
+  <hr class="s2" />
+  If the current sources are zeroed out, no current will flow through the $1kΩ$ resistor and the $4kΩ$ resistor. Noting this and rewriting the $2kΩ, 7kΩ, 6kΩ,$ and $5kΩ$ resistors as an equivalent resistor using the rules for resistors in series, we can redraw the above circuit as
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q4-8.png)</p>
+  <hr class="s2" />
+  Using the equivalent resistance rules again and Ohm's law, we get that
+  $$\begin{align} 12V &= i_1\left(8k\Omega + (3k\Omega || 20k\Omega)\left) \\\\
+    &= i_1 \left(8k\Omega + \left( \frac{1}{3k\Omega} + \frac{1}{20k\Omega} \right)^{-1} \right) \\\\
+    &= i_1 \left(8k\Omega + \left( \frac{20}{60k\Omega} + \frac{3}{60k\Omega} \right)^{-1} \right) \\\\
+    &= i_1 \left(8 + \frac{60}{23} \right) k\Omega \end{align}$$
+  We know that the voltage drop across the $3k\Omega$ and $20k\Omega$ must be the same and from KCL we know that $i_1 + i = i_2$. Thus we have
+  $$-i(3k\Omega) = i_2(20k\Omega)$$
+  Substituting we get
+  $$-i(3k\Omega) = (i_1 + i)(20k\Omega)$$
+  Solving for $i$ we get
+  $$-i(3k\Omega + 20k\Omega) = i_1(20k\Omega)$$
+  $$-i(3k\Omega + 20k\Omega) = \left( \frac{12V}{(8 + \frac{60}{23}) k\Omega \right) (20k\Omega)$$
+  Thus we have that the portion of $i$ from the voltage source, $i_{12V}$, is
+  $$i_{12V} = -0.9836 mA$$
+  - $2mA$ **Curent Source**
+  Zeroing out the voltage source and the $4 mA$ current source, the circuit becomes
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q4-9.png)</p>
+  <hr class="s2" />
+  Redrawing the circuit applying the series equivalent resistance rules and labeling nodes, we get
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q4-10.png)</p>
+  <hr class="s2" />
+  The easiest way to calculate $i$ is to calculate the voltage drop from node $4$ to node $1$. Once we know this, we can calculate $i$ using Ohm's law
+  $$V_4 - V_1 = (-i)3k\Omega$$
+  A simple way to calculate V4 − V1 is to use Ohm’s law and the equivalent resistance of the three resistors in parallel: the $8kΩ, 3kΩ$, and $20kΩ$ resistors. We know the total current traveling through these three resistors is $2 mA$. Using Ohm’s law, we have
+  $$\begin{align} V_4 - V_1 &= 2mA\left(8k\Omega || 3k\Omega || 20k\Omega \right) \\\\
+    &= 2mA \left( \frac{1}{8k\Omega} + \frac{1}{3k\Omega} + \frac{1}{20k\Omega} \right)^{-1} \\\\
+    &= 2mA \left( \frac{15}{120k\Omega} + \frac{40}{120k\Omega} + \frac{6}{120k\Omega} \right)^{-1} \\\\
+    &= 2mA \left( \frac{120k\Omega}{61} \right) \end{align}$$
+  Now that we know $V_4 - V_1$, we use Ohm's Law again this time across the $3k\Omega$ resistor to calculate the portion of $i$ from the $2mA$ current source.
+  $$i_{2mA} = \frac{V_1 - V_4}{3k\Omega} = -\frac{1}{3k\Omega}2mA\left(\frac{120k\Omega}{61}\right) = -1.3115mA$$
+  - $4mA$ **Current Source**
+  Finally, we zero out the voltage source and the $2mA$ current source to solve for the portion of $i$ from the $4mA$ current source.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q4-11.png)</p>
+  <hr class="s2" />
+  Noticing again that no current will flow through the $1k\Omega$ and $4k\Omega$ resistors, using the series equivalent resistance rules on the $7k\Omega$ and $6k\Omega$ resistors, and labeling currents and nodes, we can redraw the circuit as
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q4-12.png)</p>
+  <hr class="s2" />
+  From KCL, we have that
+  $$i_1 + i_2 = 4mA$$
+  We know that the voltage drop from node $1$ to node $2$ is the same through the left half of the circuit and the right half. Using Ohm's law and equivalent resistance rules we get that
+  $$V_1 - V_2 = i_1\left(2k\Omega + 5k\Omega + (8k\Omega || 3k\Omega))$$
+  and that
+  $$V_1 - V_2 = i_2(13k\Omega)$$
+  Substituting using the above $3$ equations, we can solve for $i_1$.
+  $$\begin{align} (4mA - i_1)(13k\Omega) &= i_1\left(2k\Omega + 5k\Omega + (8k\Omega || 3k\Omega)\right) \\\\
+  4mA(13k\Omega) &= i_1 \left(13k\Omega + 2k\Omega + 5k\Omega + (8k\Omega || 3k\Omega) \right) \\\\
+  4mA(13k\Omega) &= i_1 \left(13k\Omega + 2k\Omega + 5k\Omega + (\frac{1}{8k\Omega} + \frac{1}{3k\Omega})^{-1} \right) \\\\
+  4mA(13k\Omega) &= i_1 \left(13k\Omega + 2k\Omega + 5k\Omega + (\frac{24k\Omega}{11})\right) \end{align}$$
+  We also need to know the voltage drop from node $3$ to node $4$. Again using the equivalent resistance rules, we have that
+  $$V_3 - V_4 = i_1(8k\Omega || 3k\Omega)$$
+  $$V_3 - V_$ = i_1\left( \frac{24k\Omega}{11} \right)$$
+  Finally the portion of $i$ from the $4mA$ current source, $i_{4mA}$, can be calculated using Ohm's Law and $V_3 - V_4$.
+  $$\begin{align} i_{4mA} &= \frac{V_3 - V_4}{3k\Omega} \\\\
+    &= \frac{1}{3k\Omega} \left(\frac{24k\Omega}{11}\right) i_1 \\\\
+    &= \frac{1}{3k\Omega} \left(\frac{24k\Omega}{11}\right) 4mA (13k\Omega) \left(13k\Omega + 2k\Omega + 5k\Omega + \frac{24k\Omega}{11} \right)^{-1} \\\\
+    &= 1.7049 mA \end{align}$$
+  Finally, we solve for $i$. Note that as expected we get the same value that we got using nodal analysis.
+  $$\begin{align} i = i_{12V} + i_{2mA} + i_{4mA} \\\\
+    &= -0.9836mA - 1.3115mA + 1.7049mA \\\\
+    &= -0.5902mA$$
+  Note: This problem is way longer and more tedious than anything that you will face on an exam in 16a. However, it is important for you to see that analyzing circuits can be done mechanically. This is why we wanted you to do this on the homework.
+
+q5_1: |
+  # 5. Capacitor Charge Sharing
+  Consider the following circuit:
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q5-1.png)</p>
+  <hr class="s2" />
+  In the first phase, all of the switches labeled $\phi_1$ will be closed and all switches labeled $\phi_2$ will be open. In the second phase, all switches labeled φ1 open and all switches labeled $\phi_2$ close.
+  <hr class="s2" />
+  (a) Draw polarity ($+$ and $-$ signs) on the two capacitors $C_1$ and $C_2$. (It doesn’t matter which terminal you label $+$ or $−$; just remember to keep these consistent through phases $1$ and $2$!)
+
+q5_1_s: |
+  **Solutions:**
+  - i. Label all the voltages across the capacitors. Choose whichever direction you want for each capac- itor(for example, you can keep the $+$ sign on the top plate and the $−$ sign on the bottom plate of each capacitor, meaning that there is a voltage drop from top to bottom). Just make sure you stay consistent across phases.
+  - ii. Draw the circuit in each phase. Keep the polarities of the voltages across capacitors consistent in all phases!
+  - iii. Look at the circuit in the first phase. First, determine the voltages across each capacitor according to the polarities you have defined. Then, use $Q = CV$ to determine the charge on each plate on each capacitor. (Make sure to emphasize the magnitude of charge on each plate. This is important if you want to explain charge sharing conceptually.)
+  - iv. Look at the circuit in the second phase. Determine where the charge is conserved. (Guideline for this: If a plate of a capacitor, or plates of multiple capacitors that are connected to each other in one of the phases, are “floating” in the second phase, meaning that it/they are not connected to any voltage source or ground, then the total charge on the plate(s) must be conserved.)
+  - v. Write the equation for charge conservation. Hence, determine the voltages across the capacitors. Finally, calculate the charge stored in each capacitor in the second phase.
+
+  <hr class="s2" />
+  Now, let’s do the solution for part a) (step i. of the recipe). One way of marking the polarities is $+$ on the top plate and $−$ on the bottom plate of both $C_1$ and $C_2$. Let’s call the voltage drop across $C_1 \; V_{C_1}$ and across $C_2 \; V_{C_2}$.
+
+q5_2: |
+  (b) Draw the circuit in the first phase and in the second phase. Keep your polarity in part (a) in mind.
+
+q5_2_s: |
+  **Solutions:** (step ii. of the recipe) In phase $1$, all the switches marked as $\phi_1$ are closed and switches marked as $\phi_2$ are open. In phase $2$, all the switches marked as $\phi_2$ are closed and switches marked as $\phi_1$ are open. Draw both the circuits separately, side by side, with the switches in their respective positions.
+
+q5_3: |
+  (c) Find the voltages and charges on $C_1$ and $C_2$ in the first phase. Be sure to keep the polarities of the voltages the same!
+
+q5_3_s: |
+  **Solutions:** (step iii. of the recipe) In phase 1,
+  $$V_{C_1,1} = V_{source} - 0 = V_{source}$$
+  and
+  $$V_{C_2,1} = 0 - 0 = 0$$
+  Next, we find the charge on each capacitor:
+  $$Q_{C_1,1} = V_{C_1,1} C_1 = CV_{source}$$
+  Note that the positive plate has a charge of $+CV_{source}$ coulombs, while the negative plate has a charge of $-CV_{source}$ coulombs, and
+  $$Q_{C_2,2} = V_{C_2,1}C_2 = 0$$
+
+q5_4: |
+  (d) Now, in the second phase, find the voltage $V_x$.
+
+q5_4_s: |
+  **Solutions:** (step iv. of the recipe) Where is charge conserved? To answer this, look at the top plates of $C_1$ and $C_2$. In phase $2$, they are both “floating” because they are not connected to $V_{source}$ or ground. And in phase $1$, they are not connected to each other, but in phase 2, they are connected by the switch. Therefore, in phase 2, the charges on the top plates of $C_1$ and $C_2$ will be $shared$, or distributed, because they simply cannot go anywhere else. The total charge will remain the same as in phase $1$. Let’s find the voltages across $C_1$ and $C_2$ in phase $2$ (same polarities as phase $1$!):
+  $$V_{C_1,2} = V_x - V_{source}$$
+  and
+  $$V_{C_2,2} = V_x$$
+  Now, let's find the charge stored in top plates of $C_1$ and $C_2$:
+  $$Q_{C_1,2} = C(V_x - V_{source})$$Jj,wA
+  and
+  $$Q_{C_2,2} = 9CV_x$$
+  Next, let's write the equation for charge conservation (step v. of the recipe):
+  $$Q_{C_1,1} + Q_{C_2,1} = Q_{C_1,2} + Q_{C_2,2}$$
+  giving
+  $$CV_{source} + 0 = C(V_x - V_{source}) + 9CV_x$$
+  which results in
+  $$V_x = \frac{V_{source}}{5}$$
+
+q5_5: |
+  (e) (BONUS) If capacitor $C_2$ did not exist (i.e., had a capacitance of $0F$), what would the voltage $V_x$ be?
+
+q5_5_s: |
+  **Solutions:** We could always go back to the equations above, plug in $C_2 = 0$, and derive $V_x = 2V_{source}$. It might be worthwhile to go over what this means for the circuit, though. If $C_2 = 0F$, the capacitor is actually an open circuit. (Why?) So we can pretend, as the question says, that $C_2$ does not exist. In phase $1$, as before, $C_1$ has a voltage drop of $V_{source}$ across it (from top to bottom), and is charged up to $CV_{source}$. Now, in phase $2$, the top plate of $C_1$ is left dangling (floating). This means that the charge on the top plate of $C_1$ is going to be the same, and therefore, so is the charge on the bottom plate. We will therefore get
+  $$V_x = V_{source} - (-V_{source}) = 2V_{source}$$
+
+q6_1: |
+  # 6. Equivalence
+  Find the Thévenin and Norton equivalents of the following circuit across the terminals $a$ and $b$ (in terms of $V_s$ and $\beta$). Note that the current source is dependent on the current $I_x$.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q6-1.png)</p>
+
+q6_1_s: |
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q6-2.png)</p>
+  <hr class="s2" />
+  **Solutions:** To calculate the Thévenin equivalent, the recipe is:
+  - (a) Calculate the output voltage in open circuit condition (no load resistor or equivalently infinite load resistance). Denote this as $V_{Th}$.
+  - (b) Calculate the output current in short circuit condition (load has $0$ resistance). Denote this as $I_{No}$.
+  - (c) Calculate the effective resistance $R_{eff} = \frac{V_{Th}}{I_{No}}$.
+
+  <hr class="s2" />
+  The Thévenin equivalent would be the circuit in Figure ??. The Norton equivalent would be the circuit in Figure ??.
+  <hr class="s1" />
+  Applying this recipe to our circuit. First, calculate $V_{Th}$ as in Figure ??. To get $V_{Th} = -\beta I_x \cdot 100 \text{ x } 10^3$ but since $I_x = \frac{V_s}{10 \text{ x } 10^3}$ we get $V_{Th} - \beta\frac{V_s \cdot 100 \text{ x }10^3}{10 \text{ x } 10^3} = -10\beta V_s$.
+  <hr class="s1" />
+  Second, calculate $I_{N_o}$ as in Figure ??. To get $I_{N_o} = -\beta I_x = \beta \frac{V_s}{10 \text{ x } 10^3}$. From this we know that $R_{eff} = 100k\Omega$.
+  <hr class="s1" />
+  Which yields the equivalent circuits in Figures ?? and ??.
+  <hr class="s1" />
+  To demonstrate the notion of equivalence, consider the circuit in Figure ??. If we solve it straight up, we get $V_l = -\beta I_x (R_l || 100k\Omega) = -\beta \frac{V_s}{10 \text{ x } 10^3} \cdot (R_l || 100k\Omega)$ and $i_l = \frac{V_l}{R_l} = \frac{-\bega \frac{V_s}{10 \text{ x } 10^3} \cdot (R_l || 100k\Omega)}{R_l} = -\beta \frac{V_s}{10 \text{ x } 10^3} \cdot \frac{100k\Omega}{100k\Omega + R_l}$.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q6-3.png)</p>
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q6-4.png)</p>
+  <hr class="s2" />
+  If we solve the circuit in Figure ??, we get (from voltage divider, last discussion) $V_l = V_{Th} \frac{R_l}{R_l + 100k\Omega} = -10\beta V_s \frac{R_l}{R_l + 100k\Omega} = -10 \beta V_s \frac{R_l}{R_l + 100k\Omega} \frac{100 \text{x} 10^3}{100 \text{x} 10^3} = -\beta \frac{V_s}{10\text{x}10^3} \frac{100\text{x}10^3 \cdot R_l}{R_l + 100k\Omega} = -\beta \frac{V_s}{10\text{x}10^3} \cdot (R_l || 100k\Omega)$, and therefore the current will be the same (same voltage, same resistor).
+  <hr class="s1" />
+  Now if we solved the circuit in Figure ??, we get (from current divider, either derive it or note that we kind of derived it when we computed $i_l$ from Figure ??) $i_l = I_{N_o} \frac{100k\Omega}{100k\Omega + R_l} = -\beta \frac{V_s}{10\text{x}10^3}\frac{100k\Omega}{100k\Omega + R_l}$, and therefore the voltage will be the same (same current, same resistor).
+  <hr class="s1" />
+  What exactly are we doing when we find the equivalent circuits? Imagine you are given a box with two terminals. The value of an equivalent circuit is that we can completely describe the behavior of that box without knowing what is inside. In addition, actually calculating the Thévenin and Norton equivalent voltage and current can be done with only the two terminals. How would we measure the voltage? Simply take a voltmeter and measure the voltage across the terminals. How would we measure the current? Simply connect the terminals together and measure the current through this short. The resistance is a bit more subtle. If we look at the equivalent circuits, you could either SHORT the voltage source in the Thévenin equivalent, or OPEN the current source in the Norton equivalent. Then, you must apply a test voltage source at the output
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q6-5.png)</p>
+  <hr class="s2" />
+  and measure the current supplied by this source. Alternatively, you can just divide the equivalent voltage source by the equivalent current source. The Thévenin and Norton equivalents must be consistent (with the obvious exception that the Norton equivalent burns power while the Thévenin equivalent does not...)
+
+q7_1: |
+  # Section 2: Free-form Problems
+  # 7. DC-DC Voltage Divider
+  As we have learned in class, one of the reasons for using AC voltages is that we can easily transform the voltage (step up or step down) using transformers. Unfortunately, such circuits do not work at DC and we need to come up with other ways of dividing DC voltages. We have learned about resistive dividers, but we found issues such as inefficiencies. An alternative circuit, a capacitive charge pump, is shown below. It relies on two switches which are activated in sequence, first switch $\Phi_1$ is closed (during this period $\Phi_2$ switches are open), and next $\Phi_2$ closes and $\Phi_1$ is opened. In practice this is done periodically but for this problem we will analyze each phase separately. Note that $V_{in}$ is a DC voltage.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q7-1.png)</p>
+  <hr class="s2" />
+  (a) During phase $\Phi_1$, calculate the voltage across and charge stored by each capacitor $C_1$ and $C_2$.
+
+q7_1_s: |
+  **Solutions:** Since the two capacitors are connected in series, the same current flows through each one (by KCL), so they both charge to the same value. We can model the system as two capacitors in series, so the amount of charge is given by
+  $$q_1 = q_2 = q = C_{eff}V_{in} = \left(\frac{C_1C_2}{C_1 + C_2}\right) V_{in}$$
+  $$v_1 = q_1/C_1 = \left(\frac{C_2}{C_1 + C_2}\right)V_{in}$$
+  $$v_2 = q_2/C_2 = \left(\frac{C_1}{C_1 + C_2}\right)V_{in}$$
+
+q7_2: |
+  (b) During phase $\Phi_2$, calculate the output voltage $V_{out}$ and show that it is a fraction of the input voltage $V_{in}$.
+
+q7_2_s: |
+  **Solutions:** In phase $2$, the two capacitors are placed in parallel. Note that even if they are charged to different voltages at the end of phase 1, at the end of phase $2$ their voltages must equalize, since they are placed in parallel. In this scenario, similar to putting two batteries in parallel, a large current will from from one capacitor to the other. Nevertheless, the total charge in the system does not change, so at the in phase $2$, we have two capacitors in parallel holding a charge of $q_{tot} = q_1 + q_2$, and so the output voltage is given by
+  $$V_{out} = \frac{q_{tot}}{C_1 + C_2} = \frac{2\left(\frac{C_1C_2}{C_1 + C_2}\right)V_{in}}{C_1 + C_2}$$
+  Simplifying
+  $$V_{out} = \frac{2C_1C_2}{(C_1 + C_2)^2} V_{in} < V_{in}$$
+
+q7_3: |
+  (c) For the special case of $C_1 = C_2$, calculate the output voltage and the efficiency of the system. To calculate the efficiency, calculate the energy stored in the capacitors during the end of phase $\Phi_1$ and $\Phi_2$.
+
+q7_3_s: |
+  **Solutions:** For this special case, each capacitor is charged to the same voltage in phase 1 and so when they are connected in parallel, there is no charge transfer between the capacitors, and the output is exactly half of the input voltage. The derivation above confirms that
+  $$V_{out} = \frac{2C^2}{(2C)^2}V_{in} = \frac{V_{in}}{2}$$
+  The energy stored by $C_1$ and $C_2$ at the end of phase $1$ is given by
+  $$E_1 = E_2 = \frac{1}{2}C\left(\frac{V_{in}}{2}\right)^2$$
+  $$E_{t,1} = 2\frac{1}{2}CV_{in}^2\frac{1}{4} = \frac{1}{4}CV_{in}^2$$
+  At the end of phase $2$, the total energy is stored in two parallel capacitors $C_1 + C_2 = 2C$.
+  $$E_{t,2} = \frac{1}{2}2C\left(\frac{V_{in}}{2}\right)^2 = E_{t,1}$$
+  which means that no energy is lost in dividing the voltage. If we repeat this calcualtion in the general case, we will find that unless the division ratio is set at two, there is energy loss. Where does the energy go ? In practice most switches have resistance and so it goes into heating the switches. What if the switch is ideal??
+  <hr class="s1" />
+  How can you build a circuit that divides by another ratio, say 3, without incurring an efficiency loss?
+
+q7_4: |
+  (d) Assume that this circuit is used with a load represented by the current source $I_L = 10mA$. Suppose that the cycle described above repeats periodically at a rate of $10 kHz$, or $10,000$ times per second, with each phase $\Phi_1$ and $\Phi_2$ exactly $50$% of each cycle. During phase $\Phi_2$, which lasts $50μs$, we wish the output voltage to not drop by more than $5mV$. Specify the size of $C_1$ and $C_2$ to satisfy this constraint.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q7-1.png)</p>
+
+q7_4_s: |
+  **Solutions:** During phase $2$, the voltage on the capacitors will droop due to the load current. For a capacitor, we know that
+  $$I_c = C\frac{dV}{dt} = (C_1 + C_2)\frac{dV}{dt} = I_L$$
+  $$\frac{dV}{dt} = \frac{I_L}{C_1 + C_2}$$
+  Since the right hand is a constant, we have
+  $$\delta V = \delta t = \frac{I_L}{C_1 + C_2}$$
+  Solving for $C_1 + C_2$, we arrive at
+  $$C_1 + C_2 = \frac{\delta tI_L}{\delta V} = 10\mu F$$
+
+q8_1: |
+  # 8. Thevenin's Theorem and Op-Amp Circuits!
+  You're given the below circuit - which cascades two opamps.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q8-1.png)</p>
+  <hr class="s2" />
+  We're going to explore what this circuit does in several different ways.
+  <hr class="s2" />
+  (a) Let’s first assume that the Golden Rules hold ($A = \infty$ for both the opamps) Calculate $V_x$ in terms of $V_{in}$. Calculate $V_{out}$ in terms of $V_x$, and therefore in terms of $V_{in}$.
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q8-2.png)</p>
+
+q8_1_s: |
+  **Solutions:** Begin with the golden rules:
+  - Current into both terminals of the opamp(s) is 0.
+  - $V_{+} = V_{-}$ *when the opamp is connected in negative feedback.
+
+  <hr class="s2" />
+  Solve the circuit systematically. First, label all the nodes in the circuit. Let $V_{1±}$ be the inverting/non-inverting inputs of the leftmost op-amp.
+  <hr class="s1" />
+  Applying the consequences of the Golden Rules, we get $V_{1+} = V_{in}$ and V_{1−} = V_{1+} = V_{in}$. Putting these together, we get $V_x = V_{1−} = V_{in}$. As we saw last discussion, the first opamp forms a voltage follower, or buffer circuit.
+  <hr class="s2" />
+  Next, we find $V_{out}$ in terms of $V_x$. As a consequence of the Golden Rules, current into input terminals of opamp $2$ will also be $0$. Using this knowledge, we can do simple nodal analysis to solve the circuit. Applying KCL at node $2−$:
+  $$i_2-  i_3 = 0$$
+  giving us
+  $$i_2 = i_3 = i$$
+  Also, $V_{2-} = V_{2+} = 0$.
+  <hr class="s1" />
+  Now, noting from Ohm's Law that $i_2 = \frac{V_x - V_{2-}}{R_2}$ and $i_3 = \frac{V_{2-} - V_{out}}{R_3}$, we get
+  $$\frac{V_x - V_{2-}}{R_2} = \frac{V_{2-} - V_{out}}{R_3}$$
+  giving us
+  $$\frac{V_x}{R_2} = \frac{-V_{out}{R_3}}$$
+  Therefore,
+  $$V_{out} = -\frac{V_xR_2}{R_3} = -\frac{V_{in}R_2}{R_3}$$
+  Note that the answer for $V_{out}$ in terms of $V_x$ did not depend on any part of the circuit to the left of node $x$. Talk about interfaces and opamps as black boxes a bit here (connecting to the discussion in lecture) and how we can simplify solving these sort of cascaded opamps circuits by solving for the gain in each part of the circuit.
+
+q8_2: |
+  (b) Now, suppose we remove the infinite gain assumption. The model of the op amp remains the same, but now $A$ is finite for both opamps. This complicates our analysis...Thevenin and Norton, save us! What is the Thevenin equivalent circuit at $V_x$ with respect to ground looking back? (Imagine that you disconnect the rest of the circuit to the right of node $x$. Look at the rest of the circuit, and find the Thevenin voltage and equivalent resistance.)
+
+q8_2_s: |
+  **Solutions:** Since we can no longer apply all the Golden Rules, we can no longer make the simplifying assumptions we made in the previous part. We could always solve this circuit brute force using nodal analysis, but we don’t want to do that here. In the next problem parts, we are going to see that finding the Thevenin equivalents of the circuits can simplify calculations, and this procedure can give us additional insight into the circuit.
+  <hr class="s1" />
+  We are treating the entire circuit to the left of $V_x$ as a black box. Let’s draw the part of the circuit we want to calculate the Thevenin equivalent for:
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q8-3.png)</p>
+  <hr class="s2" />
+  **Calculating Thevenin (open circuit) voltage** $V_{th}$:
+  <hr class="s1" />
+  Looking at the node marked $x$, we can see that
+  $$V_{th} = A(V_{1+} - V_{1-}) = V_{1-}$$
+  Also note that $V_{1+} = V_{in}$ (as there is an open circuit). Work through this to get
+  $$V_{th} = \frac{AV_{in}}{A + 1}$$
+  Point out here that if $A \to \infty$, we would have $V_{th} = V_x = V_{in}$ as before.
+  <hr class="s2" />
+  **Calculating Thevenin resistance* $R_{eq}$ **(Method 1):**
+  <hr class="s1" />
+  Find the Norton current $I_N$. Here, you notice that the value of the VCVS will be $A(V_{1+} - V_{1-}) = AV_{in}$. We are directly connecting the VCVS to ground by a short circuit. So, $I_N = \infty$. Finally $R_{eq} = \frac{V_{th}}{I_N} = 0\Omega$.
+  <hr class="s2" />
+  **Calculating Thevenin resistance* $R_{eq}$ **(Method 2):**
+  <hr class="s1" />
+  As discussed in Problem $1$ on this worksheet, zero out the independent source $V_{in}$. Then, apply $V_{test}$ across node $x$ and the ground node and calculate $I_{test}$ as shown in the figure.
+  <hr class="s1" />
+  In this circuit, we can see that $V_{1+} = 0$ and $V_{1-} = V_{test}$. Also, $A(V_{1+} - V_{1-}) = -AV_{1-}$. Therefore, the VCVS and the voltage source $V_{test}$ are connected by a short circuit, and $I_{test} = \infty$. This gives us $R_{eq} = \frac{V_{test}}{I_{test}} = 0\Omega$.
+
+q8_3: |
+  (c) Redraw the circuit using the Thevenin equivalent you have obtained. Does it look simpler?
+
+q8_3_s: |
+  **Solutions:**
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q8-3.png)</p>
+  <hr class="s2" />
+  The circuit certainly does look simpler; we have abstracted out the effect of the first opamp. Notice what the first opamp circuit has done; it took a non-ideal voltage source ($V_{in}$ with resistance $R_1$), and converted it to an ideal voltage source (since $R_{out} = 0$) This is why voltage followers are useful.
+
+q8_4: |
+  (d) Now, calculate the Thevenin equivalent circuit at $V_{out}$ with respect to ground looking back. (Under the same finite-gain assumption as the previous part).
+
+q8_4_s: |
+  **Solutions:**
+  <hr class="s1" />
+  **Calculating Thevenin (open circuit) voltage** $V_{th} = V_{out}$ **:**
+  <hr class="s1" />
+  Note that $V_{2+} = 0$. Therefore, the op-amp enforces:
+  $$V_{out} = A(V_{2+} - V_{2-}) = -AV_{2-}$$
+  Or re-written:
+  $$V_{2-} = -\frac{V_{out}}{A}$$
+  Write the node equation at node $2_{-}$:
+  $$\frac{V_x - V_{2-}}{R_2} = \frac{V_{2-} - V_{out}}{R_3}$$
+  Now, plugging in our expression for $V_{2-}$:
+  $$\frac{V_x}{R_2} + \frac{V_{out}}{AR_2} = -\frac{V_{out}}{AR_3} - \frac{V_{out}}{R_3}$$
+  Re-arrange to solve for $V_{out}$:
+  $$V_{out} = -\frac{V_x}{R_2}\left[ \frac{1}{AR_2} + \frac{1}{AR_3} + \frac{1}{R_3} \right]^{-1}$$
+  Now, plug in $V_x = AV_{in} / (A + 1)$ from part (b) (notice, here we crucially use the fact that loading does not change $V_x$):
+  $$V_{out} = -\frac{AV_{in}}{(A + 1)R_2}\left[\frac{1}{AR_2} + \frac{1}{AR_3} + \frac{1}{R_3} \right]^{-1}$$
+  Notice that taking limit $A \to \infty$ gives the expected answer.
+  <hr class="s2" />
+  **Calculating Thevenin resistance* $R_{eq}$ **(Method 1):**
+  <hr class="s1" />
+  $I_N = \infty$. Why?
+  <hr class="s1" />
+  This gives us, again, $R_{eq} = \frac{V_{th}}{I_N} = 0\Omega$.
+  <hr class="s2" />
+  **Calculating Thevenin resistance* $R_{eq}$ **(Method 2):**
+  <hr class="s1" />
+  $I_{test} = \infty$. Why?
+  <hr class="s1" />
+  This gives us $R_{eq} = \frac{V_{test}}{I_{test}} = 0\Omega$.
+
+q8_5: |
+  (e) Now, calculate $V_{out}$ in the limit as $A \to \infty$. Do you get the same answer as before?
+
+q8_5_s: |
+  **Solutions:** Taking $A \to \infty$, we get $V_{out} = -\frac{R_2V_{in}}{R_2}$. This is indeed the same answer as before.
+
+q9_1: |
+  # 9. Wireless communication with an LED
+  **Note:** This problem is slightly more difficult (out of scope in difficulty) than a midterm problem. It was a HW problem from Fall 2015.
+  <hr class="s1" />
+  In this question, we are going to analyze the system shown in the figure below. It shows a circuit that can be used as a wireless communication system using visible light (or infrared, very similar to remote controls).
+  <hr class="s2" />
+  <p align="center">![circuit](/img/ee16a/mt2p-sp16-q9-1.png)</p>
+  <hr class="s2" />
+  The element $D_1$ in the transmitter is a light-emitting diode (LED in short). An LED is an element that emits light where the brightness of the light is controlled by the current flowing through it. You can recall controlling the light emitted by an LED using your MSP430 in touch screen lab part $1$. In our circuit, the current across the LED, hence its brightness, can be controlled by choosing the applied voltage Vin and the value of the resistor R. In the receiver, the element labeled as $D_2$ is a reverse biased solar cell. You can recall using a reverse biased solar cell in imaging labs $1$ to $3$ as a light controlled current source, by IS we denote the current supplied by the solar cell. In this circuit the LED $D_1$ is used as a means for transmitting information with light, and the reverse biased solar cell $D_2$ is used as a receiver of light to see if anything was transmitted.
+  <hr class="s2" />
+  **Remark:** In imaging lab part $3$, we have talked about how non-idealities such as background light affect the performance of a system that does light measurements. In this question we assume ideal conditions, that is, there is no source of light around except for the LED.
+  <hr class="s1" />
+  In our system, we define two states for the transmitter, the *transmitter is sending something* when they turn on the LED, and *transmitter is not sending anything* when they turn off the LED. On the receiver side, the goal is to convert the current $I_S$ generated by the solar cell into a voltage and amplify it so that we can read the output voltage $V_{out}$ to see if the transmitter was sending something or not. The circuit implements this operation through a series of op-amps. It might look look complicated at first glance, but we can analyze it a section at a time.
+  <hr class="s2" />
+  (a) Currents $i_1, i_2$ and $i_3$ are labeled on the diagram. Assuming the Golden Rules hold, is $I_S = i_1$? $i_1 = i_2$? $i_2 = i_3$? Treat the solar cell as an ideal current source.
+
+q9_1_s: |
+  **Solutions:**
+  <hr class="s1" />
+  We use the op-amp golden rules, which says that in an op-amp, no current flows into or out of $V_{+}$ or $V_{−}$. Therefore we can use KCL at node $V_0$ and $V_2$ to conclude that $\fbox{I_S = i_1}$ and $\fbox{i_2 = i_3}$. However, if $I_S \noteq 0$ and $R_1 \noteq R_2$ then $\fbox{i_1 \noteq i_2}$. This is because $V_0 = V_2 = 0V$ and $V_1$ is some non-zero voltage. If $R_1 \noteq R_2$, then the currents flowing through them are different.
+
+q9_2: |
+  (b) Use the Golden Rules to find $V_0, V_1, V_2$ and $V_3$ in terms of $I_S, R_1, R_2$ and $R_3$.
+  <hr class="s1" />
+  **Hint:** Solve for them from left to right, and remember to use the op-amp golden rules.
+
+q9_2_s: |
+  **Solutions:**
+  <hr class="s1" />
+  Using the Golden rules, we know that $\fbox{V_0 = 0V}$. Using Ohm's law, we know that $V_0 - V_1 = i_1R_1$. From the previous part we know that $i_1 = I_S$. Thus we get $\fbox{V_1 = -I_SR_1}$. Using the Golden rules again, we get $\fbox{V_2 = 0V}$. Using Ohm's law and the KCL result from the previous part, we get the following equations:
+  $$V_1 - V_2 = i_2R_2$$
+  $$V_2 - V_3 = i_3R_3$$
+  $$i_2 = i_3$$
+  Solving them, we get $\fbox{V_3 = I_SR_1R_3/R_2}$.
+
+q9_3: |
+  (c) In the previous part, how could you check your work to gain confidence that you got the right answer?
+
+q9_3_s: |
+  **Solutions:**
+  <hr class="s1" />
+  One sanity check is checking that your answer has the right units (Voltage = Amperes x Ohms x Ohms \ Ohms = Amperes x Ohms).
+  <hr class="s1" />
+  Also notice that $R_2$ and $R_3$ form a voltage divider since no current flows into the negative terminal of $O_2$. Thus we can check that the voltage divider equation holds:
+  $$V_1 - V_1 = (V_3 - V_1)\frac{R_2}{R_2 + R_3}$$
+
+q9_4: |
+  (d) Now, assume that the transmitter has chosen the values of $V_{in}$ and $R$ to control the intensity of light emitted by LED such that when *transmitter is sending something* $I_S$ is equal to $0.1 A$, and when the *transmitter is not sending anything* $I_S$ is equal to $0 A$. The following figure shows a visual example of how this current $I_S$ might look like as time changes (note that this is just here for helping visualizing the form of the current supplied by the solar cell).
+  <hr class="s2" />
+  <p align="center">![graph](/img/ee16a/mt2p-sp16-q9-2.png)</p>
+  <hr class="s2" />
+  For the receiver, suppose $V_{ref} = 2V, R_1 = 10\Omega, R_2 = 1000\Omega$, and the supply voltages of the op-amps are $V_{DD} = 5V$ and $V_{SS} = -5V$. Pick a value of $R_3$ such that $V_{out}$ is $V_{DD}$ when the *transmitter is sending something* and $V_{SS}$ when the *transmitter is not sending anything*?
+
+q9_4_s: |
+  **Solutions:**
+  <hr class="s1" />
+  We want $V_{out} = V_3 - V_{ref} > 0V$ when $I_S = 0.1A$, and $V_{out} = V_3 - V_{ref} < 0V$ when $I_S = 0A$. We plug the known resistor values into an equation in the previous part to get $V_3 = I_SR_3/100$. When $I_S = 0$, $V_{out} = -2V < 0V$. When $I_S = 0.1A$, $V_{out} = R_3 / 1000 - V_{ref} > 0V$. Thus $\fbox{R_3 > 2000\Omega}$.
+
+q9_5: |
+  (e) In the previous part, how could you check your work to gain confidence that you got the right answer?
+
+q9_5_s: |
+  **Solutions:**
+  <hr class="s1" />
+  We can check if the answer makes sense. We know that $O_2$ serves as an inverting amplifier and $V_1$ is negative (since there is a voltage drop from $V_0 = 0V$), thus we want it to amplify $V_1$ until it is higher than $V_{ref}$, so $R_3$ should be bigger than $R_2$.
+
+q10_1: |
+  # 10. Wine Barrel Filler
+  You own a wine tasting place in Berkeley! You have a very elegant dispenser set up for each kind of wine. To minimize the number of bottles you use, you dispense the wine directly from refillable rectangular barrels. To make sure that the barrels never run out, you want to design a level “detector” which will send the appropiate signal to the tank of wine to pour wine into a barrel until a certain level. Two lateral faces of the barrel (opposite to each other) are coated inside with a perfectly conducting material and you have wires coming out of the barrel at the two faces. You are given that the resistivity of wine is $\rho$. The dimensions of the barrels (other than height) are $l$ and $w$. Design a circuit to control the level of the wine. You don’t want it to go below a threshold $h_{\min}$ and above a threshold $h_{\max}$. The only commands the circuit needs to output are “Fill" and “Stop Fill”. Recall the formula $R = \frac{\rho l}{A}$.
+  <hr class="s2" />
+  <p align="center">![box](/img/ee16a/mt2p-sp16-q10-1.png)</p>
+
+q10_1_s: |
+  **Solutions:**
+  As the wine level gets lower, the resistance of the wine will increase because the width of the resistor (wine) decreases.
+  <hr class="s1" />
+  Using the dashed line as the current level of wine in the barrel and the fact that the wires run from the side spanning $l$, what are the dimensions we should use for the formula? $w$ should be length and $l \cdot h$ should be the cross sectional area. The formula yields:
+  $$R_{barrel} = \frac{\rho L}{A} = \frac{\rho w}{lh}$$
+  Now consider the graph of $R_{\text{barrel}}$ as $h$ varies:
+  <hr class="s2" />
+  <p align="center">![box](/img/ee16a/mt2p-sp16-q10-2.png)</p>
+  <hr class="s2" />
+  $$R_{\min} \text{ or } (R_{\text{fill}}) = \frac{\rho w}{lh_{\max}}$$
+  $$R_{\max} = \frac{\rho w}{l h_{\min}}$$
+  Since voltage across a resistor decreases as the cross-sectional area increases (meaning as h increases), then any voltage read that is below the voltage across a barrel with $h_\max$ means that the barrel has $h ≥ h_\max$ and we should send the “Stop Fill” command. Otherwise, the level is below the minimum and we should send the “Fill” command.
+  <hr class="s1" />
+  Using what we learned about operational amplifiers being used as comparators, let’s design a circuit that has a sensing resistor $R_s$ (to make sure voltage drop across $R_{\text{barrel}}$ is not just the voltage source’s voltage), a voltage source, and an operational amplifier that takes in a feed from the voltage across the barrel and feeds it into the dispenser as a signal. Let the positive terminal of the op amp’s power supply be $5V$ and the negative terminal be $0V$ or ground. Let our voltage source provide $5V$ as well.
+  <hr class="s2" />
+  <p align="center">![box](/img/ee16a/mt2p-sp16-q10-3.png)</p>
+  <hr class="s2" />
+  Now what is the range of $V_{in}$ and what is $V_{ref}$? If the level of wine is $0$, meaning $h = 0$, then the resistance of the barrel is infinite and the voltage drop across it should be the voltage of the voltage source, $5V$. That’s the maximum. The minimum however, is not $0$. By Ohm’s Law, voltage drop across a resistor is low if the resistance is low. The lowest resistance $R_{fill}$, corresponds to a $h = h_{max}$. Using Ohm’s Law:
+  $$I = \frac{V_0}{R_{eq}}$$
+  $$R_{eq} = R_s + R_{barrel}$$
+  $$I = \frac{5}{R_s + R_{barrel}}A$$
+  $$V_{\text{ref}} = IR_{barrel}$$
+  $$V_{\text{ref}} = \frac{5 \text{ x } R_{barrel}}{R_s + R_{barrel}}V$$
+  $$\min V_{in} = \frac{5 \text{ x } R_{fill}}{R_s + R_{fill}}V$$
+  This is the minimum $V_{in}$ corresponding to $h_{max}$. If we want to send a $0V$ signal if $h \ge h_{max}$, then we want to reject $V \le \min V_{in}$. This means $V_{ref}$ is the lower bound of the range of $V_{in}$.
+  $$V_{in} \in \left[ \frac{5 \text{ x } R_{fill}}{R_s + R_{fill}}V, 5V \right]$$
+  $$V_{\text{ref}} = \frac{5 \text{ x } R_{fill}}{R_s + R_{fill}}V$$
