@@ -260,6 +260,10 @@ const exams = {
         'term': 'Fall 2016',
         'profs': 'Joseph',
       },
+      'sp16': {
+        'term': 'Spring 2016',
+        'profs': 'Joseph',
+      }
     },
     'mt1': {
       'fa16': {
