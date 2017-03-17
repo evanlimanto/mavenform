@@ -304,17 +304,17 @@ const exams = {
 };
 
 const courses = {
+  'cs170': 'Efficient Algorithms and Intractable Problems',
+  'ee16a': 'Designing Information Devices and Systems I',
+  'cs162': 'Operating Systems and Systems Programming',
+  'ee16b': 'Designing Information Devices and Systems II',
   'cs189': 'Introduction to Machine Learning',
   'cs61a': 'The Structure and Interpretation of Computer Programs',
   'cs188': 'Introduction to Artificial Intelligence',
-  'cs170': 'Efficient Algorithms and Intractable Problems',
-  'ee16a': 'Designing Information Devices and Systems I',
-  'ee16b': 'Designing Information Devices and Systems II',
   'data8': 'Foundations of Data Science',
   'cs186': 'Introduction to Database Systems',
   'ugba10': 'Principles of Business',
   'cs61c': 'Great Ideas in Computer Architecture (Machine Structures)',
-  'cs162': 'Operating Systems and Systems Programming',
   // 'chem1a': 'General Chemistry',
 };
 
