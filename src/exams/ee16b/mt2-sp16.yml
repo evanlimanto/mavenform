@@ -1,0 +1,315 @@
+course: 'ee16b'
+ref: 'mt2-sp16'
+
+type: 'mt2'
+term: 'sp16'
+prof: 'Sahai, Maharbiz'
+
+questions: {
+  'q1': 'Solve It',
+  'q2': 'Invert It',
+  'q3': 'Show It',
+  'q4': 'Null It',
+  'q5': 'Finding the Bright Cave',
+  'q6': 'A Tale of Two Cities',
+  'q7': 'Justin Beaver'
+}
+
+parts: {
+  'q1': 7,
+  'q2': 3,
+  'q3': 2,
+  'q4': 3,
+  'q5': 3,
+  'q6': 6,
+  'q7': 2,
+  'q8': 1,
+}
+
+q1_1: |
+  # Section 1: Warm-up questions (48 points)
+  **1. True or False** (2 pts for each question) For each question below, circle **T** on the left of each statement if you think the statement is true; else circle **F** (for false).
+  <hr class="s2" />
+  (a) **[ T / F ]** An ideal capacitor dissipates energy from the circuit in the form of heat.
+
+q1_1_s: |
+  **Solutions:** False. Ideal capacitors do not have non-idealities which dissipate heat, like series resistance.
+
+q1_2: |
+  (b) **[ T / F ]** An ideal “golden rules” op-amp behaves as though it has infinite gain.
+
+q1_2_s: |
+  **Solutions:** True. The golden rule where the positive and negative terminals have identical voltage in negative feedback holds true in the limit that $A \to \infty$.
+
+q1_3: |
+  **(c) [T/F]** A series RLC circuit connected with a DC input voltage/current in a single loop cannot exhibit voltage or current oscillations in time.
+
+q1_3_s: |
+  **Solutions:** We accept both *True* and *False* for this question, because we do not clarify the definition of a DC source during the exam. If you think a DC source should never change the value, then the answer is *True*.
+  <hr class="s1" />
+  However, if you think a DC voltage source can be $1V$ for $t < 0$ and $0V$ for $t ≥ 0$, consider the circuit in Question 7(a), it exhibits oscillations. Hence the answer is False.
+
+q1_4: |
+  (d) **[ T / F ]** Given an impedance $Z$ connected across a voltage source $v(t)$, it is possible for i(t) to be in-phase (no phase shift) with a sinusoidal $v(t)$.
+
+q1_4_s: |
+  Solutions: True. A simple resistor has an impedance of $R$, which by Ohm's law results in $v(t) = i(t)R$, where the voltage and current are in phase.
+
+q1_5: |
+  (e) **[ T / F ]** Since the current across an open circuit must be zero, the voltage across the open circuit must also be zero by Ohm's law.
+
+q1_5_s: |
+  **Solutions:** False. Ohm's law applies only to resistors, and so the voltage across an open circuit could be anything. Furthermore, if we model the open circuit as a resistor with resistance $R \to \infty$, then we have $V = \infty \* 0$ which is undefined.
+
+q1_6: |
+  (f) **[ T / F ]** The voltage across a constant current source must be zero.
+
+q1_6_s: |
+  **Solutions:** False. Consider a constant current source in series with a resistor. Then the voltage across the constant current source is no longer zero.
+
+q1_7: |
+  (g) **[ T / F ]** An electrical impedance across two terminals $Z = j\omega k$ (where $\omega$ is a positive angular frequency in rad/s and $k$ is a positive real number) can be implemented using only capacitors.
+
+q1_7_s: |
+  **Solutions:** False. Without active elements or inductors, only impedances in the following form can be produced:
+  <hr class="s2" />
+  $Z = \frac{1}{j \omega C_1} + \frac{1}{j \omega C_2} + \dots + \frac{1}{j \omega C_n} \\\\
+  Z = \frac{1}{j \ omega}(\frac{1}{C_1} + \frac{1}{C_2} + \dots + \frac{1}{C_n} \\\\
+  Z = \frac{k'}{j \omega}$
+  <hr class="s2" />
+  This is not in the form $Z = j\omega k$.
+
+q2_1: |
+  # 2. Digital Circuits (9 pts)
+  Consider the circuit below:
+  <hr class="s2" />
+  (a) (3 pts) The circuit below is a legal CMOS gate. $A, B$ and $Y$ are the Boolean values of the voltages, $V_A, V_B$ and $V_Y$, respectively. Write down $Y$ as a Boolean formula involving $A$ and $B$.
+  <hr class="s2" />
+  ![circuit](/img/ee16b/mt2-sp16-q2-1.png)
+
+q2_1_s: |
+  **Solutions:** The circuit implements the NOR function. It pulls up when both $A$ and $B$ are zero. It pulls down on all other inputs.
+
+q2_2: |
+  ![table](/img/ee16b/mt2-sp16-q2-2.png)
+  <hr class="s2" />
+  Implement each of the following Boolean functions with a single CMOS gate (i.e. implemented using a pull-up network consisting of PMOS transistors connected to a pull-down network consisting of NMOS transistors) by drawing it, or state why the function cannot be implemented as a single CMOS gate in 1-3 sentences. You only have available $V_A$ and $V_B$ as inputs.
+  <hr class="s2" />
+  (b) (3 pts) $¬(A ∧ B)$
+
+q2_2_s: |
+  **Solutions:** The function is the NAND function.
+  <hr class="s2" />
+  ![table](/img/ee16b/mt2-sp16-q2-3.png)
+
+q2_3: |
+  (c) (3 pts) $A ∧ B$.
+
+q2_3_s: |
+  **Solutions:** Given the assignment $A = B = 0$, the pull-up network, being composed of PMOS transistors only, has to pull up the output to $1$, no matter how the transistos are arranged. However, the output of $A ∧ B$ on this assignment is $0$. Therefore this function cannot be implemented as a single CMOS gate.
+
+q3_1: |
+  # 3. Can you control me? (8pts)
+  We have a discrete time system that evolves according to $\vec{x}(t + 1) = A\vec{x}(t) + B\vec{u}(t)$. For each part, **answer whether there exists a sequence of control vectors** \vec{u}(t)$ **that will bring the state to the origin** $\vec{0}$ **in a finite number of steps no matter where it starts.**
+  <hr class="s2" />
+  (a) (4 pts) $A = \left[ \begin{array}{c c} 2 & 0 \\\\ 0 & 2 \end{array} \right]$ and $B = \left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right]$.
+
+q3_1_s: |
+  **Solutions:** The controllability matrix
+  $$[B, AB] = \left[ \begin{array}{c c} 1 & 2 \\\\ 0 & 0 \end{array} \right]$$
+  is not full-rank. This system is not controllable.
+
+q3_2: |
+  (b) (4 pts) $A = \left[ \begin{array}{c c} 1 & 2 \\\\ 1 & 2 \end{array} \right]$ and $B = \left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right]$.
+
+q3_2_s: |
+  **Solutions:** The controllability matrix
+  $$[B, AB] = \left[ \begin{array}{c c} 1 & 1 \\\\ 0 & 1 \end{array} \right]$$
+  is full-rank. This system is controllable.
+
+q4_1: |
+  # 4. Transfer Functions (9 pts)
+  Consider the circuit diagrams below. We define $H(\omega) = V_\text{out}/V_\text{in}$ as the voltage transfer function for each circuit. Here, assume that the input is connected to an ideal voltage source that applies a sinusoidal voltage. For each circuit, **provide an expression** for $H(\omega)$ where $\omega$ is the frequency of the applied sinusoidal voltage in radians per second. Here the transfer functions should be expressed as functions of $j, \omega$, constants and the physical constants $(R, C, L)$ of the systems.
+  <hr class="s2" />
+  (a) (3 pts) $H(\omega) = $?
+  <hr class="s2" />
+  ![table](/img/ee16b/mt2-sp16-q4-1.png)
+
+q4_1_s: |
+  **Solutions:** Clearly, V_\text{out} = V_\text{in}. The transfer function is $H(\omega) = 1$.
+
+q4_2: |
+  (b) (3 pts) $H(\omega) = $?
+  <hr class="s2" />
+  ![table](/img/ee16b/mt2-sp16-q4-2.png)
+
+q4_2_s: |
+  **Solutions:** This is a voltage divider. The transfer function is
+  $$H(\omega) = \frac{j \omega L}{R + j \omega L}$$
+
+q4_3: |
+  (c) (3 pts) $H(\omega) = $?
+  <hr class="s2" />
+  ![table](/img/ee16b/mt2-sp16-q4-3.png)
+
+q4_3_s: |
+  **Solutions:** This is a voltage divider. The transfer function is
+  $$H(\omega) = \frac{j \omega L}{R + \frac{1}{j \omega C} + j \omega L}$$
+
+q5_1: |
+  # 7. RLC Transient Matching (8 pts)
+  ![circuit](/img/ee16b/mt2-sp16-q5-1.png)
+  <hr class="s2" />
+  Throughout this problem, we assume $V_{in} = 1V$ for $t < 0$ and $0V$ for $t \ge 0$.
+  <hr class="s2" />
+  For this problem you are asked to **match** the transient behavior for **the current**, $i$, of the RLC circuit for various values of $R, L,$ and $C$.
+  <hr class="s2" />
+  **Circle your answer. There is no need to give any justification. However, 0 points will be awarded for an incorrect answer, 0.5 point will be awarded for leaving it blank and 4 points will be awarded for the correct answer.**
+  <hr class="s2" />
+  **(a)** (4 pts) For $R = 0\Omega, L = 1H, C = 1F$, which one is the correct transient response of the current in the circuit?
+  <hr class="s2" />
+  ![graphs](/img/ee16b/mt2-sp16-q5-2.png)
+
+q5_1_s: |
+  **Solutions:** In this circuit, we have the three equations to describe the current and voltage for each component: $v_R = i \times R, C \frac{dv_C}{dt} = i$ and $L \frac{di}{dt} = v_L$. By KVL, we have $V_{in} = v_L + V_R + v_C = L \frac{di}{dt} + i \times R + \frac{\int i dt}{C}$. Taking the derivative, we get $L \frac{d^2i}{dt^2} + R\frac{di}{dt} + \frac{i}{C} = 0$.
+  <hr class="s2" />
+  To solve this second order differential equation, we could define $\vec{x} = \left( \begin{array}{c} i \\\\ \frac{di}{dt} \end{array} \right)$. Therefore, we can get the following differential equations in the matrix form:
+  $$\left( \begin{array}{c} \frac{di}{dt} \\\\ \frac{d^2i}{dt} \end{array} \right) = \left( \begin{array}{c c} 0 & 1 \\\\ -\frac{1}{LC} & \frac{-R}{L} \end{array} \right) \left( i \\\\ \frac{di}{dt} \right) \end{array}$$
+  Finding the eigenvalues for the above circuit, you will get $\lambda = \frac{-\frac{R}{L} \pm \sqrt{\frac{R^2}{L^2} - \frac{4}{LC}}}{2}$.
+  <hr class="s2" />
+  For $R = 0$, the eigenvalues are pure imaginary numbers, and this produces sinusoidal oscillation. The oscillation has a period of $\frac{1}{\sqrt{LC}} = 1\frac{rad}{s} = 2\pi \frac{1}{s}$. The initial conditions are that the current $i = 0$ and therefore, the correct answer is part (A).
+
+q5_2: |
+  **(b)** (4 pts) For $R = 0.5\Omega, L = 1H, C = 1F$, which one is the correct transient response of the current in the circuit?
+
+q5_2_s: |
+  **Solutions:** For $R = 0.5$, this circuit is in the underdamped stage. We can see this because the differential equation solution has oscillating terms if and only if $\frac{R}{2L} < \frac{1}{\sqrt{LC}}$. This case exhibits both negative real and imaginary eigenvalues and thus, should oscillate and decay with time. Initial conditions say the circuit should start out with $0$ current, therefore part (A) is the correct answer again.
+
+q6_1: |
+  # Section 2: In The Zone (59 points)
+  # 8. RLC Problem (26 pts)
+  Consider the circuit below: let's try to analyze it with everything you know about circuits.
+  <hr class="s2" />
+  ![circuit](/img/ee16b/mt2-sp16-q6-1.png)
+  <hr class="s2" />
+  (a) (3 pts) Assume $v_s = V_0$ for $t < 0$, and $v_s = 0$ for $t \ge 0$. **What is** $v_C(0)$**? What is** $i_L(0)$**?**
+
+q6_1_s: |
+  **Solutions:** Here $C$ is an open circuit for the DC source while $L$ works as a short, so $v_C = v_R = V_0$. The current going through $L$ is the same as that of $R: i_L = i_R = \frac{v_R}{R} = \frac{V_0}{R}$.
+
+q6_2: |
+  (b) (3 pts) If $v_s = 0$ (a constant) for any $t \ge 0$, **what is the steady state value of** $v_C$? (i.e. $v_C(t \to \infty)$) **What is the steady state value of $i_L$?
+
+q6_2_s: |
+  **Solutions:** Smae as (a), $V_C = 0$, and $i_L = 0$.
+
+q6_3: |
+  (c) (3 pts) **Write down the KCL equation on a node connecting the three passive components in terms of $i_L, i_C$ and $i_R$.
+
+q6_3_s: |
+  **Solutions:** $i_s = i_L = i_R + i_C$.
+
+q6_4: |
+  (d) (3 pts) **Write down a KVL equation for the loop containing the voltage source, inductor and the capacitor in terms of** $v_s, v_L$ **and** $v_C$.
+
+q6_4_s: |
+  **Solutions:** $v_s = V_L + V_C$
+
+q6_5: |
+  (e) (6 pts) **Write down differential equations for** $v_C$ **and** $i_L$ using the relationships between the voltage across each component and the current through it, in addition to the equations obtained above. Convert them into the following matrix form (notice that $v_s = 0$ for any $t ≥ 0$):
+  $$\left( \begin{array}{c} \frac{di_L}{dt} \\\\ \frac{dv_C}{dt} \end{array} \right) = A \left( \begin{array}{c} i_L \\\\ v_C \end{array} \right)$$
+
+q6_5_s: |
+  **Solutions:** We have (1) $v_R = i_R \times R = v_C$, (2) $C \frac{dv_C}{dt} = i_C$ and (3) $v_L = L\frac{di_L}{dt}$. Plug in the KCl equation, $i_L = \frac{v_C}{R} + C\frac{dv_C}{dt}$. Plug in the KVL equation, then $L\frac{di_L}{dt} + v_c = v_s$. Because $v_s = 0$, we can drop the constant term. Finally we get the following matrix form:
+  $$\left( \begin{array}{c} \frac{di_L}{dt} \\\\ \frac{dv_C}{dt} \end{array} \right) = \left( \begin{array}{c c} 0 & -\frac{1}{L} \\\\ \frac{1}{C} & \frac{-1}{RC} \end{array} \right) \left( \begin{array}{c} i_L \\\\ v_C \end{array} \right)$$
+
+q6_6: |
+  (f) (8 pts) For the differential equations above, we know the solution can be obtained from the general solutions $c_1e^{\lambda_1t}\vec{v_1} + c_2e^{\lambda_2t}\vec{v_2}$. **What are the values of** $\lamba_1$ **and** $\lambda_2$ **? Express them in terms of** $R, L, C$ **and constants.**
+
+q6_6_s: |
+  **Solutions:** $\lambda_1$ and $\lambda_2$ are eigenvalues of $A$. To find eigenvalues of $A$, we could find the roots of $det(A - I\lambda) = -\lambda \times (-\lambda - \frac{1}{RC} + \frac{1}{LC}) = 0$. For $\lambda^2 + \frac{\lamba}{RC} + \frac{1}{RC} = 0$, the solutions should be $\lambda = \frac{-\frac{1}{RC} \pm \sqrt{\frac{1}{(RC)^2} - \frac{4}{LC}}}{2}$.
+
+q7_1: |
+  # 7. Hold me and linearize me (13 pts)
+  Consider a non-linear two-diension system with states $x_0$ and $x_1$ and scalar input $u$ that evolves according to the following coupled differential equations
+  $$\frac{d}{dt}x_0(t) = \dot{x}_0 = x_1(t)$$
+  $$\frac{d}{dt}x_1(t) = \dot{x}_1 = 4 - (\frac{u(t)}{x_0(t)})^2$$
+  (a) (5 pts) **Find an input** $u_e$ **so that if the system starts in state vector** $\vec{x}_e = \left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right]$ **and we apply the input** $u(t) = u_e$, **the system will always stay in that same state.**
+
+q7_1_s: |
+  **Solutions:** The non-linear system is given in vector form as
+  $$\frac{d}{dt}\vec{x}(t) = \vec{f}(\vec{x}(t),u(t)) = \left[ \begin{array}{c} x_1(t) \\\\ 4 - (\frac{u(t)}{x_0(t)})^2 \end{array} \right]$$
+  Now setting $\frac{d}{dt}\vec{x}_e(t) = \vec{f}(\vec{x}_e(t), u_e(t)) = \vec{0}$ we have
+  $$u_e(t)^2 = 4$$
+  Thus, we have
+  $\vec{x}_e = \left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right]$ and $u_e(t) = \pm 2$.
+
+q7_2: |
+  (b) (8 pts) **Write linearized state-space equations around $\vec{x}_e$ and $\vec{u}_e$. Convert them into the following form and find the matrices $A$ and $B$.
+  $$\frac{d}{dt}\vec{x}(t) = A(\vec{x} - \vec{x}_e) + B(u(t) - u_e)$$
+
+q7_2_s: |
+  **Solutions:** We find the Jacobian matrices for both the state vector and the input. Thus,
+  $$\frac{\delta\vec{f}}{\delta\vec{x}} = \left[ \begin{array}{c c} 0 & 1 \\\\ 2\frac{u_e(t)^2}{x_{0_e}(t)^3} & 0 \end{array} \right] = A_e$$
+  and
+  $$\frac{\delta\vec{f}}{\delta\vec{u}} = \left[ \begin{array} 0 \\\\ -2u_e(t) \end{array} \right] = B_e$$
+  The system evolves as
+  $$\frac{d}{dt} \vec{x}(t) = A_e(\vec{x} - \vec{x}_e) + B_e(\vec{u} - \vec{u}_e)$$
+  For $u_e = 2$,
+  $$A = \left[ \begin{array}{c c} 0 & 1 \\\\ 8 & 0 \end{array} \right]$$
+  and
+  $$B = \left[ \begin[array}{c} 0 \\\\ -4 \end{array} \right]$$
+  For $u_e = -2$,
+  $$A = \left[ \begin{array}{c c} 0 & 1 \\\\ 8 & 0 \end{array} \right]$$
+  and
+  $$B = \left[ \begin[array}{c} 0 \\\\ 4 \end{array} \right]$$
+
+q8_1: |
+  # 10. Circuit Design (8 pts)
+  In this problem, you will find a circuit where several components have been left blank for you to fill in.
+  <hr class="s1" />
+  Assume the op-amp is ideal.
+  <hr class="s1" />
+  You have at your disposal only one of each of the following components:
+  <hr class="s2" />
+  ![circuit elements](/img/ee16b/mt2-sp16-q8-1.png)
+  <hr class="s2" />
+  Consider the circuit below. The voltage source $v_{in}(t)$ has the form $v_{in}(t) = v_0 \text{cos}(\omega t + \phi)$. The labeled voltages $V_{in}(\omega)$ and $V_{out}(\omega)$ are the phasore representations of $v_{in}(t)$ and $v_{out}(t)$. The transfer function $H(\omega)$ is defined as $H(\omega) = V_{out}(\omega)/V_{in}(\omega)$.
+  <hr class="s2" />
+  ![circuit](/img/ee16b/mt2-sp16-q8-2.png)
+  <hr class="s2" />
+  Let $R_1$ be $1kΩ$. **Fill in the boxes and determine the value of** $R_2$ so that
+  - It is a high-pass filter.
+  - $|H(\infty)| = 2$.
+  - $|H(10^3)| = \sqrt{2}$
+
+q8_1_s: |
+  **Solutions:**
+  <hr class="s1" />
+  Let the left box be $Z_1$ and the right box be $Z_2$. The circuit should be a high-pass filter, so $Z_2$ cannot be a short circuit or a capacitor (otherwise $V_{out}(\infty) = 0$). Since $Z_2$ cannot be capacitors, $Z_1$ must be a capacitor (otherwise it is not a filter). $Z_2$ is either an open circuit or a resistor. Let $R_f = R_2 || Z_2$ and $Z_1 = C$. The transfer function is given by
+  $$H(\omega) = -\frac{R_f}{R_1 + \frac{1}{j \omega C}} = -\frac{j \omega R_f C}{1 + j \omega R_1 C} = -\frac{R_f}{R_1}\frac{j\omega R_1C}{1 + j\omega R_1C}$$
+  Observing the transfer function, we know $H(0) = 0$ and $H(\infty) = -\rac{R_f}{R_1}$ so it is a high-pass filter. From $|H(\infty)| = 2$, we know $R_f = 2R_1 = 2k\Omega = R_2 || Z_2$. Because of the limited choices of resistors, $Z_2$ must be an open circuit and $R_2 = 2k\Omega$.
+  <hr class="s1" />
+  From $H(10^3) = \sqrt{2}$, we have (let $x = 10^3R_1C$)
+  $$\sqrt{2} = 2\frac{\sqrt{x^2}}{\sqrt{1 + x^2}} \implies \frac{1}{2} = \frac{x^2}{1 + x^2} \\\\
+  \implies x^2 = 1 \implies 10^3R_1C = 1 \implies C = \frac{1}{10^3R_1} = 1\mu F$$
+  Thus,
+  - $R_2 = 2k\Omega$
+  - The right box: an open circuit.
+  - The left box: a capacitor with $C = 1\mu F$.
+
+q9_1: |
+  # 9. Bode Plots (12 pts)
+  **Draw the Bode plot for the transfer function** $H(\omega) = \frac{(j\omega \times 10)(10 + j\omega \times 10^{-3})}{(100 + j\omega \times 10)}. Remember you have the Bode
+   plot table in the next page!
+  <hr class="s2" />
+  ![plots](/img/ee16b/mt2-sp16-q9-1.png)
+  <hr class="s2" />
+  ![bode plot table](/img/ee16b/mt2-sp16-q9-2.png)
+
+q9_1_s: |
+  ![plots](/img/ee16b/mt2-sp16-q9-3.png)
+  <hr class="s2" />
+  **Solutions:**
+  $$H(\omega) = \frac{(j \omega \times 10)(10 + j \omega \times 10^{-3})}{(100 + j\omega \times 10)} = \frac{j \omega(1 + \frac{j\omega}{10^4})}{(1 + \frac{j \omega}{10})}$$
+  Therefore, we should draw three lines and perform superposition among them. In the following graph, line (1) is $j\omega$, line (2) is $(1 + \frac{j \omega}{10^4})$, and line (3) is $(1 + \frac{j \omega}{10})^{-1}$.

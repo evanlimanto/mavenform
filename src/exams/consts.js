@@ -200,6 +200,15 @@ const exams = {
     }
   },
 
+  'ee16b': {
+    'mt2': {
+      'sp16': {
+        'term': 'Spring 2016',
+        'profs': 'Sahai, Maharbiz',
+      }
+    }
+  },
+
   'cs61a': {
     'mt2': {
       'fa16': {
@@ -300,6 +309,7 @@ const courses = {
   'cs188': 'Introduction to Artificial Intelligence',
   'cs170': 'Efficient Algorithms and Intractable Problems',
   'ee16a': 'Designing Information Devices and Systems I',
+  'ee16b': 'Designing Information Devices and Systems II',
   'data8': 'Foundations of Data Science',
   'cs186': 'Introduction to Database Systems',
   'ugba10': 'Principles of Business',
@@ -342,6 +352,7 @@ const courseIDToLabel = {
   'data8': 'Data 8',
   'cs186': 'CS 186',
   'ee16a': 'EE 16A',
+  'ee16b': 'EE 16B',
   'cs61a': 'CS 61A',
   'cs61c': 'CS 61C',
   'cs162': 'CS 162',
