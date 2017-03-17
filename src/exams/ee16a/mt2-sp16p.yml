@@ -1,17 +1,21 @@
 course: 'ee16a'
-ref: 'mt2-sp16'
+ref: 'mt2-sp16p'
 
 type: 'mt2'
-term: 'fa15'
+term: 'sp16'
 prof: 'Sahai, Niknejad'
 
 questions: {
-  'q1': 'Correlation',
-  'q2': 'Cascading Amplifiers',
-  'q3': 'Just solve it',
-  'q4': 'CapRank',
-  'q5': 'Thevenin In the Wild',
-  'q6': 'Designing for a child''s party',
+  'q1': 'KVL/KCL Practice',
+  'q2': 'More KCL/KVL Analysis',
+  'q3': 'KCL\KVL Analysis + Capacitors',
+  'q4': 'KCL/KVL or Superposition?',
+  'q5': 'Capacitor Charge Sharing',
+  'q6': 'Equivalence',
+  'q7': 'DC-DC Voltage Divider',
+  'q8': 'Thevenin''s Theorem and Op-Amp Circuits!',
+  'q9': 'Wireless communication with an LED',
+  'q10': 'Wine Barrel Filler',
 }
 
 parts: {

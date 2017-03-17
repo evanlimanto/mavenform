@@ -160,13 +160,12 @@ const exams = {
   },
 
   'ee16a': {
-    'mt2p': {
-      'sp16': {
+    'mt2': {
+      'sp16p': {
         'term': 'Spring 2016',
         'profs': 'Alon, Ayazifar',
+        'note': 'Practice',
       },
-    },
-    'mt2': {
       'fa16': {
         'term': 'Fall 2016',
         'profs': 'Ayazifar, Stojanovic',
