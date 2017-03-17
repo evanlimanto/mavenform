@@ -1,0 +1,173 @@
+course: 'ee16b'
+ref: 'mt2-fa15'
+
+type: 'mt2'
+term: 'fa15'
+prof: 'Alon, Ayazifar, Tomlin, Ranade'
+
+questions: {
+  'q1': 'Miscellaneous',
+  'q2': 'Underwater Communications',
+  'q3': 'Controlling a Car',
+}
+
+parts: {
+  'q1': 3,
+  'q2': 5,
+  'q3': 5,
+}
+
+q1_1: |
+  # Problem 1. Miscellaneous (18 points)
+  a) **(6 pts)** Assuming that for every inverter in the chain shown below, $R_\text{on,n} = R_\text{on,p} = 1k\Omega$, and $C_\text{g,n} = C_\text{g,p} = 20fF$, what is the delay from $V_\text{in}$ transitioning from $0V$ to $V_\text{dd}$ to $V_\text{out}$ transitioning from $V_\text{dd}$ to $0V$?
+  <hr class="s2" />
+  ![circuit](/img/ee16b/mt2-fa15-q1-1.png)
+
+q1_1_s: |
+  **Model:**
+  <hr class="s2" />
+  ![circuit](/img/ee16b/mt2-fa15-q1-2.png)
+  $$\begin{align} \text{Delay} &= ln(2) \cdot V_\text{on,n} \cdot (C_\text{g,p} + C_\text{g,n}) + ln(2) \cdot R_\text{on,p} \cdot 40fF \\\\
+  &= ln(2) \cdot [1k\Omega \cdot 40fF + 1k\Omega \cdot 40fF] \\\\
+  &\approx 55.45ps \end{align}$$
+
+q1_2: |
+  b) **(6 pts)** Sketch the phase (in radians) vs. log($\omega$) for the filter specified below with $\omega_1 = 1e3 \; \text{rad/s}$ and $\omega_2 = 1e6 \; \text{rad/s}$.
+  $$H(\omega) = \frac{j\omega/\omega_1}{(1 + j\omega/\omega_1)}\frac{10}{(1 + j\omega/\omega_2)}$$
+  **Hint:** You may want to figure out the phase responses of each component of $H(\omega)$ individually and then combine them together.
+
+q1_2_s: |
+  $$\begin{align} &(1) \; \angle \frac{j\omega /\omega_1}{1 + j\omega/\omega_1} = \text{tan}^{-1}(\infty) - \text{tan}^{-1}(\omega/\omega_1) = \pi/2 - \text{tan}^{-1}(\omega/\omega_1) \\\\
+  &(2) \; \angle \frac{10}{1 + j\omega /\omega_2} = \text{tan}^{-1}(0) - \text{tan}^{-1}(\omega / \omega_2) = 0 - \text{tan}^{-1}(\omega / \omega_2)\end{align}$$
+  <hr class="s2" />
+  ![graphs](/img/ee16b/mt2-fa15-q1-3.png)
+  $$\angle H(\omega) = \angle (1) + \angle (2)$$
+  ![graphs](/img/ee16b/mt2-fa15-q1-4.png)
+
+q1_3: |
+  c) **(6 pts)** It turns out that filters can be realized not only be electrical components like we have seen so far in class, but out of mechanical (and even electro- mechanical) components as well. The differential equation provided below represents the relationship between an applied force $F(t)$ (that could be coming from for example an incoming audio signal) and the displacement $x(t)$ of a mass connected to a spring and damper; $m$ is the mass, $b$ is the damping coefficient, and $k$ is the spring constant. If we define $H(\omega) = x(t) / F(t)$ for a **sinusoidal** $F(t)$, derive $H(\omega)$ for this mechanical filter.
+  $$m\frac{d^2x(t)}{dt^2} + b\frac{dx(t)}{dt} + kx(t) - F(t) = 0$$
+
+q1_3_s: |
+  $F(t) = e^{j\omega t}$, so $x(t) = H(\omega) e^{j \omega t}$.
+  $$m(j\omega)^2 H(\omega) e^{j \omega t} + b(j\omega)H(\omega) e^{j\omega t} + kH(\omega)e^{j \omega t} - e^{j \omega t}$$
+  $$(-m\omega^2 + bj\omega + k)H(\omega) = 1$$
+  $$H(\omega) = \frac{1}{k - m\omega^2 + j\omega b}$$
+
+q2_1: |
+  # Problem 2. Underwater Communications (26 pts)
+  Communicating underwater can be very challenging for a number of reasons, and one of the techniques adopted by submarines is to use *subsonic* signals – that is, very low frequencies – for communication. In this problem we’ll explore the design of such a communication system for an underwater autonomous robot called FiShT33n.
+  <hr class="s2" />
+  **Important Note:** This problem has many sub-parts, but it has been set up in a way that you can complete each sub-part without having gotten the (correct) answer to the previous parts.
+  <hr class="s2" />
+  a) **(2 pts)** For our initial design, let’s assume that FiShT33n communicates by sending signals that can have frequency components anywhere between $-15Hz$ and $15Hz$ (i.e., the bandwidth is $30Hz$, centered at $0Hz$), and that the measured frequency of the signal is used to convey the desired command or message. Given these specifications, what is the minimum frequency that FiShT33n should use to sample the received signal?
+  <hr class="s2" />
+  (As additional clarification and an example of how the communication works, if the robot’s human monitor sends a signal $x(t) = cos(2\*\pi\*10Hz\*t)$ and FiShT33n sees that it is receiving a signal whose frequency corresponds to $10Hz$, that would mean “stop and search this area”. Similarly, if the monitor sends a signal $x(t) = cos(2\*\pi\*5Hz\*t)$ and FiShT33n receives a signal whose frequency corresponds to $5Hz$, that would mean “get away – a shark is about to try and eat you”.)
+
+q2_1_s: |
+  Basically, just need to meeet Nyquist criterion, so $f_\text{s, min} = 2 \cdot 15Hz = 30Hz$.
+
+q2_2: |
+  b) **(4 pts)** Let’s assume that your answer to part (a) was $40Hz$, that you chose to have FiShT33n’s receiver sample at this frequency in order to save power, and that you tried to save some money by not put any filtering in front of the receiver. After some initial failed experiments with FiShT33n out in the ocean, you realize that the robot is sometimes getting confused by the presence of audio signals from things like dolphins, whales, humans, and boats, and that these signals are all at frequencies of $400Hz$ and above.
+  <hr class="s2" />
+  Assuming that all interfering signals are at a frequency of exactly $410Hz$, after sampling, what continuous-time frequency would FiShT33n’s receiver perceive the interfering signal as being equivalent to?
+
+q2_2_s: |
+  CT signal of $cos(2\pi \cdot 410Hz \cdot$ t) after sampling at $40Hz$:
+  $$\begin{align} x_d[n] &= cos(2\pi \cdot \frac{410Hz}{40Hz} \cdot n) \\\\
+    &= \text{cos}(2\pi \cdot (10 + \frac{10}{40}) \cdot n) \\\\
+    &= \text{cos}(2\pi \cdot \frac{10Hz}{40Hz} \cdot n) \end{align}$$
+  So, it looks identical to $\underline{10Hz}$.
+
+q2_3: |
+  (c) **(6 pts)** Continuing to assume that FiShT33n samples the received signal at $40Hz$ and that external interference is always at frequencies of $400Hz$ and above, select a value for $\omega_c$ so that the $H(\omega)$ provided below attenuates the interfering signals by at least a factor of $50$ while attenuating the desired signal by at most $10$%. (In other words, $||H(\omega)|| < 1/50$ for frequencies associated with the interference, while for frequencies associated with the signal $||H(ω)|| > 0.9$.)
+  $$H(\omega) = \frac{1}{(1 + j\omega/\omega_c)^2}$$
+
+q2_3_s: |
+  We obviously need $w_c > 2\pi \cdot 15Hz$, but we can't go too high or we'll fail the attenuation requirement.
+  <hr class="s1" />
+  A simple way to find a good $w_c$ is to just hit "in-band" spec:
+  $$H(2\pi \cdot 15Hz) = \frac{1}{1 + \frac{w_{15}^2}{w_c^2}} = 0.9 \implies \\\\
+    \begin{align} 1 &= 0.9 + 0.9 \frac{w_{15}^2}{w_c^2} \\\\
+    \frac{1}{9} &= \frac{w_\text{15}^2}{w_c^2} \\\\
+    w_c^2 &= 9w_\text{15}^2 \\\\
+    w_c &= 3 \cdot 2\pi \cdot 15 Hz = 2\pi \cdot 45Hz \end{align}$$
+  Check $||H(\omega)||$ for  $\omega = 2\pi \cdot 400Hz$:
+  $$\frac{1}{1 + (400/45)^2} \approx 0.0012 < 0.02$$
+
+q2_4: |
+  d) **(6 pts)** Assuming that your answer to part (c) was $\omega_c = 2\pi \* 100Hz$, design an analog circuit that realizes this $H(\omega)$. You can use any combination of op-amps and passive components to implement this circuit, but be sure to label the values of any of these passive components.
+
+q2_4_s: |
+  ![graphs](/img/ee16b/mt2-fa15-q2-1.png)
+
+q2_5: |
+  **(8 pts)** One of your colleagues who didn’t take $EE16$ and has an irrational aversion to analog circuits suggests that instead of adding the filter in, maybe you could just increase the sampling rate of the receiver to $1.52kHz$ instead. You believe there is a way to make this work, but you worry that this will substantially increase the power dissipated by the microcontroller that implements the receiver.
+  <hr class="s2" />
+  Let’s assume that with the original sample rate of $40Hz$, you could operate the microcontroller at a supply voltage $V_{dd} = 0.6V$, and that the microcontroller dissipates $100μW$ at this frequency ($40Hz$)/supply voltage ($0.6V$). If the resistance of the gates inside of the microcontroller is proportional to $1/(V_{dd} – 0.55V)$, what $V_{dd}$ would you need to use to run the microcontroller at $1.52kHz$ (to support the increased sampling frequency)? How much power will the microcontroller dissipate at this $V_{dd}$/clock frequency ($1.52kHz$)?
+
+q2_5_s: |
+  First, we need to find th new $V_{dd}$; know that $t_d \propto RC$, so $f_{clk} \propto \frac{1}{RC}$ and $f_{clk} \propto \frac{1}{(1/(V_{dd} - 0.55V))} \propto V_{dd} - 0.55V$
+  $$\frac{1520}{40} = \frac{V_\text{dd, new} - 0.55V}{0.6V - 0.55V}$$
+  $$V_\text{dd,new} = 2.45V$$
+  $Power = \alpha_{0 \to 1}CV_\text{dd}^2f_{clk}\;$ and $\;Power(0.6V, 40Hz) = 100 \mu W$, so:
+  $$\frac{Power(2.45V, 1.52kHz)}{Power(0.6V, 40Hz)} = \frac{(2.45)^2 \cdot 1520}{(0.6)^2 \cdot 40}$$
+  $$Power(2.45V, 1.52kHz) \approx 633.6 \cdot 100\mu W \approx 63.36 \mu W$$
+
+q3_1: |
+  # Problem 3. Controlling a Car (22 points)
+  In this problem we will examine a simple model for a car driving on a road. The state of the car is $x[k] = [z[k]\; v[k]]^T$, where $z[k]$ is the position of the car at time $kT_s, v[k]$ is the velocity of the car at time $kT_s$, and Ts is the sampling period. The car is driven by a force $u[k]$ from its engine, which must counter a friction force $F_f[k]$. Finally, $y[k]$ represents the variables that we will measure (sense). In this case, we can model the dynamics of the car as follows:
+  $$x[k + 1] = Ax[k] + B(u[k] - F_f[k])$$
+  $$y[k] = Cx[k]$$
+  $$A = \left[ \begin{array}{c c} \lambda_1 & 0.1 \\\\ 0 & \lambda_2 \end{array} \right], B = \left[ \begin{array}{c} 0.01 \\\\ 0.2 \end{array} \right]$$
+  **Note:** for parts (a) through (c) of this problem, you can assume that the friction force $F_f[k] = 0$ for all $k$.
+  <hr class="s2" />
+  a) **(4 pts)** Let's assume that $C = \left[ \begin{array}{c c} 1 & 0 \\\\ 0 & 1 \end{array} \right]$ and that we want to set the velocity and position to some desired values $z_d[k]$ and $v_d[k]$ by using closed-loop control with a forward gain matrix $K = [k_1 \; k_2]$. Provide expressions for the $A_{CL}$ and $B_{CL}$ matrices you would use to create a state-space model of the resulting closed-loop system.
+
+q3_1_s: |
+  $$\begin{align} A_{CL} &= A - B\mathcal{K}C \\\\
+  &= \left[ \begin{array}{c c} \lambda_1 & 0.1 \\\\ 0 & \lambda_2 \end{array} \right] - \left[ \begin{array}{c} 0.01 \\\\ 0.2 \end{array} \right] [ k_1 \; k_2 ] \left[ \begin{array}{c c} 1 & 0 \\\\ 0 & 1 \end{array} \right] \\\\
+  &= \left[ \begin{array}{c c} \lambda_1 - 0.01 k_1 & 0.1 - 0.01 k_2 \\\\ -0.2 k_1 & \lambda_2 - 0.2 k_2 \end{array} \right] \end{align}$$
+  $$\begin{align} B_{CL} &= B\mathcal{K} \\\\
+  &= \left[ \begin{array}{c} 0.01 \\\\ 0.2 \end{array} \right] \left[ \begin{array}{c c} k_1 & k_2 \end{array} \right] \\\\
+  &= \left[ \begin{array}{c c} 0.01k_1 & 0.01k_2 \\\\ 0.2k_1 & 0.2k_2 \end{array} \right] \end{align}$$
+
+q3_2: |
+  b) **(4 pts)** Assuming that $\lambda_1 = 1$ and $\lambda_2 = 2$, derive the eigenvalues of $A_\text{CL}$ as a function of $k_1$ and $k_2$.
+  <hr class="s1" />
+  **Note:** You do not need to actually solve for the eigenvalues - please just show the equation you would need to solve to find the eigenvalues.
+
+q3_2_s: |
+  $$\text{det}(\lambda_{CL}I - A_\text{CL}) = 0$$
+  $$(1 - 0.01k_1)(2 - 0.2k_2) + 0.2k_1(0.1 - 0.01k_2) = 0$$
+
+q3_3: |
+  c) **(6 pts)** Assuming that the eigenvalues of $A_{CL}$ and $\lambda_1 = (1-0.1\* k_1)$ and $\lambda_2 = (2 - 0.4k_2 + 0.1 \* k_1^2)$ (note that this may or may note be the correct answer to part (b)), explain whether you would choose to use a controller with $K = [k_1 \; k_2] = [5 \; 1]$ or $K = [1 \; 5]$. You should be as clear and complete as possible in identifying the issues/tradeoffs when justifying your selection.
+
+q3_3_s: |
+  For $K = [5 \; 1], \lambda_{CL_1} = 1 - 0.5 \cdot 5 = 0.5, \lambda_{CL_2} = 2 - 0.4 + 0.1 \cdot 5^2 = 4.1$
+  <hr class="s1" />
+  For $K = [1 \; 5], \lambda_{CL_2} = 1 - 0.1 \cdot 1 = 0.9, \lambda_{CL_2} = 2 - 0.4 \cdot 5 + 0.1 = 0.1$
+  <hr class="s1" />
+  Strongly prefer $K = [1 \; 5]$ since the other choice results in a highly unstable system $(|\lambda_2| > 1)$.
+
+q3_4: |
+  d) **(8 pts)** Now let's use a potentially more realistic model where the friction force $F_f[k]$ actually depends on the velocity as follows: $F_f[k] = \mu \* v[k]$. Assuming the same feedback system as part (a), derive new expressions for the $A_{CL}$ and $B_{CL}$ matrices including this velocity dependent friction.
+
+q3_4_s: |
+  ![circuit](/img/ee16b/mt2-fa15-q3-1.png)
+  <hr class="s2" />
+  $$x[k+1] = Ax[k] + B \cdot (\mu \cdot [0 \; 1] x[k] + \mathcal{K} \cdot (y_d[k] - Cx[k]))$$
+  $$\begin{align} x[k+1] &= \underbrace{A + B\mu[0 \; 1] - B\mathcal{K}C)}_{A_{CL}}x[k] + \underbrace{B\mathcal{K}}_{B_{CL}}y_d[k] \\\\
+  &= \left[ \begin{array}{c c} \lambda_1 & 0.1 \\\\ 0 & \lambda_2 \end{array} \right] + \left[ \begin{array}{c} 0.01 \\\\ 0.2 \end{array} \right] \mu [0 \; 1] - \left[ \begin{array}{c} 0.01 \\\\ 0.2 \end{array} \right] [k_1 k_2] I \\\\
+  &= \left[ \begin{array}{c c} \lambda_1 & 0.1 \\\\ 0 & \lambda_2 \end{array} \right] + \left[ \begin{array}{c c} 0 & 0.01 \mu \\\\ 0 & 0.2 \mu \end{array} \right] - \left[ \begin{array}{c c} 0.01 k_1 & 0.01 k_2 \\\\ 0.2k_1 & 0.2k_2 \end{array} \right] \\\\
+  &= \left[ \begin{array}{c c} \lambda_1 - 0.01 k_1 & 0.1 + 0.01(\mu - k_2) \\\\ -0.2 k_1 & \lambda_2 - 0.2 (\mu - k_2) \end{array} \right] \end{align}$$
+
+q3_5: |
+  e) **(BONUS: 6 pts)** Recall that the discrete-time state-space model we provided you for the car is actually the result of sampling the continuous-time inputs (in this case, position $z(t)$ and velocity $v(t)$) going in to our sensors. Let’s assume that the road the car is driving on is rough in a way that the continuous time velocity is actually $v(t) = v_\text{nom}\*[1+0.5\*cos(2π\*100Hz\*t)]$ and that our sensor is sampling with $T_s = 100ms$. If the sensor directly samples $v(t)$, as a function of $v_{nom}$, what will the sensor’s output $v[k]$ be? Assuming that we set $v_d[k]$ to a fixed constant value, what would this result (i.e., the relationship between $v_{nom}$ and $v[k]$) imply about the actual average velocity of the car?
+
+q3_5_s: |
+  $$\begin{align} v[k] &= v_{nom}(1 + 0.5 \text{cos} (2\pi \cdot \frac{100Hz}{10Hz} \cdot k)) \\\\
+  &= 1.5 v_{nom} \end{align}$$
+  - Average value of $v(t)$ is $V_{nom}$, but average value of $v[k]$ is $1.5 \times$ longer than that!
+  - This means that actual average velocity of the car will be $2/3$ of desired average velocity (due to the aliasing).

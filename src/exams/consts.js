@@ -204,6 +204,10 @@ const exams = {
       'sp16': {
         'term': 'Spring 2016',
         'profs': 'Sahai, Maharbiz',
+      },
+      'fa15': {
+        'term': 'Fall 2015',
+        'profs': 'Alon, Ayazifar, Tomlin, Ranade',
       }
     }
   },
