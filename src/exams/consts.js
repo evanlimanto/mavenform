@@ -267,6 +267,10 @@ const exams = {
       'fa15': {
         'term': 'Fall 2015',
         'profs': 'Joseph',
+      },
+      'sp15': {
+        'term': 'Spring 2015',
+        'profs': 'Kubiatowicz',
       }
     },
     'mt1': {
