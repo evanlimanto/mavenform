@@ -201,6 +201,11 @@ const exams = {
 
   'ee16b': {
     'mt2': {
+      'sp17p': {
+        'term': 'Spring 2017',
+        'profs': 'Arcak, Maharbiz',
+        'note': 'Practice',
+      },
       'sp16': {
         'term': 'Spring 2016',
         'profs': 'Sahai, Maharbiz',

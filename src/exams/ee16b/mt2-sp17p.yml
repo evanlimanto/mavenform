@@ -1,0 +1,275 @@
+course: 'ee16b'
+ref: 'mt2-sp17p'
+
+type: 'mt2'
+term: 'sp17'
+prof: 'Alon, Ayazifar, Tomlin, Ranade'
+
+questions: {
+  'q1': 'Normalized Oscillator Dynamics',
+  'q2': 'Motor Drive',
+  'q3': 'Operation Amplifier Circuit',
+  'q4': 'Keynesian Economics',
+  'q5': 'Scalar System',
+  'q6': 'Motor Drive',
+  'q7': 'Bicycle Dynamics',
+}
+
+parts: {
+  'q1': 4,
+  'q2': 1,
+  'q3': 1,
+  'q4': 1,
+  'q5': 1,
+  'q6': 1,
+  'q7': 1,
+}
+
+q1_1: |
+  # 1. Normalized Oscillator Dynamics
+  Consider a damped spring-mass system with dynamics
+  $$m\ddot{q} + c\dot{q} + kq = F$$
+  Let $\omega_0 = \sqrt{k/m}$ be the natural frequency and $\zeta = c / (2\sqrt{km})$ be the damping ratio.
+  <hr class="s2" />
+  (a) Show that by rescaling the equations, we can write the dynamics in the form
+  $$\ddot{q} + 2\zeta\omega_0\dot{q} + \omega_0^2 q = \omega_0^2 u$$
+  where $u = F / k$. This form of the dynamics is that of a linear oscillator with natural frequency $\omega_0$ and damping ratio $\zeta$.
+
+q1_1_s: |
+  **Solution (S.Fuller, 2007; modified by S. Han, Oct 2008):**
+  <hr class="s1" />
+  Dividing by $m$ and introducing $u = F/k$ gives
+  $$\ddot{q} + \frac{c}{m}\dot{q} + \frac{k}{m}q = \frac{k}{m}$$
+  Introducing $\omega_0 = \sqrt{k/m}$ and $\zeta = \frac{c}{2\sqrt{km}}$ gives the equation above.
+
+q1_2: |
+  (b) Show that the system can be further normalized and written in the form
+  $$\frac{dz_1}{d\tau} = z_2, \quad \frac{dz_i}{d\tau} = -z_1 - 2\zeta z_2 + v$$
+  The essential dynamics of the system are governed by a single damping parameter $\zeta$. The $Q$-value defined as $Q = 1/2 \zeta$ is sometimes used instead of $/zeta$.
+
+q1_2_s: |
+  Let $\tau = \omega_0 t$ be scaled time and let $z_1 = \omega_0 q, z_2 = \dot{q}$, and $v = \omega_0 u$. Then
+  $$\frac{dz_1}{d\tau} = \frac{d(\omega_0 q)}{d(\omega_0 t)} = \frac{dq}{dt} = \dot{q} = z_2$$
+  and from the equation in part (a),
+  $$\frac{dz_2}{d\tau} = \frac{\ddot{q}}{\omega_0} = -2\zeta\dot{q} - \omega_0 q + \omega_0 u = -2\zeta z_2 - z_1 + v$$
+  which gives the final equation.
+
+q1_3: |
+  (c) Show that the solution for the unforced system ($v = 0$) with no damping ($\zeta = 0$) is given by
+  $$z_1(\tau) = z_1(0)\text{cos} \tau + z_2(0) \text{sin}\tau, \quad z_2(\tau) = -z_1(0)\text{sin}\tau + z_2(0)\text{cos}\tau$$
+  Invert the scaling relations to find the form of the solutions $q(t)$ in terms of $q(0), \dot{q}(0)$ and $\omega_0$.
+
+q1_3_s: |
+  If the damping is zero, the normalized solution is a simple oscillator and the form of the solution can be verified by substitution. Inverting the scaling relations yields
+  $$q(t) = z_1/\omega_0 = q(0) \text{cos}\omega_0 t + (\dot{q}(0)/\omega_0)\text{sin}\omega_0 t$$
+  $$\dot{q}(t) = z_2 = -q(0) \omega_0 \text{sin} \omega_0 t + \dot{q}(0) \text{cos} \omega_0 t$$
+  This solution can be verified by direct substitution into the original dynamics.
+
+q1_4: |
+  (d) Consider the case where $\zeta = 0$ and $u(t) = \text{sin} \omega t, \omega > \omega_0. Solve for $z_1(\tau)$, the normalized output of the oscillator, with initial conditions $z_1(0) = z_2(0) = 0$ and use this result to find the solution for $q(t)$.
+
+q1_4_s: |
+  (d) Let $\eta = \omega / \omega_0$. Written in second order form, the normalized equations have the form
+  $$\ddot{z}_1 + z_1 = v = \omega_0 \text{sin} \eta \tau$$
+  We look for a particular solution of the form $z_1 = a \text{sin} \eta \tau + b \text{cos} \eta \tau$. Substitution into the differential equation and equating the sine and cosine terms yields $a = \omega_0/(1 - \eta^2)$ and $b = 0$, so the particular solution is given by
+  $$z_1 = \frac{\omega_0}{1 - \eta^2} \text{sin} \eta \tau, \quad z_2 = \frac{\omega_0 \eta}{1 - \eta^2} \text{cos} \eta \tau$$
+  Since the particular solution is nonzero $\tau = 0$, we must add a homogeneous solution of the given form given in part (c). The resulting solution is given by
+  $$z_1 = \frac{\omega_0}{1 - \eta^2}(\text{sin}\eta\tau - \eta \text{\tau}), \quad z_2 = \frac{\omega_0 \eta}{1 - \eta^2}(\text{cos} \eta \tau - \text{cos} \tau)$$
+  The solution can be written in the original coordinates by rescaling as in part (c). The resulting solution is
+  $$\frac{1}{\omega_0^2 - \omega^2}(\omega_0^2\text{sin}\omega t - \omega_0 \omega \text{sin} \omega_0 t), \quad \dot{q} = \frac{\omega \omega_0^2}{\omega_0^2 - \omega^2}(\text{cos} \omega t - \text{cos}\omega_0 t)$$
+  Note that as the forcing frequency $\omega$ approaches the natural frequency $\omega_0$, the amplitude of the response grows.
+
+q2_1: |
+  # 2. Motor Drive
+  Consider a system consisting of a motor driving two masses that are connected by a torsional spring, as shown in the diagram below.
+  <hr class="s2" />
+  ![diagram](/img/ee16b/mt2-sp17p-q2-1.png)
+  <hr class="s2" />
+  This system can represent a motor with a flexible shaft that drives a load. Assuming that the motor delivers a torque that is proportional to the current, the dynamics of the system can be described by the equations
+  $$J_1\frac{d^2\phi_1}{dt^2} + c\left(\frac{d\phi_1}{dt} - \frac{d\phi_2}{dt} \right) + k(\phi_1 - \phi_2) = k_1I$$
+  $$J_2\frac{d^2\phi_2}{dt^2} + c\left(\frac{d\phi_2}{dt} - \frac{d\phi_1}{dt} \right) + k(\phi_2 - \phi_1) = T_d$$
+  Similar equations are obtained for a robot with flexible arms and for the arms of DVD and optical disk drives.
+  <hr class="s1" />
+  Derive a state space model for the system by introducing the (normalized) state variables $x_1 = \phi_1, x_2 = \phi_2, x_3 = \omega_1/\omega_0$ and $x_4 = \omega_2/\omega_0$, where $\omega_0 = \sqrt{k(J_1 + J_2)/(J_1J_2)}$ is the undamped natural frequency of the system when the control signal is zero.
+
+q2_1_s: |+
+  **Solution (S. Han, Apr 08):**
+  <hr class="s1" />
+  Introducing the state variables $x_1 = \phi_1, x_2 = \phi_2, x_3 = \omega_1/\omega_1$, and $x_4 = \omega_2/\omega_0$ and substituting them into the above equation give
+  $$J_1\ddot{x}_1 + c(\dot{x}_1 - \dot{x}_2) + k(x_1 - x_2) = k_II$$
+  $$J_2\ddot{x}_2 + c(\dot{x}_2 - \dot{x}_1) + k(x_2 - x_1) = T_d$$
+  Therefore
+  $$\begin{align} \frac{dx_1}{dt} &= \dot{\phi}_1 = \omega_1 = \omega_0 x_3, \; \frac{dx_2}{dt} = \omega_0 x_4 \\\\
+  \frac{dx_3}{dt} &= \frac{\ddot{x_1}}{\omega_0} = \frac{1}{\omega_0 J_1}(-c\dot{x}_1 + c\dot{x}_2 - kx_1 + kx_2 + k_I I) \\\\
+  &= -\frac{k}{\omega_0 J_1} x_1 + \frac{k}{\omega_0 J_1} x_2 - \frac{c}{J_1}x_3 + \frac{c}{J_1}x_4 + \frac{k_I}{\omega_0 J_1}I, \\\\
+  \frac{dx_4}{dt} &= \frac{\ddot{x_2}}{\omega_0} = \frac{1}{\omega_0 J_2}(-c\dot{x}_2 + c\dot{x}_1 - kx_2 + kx_1 + T_d) \\\\
+  &= \frac{k}{\omega_0 J_2}x_1 - \frac{k}{\omega_0 J_2}x_2 + \frac{c}{J_2}x_3 - \frac{c}{J_2}x_4 + \frac{1}{\omega_0 J_2}T_d. \end{align}$$
+  Rewrite in state-space form:
+  $$\dot{x} = \left[ \begin{array}{c c c c} 0 & 0 & \omega_0 & 0 \\\\ 0 & 0 & 0 & \omega_0 \\\\ -\frac{k}{\omega_0 J_1} & \frac{k}{\omega_0 J_1} & -\frac{c}{J_1} & \frac{c}{J_1} \\\\ \frac{k}{\omega_0 J_2} & -\frac{k}{\omega_0 J_2} & \frac{c}{J_2} & -\frac{c}{J_2} \end{array} \right] x + \left[ \begin{array}{c} 0 \\\\ 0 \\\\ \frac{k_I}{\omega_0 J_1} \\\\ 0 \end{array} \right] I + \left[ \begin{array}{c} 0 \\\\ 0 \\\\ 0 \\\\ \frac{1}{\omega_0 J_2} \end{array} \right] T_d$$
+
+q3_1: |
+  # 3. Operation Amplifier Circuit
+  Consider the op amp circuit below.
+  <hr class="s2" />
+  ![circuit](/img/ee16b/mt2-sp17p-q3-1.png)
+  <hr class="s2" />
+  Show that the dynamics can be written in state space form as
+  $$\frac{dx}{dt} = \left[ \begin{array}{c c} -\frac{1}{R_1C_1} - \frac{1}{R_aC_1} & 0 \\\\ \frac{R_b}{R_a}\frac{1}{R_2C_2} & -\frac{1}{R_2C_2} \end{array} \right] x + \left[ \begin{array}{c} \frac{1}{R_1C_1} \end{array} \right] u, \quad y = \left[ 0 \; 1 \right] x$$
+  where $u = v_1$ and $y = v_3$. (Hint: Use $v_2$ and $v_3$ as your state variables.)
+
+q3_1_s: |
+  **Solution (S. Han, Apr 08):** Letting $v_2$ and $v_3$ represent the states, we can write down the "nodal equations", which state that the total current at any node in the circuit must be zero. This yields three equations:
+  $$C_1 \dot{v}_2 = \frac{v_1 - v_2}{R_1} - \frac{V_2}{R_a}, \quad \frac{v_2}{R_a} = \frac{v_o}{R_b}, \quad C_2\dot{v}_3 = \frac{v_o - v_3}{R_2} = \frac{-v_3}{R_2} + \frac{R_bv_2}{R_aR_2},$$
+  where the last equality follows by solving the second equation for $v_o$ and substituting it into the third equation. Let $x_1 = v_2, x_2 = v_3, u = v_1$ and $y = v_3$:
+  $$\begin{align} & \dot{x}_1 = \dot{v}_2 = \left(-\frac{1}{R_1C_1} - \frac{1}{R_aC_1} \right)v_2 + \frac{1}{R_1C_1} v_1 = \left( -\frac{1}{R_1C_1} - \frac{1}{R_aC_1} \right) x_1 + \frac{1}{R_1C_1}u, \\\\
+  & \dot{x}_2 = \dot{v}_3 = \frac{R_b}{R_a} \frac{1}{R_2C_2} v_2 - \frac{1}{R_2C_2}v_3 = \frac{R_b}{R_a}\frac{1}{R_2C_2}x_1 - \frac{1}{R_2C_2}x_2 \end{align}$$
+  Written in state space form,
+  $$\frac{dx}{dt} = \left[ \begin{array}{c c} -\frac{1}{R_1C_1} - \frac{1}{R_aC_1} & 0 \\\\ \frac{R_b}{R_a}\frac{1}{R_2C_2} & -\frac{1}{R_2C_2} \end{array} \right] x + \left[ \begin{array}{c} \frac{1}{R_1C_1} \\\\ 0 \end{array} \right] u, \quad y = \left[ \begin{array}{c c} 0 & 1 \end{array} \right] x$$
+
+q4_1: |
+  # 4. Keynesian Economics
+  Consider the following simple Keynesian macroeconomic model in the form of a linear discrete-time system discussed in Exercise 5.8:
+  $$\begin{align} \left[ \begin{array}{c} C[t + 1] \\\\ I[t + 1] \end{array} \right] &= \left[ \begin{array}{c c} a & a \\\\ ab - b & ab \end{array} \right] \left[ \begin[array}{c} C[t] \\\\ I[t] \end{array} \right] + \left[ \begin{array}{c} a \\\\ ab \end{array} \right] G[t] \\\\
+  Y[t] &= C[t] + I[t] + G[t] \end{align}$$
+  Determine the eigenvalues of the dynamics matrix. When are the magnitudes of the eigenvalues less than $1$? Assume that the system is in equilibrium with constant values capital spending $C$, investment $I$ and government expenditure $G$. Explore what happenes when government expenditure increases by $10$%. Use the values $a = 0.25$ and $b = 0.5$.
+
+q4_1_s: |
+  **Solution:** The eigenvalues of the dynamic matrix can be found by solving for the roots of
+  $$\text{det}(\lambda I - A) = \left| \begin{array}{c c} \lambda - a & -a \\\\ a - ab & \lambda - ab \end{array} \end{array} \right| = \lambda^2 - a(b + 1)\lambda + a^2,$$
+  which gives
+  $$\lambda_{1,2} = \frac{a(b + 1) \pm \sqrt{a^2((b + 1)^2 - 4)}}{2}.$$
+  To guarantee $\left| \lambda_{1,2} < 1, \right|$, we need to have
+  <hr class="s2" />
+  (a) If $(b + 1)^2 \le 4, the eigenvalues are complex and $|\lambda_1| = |\lambda_2|$, so $|\lambda_{1,2}| < 1$ \iff a^2 = |\lambda_1\lambda_2| = |\lambda_1^2| < 1 \iff |a| < 1.$
+  <hr class="s" />
+  (b) If $(b + 1)^2 \gt 4$, the eigenvalues are real. In this case we need
+  $$\left| \frac{a(b + 1) + \sqrt{a^2((b + 1)^2 - 4)}}{2} \right| < 1$$
+  and
+  $$\left| \frac{a(b + 1) - \sqrt{a^2((b + 1)^2 - 4)}}{2} \right| < 1$$
+  Assuming $a, b > 0$, the first eigenvalue is larger and the condition becomes
+  $$a\left(\frac{(b + 1) + \sqrt{(b + 1)^2 - 4}}{2} \right) < 1$$
+  When the system is at equilibrium, $C, I,$ and $G$ are all constants, so
+  $$C = aC + aI + aG, \quad I = a(b - 1)C + abI + abG$$
+  We can express $C$ and $I$ using $G$:
+  $$C = \frac{a}{a^2 - ab - a + 1}G, \quad I = \frac{ab - a^2}{a^2 - ab - a + 1}G$$
+  When there is a $10$% increase in $G$, using $a = 0.25$ and $b = 0.5$, we can calculate that $C$ will increase by $3.65$% while $I$ will only increase by $0.91$%.
+
+q5_1: |
+  # 5. Scalar System
+  Consider a scalar system
+  $$\frac{dx}{dt} = 1 - x^3 + u$$
+  Compute the equilibrium points for the unforced system ($u = 0$) and use a Taylor series expansion around the equilibrium point to compute the linearization. Verify that this agrees with the linearization in equation ($5.33$).
+
+q5_1_s: |
+  **Solution:** The point $(x_e, u_e) = (1, 0)$ is an equilibrium point for this system and we can thus set
+  $$z = x - 1 \quad v = u$$
+  We can now compute the equations in these new coordinates as
+  $$\begin{align} \dot{z} & = \frac{d}{dt}(x - 1) = \dot{x} \\\\
+    & = 1 - x^3 + u = 1 - (z + 1)^3 + v \\\\
+    & = 1 - z^3 - 3z^2 - 3z - 1 + v = -3z - 3z^2 - z^3 + v \end{align}$$
+  If we now assume that $x$ stays very close to the equilibrium point, then $z = x - x_e$ is small and $z << z^2 << z^3$.
+  <hr class="s1" />
+  We can thus *approximate* our system by a *new* system
+  $$\dot{z} = -3z + v$$
+  This set of equations should give a behavior that is close to that of the original system as long as $z$ remains small.
+
+q6_1: |
+  # 6. Motor Drive
+  Consider the normalized model of the motor drive in Exercise 2.10. Using the following normalized parameters,
+  $$J_1 = 10/9, \quad J_2 = 10, c = 0.1, k = 1, k_I = 1$$
+  verify that the eigenvalues of the open loop system are $0, 0, -0.05 \pm i$. Design a state feedback that gives a closed loop system with eigenvalues $-2, -1$ and $-1 \pm i$. This choice implies that the oscillatory eigenvalues will be well damped and that the eigenvalues at the origin are replaced by eigenvalues on the negative real axis. Simulate the responses of the closed loop system to step changes in the command signal for $\theta_2$ and a step change is a disturbanc torque on the second rotor.
+
+q6_1_s: |
+  **Solution:** It is useful to write a script that sets all parameters. This is accomplished by the script below:
+
+  ```
+  %robotarm_data.m
+  %Data for the normalized motor drive
+  %    kja 070820
+  %Parameters
+  J1=10/9;J2=10;k=1;kd=0.1;ki=5;
+  w0=sqrt(k*(J1+J2)/J1/J2);a1=J2/(J1+J2);a2=J1/(J1+J2);
+  b1=kd/(w0^2*J1);b2=kd/(w0^2*J2);
+  g1=ki/(w0^2*J1);g2=1/(w0^2*J2);
+  %System matrices
+  A=[0 0 1 0;0 0 0 1;-a1 a1 -b1 b1;a2 -a2 b2 -b2]*w0;
+  B1=[0;0;g1;0];B2=[0;0;0;g2];B=[B1 B2];
+  C1=[1 0 0 0];C2=[0 1 0 0];D1=0;C=[C1;C2];D=zeros(2,2);
+  %SISO system where output is angle of first rotor
+  sys1=ss(A,B1,C1,D1);
+  %SISO system where output is angle of second rotor
+  sys2=ss(A,B2,C2,D1);
+  %Complete system
+  sys=ss(A,B,C,D0;
+  ```
+  The state feedback is given by Theorem 6.3, in component form we have
+  $$u = -k_1x_1 - k_2x_2 - k_3x_3 - k_4x_4 + k_rx_r$$
+  The numerical values are obtained using the following script:
+  ```
+  %robotarm_sfb.m - Design of State feedback for robotarm
+  %    kja 070820
+  %Get process model
+  motordrivedata;B=B1;C=C2;
+  %Desired closed loop poles
+  P=[-1 -2 -1+i -1-i];
+  K=acker(A,B,P);Ac1=A-B*K;
+  Kr=-1/(C*inv(Ac1)*B);
+  disp('Feedback gain L=');disp(K)
+  disp('Reference gain Lr=');disp(Kr)
+  %Check the results
+  n=size(A);disp('Specified closed loop eigenvalues')
+  disp(P);
+  disp('Closed loop eigenvalues obtained')
+  disp(eig(Ac1));
+  ```
+  which gives the values $k_1 = 1.78, k_2 = 7.10, k_3 = 1.09$ and $k_4 = 20.24$ and $k_r = 8.89$. Notice that we have added a line where we compute the closed loop eigenvalues with the computed controller gains. It is a good practice to add checks of this type in the design programs.
+  <hr class="s2" />
+  ![diagram](/img/ee16b/mt2-sp17p-q6-1.png)
+  <hr class="s2" />
+  To explore the properties of the systems we will simulate it. A SIMULINK block diagram of the system is shown in Figure S6.3. Notice that the block is generic, the specifics are given by the matrices defining the process, the controller and the inputs. In the simulation we will first apply a unit step in the reference signal and we will then apply a disturbranc torque of $2$ units at the seconf rotor. The simulation is executed using the script below:
+  ```
+  %motordrive_sfbsim.m
+  %Simulation of motor drive with state feedback
+  %    kja 070820
+  %Get process parameters and design state feedback
+  aminit;
+  motordrive_sfb;
+  Ap=A;Bp=[B B2];Cp=eye(n);Dp=zeros(4,2);
+  %Set controller parameters
+  Ac=0;Bc=zeros(1,5);Cc=0;Dc=[Kr -K];
+  %Execute simulation
+  r=1;d=2;ts=20;[t,x,y]=sim('motordrive_blk',[0 ts]);
+  subplot(311);
+  plot(t,y(:,1),'r--',t,y(:,2),'b',t,ones(size(t)),'r:','linew',2);
+  axis([0 20 -2 4]);grid on;
+  ylabel('y');
+  subplot(312);plot(t,y(:,6),t,zeros(size(t)),'r--','linew',2);
+  ylabel('u');xlabel('t');grid on;
+  axis([0 20 -2 10]);
+  amprint('-deps', 'dcmotor-statefbk-sfbsim.eps');
+  ```
+  The results of the simulation are shown in Figure S6.4. The simulation shows that the second rotor responds very nicely to the reference signal. To achieve the fast response the first rotor has a large overshoot. This is necessary because the only way to exert a force on the second rotor is to turn the first rotor so that a large force is obtained. To execute effective control it is necessary to coordinate the motion of both rotors accurately. This is done very efficiently by the controller based on state feedback. To obtain the response to a unit step in the reference shown in the figure the initial value of the control signal is $8.89k_r$. The value is proportional to the magnitude of the step. To judge if the value is reasonable it is necessary to know the numerical values of typical steps and the signal level when the control signal saturates. If a larger value of the control signal can be permitted the specified closed loop poles can be chosen to be faster. If the value is too large the desired closed loop poles should have smaller magnitudes.
+  <hr class="s1" />
+  The response to a torque disturbance at the second rotor shows that there is a steady-state error. The reason for this is that the controller does not have integral action. Also notice that the angle $\phi_1$ of the first rotor is negative. This is necessary because the only way to exert a torque on the second rotor is by turning the first rotor.
+
+q7_1: |
+  # 7. Bicycle Dynamics
+  The linearized model for a bicycle is given by the equation
+  $$J\frac{d^2\phi}{dt^2} - \frac{Dv_0}{b}\frac{d\delta}{dt} = mgh\phi + \frac{mv_0^2h}{b}\delta$$
+  where $\phi$ is the tilt of the bicycle and $\delta$ is the steering angle. Give conditions under which the system is observable and explain any special situations where it loses observability.
+
+q7_1_s: |
+  **Solution:** Taking the torque on the handle bars as an input and the lateral deviation as the output, we can write the dynamics in state space form as
+  $$\frac{d}{dt}\left[\begin{array}{c} x_1 \\\\ x_2 \end{array}\right] = \left[ \begin{array}{c c} 0 & mgh/J \\\\ 1 & 0 \end{array}\right] \left[ \begin{array}{c} x_1 \\\\ x_2 \end{array} \right] + \left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right] u$$
+  $$y = \left[ \begin{array}{c c} \frac{Dv_0}{bJ} & \frac{mv_0^2h}{bJ} \end{array} \right] x$$
+  The observability of this sytem determines whether it is possible to determine the entire system state (tilt angle and tilt rate) from observation of the input (steering angle) and output(tilt angle).
+  <hr class="s1" />
+  The observability matrix is
+  $$W_0 = \left[ \begin{array}{c c} \frac{Dv_0}{bJ} & \frac{mv_0^2h}{bJ} \\\\ \frac{mv_0^2h}{bJ} & \frac{mgh}{J} \cdot \frac{Dv_0}{bJ} \end{array} \right]$$
+  and its determinant is
+  $$\text{det}\;W_o = (\frac{Dv_0}{bJ})^2 \frac{mgh}{J} - (\frac{mv_0^2}{bJ})^2$$
+  Under most choices of parameters, the determinant will be nonzero and hence the system is observable.
+  <hr class="s1" />
+  However, if the parameters of the system are chosen such that
+  $$\frac{mv_0h}{D} = \sqrt{\frac{mgh}{J}}$$
+  then we see that $W_o$ becomes singular and the system is not observable.
