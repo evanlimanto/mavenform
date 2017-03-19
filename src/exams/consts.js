@@ -39,10 +39,6 @@ const exams = {
 
   'cs170': {
     'mt2': {
-      'fa16': {
-        'term': 'Fall 2016',
-        'profs': 'Papadimitriou, Trevisan',
-      },
       'sp16': {
         'term': 'Spring 2016',
         'profs': 'Chiesa, Vazirani',
