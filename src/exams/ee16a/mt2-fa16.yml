@@ -76,7 +76,7 @@ q2_1: |
   **Note the polarity on the voltage sources. Solutions that solve the circuit without using nodal analysis will not be awarded full credit.**
   $$\begin{align} V_1 = 5 V & \quad R_1 = 10 \Omega \\\\
     V_2 = 5 V & \quad R_2 = 50 \Omega \\\\
-    G = \frac{1}{4}S & \quad R_3 = 40 \Omega \end{align}$
+    G = \frac{1}{4}S & \quad R_3 = 40 \Omega \end{align}$$
     <hr class="s2" />
     ![circuit](/img/ee16a/mt2-fa16-q2-1.png)
 

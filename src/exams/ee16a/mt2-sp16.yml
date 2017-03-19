@@ -64,7 +64,7 @@ q2_1: |
   # 2. Circuits (14 pts)
   (a) **(4 pts)** Given the circuit shown below:
   <hr class="s2" />
-  <p align="center">![circuit](/img/ee16a/mt2-sp16-q1-2.png)</p>
+  <p align="center">![circuit](/img/ee16a/mt2-sp16-q2-1.png)</p>
   <hr class="s2" />
   Use **only KCL and Ohm's Law** to set up a system of equations relating each of the labeled currents $(I_1, I_2, I_3)$ and voltages $(V_1, V_2)$. Then construct a $3\text{ x }5$ matrix $A$ representing this system of equations such that $Ax = 0$ where $x$ is:
   $$x = \left[ \begin{array}{c} I_1 \\\\ I_2 \\\\ I_3 \\\\ V_1 \\\\ V_2 \end{array} \right]$$

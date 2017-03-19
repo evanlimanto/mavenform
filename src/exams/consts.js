@@ -238,6 +238,15 @@ const exams = {
     }
   },
 
+  'cs61b': {
+    'mt2': {
+      'sp16': {
+        'term': 'Spring 2016',
+        'profs': 'Hug',
+      }
+    }
+  },
+
   'cs61c': {
     'mt1': {
       'fa16': {
@@ -313,6 +322,7 @@ const courses = {
   'cs162': 'Operating Systems and Systems Programming',
   'ee16b': 'Designing Information Devices and Systems II',
   'cs189': 'Introduction to Machine Learning',
+  'cs61b': 'Data Structures',
   'cs61a': 'The Structure and Interpretation of Computer Programs',
   'cs188': 'Introduction to Artificial Intelligence',
   'data8': 'Foundations of Data Science',
@@ -358,6 +368,7 @@ const courseIDToLabel = {
   'ee16a': 'EE 16A',
   'ee16b': 'EE 16B',
   'cs61a': 'CS 61A',
+  'cs61b': 'CS 61B',
   'cs61c': 'CS 61C',
   'cs162': 'CS 162',
   'cs170': 'CS 170',
