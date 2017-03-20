@@ -73,7 +73,7 @@ q1_4_s: |
   ![tree](/img/cs170/mt2-fa15-q1-4.png)
 
 q1_5: |
-  3. On a weirdly designed keyboard, every insertion takes $$ keystrokes, every deletion takes $3$ key strokes and every substitution takes $4$ keystrokes. Write the recurrence relation for the edit distance (minimum number of key strokes needed to edit a string $x[1,...,m]$ in to a string $y[1,...,n]$).
+  3. On a weirdly designed keyboard, every insertion takes $2$ keystrokes, every deletion takes $3$ key strokes and every substitution takes $4$ keystrokes. Write the recurrence relation for the edit distance (minimum number of key strokes needed to edit a string $x[1,...,m]$ in to a string $y[1,...,n]$).
   <hr class="s2" />
   $$ED[i,j] = $$
 

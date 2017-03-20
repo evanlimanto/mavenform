@@ -25,7 +25,6 @@ renderer.code = function(code, language) {
   code = replace(code, /\r\n|\r|\n/g, '<hr class="scode" />');
   code = replace(code, /\\_/g, '_'); // remove escapes
   code = replace(code, /\\./g, '.'); // remove escapes
-  console.log(code);
   return `<code class="codediv">${code}</code>`;
 };
 renderer.codespan = function(code, language) {
