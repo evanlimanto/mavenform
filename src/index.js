@@ -69,7 +69,6 @@ window.addEventListener('scroll', function(e) {
 
 var userOnPageTracker = null;
 var userOnPageTrackerStart = 0;
-const activeSessionTime = 15 * 60 * 1000;
 const activeTrackingInterval = 5 * 1000;
 function trackUserOnPage() {
   if (debug || window.location.hostname !== "localhost") {
@@ -78,11 +77,6 @@ function trackUserOnPage() {
       handleEvent('Active', path);
     } else {
       console.log("Tracking - Active User.");
-    }
-
-    const currentTime = Date.now();
-    if (currentTime - userOnPageTrackerStart > activeSessionTime) {
-      window.clearInterval(userOnPageTracker);
     }
   }
 }

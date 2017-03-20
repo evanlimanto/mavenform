@@ -17,8 +17,8 @@ questions: {
 
 parts: {
   'q1': 5,
-  'q2': 1,
-  'q3': 1,
+  'q2': 4,
+  'q3': 2,
   'q4': 1,
   'q5': 1,
   'q6': 1,
@@ -89,6 +89,112 @@ q2_4: |
 q2_4_s: |
   **True, False.** We gave points to both answers here, based on student feedback.
   <hr class="s2" />
-  We can shift the boundary if $x$ is chosen cleverly. Let $x'$ be arbitrary, and suppose we choose $x$ so that $x = x'||len(x')$. Set y′ = len(x)||y. Then you can verify that x||len(x)||y = x′||len(x′)||y′, so H(x||len(x)||y) = H(x′||len(x′)||y′).
+  We can shift the boundary if $x$ is chosen cleverly. Let $x'$ be arbitrary, and suppose we choose $x$ so that $x = x'||len(x')$. Set $y' = len(x)||y$. Then you can verify that $x||len(x)||y = x'||len(x')||y'$, so $H(x||len(x)||y) = H(x'||len(x')||y')$.
   <hr class="s2" />
-  However some students pointed out that they interpreted the question as asking
+  However some students pointed out that they interpreted the question as asking whether or not such an attack can always be done, for all $x, y$. Indeed, it can’t be done for all $x, y$; only for $x, y$ with a special structure. Therefore, we gave credit for either **True or False** on this question.
+
+q3_1: |
+  # Problem 3. Multiple Choice (6 points)
+  Circle all the options that apply.
+  <hr class="s2" />
+  (a) When using the CBC block chaining mode, if the IV is modified by an attacker during transmission (so the correct IV was used during encryption, but the receiver receives the modified value), the recipient can still successfully decrypt:
+  - the entire ciphertext
+  - none of the ciphertext
+  - only the first block
+  - all but the first block
+  - other set of blocks than above
+
+q3_1_s: |
+  **All but the first block.**
+  <hr class="s1" />
+  CBC decryption looks like this:
+  <hr class="s2" />
+  ![cbc](/img/cs161/mt2-sp16-q3-1.png)
+  <hr class="s2" />
+  An incorrect IV will lead to an incorrect first plaintext block, but the rest will actually be correct, because they do not depend on the IV at all, only the previous ciphertext block.
+  <hr class="s2" />
+  Post-exam clarification: option (5) was intended as a “none of the above”.
+  <hr class="s2" />
+  **Mathematically:** (note that the IV here is denoted $C_0$)
+  <hr class="s1" />
+  So we receive $C_0',C_1,C_2,...,C_n$ instead of $C_0,C_1,C_2,...,C_n$. We decrypt using the equation $M_i = D_k(C_i) ⊕ C_{i−1}$. This means the recipient will get $M_1$ wrong, but $M_2,M_3,...,M_n$ will all be correct.
+
+q3_2: |
+  (b) Which of the following are properties of CTR mode?
+  - encryption can be parallelized
+  - decryption can be parallelized
+  - the nonce does not have to be random, as long as it never repeats
+  - it turns a block sipher into a stream cipher
+  - it is more secure than CBC mode
+  - it provides integrity and authentication for the message
+
+q3_2_s: |
+  - encryption can be parallelized
+  - decryption can be parallelized
+  - the nonce does not have to be random, as long as it never repeats
+  - it turns a block sipher into a stream cipher
+
+  <hr class="s2" />
+  Note: Item 3 was ignored for the purposes of grading, because in lecture we specified that the nonce *should* be random. Also, the nonce does not actually have to be random, as long as it does not ever repeat for any block encrypted using a given key. (There are two variants of CTR mode, and the requirement on the nonce depends which variant you are using. One variant uses $C_i = M_i ⊕ E_k(IV || i)$, and for that variant, the IV doesn’t need to be random; it just needs to never repeat. Another variant uses $C_i = M_i ⊕ E_k(IV + i)$; for that variant, the IV needs to be random, or at least to ensure that you never have $IV +i = IV' +i'$ for any pair of messages.)
+  <hr class="s2" />
+  CTR isn’t more secure than CBC mode: they’re both secure if they are used and implemented correctly. If used and implemented correctly, there are no known attacks on either.
+
+q4_1: |
+  # Problem 4. TLS (16 points)
+  An attacker is trying to attack the company Wahoo and its users. Assume that users al- ways visit Wahoo’s website with an HTTPS connection, using RSA and AES encryption (no Diffie-Hellman). (You may assume that Wahoo does not use certificate pinning— if you don’t know what that is, you can ignore it.) For each of the following attack scenarios, circle all of the options that an attacker could achieve in that attack scenario.
+  <hr class="s2" />
+  (a) If the attacker obtains a copy of Wahoo's certificate, the attacker could:
+  - impersonate the Wahoo web server to a user
+  - discover some of the plaintext of data sent during a past connection between a user and Wahoo’s website
+  - discover all of the plaintext of data sent during a past connection between a user and Wahoo’s website
+  - replay data that a user previously sent to the Wahoo server over a prior HTTPS connection
+  - none of the above
+
+q4_1_s: |
+  **None of the above.**
+  <hr class="s1" />
+  The certificate is public. Anyone can obtain a copy simply by con- necting to Wahoo’s webserver. So, learning the certificate doesn’t help the attacker.
+
+q4_2: |
+  (b) If the attacker obtains the private key of a certificate authority trusted by users of Wahoo, the attacker could:
+  - impersonate the Wahoo web server to a user
+  - discover some of the plaintext of data sent during a past connection between a user and Wahoo’s website
+  - discover all of the plaintext of data sent during a past connection between a user and Wahoo’s website
+  - replay data that a user previously sent to the Wahoo server over a prior HTTPS connection
+  - none of the above
+
+q4_2_s: |
+  **Impersonate the Wahoo web server to a user.**
+  <hr class="s1" />
+  The attacker can’t decrypt past data, because the attacker doesn’t learn Wahoo’s private key—only the CA’s private key. All that the CA’s private key can be used for is to create bogus certificates, which can be used to fool the client into thinking it is talking to Wahoo—but doesn’t allow learning past data. Replays aren’t possible, due to the nonces in the TLS handshake.
+
+q4_3: |
+  (c) If the attacker is a man in the middle on a HTTPS connection between a user and Wahoo’s website, the attacker could:
+  - impersonate the Wahoo web server to this user
+  - discover some of the plaintext of data sent during this connection
+  - discover all of the plaintext of data sent during this connection
+  - discover all of the plaintext of data sent during a past connection between a user and Wahoo’s website
+  - replay data that a user previously sent to the Wahoo server over a prior HTTPS connection
+  - none of the above
+
+q4_3_s: |
+  **None of the above.**
+  <hr class="s1" />
+  TLS is secure against man-in-the-middle attacks.
+
+q4_4: |
+  (d) Suppose the attacker obtains the private key that was used by Wahoo’s server during a past connection between a victim and Wahoo’s server, but not the current private key. Also, assume that the certificate corresponding to the old private key has been revoked and is no longer valid. This attacker could:
+  - impersonate the Wahoo web server to this user
+  - discover all of the plaintext of data sent during a *current* connection (one where the current private key is used) between a user and Wahoo’s website
+  - discover all of the plaintext of data sent during a *past* connection (one where the old private key was used) between a user and Wahoo's website
+  - none of the above
+
+q4_4_s: |
+  - discover all of the plaintext of data sent during a *past* connection (one where the old private key was used) between a user and Wahoo's website
+
+  <hr class="s2" />
+  Since the server is using RSA, an attacker who learns the RSA pri- vate key can decrypt past sessions (the attacker can decrypt to learn the pre- master secret, derive the symmetric keys, and decrypt all of the data). This can’t be used to impersonate the Wahoo server, because the attacker doesn’t have a valid certificate for the RSA public key that was compromised.
+
+q5_1: |
+  # Problem 5. Iliad Identification Integrity scheme (15 points)
+
