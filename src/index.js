@@ -8,7 +8,7 @@ import Course from './Course';
 import Home from './Home';
 import NotFound from './NotFound';
 
-const debug = process.env.NODE_ENV === "development" || true;
+const debug = process.env.NODE_ENV === "development";
 const $ = require('jquery');
 var ReactGA = require('react-ga');
 ReactGA.initialize('UA-20131732-5');

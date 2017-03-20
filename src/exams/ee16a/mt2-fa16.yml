@@ -153,6 +153,8 @@ q4_2_s: |
 q5_1: |
   # 5. 16A-Spice (10 points)
   (a) **(5 points)** Write down the incidence matrix, $\mathbf{F}$, of this circuit. Let node $v_n$ correspond to column $n$ in your incidence matrix, and current $i_m$ correspond to row $m$.
+  <hr class="s2" />
+  ![circuit](/img/ee16a/mt2-fa16-q5-1.png)
 
 q5_1_s: |
   **Solutions:**
