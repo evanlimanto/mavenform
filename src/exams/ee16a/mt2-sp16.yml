@@ -271,7 +271,8 @@ q6_3: |
   (c) **(5 pts)** You attach another IoTatron with $R_o = \infty$ to the one in part (b), but this one also has a finite $R_L$, resulting in the circuit shown below. Solve for $I_L$ in terms of $g_m, I_{in}$, and $R_L$.
   <hr class="s2" />
   <p align="center">![circuit](/img/ee16a/mt2-sp16-q6-4.png)</p>
-  <hr class="s2" />
+
+q6_3_s: |
   **Solutions:** KVL dictates that $V_{g2} = V_C$.
   <hr class="s1" />
   We know from part (b) that $V_c = \frac{I_{in}}{g_m}$. Therefore, $g_mV_{g2} = g_m\frac{I_{in}}{g_m} = I_{in}$.

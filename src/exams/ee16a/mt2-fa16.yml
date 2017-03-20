@@ -98,7 +98,7 @@ q2_1_s: |
   $$V_y = -7V$$
 
 q3_1: |
-  # 5. Thévenin and Norton Equivalence (10 points)
+  # 3. Thévenin and Norton Equivalence (10 points)
   ![circuit](/img/ee16a/mt2-fa16-q3-1.png)
   <hr class="s2" />
   (a) **(4 points)** Redraw the circuit with all sources nulled, then calculate $R_{th}$ between terminals $a$ and $b$.
@@ -131,7 +131,7 @@ q3_2_s: |
   $$V_{th} = V_{oc} = V_{1_V} + V_{1_t} = R_1I_S \frac{R_3}{R_1 + R_2 + R_3} + V_S\frac{R_1}{R_1 + R_2 + R_3}$$
 
 q4_1: |
-  # 6. Superposition and Op-Amps (8 points)
+  # 4. Superposition and Op-Amps (8 points)
   ![circuit](/img/ee16a/mt2-fa16-q4-1.png)
   <hr class="s2" />
   (a) **(2 points)** For the circuit above, label the polarity of the terminals of the op-amp such that there is negative feedback.
@@ -151,7 +151,7 @@ q4_2_s: |
   $$V_O = 4V_{in,2} - 3V_{in,1}$$
 
 q5_1: |
-  # 7. 16A-Spice (10 points)
+  # 5. 16A-Spice (10 points)
   (a) **(5 points)** Write down the incidence matrix, $\mathbf{F}$, of this circuit. Let node $v_n$ correspond to column $n$ in your incidence matrix, and current $i_m$ correspond to row $m$.
 
 q5_1_s: |
@@ -172,7 +172,7 @@ q5_2_s: |
   A basis for the null space of $F$ is $\\{\left[ \begin{array}{c} 1 \\\\ 1 \\\\ 1 \end{array} \right]\\}$.
 
 q6_1: |
-  # 8. Charge-Sharing (8 points)
+  # 6. Charge-Sharing (8 points)
   Initially, all capacitors are uncharged, and have the same capacitance $C$. For $t < 0$, the switch $\phi_1$ is *on* and $\phi_2$ is *off* and the circuit has achieved steady state. Later, at $t = 0$, $\phi_1$ is *off* and $\phi_2$ is *on*; then the system is allowed to reach steady state.
   <hr class="s2" />
   ![circuit](/img/ee16a/mt2-fa16-q6-1.png)
@@ -188,7 +188,7 @@ q6_1_s: |
 
 q7_1: |
   # Section 2 (44 points)
-  # 9. $\mathbf{\text{Operation}}^{TM}$ (10 points)
+  # 7. $\mathbf{\text{Operation}}^{TM}$ (10 points)
   You’re an intern at Hasbro working on improvements to the game Operation. Operation is a board game that consists of an "operating table" (the board), overlaid with a drawing of the "patient". In the surface of the board/patient are a number of metal-lined cavities filled with plastic bones and other body parts. The player tries to remove these objects with metal tweezers without touching the edge of the cavity opening. Touching the cavity opening turns on a light and causes a loud buzzer to go off.
   <hr class="s1" />
   You are given the following supplies:
@@ -234,7 +234,7 @@ q7_2_s: |
   &= 2 \left( \frac{V_{\text{bat}}^2}{R_{\text{lamp}}}\right) \end{align}$$
 
 q8_1: |
-  # 10. This Is Your Brain on EE (18 points)
+  # 8. This Is Your Brain on EE (18 points)
   Medical instruments such as electroencephalograms (EEG) take very small electric signals from the body and scale them into a voltage that we can measure. EEG’s take voltage readings from the scalp and are used to determine brain activity. There are some challenges in designing a circuit for measuring the brain:
   - The human body is very noisy, so we have to take multiple sensor readings and average them.
   - The brain’s electrical signals are very small, usually in the microvolt range.
@@ -274,7 +274,7 @@ q8_3_s: |
   We could have also used an inverting summer circuit and then invert the output of that with unity gain. There are several correct solutions to this problem.
 
 q9_1: |
-  # 11. Voltage Regulators (16 points)
+  # 9. Voltage Regulators (16 points)
   In this problem we will explore how we can use charge sharing to make a better voltage regulator.
   <hr class="s2" />
   ![circuit](/img/ee16a/mt2-fa16-q9-1.png)

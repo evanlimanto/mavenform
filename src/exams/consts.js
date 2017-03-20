@@ -243,6 +243,10 @@ const exams = {
       'sp16': {
         'term': 'Spring 2016',
         'profs': 'Hug',
+      },
+      'sp15': {
+        'term': 'Spring 2015',
+        'profs': 'Hug',
       }
     }
   },
