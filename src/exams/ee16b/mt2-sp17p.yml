@@ -2,7 +2,7 @@ course: 'ee16b'
 ref: 'mt2-sp17p'
 
 type: 'mt2'
-term: 'sp17'
+term: 'sp17p'
 prof: 'Alon, Ayazifar, Tomlin, Ranade'
 
 questions: {
@@ -45,7 +45,7 @@ q1_1_s: |
 q1_2: |
   (b) Show that the system can be further normalized and written in the form
   $$\frac{dz_1}{d\tau} = z_2, \quad \frac{dz_i}{d\tau} = -z_1 - 2\zeta z_2 + v$$
-  The essential dynamics of the system are governed by a single damping parameter $\zeta$. The $Q$-value defined as $Q = 1/2 \zeta$ is sometimes used instead of $/zeta$.
+  The essential dynamics of the system are governed by a single damping parameter $\zeta$. The $Q$-value defined as $Q = 1/2 \zeta$ is sometimes used instead of $\zeta$.
 
 q1_2_s: |
   Let $\tau = \omega_0 t$ be scaled time and let $z_1 = \omega_0 q, z_2 = \dot{q}$, and $v = \omega_0 u$. Then
@@ -56,27 +56,27 @@ q1_2_s: |
 
 q1_3: |
   (c) Show that the solution for the unforced system ($v = 0$) with no damping ($\zeta = 0$) is given by
-  $$z_1(\tau) = z_1(0)\text{cos} \tau + z_2(0) \text{sin}\tau, \quad z_2(\tau) = -z_1(0)\text{sin}\tau + z_2(0)\text{cos}\tau$$
+  $$z_1(\tau) = z_1(0)\text{cos}\; \tau + z_2(0) \text{sin}\tau, \quad z_2(\tau) = -z_1(0)\text{sin}\tau + z_2(0)\text{cos}\;\tau$$
   Invert the scaling relations to find the form of the solutions $q(t)$ in terms of $q(0), \dot{q}(0)$ and $\omega_0$.
 
 q1_3_s: |
   If the damping is zero, the normalized solution is a simple oscillator and the form of the solution can be verified by substitution. Inverting the scaling relations yields
-  $$q(t) = z_1/\omega_0 = q(0) \text{cos}\omega_0 t + (\dot{q}(0)/\omega_0)\text{sin}\omega_0 t$$
-  $$\dot{q}(t) = z_2 = -q(0) \omega_0 \text{sin} \omega_0 t + \dot{q}(0) \text{cos} \omega_0 t$$
+  $$q(t) = z_1/\omega_0 = q(0) \text{cos}\;\omega_0 t + (\dot{q}(0)/\omega_0)\text{sin}\;\omega_0 t$$
+  $$\dot{q}(t) = z_2 = -q(0) \omega_0 \text{sin}\; \omega_0 t + \dot{q}(0) \text{cos}\; \omega_0 t$$
   This solution can be verified by direct substitution into the original dynamics.
 
 q1_4: |
-  (d) Consider the case where $\zeta = 0$ and $u(t) = \text{sin} \omega t, \omega > \omega_0. Solve for $z_1(\tau)$, the normalized output of the oscillator, with initial conditions $z_1(0) = z_2(0) = 0$ and use this result to find the solution for $q(t)$.
+  (d) Consider the case where $\zeta = 0$ and $u(t) = \text{sin}\; \omega t, \omega > \omega_0$. Solve for $z_1( \tau )$, the normalized output of the oscillator, with initial conditions $z_1(0) = z_2(0) = 0$ and use this result to find the solution for $q(t)$.
 
 q1_4_s: |
   (d) Let $\eta = \omega / \omega_0$. Written in second order form, the normalized equations have the form
-  $$\ddot{z}_1 + z_1 = v = \omega_0 \text{sin} \eta \tau$$
-  We look for a particular solution of the form $z_1 = a \text{sin} \eta \tau + b \text{cos} \eta \tau$. Substitution into the differential equation and equating the sine and cosine terms yields $a = \omega_0/(1 - \eta^2)$ and $b = 0$, so the particular solution is given by
-  $$z_1 = \frac{\omega_0}{1 - \eta^2} \text{sin} \eta \tau, \quad z_2 = \frac{\omega_0 \eta}{1 - \eta^2} \text{cos} \eta \tau$$
+  $$\ddot{z}_1 + z_1 = v = \omega_0 \text{sin}\; \eta \tau$$
+  We look for a particular solution of the form $z_1 = a \text{sin} \; \eta \tau + b \text{cos}\; \eta \tau$. Substitution into the differential equation and equating the sine and cosine terms yields $a = \omega_0/(1 - \eta^2)$ and $b = 0$, so the particular solution is given by
+  $$z_1 = \frac{\omega_0}{1 - \eta^2} \text{sin}\; \eta \tau, \quad z_2 = \frac{\omega_0 \eta}{1 - \eta^2} \text{cos}\; \eta \tau$$
   Since the particular solution is nonzero $\tau = 0$, we must add a homogeneous solution of the given form given in part (c). The resulting solution is given by
-  $$z_1 = \frac{\omega_0}{1 - \eta^2}(\text{sin}\eta\tau - \eta \text{\tau}), \quad z_2 = \frac{\omega_0 \eta}{1 - \eta^2}(\text{cos} \eta \tau - \text{cos} \tau)$$
+  $$z_1 = \frac{\omega_0}{1 - \eta^2}(\text{sin}\;\eta\tau - \eta \tau), \quad z_2 = \frac{\omega_0 \eta}{1 - \eta^2}(\text{cos}\; \eta \tau - \text{cos}\; \tau)$$
   The solution can be written in the original coordinates by rescaling as in part (c). The resulting solution is
-  $$\frac{1}{\omega_0^2 - \omega^2}(\omega_0^2\text{sin}\omega t - \omega_0 \omega \text{sin} \omega_0 t), \quad \dot{q} = \frac{\omega \omega_0^2}{\omega_0^2 - \omega^2}(\text{cos} \omega t - \text{cos}\omega_0 t)$$
+  $$q = \frac{1}{\omega_0^2 - \omega^2}(\omega_0^2\text{sin}\;\omega t - \omega_0 \omega \text{sin}\; \omega_0 t), \quad \dot{q} = \frac{\omega \omega_0^2}{\omega_0^2 - \omega^2}(\text{cos}\; \omega t - \text{cos}\;\omega_0 t)$$
   Note that as the forcing frequency $\omega$ approaches the natural frequency $\omega_0$, the amplitude of the response grows.
 
 q2_1: |
@@ -114,7 +114,7 @@ q3_1: |
   ![circuit](/img/ee16b/mt2-sp17p-q3-1.png)
   <hr class="s2" />
   Show that the dynamics can be written in state space form as
-  $$\frac{dx}{dt} = \left[ \begin{array}{c c} -\frac{1}{R_1C_1} - \frac{1}{R_aC_1} & 0 \\\\ \frac{R_b}{R_a}\frac{1}{R_2C_2} & -\frac{1}{R_2C_2} \end{array} \right] x + \left[ \begin{array}{c} \frac{1}{R_1C_1} \end{array} \right] u, \quad y = \left[ 0 \; 1 \right] x$$
+  $$\frac{dx}{dt} = \left[ \begin{array}{c c} -\frac{1}{R_1C_1} - \frac{1}{R_aC_1} & 0 \\\\ \frac{R_b}{R_a}\frac{1}{R_2C_2} & -\frac{1}{R_2C_2} \end{array} \right] x + \left[ \begin{array}{c} \frac{1}{R_1C_1} \\\\ 0 \end{array} \right] u, \quad y = \left[ 0 \; 1 \right] x$$
   where $u = v_1$ and $y = v_3$. (Hint: Use $v_2$ and $v_3$ as your state variables.)
 
 q3_1_s: |
@@ -129,19 +129,19 @@ q3_1_s: |
 q4_1: |
   # 4. Keynesian Economics
   Consider the following simple Keynesian macroeconomic model in the form of a linear discrete-time system discussed in Exercise 5.8:
-  $$\begin{align} \left[ \begin{array}{c} C[t + 1] \\\\ I[t + 1] \end{array} \right] &= \left[ \begin{array}{c c} a & a \\\\ ab - b & ab \end{array} \right] \left[ \begin[array}{c} C[t] \\\\ I[t] \end{array} \right] + \left[ \begin{array}{c} a \\\\ ab \end{array} \right] G[t] \\\\
+  $$\begin{align} \left[ \begin{array}{c} C[t + 1] \\\\ I[t + 1] \end{array} \right] &= \left[ \begin{array}{c c} a & a \\\\ ab - b & ab \end{array} \right] \left[ \begin{array}{c} C[t] \\\\ I[t] \end{array} \right] + \left[ \begin{array}{c} a \\\\ ab \end{array} \right] G[t] \\\\
   Y[t] &= C[t] + I[t] + G[t] \end{align}$$
   Determine the eigenvalues of the dynamics matrix. When are the magnitudes of the eigenvalues less than $1$? Assume that the system is in equilibrium with constant values capital spending $C$, investment $I$ and government expenditure $G$. Explore what happenes when government expenditure increases by $10$%. Use the values $a = 0.25$ and $b = 0.5$.
 
 q4_1_s: |
   **Solution:** The eigenvalues of the dynamic matrix can be found by solving for the roots of
-  $$\text{det}(\lambda I - A) = \left| \begin{array}{c c} \lambda - a & -a \\\\ a - ab & \lambda - ab \end{array} \end{array} \right| = \lambda^2 - a(b + 1)\lambda + a^2,$$
+  $$\text{det}(\lambda I - A) = \left| \begin{array}{c c} \lambda - a & -a \\\\ a - ab & \lambda - ab \end{array} \right| = \lambda^2 - a(b + 1)\lambda + a^2$$
   which gives
   $$\lambda_{1,2} = \frac{a(b + 1) \pm \sqrt{a^2((b + 1)^2 - 4)}}{2}.$$
   To guarantee $\left| \lambda_{1,2} < 1, \right|$, we need to have
   <hr class="s2" />
-  (a) If $(b + 1)^2 \le 4, the eigenvalues are complex and $|\lambda_1| = |\lambda_2|$, so $|\lambda_{1,2}| < 1$ \iff a^2 = |\lambda_1\lambda_2| = |\lambda_1^2| < 1 \iff |a| < 1.$
-  <hr class="s" />
+  (a) If $(b + 1)^2 \le 4$, the eigenvalues are complex and $|\lambda_1| = |\lambda_2|$, so $|\lambda_{1,2}| < 1 \iff a^2 = |\lambda_1\lambda_2| = |\lambda_1^2| < 1 \iff |a| < 1.$
+  <hr class="s2" />
   (b) If $(b + 1)^2 \gt 4$, the eigenvalues are real. In this case we need
   $$\left| \frac{a(b + 1) + \sqrt{a^2((b + 1)^2 - 4)}}{2} \right| < 1$$
   and
@@ -176,12 +176,12 @@ q5_1_s: |
 q6_1: |
   # 6. Motor Drive
   Consider the normalized model of the motor drive in Exercise 2.10. Using the following normalized parameters,
-  $$J_1 = 10/9, \quad J_2 = 10, c = 0.1, k = 1, k_I = 1$$
-  verify that the eigenvalues of the open loop system are $0, 0, -0.05 \pm i$. Design a state feedback that gives a closed loop system with eigenvalues $-2, -1$ and $-1 \pm i$. This choice implies that the oscillatory eigenvalues will be well damped and that the eigenvalues at the origin are replaced by eigenvalues on the negative real axis. Simulate the responses of the closed loop system to step changes in the command signal for $\theta_2$ and a step change is a disturbanc torque on the second rotor.
+  $$J_1 = 10/9, \quad J_2 = 10, \quad c = 0.1, \quad k = 1, \quad k_I = 1$$
+  verify that the eigenvalues of the open loop system are $0, 0, -0.05 \pm i$. Design a state feedback that gives a closed loop system with eigenvalues $-2, -1$ and $-1 \pm i$. This choice implies that the oscillatory eigenvalues will be well damped and that the eigenvalues at the origin are replaced by eigenvalues on the negative real axis. Simulate the responses of the closed loop system to step changes in the command signal for $\theta_2$ and a step change is a disturbance torque on the second rotor.
 
 q6_1_s: |
   **Solution:** It is useful to write a script that sets all parameters. This is accomplished by the script below:
-
+  <hr class="s2" />
   ```
   %robotarm_data.m
   %Data for the normalized motor drive
@@ -200,11 +200,12 @@ q6_1_s: |
   %SISO system where output is angle of second rotor
   sys2=ss(A,B2,C2,D1);
   %Complete system
-  sys=ss(A,B,C,D0;
+  sys=ss(A,B,C,D0);
   ```
-  The state feedback is given by Theorem 6.3, in component form we have
-  $$u = -k_1x_1 - k_2x_2 - k_3x_3 - k_4x_4 + k_rx_r$$
+  <hr class="s2" />
+  The state feedback is given by Theorem 6.3, in component form we have $$u = -k_1x_1 - k_2x_2 - k_3x_3 - k_4x_4 + k_rx_r$$
   The numerical values are obtained using the following script:
+  <hr class="s2" />
   ```
   %robotarm_sfb.m - Design of State feedback for robotarm
   %    kja 070820
@@ -222,11 +223,13 @@ q6_1_s: |
   disp('Closed loop eigenvalues obtained')
   disp(eig(Ac1));
   ```
-  which gives the values $k_1 = 1.78, k_2 = 7.10, k_3 = 1.09$ and $k_4 = 20.24$ and $k_r = 8.89$. Notice that we have added a line where we compute the closed loop eigenvalues with the computed controller gains. It is a good practice to add checks of this type in the design programs.
+  <hr class="s2" />
+  which gives the values $k_1 = 1.78, k_2 = 7.10, k_3 = 1.09, k_4 = 20.24$ and $k_r = 8.89$. Notice that we have added a line where we compute the closed loop eigenvalues with the computed controller gains. It is a good practice to add checks of this type in the design programs.
   <hr class="s2" />
   ![diagram](/img/ee16b/mt2-sp17p-q6-1.png)
   <hr class="s2" />
-  To explore the properties of the systems we will simulate it. A SIMULINK block diagram of the system is shown in Figure S6.3. Notice that the block is generic, the specifics are given by the matrices defining the process, the controller and the inputs. In the simulation we will first apply a unit step in the reference signal and we will then apply a disturbranc torque of $2$ units at the seconf rotor. The simulation is executed using the script below:
+  To explore the properties of the systems we will simulate it. A SIMULINK block diagram of the system is shown in Figure S6.3. Notice that the block is generic, the specifics are given by the matrices defining the process, the controller and the inputs. In the simulation we will first apply a unit step in the reference signal and we will then apply a disturbranc torque of $2$ units at the second rotor. The simulation is executed using the script below:
+  <hr class="s2" />
   ```
   %motordrive_sfbsim.m
   %Simulation of motor drive with state feedback
@@ -248,6 +251,7 @@ q6_1_s: |
   axis([0 20 -2 10]);
   amprint('-deps', 'dcmotor-statefbk-sfbsim.eps');
   ```
+  <hr class="s2" />
   The results of the simulation are shown in Figure S6.4. The simulation shows that the second rotor responds very nicely to the reference signal. To achieve the fast response the first rotor has a large overshoot. This is necessary because the only way to exert a force on the second rotor is to turn the first rotor so that a large force is obtained. To execute effective control it is necessary to coordinate the motion of both rotors accurately. This is done very efficiently by the controller based on state feedback. To obtain the response to a unit step in the reference shown in the figure the initial value of the control signal is $8.89k_r$. The value is proportional to the magnitude of the step. To judge if the value is reasonable it is necessary to know the numerical values of typical steps and the signal level when the control signal saturates. If a larger value of the control signal can be permitted the specified closed loop poles can be chosen to be faster. If the value is too large the desired closed loop poles should have smaller magnitudes.
   <hr class="s1" />
   The response to a torque disturbance at the second rotor shows that there is a steady-state error. The reason for this is that the controller does not have integral action. Also notice that the angle $\phi_1$ of the first rotor is negative. This is necessary because the only way to exert a torque on the second rotor is by turning the first rotor.

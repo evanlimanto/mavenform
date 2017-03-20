@@ -343,7 +343,6 @@ const examTypeToLabel = {
 
   'mt1': 'Midterm 1',
   'mt2': 'Midterm 2',
-  'mt2p': 'Midterm 2 (Practice)',
   'final': 'Final',
 }
 
@@ -364,6 +363,7 @@ const termToLabel = {
   'sp16': 'Spring 2016',
   'su16': 'Summer 2016',
   'fa16': 'Fall 2016',
+  'sp17p': 'Spring 2017 - Practice',
 };
 
 const courseIDToLabel = {
