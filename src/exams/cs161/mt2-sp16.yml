@@ -1,0 +1,94 @@
+course: 'cs161'
+ref: 'mt2-sp16'
+
+type: 'mt2'
+term: 'sp16'
+prof: 'Popa, Wagner'
+
+questions: {
+  'q1': '',
+  'q2': '',
+  'q3': '',
+  'q4': '',
+  'q5': '',
+  'q6': '',
+  'q7': '',
+}
+
+parts: {
+  'q1': 5,
+  'q2': 1,
+  'q3': 1,
+  'q4': 1,
+  'q5': 1,
+  'q6': 1,
+  'q7': 1,
+}
+
+q1_1: |
+  # Problem 1: True or False (10 points)
+  Circle True or False. Do not justify your answer.
+  <hr class="s2" />
+  (a) **True or False**: It is safe (IND-CPA-secure) to encrypt multiple messages in CBC mode with a constant IV of 0, using the same encryption key each time.
+
+q1_1_s: |
+  **False.** If you encrypt the same message twice, you’ll get the same ciphertext both times, so this can’t be IND-CPA-secure.
+
+q1_2: |
+  (b) **True or False**: It is safe (IND-CPA-secure) to encrypt multiple messages in CBC mode with a constant IV of 0, as long as the encryption key is different for each message sent.
+
+q1_2_s: |
+  **True.** Using a different random key each time provides the randomiza- tion needed to ensure that each message encrypts to a different random-looking ciphertext—even if you encrypt the same message twice, you’ll get two different unrelated ciphertexts.
+
+q1_3: |
+  (c) **True or False**: Encrypting a message with CBC mode protects the integrity of the message.
+
+q1_3_s: |
+  **False.** Encryption doesn’t provide integrity, as you saw in HW3 Problem 2(c).
+
+q1_4: |
+  (d) **True or False**: It’s ok for multiple people using El Gamal public key encryption to use the same modulus $p$.
+
+q1_4_s: |
+  **True.** Knowing $p$ doesn’t help you compute Bob’s private key (b) from his public key ($g^b \; \text{mod} \; p$).
+
+q1_5: |
+  (e) **True or False**: It’s ok for multiple people using RSA signatures to use the same modulus $n$.
+
+q1_5_s: |
+  **False.** If two people have the same n, then they’ll have the same $d$, i.e., the same private key. This means Alice will be to sign messages that look like they came from Bob.
+
+q2_1: |
+  # Problem 2: More True or False (8 points)
+  In this question, $H$ refers to a secure cryptographic hash function and $len(x)$ is a 128-bit int storing the length of $x$. You can assume that $x$ and $y$ are at most one million bytes long. Circle **True or False**. Do not justify your answer.
+  <hr class="s2" />
+  (a) **True or False:** Let $F (x, y) = H(x||y)$. Given $x, y,$ and $F (x, y)$, it is easy for an attacker to find $x',y'$ such that $F(x',y') = F(x,y)$ and $x \ne x'$.
+
+q2_1_s: |
+  **True.** Just shift the boundary. For instance if $x = \text{builtin}$ and $y = \text{securely}$, you could use $x' = \text{built}$ and $y = \text{insecurely}$.
+
+q2_2: |
+  (b) **True or False:** Let $F (x, y) = H(len(x)||x||y)$. Given $x, y,$ and $F (x, y)$, it is easy for an attacker to find $x',y'$ such that $F(x',y') = F(x,y)$ and $x ̸= x'$.
+
+q2_2_s: |
+  **False.** The input to $H$ is uniquely decodable: given $len(x)||x||y$, $x$ and $y$ are uniquely determined. In other words, if $len(x)||x||y = len(x')||x'||y'$, then we must have $len(x) = len(x')$ (since the two input strings match in their first $128$ bits), and thus $x = x'$ and $y = y'$ (there is no opportunity to shift the boundary, since $x$ has to have the same length in both input strings).
+  <hr class="s2" />
+  Thus: if $x \ne x'$, then $len(x)||x||y \ne len(x')||x'||y'$ Since $H$ is collision-resistant, this means $H(len(x)||x||y) \ne H(len(x')||x'||y')$.
+
+q2_3: |
+  **True or False:** Let $F (x, y) = H(len(y)||x||y)$. Given $x, y$, and $F (x, y)$, it is easy for an attacker to find $x',y'$ such that $F(x',y') = F(x,y)$ and x \ne x'$.
+
+q2_3_s: |
+  **False.** The same reasoning as in part (b): the input to $H$ is uniquely decodable. If two inputs to $H$ are equal, then $len(y)$ must be the same in both, and there’s no opportunity to shift the boundary.
+  <hr class="s2" />
+  We felt it was sufficiently clear that $len(y)$ is a $128$-bit int containing the length of $y$. However, we gave credit for $True$ for students who explicitly wrote “I assume $len(y)$ is variable-length.”
+
+q2_4: |
+  **True or False:** Let $F(x,y) = H(x||len(x)||y)$. Given $x, y$, and $F(x,y)$, it is easy for an attacker to find $x',y'$ such that $F(x',y') = F(x,y)$ and $x \ne x'$.
+
+q2_4_s: |
+  **True, False.** We gave points to both answers here, based on student feedback.
+  <hr class="s2" />
+  We can shift the boundary if $x$ is chosen cleverly. Let $x'$ be arbitrary, and suppose we choose $x$ so that $x = x'||len(x')$. Set y′ = len(x)||y. Then you can verify that x||len(x)||y = x′||len(x′)||y′, so H(x||len(x)||y) = H(x′||len(x′)||y′).
+  <hr class="s2" />
+  However some students pointed out that they interpreted the question as asking
