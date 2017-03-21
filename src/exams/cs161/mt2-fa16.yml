@@ -1,0 +1,28 @@
+course: 'cs161'
+ref: 'mt2-sp14'
+
+type: 'mt2'
+term: 'sp14'
+prof: 'Popa, Wagner'
+
+questions: {
+  'q1': 'True or False',
+  'q2': 'More True or False',
+  'q3': 'Vulnerability Mitigation',
+  'q4': 'Password Hashing',
+  'q5': 'Deja vu ... all over again',
+  'q6': 'A special encryption algorithm',
+  'q7': 'Authentication',
+  'q8': 'Chosen-ciphertext security of El Gamal',
+}
+
+parts: {
+  'q1': 8,
+  'q2': 8,
+  'q3': 2,
+  'q4': 3,
+  'q5': 3,
+  'q6': 2,
+  'q7': 3,
+  'q8': 1,
+}

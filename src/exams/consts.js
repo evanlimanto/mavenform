@@ -37,6 +37,19 @@ const exams = {
     }
   },
 
+  'cs161': {
+    'mt2': {
+      'sp16': {
+        'term': 'Spring 2016',
+        'profs': 'Popa, Wagner',
+      },
+      'sp14': {
+        'term': 'Spring 2014',
+        'profs': 'Popa, Wagner',
+      }
+    }
+  },
+
   'cs170': {
     'mt2': {
       'sp16': {
