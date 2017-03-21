@@ -355,12 +355,12 @@ const courses = {
 };
 
 const courseIsFeatured = {
-  'cs170': true,
-  'ee16a': true,
+  'cs170': false,
+  'ee16a': false,
   'cs162': true,
   'ee16b': true,
   'cs61b': true,
-  'cs161': true,
+  'cs161': false,
   'cs189': false,
   'cs61a': false,
   'cs188': false,
