@@ -1,8 +1,8 @@
 course: 'cs162'
-ref: 'mt2-fa15'
+ref: 'mt2-sp15'
 
 type: 'mt2'
-term: 'fa15'
+term: 'sp15'
 prof: 'Kubiatowicz'
 
 questions: {

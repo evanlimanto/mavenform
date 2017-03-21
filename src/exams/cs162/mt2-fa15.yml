@@ -1,8 +1,8 @@
 course: 'cs162'
-ref: 'mt2-fa16'
+ref: 'mt2-fa15'
 
 type: 'mt2'
-term: 'fa16'
+term: 'fa15'
 prof: 'Joseph'
 
 questions: {
