@@ -11,7 +11,7 @@ class Navbar extends Component {
     const toggleBackComponent = (this.props.isExam) ? (
         <a className="material-icons mobile-back" href={`/${course}`}  onClick={() => handleEvent('Click', 'Home - Mobile')}>keyboard_backspace</a>
       ) : (
-        <a className="material-icons mobile-back" href="/" onClick={() => handleEvent('Click', 'Home - Mobile')}>home</a>
+        <a className="material-icons mobile-back" href="/courses" onClick={() => handleEvent('Click', 'Home - Mobile')}>keyboard_backspace</a>
       );
     /*
     const toggleSolutionsComponent = (this.props.isExam) ? (
@@ -31,7 +31,7 @@ class Navbar extends Component {
 
     return (
       <div className="nav">
-        <a className="logo" href="/" onClick={() => handleEvent('Click', 'Home - Desktop')}>Mavenform</a>
+        <a className="logo" href="/courses" onClick={() => handleEvent('Click', 'Home - Desktop')}>Mavenform</a>
         {toggleBackComponent}
         {toggleSolutionsComponent}
         <div className="tooltip-container">

@@ -50,15 +50,7 @@ class Home extends Component {
             <hr className="s2" />
             <h5 className="h5-alt">A new and intuitive format to view and study past exams</h5>
             <div className="home-button-container">
-              <Link
-               className="home-button"
-               to="courses"
-               isDynamic={true}
-               smooth={true}
-               duration={500}
-              >
-               View Courses
-              </Link>
+              <a className="home-button" href="/courses">View Courses</a>
               <Link
                className="home-button home-button-alt"
                to="features"
@@ -72,19 +64,8 @@ class Home extends Component {
             <img className="banner-screen" src="/img/screen.png"/> 
           </div>
         </div>
-        <Element name="courses" className="card-container-container">
-          <div className="card-container center">
-            <hr className="margin" />
-            <h4 className="center">Courses</h4>
-            <hr className="s1" />
-            <h5>Currently available exam sets</h5>
-            <hr className="s3" />
-            {courseBoxes}
-            <hr className="margin" />
-          </div>
-        </Element>
-        <Element name="features">
-          <div className="light-gray center">
+        <Element name="features" className="card-container-container">
+          <div className="center">
             <hr className="margin" />
             <h4 className="center">Features</h4>
             <hr className="s1" />

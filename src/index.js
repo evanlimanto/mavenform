@@ -5,6 +5,7 @@ import { handleEvent } from './utils';
 import { lowerCase } from 'lodash';
 import Exam from './Exam';
 import Course from './Course';
+import Courses from './Courses';
 import Home from './Home';
 import NotFound from './NotFound';
 
@@ -116,6 +117,7 @@ $(document).ready(function() {
 ReactDOM.render((
   <Router history={browserHistory} onUpdate={logPageView}>
     <Route path="/" component={Home} />
+    <Route path="/courses" component={Courses} />
     <Route path="/:courseid" component={Course} />
     <Route path="/:courseid/:examtype/:id" component={Exam} />
     <Route path="*" component={NotFound} />

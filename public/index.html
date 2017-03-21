@@ -28,6 +28,7 @@
     }
   </script>
   <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?delayStartupUntilConfig&config=TeX-MML-AM_HTMLorMML"></script>
+  <script src="jquery.hideseek.min.js"></script>
   <meta property="og:url" content="http://www.mavenform.com"/>
   <meta property="og:title" content="Mavenform"/>
   <meta property="og:type" content="website"/>
@@ -43,6 +44,13 @@
       e.stopPropagation();
       $(this).focus();
     }
+  });
+  </script>
+  <script>
+  $(document).ready(function() {
+    $('#search').hideseek({
+      nodata: 'No results found'
+    });
   });
   </script>
 </body>
