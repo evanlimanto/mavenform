@@ -1,8 +1,8 @@
 course: 'cs61b'
-ref: 'mt2-sp16'
+ref: 'mt2-sp15'
 
 type: 'mt2'
-term: 'sp16'
+term: 'sp15'
 prof: 'Hug'
 
 questions: {
