@@ -1,8 +1,8 @@
 course: 'cs161'
-ref: 'mt2-sp14'
+ref: 'mt2-fa16'
 
 type: 'mt2'
-term: 'sp14'
+term: 'fa16'
 prof: 'Popa, Wagner'
 
 questions: {
