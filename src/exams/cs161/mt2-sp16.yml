@@ -6,14 +6,14 @@ term: 'sp16'
 prof: 'Popa, Wagner'
 
 questions: {
-  'q1': '',
-  'q2': '',
-  'q3': '',
-  'q4': '',
-  'q5': '',
-  'q6': '',
-  'q7': '',
-  'q8': '',
+  'q1': 'True or False',
+  'q2': 'More True or False',
+  'q3': 'Multiple Choice',
+  'q4': 'TLS',
+  'q5': 'Iliad Identification Integrity scheme',
+  'q6': 'Name confidentiality in Project 2',
+  'q7': 'Computing on Encrypted Data',
+  'q8': 'Protocol Analysis',
   'q9': 'RSA Keypairs',
 }
 
@@ -315,7 +315,7 @@ q6_6_s: |
   Or, another way to think about it: $j$ depends on both $n$ and $k$ (the AES key), so this is much like $H(n||k)$, which is secure, as explained in the Project 2 Part 1 solutions.
 
 q7_1: |
-  # Problem 7. Computing on encrypted data (10 points)
+  # Problem 7. Computing on Encrypted Data (10 points)
   A cool property of some encryption schemes is that they allow you to compute on encrypted data! Let $Enc(M)$ denote the encryption of message $M$. Given $C_1$ and $C_2$ (the ciphertexts for messages $M_1$ and $M_2$), anyone (even without the decryption keys) can compute a ciphertext $C_3$ that will decrypt to the product $M_1 \times M_2$.
   <hr class="s2" />
   The idea is that we want a server in the cloud to do some work for us, but we don’t want the cloud to see our data. So we give encrypted data to the cloud (without giving the decryption key to the cloud), and the cloud gives us back the encrypted computation result. Let’s figure out how the cloud can perform this computation.

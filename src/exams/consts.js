@@ -42,6 +42,10 @@ const exams = {
       'sp16': {
         'term': 'Spring 2016',
         'profs': 'Popa, Wagner',
+      },
+      'sp14': {
+        'term': 'Spring 2014',
+        'profs': 'Popa, Wagner',
       }
     }
   },

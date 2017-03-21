@@ -1,0 +1,335 @@
+course: 'cs161'
+ref: 'mt2-sp14'
+
+type: 'mt2'
+term: 'sp14'
+prof: 'Popa, Wagner'
+
+questions: {
+  'q1': 'True or False',
+  'q2': 'More True or False',
+  'q3': 'Vulnerability Mitigation',
+  'q4': 'Password Hashing',
+  'q5': 'Deja vu ... all over again',
+  'q6': 'A special encryption algorithm',
+  'q7': 'Authentication',
+  'q8': 'Chosen-ciphertext security of El Gamal',
+}
+
+parts: {
+  'q1': 8,
+  'q2': 8,
+  'q3': 2,
+  'q4': 3,
+  'q5': 3,
+  'q6': 2,
+  'q7': 3,
+  'q8': 1,
+}
+
+q1_1: |
+  # Problem 1. True or False (16 points)
+  Circle **True or False**. Do not justify your answer.
+  <hr class="s2" />
+  (a) **True or False:** Firewalls are commonly deployed because they never affect functionality.
+
+q1_1_s: |
+  **False.** Firewalls can affect some functionality (e.g., some peer-to-peer software).
+
+q1_2: |
+  (b) **True or False:** No instrusion detection system is capable of detecting novel attacks.
+
+q1_2_s: |
+  **False.** Anomaly detection can potentially detect (some) novel at- tacks, as can behavioral detection.
+
+q1_3: |
+  (c) **True or False:** Full TCP reassembly is sufficient to implement a network instrusion detection system (NIDS) that stops all evasion attacks.
+
+q1_3_s: |
+  **False.** There are other kinds of evasion attacks, e.g., at application- layer semantics.
+
+q1_4: |
+  (d) **True or False:** A host-based intrusion detection system (HIDS) is harder to evade than a network intrusion detection system (NIDS) because a HIDS has access to application-layer semantics.
+
+q1_4_s: |
+  **True.** A HIDS has more visibility.
+
+q1_5: |
+  (e) **True or False:** The false positive and false negative rates of a given intrusion detection system provide enough info to classify it as “good” or “bad” at detecting threats.
+
+q1_5_s: |
+  **False.** This is the base rate fallacy. It also depends upon the base rate of attacks (and typically on the cost of a false positive vs of a false negative).
+
+q1_6: |
+  (f) **True or False:** The Kaminsky attack is an on-path attack; off-path attackers cannot mount a Kaminsky attack.
+
+q1_6_s: |
+  **False.** It is an off-path attack. (An on-path attacker wouldn’t need any of the cleverness in the Kaminsky attack; they could see the DNS transaction ID and thus could directly spoof replies without any clever tricks needed.)
+
+q1_7: |
+  (g) **True or False:** On-path attackers can successfully eavesdrop on the data sent over a TCP connection.
+
+q1_7_s: |
+  **True.** They can see all the packets in the connection.
+
+q1_8: |
+  (h) **True or False:** Off-path attackers can successfully eavesdrop on the data sent over a TCP connection.
+
+q1_8_s: |
+  **False.** They’re not in a position to see the packets.
+
+q2_1: |
+  # Problem 2. More True or False (16 points)
+  Circle **True or False**. Do not justify your answer.
+  <hr class="s2" />
+  (a) **True or False:** On-path attackers can successfully tamper with (i.e., modify) the data sent from Alice’s web browser to [http://www.cnn.com/](http://www.cnn.com/).
+
+q2_1_s: |
+  **True.** They can observe the sequence numbers and port numbers, which is all that is needed to inject false packets or mount a TCP hijacking attack.
+
+q2_2: |
+  (b) **True or False:** Off-path attackers can successfully tamper with (i.e., modify) the data sent from Alice’s web browser to [http://www.cnn.com/](http://www.cnn.com/).
+
+q2_2_s: |
+  **False.** On a modern TCP stack, they won’t be able to predict the sequence numbers, so it won’t be feasible to mount TCP hijacking attacks.
+
+q2_3: |
+  (c) **True or False:** DHCP spoofing only affects the integrity of DNS lookups and has no practical effect on web security.
+
+q2_3_s: |
+  **False.** It has a severe effect on the security of all web sites that use HTTP: the same-origin policy is defined in terms of domain names (not IP addresses), so defeating DNS lets a malicious site defeat the same-origin policy.
+
+q2_4: |
+  (d) **True or False:** Diffie-Hellman is secure against passive eavesdroppers who can- not modify packets or send forged packets.
+
+q2_4_s: |
+  **True.** That's what is is designed for.
+
+q2_5: |
+  (e) **True or False:** Diffie-Hellman is secure against man-in-the-middle attacks.
+
+q2_5_s: |
+  **False.** We went over a man-in-the-middle attack in lecture. To defeat man-in-the-middle attacks, you need some kind of authentication (e.g., signed Diffie-Hellman).
+
+q2_6: |
+  (f) **True or False:** Cryptographic hash functions are required to be one-way and collision-resistant.
+
+q2_6_s: |
+  **True.** That’s part of the definition of what it means to be a crypto- graphic hash function.
+
+q2_7: |
+  (g) **True or False:** The IV in CTR mode (counter mode) must be kept secret.
+
+q2_7_s: |
+  **False.** It is sent as part of the ciphertext, so it is visible to any eavesdropper.
+
+q2_8: |
+  Alice and Bob share a symmetric key $k$. Alice sends Bob a message stating, “I owe you \$100”, and also sends a message authentication code (MAC) on this message computed using the key $k$.)
+  <hr class="s2" />
+  **True or False:** Assuming the MAC algorithm is secure, Bob can now go to his bank and prove to the bank teller that Alice does indeed owe him \$100 by giving his key $k$ to the teller.
+
+q2_8_s: |
+  **False.** Since Bob knows the key $k$, he could have made up the mes- sage and computed the MAC tag on it himself.
+
+q3_1: |
+  # Problem 3. Vulnerability Mitigation (10 points)
+  Recall that the version of VSFTPd we used in Project 2 had a widely known vulnerability (“smile at login”). You’re the sysadmin for a large company, and you’ve learned that there is an internal server inside your company’s network running this version of VSFTPd. Unfortunately, you can’t modify that server.
+  <hr class="s2" />
+  (a) Describe one way you could use a stateful packet filter to prevent an outside attacker from exploiting the VSFTPd vulnerability.
+  <hr class="s2" />
+  (Hint: FTP uses TCP and is unencrypted.)
+
+q3_1_s: |
+  There are many possible answers:
+  - An excellent answer: Scan all packets, reassemble the TCP stream, and
+  - ok for :) in a username; if you see this, block the rest of the connection.
+  - Another excellent answer: Block all connections to port $6200$ on that
+  - rver, i.e., to the backdoor port.
+  - Almost as good: Scan all packets and block any connection if it contains :) in a username. (Still a very good answer, but we gave slightly fewer points to this, to give credit to those who noted the need to reassemble the TCP stream first.)
+  - Also good: Block all inbound FTP connections from any external host to this VSFTPd server. (This answer is not quite as good because it prevents external use of the server, so we awarded most of the points but took off a couple of points for the potential loss of functionality.)
+
+  <hr class="s2" />
+  Other answers that impacted functionality more got correspondingly fewer points (e.g., block all access to FTP on all servers; block all access to that VSFTPd server; block all inbound connections to internal servers; block :) anywhere in any TCP data stream).
+
+q3_2: |
+  (b) Suppose that we have deployed a stateful packet filter (as in part (a)) at the border of our network, where it connects to the rest of the Internet. Now imagine that an employee’s laptop has been infected with malware. Could the malware exploit the VSFTPd vulnerability? Why or why not?
+
+q3_2_s: |
+  Yes. The malware can wait until the employee’s laptop is on the internal network and then make a connection from the internal laptop to the internal VSFTPd server. This connection never goes through the stateful packet filter, which thus can’t block the attack.
+
+q4_1: |
+  # Problem 4. Password Hashing (12 points)
+  Joe runs a large website that allows users to log in and share images. When a new user sets up their account, the website hashes their password with SHA256 and stores the hash in a database. When a user logs in, the website hashes the supplied password with SHA256 and compares it to the stored hash.
+  <hr class="s2" />
+  Joe figures that with this scheme, if anyone hacks into your database they will only see hashes and won’t learn your users’ passwords. Out of curiosity, Joe does a Google search on several hashes in the database and is alarmed to find that, for a few of them, the Google search results reveal the corresponding password. He comes to you for help
+  <hr class="s2" />
+  (a) What mistake did Joe make in how he stored passwords?
+
+q4_1_s: |
+  He didn't use a salt.
+  <hr class="s2" />
+  (His other mistake was to use a hash that is too fast, though that doesn’t really explain why the hash turned up in a Google search, so this didn’t receive full credit.)
+
+q4_2: |
+  (b) What is the consequence of this mistake? In other words, what is the risk that it introduces and how many of Joe’s users could be affected? Does it affect only users whose password hashes are available in Google search, or does it go beyond that?
+
+q4_2_s: |
+  If the database is leaked (e.g., server compromise), the attacker can mount offline password guessing attacks. Such an attacker might be able to recover many of the users’ passwords—not just those whose password hashes are listed in Google search.
+
+q4_3: |
+  (c) How should Joe store passwords? More specifically, if a user’s password is $w$, what should Joe store in the database record for that user?
+
+q4_3_s: |
+  $s, F(w, s)$ where $s$ is a random salt chosen independently for each user and where $F$ is a slow cryptographic hash, e.g., SHA256 iterated may times $(F(x) = H(H(\cdots(x)\cdots))$ where $H$ is SHA256).
+
+q5_1: |
+  # Problem 5. Deja vu ... all over again (17 points)
+  The C code below should look very similar to something you’ve seen in Project 2. You have the same goal—you want to write an exploit that spawns a shell. For your reference:
+  <hr class="s2" />
+  **shellcode** (as seen in gdb): `0x895e1feb, 0xc0310876, 0x89074688, 0x0bb00c46, ...`
+  <hr class="s1" />
+  **ASCII:** `A-Z: 0x41-0x90, a-z: 0x61-0x7a, newline: 0x0a, escape: 0x1b, tab: 0x09`
+  <hr class="s2" />
+  ```
+  void deja_vu()
+  {
+    char door[8];
+    gets(door);
+  }
+  int main()
+  {
+    deja_vu();
+    return 0;
+  }
+  ```
+  <hr class="s2" />
+  (a) In gdb, what line should you set a breakpoint at to check if your exploit succeeded, without any additional `step` calls?
+
+q5_1_s: |
+  Line number 5.
+
+q5_2: |
+  (b) The relevant gdb output below is from **before** you feed in your malicious input.
+  <hr class="s2" />
+  ```
+  (gdb) x/8x door
+  0xbffff9b8: 0xbffffa7c  0xb7e5f225  0xb7fed270  0x00000000
+  0xbffff9c8: 0xbffff9d8  0x0804842a  0x08048440  0x00000000
+
+  (gdb) i f 0
+  Stack level 0, frame at 0xbffff9d0:
+   eip = 0x8048412 in deja_vu (dejavu.c:7); saved eip 0x804842a
+   Locals at 0xbffff9c8, Previous frame’s sp is 0xbffff9d0
+   Saved registers:
+    ebp at 0xbffff9c8, eip at 0xbffff9cc
+  ```
+  <hr class="s2" />
+  What should you see if you run `x/8x` door **after** the malicious input has been fed in but before the shellcode executes? Assume that the exploit was successful, and the bare minimum was changed in memory. Your solution should have at least one 4-byte chunk of shellcode.
+
+q5_2_s: |
+  **Solution:**
+  <hr class="s2" />
+  ```
+  0xbffff9b8: 0xbffffa7c  0xb7e5f225  0xb7fed270  0x00000000
+  0xbffff9c8: 0xbffff9d8  0xbffff9d0  0x895e1feb  0xc0310876
+  ```
+  <hr class="s2" />
+  or
+  <hr class="s2" />
+  ```
+  0xbffff9b8: 0xbffffa7c  0xb7e5f225  0xb7fed270  0x00000000
+  0xbffff9c8: 0xbffff9d8  0xbffff9d4  0x08048440  0x895e1feb
+  ```
+
+q5_3: |
+  (c) Recall that in Project 2, your absolute memory addresses were randomized depend- ing on your login. Explain how this kind of randomization could make exploiting the above vulnerability more complicated, if you got an unlucky choice of memory addresses. Provide an example of a specific address for `door` which would cause this problem. Your example address must be between `0xbfff0000` and `0xbffffffc`.
+
+q5_3_s: |
+  Address of door: `0xbfff0a08`
+  <hr class="s2" />
+  Explanation: We’ll need to overwrite the return address with an address like `0xbfff0a20`. This address contains a `0x0a` byte, so we’ll need the malicious input to contain a `0x0a` byte, followed a bit later by the shellcode. However, `gets()` stops reading the input when it sees a `0x0a` byte, which will mess up our exploit.
+  <hr class="s2" />
+  There are many other example addresses that would force the buffer to contain a `0x0a` byte.
+  <hr class="s1" />
+  We also accepted anything that would force the buffer to contain a `0x00` byte.
+
+q6_1: |
+  # Problem 6. A special encryption algorithm (7 points)
+  A security company has determined that, even using a bunch of fast computers, brute- force attacks can break at most a $50$-bit key in a reasonable amount of time. So, they decide to design an encryption algorithm that will encrypt $64$-bit messages under a $64$-bit key. They already have a good block cipher $E$ that can encrypt a $32$-bit message under a $32$-bit key and that is resilient against all attacks except brute-force attacks. So, for the $64$-bit encryption algorithm, they simply split the message $M$ in two parts $M_1$ and $M_2$ and the key $K$ in two parts $K_1$ and $K_2$. The ciphertext $C$ is then computed as $E_{K_1} (M_1)||E_{K_2} (M_2)$.
+  <hr class="s2" />
+  (a) What is the decryption algorithm? In particular, suppose we have a $64$-bit ciphertext $C$, split into two parts $C_1$ and $C_2$, and suppose we know the $64$-bit key $K$ (whose two parts are $K_1$ and $K_2$). How do we compute $M$?
+
+q6_1_s: |
+  $M = M_1||M_2$ where $M_1 = D_{K_1}(C_1), M_2 = D_{K_2}(C_2)$. Here $D(·)$ is decryption for the $32$-bit block cipher.
+
+q6_2: |
+  (b) Show that this scheme is vulnerable to a known-plaintext attack. In particular, assume we know that $C$ is the encryption of the $64$-bit message $M$ (using the $64$-bit encryption algorithm, under the unknown key $K$). Show how to recover the $64$-bit key $K$ in a reasonable amount of time.
+
+q6_2_s: |
+  First, use brute force to recover $K_1$. We know that $C_1 = E_{K_1}(M_1)$, and we know $M_1, C_1$, so try all possibilities for $K_1$ and see which one is consistent with this equation. Next, use brute force to recover $K_2$, by a similar method. This requires $2^{32} + 2^{32} = 2^{33}$ trial decryptions in total, which is easily feasible.
+
+q7_1: |
+  # Problem 7. Authentication (12 points)
+  Alice would like to send a message $M$ to Bob with confidentiality and integrity. Alice and Bob share symmetric keys $k_1, k_2$. Bob’s public key is $K_B$; we assume that Alice knows $K_B$. Below, $F$ is AES-CMAC (a secure message authentication code) and $H$ is SHA256 (a secure cryptographic hash).
+  <hr class="s2" />
+  Consider the following two schemes:
+  - S1: Alice sends $E_{k_1}(M), F_{k_2}(M)$ to Bob
+  - S2: Alice sends $E_{k_1}(M), H(M)$ to Bob
+
+  <hr class="s2" />
+  Here $E_{k_1} (·)$ is AES-CTR mode (a secure symmetric-key encryption scheme).
+  <hr class="s2" />
+  (a) Which scheme is better for confidentiality, $S1$ or $S2$? Why?
+
+q7_1_s: |
+  $S1$ is better. $S2$ lets the attacker test a guess at $M$ (given a guess $g$, compute $H(g)$; if $H(g) = H(M)$, then he can conclude his guess was correct). Therefore, if there are only a few possibilities for $M$ (maybe it is a $4$-digit PIN), $S2$ allows the attacker to find $M$.
+  <hr class="s2" />
+  As a special case, we also gave full credit for an answer which said that $S2$ is better since a MAC might potentially leak information about its message input (as explained in the lecture notes). In fact, that doesn’t affect AES- CMAC—the AES-CMAC tag doesn’t leak anything about the message—so for this particular question that issue doesn’t actually arise, but we thought this answer demonstrated a high level of knowledge about MACs, so we gave full credit for that answer as well.
+  <hr class="s2" />
+  We also gave full credit for an answer which said that $S1$ is better since in $S2$, if you send the same message twice, it’ll have the same hash, so an eavesdropper can tell if you send the same message twice. This answer is actually not a valid reason to prefer $S1$ (in fact, because a MAC is a deterministic function, both schemes suffer from this problem), but we thought that it demonstrates reasonable understanding of the topic, so we gave it full credit.
+  <hr class="s2" />
+  Common misconception: A MAC is not a trapdoor one-way function. There is no trapdoor. (A hash is not a trapdoor one-way function, either. Again, there is no trapdoor.) A trapdoor would mean a secret that, if you know it, lets you invert the function; but a MAC takes a long message and produces a short tag, so there is no hope of inverting it, even if you know the key.
+  <hr class="s2" />
+  Common misconception: Some people thought that using a hash would be secure since it is collision-resistant. This reasoning would be correct if we somehow knew that the adversary could not tamper with the value $H(M)$ that Alice sends. However, what this overlooks is that an attacker could modify both the ciphertext $E_{k_1}(M)$ and the corresponding hash value $H(M)$, changing the hash value to something that is consistent with the ciphertext. So, the lesson is that an active attacker can potentially change everything that’s sent.
+  <hr class="s2" />
+  Common misconception: Some folks suggested that Bob could decrypt $F_{k_2}(M)$ to recover $M$, and compare it to the decryption of $E_{k_1}(M)$. Unfortunately, you can’t decrypt a MAC. For instance, the input to a MAC might be a $1000$-byte message, and the output is a $16$-byte MAC tag, so given the MAC tag, there is no way to uniquely determine the message (not even if you know the key).
+
+q7_2: |
+  (b) Which scheme is better for integrity, $S1$ or $S2$? Why?
+
+q7_2_s: |
+  $S1$ is better. With $S2$, if the attacker knows $M$, he can modify the ciphertext to turn it into a valid encryption of $M'$. In particular, since $E$ is a stream cipher, he can flip bits in $E_{k_1}(M)$ to change it to an encryption of $E_{k_1}(M')$, and then replace $H(M)$ with $H(M')$. This attack is not possible against $S1$, since the MAC is secure and the attacker doesn’t know the MAC key $k_2$, so the attacker won’t be able to predict $F_{k_2}(M')$.
+
+q7_3: |
+  Next, consider the following two schemes:
+  <hr class="s2" />
+
+  - S3: Alice sends $E_{K_B} (M), F_{k_2} (M)$ to Bob
+  - S4: Alice sends $E_{K_B} (M), H(M)$ to Bob
+
+  <hr class="s2" />
+  Here $E_{K_B} (·)$ represents El Gamal encryption.
+  <hr class="s2" />
+  (c) Which scheme is better for integrity, $S3$ or $S4$? Why?
+
+q7_3_s: |
+  $S3$. With $S4$, anyone can forge a message to Bob; they don't need to know any secret keys.
+
+q8_1: |
+  # Problem 8. Chosen-ciphertext security of El Gamal (10 points)
+  Alice is using El Gamal encryption to send messages to Bob.
+  <hr class="s2" />
+  Recall that the El Gamal encryption of message $M$ is the ciphertext $C = (C_1, C_2)$, where $C_1 = g^r \; \text{mod} \; p, C_2 = M \times B^r \; \text{mod} \; p$, $r$ is a random number chosen separately for each encryption, and $B$ is Bob’s public key. Bob’s private key is $b$, and $B = g^b \; \text{mod} \; p$. $\; p$ and $g$ are fixed and public. To decrypt a ciphertext $C = (C_1 , C_2)$, Bob computes $M = C_1^{−b} \times C_2 \; \text{mod} \; p$.
+  <hr class="s2" />
+  Suppose that, after Bob decrypts a ciphertext, if it does not look like English, Bob will send back an unencrypted email saying “What happened? Your message was corrupted” and attach the decrypted message as an attachment. Thus, Mallory can learn $M$, the decryption of $C$, for any $C$ such that $M$ does not look like English.
+  <hr class="s2" />
+  Suppose that Mallory has intercepted a ciphertext $C^∗ = (C_1^*, C_2^∗)$ sent by Alice to Bob. Mallory knows $C^∗$ is the encryption of some English message, but Mallory doesn’t know what the message says. Describe a chosen-ciphertext attack that would let Mallory learn the decryption of $C^∗$.
+
+q8_1_s: |
+  Mallory can send $C = (C_1, C_2)$ to Bob, where $C_1 = C_1^\*$ and $C_2 = 3C_2^\* \; \text{mod} \; p$. Bob will decrypt this and get
+  $$M = C_1^{-b} \times C_2 = (C_1^\*)^{-b} \times 3C_2^\* = 3M^\* \; \text{mod} \; p$$
+  Now $M$ is unlikely to look like English, so Bob will respond and Mallory will learn $M$. Finally, Mallory can compute $M^\* = M/3 \; \text{mod} \; p$.
+  <hr class="s2" />
+  An alternate solution: Mallory can send $C = (C_1^\*, 1)$. The decryption will be $M = (C_1^\*)^{-b} \times 1 \; \text{mod} \; p$, which will most likely not look like English, so Mallory learns $(C_1^\*)^{-b} \; \text{mod} \; p$. Now Mallory can compute $M^\*$ via the equation $M^\* = (C_1^\*)^{-b} \times C_2^\* \; \text{mod} \; p$, since she knows both quantities on the right-hand side.
+  <hr class="s2" />
+  A common misconception: a number of people wrote something like “since we know $g^b \; \text{mod} \; p, g$, and $p$, it is easy to solve for $b$, and then we have the private key and can decrypt anything we want.” Unfortunately, that’s not right: it’s not easy to solve for $b$. In fact, finding $b$ from $g^b, g, p$ is the discrete log problem, which is believed to be computationally infeasible. (If you could find $b$ from $g^b, g, p$ efficiently, then you could break Diffie-Hellman and El Gamal encryption. As far as we know, this is not possible.) Or, to put it another way, the function $f(x) = g^x \; \text{mod} \; p$ is believed to be a one-way function; so given $f(b) = g^b \; \text{mod} \; p$ (and $g, p$), there is no known feasible way to recover $b$. This forms part of the basis for the security of several public-key cryptosystems.
