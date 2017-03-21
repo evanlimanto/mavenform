@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { browserHistory, Router, Route } from 'react-router';
 import { handleEvent } from './utils';
-import { lowerCase } from 'lodash';
 import Exam from './Exam';
 import Course from './Course';
 import Courses from './Courses';
@@ -35,7 +34,7 @@ window.addEventListener('mousemove', function(e) {
   if (debug || window.location.hostname !== "localhost") {
     const path = window.location.pathname;
     if (!debug) {
-      handleEvent('Mouse', lowerCase(path));
+      handleEvent('Mouse', path);
     }
   }
 });
@@ -44,7 +43,7 @@ window.addEventListener('click', function(e) {
   if (debug || window.location.hostname !== "localhost") {
     const path = window.location.pathname + window.location.search;
     if (!debug) {
-      handleEvent('Click', lowerCase(path));
+      handleEvent('Click', path);
     }
   }
 });
@@ -53,7 +52,7 @@ window.addEventListener('keypress', function(e) {
   if (debug || window.location.hostname !== "localhost") {
     const path = window.location.pathname + window.location.search;
     if (!debug) {
-      handleEvent('KeyPress', lowerCase(path));
+      handleEvent('KeyPress', path);
     }
   }
 });
