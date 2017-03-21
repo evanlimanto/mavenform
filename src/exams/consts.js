@@ -39,6 +39,10 @@ const exams = {
 
   'cs161': {
     'mt2': {
+      'fa16': {
+        'term': 'Fall 2016',
+        'profs': 'Popa, Weaver',
+      },
       'sp16': {
         'term': 'Spring 2016',
         'profs': 'Popa, Wagner',
@@ -350,6 +354,22 @@ const courses = {
   // 'chem1a': 'General Chemistry',
 };
 
+const courseIsFeatured = {
+  'cs170': true,
+  'ee16a': true,
+  'cs162': true,
+  'ee16b': true,
+  'cs61b': true,
+  'cs161': true,
+  'cs189': false,
+  'cs61a': false,
+  'cs188': false,
+  'data8': false,
+  'cs186': false,
+  'ugba10': false,
+  'cs61c': false,
+};
+
 const examTypeToLabel = {
   'marketing': 'Marketing',
   'marketingp': 'Marketing - Practice',
@@ -397,4 +417,4 @@ const courseIDToLabel = {
   // 'chem1a': 'Chem 1A',
 };
 
-export { exams, courses, examTypeToLabel, courseIDToLabel, termToLabel };
+export { exams, courses, examTypeToLabel, courseIDToLabel, courseIsFeatured, termToLabel };

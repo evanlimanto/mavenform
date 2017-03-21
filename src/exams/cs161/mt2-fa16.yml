@@ -7,22 +7,311 @@ prof: 'Popa, Wagner'
 
 questions: {
   'q1': 'True or False',
-  'q2': 'More True or False',
-  'q3': 'Vulnerability Mitigation',
-  'q4': 'Password Hashing',
-  'q5': 'Deja vu ... all over again',
-  'q6': 'A special encryption algorithm',
-  'q7': 'Authentication',
-  'q8': 'Chosen-ciphertext security of El Gamal',
+  'q2': 'Shorts',
+  'q3': 'The No Such Agency''s Attack Tools',
+  'q4': 'Applied Cryptography',
+  'q5': 'TLS',
+  'q6': 'DNS',
+  'q7': 'A simpler “TLS” for secure Messaging'
 }
 
 parts: {
-  'q1': 8,
-  'q2': 8,
-  'q3': 2,
-  'q4': 3,
-  'q5': 3,
-  'q6': 2,
-  'q7': 3,
-  'q8': 1,
+  'q1': 10,
+  'q2': 3,
+  'q3': 8,
+  'q4': 5,
+  'q5': 4,
+  'q6': 6,
+  'q7': 2,
 }
+
+q1_1: |
+  # Problem 1. True/False (20 points)
+  Circle True or False. Do not justify your answer.
+  <hr class="s2" />
+  (a) **True or False:** Randomizing the DNS query identifier prevents an on-path at- tacker (sitting between the client and the DNS server) from spoofing DNS responses.
+
+q1_1_s: |
+  **False** - such an attacker can see the ID and spoof a reply
+
+q1_2: |
+  (b) **True or False:** One defense against the Kaminsky Attack is to randomize the destination port along with randomizing the identifier field.
+
+q1_2_s: |
+  **False** - the source port should be randomized.
+
+q1_3: |
+  (c) **True or False:** An off-path attacker can intercept and modify the DNS reply sent by the DNS server to the client.
+
+q1_3_s: |
+  **False** - an off-path attacker cannot see or intercept packets.
+
+q1_4: |
+  (d) **True or False:** In order to determine whether a given certificate is valid, it is sufficient to only verify the signature on the given certificate.
+
+q1_4_s: |
+  **False** - you need to check that the public key you are using is correct, either by checking the signatures all the way up the certificate chain, or by checking the public key against a root public key hardcoded in the browser.
+
+q1_5: |
+  (e) **True or False:** If an attacker learns the internal state of an HMAC-based pRNG (HMAC-DRBG) they can reconstruct previous outputs.
+
+q1_5_s: |
+  **False** - HMAC-DRBG, even if the attacker learns the internal state they can only predict the future, not reconstruct previous outputs.
+
+q1_6: |
+  (f) **True or False:** If an attacker learns the internal state of an HMAC-based pRNG (HMAC-DRBG) they can predict future outputs.
+
+q1_6_s: |
+  **True** - HMAC-DRBG, if the attacker learns the internal state they can predict the future.
+
+q1_7: |
+  (g) **True or False:** if an attacker connected to your local wireless network using WPA2-Enterprise (like AirBears2) they can directly observe all your network traffic?
+
+q1_7_s: |
+  **False:** WPA-Enterprise does a public key operation to generate the secret between the client and the base station.
+
+q1_8: |
+  (h) **True or False:** You click the “Forgot password” link on the website, and the web server sends you an email with your password in it (in plaintext). Assume that this communication is over SSL/TLS so an attacker cannot eavesdrop on it. True or False: The website stores only hashed passwords.
+
+q1_8_s: |
+  **False.** This indicates the website is storing un-hashed plaintext passwords (possibly encrypted, but this is irrelevant, as a website breach would presumably leak the decrypted passwords).
+
+q1_9: |
+  (i) **True or False:** As long as one uses long and randomly-generated passwords, it is safe to use the same password for all your online accounts.
+
+q1_9_s: |
+  **False.** Even if the password is very secure, if one of the websites does not properly store passwords (say, it keeps them in plaintext) and is breached, an attacker will learn the password and be able to use it on all the other sites you have accounts on.
+
+q1_10: |
+  (j) **True or False:** Consider that a server stores hashed passwords, each salted with a large and randomly chosen salt and stored along with the salt, instead of storing only hashed passwords (with no salt). This prevents an attacker who stole the salted hashed passwords database from mounting a dictionary attack.
+
+q1_10_s: |
+  **False**, it slows it down, but does not prevent it.
+
+q2_1: |
+  # Problem 2. Shorts (12 points)
+  (a) An eavesdropper sees a target log into a WPA2-PSK secured network and sees the
+  4-way handshake. The eavesdropper sees
+  - The network’s passphrase
+  - The access point’s ANonce
+  - The client’s SNonce
+
+  <hr class="s2" />
+  What else does she need to compute the pairwise transport key? (Write only the item(s) in your best answer; do not write a laundry list of tries as we will penalize that).
+
+q2_1_s: |
+  (No solution available)
+
+q2_2: |
+  (b) The Free Birdseed #1: Wile-E-Coyote of ACME Inc is seeding a cryptographic pRNG. He doesn’t know much about security, so he’s not sure what would be a good way to come up with a seed. Which of these, used alone, would be sufficiently secure? Circle zero or more options, and briefly explain why unselected options are unsuitable.
+  - The process ID of Mr Coyote’s application
+  - A cryptographic hash of the application binary
+  - Wind speeds across the Bay Bridge as reported by ACME weather app (It’s number four on the App Store, “but we’re really hoping to bump that up with our upcoming redesign,” according to the developer.)
+  - Precise timing (including microseconds) and coordinates taken from a minute of hectic flailing of the user’s mouse
+  - The sum of two numbers modulo a large fixed prime $p$, each generated from a source of randomness, knowing that one of these sources is actually broken, but the other works as expected
+
+q2_2_s: |
+  (No solution available)
+
+q2_3: |
+  (c) The Free Birdseed #2: Mr Coyote comes up with a more convoluted process instead. When his application starts up, it will:
+  - Instantiate a PRNG with the user ID as the seed
+  - Use the PRNG to establish an encrypted connection to BIG-SEED server which returns a large random string S
+  - Reseed the PRNG with S
+
+  <hr class="s2" />
+  Suppose the application uses Diffie-Hellman to establish a key for an encrypted connection using the PRNG, and an attacker can eavesdrop on the application’s communications over the network, but cannot tamper with them. Describe how the attacker can predict future random numbers generated by Mr Coyote’s application.
+
+q2_3_s: |
+  (No solution available)
+
+q3_1: |
+  # Problem 3. The No Such Agency's Attack Tools (24 points)
+  The No Such Agency maintains numerous network presences, including off-path, on- path, and full man-in-the-middle positions, and all these positions have the capability of creating arbitrary packets and sending them into the network. But overall the NSA prefers using the least powerful attack for the job at hand, so they will prefer an off-path attack over an on-path attack, and an on-path attack over a man-in-the-middle attack, as it is easier to be an on-path attacker and easier still as an off-path attacker.
+  <hr class="s2" />
+  For each attack scenario, which type of attack does the NSA select and why can’t the NSA use a less powerful attack? None could also be an option.
+  <hr class="s2" />
+  (a) The NSA can generate only a single query against a target DNS server they seek to cache poison, and they want to reliably cache poison the target.
+
+q3_1_s: |
+  The NSA has to use an on-path attack, because they need to see the DNS request to get the port/transaction info to generate a malicious reply.
+
+q3_2: |
+  (b) The NSA seeks to create a UDP request which appears to come from an arbitrary IP to the remote server. This request will compromise the remote server, and the NSA doesn’t need to see the reply.
+
+q3_2_s: |
+  An off-path attack, since they don’t need to see anything about the server.
+
+q3_3: |
+  (c) The NSA seeks to create a TCP connection which appears to be from an arbitrary IP to a remote server. This request will compromise the remote server, and the remote server uses the current time to generate the initial sequence number.
+
+q3_3_s: |
+  An off-path attack, since they can predict the initial sequence number.
+
+q3_4: |
+  (d) The NSA seeks to create a TCP connection which appears to be from an arbitrary IP to a remote server. This request will compromise the remote server, and the remote server uses a secure RNG to generate the initial sequence number.
+
+q3_4_s: |
+  An on-path attack, since the attacker can’t predict the initial sequence number.
+
+q3_5: |
+  (e) The NSA seeks to inject content into an existing active TCP connection between the victim and a web server. The NSA knows this victim is very paranoid and records raw traffic and requires that the victim be unable to determine that the NSA modified this traffic.
+
+q3_5_s: |
+  A full man-in-the-middle, as an on-path attacker can’t stop the legitimate reply from the server.
+
+q3_6: |
+  (f) The NSA seeks to inject content into a TLS web connection that uses RSA key exchange. The NSA has a copy of the server’s key. The NSA knows the victim is not recording raw traffic and so can’t detect additional replies from the server. The cryptography is otherwise secure.
+
+q3_6_s: |
+  An on-path attack, since that is sufficient to decrypt the TLS connection.
+
+q3_7: |
+  (g) The NSA seeks to inject content into a TLS web connection that uses DHE key exchange. The NSA has a copy of the server’s key. The NSA knows the victim is not recording raw traffic and so can’t detect additional replies from the server. The cryptography is otherwise secure.
+
+q3_7_s: |
+  A full man-in-the-middle, since an observer can’t deduce the key from DHE.
+
+q3_8: |
+  (h) The NSA seeks to inject content into a TLS web connection to Google, where the client is using Chrome. The NSA has a forged certificate for the server signed by a different Certificate Authority than the one Google uses.
+
+q3_8_s: |
+  None. Chrome doesn’t accept any CA, but only those specified as be- longing to Google.
+
+q4_1: |
+  # Problem 4. Applied Cryptography (15 points)
+  Mr Wile-E-Coyote needs to deploy a system to authenticate user passwords on a web server that does not use TLS to transmit the password from the user using an encrypted channel. He needs to develop alternate approaches where the web browser downloads JavaScript from the server to perform password calculations. In what follows, a passive attacker is an attacker that does not modify any of the traffic it sees.
+  <hr class="s2" />
+  (a) Mr Coyote’s first implementation has the javascript which the web browser down- loads from the server compute H(passwd) and send it to the server. Does this protocol prevent a passive observer from directly seeing the user’s password? Why?
+
+q4_1_s: |
+  Yes, its hashed.
+
+q4_2: |
+  (b) Does this protocol prevent a passive observer from logging in as the user? Why?
+
+q4_2_s: |
+  No. It effectively makes H(passwd) the actual password used to commuinacte with the server.
+
+q4_3: |
+  (c) Mr Coyote’s second implementation has the Javascript compute H(passwd) which is used as a seed for a pRNG. This pRNG then generates a private key that is used to encrypt a channel to the server. Does this protocol prevent a passive observer from logging in as the user? Why?
+
+q4_3_s: |
+  Yes. This creates a shared secret that requires knowing either passwd or h(passwd) which a passive observer can’t monitor.
+
+q4_4: |
+  (d) Is this implementation secure against a man-in-the-middle? Why or why not?
+
+q4_4_s: |
+  No. The adversary could replace the JavaScript with a version that steals the user’s password.
+
+q4_5: |
+  (e) Mr Coyote, tired of dealing with poor solutions, decides to switch his web server to TLS with a certificate purchased from SureSign. He is worried about other certificate authorities, notably Verislime. Does certificate pinning give Mr Coyote protection against an attacker who can compromise a different certificate authority?
+
+q4_5_s: |
+  Yes. Certificate pinning allows specifing a specific CA as responsible for a domain.
+
+q5_1: |
+  # Problem 5. TLS (12 points)
+  An attacker is trying to attack the company WoSlime and its users. Assume that users always visit WoSlime’s website with an HTTPS connection, using Diffie-Hellman and AES encryption. (You may assume that WoSlime does not use certificate pinning) For each of the following attack scenarios, circle all of the options that an attacker could achieve in that attack scenario.
+  <hr class="s2" />
+  (a) If the attacker obtains the private key of a certificate authority trusted by users of WoSlime, the attacker could:
+  - impersonate the WoSlime web server to a user
+  - discover some of the plaintext of data sent during a past connection between a user and WoSlime’s website
+  - discover all of the plaintext of data sent during a past connection between a user and WoSlime’s website
+  - replay data that a user previously sent to the WoSlime server over a prior HTTPS connection
+  - none of the above
+
+q5_1_s: |
+  (No solution available)
+
+q5_2: |
+  (b) If the attacker obtains a copy of WoSlime’s certificate, the attacker could:
+  - impersonate the WoSlime web server to a user
+  - discover some of the plaintext of data sent during a past connection between a user and WoSlime’s website
+  - discover all of the plaintext of data sent during a past connection between a user and WoSlime’s website
+  - replay data that a user previously sent to the WoSlime server over a prior HTTPS connection
+  - none of the above
+
+q5_2_s: |
+  (No solution available)
+
+q5_3: |
+  (c) If the attacker is a man in the middle on a HTTPS connection between a user and WoSlime’s website, the attacker could:
+  - impersonate the WoSlime web server to this user
+  - discover some of the plaintext of data sent during this connection
+  - discover all of the plaintext of data sent during this connection
+  - discover the amount of plaintext data sent during this connection
+  - discover all of the plaintext of data sent during a past connection between a user and WoSlime’s website
+  - replay data that a user previously sent to the WoSlime server over a prior HTTPS connection
+  - none of the above
+
+q5_3_s: |
+  (No solution available)
+
+q5_4: |
+  (d) Suppose the attacker obtains the private key that was used by WoSlime’s server during a past connection between a victim and WoSlime’s server, but not the current private key. Also, assume that the certificate corresponding to the old private key has been revoked and is no longer valid. This attacker could:
+  - impersonate the WoSlime web server to this user
+  - discover all of the plaintext of data sent during a current connection (one where the current private key is used) between a user and WoSlime’s website
+  - discover all of the plaintext of data sent during a past connection (one where the old private key was used) between a user and WoSlime’s website
+  - none of the above
+
+q5_4_s: |
+  (No solution available)
+
+q6_1: |
+  # Problem 6. DNS (16 points)
+  A lookup for `www.berkeley.edu` on a DNS resolver with an empty cache begins by query- ing the root, then an `.edu` authority server, and then a `berkeley.edu` authority server.
+  (a) The lookup at the root indicates that the NS records for `.edu` are `a.gtld-servers.net` and `b.gtld-servers.info` and provides IPs for both systems. Which part of the response contains the IP addresses?
+
+q6_1_s: |
+  The Additional records
+
+q6_2: |
+  (b) Can a nameserver safely cache the result for `b.gtld-servers.info`? Why?
+
+q6_2_s: |
+  (No solution available)
+
+q6_3: |
+  (c) The lookup at the root indicates that the NS records for `.edu` are `a.gtld-servers.edu` and `b.gtld-servers.info` and provides IPs for both systems. Which part of the response contains the IP addresses?
+
+q6_3_s: |
+  Yes. It is in-bailywick (aka root is authoritative for) `.info`
+
+q6_4: |
+  (d) The `.edu` DNS server says that `adns1.berkeley.edu` and `sns-pb.isc.org` are the nameservers for `.berkeley.edu` and provides the IP for both. If the resolver wishes to cache the IP addresses, which IPs can it cache?
+
+q6_4_s: |
+  Only the IP for `adns1.berkeley.edu`, since `sns-pb.isc.org` is not in bailywick
+
+q6_5: |
+  (e) As a reminder, the transaction ID is $16$ bits, the UDP source port is $16$ bits, and the UDP destination port is $16$ bits. If the resolver fully randomizes the ports in a request to the maximum extent possible, how many bits of entropy would an off-path attacker have to guess?
+
+q6_5_s: |
+  $32$ bits, since you can’t randomize the destination port. (Slightly less also acceptable)
+
+q6_6: |
+  (f) If the resolver randomly capitalizes the request (e.g. `wwW.BerKeLEy.eDU`), what is the minimum additional entropy added to requests for berkeley domains?
+
+q6_6_s: |
+  $11$ bits, since you can’t randomly capitalize a name like `1.berkeley.edu` etc...
+
+q7_1: |
+  # Problem 7. A simpler “TLS” for secure Messaging (11 points)
+  Consider that Alice and Bob want to communicate securely, but there is an *on-path* attacker who aims to modify or read their conversations. They each have a public-key pair $(PK_A, SK_A)$ for Alice and $(PK_B, SK_B)$ for Bob. Unfortunately, Alice does not know Bob’s public key, Bob does not know Alice’s public key, there is no certificate authority here and none of them have any certificate on their keys.
+  <hr class="s2" />
+  Fortunately, when Alice and Bob setup the channel for communication, the attacker was not ready to mount an active attack and he/she can only observe the packets between the two. Namely, the attacker is an eavesdropper, but not a man-in-the-middle attacker. After the setup phase, the attacker starts figuring out how to modify the traffic sent between the two of them, and acts as a full man-in-the-middle attacker.
+  <hr class="s2" />
+  How can Alice and Bob communicate securely? Answer the questions below by simply presenting each message sent between Alice and Bob with no explanation. Use the notation `Enc()` for encryption (either symmetric or asymmetric), `Sign()` for signing, `Verify()` for verifying, and `MAC()` for mac-ing (but you don’t have to use all these algorithms). For each of these algorithms specify concretely the key to be used and the plaintext on which to use it.
+  <hr class="s2" />
+  (a) What messages do they send each other in the setup phase?
+
+q7_1_s: |
+  Alice sends a message to Bob saying “please give me your PK”. She receives $PK_B$ untampered by the attacker who is passive during the setup phase. Alice then chooses symmetric keys $k_1$ and $k_2$ and sends $Enc(PK_B,k_1)$ and $Enc(PK_B,k_2)$. Bob obtains $k_1$ and $k_2$.
+
+q7_2: |
+  (b) If Alice wants to send message $m$ to Bob, after the setup phase, write down what she is sending here. Make sure that your solution prevents against replay attacks, namely, the attacker cannot send an old message to Bob instead of a new message and convince him it is a new message. You only need to worry about the messages sent from Alice to Bob here.
+
+q7_2_s: |
+  Set $counter = 0$. For every message send, $C = Enc(k_1, m||counter\text{++}), T = MAC(k_2,C)$, where $||$ is concatenation. Send $(C,T)$.
