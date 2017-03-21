@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { handleEvent } from '../src/utils';
-import { courseIDToLabel, courses } from './exams';
-import { map } from 'lodash';
+import { courseIDToLabel, courseIsFeatured, courses } from './exams';
+import { keys, identity, map, sortBy } from 'lodash';
 
 class Courses extends Component {
   constructor(props) {
@@ -9,12 +9,14 @@ class Courses extends Component {
   }
 
   render() {
-    const courseBoxes = map(courses, (desc, course) => {
+    const sortedCourses = sortBy(keys(courses), [(course) => !courseIsFeatured[course], identity]);
+    const courseBoxes = map(sortedCourses, (course) => {
       return (
         <a key={course} className="course-card" href={`/${course}`} onClick={() => handleEvent('Click', 'Course', course)}>
           <h1>{courseIDToLabel[course]}</h1>
           <hr className="s1" />
-          <i className="course-subtitle">{desc}</i>
+          <i className="course-subtitle">{courses[course]}</i>
+          {(courseIsFeatured[course]) ?  (<span><hr className="s2" /><span className="featured-tag">Featured</span></span>) : null}
           <h6 className="card-helper">CLICK TO VIEW &#8594;</h6>
         </a>
       );
@@ -38,14 +40,6 @@ class Courses extends Component {
           <div className="card-container center">
             <hr className="margin" />
             <div className="course-list">
-              <a className="course-card">
-                <h1>CS 101</h1>
-                <hr className="s1" />
-                <i className="course-subtitle">The Most Featured Course Ever</i>
-                <hr className="s2" />
-                <span className="featured-tag">Featured</span>
-                <h6 className="card-helper">CLICK TO VIEW &#8594;</h6>
-              </a>
               {courseBoxes}
             </div>
             <hr className="margin" />
