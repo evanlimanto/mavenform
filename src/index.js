@@ -68,7 +68,6 @@ window.addEventListener('scroll', function(e) {
 });
 
 var userOnPageTracker = null;
-var userOnPageTrackerStart = 0;
 const activeTrackingInterval = 5 * 1000;
 function trackUserOnPage() {
   if (debug || window.location.hostname !== "localhost") {
@@ -83,7 +82,6 @@ function trackUserOnPage() {
 
 window.addEventListener('focus', function(e) {
   if (debug || window.location.hostname !== "localhost") {
-    userOnPageTrackerStart = Date.now();
     if (userOnPageTracker !== null) {
       window.clearInterval(userOnPageTracker);
     }
@@ -101,7 +99,6 @@ window.addEventListener('blur', function(e) {
 
 $(document).ready(function() {
   if (debug || window.location.hostname !== "localhost") {
-    userOnPageTrackerStart = Date.now();
     trackUserOnPage();
     userOnPageTracker = window.setInterval(trackUserOnPage, activeTrackingInterval);
   }
