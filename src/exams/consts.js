@@ -357,9 +357,9 @@ const courses = {
 const courseIsFeatured = {
   'cs170': false,
   'ee16a': false,
-  'cs162': true,
-  'ee16b': true,
-  'cs61b': true,
+  'cs162': false,
+  'ee16b': false,
+  'cs61b': false,
   'cs161': true,
   'cs189': false,
   'cs61a': false,
