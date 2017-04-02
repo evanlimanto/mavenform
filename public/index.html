@@ -73,9 +73,11 @@ mixpanel.init("d9dbfd1988e5250bea11879c6a783054");</script>
   </script>
   <script>
   $(document).ready(function() {
-    $('#search').hideseek({
-      nodata: 'No results found'
-    });
+    if ($('#search').length) {
+      $('#search').hideseek({
+        nodata: 'No results found'
+      });
+    }
   });
   </script>
 </body>

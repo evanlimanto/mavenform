@@ -6,7 +6,7 @@ import Navbar from './navbar';
 import NavSidebar from './navsidebar';
 import NotFound from './notfound';
 import { MultipleChoiceQuestion, Question } from './question';
-import Root from './root';
+import Routes from './routes';
 import Sidebar from './sidebar';
 
 export { 
@@ -18,7 +18,7 @@ export {
 	NavSidebar,
 	NotFound,
 	MultipleChoiceQuestion,
-	Root,
+	Routes,
 	Question,
 	Sidebar
 };

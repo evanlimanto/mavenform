@@ -351,7 +351,6 @@ const courses = {
   'cs186': 'Introduction to Database Systems',
   'ugba10': 'Principles of Business',
   'cs61c': 'Great Ideas in Computer Architecture (Machine Structures)',
-  // 'chem1a': 'General Chemistry',
 };
 
 const courseIsFeatured = {
@@ -360,7 +359,7 @@ const courseIsFeatured = {
   'cs162': false,
   'ee16b': false,
   'cs61b': false,
-  'cs161': true,
+  'cs161': false,
   'cs189': false,
   'cs61a': false,
   'cs188': false,
@@ -414,7 +413,6 @@ const courseIDToLabel = {
   'cs188': 'CS 188',
   'cs189': 'CS 189',
   'ugba10': 'UGBA 10',
-  // 'chem1a': 'Chem 1A',
 };
 
 export { exams, courses, examTypeToLabel, courseIDToLabel, courseIsFeatured, termToLabel };

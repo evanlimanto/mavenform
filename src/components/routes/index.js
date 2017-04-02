@@ -1,3 +1,3 @@
-import Root from './Root';
+import Routes from './Routes';
 
-export default Root;
+export default Routes;

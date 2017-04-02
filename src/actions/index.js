@@ -10,3 +10,9 @@ export const updateExamContent = (examContent) => {
 		examContent: examContent,
 	}
 };
+
+export const closeNotificationBar = () => {
+	return {
+		type: 'CLOSE_NOTIFICATION_BAR'
+	}
+};

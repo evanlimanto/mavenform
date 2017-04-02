@@ -5,7 +5,10 @@ import { has, map } from 'lodash';
 import { toggleAppMode } from '../../actions';
 import { exams, examTypeToLabel, courseIDToLabel, courses } from '../../exams';
 import { handleEvent } from '../../utils';
-import { Navbar, NavSidebar, NotFound } from '../';
+
+import Navbar from '../navbar';
+import NavSidebar from '../navsidebar';
+import NotFound from '../notfound';
 
 const CourseComponent = ({ courseid, appMode, onToggleAppMode }) => {
   if (!has(exams, courseid)) {
@@ -44,19 +47,19 @@ const CourseComponent = ({ courseid, appMode, onToggleAppMode }) => {
     });
   });
   const navComponents = (appMode) ? (
-    <div className="tooltip-container app-mode" onClick={() => onToggleAppMode()}>
-      <a className="material-icons">dashboard</a>
-      <span className="tooltip">App Mode</span>
-    </div>
-  ) : (
     <span>
-      <Navbar isExam={false} toggleAppModeCallback={onToggleAppMode} />
+      <Navbar isExam={false} onToggleAppMode={onToggleAppMode} couseid={courseid} />
       <NavSidebar course={courseid} isExam={false} />
       <div className="sidebar">
         <h6>INFO</h6>
         <i>{desc}</i>
       </div>
     </span>
+  ) : (
+    <div className="tooltip-container app-mode" onClick={() => onToggleAppMode()}>
+      <a className="material-icons">dashboard</a>
+      <span className="tooltip">App Mode</span>
+    </div>
   );
 
   return (
@@ -95,8 +98,8 @@ const CourseComponent = ({ courseid, appMode, onToggleAppMode }) => {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    courseid: ownProps.params.courseid,
-    appMode: true,
+    courseid: ownProps.match.params.courseid,
+    appMode: state.config.appMode,
   }
 };
 

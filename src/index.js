@@ -1,37 +1,62 @@
 import React from 'react';
-import { createStore, combineReducers } from 'redux';
-import { reduxReactRouter, routerStateReducer, ReduxRouter } from 'redux-router';
-
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
+import { Router } from 'react-router';
 import { Provider } from 'react-redux';
-import { devTools } from 'redux-devtools';
-import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
-import createHistory from 'history/lib/createBrowserHistory';
+import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
 
-import rootReducer from './reducers';
-import { Root } from './components';
+import { createDevTools } from 'redux-devtools';
+import LogMonitor from 'redux-devtools-log-monitor';
+import DockMonitor from 'redux-devtools-dock-monitor';
 
-const reducer = combineReducers({
-	router: routerStateReducer,
-	app: rootReducer,
-});
+import * as appReducers from './reducers';
+import { Routes } from './components';
 
-const store = compose(
-  reduxReactRouter({ createHistory }),
-  devTools()
-)(createStore)(reducer);
-
-const RootComponent = (
-  <Provider store={store}>
-    <ReduxRouter routes={routes} />
-  </Provider>
+const DevTools = createDevTools(
+  <LogMonitor theme='tomorrow' />
 );
 
-render((
-  <div>
-    {RootComponent}
-    <DebugPanel top right bottom>
-      <DevTools store={store} monitor={LogMonitor} />
-    </DebugPanel>
-  </div>
+const store = createStore(
+  combineReducers({
+    ...appReducers,
+    routing: routerReducer,
+  }),
+  DevTools.instrument()
+);
+const history = syncHistoryWithStore(createHistory(), store);
+
+const ReactGA = require('react-ga').initialize('UA-20131732-5');
+
+function logPageView() {
+  const debug = false;
+  if (debug || window.location.hostname !== "localhost") {
+    const path = window.location.pathname;
+    ReactGA.set({ path });
+    ReactGA.pageview(path);
+  }
+}
+
+function showDevTools(store) {
+  const popup = window.open(null, 'Redux DevTools', 'menubar=no,location=no,resizable=yes,scrollbars=no,status=no');
+  // Reload in case it already exists
+  popup.location.reload();
+
+  setTimeout(() => {
+    popup.document.write('<div id="react-devtools-root"></div>');
+    ReactDOM.render(
+      <DevTools store={store} />,
+      popup.document.getElementById('react-devtools-root')
+    );
+  }, 10);
+}
+
+ReactDOM.render((
+  <Provider store={store}>
+    <Router history={history}>
+      {Routes}
+    </Router>
+  </Provider>
 ), document.getElementById('root'));
+
+showDevTools(store);

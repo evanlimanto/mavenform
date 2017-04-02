@@ -3,9 +3,12 @@ import { connect } from 'react-redux';
 import { has } from 'lodash';
 
 import ExamContent from './ExamContent';
+import Navbar from '../navbar';
+import NavSidebar from '../navsidebar';
+import NotFound from '../notfound';
+
 import { toggleAppMode } from '../../actions';
 import { exams } from '../../exams';
-import { Navbar, NavSidebar, NotFound } from '../';
 import { handleEvent } from '../../utils';
 
 import './Exam.css';
@@ -26,12 +29,12 @@ function setAppMode() {
   wrapper.parentNode.removeChild(wrapper);
 }
 
-const ExamComponent = ({ appMode, courseid, examtype, examid, toggleAppMode }) => {
-  if (appMode) {
-    setAppMode();
-  } else {
-    setReaderMode();
-  }
+const ExamComponent = ({ appMode, courseid, examtype, examid, onToggleAppMode }) => {
+  // if (appMode) {
+  //   setAppMode();
+  // } else {
+  //   setReaderMode();
+  // }
 
   try {
     exams[courseid][examtype][examid];
@@ -41,11 +44,11 @@ const ExamComponent = ({ appMode, courseid, examtype, examid, toggleAppMode }) =
 
   const navComponents = (appMode) ? (
     <span>
-      <Navbar isExam={true} toggleAppModeCallback={toggleAppMode} />
+      <Navbar isExam={true} onToggleAppMode={onToggleAppMode} />
       <NavSidebar isExam={true} />
     </span>
   ) : (
-    <div className="tooltip-container app-mode" onClick={() => toggleAppMode()}>
+    <div className="tooltip-container app-mode" onClick={() => onToggleAppMode()}>
       <a className="material-icons">dashboard</a>
       <span className="tooltip">App Mode</span>
     </div>
@@ -65,15 +68,15 @@ ExamComponent.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    courseid: ownProps.params.courseid,
-    examtype: ownProps.params.examtype,
-    examid: ownProps.params.examid,
+    courseid: ownProps.match.params.courseid,
+    examtype: ownProps.match.params.examtype,
+    examid: ownProps.match.params.examid,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    toggleAppMode: () => {
+    onToggleAppMode: () => {
       dispatch(toggleAppMode());
       handleEvent('Click', 'Toggle Reader Mode');
     }

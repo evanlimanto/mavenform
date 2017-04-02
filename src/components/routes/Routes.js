@@ -1,23 +1,17 @@
-import React, { PropTypes } from 'react';
-import { browserHistory, Router, Route } from 'react-router';
+import React from 'react';
+import { Route, Switch } from 'react-router';
+import { Router } from 'react-router-dom';
 import { forEach } from 'lodash';
 
-import { Course, Courses, Exam, Home, NotFound } from '../';
+import Course from '../course';
+import Courses from '../courses';
+import Exam from '../exam';
+import Home from '../home';
+import NotFound from '../notfound';
 import { handleEvent } from '../../utils';
 
 const debug = process.env.NODE_ENV === "development";
 const $ = require('jquery');
-
-let ReactGA = require('react-ga');
-ReactGA.initialize('UA-20131732-5');
-
-function logPageView() {
-  if (debug || window.location.hostname !== "localhost") {
-    const path = window.location.pathname;
-    ReactGA.set({ path });
-    ReactGA.pageview(path);
-  }
-}
 
 function createEventTracker(name) {
   window.addEventListener(name, function(e) {
@@ -71,13 +65,13 @@ $(document).ready(function() {
 });
 
 const Routes = (
-  <Router history={browserHistory} onUpdate={logPageView}>
-    <Route path="/" component={Home} />
-    <Route path="/courses" component={Courses} />
-    <Route path="/:courseid" component={Course} />
+  <Switch>
+    <Route exact path="/" component={Home} />
+    <Route exact path="/courses" component={Courses} />
     <Route path="/:courseid/:examtype/:examid" component={Exam} />
-    <Route path="*" component={NotFound} />
-  </Router>
+    <Route path="/:courseid" component={Course} />
+    <Route component={NotFound} />
+  </Switch>
 );
 
 export default Routes;
