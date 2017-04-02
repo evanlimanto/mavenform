@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { handleEvent } from '../src/utils';
-import { courseIDToLabel, courses } from './exams';
 import { map } from 'lodash';
+
+import { handleEvent } from '../../utils';
+import { courseIDToLabel, courses } from '../../exams';
 
 const Scroll = require('react-scroll');
 const Element = Scroll.Element;

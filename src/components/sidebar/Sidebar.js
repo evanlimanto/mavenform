@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { handleEvent } from '../../utils';
 import { map, range, replace } from 'lodash';
+
+import { handleEvent } from '../../utils';
 
 const Scroll = require('react-scroll');
 var Link = Scroll.Link;

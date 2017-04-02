@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import { has, map } from 'lodash';
+
 import { handleEvent } from '../../utils';
 import { exams, examTypeToLabel, courseIDToLabel } from '../../exams';
-import { has, map } from 'lodash';
 
 class NavSidebar extends Component {
   render() {

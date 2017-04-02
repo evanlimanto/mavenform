@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { handleEvent } from '../src/utils';
-import { courseIDToLabel, courseIsFeatured, courses } from './exams';
 import { keys, identity, map, sortBy } from 'lodash';
+
+import { handleEvent } from '../../utils';
+import { courseIDToLabel, courseIsFeatured, courses } from '../../exams';
 
 class Courses extends Component {
   constructor(props) {
@@ -49,5 +50,7 @@ class Courses extends Component {
     );
   }
 }
+
+
 
 export default Courses;

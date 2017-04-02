@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { handleEvent } from '../../utils';
-import { has, lowerCase, map } from 'lodash';
-import Expire from './Expire';
 import classnames from 'classnames';
 import copy from 'copy-to-clipboard';
+import { has, lowerCase, map } from 'lodash';
+
+import { handleEvent } from '../../utils';
+import Expire from './Expire';
 
 class Solution extends Component {
   constructor(props) {
