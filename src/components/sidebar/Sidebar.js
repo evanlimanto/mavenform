@@ -70,7 +70,7 @@ const mapStateToProps = (state, ownProps) => {
     courseid: ownProps.courseid, 
     examType: ownProps.examType,
     hasSolutions: ownProps.hasSolutions,
-    examid: ownProps.hasSolutions,
+    examid: ownProps.examid,
     problemIDs: ownProps.problemIDs,
   };
 };

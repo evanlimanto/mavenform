@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { has, keys, range, replace, map, values} from 'lodash';
+import { has, endsWith, keys, range, replace, map, reduce, values} from 'lodash';
 
 import MDRenderer from './MDRenderer';
 import { Question } from '../question';
@@ -41,13 +41,16 @@ class ExamContentComponent extends Component {
       return null;
     }
 
-    const { examContent, courseid, examtype, examid, appMode, showSolutions } = this.props;
+    const { examContent, courseid, examtype, examid, appMode } = this.props;
     const examCode = `${examContent.course}${examContent.ref}`;
     const problemIDs = keys(examContent.parts);
     const problemTitles = values(examContent.questions);
-    const { course, prof, type, term, md, mcq, num, pre, has_solutions } = examContent;
+    const { course, prof, type, term, md, mcq, num, pre } = examContent;
+    const hasSolutions = reduce(examContent, function(result, value, key) {
+      return result || endsWith(key, "_s");
+    }, false);
 
-    var content = map(examContent.parts, (num_parts, part) => {
+    const content = map(examContent.parts, (num_parts, part) => {
       const subparts = map(range(1, num_parts + 1), subpart => {
         const key = `${part}_${subpart}`;
         if (!has(examContent, key)) {
@@ -56,12 +59,10 @@ class ExamContentComponent extends Component {
         }
         var qcontent = examContent[key] || '';
         var solution = examContent[key + "_s"] || '';
-        if (md) {
-          // TODO: Remove md from .yml files
-          qcontent = preprocess(qcontent);
-          solution = preprocess(solution);
-        }
-        return <Question id={`${part}_${subpart}`} course={course} content={qcontent} solution={solution} term={term} examType={type} key={key} appMode={appMode} showSolutions={showSolutions} />
+        // TODO: Remove md from .yml files
+        qcontent = preprocess(qcontent);
+        solution = preprocess(solution);
+        return <Question id={`${part}_${subpart}`} courseid={courseid} content={qcontent} solution={solution} term={term} examType={type} key={key} appMode={appMode} />
       });
 
       return <Element name={part} key={part} className="element">{subparts}</Element>;
@@ -77,19 +78,12 @@ class ExamContentComponent extends Component {
       </div>
     );
 
-    return (has_solutions) ? (
+    return (
       <div className="content">
         {examDesc}
         {content}
+        {(appMode) ? <Sidebar problemIDs={problemIDs} term={term} courseid={courseid} examType={type} hasSolutions={hasSolutions} examid={examid} /> : null}
       </div>
-    ) : (
-      <span className="reader">
-        <div className="content">
-          {examDesc}
-          {content}
-          {(appMode) ? <Sidebar /> : null}
-        </div>
-      </span>
     );
   }
 }

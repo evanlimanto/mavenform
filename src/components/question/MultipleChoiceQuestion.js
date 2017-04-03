@@ -1,0 +1,84 @@
+import React, { Component } from 'react';
+import copy from 'copy-to-clipboard';
+import classnames from 'classnames';
+import { lowerCase, map } from 'lodash';
+
+import Expire from './Expire';
+import Solution from './Solution';
+import { handleEvent } from '../../utils';
+
+class MultipleChoiceQuestion extends Component {
+  constructor(props) {
+    super(props);
+    this.copyToClipboard = this.copyToClipboard.bind(this);
+    this.clearCopied = this.clearCopied.bind(this);
+
+    this.state = {
+      copied: false
+    }
+  }
+
+  copyToClipboard(url) {
+    const course = this.props.course;
+    const examType = this.props.examType;
+    const term = this.props.term;
+    const examCode = lowerCase(`${course}/${examType}-${term}`);
+    copy(url);
+    handleEvent("Click", "Copy Question", examCode);
+
+    this.setState({
+      copied: true
+    });
+  }
+
+  clearCopied() {
+    this.setState({
+      copied: false
+    });
+  }
+
+  render() {
+    const course = this.props.course;
+    const content = this.props.content;
+    const examType = this.props.examType;
+    const term = this.props.term;
+    const solutionNum = (this.props.solutionNum) ? (this.props.solutionNum - 1) : null;
+    const choices = this.props.choices;
+    const examCode = lowerCase(`${examType}${term}${course}`);
+    const options = map(choices, (choice, index) => {
+      choice = `${String.fromCharCode(index + 65)}) ${choice}`;
+      const optionClass = classnames({
+        option: true,
+        right: (index === solutionNum),
+      });
+      return <div key={index} tabIndex="0" className={optionClass} dangerouslySetInnerHTML={{__html: choice}} onClick={handleEvent("Click", "Multiple Choice", examCode)}></div>;
+    });
+
+    const solution = (solutionNum >= 0) ? `${String.fromCharCode(solutionNum + 65)}) ${choices[solutionNum]}` : "Solution unavailable. Sorry!";
+    const SolutionComponent = (
+      <Solution solution={solution} examCode={examCode} showSolutions={this.props.showSolutions} />
+    );
+
+    return (
+      <div id={this.props.id} className="question mc-question">
+        <div className="tooltip-container">
+          <a className="link material-icons" onClick={() => this.copyToClipboard(`${document.location.origin}/${course}/${examType}/${term}#${this.props.id}`)}>link</a>
+            {(this.state.copied) ?
+              (<span className="tooltip-link blue">
+                <Expire
+                 delay={2000}
+                 callback={this.clearCopied}
+                >Link Copied!</Expire>
+               </span>) : (<span className="tooltip-link">Copy Link</span>)
+            }
+        </div>
+        <div dangerouslySetInnerHTML={{__html: content}}></div>
+        <hr className="s1" />
+        {options}
+        {SolutionComponent}
+      </div>
+    );
+  }
+}
+
+export default MultipleChoiceQuestion;

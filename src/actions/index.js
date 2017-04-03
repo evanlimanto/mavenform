@@ -16,3 +16,10 @@ export const closeNotificationBar = () => {
 		type: 'CLOSE_NOTIFICATION_BAR'
 	}
 };
+
+export const setQuestionCopied = (copying) => {
+	return {
+		type: 'SET_QUESTION_COPIED',
+		copying: copying,
+	}
+};

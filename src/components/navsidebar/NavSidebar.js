@@ -41,6 +41,7 @@ const NavSidebarComponent = ({ courseid, examid, thisExamType, isExam }) => {
       </span>
     );
   });
+
   const sidetabClass = classnames({
     sidetab: true,
     active: !isExam,

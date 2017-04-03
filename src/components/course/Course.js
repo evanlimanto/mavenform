@@ -49,7 +49,7 @@ const CourseComponent = ({ courseid, appMode, onToggleAppMode }) => {
   const navComponents = (appMode) ? (
     <span>
       <Navbar isExam={false} onToggleAppMode={onToggleAppMode} couseid={courseid} />
-      <NavSidebar course={courseid} isExam={false} />
+      <NavSidebar courseid={courseid} isExam={false} />
       <div className="sidebar">
         <h6>INFO</h6>
         <i>{desc}</i>

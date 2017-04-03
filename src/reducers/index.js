@@ -23,6 +23,17 @@ export const home = (state = { notificationBar: true }, action) => {
   }
 };
 
+export const question = (state = { copying: false }, action) => {
+  switch (action.type) {
+    case 'SET_QUESTION_COPIED':
+      return {
+        copying: action.copying,
+      };
+    default:
+      return state;
+  }
+};
+
 export const config = (state = { appMode: true }, action) => {
   switch (action.type) {
     case 'TOGGLE_APP_MODE':
