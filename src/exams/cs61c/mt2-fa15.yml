@@ -257,7 +257,7 @@ q4_4_s: |
 q5_1: |
   # Q5: Don’t Let Your Mind Float Away Now (10 points)
   Consider the following 16-bit representation for floating point numbers:
-  ![bits](/img/cs61c/mt2-fa15-q5-1.png);
+  ![bits](/img/cs61c/mt2-fa15-q5-1.png)
   Bits per field:
   - Sign: 1
   - Exponent: 6

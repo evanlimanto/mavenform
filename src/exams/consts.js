@@ -37,6 +37,19 @@ const exams = {
     }
   },
 
+  'cs70': {
+    'mt2': {
+      'sp16': {
+        'term': 'Spring 2016',
+        'profs': 'Walrand, Rao',
+      },
+      'fa15': {
+        'term': 'Fall 2015',
+        'profs': 'Walrand, Rao',
+      }
+    }
+  },
+
   'cs161': {
     'mt2': {
       'fa16': {
@@ -353,6 +366,7 @@ const exams = {
 
 const courses = {
   'cs170': 'Efficient Algorithms and Intractable Problems',
+  'cs70': 'Discrete Mathematics and Probability Theory',
   'ee16a': 'Designing Information Devices and Systems I',
   'cs162': 'Operating Systems and Systems Programming',
   'ee16b': 'Designing Information Devices and Systems II',
@@ -365,11 +379,11 @@ const courses = {
   'cs186': 'Introduction to Database Systems',
   'ugba10': 'Principles of Business',
   'cs61c': 'Great Ideas in Computer Architecture (Machine Structures)',
-  // 'chem1a': 'General Chemistry',
 };
 
 const courseIsFeatured = {
   'cs170': false,
+  'cs70': true,
   'ee16a': false,
   'cs162': false,
   'ee16b': false,
@@ -416,6 +430,7 @@ const termToLabel = {
 
 const courseIDToLabel = {
   'data8': 'Data 8',
+  'cs70': 'CS 70',
   'cs186': 'CS 186',
   'ee16a': 'EE 16A',
   'ee16b': 'EE 16B',
@@ -428,7 +443,6 @@ const courseIDToLabel = {
   'cs188': 'CS 188',
   'cs189': 'CS 189',
   'ugba10': 'UGBA 10',
-  // 'chem1a': 'Chem 1A',
 };
 
 export { exams, courses, examTypeToLabel, courseIDToLabel, courseIsFeatured, termToLabel };
