@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
-import { Router } from 'react-router-dom';
 import { forEach } from 'lodash';
 
 import Course from '../course';
@@ -8,7 +7,7 @@ import Courses from '../courses';
 import Exam from '../exam';
 import Home from '../home';
 import NotFound from '../notfound';
-import { handleEvent } from '../../utils';
+import { actionTakenEvent, activeUserEvent } from '../../events';
 
 const debug = process.env.NODE_ENV === "development";
 const $ = require('jquery');
@@ -16,9 +15,8 @@ const $ = require('jquery');
 function createEventTracker(name) {
   window.addEventListener(name, function(e) {
     if (debug || window.location.hostname !== "localhost") {
-      const path = window.location.pathname;
       if (!debug) {
-        handleEvent(name, path);
+        actionTakenEvent(name);
       }
     }
   });
@@ -31,11 +29,8 @@ let userOnPageTracker = null;
 const activeTrackingInterval = 5 * 1000;
 function trackUserOnPage() {
   if (debug || window.location.hostname !== "localhost") {
-    const path = window.location.pathname;
     if (!debug) {
-      handleEvent('Active', path);
-    } else {
-      console.log("Tracking - Active User.");
+       activeUserEvent();
     }
   }
 }

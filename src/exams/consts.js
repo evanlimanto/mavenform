@@ -269,6 +269,20 @@ const exams = {
   },
 
   'cs61c': {
+    'mt2': {
+      'fa15': {
+        'term': 'Fall 2015',
+        'profs': 'Stojanovic, Wawrzynek'
+      },
+      'su15': {
+        'term': 'Summer 2015',
+        'profs': 'Karandikar',
+      },
+      'sp15': {
+        'term': 'Spring 2015',
+        'profs': 'Asanovic, Stojanovic',
+      }
+    },
     'mt1': {
       'fa16': {
         'term': 'Fall 2016',
@@ -294,7 +308,7 @@ const exams = {
         'term': 'Spring 2014',
         'profs': 'Garcia',
       },
-    }
+    },
   },
 
   'cs162': {

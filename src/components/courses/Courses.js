@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { keys, identity, map, sortBy } from 'lodash';
 
-import { handleEvent } from '../../utils';
+import { courseClickEvent } from '../../events';
 import { courseIDToLabel, courseIsFeatured, courses } from '../../exams';
 
 const Courses = () => {
-  const sortedCourses = sortBy(keys(courses), [(course) => !courseIsFeatured[course], identity]);
-  const courseBoxes = map(sortedCourses, (course) => {
+  const sortedCourses = sortBy(keys(courses), [(courseid) => !courseIsFeatured[courseid], identity]);
+  const courseBoxes = map(sortedCourses, (courseid) => {
     return (
-      <a key={course} className="course-card" href={`/${course}`} onClick={() => handleEvent('Click', 'Course', course)}>
-        <h1>{courseIDToLabel[course]}</h1>
+      <a key={courseid} className="course-card" href={`/${courseid}`} onClick={() => courseClickEvent(courseid)}>
+        <h1>{courseIDToLabel[courseid]}</h1>
         <hr className="s1" />
-        <i className="course-subtitle">{courses[course]}</i>
-        {(courseIsFeatured[course]) ?  (<span><hr className="s2" /><span className="featured-tag">Featured</span></span>) : null}
+        <i className="course-subtitle">{courses[courseid]}</i>
+        {(courseIsFeatured[courseid]) ?  (<span><hr className="s2" /><span className="featured-tag">Featured</span></span>) : null}
         <h6 className="card-helper">CLICK TO VIEW &#8594;</h6>
       </a>
     );

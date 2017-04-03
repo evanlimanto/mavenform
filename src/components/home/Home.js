@@ -1,27 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { map, slice } from 'lodash';
 
 import { closeNotificationBar } from '../../actions';
-import { handleEvent } from '../../utils';
-import { courseIDToLabel, courses } from '../../exams';
+import { learnMoreEvent, viewCoursesEvent } from '../../events';
 
 const Scroll = require('react-scroll');
 const Element = Scroll.Element;
 var Link = Scroll.Link;
 
 const HomeComponent = ({ notificationBar, onCloseNotificationBar }) => {
-  const courseBoxes = map(slice(courses, 0, 6), (desc, course) => {
-    return (
-      <a key={course} className="course-card" href={`/${course}`} onClick={() => handleEvent('Click', 'Course', course)}>
-        <h1>{courseIDToLabel[course]}</h1>
-        <hr className="s1" />
-        <i className="course-subtitle">{desc}</i>
-        <h6 className="card-helper">CLICK TO VIEW &#8594;</h6>
-      </a>
-    );
-  });
-
   return (
     <div className="home">
       {(notificationBar) ? (
@@ -39,18 +26,19 @@ const HomeComponent = ({ notificationBar, onCloseNotificationBar }) => {
           <hr className="s2" />
           <h5 className="h5-alt">A new and intuitive format to view and study past exams</h5>
           <div className="home-button-container">
-            <a className="home-button" href="/courses">View Courses</a>
+            <a className="home-button" href="/courses" onClick={viewCoursesEvent()}>View Courses</a>
             <Link
              className="home-button home-button-alt"
              to="features"
              isDynamic={true}
              smooth={true}
              duration={500}
+             onClick={learnMoreEvent()}
             >
              Learn More
             </Link>
           </div>
-          <img className="banner-screen" src="/img/screen.png"/> 
+          <img className="banner-screen" src="/img/screen.png" alt="banner" /> 
         </div>
       </div>
       <Element name="features" className="card-container-container">

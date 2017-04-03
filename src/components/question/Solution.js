@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { has } from 'lodash';
 
-import { handleEvent } from '../../utils';
+import { toggleSolutionEvent } from '../../events';
 
 class Solution extends Component {
   constructor(props) {
@@ -15,15 +14,13 @@ class Solution extends Component {
   }
 
   toggleSolution() {
-    handleEvent("Click", "Toggle Solution", this.props.examCode);
+    toggleSolutionEvent();
     this.setState({
       showSolution: !this.state.showSolution
     });
   }
 
   render() {
-    var check = null;
-    var solutionButton = null;
     var solutionContent = null;
 
     if (this.props.solution) {
@@ -38,7 +35,7 @@ class Solution extends Component {
       );
     }
 
-    solutionButton = (
+    const solutionButton = (
       <input className={(this.state.showSolution) ? "gray" : "blue"} type="button"
        value={(this.state.showSolution) ? "Hide Solution" : "Show Solution"} onClick={() => this.toggleSolution()}/>
     );
@@ -46,7 +43,6 @@ class Solution extends Component {
     return (
       <div>
         <hr className="s3" />
-        {check}
         {solutionButton}
         {solutionContent}
       </div>

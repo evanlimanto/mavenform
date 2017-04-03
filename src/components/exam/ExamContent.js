@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { has, endsWith, keys, range, replace, map, reduce, values} from 'lodash';
+import { has, endsWith, keys, range, replace, map, reduce } from 'lodash';
 
 import MDRenderer from './MDRenderer';
 import { Question } from '../question';
@@ -12,8 +12,8 @@ import { updateExamContent } from '../../actions';
 const preprocess = function(text) {
   text = replace(text, /\./g, '\\.');
   text = replace(text, /_/g, '\\_');
-  text = MDRenderer(text);
   text = replace(text, /&amp;/g, '&');
+  text = MDRenderer(text);
   return text;
 };
 
@@ -32,6 +32,7 @@ class ExamContentComponent extends Component {
     header.parentNode.removeChild(header);
     var firstQuestion = document.getElementsByClassName("element")[0];
     firstQuestion.insertBefore(header, firstQuestion.firstChild);
+
     scrollSpy.update();
     window.renderMJ();
   }
@@ -42,10 +43,8 @@ class ExamContentComponent extends Component {
     }
 
     const { examContent, courseid, examtype, examid, appMode } = this.props;
-    const examCode = `${examContent.course}${examContent.ref}`;
     const problemIDs = keys(examContent.parts);
-    const problemTitles = values(examContent.questions);
-    const { course, prof, type, term, md, mcq, num, pre } = examContent;
+    const { prof, term, pre } = examContent;
     const hasSolutions = reduce(examContent, function(result, value, key) {
       return result || endsWith(key, "_s");
     }, false);
@@ -62,7 +61,7 @@ class ExamContentComponent extends Component {
         // TODO: Remove md from .yml files
         qcontent = preprocess(qcontent);
         solution = preprocess(solution);
-        return <Question id={`${part}_${subpart}`} courseid={courseid} content={qcontent} solution={solution} term={term} examType={type} key={key} appMode={appMode} />
+        return <Question id={`${part}_${subpart}`} courseid={courseid} content={qcontent} solution={solution} term={term} examtype={examtype} key={key} appMode={appMode} />
       });
 
       return <Element name={part} key={part} className="element">{subparts}</Element>;
@@ -71,8 +70,8 @@ class ExamContentComponent extends Component {
     const examDesc = (
       <div id="header-text">
         <div className="center">
-          <h4>{courseIDToLabel[course]}</h4>
-          <h5>{examTypeToLabel[type]} | {termToLabel[term]} | {prof}</h5>
+          <h4>{courseIDToLabel[courseid]}</h4>
+          <h5>{examTypeToLabel[examtype]} | {termToLabel[term]} | {prof}</h5>
         </div>
         <div dangerouslySetInnerHTML={{__html: pre}} />
       </div>
@@ -82,7 +81,7 @@ class ExamContentComponent extends Component {
       <div className="content">
         {examDesc}
         {content}
-        {(appMode) ? <Sidebar problemIDs={problemIDs} term={term} courseid={courseid} examType={type} hasSolutions={hasSolutions} examid={examid} /> : null}
+        {(appMode) ? <Sidebar problemIDs={problemIDs} term={term} courseid={courseid} examtype={examtype} hasSolutions={hasSolutions} examid={examid} /> : null}
       </div>
     );
   }

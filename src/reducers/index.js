@@ -1,5 +1,3 @@
-import { combineReducers } from 'redux';
-
 export const exam = (state = { examContent: null, examContentHasLoaded: false }, action) => {
   switch (action.type) {
     case 'UPDATE_EXAM_CONTENT':

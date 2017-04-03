@@ -1,21 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import classnames from 'classnames';
 import copy from 'copy-to-clipboard';
-import { has, lowerCase, map } from 'lodash';
 
-import { handleEvent } from '../../utils';
+import { copyQuestionLinkEvent } from '../../events';
 import { setQuestionCopied } from '../../actions';
 import Expire from './Expire';
 import Solution from './Solution';
 
-const QuestionComponent = ({ id, courseid, content, examType, term, copying, solution, copyQuestionLink, doneCopyingLink }) => {
-  const examCode = lowerCase(`${examType}${term}${courseid}`);
+const QuestionComponent = ({ id, courseid, content, examtype, term, copying, solution, copyQuestionLink, doneCopyingLink }) => {
+  const examCode = `${examtype}${term}${courseid}`;
 
   const SolutionComponent = (
     <Solution solution={solution} examCode={examCode} />
   );
-  const url = `${document.location.origin}/${courseid}/${examType}/${term}#${id}`;
+  const url = `${document.location.origin}/${courseid}/${examtype}/${term}#${id}`;
 
   return (
     <div id={id} className="question">
@@ -40,7 +38,7 @@ const mapStateToProps = (state, ownProps) => {
     id: ownProps.id,
     courseid: ownProps.courseid,
     content: ownProps.content,
-    examType: ownProps.examType,
+    examtype: ownProps.examtype,
     term: ownProps.term,
     solution: ownProps.solution,
     copying: state.question.copying,
@@ -51,7 +49,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     copyQuestionLink: (url) => {
       copy(url);
-      handleEvent("Click", "Copy Question");
+      copyQuestionLinkEvent();
       dispatch(setQuestionCopied(true))
     },
     doneCopyingLink: () => {

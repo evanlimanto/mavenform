@@ -13,32 +13,32 @@ marked.setOptions({
   smartypants: false,
 });
 
-const Renderer = new marked.Renderer();
-Renderer.code = function(code, language) {
+const renderer = new marked.Renderer();
+renderer.code = function(code, language) {
   code = replace(code, /\r\n|\r|\n/g, '<hr class="scode" />');
   code = replace(code, /\\_/g, '_'); // remove escapes
   code = replace(code, /\\./g, '.'); // remove escapes
   return `<code class="codediv">${code}</code>`;
 };
-Renderer.codespan = function(code, language) {
+renderer.codespan = function(code, language) {
   code = replace(code, /\\_/g, '_'); // remove escapes
   code = replace(code, /\\./g, '.'); // remove escapes
   return `<code>${code}</code>`;
 };
-Renderer.em = function(text) {
+renderer.em = function(text) {
   return `<i>${text}</i>`;
 };
-Renderer.br = function() {
+renderer.br = function() {
   return '<hr class="s1" />';
 };
-Renderer.paragraph = function(text) {
+renderer.paragraph = function(text) {
   return `${text}`;
 };
-Renderer.image = function(href, title, text) {
-  href = replace(href, /\\\./g, '.'); // remove escapes
+renderer.image = function(href, title, text) {
+  href = replace(href, /\\./g, '.'); // remove escapes
   return `<img src="${href}" title="${title}" alt="${text}" />`;
 };
-Renderer.list = function(body, ordered) {
+renderer.list = function(body, ordered) {
   if (ordered) {
     return `${replace(replace(body, '<li>', ''), '</li>', '')}`;
   } else {
@@ -47,5 +47,5 @@ Renderer.list = function(body, ordered) {
 };
 
 export default function MDRenderer(text) {
-  return marked(text, { Renderer });
+  return marked(text, { renderer });
 }

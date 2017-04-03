@@ -4,7 +4,7 @@ import { has, map } from 'lodash';
 
 import { toggleAppMode } from '../../actions';
 import { exams, examTypeToLabel, courseIDToLabel, courses } from '../../exams';
-import { handleEvent } from '../../utils';
+import { examClickEvent, toggleAppModeEvent } from '../../events';
 
 import Navbar from '../navbar';
 import NavSidebar from '../navsidebar';
@@ -16,29 +16,14 @@ const CourseComponent = ({ courseid, appMode, onToggleAppMode }) => {
   }
 
   const desc = courses[courseid];
-  const available = map(exams[courseid], (examsOfType, examType) => {
-    return map(examsOfType, (item, id) => {
+  const available = map(exams[courseid], (examsOfType, examtype) => {
+    return map(examsOfType, (item, examid) => {
       const term = item.term;
-      var note = item.note ? `(${item.note})` : (null);
-      const isAvailable = has(item, 'available') ? item.available : true;
-      if (has(item, 'available') && !item.available) {
-        note = '';
-      }
-      const url = `/${courseid}/${examType}/${id}`;
-      if (!isAvailable) {
-        return (
-          <tr className="available" onClick={handleEvent("Click", "Exam", courseid)} key={id}>
-            <td><a>{examTypeToLabel[examType]} <i>{note}</i></a></td>
-            <td><a>{term}</a></td>
-            <td><a>{item.profs}</a></td>
-            <td><a><i>Available by 03/09</i></a></td>
-          </tr>
-        );
-      }
-
+      const note = item.note ? `(${item.note})` : (null);
+      const url = `/${courseid}/${examtype}/${examid}`;
       return (
-        <tr className="available" onClick={handleEvent("Click", "Exam", courseid)} key={id}>
-          <td><a href={url}>{examTypeToLabel[examType]} <i>{note}</i></a></td>
+        <tr className="available" onClick={examClickEvent(courseid, examtype, examid)} key={examid}>
+          <td><a href={url}>{examTypeToLabel[examtype]} <i>{note}</i></a></td>
           <td><a href={url}>{term}</a></td>
           <td><a href={url}>{item.profs}</a></td>
           <td><h6><a className="table-link" href={url}>CLICK TO VIEW &#8594;</a></h6></td>
@@ -48,7 +33,7 @@ const CourseComponent = ({ courseid, appMode, onToggleAppMode }) => {
   });
   const navComponents = (appMode) ? (
     <span>
-      <Navbar isExam={false} onToggleAppMode={onToggleAppMode} couseid={courseid} />
+      <Navbar isExam={false} onToggleAppMode={() => onToggleAppMode()} couseid={courseid} />
       <NavSidebar courseid={courseid} isExam={false} />
       <div className="sidebar">
         <h6>INFO</h6>
@@ -106,7 +91,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onToggleAppMode: () => {
-      dispatch(toggleAppMode())
+      toggleAppModeEvent();
+      dispatch(toggleAppMode());
     }
   }
 };

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { has } from 'lodash';
 
@@ -9,14 +9,14 @@ import NotFound from '../notfound';
 
 import { toggleAppMode } from '../../actions';
 import { exams } from '../../exams';
-import { handleEvent } from '../../utils';
+import { toggleAppModeEvent } from '../../events';
 
 import './Exam.css';
 
 const ExamComponent = ({ appMode, courseid, examtype, examid, onToggleAppMode }) => {
-  try {
-    exams[courseid][examtype][examid];
-  } catch (ex) {
+  if (!has(exams, courseid) ||
+      !has(exams[courseid], examtype) ||
+      !has(exams[courseid][examtype], examid)) {
     return <NotFound />;
   }
 
@@ -40,10 +40,6 @@ const ExamComponent = ({ appMode, courseid, examtype, examid, onToggleAppMode })
   );
 }
 
-ExamComponent.propTypes = {
-  params: React.PropTypes.object,
-};
-
 const mapStateToProps = (state, ownProps) => {
   return {
     appMode: state.config.appMode,
@@ -57,7 +53,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onToggleAppMode: () => {
       dispatch(toggleAppMode());
-      handleEvent('Click', 'Toggle Reader Mode');
+      toggleAppModeEvent();
     }
   };
 };
