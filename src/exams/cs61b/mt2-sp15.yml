@@ -70,7 +70,7 @@ q2_1: |
   ![table](/img/cs61b/mt2-sp15-q2-1.png)
 
 q2_1_s: |
-  **Answer:** $0.0001N^2$.
+  **Answer:** $0.001N^2$.
   <hr class="s2" />
   Since we are interested in asymptotic behavior, we use the largest data points. To calculate $b: \text{log}_2(9.97/2.5)$ is approximately $2$. Then we have that $9.97 = a100^2$, so $a = 0.001$. We can double check by plugging in $N=1000$, getting $1000$ seconds, which $100 \times$ the time as we’d expect from $10 \times$ing the input to a quadratic algorithm.
 
