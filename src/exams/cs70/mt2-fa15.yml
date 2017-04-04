@@ -24,18 +24,18 @@ q1_1: |
   <hr class="s1" />
   For each question, please answer in the correct format. When an expression is asked for, it may simply be a number, or an expression involving variables in the problem statement, you have to figure out which is appropriate.
   <hr class="s2" />
-  (a) What is $3^{240}$ (mod $77$)?
+  (a) What is $3^{240} \pmod {77}$?
 
 q1_1_s: |
-  $3^{240} = (3^{60})^4 = 1^4 = 1$ (mod $77$)
+  $3^{240} = (3^{60})^4 = 1^4 = 1 \pmod {77}$
   <hr class="s2" />
-  The second step follows from $7^{(p-1)(q-1)} = 1$ (mod $77$).
+  The second step follows from $7^{(p-1)(q-1)} = 1 \pmod {77}$.
 
 q1_2: |
-  (b) What is $3^{16} ∗ 3^{−1}$ mod $7$? (Hint: the multiplicative inverse of $3$ is $5$ modulo $7$ and repeated squaring.)
+  (b) What is $3^{16} ∗ 3^{−1} \pmod {7}$? (Hint: the multiplicative inverse of $3$ is $5$ modulo $7$ and repeated squaring.)
 
 q1_2_s: |
-  $(3^{16}) \* 3^{-1} = ((3^2)^2)^2 \* 5 = 6$ (mod $7$)
+  $(3^{16}) \* 3^{-1} = ((3^2)^2)^2 \* 5 = 6 \pmod {7}$
 
 q1_3: |
   (c) Given an RSA scheme for large primes $p$ and $q$ where $q < p < 2q$ we can set $e = p$ and get a valid construction (True or False)
@@ -47,17 +47,17 @@ q1_4: |
   (d) What is $d$ for RSA scheme with $(N = 143, e = 11)$?
 
 q1_4_s: |
-  We have $N = 11(13) = 143$, we want $11^{-1} \; (\text{mod}\; (10)(12))$ which is $11$.
+  We have $N = 11(13) = 143$, we want $11^{-1} \; \pmod{(10)(12)}$ which is $11$.
 
 q1_5: |
   Background: Alice wants a signature of $x$ from Bob but doesn’t want Bob to know $x$.
   <hr class="s1" />
-  Let $(N, e)$ be Bob’s public key, and $d$ be his decryption key. Alice chooses a random $r$ that is relatively prime to $N$, and sends Bob $r^ex$ (mod $N$) to sign, and Bob returns $m = (r^ex)^d$ (mod $N$) to Alice . Give an expression that yields Bob’s signature of $x: x^d$ (mod $N$). Your expression may use the variables $m, x, r, N$ and $e$.
+  Let $(N, e)$ be Bob’s public key, and $d$ be his decryption key. Alice chooses a random $r$ that is relatively prime to $N$, and sends Bob $r^ex \pmod N$ to sign, and Bob returns $m = (r^ex)^d \pmod N$ to Alice . Give an expression that yields Bob’s signature of $x: x^d \pmod N$. Your expression may use the variables $m, x, r, N$ and $e$.
 
 q1_5_s: |
-  $r^{-1}m$ (mod $N$), where $r$ is the multiplicatve inverse of $r$.
+  $r^{-1}m \pmod N$, where $r$ is the multiplicatve inverse of $r$.
   <hr class="s1" />
-  Verification: $r^{-1}m = r^{-1}(r^ex)^d = r^{-1}(r^{ed})x^d = r^{-1}rx^d = 1$ (mod $N$).
+  Verification: $r^{-1}m = r^{-1}(r^ex)^d = r^{-1}(r^{ed})x^d = r^{-1}rx^d = 1 \pmod N$.
 
 q2_1: |
   # 2. Polynomials. 19 points. 3/3/3/3/3/4
@@ -89,17 +89,17 @@ q2_4_s: |
   Solve a linear system. It works out pretty ok, but takes a minute or two.
 
 q2_5: |
-  (e) What is the error polynomial for Berlekamp-Welsh for a message (mod $11$) where errors appeared at $x = 2$ and $x = 4$?
+  (e) What is the error polynomial for Berlekamp-Welsh for a message $\pmod {11}$ where errors appeared at $x = 2$ and $x = 4$?
 
 q2_5_s: |
-  $(x − 2)(x − 4) = x^2 + 5x + 8$ (mod $11$)
+  $(x − 2)(x − 4) = x^2 + 5x + 8 \pmod {11}$
 
 q2_6: |
-  (f) We are working modulo seven, (mod $7$), in this problem. We have polynomials
+  (f) We are working modulo seven,$\pmod {7}$, in this problem. We have polynomials
   $$p_1(1) = 3 \quad p_1(2) = 0 \quad p_1(3) = 0 \\\\
     p_2(1) = 1 \quad p_2(2) = 1 \quad p_2(3) = 0 \\\\
     p_3(1) = 0 \quad p_3(2) = 0 \quad p_3(3) = 1$$
-  Describe a polynomial $p(x)$ where $p(1) = 5, p(2) = 3$ and $p(3) = 1$ in terms of polynomials $p_1(x), p_2(x)$, and $p_3(x)$. (Remember this is all (mod $7$).)
+  Describe a polynomial $p(x)$ where $p(1) = 5, p(2) = 3$ and $p(3) = 1$ in terms of polynomials $p_1(x), p_2(x)$, and $p_3(x)$. (Remember this is all$\pmod {7}$.)
 
 q2_6_s: |
   $3p_1(x) + 3p_2(x) + p_3(x)$.
@@ -197,16 +197,16 @@ q6_1_s: |
 q6_2: |
   (b) Let $S_n$ be the numbers in $\\{0,...,n - 1\\}$ that are relatively prime to $n$.
   <hr class="s2" />
-  (i) For a set $T_a = \\{ax (\text{mod}\;n): x \in S_n\\}$ where $a \in S_n$ show that $T_a = S_n$.
+  (i) For a set $T_a = \\{ax \pmod n: x \in S_n\\}$ where $a \in S_n$ show that $T_a = S_n$.
 
 q6_2_s: |
   Since $a$ has a multiplicative inverse the function is one to one, so $|Ta| \ge |S|$. Also, anything of the form $ax$ is relatively prime to $n$ if both $a$ and $x$ are so $T_a ⊆ S$. This implies they are the same set.
 
 q6_3: |
-  ii) For any $a \in S_n$, $a^x = 1$ (mod $n$). What is $x$? (State your answer as an expression using $S_n$ and other standard math expression symbols, e.g, $|\cdot|$. Briefly justify.)
+  ii) For any $a \in S_n$, $a^x = 1 \pmod n$. What is $x$? (State your answer as an expression using $S_n$ and other standard math expression symbols, e.g, $|\cdot|$. Briefly justify.)
 
 q6_3_s: |
-  $|S_n|$. From the previous part we know the products of the elements of $T_a$ and $S_n$ are the same, and the product of elements in $T_a$ has $|S_n|$ extra $a$’s when compared to the product of elements of $S_n$. Thus $a^{|S_n|} = 1$ (mod $n$).
+  $|S_n|$. From the previous part we know the products of the elements of $T_a$ and $S_n$ are the same, and the product of elements in $T_a$ has $|S_n|$ extra $a$’s when compared to the product of elements of $S_n$. Thus $a^{|S_n|} = 1 \pmod n$.
 
 q6_4: |
   (iii) For $n = pq$ where $p$, and $q$ are distinct primes, what is $|S_n|$?
@@ -226,11 +226,11 @@ q7_1_s: |
 q7_2: |
   (b) Consider communicating $4$ bits in an $7$ bit message. We will make sure the following equations holds.
   <hr class="s1" />
-  $m_1 + m_3 + m_5 + m_7 = 0$ (mod $2$)
+  $m_1 + m_3 + m_5 + m_7 = 0 \pmod 2$
   <hr class="s1" />
-  $m_2 + m_3 + m_6 + m_7 = 0$ (mod $2$)
+  $m_2 + m_3 + m_6 + m_7 = 0 \pmod 2$
   <hr class="s1" />
-  $m_4 + m_5 + m_6 + m_7 = 0$ (mod $2$)
+  $m_4 + m_5 + m_6 + m_7 = 0 \pmod 2$
   <hr class="s2" />
   We will send a message $1011$ by setting bits $m_1 = 1, m_2 = 0, m_3 = 1, m_4 = 1$. How should the bits $m_5, m_6$ and $m_7$ be set to satisfy the equations above.
 

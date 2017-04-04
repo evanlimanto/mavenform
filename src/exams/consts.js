@@ -46,6 +46,10 @@ const exams = {
       'fa15': {
         'term': 'Fall 2015',
         'profs': 'Walrand, Rao',
+      },
+      'fa14': {
+        'term': 'Fall 2014',
+        'profs': 'Sahai',
       }
     }
   },
