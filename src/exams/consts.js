@@ -50,7 +50,11 @@ const exams = {
       'fa14': {
         'term': 'Fall 2014',
         'profs': 'Sahai',
-      }
+      },
+      'sp14': {
+        'term': 'Spring 2014',
+        'profs': 'Sahai'
+      },
     }
   },
 
