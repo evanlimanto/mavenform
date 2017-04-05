@@ -291,6 +291,10 @@ const exams = {
 
   'cs61c': {
     'mt2': {
+      'fa16': {
+        'term': 'Fall 2016',
+        'profs': 'Katz, Boser',
+      },
       'fa15': {
         'term': 'Fall 2015',
         'profs': 'Stojanovic, Wawrzynek'
