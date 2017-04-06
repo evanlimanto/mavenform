@@ -1,6 +1,24 @@
-import Sidebar from './sidebar';
+import Course from './course';
+import Courses from './courses';
+import Exam from './exam';
+import Home from './home';
 import Navbar from './navbar';
-import { Question, MultipleChoiceQuestion } from './question';
 import NavSidebar from './navsidebar';
+import NotFound from './notfound';
+import { MultipleChoiceQuestion, Question } from './question';
+import Routes from './routes';
+import Sidebar from './sidebar';
 
-export { Question, MultipleChoiceQuestion, Navbar, NavSidebar, Sidebar };
+export {
+	Course,
+	Courses,
+	Exam,
+	Home,
+	Navbar,
+	NavSidebar,
+	NotFound,
+	MultipleChoiceQuestion,
+	Routes,
+	Question,
+	Sidebar
+};

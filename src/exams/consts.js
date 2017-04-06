@@ -333,7 +333,7 @@ const exams = {
         'term': 'Spring 2014',
         'profs': 'Garcia',
       },
-    }
+    },
   },
 
   'cs162': {

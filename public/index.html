@@ -65,9 +65,11 @@
   </script>
   <script>
   $(document).ready(function() {
-    $('#search').hideseek({
-      nodata: 'No results found'
-    });
+    if ($('#search').length) {
+      $('#search').hideseek({
+        nodata: 'No results found'
+      });
+    }
   });
   </script>
 </body>

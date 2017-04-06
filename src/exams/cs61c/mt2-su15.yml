@@ -132,6 +132,7 @@ q4_1_s: |
 
 q4_2: |
   b) Write equivalent TAL MIPS for the **beqalr** instruction. `$ra` should be set to the instruction after the expanded **beqalr** (labeled "**resume**"). **Our system does not have delay slots.**
+  <hr class="s2" />
   ![code](/img/cs61c/mt2-su15-q4-2.png)
 
 q4_2_s: |

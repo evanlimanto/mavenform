@@ -7,7 +7,6 @@ const glob = require("glob");
 const path = require('path');
 const yaml = require("js-yaml");
 const NodeCache = require("node-cache");
-const _ = require('lodash')
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -48,5 +47,6 @@ app.get('/getExam/:course/:type/:exam', function(req, res, next) {
   res.end();
 });
 
+// Start server
 app.use(express.static(path.join(__dirname, '/build')));
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, './build/index.html'))).listen(port, () => console.log('Started server on port ' + port));
