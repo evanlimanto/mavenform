@@ -22,7 +22,7 @@ const CourseComponent = ({ courseid, appMode, onToggleAppMode }) => {
       const note = item.note ? `(${item.note})` : (null);
       const url = `/${courseid}/${examtype}/${examid}`;
       return (
-        <tr className="available" onClick={examClickEvent(courseid, examtype, examid)} key={examid}>
+        <tr className="available" onClick={() => examClickEvent(courseid, examtype, examid)} key={examid}>
           <td><a href={url}>{examTypeToLabel[examtype]} <i>{note}</i></a></td>
           <td><a href={url}>{term}</a></td>
           <td><a href={url}>{item.profs}</a></td>

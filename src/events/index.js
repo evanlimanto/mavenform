@@ -7,9 +7,12 @@ const mixpanel = Mixpanel.init((window.location.hostname === "www.mavenform.com"
 const ReactGA = require('react-ga').initialize('UA-20131732-5');
 
 const tracker = function(name, dict={}) {
-	mixpanel.track(name, dict={});
-	if (window.location.hostname !== "localhost") {
-		ReactGA.event({ category: name });
+	if (process.env.NODE_ENV === "development") {
+    console.log(`Tracking event ${name}`);
+  } else {
+    const page = window.location.pathname;
+    mixpanel.track(name, { page });
+		ReactGA.event({ category: name, page: page });
 	}
 }
 
@@ -61,4 +64,8 @@ export function actionTakenEvent(action) {
 
 export function activeUserEvent() {
 	tracker('active user');
+}
+
+export function PDFClickEvent() {
+  tracker('pdf');
 }

@@ -87,13 +87,8 @@ q2_1_s: |
 q2_2: |
   b) Now, assume we have a Pipelined 5-stage MIPS CPU with the following specs:
   - The CPU stalls on hazards, there is no forwarding
-<<<<<<< HEAD
-  - Branch comparison happens in stage 2 and we DO NOT have a branch delay slot. (i.e. the branch “decision” is clocked into the PC at the end of stage 2).
-  - Both memory and registers CAN be written and read in the same clock cycle
-=======
   - Branch comparison happens in stage 2 and we **DO NOT** have a branch delay slot. (i.e. the branch “decision” is clocked into the PC at the end of stage 2).
   - Both memory and registers **CAN** be written and read in the same clock cycle
->>>>>>> master
   - All Loads and Stores hit in the cache (ie. loads/stores take one cycle in the Mem stage)
 
   <hr class="s2" />
@@ -133,17 +128,11 @@ q4_1: |
   a) Briefly describe what we would use this instruction for in a program. (Hint: think about what C code that gets compiled into this instruction would look like.)
 
 q4_1_s: |
-<<<<<<< HEAD
-  <u>We could use this instruction for conditional function calls.</u> This is better than a simple branch because it is not constrained by the address range 2^17-4 lower to 2^17 higher.
-
-q4_2: |
-  b) Write equivalent TAL MIPS for the **beqalr** instruction. `\$ra` should be set to the instruction after the expanded **beqalr** (labeled "**resume**"). **Our system does not have delay slots.**
-=======
   <u>We could use this instruction for conditional function calls.</u> This is better than a simple branch because it is not constrained by the address range $2^{17}-4$ lower to $2^{17}$ higher.
 
 q4_2: |
   b) Write equivalent TAL MIPS for the **beqalr** instruction. `$ra` should be set to the instruction after the expanded **beqalr** (labeled "**resume**"). **Our system does not have delay slots.**
->>>>>>> master
+  <hr class="s2" />
   ![code](/img/cs61c/mt2-su15-q4-2.png)
 
 q4_2_s: |
@@ -249,8 +238,4 @@ q5_4: |
   ![table](/img/cs61c/mt2-su15-q5-3.png)
 
 q5_4_s: |
-<<<<<<< HEAD
   `1 + .5*(5 + .20*(15 + .01*(500))) = 5.5 ns`
-=======
-  `1 + .5*(5 + .20*(15 + .01*(500))) = 5.5 ns`
->>>>>>> master

@@ -9,7 +9,7 @@ import { MultipleChoiceQuestion, Question } from './question';
 import Routes from './routes';
 import Sidebar from './sidebar';
 
-export { 
+export {
 	Course,
 	Courses,
 	Exam,

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { map, range, replace } from 'lodash';
 
-import { scrollNavClickEvent } from '../../events';
+import { scrollNavClickEvent, PDFClickEvent } from '../../events';
 
 const Scroll = require('react-scroll');
 var Link = Scroll.Link;
@@ -54,10 +54,10 @@ const SidebarComponent = ({ term, courseid, examtype, hasSolutions, examid, prob
         {noSolutionsInfo}
         <h6>SOURCES</h6>
         <div className="sidetab-container">
-          <a className="sidetab" href={`${examDirPrefix}-exam.pdf`} target="_blank">Exam PDF</a>
+          <a className="sidetab" onClick={() => PDFClickEvent()} href={`${examDirPrefix}-exam.pdf`} target="_blank">Exam PDF</a>
         </div>
         <div className="sidetab-container">
-          <a className="sidetab" href={`${examDirPrefix}-soln.pdf`} target="_blank">Solutions PDF</a>
+          <a className="sidetab" onClick={() => PDFClickEvent()} href={`${examDirPrefix}-soln.pdf`} target="_blank">Solutions PDF</a>
         </div>
       </div>
     </span>
@@ -67,7 +67,7 @@ const SidebarComponent = ({ term, courseid, examtype, hasSolutions, examid, prob
 const mapStateToProps = (state, ownProps) => {
   return {
     term: ownProps.term,
-    courseid: ownProps.courseid, 
+    courseid: ownProps.courseid,
     examtype: ownProps.examtype,
     hasSolutions: ownProps.hasSolutions,
     examid: ownProps.examid,

@@ -26,7 +26,7 @@ const NavbarComponent = ({ course, onToggleAppMode, isExam }) => {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    courseid: ownProps.courseid, 
+    courseid: ownProps.courseid,
     onToggleAppMode: ownProps.onToggleAppMode,
     isExam: ownProps.isExam,
   };
