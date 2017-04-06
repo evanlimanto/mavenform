@@ -116,6 +116,10 @@ q3_2: |
 
 q3_2_s: |
   ![table](/img/cs61c/mt2-sp15-q3-3.png)
+<<<<<<< HEAD
+=======
+  <hr class="s2" />
+>>>>>>> master
   No, the value of \$t1 are ready before the execute stage of the and instruction. We can forward its value to the next instruction from the pipeline registers without stalling the pipeline.
 
 q3_3: |
@@ -213,4 +217,8 @@ q6_3: |
   c) What is the smallest positive denormalized number?
 
 q6_3_s: |
+<<<<<<< HEAD
   2^-70 or 0x4001
+=======
+  2^-70 or 0x4001
+>>>>>>> master

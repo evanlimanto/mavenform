@@ -37,6 +37,27 @@ const exams = {
     }
   },
 
+  'cs70': {
+    'mt2': {
+      'sp16': {
+        'term': 'Spring 2016',
+        'profs': 'Walrand, Rao',
+      },
+      'fa15': {
+        'term': 'Fall 2015',
+        'profs': 'Walrand, Rao',
+      },
+      'fa14': {
+        'term': 'Fall 2014',
+        'profs': 'Sahai',
+      },
+      'sp14': {
+        'term': 'Spring 2014',
+        'profs': 'Sahai'
+      },
+    }
+  },
+
   'cs161': {
     'mt2': {
       'fa16': {
@@ -270,6 +291,10 @@ const exams = {
 
   'cs61c': {
     'mt2': {
+      'fa16': {
+        'term': 'Fall 2016',
+        'profs': 'Katz, Boser',
+      },
       'fa15': {
         'term': 'Fall 2015',
         'profs': 'Stojanovic, Wawrzynek'
@@ -353,6 +378,7 @@ const exams = {
 
 const courses = {
   'cs170': 'Efficient Algorithms and Intractable Problems',
+  'cs70': 'Discrete Mathematics and Probability Theory',
   'ee16a': 'Designing Information Devices and Systems I',
   'cs162': 'Operating Systems and Systems Programming',
   'ee16b': 'Designing Information Devices and Systems II',
@@ -369,10 +395,11 @@ const courses = {
 
 const courseIsFeatured = {
   'cs170': false,
+  'cs70': true,
   'ee16a': false,
   'cs162': false,
   'ee16b': false,
-  'cs61b': false,
+  'cs61b': true,
   'cs161': false,
   'cs189': false,
   'cs61a': false,
@@ -380,7 +407,7 @@ const courseIsFeatured = {
   'data8': false,
   'cs186': false,
   'ugba10': false,
-  'cs61c': false,
+  'cs61c': true,
 };
 
 const examTypeToLabel = {
@@ -415,6 +442,7 @@ const termToLabel = {
 
 const courseIDToLabel = {
   'data8': 'Data 8',
+  'cs70': 'CS 70',
   'cs186': 'CS 186',
   'ee16a': 'EE 16A',
   'ee16b': 'EE 16B',

@@ -57,7 +57,11 @@ q1_2: |
   2. What is the critical path delay of the circuit? Please include proper units in your answer.
 
 q1_2_s: |
+<<<<<<< HEAD
   `50nss = clk-to-q + 4 adders + setup time`
+=======
+  `50ns = clk-to-q + 4 adders + setup time`
+>>>>>>> master
 
 q1_3: |
   3. What is the maximum clock frequency at which the circuit will function correctly? Please include proper units in your answer.
@@ -102,6 +106,7 @@ q2_2: |
   For Q2.2, you will be modifying the CPU in order to implement bneqpc. You must also finish filling out the control signal table in Q2.3.
   <hr class="s2" />
   Important observations:
+<<<<<<< HEAD
   - Assume that the current state of the CPU does not account for an implementation of bneqpc at all.
   - You are given that the ALU generates a signal "NEQ" that is high when two inputted arguments are not equal and low otherwise.
   - Use the signal "**bneqpc**" as a control signal that is high when the passed-in instruction is bneqpc.
@@ -112,6 +117,18 @@ q2_2: |
   After the answer sheet is an incomplete datapath diagram that you can detach. Your job is to find the
   <hr class="s2" />
   2. Your choices for the datapath boxes I-V are shown below. Select the best option that will allow you to implement bneqpc. If you find multiple valid solution combinations, choose the one that uses the **fewest number of extra hardware units overall.**
+=======
+  - Assume that the current state of the CPU does **not** account for an implementation of **bneqpc** at all.
+  - You are given that the ALU generates a signal **"NEQ"** that is high when two inputted arguments are not equal and low otherwise.
+  - Use the signal **"bneqpc"** as a control signal that is high when the passed-in instruction is **bneqpc**.
+
+  <hr class="s2" />
+  Make sure that the abilities of the original MIPS CPU are still preserved. Hint: Look through all answers before attempting to solve the question. **Also, take a look at the given control signals in Q2.3 when working through Q2.2**.
+  <hr class="s2" />
+  After the answer sheet is an incomplete datapath diagram that you can detach. Your job is to find the
+  <hr class="s2" />
+  2. Your choices for the datapath boxes I-V are shown below. Select the best option that will allow you to implement bneqpc. If you find multiple valid solution combinations, choose the one that uses the **fewest number of extra hardware units overall**.
+>>>>>>> master
   <hr class="s2" />
   I. If none of the answers below are sufficient, feel free to draw your answer in D.
   <hr class="s2" />
@@ -257,7 +274,11 @@ q4_4_s: |
 q5_1: |
   # Q5: Don’t Let Your Mind Float Away Now (10 points)
   Consider the following 16-bit representation for floating point numbers:
+<<<<<<< HEAD
   ![bits](/img/cs61c/mt2-fa15-q5-1.png);
+=======
+  ![bits](/img/cs61c/mt2-fa15-q5-1.png)
+>>>>>>> master
   Bits per field:
   - Sign: 1
   - Exponent: 6
@@ -282,4 +303,8 @@ q5_3: |
   3. How many positive, real numbers can be represented?
 
 q5_3_s: |
+<<<<<<< HEAD
   `2^15 – 2^9 - 1`
+=======
+  `2^15 – 2^9 - 1`
+>>>>>>> master

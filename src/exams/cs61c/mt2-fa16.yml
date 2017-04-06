@@ -1,0 +1,305 @@
+course: 'cs61c'
+ref: 'mt2-fa16'
+
+type: 'mt2'
+term: 'fa16'
+prof: 'Katz, Boser'
+
+questions: {
+}
+
+parts: {
+  'q1': 3,
+  'q2': 3,
+  'q3': 4,
+  'q4': 5,
+  'q5': 3,
+  'q6': 1,
+  'q7': 6,
+}
+
+q1_1: |
+  # Q1: Finite State Machine (8 points)
+  Answer the questions below for the finite state machine in this diagram:
+  <hr class="s2" />
+  ![fsm](/img/cs61c/mt2-fa16-q1-1.png)
+  <hr class="s2" />
+  1. Complete the truth table shown below. (2 points)
+  <hr class="s2" />
+  ![truth table](/img/cs61c/mt2-fa16-q1-2.png)
+
+q1_1_s: |
+  ![truth table](/img/cs61c/mt2-fa16-q1-3.png)
+
+q1_2: |
+  2. Fill in the blanks in the diagram below. (3 points.)
+  <hr class="s2" />
+  ![diagram](/img/cs61c/mt2-fa16-q1-4.png)
+
+q1_3: |
+  3. The finite state machine is required to operate at a frequency $f_{clk}$ = 5GHz. The finite state machine is realized with combinatorial logic with delay $t_c$ = 120ps and flip-flops with hold and clock-to-Q times of $t_{hold}$ = 50ps and $t_{clk2Q}$ = 70ps, respectively.
+  <hr class="s2" />
+  What is the maximum value of the flip-flop setup time $t_{setup}$ that allows the finite state machine to operate at a clock frequency of up to $f_{clk}$ = 5GHz? Suggestion: draw a complete timing diagram. (3 points)
+  <hr class="s2" />
+  $t_{setup} \le \text{________________}$ (state the unit of your result)
+
+q1_3_s: |
+  $t_{setup} \le 200-120-70=10ps$
+
+q2_1: |
+  # Q2: Pipelining (8 points)
+  Compare two pipeline implementation options A and B with 4 and 7 stages, respectively.
+  <hr class="s2" />
+  1. The logic delays of the pipeline stages are as follows:
+  <hr class="s2" />
+  ![table](/img/cs61c/mt2-fa16-q2-1.png)
+  <hr class="s2" />
+  What are the maximum clock rates for the two implementations? (2 points)
+  <hr class="s2" />
+  Option A $f_{s_max} = \text{________________}$ (include the unit with your result)
+  <hr class="s1" />
+  Option B $f_{s_max} = \text{________________}$ (include the unit with your result)
+
+q2_1_s: |
+  Option A $f_{s_max} = 1/0.4ns = 2.5GHz$
+  <hr class="s1" />
+  Option B $f_{s_max} = 1/0.25ns = 4GHz$
+
+q2_2: |
+  2. The table below states the operation of each pipeline stage:
+  <hr class="s2" />
+  ![table](/img/cs61c/mt2-fa16-q2-2.png)
+  <hr class="s2" />
+  Compared to the MIPS CPU, option A merges IF and ID in a single stage, while option B splits EXE over three pipeline stages. Registers and memory are written to in the first half of the cycle and read during the second half of the cycle (same as MIPS) but there are no forwarding paths. How many instructions are executed after an **add** and a **lw** instruction, respectively, before the new register values are available? (4 points)
+  <hr class="s2" />
+  ![table](/img/cs61c/mt2-fa16-q2-3.png)
+
+q2_2_s: |
+  ![table](/img/cs61c/mt2-fa16-q2-4.png)
+
+q2_3: |
+  3. Calculate the number of instructions executed per second for each implementation for the specified $f_s$ (these are not *necessarily* the correct results for part 1) and CPI. (2 points)
+  <hr class="s2" />
+  ![table](/img/cs61c/mt2-fa16-q2-5.png)
+
+q2_3_s: |
+  1/CPI \* 1/f = 1/CPI \* Cycles / sec
+  <hr class="s2" />
+  ![table](/img/cs61c/mt2-fa16-q2-6.png)
+
+q3_1: |
+  # Q3: Pipeline Hazards (14 points)
+  The goal of the problem is to increase the execution speed of the code below by eliminating as many stalls and useless operations (**nop**’s in the branch delay slots) as possible. The code runs on a 5- stage pipelined MIPS CPU with forwarding with the characteristics discussed in lecture.
+  <hr class="s2" />
+  Note: the branch delay slot is not hidden, i.e. **nop**‘s in the code below are always executed regardless of the branch decision.
+  <hr class="s2" />
+  a) Indicate stalls in the code below with arrows right after the instruction where the stall occurs. The following is not necessarily correct and only used as an example. (2 points)
+  <hr class="s2" />
+  ![table](/img/cs61c/mt2-fa16-q3-1.png)
+
+q3_1_s: |
+  ![table](/img/cs61c/mt2-fa16-q3-2.png)
+
+q3_2: |
+  b) How many cycles does it take to execute the entire code sequence below, including stalls and **nop**s? (2 points)
+
+q3_2_s: |
+  N1 = 19 or 20 (depends on if you observed the stall between sltiu and beq) cycles
+
+q3_3: |
+  c) Assuming all stalls and nops can be eliminated, by how many cycles does the execution time decrease? (2 points)
+
+q3_3_s: |
+  N2 = 4 or 5 (depends on if you observed the stall between sltiu and beq) cycles
+
+q3_4: |
+  d) Rewrite the code below, eliminating as many stalls and **nop**s as possible. The improved code must store the same results to memory, but register values may differ between the two versions when **exit** is reached. (8 points)
+  <hr class="s2" />
+  ![code](/img/cs61c/mt2-fa16-q3-3.png)
+  <hr class="s2" />
+  ![code](/img/cs61c/mt2-fa16-q3-4.png)
+
+q3_4_s: |
+  There were multiple accepted solutions for this part. Extra credit was given to students who observed the stall between sltiu and beq (not necessary for full credit).Students were provided credit if their solution was optimal and the results stored to memory after executing the code remained the same.
+  <hr class="s2" />
+  ![code](/img/cs61c/mt2-fa16-q3-5.png)
+  <hr class="s2" />
+  ![code](/img/cs61c/mt2-fa16-q3-6.png)
+
+q4_1: |
+  # Q4: Locality (2.5 points)
+  Choose the single best answer that describes the locality characterized by the indicated C programming pattern. Assume “well-written” code. (0.5 points each)
+  <hr class="s2" />
+  i. Sequencing of Instructions in a loop
+  - Temporal
+  - Spatial
+  - Both
+  - Neither
+
+q4_1_s: |
+  - Both
+
+q4_2: |
+  ii. Subroutine prologue and epilogue
+  - Temporal
+  - Spatial
+  - Both
+  - Neither
+
+q4_2_s: |
+  - Spatial
+
+q4_3: |
+  iii. String copy
+
+q4_3_s: |
+  - Both
+
+q4_4: |
+  iv. Nested If-Then-Else Processing
+  - Temporal
+  - Spatial
+  - Both
+  - Neither
+
+q4_4_s: |
+  - Spatial
+
+q4_5: |
+  v. Two Dimensional Matrix Multiply
+  - Temporal
+  - Spatial
+  - Both
+  - Neither
+
+q4_5_s: |
+  - Both
+
+q5_1: |
+  # Q5: AMAT (3.5 points)
+  Fill in the following parts. Recall that AMAT = Hit Time + Miss Rate \* Miss Penalty.
+  <hr class="s1" />
+  a.) Assume Hit Time is 1 cycle and the miss penalty is 100 cycles. What must the miss rate be to achieve an AMAT of 2 cycles? (1 point)
+
+q5_1_s: |
+  $$\begin{align} & 2 = 1 + x * 100 \\\\
+  & x = 0.01 \end{align}$$
+
+q5_2: |
+  b.) As in (a.) but now assume the miss penalty is 800 cycles. What is the miss rate needed to achieve an AMAT of 2 cycles? (1 point)
+
+q5_2_s: |
+  $$\begin{align} & 2 = 1 + x * 800 \\\\
+  & x = 0.00125 \end{align}$$
+
+q5_3: |
+  c.) Assume a two level cache where the L1 hit time is as in (a.) and the hit time in the L2 cache is 2 cycles and the miss penalty is 800 cycles. Further assume an L1 miss rate of 0.1. Show how you calculate the L2 miss rate to achieve an AMAT of 2 cycles. What is the L2 miss rate you calculated? (1.5 points)
+
+q5_3_s: |
+   AMAT = L1 hit + L1 miss rate \* (L2 hit time + L2 miss rate \* L2 miss penalty)
+   $$\begin{align} & 2 = 1 + .1 (2 + x \* 800) \\\\
+   & 2 = 1 + .2 + x \* 80 \\\\
+   & .8 = x \* 80 \\\\
+   & x = 0.01 \end{align}$$
+
+q6_1: |
+  # Q6: Reverse Engineering a Cache (12 points)
+  You are given the sketch of a cache design below:
+  <hr class="s2" />
+  ![cache](/img/cs61c/mt2-fa16-q6-1.png)
+  <hr class="s2" />
+  Note: a 4:1 Selector has four control inputs labeled 0, 1, 2, 3 and four data inputs D0, D1, D2, D3. It connects Di to the output when the ith control signal is true. Assume that **at most one** control input is true at any time. The selector function is undefined when none of the control inputs are true.
+  <hr class="s2" />
+  Answer the following questions about the cache above.
+  - What is the block size of the cache in bytes? (1 point)
+  - What is the number of blocks in this cache? (1 point)
+  - What is the total data capacity of the cache in bytes? (2 points)
+  - What is the associativity of the cache? (2 points)
+  - Is this a write-through or write-back cache? (2 points)
+  - What is the total number of valid bits in the cache? (2 points)
+  - What is the total number of tag bits in the cache? (2 points)
+
+q6_1_s: |
+  - What is the block size of the cache in bytes? (1 point) **32 Bytes**
+  - What is the number of blocks in this cache? (1 point) **256**
+  - What is the total data capacity of the cache in bytes? (2 points) **8192 Bytes**
+  - What is the associativity of the cache? (2 points) **4-way**
+  - Is this a write-through or write-back cache? (2 points) **Write-through**
+  - What is the total number of valid bits in the cache? (2 points) **256**
+  - What is the total number of tag bits in the cache? (2 points) **256 * 21 = 5376**
+
+q7_1: |
+  # Q7: Program Performance in Caches (12 points)
+  You are given a snippet of MIPS assembly code that copies a null terminated character string from one location to another.
+  ```
+  # $t0 has the address of the string source
+  # $t1 has the address of the string destination
+  StrCpy:
+        lb    $t2, 0($t0)         # $t2 gets src char
+        sb    $t2, 0($t1)         # store into dest char
+        beq   $t2, $zero, Exit    # done when last char is null
+        addiu $t0, $t0, 1         # point to next char of src
+        addiu $t1, $t1, 1         # point to next char of dest
+        j   StrCpy
+  Exit:
+  ```
+  Assume the processor is **unpipelined**, and has a unified instruction and data cache that is direct mapped with $128$ bytes and word-sized blocks. Assume random replacement, write through, and no write allocate. The `StrCpy` code is located at (byte) memory address $0$ and the source and destination strings at (byte) memory addresses $128_{10}$ and $256_{10}$ respectively. Show your work to receive full credit.
+  <hr class="s2" />
+  a.) For just the sequence of instructions shown above, how many memory references are there for the loop iteration that copies a non-null character? (1 point)
+
+q7_1_s: |
+  Six instruction refs and two data refs = **8 memory refs**
+
+q7_2: |
+  b.) For just the sequence of instructions shown above, how many memory references (i.e. access to memory) are there for the loop iteration that copies the null character and exits the loop? Do not count the reference to the instruction at label `Exiti`. (1 point)
+
+q7_2_s: |
+  Three instruction refs and two data refs = **5 memory refs**
+
+q7_3: |
+  For the following questions, assume the source string is four bytes long (3 bytes plus null terminator). You can write the miss rate as the fraction # of misses/# of processor memory references.
+  <hr class="s2" />
+  c.) What is the total number of memory references to execute this snippet of code? (1 point)
+
+q7_3_s: |
+   Three iterations x 8 memory references + one iteration of 5 = **29 total**
+
+q7_4: |
+  d.) What is the cache miss rate? (3 points)
+
+q7_4_s: |
+  First iteration: 6 instruction misses, 1 data miss, since no write allocate, store is thru to memory, and not stored in cache. Load knocks out first instruction. The store should count as a miss too. 8 misses total
+  <hr class="s2" />
+  Second iteration: miss on first instruction, hit on five instructions, miss on load data (instruction fetch kicked it out) and miss on store: 3 misses total.
+  <hr class="s2" />
+  Third and fourth iterations are the same.
+  <hr class="s2" />
+  Total misses: 8 + 3 + 3 + 3 = **17 misses/29 memory references = 0.59**
+  <hr class="s2" />
+  Common mistakes were 13/29 which assumed no write allocate never tried accessing cache.
+
+q7_5: |
+  e.) Now consider a two-way set associative cache of the same capacity and block size. What is the cache miss rate now? (3 points)
+
+q7_5_s: |
+  No conflict between first instruction and source string address. Stores still count as misses though.
+  <hr class="s2" />
+  Total misses: 8 + 1 + 1 + 1 = **11 misses/29 memory references = 0.38**
+  <hr class="s2" />
+  Common mistakes were 7/29 which assumed no write allocated never tried accessing cache.
+
+q7_6: |
+  f.) Now consider a two-way-set-associative cache, but organized as a write-back cache with write- allocate. The replacement strategy is random with a preference for clean data blocks. What is the miss rate now? (3 points)
+
+q7_6_s: |
+  First iteration: 6 instruction misses, one load data miss, store data written to cache but not memory. 8 misses total (need to load the store data block).
+  <hr class="s2" />
+  Second iteration can be 1 miss or 2 misses based on replacement policy.
+  <hr class="s2" />
+  Third and fourth iterations will be two misses per iteration (instruction ref knocks out load but store stays in the cache as it is dirty; there should just be conflict between the instruction and the load data).
+  <hr class="s2" />
+  8 + 2 + 2 + 2 = **14 misses/29 references = 0.48**
+  <hr class="s1" />
+  OR
+  <hr class="s1" />
+  8 + 1 + 2 + 2 = **13 misses/29 references = 0.45**
