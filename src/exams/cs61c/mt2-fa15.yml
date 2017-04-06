@@ -40,8 +40,6 @@ q1_1: |
   <hr class="s2" />
   Assume each adder has a delay of 10ns, and any registers have a clk-to-q, hold time, and setup time of 5ns. Assume the inputs are driven by registers, and outputs are registers as well.
   <hr class="s2" />
-  Assume each adder has a delay of 10ns, and any registers have a clk-to-q, hold time, and setup time of 5ns. Assume the inputs are driven by registers, and outputs are registers as well.
-  <hr class="s2" />
   1. Write Boolean formulas for `s0` and `c1` in terms of the inputs `cin, a0`, and `b0`. You may use XOR as an operator in the Boolean formulas. Each formula should use as few operators as possible.
   ![circuit](/img/cs61c/mt2-fa15-q1-1.png)
   s0 = ________________________________
@@ -270,7 +268,7 @@ q5_1: |
   1. Convert `-15.125` into floating point. Write your answer in hexadecimal.
 
 q5_1_s: |
-  `0xB5B8`
+  `0xC5C8`
 
 q5_2: |
   2. What is the value of the largest odd number that can be represented by the above floating point representation?

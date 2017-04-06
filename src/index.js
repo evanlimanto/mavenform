@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { browserHistory, Router, Route } from 'react-router';
+
 import { handleEvent } from './utils';
 import Exam from './Exam';
 import Course from './Course';
