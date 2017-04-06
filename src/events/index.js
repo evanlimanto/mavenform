@@ -4,7 +4,8 @@ const MIXPANEL_ID_DEV = 'd9dbfd1988e5250bea11879c6a783054';
 const MIXPANEL_ID = 'af9797f751c2f22b4ba5f77f20cc6cc5';
 
 const mixpanel = Mixpanel.init((window.location.hostname === "www.mavenform.com") ? MIXPANEL_ID : MIXPANEL_ID_DEV);
-const ReactGA = require('react-ga').initialize('UA-20131732-5');
+const ReactGA = require('react-ga');
+ReactGA.initialize('UA-20131732-5');
 
 const tracker = function(name, dict={}) {
 	if (process.env.NODE_ENV === "development") {
@@ -12,7 +13,7 @@ const tracker = function(name, dict={}) {
   } else {
     const page = window.location.pathname;
     mixpanel.track(name, { page });
-		ReactGA.event({ category: name, page: page });
+		ReactGA.event({ category: name, action: page });
 	}
 }
 
