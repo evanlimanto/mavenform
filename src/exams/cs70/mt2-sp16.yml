@@ -50,7 +50,7 @@ q1_5: |
   5. What is the probability that the maximum of the two values is $5$ or $6$?
 
 q1_5_s: |
-  The outcomes in that event are $(a, b)$ where $a \in \\{5, 6\\}$ or $b \in \\{5, 6\\}$. Let $A$ be the first set and $B$ the second. Then $|A \cap B| = |A| + |B| − |A \cap B| = 12 + 12 − 4 = 20$. (You can also look at the picture and count.) Hence, the probability of that event is $20/36 = 5/9$.
+  The outcomes in that event are $(a, b)$ where $a \in \\{5, 6\\}$ or $b \in \\{5, 6\\}$. Let $A$ be the first set and $B$ the second. Then $|A \cup B| = |A| + |B| − |A \cap B| = 12 + 12 − 4 = 20$. (You can also look at the picture and count.) Hence, the probability of that event is $20/36 = 5/9$.
 
 q2_1: |
   # 2. Short Questions: 3/3/3/3/3/3/3 Provide a clear and concise justification of your answer.
