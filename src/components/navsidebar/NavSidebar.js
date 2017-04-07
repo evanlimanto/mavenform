@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { has, map } from 'lodash';
@@ -22,9 +23,10 @@ const NavSidebarComponent = ({ courseid, examid, thisExamType, isExam }) => {
         active: (examid === id && thisExamType === examtype),
       });
       if (isAvailable) {
+        // TODO: Make these links client-side
         return (
           <div key={id} className="sidetab-container">
-            <a className={sideTabClass} href={url} onClick={() => navSidebarClickEvent()}>
+            <a href={url} className={sideTabClass} onClick={() => navSidebarClickEvent()}>
               {term}
               <span dangerouslySetInnerHTML={{__html: note}} />
             </a>
@@ -51,7 +53,7 @@ const NavSidebarComponent = ({ courseid, examid, thisExamType, isExam }) => {
     <div className="menu">
       <h6>{courseIDToLabel[courseid]}</h6>
       <div className="sidetab-container">
-        <a className={sidetabClass} href={`/${courseid}`} onClick={() => navSidebarClickEvent()}>Index</a>
+        <Link to={`/${courseid}`} className={sidetabClass} onClick={() => navSidebarClickEvent()}>Index</Link>
       </div>
       {sideTabs}
     </div>

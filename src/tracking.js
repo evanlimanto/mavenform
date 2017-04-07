@@ -3,13 +3,6 @@ import { forEach } from 'lodash';
 import { actionTakenEvent, activeUserEvent } from './events';
 
 export default function initializeTracking() {
-  const ReactGA = require('react-ga');
-  ReactGA.initialize('UA-20131732-5');
-
-  const path = window.location.pathname;
-  ReactGA.set({ path });
-  ReactGA.pageview(path);
-
   function createEventTracker(name) {
     window.addEventListener(name, function(e) {
       actionTakenEvent(name);

@@ -1,30 +1,44 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Router } from 'react-router';
 import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import { applyMiddleware, createStore, combineReducers } from 'redux';
+import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 
 import * as appReducers from './reducers';
 import { Routes } from './components';
 import initializeTracking from './tracking';
 
+const ReactGA = require('react-ga');
+ReactGA.initialize('UA-20131732-5');
+ReactGA.set({ path: location.pathname });
+ReactGA.pageview(location.pathname);
+
+const history = createHistory()
+history.listen((location, action) => {
+  // Track all pageviews, "PUSH" and "POP"
+  ReactGA.set({ path: location.pathname });
+  ReactGA.pageview(location.pathname);
+})
+
+const middleware = routerMiddleware(history)
+
 const store = createStore(
   combineReducers({
     ...appReducers,
-    routing: routerReducer,
-  })
+    router: routerReducer
+  }),
+  applyMiddleware(middleware)
 );
-const history = syncHistoryWithStore(createHistory(), store);
+
 
 initializeTracking();
 
 ReactDOM.render((
   <Provider store={store}>
-    <Router history={history}>
+    <ConnectedRouter history={history}>
       {Routes}
-    </Router>
+    </ConnectedRouter>
   </Provider>
 ), document.getElementById('root'));

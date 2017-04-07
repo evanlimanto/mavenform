@@ -1,12 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import { closeNotificationBar } from '../../actions';
 import { learnMoreEvent, viewCoursesEvent } from '../../events';
 
 const Scroll = require('react-scroll');
 const Element = Scroll.Element;
-var Link = Scroll.Link;
 
 const HomeComponent = ({ notificationBar, onCloseNotificationBar }) => {
   return (
@@ -26,8 +25,8 @@ const HomeComponent = ({ notificationBar, onCloseNotificationBar }) => {
           <hr className="s2" />
           <h5 className="h5-alt">A new and intuitive format to view and study past exams</h5>
           <div className="home-button-container">
-            <a className="home-button" href="/courses" onClick={viewCoursesEvent()}>View Courses</a>
-            <Link
+            <Link to="/courses" className="home-button" onClick={viewCoursesEvent()}>View Courses</Link>
+            <Scroll.Link
              className="home-button home-button-alt"
              to="features"
              isDynamic={true}
@@ -36,9 +35,9 @@ const HomeComponent = ({ notificationBar, onCloseNotificationBar }) => {
              onClick={learnMoreEvent()}
             >
              Learn More
-            </Link>
+            </Scroll.Link>
           </div>
-          <img className="banner-screen" src="/img/screen.png" alt="banner" /> 
+          <img className="banner-screen" src="/img/screen.png" alt="banner" />
         </div>
       </div>
       <Element name="features" className="card-container-container">

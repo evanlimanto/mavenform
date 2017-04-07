@@ -1,3 +1,5 @@
+import AuthService from '../utils/AuthService';
+
 export const exam = (state = { examContent: null, examContentHasLoaded: false }, action) => {
   switch (action.type) {
     case 'UPDATE_EXAM_CONTENT':
@@ -39,6 +41,14 @@ export const config = (state = { appMode: true }, action) => {
         appMode: !state.appMode,
       };
     default:
-      return state; 
+      return state;
+  }
+};
+
+const authState = new AuthService('tgMckz0tmKMhju4VwEnPLxEH4BDExL21', 'mavenform.auth0.com')
+export const auth = (state = authState, action) => {
+  switch (action.type) {
+    default:
+      return state;
   }
 };

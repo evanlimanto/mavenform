@@ -47,6 +47,12 @@ app.get('/getExam/:course/:type/:exam', function(req, res, next) {
   res.end();
 });
 
-// Start server
 app.use(express.static(path.join(__dirname, '/build')));
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, './build/index.html'))).listen(port, () => console.log('Started server on port ' + port));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/build', 'index.html'));
+})
+
+app.listen(port, () => console.log('Started server on port', port));
+
+//app.get('*', (req, res) => res.sendFile(path.join(__dirname, './build/index.html'))).listen(port, () => console.log('Started server on port ' + port));

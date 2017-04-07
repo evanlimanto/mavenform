@@ -1,16 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const NavbarComponent = ({ course, onToggleAppMode, isExam }) => {
   const toggleBackComponent = (isExam) ? (
-      <a className="material-icons mobile-back" href={`/${course}`}>keyboard_backspace</a>
+      <Link to={`/${course}`} className="material-icons mobile-back">keyboard_backspace</Link>
     ) : (
-      <a className="material-icons mobile-back" href="/courses">keyboard_backspace</a>
+      <Link to="/courses" className="material-icons mobile-back">keyboard_backspace</Link>
     );
 
   return (
     <div className="nav">
-      <a className="logo" href="/courses">Mavenform</a>
+      <Link to="/courses" className="logo">Mavenform</Link>
       {toggleBackComponent}
       <div className="tooltip-container">
         <a className="material-icons" href="https://docs.google.com/forms/d/e/1FAIpQLSfCS9McWikQ7F6syAGV9FX7Wf2-rWjqt-XMXxxEx5piTIf92Q/viewform?usp=sf_link" target="_blank">sms</a>

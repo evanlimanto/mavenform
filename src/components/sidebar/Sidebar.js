@@ -1,11 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { map, range, replace } from 'lodash';
 
 import { scrollNavClickEvent, PDFClickEvent } from '../../events';
 
 const Scroll = require('react-scroll');
-var Link = Scroll.Link;
 
 const SidebarComponent = ({ term, courseid, examtype, hasSolutions, examid, problemIDs }) => {
   const examDirPrefix = `${process.env.PUBLIC_URL}/exams/${courseid}/${examtype}-${examid}`;
@@ -21,10 +21,10 @@ const SidebarComponent = ({ term, courseid, examtype, hasSolutions, examid, prob
       return (
         <div className="sidetab-container" key={index}>
           {
-            <Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} offset={-50} smooth={true} duration={500}
+            <Scroll.Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} offset={-50} smooth={true} duration={500}
              onClick={() => scrollNavClickEvent()}>
               {problemTitle}
-            </Link>
+            </Scroll.Link>
           }
         </div>
       );
@@ -54,10 +54,10 @@ const SidebarComponent = ({ term, courseid, examtype, hasSolutions, examid, prob
         {noSolutionsInfo}
         <h6>SOURCES</h6>
         <div className="sidetab-container">
-          <a className="sidetab" onClick={() => PDFClickEvent()} href={`${examDirPrefix}-exam.pdf`} target="_blank">Exam PDF</a>
+          <Link to={`${examDirPrefix}-exam.pdf`} className="sidetab" onClick={() => PDFClickEvent()} target="_blank">Exam PDF</Link>
         </div>
         <div className="sidetab-container">
-          <a className="sidetab" onClick={() => PDFClickEvent()} href={`${examDirPrefix}-soln.pdf`} target="_blank">Solutions PDF</a>
+          <Link to={`${examDirPrefix}-soln.pdf`} className="sidetab" onClick={() => PDFClickEvent()} target="_blank">Solutions PDF</Link>
         </div>
       </div>
     </span>

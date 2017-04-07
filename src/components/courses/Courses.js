@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { keys, identity, map, sortBy } from 'lodash';
 
 import { courseClickEvent } from '../../events';
@@ -8,20 +9,20 @@ const Courses = () => {
   const sortedCourses = sortBy(keys(courses), [(courseid) => !courseIsFeatured[courseid], identity]);
   const courseBoxes = map(sortedCourses, (courseid) => {
     return (
-      <a key={courseid} className="course-card" href={`/${courseid}`} onClick={() => courseClickEvent(courseid)}>
+      <Link to={`/${courseid}`} key={courseid} className="course-card" onClick={() => courseClickEvent(courseid)}>
         <h1>{courseIDToLabel[courseid]}</h1>
         <hr className="s1" />
         <i className="course-subtitle">{courses[courseid]}</i>
         {(courseIsFeatured[courseid]) ?  (<span><hr className="s2" /><span className="featured-tag">Featured</span></span>) : null}
         <h6 className="card-helper">CLICK TO VIEW &#8594;</h6>
-      </a>
+      </Link>
     );
   });
 
   return (
     <div className="courses">
       <div className="banner">
-        <a className="material-icons courses-back" href="/">keyboard_backspace</a>
+        <Link to="/" className="material-icons courses-back">keyboard_backspace</Link>
         <div className="banner-img"></div>
         <div className="banner-text content">
           <div className="banner-header">Courses</div>

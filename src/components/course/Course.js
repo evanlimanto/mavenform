@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { has, map } from 'lodash';
 
@@ -23,10 +24,10 @@ const CourseComponent = ({ courseid, appMode, onToggleAppMode }) => {
       const url = `/${courseid}/${examtype}/${examid}`;
       return (
         <tr className="available" onClick={() => examClickEvent(courseid, examtype, examid)} key={examid}>
-          <td><a href={url}>{examTypeToLabel[examtype]} <i>{note}</i></a></td>
-          <td><a href={url}>{term}</a></td>
-          <td><a href={url}>{item.profs}</a></td>
-          <td><h6><a className="table-link" href={url}>CLICK TO VIEW &#8594;</a></h6></td>
+          <td><Link to={url}>{examTypeToLabel[examtype]} <i>{note}</i></Link></td>
+          <td><Link to={url}>{term}</Link></td>
+          <td><Link to={url}>{item.profs}</Link></td>
+          <td><h6><Link to={url} className="table-link">CLICK TO VIEW &#8594;</Link></h6></td>
         </tr>
       );
     });
