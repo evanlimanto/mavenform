@@ -11,7 +11,7 @@ export default function initializeTracking() {
 
   function createTimedEventTracker(name) {
     let lastTime = 0;
-    const trackingInterval = 2.5 * 1000;
+    const trackingInterval = 5 * 1000;
     window.addEventListener(name, function(e) {
       const currentTime = Date.now();
       if (currentTime - lastTime > trackingInterval) {
@@ -25,7 +25,7 @@ export default function initializeTracking() {
   forEach(['mousemove', 'scroll'], (e) => createTimedEventTracker(e));
 
   let userOnPageTracker = null;
-  const activeTrackingInterval = 5 * 1000;
+  const activeTrackingInterval = 15 * 1000;
   window.addEventListener('focus', function(e) {
     if (userOnPageTracker !== null) {
       window.clearInterval(userOnPageTracker);

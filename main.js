@@ -5,7 +5,6 @@ const browserify = require('browserify');
 const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
-const yaml = require('js-yaml');
 const NodeCache = require('node-cache');
 const pg = require('pg');
 const _ = require('lodash');
