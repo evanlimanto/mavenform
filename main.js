@@ -7,6 +7,7 @@ const glob = require('glob');
 const path = require('path');
 const yaml = require('js-yaml');
 const NodeCache = require('node-cache');
+const pg = require('pg');
 const _ = require('lodash');
 
 const port = process.env.PORT || 8080;
@@ -16,17 +17,10 @@ const useCache = (process.env.NODE_ENV !== 'development');
 const examCache = new NodeCache({ stdTTL: 30 * 60, checkperiod: 10 * 60 });
 console.log("Using redis to cache exams:", useCache);
 
-const config = {
-  user: 'evanlimanto',
-  database: 'mavenform',
-  password: '',
-  port: 5432,
-  host: 'localhost',
-  max: 5,
-};
-
-const Client = require('pg').Client;
-const client = new Client(config);
+if (process.env.NODE_ENV !== 'development') {
+  pg.defaults.ssl = true;
+}
+const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 
 app.use('/img', express.static(path.join(__dirname, '/src/img')));

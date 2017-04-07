@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { has, endsWith, keys, range, replace, map, reduce } from 'lodash';
+import { has, range, replace, map } from 'lodash';
 
 import MDRenderer from './MDRenderer';
 import { Question } from '../question';
@@ -28,6 +28,8 @@ class ExamContentComponent extends Component {
           this.props.examtype === nextProps.examtype &&
           this.props.examid === nextProps.examid)) {
       this.props.getExamContent(courseid, examtype, examid);
+    } else if (this.props.examContentHasLoaded) {
+      Scroll.animateScroll.scrollToTop();
     }
   }
 
@@ -53,7 +55,6 @@ class ExamContentComponent extends Component {
     }
 
     const { examContent, courseid, examtype, examid, appMode, profs, term } = this.props;
-    const problemIDs = keys(examContent.parts);
     const hasSolutions = true;
 
     const content = map(examContent.info, (num_parts, part) => {

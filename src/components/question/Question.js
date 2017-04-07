@@ -21,7 +21,7 @@ const QuestionComponent = ({ id, courseid, content, examtype, term, copying, sol
         <a className="link material-icons" onClick={() => copyQuestionLink(url)}>link</a>
         {(copying) ?
           (<span className="tooltip-link blue">
-             <Expire delay={2000}
+             <Expire delay={1500}
               callback={() => doneCopyingLink()}>
               Link Copied
              </Expire>

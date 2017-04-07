@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { map, range, replace } from 'lodash';
+import { map } from 'lodash';
 
 import { scrollNavClickEvent, PDFClickEvent } from '../../events';
 
