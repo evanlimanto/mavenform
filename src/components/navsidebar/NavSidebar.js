@@ -26,10 +26,10 @@ const NavSidebarComponent = ({ courseid, examid, thisExamType, isExam }) => {
         // TODO: Make these links client-side
         return (
           <div key={id} className="sidetab-container">
-            <a href={url} className={sideTabClass} onClick={() => navSidebarClickEvent()}>
+            <Link to={url} className={sideTabClass} onClick={() => navSidebarClickEvent()}>
               {term}
               <span dangerouslySetInnerHTML={{__html: note}} />
-            </a>
+            </Link>
           </div>
         );
       } else {

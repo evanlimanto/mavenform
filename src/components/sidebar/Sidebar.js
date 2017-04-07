@@ -7,28 +7,21 @@ import { scrollNavClickEvent, PDFClickEvent } from '../../events';
 
 const Scroll = require('react-scroll');
 
-const SidebarComponent = ({ term, courseid, examtype, hasSolutions, examid, problemIDs }) => {
+const SidebarComponent = ({ term, courseid, examtype, hasSolutions, examid, problemIDs, info }) => {
   const examDirPrefix = `${process.env.PUBLIC_URL}/exams/${courseid}/${examtype}-${examid}`;
-  const sidetabContainers = map(range(problemIDs.length), (index) => {
-    const problemID = problemIDs[index];
-    const problemTitle = `Question ${replace(problemID, 'q', '')}`;
+  const sidetabContainers = map(info, (num_parts, part) => {
+    const problemTitle = `Question ${part}`;
 
-    if (problemID.length === 0) {
-      return (
-        <span key={index}><hr className="s1" /><div className="sidetitle">{problemTitle}</div></span>
-      );
-    } else {
-      return (
-        <div className="sidetab-container" key={index}>
-          {
-            <Scroll.Link activeClass="active" className="sidetab" to={problemID} spy={true} isDynamic={true} offset={-50} smooth={true} duration={500}
-             onClick={() => scrollNavClickEvent()}>
-              {problemTitle}
-            </Scroll.Link>
-          }
-        </div>
-      );
-    }
+    return (
+      <div className="sidetab-container" key={part}>
+        {
+          <Scroll.Link activeClass="active" className="sidetab" to={part} spy={true} isDynamic={true} offset={-50} smooth={true} duration={500}
+           onClick={() => scrollNavClickEvent()}>
+            {problemTitle}
+          </Scroll.Link>
+        }
+      </div>
+    );
   });
 
   const toc = (
@@ -72,6 +65,7 @@ const mapStateToProps = (state, ownProps) => {
     hasSolutions: ownProps.hasSolutions,
     examid: ownProps.examid,
     problemIDs: ownProps.problemIDs,
+    info: ownProps.info,
   };
 };
 

@@ -32,10 +32,11 @@ const ExamComponent = ({ appMode, courseid, examtype, examid, onToggleAppMode })
     </div>
   );
 
+  const { profs } = exams[courseid][examtype][examid];
   return (
     <div>
       {navComponents}
-      <ExamContent courseid={courseid} examtype={examtype} examid={examid} />
+      <ExamContent courseid={courseid} examtype={examtype} examid={examid} profs={profs} term={examid} />
     </div>
   );
 }

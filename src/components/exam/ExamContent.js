@@ -22,8 +22,18 @@ const Element = Scroll.Element;
 const scrollSpy = Scroll.scrollSpy;
 
 class ExamContentComponent extends Component {
+  componentWillReceiveProps(nextProps) {
+    const { courseid, examtype, examid } = nextProps
+    if (!(this.props.courseid === nextProps.courseid &&
+          this.props.examtype === nextProps.examtype &&
+          this.props.examid === nextProps.examid)) {
+      this.props.getExamContent(courseid, examtype, examid);
+    }
+  }
+
   componentDidMount() {
-    this.props.getExamContent();
+    const { courseid, examtype, examid } = this.props
+    this.props.getExamContent(courseid, examtype, examid);
   }
 
   componentDidUpdate() {
@@ -42,23 +52,19 @@ class ExamContentComponent extends Component {
       return null;
     }
 
-    const { examContent, courseid, examtype, examid, appMode } = this.props;
+    const { examContent, courseid, examtype, examid, appMode, profs, term } = this.props;
     const problemIDs = keys(examContent.parts);
-    const { prof, term, pre } = examContent;
-    const hasSolutions = reduce(examContent, function(result, value, key) {
-      return result || endsWith(key, "_s");
-    }, false);
+    const hasSolutions = true;
 
-    const content = map(examContent.parts, (num_parts, part) => {
+    const content = map(examContent.info, (num_parts, part) => {
       const subparts = map(range(1, num_parts + 1), subpart => {
         const key = `${part}_${subpart}`;
-        if (!has(examContent, key)) {
+        if (!has(examContent.problems, key)) {
           console.warn(`${key} doesn't exist in exam!`);
           return null;
         }
-        var qcontent = examContent[key] || '';
-        var solution = examContent[key + "_s"] || '';
-        // TODO: Remove md from .yml files
+        var qcontent = examContent.problems[key].problem || '';
+        var solution = examContent.problems[key].solution || '';
         qcontent = preprocess(qcontent);
         solution = preprocess(solution);
         return <Question id={`${part}_${subpart}`} courseid={courseid} content={qcontent} solution={solution} term={term} examtype={examtype} key={key} appMode={appMode} />
@@ -71,9 +77,8 @@ class ExamContentComponent extends Component {
       <div id="header-text">
         <div className="center">
           <h4>{courseIDToLabel[courseid]}</h4>
-          <h5>{examTypeToLabel[examtype]} | {termToLabel[term]} | {prof}</h5>
+          <h5>{examTypeToLabel[examtype]} | {termToLabel[term]} | {profs}</h5>
         </div>
-        <div dangerouslySetInnerHTML={{__html: pre}} />
       </div>
     );
 
@@ -81,7 +86,7 @@ class ExamContentComponent extends Component {
       <div className="content">
         {examDesc}
         {content}
-        {(appMode) ? <Sidebar problemIDs={problemIDs} term={term} courseid={courseid} examtype={examtype} hasSolutions={hasSolutions} examid={examid} /> : null}
+        {(appMode) ? <Sidebar info={examContent.info} term={term} courseid={courseid} examtype={examtype} hasSolutions={hasSolutions} examid={examid} /> : null}
       </div>
     );
   }
@@ -97,8 +102,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    getExamContent: () =>
-      fetch(`/getExam/${ownProps.courseid}/${ownProps.examtype}/${ownProps.examid}`).then(
+    getExamContent: (courseid, examtype, examid) =>
+      fetch(`/getExam/${courseid}/${examtype}/${examid}`).then(
         (response) => response.json()
       ).then(
         (json) => dispatch(updateExamContent(json))
