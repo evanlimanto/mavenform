@@ -22,7 +22,7 @@ const ExamComponent = ({ appMode, courseid, examtype, examid, onToggleAppMode })
 
   const navComponents = (appMode) ? (
     <span>
-      <Navbar isExam={true} onToggleAppMode={onToggleAppMode} />
+      <Navbar courseid={courseid} isExam={true} onToggleAppMode={onToggleAppMode} />
       <NavSidebar courseid={courseid} examtype={examtype} examid={examid} isExam={true} />
     </span>
   ) : (
