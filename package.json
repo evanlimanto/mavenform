@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "babel-register": "^6.24.1",
     "concurrently": "^3.3.0",
     "enzyme": "^2.7.1",
     "esformatter-jsx": "^7.4.1",
     "jest-enzyme": "^3.0.0",
     "react-addons-test-utils": "^15.4.2",
+    "react-router-sitemap": "^1.0.8",
     "react-scripts": "0.9.5",
     "redux-devtools": "^3.3.2",
     "redux-devtools-dock-monitor": "^1.1.1",
@@ -46,7 +48,8 @@
     "react-stickynode": "^1.2.1",
     "redux": "^3.6.0",
     "redux-router": "^2.1.2",
-    "sitemap": "^1.12.0"
+    "sitemap": "^1.12.0",
+    "sitemap-generator": "^6.0.0"
   },
   "main": "main.js",
   "proxy": "http://localhost:8080",

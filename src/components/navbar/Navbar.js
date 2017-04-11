@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const NavbarComponent = ({ course, onToggleAppMode, isExam }) => {
+const NavbarComponent = ({ courseid, onToggleAppMode, isExam }) => {
   const toggleBackComponent = (isExam) ? (
-      <Link to={`/${course}`} className="material-icons mobile-back">keyboard_backspace</Link>
+      <Link to={`/${courseid}`} className="material-icons mobile-back">keyboard_backspace</Link>
     ) : (
       <Link to="/courses" className="material-icons mobile-back">keyboard_backspace</Link>
     );
