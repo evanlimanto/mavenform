@@ -7,6 +7,7 @@ const glob = require('glob');
 const path = require('path');
 const NodeCache = require('node-cache');
 const pg = require('pg');
+const sm = require('sitemap');
 const _ = require('lodash');
 
 const port = process.env.PORT || 8080;
@@ -16,6 +17,7 @@ const useCache = (process.env.NODE_ENV !== 'development');
 const examCache = new NodeCache({ stdTTL: 30 * 60, checkperiod: 10 * 60 });
 console.log("Using redis to cache exams:", useCache);
 
+// Postgres
 if (process.env.NODE_ENV !== 'development') {
   pg.defaults.ssl = true;
 }
