@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import loadjs from 'loadjs';
 import { keys, identity, map, sortBy } from 'lodash';
 
 import { courseClickEvent } from '../../events';
 import { courseIDToLabel, courseIsFeatured, courses } from '../../exams';
 
 class Courses extends Component {
+  componentWillMount() {
+    loadjs('jquery.hideseek.min.js');
+  }
+
   render() {
     const sortedCourses = sortBy(keys(courses), [(courseid) => !courseIsFeatured[courseid], identity]);
     const courseBoxes = map(sortedCourses, (courseid) => {
