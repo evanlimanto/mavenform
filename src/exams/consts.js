@@ -93,6 +93,16 @@ const exams = {
   },
 
   'cs186': {
+    'mt2': {
+      'sp16': {
+        'term': 'Spring 2016',
+        'profs': 'Hellerstein',
+      },
+      'sp15': {
+        'term': 'Spring 2015',
+        'profs': 'Hellerstein',
+      },
+    },
     'mt1': {
       'sp16': {
         'term': 'Spring 2016',
@@ -108,16 +118,6 @@ const exams = {
       },
       'sp12': {
         'term': 'Spring 2012',
-        'profs': 'Hellerstein',
-      },
-    },
-    'mt2': {
-      'sp16': {
-        'term': 'Spring 2016',
-        'profs': 'Hellerstein',
-      },
-      'sp15': {
-        'term': 'Spring 2015',
         'profs': 'Hellerstein',
       },
     },

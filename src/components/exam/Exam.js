@@ -9,7 +9,7 @@ import NavSidebar from '../navsidebar';
 import NotFound from '../notfound';
 
 import { toggleAppMode } from '../../actions';
-import { exams } from '../../exams';
+import { exams, examTypeToLabel, termToLabel } from '../../exams';
 import { toggleAppModeEvent } from '../../events';
 
 import './Exam.css';
@@ -35,7 +35,7 @@ const ExamComponent = ({ appMode, courseid, examtype, examid, onToggleAppMode })
 
   const { profs } = exams[courseid][examtype][examid];
   const meta = {
-    description: `Past Exam - ${toUpper(courseid)} ${toUpper(examtype)} ${toUpper(examid)}`,
+    description: `${toUpper(courseid)} ${termToLabel[examid]} ${examTypeToLabel[examtype]}`,
   };
 
   return (
