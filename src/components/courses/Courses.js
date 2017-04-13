@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import loadjs from 'loadjs';
 import { keys, identity, map, sortBy } from 'lodash';
+import DocumentMeta from 'react-document-meta';
 
 import { courseClickEvent } from '../../events';
 import { courseIDToLabel, courseIsFeatured, courses } from '../../exams';
+
+const meta = {
+  description: 'List of Courses',
+};
 
 class Courses extends Component {
   componentWillMount() {
@@ -27,6 +32,7 @@ class Courses extends Component {
 
     return (
       <div className="courses">
+        <DocumentMeta {...meta} />
         <div className="banner">
           <Link to="/" className="material-icons courses-back">keyboard_backspace</Link>
           <div className="banner-img"></div>

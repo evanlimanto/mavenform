@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { has } from 'lodash';
+import { has, toUpper } from 'lodash';
+import DocumentMeta from 'react-document-meta';
 
 import ExamContent from './ExamContent';
 import Navbar from '../navbar';
@@ -33,8 +34,13 @@ const ExamComponent = ({ appMode, courseid, examtype, examid, onToggleAppMode })
   );
 
   const { profs } = exams[courseid][examtype][examid];
+  const meta = {
+    description: `Past Exam - ${toUpper(courseid)} ${toUpper(examtype)} ${toUpper(examid)}`,
+  };
+
   return (
     <div>
+      <DocumentMeta {...meta} />
       {navComponents}
       <ExamContent courseid={courseid} examtype={examtype} examid={examid} profs={profs} term={examid} />
     </div>

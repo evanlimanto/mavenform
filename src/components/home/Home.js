@@ -1,15 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import DocumentMeta from 'react-document-meta';
 import { closeNotificationBar } from '../../actions';
 import { learnMoreEvent, viewCoursesEvent } from '../../events';
 
 const Scroll = require('react-scroll');
 const Element = Scroll.Element;
 
+const meta = {
+  description: 'Mavenform is a new and intuitive format to view and study past exams currently serving thousands of students at UC Berkeley.',
+};
+
 const HomeComponent = ({ notificationBar, onCloseNotificationBar }) => {
   return (
     <div className="home">
+      <DocumentMeta {...meta} />
       {(notificationBar) ? (
         <div className="dark-gray center">
           <hr className="s2" />

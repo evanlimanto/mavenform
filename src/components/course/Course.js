@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { has, map } from 'lodash';
+import { has, map, toUpper } from 'lodash';
+import DocumentMeta from 'react-document-meta';
 
 import { toggleAppMode } from '../../actions';
 import { exams, examTypeToLabel, courseIDToLabel, courses } from '../../exams';
@@ -47,9 +48,13 @@ const CourseComponent = ({ courseid, appMode, onToggleAppMode }) => {
       <span className="tooltip">App Mode</span>
     </div>
   );
+  const meta = {
+    description: `Past Exams - ${toUpper(courseid)}`,
+  };
 
   return (
     <div>
+      <DocumentMeta {...meta} />
       {navComponents}
       <div>
         <h4 className="center">{courseIDToLabel[courseid]}</h4>
