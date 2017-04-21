@@ -337,6 +337,12 @@ const exams = {
   },
 
   'cs162': {
+    'mt3': {
+      'fa16': {
+        'term': 'Fall 2016',
+        'profs': 'Joseph',
+      }
+    },
     'mt2': {
       'fa16': {
         'term': 'Fall 2016',
@@ -395,11 +401,11 @@ const courses = {
 
 const courseIsFeatured = {
   'cs170': false,
-  'cs70': true,
+  'cs70': false,
   'ee16a': false,
-  'cs162': false,
+  'cs162': true,
   'ee16b': false,
-  'cs61b': true,
+  'cs61b': false,
   'cs161': false,
   'cs189': false,
   'cs61a': false,
@@ -407,7 +413,7 @@ const courseIsFeatured = {
   'data8': false,
   'cs186': false,
   'ugba10': false,
-  'cs61c': true,
+  'cs61c': false,
 };
 
 const examTypeToLabel = {
@@ -417,6 +423,7 @@ const examTypeToLabel = {
 
   'mt1': 'Midterm 1',
   'mt2': 'Midterm 2',
+  'mt3': 'Midterm 3',
   'final': 'Final',
 }
 

@@ -8,6 +8,7 @@ import Home from '../home';
 import Login from '../login';
 import NotFound from '../notfound';
 import Profile from '../profile';
+import Upload from '../upload';
 
 const requireAuth = (auth, history) => {
   if (!auth.loggedIn()) {
@@ -27,6 +28,7 @@ const Routes = (
     <Route path="/courses" component={Courses} />
     <Route path="/login" render={(props) => <Login parseAuthHash={parseAuthHash} {...props} />} />
     <Route path="/profile" render={(props) => <Profile requireAuth={requireAuth} {...props} />} />
+    <Route path="/upload" component={Upload} />
     <Route path="/:courseid/:examtype/:examid" component={Exam} />
     <Route path="/:courseid" component={Course} />
     <Route component={NotFound} />
