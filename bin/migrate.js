@@ -1,5 +1,4 @@
-var _ = require('lodash');
-var pg = require('pg');
+var _ = require('lodash'); var pg = require('pg');
 var fs = require('fs');
 var yaml = require('js-yaml');
 
@@ -16,6 +15,8 @@ create table exams (
 );
 */
 
+const type = 3;
+
 const config = {
   user: 'evanlimanto',
   database: 'mavenform',
@@ -23,6 +24,14 @@ const config = {
   port: 5432,
   host: 'localhost',
   max: 5,
+};
+
+const stagingConfig = {
+  user: 'qrykorzlcooyev',
+  database: 'd5956a3il3svmp',
+  password: 'a98b8a5c9c43e32cf55e8a2a29f639f5f65751b580a26300b26ccb5d815aea13',
+  port: 5432,
+  host: 'ec2-23-21-96-70.compute-1.amazonaws.com',
 };
 
 const prodConfig = {
@@ -33,15 +42,24 @@ const prodConfig = {
   host: 'ec2-23-21-96-70.compute-1.amazonaws.com',
 };
 
-pg.defaults.ssl = false;
+if (type === 2 || type === 3) {
+  pg.defaults.ssl = true;
+}
 const Client = pg.Client;
 
-const client = new Client(config);
+let client = null;
+if (type === 1) {
+  client = new Client(config);
+} else if (type === 2) {
+  client = new Client(stagingConfig);
+} else if (type === 3) {
+  client = new Client(prodConfig);
+}
 client.connect();
 
-const courseid = 'cs162';
-const examtype = 'mt3';
-const examid = 'fa16';
+const courseid = 'ugba10';
+const examtype = 'marketing';
+const examid = 'sp16p';
 
 const delq = `delete from exams where courseid = $1 and examtype = $2 and examid = $3`;
 client.query({text: delq, values: [courseid, examtype, examid]})
@@ -58,18 +76,23 @@ try {
   process.exit(1);
 }
 const results = _.map(_.filter(_.keys(doc), function(k) {
-  return k.match(/^q\d_\d$/);
+  return k.match(/^q\d+_\d$/);
 }), (k) => [k, _.split(k.slice(1), "_")]);
+
+let counter = 0;
 _.forEach(results, (res) => {
   const problem_num = res[1][0];
   const subproblem_num = res[1][1];
   const problem = doc[res[0]];
   const solution = doc[`${res[0]}_s`];
+  const choices = _.has(doc, `${res[0]}_i`) ? _.join(doc[`${res[0]}_i`], '~') : null;
   const q = `
-insert into exams (courseid, examtype, examid, problem_num, subproblem_num, problem, solution)
-values ($1, $2, $3, $4, $5, $6, $7)
+insert into exams (courseid, examtype, examid, problem_num, subproblem_num, problem, solution, choices)
+values ($1, $2, $3, $4, $5, $6, $7, $8)
   `;
-  client.query(q, [courseid, examtype, examid, problem_num, subproblem_num, problem, solution], function (err, result) {
+  counter++;
+  client.query(q, [courseid, examtype, examid, problem_num, subproblem_num, problem, solution, choices], function (err, result) {
+    console.log("Query #", counter);
     console.log(err, result);
   });
 });

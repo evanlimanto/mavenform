@@ -75,8 +75,8 @@ app.get('/searchProblems/:query_str', function(req, res, next) {
 
 // Search tags
 app.get('/searchTags/:tag', function(req, res, next) {
-  const query_tag = req.params.query_tag;
-  const q = `select * from exams where tags like '%${query_tag}%'`;
+  const query_str = req.params.query_tag;
+  const q = `select * from exams where `;
   client.query({ text: q})
     .then((result) => {
       res.json(result.rows);
@@ -90,8 +90,7 @@ app.get('/getExam/:courseid/:examtype/:examid', function(req, res, next) {
   const examtype = req.params.examtype;
   const examid = req.params.examid;
 
-  console.log(courseid, examtype, examid);
-  const q = `select problem_num, subproblem_num, problem, solution from exams where courseid = $1 and examtype = $2 and examid = $3`;
+  const q = `select problem_num, subproblem_num, problem, solution, choices from exams where courseid = $1 and examtype = $2 and examid = $3`;
   client.query({ text: q, values: [courseid, examtype, examid]})
     .then((result) => {
       const info = _.reduce(result.rows, (result, row) => {
@@ -105,9 +104,9 @@ app.get('/getExam/:courseid/:examtype/:examid', function(req, res, next) {
         return result;
       }, {});
       const problems = _.reduce(result.rows, (result, row) => {
-        const { problem_num, subproblem_num, problem, solution } = row;
+        const { problem_num, subproblem_num, problem, solution, choices } = row;
         const key = `${problem_num}_${subproblem_num}`;
-        result[key] = { problem, solution };
+        result[key] = { problem, solution, choices };
         return result;
       }, {});
       res.json({info, problems});

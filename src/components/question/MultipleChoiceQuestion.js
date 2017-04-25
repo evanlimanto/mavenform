@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import copy from 'copy-to-clipboard';
 import classnames from 'classnames';
-import { map } from 'lodash';
+import { map, split } from 'lodash';
 
 import Expire from './Expire';
 import Solution from './Solution';
@@ -11,7 +11,7 @@ import { copyQuestionLinkEvent } from '../../events';
 
 const MultipleChoiceQuestionComponent = ({ id, courseid, content, examtype, term, copying, solutionNum, choices, copyQuestionLink, doneCopyingLink, showSolutions }) => {
   solutionNum = (solutionNum) ? (solutionNum - 1) : null;
-  const options = map(choices, (choice, index) => {
+  const options = map(split(choices, '~'), (choice, index) => {
     choice = `${String.fromCharCode(index + 65)}) ${choice}`;
     const optionClass = classnames({
       option: true,
@@ -42,7 +42,6 @@ const MultipleChoiceQuestionComponent = ({ id, courseid, content, examtype, term
       <div dangerouslySetInnerHTML={{__html: content}}></div>
       <hr className="s1" />
       {options}
-      {SolutionComponent}
     </div>
   );
 }

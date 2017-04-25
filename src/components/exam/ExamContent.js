@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { has, range, replace, map } from 'lodash';
 
 import MDRenderer from './MDRenderer';
-import { Question } from '../question';
+import { Question, MultipleChoiceQuestion } from '../question';
 import Sidebar from '../sidebar';
 
 import { courseIDToLabel, examTypeToLabel, termToLabel } from '../../exams';
@@ -56,6 +56,7 @@ class ExamContentComponent extends Component {
 
     const { examContent, courseid, examtype, examid, appMode, profs, term } = this.props;
     const hasSolutions = true;
+    console.log(examContent);
 
     const content = map(examContent.info, (num_parts, part) => {
       const subparts = map(range(1, num_parts + 1), subpart => {
@@ -66,8 +67,12 @@ class ExamContentComponent extends Component {
         }
         var qcontent = examContent.problems[key].problem || '';
         var solution = examContent.problems[key].solution || '';
+        var choices = examContent.problems[key].choices || '';
         qcontent = preprocess(qcontent);
         solution = preprocess(solution);
+        if (courseid === 'ugba10') {
+          return <MultipleChoiceQuestion id={`${part}_${subpart}`} courseid={courseid} content={qcontent} solutionNum={solution} term={term} examtype={examtype} key={key} appMode={appMode} choices={choices} />
+        }
         return <Question id={`${part}_${subpart}`} courseid={courseid} content={qcontent} solution={solution} term={term} examtype={examtype} key={key} appMode={appMode} />
       });
 
@@ -87,7 +92,7 @@ class ExamContentComponent extends Component {
       <div className="content">
         {examDesc}
         {content}
-        {(appMode) ? <Sidebar info={examContent.info} term={term} courseid={courseid} examtype={examtype} hasSolutions={hasSolutions} examid={examid} /> : null}
+        {(appMode) ? ((courseid === 'ugba10') ? <Sidebar term={term} courseid={courseid} examtype={examtype} hasSolutions={hasSolutions} examid={examid} /> : <Sidebar info={examContent.info} term={term} courseid={courseid} examtype={examtype} hasSolutions={hasSolutions} examid={examid} />) : null}
       </div>
     );
   }

@@ -1,0 +1,408 @@
+course: 'ugba10'
+ref: 'marketing-sp16'
+
+type: 'marketing'
+term: 'sp16'
+prof: 'Hopelain'
+mcq: true
+num: 36
+has_solutions: false
+
+q1_1: |
+  Which of these is an example of the Apple's use of the Place lever in marketing the Apple Watch?
+
+q1_1_i:
+  - Running a 12-page ad in Vogue
+  - Offering three versions and multiple watchbands at launch
+  - Only allowing pre-orders on apple.com
+  - Having several mobile apps adapted for the Apple Watch at launch
+
+q1_1_s: -1
+
+q2_1: |
+  A management consultant who belongs to the Hilton, Hyatt and Marriott loyalty programs and likes them all equally chooses where to stay based on which one is closest to the client. Which quadrant of the Customer Relationship Group Framework does she fit in?
+
+q2_1_i:
+  - Butterfly
+  - True Friend
+  - Barnacle
+  - Stranger
+
+q2_1_s: -1
+
+q3_1: |
+  Which of these is NOT an example of a SMART marketing objective?
+
+q3_1_i:
+  - Increase the average order size by 5% within 3 years
+  - Be on Fortune's top 10 best places to work in America next year
+  - Have half of sales come from products less than 3 years old within 18 months
+  - Increase customer lifetime value significantly over the next several years
+
+q3_1_s: -1
+
+q4_1: |
+  The scandal over Volkswagen's falsification of the performance of its clean diesel engine technology has ramifications for VW as well as other carmakers. From the perspective of Mercedes Benz's clean diesel engine initiative, which quadrant of the SWOT analysis does the VW scandal belong in?
+
+q4_1_i:
+  - Strengths
+  - Weaknesses
+  - Opportunities
+  - Threats
+
+q4_1_s: -1
+
+q5_1: |
+  Which of these could be a NON-FINANCIAL marketing objective of Twitter:
+
+q5_1_i:
+  - Increase advertising revenue per user
+  - Improve tweet searchability
+  - Generate sponsorship revenue
+  - Grow Twitter's user base
+
+q5_1_s: -1
+
+q6_1: |
+  Scandals can hurt a company badly - stock prices drop, lawsuits are filed, people lose their jobs. Which of the tactics listed below is a way companies try to insulate their product brands from scandals affecting other brands in the portfolio and the corporate brand?
+
+q6_1_i:
+  - Using the company name in product brand names
+  - Using the company name to endorse product brand names
+  - Using product brand names that are not linked or related to the company name
+  - Using celebrity spokespeople as the face of the brand
+
+q6_1_s: -1
+
+q7_1: |
+  TripIt Pro is a paid app that creates integrated travel itineraries automatically combining flight, hotel, and car reservations, and is highly popular among frequent travelers. Which of these tactics is the best option for growing TripIt Pro's revenue and user base?
+
+q7_1_i:
+  - Free 3-month subscriptions for first time buyers to drive trial
+  - Discounts for repeat buyers to encourage renewals
+  - Discounts for members who buy TripIt Pro for family and friends
+  - Sponsorship to increase awareness
+
+q7_1_s: -1
+
+q8_1: |
+  Mastercard's successful and long-running marketing campaign is: "There are some things money can't buy. For everything else, there's MasterCard." What does this slogan tell you about Mastercard's positioning?
+
+q8_1_i:
+  - The target is things money can't buy
+  - The frame of reference is anything that money can buy
+  - Mastercard is exclusive and can only be used in a limited number of merchants
+  - The benefit is saving money
+
+q8_1_s: -1
+
+q9_1: |
+  Fairlife is Coca-Cola's new line of filtered protein- and calcium-enriched milk that is low in sugar, and lactose- and fat-free. Which of these is LEAST LIKELY to be a market for Fairlife milk?
+
+q9_1_i:
+  - Consumers on a high-protein diet
+  - Consumers taking calcium supplements
+  - Lactose intolerant kids
+  - Consumers on a high-fat diet
+
+q9_1_s: -1
+
+q10_1: |
+  Imagine you have an assignment to profile millennials who have traveled internationally on vacation in the past year. Which of the following would probably NOT be included in that profile?
+
+q10_1_i:
+  - The type of car they own
+  - Where they prefer to stay when on vacation
+  - How long their international trips usually last
+  - Age, income, education, and zip code
+
+q10_1_s: -1
+
+q11_1: |
+  Which of the following is a marketing advantage of having all customer information in one integrated database?
+
+q11_1_i:
+  - Greater insight by having a holistic view of customer relationships
+  - Reduced labor expense by simplifying data entry
+  - Better security by having only one database to protect customer information
+  - Streamlined programming by having only one database to pull customer information from
+
+q11_1_s: -1
+
+q12_1: |
+  General Mills has reformulated many of its cereal products by removing artifical flavors and colors in order to appeal to new consumers who care about natural ingredients. According to the Product/Market Expansion matrix, what type of growth is this?
+
+q12_1_i:
+  - Market Penetration
+  - Product Expansion
+  - Market Expansion
+  - Diversification
+
+q12_1_s: -1
+
+q13_1: |
+  Movie studio marketers have learned that Hispanic moviegoers tend to buy ticketes in particularly large groups and that if they hook one family member, they can get an exponential result. As a result, in promoting the launch of Disney's remake of "The Jungle Book," the studio teamed with Hispanic television powerhouse Univision for a five-week stunt that brought "Jungle Book" characters and clips to telenovelas, talk shows and sports coverage.
+
+q13_1_i:
+  - Product
+  - Price
+  - Place
+  - Promotion
+
+q13_1_s: -1
+
+q14_1: |
+  Ferrari aspires to be a lifestyle luxury brand. Which of the following potential moves would NOT be a proof point of the brand's lifestyle positioning?
+
+q14_1_i:
+  - Opening Ferrari World theme parks
+  - Selling a line of Ferrari fragrances exclusively at Neiman Marcus department stores
+  - Selling a line of Ferrari-branded socks at JC Penney
+  - Competing in Formula 1 racing
+
+q14_1_s: -1
+
+q15_1: |
+  In many ways, Snapple is in the fashion business. It comes in 40 different flavors, and is known for the fun facts on the inside of the cap. Which of the 4 P's are Snapple's famed bottle caps an example of?
+
+q15_1_i:
+  - Place
+  - Product
+  - Price
+  - Promotion
+
+q15_1_s: -1
+
+q16_1: |
+  Read this theoretical positioning statement for Snapchat's advertising business:
+  <hr class="s1" />
+  For advertisers looking to reach tightly knit communities, Snapchat is an exciting new social ad platform that delivers higher engagement and conversion because only Snapchat presents personal, tiny, disappearing messages that mimic real conversations.
+  <hr class="s1" />
+  Which of these is Snapchat's frame of reference?
+
+q16_1_i:
+  - Advertisers
+  - Higher engagement and conversion
+  - Personal, tiny, disappearing messages
+  - Social ad platform
+
+q16_1_s: -1
+
+q17_1: |
+  Marketers use a variety of quantitative research techniques to gain insight into customers. Which of these is a methodology for conducting quantitative research?
+
+q17_1_i:
+  - Telephone surveys of users and prospects
+  - Ethnograph
+  - Focus groups
+  - Online bulletin boards
+
+q17_1_s: -1
+
+q18_1: |
+  Which of these could be one of Gap, Inc's non-financial marketing objectives?
+
+q18_1_i:
+  - Increase the average transaction size in Gap stores and websites
+  - Increase the percentage of consumers who rate Gap as 'very innovative'
+  - Increase the number of transactions per day at Gap stores and websites
+  - Decrease the number of product returns
+
+q18_1_s: -1
+
+q19_1: |
+  Including the right people in research is one of the most important aspects of research design. Which of the following potential criteria do marketers typically use in screening research participants?
+
+q19_1_i:
+  - Availability to participate in the research
+  - Interest in the product or category being explored
+  - Access of a smartphone
+  - Memembership in one or more loyalty programs
+
+q19_1_s: -1
+
+q20_1: |
+  Choose the best way to complete this sentence from the options given. Customer or buyer profiles describe:
+
+q20_1_i:
+  - Customer hobbies, demographics and spychographics
+  - The physical appearance of the majority of customers
+  - The average discretionary income of customers
+  - The highest level of education attainment of most customers
+
+q20_1_s: -1
+
+q21_1: |
+  Choose the best way to complete this sentence from the options given. Buyer profiles are useful because they help marketers:
+
+q21_1_i:
+  - Address gaps in their product and service offering
+  - Set pricing to maximize profitable growth
+  - Place their marketing where potential customers are most likely to see it
+  - Hire the most talented job applicants for their marketing team
+
+q21_1_s: -1
+
+q22_1: |
+  Domino's views itself as the worldwide leader in pizza delivery. They designed the DXP delivery car with a built-in warming oven to help keep food wam while it's en route to a customer's home. Which part of Domino's home delivery positiong does the DXP belong in?
+
+q22_1_i:
+  - SMART objectives
+  - Mission
+  - Reasons to believe
+  - Target audience
+
+q22_1_s: -1
+
+q23_1: |
+  If one of Amazon's marketing objectives were to increase e-commerece revenue, an example of a strategic initiative to achieve this objective would be to:
+
+q23_1_i:
+  - Reward customers for writing product reviews
+  - Drive more traffic to the website
+  - Give customers the option of picking up their orders
+  - Increase the number of orders placed on the website
+
+q23_1_s: -1
+
+q24_1: |
+  Which of these questions is addressed by a products' positioning?
+
+q24_1_i:
+  - When will the product break even?
+  - How will employees participate in the product's financial success?
+  - Where should the product be sold?
+  - Why will customers choose the product?
+
+q24_1_s: -1
+
+q25_1: |
+  The classic value proposition framework includes 3 key elements. Which of these is NOT one?
+
+q25_1_i:
+  - What we do
+  - How we price
+  - Who we are
+  - Why what we do matters
+
+q25_1_s: -1
+
+q26_1: |
+  General Foods' aim to have over 80% of company volume generated by brands in either the #1 or #2 position in their category is an example of:
+
+q26_1_i:
+  - SMART objectives
+  - Company mission
+  - Integrated marketing
+  - Marketing tactics
+
+q26_1_s: -1
+
+q27_1: |
+  Farmers Only is one of many dating apps and sites. Their focus on these consumers who farm for a living is an example of which type of segmentation?
+
+q27_1_i:
+  - Psychographic-based segmentation
+  - Demographic-based segmentation
+  - Behavioral-based segmentation
+  - Needs-based segmentation
+
+q27_1_s: -1
+
+q28_1: |
+  H&M advertises that its business concept is "fashion and quality at the best price in a sustainable way". They ahve collaborated with many high-end designers including Jimmy Choo, Versace, Alexander Wang, and several fashion icons including David Backham, Madonna and Beyonce. What role do these collaborations play in H&M's positioning?
+
+q28_1_i:
+  - They are indicative of the target
+  - They are the key benefit
+  - They are the frame of reference
+  - They are what makes it believable
+
+q28_1_s: -1
+
+q29_1: |
+  TOMS is motivated by the belief that they can improve people's lives through business. Pick the statement that best describes what TOMS mission does for the organization:
+
+q29_1_i:
+  - Defines the industry they compete in
+  - Details the specific metrics that will be used to evaluate performance
+  - Motivates employees and attracts recruits
+  - Details the tactics used to achieve its goals
+
+q29_1_s: -1
+
+q30_1: |
+  Most consumers fly on more than one airline. Which of these tactics might United Airlines try to increase purchase loyalty among air travelers?
+
+q30_1_i:
+  - Create a better in-flight experience
+  - Run TV ads about United employees passion for customer service
+  - Get a celebrity spokesperson to be the face of the brand
+  - Sponsor a travel show on the Travel Network
+
+q30_1_s: -1
+
+q31_1: |
+  The Echo is one of many Amazon products that fall in the Question Mark quadrant of the BCG Growth Share Matrix. As a question mark, the main marketing challenge for the Echo is:
+
+q31_1_i:
+  - Increasing market share
+  - Maximizing marketing efficiency
+  - Increasing loyalty
+  - Staying relevant
+
+q31_1_s: -1
+
+q32_1: |
+  Imagine a consumer who has a Samsung TV and a Sony Playstation as well as an iPhone, Macbook Pro and an iPad, and consistently buys Apple computer products because she thinks they work better together. Which quadrant of the Customer Relationship Group framework would you classify this consumer in?
+
+q32_1_i:
+  - Butterfly
+  - True Friend
+  - Barnacle
+  - Stranger
+
+q32_1_s: -1
+
+q33_1: |
+  What is the farthest stage in the TripAdvisor marketing funnel that a customer who books a hotel room based on a review he read on TripAdvisor, and writes his own glowing TripAdvisor review after staying there has reached?
+
+q33_1_i:
+  - Trial
+  - Considerationg
+  - Aided awareness
+  - Advocacy
+
+q33_1_s: -1
+
+q34_1: |
+  Domino's Pizza changed its name recently to Domino's. Which quadrant of othe Product/Market Expansion matrix, does its name change suggest that Domino's pursuing? (Note: there are only three options offered)
+
+q34_1_i:
+  - Market penetration
+  - Market expansion
+  - Product expansion
+
+q34_1_s: -1
+
+q35_1: |
+  Businesses in different quadrants of the Growth-Share Matrix receive different levels and types of marketing investment. If you're working in a Star business like Amazon Web Services (AWS), you are likely to
+
+q35_1_i:
+  - Have a smaller marketing budget than colleagues working the Question Marks like the Echo
+  - Focus your marketing on increasing AWS's market share
+  - Focus your marketing building sustainable advantage
+  - Focus your marketing spending on growing the market for AWS services
+
+q35_1_s: -1
+
+q36_1: |
+  Whole Foods new chain of stores is targeting the subset of millennial consumers who are interested in affordable natural and organic products made or raised with the quality standards Whole Foods is known for. Based on just this information, what type of segmentation underlies the new chain's positioning?
+
+q36_1_i:
+  - Demographic
+  - Behavioral
+  - Psychographic
+  - Price sensitivity
+
+q36_1_s: -1

@@ -43,7 +43,7 @@ const SidebarComponent = ({ term, courseid, examtype, hasSolutions, examid, prob
   return (
     <span>
       <div className="sidebar">
-        {toc}
+        {(info) ? toc : null}
         {noSolutionsInfo}
         <h6>SOURCES</h6>
         <div className="sidetab-container">
