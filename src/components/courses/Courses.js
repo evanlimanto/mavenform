@@ -9,6 +9,7 @@ import { courseIDToLabel, courseIsFeatured, courses } from '../../exams';
 
 const meta = {
   description: 'List of Courses',
+  title: 'Course List',
 };
 
 class Courses extends Component {

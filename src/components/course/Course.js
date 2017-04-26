@@ -49,7 +49,8 @@ const CourseComponent = ({ courseid, appMode, onToggleAppMode }) => {
     </div>
   );
   const meta = {
-    description: `Past Exams - ${toUpper(courseid)}`,
+    description: `${toUpper(courseid)} - Past Exams`,
+    title: `${toUpper(courseid)} - Past Exams`,
   };
 
   return (

@@ -56,7 +56,6 @@ class ExamContentComponent extends Component {
 
     const { examContent, courseid, examtype, examid, appMode, profs, term } = this.props;
     const hasSolutions = true;
-    console.log(examContent);
 
     const content = map(examContent.info, (num_parts, part) => {
       const subparts = map(range(1, num_parts + 1), subpart => {

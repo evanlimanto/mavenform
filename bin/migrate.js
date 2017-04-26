@@ -15,7 +15,7 @@ create table exams (
 );
 */
 
-const type = 3;
+const type = 2;
 
 const config = {
   user: 'evanlimanto',
@@ -59,7 +59,7 @@ client.connect();
 
 const courseid = 'ugba10';
 const examtype = 'marketing';
-const examid = 'sp16p';
+const examid = 'sp11';
 
 const delq = `delete from exams where courseid = $1 and examtype = $2 and examid = $3`;
 client.query({text: delq, values: [courseid, examtype, examid]})

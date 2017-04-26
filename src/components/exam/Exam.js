@@ -36,6 +36,7 @@ const ExamComponent = ({ appMode, courseid, examtype, examid, onToggleAppMode })
   const { profs } = exams[courseid][examtype][examid];
   const meta = {
     description: `${toUpper(courseid)} ${termToLabel[examid]} ${examTypeToLabel[examtype]}`,
+    title: `${toUpper(courseid)} ${termToLabel[examid]} ${examTypeToLabel[examtype]}`,
   };
 
   return (

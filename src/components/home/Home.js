@@ -10,6 +10,7 @@ const Element = Scroll.Element;
 
 const meta = {
   description: 'Mavenform is a new and intuitive format to view and study past exams currently serving thousands of students at UC Berkeley.',
+  title: 'Mavenform - Home',
 };
 
 const HomeComponent = ({ notificationBar, onCloseNotificationBar }) => {
