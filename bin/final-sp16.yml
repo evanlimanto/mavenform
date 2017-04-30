@@ -1,0 +1,390 @@
+course: 'ee16b'
+
+type: 'final'
+term: 'sp16'
+prof: 'Sahai, Maharbiz'
+
+q1_1: |
+  # Section 1: Straightforward Questions (80 + 10 pts
+  # 3. Matching Question (9 pts)
+  Consider the 2-dimensional differential equation
+  $$\frac{d}{dt}\vec{x}(t) = A\vec{x}(t)$$
+  where $A$ is a $2$ by $2$ real matrix.
+  With some initial values, solutions as a function of time have been plotted. **Please select the corresponding solution plot for each $A$ matrix.** (No need to show work)
+  <hr class="s2" />
+  ![plots](/img/ee16b/final-sp16-q1-1.png)
+  <hr class="s2" />
+  (a) $A = \left[ \begin{array}{c c} -3 & -1 \\\\ -1 & -3 \\\\ \end{array} \right]$ This has eigenvalues $-4, -2$.
+
+q1_1_s: |
+  For this continues time system, both eigenvalues are in the left half-plane, which means the system is stable and the state variables will converge to zero. (C)
+
+q1_2: |
+  (b) $A = \left[ \begin{array}{c c} 0.15 & 1 \\\\ -1 & 0.15 \\\\ \end{array} \right]$ This has eigenvalues $0.15 \pm i$.
+
+q1_2_s: |
+  The two eigenvalues are in the right half-plane with conjugate imaginary parts and positive real parts. The system is unstable. The state variables will blow up with oscillation. (B)
+
+q1_3: |
+  (c) $A = \left[ \begin{array}{c c} 1 & 4 \\\\ 2 & -1 \\\\ \end{array} \right] $ This has eigenvalues $\pm 3$.
+
+q1_3_s: |
+  There is one eigenvalue located in the right half-plane (positive real part), so the state variables will blow up. The lack of imaginary parts means that there is not going to be any oscillations. Notice that there is another eigenvalue located in the left half-plane, which results in a subspace on which the state does go to zero. But in general, as in this example, both of the state variables will go off to infinity because of the unstable part. (A)
+
+q2_1: |
+  # 4. What to do? (10 pts)
+  You have learned lots of techniques/concepts in this course. These include:
+  - (a) DFT
+  - (b) SVD
+  - (c) K-means
+  - (d) Eigenvalue placement by means of controllable canonical form
+
+  <hr class="s2" />
+  For each of the scenarios below, **please choose which technique/concept you should invoke.** No explanations are needed.
+  <hr class="s2" />
+  (a) You want to design a feedback law to regulate a system to make it stable.
+
+q2_1_s: |
+  (d) Eigenvalue placement lets us place the closed-loop eigenvalues so that the system is stable.
+
+q2_2: |
+  (b) You have a data set and you want to find a lower-dimensional subspace that you can project it onto while still keeping most of the important variation in the data set.
+
+q2_2_s: |
+  (b). The SVD allows us to do PCA and thereby discover the low-dimensional subspace that contains most of the variation.
+
+q2_3: |
+  (c) You have some data on how much different individuals like different kinds of food and you want to classify people into several groups based on their preferences.
+
+q2_3_s: |
+  (c) To classify, we want to cluster. K-means does that for us.
+
+q2_4: |
+  (d) You want to find a control sequence $u(t)$ of length $n$ that will take the state of a linear system from $\vec{0}$ to a desired destination $\vec{p}$ such that the control sequence $u$ viewed as an $n$-length vector $\vec{u}$ has the smallest Euclidean norm.
+
+q2_4_s: |
+  (b) The SVD allows us to compute pseudo-inverses that give the minimum norm solution to a fat system of equations. This is exactly the problem we face when we have many choices of control sequences that will take us to the desired destination.
+  <hr class="s1" />
+  The eigenvalues are not really relevant in a direct way since we want to pick a specific control sequence, not a new system behavior.
+
+q2_5: |
+  (e) You have some measurements at regular intervals from a slowly varying physical process and would like to reconstruct hypothetical measurements for times in between your measurements.
+
+q2_5_s: |
+  (a) This is a problem that calls for interpolation since we want to fill in missing measurements. For this, the DFT is useful because it lets us model slowly varying as a signal that doesn’t have any high frequencies in it.
+
+q3_1: |
+  # 5. Matching: DFT and Sampling (12 pts)
+  **Circle your answer. There is no need to give any justification.**
+  <hr class="s2" />
+  (a) Given the time domain signal below with 12 samples taken over 3 seconds:
+  <hr class="s2" />
+  ![signals](/img/ee16b/final-sp16-q3-1.png)
+  <hr class="s2" />
+  Now, we have sampled the same signal at a different sampling rate to get 30 samples over 3 seconds:
+  <hr class="s2" />
+  ![signals](/img/ee16b/final-sp16-q3-2.png)
+  <hr class="s2" />
+  which plot below represents all the corresponding DFT coefficients?
+  <hr class="s2" />
+  ![dft](/img/ee16b/final-sp16-q3-3.png)
+
+q3_1_s: |
+  We want to test the following: the magnitudes for the DFT coefficients, the number of samples for the DFT coefficients, and how to get the coefficients. The answer should be (B), since we should have more sample points and the magnitude should be larger.
+
+q3_2: |
+  (b) Given the time domain signal below with $30$ samples taken over $3$ seconds,
+  <hr class="s2" />
+  ![signals](/img/ee16b/final-sp16-q3-4.png)
+  <hr class="s2" />
+  Now, we have obtained the DFT coefficients for another sampled signal, with sampling frequency of $6$Hz:
+  <hr class="s2" />
+  ![signals](/img/ee16b/final-sp16-q3-5.png)
+  <hr class="s2" />
+  which one is the corresponding sampled signal?
+  <hr class="s2" />
+  ![signals](/img/ee16b/final-sp16-q3-6.png)
+
+q3_2_s: |
+  The answer should be (A) since the shape should be the same but the number of samples should be smaller. The manigude should remain the same as it matches the magnitudes of the DFT coefficients.
+
+q3_3: |
+  (c) Given the DFT coefficients of the sampled signal, obtained by taking 30 samples with a sampling frequency of 5Hz:
+  <hr class="s2" />
+  ![signal](/img/ee16b/final-sp16-q3-7.png)
+  <hr class="s2" />
+  Which one is possibly the corresopnding continuous time signal that was sampled?
+  <hr class="s2" />
+  ![signals](/img/ee16b/final-sp16-q3-8.png)
+
+q3_3_s: |
+  We also want to test about the sampling effects. Since we have nonzero coefficients at index of 2 and -2, it means we should have two periods of the signal. It should also be sinusoidal. The answer is (B).
+
+q4_1: |
+  # 6. Analyze a circuit in the Phasor-domain (18 pts)
+  ![circuit](/img/ee16b/final-sp16-q4-1.png)
+  The components in this circuit are described by:
+  $$v_{in}(t) = 10\text{cos}(50t - 53°)$$
+  $$R = 20\Omega, \quad L = 100mH, \quad C = 5mF$$
+  Here we assume $cos(53°) \approx \frac{3}{5}$ and $sin(53°) \approx \frac{4}{5}$ for the purposes of all calculations.
+  <hr class="s2" />
+  (a) (4 pts) **Express the voltage source as a phasor explicitly in the form** $a + bi$. Give numerical values for $a$ and $b$.
+
+q4_1_s: |
+  $v_{in}$ in phasor domain: $V_{in} = 10e^{-53°} = 10(cos(53°) - sin(53°)) = 6 - 8j$
+
+q4_2: |
+  (b) (8 pts) **Write down the transfer function** $H(\omega) = \frac{v_{out}}{v_{in}}$ **symbolically in terms of $C, R, L$ and $\omega$.**
+
+q4_2_s: |
+  This is a voltage divider. $Z_{R||C} = \frac{1}{\frac{1}{R} + j\omega C}$. Hence the transfer function is $\frac{\frac{R}{1 + j\omega RC}}{j\omega L + \frac{R}{1 + j\omega RC}} = \frac{1}{j\omega \frac{L}{R} + (j\omega)^2LC + 1}$
+
+q4_3: |
+  (c) (6 pts) Since $v_{in}(t) = 10cos(50t - 53°)$, we know $v_{out}(t)$ can be written as $\alpha cos(50t + \theta)$, where $\alpha$ is a positive real number, and $0° \le \theta \le 360°$. It turns out that $\alpha = 20 \sqrt{2}$. **Compute the numerical value for $\theta$.**
+  <hr class="s2" />
+  (HINT: Use the transfer function from the previous part appropriately.)
+
+q4_3_s: |
+  Plug in the numbers: $H(\omega = 50) = \frac{1}{j50\frac{0.1}{20} + (j50)^2 \times 0.1 \times 0.005 + 1} = \frac{1}{0.25j - 1.25 + 1} = \frac{1}{0.25\sqrt{2}e^{135°}}$ Therefore, the output voltage in phasor domain is $\frac{1}{0.25\sqrt{2}e^{135°}} \times 10e^{-j53°} = 20\sqrt{2}e^{j(-53-135)°} = 20\sqrt{2}e^{j(172)°}$ In time domain, $v_{out}(t) = 20\sqrt{2}cos(50t + 172°)$
+
+q5_1: |
+  # 7. Frequency-Selective Filter (18 pts)
+  Recall that the $n = 4$ DFT basis can be expressed as columns of a matrix:
+  $$\left[ \begin{array}{c c c c} | & | & | & | \\\\ \vec{u}_0 & \vec{u}_1 & \vec{u}_2 & \vec{u}_3 \\\\ | & | & | & | \\\\ \end{array} \right] = \frac{1}{2} \left[ \begin{array}{c c c c} 1 & 1 & 1 & 1 \\\\ 1 & i & -1 & -i \\\\ 1 & -1 & 1 & -1 \\\\ 1 & -i & -1 & i \\\\ \end{array} \right] = \left[ \begin{array}{c c c c} \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} \\\\ \frac{1}{2} & \frac{i}{2} -\frac{1}{2} & -\frac{i}{2} \\\\ \frac{1}{2} & -\frac{1}{2} & \frac{1}{2} & -\frac{1}{2} \\\\ \frac{1}{2} & -\frac{i}{2} & -\frac{1}{2} & \frac{i}{2} \\\\ \end{array} \right]$$
+  (a) (4 pts) Let $\frac{x}$ be a $4$-length vector with each element of $\vec{x}$ defined by
+  $$\vec{x}[k] = 1 + cos\frac{2\pi}{4}k$$
+  as $k = 0, 1, 2, 3$.
+  **Find the DFT (frequency-domain representation) of $\vec{x}$.**
+
+q5_1_s: |
+  There are two approaches to take for this problem.
+  <hr class="s1" />
+  First, you can discern by Euler’s Formula that
+  $$\vec{x} = \sqrt{4}(\vec{u}_0 + \frac{1}{2}(\vec{u}_1 + \vec{u}_3)) = 2\vec{u}_0 + \vec{u}_1 + \vec{u}_3$$
+  Hence, when doing the DFT you get
+  $$U\*\vec{x} = U\*(2\vec{u}_0 + \vec{u}_1 + \vec{u}_3) = \left[ \begin{array}{c} 2 \\\\ 0 \\\\ 0 \\\\ 0 \\\\ \end{array} \right] + \left[ \begin{array}{c} 0 \\\\ 1 \\\\ 0 \\\\ 0 \\\\ \end{array} \right] + \left[ \begin{array}{c} 0 \\\\ 0 \\\\ 0 \\\\ 1 \\\\ \end{array} \right] = \left[ begin{array}{c} 2 \\\\ 1 \\\\ 0 \\\\ 1 \\\\ \end{array} \right] = \vec{X}$$
+  Another method would have been to compute it directly by taking the conjugate transpose of the matrix above and applying $\vec{x} = [2, 1, 0, 1].$
+  <hr class="s1" />
+  Either way, the final result is
+  $$\vec{X} = \sqrt{4} \* [1, \frac{1}{2}, 0, \frac{1}{2}] = [2, 1, 0, 1]$$
+
+q5_2: |
+  (b) (8 pts) We want a real $4 \times 4$ matrix $H$ that filters/projects any vector $\vec{y}$ onto the subspace spanned by $\vec{u}_0, \vec{u}_1, \vec{u}_3$. (i.e. $H\vec{y}$ returns a vector that is inside the subspace and is the closest point in the subspace to $\vec{y}$.) Furthermore, we want this $H$ matirx to be circulant. (i.e. $H = C_{\vec{h}}$ for some $\vec{h}$). **What are the four eigenvalues and corresponding four eigenvectors for this matrix $H$?**
+
+q5_2_s: |
+  Since $H$ is circulant, we know that the DFT basis diagonalizes it as shown throughout the
+  course. Hence, the $4$ eigenvectors are the $4$ DFT basis vectors $\vec{u}_0, \vec{u}_1, \vec{u}_2, \vec{u}_3$ as shown in the previous part.
+  <hr class="s1" />
+  This means it is useful to think about things in the DFT basis. The great thing about the DFT basis is that it is orthonormal — so all angles and norms are preserved. The projection we want to do here is onto a very simple subspace that is axis-aligned.
+  <hr class="s1" />
+  To project/filter onto the $\vec{u}_0, \vec{u}_1, \vec{u}_3$ spanned vector that is close as possible to $\vec{y}$ simply means removing all components in the direction of $\vec{u}_2$ without affecting the other DFT vectors.
+  <hr class="s1" />
+  To see this using the DFT, let us consider $\vec{z} = H\vec{y}$. If we diagonalize $H$, we get that $\vec{Z} = \Lambda \vec{X}$ where $\vec{Z}$ and $\vec{X}$ are the DFTs of $\vec{z}$ and $\vec{x}$, respectively, and $\Lambda$ is the diagonal containing the eigenvalues of $H$. As such, each element of $\vec{Z}$ can be defined as $\vec{Z}[k] = \lambda_k \* \vec{X}[k]$.
+  <hr class="s1" />
+  Since each element of DFT corresponds to a different eigenvector, our goal is
+  $$\vec{Z}[k] = \begin{cases} 0 & \text{when} k = 2 \\\\ \vec{X}[k] & \text{else} \end{cases}$$
+  This immediately implies that the desired eigenvalues should be [1, 1, 0, 1].
+  <hr class="s1" />
+  Hence, the final result is
+  <hr class="s1" />
+  Eigenvectors = $[\vec{u}_0, \vec{u}_1, \vec{u}_2, \vec{u}_3]$
+  <hr class="s1" />
+  Eigenvalues = $[1, 1, 0, 1]$
+
+q5_3: |
+  (c) (6 pts) **What is the first column of the circulant matrix $H$?**
+
+q5_3_s: |
+  As shown in class, the first column of a circulant matrix is its impulse response, which we shall call $\vec{h}$. As such, we can find it by determining its DFT and then performing the inverse DFT.
+  <hr class="s1" />
+  Since the Eigenvalues found in the previous part are $[1, 1, 0, 1]$, the corresponding DFT of the first column must be $\frac{1}{\sqrt{4}}[1, 1, 0, 1] = \frac{1}{2}[1, 1, 0, 1]$.
+  <hr class="s1" />
+  Applying the inverse DFT tells us that
+  $$\vec{h} = \frac{1}{2}(\vec{u_0} + \vec{u_1} + \vec{u_3}) = \frac{1}{4} = (\sqrt{4} \vec{u_0} + 2 \* (\frac{\sqrt{4}}{2}(\vec{u_1} + \vec{u_3})))$$
+  Using Euler's Formula, we can show that each element of $\vec{h}$ is defined as
+  $$\vec{h}[k] = \frac{1}{4}(1 + 2cos\frac{2\pi}{4}k)$$
+  Evaluating at every $k$, the correct answer turns out to be
+  $$\frac{1}{4}[3, 1, -1, 1]$$
+
+q5_4: |
+  # 8. SVD Me (9 pts)
+  **Compute the SVD** (express a matrix as $A = U\Sigma V^T$ where $U$ and $V$ both have orthonormal columns and $\Sigma$ is a diagonal matrix with non-negative entries) **of the matrix**
+  $$A = \left[ \begin{array}{c c c} 1 & 1 & 0 \\\\ 1 & -1 & 0 \\\\ \end{array} \right]$$
+  **wherein $V$ is the $3 \times 3$ identity matrix.**
+  <hr class="s1" />
+  For your computational convenience:
+  $$AA^T = \left[ \begin{array}{c c} 2 & 0 \\\\ 0 & 2 \\\\ \end{array} \right], \quad A^TA = \left[ \begin{array}{c c c} 2 & 0 & 0 \\\\ 0 & 2 & 0 \\\\ 0 & 0 & 0 \\\\ \end{array} \right]$$
+
+q5_4_s: |
+  This question was testing whether students understood how the SVD relates the $U$ matrix to the $V$ matrix, as well as the meaning of the $\Sigma$ matrix. For this reason, the $AA^T$ and $A^TA$ were both chosen to be not only simple, but to have many possible choices of orthonormal eigenvectors.
+  <hr class="s2" />
+  To break the symmetry, we gave you the larger $V$ matrix that we wanted to target. At this point, there is a unique choice of the $A$ and $S$ matrix. There were many ways that you could have solved this problem. The easiest way is to first focus in on the $S$ term. We know this has to be the same shape as $A$, have zeros off the diagonal, and on the diagonal, have the positive square-roots of the eigenvalues of $AA^T$. Consequently:
+  $$\Sigma = \left[ \begin{array}{c c c} \sqrt{2} & 0 & 0 \\\\ 0 & \sqrt{2} & 0 \\\\ \end{array} \right]$$
+  At this point, it just remains to figure out what $U$ is. At this point, the structure of matrix multiplication makes the answer clear. Because V is the identity, $\Sigma V = \Sigma$. The coefficients in the $j$-th row of the $U$ matrix represent the weights of the rows of $\Sigma$ in the linear-combination of them required to make the $j$-th row of $A$. By inspection, the answer is thus:
+  $$U = \frac{1}{\sqrt{2}} \left[ \begin{array}{c c} 1 & 1 \\\\ 1 & -1 \\\\ \end{array} \right]$$
+  Alternatively, we know by the SVD decomposition that $AV = U\Sigma$ (post-multiply by $V$). Since $AV = A$, this means that the first column of $U$ is just $\frac{1}{\sqrt{2}}$ times the first column of $A$ and similarly for the second column.
+
+q6_1: |
+  # 9. Observer/Estimator Design (14 pts)
+  Consider the linear discrete-time system whose vector state $\vec{x}$ evolves according to:
+  $$\vec{x}(t + 1) = \left[ \begin{array}{c c} 0 & -2 \\\\ 3 & \frac{1}{3} \\\\ \end{array} \right] \vec{x}(t) + \left[ \begin{array}{c} 1 \\\\ 0 \\\\ \end{array} \right] u(t)$$
+  And has scalar output:
+  $$y(t) = [0 1]\vec{x}(t)$$
+  (a) (2 pts) Is this system observable?
+
+q6_1_s: |
+  We calculate
+  $$O = \left[ \begin{array}{c} C \\\\ CA \\\\ \end{array} \right] = \left[ \begin{array}{c c} 0 & 1 \\\\ 3 & 1/3 \\\\ \end{array} \right]$$
+  Observe that $O$ matrix is full rank and hence our system is observable.
+
+q6_2: |
+  (b) (12 pts) The observation $y(t) = [0 1]\vec{x}(t)$ gives us an observation of only one state variable. Let's build an observer/estimator to track both state variables. Define a system
+  $$\hat{x}(t + 1) = \left[ \begin{array}{c c} 0 & -2 \\\\ 3 & \frac{1}{3} \\\\ \end{array} \right] \hat{x}(t) + \left[ \begin{array}{c} 1 \\\\ 0 \\\\ \end{array} \right] u(t) + \vec{l}(y(t) - [0 1]\hat{x}(t))$$
+  where $\vec{l} \in \mathbb{R}^2 = \left[ \begin{array}{c} l_1 \\\\ l_2 \\\\ \end{array} \right]$. Now let $\vec{e}(t) = \vec{x}(t) - \hat{x}(t)$ and the error dynamics become:
+  $$\vec{e}(t + 1) = \underbrace{(\left[ \begin{array}{c c} 0 & -2 \\\\ 3 & \frac{1}{3} \\\\ - \vec{l}[0 1])}_{\overline{A}}\vec{e}(t)$$
+  **Find $l_1, l_2$ so that the error goes exactly to zero within two time steps no matter how bad our original estimate is.** *HINT: \overline{A} must have both eigenvalues be zero for this to be true.*
+
+q6_2_s: |
+  The closed loop system for the error dynamics of the observer is:
+  $$\overline{A} = \left[ \begin{array}{c c} 0 & -2 \\\\ 3 & 1/3 \\\\ \end{array} \right] - \vec{l}[0 1] = \left[ \begin{array}{c c} 0 & -2 \\\\ 3 & 1/3 \\\\ \end{array} \right] - \left[ \begin{array}{c} l_1 \\\\ l_2 \\\\ \end{array} \right] \times [0 1] = \left[ \begin{array}{c c} 0 & -2 - l_1 \\\\ 3 & 1/3 - l_2 \\\\ \end{array} \right]$$
+  Thus, the closed loop system for the error dynamics of the observer has the form
+  $$\vec{x}[t + 1] = \underbrace{\left[ \begin{array}{c c} 0 & -2 - l_1 \\\\ 3 & 1/3 - l_2 \\\\ \end{array}}_{\overline{A}}\vec{x}[t]$$
+  Thus, finding the eigenvalues of the above system we have
+  $$det(\lambda I - \left[ \begin{array}{c c} 0 & -2 - l_1 \\\\ 3 & 1/3 - l_2 \\\\ \end{array} \right]) = 0 \implies \lambda^2 + 9l_2 - 1/3)\lambda + 3l_1 + 6 = 0$$
+  However, we want to place both eigenvalues at $\lambda = 0$. Thus, this means that
+  $$\lambda^2 + (l_2 - 1/3)\lambda + 3l_1 + 6 = \lambda^2 \implies \lambda^2 + (l_2 - 1/3)\lambda + 3l_1 + 6 = \lambda^2$$
+  The above system of equations gives us $l_1 = -2, l_2 = 1/3$
+
+q7_1: |
+  # Section 2: Free-form questions (68 + 24 pts)
+  *You must show work for credit in all questions in this section.*
+  # 10. Controllable Canonical Form (20 pts)
+  When we are trying to stabilize a robot, it is sometimes useful to put the dynamics into a standard form that lets us more easily adjust its behavior.
+  <hr class="s2" />
+  Consider the linear continuous-time system below.
+  $$\frac{d}{dt}\vec{s}(t) = A_r\vec{s}(t) + \vec{b}_r u(t) = \left[ \begin{array}{c c} 2 & -1 \\\\ 1 & 0 \\\\ \end{array} \right] \vec{s}(t) + \left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right] u(t)$$
+  (a) (10 pts) There exists a transformation $\vec{z}(t) = T\vec{s}(t)$ such that the resulting system is in controllable canonical form:
+  $$\frac{d}{dt} \vec{z}(t) = \left[ \begin{array}{c c} 0 & 1 \\\\ \alpha_0 & \alpha_1 \\\\ \end{array} \right] \vec{z}(t) + \left[ \begin{array}{c} 0 \\\\ 1 \end{array} \right] u(t)$$
+  **Find this transformation matrix $T$ and the resulting $\alpha_0$ and $\alpha_1$ in controllable canonical form.**
+  *HINT: The column vectors of $T$ are just the standard basis vectors $\left{ \left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right], \left[ \begin{array}{c} 0 \\\\ 1 \end{array} \right] \right}$ arranged in some order.*
+
+q7_1_s: |
+  From the hint and we know $T$ cannot be the identity matrix, so
+  $$T = \left[ \begin{array}{c c} 0 & 1 \\\\ 1 & 0 \\\\ \end{array} \right]$$
+  With $T$, we can derive the canonical form matrix $A_c$ by
+  $$A_c = TA_rT^{-1} = \left[ \begin{array}{c c} 0 & 1 \\\\ 1 & 0 \\\\ \end{array} \right] \left[ \begin{array}{c c} 2 & -1 \\\\ 1 & 0 \\\\ \end{array} \right] \left[ \begin{array}{c c} 0 & 1 \\\\ 1 & 0 \\\\ \end{array} \right] = \left[ \begin{array} 0 & 1 \\\\ -1 & 2 \\\\ \end{array} \right]$$
+  Thus, $\alpha_0 = -1$ and $\alpha_1 = 2$.
+
+q7_2: |
+  (b) (10 pts) For the system given by $(A_r, \vec{b}_r, \vec{s}, u)$, **use the controllabel canonical form from the previous part** to obtain a state feedback law $u(t) = \vec{f}^T\vec{z}(t) = [f_0 f_1]\vec{z}(t)$ such that the resulting closed-loop system has eigenvalues $\lambda = -1, -2$ and then use the transformation $T$ to get $u(t) = \vec{g}^T\vec{s}(t) = [g_0 g_1]\vec{s}(t)$ a control law in terms of the original state variable $\vec{s}(t)$.
+  <hr class="s2" />
+  **What are the vectors $\vec{f}$ and $\vec{g}$?**
+  *You will get full credit if you correctly use the properties of controllable canonical form to do this, but you may check your answer by another method if you so desire.*
+
+q7_2_s: |
+  First we find a feedback law for $\vec{f}$ and $\vec{z}$. With the feedback, we have
+  $$\frac{d}{dt}\vec{z}(t) = \left(A_c + \left[ \begin{array}{c c} 0 & 0 \\\\ f_0 & f_1 \\\\ \end{array} \right] \right) \vec{z}(t) = \left[ \begin{array}{c c} 0 & 1 \\\\ -1 + f_0 & 2 + f_1 \\\\ \end{array} \right] \vec{z}(t)$$
+  The characteristic polynomial of the closed-loop system is given by
+  $$\lambda^2 - (2 + f_1)\lambda - (-1 + f_0)$$
+  Our goal is to place eigenvalues at $-1$ and $-2$, which is characterized by the polynomial
+  $$(\lambda + 1)(\lambda + 2) = \lambda^2 + 3\lambda + 2$$
+  By comparison of coefficients, we have
+  $$\begin{align}
+  & -2 - f_1 = 3 \\\\
+  & 1 - f_0 = 2 \\\\
+  \end{align}$$
+  Thus,
+  $$\vec{f} = \left[ \begin{array}{c} -1 \\\\ -5 \\\\ \end{array} \right]$$
+  Then, using the property of the controllabe canonical form, we have
+  $$\vec{g}^T = \vec{f}^T T = [-1 \; -5] \left[ \begin{array}{c c} 0 & 1 \\\\ 1 & 0 \\\\ \end{array} \right] = [-5 \; -1]$$
+
+q8_1: |
+  # 11. Feedback Control of Op-Amps (30 pts)
+  You have seen op-amps in negative feedback many times, and you have learned about feedback control. You may not have realized it yet, but these are actually related to each other.
+  <hr class="s2" />
+  ![circuits](/img/ee16b/final-sp16-q8-1.png)
+  <hr class="s2" />
+  Here, we introduce a dynamic model for a non-ideal op-amp:
+  $$\frac{d}{dt}v_o(t) = -v_o(t) + Gu(t)$$
+  where $v_o$ is the output voltage, and $u(t) = (v_{+}(t) - v_{-}(t))$ where $v_{+}$ and $v_{-}$ are the voltages at the positive and negative inputs respectively, and $G > 2$ is a parameter that defines the op-amp's behavior.
+  <hr class="s2" />
+  (a) (2 pts) Given the dynamic model for the nonideal op-amp, **assuming $v_{+}$ and $v_{-}$ are not changing, for what value of $v_o$ will $v_o$ not be changing?** Your answer should depend on $v_{+}, v_{-}, G$.
+
+q8_1_s: |
+  To find a steady-state value, set $\frac{d}{dt}v_o(t) = 0$, so the whole dynamic model simply becomes $v_o(t) = Gu(t) = G(v_{+}(t) - v_{-}(t))$.
+
+q8_2: |
+  (b) (2 pts) In the above, $v_{-}(t) = hv_o(t)$. **Pick values for the resistors $R_1$ and $R_2$ so that $h$ equals $\frac{1}{2}$.
+
+q8_2_s: |
+  The $h$ from a resistive divider will be $\frac{R_2}{R_1 + R_2}$, so to set that equal to $\frac{1}{2}, 2R_2 = R_1 + R_2$, so the resistors must be equal.
+  <hr class="s1" />
+  It doesn’t much matter which values you pick provided $R_2 = R_1$, but practical considerations tend to set the value somewhere between $10k$ and $10M$.
+
+q8_3: |
+  (c) (8 pts) Suppose we place the nonideal op-amp in resistive negative feedback using a voltage divider whose ratio is $h = \frac{1}{2}$, in other words set
+  $$u(t) = v_{+}(t) - hv_o(t)$$
+  **Write out the new differential equation that relates $v_o(t)$ to $v_{+}(t)$. Is this system stable? Briefly state why or why not.
+
+q8_3_s: |
+  Plugging the given value for $u$ into the dynamical model,
+  $$\frac{d}{dt}v_o(t) = -v_o(t) + G(v_{+}(t) - hv_o(t)) = -(1 + Gh)v_o(t) + Gv_{+}(t)$$
+  The eigenvalue has therefore changed from $-1$ to $-1 -Gh$, which means the system will be stable provided $G > 1$. Since we have been given that $G > 2$, the eigenvalue is definitely negative and there is no stability issue.
+
+q8_4: |
+  (d) (4 pts) If we had swapped the roles of the positive and negative terminals of the op-amp (i.e. had hooked the nonideal op-amp up in positive feedback so that $u(t) = hv_o(t) - v_{-}(t)$.) **would the resulting closed-loop system have been stable? Briefly state why or why not.**
+
+q8_4_s: |
+  Plugging in the new given value for $u$ into the dynamic model, this time we get
+  $$\frac{d}{dt}v_o(t) = -v_o(t) + G(hv_o(t) - v_{-}(t)) = (Gh - 1)v_o(t) - v_{-}(t)$$
+  This eigenvalue is $Gh - 1$, which (because we know $G > 2$) is positive, so the system is not stable.
+
+q8_5: |
+  (e) (10 pts) For the closed-loop system in negative feedback (from part (c)) using resistor values that set $h = \frac{1}{2}$, assume that the output voltage starts at $0V$ at time $0$ and that $v_{+}(t)$ was $0V$ but then jumps up to $1V$ at time $0$. **How long will it take for $v_o(t)$ to reach $1V$?** Your answer should be in terms of $G$.
+
+q8_5_s: |
+  Since our dynamical model is a simple first-order differential equation of the style we have seen repeatedly in $16$, we can explicitly solve it without too much trouble.
+  <hr class="s1" />
+  The first step is to figure out what the formal steady-state would be after the transition — i.e. at what $v_o$ would the derivative be zero. By inspection, the answer is $\frac{G_{v_{+}}}_{Gh + 1}$.
+  <hr class="s1" />
+  Now, we can change variables to see the transient behavior and consider $\widetilde{v}_o(t) = v_o(t) - \frac{Gv_{+}}_{Gh + 1}$. It is clear that $\frac{d}{dt} \widetilde{v}_o(t) = \frac{d}{dt} v_o(t)$ and hence the relevant differential equation is:
+  $$\frac{d}{dt} \widetilde{v}_o(t) = -(1 + Gh)v_o(t) - v_{+} = -(1 + Gh) \widetilde{v}_o(t)$$
+  This has the solution $\widetilde{v}_o(t) = e^{-(1 + Gh)t} \widetilde{v}_o(0)$ where the initial condition for the transient is clearly $\widetilde{v}_o(0) = -\frac{Gv_{+}}{1 + Gh}$. Putting it all together, we get:
+  $$v_o(t) = \frac{G}{1 + Gh} \left( 1 - e^{-(1 + Gh)t} \right) v_{+}$$
+  Then substituting in the parameters $v_{+} = 1, h = \frac{1}{2}$, we can set $v_o(t) = 1$ and solve for $t$:
+  $$1 = \frac{2G}{2 + G} \left( 1 - e^{-(1 + G/2)t} \right)$$
+  $$\frac{2 + G}{2G} = 1 - e^{-(1 + G/2)t}$$
+  $$e^{-(1 + G/2)t} = 1 - \frac{2 + g}{2G} = \frac{G - 2}{2G}$$
+  $$\left( 1 + \frac{G}{2} \right) t = ln \frac{2G}{G - 2}$$
+  $$t = \frac{ln \frac{2G}{G - 2}}{1 + G/2}$$
+  It is pretty common in practice (because $G$ is usually very large, typically something like a million) to assume the final value is exactly $2$; under that assumption we can solve the problem much more easily by observing that the $t$ we’re looking for is halfway between our initial and final values: $e^{\lambda t} = \frac{1}{2}$, so
+  $$t = \frac{-ln 2}{\lambda} = \frac{ln 2}{1 + G/2}$$
+  That’s pretty close to the value from the real method, and becomes closer as $G$ gets larger.
+
+q8_6: |
+  (f) (4 pts) **What happens to the answer of the previous part if $G \to \infty$?**
+
+q8_6_s: |
+  Hopefully it is intuitively clear that it should turn to $0$; the more negative our eigen-
+value, the faster the system responds, so when our eigenvalue goes to $-\infty$, the system should respond instantly.
+  <hr class="s2" />
+  If we actually mathematically take the limit of the answer in the previous part, we do in fact get $0$ since the log in the numerator is approaching a limit while the $G$ in the denominator is growing. So both intuition and math agree.
+
+q9_1: |
+  # 12. Newton interpolation (18 pts)
+  We have studied polynomial interpolation using the monomial basis and the Lagrange basis. In this problem, we study a different basis, known as the Newton basis. This basis has the property that although it depends on the sampling points, each basis element does not depend on all of the sampling points. As you do this problem, you should begin to understand why this basis might be interesting if the samples are revealed to us one at a time in order.
+  <hr class="s2" />
+  Suppose we are given $n+1$ distinct points $x_0, x_1, ..., x_n$, and we sample a polynomial $f$ at these points, such that we have the samples $f(x_0), f(x_1), ..., f(x_n)$. Our goal is to recover $f$ given these samples.
+  <hr class="s1" />
+  We define the Newton polynomials as follows.
+  $$\begin{align}
+  & N_0(x) = 1 \\\\
+  & N_1(x) = x - x_0 \\\\
+  & \quad \vdots \\\\
+  & N_n(x) = (x - x_0)(x - x_1) \cdots (x - x_{n-1})
+  \end{align}$$
+  Our goal is to find coefficients $a_0, ..., a_n$ such that
+  $$f(x) = a_0 N_0(x) + a_1 N_1(x) + \cdots + a_n N_n(x)$$
+  (a) (8 pts) We know there must exist an $(n + 1) \times (n + 1)$ matrix $U$ such that
+  $$U \left( \begin{array}{c} a_0 \\\\ a_1 \\\\ \vdots \\\\ a_n \end{array} \right) = \left( \begin{array}{c} f(x_0) \\\\ f(x_1) \\\\ \vdots \\\\ f(x_n) \right)$$
+  **Use what you know about the structure of $U$ to compute $a_0$ and $a_$ in terms of the $x_i$ and f(x_i)$.**

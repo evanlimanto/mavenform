@@ -9,7 +9,6 @@ from pdfminer.cmapdb import CMapDB
 from pdfminer.layout import LAParams
 import os
 
-# main
 def main(fname, output_f):
   # debug option
   debug = 0
@@ -35,11 +34,9 @@ def main(fname, output_f):
                          imagewriter=imagewriter)
   fp = open(fname, 'rb')
   interpreter = PDFPageInterpreter(rsrcmgr, device)
-  for (i, page) in enumerate(PDFPage.get_pages(fp, pagenos,
+  for page in PDFPage.get_pages(fp, pagenos,
                                 maxpages=maxpages, password=password,
-                                caching=caching, check_extractable=True)):
-    if i < 2:
-      continue
+                                caching=caching, check_extractable=True):
     page.rotate = (page.rotate+rotation) % 360
     interpreter.process_page(page)
   fp.close()
@@ -103,7 +100,7 @@ def process(fname):
   print(contents)
 
   i = 0
-  cur_q = 1
+  cur_q = 2
   start_i = None
   while i < len(contents):
     if match_question(contents, i, cur_q):
@@ -127,23 +124,21 @@ if __name__ == '__main__':
   args = parser.parse_args()
 
   filename = args.infile
-  #main(filename, 'out.txt')
+  main(filename, 'out.txt')
   process('out.txt')
-  #os.remove('out.txt')
+  os.remove('out.txt')
 
-  etype = 'mt2'
-  sem = 'sp11'
+  etype = 'marketing'
+  sem = 'sp16'
   header = \
   '''course: 'ugba10'
-ref: '%s-%s'
 
 type: '%s'
 term: '%s'
-prof: 'Nitsche'
 mcq: true
-num: 40
+num: 38
   '''
-  header = header % (etype, sem, etype, sem)
+  header = header % (etype, sem)
 
   items = [header]
   pattern = re.compile("ANS: ([A-Z])")
@@ -153,14 +148,10 @@ num: 40
     except IndexError:
       ans = "?"
     fmt = '''
-q%s_%s: |
-  %s
-
-q%s_%s_i:
 %s
 
-q%s_%s_s: %s
-    ''' % (i + 1, 1, question.qc.strip(), i + 1, 1, '\n'.join('  - %s' % subquestion.strip().replace('\n', '') for subquestion in question.parts), i + 1, 1, ord(ans) - ord('A') + 1)
+%s
+    ''' % (question.qc.strip().replace('\n\n', '\n'), '\n'.join('  - %s' % re.sub('\s+', ' ', ' '.join(subquestion.split())).strip().replace('\n', '').replace('\r','') for subquestion in question.parts))
     items.append(fmt)
 
   outfile = args.outfile
@@ -168,5 +159,6 @@ q%s_%s_s: %s
   yaml = ''.join(items)
 
   printable = set(string.printable) - set(chr(12))
+  yaml = yaml.replace(chr(9), ' ')
   yaml = filter(lambda x: x in printable, yaml)
   f.write(yaml)
