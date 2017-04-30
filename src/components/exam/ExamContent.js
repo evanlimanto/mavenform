@@ -50,7 +50,8 @@ class ExamContentComponent extends Component {
       return null;
     }
 
-    const { examContent, courseid, examtype, examid, appMode, profs, term } = this.props;
+    const { examContent, appMode, profs, term } = this.props;
+    const { courseid, examtype, examid } = this.props.exams[this.props.id];
     const hasSolutions = true;
 
     const content = map(examContent.info, (num_parts, part) => {
@@ -98,6 +99,7 @@ const mapStateToProps = (state, ownProps) => {
     appMode: state.config.appMode,
     examContent: state.exam.examContent,
     examContentHasLoaded: state.exam.examContentHasLoaded,
+    exams: state.global.exams.key_dict,
   };
 };
 

@@ -89,22 +89,31 @@ app.get('/getExams', function(req, res, next) {
   const q = `select * from exams`;
   client.query({ text: q })
     .then((result) => {
-      const dict = _.reduce(result.rows, (result, row) => {
+      const multi_dict = _.reduce(result.rows, (dict, row) => {
         const id = row.id;
         const courseid = row.courseid;
         const examtype = row.examtype;
         const examid = row.examid;
         const profs = row.profs;
-        if (!_.has(result, courseid)) {
-          result[courseid] = {};
+        if (!_.has(dict, courseid)) {
+          dict[courseid] = {};
         }
-        if (!_.has(result[courseid], examtype)) {
-          result[courseid][examtype] = {};
+        if (!_.has(dict[courseid], examtype)) {
+          dict[courseid][examtype] = {};
         }
-        result[courseid][examtype][examid] = { id, profs };
-        return result;
+        dict[courseid][examtype][examid] = { id, profs };
+        return dict;
       }, {});
-      res.json(dict);
+      const key_dict = _.reduce(result.rows, (dict, row) => {
+        const id = row.id;
+        const courseid = row.courseid;
+        const examtype = row.examtype;
+        const examid = row.examid;
+        const profs = row.profs;
+        dict[id] = { courseid, examtype, examid, profs };
+        return dict;
+      }, {});
+      res.json({ multi_dict, key_dict });
     });
 });
 

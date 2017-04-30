@@ -66,7 +66,7 @@ const mapStateToProps = (state, ownProps) => {
     examid: ownProps.examid,
     thisExamType: ownProps.examtype,
     isExam: ownProps.isExam,
-    exams: state.global.exams,
+    exams: state.global.exams.multi_dict,
   }
 };
 

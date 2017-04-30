@@ -51,7 +51,7 @@ const ExamComponent = ({ appMode, exams, courseid, examtype, examid, onToggleApp
 const mapStateToProps = (state, ownProps) => {
   return {
     appMode: state.config.appMode,
-    exams: state.global.exams,
+    exams: state.global.exams.multi_dict,
     courseid: ownProps.match.params.courseid,
     examtype: ownProps.match.params.examtype,
     examid: ownProps.match.params.examid,

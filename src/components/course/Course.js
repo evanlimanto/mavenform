@@ -92,7 +92,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     courseid: ownProps.match.params.courseid,
     appMode: state.config.appMode,
-    exams: state.global.exams,
+    exams: state.global.exams.multi_dict,
   }
 };
 

@@ -45,7 +45,7 @@ export const config = (state = { appMode: true }, action) => {
   }
 };
 
-export const global = (state = {}, action) => {
+export const global = (state = { exams: { key_dict: {}, multi_dict: {} } }, action) => {
   switch (action.type) {
     case 'UPDATE_EXAM_LIST':
       return {
