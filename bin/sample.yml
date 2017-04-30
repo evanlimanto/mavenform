@@ -1,260 +1,499 @@
-course: 'cs162'
-ref: 'mt2-sp16'
+course: 'ee16b'
 
-type: 'mt2'
+type: 'final'
 term: 'sp16'
-prof: 'Joseph'
-
-questions: {
-  'q1': 'True/Fase and Why?',
-  'q2': 'Memory and I/O',
-  'q3': 'Demand Paging',
-  'q4': 'Disks and File System',
-  'q5': 'Pintos Coding Question: Verifying user pointers',
-}
-
-parts: {
-  'q1': 4,
-  'q2': 5,
-  'q3': 3,
-  'q4': 6,
-  'q5': 6,
-}
+prof: 'Sahai, Maharbiz'
 
 q1_1: |
-  # 1. (12 points total) True/False and Why?
-  **CIRCLE YOUR ANSWER AND WRITE AN EXPLANATION (no credit will be given if no explanation is provided).**
-  <hr class="s1" />
-  a. In addition to greatly reducing the overall failure probability, moving from a single
-  hard drive to using RAID $1$ (mirroring) can also increase the throughput of small random reads.
+  # Section 1: Straightforward Questions (80 + 10 pts
+  # 3. Matching Question (9 pts)
+  Consider the 2-dimensional differential equation
+  $$\frac{d}{dt}\vec{x}(t) = A\vec{x}(t)$$
+  where $A$ is a $2$ by $2$ real matrix.
+  With some initial values, solutions as a function of time have been plotted. **Please select the corresponding solution plot for each $A$ matrix.** (No need to show work)
+  <hr class="s2" />
+  ![plots](/img/ee16b/final-sp16-q1-1.png)
+  <hr class="s2" />
+  (a) $A = \left[ \begin{array}{c c} -3 & -1 \\\\ -1 & -3 \\\\ \end{array} \right]$ This has eigenvalues $-4, -2$.
 
 q1_1_s: |
-  **TRUE.** The small reads need only be sent to a single disk, so in theory, a RAID-1 system can double small random read throughput. The correct answer was worth 2 points and the justification was worth an additional 2 points.
+  For this continues time system, both eigenvalues are in the left half-plane, which means the system is stable and the state variables will converge to zero. (C)
 
 q1_2: |
-  b. The TCP transport protocol provides a reliable, in-order bytestream abstraction.
+  (b) $A = \left[ \begin{array}{c c} 0.15 & 1 \\\\ -1 & 0.15 \\\\ \end{array} \right]$ This has eigenvalues $0.15 \pm i$.
 
 q1_2_s: |
-  **TRUE.** These are exactly the characteristics of TCP. The correct answer was worth 1 point and the justification was worth an additional 2 points.
+  The two eigenvalues are in the right half-plane with conjugate imaginary parts and positive real parts. The system is unstable. The state variables will blow up with oscillation. (B)
 
 q1_3: |
-  c. The Byzantine failure model allows arbitrary behavior by a faulty system
-  component.
+  (c) $A = \left[ \begin{array}{c c} 1 & 4 \\\\ 2 & -1 \\\\ \end{array} \right] $ This has eigenvalues $\pm 3$.
 
 q1_3_s: |
-  **TRUE.** That is the definition of the model. The correct answer was worth 2 point and the justification was worth an additional 2 points.
-
-q1_4: |
-  d. Remote Procedure Calls provide identical semantics to local calls.
-
-q1_4_s: |
-  **FALSE.** RPCs can suffer from network/server failures, so the users need to deal with this difference. The correct answer was worth 2 points and the justification was worth an additional 2 points.
+  There is one eigenvalue located in the right half-plane (positive real part), so the state variables will blow up. The lack of imaginary parts means that there is not going to be any oscillations. Notice that there is another eigenvalue located in the left half-plane, which results in a subspace on which the state does go to zero. But in general, as in this example, both of the state variables will go off to infinity because of the unstable part. (A)
 
 q2_1: |
-  # 2. (26 points total) Memory and I/O.
-  a. (12 points) For each statement, **CIRCLE** the address translation scheme(s) for
-  which the statement is true.
-  <hr class="s1" />
-  i) (4 points) A process cannot directly read or write another process’ memory.
-  Assume there is no `mmap()` operation.
-  - No translation
-  - Base and Bound
-  - Segmentation
-  - Paging
+  # 4. What to do? (10 pts)
+  You have learned lots of techniques/concepts in this course. These include:
+  - (a) DFT
+  - (b) SVD
+  - (c) K-means
+  - (d) Eigenvalue placement by means of controllable canonical form
+
+  <hr class="s2" />
+  For each of the scenarios below, **please choose which technique/concept you should invoke.** No explanations are needed.
+  <hr class="s2" />
+  (a) You want to design a feedback law to regulate a system to make it stable.
 
 q2_1_s: |
-  **Base and Bound, Segmentation, and Paging**
+  (d) Eigenvalue placement lets us place the closed-loop eigenvalues so that the system is stable.
 
 q2_2: |
-  ii) (4 points) External fragmentation may occur.
-  - No translation
-  - Base and Bound
-  - Segmentation
-  - Paging
+  (b) You have a data set and you want to find a lower-dimensional subspace that you can project it onto while still keeping most of the important variation in the data set.
 
 q2_2_s: |
-  **Base and Bound and Segmentation.**
+  (b). The SVD allows us to do PCA and thereby discover the low-dimensional subspace that contains most of the variation.
 
 q2_3: |
-  iii) (4 points) Part of the process’ stack could be swapped out to disk while the process continues to execute using the rest of the stack. *Assume the stack is located in a typical location for the type of address translation in use.*
-  - No translation
-  - Base and Bound
-  - Segmentation
-  - Paging
+  (c) You have some data on how much different individuals like different kinds of food and you want to classify people into several groups based on their preferences.
 
 q2_3_s: |
-  **Paging**
+  (c) To classify, we want to cluster. K-means does that for us.
 
 q2_4: |
-  b. (10 points) Consider a system with the following specifications:
-  - 46-bit virtual address space
-  - Page size of 8 KBytes
-  - Page table entry size of 4 Bytes
-  - Every page table is required to fit into a single page
-
-  <hr class="s2" />
-  How many levels of page tables would be required to map the entire virtual address space?
-  <hr class="s1" />
-  In the space below, document the format of a virtual address under this translation scheme. Briefly explain your rationale.
+  (d) You want to find a control sequence $u(t)$ of length $n$ that will take the state of a linear system from $\vec{0}$ to a desired destination $\vec{p}$ such that the control sequence $u$ viewed as an $n$-length vector $\vec{u}$ has the smallest Euclidean norm.
 
 q2_4_s: |
-  A $1$-page page table contains $2,048$ or $2^{11}$ PTEs ($2^2 \* 2^{11} = 2^{13}$ bytes), pointing to $2^{11}$ pages (addressing a total of $2^{11} \* 2^{13} = 2^{24}$ bytes). Adding a second level yields another $2^{11}$ pages of page tables, addressing $2^{11} \* 2^{11} \* 2^{13} = 2^{35}$ bytes. Adding a third level yields another $2^{11}$ pages of page tables, addressing $2^{11} \* 2^{11} \* 2^{11} \* 2^{13} = 2^{46}$ bytes. So, we need **3 levels**.
+  (b) The SVD allows us to compute pseudo-inverses that give the minimum norm solution to a fat system of equations. This is exactly the problem we face when we have many choices of control sequences that will take us to the desired destination.
   <hr class="s1" />
-  The correct answer is worth 3 pts. Correct reasoning is worth up to 7 pts (2 pts for identifying that there are $2^{11}$ PTEs per page, 2 pts for describing how page tables are nested, and 3 pts based upon the quality of the argument):
-  <hr class="s1" />
-  |11 bit page|11 bit page|11 bit page|13 bit offset|
+  The eigenvalues are not really relevant in a direct way since we want to pick a specific control sequence, not a new system behavior.
 
 q2_5: |
-  c. (4 points) Briefly explain, in four sentences or less, what is DMA **and** why DMA enables a system to more efficiently handle I/O devices.
+  (e) You have some measurements at regular intervals from a slowly varying physical process and would like to reconstruct hypothetical measurements for times in between your measurements.
 
 q2_5_s: |
-  With DMA, the CPU does not have to be involved in the transfer of each byte or word. It is only involved in the set up of the transfer.
+  (a) This is a problem that calls for interpolation since we want to fill in missing measurements. For this, the DFT is useful because it lets us model slowly varying as a signal that doesn’t have any high frequencies in it.
 
 q3_1: |
-  # 3. (24 points total) Demand Paging.
-  a. (18 points) Consider a demand paging system with 3 pages of physical memory.
-  <hr class="s1" />
-  When a page fault occurs, we use a *page replacement algorithm* to make space for the new page by evicting a page from memory. Using the FIFO, Clock Algorithm, and LRU page replacement algorithms, *mark which pages will be in physical memory **after** each page request*. The first 3 rows for each algorithm are pre-filled for you. For the clock algorithm, on a page fault the clock hand advances before performing any checks or actions.
+  # 5. Matching: DFT and Sampling (12 pts)
+  **Circle your answer. There is no need to give any justification.**
   <hr class="s2" />
-  ![table](/img/cs162/mt2-sp16-q3-1.png)
+  (a) Given the time domain signal below with $12$ samples taken over $3$ seconds:
+  <hr class="s2" />
+  ![signals](/img/ee16b/final-sp16-q3-1.png)
+  <hr class="s2" />
+  Now, we have sampled the same signal at a different sampling rate to get $30$ samples over $3$ seconds:
+  <hr class="s2" />
+  ![signals](/img/ee16b/final-sp16-q3-2.png)
+  <hr class="s2" />
+  which plot below represents all the corresponding DFT coefficients?
+  <hr class="s2" />
+  ![dft](/img/ee16b/final-sp16-q3-3.png)
 
 q3_1_s: |
-  ![table](/img/cs162/mt2-sp16-q3-2.png)
+  We want to test the following: the magnitudes for the DFT coefficients, the number of samples for the DFT coefficients, and how to get the coefficients. The answer should be (B), since we should have more sample points and the magnitude should be larger.
 
 q3_2: |
-  b. (4 points) When a page fault occurs and a page is evicted, what entries in which
-  data structures must the OS invalidate?
+  (b) Given the time domain signal below with $30$ samples taken over $3$ seconds,
+  <hr class="s2" />
+  ![signals](/img/ee16b/final-sp16-q3-4.png)
+  <hr class="s2" />
+  Now, we have obtained the DFT coefficients for another sampled signal, with sampling frequency of $6 Hz$:
+  <hr class="s2" />
+  ![signals](/img/ee16b/final-sp16-q3-5.png)
+  <hr class="s2" />
+  which one is the corresponding sampled signal?
+  <hr class="s2" />
+  ![signals](/img/ee16b/final-sp16-q3-6.png)
 
 q3_2_s: |
-  When a page fault occurs, the OS must invalidate the TLB entry and page table entry corresponding to the evicted page.
+  The answer should be (A) since the shape should be the same but the number of samples should be smaller. The manigude should remain the same as it matches the magnitudes of the DFT coefficients.
 
 q3_3: |
-  c. (2 points) In the $N^{\text{th}}$ chance page replacement algorithm, explain the purpose of the parameter $N$. Consider the effects of a small or large $N$.
+  (c) Given the DFT coefficients of the sampled signal, obtained by taking 30 samples with a sampling frequency of 5Hz:
+  <hr class="s2" />
+  ![signal](/img/ee16b/final-sp16-q3-7.png)
+  <hr class="s2" />
+  Which one is possibly the corresopnding continuous time signal that was sampled?
+  <hr class="s2" />
+  ![signals](/img/ee16b/final-sp16-q3-8.png)
 
 q3_3_s: |
-  $N$ enables the OS to approximate the behavior of an LRU algorithm by tracking approximately how long a page it is since a page was last referenced. A larger value of $N$ will enable a more finer grain approximation of LRU.
+  We also want to test about the sampling effects. Since we have nonzero coefficients at index of 2 and -2, it means we should have two periods of the signal. It should also be sinusoidal. The answer is (B).
 
 q4_1: |
-  # 4. (22 points total) Disks and File Systems.
-  a. (6 points) Name two performance-improving features that are provided by modern
-  disk controllers. For each of the features you name, briefly explain the benefit consequences of a disk controller that does not provide that feature.
-  <hr class="s1" />
-  i) Feature #1 – Benefits and consequences if it is not provided:
+  # 6. Analyze a circuit in the Phasor-domain (18 pts)
+  ![circuit](/img/ee16b/final-sp16-q4-1.png)
+  The components in this circuit are described by:
+  $$v_{in}(t) = 10\text{cos}(50t - 53°)$$
+  $$R = 20\Omega, \quad L = 100mH, \quad C = 5mF$$
+  Here we assume $cos(53°) \approx \frac{3}{5}$ and $sin(53°) \approx \frac{4}{5}$ for the purposes of all calculations.
+  <hr class="s2" />
+  (a) (4 pts) **Express the voltage source as a phasor explicitly in the form** $a + bi$. Give numerical values for $a$ and $b$.
 
 q4_1_s: |
-  We decided to grade this question more leniently by interpreting ‘performance’ to be techniques/features that improve the performance of disk operations OR reduce the complexity of the OS. Note that we did not accept SMR as an answer because it somewhat reduces the performance of reads (due to the high degree of ECC required) and it significantly reduces the performance of writes (due to the need to write an entire shingled region when writing a single block).
-  - Track buffer – Reads an entire track when a sector is requested. Pro: makes sequential reads faster. Con: without it OS has to implement read ahead. Note that we did not accept answers that confused the OS buffer cache with a disk track buffer.
-  - TRIM for SSD. Pro: improves performance of writes. Con: slow writes due to need to erase before writing
-  - ECC for HDDs. Pro: can recover data from failing sector. Con: data loss
-  - Disk scheduling. Pro: higher performance due to reduced seek/rotational latencies. Con: more seek/rotational latency overhead
-  - DMA support. Pro: higher performance due to reduced CPU overhead. Con: higher CPU overhead.
-  - Sector interleaving/spanning or track skewing. Pro: higher performance for sequential access due to reduced rotational latencies. Con: higher rotational latencies.
-  - Remapping of defective sectors/slip sparing. Pro: enables Logical Block dressing so the OS can view the disk as a linear sequence of blocks. Con: without it OS, would have to manually keep track of failed sectors and the locations of alternate sectors.
-  - Accelerometer for protection against drops. Pro: helps reduce damage by moving head to spare track upon detection of a fall. Con: Damage to HDD.
-  - RAID. Pro: helps protect against disk failure. Con: disk failure causes data loss
-  - Disk buffers for writes. Pro: faster writes. Con: slower writes
+  $v_{in}$ in phasor domain: $V_{in} = 10e^{-53°} = 10(cos(53°) - sin(53°)) = 6 - 8j$
 
 q4_2: |
-  ii) Feature #2 – Benefits and consequences if it is not provided:
+  (b) (8 pts) **Write down the transfer function** $H(\omega) = \frac{v_{out}}{v_{in}}$ **symbolically in terms of $C, R, L$ and $\omega$.**
 
 q4_2_s: |
-  See above.
+  This is a voltage divider. $Z_{R||C} = \frac{1}{\frac{1}{R} + j\omega C}$. Hence the transfer function is $\frac{\frac{R}{1 + j\omega RC}}{j\omega L + \frac{R}{1 + j\omega RC}} = \frac{1}{j\omega \frac{L}{R} + (j\omega)^2LC + 1}$
 
 q4_3: |
-  b. (5 points) If a disk subsystem receives an average of 10 requests per second and each request has an average response time of 500ms, how many requests are in the subsystem on average? Explain your answer.
+  (c) (6 pts) Since $v_{in}(t) = 10cos(50t - 53°)$, we know $v_{out}(t)$ can be written as $\alpha cos(50t + \theta)$, where $\alpha$ is a positive real number, and $0° \le \theta \le 360°$. It turns out that $\alpha = 20 \sqrt{2}$. **Compute the numerical value for $\theta$.**
+  <hr class="s2" />
+  (HINT: Use the transfer function from the previous part appropriately.)
 
 q4_3_s: |
-  5. We can apply Little’s Law: $L = λW$, where $λ$ is the average arrival rate (10 requests per second) and $W$ is the average response time (1/2 a second)
-
-q4_4: |
-  c. (4 points) The FAT file system eliminates external fragmentation by allocating disk space in block-sized units. Considering that fact, briefly explain why defragmentation is still sometimes necessary.
-
-q4_4_s: |
-  The disk blocks allocated to a file may be scattered across the disk.
-
-q4_5: |
-  d. (3 points) In the UNIX 4.2 BSD FFS, inodes have direct pointers, a singly indirect pointer, a doubly indirect pointer, and a triply indirect pointer. The maximum file size supported by this inode type is approximately the same as the maximum file size supported by an inode with only a triply indirect pointer. Briefly explain one disadvantage of an inode design that only uses a triply indirect pointer instead of a combination of pointers (*other than the slightly reduced maximum file size*).
-
-q4_5_s: |
-  Every file access would require four additional disk reads.
-
-q4_6: |
-  e. (4 points) Briefly, *in one to three sentences*, explain the purpose of the journal in a journaling file system?
-
-q4_6_s: |
-  The journal is used to store the intentions of the OS when making changes to the file system structures (and the data in a full journaling file system). During boot, the journal is used to redo(or complete) any incomplete operations (operations that were in-progress at the time of an OS crash or power failure).
+  Plug in the numbers: $H(\omega = 50) = \frac{1}{j50\frac{0.1}{20} + (j50)^2 \times 0.1 \times 0.005 + 1} = \frac{1}{0.25j - 1.25 + 1} = \frac{1}{0.25\sqrt{2}e^{135°}}$ Therefore, the output voltage in phasor domain is $\frac{1}{0.25\sqrt{2}e^{135°}} \times 10e^{-j53°} = 20\sqrt{2}e^{j(-53-135)°} = 20\sqrt{2}e^{j(172)°}$ In time domain, $v_{out}(t) = 20\sqrt{2}cos(50t + 172°)$
 
 q5_1: |
-  # 5. (16 points total) Pintos coding question: Verifying user pointers.
-  Your project group is tasked with implementing a new syscall for Pintos. This syscall takes a <u>linked list</u> as one of its arguments, and your responsibility is to create a function that checks the validity of the linked list, so the syscall handler can safely dereference it. The value of head may be NULL, if the list is empty. This is function signature of your syscall:
-  ```
-  void foo(struct node *head);
-  ```
-  We have also defined the structure of the `node` struct, as well as `exit_thread_if_invalid()`, a function that will verify the validity of user-specified pointers.
-  ```
-  struct node {
-      int number;
-      char buffer[16];
-      struct node *next;
-      // If this is the last node, next = NULL
-  };
-
-  /* Checks that P to P+SIZE-1 is a valid user buffer.
-     Kills the current thread if it is invalid. */
-  void exit_thread_if_invalid(void *p, size_t size);
-
-  uint32_t SYS_FOO = 60;  // The syscall number for foo()
-  ```
-  Fill in the `syscall_handler()` function so that it *safely* handles the `SYS_FOO` syscall.
-
-  ```
-  static void
-  syscall_handler (struct intr_frame *f)
-  {
-      uint32_t* args = ((uint32_t*) f->esp);
-      // Fill in this part
-
-
-
-
-      // Check if this is SYS_FOO
-      if (________________) {
-          // Fill in this part
-
-
-
-
-          // This will actually handle SYS_FOO,
-          // assuming arguments are valid
-          handle_foo(args, &f->eax);
-      } else {
-          // Code for ALL other syscalls will go here.
-      }
-  }
-  ```
+  # 7. Frequency-Selective Filter (18 pts)
+  Recall that the $n = 4$ DFT basis can be expressed as columns of a matrix:
+  $$\left[ \begin{array}{c c c c} | & | & | & | \\\\ \vec{u}_0 & \vec{u}_1 & \vec{u}_2 & \vec{u}_3 \\\\ | & | & | & | \\\\ \end{array} \right] = \frac{1}{2} \left[ \begin{array}{c c c c} 1 & 1 & 1 & 1 \\\\ 1 & i & -1 & -i \\\\ 1 & -1 & 1 & -1 \\\\ 1 & -i & -1 & i \\\\ \end{array} \right] = \left[ \begin{array}{c c c c} \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} \\\\ \frac{1}{2} & \frac{i}{2} & -\frac{1}{2} & -\frac{i}{2} \\\\ \frac{1}{2} & -\frac{1}{2} & \frac{1}{2} & -\frac{1}{2} \\\\ \frac{1}{2} & -\frac{i}{2} & -\frac{1}{2} & \frac{i}{2} \\\\ \end{array} \right]$$
+  (a) (4 pts) Let $\vec{x}$ be a $4$-length vector with each element of $\vec{x}$ defined by
+  $$\vec{x}[k] = 1 + cos\frac{2\pi}{4}k$$
+  as $k = 0, 1, 2, 3$.
+  <hr class="s1" />
+  **Find the DFT (frequency-domain representation) of $\vec{x}$.**
 
 q5_1_s: |
-  ```
-  static void
-  syscall_handler (struct intr_frame *f) {
-      uint32_t* args = ((uint32_t*) f->esp);
-      exit_thread_if_invalid(args, 4);
+  There are two approaches to take for this problem.
+  <hr class="s1" />
+  First, you can discern by Euler’s Formula that
+  $$\vec{x} = \sqrt{4}(\vec{u}_0 + \frac{1}{2}(\vec{u}_1 + \vec{u}_3)) = 2\vec{u}_0 + \vec{u}_1 + \vec{u}_3$$
+  Hence, when doing the DFT you get
+  $$U^{\*}\vec{x} = U^{\*}(2\vec{u}_0 + \vec{u}_1 + \vec{u}_3) = \left[ \begin{array}{c} 2 \\\\ 0 \\\\ 0 \\\\ 0 \\\\ \end{array} \right] + \left[ \begin{array}{c} 0 \\\\ 1 \\\\ 0 \\\\ 0 \\\\ \end{array} \right] + \left[ \begin{array}{c} 0 \\\\ 0 \\\\ 0 \\\\ 1 \\\\ \end{array} \right] = \left[ \begin{array}{c} 2 \\\\ 1 \\\\ 0 \\\\ 1 \\\\ \end{array} \right] = \vec{X}$$
+  Another method would have been to compute it directly by taking the conjugate transpose of the matrix above and applying $\vec{x} = [2, 1, 0, 1].$
+  <hr class="s1" />
+  Either way, the final result is
+  $$\vec{X} = \sqrt{4} \* [1, \frac{1}{2}, 0, \frac{1}{2}] = [2, 1, 0, 1]$$
 
+q5_2: |
+  (b) (8 pts) We want a real $4 \times 4$ matrix $H$ that filters/projects any vector $\vec{y}$ onto the subspace spanned by $\vec{u}_0, \vec{u}_1, \vec{u}_3$. (i.e. $H\vec{y}$ returns a vector that is inside the subspace and is the closest point in the subspace to $\vec{y}$.) Furthermore, we want this $H$ matrix to be circulant. (i.e. $H = C_{\vec{h}}$ for some $\vec{h}$). **What are the four eigenvalues and corresponding four eigenvectors for this matrix $H$?**
 
-      // Check if this is SYS_FOO
-      if (_args[0] == SYS_FOO) {
-          exit_thread_if_invalid(&args[1], 4);
-          struct node *head = args[1];
-          while (head != NULL) {
-              exit_thread_if_invalid(head, sizeof(struct node));
-              head = head->next;
-          {
+q5_2_s: |
+  Since $H$ is circulant, we know that the DFT basis diagonalizes it as shown throughout the
+  course. Hence, the $4$ eigenvectors are the $4$ DFT basis vectors $\vec{u}_0, \vec{u}_1, \vec{u}_2, \vec{u}_3$ as shown in the previous part.
+  <hr class="s1" />
+  This means it is useful to think about things in the DFT basis. The great thing about the DFT basis is that it is orthonormal — so all angles and norms are preserved. The projection we want to do here is onto a very simple subspace that is axis-aligned.
+  <hr class="s1" />
+  To project/filter onto the $\vec{u}_0, \vec{u}_1, \vec{u}_3$ spanned vector that is close as possible to $\vec{y}$ simply means removing all components in the direction of $\vec{u}_2$ without affecting the other DFT vectors.
+  <hr class="s1" />
+  To see this using the DFT, let us consider $\vec{z} = H\vec{y}$. If we diagonalize $H$, we get that $\vec{Z} = \Lambda \vec{X}$ where $\vec{Z}$ and $\vec{X}$ are the DFTs of $\vec{z}$ and $\vec{x}$, respectively, and $\Lambda$ is the diagonal containing the eigenvalues of $H$. As such, each element of $\vec{Z}$ can be defined as $\vec{Z}[k] = \lambda_k \* \vec{X}[k]$.
+  <hr class="s1" />
+  Since each element of DFT corresponds to a different eigenvector, our goal is
+  $$\vec{Z}[k] = \begin{cases} 0 & \text{when} k = 2 \\\\ \vec{X}[k] & \text{else} \end{cases}$$
+  This immediately implies that the desired eigenvalues should be [1, 1, 0, 1].
+  <hr class="s1" />
+  Hence, the final result is
+  <hr class="s1" />
+  Eigenvectors = $[\vec{u}_0, \vec{u}_1, \vec{u}_2, \vec{u}_3]$
+  <hr class="s1" />
+  Eigenvalues = $[1, 1, 0, 1]$
 
-              // This will actually handle SYS_FOO,
-              // assuming arguments are valid
-              handle_foo(args, &f->eax);
-      } else {
-          // Code for ALL other syscalls will go here.
-      }
-  }
-  ```
+q5_3: |
+  (c) (6 pts) **What is the first column of the circulant matrix $H$?**
+
+q5_3_s: |
+  As shown in class, the first column of a circulant matrix is its impulse response, which we shall call $\vec{h}$. As such, we can find it by determining its DFT and then performing the inverse DFT.
+  <hr class="s1" />
+  Since the Eigenvalues found in the previous part are $[1, 1, 0, 1]$, the corresponding DFT of the first column must be $\frac{1}{\sqrt{4}}[1, 1, 0, 1] = \frac{1}{2}[1, 1, 0, 1]$.
+  <hr class="s1" />
+  Applying the inverse DFT tells us that
+  $$\vec{h} = \frac{1}{2}(\vec{u_0} + \vec{u_1} + \vec{u_3}) = \frac{1}{4} = (\sqrt{4} \vec{u_0} + 2 \* (\frac{\sqrt{4}}{2}(\vec{u_1} + \vec{u_3})))$$
+  Using Euler's Formula, we can show that each element of $\vec{h}$ is defined as
+  $$\vec{h}[k] = \frac{1}{4}(1 + 2cos\frac{2\pi}{4}k)$$
+  Evaluating at every $k$, the correct answer turns out to be
+  $$\frac{1}{4}[3, 1, -1, 1]$$
+
+q5_4: |
+  # 8. SVD Me (9 pts)
+  **Compute the SVD** (express a matrix as $A = U\Sigma V^T$ where $U$ and $V$ both have orthonormal columns and $\Sigma$ is a diagonal matrix with non-negative entries) **of the matrix**
+  $$A = \left[ \begin{array}{c c c} 1 & 1 & 0 \\\\ 1 & -1 & 0 \\\\ \end{array} \right]$$
+  **wherein $V$ is the $3 \times 3$ identity matrix.**
+  <hr class="s1" />
+  For your computational convenience:
+  $$AA^T = \left[ \begin{array}{c c} 2 & 0 \\\\ 0 & 2 \\\\ \end{array} \right], \quad A^TA = \left[ \begin{array}{c c c} 2 & 0 & 0 \\\\ 0 & 2 & 0 \\\\ 0 & 0 & 0 \\\\ \end{array} \right]$$
+
+q5_4_s: |
+  This question was testing whether students understood how the SVD relates the $U$ matrix to the $V$ matrix, as well as the meaning of the $\Sigma$ matrix. For this reason, the $AA^T$ and $A^TA$ were both chosen to be not only simple, but to have many possible choices of orthonormal eigenvectors.
+  <hr class="s2" />
+  To break the symmetry, we gave you the larger $V$ matrix that we wanted to target. At this point, there is a unique choice of the $A$ and $S$ matrix. There were many ways that you could have solved this problem. The easiest way is to first focus in on the $S$ term. We know this has to be the same shape as $A$, have zeros off the diagonal, and on the diagonal, have the positive square-roots of the eigenvalues of $AA^T$. Consequently:
+  $$\Sigma = \left[ \begin{array}{c c c} \sqrt{2} & 0 & 0 \\\\ 0 & \sqrt{2} & 0 \\\\ \end{array} \right]$$
+  At this point, it just remains to figure out what $U$ is. At this point, the structure of matrix multiplication makes the answer clear. Because V is the identity, $\Sigma V = \Sigma$. The coefficients in the $j$-th row of the $U$ matrix represent the weights of the rows of $\Sigma$ in the linear-combination of them required to make the $j$-th row of $A$. By inspection, the answer is thus:
+  $$U = \frac{1}{\sqrt{2}} \left[ \begin{array}{c c} 1 & 1 \\\\ 1 & -1 \\\\ \end{array} \right]$$
+  Alternatively, we know by the SVD decomposition that $AV = U\Sigma$ (post-multiply by $V$). Since $AV = A$, this means that the first column of $U$ is just $\frac{1}{\sqrt{2}}$ times the first column of $A$ and similarly for the second column.
+
+q6_1: |
+  # 9. Observer/Estimator Design (14 pts)
+  Consider the linear discrete-time system whose vector state $\vec{x}$ evolves according to:
+  $$\vec{x}(t + 1) = \left[ \begin{array}{c c} 0 & -2 \\\\ 3 & \frac{1}{3} \\\\ \end{array} \right] \vec{x}(t) + \left[ \begin{array}{c} 1 \\\\ 0 \\\\ \end{array} \right] u(t)$$
+  And has scalar output:
+  $$y(t) = [0 \quad 1]\vec{x}(t)$$
+  (a) (2 pts) Is this system observable?
+
+q6_1_s: |
+  We calculate
+  $$O = \left[ \begin{array}{c} C \\\\ CA \\\\ \end{array} \right] = \left[ \begin{array}{c c} 0 & 1 \\\\ 3 & 1/3 \\\\ \end{array} \right]$$
+  Observe that $O$ matrix is full rank and hence our system is observable.
+
+q6_2: |
+  (b) (12 pts) The observation $y(t) = [0 \quad 1]\vec{x}(t)$ gives us an observation of only one state variable. Let's build an observer/estimator to track both state variables. Define a system
+  $$\hat{x}(t + 1) = \left[ \begin{array}{c c} 0 & -2 \\\\ 3 & \frac{1}{3} \\\\ \end{array} \right] \hat{x}(t) + \left[ \begin{array}{c} 1 \\\\ 0 \\\\ \end{array} \right] u(t) + \vec{l}(y(t) - [0 \quad 1]\hat{x}(t))$$
+  where $\vec{l} \in \mathbb{R}^2 = \left[ \begin{array}{c} l_1 \\\\ l_2 \\\\ \end{array} \right]$. Now let $\vec{e}(t) = \vec{x}(t) - \hat{x}(t)$ and the error dynamics become:
+  $$\vec{e}(t + 1) = \underbrace{(\left[ \begin{array}{c c} 0 & -2 \\\\ 3 & \frac{1}{3} \\\\ \end{array} \right] - \vec{l}[0 \quad 1])}_{\overline{A}}\vec{e}(t)$$
+  **Find $l_1, l_2$ so that the error goes exactly to zero within two time steps no matter how bad our original estimate is.** *HINT: $\overline{A}$ must have both eigenvalues be zero for this to be true.*
+
+q6_2_s: |
+  The closed loop system for the error dynamics of the observer is:
+  $$\overline{A} = \left[ \begin{array}{c c} 0 & -2 \\\\ 3 & 1/3 \\\\ \end{array} \right] - \vec{l}[0 \quad 1] = \left[ \begin{array}{c c} 0 & -2 \\\\ 3 & 1/3 \\\\ \end{array} \right] - \left[ \begin{array}{c} l_1 \\\\ l_2 \\\\ \end{array} \right] \times [0 \quad 1] = \left[ \begin{array}{c c} 0 & -2 - l_1 \\\\ 3 & 1/3 - l_2 \\\\ \end{array} \right]$$
+  Thus, the closed loop system for the error dynamics of the observer has the form
+  $$\vec{x}[t + 1] = \underbrace{\left[ \begin{array}{c c} 0 & -2 - l_1 \\\\ 3 & 1/3 - l_2 \\\\ \end{array} \right]}_{\overline{A}}\vec{x}[t]$$
+  Thus, finding the eigenvalues of the above system we have
+  $$det(\lambda I - \left[ \begin{array}{c c} 0 & -2 - l_1 \\\\ 3 & 1/3 - l_2 \\\\ \end{array} \right]) = 0 \implies \lambda^2 + (l_2 - 1/3)\lambda + 3l_1 + 6 = 0$$
+  However, we want to place both eigenvalues at $\lambda = 0$. Thus, this means that
+  $$\lambda^2 + (l_2 - 1/3)\lambda + 3l_1 + 6 = \lambda^2 \implies \lambda^2 + (l_2 - 1/3)\lambda + 3l_1 + 6 = \lambda^2$$
+  The above system of equations gives us $l_1 = -2, l_2 = 1/3$
+
+q7_1: |
+  # Section 2: Free-form questions (68 + 24 pts)
+  *You must show work for credit in all questions in this section.*
+  <hr class="s2" />
+  # 10. Controllable Canonical Form (20 pts)
+  When we are trying to stabilize a robot, it is sometimes useful to put the dynamics into a standard form that lets us more easily adjust its behavior.
+  <hr class="s2" />
+  Consider the linear continuous-time system below.
+  $$\frac{d}{dt}\vec{s}(t) = A_r\vec{s}(t) + \vec{b}_r u(t) = \left[ \begin{array}{c c} 2 & -1 \\\\ 1 & 0 \\\\ \end{array} \right] \vec{s}(t) + \left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right] u(t)$$
+  (a) (10 pts) There exists a transformation $\vec{z}(t) = T\vec{s}(t)$ such that the resulting system is in controllable canonical form:
+  $$\frac{d}{dt} \vec{z}(t) = \left[ \begin{array}{c c} 0 & 1 \\\\ \alpha_0 & \alpha_1 \\\\ \end{array} \right] \vec{z}(t) + \left[ \begin{array}{c} 0 \\\\ 1 \end{array} \right] u(t)$$
+  **Find this transformation matrix $T$ and the resulting $\alpha_0$ and $\alpha_1$ in controllable canonical form.**
+  *HINT: The column vectors of $T$ are just the standard basis vectors $\left\\{ \left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right], \left[ \begin{array}{c} 0 \\\\ 1 \end{array} \right] \right\\}$ arranged in some order.*
+
+q7_1_s: |
+  From the hint and we know $T$ cannot be the identity matrix, so
+  $$T = \left[ \begin{array}{c c} 0 & 1 \\\\ 1 & 0 \\\\ \end{array} \right]$$
+  With $T$, we can derive the canonical form matrix $A_c$ by
+  $$A_c = TA_rT^{-1} = \left[ \begin{array}{c c} 0 & 1 \\\\ 1 & 0 \\\\ \end{array} \right] \left[ \begin{array}{c c} 2 & -1 \\\\ 1 & 0 \\\\ \end{array} \right] \left[ \begin{array}{c c} 0 & 1 \\\\ 1 & 0 \\\\ \end{array} \right] = \left[ \begin{array}{c c} 0 & 1 \\\\ -1 & 2 \\\\ \end{array} \right]$$
+  Thus, $\alpha_0 = -1$ and $\alpha_1 = 2$.
+
+q7_2: |
+  (b) (10 pts) For the system given by $(A_r, \vec{b}_r, \vec{s}, u)$, **use the controllable canonical form from the previous part** to obtain a state feedback law $u(t) = \vec{f}^T\vec{z}(t) = [f_0 \quad f_1]\vec{z}(t)$ such that the resulting closed-loop system has eigenvalues $\lambda = -1, -2$ and then use the transformation $T$ to get $u(t) = \vec{g}^T\vec{s}(t) = [g_0 \quad g_1]\vec{s}(t)$ a control law in terms of the original state variable $\vec{s}(t)$.
+  <hr class="s2" />
+  **What are the vectors $\vec{f}$ and $\vec{g}$?**
+  <hr class="s1" />
+  *You will get full credit if you correctly use the properties of controllable canonical form to do this, but you may check your answer by another method if you so desire.*
+
+q7_2_s: |
+  First we find a feedback law for $\vec{f}$ and $\vec{z}$. With the feedback, we have
+  $$\frac{d}{dt}\vec{z}(t) = \left(A_c + \left[ \begin{array}{c c} 0 & 0 \\\\ f_0 & f_1 \\\\ \end{array} \right] \right) \vec{z}(t) = \left[ \begin{array}{c c} 0 & 1 \\\\ -1 + f_0 & 2 + f_1 \\\\ \end{array} \right] \vec{z}(t)$$
+  The characteristic polynomial of the closed-loop system is given by
+  $$\lambda^2 - (2 + f_1)\lambda - (-1 + f_0)$$
+  Our goal is to place eigenvalues at $-1$ and $-2$, which is characterized by the polynomial
+  $$(\lambda + 1)(\lambda + 2) = \lambda^2 + 3\lambda + 2$$
+  By comparison of coefficients, we have
+  $$\begin{align}
+  -2 - f_1 &= 3 \\\\
+  1 - f_0 &= 2 \\\\
+  \end{align}$$
+  Thus,
+  $$\vec{f} = \left[ \begin{array}{c} -1 \\\\ -5 \\\\ \end{array} \right]$$
+  Then, using the property of the controllabe canonical form, we have
+  $$\vec{g}^T = \vec{f}^T T = [-1 \quad -5] \left[ \begin{array}{c c} 0 & 1 \\\\ 1 & 0 \\\\ \end{array} \right] = [-5 \quad -1]$$
+
+q8_1: |
+  # 11. Feedback Control of Op-Amps (30 pts)
+  You have seen op-amps in negative feedback many times, and you have learned about feedback control. You may not have realized it yet, but these are actually related to each other.
+  <hr class="s2" />
+  ![circuits](/img/ee16b/final-sp16-q8-1.png)
+  <hr class="s2" />
+  Here, we introduce a dynamic model for a non-ideal op-amp:
+  $$\frac{d}{dt}v_o(t) = -v_o(t) + Gu(t)$$
+  where $v_o$ is the output voltage, and $u(t) = (v_{+}(t) - v_{-}(t))$ where $v_{+}$ and $v_{-}$ are the voltages at the positive and negative inputs respectively, and $G > 2$ is a parameter that defines the op-amp's behavior.
+  <hr class="s2" />
+  (a) (2 pts) Given the dynamic model for the nonideal op-amp, **assuming $v_{+}$ and $v_{-}$ are not changing, for what value of $v_o$ will $v_o$ not be changing?** Your answer should depend on $v_{+}, v_{-}, G$.
+
+q8_1_s: |
+  To find a steady-state value, set $\frac{d}{dt}v_o(t) = 0$, so the whole dynamic model simply becomes $v_o(t) = Gu(t) = G(v_{+}(t) - v_{-}(t))$.
+
+q8_2: |
+  (b) (2 pts) In the above, $v_{-}(t) = hv_o(t)$. **Pick values for the resistors $R_1$ and $R_2$ so that $h$ equals $\frac{1}{2}$.**
+
+q8_2_s: |
+  The $h$ from a resistive divider will be $\frac{R_2}{R_1 + R_2}$, so to set that equal to $\frac{1}{2}, 2R_2 = R_1 + R_2$, so the resistors must be equal.
+  <hr class="s1" />
+  It doesn’t much matter which values you pick provided $R_2 = R_1$, but practical considerations tend to set the value somewhere between $10k$ and $10M$.
+
+q8_3: |
+  (c) (8 pts) Suppose we place the nonideal op-amp in resistive negative feedback using a voltage divider whose ratio is $h = \frac{1}{2}$, in other words set
+  $$u(t) = v_{+}(t) - hv_o(t)$$
+  **Write out the new differential equation that relates $v_o(t)$ to $v_{+}(t)$. Is this system stable? Briefly state why or why not.**
+
+q8_3_s: |
+  Plugging the given value for $u$ into the dynamical model,
+  $$\frac{d}{dt}v_o(t) = -v_o(t) + G(v_{+}(t) - hv_o(t)) = -(1 + Gh)v_o(t) + Gv_{+}(t)$$
+  The eigenvalue has therefore changed from $-1$ to $-1 -Gh$, which means the system will be stable provided $G > 1$. Since we have been given that $G > 2$, the eigenvalue is definitely negative and there is no stability issue.
+
+q8_4: |
+  (d) (4 pts) If we had swapped the roles of the positive and negative terminals of the op-amp (i.e. had hooked the nonideal op-amp up in positive feedback so that $u(t) = hv_o(t) - v_{-}(t)$.) **would the resulting closed-loop system have been stable? Briefly state why or why not.**
+
+q8_4_s: |
+  Plugging in the new given value for $u$ into the dynamic model, this time we get
+  $$\frac{d}{dt}v_o(t) = -v_o(t) + G(hv_o(t) - v_{-}(t)) = (Gh - 1)v_o(t) - v_{-}(t)$$
+  This eigenvalue is $Gh - 1$, which (because we know $G > 2$) is positive, so the system is not stable.
+
+q8_5: |
+  (e) (10 pts) For the closed-loop system in negative feedback (from part (c)) using resistor values that set $h = \frac{1}{2}$, assume that the output voltage starts at $0V$ at time $0$ and that $v_{+}(t)$ was $0V$ but then jumps up to $1V$ at time $0$. **How long will it take for $v_o(t)$ to reach $1V$?** Your answer should be in terms of $G$.
+
+q8_5_s: |
+  Since our dynamical model is a simple first-order differential equation of the style we have seen repeatedly in $16$, we can explicitly solve it without too much trouble.
+  <hr class="s1" />
+  The first step is to figure out what the formal steady-state would be after the transition — i.e. at what $v_o$ would the derivative be zero. By inspection, the answer is $\frac{G_{v_+}}{Gh + 1}$.
+  <hr class="s1" />
+  Now, we can change variables to see the transient behavior and consider $\widetilde{v}_o(t) = v_o(t) - \frac{Gv_{+}}{Gh + 1}$. It is clear that $\frac{d}{dt} \widetilde{v}_o(t) = \frac{d}{dt} v_o(t)$ and hence the relevant differential equation is:
+  $$\frac{d}{dt} \widetilde{v}_o(t) = -(1 + Gh)v_o(t) - v_{+} = -(1 + Gh) \widetilde{v}_o(t)$$
+  This has the solution $\widetilde{v}_o(t) = e^{-(1 + Gh)t} \widetilde{v}_o(0)$ where the initial condition for the transient is clearly $\widetilde{v}_o(0) = -\frac{Gv_{+}}{1 + Gh}$. Putting it all together, we get:
+  $$v_o(t) = \frac{G}{1 + Gh} \left( 1 - e^{-(1 + Gh)t} \right) v_{+}$$
+  Then substituting in the parameters $v_{+} = 1, h = \frac{1}{2}$, we can set $v_o(t) = 1$ and solve for $t$:
+  $$1 = \frac{2G}{2 + G} \left( 1 - e^{-(1 + G/2)t} \right)$$
+  $$\frac{2 + G}{2G} = 1 - e^{-(1 + G/2)t}$$
+  $$e^{-(1 + G/2)t} = 1 - \frac{2 + g}{2G} = \frac{G - 2}{2G}$$
+  $$\left( 1 + \frac{G}{2} \right) t = ln \frac{2G}{G - 2}$$
+  $$t = \frac{ln \frac{2G}{G - 2}}{1 + G/2}$$
+  It is pretty common in practice (because $G$ is usually very large, typically something like a million) to assume the final value is exactly $2$; under that assumption we can solve the problem much more easily by observing that the $t$ we’re looking for is halfway between our initial and final values: $e^{\lambda t} = \frac{1}{2}$, so
+  $$t = \frac{-ln 2}{\lambda} = \frac{ln 2}{1 + G/2}$$
+  That’s pretty close to the value from the real method, and becomes closer as $G$ gets larger.
+
+q8_6: |
+  (f) (4 pts) **What happens to the answer of the previous part if $G \to \infty$?**
+
+q8_6_s: |
+  Hopefully it is intuitively clear that it should turn to $0$; the more negative our eigenvalue, the faster the system responds, so when our eigenvalue goes to $-\infty$, the system should respond instantly.
+  <hr class="s2" />
+  If we actually mathematically take the limit of the answer in the previous part, we do in fact get $0$ since the log in the numerator is approaching a limit while the $G$ in the denominator is growing. So both intuition and math agree.
+
+q9_1: |
+  # 12. Newton interpolation (18 pts)
+  We have studied polynomial interpolation using the monomial basis and the Lagrange basis. In this problem, we study a different basis, known as the Newton basis. This basis has the property that although it depends on the sampling points, each basis element does not depend on all of the sampling points. As you do this problem, you should begin to understand why this basis might be interesting if the samples are revealed to us one at a time in order.
+  <hr class="s2" />
+  Suppose we are given $n+1$ distinct points $x_0, x_1, ..., x_n$, and we sample a polynomial $f$ at these points, such that we have the samples $f(x_0), f(x_1), ..., f(x_n)$. Our goal is to recover $f$ given these samples.
+  <hr class="s1" />
+  We define the Newton polynomials as follows.
+  $$\begin{align}
+  & N_0(x) = 1 \\\\
+  & N_1(x) = x - x_0 \\\\
+  & \quad \vdots \\\\
+  & N_n(x) = (x - x_0)(x - x_1) \cdots (x - x_{n-1})
+  \end{align}$$
+  Our goal is to find coefficients $a_0, ..., a_n$ such that
+  $$f(x) = a_0 N_0(x) + a_1 N_1(x) + \cdots + a_n N_n(x)$$
+  (a) (8 pts) We know there must exist an $(n + 1) \times (n + 1)$ matrix $U$ such that
+  $$U \left( \begin{array}{c} a_0 \\\\ a_1 \\\\ \vdots \\\\ a_n \end{array} \right) = \left( \begin{array}{c} f(x_0) \\\\ f(x_1) \\\\ \vdots \\\\ f(x_n) \end{array} \right)$$
+  **Use what you know about the structure of $U$ to compute $a_0$ and $a_1$ in terms of the $x_i$ and $f(x_i)$.**
+  <hr class="s1" />
+  *(HINT: Write out the first two rows of $U$.)*
+
+q9_1_s: |
+  For each $0 \le i \le n$, we have the equation
+  $$f(x_i) = a_0N_0(x_i) + \ldots + a_nN_n(x_i) = a_0N_0(x_i) + \ldots + a_iN_i(x_i)$$
+  since $N_j(x_i) = 0$ for $j > i$. For $1 \le k \le i$, we have $N_k(x_i) = \prod_{j=0}^{i-}(x_i - x_j)$. If we arrange these $n + 1$ equations in a matrix, we get
+  $$ \left( \begin{array}{c c c c c c} 1 & 0 & 0 & 0 & \ldots & 0 \\\\ 1 & x_1 - x_0 & 0 & 0 & \ldots & 0 \\\\ 1 & x_2 - x_0 & (x_2 - x_0)(x_2 - x_1) & 0 & \ldots & 0 \\\\ \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\\\ 1 & x_n - x_0 & (x_n - x_0)(x_n - x_1) & (x_n - x_0)(x_n - x_1)(x_n - x_2) & \cdots & \prod_{j=0}^{n-1} (x_n - x_j) \\\\ \end{array} \right) \left( \begin{array}{c} a_0 \\\\ a_1 \\\\ a_2 \\\\ \vdots \\\\ a_n \end{array} \right) = \left( \begin{array}{c} f(x_0) \\\\ f(x_1) \\\\ f(x_2) \\\\ \vdots \\\\ f(x_n) \\\\ \end{array} \right)$$
+  We can read $a_0$ from the first row of the equation to see $a_0 = f(x_0)$. To find $a_1$, the second row gives
+  $$a_0 + (x_1 - x_0)a_1 = f(x_1)$$
+  This gives us
+  $$a_1 = \frac{f(x_1) - f(x_0)}{x_1 - x_0}$$
+
+q9_2: |
+  (b) (10 pts) Suppose we have $n = 2$, and our points are $x_0 = 0, x_1 = 1, x_2 = 2$, and $f(x_0) = 5, f(x_1) = -1, f(x_2) = 3$. **Find the coefficients** $a_0, a_1, a_2$.
+
+q9_2_s: |
+  From the previous part, we have $a_0 = f(x_0) = 5$, and $a_1 = \frac{-1-5}{1-0} = -6$. To compute $a_2$, we look at the third row of our matrix $U$ from the first part, which gives us
+  $$a_0 + a_1(x_2 - x_0) + a_2(x_2 - x_0)(x_2 - x_1) = f(x_2)$$
+  Substituting in the values, we get
+  $$5 - 6(2) + a_2(2)(1) = 3$$
+  Rearranging, we have $a_2 = 5$.
+  <hr class="s1" />
+  What is so great about the Newton polynomial representation is that it can easily be solved recursively as we go. We don’t have to know where the next sample is going to be taken, but can still reuse the work from the earlier parts. Notice how this is like being able to recursively solve triangular system of equations.
+  <hr class="s1" />
+  The practice problem about splines in graphics should remind you of what this problem is about.
+
+q10_1: |
+  # 13. Efficient Cross Correlation (Bonus 24 pts)
+  Computing correlations is an important part of doing things like localization (as you saw in 16A) for GPS.
+  <hr class="s2" />
+  (a) (8 pts) Let $\vec{r}$ be the time-reversal of a real vector $\vec{x}$ so that $r[0] = x[0]$ and $r[k] = x[n-k]$ for $k = 1, \ldots, n - 1$.
+  <hr class="s1" />
+  **What is the relationship between the frequency-domain representation (DFT) of $\vec{r}$ — namely $\vec{R}$ — and the frequency-domain representation (DFT) of $\vec{x}$?**
+
+q10_1_s: |
+  If we express $\vec{x}$ in terms of its DFT coefficients,
+  $$\vec{x} = \sum_{p=0}^{n-1}\vec{X}[p]\vec{u}_p$$
+  The time-reversal of $\vec{x}$ can be obtained by time-reversing each of the $\vec{u}_p$ vectors. Consider the $n - t$ entry of $\vec{u}_p$,
+  $$\begin{align}
+  u_p[n - t] &= \frac{1}{\sqrt{n}}e^{\frac{2\pi}{n} \cdot p \cdot (n - t)} \\\\
+  &= \frac{1}{\sqrt{n}}e^{\frac{2\pi}{n} \cdot (-p) \cdot t} \\\\
+  &= \frac{1}{\sqrt{n}}e^{\frac{2\pi}{n} \cdot (-p) \cdot t} \\\\
+  &= u_{-p}[t]
+  \end{align}$$
+  Therefore, the time-reversal of $\vec{u}_p$ is $\vec{u}_{-p}$, making the time-reversal of $\vec{r}$ to be
+  $$\begin{align}
+  \vec{r} &= \sum_{p=0}^{n-1}X[p]\vec{u}_{-p}
+  &= \sum_{p=0}^{n-1}X[-p]\vec{u}_p
+  \end{align}$$
+  Therefore, the DFT coefficients of the time-reversal of $\vec{x}$ are just the "frequency-reversal" of $\vec{X}$, i.e.
+  $$R[p] = X[-p] = X[n-p]$$
+
+q10_2: |
+  (b) (6 pts) The circular cross-correlation $\vec{z}$ of two $n$-dimensional real vectors $\vec{x}$ and $\vec{y}$ is defined by
+  $$z[t] = \sum_{k=0}^{n-1} x[k] y[k+t]$$
+  Where the indices arithmetic is taken mod-$n$. (So $-3$ is just $n - 3$, etc.)
+  <hr class="s1" />
+  We can represent the cross-correlation $\vec{z}$ as a matrix multiplication of a matrix $M_{\vec{x}}$ and the vector $\vec{y}$.
+  <hr class="s1" />
+  **What is $M_{\vec{x}}$?**
+  *(For purposes of exam grading, it would suffice to show us what $M_{\vec{x}}$ is for the case $n = 4$ but we actually have compact notation in the $16$ series that can be used to express this matrix.)*
+
+q10_2_s: |
+  $$\begin{align}
+  z[t] &= \sum_{k=0}^{n-1}x[k] y[k+t] \\\\
+  &= \sum_{k=0}^{n-1}x[k-t] y[t] \\\\
+  &= < \vec{x}_{\to t}, \vec{y} >
+  \end{align}$$
+  For the simple case of $n = 4$, we can express it by
+  $$M_{vec{x}} = \left[ \begin{array}{c c c c} x[0] & x[1] & x[2] & x[3] \\\\ x[3] & x[0] & x[1] & x[2] \\\\ x[2] & x[3] & x[0] & x[1] \\\\ x[1] & x[2] & x[3] & x[0] \\\\ \end{array} \right]$$
+  It is clear that this is a circulant matrix, whose impulse response is the time-reversal of $\vec{x}$. This insight is true in the general case as well. If we express this as matrix multiplication, the $t$-th row of $M_{\vec{x}}$ is $\vec{x}_{\to t}$, which immediately implies:
+  $$M_{\vec{x}} = C_{\vec{x}}^T$$
+  Furthermore,
+  $$\begin{align}
+  (C_{\vec{x}})_{ij} &= x_{\to j}[i] \\\\
+  &= x[i-j] \\\\
+  &= r[j-i] \\\\
+  &= r_{\to i}[j] \\\\
+  &= (C_{\vec{r}}^T)_{ji}
+  \end{align}$$
+  This means that we can conclude:
+  $$M_{\vec{x}} = C_{\vec{x}}^T = C_{\vec{r}}$$
+  That is, $M_{\vec{x}}$ is the circulant matrix whose impulse response is $\vec{r}$.
+
+q10_3: |
+  (c) (10 pts) If you had a fast way of computing the DFT and Inverse-DFT, use that to **give a fast way of computing the circular cross-correlation $\vec{z}$ of $\vec{x}$ and $\vec{y}$?**
+  <hr class="s1" />
+  *(HINT: Does $M_{\vec{x}}$ have any special structure you can exploit? Can you compute with it fast in the frequency domain? Multiplication by a diagonal matrix is fast. Multiplication by a non-diagonal matrix is slow.)*
+
+q10_3_s: |
+  We have seen in class that the action of a circular matrix in the time-domain
+  $$\vec{z} = C_{\vec{r}} \cdot \vec{y}$$
+  is equivalent to the action of a diagonal matrix in the frequency-domain
+  $$\vec{Z} = \Lambda \vec{Y} = \sqrt{n}\left( \vec{R} ⊙ \vec{Y} \right)$$
+  The second part, which is really crucial to demonstrating a proper understanding of this problem, comes from the fact that the entries along the diagonal of $\Lambda$ (namely the eigenvalues of $C_{\vec{r}}$) are in fact pn times the corresponding frequency-domain coefficients in $\vec{R}$. This fact is what allows us to leverage the fact that we can rapidly compute the DFT to rapidly compute the eigenvalues of the relevant circulant matrix.
+  <hr class="s1" />
+  Any student solution to the problem that did not explicitly utilize this fact did not really deserve much credit since it missed this crucial fact.
+  <hr class="s1" />
+  We can therefore compute $\vec{z}$ as follows:
+  - compute $\vec{X}$, the DFT of $\vec{x}$,
+  - compute $\vec{Y}$, the DFT of $\vec{y}$,
+  - compute $\vec{Z}$, by $Z[p] = \sqrt{n} \cdot X[n-p] \cdot Y[p]$, and
+  - compute $\vec{z}$, by taking the inverse-DFT of $\vec{Z}$.
+
+  <hr class="s2" />
+  A full credit solution to this problem required correctly using the correct answers from the previous two parts of this problem together with the crucial connection between the eigenvalues of a circulant matrix and the frequency domain representation of a vector computed by the DFT.

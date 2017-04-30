@@ -5,7 +5,6 @@ import classnames from 'classnames';
 import { map, split } from 'lodash';
 
 import Expire from './Expire';
-import Solution from './Solution';
 import { setQuestionCopied } from '../../actions';
 import { copyQuestionLinkEvent } from '../../events';
 
@@ -20,9 +19,7 @@ const MultipleChoiceQuestionComponent = ({ id, courseid, content, examtype, term
     return <div key={index} tabIndex="0" className={optionClass} dangerouslySetInnerHTML={{__html: choice}}></div>;
   });
 
-  const solution = (solutionNum >= 0) ? `${String.fromCharCode(solutionNum + 65)}) ${choices[solutionNum]}` : "Solution unavailable. Sorry!";
   const url = `${document.location.origin}/${courseid}/${examtype}/${term}#${id}`;
-
   return (
     <div id={id} className="question mc-question">
       <div className="tooltip-container">

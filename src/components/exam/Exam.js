@@ -15,7 +15,6 @@ import { toggleAppModeEvent } from '../../events';
 import './Exam.css';
 
 const ExamComponent = ({ appMode, exams, courseid, examtype, examid, onToggleAppMode }) => {
-  console.log(exams);
   if (!has(exams, courseid) ||
       !has(exams[courseid], examtype) ||
       !has(exams[courseid][examtype], examid)) {

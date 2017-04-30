@@ -1,3 +1,22 @@
+/*
+create table content (
+	id serial primary key,
+	problem_num integer not null,
+	subproblem_num integer not null,
+	problem varchar,
+	solution varchar,
+  exam integer references exams(id),
+);
+
+create table exams (
+  id serial primary key,
+  courseid varchar(20) not null,
+  examtype varchar(20) not null,
+  examid varchar(20) not null,
+  profs varchar(50)
+);
+*/
+
 var _ = require('lodash');
 var pg = require('pg');
 var fs = require('fs');
@@ -10,6 +29,7 @@ program
   .option('-c, --courseid <id>', 'e.g. ee16b')
   .option('-t, --examtype <type>', 'e.g. mt2')
   .option('-e, --examid <id>', 'e.g. sp16')
+  .option('-p, --profs [names]', 'e.g. Ayazifar, Alon')
   .parse(process.argv);
 
 let type = null;
@@ -25,27 +45,7 @@ if (program.database === "dev") {
 const courseid = program.courseid;
 const examtype = program.examtype;
 const examid = program.examid;
-
-/*
-create table content (
-	id serial primary key,
-	courseid varchar(20) not null,
-	examtype varchar(20) not null,
-	examid varchar(20) not null,
-	problem_num integer not null,
-	subproblem_num integer not null,
-	problem varchar,
-	solution varchar
-);
-
-create table exams (
-  id serial primary key,
-  courseid varchar(20) not null,
-  examtype varchar(20) not null,
-  examid varchar(20) not null,
-  profs varchar(50)
-);
-*/
+const profs = program.profs;
 
 const config = {
   user: 'evanlimanto',
@@ -87,38 +87,56 @@ if (type === 1) {
 }
 client.connect();
 
-const delq = `delete from exams where courseid = $1 and examtype = $2 and examid = $3`;
-client.query({text: delq, values: [courseid, examtype, examid]})
+let id = null;
+const idq = `select id from exams where courseid = $1 and examtype = $2 and examid = $3`;
+client.query({text: idq, values: [courseid, examtype, examid]})
   .then((result) => {
-    console.log(result)
-  });
+    if (result.rowCount === 0) {
+      const insertq = `insert into exams (courseid, examtype, examid, profs) values($1, $2, $3, $4)`;
+      client.query({text: insertq, values: [courseid, examtype, examid, profs]})
+        .then((result) => {
+          client.query({text: idq, values: [courseid, examtype, examid]})
+            .then((result) => {
+              id = result.rows[0].id;
+            });
+        });
+    } else {
+      id = result.rows[0].id;
+    }
 
-const contents = fs.readFileSync(`${examtype}-${examid}.yml`);
-let doc = null;
-try {
-  doc = yaml.safeLoad(contents);
-} catch (e) {
-  console.log(e);
-  process.exit(1);
-}
-const results = _.map(_.filter(_.keys(doc), function(k) {
-  return k.match(/^q\d+_\d$/);
-}), (k) => [k, _.split(k.slice(1), "_")]);
+    const delq = `delete from content where exam = $1`;
+    client.query({text: delq, values: [id]})
+      .then((result) => {
+        console.log(result)
+      });
 
-let counter = 0;
-_.forEach(results, (res) => {
-  const problem_num = res[1][0];
-  const subproblem_num = res[1][1];
-  const problem = doc[res[0]];
-  const solution = doc[`${res[0]}_s`];
-  const choices = _.has(doc, `${res[0]}_i`) ? _.join(doc[`${res[0]}_i`], '~') : null;
-  const q = `
-insert into exams (courseid, examtype, examid, problem_num, subproblem_num, problem, solution, choices)
-values ($1, $2, $3, $4, $5, $6, $7, $8)
-  `;
-  client.query(q, [courseid, examtype, examid, problem_num, subproblem_num, problem, solution, choices], function (err, result) {
-    counter++;
-    console.log("Query #", counter);
-    console.log(err, result);
+    const contents = fs.readFileSync(`${examtype}-${examid}.yml`);
+    let doc = null;
+    try {
+      doc = yaml.safeLoad(contents);
+    } catch (e) {
+      console.log(e);
+      process.exit(1);
+    }
+    const results = _.map(_.filter(_.keys(doc), function(k) {
+      return k.match(/^q\d+_\d$/);
+    }), (k) => [k, _.split(k.slice(1), "_")]);
+
+    let counter = 0;
+    _.forEach(results, (res) => {
+      const problem_num = res[1][0];
+      const subproblem_num = res[1][1];
+      const problem = doc[res[0]];
+      const solution = doc[`${res[0]}_s`];
+      const choices = _.has(doc, `${res[0]}_i`) ? _.join(doc[`${res[0]}_i`], '~') : null;
+      const q = `
+    insert into content (problem_num, subproblem_num, problem, solution, choices, exam)
+    values ($1, $2, $3, $4, $5, $6)
+      `;
+      client.query(q, [problem_num, subproblem_num, problem, solution, choices, id], function (err, result) {
+        counter++;
+        console.log("Query #", counter);
+        console.log(err, result);
+      });
+    });
   });
-});

@@ -1,0 +1,150 @@
+course: 'ee16b'
+
+type: 'final'
+term: 'fa15'
+prof: 'Alon, Ayazifar, Tomlin, Ranade'
+
+q1_1: |
+  # Problem 1. Miscellaneous (20 pts)
+  a) **(6 pts)** If $x[n] = e^{j(2\pi/3)n} + e^{j(2\pi/5)n}$, compute the coefficients $X[k]$ for a length-$15$ DFT of the signal over the interval $n = 0, 1, ..., 14$.
+
+q1_1_s: |
+  Length $15$ contains integer multiple of periods of both components, so don't need to worry about spectral leakage.
+  <hr class="s1" />
+  $$X[k] = \sum_{n=0}^{14} e^{-j(2\pi / 15)kn} \cdot (e^{j(2\pi / 3)n} + e^{j(2\pi / 5)n})$$
+  This expression $\ne 0$ only when $2\pi / 15 kn = 2\pi / 3 n \implies k = 5$ or $2\pi / 15 kn = 2\pi / 5 n \implies k = 3$.
+  <hr class="s1" />
+  So, $X[3] = X[5] = 15$.
+
+q1_2: |
+  b) **(4 pts)** Many bio-sensors are constructed by getting the molecule of interest to attach to a magnetic bead, and then subsequently having that bead become chemically/physically attached (usually via specific antibodies) to an inductor. The number of such attached molecules is then sensed by measuring the value of the inductor.
+  <hr class="s2" />
+  Assuming that our sense inductor is a solenoid with an area $A = 1e^{-7}m^2$, number of turns $N = 4$, and length $l = 10μm$, if each magnetic bead that gets attached to the inductive sensor adds $4\pi \∗ 1e^{-10}$ to the permeability (the permeability with zero beads is $4\pi \* 1e^{-7}$), provide an expression for the inductance of the sensor as a function of the number of beads $N_{beads}$.
+
+q1_2_s: |
+  $$\begin{align} L_{sense} = \mu_{off} \frac{N^2A}{l} &= (4 \pi e^{-7} + N_{beads} \cdot 4 \pi e^{-10}) \frac{H}{M} \cdot \frac{4^2 \cdot 1e^{-7}m^2}{10e^{-6}m} \\\\
+  &= 4\pi e^{-7} \cdot 16e^{-2} \cdot (1 + 1e^{-3} \cdot N_{beads})H \\\\
+  &= 64 nH \cdot (1 + 1e^{-3} \cdot N_{beads}) \end{align}$$
+
+q1_3: |
+  c) **(10 pts)** For this problem, assume you have an open-loop system whose dynamics are described by:
+  $$\left[ \begin{array}{c} x_0[k + 1] \\\\ x_1[k + 1] \\\\ x_2[k + 1] \\\\ \end{array} \right] = A \left[ \begin{array}{c} x_0[k] \\\\ x_1[k] \\\\ x_2[k] \\\\ \end{array} \right] + Bu[k] \quad y[k] = C \left[ \begin{array}{c} x_0[k] \\\\ x_1[k] \\\\ x_2[k] \\\\ \end{array} \right]$$
+  $$A = \left[ \begin{array}{c c c} 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ 1 & 2 & 3 \\\\ \end{array} \right], B = \left[ \begin{array}{c} 0 \\\\ 0 \\\\ 1 \\\\ \end{array} \right], C = \left[ \begin{array}{c c c} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ \end{array} \right]$$
+  If we place this system in to closed-loop feedback with a forward gain $K = [k_1 \quad k_2 \quad k_3]$, choose values for $k_1, k_2$, and $k_3$ such that the eigenvalues of the closed-loop system are equal to $0.9 0.8$, and $0.7$.
+  <hr class="s2" />
+  **Important Note:** You do not need to know the formula for the determinant of a $3 \times 3$ matrix to solve this problem. Instead, recall that for an eigenvector $v = [v_0 \quad v_1 \quad v_2]^T$ (where you can initially treat $e_0, e_1$, and $e_2$ as being unknowns), $Av = \lambda v$, and use this relationship to determine an equation for $\lambda$.
+
+q1_3_s: |
+  $$\begin{align}
+  A_{CL} = A - B \mathcal{K} C &= \left[ \begin{array}{c c c} 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ 1 & 2 & 3 \\\\ \end{array} \right] - \left[ \begin{array}{c} 0 \\\\ 0 \\\\ 1 \\\\ \end{array} \right] [k_1 \quad k_2 \quad k_3] \left[ \begin{array}{c c c} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ \end{array} \right] \\\\
+  &= \left[ \begin{array}{c c c} 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ 1 - k_1 & 2 - k_2 & 3 - k_3 \\\\ \end{array} \right]
+  \end{align}$$
+  Let's define this as:
+  $$A_{CL} = \left[ \begin{array}{c c c} 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ c_0 & c_1 & c_2 \\\\ \end{array} \right]$$
+  $$A_{CL}v = \lambda v \implies \left[ \begin{array}{c c c} 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ c_0 & c_1 & c_2 \\\\ \end{array} \right] \left[ \begin{array}{c} v_0 \\\\ v_1 \\\\ v_2 \\\\ \end{array} \right] = \left[ \begin{array}{c} \lambda v_0 \\\\ \lambda v_1 \\\\ \lambda v_2 \\\\ \end{array} \right]$$
+  $$\implies$$
+  $$\begin{align}
+  v_1 &= \lambda v_0 \\\\
+  v_2 &= lambda v_1 = \lambda^2 v_0 \\\\
+  c_0v_0 + c_1v_1 + c_2v_2 &= \lambda v_2
+  \end{align}$$
+  $$\implies$$
+  $$\begin{align}
+  c_0v_0 + c_1 \lambda v_0 + c_3 \lambda^2 v_0 &= \lambda^3 v_0 \\\\
+  \lambda^3 - c_2 \lambda^2 - c_1 \lambda - c_0 &= 0
+  \end{align}$$
+  Desired evals:
+  $$\begin{align}
+  (\lambda - 0.9)(\lambda - 0.8)(\lambda - 0.7) &= 0 \\\\
+  \lambda^3 + (-0.7 - 0.8 - 0.9) \lambda^2 + (0.9 \cdot 0.8 + 0.9 \cdot 0.7 + 0.8 \cdot 0.7) \lambda - 0.9 \cdot 0.8 \cdot 0.7 &= 0 \\\\
+  \lambda^3 - 2.4 \lambda^2 - 1.91 \lambda - 0.504 &= 0
+  \end{align}$$
+  $$\begin{align}
+  \text{So:} & -c_2 = -2.4 \implies k_3 = 0.6 \\\\
+  & -c_1 = 1.91 \implies k_2 = 3.91 \\\\
+  & -c_0 = -0.504 \implies k_1 = 0.496
+  \end{align}$$
+
+q2_1: |
+  # Problem 2. PI control (20 points)
+  (a) **(3 pts)** Let's assume that we have an open-loop system whose dynamics are described by:
+  $$\begin{align}
+  x_0[k + 1] = Ax_0[k] + Bu[k] \\\\
+  y[k] = Cx_0[k] \\\\
+  A = 0.8, B = 1, C = 0.5
+  \end{align}$$
+  Assuming we have a desired output $y_d[k]$ and that we close the above system in a
+feedback loop with a forward gain $K$, derive the $A_{CL}, B_{CL}$, and $C_{CL}$ that capture the dynamics of the resulting closed-loop system.
+
+q2_1_s: |
+  $$A_{CL} = A - B\mathcal{K}C = 0.8 - 1 \cdot \mathcal{K} \cdot 0.5 = 0.8 - 0.5 \mathcal{K}$$
+  $$B_{CL} = B\mathcal{K} = \mathcal{K}$$
+  $$C_{CL} = 0.5$$
+
+q2_2: |
+  (b) **(4 pts)** If $K = 2$ and $y_d = 2$ (i.e., $y_d$ is a constant), what will $y[k]$ converge to? In other words, what will be the steady state error between $y_d$ and $y$?
+
+q2_2_s: |
+  $$x[k] = A_{CL}x[k] + B_{CL}y_d[k]$$
+  $$\begin{align}
+  (1 - 0.8 + 0.5 \mathcal{K})x[k] &= \mathcal{K}y_d[k] \\\\
+  x[k] &= \frac{\mathcal{K}}{0.2 + 0.5\mathcal{K}} \cdot y_d
+  \end{align}$$
+  $$\mathcal{K} = 2, y_d = 2 \implies x[k] = \frac{2}{1.2} \cdot 2 = \frac{10}{3}$$
+  $$y = 0.5x \implies \text{error} = y - y_d = \frac{5}{3} - 2 = -\frac{1}{3}$$
+
+q2_3: |
+  (c) **(8 pts)** Now let’s assume that we augment the system to include an integral term in the feedback. However, unlike the examples we developed in lecture, we will add this integral feedback to our original proportional-only controller. In other words, the output of our controller $u[k]$ is now set by:
+  $$\begin{align}
+  & u[k] = K_P(y_d[k] - y[k]) + z[k] \\\\
+  & z[k+1] = K_I T_s(y_d[k] - y[k]) + z[k]
+  \end{align}$$
+  Re-derive the $A_{CL}, B_{CL}$, and $C_{CL}$ that capture the dynamics of the resulting closed-loop system. Hint: What are the state variables of the new closed-loop system?
+
+q2_3_s: |
+  We'll need to include $z[k]$ as a state variable, but let's first plug in the controller output in to the open-loop systems
+  $$\begin{align}
+  x[k+1] &= Ax[k] + BK_P(y_d[k] - y[k]) + Bz[k] \\\\
+  &= Ax[k] + BK_P(y_d[k] - Cx[k]) + Bz[k] \\\\
+  &= (A - BK_PC)x[k] + Bz[k] + BK_Py_d[k] \\\\
+  z[k+1] &= K_IT_S(y_d[k] - y[k]) + z[k] \\\\
+  &= K_IT_S(y_d[k] - Cx[k]) + z[k] \\\\
+  &= -K_IT_S(x[k] + z[k] + K_IT_sy_d[k]
+  \end{align]$$
+  So:
+  $$A_{CL} = \left[ \begin{array}{c c} A- BK_PC & B \\\\ -K_IT_SC & 1 \\\\ \end{array} \right] = \left[ \begin{array}{c c} 0.8 -0.5K_P & 1 \\\\ -K_IT_S/2 & 1 \\\\ \end{array} \right]$$
+  $$B_{CL} = \left[ \begin{array}{c} BK_P \\\\ K_IT_S \\\\ \end{array} \right] = \left[ \begin{array}{c} K_P \\\\ K_IT_S \\\\ \end{array} \right]$$
+  $$C_{CL} = [0.5 \quad 0]$$
+
+q2_4: |
+  (d) **(5 pts)** As a function of $K_I$ and $K_P$ but continuing to assume that $y_d = 2$ (i.e., $y_d$ is a constant$, what will $y[k]$ converge to with the new feedback controller from part (c)? Note that you must derive the answer – you can't simply state the final result.
+
+q2_4_s: |
+  $$\left[ \begin{array}{c} x[k] \\\\ z[k] \\\\ \end{array} \right] = \left[ \begin{array}{c c} 0.8 - 0.5K_P & 1 \\\\ -K_IT_S/2 & 1 \\\\ \end{array} \right] \left[ \begin{array}{c} x[k] \\\\ z[k] \\\\ \end{array} \right] + \left[ \begin{array}{c} K_P \\\\ K_IT_S \\\\ \end{array} \right] y_d[k]$$
+  $$\left[ \begin{array}{c c} 0.2 + 0.5K_P & -1 \\\\ K_IT_S/2 & 0 \\\\ \end{array} \right] \left[ \begin{array}{c}x[k] \\\\ z[k] \\\\ \end{array} \right] = \left[ \begin{array}{c} K_P \\\\ K_IT_S \end{array} \right] y_d[k]$$
+  $$K_IT_S \cdot \frac{1}{2} x[k] = K_IT_S y_d[k]$$
+  $$y[k] = Cx[k] = \frac{1}{2}x[k]$$
+  $$K_IT_Sy[k] = K_IT_Sy_d[k] \implies y[k] - y_d[k] = 0$$
+
+q3_1: |
+  # Problem 3. DC-DC Converters (27 pts)
+  Having learned about Dynamic Voltage and Frequency Scaling (DVFS) in lecture, you may now have an appreciation for why it would be useful to have a circuit component that can take a battery input voltage (e.g., $~3.7V$ for a lithium-ion battery) and efficiently (i.e., ideally, without the circuit itself dissipating any power) generating a new power supply voltage with an arbitrary value (e.g., $0.5V – 1V$ to supply a digital processor, or e.g. $>5-10V$ to make the LCD work). These circuits are known as “DC-DC converters”, and in this problem we will explore some key sub-components to get an idea of how such circuits operate.
+  <hr class="s2" />
+  **Important note:** This problem has many sub-parts, but has been set up so that the majority of the sub-parts can be solved independently of each other.
+  <hr class="s2" />
+  a) **(5 pts)** Let's first remind ourselves of the benefits of being able to scale the supply voltage of a digital circuit. Assuming that with a supply voltage $V_{dd} = 1V$ our digital circuit operates at $1GHz$ and dissipates $1W$, how much power will the digital circuit dissipate at a supply voltage of $0.6V$ and clock frequency of $300MHz$?
+
+q3_1_s: |
+  $$P = \alpha_{v \to 1} CV_{DD}^2\mathcal{f}$$
+  $$\begin{align}
+  P_{new} &= (\frac{V_{DD, new}}{V_{DD, old}})^2 \cdot (\frac{\mathcal{f}_{new}}{\mathcal{f}_{old}}) \cdot P_{old} \\\\
+  &= (\frac{0.6V}{1V})^2 \cdot (\frac{300mHz}{10Hz}) \cdot 1W \\\\
+  &= 108mW
+  \end{align}$$
+
+q3_2: |
+  b) **(10 pts)** For the circuit shown below, assuming that for $t < 0$ switch $S1$ is on and switch $S2$ if off, while for $t ≥ 0$ switch $S1$ is off and switch $S2$ is on, derive an expression for $V_{out}(t)$ for $t ≥ 0$.
+  <hr class="s2" />
+  (This isn't important to solving this problem, but note that $R_L$ here represents the circuit that we are trying to power through the hypothetical DC-DC converter.)
+  ![circuit](/img/ee16b/final-fa15-q3-1.png)
+

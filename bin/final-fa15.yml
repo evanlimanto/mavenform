@@ -1,0 +1,762 @@
+course: 'cs61c'
+
+type: 'final'
+term: 'fa15'
+prof: 'Stojanovic, Wawrzynek'
+
+q1_1: |
+  # MT1-1: Potpourri - Good for the beginning... (8 points)
+  a. **True/False:**
+  - i. The compiler turns C code into instructions ready to be run by a processor
+  - ii. The instruction `addiu $t0 $t1 0x10000` is a TAL instruction
+  - iii. The linker computes the offset of all branch instructions
+
+q1_1_s: |
+  **F, F, F**
+
+q1_2: |
+  b. **Memory Management**
+
+  ```
+  int global = 0;
+  int* func() {
+      int* arr = malloc(10 * sizeof(int));
+      return arr;
+  }
+  int main() {
+      char* str = "hello world";
+      char str2[100] = "cs61c";
+      int* a = func();
+      return 0;
+  }
+  ```
+
+  In what part of memory are each of the following values stored?
+  - `*str:`    ________
+  - `a:`       ________
+  - `arr[0]:`  ________
+  - `str2[0]:` ________
+  - `arr:`     ________
+
+q1_2_s: |
+  - `*str:`    static
+  - `a:`       stack
+  - `arr[0]:`  stack
+  - `str2[0]:` stack
+  - `arr:`     heap
+
+q1_3: |
+  # MT1-2: C-ing images through a kaleidoscope (8 points)
+  Consider a grayscale image with a representation similar to the one you worked with in Project 4, where the image is represented by a $1$-dimensional array of `chars` with length $n \times n$. Fill out the following function `block_tile`. It returns a new, larger image array, which is the same image tiled rep times in both the $x$ and $y$ direction. You may or may not need all of the lines.
+  <hr class="s2" />
+  For a better idea of what must be accomplished, consider the following example:
+
+  ```
+  char *image = malloc(sizeof(char) * 4);
+  image[0] = 1;
+  image[1] = 2;
+  image[2] = 3;
+  image[3] = 4;
+  char *tiled_image = block_tile(image, 2, 2);
+  ```
+
+  The contents of `tiled_image` would then look like:
+
+  ```
+  tiled_image: [1, 2, 1, 2
+                3, 4, 3, 4
+                1, 2, 1, 2
+                3, 4, 3, 4];
+
+  char *block_tile(char *block, int n, int rep) {
+      int new_width = ________________________________________;
+      char *new_block = malloc(________________________________________);
+      for (int j = 0; j < new_width; j++) {
+          for (int i = 0; i < new_width; i++) {
+              int old_x = ________________________________________;
+              int old_y = ________________________________________;
+              int new_loc = ________________________________________;
+              new_block[new_loc] = block[old_y * n + old_x];
+          }
+      }
+      ________________________________________;
+      ________________________________________;
+      return new_block;
+  }
+  ```
+
+q1_3_s: |
+  ```
+  char *block_tile(char *block, int n, int rep) {
+      int new_width = n * rep;
+      char *new_block = malloc(new_width * new_width * sizeof(char));
+      for (int j = 0; j < new_width; j++) {
+          for (int i = 0; i < new_width; i++) {
+              int old_x = i % n;
+              int old_y = j % n;
+              int new_loc = j * new_width + i;
+              new_block[new_loc] = block[old_y * n + old_x];
+          }
+      }
+      ________________________________________;
+      ________________________________________;
+      return new_block;
+  }
+  ```
+
+q1_4: |
+  # MT1-3: Easy questions have no depth - this one does (12 points)
+  We’re interested in running a depth-first search on a graph, and labeling the nodes in the order we finish examining them. Below we have the struct definition of a node in the graph, and the implementation of the function in C.
+  <hr class="s2" />
+  ![graph](/img/cs61c/final-fa15-q1-1.png)
+
+  ```
+  struct node {
+      int data;
+      int label;
+      int num_edges;
+      struct node** edges[];
+  }
+  ```
+
+  Note that initially, all nodes in the graph have their label set to `-1`. The address width of our machine is 32 bits.
+
+  ```
+  int dfs_label(struct node* node, int counter) {
+      if (node->label != -1) {
+          return counter;
+      }
+      for (int i = 0; i < node->num_edges; ++i) {
+          counter = dfs_label(node->edges[i], counter);
+      }
+      node->label = counter++;
+      return counter;
+  }
+  ```
+
+  Implement `dfs_label` in TAL MIPS. Assume `node` is in `$a0` and `counter` is in `$a1`. You may not need all the lines provided.
+
+  ```
+  dfs_label:
+  # prologue
+       addiu $sp $sp ____
+       sw $ra 0($sp)
+       sw $s0 4($sp)
+       sw $s1 8($sp)
+  # base case
+       addiu $t1 ____ ____
+       ____________________
+       ____________________
+       bne $t0 $t1 epilogue
+  # loop
+       addu $s0 ____ ____
+       addiu $s1 $0 0
+  loop:
+       lw $t0 ____
+       beq ____ ____ ____
+       lw $a0 ____             # load edges into $a0
+       sll $t0 $s1 ____
+       ____________________    # load the next node
+       lw $a0 ____
+       jal dfs_label
+       addu $a1 ____ ____
+       addiu $s1 $s1 1
+       j loop
+  fin:
+       sw $a1 ____
+  # into $a0
+       ____________________
+       addu $v0 $0 $a1
+  epilogue:
+       lw $ra 0($sp)
+       lw $s0 4($sp)
+       lw $s1 8($sp)
+       addiu $sp $sp ____
+       jr $ra
+  ```
+
+q1_4_s: |
+  ```
+  dfs_label:
+  # prologue
+      addiu $sp $sp _-12_
+      sw $ra ($sp)
+      sw $s0 4($sp)
+      sw $s1 8($sp)
+  # base case
+      addiu $t1 _$0_ _-1_
+      __lw $t0 4($a0)__
+      __addu $v0 $0 $a1__
+      bne $t0 $t1 epilogue
+  # loop
+        addu $s0 _$a0_ _0_
+       addiu $s1 $0 0
+  loop:
+      lw $t0 _8($s0)_
+      beq _$t0_ _$s1_ _fin_
+      lw $a0 _12($s0)_       # load edges into $a0
+      sll $t0 $s1 _2_
+      _addu $a0 $a0 $t0_     # load the next node
+      lw $a0 _0($a0)_
+      jal dfs_label
+      addu $a1 _$v0_ _$0_    # into $a0
+      addiu $s1 $s1 1
+      j loop
+  fin:
+      sw $a1 _4(s0)_
+      _addiu $a1 $a1 1_
+      addu $v0 $0 $a1
+  epilogue:
+      lw $ra ($sp)
+      lw $s0 4($sp)
+      lw $s1 8($sp)
+      addiu $sp $sp _12_
+      jr $ra
+  ```
+
+q1_5: |
+  # MT1-4: Can't reveal this MIPS-tery (8 points)
+  ```
+   0| Mystery:
+   1|     add $t0, $a0, $0
+   2|     add $t1, $a1, $0
+   3|
+   4|     la $s0, L1
+   5|     lw $s1, 12($s0)
+   6|     addi $s2, $0, 6
+   7|     addi $s3, $0, 0
+   8|     addi $s4, $0, 1057        # $s4 contains 0b0100 0010 0001
+   9|     sll $s4, $s4, 11
+  10|
+  11| L1: beq $s3, $s2, L2
+  12|     addu $s1, $s1, $s4
+  13|     sw $s1, 12($s0)
+  14|     addu $t1, $a3, $t0
+  15|     addi $s3, $s3, 1
+  16|     j L1
+  17| L2:
+  ```
+
+  a. When the above code executes, which line is modified? How many times?
+
+q1_5_s: |
+  Line 14, 6 times
+
+q1_6: |
+  b. Assume we run this block of code with `$a0 = 1` and `$a1 = 1`; what is the value in `$t2` at the end of the code execution? How about `$t3`?
+
+q1_6_s: |
+  `$t2 = 2, $t3 = 3`
+
+q1_7: |
+  c. In three sentences or less, how does this code affect the temporary registers?
+
+q1_7_s: |
+  It takes the arguments `$a0` and `$a1` and stores then in registers `$t0` and `$t1`. Then for the remaining temporary registers, it sets register $t_{n}$ to $t_{n-1} + t_{n-2}$.
+
+q2_1: |
+  # MT2-1: Synchronous Finite State Digital Machine Systems (9 points)
+  a. The circuit shown below can be simplified. Write a Boolean expression that represents the function of the simplified circuit using the minimum number of AND, OR, and NOT gates.
+  <hr class="s2" />
+  ![circuit](/img/cs61c/final-fa15-q2-1.png)
+
+q2_1_s: |
+  `~( ~(A) (B+~(C))) = A + ~(B+(~C)) = A + (~B)C`
+
+q2_2: |
+  b. Consider the finite state machine below which has $6$ states, and a single input that can take on the value of $0$ or $1$. The finite state machine should output $1$ *if and only if* $6 +$ the sum of all the input values is not divisible by $2$ or $3$. One transition has been provided; complete the remainder of the diagram.
+  <hr class="s2" />
+  (Hint: If the sum of the inputs is a multiple of $6$, then we have $6 +$ the sum of the inputs $= 6n$ for some $n$. As $6n$ is divisible by $2$, $6n$ cannot be prime.)
+  <hr class="s2" />
+  ![circuit](/img/cs61c/final-fa15-q2-2.png)
+
+q2_2_s: |
+  ![circuit](/img/cs61c/final-fa15-q2-3.png)
+  <hr class="s2" />
+  All transitions going to `001` and `101` should output `1`, as we get something in the form of 6n+1 and 6n+5 respectively. If you look at the `4` other cases, `6n, 6n+2, 6n+3, 6n+4`, all numbers in these forms are divisible by either `2` and/or `3`, and therefore can never be prime for `n >= 1` (Which is what we have as we add `6` to the sum of all our inputs). Therefore for all transitions going to `000, 010, 011`, and `101`, we should output `0`.
+
+q2_3: |
+  c. Consider the following circuit. Assume registers have a CLK to Q time of `60ps`, a setup time of `40ps`, and a hold time of `30ps`. Assuming that all gates have the same propagation delay, what is the maximum propagation delay each individual gate could have to achieve a clock rate of `1GHz`.
+  <hr class="s2" />
+  ![circuit](/img/cs61c/final-fa15-q2-4.png)
+
+q2_3_s: |
+  `300 ps`
+
+q2_4: |
+  # MT2-2: Do stray off of the well-worn datapath (11 points)
+  Suppose we have a new instruction, `bmeq`. We branch if the value in memory at the address in `$rs` equals the value in `$rt`. The instruction format is as follows:
+
+  ```
+  bmeq ($rs) $rt offset
+  ```
+
+  Use the datapath diagram provided as a reference for input and output names. Assume we are working with a non-pipelined single cycle datapath.
+  <hr class="s2" />
+  a. Write the register transfer language that represents the logic of this command.
+
+q2_4_s: |
+  `If MEM[$rs] == $rt PC = PC + offset << 2; else PC = PC + 4`
+
+q2_5: |
+  b. You are given a new control signal, `BMEQ`, which is `1` when it is a `BMEQ` instruction and 0 when it is not. In the following table, please fill in the inputs, control signal, and output destination for any additional MUXes you would need in order for this instruction to work correctly. You might not need all the lines.
+  <hr class="s2" />
+  **Inputs:** `ReadData1, ReadData2, ReadData, AluOut, MemoryData, PC`
+  <hr class="s1" />
+  **Output Destinations:** `Addr, ReadReg1, ReadReg2, WriteAddr, InputA, InputB, ReadAddr, WriteData`
+  <hr class="s2" />
+
+  |Control Signal|Input0|Input1|Output Destination|
+  |--------------|------|------|------------------|
+  |||||
+  |||||
+  ||||||
+
+q2_5_s: |
+  |Control Signal|Input0|Input1|Output Destination|
+  |--------------|------|------|------------------|
+  |BMEQ|ReadData1|ALUOut|ReadAddr|
+  |BMEQ|ReadData1|MemoryData|InputA|
+  ||||||
+
+q2_6: |
+  d. Fill in the values for the control signals for this new instruction. Use `X` if the signal does not matter. For `ExtOp`, write `SIGN` for sign-extension and `ZERO` for zero-extension.
+  <hr class="s2" />
+
+  |Reg Dst|ExtOp|RegWr|ALU Sr|ALU Ctr|Mem Wr|Memto Reg|Branch|Jump|BMEQ|
+  |-------|-----|-----|------|-------|------|---------|------|----|----|
+  ||||||||||1|
+
+q2_6_s: |
+  |Reg Dst|ExtOp|RegWr|ALU Sr|ALU Ctr|Mem Wr|Memto Reg|Branch|Jump|BMEQ|
+  |-------|-----|-----|------|-------|------|---------|------|----|----|
+  |X|SIGN|0|0|X|0|X|1|0|1|
+
+q2_7: |
+  e. In ≤ 1 sentence, why can’t this instruction work with a normal pipelined 5-stage MIPS datapath?
+
+q2_7_s: |
+  The execute stage now requires a data to be loaded in from memory.
+
+q2_8: |
+  # MT2-3: Enough stalling, that will only slow you down (9 points)
+  Consider the standard 5-stage pipelined MIPS CPU with instruction fetch, register read, ALU, memory, and register write stages. Register writes happen before register reads in the same clock cycle, branch comparison is done during the register read stage, there is a branch delay slot, and forwarding is implemented.
+  <hr class="s2" />
+  For the following stream of instructions, assume that `$t0` is not equal to `0`, so the branch is not taken.
+
+  ```
+  0| start:    lw $t0 0($a0)
+  1|           beq $t0, 0, end
+  2|           addiu $t0, $t0, 10
+  3|           sw $t0, 0($a0)
+  4| end:
+  ```
+
+  a. For each pair of instructions, circle whether the CPU needs to be stalled for the execution of the second instruction, and if so, for how many cycles.
+
+  ```
+  i.   0| start:  lw $t0 0($a0)        stall for ___ cycles
+       1|         beq $t0, 0 end       no stall
+
+  ii.  1|         beq $t0, 0, end      stall for ___ cycles
+       2|         addiu $t0, $t0, 10   no stall
+
+  iii. 2|         addiu $t0, $t0, 10   stall for ___ cycles
+       3|         sw $t0 0($a0)        no stall
+  ```
+
+q2_8_s: |
+  - i. stall for 2 cycles
+  - ii. no stall
+  - iii. no stall
+
+q2_9: |
+  Logic in each stage of the pipeline has the following timing:
+  <hr class="s2" />
+
+  |Instruction Fetch|Register Read|ALU|Memory|Register Write|
+  |-----------------|-------------|---|------|--------------|
+  |150 ps|100 ps|100 ps|200 ps|100 ps|
+
+  <hr class="s2" />
+  The pipelining registers in between stages have the following timing:
+
+  |Clock-to-Q|Hold Time|Setup|
+  |----------|---------|-----|
+  |30 ps|20 ps|30 ps|
+
+  <hr class="s2" />
+  b. What is the minimum clock period, in picoseconds, for which the processor can run?
+
+q2_9_s: |
+  260
+
+q2_10: |
+  c. What is the time required, in picoseconds, that it takes for the CPU, starting from the first stage of the lw instruction, to finish the execution of the final `sw` instruction? You may use the variable `stall_cycles` in place of the sum of your answers for question a, and `clock_period` in place of your answer for question b.
+
+q2_10_s: |
+  `(8 + stall_cycles) * clock_period`
+
+q2_11: |
+  d. Which timing values, if lowered independently (all other timing remain the same), will allow us to increase the frequency of the CPU? Circle all that apply.
+  <hr class="s2" />
+  Pipelining Register Clock-to-Q, Pipelining Register Hold time, Pipelining Register Setup time, Instruction Fetch, Register Read, ALU, Memory, Register Write
+
+q2_11_s: |
+  pipelining register clock-to-q, pipelining register setup time, memory (can be either circled or not circled)
+
+q3_1: |
+  # MT2-4: If you do well, it's clobbering time! (12 points)
+  The information for one student in regards to clobbering a single midterm is captured in the data of the following *tightly-packed* struct:
+
+  ```
+  typedef struct student {
+     int studentID;
+     float oldZScore;
+     float newZScore;
+     int clobber;         /* a value equal to 1 if a student clobbers,
+                             0 if otherwise */
+  } student;
+  ```
+
+  We run the following code on a 32-bit machine with a 4 KiB write-back cache. `importStudent()` returns a `struct student` that is in the course roster and that has not been returned by `importStudent()` previously. For simplicity, assume `importStudent()` does not affect the cache.
+
+  ```
+  int ARR_SIZE = 512; //Class size rounded down for simplicity
+  student *61CStudents = (student *) malloc (sizeof(student) * ARR_SIZE);
+  /* Assume malloc returns a cache block aligned address */
+  for (int i = 0; i < ARR_SIZE; i++) {                         <=== part I
+    61CStudents[i] = importStudent()
+  }
+  for (int i = 0; i < ARR_SIZE; i++) {                         <=== part II
+    if (61CStudents[i].oldZscore > 61CStudents[i].newZscore){
+      61CStudents[i].clobber = 0;
+    } else {
+      61CStudents[i].clobber = 1;
+    }
+  }
+  ```
+
+  a. How many bytes is needed to store the information for a single student?
+
+q3_1_s: |
+  16 bytes
+
+q3_2: |
+  b. Assume that the block size is `32 B`. What is the tag:index:offset breakdown of the cache (direct-mapped)?
+
+q3_2_s: |
+  20:7:5
+
+q3_3: |
+  At the label `part I`, assume that `61CStudents` is filled with the correct data. What type of misses will occur from memory accesses (accesses in the for loop of part a.) during the process? Why?
+
+q3_3_s: |
+  Compulsory. New Data; `512 * 16 B >= 4 KiB` cache
+
+q3_4: |
+  d. Suppose we run the code again and the cache block size is now `8 B` long and the cache is direct- mapped. For the for-loop in `part II`, what is the miss rate in the best case scenario (we want the highest hit rate possible)? What type of misses occur?
+
+q3_4_s: |
+  Capacity, `2/3`
+
+q3_5: |
+  e. For the for-loop `in part II`, assume that the cache block size is now `128B`.
+  <hr class="s2" />
+  i. If the cache is direct-mapped, what is the hit rate?
+
+q3_5_s: |
+  `8` students per block. `3` Memory accesses per student, `1` miss & `23` hits. `23/24`.
+
+q3_6: |
+  ii. If the cache is fully associative, what is the hit rate? Does associativity help? Why or why not?
+
+q3_6_s: |
+  `23/24`.
+
+q3_7: |
+  # MT2-5: What is the floating point of complex numbers? (5 points)
+  We realize that you want to represent complex numbers, which are in the form $a + bi$, where $a$ is the real component, $b$ is the imaginary component, and the magnitude is $\sqrt{a^2 + b^2}$.
+  <hr class="s2" />
+  We create a 16-bit representation for storing both the real and imaginary components as floating point numbers with the following form: The first 8 bits will represent the real component, and the latter 8 bits will represent the complex component. Our new representation will look like:
+  <hr class="s2" />
+  ![bits](/img/cs61c/final-fa15-q3-1.png)
+  <hr class="s2" />
+  **Bits per field:**
+  - Sign: 1
+  - Exponent: 3
+  - Significand: 4
+  - Everything else follows the IEEE standard 754 for floating point, except in 16 bits
+
+  <hr class="s1" />
+  **Bias:** 3
+  <hr class="s2" />
+  a. Convert `0xB248` into the complex number form $a + bi$.
+
+q3_7_s: |
+  $-1.125 + 3i$
+
+q3_8: |
+  b. What is the smallest positive number you can represent with a nonzero real component and zero complex component.
+
+q3_8_s: |
+  `2^-6`
+
+q3_9: |
+  Recall the following floating point representation from the midterm:
+  <hr class="s2" />
+  ![bits](/img/cs61c/final-fa15-q3-2.png)
+  <hr class="s2" />
+  **Bits per field:**
+  - Sign: 1
+  - Exponent: 6
+  - Significand: 9
+  - Everything else follows the IEEE standard 754 for floating point, except in 16 bits
+
+  <hr class="s2" />
+  c. Ignoring infinities, which of the two representations presented above can represent a number with the larger magnitude.
+
+q3_9_s: |
+  The midterm floating point representation can represent `2^6`, whereas complex numbers are strictly bounded by `2^5`.
+
+q4_1: |
+  # F-1: You may need to context switch for this question (9 points)
+  The system in question has `1MiB` of physical memory, `32`-bit virtual addresses, and `256` physical pages. The memory management system uses a fully associative TLB with `128` entries and an LRU replacement scheme.
+  <hr class="s2" />
+  a. What is the size of the physical pages in bytes?
+
+q4_1_s: |
+  `2^12` bytes
+
+q4_2: |
+  b. What is the size of the virtual pages in bytes?
+
+q4_2_s: |
+  `2^12` bytes
+
+q4_3: |
+  c. What is the maximum number of virtual pages a process can use?
+
+q4_3_s: |
+  `2^20` pages
+
+q4_4: |
+  d. What is the minimum number of bits required for the page table base address register?
+
+q4_4_s: |
+  `20` bits
+
+q4_5: |
+  **Everybody Got Choices**
+  <hr class="s1" />
+  e. Answer “Yup!” (True) or “Nope!” (False) to the following questions
+  - i. The page table is stored in main memory
+  - ii. Every virtual page is mapped to a physical page
+  - iii. The TLB is checked before the page table
+  - iv. The penalty for a page fault is about the same as the penalty for a cache miss
+  - v. A linear page table takes up more memory as the process uses more memory
+
+q4_5_s: |
+  - i. The page table is stored in main memory - Yup!
+  - ii. Every virtual page is mapped to a physical page - Nope!
+  - iii. The TLB is checked before the page table - Yup!
+  - iv. The penalty for a page fault is about the same as the penalty for a cache miss - Nope!
+  - v. A linear page table takes up more memory as the process uses more memory - Nope!A
+
+q5_1: |
+  # F-2: Not all optimizations are created equal (8 points)
+  For this question, you will be looking at several different versions of the same code that has been, or at least has tried to be, optimized. For each of the versions, indicate the correctness and speed with the appropriate letter:
+  **Correctness:**
+  - A. Always Correct
+  - B. Sometimes Correct
+  - C. Always Incorrect
+
+  <hr class="s2" />
+  **Speed:**
+  - A. Faster
+  - B. Same
+  - C. Slower
+
+  <hr class="s2" />
+  For reference, here is the serial version of the code:
+
+  ```
+  #DEFINE RESULT_ARR_SIZE 8
+  #DEFINE ARR_SIZE 65536
+
+  result[0] = 0;
+  for (int i = 1; i < RESULT_ARR_SIZE; i++) {
+      int sum = 0;
+      for (int j = 0; j < ARR_SIZE; j++) {
+          sum += arr[j] + i;
+      }
+      result[i] = sum + result[i - 1];
+  }
+  ```
+
+  a. Version 1:
+
+  ```
+  result[0] = 0;
+  #pragma omp parallel
+  for (int i = 1; i < RESULT_ARR_SIZE; i++) {
+      int sum = 0;
+      for (int j = 0; j < ARR_SIZE; j++) {
+          sum += arr[j] + i;
+      }
+      result[i] = sum + result[i - 1];
+  }
+  ```
+
+  Correctness: ___
+  <hr class="s1" />
+  Speed: ___
+
+q5_1_s: |
+  Correctness: B
+  <hr class="s1" />
+  Speed: C
+
+q5_2: |
+  b. Version 2:
+
+  ```
+  result[0] = 0;
+  #pragma omp parallel for
+  for (int i = 1; i < RESULT_ARR_SIZE; i++) {
+      int sum = 0;
+      for (int j = 0; j < ARR_SIZE; j++) {
+          sum += arr[j] + i;
+      }
+      #pragma omp critical
+      result[i] = sum + result[i - 1];
+  }
+  ```
+
+  Correctness: ___
+  <hr class="s1" />
+  Speed: ___
+
+q5_2_s: |
+  Correctness: B
+  <hr class="s1" />
+  Speed: A
+
+q5_3: |
+  c. Version 3:
+
+  ```
+  result[0] = 0;
+  for (int i = 1; i < RESULT_ARR_SIZE; i++) {
+      int sum = 0;
+      #pragma omp parallel for reduction(+: sum)
+      for (int j = 0; j < ARR_SIZE; j++) {
+          sum += arr[j] + i;
+      }
+      result[i] = sum + result[i - 1];
+  }
+  ```
+
+  Correctness: ___
+  <hr class="s1" />
+  Speed: ___
+
+q5_3_s: |
+  Correctness: A
+  <hr class="s1" />
+  Speed: A
+
+q5_4: |
+  d. Consider the correctly parallelized version of the serial code above.
+  - i. Could it ever achieve perfect speedup?
+  - ii. What law provides the answer to this question?
+
+q5_4_s: |
+  - i. Could it ever achieve perfect speedup? No
+  - ii. What law provides the answer to this question? Amdahl's Law
+
+q6_1: |
+  # F-3: Map and Reduce are 2nd degree friends - when you also Combine (8 points)
+  Imagine we’re looking at Facebook’s friendship graph, which we model as having a vertex for each user, and an undirected edge between friends. Facebook stores this graph as an adjacency list, with each vertex associated with the list of its neighbors, who are its friends. This representation can be viewed as a list of degree 1 friendships, since each user is associated with their direct friends. We’re interested in finding the list of degree 2 friendships, that is, an association between each user and the friends of their direct friends.
+  <hr class="s2" />
+  You are given a list of associations of the form `(user_id, list(friend_id))`, where the `user_id` is 1st degree friends with all the users in the list.
+  <hr class="s2" />
+  Your output should be another list of associations of the same form, where the first item of the pair is a `user_id`, and the second item is a list of that user’s 2nd degree friends. **Note:** a user is not their own 2nd degree friend, so the list of second degree friends must not include the user themselves.
+  <hr class="s2" />
+  Write pseudocode for the mapper and reducer to get the desired output from the input. Assume you have a set data structure, with `add(value)` and `remove(value)` methods, where value can be an item or a list of items. You can iterate through a list with the `for item in items` construct. You may not need all the lines provided.
+
+  ```
+  map(user_id, friend_ids):
+      for __________________________________:
+          emit(_________, _________)
+
+
+
+  reduce(key, values):
+      second_degree_friends = set()
+      _______________________________________
+      _______________________________________
+      _______________________________________
+      _______________________________________
+      emit(_______________, __________________)
+  ```
+
+q6_1_s: |
+  ```
+  map(user_id, friend_ids):
+      for friend in friend_ids:
+          emit(friend, friend_ids)
+
+  reduce(key, values):
+      second_degree_friends = set()
+      for value in values:
+          second_degree_friends.add(value)
+      second_degree_friends.remove(key)
+      emit(key, second_degree_friends)
+  ```
+
+q7_1: |
+  # F-4: Potpourri – ... and good for the end! (11 points)
+  a. We have a hard drive with a controller overhead of `5 ms`. The disk has `12000` cylinders, and it takes `2 ms` to cross `1000` cylinders. The drive rotates at `2400 RPM`, and we want to copy half a MB of data. Our hard drive has a transfer rate of `500 MB/s`. What is the access time of a read from disk?
+
+q7_1_s: |
+  `5 ms + 12000/3 * (2/1000) + 1000 * 1/(24000/60/2) + 1000*((1/2)/500) = 15.25 ms`
+
+q7_2: |
+  b. I launched a new online app at the start of this year (2015), and I want to have at least three nines of availability per year. Up until today, my app has been available at all times this year. However, some malicious hackers crashed my app for today; it took me `4` hours to get it back up again. For the rest of this year, what is the most downtime I can have on my app to meet my availability goals, rounded to the closest hour? (There are `8760` hours this year)
+
+q7_2_s: |
+  `5` hours
+
+q7_3: |
+  c. If a receiver checks the header and the checksum is correct, what does it do? (In ≤ 1 sentence)
+
+q7_3_s: |
+  Ack
+
+q7_4: |
+  d. For the standard single-error correcting Hamming code presented in class, is the `12`-bit code word `0x61C` corrupted? What is the correct data value in decimal format?
+
+q7_4_s: |
+  ```
+  0x61C = 0b0110 0001 1100
+  P1: 0 ^ 1 ^ 0 ^ 0 ^ 1 ^ 0 = 0
+  P2: 1 ^ 1 ^ 0 ^ 0 ^ 1 ^ 0 = 1
+  P4: 0 ^ 0 ^ 0 ^ 0 ^ 0 = 0
+  P8: 1 ^ 1 ^ 1 ^ 0 ^ 0 ^ 0 = 1
+
+  0x61C = 0b0110 0001 1100 => 0b0110 0001 1000 = 0b1000 1000 = 128 + 8 = 136
+  ```
+
+q7_5: |
+  e. **True/False**
+  - i. Raid `4` allows for concurrent independent writes to disk.
+  - ii. Raid `5` allows for concurrent independent writes to disk.
+  - iii. Raid `5` allows for concurrent independent reads to disk.
+  - iv. IP guarantees delivery.
+
+q7_5_s: |
+  - i. Raid `4` allows for concurrent independent writes to disk. F
+  - ii. Raid `5` allows for concurrent independent writes to disk. T
+  - iii. Raid `5` allows for concurrent independent reads to disk. T
+  - iv. IP guarantees delivery. F
