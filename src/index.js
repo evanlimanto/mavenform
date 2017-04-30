@@ -9,6 +9,7 @@ import createHistory from 'history/createBrowserHistory';
 import * as appReducers from './reducers';
 import { Routes } from './components';
 import initializeTracking from './tracking';
+import { retrieveExamList } from './utils';
 
 const ReactGA = require('react-ga');
 ReactGA.initialize('UA-20131732-5');
@@ -32,7 +33,7 @@ const store = createStore(
   applyMiddleware(middleware)
 );
 
-
+retrieveExamList(store);
 initializeTracking();
 
 ReactDOM.render((

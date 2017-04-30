@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { has, map } from 'lodash';
 
-import { exams, examTypeToLabel, courseIDToLabel } from '../../exams';
+import { examTypeToLabel, courseIDToLabel, termToLabel } from '../../exams';
 import { navSidebarClickEvent } from '../../events';
 
-const NavSidebarComponent = ({ courseid, examid, thisExamType, isExam }) => {
+const NavSidebarComponent = ({ exams, courseid, examid, thisExamType, isExam }) => {
   const sideTabs = map(exams[courseid], (courseExams, examtype) => {
-    const content =  map(courseExams, (item, id) => {
-      const term = item.term;
+    const content = map(courseExams, (item, id) => {
+      const term = termToLabel[id];
       const isAvailable = has(item, 'available') ? item.available : true;
       var url = `/${courseid}/${examtype}/${id}`;
       var note = item.note ? `<br/><i class="side-i" >(${item.note})</i>` : (null);
@@ -66,6 +66,7 @@ const mapStateToProps = (state, ownProps) => {
     examid: ownProps.examid,
     thisExamType: ownProps.examtype,
     isExam: ownProps.isExam,
+    exams: state.global.exams,
   }
 };
 

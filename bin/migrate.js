@@ -1,9 +1,33 @@
-var _ = require('lodash'); var pg = require('pg');
+var _ = require('lodash');
+var pg = require('pg');
 var fs = require('fs');
 var yaml = require('js-yaml');
+var program = require('commander');
+
+program
+  .version('1.0.0')
+  .option('-d, --database <name>', 'dev, staging, or prod')
+  .option('-c, --courseid <id>', 'e.g. ee16b')
+  .option('-t, --examtype <type>', 'e.g. mt2')
+  .option('-e, --examid <id>', 'e.g. sp16')
+  .parse(process.argv);
+
+let type = null;
+if (program.database === "dev") {
+  type = 1;
+} else if (program.database === "staging") {
+  type = 2;
+} else if (program.database === "prod") {
+  type = 3;
+} else {
+  throw "Unrecognized db!";
+}
+const courseid = program.courseid;
+const examtype = program.examtype;
+const examid = program.examid;
 
 /*
-create table exams (
+create table content (
 	id serial primary key,
 	courseid varchar(20) not null,
 	examtype varchar(20) not null,
@@ -13,9 +37,15 @@ create table exams (
 	problem varchar,
 	solution varchar
 );
-*/
 
-const type = 2;
+create table exams (
+  id serial primary key,
+  courseid varchar(20) not null,
+  examtype varchar(20) not null,
+  examid varchar(20) not null,
+  profs varchar(50)
+);
+*/
 
 const config = {
   user: 'evanlimanto',
@@ -57,10 +87,6 @@ if (type === 1) {
 }
 client.connect();
 
-const courseid = 'ugba10';
-const examtype = 'marketing';
-const examid = 'sp11';
-
 const delq = `delete from exams where courseid = $1 and examtype = $2 and examid = $3`;
 client.query({text: delq, values: [courseid, examtype, examid]})
   .then((result) => {
@@ -90,8 +116,8 @@ _.forEach(results, (res) => {
 insert into exams (courseid, examtype, examid, problem_num, subproblem_num, problem, solution, choices)
 values ($1, $2, $3, $4, $5, $6, $7, $8)
   `;
-  counter++;
   client.query(q, [courseid, examtype, examid, problem_num, subproblem_num, problem, solution, choices], function (err, result) {
+    counter++;
     console.log("Query #", counter);
     console.log(err, result);
   });

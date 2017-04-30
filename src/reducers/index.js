@@ -45,6 +45,17 @@ export const config = (state = { appMode: true }, action) => {
   }
 };
 
+export const global = (state = {}, action) => {
+  switch (action.type) {
+    case 'UPDATE_EXAM_LIST':
+      return {
+        exams: action.exams,
+      };
+    default:
+      return state;
+  }
+};
+
 const authState = new AuthService('tgMckz0tmKMhju4VwEnPLxEH4BDExL21', 'mavenform.auth0.com')
 export const auth = (state = authState, action) => {
   switch (action.type) {

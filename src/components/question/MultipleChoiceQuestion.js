@@ -21,9 +21,6 @@ const MultipleChoiceQuestionComponent = ({ id, courseid, content, examtype, term
   });
 
   const solution = (solutionNum >= 0) ? `${String.fromCharCode(solutionNum + 65)}) ${choices[solutionNum]}` : "Solution unavailable. Sorry!";
-  const SolutionComponent = (
-    <Solution solution={solution} showSolutions={showSolutions} />
-  );
   const url = `${document.location.origin}/${courseid}/${examtype}/${term}#${id}`;
 
   return (

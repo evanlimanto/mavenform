@@ -65,7 +65,7 @@ app.post('/upload', function(req, res) {
 // Search substring in problems
 app.get('/searchProblems/:query_str', function(req, res, next) {
   const query_str = req.params.query_str;
-  const q = `select * from exams where problem like '%${query_str}%' or solution like '%${query_str}%'`;
+  const q = `select * from content where problem like '%${query_str}%' or solution like '%${query_str}%'`;
   client.query({ text: q})
     .then((result) => {
       res.json(result.rows);
@@ -76,7 +76,7 @@ app.get('/searchProblems/:query_str', function(req, res, next) {
 // Search tags
 app.get('/searchTags/:tag', function(req, res, next) {
   const query_str = req.params.query_tag;
-  const q = `select * from exams where `;
+  const q = `select * from content where `;
   client.query({ text: q})
     .then((result) => {
       res.json(result.rows);
@@ -84,14 +84,36 @@ app.get('/searchTags/:tag', function(req, res, next) {
     });
 });
 
-// Retrieve exam contents
-app.get('/getExam/:courseid/:examtype/:examid', function(req, res, next) {
-  const courseid = req.params.courseid;
-  const examtype = req.params.examtype;
-  const examid = req.params.examid;
+// Retrieve exam list
+app.get('/getExams', function(req, res, next) {
+  const q = `select * from exams`;
+  client.query({ text: q })
+    .then((result) => {
+      const dict = _.reduce(result.rows, (result, row) => {
+        const id = row.id;
+        const courseid = row.courseid;
+        const examtype = row.examtype;
+        const examid = row.examid;
+        const profs = row.profs;
+        if (!_.has(result, courseid)) {
+          result[courseid] = {};
+        }
+        if (!_.has(result[courseid], examtype)) {
+          result[courseid][examtype] = {};
+        }
+        result[courseid][examtype][examid] = { id, profs };
+        return result;
+      }, {});
+      res.json(dict);
+    });
+});
 
-  const q = `select problem_num, subproblem_num, problem, solution, choices from exams where courseid = $1 and examtype = $2 and examid = $3`;
-  client.query({ text: q, values: [courseid, examtype, examid]})
+// Retrieve exam contents
+app.get('/getExam/:id', function(req, res, next) {
+  const id = req.params.id;
+
+  const q = `select problem_num, subproblem_num, problem, solution, choices from content where exam = $1`;
+  client.query({ text: q, values: [id]})
     .then((result) => {
       const info = _.reduce(result.rows, (result, row) => {
         const problem_num = row.problem_num;

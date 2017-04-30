@@ -23,19 +23,15 @@ const scrollSpy = Scroll.scrollSpy;
 
 class ExamContentComponent extends Component {
   componentWillReceiveProps(nextProps) {
-    const { courseid, examtype, examid } = nextProps
-    if (!(this.props.courseid === nextProps.courseid &&
-          this.props.examtype === nextProps.examtype &&
-          this.props.examid === nextProps.examid)) {
-      this.props.getExamContent(courseid, examtype, examid);
+    if (!(this.props.id === nextProps.id)) {
+      this.props.getExamContent(nextProps.id);
     } else if (this.props.examContentHasLoaded) {
       Scroll.animateScroll.scrollToTop();
     }
   }
 
   componentDidMount() {
-    const { courseid, examtype, examid } = this.props
-    this.props.getExamContent(courseid, examtype, examid);
+    this.props.getExamContent(this.props.id);
   }
 
   componentDidUpdate() {
@@ -107,8 +103,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    getExamContent: (courseid, examtype, examid) =>
-      fetch(`/getExam/${courseid}/${examtype}/${examid}`).then(
+    getExamContent: (id) =>
+      fetch(`/getExam/${id}`).then(
         (response) => response.json()
       ).then(
         (json) => dispatch(updateExamContent(json))

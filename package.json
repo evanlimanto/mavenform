@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "commander": "^2.9.0",
     "concurrently": "^3.3.0",
     "enzyme": "^2.7.1",
     "esformatter-jsx": "^7.4.1",

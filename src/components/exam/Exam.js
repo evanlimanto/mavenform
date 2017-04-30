@@ -9,12 +9,13 @@ import NavSidebar from '../navsidebar';
 import NotFound from '../notfound';
 
 import { toggleAppMode } from '../../actions';
-import { exams, examTypeToLabel, termToLabel } from '../../exams';
+import { examTypeToLabel, termToLabel } from '../../exams';
 import { toggleAppModeEvent } from '../../events';
 
 import './Exam.css';
 
-const ExamComponent = ({ appMode, courseid, examtype, examid, onToggleAppMode }) => {
+const ExamComponent = ({ appMode, exams, courseid, examtype, examid, onToggleAppMode }) => {
+  console.log(exams);
   if (!has(exams, courseid) ||
       !has(exams[courseid], examtype) ||
       !has(exams[courseid][examtype], examid)) {
@@ -33,7 +34,7 @@ const ExamComponent = ({ appMode, courseid, examtype, examid, onToggleAppMode })
     </div>
   );
 
-  const { profs } = exams[courseid][examtype][examid];
+  const { id, profs } = exams[courseid][examtype][examid];
   const meta = {
     description: `${toUpper(courseid)} ${termToLabel[examid]} ${examTypeToLabel[examtype]}`,
     title: `${toUpper(courseid)} ${termToLabel[examid]} ${examTypeToLabel[examtype]}`,
@@ -43,7 +44,7 @@ const ExamComponent = ({ appMode, courseid, examtype, examid, onToggleAppMode })
     <div>
       <DocumentMeta {...meta} />
       {navComponents}
-      <ExamContent courseid={courseid} examtype={examtype} examid={examid} profs={profs} term={examid} />
+      <ExamContent id={id} profs={profs} term={examid} />
     </div>
   );
 }
@@ -51,6 +52,7 @@ const ExamComponent = ({ appMode, courseid, examtype, examid, onToggleAppMode })
 const mapStateToProps = (state, ownProps) => {
   return {
     appMode: state.config.appMode,
+    exams: state.global.exams,
     courseid: ownProps.match.params.courseid,
     examtype: ownProps.match.params.examtype,
     examid: ownProps.match.params.examid,

@@ -5,14 +5,14 @@ import { has, map, toUpper } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 
 import { toggleAppMode } from '../../actions';
-import { exams, examTypeToLabel, courseIDToLabel, courses } from '../../exams';
+import { examTypeToLabel, courseIDToLabel, courses, termToLabel } from '../../exams';
 import { examClickEvent, toggleAppModeEvent } from '../../events';
 
 import Navbar from '../navbar';
 import NavSidebar from '../navsidebar';
 import NotFound from '../notfound';
 
-const CourseComponent = ({ courseid, appMode, onToggleAppMode }) => {
+const CourseComponent = ({ exams, courseid, appMode, onToggleAppMode }) => {
   if (!has(exams, courseid)) {
     return <NotFound />;
   }
@@ -20,7 +20,7 @@ const CourseComponent = ({ courseid, appMode, onToggleAppMode }) => {
   const desc = courses[courseid];
   const available = map(exams[courseid], (examsOfType, examtype) => {
     return map(examsOfType, (item, examid) => {
-      const term = item.term;
+      const term = termToLabel[examid];
       const note = item.note ? `(${item.note})` : (null);
       const url = `/${courseid}/${examtype}/${examid}`;
       return (
@@ -92,6 +92,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     courseid: ownProps.match.params.courseid,
     appMode: state.config.appMode,
+    exams: state.global.exams,
   }
 };
 

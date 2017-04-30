@@ -23,3 +23,10 @@ export const setQuestionCopied = (copying) => {
 		copying: copying,
 	}
 };
+
+export const updateExamList = (exams) => {
+  return {
+    type: 'UPDATE_EXAM_LIST',
+    exams: exams,
+  };
+};
