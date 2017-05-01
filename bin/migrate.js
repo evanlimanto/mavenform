@@ -22,6 +22,7 @@ var pg = require('pg');
 var fs = require('fs');
 var yaml = require('js-yaml');
 var program = require('commander');
+var sleep = require('sleep');
 
 program
   .version('1.0.0')
@@ -103,6 +104,7 @@ client.query({text: idq, values: [courseid, examtype, examid]})
     } else {
       id = result.rows[0].id;
     }
+    sleep.sleep(1);
 
     const delq = `delete from content where exam = $1`;
     client.query({text: delq, values: [id]})
