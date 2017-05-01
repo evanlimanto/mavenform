@@ -112,7 +112,7 @@ client.query({text: idq, values: [courseid, examtype, examid]})
         console.log(result)
       });
 
-    const contents = fs.readFileSync(`${examtype}-${examid}.yml`);
+    const contents = fs.readFileSync(`${courseid}-${examtype}-${examid}.yml`);
     let doc = null;
     try {
       doc = yaml.safeLoad(contents);

@@ -1,0 +1,770 @@
+course: 'cs188'
+
+type: 'final'
+term: 'sp16'
+prof: 'Abbeel, Dragan'
+
+q1_1: |
+  # Q1. [1 pt] Agent Testing Today!
+  It’s testing time! Circle your favorite robot below. We hope you have fun with the rest of the exam!
+  <hr class="s2" />
+  ![robots](/img/cs188/final-sp16-q1-1.png)
+
+q1_1_s: |
+  Any answer was acceptable.
+
+q2_1: |
+  # Q2. [21 pts] Potpourri
+  **(a) (i)** [1 pt] Suppose we have a multiclass perceptron with three classes $A, B, C$ and with weights initially set to $w_A = [1, 2], w_B = [2, 0], w_C = [2, −1]$. Write out the vectors $w_A,w_B,w_C$ of the perceptron after training on the following two dimensional training example once.
+  <hr class="s2" />
+
+  |$x_0$|$x_1$|label|
+  |----|---|-----|
+  |1|1|A|
+
+  <hr class="s2" />
+  $w_A = [\text{____}, \text{____}]$
+  <hr class="s1" />
+  $w_B = [\text{____}, \text{____}]$
+  <hr class="s1" />
+  $w_C = [\text{____}, \text{____}]$
+
+q2_1_s: |
+  $w_A = [1, 2]$
+  <hr class="s1" />
+  $w_B = [2, 0]$
+  <hr class="s1" />
+  $w_C = [2, -1]$
+  <hr class="s2" />
+  The predicted label is $y' = \text{arg max}_{y \in {A,B,C}} w_y \cdot [x_0, x_1] = A$, since $w_A \cdot [x_0, x_1] = [1, 2] \cdot [1, 1] = 3$ is greater than both $w_B \cdot [x_0, x_1] = [2, 0] \cdot [1, 1] = 2$ and $w_C \cdot [x_0, x_1] = [2, -1] \cdot [1, 1] = 1$. Since the predicted label $y' = A$ is equal to the correct label $y∗ = A$, the weights are not updated, so the weights are the same as the initial ones.
+
+q2_2: |
+  **(ii)** [1 pt] Suppose we have a different multiclass perceptron with three classes $A, B, C$ set to $w_A = [2, 4], w_B = [−1, 0], w_C = [2, −2]$. Write out the vectors $w_A, w_B, w_C$ of the perceptron after training on the following two dimensional training example once.
+  <hr class="s2" />
+
+  |$x_0$|$x_1$|label|
+  |-----|-----|-----|
+  |-2|1|C|
+
+  <hr class="s2" />
+  $w_A = [\text{____}, \text{____}]$
+  <hr class="s1" />
+  $w_B = [\text{____}, \text{____}]$
+  <hr class="s1" />
+  $w_C = [\text{____}, \text{____}]$
+  <hr class="s1" />
+
+q2_2_s: |
+  The predicted label is $y' = \text{arg max}_{y \in {A,B,C}} w_y \cdot [x_0, x_1] = B$, since $w_B \cdot [x_0, x_1] = [−1, 0] \cdot [−2, 1] = 2$ is greater than both $w_A \cdot [x_0, x_1] = [2, 4] \cdot [−2, 1] = 0$ and $w_C \cdot [x_0, x_1] = [2, -2] \cdot [-2, 1] = -6$. Since the predicted label $y' = B$ is not equal to the correct label $y∗ = C$, the weights are updated by subtracting the datum from the weights of the predicted label and by adding the datum to the weights of the correct label:
+  $$\begin{align}
+  & w_B \leftarrow w_B - [-2, 1] = [1, -1] \\\\
+  & w_C \leftarrow w_C + [2, 1] = [0, -1]
+  \end{align}$$
+
+q2_3: |
+  **(iii)** [3 pts] Suppose we have a different multiclass perceptron with three classes $A,B,C$ and with weights initially set to $w_A = [1,0], w_B = [1,1], w_C = [3,0]$. After training on the following set of training data an infinite number of times, select which of the following options must be True given no additional information. Convergence indicates that the values do not change even within a pass through the data set.
+  <hr class="s2" />
+
+  |training example $i$|$x_0$|$x_1$|label|
+  |--------------------|-----|-----|-----|
+  |0|1|1|A|
+  |1|-1|1|B|
+  |2|1|-1|C|
+  |3|-1|-1|A|
+
+  <hr class="s2" />
+  - All of the weight vectors $w_A, w_B, w_C$ converge.
+  - Only two of the weight vectors $w_A, w_B, w_C$ converge.
+  - Only one of the weight vectors $w_A, w_B, w_C$ converge.
+  - None of the weight vectors $w_A, w_B, w_C$ converge.
+  - None of the above.
+
+q2_3_s: |
+  - Only one of the weight vectors $w_A, w_B, w_C$ converge.
+
+  <hr class="s2" />
+  First, notice that the data is not linearly separable, so not all of the weight vectors converge (this is the case for the perceptron). Second, notice that it’s impossible for only two of the weight vectors to converge since every time the prediction is wrong, two of the weights are updated with a datum (this is the case for the multiclass perceptron), all of which are non-zero for this particular data set. Therefore, there are two possibilities left: either only one of the weight vectors converge or none of them converge. To find out which one is the case, you can do a single pass through the data in order to notice a pattern emerge.
+  For the training example with $i = 0$, the perceptron incorrectly predicts a label of $C$, so the weight vectors $w_A$ and $w_C$ get updated to $w_A = [2,1]$ and $w_C = [2,-1]$. Then, for the training examples with $i = 1$ and $i = 2$, the perceptron correctly predicts the labels $B$ and $C$, respectively, so the weight vectors are not updated. Then, for the training example with $i = 3$, the perceptron incorrectly predicts a label of $C$, so the weight vectors $w_A$ and $w_C$ get updated to $w_A = [1, 0]$ and $w_C = [3, 0]$, which are the values that you originally started with! Therefore, as you train the perceptron on the data set an infinite number of times, the value of the weight vector $w_A$ fluctuates between $w_A = [2, 1]$ and $w_A = [1, 0]$, while the value of the weight vector $w_C$ fluctuates between $w_C = [2, -1]$ and $w_C = [3, 0]$. Meanwhile, the value of the weight vector $w_B$ stays at $w_B = [1, 1]$, and therefore it is the only weight vector that converges.
+
+q2_4: |
+  **(b)** You are given a constraint graph for a Constraint Satisfaction Problem as follows. The domains of all variables are indicated in the table, and the binary constraints are as follows:
+  <hr class="s2" />
+  ![constraints](/img/cs188/final-sp16-q2-1.png)
+  <hr class="s2" />
+  **(i)** [3 pts] Enforce arc consistency on this graph and indicate what the domains of all the variables are after arc consistency is enforced, in the table below by crossing out eliminated values from the domains.
+  <hr class="s2" />
+  ![table](/img/cs188/final-sp16-q2-2.png)
+
+q2_4_s: |
+  ![table](/img/cs188/final-sp16-q2-3.png)
+
+q2_5: |
+  **(ii)** [2 pts] Now suppose you are given a different CSP with variables still being $A,B,C,D$, but you are not given the constraints. The domains of variables remaining after enforcing arc consistency for this CSP are given to you below. Select *all* of the following options which can be inferred given just this information.
+  <hr class="s2" />
+  ![table](/img/cs188/final-sp16-q2-4.png)
+  <hr class="s2" />
+  - The CSP may have no solution.
+  - The CSP must have a solution.
+  - The CSP must have exactly one solution.
+  - The CSP may have more than one solution.
+  - The CSP must have more than one solution.
+  - None of the above.
+
+q2_5_s: |
+  - The CSP may have no solution.
+  - The CSP may have more than one solution.
+
+  <hr class="s2" />
+  An example CSP that may have more than one solution with these domains is: $A > C, A \le B \neq  C, D = B$. You get solutions with $A = 2$ and $B = 3$, as well as solutions with $A = 3$ and $B = 2$.
+  <hr class="s1" />
+  A CSP with no solution is with these domains is: $A \neq B, B \neq D, D \neq A$. There is a cycle between $A,B,D$ and each arc is consistent but there is no overall consistent solution.
+
+q2_6: |
+  **(c)** [3 pts] Your assistant gives you the probability distributions for $4$ mysterious binary variables: $W, X, Y$, and $Z$. Circle the Bayes net(s) amongst those given, that can represent a distribution that is consistent with the tables below using the fewest edges. If there is more than one such minimal net, circle all of them.
+
+q2_6_s: |
+  The correct answers are the last two options in the second row. Notice that in the table for $P(W|X)$, the probability of $W$ does not change when $X$ changes. This means that $W$ is independent of $X$. You can use the values to calculate $P(Y,Z)$ vs $P(Y)P(Z)$, and they are independent. The same holds for $X$ and $Z$. The minimal bayes net is the one with the fewest arrows (that is, the most enforced independencies). The last two in the bottom row encode the information necessary for the given distribution: the dependence betwen $X$ and $Y$, and the dependence between $Z$ and $W$.
+
+q2_7: |
+  **(d)** Triangle is a rational agent in the world below, where it gains or loses Utility from moving and picking up money. Triangle can move deterministically Up, Down, Left or Right or Stay still. Black squares indicate that the Triangle cannot traverse them. The squares marked with $L(\text{\$}100, \text{\$}0)$ indicate lotteries of $[0.5, \text{\$}100; 0.5 \text{\$}0]$. Taking a step onto a blank square gives Triangle no utility, but stepping onto a lottery square gives it the utility of the lottery, and the lottery disappears.
+  <hr class="s1" />
+  Additionally, taking a step in any direction has a probability $p$ of giving Triangle pain in addition to whatever money it might earn upon landing on a spot. If Triangle chooses to stay still, it will not feel pain. The utilities are not discounted in this problem so $\gamma = 1$.
+  <hr class="s2" />
+  ![triangle](/img/cs188/final-sp16-q2-6.png)
+  <hr class="s2" />
+  In both of the problems below, Triangle's starting position is as shown in the figure above.
+  <hr class="s1" />
+  **(i)** [1 pt] For this part, Triangle's utility is as follows (where $k > 0$):
+  $$U(\text{pain}) = -k; \quad U(\text{\$}m) = m$$
+  What is the expected utility of going to the closest lottery and staying in that spot forever? Express your answer in terms of numerical constants, $p, k$.
+
+q2_7_s: |
+  There are $2$ moves required to go to the closest lottery, so the expected utility is $-2kp+0.5∗100+0.5∗0 = 50-2pk$.
+
+q2_8: |
+  **(ii)** [2 pts] Now, triangle’s utility function is as follows:
+  $$U(\text{pain}) = -k; \quad U(\text{\$}m) = \sqrt{m}$$
+  For what range of $k$ (where $k > 0$) will triangle always go to both lotteries. Express your answer in terms of numerical constants and $p$. If no such range exists, write None in the blank below.
+
+q2_8_s: |
+  There are 3 possible best options for triangle: staying put, going to the first money, and going to both moneys. $U(\text{both}) = −5pk + 10 ∗ 0.5 + 10 ∗ 0.5, U(\text{first}) = −2pk + 10 ∗ 0.5, U(\text{Neither}) = 0$. For both to the optimal strategy, $U(\text{both})$ must be greater than all other options, therefore:
+  $$-5pk + 10 > -2pk + 5 \; \text{and} \; -5pk + 10 > 0$$
+  $$k < \frac{5}{3p} \; \text{and} \; k < \frac{10}{5p}$$
+  $\frac{2}{p} > \frac{5}{3p}$, so the range for $k$ is $k \in (0, \frac{5}{3p})$
+
+q2_9: |
+  **(e)** [5 pts] [5 pts] For each of the branches in the game tree below, put an ‘X’ on the branches if there exists an assignment of values to leaf nodes, for which that branch could be pruned. The max nodes are upward pointing triangles, the min nodes are downward pointing triangles, and the chance nodes are circles. Assume that the children of a node are visited in left-to-right order.
+  <hr class="s1" />
+  Explicitly write down “Not possible” below if no branches can be pruned, in which case any ‘X’ marks above will be ignored. Any ‘X’ on the nodes and leaves will be ignored.
+  <hr class="s2" />
+  ![tree](/img/cs188/final-sp16-q2-8.png)
+
+q2_9_s: |
+  ![tree](/img/cs188/final-sp16-q2-9.png)
+  <hr class="s2" />
+  When there is an adversarial min-max set of nodes, then bounds can be imposed on how good or bad a node can be which allows us to prune certain branches. However, we always have to look at the left most branch in order to determine whether pruning is ever going to be possible. Branches immediately under a chance node however can never be pruned because they all need to be looked at in order to compute an expectation.
+  <hr class="s1" />
+  The numbers inside the nodes have been added to the solution for the sole purpose of referencing them in the explanations that follow. There are $5$ branches that can be pruned (from left to right):
+  <hr class="s1" />
+  The first branch (the one above node $11$) can be pruned if the minimizer node $8$ has a value that is greater than the value that the minimizer node $2$ has so far (i.e. the value of node $3$). This is what typically happens in a standard minimax tree since the chance node $6$ with a single child can be thought of as not doing anything.
+  <hr class="s1" />
+  The second branch (the one above leave $28$) can be pruned if the leave node $27$ has a value that is less than the value that the maximizer node $22$ has so far (i.e. the value of the node $23$).
+  <hr class="s1" />
+  The third branch can be pruned (the one above node $33$) if the chance node $14$ has a value that is, so far, less than the value that the root maximizer node $1$ has so far. This is because once the value of the chance node $30$ is known, the value of the chance node $14$ can’t increase.
+  <hr class="s1" />
+  The fourth branch (the one above leave $35$) can be pruned if the leave $34$ has a value that is greater than the value of the chance node $30$. Even though the third branch can be pruned, this fourth one should also be marked because there might be cases in which the third branch can’t be pruned but the fourth branch can. However, the rubric doesn’t penalize for not marking the fourth branch if the third branch is marked. This is because the question didn’t explictly specify to mark branches that are underneath branches that can be pruned.
+  <hr class="s1" />
+  The fifth branch (the one above the chance node $45$) can be pruned if the minimizer node $37$ has a value that is less than the value that the root maximizer node $1$ has so far.
+
+q3_1: |
+  # Q3. [6 pts] Bayes Nets and Sampling
+  You are given a bayes net with the following probability tables:
+  <hr class="s2" />
+  ![bayes net](/img/cs188/final-sp16-q3-1.png)
+  <hr class="s2" />
+  You want to know $P(C = 0|B = 1, D = 0$ and decide to use sampling to approximate it.
+  <hr class="s1" />
+  **(a)** [2 pts] With prior sampling, what would be the likelihood of obtaining the sample $[A=1, B=0, C=0, D=0, E=1, F=0]$?
+
+  - $0.25\*0.1\*0.3\*0.9\*0.8\*0.7$
+  - $0.75\*0.1\*0.3\*0.9\*0.5\*0.8$
+  - $0.25\*0.9\*0.7\*0.1\*0.5\*0.6$
+  - $0.25\*0.5\*0.7\*0.5\*0.9\*0.2$
+  - $0.25\*0.5\*0.3\*0.2\*0.9\*0.2$
+  - $0.75\*0.1\*0.3\*0.9\*0.5\*0.2 + 0.25\*0.5\*0.7\*0.5\*0.9\*0.2$
+  - Other ________
+
+q3_1_s: |
+  - $0.25\*0.5\*0.7\*0.5\*0.9\*0.2$
+
+  <hr class="s2" />
+  Prior sampling samples without taking the evidence into account, so the probability of the sample if $P(A)P(B-A)P(C-A)P(D-C,E)P(E)P(F-E,D)$
+
+q3_2: |
+  **(b)** [2 pts] Assume you obtained the sample $[A = 1, B = 1, C = 0, D = 0, E = 1, F = 1]$ through likelihood weighting. What is its weight?
+  - $0.25\*0.5\*0.7\*0.5\*0.9\*0.8$
+  - $0.25\*0.7\*0.9\*0.8 + 0.75\*0.3\*0.9\*0.8$
+  - $0.25\*0.5\*0.7\*0.5\*0.8$
+  - $0$
+  - $0.5\*0.5$
+  - $0.9\*0.5 + 0.1\*0.5$
+  - Other ________
+
+q3_2_s: |
+  - $0.5\*0.5$
+
+  <hr class="s2" />
+  The weight of sample in Gibbs sampling is the probability of the evidence given their parents: $P(D=0 | E=1, C=0) \* P(B=1 | A=1)$
+
+q3_3: |
+  **(c)** [2 pts] You decide to use Gibb’s sampling instead. Starting with the initialization $[A = 1, B=1, C=0, D=0, E=0, F=0]$, suppose you resample F first, what is the probability that the next sample drawn is $[A = 1, B=1, C=0, D=0, E=0, F=1]$?
+  - $0.4$
+  - $0.6\*0.1\*0.5$
+  - $0.25\*0.5\*0.7\*0.5\*0.1\*0.3$
+  - $0.6$
+  - $0$
+  - $0.9\*0.5 + 0.1\*0.5$
+  - Other ________
+
+q3_3_s: |
+  - $0.4$
+
+  In Gibb’s sampling, you resample individual vairables conditioned on the rest of the sample. The distribution of $F$ given the rest of the sample is $0.4$ for $F=1$ and $0.6$ for $F=0$.
+
+q4_1: |
+  # Q4. [15 pts] Deep Learning
+  **(a)** [3 pts] Perform forward propagation on the neural network below for $x = 1$ by filling in the values in the table. Note that (i), ..., (vii) are outputs after performing the appropriate operation as indicated in the node.
+  <hr class="s2" />
+
+  |(i)|(ii)|(iii)|(iv)|(v)|(vi)|(vii)|
+  |---|----|-----|----|---|----|-----|
+  |||||||||
+
+  <hr class="s2" />
+  ![network](/img/cs188/final-sp16-q4-1.png)
+
+q4_1_s: |
+  |(i)|(ii)|(iii)|(iv)|(v)|(vi)|(vii)|
+  |---|----|-----|----|---|----|-----|
+  |2|3|4|5|4|3|5|
+
+q4_2: |
+  (b) [6 pts] Below is a neural network with weights $a,b,c,d,e,f$. The inputs are $x_1$ and $x_2$.
+  <hr class="s1" />
+  The first hidden layer computes $r_1 = \text{max}(c \cdot x_1 + e \cdot x_2, 0)$ and $r_2 = \text{max}(d \cdot x_1 + f \cdot x_2, 0)$.
+  <hr class="s1" />
+  The second hidden layer computes $s_1 = \frac{1}{1 + \text{exp}(-a \cdot r_1)}$ and $s_2 = \frac{1}{1 + \text{exp}(-b \cdot r_2)}$.
+  <hr class="s1" />
+  The output layer computes $y = s_1 + s_2$. Note that the weights $a,b,c,d,e,f$ are indicated along the edges of the neural network here.
+  <hr class="s2" />
+  Suppose the network has inputs $x_1 = 1, x_2 = -1$.
+  <hr class="s1" />
+  The weight values are $a = 1, b = 1, c = 4, d = 1, e = 2, f = 2$.
+  <hr class="s1" />
+  Forward propagation then computes $r_1 = 2, r_2 = 0, s_1 = 0.9, s_2 = 0.5, y = 1.4$. Note: some values are rounded.
+  <hr class="s2" />
+  ![network](/img/cs188/final-sp16-q4-2.png)
+  <hr class="s2" />
+  **Using the values computed from forward propagation**, use backpropagation to numerically calculate the following partial derivatives. Write your answers as a single number (not an expression). You do not need a calculator. Use scratch paper if needed.
+  <hr class="s1" />
+  *Hint:* For $g(z) = \frac{1}{1 + \text{exp}(-x)}$, the derivative is $\frac{\delta g}{\delta z} = g(z)(1 − g(z))$.
+  <hr class="s2" />
+
+  |$\frac{\delta y}{\delta a}$|$\frac{\delta y}{\delta b}$|$\frac{\delta y}{\delta c}$|$\frac{\delta y}{\delta d}$|$\frac{\delta y}{\delta e}$|$\frac{\delta y}{\delta f}$|
+  |-|-|-|-|-|-|
+  ||||||||
+
+q4_2_s: |
+  |$\frac{\delta y}{\delta a}$|$\frac{\delta y}{\delta b}$|$\frac{\delta y}{\delta c}$|$\frac{\delta y}{\delta d}$|$\frac{\delta y}{\delta e}$|$\frac{\delta y}{\delta f}$|
+  |-|-|-|-|-|-|
+  |0.18|0|0.09|0|-0.09|0|
+
+  <hr class="s2" />
+  $$\begin{align}
+  \frac{\delta y}{\delta a} &= \frac{\delta y}{\delta s_1}\frac{\delta s_1}{\delta a} \\\\
+  &= 1 \cdot \frac{\delta g(a \cdot r_1)}{\delta a} \\\\
+  &= r_1 \cdot g(a \cdot r_1)(1 - g(a \cdot r_1)) \\\\
+  &= r_1 \cdot s_1(1 - s_1) \\\\
+  &= 2 \cdot 0.9 \cdot (1 - 0.9) \\\\
+  &= 0.18
+  \end{align}$$
+  $$\begin{align}
+  \frac{\delta y}{\delta b} &= \frac{\delta y}{\delta s_2} \frac{\delta s_2}{\delta b} \\\\
+  &= 1 \cdot \frac{\delta g(b \cdot r_2)}{\delta b} \\\\
+  &= r_2 \cdot g(b \cdot r_2)(1 - g(b \cdot r_2)) \\\\
+  &= r_2 \cdot s_(1 - s_2) \\\\
+  &= 0 \cdot 0.5(1 - 0.5) \\\\
+  &= 0
+  \end{align}$$
+  $$\begin{align}
+  \frac{\delta y}{\delta c} &= \frac{\delta y}{\delta s_1} \frac{\delta s_1}{\delta r_1} \frac{\delta r_1}{\delta c} \\\\
+  &= 1 \cdot [a \cdot g(a \cdot r_1)(1 - g(a \cdot r_1))] \cdot x_1 \\\\
+  &= [a \cdot s_1(1 - s_1)] \cdot x_1 \\\\
+  &= [1 \cdot 0.9(1 - 0.9)] \cdot 1 \\\\
+  &= 0.09
+  \end{align}$$
+  $$\begin{align}
+  \frac{\delta y}{\delta d} &= \frac{\delta y}{\delta s_2} \frac{\delta s_1}{\delta r_2} \frac{\delta r_2}{\delta d} \\\\
+  &= \frac{\delta y}{\delta s_2} \frac{\delta s_2}{\delta r_2} \cdot 0 \\\\
+  &= 0
+  \end{align}$$
+  $$\begin{align}
+  \frac{\delta y}{\delta e} &= \frac{\delta y}{\delta s_1} \frac{\delta s_1}{\delta r_1} \frac{\delta r_2}{\delta d} \\\\
+  &= 1 \cdot [a \cdot g(a \cdot r_1)(1 - g(a \cdot r_1))] \cdot x_2 \\\\
+  &= [a \cdot s_1(1 - s_1)] \cdot x_2 \\\\
+  &= [1 \cdot 0.9(1 - 0.9)] \cdot -1 \\\\
+  &= -0.09
+  \end{align}$$
+  $$\begin{align}
+  \frac{\delta y}{\delta f} &= \frac{\delta y}{\delta s_2} \frac{\delta s_2}{\delta r_2} \frac{\delta r_2}{\delta f} \\\\
+  &= \frac{\delta y}{\delta s_2} \frac{\delta s_2}{\delta r_2} \cdot 0 \\\\
+  &= 0
+  \end{align}$$
+
+q4_3: |
+  **(c)** [6 pts] Below are two plots with horizontal axis $x_1$ and vertical axis $x_2$ containing data labelled × and •. For each plot, we wish to find a function $f(x_1,x_2)$ such that $f(x_1,x_2) ≥ 0$ for all data labelled × and $f(x_1,x_2) < 0$ for all data labelled •.
+  <hr class="s1" />
+  Below each plot is the function $f(x_1,x_2)$ for that specific plot. Complete the expressions such that all the data is labelled correctly. If not possible, mark “No valid combination”.
+  <hr class="s2" />
+  ![plot](/img/cs188/final-sp16-q4-3.png)
+
+q4_3_s: |
+  ![plot](/img/cs188/final-sp16-q4-4.png)
+
+q4_4: |
+  ![plot](/img/cs188/final-sp16-q4-5.png)
+
+q4_4_s: |
+  ![plot](/img/cs188/final-sp16-q4-6.png)
+
+q5_1: |
+  # Q5. [11 pts] MDPs: Reward Shaping
+  PacBot is in a Gridworld-like environment $E$. It moves deterministically Up, Down, Right, or Left except that it cannot move onto squares which are blackened. PacBot must move at every step or exit. The reward for any of these actions is always zero. Additionally, from a numbered square, PacBot can choose to exit to a terminal state and collect reward equal to the number on the square. **PacBot is not required to exit on a numbered square; it can also move in any direction off that square.**
+  <hr class="s2" />
+  (a) [3 pts] Draw an arrow in **each** square (including numbered squares) in the following board on the right to indicate the optimal policy PacBot will calculate with the discount factor $\gamma = 0.5$ in the board on the left. (For example, if PacBot would move Down from the square in the middle on the left board, draw a down arrow in that square on the right board.) If PacBot’s policy would be to exit from a particular square, draw an X instead of an arrow in that square.
+  <hr class="s2" />
+  ![board](/img/cs188/final-sp16-q5-1.png)
+
+q5_1_s: |
+  The decision between actions in this MDP at each state is to either take the number on the board or take half the reward that can be attained from a neighboring square. On the square showing 4, the value for moving toward it from one square away is 2. Since that’s greater than 1, we move toward the four instead of exiting from the 1 in the bottom right. From two squares away, we can get reward 1 by moving toward the 4. This means that from the cell in the second row, second column, we can get reward 1 by moving right and only reward 1 by moving left. Finally, at distance more then 2 from the 4, we get reward less than 1, so it is optimal 2 to exit from the squares showing 1 on the left side rather than go toward the 4.
+  <hr class="s2" />
+  ![board](/img/cs188/final-sp16-q5-2.png)
+
+q5_2: |
+  $PacBot now operates in a new environment $E' with an additional reward function $F(s,a,s')$, which is added to the original reward function $R(s, a, s')$ for every $(s, a, s')$ triplet.
+  <hr class="s2" />
+  **(b)** [4 pts] Consider an additional reward $F_1$ that favors moving toward numbered squares. Let $d(s)$ be defined as the Manhattan distance from $s$ to the nearest numbered square. If $s$ is numbered, $d(s) = 0$.
+  $$F_1(s, a, s') = \begin{cases} 0 & s' \; \text{is a terminal state,} \\\\ 10 & d(s') \lt d(s) \; \text{i.e.} \; s' \; \text{is closer to a numbered square than} \; s \; \text{is,} \\\\ 0 & d(s') \ge d(s) \end{cases}$$
+  Fill in the diagram on the right as in (a) to indicate the optimal policy PacBot will calculate with the discount factor $\gamma = 0.5$ and the modified reward function $R_1'(s, a, s') = R(s, a, s') + F_1(s, a, s')$ in the board on the left.
+  <hr class="s2" />
+  ![board](/img/cs188/final-sp16-q5-3.png)
+
+q5_2_s: |
+  ![board](/img/cs188/final-sp16-q5-4.png)
+  <hr class="s2" />
+  Here, from all exit squares, we can step off of the numbered squares and back on to get a reward of $5$. This is $5$ and not $2.5$ because the value at a numbered square is (let $s'$ be the state resulting from taking the optimal action from $s$)
+  <hr class="s2" />
+  $\begin{align}
+  V(s) &= \text{max}_a(R_1' (s, a, s') + \gamma V (s')) \\\\
+  &= 0 + \gamma \text{max}(R_1' (s', a', s'') + γV (s'')) \quad \text{the best choice from} \; s \; \text{is to move to a non-numbered square} \\\\
+  &= 10 \gamma + \gamma^2 V(s'') \text{the best choice from} \; s' \; \text{is to move onto a numbered square} \\\\
+  &= 5 + γ^2V (s'').
+  \end{align}$
+  <hr class="s2" />
+  So from all numbered states we move off the numbers onto blank states, and from non-numbered states we move onto numbered states to collect the reward of $10$. Note that the reward is only achieved for *strictly* decreasing the distance to the nearest numbered square, so moving back and forth between numbered squares (or squares with $d(s) = 1$) does not get the reward and is thus not optimal.
+
+q5_3: |
+  **(c)** [4 pts] Consider a different artificial reward that also favors moving toward numbered squares in a slightly different way:
+  $$F_2(s, a, s') = \begin{cases} 0 & s' \; \text{is a terminal state,} \\\\ 10(d(s) - \frac{1}{2}d(s')) & \text{otherwise.} \end{cases}$$
+  Fill in the diagram on the right as in (a) to indicate the optimal polciy PacBot will calculate with the discount factor $\gamma = 0.5$ and the modified reward function $R_2'(s, a, s') = R(s, a, s') + F_2(s, a, s')$ in the board on the left.
+  <hr class="s2" />
+  ![board](/img/cs188/final-sp16-q5-5.png)
+
+q5_3_s: |
+  ![board](/img/cs188/final-sp16-q5-6.png)
+  <hr class="s2" />
+  Here we will never get into a cycle because for every reward we could gain by stepping in one direction, that reward is lost when we step back the other way. It can be shown that the sum of $F_2$ rewards along a path from a numbered square to another numbered square all cancel to $0$. In fact, along any (multi-step) path from state $s$ to state $s'$, the sum of $F_2$ rewards along that path will sum to $10(d(s) − \frac{1}{2}d(s'))$. This means that the $F_2$ rewards do not favor one path over another as long as they both lead to exiting, and they favor exiting eventually over never exiting. Thus we will have a policy that never gets stuck in a cycle and chooses which exit to go to in exactly the same way as in (a). Explicitly computing the $Q$-values by hand will also show that the optimal policy is the same as that in (a).
+
+q6_1: |
+  # Q6. [6 pts] Zero Sum MDP's
+  Consider a Markov Decision Process where it is not just Pacman in the environment, but there is also a ghost. Pacman plays one turn, then the ghost plays one turn and they continue alternating, each of their actions transitioning the state forward using the same transition function $T$. At any one time step, only one of Pacman and ghost can play a turn. Let $A $be Pacman’s action set can take and $B$ be the ghost’s action set. The game is infinite horizon, with discount factor $\gamma$ applied at every turn no matter which agent is taking the turn. $|A|$ is the size of $A$’s action set and $|B|$ is the size of $B$’s action set. $R$ indicates the utility received by Pacman.
+  <hr class="s2" />
+  **(a)** [2 pts] Let us first consider the situation where Pacman tries to maximize his expected utility, while the ghost tries to minimize Pacman’s utility, thus playing adversarially. Both Pacman and the ghost try to play optimally and they are aware of this. Given the standard notation for an MDP, choose which of the following updates is the correct one for $Q$-Value Iteration under this formulation, given that $Q_{pac}^{\*}$ is the infinite horizon $Q$-function for Pacman.
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma \sum_{b \in B} \sum_{s''}(T(s', b, s'')[R(s', b, s'') + \gamma \text{max}_{a' \in A} Q_{pac}^{\*}(s'', a')])]$
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma \text{max}_{a' \in A} Q_{pac}^{\*}(s', a')]$
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}R(s, a, s') + \gamma \text{max}_{a' \in A} Q_{pac}^{\*} (s', a')$
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma \sum_{b \in B} \sum_{s''}(T(s', b, s'')[R(s', b, s'') + \gamma \frac{1}{|B|} \text{max}_{a' \in A} Q_{pac}^{\*}(s'', a')])]$
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma \text{min}_{b \in B} \sum_{s''}(T(s', b, s'')[R(s', b, s'') + \gamma \text{max}_{a' \in A} Q_{pac}^{\*}(s'', a')])]$
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma \text{max}_{b \in B} \sum_{s''}(T(s', b, s'')[R(s', b, s'') + \gamma \text{max}_{a' \in A} Q_{pac}^{\*}(s'', a')])]$
+  - None of the above.
+
+q6_1_s: |
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma \text{min}_{b \in B} \sum_{s''}(T(s', b, s'')[R(s', b, s'') + \gamma \text{max}_{a' \in A} Q_{pac}^{\*}(s'', a')])]$
+
+  <hr class="s2" />
+  You can project this game by imagining that the ghost takes the next move, and instead of maximizing utility, the ghost is minimizing utility. The ghost’s optimal value is again decided by imagining you playing optimally, which leads to the inner maximization of the Q function.
+
+q6_2: |
+  **(b)** [2 pts] For this part, let us suppose that instead of having a ghost which is adversarial, the ghost is a friendly ghost who is also trying to maximize Pacman’s utility. Both Pacman and the ghost know this arrangement, and are aware of the others knowledge. Given the standard notation for an MDP, choose which of the following updates is the correct one for $Q$-Value Iteration under this formulation, given that $Q_{pac}^{\*}$ is the $Q$-function for Pacman.
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}[R(s, a, s') + \gamma \text{min}_{b \in B} Q_{pac}^{\*} (s', b)]$
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma \sum_{b \in B} \sum_{s''} (T(s', b, s'')[R(s', b, s'') + \gamma \text{max}_{a' \in A} Q_{pac}^{\*} (s'', a')])]$
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma \frac{1}{|B|} \sum_{b \in B} \sum_{s''} (T(s', b, s'')[R(s', b, s'') + \gamma \text{max}_{a' \in A} Q_{pac}^{\*} (s'', a')])]$
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma \text{max}_{b \in B} \sum_{s''} (T(s', b, s'')[R(s', b, s'') + \gamma \text{max}_{a' \in A} Q_{pac}^{\*} (s'', a')])]$
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma \text{max}_{b \in B} \sum_{s''} (T(s', b, s'')[R(s', b, s'') + \gamma \text{max}_{a' \in A} Q_{pac}^{\*} (s'', a')])]$
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma \frac{1}{|B|} \text{max}_{b \in B} Q_{pac}^{\*}(s', b)]$
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma \text{min}_{b \in B} \sum_{s''} (T(s', b, s'')[R(s', b, s'') + \gamma \text{max}_{a' \in A} Q_{pac}^{\*} (s'', a')])]$
+  - None of the above.
+
+q6_2_s: |
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma \text{max}_{b \in B} \sum_{s''} (T(s', b, s'')[R(s', b, s'') + \gamma \text{max}_{a' \in A} Q_{pac}^{\*} (s'', a')])]$
+
+  <hr class="s2" />
+  You can project this game by imagining that the ghost takes the next move, and the ghost is maximizing your utility. The ghost’s optimal value is again decided by imagining you playing optimally, which leads to the inner maximization of the $Q$ function, along with the outer maximization where the ghost is trying to help you.
+
+q6_3: |
+  **(c)** [2 pts] For this part let us suppose that instead of having a ghost which is friendly, the ghost is a confused ghost who takes random actions, with uniform probability in the environment. Given the standard notation for an MDP, choose which of the following updates is the correct one for $Q$-Value Iteration under this formulation, given that $Q_{pac}$ is the $Q$-function for Pacman.
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma \frac{1}{|B|} \text{max}_{b \in B} \sum_{s''} (T(s', b, s'')[R(s', b, s'') + \gamma \text{max}_{a' \in A} Q_{pac}^{\*} (s'', a')])]$
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \sum_{b \in B} \sum_{s''} (T(s', b, s'')[R(s', b, s'') + \gamma \text{max}_{a' \in A} Q_{pac}^{\*} (s'', a')])]$
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma \text{max}_{b \in B} Q_{pac}^{\*} (s', b)]$
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma \frac{1}{|B|} \sum_{b \in B} \sum_{s''} (T(s', b, s'')[R(s', b, s'') + \gamma \text{max}_{a' \in A} Q_{pac}^{\*} (s'', a')])]$
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma \frac{1}{|B|} \text{min}_{b \in B} \sum_{s''} (T(s', b, s'')[R(s', b, s'') + \gamma \text{max}_{a' \in A} Q_{pac}^{\*} (s'', a')])]$
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma \text{max}_{a' \in A} Q_{pac}^{\*} (s', a')]$
+
+q6_3_s: |
+  - $Q_{pac}^{\*}(s,a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma \frac{1}{|B|} \sum_{b \in B} \sum_{s''} (T(s', b, s'')[R(s', b, s'') + \gamma \text{max}_{a' \in A} Q_{pac}^{\*} (s'', a')])]$
+
+  <hr class="s2" />
+  You can project this game by imagining that the ghost takes the next move, and the ghost is playing randomly, which means that you can take an expectation over all possible actions that the ghost could play. The ghost’s optimal value is decided by imagining you playing optimally, which leads to the inner maximization of the $Q$ function, along with the outer expectation where we average over all random actions that the ghost could take.
+
+q7_1: |
+  # Q7. [11 pts] Planning ahead with HMMs
+  Pacman is tired of using HMMs to estimate the location of ghosts. He wants to use HMMs to plan what actions to take in order to maximize his utility. Pacman uses the HMM (drawn to the right) of length $T$ to model the plan- ning problem. In the HMM, $X_{1:T}$ is the sequence of hidden states of Pacman’s world, $A_{1:T}$ are actions Pacman can take, and $U_t$ is the utility Pacman receives at the particular hidden state $X_t$. Notice that there are no evidence variables, and utilities are not discounted.
+  <hr class="s2" />
+  ![hmm](/img/cs188/final-sp16-q7-1.png)
+  <hr class="s2" />
+  **(a)** The belief at time $t$ is defined as $B_t(X_t) = p(X_t|a_{1:t})$. The forward algorithm update has the following form:
+  $$B_t(X_t) = \quad \mathbf{(i)} \quad \mathbf{(ii)} \quad B_{t-1}(x_{t-1})$$
+  Complete the expression by choosing the option that fills in each blank.
+  <hr class="s1" />
+  $$\begin{align}
+  \mathbf{(i)} \; & \text{[1 pt]} \; & \sum_{x_{t-1}} & \text{max}_{x_{t-1}} & \text{max}_{x_t} & \sum_{x_t} & 1 \\\\
+  \mathbf{(ii)} \; & \text{[1 pt]} \; & p(X_t|x_{t-1})p(X_t|a_t) & p(X_t|x_{t-1}) & p(X_t) & p(X_t|x_{t-1}, a_t) & 1
+  \end{align}$$
+
+q7_1_s: |
+  **(i)** $\sum_{x_{t-1}}$
+  <hr class="s1" />
+  **(ii)** $p(X_t|x_{t-1}, a_t)$
+  $$\begin{align}
+  B_t(X_t) &= p(X_t|a_{1:t}) \\\\
+  &= \sum_{x_{t-1}} p(X_t|x_{t-1}, a_t) p(x_{t-1}|x_{1:t-1}) \\\\
+  &= \sum_{x_{t-1}} p(X_t|x_{t-1}, a_t) B_{t-1}(x_{t-1})
+  \end{align}$$
+
+q7_2: |
+  **(b)** Pacman would like to take actions $A_{1:T}$ that maximizes the expected sum of utilities, which has the following form:
+  $$\text{MEU}_{1:T} = \mathbf{(i)} \quad \mathbf{(ii)} \quad \mathbf{(iii)} \quad \mathbf{(iv)} \quad \mathbf{(v)}$$
+  Complete the expression by choosing the option that fills in each blank.
+  $$\begin{align}
+  \mathbf{(i)} & \; \text{[1 pt]} \; & \text{max}_{a_T} & \text{max}_{a_{1:T}} & \sum_{a_{1:T}} & \sum_{a_T} & 1 \\\\
+  \mathbf{(ii)} & \; \text{[1 pt]} \; & \sum_{x_t} & \sum_{x_t,a_t} & \sum_{a_t} & \sum_{x_T} & 1 \\\\
+  \mathbf{(iii)} & \; \text{[1 pt]} \; & \sum_{x_t} & \sum_{x_t, a_t} & \sum_{a_t} & \sum_{x_T} & 1 \\\\
+  \mathbf{(iv)} & \; \text{[1 pt]} \; & p(x_t) & p(x_t | x_{t-1}, a_t) & B_T(x_T) & B_t(x_t) & 1 \\\\
+  \mathbf{(v)} & \; \text{[1 pt]} \; & \frac{1}{U_t} & U_T & U_t & \frac{1}{U_T} & 1
+  \end{align}$$
+
+q7_2_s: |
+  **(i)** $\text{max}_{a_{1:T}}$
+  <hr class="s1" />
+  **(ii)** $\sum_{t=1}^{T}$
+  <hr class="s1" />
+  **(iii)** $\sum_{x_t}$
+  <hr class="s1" />
+  **(iv)** $B_t(x_T)$
+  <hr class="s1" />
+  **(v)** $U_t$
+  <hr class="s2" />
+  $$\text{MEU}_{1:T} = \text{max}_{a_{1:T}} \sum_{t=1}^{T} \sum_{x_t} B_t(x_t) U_t(x_t)$$
+
+q7_3: |
+  **(c)** [2 pts] A greedy ghost now offers to tell Pacman the values of some of the hidden states. Pacman needs your help to figure out if the ghost’s information is useful. Assume that the transition function $p(x_t|x_{t-1},a_t)$ is not deterministic. **With respect to the utility $U_t$**, mark all that can be True:
+  - $\text{VPI}(X_{t-1}|X_{t-2}) > 0$
+  - $\text{VPI}(X_{t-2}|X_{t-1}) > 0$
+  - $\text{VPI}(X_{t-1}|X_{t-2}) = 0$
+  - $\text{VPI}(X_{t-2}|X_{t-1}) = 0$
+  - None of the above
+
+q7_3_s: |
+  It is always possible that $\text{VPI} = 0$. Can guarantee $\text{VPI}(E|e)$ is not greater than $0$ if $E$ is independent of parents($U$) given $e$.
+  - $\text{VPI}(X_{t-1}|X_{t-2}) > 0$
+  - $\text{VPI}(X_{t-1}|X_{t-2}) = 0$
+  - $\text{VPI}(X_{t-2}|X_{t-1}) = 0$
+
+q7_4: |
+  **(d)** [2 pts] Pacman notices that calculating the beliefs under this model is very slow using exact inference. He therefore decides to try out various particle filter methods to speed up inference. Order the following methods by how accurate their estimate of $B_T(X_T)$ is? If different methods give an equivalently accurate estimate, mark them as the same number.
+  - Exact inference (1, 2, 3, 4)
+  - Particle filtering with no resampling (1, 2, 3, 4)
+  - Particle filtering with resampling before every time elapse (1, 2, 3, 4)
+  - Particle filtering with resampling before every other time elapse (1, 2, 3, 4)
+
+q7_4_s: |
+  - Exact inference (1)
+  - Particle filtering with no resampling (2)
+  - Particle filtering with resampling before every time elapse (4)
+  - Particle filtering with resampling before every other time elapse (3)
+
+  <hr class="s2" />
+  Exact inference will always be more accurate than using a particle filter. When comparing the particle filter resampling approaches, notice that because there are no observations, each particle will have weight $1$. Therefore resampling when particle weights are $1$ could lead to particles being lost and hence prove bad.
+
+q8_1: |
+  # Q8. [7 pts] Naive Bayes
+  You are given a naive bayes model, shown below, with label $Y$ and features $X_1$ and $X_2$. The conditional probabilities for the model are parameterized by $p_1, p_2$ and $q$.
+  <hr class="s2" />
+  ![model](/img/cs188/final-sp16-q8-1.png)
+  <hr class="s2" />
+  **Note that some of the parameters are shared** (e.g. $P(X_1 = 0|Y = 0) = P(X_1 = 1|Y = 1) = p_1$).
+  <hr class="s2" />
+  **(a)** [2 pts] Given a new data point with $X_1 = 1$ and $X_2 = 1$, what is the probability that this point has label $Y = 1$? Express your answer in terms of the parameters $p_1, p_2$ and $q$ (you might not need all of them).
+  <hr class="s2" />
+  $P(Y = 1|X_1 = 1, X_2 = 1) = \text{________________}$
+
+q8_1_s: |
+  $P(Y = 1|X_1 = 1, X_2 = 1) = \frac{p_1p_2q}{p_1p_2q + (1-p_1)(1-p_2)(1-q)}$
+  $$\begin{align}
+  P(Y = 1, X_1 = 1, X_2 = 1) &= P(X_1 = 1|Y = 1)P(X_1 = 1|Y = 1)P(Y = 1) \\\\
+  &= p_1p_2q \\\\
+  P(Y = 0, X_1 = 1, X_2 = 1) &= P(X_1 = 1|Y = 0)P(X_2 = 1|Y = 0)P(Y = 0) \\\\
+  &= (1 - p_1)(1 - p_2)(1 - q) \\\\
+  P(Y = 1|X_1 = 1, X_2 = 1) &= \frac{P(Y = 1, X_1 = 1, X_2 = 1)}{P(X_1 = 1, X_2 = 1)} \\\\
+  &= \frac{P(Y = 1, X_1 = 1, X_2 = 1)}{P(Y = 1, X_1 = 1, X_2 = 1) + P(Y = 0, X_1 = 1, X_1 = 1)} \\\\
+  &= \frac{p_1p_2q}{p_1p_2q + (1 - p_1)(1 - p_2)(1 - q)}
+  \end{align}$$
+
+q8_2: |
+  The model is trained with the following data:
+  <hr class="s2" />
+  ![data](/img/cs188/final-sp16-q8-2.png)
+  <hr class="s2" />
+  **(b)** [5 pts] What are the maximum likelihood estimates for $p_1, p_2$ and $q$?
+  $p_1 = \text{________} \quad p_2 = \text{________} \quad q = \text{________}$
+
+q8_2_s: |
+  $p_1 = \frac{3}{5} \quad p_2 = \frac{4}{5} \quad q = \frac{3}{10}$
+  <hr class="s2" />
+  The maximum likelihood estimate of $p_1$ is the fraction of counts of samples in which $X_1 = Y$. In the given training data, samples $1, 2, 4$ and $6$ have $X_1 = Y = 0$ and samples $9$ and $10$ have $X_1 = Y = 1$, so $6$ out of the $10$ samples have $X_1 = Y$ and thus $p_1 = \frac{6}{10} = \frac{3}{5}$. Analogously, $8$ out of the $10$ samples have $X_2 = Y$ and thus $p_2 = \frac{8}{10} = \frac{4}{5}$. The maximum likelihood estimate of $q$ is the fraction of counts of samples in which $Y = 1$, thus $q = \frac{3}{10}$.
+  <hr class="s2" />
+  You can find what these parameters are equal to by maximizing the likelihood of the data with respect to the parameters. First, notice that the probabilities can be written as
+  $$P(X_1 = x_1|Y = y) = (p_1)^{\mathcal{1}[x_1=y]}(1-p_1)^{(1-\mathcal{1}[x_1=y])}$$
+  $$P(X_2 = x_2|Y = y) = (p_2)^{\mathcal{1}[x_2=y]}(1-p_2)^{(1-\mathcal{1}[x_2=y])}$$
+  $$P(Y = y) = (q)^y(1 - q)^{(1-y)}$$
+where $\mathcal{1}[x = y]$ is an indicator function that evaluates to $1$ when $x$ is equal to $y$, and $0$ otherwise. Let $X$ be all the data: $x_1^{(i)}, x_2^{(i)}, y^{(i)}, \forall = 1, ..., 10$, where the superscripts $i$ denote the sample number. Then, the likelihood of the data given the parameters is
+  $$\begin{align}
+  l(X|p_1, p_2, q) &= P(X|p_1, p_2, q) \\\\
+  &= \prod_{i=1}^{10} P(x_1^{(i)}, x_2^{(i)}, y^{(i)}) \\\\
+  &= \prod_{i=1}^{10} P(x_1^{(i)}|y^{(i)}) P(x_2^{(i)}|y^{(i)}) P(y^{(i)}) \\\\
+  &= \prod_{i=1}^{10} (p_1)^{\mathcal{1}[x_1^{(i)} = y^{(i)}] (1 - p_1)^{(1 - \mathcal{1}[x_1^{(i)} = y^{(i)}])} (p_2)^{\mathcal{1} [x_2^{(i)} = y^{(i)}]} (1 - p_2)^{(1 - \mathcal{1} [x_2^{(i)} = y^{(i)}])} (q)^{y^{(i)}} (1 - q)^{(1 - y^{(i)})}
+  \end{align}$$
+  We optimize for the parameters by maximizing the likelihood $l(X|p_1, p_2, q)$, which is equivalent to maximizing the log likelihood $ll(X|p_1, p_2, q)$,
+  $$\begin{align}
+  p_1, p_2, q &= \text{arg max}_{p_1, p_2, q} l(X|p_1, p_2, q) \\\\
+  &= \text{arg max}_{p_1, p_2, q} ll(X|p_1, p_2, q)
+  \end{align}$$
+  where
+  $$\begin{align}
+  ll(X|p_1, p_2, q) &= \text{log} \; l(X|p_1, p_2, q) \\\\
+  &= \sum_{i=1}^{10} \mathcal{1} [x_1^{(i)} = y^{(i)}] \text{log}(p_1) + (1 - \mathcal{1} [x_1^{(i)} = y^{(i)}]) \text{log}(1 - p_1) \\\\
+  \quad + \mathcal{1} [x_2^{(i)} = y^{(i)}] \text{log}(p_2) + (1 - \mathcal{1} [x_2^{(i)} = y^{(i)}]) \text{log}(1 - p_2) \\\\
+  \quad + y^{(i)} \text{log}(q) + (1 - y^{(i)}) \text{log}(1 - q)
+  \end{align}$$
+  We can find the values that obtain the maximum by setting the partial derivatives of the log likelihood to zero and solving for the parameters
+  $$\begin{align}
+  \frac{\delta ll}{\delta p_1} &= \sum_{i=1}^{10} \frac{1}{p_1} \mathcal{1} [x_1^{(i)} = y^{(i)}] - \frac{1}{1 - p_1} (1 - \mathcal{1} [x_1^{(i)} = y^{(i)}]) = 0 \qquad & \implies p_1 = \frac{\sum_{i=1}^{10} \mathcal{1} [x_1^{(i)} = y^{(i)}]}{10} \\\\
+  \frac{\delta ll}{\delta p_2} &= \sum_{i=1}^{10} \frac{1}{p_2} \mathcal{1} [x_2^{(i)} = y^{(i)}] - \frac{1}{1 - p-2} (1 - \mathcal{1} [x_2^{(i)} = y^{(i)}]) = 0 \qquad & \implies p_1 = \frac{\sum_{i=1}^{10} \mathcal{1} [x_1^{(i)} = y^{(i)}]}{10} \\\\
+  \frac{\delta ll}{\delta q} &= \sum_i=1}^{10} \frac{1}{q} y^{(i)} - \frac{1}{1 - q} (1 - y^{(i)}) = 0 & \implies q = \frac{\sum_{i=1}^{10} y^{(i)}}{10}
+  \end{align}$$
+
+q9_1: |
+  # Q9. [12 pts] Beyond Ordinary Pruning
+  **Important:** For all following parts, assume that the children of a node are visited in left-to-right order. You should **not** prune on equality (This also applies to any bound on utilities, if any. For example, given all utilities are less than or equal to $10$, you should not prune after seeing a node with utility of $10$.)
+  <hr class="s1" />
+  **(a)** [3 pts] Consider a two-player game in which both players alternate moves and each player seeks to maximize its own utility. At a leaf node $s$, utilities are represented as a tuple $U(s) = (U_1(s), U_2(s))$, with the $i$-th component corresponding to the utility of the $i$-th player.
+  <hr class="s2" />
+  For the following special cases of two-player games, select **all** of the following in which pruning is never possible, given **just** this information about the relationship between utilities $U_1$ and $U_2$. Select “None of the above” if none of the options apply.
+  - $0 < U_1(s), U_2(s) < M$ for all terminal states $s$, where $M$ is a positive constant
+  - $U_1(s) + U_2(s) = M$ for all terminal states $s$, where $M \neq 0$ is a constant
+  - $U_1(s) = U_2(s)$ for all terminal states $s$
+  - $U_1(s) + U_2(s) = 0$ for all terminal states $s$
+  - None of the above
+
+q9_1_s: |
+  - $0 < U_1(s), U_2(s) < M$ for all terminal states $s$, where $M$ is a positive constant
+  - $U_1(s) = U_2(s)$ for all terminal states $s$
+
+  <hr class="s2" />
+  The first option is an interleaving of two independent searches; without the relationship between the two players, no pruning is possible.
+  <hr class="s1" />
+  The second option is minimax in which all utilities are shifted by M; alpha-beta pruning still applies.
+  <hr class="s1" />
+  The third option is a search problem since both players share the same objective; since the maximum utility can occur at any terminal node, no pruning is possible.
+  <hr class="s1" />
+  The fourth option is minimax; alpha-beta pruning applies.
+
+q9_2: |
+  **(b)** Now we consider a three-player game similarly defined as in part (a). Then at a leaf node $s$, utilities are represented as a $3$-tuple $U(s) = (U_1(s), U_2(s), U_3(s))$, where the player oging first (at the top of the tree) maximizes $U_1$, the player going second maximizes $U_2$, and the player going last maximizes $U_3$.
+  <hr class="s2" />
+  **(i)** [2 pts] Fill in the values at all nodes. Note that all players maximize their own respective utilites.
+  ![tree](/img/cs188/final-sp16-q9-2.png)
+
+q9_2_s: |
+  ![tree](/img/cs188/final-sp16-q9-3.png)
+
+q9_3: |
+  (ii) [3 pts] Without any further information, select **all** terminal nodes that can be pruned. Or check “None” if no node can be pruned.
+  <hr class="s2" />
+  *Reminder:* A node can be pruned only if the node’s utilities can have no effect on the utilities at the root, irrespective of the node’s utilities, and the utilities of nodes not yet visited by the left-to-right depth-first traversal.
+  - a
+  - b
+  - c
+  - d
+  - e
+  - f
+  - None
+
+q9_3_s: |
+  - None
+
+  <hr class="s2" />
+  Note that without any further assumption, particularly we don’t know whether any utility value is bounded. Before visiting any leaf node, we don’t know whether that node has $U_3(\cdot) = \infty$ (no pruning on equality). Therefore, no node can be pruned.
+
+q9_4: |
+  **(iii)** [4 pts] Now we are given that for all terminal states $s$ the following holds true:
+  - $U_i(s) \ge 0 \quad \forall i = 1,2,3$
+  - $\sum_{i=1}^{3} U_i(s) \le 9$
+
+  <hr class="s2" />
+  Select **all** terminal nodes that can be pruned. Or check "None" if no node can be pruned.
+  - a
+  - b
+  - c
+  - d
+  - e
+  - f
+  - None
+
+q9_4_s: |
+  - c
+
+  <hr class="s2" />
+  Nodes $a, b$ and $d$ cannot be pruned because each is the first child of the corresponding player and before visiting that child, the player does not yet have a bound.
+  <hr class="s1" />
+  Node $c$ can be pruned. After visiting node $a$, the second player will only choose the right branch when $\text{max}(U_2(b),U_2(c)) \ge 2$. After visiting node $b$, the third player will only choose node $c$ when $U_3(c) \ge 8$ and $U_2(c) \ge 2$. But this is not possible given the constraints, so node $c$ will not be chosen no matter what utilities it subsumes and hence can be pruned.
+  <hr class="s1" />
+  Node $e$ cannot be pruned. To see this, assume node $e$ subsumes a different utility tuple, for example, $(3, 0, 6)$. Now, on the right branch of the root, the third player will choose node $e$ and subsumes $(3,0,6)$, the second player will choose node $f$ and subsumes $(6, 1, 2)$, and the first player (the root) will choose the right branch and subsume $(6, 1, 2)$. Since the utilities at node $e$ may affect the utilities at the root, node $e$ cannot be pruned. Node $f$ cannot be pruned. Assume node $f$ subsumes utility tuple $(6, 3, 0)$. Then the first player (the root) will subsume $(6, 3, 0)$ after the propagation.
+
+q10_1: |
+  # Q10. [10 pts] Iterative Deepening Search
+  Pacman is performing search in a maze again! The search graph has a branching factor of $b$, a solution of depth $d$, a maximum depth of $m$, and edge costs that may not be integers. Although he knows breadth first search returns the solution with the smallest depth, it takes up too much space, so he decides to try using iterative deepening. As a reminder, in standard depth-first iterative deepening we start by performing a depth first search terminated at a maximum depth of one. If no solution is found, we start over and perform a depth first search to depth two and so on. This way we obtain the shallowest solution, but use only $O(bd)$ space.
+  <hr class="s2" />
+  But Pacman decides to use a variant of iterative deepening called **iterative deepening $A\{*}$**, where instead of limiting the depth-first search by depth as in standard iterative deepening search, we can limit the depth-first search by the $f$ value as defined in $A\{*}$ search. As a reminder $f[node] = g[node] + h[node]$ where $g[node]$ is the cost of the path from the start state and $h[node]$ is a heuristic value estimating the cost to the closest goal state.
+  <hr class="s2" />
+  In this question, all searches are tree searches and **not** graph searches.
+  <hr class="s2" />
+  **(a)** [7 pts] Complete the pseudocode outlining how to perform iterative deepening $A\*$ by choosing the option from the next page that fills in each of these blanks. Iterative deepening $A*$ should return the solution with the lowest cost when given a consistent heuristic. Note that cutoff is a boolean and new-limit is a number.
+
+  ```
+  function Iterative-Deepening-Tree-Search(problem)
+      start-node ← Make-Node(Initial-State[problem])
+      limit ← f[start-node]
+      loop
+          fringe ← Make-Stack(start-node)
+          new-limit ←  (i)
+          cutoff ←  (ii)
+          while fringe is not empty do
+              node ← Remove-Front(fringe)
+              if Goal-Test(problem, State[node]) then
+                  return node
+              end if
+              for child-node in Expand(State[node], problem) do
+                  if f [child-node] ≤ limit then
+                      fringe ← Insert(child-node, fringe)
+                      new-limit ←  (iii)
+                      cutoff ←  (iv)
+                  else
+                      new-limit ←  (v)
+                      cutoff ←  (vi)
+                  end if
+              end for
+          end while
+          if not cutoff then
+              return failure
+          end if
+          limit ←  (vii)
+      end loop
+  end function
+  ```
+
+  ![choices](/img/cs188/final-sp16-q10-1.png)
+  <hr class="s2" />
+  **(i)** [1 pt] $A_1 \quad A_2 \quad A_3 \quad A_4$
+
+q10_1_s: |
+  $A_3$
+
+q10_2: |
+  **(ii)** [1 pt] $B_1 \quad B_2 \quad B_3 \quad B_4$
+
+q10_2_s: |
+  $B_2$
+
+q10_3: |
+  **(iii)** [1 pt]
+  <hr class="s1" />
+  $C_1 \quad C_2 \quad C_3 \quad C_4 \\\\ C_5 \quad C_6 \quad C_7 \quad C_8$
+
+q10_3_s: |
+  $C_1, C_7, C_8$
+
+q10_4: |
+  **(iv)** [1 pt] $B_1 \quad B_2 \quad B_3 \quad B_4$
+
+q10_4_s: |
+  $B_3$
+
+q10_5: |
+  **(v)** [1 pt]
+  <hr class="s1" />
+  $C_1 \quad C_2 \quad C_3 \quad C_4 \\\\ C_5 \quad C_6 \quad C_7 \quad C_8$
+
+q10_5_s: |
+  $C_6$
+
+q10_6: |
+  **(vi)** [1 pt] $B_1 \quad B_2 \quad B_3 \quad B_4$
+
+q10_6_s: |
+  $B_1$
+
+q10_7: |
+  **(vii)** [1 pt]
+  <hr class="s1" />
+  $C_1 \quad C_2 \quad C_3 \quad C_4 \\\\ C_5 \quad C_6 \quad C_7 \quad C_8$
+
+q10_7_s: |
+  $C_1$
+  <hr class="s2" />
+  The cutoff variable keeps track of whether there are items that aren’t being explored because of the limit. If cutoff is false and the algorithm has exited the while, no nodes were cutoff (not added to the fringe because of the limit). This scenario suggests that there is no solution.
+  <hr class="s2" />
+  In order to ensure that iterative deepening $A\{*}$ obtains the lowest cost solution efficiently, we want to increase the limit as much as we can while guaranteeing optimality. Setting new-limit to the smallest $f$ cost of nodes that were cutoff achieves this. When nodes aren’t cutoff (part iii), the new-limit should not change. Hence $C1, C7, C8$, or a combination of the three were accepted as answers.
+
+q10_8: |
+  (b) [3 pts] Assuming there are no ties in $f$ value between nodes, which of the following statements about the number of nodes that iterative deepening $A*$ expands is True? If the same node is expanded multiple times, count all of the times that it is expanded. If none of the options are correct, mark None of the above.
+  - The number of times that iterative deepening $A\*$ expands a node is greater than or equal to the number of times $A\*$ will expand a node.
+  - The number of times that iterative deepening $A\*$ expands a node is less than or equal to the number of times $A\*$ will expand a node.
+  - We don’t know if the number of times iterative deepening $A\*$ expands a node is more or less than the number of times $A\*$ will expand a node.
+  - None of the above
+
+q10_8_s: |
+  - The number of times that iterative deepening $A\*$ expands a node is greater than or equal to the number of times $A\*$ will expand a node.
+
+  <hr class="s2" />
+  Iterative deepening $A\*$ runs depth first search multiples at different limit values. This causes iterative deepening $A\*$ to expand certain nodes multiple times.
