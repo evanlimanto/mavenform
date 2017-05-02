@@ -104,7 +104,7 @@ client.query({text: idq, values: [courseid, examtype, examid]})
     } else {
       id = result.rows[0].id;
     }
-    sleep.sleep(1);
+    sleep.sleep(2);
 
     const delq = `delete from content where exam = $1`;
     client.query({text: delq, values: [id]})
@@ -121,7 +121,7 @@ client.query({text: idq, values: [courseid, examtype, examid]})
       process.exit(1);
     }
     const results = _.map(_.filter(_.keys(doc), function(k) {
-      return k.match(/^q\d+_\d$/);
+      return k.match(/^q\d+_\d+$/);
     }), (k) => [k, _.split(k.slice(1), "_")]);
 
     let counter = 0;
