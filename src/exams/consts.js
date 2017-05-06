@@ -16,20 +16,20 @@ const courses = {
 };
 
 const courseIsFeatured = {
-  'cs170': false,
+  'cs170': true,
   'cs70': false,
   'ee16a': false,
-  'cs162': true,
+  'cs162': false,
   'ee16b': false,
-  'cs61b': false,
+  'cs61b': true,
   'cs161': false,
-  'cs189': false,
-  'cs61a': false,
-  'cs188': false,
+  'cs189': true,
+  'cs61a': true,
+  'cs188': true,
   'data8': false,
   'cs186': false,
   'ugba10': false,
-  'cs61c': false,
+  'cs61c': true,
 };
 
 const examTypeToLabel = {
