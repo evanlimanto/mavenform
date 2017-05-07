@@ -1,8 +1,0 @@
-Running in verbose mode
-
------------------------------------------------------------------
-  pg_upgrade run on Mon Apr 17 20:44:38 2017
------------------------------------------------------------------
-
-check for "/Users/kevinwu/Library/Application Support/Postgres/var-9.5" failed: No such file or directory
-
