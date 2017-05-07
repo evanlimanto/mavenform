@@ -21,7 +21,7 @@ const HomeComponent = ({ notificationBar, onCloseNotificationBar }) => {
         <div className="dark-gray center">
           <hr className="s2" />
           <a className="material-icons notification-x" onClick={() => onCloseNotificationBar()}>close</a>
-          <p className="white-text notification-text">New courses are added every week. <a className="header-link" href="https://docs.google.com/forms/d/e/1FAIpQLSeHtnXpK0TE2z9nt_0ygAdJa1HjMoxUyk-KU-Pksxb9b6t4Pg/viewform?usp=sf_link" target="_blank">Sign up</a> to be notified when your course is available!</p>
+          <p className="white-text notification-text">Courses now updated with final exams! Check the courses page to see if your course has been updated.</p>
           <hr className="s2" />
         </div>
       ) : (null)}

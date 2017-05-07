@@ -113,6 +113,7 @@ app.get('/getExams', function(req, res, next) {
         dict[id] = { courseid, examtype, examid, profs };
         return dict;
       }, {});
+      console.log(multi_dict);
       res.json({ multi_dict, key_dict });
     });
 });
@@ -120,6 +121,7 @@ app.get('/getExams', function(req, res, next) {
 // Retrieve exam contents
 app.get('/getExam/:id', function(req, res, next) {
   const id = req.params.id;
+  console.log(id);
 
   const q = `select problem_num, subproblem_num, problem, solution, choices from content where exam = $1`;
   client.query({ text: q, values: [id]})
@@ -134,8 +136,13 @@ app.get('/getExam/:id', function(req, res, next) {
         }
         return result;
       }, {});
+
       const problems = _.reduce(result.rows, (result, row) => {
-        const { problem_num, subproblem_num, problem, solution, choices } = row;
+        const problem_num = row.problem_num;
+        const subproblem_num = row.subproblem_num;
+        const problem = row.problem;
+        const solution = row.solution;
+        const choices = row.choices;
         const key = `${problem_num}_${subproblem_num}`;
         result[key] = { problem, solution, choices };
         return result;

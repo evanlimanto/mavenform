@@ -5,7 +5,7 @@ import { keys, identity, map, sortBy } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 
 import { courseClickEvent } from '../../events';
-import { courseIDToLabel, courseIsFeatured, courses } from '../../exams';
+import { courseIDToLabel, courseIsFeatured, courseIsUpdated, courseIsPriority, courses } from '../../exams';
 
 const meta = {
   description: 'List of Courses',
@@ -18,7 +18,7 @@ class Courses extends Component {
   }
 
   render() {
-    const sortedCourses = sortBy(keys(courses), [(courseid) => !courseIsFeatured[courseid], identity]);
+    const sortedCourses = sortBy(keys(courses), [(courseid) => !courseIsPriority[courseid], identity]);
     const courseBoxes = map(sortedCourses, (courseid) => {
       return (
         <Link to={`/${courseid}`} key={courseid} className="course-card" onClick={() => courseClickEvent(courseid)}>
@@ -26,6 +26,7 @@ class Courses extends Component {
           <hr className="s1" />
           <i className="course-subtitle">{courses[courseid]}</i>
           {(courseIsFeatured[courseid]) ?  (<span><hr className="s2" /><span className="featured-tag">Featured</span></span>) : null}
+          {(courseIsUpdated[courseid]) ?  (<span><hr className="s2" /><span className="featured-tag">Updated</span></span>) : null}
           <h6 className="card-helper">CLICK TO VIEW &#8594;</h6>
         </Link>
       );

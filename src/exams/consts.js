@@ -16,16 +16,50 @@ const courses = {
 };
 
 const courseIsFeatured = {
-  'cs170': true,
+  'cs170': false,
   'cs70': false,
   'ee16a': false,
   'cs162': false,
   'ee16b': false,
+  'cs61b': false,
+  'cs161': false,
+  'cs189': false,
+  'cs61a': false,
+  'cs188': false,
+  'data8': false,
+  'cs186': false,
+  'ugba10': false,
+  'cs61c': false,
+};
+
+const courseIsUpdated = {
+  'cs170': true,
+  'cs70': true,
+  'ee16a': false,
+  'cs162': false,
+  'ee16b': true,
   'cs61b': true,
   'cs161': false,
   'cs189': true,
   'cs61a': true,
   'cs188': true,
+  'data8': false,
+  'cs186': false,
+  'ugba10': false,
+  'cs61c': true,
+};
+
+const courseIsPriority = {
+  'cs170': false,
+  'cs70': true,
+  'ee16a': true,
+  'cs162': false,
+  'ee16b': true,
+  'cs61b': true,
+  'cs161': false,
+  'cs189': false,
+  'cs61a': true,
+  'cs188': false,
   'data8': false,
   'cs186': false,
   'ugba10': false,
@@ -80,4 +114,4 @@ const courseIDToLabel = {
   'ugba10': 'UGBA 10',
 };
 
-export { courses, examTypeToLabel, courseIDToLabel, courseIsFeatured, termToLabel };
+export { courses, examTypeToLabel, courseIDToLabel, courseIsFeatured, courseIsUpdated, courseIsPriority, termToLabel };
