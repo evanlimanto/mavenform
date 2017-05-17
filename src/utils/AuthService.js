@@ -1,11 +1,11 @@
-import { EventEmitter } from 'events'
 import { isTokenExpired } from './jwtHelper'
 import createBrowserHistory from 'history/createBrowserHistory'
 import auth0 from 'auth0-js'
 
-export default class AuthService extends EventEmitter {
+import { evtEmitter } from './events'
+
+export default class AuthService {
   constructor(clientId, domain) {
-    super()
     // Configure Auth0
     this.auth0 = new auth0.WebAuth({
       clientID: 'tgMckz0tmKMhju4VwEnPLxEH4BDExL21',
@@ -22,6 +22,7 @@ export default class AuthService extends EventEmitter {
     this.parseHash = this.parseHash.bind(this)
     this.loggedIn = this.loggedIn.bind(this)
     this.getProfile = this.getProfile.bind(this)
+    this.setProfile = this.setProfile.bind(this)
     this.logout = this.logout.bind(this)
   }
 
@@ -71,15 +72,15 @@ export default class AuthService extends EventEmitter {
             console.log('Error loading the Profile', error)
           } else {
             if (process.env.NODE_ENV === "development") {
-              console.log(`User Profile: ${profile}`)
+              console.log("User Profile: ", profile);
             }
             this.setProfile(profile)
             // Redirect user here
+            this.history.replace('/login')
           }
         })
       }
     })
-    this.history.replace('/login')
   }
 
   loggedIn() {
@@ -98,7 +99,7 @@ export default class AuthService extends EventEmitter {
     // Saves profile data to localStorage
     localStorage.setItem('profile', JSON.stringify(profile))
     // Triggers profile_updated event to update the UI
-    this.emit('profile_updated', profile)
+    evtEmitter.emit('profile_updated', profile)
   }
 
   getProfile() {
@@ -116,6 +117,6 @@ export default class AuthService extends EventEmitter {
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token')
     localStorage.removeItem('profile')
-    this.history.replace('/login')
+    this.history.go('/login')
   }
 }

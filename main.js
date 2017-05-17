@@ -1,6 +1,7 @@
 'use strict';
 
 const AWS = require('aws-sdk');
+const bodyParser = require('body-parser');
 const express = require('express');
 const browserify = require('browserify');
 const fileUpload = require('express-fileupload');
@@ -29,6 +30,8 @@ if (process.env.NODE_ENV !== 'development') {
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
 app.use('/img', express.static(path.join(__dirname, '/src/img')));
 
@@ -66,7 +69,7 @@ app.post('/upload', function(req, res) {
 app.get('/searchProblems/:query_str', function(req, res, next) {
   const query_str = req.params.query_str;
   const q = `select * from content where problem like '%${query_str}%' or solution like '%${query_str}%'`;
-  client.query({ text: q})
+  client.query({ text: q })
     .then((result) => {
       res.json(result.rows);
       res.end();
@@ -113,7 +116,6 @@ app.get('/getExams', function(req, res, next) {
         dict[id] = { courseid, examtype, examid, profs };
         return dict;
       }, {});
-      console.log(multi_dict);
       res.json({ multi_dict, key_dict });
     });
 });
@@ -121,7 +123,6 @@ app.get('/getExams', function(req, res, next) {
 // Retrieve exam contents
 app.get('/getExam/:id', function(req, res, next) {
   const id = req.params.id;
-  console.log(id);
 
   const q = `select problem_num, subproblem_num, problem, solution, choices from content where exam = $1`;
   client.query({ text: q, values: [id]})
@@ -150,6 +151,16 @@ app.get('/getExam/:id', function(req, res, next) {
       res.json({info, problems});
       res.end();
     });
+});
+
+// Update problem contents
+app.post('/updateProblem', function(req, res) {
+  const { examid, problem_num, subproblem_num, problem_content, solution_content } = req.body;
+  const q = `update content set problem=$1, solution=$2 where exam=$3 and problem_num=$4 and subproblem_num=$5`;
+  client.query(q, [problem_content, solution_content, examid, problem_num, subproblem_num], function(err, result) {
+    if (err) res.status(400).send(err);
+    res.end();
+  });
 });
 
 app.use(express.static(path.join(__dirname, '/build')));

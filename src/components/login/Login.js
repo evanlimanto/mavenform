@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import ReactDOM from 'react-dom'
 
 import AuthService from '../../utils/AuthService'
+import { evtEmitter } from '../../utils/events'
 
 class LoginComponent extends React.Component {
   static contextTypes = {
@@ -14,9 +15,21 @@ class LoginComponent extends React.Component {
     auth: T.instanceOf(AuthService)
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      profile: {
+        name: ""
+      }
+    };
+  }
+
   componentWillMount() {
     const { auth, location } = this.props;
     this.props.parseAuthHash(auth, location);
+    evtEmitter.addListener('profile_updated', (profile) => {
+      this.setState({ profile });
+    });
   }
 
   getAuthParams() {
@@ -55,7 +68,7 @@ class LoginComponent extends React.Component {
   render() {
     return (
       <div>
-        {(this.props.auth.loggedIn()) ? 'Logged In' : 'Logged Out'}
+        {(this.props.auth.loggedIn()) ? 'Logged In as ' + this.state.profile.name : 'Logged Out'}
         <h2>Login</h2>
         <form onSubmit={this.login.bind(this)}>
           <div>

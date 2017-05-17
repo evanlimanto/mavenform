@@ -12,6 +12,7 @@
   "dependencies": {
     "auth0-js": "^8.5.0",
     "aws-sdk": "^2.42.0",
+    "body-parser": "^1.17.1",
     "browserify": "^14.1.0",
     "classnames": "^2.2.5",
     "copy-to-clipboard": "^3.0.5",

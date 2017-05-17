@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { has, range, replace, map } from 'lodash';
+import { has, range, map } from 'lodash';
 
-import MDRenderer from './MDRenderer';
 import { Question, MultipleChoiceQuestion } from '../question';
 import Sidebar from '../sidebar';
 
 import { courseIDToLabel, examTypeToLabel, termToLabel } from '../../exams';
 import { updateExamContent } from '../../actions';
-
-const preprocess = function(text) {
-  text = replace(text, /\./g, '\\.');
-  text = replace(text, /_/g, '\\_');
-  text = replace(text, /&amp;/g, '&');
-  text = MDRenderer(text);
-  return text;
-};
+import { preprocess } from '../../utils';
 
 const Scroll = require('react-scroll');
 const Element = Scroll.Element;
