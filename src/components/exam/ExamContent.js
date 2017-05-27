@@ -28,9 +28,9 @@ class ExamContentComponent extends Component {
 
   componentDidUpdate() {
     // Move header to first question element
-    var header = document.getElementById("header-text");
+    const header = document.getElementById("header-text");
     header.parentNode.removeChild(header);
-    var firstQuestion = document.getElementsByClassName("element")[0];
+    const firstQuestion = document.getElementsByClassName("element")[0];
     firstQuestion.insertBefore(header, firstQuestion.firstChild);
 
     scrollSpy.update();
@@ -53,9 +53,9 @@ class ExamContentComponent extends Component {
           console.warn(`${key} doesn't exist in exam!`);
           return null;
         }
-        var qcontent = examContent.problems[key].problem || '';
-        var solution = examContent.problems[key].solution || '';
-        var choices = examContent.problems[key].choices || '';
+        let qcontent = examContent.problems[key].problem || '';
+        let solution = examContent.problems[key].solution || '';
+        const choices = examContent.problems[key].choices || '';
         qcontent = preprocess(qcontent);
         solution = preprocess(solution);
         if (courseid === 'ugba10') {

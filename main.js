@@ -1,6 +1,5 @@
 'use strict';
 
-const AWS = require('aws-sdk');
 const bodyParser = require('body-parser');
 const express = require('express');
 const browserify = require('browserify');
@@ -12,9 +11,6 @@ const NodeCache = require('node-cache');
 const pg = require('pg');
 const sm = require('sitemap');
 const _ = require('lodash');
-
-AWS.config.update(JSON.parse(fs.readFileSync('aws.json')));
-const s3 = new AWS.S3();
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -49,14 +45,7 @@ app.post('/upload', function(req, res) {
       ContentEncoding: file.encoding,
       ContentType: file.mimetype
     };
-    s3.putObject(params, (err, data) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send(err);
-        res.end();
-        has_error = true;
-      }
-    });
+    // Upload file here
   });
 
   if (!has_error) {

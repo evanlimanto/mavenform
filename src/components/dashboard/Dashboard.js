@@ -5,6 +5,8 @@ import { concat, map, range, reduce } from 'lodash';
 import { Question } from '../question';
 import { preprocess } from '../../utils';
 
+require('./Dashboard.css');
+
 class DashboardComponent extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +20,11 @@ class DashboardComponent extends Component {
         solution: "",
       },
     };
+  }
+
+  componentWillMount() {
+    const { auth, history } = this.props;
+    this.props.requireAuth(auth, history)
   }
 
   updateContent() {
@@ -97,9 +104,9 @@ class DashboardComponent extends Component {
 
     const problem = this.state.problem;
     return (
-      <div>
-        <span style={{"float": "left", "width": "200px"}}>{exams}</span>
-        <span style={{"float": "left", "width": "200px"}}>{subparts}</span>
+      <div className="dashboardContainer">
+        <span className="dashboardNavCol">{exams}</span>
+        {subparts.length ? <span className="dashboardNavCol">{subparts}</span> : null}
         <span style={{"float": "left", "width": "1000px"}}>
           <textarea value={problem.problem} style={{"width": "500px", "height": "300px"}} ref="problem" onChange={this.handleChange} />
           <textarea value={problem.solution} style={{"width": "500px", "height": "300px"}} ref="solution" onChange={this.handleChange} />
@@ -113,19 +120,13 @@ class DashboardComponent extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    auth: state.auth,
     exams: state.global.exams
-  };
-};
-
-const mapDispatchToProps = (dispatch, props) => {
-  return {
-
   };
 };
 
 const Dashboard = connect(
   mapStateToProps,
-  mapDispatchToProps
 )(DashboardComponent);
 
 export default Dashboard;
