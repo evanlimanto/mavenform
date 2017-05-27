@@ -12,9 +12,15 @@ const pg = require('pg');
 const sm = require('sitemap');
 const _ = require('lodash');
 
-const port = process.env.PORT || 8080;
-const app = express();
+// GCP Storage
+const gcloud = require('google-cloud')({
+  projectId: 'studyform-168904',
+  keyFilename: './gcp.json',
+});
+const gcs = gcloud.storage();
+const bucket = gcs.bucket('studyform');
 
+// Redis
 const useCache = (process.env.NODE_ENV !== 'development');
 const examCache = new NodeCache({ stdTTL: 30 * 60, checkperiod: 10 * 60 });
 console.log("Using redis to cache exams:", useCache);
@@ -26,6 +32,10 @@ if (process.env.NODE_ENV !== 'development') {
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 
+// Express
+const port = process.env.PORT || 8080;
+const app = express();
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
@@ -36,22 +46,23 @@ app.post('/upload', function(req, res) {
   if (!req.files)
     return res.status(400).send('No files were uploaded.');
 
-  let has_error = false;
   _.forEach(req.files, (file) => {
-    const params = {
-      Bucket: 'mavenform',
-      Key: file.name,
-      Body: file.data,
-      ContentEncoding: file.encoding,
-      ContentType: file.mimetype
-    };
-    // Upload file here
+    const bucketFile = bucket.file(file.name);
+    const ws = bucketFile.createWriteStream({
+      public: true,
+      metadata: {
+        contentEncoding: file.encoding
+      }
+    });
+    ws.on('error', function(err) {
+      console.error(err);
+    });
+    ws.write(file.data);
+    ws.end();
   });
 
-  if (!has_error) {
-    res.send('Successfully uploaded files!');
-    res.end();
-  }
+  res.send('Successfully uploaded files!');
+  res.end();
 });
 
 // Search substring in problems
@@ -145,6 +156,7 @@ app.get('/getExam/:id', function(req, res, next) {
 // Update problem contents
 app.post('/updateProblem', function(req, res) {
   const { examid, problem_num, subproblem_num, problem_content, solution_content } = req.body;
+  console.log(req.body);
   const q = `update content set problem=$1, solution=$2 where exam=$3 and problem_num=$4 and subproblem_num=$5`;
   client.query(q, [problem_content, solution_content, examid, problem_num, subproblem_num], function(err, result) {
     if (err) res.status(400).send(err);

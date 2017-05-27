@@ -80,7 +80,7 @@ const HomeComponent = ({ notificationBar, onCloseNotificationBar }) => {
       </Element>
       <div className="blue center">
         <hr className="s2" />
-        <p className="white-text">Made by <a className="footer-link" href="http://www.kevinandstuff.com/" target="_blank">Kevin</a> & <a className="footer-link" href="http://evanlimanto.github.io/" target="_blank">Evan</a></p>
+        <p className="white-text">Made by <a className="footer-link" href="http://www.kevinandstuff.com/" target="_blank" rel="noopener noreferrer">Kevin</a> & <a className="footer-link" href="http://evanlimanto.github.io/" target="_blank" rel="noopener noreferrer">Evan</a></p>
         <hr className="s2" />
       </div>
     </div>

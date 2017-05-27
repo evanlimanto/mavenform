@@ -20,6 +20,8 @@ class DashboardComponent extends Component {
         solution: "",
       },
     };
+
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillMount() {
@@ -46,6 +48,12 @@ class DashboardComponent extends Component {
         solution_content,
       })
     })
+
+    const id = `${problem_num}_${subproblem_num}`;
+    this.state.content.problems[id] = {
+      problem: problem_content,
+      solution: solution_content,
+    };
   }
 
   getExam(id) {
@@ -71,7 +79,7 @@ class DashboardComponent extends Component {
 		window.renderMJ();
   }
 
-  refreshProblem() {
+  saveProblem() {
     this.setState({
       problem: {
         problem: this.refs.problem.value,
@@ -84,18 +92,26 @@ class DashboardComponent extends Component {
 
   handleChange() {
     this.setState({
-      problem: this.refs.problem.value,
-      solution: this.refs.solution.value,
+      problem: {
+        problem: this.refs.problem.value,
+        solution: this.refs.solution.value,
+      }
     });
   }
 
   render() {
     const exams = map(this.props.exams.key_dict, (exam, key) => {
+      if (key === this.state.examid) {
+        return <div key={key} onClick={() => this.getExam(key)}><a href="#" style={{ color: "blue" }}>{exam.courseid} - {exam.examtype} - {exam.examid}</a></div>;
+      }
       return <div key={key} onClick={() => this.getExam(key)}><a href="#">{exam.courseid} - {exam.examtype} - {exam.examid}</a></div>;
     });
 
     const subparts = reduce(this.state.content.info, (res, num_parts, part) => {
       const subparts = map(range(1, num_parts + 1), (subpart) => {
+        if (part === this.state.problem_num && subpart === this.state.subproblem_num) {
+          return <div key={`${part}-${subpart}`}><a style={{ color: "blue" }} onClick={() => this.selectProblem(part, subpart)}>Question {part} Part {subpart}</a></div>;
+        }
         return <div key={`${part}-${subpart}`}><a onClick={() => this.selectProblem(part, subpart)}>Question {part} Part {subpart}</a></div>;
       });
       res = concat(res, subparts);
@@ -103,16 +119,23 @@ class DashboardComponent extends Component {
     }, []);
 
     const problem = this.state.problem;
+    const exam = (this.state.examid) ? this.props.exams.key_dict[this.state.examid] : null;
     return (
       <div className="dashboardContainer">
         <span className="dashboardNavCol">{exams}</span>
         {subparts.length ? <span className="dashboardNavCol">{subparts}</span> : null}
-        <span style={{"float": "left", "width": "1000px"}}>
-          <textarea value={problem.problem} style={{"width": "500px", "height": "300px"}} ref="problem" onChange={this.handleChange} />
-          <textarea value={problem.solution} style={{"width": "500px", "height": "300px"}} ref="solution" onChange={this.handleChange} />
-          {(problem.problem !== "") ? <button onClick={() => this.refreshProblem()}>Refresh</button> : null}
-          {(problem.problem !== "") ? (<Question content={preprocess(problem.problem)} solution={preprocess(problem.solution)} />) : null}
-        </span>
+        <div style={{"float": "left", "width": "1000px"}}>
+          <h1>{this.state.examid} : {exam ? `${exam.courseid} - ${exam.examtype} - ${exam.examid}` : null}</h1>
+          <span className="dashboardCol">
+            <textarea value={problem.problem} ref="problem" onChange={this.handleChange} />
+          </span>
+          <span className="dashboardCol">
+            <textarea value={problem.solution} ref="solution" onChange={this.handleChange} />
+          </span>
+          <br/>
+          {(problem.problem !== "") ? <button onClick={() => this.saveProblem()}>Save</button> : null}
+          {(problem.problem !== "") ? <Question content={preprocess(problem.problem)} solution={preprocess(problem.solution)} /> : null}
+        </div>
       </div>
     );
   }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { map } from 'lodash';
 
@@ -17,7 +16,7 @@ function getSolutionPDFURL(courseid, examtype, examid) {
 
 class SidebarComponent extends Component {
   render() {
-    const { term, courseid, examtype, hasSolutions, examid, problemIDs, info } = this.props;
+    const { courseid, examtype, hasSolutions, examid, info } = this.props;
     const sidetabContainers = map(info, (num_parts, part) => {
       const problemTitle = `Question ${part}`;
 
@@ -56,10 +55,10 @@ class SidebarComponent extends Component {
           {noSolutionsInfo}
           <h6>SOURCES</h6>
           <div className="sidetab-container">
-            <a href={getExamPDFURL(courseid, examtype, examid)} className="sidetab" onClick={PDFClickEvent} target="_blank">Exam PDF</a>
+            <a href={getExamPDFURL(courseid, examtype, examid)} className="sidetab" onClick={PDFClickEvent} target="_blank" rel="noopener noreferrer">Exam PDF</a>
           </div>
           <div className="sidetab-container">
-            <a href={getSolutionPDFURL(courseid, examtype, examid)} className="sidetab" onClick={PDFClickEvent} target="_blank">Solution PDF</a>
+            <a href={getSolutionPDFURL(courseid, examtype, examid)} className="sidetab" onClick={PDFClickEvent} target="_blank" rel="noopener noreferrer">Solution PDF</a>
           </div>
         </div>
       </span>
@@ -69,12 +68,10 @@ class SidebarComponent extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    term: ownProps.term,
     courseid: ownProps.courseid,
     examtype: ownProps.examtype,
     hasSolutions: ownProps.hasSolutions,
     examid: ownProps.examid,
-    problemIDs: ownProps.problemIDs,
     info: ownProps.info,
   };
 };

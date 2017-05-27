@@ -10,3 +10,8 @@
   margin: 0px 5px;
   border-radius: 5px;
 }
+
+.dashboardCol textarea {
+  width: 500px;
+  height: 300px;
+}
