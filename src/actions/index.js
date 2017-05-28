@@ -30,3 +30,10 @@ export const updateExamList = (exams) => {
     exams: exams,
   };
 };
+
+export const updateCourseList = (courses) => {
+  return {
+    type: 'UPDATE_COURSE_LIST',
+    courses: courses,
+  };
+};

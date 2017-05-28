@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import { closeNotificationBar } from '../../actions';
 import { learnMoreEvent, viewCoursesEvent } from '../../events';
+import Screen from './screen.png';
 
 const Scroll = require('react-scroll');
 const Element = Scroll.Element;
@@ -44,7 +45,7 @@ const HomeComponent = ({ notificationBar, onCloseNotificationBar }) => {
              Learn More
             </Scroll.Link>
           </div>
-          <img className="banner-screen" src="/img/screen.png" alt="banner" />
+          <img className="banner-screen" src={Screen} alt="banner" />
         </div>
       </div>
       <Element name="features" className="card-container-container">

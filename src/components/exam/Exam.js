@@ -9,7 +9,7 @@ import NavSidebar from '../navsidebar';
 import NotFound from '../notfound';
 
 import { toggleAppMode } from '../../actions';
-import { examTypeToLabel, termToLabel } from '../../exams';
+import { examTypeToLabel, termToLabel } from '../../utils';
 import { toggleAppModeEvent } from '../../events';
 
 import './Exam.css';
@@ -35,8 +35,8 @@ const ExamComponent = ({ appMode, exams, courseid, examtype, examid, onToggleApp
 
   const { id, profs } = exams[courseid][examtype][examid];
   const meta = {
-    description: `${toUpper(courseid)} ${termToLabel[examid]} ${examTypeToLabel[examtype]}`,
-    title: `${toUpper(courseid)} ${termToLabel[examid]} ${examTypeToLabel[examtype]}`,
+    description: `${toUpper(courseid)} ${termToLabel(examid)} ${examTypeToLabel(examtype)}`,
+    title: `${toUpper(courseid)} ${termToLabel(examid)} ${examTypeToLabel(examtype)}`,
   };
 
   return (
@@ -51,7 +51,7 @@ const ExamComponent = ({ appMode, exams, courseid, examtype, examid, onToggleApp
 const mapStateToProps = (state, ownProps) => {
   return {
     appMode: state.config.appMode,
-    exams: state.global.exams.multi_dict,
+    exams: state.exams.multi_dict,
     courseid: ownProps.match.params.courseid,
     examtype: ownProps.match.params.examtype,
     examid: ownProps.match.params.examid,

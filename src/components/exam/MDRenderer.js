@@ -38,6 +38,10 @@ renderer.image = function(href, title, text) {
   href = replace(href, /\\./g, '.'); // remove escapes
   return `<img src="${href}" title="${title}" alt="${text}" />`;
 };
+renderer.link = function(href, title, text) {
+  href = replace(href, /\\./g, '.'); // remove escapes
+  return `<a href="${href}" title="${title}" target="_blank">${text}</a>`;
+}
 renderer.list = function(body, ordered) {
   if (ordered) {
     return `${replace(replace(body, '<li>', ''), '</li>', '')}`;

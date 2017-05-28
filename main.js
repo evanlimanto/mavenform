@@ -120,10 +120,29 @@ app.get('/getExams', function(req, res, next) {
     });
 });
 
+// Retrieve course listing
+app.get('/getCourses/:schoolid', function(req, res, next) {
+  const schoolid = req.params.schoolid;
+  const q1 = `select id from schools where code = $1`;
+  const q2 = `select code, name from courses where schoolid = $1`;
+  client.query({ text: q1, values: [schoolid]})
+    .then((result) => {
+      if (result.rows.length > 0) {
+        const id = result.rows[0].id;
+        client.query({ text: q2, values: [id]})
+          .then((result) => {
+            const items = _.map(result.rows, function (row) {
+              return { code: row.code, name: row.name };
+            });
+            res.json(items);
+          });
+      }
+    });
+});
+
 // Retrieve exam contents
 app.get('/getExam/:id', function(req, res, next) {
   const id = req.params.id;
-
   const q = `select problem_num, subproblem_num, problem, solution, choices from content where exam = $1`;
   client.query({ text: q, values: [id]})
     .then((result) => {

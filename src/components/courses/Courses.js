@@ -1,32 +1,32 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import loadjs from 'loadjs';
-import { keys, identity, map, sortBy } from 'lodash';
+import { map } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 
 import { courseClickEvent } from '../../events';
-import { courseIDToLabel, courseIsFeatured, courseIsUpdated, courseIsPriority, courses } from '../../exams';
+import { courseCodeToLabel } from '../../utils';
 
 const meta = {
-  description: 'List of Courses',
+  description: 'Course List',
   title: 'Course List',
 };
 
-class Courses extends Component {
+class CoursesComponent extends Component {
   componentWillMount() {
     loadjs('jquery.hideseek.min.js');
   }
 
   render() {
-    const sortedCourses = sortBy(keys(courses), [(courseid) => !courseIsPriority[courseid], identity]);
-    const courseBoxes = map(sortedCourses, (courseid) => {
+    const courses = this.props.courses;
+    const courseBoxes = map(courses, (course) => {
+      const coursecode = course.code;
       return (
-        <Link to={`/${courseid}`} key={courseid} className="course-card" onClick={() => courseClickEvent(courseid)}>
-          <h1>{courseIDToLabel[courseid]}</h1>
+        <Link to={`/${coursecode}`} key={coursecode} className="course-card" onClick={() => courseClickEvent(coursecode)}>
+          <h1>{courseCodeToLabel(course.code)}</h1>
           <hr className="s1" />
-          <i className="course-subtitle">{courses[courseid]}</i>
-          {(courseIsFeatured[courseid]) ?  (<span><hr className="s2" /><span className="featured-tag">Featured</span></span>) : null}
-          {(courseIsUpdated[courseid]) ?  (<span><hr className="s2" /><span className="featured-tag">Updated</span></span>) : null}
+          <i className="course-subtitle">{course.name}</i>
           <h6 className="card-helper">CLICK TO VIEW &#8594;</h6>
         </Link>
       );
@@ -60,5 +60,15 @@ class Courses extends Component {
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    courses: state.courses,
+  };
+};
+
+const Courses = connect(
+  mapStateToProps
+)(CoursesComponent);
 
 export default Courses;

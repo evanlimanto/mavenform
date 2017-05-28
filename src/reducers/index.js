@@ -45,12 +45,19 @@ export const config = (state = { appMode: true }, action) => {
   }
 };
 
-export const global = (state = { exams: { key_dict: {}, multi_dict: {} } }, action) => {
+export const exams = (state = { key_dict: {}, multi_dict: {} }, action) => {
   switch (action.type) {
     case 'UPDATE_EXAM_LIST':
-      return {
-        exams: action.exams,
-      };
+      return action.exams;
+    default:
+      return state;
+  }
+};
+
+export const courses = (state = [], action) => {
+  switch (action.type) {
+    case 'UPDATE_COURSE_LIST':
+      return action.courses;
     default:
       return state;
   }

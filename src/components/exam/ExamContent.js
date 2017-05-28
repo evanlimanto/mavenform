@@ -5,9 +5,8 @@ import { has, range, map } from 'lodash';
 import { Question, MultipleChoiceQuestion } from '../question';
 import Sidebar from '../sidebar';
 
-import { courseIDToLabel, examTypeToLabel, termToLabel } from '../../exams';
+import { courseCodeToLabel, examTypeToLabel, preprocess, termToLabel } from '../../utils';
 import { updateExamContent } from '../../actions';
-import { preprocess } from '../../utils';
 
 const Scroll = require('react-scroll');
 const Element = Scroll.Element;
@@ -70,8 +69,8 @@ class ExamContentComponent extends Component {
     const examDesc = (
       <div id="header-text">
         <div className="center">
-          <h4>{courseIDToLabel[courseid]}</h4>
-          <h5>{examTypeToLabel[examtype]} | {termToLabel[term]} | {profs}</h5>
+          <h4>{courseCodeToLabel(courseid)}</h4>
+          <h5>{examTypeToLabel(examtype)} | {termToLabel(term)} | {profs}</h5>
         </div>
       </div>
     );
@@ -91,7 +90,7 @@ const mapStateToProps = (state, ownProps) => {
     appMode: state.config.appMode,
     examContent: state.exam.examContent,
     examContentHasLoaded: state.exam.examContentHasLoaded,
-    exams: state.global.exams.key_dict,
+    exams: state.exams.key_dict,
   };
 };
 
