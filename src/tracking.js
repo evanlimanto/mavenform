@@ -1,6 +1,6 @@
 import { forEach } from 'lodash';
 
-import { actionTakenEvent, activeUserEvent } from './events';
+import { actionTakenEvent, activeUserEvent, pageFocusEvent, pageBlurEvent } from './events';
 
 export default function initializeTracking() {
   function createEventTracker(name) {
@@ -30,11 +30,13 @@ export default function initializeTracking() {
     if (userOnPageTracker !== null) {
       window.clearInterval(userOnPageTracker);
     }
+    pageFocusEvent();
     activeUserEvent();
     userOnPageTracker = window.setInterval(activeUserEvent, activeTrackingInterval);
   });
 
   window.addEventListener('blur', function(e) {
+    pageBlurEvent();
     window.clearInterval(userOnPageTracker);
     userOnPageTracker = null;
   });

@@ -1,0 +1,30 @@
+.contentContainer {
+  margin: 10px;
+}
+
+.contentNavCol {
+  float: left;
+  width: 200px;
+  border: 2px solid black;
+  padding: 10px;
+  margin: 0px 5px;
+  border-radius: 5px;
+}
+
+.contentCol textarea {
+  width: 500px;
+  height: 300px;
+}
+
+.backLink {
+  margin-bottom: 20px;
+}
+
+.highlighted {
+  color: blue;
+}
+
+input, select, button {
+  border: 1px solid black;
+  border-radius: 1px;
+}

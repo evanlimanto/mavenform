@@ -54,6 +54,15 @@ export const exams = (state = { key_dict: {}, multi_dict: {} }, action) => {
   }
 };
 
+export const schools = (state = [], action) => {
+  switch (action.type) {
+    case 'UPDATE_SCHOOL_LIST':
+      return action.schools;
+    default:
+      return state;
+  }
+};
+
 export const courses = (state = [], action) => {
   switch (action.type) {
     case 'UPDATE_COURSE_LIST':
@@ -66,6 +75,25 @@ export const courses = (state = [], action) => {
 const authState = new AuthService('tgMckz0tmKMhju4VwEnPLxEH4BDExL21', 'mavenform.auth0.com')
 export const auth = (state = authState, action) => {
   switch (action.type) {
+    default:
+      return state;
+  }
+};
+
+export const exam_types = (state = [], action) => {
+  switch (action.type) {
+    case 'UPDATE_EXAM_TYPES_LIST':
+      return action.exam_types;
+    default:
+      return state;
+  }
+};
+
+export const terms = (state = [], action) => {
+  console.log(action);
+  switch (action.type) {
+    case 'UPDATE_TERM_LIST':
+      return action.terms;
     default:
       return state;
   }

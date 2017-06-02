@@ -1,3 +1,6 @@
 import Dashboard from './Dashboard';
+import DashboardContent from './DashboardContent';
+import ImageUpload from './ImageUpload';
+import Transcribe from './Transcribe';
 
-export default Dashboard;
+export { Dashboard, DashboardContent, ImageUpload, Transcribe };

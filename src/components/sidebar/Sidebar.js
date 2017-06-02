@@ -7,11 +7,11 @@ import { scrollNavClickEvent, PDFClickEvent } from '../../events';
 const Scroll = require('react-scroll');
 
 function getExamPDFURL(courseid, examtype, examid) {
-  return `https://storage.googleapis.com/studyform/ucberkeley/${courseid}/${examtype}-${examid}-exam.pdf`;
+  return `https://storage.googleapis.com/studyform/ucberkeley/pdf/${courseid}/${examtype}-${examid}-exam.pdf`;
 }
 
 function getSolutionPDFURL(courseid, examtype, examid) {
-  return `https://storage.googleapis.com/studyform/ucberkeley/${courseid}/${examtype}-${examid}-soln.pdf`;
+  return `https://storage.googleapis.com/studyform/ucberkeley/pdf/${courseid}/${examtype}-${examid}-soln.pdf`;
 }
 
 class SidebarComponent extends Component {

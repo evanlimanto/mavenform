@@ -1,7 +1,9 @@
 import { replace, reduce, toUpper } from 'lodash';
 
-import { updateExamList, updateCourseList } from '../actions';
+import { updateExamList, updateCourseList, updateSchoolList, updateExamTypesList, updateTermList } from '../actions';
 import MDRenderer from '../components/exam/MDRenderer';
+
+export const ENV_IS_DEV = process.env.NODE_ENV === "development";
 
 export function parseAuthHash(auth, location) {
   if (/access_token|id_token|error/.test(location.hash)) {
@@ -17,6 +19,9 @@ export function requireAuth(auth, history) {
   }
 }
 
+/*
+ * Initialize redux store.
+ */
 export function initStore(store) {
   fetch(`/getExams`).then(
     (response) => response.json()
@@ -28,6 +33,24 @@ export function initStore(store) {
     (response) => response.json()
   ).then(
     (json) => store.dispatch(updateCourseList(json))
+  );
+
+  fetch(`/getSchools`).then(
+    (response) => response.json()
+  ).then(
+    (json) => store.dispatch(updateSchoolList(json))
+  );
+
+  fetch(`/getExamTypes`).then(
+    (response) => response.json()
+  ).then(
+    (json) => store.dispatch(updateExamTypesList(json))
+  );
+
+  fetch(`/getTerms`).then(
+    (response) => response.json()
+  ).then(
+    (json) => store.dispatch(updateTermList(json))
   );
 }
 

@@ -70,3 +70,11 @@ export function activeUserEvent() {
 export function PDFClickEvent() {
   tracker('pdf');
 }
+
+export function pageFocusEvent() {
+  tracker('page focus');
+}
+
+export function pageBlurEvent() {
+  tracker('page blur');
+}

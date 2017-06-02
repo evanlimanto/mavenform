@@ -1,38 +1,32 @@
-const program = require('commander');
+const pg = require('pg');
+const _ = require('lodash');
 
-program
-  .version('1.0.0')
-  .option('-f --from <from>')
-  .option('-t --to <to>')
-  .parse(process.argv);
+const config = {
+  user: 'evanlimanto',
+  database: 'mavenform',
+  password: '',
+  port: 5432,
+  host: 'localhost',
+  max: 5,
+};
 
-const { from, to } = program;
+const Client = pg.Client;
+const client = new Client(config);
+client.connect();
 
-const gcloud = require('google-cloud')({
-  projectId: 'studyform-168904',
-  keyFilename: '../gcp.json',
-});
+const terms = ['sp', 'su', 'fa'];
+const termLabels = ['Spring', 'Summer', 'Fall'];
 
-const gcs = gcloud.storage();
-const bucket = gcs.bucket('studyform');
-
-const fromFile = bucket.file(from);
-fromFile.download(function(err, contents) {
-  const toFile = bucket.file(to);
-  const ws = toFile.createWriteStream({
-    predefinedAcl: 'publicRead',
-    metadata: {
-      contentType: 'image/png'
-    }
+_.map(_.range(0, 21), (year) => {
+  _.map(termLabels, (label, i) => {
+    let code = terms[i];
+    let yearString = _.toString(year);
+    if (year < 10) yearString = "0" + yearString;
+    code = code + yearString;
+    const q = `insert into terms (term_code, term_label) values($1, $2)`;
+    client.query(q, [code, label + " " + yearString], function(err, res) {
+      if (err) console.error(err);
+      else console.log(res);
+    });
   });
-  ws.on('error', function(err) {
-    console.error(err);
-  });
-  ws.write(contents);
-  ws.end();
-});
-fromFile.delete(function(err, apiResponse) {
-  if (err) {
-    console.error(err);
-  }
 });

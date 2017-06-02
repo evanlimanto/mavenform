@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@google-cloud/storage": "^1.1.1",
+    "adm-zip": "^0.4.7",
     "auth0-js": "^8.5.0",
     "aws-sdk": "^2.42.0",
     "body-parser": "^1.17.1",
@@ -23,6 +24,7 @@
     "flatten": "^1.0.2",
     "glob": "^7.1.1",
     "google-cloud": "^0.54.0",
+    "heap-api": "^1.0.1",
     "history": "^4.6.1",
     "jquery": "^3.2.1",
     "js-yaml": "^3.8.1",
@@ -51,6 +53,7 @@
     "sitemap": "^1.12.0",
     "sleep": "^5.1.1",
     "superagent": "^3.5.2",
+    "unzip": "^0.1.11",
     "wait.for": "^0.6.6"
   },
   "main": "main.js",

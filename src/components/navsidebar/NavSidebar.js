@@ -14,7 +14,7 @@ const NavSidebarComponent = ({ exams, courseid, examid, thisExamType, isExam }) 
       const isAvailable = has(item, 'available') ? item.available : true;
       var url = `/${courseid}/${examtype}/${id}`;
       var note = item.note ? `<br/><i class="side-i" >(${item.note})</i>` : (null);
-      if (has(item, 'available') && !item.available){
+      if (has(item, 'available') && !item.available) {
         url = '#';
         note = '';
       }

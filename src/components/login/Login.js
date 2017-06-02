@@ -1,6 +1,7 @@
 import React, { PropTypes as T } from 'react'
 import { connect } from 'react-redux'
 import ReactDOM from 'react-dom'
+import { map } from 'lodash'
 
 import AuthService from '../../utils/AuthService'
 import { evtEmitter } from '../../utils/events'
@@ -30,6 +31,10 @@ class LoginComponent extends React.Component {
     evtEmitter.addListener('profile_updated', (profile) => {
       this.setState({ profile });
     });
+    const profile = this.props.auth.getProfile();
+    if (profile) {
+      this.setState({ profile });
+    }
   }
 
   getAuthParams() {
@@ -65,21 +70,42 @@ class LoginComponent extends React.Component {
     this.props.auth.logout();
   }
 
+  updateSchool(e) {
+    e.preventDefault();
+    const school = this.refs.school.value; 
+    this.props.auth.updateSchool(school);
+  }
+
   render() {
     return (
       <div>
         {(this.props.auth.loggedIn()) ? 'Logged In as ' + this.state.profile.name : 'Logged Out'}
         <h2>Login</h2>
-        <form onSubmit={this.login.bind(this)}>
-          <div>
-            <label>Email</label>
-            <input type="email" ref="email" placeholder="denero@berkeley.edu" />
-          </div>
-          <div>
-            <label>Password</label>
-            <input type="password" ref="password" placeholder="Password" />
-          </div>
-          <button type="submit">Login</button>
+        <form>
+          {(this.props.auth.loggedIn()) ? (
+            this.props.auth.getSchool() ? this.props.auth.getSchool() : (
+              <div>
+                <select ref="school">
+                  {map(this.props.schools, (school, key) => {
+                    return <option key={key} value={school.id}>{school.name}</option>; 
+                  })}    
+                </select>
+                <button onClick={(e) => this.updateSchool(e)}>Select school</button>
+              </div>
+            )
+          ) : (
+            <span>
+              <div>
+                <label>Email</label>
+                <input type="email" ref="email" placeholder="denero@berkeley.edu" />
+              </div>
+              <div>
+                <label>Password</label>
+                <input type="password" ref="password" placeholder="Password" />
+              </div>
+            </span>
+          )}
+          <button onClick={this.login.bind(this)}>Login</button>
           <button onClick={this.signup.bind(this)}>Sign Up</button>
           <button onClick={this.loginWithGoogle.bind(this)}>
             Login with Google
@@ -98,7 +124,8 @@ class LoginComponent extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    schools: state.schools
   };
 };
 

@@ -1,6 +1,7 @@
 import { isTokenExpired } from './jwtHelper'
 import createBrowserHistory from 'history/createBrowserHistory'
 import auth0 from 'auth0-js'
+import { has } from 'lodash'
 
 import { evtEmitter } from './events'
 
@@ -99,7 +100,7 @@ export default class AuthService {
     // Saves profile data to localStorage
     localStorage.setItem('profile', JSON.stringify(profile))
     // Triggers profile_updated event to update the UI
-    evtEmitter.emit('profile_updated', profile)
+    evtEmitter.emit('profile_updated', profile);
   }
 
   getProfile() {
@@ -108,9 +109,47 @@ export default class AuthService {
     return profile ? JSON.parse(localStorage.profile) : {}
   }
 
+  getUserId() {
+    return this.getProfile().user_id;
+  }
+
+  getAccessToken() {
+    return localStorage.getItem('access_token')
+  }
+
   getToken() {
     // Retrieves the user token from localStorage
     return localStorage.getItem('id_token')
+  }
+
+  getSchool() {
+    const profile = this.getProfile();
+    const school = (has(profile, 'user_metadata') && has(profile.user_metadata, 'school_id'))
+      ? profile.user_metadata.school_id : null;
+    return school;
+  }
+
+  updateSchool(school_id) {
+    const auth0Manage = new auth0.Management({
+      domain: 'mavenform.auth0.com',
+      token: this.getToken()
+    })
+    auth0Manage.patchUserMetadata(this.getUserId(), {
+      school_id: school_id
+    }, (err, res) => {
+      if (err) console.error(err);
+      else {
+        this.auth0.client.userInfo(this.getAccessToken(), (error, profile) => {
+          if (error) {
+            console.log('Error loading the Profile', error)
+          } else {
+            this.setProfile(profile)
+            // Redirect user here
+            this.history.replace('/login')
+          }
+        })
+      }
+    });
   }
 
   logout() {
