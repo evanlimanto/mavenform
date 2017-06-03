@@ -90,7 +90,6 @@ export const exam_types = (state = [], action) => {
 };
 
 export const terms = (state = [], action) => {
-  console.log(action);
   switch (action.type) {
     case 'UPDATE_TERM_LIST':
       return action.terms;

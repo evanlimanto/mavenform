@@ -55,7 +55,6 @@ export function initStore(store) {
 }
 
 export function preprocess(text) {
-  text = replace(text, /\./g, '\\.');
   text = replace(text, /_/g, '\\_');
   text = replace(text, /&amp;/g, '&');
   text = MDRenderer(text);

@@ -16,6 +16,8 @@ class Dashboard extends Component {
         <Link to="/dashboard/imageupload">Image Upload</Link>
         <hr className="s1" />
         <Link to="/dashboard/transcribe">Transcription</Link>
+        <hr className="s1" />
+        <Link to="/dashboard/transcribed">Transcribed Exams</Link>
       </div>
     );
   }

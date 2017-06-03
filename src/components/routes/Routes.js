@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import Course from '../course';
 import Courses from '../courses';
-import { Dashboard, DashboardContent, ImageUpload, Transcribe } from '../dashboard';
+import { Dashboard, DashboardContent, ImageUpload, Transcribe, Transcribed } from '../dashboard';
 import Exam from '../exam';
 import Home from '../home';
 import { Login, Logout } from '../login';
@@ -23,6 +23,7 @@ const Routes = (
     <Route path="/dashboard/content" component={DashboardContent} />
     <Route path="/dashboard/imageupload" component={ImageUpload} />
     <Route path="/dashboard/transcribe" component={Transcribe} />
+    <Route path="/dashboard/transcribed" component={Transcribed} />
     <Route path="/dashboard" component={Dashboard} />
     <Route path="/upload" component={Upload} />
     <Route path="/:courseid/:examtype/:examid" component={Exam} />

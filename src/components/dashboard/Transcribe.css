@@ -6,24 +6,40 @@ span.col {
   margin-left: 10px;
 }
 
+span.transcription {
+  position: fixed;
+  left: 0%;
+}
+
+span.preview {
+  position: relative;
+  left: 50%; 
+}
+
 .dropzone {
   width: 100%;
   border: 2px solid black;
-  padding: 20px 0px;
-  margin-top: 50px;
+  padding: 20px 5px;
 }
 
 textarea {
   width: 100%;
   height: 500px;
   border: 2px solid black;
+  padding: 5px;
 }
 
-button {
-  margin-top: 50px;
+button.upload {
   padding: 20px 10px;
   font-size: 20px;
   border-radius: 5px;
+}
+
+button.approve {
+  padding: 10px 5px;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-left: 20px;
 }
 
 .question img {
@@ -32,4 +48,27 @@ button {
 
 input[type="text"], select {
   margin-left: 15px;
+  float: right;
+  padding: 5px;
+}
+
+hr.spacer {
+  margin: 20px 0px;
+}
+
+p.error {
+  color: red;
+  margin: 0px 15px;
+  display: inline;
+}
+
+p.success {
+  color: green;
+  margin: 0px 15px;
+  display: inline;
+}
+
+.question {
+  padding-top: 0px;
+  padding-bottom: 50px;
 }

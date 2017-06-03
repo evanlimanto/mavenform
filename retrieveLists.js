@@ -68,3 +68,50 @@ exports.getTerms = (req, res) => {
       res.json(items);
     });
 };
+
+exports.getTranscribedExams = (req, res) => {
+  const q = `
+    select ES.id, ES.profs, courses.code as course_code, courses.name as course_name, schools.code as school_code, schools.name as school_name, terms.term_code, terms.term_label from exams_staging ES
+    inner join courses on courses.id = ES.courseid
+    inner join exam_types on exam_types.id = ES.examtype
+    inner join schools on schools.id = ES.schoolid
+    inner join terms on terms.id = ES.examid;
+  `;
+  client.query({ text: q })
+    .then((result) => {
+      const items = _.reduce(result.rows, function(dict, row) {
+        dict[row.id] = {
+          course_code: row.course_code,
+          course_name: row.course_name,
+          school_code: row.school_code,
+          school_name: row.school_name,
+          term_code: row.term_code,
+          term_label: row.term_label,
+        };
+        return dict;
+      }, {});
+      res.json(items);
+    });
+};
+
+exports.getTranscribedContent = (req, res) => {
+  const q = `
+    select problem_num, subproblem_num, problem, solution, exam from content_staging
+  `;
+  client.query({ text: q })
+    .then((result) => {
+      const items = _.reduce(result.rows, function(dict, row) {
+        if (!_.has(dict, row.exam)) {
+          dict[row.exam] = [];
+        }
+        dict[row.exam].push({
+          problem_num: row.problem_num,
+          subproblem_num: row.subproblem_num,
+          problem: row.problem,
+          solution: row.solution,
+        });
+        return dict;
+      }, {});
+      res.json(items);
+    });
+};
