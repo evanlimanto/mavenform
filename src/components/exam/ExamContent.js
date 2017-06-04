@@ -80,7 +80,7 @@ class ExamContentComponent extends Component {
       <div className="content">
         {examDesc}
         {content}
-        {(appMode) ? ((courseid === 'ugba10') ? <Sidebar term={term} courseid={courseid} examtype={examtype} hasSolutions={hasSolutions} examid={examid} /> : <Sidebar info={examContent.info} term={term} courseid={courseid} examtype={examtype} hasSolutions={hasSolutions} examid={examid} />) : null}
+        {/*{(appMode) ? ((courseid === 'ugba10') ? <Sidebar term={term} courseid={courseid} examtype={examtype} hasSolutions={hasSolutions} examid={examid} /> : <Sidebar info={examContent.info} term={term} courseid={courseid} examtype={examtype} hasSolutions={hasSolutions} examid={examid} />) : null}*/}
       </div>
     );
   }

@@ -1,0 +1,231 @@
+.home-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  height: 80px;
+  text-align: right;
+}
+
+.home-logo {
+  float: left;
+  padding: 25px 0;
+  height: 80px;
+}
+
+.home-button {
+  padding: 9px 20px 10px;
+  margin: 19px 0 19px 15px;
+  display: inline-block;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  color: #fff;
+  opacity: 0.9;
+  text-align: center;
+}
+
+.home-button:hover {
+  cursor: pointer;
+  opacity: 1;
+  color: #fff;
+}
+
+.home-button-alt {
+  padding: 9px 15px 10px;
+  border: transparent;
+}
+
+.banner {
+  text-align: center;
+  position: relative;
+  width: 100%;
+  padding: 140px 0 120px;
+  background: #11aacc;
+}
+
+.banner-screen {
+  width: 100%;
+  max-width: 1020px;
+}
+
+.banner-img::after {
+  background: -moz-linear-gradient(20deg, rgba(17,172,204,0.98) 30%, rgba(17,172,204,0.85) 100%);
+  background: -webkit-linear-gradient(20deg, rgba(17,172,204,0.98) 30%, rgba(17,172,204,0.85) 100%);
+  background: linear-gradient(20deg, rgba(17,172,204,0.98) 30%, rgba(17,172,204,0.85) 100%);
+  content: '';
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.banner-img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  background: url('../img/banner.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.banner-text {
+  position: relative;
+  z-index: 2;
+}
+
+.banner-header {
+  line-height: normal;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 44px;
+  color: #fff;
+}
+
+.h5-alt {
+  font-size: 22px;
+  color: #fff;
+  opacity: 0.8;
+  padding: 0 50px;
+}
+
+.search-container {
+  display: block;
+  margin: auto;
+  width: 850px;
+}
+
+.search {
+  display: block;
+  float: left;
+  text-align: left;
+  width: 770px;
+  padding: 20px;
+  border-radius: 5px 0 0 5px;
+  background: #fff;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #666;
+}
+
+.search-icon {
+  float: left;
+  height: 59px;
+  width: 80px;
+  text-align: center;
+  padding-top: 16px;
+  font-size: 28px;
+  border-radius: 0 5px 5px 0;
+  background: rgba(0, 136, 170, 0.7);
+  color: rgba(255, 255, 255, 0.9);
+  z-index: 1;
+}
+
+.search-icon:hover {
+  background: rgba(0, 119, 153, 0.7);
+  color: #fff;
+  cursor: pointer;
+}
+
+.search-link {
+  color: #fff;
+  display: inline-block;
+  padding: 20px;
+  opacity: 0.9;
+}
+
+.search-link:hover {
+  color: #fff;
+  opacity: 1;
+}
+
+.search-link .material-icons {
+  position: relative;
+  top: -2px;
+  left: -7px;
+}
+
+.search-link .school {
+  left: -9px;
+}
+
+.courses .content {
+  padding-bottom: 90px;
+}
+
+.home h1 {
+  padding: 0;
+}
+
+.home h4 {
+  padding: 0;
+}
+
+.column {
+  padding: 10px;
+  display: inline-block;
+  max-width: 320px;
+}
+
+.column .material-icons {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-size: 36px;
+  color: #ccc;
+  padding: 5px 0 15px;
+}
+
+.column * {
+  text-align: center;
+}
+
+.schools {
+  border-top: 1px solid #ccc;;
+}
+
+.footer-link, .header-link {
+  color: #fff;
+  border-bottom: 1px dashed #fff;
+}
+
+.error-link {
+  color: #999;
+  border-bottom: 1px dashed #999;
+}
+
+.footer-link:hover {
+  color: #ccc;
+  border-bottom: 1px dashed #ccc;
+}
+
+.header-link:hover, .error-link:hover {
+  color: #11aacc;
+  border-bottom: 1px dashed #11aacc;
+}
+
+.notification-text {
+  position: relative;
+  /*Pixel pushing for vertical centering*/
+  top: 1px;
+  display: block;
+  padding: 0 50px;
+}
+
+.notification-x {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+  color: #fff;
+  z-index: 2;
+  float: right;
+  right: 15px;
+}

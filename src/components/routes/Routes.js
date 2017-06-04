@@ -11,6 +11,9 @@ import NotFound from '../notfound';
 import Profile from '../profile';
 import Upload from '../upload';
 
+/* mockups */
+import { School, UserHome, Marketing } from '../mockups';
+
 import { requireAuth, parseAuthHash } from '../../utils';
 
 const Routes = (
@@ -22,6 +25,12 @@ const Routes = (
     <Route path="/profile" render={(props) => <Profile requireAuth={requireAuth} {...props} />} />
     <Route path="/dashboard" render={(props) => <Dashboard requireAuth={requireAuth} {...props} />} />
     <Route path="/upload" component={Upload} />
+    
+    {/* mockups */}
+    <Route path="/school" component={School} />
+    <Route path="/userhome" component={UserHome} />
+    <Route path="/marketing" component={Marketing} />
+
     <Route path="/:courseid/:examtype/:examid" component={Exam} />
     <Route path="/:courseid" component={Course} />
     <Route component={NotFound} />

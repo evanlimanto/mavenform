@@ -29,7 +29,7 @@ if (process.env.NODE_ENV !== 'development') {
 }
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
-
+console.log(process.env.DATABASE_URL);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());

@@ -1,0 +1,97 @@
+.card-container {
+  margin: auto;
+  width: 1020px;
+  text-align: left;
+}
+
+.card {
+  position: relative;
+  vertical-align: top;
+  display: inline-block;
+  padding: 30px;
+  width: 305px;
+  margin: 15px;
+  border-radius: 5px;
+  border: 1px solid #999;
+  text-align: left;
+  background: #fff;
+  color: #999;
+  font-size: 18px;
+}
+
+.card:hover {
+  cursor: pointer;
+  border: 1px solid #11aacc;
+  color: #11aacc;
+}
+
+.course-card {
+  width: 235px;
+  margin: 10px;
+  border: 1px solid #ccc;
+}
+
+.add-course {
+  border: 1px dashed #11aacc;
+  color: #11aacc;
+}
+
+.add-course:hover {
+  border: 1px dashed #11aacc;
+  background: rgba(17, 170, 204, 0.1);
+}
+
+.card-arrow {
+  display: block;
+  float: right;
+}
+
+.no-results {
+  border: none;
+  pointer-events: none;
+  font-weight: 400;
+  font-size: 22px;
+  color: #ccc;
+}
+
+.no-results:hover {
+  background: transparent;
+  border: none;
+  color: #ccc;
+}
+
+.featured-tag {
+  background: #11aacc;
+  color: #fff;
+  font-size: 16px;
+  padding: 4px 10px 5px;
+  border-radius: 5px;
+}
+
+.course-subtitle {
+  font-size: 18px;
+}
+
+.doc {
+  position: relative;
+  vertical-align: top;
+  display: inline-block;
+  padding: 30px;
+  width: 260px;
+  height: 360px;
+  margin: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.doc:hover {
+  cursor: pointer;
+  background: #fafafa;
+  border: 1px solid #11aacc;
+}
+
+.doc {
+  padding-top: 1px;
+  color: #666;
+}

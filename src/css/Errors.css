@@ -1,0 +1,24 @@
+/*404*/
+.maven-the-raven {
+  opacity: 0.1;
+  width: 100%;
+  max-width: 500px;
+}
+
+.aligner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+}
+
+.aligner-item {
+  width: 100%;
+  color: #333;
+  text-align: center;
+}

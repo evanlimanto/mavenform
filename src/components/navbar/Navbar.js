@@ -10,7 +10,32 @@ const NavbarComponent = ({ courseid, onToggleAppMode, isExam }) => {
     );
 
   return (
-    <div className="nav">
+    <div>
+      <div className="nav">
+        <div className="container">
+          <a href="..">
+            <img className="logo" src="/img/logo.svg" />
+          </a>
+          <input className="nav-search" name="search" placeholder="Search courses..." type="text" autoComplete="off">
+          </input>
+          <div className="material-icons nav-search-icon">search</div>
+          <a className="nav-button nav-button-alt" href="../userhome">Log In</a>
+          <a className="nav-button" href="../userhome">Sign Up</a>
+        </div>
+      </div>
+      <div className="gray-nav">
+        <div className="container">
+          <a>Home</a> 
+          <span> > </span>
+          <a>UC Berkeley</a>
+          <span> > </span>
+          <a>CS 61A</a>
+          <span> > </span>
+          <a className="active">Midterm 2 | Fall 2016 | DeNero</a>
+        </div>
+      </div>
+    </div>
+    /*<div className="nav">
       <Link to="/courses" className="logo">Mavenform</Link>
       {toggleBackComponent}
       <div className="tooltip-container">
@@ -21,7 +46,7 @@ const NavbarComponent = ({ courseid, onToggleAppMode, isExam }) => {
         <a className="material-icons">subject</a>
         <span className="tooltip">Reader Mode</span>
       </div>
-    </div>
+    </div>*/
   );
 };
 
