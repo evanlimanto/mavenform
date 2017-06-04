@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { map, filter, keys, split } from 'lodash';
+import { map } from 'lodash';
 import { Question } from '../question';
 import { preprocess } from '../../utils';
 
@@ -52,7 +52,7 @@ class TranscribedComponent extends Component {
       return <div>No data yet.</div>;
     }
 
-    const { exams, content } = this.state;
+    const { exams } = this.state;
     const examsList = map(exams, (exam, key) => {
       return <div key={key}><a onClick={() => this.renderContent(key)}>{exam.school_name}: {exam.course_code} - {exam.term_label}</a><button className='approve' onClick={() => this.approveContent(key)}>Approve</button></div>;
     });

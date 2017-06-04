@@ -115,3 +115,22 @@ exports.getTranscribedContent = (req, res) => {
       res.json(items);
     });
 };
+
+exports.getSchoolCourses = (req, res, next) => {
+  const school_id = req.params.schoolid;
+  const q = `select id, code, name from courses where schoolid = $1`;
+  client.query(q, [school_id], (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    const items = _.map(result.rows, (row) => {
+      return {
+        id: row.id,
+        code: row.code,
+        name: row.name,
+      };
+    });
+    res.json(items);
+  });
+};

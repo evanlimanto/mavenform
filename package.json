@@ -13,6 +13,7 @@
   "dependencies": {
     "@google-cloud/storage": "^1.1.1",
     "adm-zip": "^0.4.7",
+    "async": "^2.4.1",
     "auth0-js": "^8.5.0",
     "aws-sdk": "^2.42.0",
     "body-parser": "^1.17.1",
@@ -54,6 +55,7 @@
     "sleep": "^5.1.1",
     "spellchecker": "^3.3.1",
     "superagent": "^3.5.2",
+    "synchronize": "^2.0.0",
     "unzip": "^0.1.11",
     "wait.for": "^0.6.6"
   },

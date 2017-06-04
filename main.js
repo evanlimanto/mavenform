@@ -1,6 +1,7 @@
 'use strict';
 
 const AdmZip = require('adm-zip');
+const async = require('async');
 const bodyParser = require('body-parser');
 const express = require('express');
 const browserify = require('browserify');
@@ -11,6 +12,7 @@ const path = require('path');
 const NodeCache = require('node-cache');
 const pg = require('pg');
 const sm = require('sitemap');
+const SpellChecker = require('spellchecker');
 const yaml = require('js-yaml');
 const _ = require('lodash');
 
@@ -46,6 +48,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
 app.use('/img', express.static(path.join(__dirname, '/src/img')));
 
+// Error handler middleware
+if (app.get('env') === 'development') {
+  app.use((err, req, res, next) => {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
+}
+
 // Retrieve list of exams
 app.get('/getExams', retrieveLists.getExams);
 
@@ -63,6 +76,9 @@ app.get('/getTranscribedExams', retrieveLists.getTranscribedExams);
 
 // Retrieve list of transcribed content
 app.get('/getTranscribedContent', retrieveLists.getTranscribedContent);
+
+// Retrieve list of courses
+app.get('/getSchoolCourses/:schoolid', retrieveLists.getSchoolCourses);
 
 // File uploads
 app.post('/upload', function(req, res) {
@@ -244,14 +260,13 @@ function replaceImagePlaceholders(basePath, content) {
   return content;
 }
 
-app.post('/processTranscription', function(req, res) {
-  const { contents, course, course_id,
-          term, term_id, profs, school, school_id,
+app.post('/processTranscription', function(req, res, next) {
+  const { contents, course, course_id, term, term_id, profs, school, school_id,
           exam_type, exam_type_id } = req.body;
   const imageFiles = req.files;
 
   const basePath = `${school}/img/${course}/${exam_type}-${term}`;
-  _.forEach(imageFiles, (file) => {
+  async.forEach(imageFiles, (file, callback) => {
     const fileName = `${basePath}-${file.name}`;
     const bucketFile = stagingBucket.file(fileName);
     const ws = bucketFile.createWriteStream({
@@ -262,121 +277,114 @@ app.post('/processTranscription', function(req, res) {
       }
     });
     ws.on('error', function(err) {
-      console.error(err);
+      callback(err);
     });
     ws.on('finish', function() {
       console.log('Finished uploading file', fileName);
     });
     ws.write(file.data);
     ws.end();
+  }, (err) => {
+    next(err); 
   });
 
   let doc = null;
   try {
     doc = yaml.safeLoad(contents);
-  } catch (e) {
-    return console.error(e);
+  } catch (err) {
+    next(e);
   }
 
-  const results = _.map(_.filter(_.keys(doc), function(k) {
+  const items = _.map(_.filter(_.keys(doc), function(k) {
     return k.match(/^q\d+_\d+$/);
   }), (k) => [k, _.split(k.slice(1), "_")]);
 
-  let error = null;
-  const inq = `insert into exams_staging (courseid, examtype, examid, profs, schoolid) values($1, $2, $3, $4, $5)`;
-  client.query(inq, [course_id, exam_type_id, term_id, profs, school_id], function(err, res) {
-    const getq = `select id from exams_staging where courseid = $1 and examtype = $2 and examid = $3 and profs = $4 and schoolid = $5`;
-    client.query(getq, [course_id, exam_type_id, term_id, profs, school_id], function(err, res) {
-      const id = res.rows[0].id;
-      _.forEach(imageFiles, (file) => {
-        const imageq = `insert into images_staging (examid, url) values($1, $2)`;
-        client.query(imageq, [id, `${basePath}-${file.name}`], function(err, res) {
-
-        });
-      });
-      const renderedContent = _.map(results, (res) => {
-        const key = res[0];
-        const problem_num = res[1][0];
-        const subproblem_num = res[1][1];
-        const content = replaceImagePlaceholders(basePath, doc[key]);
-        const solution = replaceImagePlaceholders(basePath, doc[key + "_s"]);
-        const q = `insert into content_staging (problem_num, subproblem_num, problem, solution, exam) values($1, $2, $3, $4, $5)`;
-        client.query(q, [problem_num, subproblem_num, content, solution, id], function(err, res) {
-        });
-      });
-    });
+  const inq    = `insert into exams_staging (courseid, examtype, examid, profs, schoolid) values($1, $2, $3, $4, $5)`;
+  const getq   = `select id from exams_staging where courseid = $1 and examtype = $2 and examid = $3 and profs = $4 and schoolid = $5`;
+  const imageq = `insert into images_staging (examid, url) values($1, $2)`;
+  const q      = `insert into content_staging (problem_num, subproblem_num, problem, solution, exam) values($1, $2, $3, $4, $5)`;
+  async.waterfall([
+    (callback) => {
+      client.query(inq, [course_id, exam_type_id, term_id, profs, school_id], (err) => callback(err))
+    },
+    (callback) => {
+      client.query(getq, [course_id, exam_type_id, term_id, profs, school_id], callback)
+    },
+    (result, callback) => {
+      const id = result.rows[0].id;
+      async.parallel([
+        (funcCallback) => async.each(imageFiles, (file, innerCallback) => {
+          client.query(imageq, [id, `${basePath}-${file.name}`], (err) => innerCallback(err));
+        }, funcCallback),
+        (funcCallback) => async.each(items, (item, innerCallback) => {
+          const key = item[0];
+          const problem_num = item[1][0];
+          const subproblem_num = item[1][1];
+          const content = replaceImagePlaceholders(basePath, doc[key]);
+          const solution = replaceImagePlaceholders(basePath, doc[key + "_s"]);
+          client.query(q, [problem_num, subproblem_num, content, solution, id], (err) => innerCallback(err));  
+        }, funcCallback)
+      ], callback);
+    }
+  ], (err, results) => {
+    if (err) next(err);
+    else res.send('Success!');
   });
-  res.send('Success!');
 });
 
 app.get('/approveTranscription/:examid', function(req, res) {
   const approvedExamId = req.params.examid;
 
-  const imageq = `select url from images_staging where examid = $1`;
-  client.query(imageq, [approvedExamId], (err, result) => {
-    _.forEach(result.rows, (row) => {
-      const sourceFile = stagingBucket.file(row.url);
-      sourceFile.move(bucket, (err, destFile, resp) => {
-        if (err) return console.error(err);
-        else {
-          destFile.makePublic((err, resp) => {
-            if (err) console.error(err);
-          })
-        }
-      });
-    });
-    const delimageq = `delete from images_staging where examid = $1`;
-    client.query(delimageq, [approvedExamId], (err, result) => {
-      if (err) console.error(err);
-    });
+  const imageq    = `select url from images_staging where examid = $1`;
+  const delimageq = `delete from images_staging where examid = $1`;
+  const getq      = `select courseid, examtype, examid, schoolid, profs from exams_staging where id = $1`;
+  const inq       = `insert into exams (courseid, examtype, examid, schoolid, profs) values($1, $2, $3, $4, $5)`;
+  const getidq    = `select id from exams where courseid = $1 and examtype = $2 and examid = $3 and schoolid = $4 and profs = $5`;
+  const insertproblemsq = `insert into content (problem_num, subproblem_num, problem, solution, exam)
+    select problem_num, subproblem_num, problem, solution, $1 from content_staging where exam = $2`;
+  const deleteproblemsq = `delete from content_staging where exam = $1`;
+  const delq = `delete from exams_staging where id = $1`;
+
+  async.series([
+    (callback) => client.query(imageq, [approvedExamId], (err, result) =>
+      async.each(result.rows, (row) => {
+        const sourceFile = stagingBucket.file(row.url);
+        async.waterfall([
+          (innerCallback) => {
+            sourceFile.move(bucket, innerCallback)
+          },
+          (destFile, resp, innerCallback) => {
+            destFile.makePublic(innerCallback)
+          }
+        ], callback)
+      })),
+    (callback) => {
+      client.query(delimageq, [approvedExamId], callback);
+    }
+  ], (err) => {
+    next(err);
   });
 
-  const getq = `select courseid, examtype, examid, schoolid, profs from exams_staging where id = $1`;
-  client.query(getq, [approvedExamId], function(err, result) {
-    if (err) {
-      res.status(400).send(err);
-      return;
+  async.waterfall([
+    (callback) => {
+      client.query(getq, [approvedExamId], callback);
+    },
+    (result, callback) => {
+      const { courseid, examtype, examid, schoolid, profs } = result.rows[0];
+      client.query(inq, [courseid, examtype, examid, schoolid, profs], callback);
+    },
+    (result, callback) => {
+      const id = result.rows[0].id;
+      client.query(insertproblemsq, [id, approvedExamId], (err) => callback(err));
+    },
+    (callback) => {
+      client.query(deleteproblemsq, [approvedExamId], (err) => callback(err)); 
+    },
+    (callback) => {
+      client.query(delq, [approvedExamId], (err) => callback(err));
     }
-    result = result.rows[0];
-    const { courseid, examtype, examid, schoolid, profs } = result;
-    const inq = `insert into exams (courseid, examtype, examid, schoolid, profs) values($1, $2, $3, $4, $5)`;
-    client.query(inq, [courseid, examtype, examid, schoolid, profs], function(err, result) {
-      if (err) {
-        res.status(400).send(err);
-        return;
-      }
-      const getidq = `select id from exams where courseid = $1 and examtype = $2 and examid = $3 and schoolid = $4 and profs = $5`;
-      client.query(getidq, [courseid, examtype, examid, schoolid, profs], function(err, result) {
-        if (err) {
-          res.status(400).send(err);
-          return;
-        }
-        const id = result.rows[0].id;
-        const insertproblemsq = `insert into content (problem_num, subproblem_num, problem, solution, exam)
-          select problem_num, subproblem_num, problem, solution, $1 from content_staging where exam = $2`;
-        client.query(insertproblemsq, [id, approvedExamId], function(err, result) {
-          if (err) {
-            res.status(400).send(err);
-            return;
-          }
-          const deleteproblemsq = `delete from content_staging where exam = $1`;
-          client.query(deleteproblemsq, [approvedExamId], function(err, result) {
-            if (err) {
-              res.status(400).send(err);
-              return;
-            }
-            const delq = `delete from exams_staging where id = $1`;
-            client.query(delq, [approvedExamId], function(err, result) {
-              if (err) {
-                res.status(400).send(err);
-                return;
-              }
-              res.send('Success!').end();
-            });
-          });
-        });
-      });
-    });
+  ], (err) => {
+    next(err);
   });
 });
 

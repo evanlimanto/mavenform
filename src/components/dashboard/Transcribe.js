@@ -5,12 +5,11 @@ import { Question } from '../question';
 import { preprocess } from '../../utils';
 import { endsWith, join, keys, forEach, map, split, filter, reduce, range, toString } from 'lodash';
 const request = require('superagent');
-
 const yaml = require('js-yaml');
 
 require('./Transcribe.css');
 
-function replaceImagePlaceholders(content) {
+function augment(content) {
   if (!content) return content;
   const regexp = /\[\[(.*?)\]\]/g;
   const matches = content.match(regexp);
@@ -30,13 +29,15 @@ class TranscribeComponent extends Component {
       error: null,
       success: null,
       rawContent: null,
-      images: []
+      images: [],
+      courses: []
     };
     this.onDrop = this.onDrop.bind(this);
     this.upload = this.upload.bind(this);
     this.updateContent = this.updateContent.bind(this);
     this.updateImages = this.updateImages.bind(this);
     this.validateImages = this.validateImages.bind(this);
+    this.populateCourses = this.populateCourses.bind(this);
   }
 
   componentDidUpdate() {
@@ -56,6 +57,13 @@ class TranscribeComponent extends Component {
     }
   }
 
+  populateCourses() {
+    const schoolid = split(this.refs.school.value, '~')[1];
+    fetch(`/getSchoolCourses/${schoolid}`).then(
+      (response) => response.json()
+    ).then((json) => this.setState({ courses: json }));
+  }
+
   updateContent() {
     const contents = this.refs.content.value;
     if (contents.length === 0) {
@@ -68,17 +76,17 @@ class TranscribeComponent extends Component {
       return this.setState({ error: e });
     }
     
-    const results = map(filter(keys(doc), function(k) {
+    const items = map(filter(keys(doc), function(k) {
       return k.match(/^q\d+_\d+$/);
     }), (k) => [k, split(k.slice(1), '_')]);
 
-    const renderedContent = map(results, (res) => {
-      const key = res[0];
-
-      return <Question key={key}
-              content={preprocess(replaceImagePlaceholders(doc[key]))}
-              solution={preprocess(replaceImagePlaceholders(doc[key + '_s']))} />;
+    const renderedContent = map(items, (item) => {
+      const key = item[0]; 
+      const content = augment(preprocess(doc[key]));
+      const solution = augment(preprocess(doc[key + '_s']));
+      return <Question key={key} content={content} solution={solution} />
     });
+
     this.setState({ content: renderedContent, rawContent: contents, error: null }, this.updateImages);
   }
 
@@ -104,12 +112,13 @@ class TranscribeComponent extends Component {
         imageSpan.appendChild(img);
       }
     });
+    window.renderMJ();
   }
 
   validateImages() {
     const regexp = /\[\[(.*?)\]\]/g;
     const matches = this.state.rawContent.match(regexp);
-    if (matches.length !== this.state.images.length) {
+    if (!!matches && matches.length !== this.state.images.length) {
       return { res: false, error: 'Number of images doesn\'t match number of image placeholders!' };
     }
 
@@ -124,7 +133,7 @@ class TranscribeComponent extends Component {
 
   upload(e) {
     e.preventDefault();
-    if (this.state.error)
+    if (this.state.error || !!! this.refs.school.value || !!!this.refs.course.value)
       return;
     const validationResult = this.validateImages();
     if (!validationResult.res)
@@ -173,20 +182,21 @@ class TranscribeComponent extends Component {
 
   render() {
     const schoolsSelect = (
-      <select ref='school'>
+      <select ref='school' onChange={this.populateCourses}>
+        <option selected value disabled> -- select a school -- </option>
         {map(this.props.schools, (school, key) => {
           return <option key={key} value={school.code + '~' + school.id}>{school.name}</option>;
         })}
       </select>
     );
 
-    const coursesSelect = (
+    const coursesSelect = this.state.courses ? (
       <select ref='course'>
-        {map(this.props.courses.sort((a, b) => a.code.localeCompare(b.code)), (course, key) => {
+        {map(this.state.courses.sort((a, b) => a.code.localeCompare(b.code)), (course, key) => {
           return <option key={key} value={course.code + '~' + course.id}>{course.code} - {course.name}</option>
         })}
       </select>
-    );
+    ) : null;
 
     const examTypesSelect = (
       <select ref='exam_type'>
@@ -255,7 +265,6 @@ class TranscribeComponent extends Component {
 const mapStateToProps = (state) => {
   return {
     schools: state.schools,
-    courses: state.courses,
     exam_types: state.exam_types,
     terms: state.terms
   }; 
