@@ -4,17 +4,17 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { has, map } from 'lodash';
 
-import { examTypeToLabel, courseIDToLabel, termToLabel } from '../../exams';
 import { navSidebarClickEvent } from '../../events';
+import { courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
 
 const NavSidebarComponent = ({ exams, courseid, examid, thisExamType, isExam }) => {
   const sideTabs = map(exams[courseid], (courseExams, examtype) => {
     const content = map(courseExams, (item, id) => {
-      const term = termToLabel[id];
+      const term = termToLabel(id);
       const isAvailable = has(item, 'available') ? item.available : true;
       var url = `/${courseid}/${examtype}/${id}`;
       var note = item.note ? `<br/><i class="side-i" >(${item.note})</i>` : (null);
-      if (has(item, 'available') && !item.available){
+      if (has(item, 'available') && !item.available) {
         url = '#';
         note = '';
       }
@@ -23,7 +23,6 @@ const NavSidebarComponent = ({ exams, courseid, examid, thisExamType, isExam }) 
         active: (examid === id && thisExamType === examtype),
       });
       if (isAvailable) {
-        // TODO: Make these links client-side
         return (
           <div key={id} className="sidetab-container">
             <Link to={url} className={sideTabClass} onClick={() => navSidebarClickEvent()}>
@@ -38,7 +37,7 @@ const NavSidebarComponent = ({ exams, courseid, examid, thisExamType, isExam }) 
     });
     return (
       <span key={examtype}>
-        <div className="sideTitle">{examTypeToLabel[examtype]}</div>
+        <div className="sideTitle">{examTypeToLabel(examtype)}</div>
         {content}
       </span>
     );
@@ -51,7 +50,7 @@ const NavSidebarComponent = ({ exams, courseid, examid, thisExamType, isExam }) 
 
   return (
     <div className="menu">
-      <h6>{courseIDToLabel[courseid]}</h6>
+      <h6>{courseCodeToLabel(courseid)}</h6>
       <div className="sidetab-container">
         <Link to={`/${courseid}`} className={sidetabClass} onClick={() => navSidebarClickEvent()}>Index</Link>
       </div>
@@ -66,7 +65,7 @@ const mapStateToProps = (state, ownProps) => {
     examid: ownProps.examid,
     thisExamType: ownProps.examtype,
     isExam: ownProps.isExam,
-    exams: state.global.exams.multi_dict,
+    exams: state.exams.multi_dict,
   }
 };
 

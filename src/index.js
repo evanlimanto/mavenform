@@ -9,12 +9,12 @@ import createHistory from 'history/createBrowserHistory';
 import * as appReducers from './reducers';
 import { Routes } from './components';
 import initializeTracking from './tracking';
-import { retrieveExamList } from './utils';
+import { initStore } from './utils';
 
 const ReactGA = require('react-ga');
 ReactGA.initialize('UA-20131732-5');
-ReactGA.set({ path: location.pathname });
-ReactGA.pageview(location.pathname);
+ReactGA.set({ path: window.location.pathname });
+ReactGA.pageview(window.location.pathname);
 
 const history = createHistory()
 history.listen((location, action) => {
@@ -33,7 +33,7 @@ const store = createStore(
   applyMiddleware(middleware)
 );
 
-retrieveExamList(store);
+initStore(store);
 initializeTracking();
 
 ReactDOM.render((

@@ -39,7 +39,7 @@ const NavbarComponent = ({ courseid, onToggleAppMode, isExam }) => {
       <Link to="/courses" className="logo">Mavenform</Link>
       {toggleBackComponent}
       <div className="tooltip-container">
-        <a className="material-icons" href="https://docs.google.com/forms/d/e/1FAIpQLSfCS9McWikQ7F6syAGV9FX7Wf2-rWjqt-XMXxxEx5piTIf92Q/viewform?usp=sf_link" target="_blank">sms</a>
+        <a className="material-icons" href="https://docs.google.com/forms/d/e/1FAIpQLSfCS9McWikQ7F6syAGV9FX7Wf2-rWjqt-XMXxxEx5piTIf92Q/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer">sms</a>
         <span className="tooltip">Send Feedback</span>
       </div>
       <div className="tooltip-container reader-mode" onClick={() => onToggleAppMode()}>

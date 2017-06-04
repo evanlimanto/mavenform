@@ -5,27 +5,27 @@ import { has, map, toUpper } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 
 import { toggleAppMode } from '../../actions';
-import { examTypeToLabel, courseIDToLabel, courses, termToLabel } from '../../exams';
 import { examClickEvent, toggleAppModeEvent } from '../../events';
+import { courseCodeToLabel, examTypeToLabel, getCourse, termToLabel } from '../../utils';
 
 import Navbar from '../navbar';
 import NavSidebar from '../navsidebar';
 import NotFound from '../notfound';
 
-const CourseComponent = ({ exams, courseid, appMode, onToggleAppMode }) => {
+const CourseComponent = ({ exams, courses, courseid, appMode, onToggleAppMode }) => {
   if (!has(exams, courseid)) {
     return <NotFound />;
   }
 
-  const desc = courses[courseid];
+  const course = getCourse(courses, courseid);
   const available = map(exams[courseid], (examsOfType, examtype) => {
     return map(examsOfType, (item, examid) => {
-      const term = termToLabel[examid];
+      const term = termToLabel(examid);
       const note = item.note ? `(${item.note})` : (null);
       const url = `/${courseid}/${examtype}/${examid}`;
       return (
         <tr className="available" onClick={() => examClickEvent(courseid, examtype, examid)} key={examid}>
-          <td><Link to={url}>{examTypeToLabel[examtype]} <i>{note}</i></Link></td>
+          <td><Link to={url}>{examTypeToLabel(examtype)} <i>{note}</i></Link></td>
           <td><Link to={url}>{term}</Link></td>
           <td><Link to={url}>{item.profs}</Link></td>
           <td><h6><Link to={url} className="table-link">CLICK TO VIEW &#8594;</Link></h6></td>
@@ -58,7 +58,7 @@ const CourseComponent = ({ exams, courseid, appMode, onToggleAppMode }) => {
       <DocumentMeta {...meta} />
       {navComponents}
       <div>
-        <h4 className="center">{courseIDToLabel[courseid]}</h4>
+        <h4 className="center">{courseCodeToLabel(courseid)}</h4>
         <div className="center">
           <h5>Index of resources</h5>
         </div>
@@ -92,7 +92,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     courseid: ownProps.match.params.courseid,
     appMode: state.config.appMode,
-    exams: state.global.exams.multi_dict,
+    exams: state.exams.multi_dict,
+    courses: state.courses,
   }
 };
 

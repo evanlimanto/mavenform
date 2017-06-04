@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import { closeNotificationBar } from '../../actions';
 import { learnMoreEvent, viewCoursesEvent } from '../../events';
+import Screen from './screen.png';
 
 const Scroll = require('react-scroll');
 const Element = Scroll.Element;
