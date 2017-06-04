@@ -225,7 +225,7 @@ class TranscribeComponent extends Component {
     );
 
     return (
-      <div>
+      <div className="admin">
         <span className='col transcription'>
           <h1>Transcription</h1>
           <label>School</label>

@@ -1,4 +1,4 @@
-span.col {
+.admin span.col {
   width: 45%;
   display: block;
   float: left;
@@ -6,65 +6,69 @@ span.col {
   margin-left: 10px;
 }
 
-span.transcription {
+.admin span.transcription {
+  position: fixed;
+  left: 0%;
 }
 
-span.preview {
+.admin span.preview {
+  position: relative;
+  left: 50%; 
 }
 
-.dropzone {
+.admin .dropzone {
   width: 100%;
   border: 2px solid black;
   padding: 20px 5px;
 }
 
-textarea {
+.admin textarea {
   width: 100%;
   height: 100px;
   border: 2px solid black;
   padding: 5px;
 }
 
-button.upload {
+.admin button.upload {
   padding: 20px 10px;
   font-size: 20px;
   border-radius: 5px;
 }
 
-button.approve {
+.admin button.approve {
   padding: 10px 5px;
   font-size: 16px;
   border-radius: 5px;
   margin-left: 20px;
 }
 
-.question img {
+.admin .question img {
   margin: 0px;
 }
 
-input[type="text"], select {
+.admin input[type="text"], select {
   margin-left: 15px;
   float: right;
   padding: 5px;
 }
 
-hr.spacer {
+.admin hr.spacer {
   margin: 20px 0px;
 }
 
-p.error {
+.admin p.error {
   color: red;
   margin: 0px 15px;
   display: inline;
 }
 
-p.success {
+.admin p.success {
   color: green;
   margin: 0px 15px;
   display: inline;
 }
 
-.question {
+.admin .question {
   padding-top: 0px;
   padding-bottom: 50px;
 }

@@ -2,7 +2,7 @@
   margin: 10px;
 }
 
-.contentNavCol {
+.contentContainer .contentNavCol {
   float: left;
   width: 200px;
   border: 2px solid black;
@@ -11,20 +11,20 @@
   border-radius: 5px;
 }
 
-.contentCol textarea {
+.contentContainer .contentCol textarea {
   width: 500px;
   height: 300px;
 }
 
-.backLink {
+.contentContainer .backLink {
   margin-bottom: 20px;
 }
 
-.highlighted {
+.contentContainer .highlighted {
   color: blue;
 }
 
-input, select, button {
+.contentContainer input, .contentContainer select, .contentContainer button {
   border: 1px solid black;
   border-radius: 1px;
 }

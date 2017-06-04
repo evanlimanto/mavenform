@@ -12,8 +12,6 @@ import { toggleAppMode } from '../../actions';
 import { examTypeToLabel, termToLabel } from '../../utils';
 import { toggleAppModeEvent } from '../../events';
 
-import './Exam.css';
-
 const ExamComponent = ({ appMode, exams, courseid, examtype, examid, onToggleAppMode }) => {
   if (!has(exams, courseid) ||
       !has(exams[courseid], examtype) ||
@@ -24,7 +22,7 @@ const ExamComponent = ({ appMode, exams, courseid, examtype, examid, onToggleApp
   const navComponents = (appMode) ? (
     <span>
       <Navbar courseid={courseid} isExam={true} onToggleAppMode={onToggleAppMode} />
-      <NavSidebar courseid={courseid} examtype={examtype} examid={examid} isExam={true} />
+      {/*<NavSidebar courseid={courseid} examtype={examtype} examid={examid} isExam={true} />*/}
     </span>
   ) : (
     <div className="tooltip-container app-mode" onClick={() => onToggleAppMode()}>

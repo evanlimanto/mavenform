@@ -1,0 +1,75 @@
+@media (max-width: 1199px) {
+  .content {
+    max-width: 100%;
+    padding: 0 245px 125px 255px;
+  }
+
+  .table-container-container {
+    padding: 0 250px;
+  }
+}
+
+@media (max-width: 899px) {
+  .nav {
+    padding: 0 10px;
+  }
+
+  .app-mode {
+    right: 10px;
+  }
+
+  .exams td:nth-child(3), .exams th:nth-child(3) {
+    display: none;
+  }
+
+  .content {
+    padding: 0 25px 125px;
+  }
+
+  .table-container-container {
+    padding: 0 25px;
+  }
+
+  .menu, .sidebar {
+    display: none;
+  }
+
+  .tooltip {
+    display: none;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .mobile-back {
+    display: initial;
+  }
+
+  .link {
+    display: none;
+  }
+
+  .content {
+    overflow-x: auto;
+  }
+
+  .question {
+    left: 0;
+  }
+
+  .banner-screen {
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 399px) {
+  .course-card {
+    width: 90%;
+    margin: 15px 5%;
+  }
+
+  .exams td:nth-child(4), .exams th:nth-child(4) {
+    display: none;
+  }
+}

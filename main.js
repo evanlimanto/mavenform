@@ -1,7 +1,5 @@
 'use strict';
 
-const AdmZip = require('adm-zip');
-const async = require('async');
 const bodyParser = require('body-parser');
 const express = require('express');
 const browserify = require('browserify');

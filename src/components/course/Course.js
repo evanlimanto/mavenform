@@ -36,11 +36,11 @@ const CourseComponent = ({ exams, courses, courseid, appMode, onToggleAppMode })
   const navComponents = (appMode) ? (
     <span>
       <Navbar isExam={false} onToggleAppMode={() => onToggleAppMode()} couseid={courseid} />
-      <NavSidebar courseid={courseid} isExam={false} />
+      {/*<NavSidebar courseid={courseid} isExam={false} />
       <div className="sidebar">
         <h6>INFO</h6>
-        <i>{course.name}</i>
-      </div>
+        <i>{desc}</i>
+      </div>*/}
     </span>
   ) : (
     <div className="tooltip-container app-mode" onClick={() => onToggleAppMode()}>
@@ -60,7 +60,7 @@ const CourseComponent = ({ exams, courses, courseid, appMode, onToggleAppMode })
       <div>
         <h4 className="center">{courseCodeToLabel(courseid)}</h4>
         <div className="center">
-          <h5>Index of exams</h5>
+          <h5>Index of resources</h5>
         </div>
         <hr className="s4" />
         <div className="center">
@@ -72,7 +72,7 @@ const CourseComponent = ({ exams, courses, courseid, appMode, onToggleAppMode })
                     <th>Type</th>
                     <th>Term</th>
                     <th>Instructors</th>
-                    <th>Mavenform</th>
+                    <th>Studyform</th>
                   </tr>
                 </thead>
                 <tbody>
