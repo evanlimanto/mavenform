@@ -23,6 +23,7 @@ import '../css/Exam.css';
 import '../css/Marketing.css';
 import '../css/Modals.css';
 import '../css/Mobile.css';
+import '../css/Admin.css';
 
 export {
 	Course,

@@ -1,0 +1,171 @@
+.contentContainer {
+  margin: 10px;
+}
+
+.contentContainer .contentNavCol {
+  float: left;
+  width: 200px;
+  border: 2px solid black;
+  padding: 10px;
+  margin: 0px 5px;
+  border-radius: 5px;
+}
+
+.contentContainer .contentCol textarea {
+  width: 500px;
+  height: 300px;
+}
+
+.contentContainer .backLink {
+  margin-bottom: 20px;
+}
+
+.contentContainer .highlighted {
+  color: blue;
+}
+
+.contentContainer input, .contentContainer select, .contentContainer button {
+  border: 1px solid black;
+  border-radius: 1px;
+}
+
+.admin {
+  display: flex;
+  flex-flow: row;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.admin .col {
+  height: 100%;
+  padding: 25px;
+}
+
+.admin .transcription {
+  display: flex;
+  flex-flow: column;
+  width: 531px;
+  border-right: 1px solid #333;
+}
+
+.admin .preview {
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  overflow-x: hidden;
+}
+
+.admin label {
+  display: inline-block;
+  margin: 0;
+  font-size: 14px;
+  min-width: 70px;
+}
+
+.admin input[type="text"], .admin select {
+  display: inline-block;
+  border: 1px solid #333;
+  padding: 2.5px 7px;
+  font-size: 14px;
+  margin-left: 10px;
+  border-radius: 5px;
+  width: 400px;
+}
+
+.half-input select {
+  width: 195px;
+}
+
+.admin .dropzone {
+  width: 100%;
+  border: 1px solid #333;
+  background: #f9f9f9;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.admin .dropzone:hover {
+  border: 1px solid #11aacc;
+  background: #f3f3f3;
+  color: #11aacc;
+  cursor: pointer;
+}
+
+.admin textarea {
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+  flex: 1;
+}
+
+.admin button {
+  display: inline-block;
+  margin-right: 20px;
+  padding: 15px;
+  width: 230px;
+  font-size: 14px;
+  border-radius: 5px;
+  color: #fff;
+  opacity: 0.9;
+}
+
+.admin .cancel {
+  margin-right: 0;
+  text-align: center;
+  display: inline-block;
+  padding: 12.5px;
+  width: 230px;
+  font-size: 14px;
+  border-radius: 5px;
+  color: #fff;
+  opacity: 0.9;
+}
+
+.admin button:hover, .admin .cancel:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.admin .preview-content {
+  max-width: 100%;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 25px 50px;
+  font-size: 14px;
+  flex: 1;
+  overflow-y: scroll;
+}
+
+.admin button.approve {
+  padding: 10px 5px;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-left: 20px;
+}
+
+.admin .question img {
+  margin: 0px;
+}
+
+.admin p.error {
+  color: red;
+  margin: 0px 15px;
+  display: inline;
+}
+
+.admin p.success {
+  color: green;
+  margin: 0px 15px;
+  display: inline;
+}
+
+.admin .question {
+  padding-top: 0px;
+  padding-bottom: 50px;
+}

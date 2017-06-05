@@ -7,8 +7,6 @@ import { endsWith, join, keys, forEach, map, split, filter, reduce, range, toStr
 const request = require('superagent');
 const yaml = require('js-yaml');
 
-require('./Transcribe.css');
-
 function augment(content) {
   if (!content) return content;
   const regexp = /\[\[(.*?)\]\]/g;
@@ -226,37 +224,52 @@ class TranscribeComponent extends Component {
 
     return (
       <div className="admin">
-        <span className='col transcription'>
-          <h1>Transcription</h1>
-          <label>School</label>
-          {schoolsSelect}      
-          <hr className='spacer'/>
-          <label>Course</label>
-          {coursesSelect}
-          <hr className='spacer'/>
-          <label>Type</label>
-          {examTypesSelect}
-          <hr className='spacer'/>
-          <label>Term</label>
-          {yearSelect}{quarterSelect}
-          <hr className='spacer'/>
-          <label>Professors</label>
-          <input type='text' placeholder='e.g. Alon, Ranade' ref='profs' />
-          <hr className='spacer'/>
-          <textarea ref='content' onKeyUp={this.updateContent} placeholder='Enter content here'></textarea>
-          <hr className='spacer'/>
+        <div className='col transcription'>
+          <h1>TRANSCRIPTION</h1>
+          <div>
+            <label>School</label>
+            {schoolsSelect} 
+          </div>
+          <hr className="s1" />
+          <div>
+            <label>Course</label>
+            {coursesSelect}
+          </div>
+          <hr className="s1" />
+          <div>
+            <label>Type</label>
+            {examTypesSelect}
+          </div>
+          <hr className="s1" />
+          <div className="half-input">
+            <label>Term</label>
+            {yearSelect}{quarterSelect}
+          </div>
+          <hr className="s1" />
+          <div>
+            <label>Professors</label>
+            <input type='text' placeholder='e.g. Alon, Ranade' ref='profs' />
+          </div>
+          <hr className="s1" />
           <Dropzone onDrop={this.onDrop} className='dropzone'>
-            <div>{this.state.images ? 'Uploaded images: ' + join(map(this.state.images, (image) => image.name), ', ') : 'Drag labeled images: q1-1.png, q1-2.png, q2-1.png, q2-2.png, etc here, or click to upload.'}</div>
+            <div>{this.state.images ? 'Click to upload. Uploaded: ' + join(map(this.state.images, (image) => image.name), ', ') : 'Drag labeled images: q1-1.png, q1-2.png, q2-1.png, q2-2.png, etc here, or click to upload.'}</div>
           </Dropzone>
-          <hr className='spacer'/>
-          <button className='upload' onClick={(e) => this.upload(e)}>Upload</button>
+          <hr className="s1" />
+          <textarea ref='content' onKeyUp={this.updateContent} placeholder='Enter content here'></textarea>
+          <hr className="s2" />
+          <div>
+            <button className='blue' onClick={(e) => this.upload(e)}>SAVE</button>
+            <a className='gray cancel' href="/dashboard">CANCEL</a>
+          </div>
           {this.state.error ? <p className='error'>{this.state.error}</p> : null}
           {this.state.success ? <p className='success'>{this.state.success}</p> : null}
-        </span>
-        <span className='col preview'>
-          <h1>Preview (without images)</h1>
-          {this.state.content ? this.state.content : <p>No content yet.</p>}
-        </span>
+        </div>
+        <div className='col preview'>
+          <h1>PREVIEW</h1>
+          <div className="preview-content">
+            {this.state.content ? this.state.content : <p>No content yet.</p>}
+          </div>
+        </div>
       </div>
     );
   }
