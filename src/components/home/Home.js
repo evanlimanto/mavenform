@@ -29,7 +29,7 @@ class HomeComponent extends Component {
 
   componentWillMount() {
     if (this.props.auth.loggedIn()) {
-      this.props.history.go('/home'); 
+      this.props.history.push('/home'); 
     }
   }
 

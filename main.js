@@ -11,7 +11,6 @@ const path = require('path');
 const NodeCache = require('node-cache');
 const pg = require('pg');
 const sm = require('sitemap');
-const SpellChecker = require('spellchecker');
 const yaml = require('js-yaml');
 const _ = require('lodash');
 
