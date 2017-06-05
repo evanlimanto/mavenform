@@ -43,6 +43,8 @@
 }
 
 .modal {
+  position: relative;
+  z-index: 1;
   background: #fff;
   border-radius: 5px;
   width: 100%;
@@ -63,6 +65,8 @@
 .modal-header h1 {
   color: #fff;
   font-weight: 400;
+  padding: 5px 0;
+  margin-left: -5px;
 }
 
 .modal-content {
@@ -70,7 +74,11 @@
   width: 100%;
 }
 
-.login-info {
+.modal input, .modal select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: block;
   border-radius: 5px;
   border: 1px solid #ccc;
   padding: 15px;
@@ -78,8 +86,21 @@
   width: 100%;
 }
 
-.login-info:focus {
+.modal input:focus, .modal select:focus {
   border: 1px solid #11aacc;
+}
+
+.select-arrow {
+  position: relative;
+  float: right;
+  top: -35px;
+  left: -35px;
+  z-index: -1;
+}
+
+.select-arrow div {
+  position: absolute;
+  color: #ccc;
 }
 
 .login-button {

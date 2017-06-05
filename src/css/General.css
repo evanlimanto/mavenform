@@ -20,10 +20,6 @@ body {
   color: #333;
 }
 
-* {
-  vertical-align: middle;
-}
-
 .container {
   display: block;
   margin: auto;

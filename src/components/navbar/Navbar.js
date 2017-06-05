@@ -98,6 +98,12 @@ class NavbarComponent extends Component {
         <div className="gray-nav">
           <div className="container">
             {navbarNav}
+            <div className="nav-results" >
+              <a>Search Result #1</a>
+              <a>Search Result #2</a>
+              <a>Search Result #3</a>
+              <a className="bottom">Search Result #4</a>
+            </div>
           </div>
         </div>
       </div>

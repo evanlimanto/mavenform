@@ -68,6 +68,57 @@ class UserHomeComponent extends Component {
     return (
       <div className="userhome">
         <DocumentMeta {...meta} />
+        {/* SELECT SCHOOL
+        <div className="modal-container">
+          <div className="modal-click">
+          </div>
+          <div className="modal">
+            <div className="modal-header">
+              <h1>Select Your School</h1>
+            </div>
+            <div className="modal-content">
+              <hr className="s3"/>
+              <select>
+                <option>UC Berkeley</option>
+                <option>UC San Diego</option>
+              </select>
+              <div className="select-arrow">
+                <div className="material-icons">keyboard_arrow_down</div>
+              </div>
+              <hr className="s2" />
+              <a className="login-button blue">Confirm</a>
+              <hr className="s3"/>
+            </div>
+          </div>
+          <a className="x"><img src="/img/x.svg" alt="close" /></a>
+        </div>
+        */}
+        {/* ADD COURSE
+        <div className="modal-container">
+          <div className="modal-click">
+          </div>
+          <div className="modal">
+            <div className="modal-header">
+              <h1>Add Course</h1>
+            </div>
+            <div className="modal-content">
+              <hr className="s3"/>
+              <select>
+                <option>CS 61A</option>
+                <option>CS 61B</option>
+                <option>CS 61C</option>
+              </select>
+              <div className="select-arrow">
+                <div className="material-icons">keyboard_arrow_down</div>
+              </div>
+              <hr className="s2" />
+              <a className="login-button blue">Add To Dashboard</a>
+              <hr className="s3"/>
+            </div>
+          </div>
+          <a className="x"><img src="/img/x.svg" alt="close" /></a>
+        </div>
+        */}
         <div className="nav">
           <div className="container">
             <a href="..">
@@ -75,12 +126,19 @@ class UserHomeComponent extends Component {
             </a>
             <input className="nav-search nav-search-signed-in" name="search" placeholder="Search courses..." type="text" autoComplete="off">
             </input>
+            <div className="nav-results nav-results-signed-in" >
+              <a>Search Result #1</a>
+              <a>Search Result #2</a>
+              <a>Search Result #3</a>
+              <a className="bottom">Search Result #4</a>
+            </div>
             <div className="material-icons nav-search-icon">search</div>
             <span className="nav-button nav-signed-in">
               <div className="material-icons signed-in-icon">person</div>
               {username}
               <div className="material-icons signed-in-arrow">keyboard_arrow_down</div>
             </span>
+            <a className="logout">Log Out</a>
           </div>
         </div>
         <div className="card-container-container">
@@ -92,7 +150,12 @@ class UserHomeComponent extends Component {
               </div>
             </div>
             <hr className="s5" />
-            {bookmarkedCoursesBoxes}
+            <div className="center">
+              <a className="card school-card add-school">
+                <span>Click to select your school</span>
+              </a>
+            </div>
+            {/*bookmarkedCoursesBoxes*/}
             <hr className="s2" />
             <hr className="margin" />
           </div>

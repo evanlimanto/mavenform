@@ -31,6 +31,16 @@
   border: 1px solid #ccc;
 }
 
+.add-school {
+  border: 1px dashed #11aacc;
+  color: #11aacc;
+}
+
+.add-school:hover {
+  border: 1px dashed #11aacc;
+  background: rgba(17, 170, 204, 0.1);
+}
+
 .add-course {
   border: 1px dashed #11aacc;
   color: #11aacc;

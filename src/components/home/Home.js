@@ -69,6 +69,14 @@ class HomeComponent extends Component {
             <hr className="s5" />
             <div className="search-container">
               <input className="search" name="search" placeholder="Search for your course to see what study resources are available..." type="text" autoComplete="off" onChange={this.getSuggestions} ref="search" />
+              <div className="results-container" >
+                <div className="results" >
+                  <a>Search Result #1</a>
+                  <a>Search Result #2</a>
+                  <a>Search Result #3</a>
+                  <a className="bottom">Search Result #4</a>
+                </div>
+              </div>
               <div className="material-icons search-icon">search</div>
               <a className="search-link"> 
                 <div className="material-icons">info_outline</div>
