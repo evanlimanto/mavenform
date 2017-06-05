@@ -10,6 +10,7 @@ import Navbar from '../navbar';
 import { algoliaCourseIndex } from '../../utils';
 
 const Scroll = require('react-scroll');
+const ScrollLink = Scroll.Link;
 const Element = Scroll.Element;
 
 const meta = {
@@ -63,8 +64,8 @@ class HomeComponent extends Component {
   }
 
   render() {
-    const schools = ['ucberkeley', 'ucsandiego', 'uclosangeles', 'stanford', 'mit', 'princeton'];
-    const schoolLabels = ['UC Berkeley', 'UC San Diego', 'UC Los Angeles', 'Stanford', 'MIT', 'Princeton'];
+    const schools = ['ucberkeley', 'ucsandiego', 'stanford'];
+    const schoolLabels = ['UC Berkeley', 'UC San Diego', 'Stanford'];
     const schoolCards = map(schools, (school, key) => {
       return (
         <Link key={key} className="card" to={"/" + school}>
@@ -101,14 +102,14 @@ class HomeComponent extends Component {
                 {searchResults}
               </div>
               <div className="material-icons search-icon">search</div>
-              <a className="search-link"> 
+              <ScrollLink className="search-link" to="features" spy={true} smooth={true} duration={500}> 
                 <div className="material-icons">info_outline</div>
                 Learn More 
-              </a>
-              <a className="search-link"> 
+              </ScrollLink>
+              <ScrollLink className="search-link" to="schools" spy={true} smooth={true} duration={500}> 
                 <div className="material-icons school">school</div>
                 View Schools 
-              </a>
+              </ScrollLink>
             </div>
           </div>
         </div>

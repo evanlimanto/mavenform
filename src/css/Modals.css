@@ -51,6 +51,10 @@
   max-width: 450px;
 }
 
+.modal * {
+  vertical-align: middle;
+}
+
 .modal-logo {
   padding: 30px 60px;
 }
@@ -144,7 +148,7 @@
 
 .f-logo {
   height: 18px;
-  margin-right: 10px;
+  margin: 0 7px 0 2px;
 }
 
 .login-button-g {
