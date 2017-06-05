@@ -247,12 +247,15 @@ class TranscribeComponent extends Component {
           <hr className="s1" />
           <textarea ref='content' onKeyUp={this.updateContent} placeholder='Enter content here'></textarea>
           <hr className="s2" />
-          <button className='blue upload' onClick={(e) => this.upload(e)}>UPLOAD</button>
+          <div>
+            <button className='blue' onClick={(e) => this.upload(e)}>SAVE</button>
+            <a className='gray cancel' href="/dashboard">CANCEL</a>
+          </div>
           {this.state.error ? <p className='error'>{this.state.error}</p> : null}
           {this.state.success ? <p className='success'>{this.state.success}</p> : null}
         </div>
         <div className='col preview'>
-          <h1>LIVE PREVIEW</h1>
+          <h1>PREVIEW</h1>
           <div className="preview-content">
             {this.state.content ? this.state.content : <p>No content yet.</p>}
           </div>

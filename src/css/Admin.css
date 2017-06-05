@@ -104,15 +104,30 @@
   flex: 1;
 }
 
-.admin button.upload {
-  padding: 20px;
-  font-size: 18px;
+.admin button {
+  display: inline-block;
+  margin-right: 20px;
+  padding: 15px;
+  width: 230px;
+  font-size: 14px;
   border-radius: 5px;
   color: #fff;
   opacity: 0.9;
 }
 
-.admin button.upload:hover {
+.admin .cancel {
+  margin-right: 0;
+  text-align: center;
+  display: inline-block;
+  padding: 12.5px;
+  width: 230px;
+  font-size: 14px;
+  border-radius: 5px;
+  color: #fff;
+  opacity: 0.9;
+}
+
+.admin button:hover, .admin .cancel:hover {
   cursor: pointer;
   opacity: 1;
 }
