@@ -1,6 +1,6 @@
 import { replace, reduce, toUpper } from 'lodash';
 
-import { updateExamList, updateCourseList, updateSchoolList, updateExamTypesList, updateTermList } from '../actions';
+import { updateExamList, updateCourseList, updateSchoolList, updateExamTypesList, updateTermList, updateLabels } from '../actions';
 import MDRenderer from '../components/exam/MDRenderer';
 
 export const ENV_IS_DEV = process.env.NODE_ENV === "development";
@@ -52,6 +52,12 @@ export function initStore(store) {
   ).then(
     (json) => store.dispatch(updateTermList(json))
   );
+
+  fetch(`/getLabels`).then(
+    (response) => response.json()
+  ).then(
+    (json) => store.dispatch(updateLabels(json))
+  );
 }
 
 export function preprocess(text) {
@@ -62,6 +68,9 @@ export function preprocess(text) {
 };
 
 export function courseCodeToLabel(course_code) {
+  if (!!!course_code)
+    return null;
+
   let idx = -1;
   for (var i = 0; i < course_code.length; i++) {
     if (course_code[i] >= '0' && course_code[i] <= '9') {
@@ -86,6 +95,8 @@ export function getCourse(courses, courseid) {
 }
 
 export function termToLabel(term) {
+  if (!term)
+    return null;
   let label = "";
   if (term[0] === 'f') {
     label = "Fall";
@@ -108,6 +119,8 @@ export function termToLabel(term) {
 }
 
 export function examTypeToLabel(exam_type) {
+  if (!exam_type)
+    return null;
   switch (exam_type) {
     case 'marketing':
       return 'Marketing';

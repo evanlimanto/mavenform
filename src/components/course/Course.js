@@ -1,114 +1,104 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { has, map, toUpper } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 
-import { toggleAppMode } from '../../actions';
-import { examClickEvent, toggleAppModeEvent } from '../../events';
+import { examClickEvent } from '../../events';
 import { courseCodeToLabel, examTypeToLabel, getCourse, termToLabel } from '../../utils';
 
+import Footer from '../footer';
 import Navbar from '../navbar';
 import NavSidebar from '../navsidebar';
 import NotFound from '../notfound';
 
-const CourseComponent = ({ exams, courses, courseid, appMode, onToggleAppMode }) => {
-  if (!has(exams, courseid)) {
-    return <NotFound />;
+class CourseComponent extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      exams: [] 
+    };
   }
 
-  const course = getCourse(courses, courseid);
-  const available = map(exams[courseid], (examsOfType, examtype) => {
-    return map(examsOfType, (item, examid) => {
-      const term = termToLabel(examid);
-      const note = item.note ? `(${item.note})` : (null);
-      const url = `/${courseid}/${examtype}/${examid}`;
+  componentDidMount() {
+    const { courseCode, schoolCode } = this.props;
+    fetch(`/getCourseExams/${this.props.schoolCode}/${this.props.courseCode}`).then(
+      (response) => response.json()
+    ).then((json) => this.setState({ exams: json }));
+  }
+
+  render() {
+    const { courseCode, schoolCode } = this.props;
+    const available = map(this.state.exams, (exam, key) => {
+      const typeCode = exam.type_code;
+      const typeLabel = exam.type_label;
+      const termCode = exam.term_code;
+      const termLabel = exam.term_label;
+      const profs = exam.profs;
+      const url = `/${schoolCode}/${courseCode}/${typeCode}/${termCode}`;
       return (
-        <tr className="available" onClick={() => examClickEvent(courseid, examtype, examid)} key={examid}>
-          <td><Link to={url}>{examTypeToLabel(examtype)} <i>{note}</i></Link></td>
-          <td><Link to={url}>{term}</Link></td>
-          <td><Link to={url}>{item.profs}</Link></td>
+        <tr key={key} className="available" onClick={() => examClickEvent(courseCode, typeCode, termCode)}>
+          <td><Link to={url}>{typeLabel}</Link></td>
+          <td><Link to={url}>{termLabel}</Link></td>
+          <td><Link to={url}>{profs}</Link></td>
           <td><h6><Link to={url} className="table-link">CLICK TO VIEW &#8594;</Link></h6></td>
         </tr>
       );
     });
-  });
-  const navComponents = (appMode) ? (
-    <span>
-      <Navbar isExam={false} onToggleAppMode={() => onToggleAppMode()} couseid={courseid} />
-      {/*<NavSidebar courseid={courseid} isExam={false} />
-      <div className="sidebar">
-        <h6>INFO</h6>
-        <i>{desc}</i>
-      </div>*/}
-    </span>
-  ) : (
-    <div className="tooltip-container app-mode" onClick={() => onToggleAppMode()}>
-      <a className="material-icons">dashboard</a>
-      <span className="tooltip">App Mode</span>
-    </div>
-  );
-  const meta = {
-    description: `${toUpper(courseid)} - Past Exams`,
-    title: `${toUpper(courseid)} - Past Exams`,
-  };
 
-  return (
-    <div>
-      <DocumentMeta {...meta} />
-      {navComponents}
+    const meta = {
+      description: `${toUpper(courseCode)} - Past Exams`,
+      title: `${toUpper(courseCode)} - Past Exams`,
+    };
+
+    return (
       <div>
-        <h4 className="center">{courseCodeToLabel(courseid)}</h4>
-        <div className="center">
-          <h5>Index of resources</h5>
-        </div>
-        <hr className="s4" />
-        <div className="center">
-          <div className="table-container-container">
-            <div className="table-container">
-              <table className="exams center">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Term</th>
-                    <th>Instructors</th>
-                    <th>Studyform</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {available}
-                </tbody>
-              </table>
-            </div>
+        <DocumentMeta {...meta} />
+        <Navbar schoolCode={schoolCode} courseCode={courseCode} />
+        <div>
+          <h4 className="center">{courseCodeToLabel(courseCode)}</h4>
+          <div className="center">
+            <h5>Index of resources</h5>
           </div>
-          <hr className="margin" />
+          <hr className="s4" />
+          <div className="center">
+            <div className="table-container-container">
+              <div className="table-container">
+                <table className="exams center">
+                  <thead>
+                    <tr>
+                      <th>Type</th>
+                      <th>Term</th>
+                      <th>Instructors</th>
+                      <th>Studyform</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {available}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <hr className="margin" />
+          </div>
         </div>
+        <Footer />
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    courseid: ownProps.match.params.courseid,
-    appMode: state.config.appMode,
+    courseCode: ownProps.match.params.courseCode,
+    schoolCode: ownProps.match.params.schoolCode,
     exams: state.exams.multi_dict,
-    courses: state.courses,
-  }
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onToggleAppMode: () => {
-      toggleAppModeEvent();
-      dispatch(toggleAppMode());
-    }
   }
 };
 
 const Course = connect(
   mapStateToProps,
-  mapDispatchToProps,
 )(CourseComponent);
 
 export default Course;

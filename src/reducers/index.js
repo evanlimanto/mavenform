@@ -97,3 +97,12 @@ export const terms = (state = [], action) => {
       return state;
   }
 };
+
+export const labels = (state = {}, action) => {
+  switch (action.type) {
+    case 'UPDATE_LABELS':
+      return action.labels;
+    default:
+      return state;
+  }
+};

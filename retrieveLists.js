@@ -117,9 +117,49 @@ exports.getTranscribedContent = (req, res) => {
 };
 
 exports.getSchoolCourses = (req, res, next) => {
-  const school_id = req.params.schoolid;
-  const q = `select id, code, name from courses where schoolid = $1`;
-  client.query(q, [school_id], (err, result) => {
+  const schoolCode = req.params.schoolCode;
+  const q = `
+    select C.id, C.code, C.name, subjects.subject_code, subjects.subject_label from courses C
+    inner join schools on schools.id = C.schoolid
+    inner join subjects on subjects.id = C.subjectid
+    where schools.code = $1
+  `;
+  client.query(q, [schoolCode], (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    const items = _.reduce(result.rows, (dict, row) => {
+      if (!_.has(dict, row.subject_code)) {
+        dict[row.subject_code] = {
+          label: row.subject_label,
+          courses: []
+        }
+      }
+      dict[row.subject_code].courses.push({
+        id: row.id,
+        code: row.code,
+        name: row.name,
+      });
+      return dict;
+    }, {});
+    res.json(items);
+  });
+};
+
+exports.getCourseExams = (req, res, next) => {
+  const { courseCode, schoolCode } = req.params;
+  const q = `
+    select E.id as id, ET.type_code as type_code, ET.type_label as type_label,
+      T.term_code as term_code, T.term_label as term_label,
+      E.profs as profs from exams E
+    inner join courses C on C.id = E.courseid
+    inner join exam_types ET on ET.id = E.examtype
+    inner join terms T on T.id = E.examid
+    inner join schools S on S.id = E.schoolid
+    where C.code = $1 and S.code = $2;
+  `;
+  client.query(q, [courseCode, schoolCode], (err, result) => {
     if (err) {
       next(err);
       return;
@@ -127,10 +167,49 @@ exports.getSchoolCourses = (req, res, next) => {
     const items = _.map(result.rows, (row) => {
       return {
         id: row.id,
-        code: row.code,
-        name: row.name,
+        type_code: row.type_code,
+        type_label: row.type_label,
+        term_code: row.term_code,
+        term_label: row.term_label,
+        profs: row.profs,
       };
     });
     res.json(items);
+  });
+};
+
+exports.getLabels = (req, res, next) => {
+  const q = `select code, name from schools`;
+  client.query(q, [], (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    const items = _.reduce(result.rows, (dict, row) => {
+      dict[row.code] = row.name; 
+      return dict;
+    }, {});
+    res.json({
+      schools: items 
+    });
+  });
+};
+
+exports.getProfs = (req, res, next) => {
+  const { schoolCode, courseCode, examTypeCode, termCode } = req.params;
+  const getidq = `
+    select E.profs from exams E
+    inner join courses C on C.id = E.courseid
+    inner join exam_types ET on ET.id = E.examtype
+    inner join terms T on T.id = E.examid
+    inner join schools S on S.id = E.schoolid
+    where S.code = $1 and T.term_code = $2 and ET.type_code = $3 and C.code = $4;
+  `;
+  client.query(getidq, [schoolCode, termCode, examTypeCode, courseCode], (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.json({ profs: result.rows[0].profs });
   });
 };

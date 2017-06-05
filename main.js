@@ -1,5 +1,6 @@
 'use strict';
 
+const async = require('async');
 const bodyParser = require('body-parser');
 const express = require('express');
 const browserify = require('browserify');
@@ -76,7 +77,16 @@ app.get('/getTranscribedExams', retrieveLists.getTranscribedExams);
 app.get('/getTranscribedContent', retrieveLists.getTranscribedContent);
 
 // Retrieve list of courses
-app.get('/getSchoolCourses/:schoolid', retrieveLists.getSchoolCourses);
+app.get('/getSchoolCourses/:schoolCode', retrieveLists.getSchoolCourses);
+
+// Retrieve list of exams
+app.get('/getCourseExams/:schoolCode/:courseCode', retrieveLists.getCourseExams);
+
+// Retrieve list of labels
+app.get('/getLabels', retrieveLists.getLabels);
+
+// Retrieve profs for an exam
+app.get('/getProfs/:schoolCode/:courseCode/:examTypeCode/:termCode', retrieveLists.getProfs);
 
 // File uploads
 app.post('/upload', function(req, res) {
@@ -170,35 +180,53 @@ app.get('/getCourses/:schoolid', function(req, res, next) {
 });
 
 // Retrieve exam contents
-app.get('/getExam/:id', function(req, res, next) {
-  const id = req.params.id;
-  const q = `select problem_num, subproblem_num, problem, solution, choices from content where exam = $1`;
-  client.query({ text: q, values: [id]})
-    .then((result) => {
-      const info = _.reduce(result.rows, (result, row) => {
-        const problem_num = row.problem_num;
-        const subproblem_num = row.subproblem_num;
-        if (_.has(result, problem_num)) {
-          result[problem_num] = Math.max(result[problem_num], subproblem_num);
-        } else {
-          result[problem_num] = subproblem_num;
-        }
-        return result;
-      }, {});
+app.get('/getExam/:schoolCode/:courseCode/:examTypeCode/:termCode', function(req, res, next) {
+  const { schoolCode, courseCode, examTypeCode, termCode } = req.params;
 
-      const problems = _.reduce(result.rows, (result, row) => {
-        const problem_num = row.problem_num;
-        const subproblem_num = row.subproblem_num;
-        const problem = row.problem;
-        const solution = row.solution;
-        const choices = row.choices;
-        const key = `${problem_num}_${subproblem_num}`;
-        result[key] = { problem, solution, choices };
-        return result;
-      }, {});
-      res.json({info, problems});
-      res.end();
-    });
+  const getidq = `
+    select E.id from exams E
+    inner join courses C on C.id = E.courseid
+    inner join exam_types ET on ET.id = E.examtype
+    inner join terms T on T.id = E.examid
+    inner join schools S on S.id = E.schoolid
+    where S.code = $1 and T.term_code = $2 and ET.type_code = $3 and C.code = $4;
+  `;
+  const getcontentq = `
+    select problem_num, subproblem_num, problem, solution from content where exam = $1
+  `;
+  async.waterfall([
+    (callback) => {
+      client.query(getidq, [schoolCode, termCode, examTypeCode, courseCode], callback);
+    },
+    (result, callback) => {
+      const id = result.rows[0].id;
+      client.query(getcontentq, [id], callback);
+    }
+  ], (err, result) => {
+    const info = _.reduce(result.rows, (result, row) => {
+      const problem_num = row.problem_num;
+      const subproblem_num = row.subproblem_num;
+      if (_.has(result, problem_num)) {
+        result[problem_num] = Math.max(result[problem_num], subproblem_num);
+      } else {
+        result[problem_num] = subproblem_num;
+      }
+      return result;
+    }, {});
+
+    const problems = _.reduce(result.rows, (result, row) => {
+      const problem_num = row.problem_num;
+      const subproblem_num = row.subproblem_num;
+      const problem = row.problem;
+      const solution = row.solution;
+      const choices = row.choices;
+      const key = `${problem_num}_${subproblem_num}`;
+      result[key] = { problem, solution, choices };
+      return result;
+    }, {});
+    res.json({info, problems});
+    res.end();
+  });
 });
 
 // Update problem contents

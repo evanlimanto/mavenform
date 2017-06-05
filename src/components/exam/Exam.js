@@ -1,73 +1,57 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { has, toUpper } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 
 import ExamContent from './ExamContent';
+import Footer from '../footer';
 import Navbar from '../navbar';
-import NavSidebar from '../navsidebar';
-import NotFound from '../notfound';
 
-import { toggleAppMode } from '../../actions';
-import { examTypeToLabel, termToLabel } from '../../utils';
-import { toggleAppModeEvent } from '../../events';
+class ExamComponent extends Component {
+  constructor(props) {
+    super(props);
 
-const ExamComponent = ({ appMode, exams, courseid, examtype, examid, onToggleAppMode }) => {
-  if (!has(exams, courseid) ||
-      !has(exams[courseid], examtype) ||
-      !has(exams[courseid][examtype], examid)) {
-    return <NotFound />;
+    this.state = {
+      profs: null
+    };
   }
 
-  const navComponents = (appMode) ? (
-    <span>
-      <Navbar courseid={courseid} isExam={true} onToggleAppMode={onToggleAppMode} />
-      {/*<NavSidebar courseid={courseid} examtype={examtype} examid={examid} isExam={true} />*/}
-    </span>
-  ) : (
-    <div className="tooltip-container app-mode" onClick={() => onToggleAppMode()}>
-      <a className="material-icons">dashboard</a>
-      <span className="tooltip">App Mode</span>
-    </div>
-  );
+  componentDidMount() {
+    const { schoolCode, courseCode, examType, termCode } = this.props;
+    fetch(`/getProfs/${schoolCode}/${courseCode}/${examType}/${termCode}`).then(
+      (response) => response.json()
+    ).then((json) => this.setState({ profs: json.profs }));
+  }
 
-  const { id, profs } = exams[courseid][examtype][examid];
-  const meta = {
-    description: `${toUpper(courseid)} ${termToLabel(examid)} ${examTypeToLabel(examtype)}`,
-    title: `${toUpper(courseid)} ${termToLabel(examid)} ${examTypeToLabel(examtype)}`,
-  };
+  render() {
+    const { schoolCode, courseCode, examType, termCode } = this.props;
+    const profs = this.state.profs;
+    const meta = {
+      description: '',
+      title: '',
+    };
 
-  return (
-    <div>
-      <DocumentMeta {...meta} />
-      {navComponents}
-      <ExamContent id={id} profs={profs} term={examid} />
-    </div>
-  );
+    return (
+      <div>
+        <DocumentMeta {...meta} />
+        <Navbar schoolCode={schoolCode} courseCode={courseCode} examTypeCode={examType} termCode={termCode} />
+        <ExamContent schoolCode={schoolCode} courseCode={courseCode} examTypeCode={examType} termCode={termCode} profs={profs} />
+        <Footer />
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    appMode: state.config.appMode,
-    exams: state.exams.multi_dict,
-    courseid: ownProps.match.params.courseid,
-    examtype: ownProps.match.params.examtype,
-    examid: ownProps.match.params.examid,
-  };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    onToggleAppMode: () => {
-      dispatch(toggleAppMode());
-      toggleAppModeEvent();
-    }
+    schoolCode: ownProps.match.params.schoolCode,
+    courseCode: ownProps.match.params.courseCode,
+    examType: ownProps.match.params.examType,
+    termCode: ownProps.match.params.termCode,
   };
 };
 
 const Exam = connect(
   mapStateToProps,
-  mapDispatchToProps,
 )(ExamComponent);
 
 export default Exam;

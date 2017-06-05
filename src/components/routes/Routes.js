@@ -10,9 +10,10 @@ import { Login, Logout } from '../login';
 import NotFound from '../notfound';
 import Profile from '../profile';
 import Upload from '../upload';
+import School from '../school';
 
 /* mockups */
-import { School, UserHome, Marketing } from '../mockups';
+import { UserHome, Marketing } from '../mockups';
 
 import { requireAuth, parseAuthHash } from '../../utils';
 
@@ -29,14 +30,14 @@ const Routes = (
     <Route path="/dashboard/transcribed" component={Transcribed} />
     <Route path="/dashboard" component={Dashboard} />
     <Route path="/upload" component={Upload} />
+    <Route path="/:schoolCode/:courseCode/:examType/:termCode" component={Exam} />
+    <Route path="/:schoolCode/:courseCode" component={Course} />
+    <Route path="/:schoolCode" component={School} />
     
     {/* mockups */}
-    <Route path="/school" component={School} />
     <Route path="/userhome" component={UserHome} />
     <Route path="/marketing" component={Marketing} />
 
-    <Route path="/:courseid/:examtype/:examid" component={Exam} />
-    <Route path="/:courseid" component={Course} />
     <Route component={NotFound} />
   </Switch>
 );

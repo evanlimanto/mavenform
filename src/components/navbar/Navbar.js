@@ -1,60 +1,64 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { has } from 'lodash';
+import classnames from 'classnames';
 
-const NavbarComponent = ({ courseid, onToggleAppMode, isExam }) => {
-  const toggleBackComponent = (isExam) ? (
-      <Link to={`/${courseid}`} className="material-icons mobile-back">keyboard_backspace</Link>
-    ) : (
-      <Link to="/courses" className="material-icons mobile-back">keyboard_backspace</Link>
-    );
+import { courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
 
-  return (
-    <div>
-      <div className="nav">
-        <div className="container">
-          <a href="..">
-            <img className="logo" src="/img/logo.svg" />
-          </a>
-          <input className="nav-search" name="search" placeholder="Search courses..." type="text" autoComplete="off">
-          </input>
-          <div className="material-icons nav-search-icon">search</div>
-          <a className="nav-button nav-button-alt" href="../userhome">Log In</a>
-          <a className="nav-button" href="../userhome">Sign Up</a>
+class NavbarComponent extends Component {
+  render() {
+    if (!has(this.props.labels, 'schools')) {
+      return false;
+    }
+
+    const { schoolCode, courseCode, examTypeCode, termCode } = this.props;
+    const courseLabel = courseCodeToLabel(courseCode);
+    const schoolLabel = this.props.labels.schools[schoolCode];
+    const examTypeLabel = examTypeToLabel(examTypeCode);
+    const termLabel = termToLabel(termCode); 
+    const numLayers = !!schoolLabel + !!courseLabel + !!examTypeLabel;
+    let navbarNav = [<Link key='home' to='/' className={classnames({ active: numLayers === 0 })}>Home</Link>];
+    if (schoolLabel) {
+      navbarNav.push(<span key='homeSpan'> > </span>);
+      navbarNav.push(<Link key='school' to={'/' + schoolCode} className={classnames({ active: numLayers === 1 })}>{schoolLabel}</Link>);
+      if (courseLabel) {
+        navbarNav.push(<span key='courseSpan'> > </span>);
+        navbarNav.push(<Link key='course' to={'/' + schoolCode + '/' + courseCode} className={classnames({ active: numLayers === 2 })}>{courseLabel}</Link>);
+        if (examTypeLabel) {
+          navbarNav.push(<span key='examSpan'> > </span>);
+          navbarNav.push(<Link key='exam' to={'/' + schoolCode + '/' + courseCode + '/' + examTypeCode + '/' + termCode} className={classnames({ active: numLayers === 3 })}>{examTypeLabel} - {termLabel}</Link>);
+        }
+      }
+    }
+
+    return (
+      <div>
+        <div className="nav">
+          <div className="container">
+            <a href="..">
+              <img className="logo" src="/img/logo.svg" />
+            </a>
+            <input className="nav-search" name="search" placeholder="Search courses..." type="text" autoComplete="off">
+            </input>
+            <div className="material-icons nav-search-icon">search</div>
+            <a className="nav-button nav-button-alt" href="../userhome">Log In</a>
+            <a className="nav-button" href="../userhome">Sign Up</a>
+          </div>
+        </div>
+        <div className="gray-nav">
+          <div className="container">
+            {navbarNav}
+          </div>
         </div>
       </div>
-      <div className="gray-nav">
-        <div className="container">
-          <a>Home</a> 
-          <span> > </span>
-          <a>UC Berkeley</a>
-          <span> > </span>
-          <a>CS 61A</a>
-          <span> > </span>
-          <a className="active">Midterm 2 | Fall 2016 | DeNero</a>
-        </div>
-      </div>
-    </div>
-    /*<div className="nav">
-      <Link to="/courses" className="logo">Mavenform</Link>
-      {toggleBackComponent}
-      <div className="tooltip-container">
-        <a className="material-icons" href="https://docs.google.com/forms/d/e/1FAIpQLSfCS9McWikQ7F6syAGV9FX7Wf2-rWjqt-XMXxxEx5piTIf92Q/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer">sms</a>
-        <span className="tooltip">Send Feedback</span>
-      </div>
-      <div className="tooltip-container reader-mode" onClick={() => onToggleAppMode()}>
-        <a className="material-icons">subject</a>
-        <span className="tooltip">Reader Mode</span>
-      </div>
-    </div>*/
-  );
+    ); 
+  }
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
-    courseid: ownProps.courseid,
-    onToggleAppMode: ownProps.onToggleAppMode,
-    isExam: ownProps.isExam,
+    labels: state.labels,
   };
 };
 

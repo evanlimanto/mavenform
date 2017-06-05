@@ -58,3 +58,10 @@ export const updateTermList = (terms) => {
     terms: terms
   };
 };
+
+export const updateLabels = (labels) => {
+  return {
+    type: 'UPDATE_LABELS',
+    labels: labels,
+  };
+};
