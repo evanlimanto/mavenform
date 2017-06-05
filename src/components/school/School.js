@@ -38,7 +38,7 @@ class SchoolComponent extends Component {
         </Link>
       ));
       return (
-        <div className="department">
+        <div className="department" key={subject}>
           <h1>{obj.label}</h1>
           {courseBoxes}
         </div>

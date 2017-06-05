@@ -4,6 +4,7 @@ import auth0 from 'auth0-js'
 import { has } from 'lodash'
 
 import { evtEmitter } from './events'
+const request = require('superagent');
 
 export default class AuthService {
   constructor(clientId, domain) {
@@ -32,8 +33,9 @@ export default class AuthService {
       connection: 'Username-Password-Authentication',
       username,
       password
-    }, err => {
+    }, (err) => {
       if (err) console.error(err);
+      console.error(err.original);
     })
   }
 
@@ -75,6 +77,11 @@ export default class AuthService {
               console.log(profile);
             }
             this.setProfile(profile)
+            const req = request.post('/createUser');
+            req.field('auth_user_id', profile.user_id)
+              .end((err, res) => {
+                if (err) console.error(err);
+              });
             document.location = "/home";
           }
         })
@@ -125,27 +132,6 @@ export default class AuthService {
     const school = (has(profile, 'user_metadata') && has(profile.user_metadata, 'school_id'))
       ? profile.user_metadata.school_id : null;
     return school;
-  }
-
-  updateSchool(school_id) {
-    const auth0Manage = new auth0.Management({
-      domain: 'mavenform.auth0.com',
-      token: this.getToken()
-    })
-    auth0Manage.patchUserMetadata(this.getUserId(), {
-      school_id: school_id
-    }, (err, res) => {
-      if (err) console.error(err);
-      else {
-        this.auth0.client.userInfo(this.getAccessToken(), (error, profile) => {
-          if (error) {
-            console.log('Error loading the Profile', error)
-          } else {
-            this.setProfile(profile)
-          }
-        })
-      }
-    });
   }
 
   logout() {

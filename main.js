@@ -10,6 +10,7 @@ const glob = require('glob');
 const path = require('path');
 const NodeCache = require('node-cache');
 const pg = require('pg');
+const randomstring = require('randomstring');
 const sm = require('sitemap');
 const yaml = require('js-yaml');
 const _ = require('lodash');
@@ -75,8 +76,11 @@ app.get('/getTranscribedExams', retrieveLists.getTranscribedExams);
 // Retrieve list of transcribed content
 app.get('/getTranscribedContent', retrieveLists.getTranscribedContent);
 
-// Retrieve list of courses
+// Retrieve list of courses with subjects
 app.get('/getSchoolCourses/:schoolCode', retrieveLists.getSchoolCourses);
+
+// Retrieve list of courses that are not bookmarked
+app.get('/getUnbookmarkedCourses/:school_id/:auth_user_id', retrieveLists.getUnbookmarkedCourses);
 
 // Retrieve list of exams
 app.get('/getCourseExams/:schoolCode/:courseCode', retrieveLists.getCourseExams);
@@ -264,8 +268,8 @@ app.post('/addProblem', function(req, res) {
   });
 });
 
-app.post('/createUser/:userid', function(req, res) {
-  const userid = req.params.userid;
+app.post('/createUser', function(req, res) {
+  const userid = req.body.userid;
   const q = `insert into users (auth_user_id) values ($1) where not exists (select id from users where auth_user_id = $2)`;
   client.query(q, [userid, userid], function(err, result) {
     if (res) res.status(400).send(err);
@@ -427,6 +431,84 @@ app.get('/getBookmarkedCourses/:userid', (req, res, next) => {
     }
     const items = _.map(result.rows, (row) => row.code);
     res.json(items);
+  });
+});
+
+app.get('/getUserSchool/:userid', (req, res, next) => {
+  const userid = req.params.userid;
+
+  const q = `select users.schoolid as school_id, schools.name as school_name from users
+    inner join schools on schools.id = users.schoolid where users.auth_user_id = $1`;
+  client.query(q, [userid], (err, result) => {
+    if (result.rows.length === 0) {
+      res.json({});
+    } else {
+      const row = result.rows[0];
+      res.json({ school_id: row.school_id, school_name: row.school_name });
+    }
+  });
+});
+
+app.post('/selectSchool', (req, res, next) => {
+  const { auth_user_id, school_id } = req.body;
+
+  const q = `update users set schoolid = $1 where auth_user_id = $2`;
+  client.query(q, [school_id, auth_user_id], (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.end();
+  });
+});
+
+app.post('/bookmarkCourse', (req, res, next) => {
+  const { auth_user_id, course_id } = req.body;
+
+  const q = `
+    insert into bookmarked_courses(userid, courseid)
+      select id, $1 from users where auth_user_id = $2
+  `;
+  client.query(q, [course_id, auth_user_id], (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.end();
+  });
+});
+
+app.post('/applyMarketing', (req, res, next) => {
+  const marketingBucket = gcs.bucket('studyform-marketing'); 
+  let file = _.values(req.files)[0];
+  file.name = randomstring.generate(5) + "-" + file.name;
+
+  const bucketFile = marketingBucket.file(file.name);
+  const ws = bucketFile.createWriteStream({
+    public: true,
+    metadata: {
+      contentEncoding: file.encoding,
+      contentType: 'application/pdf'
+    }
+  });
+  ws.on('error', function(err) {
+    console.error(err);
+  });
+  ws.write(file.data);
+  ws.end();
+
+  const { name, email, school, essay1, essay2 } = req.body;
+  const q = `
+    insert into marketing_apps (name, email, school, essay1, essay2, resume)
+    values($1, $2, $3, $4, $5, $6)
+  `;
+
+  client.query(q, [name, email, school, essay1, essay2, file.name], (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.end();
   });
 });
 

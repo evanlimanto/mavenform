@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import DocumentMeta from 'react-document-meta';
-import { map } from 'lodash';
+import { map, toLower } from 'lodash';
 import Footer from '../footer';
 import Modal from '../modal';
 import Navbar from '../navbar';
+import { algoliaCourseIndex } from '../../utils';
 
 const Scroll = require('react-scroll');
 const Element = Scroll.Element;
@@ -15,16 +17,14 @@ const meta = {
   title: 'Studyform',
 };
 
-const APP_ID = 'NPJP92R96D'
-const SEARCH_API_KEY = '22cd6e2a19445d1444df8fb7a3d00f52'
-const algolia = require('algoliasearch')(APP_ID, SEARCH_API_KEY);
-const index = algolia.initIndex('courses');
-
 class HomeComponent extends Component {
   constructor(props) {
     super(props);
 
     this.getSuggestions = this.getSuggestions.bind(this);
+    this.state = {
+      suggestions: []
+    };
   }
 
   componentWillMount() {
@@ -34,14 +34,32 @@ class HomeComponent extends Component {
   }
 
   getSuggestions() {
-    /*
     const queryStr = this.refs.search.value;
-    index.search(queryStr, (err, content) => {
-      forEach(content.hits, (hit) => {
-        console.log(hit.school_name, hit.code, hit.course_name, hit._highlightResult);
+    if (queryStr.length === 0) {
+      this.setState({
+        suggestions: []
       });
+      return;
+    }
+    algoliaCourseIndex.search({
+      query: queryStr,
+      length: 4,
+      offset: 0,
+    }, (err, content) => {
+      const suggestions = map(content.hits, (hit) => {
+        console.log(hit);
+        return {
+          school_code: hit.school_code,
+          school_name: hit.school_name,
+          school_name_highlighted: hit._highlightResult.school_name.value,
+          code: hit.code,
+          code_highlighted: hit._highlightResult.code.value,
+          name: hit.name,
+          name_highlighted: hit._highlightResult.name.value,
+        };
+      });
+      this.setState({ suggestions });
     });
-    */
   }
 
   render() {
@@ -55,6 +73,16 @@ class HomeComponent extends Component {
         </Link> 
       );
     });
+    const suggestions = this.state.suggestions;
+    const searchResults = (
+      <div className="results">
+        {map(suggestions, (suggestion, index) => {
+          const aClass = classnames({ bottom: index === suggestions.length - 1 });
+          const suggestionText = `${suggestion.school_name_highlighted} ${suggestion.code_highlighted}: ${suggestion.name_highlighted}`;
+          return <Link to={`/${suggestion.school_code}/${toLower(suggestion.code)}`} className={aClass} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
+        })}
+      </div>
+    );
 
     return (
       <div className="home">
@@ -69,13 +97,8 @@ class HomeComponent extends Component {
             <hr className="s5" />
             <div className="search-container">
               <input className="search" name="search" placeholder="Search for your course to see what study resources are available..." type="text" autoComplete="off" onChange={this.getSuggestions} ref="search" />
-              <div className="results-container" >
-                <div className="results" >
-                  <a>Search Result #1</a>
-                  <a>Search Result #2</a>
-                  <a>Search Result #3</a>
-                  <a className="bottom">Search Result #4</a>
-                </div>
+              <div className="results-container">
+                {searchResults}
               </div>
               <div className="material-icons search-icon">search</div>
               <a className="search-link"> 

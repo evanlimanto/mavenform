@@ -49,3 +49,7 @@
   opacity: 1;
   color: #fff;
 }
+
+.marketing-error-message {
+  color: red;
+}

@@ -8,13 +8,11 @@ import Exam from '../exam';
 import Home from '../home';
 import { Login, Logout } from '../login';
 import NotFound from '../notfound';
+import Marketing from '../marketing';
 import Profile from '../profile';
 import Upload from '../upload';
 import School from '../school';
 import UserHome from '../userhome';
-
-/* mockups */
-import { Marketing } from '../mockups';
 
 import { requireAuth, parseAuthHash } from '../../utils';
 
@@ -24,6 +22,7 @@ const Routes = (
     <Route path="/courses" component={Courses} />
     <Route path="/login" render={(props) => <Login parseAuthHash={parseAuthHash} {...props} />} />
     <Route path="/logout" component={Logout} />
+    <Route path="/marketing" component={Marketing} />
     <Route path="/profile" render={(props) => <Profile requireAuth={requireAuth} {...props} />} />
     <Route path="/dashboard/content" component={DashboardContent} />
     <Route path="/dashboard/imageupload" component={ImageUpload} />
@@ -35,9 +34,6 @@ const Routes = (
     <Route path="/:schoolCode/:courseCode/:examType/:termCode" component={Exam} />
     <Route path="/:schoolCode/:courseCode" component={Course} />
     <Route path="/:schoolCode" component={School} />
-    
-    {/* mockups */}
-    <Route path="/marketing" component={Marketing} />
 
     <Route component={NotFound} />
   </Switch>

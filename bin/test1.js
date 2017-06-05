@@ -11,30 +11,32 @@ const algolia = require('algoliasearch')(APP_ID, API_KEY);
 const index = algolia.initIndex('courses');
 
 const q = `
-  select courses.code, courses.name as course_name, schools.name as school_name, subjects.subject_label from courses
+  select courses.code, courses.name as course_name, schools.name as school_name, schools.code as school_code, subjects.subject_label from courses
   inner join schools on courses.schoolid = schools.id
   inner join subjects on courses.subjectid = subjects.id
 `;
 
-/*
 client.query(q, [], (err, result) => {
   _.forEach(result.rows, (row) => {
-    const { code, course_name, school_name, subject_label } = row; 
+    let { code, course_name, school_name, subject_label, school_code } = row;
+    code = _.toUpper(code);
     index.addObject({
       code: code,
-      course_name: course_name,
+      name: course_name,
       school_name: school_name,
+      school_code: school_code,
     }, (err, content) => {
       if (err) console.error(err); 
       else console.log(content);
     });
   });
 });
-*/
 
+/*
 index.search('berkeley', (err, content) => {
   console.log(content);
   _.forEach(content.hits, (hit) => {
     console.log(hit._highlightResult);
   });
 })
+*/

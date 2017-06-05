@@ -17,9 +17,13 @@ export function requireAuth(auth, history) {
   }
 }
 
-/*
- * Initialize redux store.
- */
+// Algolia search
+const APP_ID = 'NPJP92R96D'
+const SEARCH_API_KEY = '22cd6e2a19445d1444df8fb7a3d00f52'
+const algolia = require('algoliasearch')(APP_ID, SEARCH_API_KEY);
+export const algoliaCourseIndex = algolia.initIndex('courses');
+
+// Redux store
 export function initStore(store) {
   fetch(`/getExams`).then(
     (response) => response.json()

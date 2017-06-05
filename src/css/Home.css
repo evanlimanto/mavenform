@@ -265,3 +265,7 @@
   float: right;
   right: 15px;
 }
+
+.results em {
+  text-decoration: underline;
+}

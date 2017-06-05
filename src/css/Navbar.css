@@ -182,3 +182,7 @@
 .gray-nav a:hover, .gray-nav a.active {
   color: #11aacc;
 }
+
+div.nav-results em {
+  text-decoration: underline;
+}
