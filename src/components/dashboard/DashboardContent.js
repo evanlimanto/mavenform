@@ -7,8 +7,6 @@ import classnames from 'classnames';
 import { Question } from '../question';
 import { preprocess } from '../../utils';
 
-require('./DashboardContent.css');
-
 class DashboardContentComponent extends Component {
   constructor(props) {
     super(props);
