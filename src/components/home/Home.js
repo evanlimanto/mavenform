@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import DocumentMeta from 'react-document-meta';
 import { map, toLower } from 'lodash';
 import Footer from '../footer';
-import Modal from '../modal';
 import Navbar from '../navbar';
 import { algoliaCourseIndex } from '../../utils';
 
@@ -74,15 +73,17 @@ class HomeComponent extends Component {
       );
     });
     const suggestions = this.state.suggestions;
-    const searchResults = (
-      <div className="results">
-        {map(suggestions, (suggestion, index) => {
-          const aClass = classnames({ bottom: index === suggestions.length - 1 });
-          const suggestionText = `${suggestion.school_name_highlighted} ${suggestion.code_highlighted}: ${suggestion.name_highlighted}`;
-          return <Link to={`/${suggestion.school_code}/${toLower(suggestion.code)}`} className={aClass} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
-        })}
+    const searchResults = (suggestions && suggestions.length > 0) ? (
+      <div className="results-container">
+        <div className="results">
+          {map(suggestions, (suggestion, index) => {
+            const aClass = classnames({ bottom: index === suggestions.length - 1 });
+            const suggestionText = `${suggestion.school_name_highlighted} ${suggestion.code_highlighted}: ${suggestion.name_highlighted}`;
+            return <Link to={`/${suggestion.school_code}/${toLower(suggestion.code)}`} className={aClass} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
+          })}
+        </div>
       </div>
-    );
+    ) : null;
 
     return (
       <div className="home">
@@ -97,9 +98,7 @@ class HomeComponent extends Component {
             <hr className="s5" />
             <div className="search-container">
               <input className="search" name="search" placeholder="Search for your course to see what study resources are available..." type="text" autoComplete="off" onChange={this.getSuggestions} ref="search" />
-              <div className="results-container">
-                {searchResults}
-              </div>
+              {searchResults}
               <div className="material-icons search-icon">search</div>
               <a className="search-link"> 
                 <div className="material-icons">info_outline</div>

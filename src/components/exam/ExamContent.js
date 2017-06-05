@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { has, range, map } from 'lodash';
 
 import { Question, MultipleChoiceQuestion } from '../question';
-
 import { courseCodeToLabel, examTypeToLabel, preprocess, termToLabel } from '../../utils';
-import { updateExamContent } from '../../actions';
 
 const Scroll = require('react-scroll');
 const Element = Scroll.Element;

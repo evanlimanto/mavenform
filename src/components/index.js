@@ -9,9 +9,6 @@ import { MultipleChoiceQuestion, Question } from './question';
 import Routes from './routes';
 import Sidebar from './sidebar';
 
-/* mockups */
-import { School, UserHome, Marketing } from './mockups';
-
 import '../css/General.css';
 import '../css/Typography.css';
 import '../css/Navbar.css';
@@ -37,7 +34,4 @@ export {
 	Routes,
 	Question,
 	Sidebar,
-	School,
-	UserHome,
-	Marketing,
 };

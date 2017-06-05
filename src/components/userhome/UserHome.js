@@ -18,7 +18,7 @@ class UserHomeComponent extends Component {
     super(props);
     this.state = {
       bookmarkedCourses: [],
-      selectedSchool: null,
+      selectedSchool: { code: null },
       showSelectSchoolModal: false,
       showAddCourseModal: false,
       coursesToBookmark: null,
@@ -48,7 +48,7 @@ class UserHomeComponent extends Component {
 
   getUnbookmarkedCourses() {
     const userid = this.props.auth.getProfile().user_id;
-    const schoolid = this.state.selectedSchool.school_id;
+    const schoolid = this.state.selectedSchool.id;
     fetch(`/getUnbookmarkedCourses/${schoolid}/${userid}`)
       .then((response) => response.json())
       .then((json) => this.setState({ coursesToBookmark: json }));
@@ -105,16 +105,11 @@ class UserHomeComponent extends Component {
   }
 
   render() {
-    console.log(this.state, this.props);
-    const profile = this.props.auth.getProfile();
-    const username = (has(profile, 'user_metadata') && has(profile.user_metadata, 'username')) ?
-      (profile.user_metadata.username) : (profile.nickname);
-
     const bookmarkedCoursesBoxes = (
       <div className="card-container">
         {map(this.state.bookmarkedCourses, (courseCode, key) => {
           return (
-            <Link className="card course-card" key={key} to={"/" + "ucberkeley" + "/" + courseCode}>
+            <Link className="card course-card" key={key} to={"/" + this.state.selectedSchool.code + "/" + courseCode}>
               <span>{courseCodeToLabel(courseCode)}</span>
               <span className="card-arrow">&#8594;</span>
             </Link>
@@ -166,7 +161,7 @@ class UserHomeComponent extends Component {
 
     const addCourseModal = (this.state.showAddCourseModal) ? (
       <div className="modal-container">
-        <div className="modal-click">
+        <div className="modal-click" onClick={this.toggleAddCourseModal}>
         </div>
         <div className="modal">
           <div className="modal-header">
@@ -183,7 +178,7 @@ class UserHomeComponent extends Component {
             <hr className="s3"/>
           </div>
         </div>
-        <a className="x"><img src="/img/x.svg" alt="close" /></a>
+        <a className="x" onClick={this.toggleAddCourseModal}><img src="/img/x.svg" alt="close" /></a>
       </div>
     ) : null;
 
@@ -192,7 +187,7 @@ class UserHomeComponent extends Component {
         <DocumentMeta {...meta} />
         {selectSchoolModal} 
         {addCourseModal}
-        <Navbar />
+        <Navbar userHome={true} />
         <div className="card-container-container">
           <div className="card-container center">
             <div className="container">

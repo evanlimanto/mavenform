@@ -5,7 +5,6 @@ class LoginComponent extends React.Component {
   componentWillMount() {
     const { auth, location } = this.props;
     this.props.parseAuthHash(auth, location);
-    window.location = "/home";
   }
 
   render() {

@@ -10,7 +10,7 @@ export default class AuthService {
   constructor(clientId, domain) {
     // Configure Auth0
     this.auth0 = new auth0.WebAuth({
-      clientID: 'tgMckz0tmKMhju4VwEnPLxEH4BDExL21',
+      clientID: '3SPCS4VBz4m9U3ftP37BdwoSm9r4obPN',
       domain: 'mavenform.auth0.com',
       responseType: 'token id_token',
       redirectUri: 'http://localhost:3000/login'
@@ -64,26 +64,22 @@ export default class AuthService {
 
   parseHash(hash) {
     this.auth0.parseHash({ hash, _idTokenVerification: false }, (err, authResult) => {
-      if (err) {
-        alert(`Error: ${err.errorDescription}`)
-      }
+      if (err)
+        return console.error(err);
       if (authResult) {
         this.setToken(authResult.accessToken, authResult.idToken)
         this.auth0.client.userInfo(authResult.accessToken, (error, profile) => {
-          if (error) {
-            console.error(error)
-          } else {
-            if (process.env.NODE_ENV === "development") {
-              console.log(profile);
-            }
-            this.setProfile(profile)
-            const req = request.post('/createUser');
-            req.field('auth_user_id', profile.user_id)
-              .end((err, res) => {
-                if (err) console.error(err);
-              });
-            document.location = "/home";
-          }
+          if (error)
+            return console.error(error, error.original)
+          if (process.env.NODE_ENV === "development")
+            console.log(profile);
+          this.setProfile(profile)
+          const req = request.post('/createUser');
+          req.field('auth_user_id', profile.user_id)
+            .end((err, res) => {
+              if (err) console.error(err);
+            });
+          document.location = "/home";
         })
       }
     })
