@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import loadjs from 'loadjs';
-import { keys, identity, map, sortBy } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 
 const meta = {
@@ -17,7 +14,7 @@ class Marketing extends Component {
         <div className="nav">
           <div className="container">
             <a href="..">
-              <img className="logo" src="/img/logo.svg" />
+              <img className="logo" src="/img/logo.svg" alt="logo" />
             </a>
             <input className="nav-search" name="search" placeholder="Search courses..." type="text" autoComplete="off">
             </input>

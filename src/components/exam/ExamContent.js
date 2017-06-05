@@ -62,7 +62,7 @@ class ExamContent extends Component {
         qcontent = preprocess(qcontent);
         solution = preprocess(solution);
         if (courseCode === 'ugba10') {
-          return <MultipleChoiceQuestion id={part + "_" + subpart``} courseid={courseCode} content={qcontent} solutionNum={solution} term={termCode} examtype={examTypeCode} key={key} choices={choices} />
+          return <MultipleChoiceQuestion id={part + "_" + subpart} courseid={courseCode} content={qcontent} solutionNum={solution} term={termCode} examtype={examTypeCode} key={key} choices={choices} />
         }
         return <Question id={part + "_" + subpart} courseid={courseCode} content={qcontent} solution={solution} term={termCode} examtype={examTypeCode} key={key} />
       });

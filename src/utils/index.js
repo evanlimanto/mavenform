@@ -13,9 +13,7 @@ export function parseAuthHash(auth, location) {
 
 export function requireAuth(auth, history) {
   if (!auth.loggedIn()) {
-    history.push("/login");
-  } else if (JSON.parse(localStorage.getItem("profile")).user_id !== "facebook|10210068307522822") {
-    history.push("/");
+    history.push('/');
   }
 }
 

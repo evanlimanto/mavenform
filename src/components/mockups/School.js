@@ -1,41 +1,34 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import loadjs from 'loadjs';
 import { keys, identity, map, sortBy } from 'lodash';
 import DocumentMeta from 'react-document-meta';
+import Navbar from '../navbar';
 
 const meta = {
   description: 'List of Schools',
   title: 'Schools',
 };
 
-class School extends Component {
+class SchoolComponent extends Component {
   render() {
+    const schoolCode = this.props.schoolCode;
+    const schoolLabel = this.props.labels.schools[schoolCode];
     return (
       <div className="school">
         <DocumentMeta {...meta} />
-        <div className="nav">
-          <div className="container">
-            <a href="..">
-              <img className="logo" src="/img/logo.svg" />
-            </a>
-            <input className="nav-search" name="search" placeholder="Search courses..." type="text" autoComplete="off">
-            </input>
-            <div className="material-icons nav-search-icon">search</div>
-            <a className="nav-button nav-button-alt" href="../userhome">Log In</a>
-            <a className="nav-button" href="../userhome">Sign Up</a>
-          </div>
-        </div>
+        <Navbar /> 
         <div className="gray-nav">
           <div className="container">
-            <a>Home</a> > <a>UC Berkeley</a>
+            <a>Home</a> > <a>{schoolLabel}</a>
           </div>
         </div>
         <div className="card-container-container">
           <div className="card-container center">
             <div className="container">
               <div className="center">
-                <h4>UC Berkeley</h4>
+                <h4>{schoolLabel}</h4>
                 <h5>Available courses</h5>
               </div>
             </div>
@@ -102,5 +95,16 @@ class School extends Component {
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    schoolCode: ownProps.match.params.schoolCode,
+    labels: state.labels,
+  };
+};
+
+const School = connect(
+  mapStateToProps
+)(SchoolComponent);
 
 export default School;

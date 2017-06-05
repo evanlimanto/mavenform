@@ -33,19 +33,18 @@ export default class AuthService {
       username,
       password
     }, err => {
-      if (err) return alert(err.description)
+      if (err) console.error(err);
     })
   }
 
-  signup(email, password){
+  signup(email, username, password){
     this.auth0.redirect.signupAndLogin({
       connection: 'Username-Password-Authentication',
       email,
       password,
-    }, function(err) {
-      if (err) {
-        alert('Error: ' + err.description)
-      }
+      user_metadata: { username }
+    }, (err) => {
+      if (err) console.error(err);
     })
   }
 
@@ -66,18 +65,17 @@ export default class AuthService {
       if (err) {
         alert(`Error: ${err.errorDescription}`)
       }
-      if (authResult && authResult.accessToken && authResult.idToken) {
+      if (authResult) {
         this.setToken(authResult.accessToken, authResult.idToken)
         this.auth0.client.userInfo(authResult.accessToken, (error, profile) => {
           if (error) {
-            console.log('Error loading the Profile', error)
+            console.error(error)
           } else {
             if (process.env.NODE_ENV === "development") {
-              console.log("User Profile: ", profile);
+              console.log(profile);
             }
             this.setProfile(profile)
-            // Redirect user here
-            this.history.replace('/login')
+            document.location = "/home";
           }
         })
       }
@@ -144,8 +142,6 @@ export default class AuthService {
             console.log('Error loading the Profile', error)
           } else {
             this.setProfile(profile)
-            // Redirect user here
-            this.history.replace('/login')
           }
         })
       }
@@ -156,6 +152,6 @@ export default class AuthService {
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token')
     localStorage.removeItem('profile')
-    this.history.go('/login')
+    document.location = "/";
   }
 }

@@ -265,10 +265,10 @@ app.post('/addProblem', function(req, res) {
   });
 });
 
-app.post('/createUser', function(req, res) {
-  const userId = req.body;
+app.post('/createUser/:userid', function(req, res) {
+  const userid = req.params.userid;
   const q = `insert into users (auth_user_id) values ($1) where not exists (select id from users where auth_user_id = $2)`;
-  client.query(q, [userId, userId], function(err, result) {
+  client.query(q, [userid, userid], function(err, result) {
     if (res) res.status(400).send(err);
     else res.send("Success!");
     res.end();
@@ -411,6 +411,23 @@ app.get('/approveTranscription/:examid', function(req, res) {
     }
   ], (err) => {
     next(err);
+  });
+});
+
+app.get('/getBookmarkedCourses/:userid', (req, res, next) => {
+  const userid = req.params.userid;
+
+  const q = `select courses.id, courses.code from bookmarked_courses BC
+    inner join courses on BC.courseid = courses.id
+    inner join users on BC.userid = users.id
+    where users.auth_user_id = $1`;
+  client.query(q, [userid], (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    const items = _.map(result.rows, (row) => row.code);
+    res.json(items);
   });
 });
 

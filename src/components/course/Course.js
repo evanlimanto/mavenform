@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { has, map, toUpper } from 'lodash';
+import { map, toUpper } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 
 import { examClickEvent } from '../../events';
-import { courseCodeToLabel, examTypeToLabel, getCourse, termToLabel } from '../../utils';
+import { courseCodeToLabel } from '../../utils';
 
 import Footer from '../footer';
 import Navbar from '../navbar';
-import NavSidebar from '../navsidebar';
-import NotFound from '../notfound';
 
 class CourseComponent extends Component {
   constructor(props) {
@@ -23,7 +21,7 @@ class CourseComponent extends Component {
 
   componentDidMount() {
     const { courseCode, schoolCode } = this.props;
-    fetch(`/getCourseExams/${this.props.schoolCode}/${this.props.courseCode}`).then(
+    fetch(`/getCourseExams/${schoolCode}/${courseCode}`).then(
       (response) => response.json()
     ).then((json) => this.setState({ exams: json }));
   }

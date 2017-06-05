@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import createBrowserHistory from 'history/createBrowserHistory'
-
-import Login from './Login';
-import { parseAuthHash } from '../../utils'
 
 class LogoutComponent extends Component {
-  render() {
+  componentWillMount() {
     this.props.auth.logout();
-    createBrowserHistory().push('/login')
-    return <Login parseAuthHash={parseAuthHash} />;
+    window.location = "/";
+  }
+
+  render() {
+    return false;
   }
 }
 

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import loadjs from 'loadjs';
-import { keys, identity, map, sortBy } from 'lodash';
+import { map } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 
 import Footer from '../footer';
@@ -32,8 +31,8 @@ class SchoolComponent extends Component {
   render() {
     const schoolCode = this.props.schoolCode;
     const courseItems = map(this.state.courses, (obj, subject) => {
-      const courseBoxes = map(obj.courses, (course) => (
-        <Link className="card course-card" to={"/" + schoolCode + "/" + course.code}>
+      const courseBoxes = map(obj.courses, (course, key) => (
+        <Link className="card course-card" to={"/" + schoolCode + "/" + course.code} key={key}>
           <span>{courseCodeToLabel(course.code)}</span>
           <span className="card-arrow">&#8594;</span>
         </Link>

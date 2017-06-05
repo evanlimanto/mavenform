@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import DocumentMeta from 'react-document-meta';
-import { map, forEach } from 'lodash';
-import { closeNotificationBar } from '../../actions';
-import { learnMoreEvent, viewCoursesEvent } from '../../events';
+import { map } from 'lodash';
 import Footer from '../footer';
 import Modal from '../modal';
-import Screen from './screen.png';
+import Navbar from '../navbar';
 
 const Scroll = require('react-scroll');
 const Element = Scroll.Element;
@@ -22,41 +20,22 @@ const SEARCH_API_KEY = '22cd6e2a19445d1444df8fb7a3d00f52'
 const algolia = require('algoliasearch')(APP_ID, SEARCH_API_KEY);
 const index = algolia.initIndex('courses');
 
-class Home extends Component {
+class HomeComponent extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      modal: null
-    };
-
-    this.closeModal = this.closeModal.bind(this);
-    this.loginModal = this.loginModal.bind(this);
-    this.signUpModal = this.signUpModal.bind(this);
     this.getSuggestions = this.getSuggestions.bind(this);
   }
 
-  closeModal() {
-    this.setState({
-      modal: null
-    });
-  }
-
-  loginModal() {
-    this.setState({
-      modal: 'login'
-    });
-  }
-
-  signUpModal() {
-    this.setState({
-      modal: 'signup'
-    });
+  componentWillMount() {
+    if (this.props.auth.loggedIn()) {
+      this.props.history.go('/home'); 
+    }
   }
 
   getSuggestions() {
-    const queryStr = this.refs.search.value;
     /*
+    const queryStr = this.refs.search.value;
     index.search(queryStr, (err, content) => {
       forEach(content.hits, (hit) => {
         console.log(hit.school_name, hit.code, hit.course_name, hit._highlightResult);
@@ -77,26 +56,10 @@ class Home extends Component {
       );
     });
 
-    let modal = null;
-    if (this.state.modal === 'signup') {
-      modal = <Modal signUp={true} closeModal={this.closeModal} loginModal={this.loginModal} signUpModal={this.signUpModal} />;
-    } else if (this.state.modal === 'login') {
-      modal = <Modal signUp={false} closeModal={this.closeModal} loginModal={this.loginModal} signUpModal={this.signUpModal} />;
-    }
-
     return (
       <div className="home">
         <DocumentMeta {...meta} />
-        {modal}
-        <div className="home-nav">
-          <div className="container">
-            <a href="..">
-              <img className="logo home-logo" src="/img/logo.svg" />
-            </a>
-            <a className="home-button home-button-alt" onClick={this.loginModal}>Log In</a>
-            <a className="home-button" onClick={this.signUpModal}>Sign Up</a>
-          </div>
-        </div>
+        <Navbar home={true} />
         <div className="banner">
           <div className="banner-img"></div>
           <div className="banner-text">
@@ -165,5 +128,15 @@ class Home extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  };
+};
+
+const Home = connect(
+  mapStateToProps
+)(HomeComponent);
 
 export default Home;
