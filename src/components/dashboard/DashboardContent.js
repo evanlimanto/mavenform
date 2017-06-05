@@ -24,11 +24,6 @@ class DashboardContentComponent extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentWillMount() {
-    const { auth, history } = this.props;
-    // this.props.requireAuth(auth, history)
-  }
-
   updateContent() {
     const { examid, problem_num, subproblem_num } = this.state;
     const problem_content = this.refs.problem.value;

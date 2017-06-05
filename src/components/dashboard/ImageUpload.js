@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import request from 'superagent';
-import { endsWith, map } from 'lodash';
+import { map } from 'lodash';
 
 class ImageUploadComponent extends Component {
   constructor(props) {

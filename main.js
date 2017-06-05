@@ -437,14 +437,14 @@ app.get('/getBookmarkedCourses/:userid', (req, res, next) => {
 app.get('/getUserSchool/:userid', (req, res, next) => {
   const userid = req.params.userid;
 
-  const q = `select users.schoolid as school_id, schools.name as school_name from users
+  const q = `select users.schoolid as id, schools.name as name, schools.code as code from users
     inner join schools on schools.id = users.schoolid where users.auth_user_id = $1`;
   client.query(q, [userid], (err, result) => {
     if (result.rows.length === 0) {
       res.json({});
     } else {
       const row = result.rows[0];
-      res.json({ school_id: row.school_id, school_name: row.school_name });
+      res.json({ id: row.id, name: row.name, code: row.code });
     }
   });
 });

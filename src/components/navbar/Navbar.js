@@ -115,22 +115,32 @@ class NavbarComponent extends Component {
     const examTypeLabel = examTypeToLabel(examTypeCode);
     const termLabel = termToLabel(termCode); 
     const numLayers = !!schoolLabel + !!courseLabel + !!examTypeLabel;
-    let navbarNav = [<Link key='home' to='/' className={classnames({ active: numLayers === 0 })}>Home</Link>];
-    if (schoolLabel) {
-      navbarNav.push(<span key='homeSpan'> > </span>);
-      navbarNav.push(<Link key='school' to={'/' + schoolCode} className={classnames({ active: numLayers === 1 })}>{schoolLabel}</Link>);
-      if (courseLabel) {
-        navbarNav.push(<span key='courseSpan'> > </span>);
-        navbarNav.push(<Link key='course' to={'/' + schoolCode + '/' + courseCode} className={classnames({ active: numLayers === 2 })}>{courseLabel}</Link>);
-        if (examTypeLabel) {
-          navbarNav.push(<span key='examSpan'> > </span>);
-          navbarNav.push(<Link key='exam' to={'/' + schoolCode + '/' + courseCode + '/' + examTypeCode + '/' + termCode} className={classnames({ active: numLayers === 3 })}>{examTypeLabel} - {termLabel}</Link>);
+    let navbarNav = null;
+    if (!this.props.userHome) {
+      navbarNav = [<Link key='home' to='/' className={classnames({ active: numLayers === 0 })}>Home</Link>];
+      if (schoolLabel) {
+        navbarNav.push(<span key='homeSpan'> > </span>);
+        navbarNav.push(<Link key='school' to={'/' + schoolCode} className={classnames({ active: numLayers === 1 })}>{schoolLabel}</Link>);
+        if (courseLabel) {
+          navbarNav.push(<span key='courseSpan'> > </span>);
+          navbarNav.push(<Link key='course' to={'/' + schoolCode + '/' + courseCode} className={classnames({ active: numLayers === 2 })}>{courseLabel}</Link>);
+          if (examTypeLabel) {
+            navbarNav.push(<span key='examSpan'> > </span>);
+            navbarNav.push(<Link key='exam' to={'/' + schoolCode + '/' + courseCode + '/' + examTypeCode + '/' + termCode} className={classnames({ active: numLayers === 3 })}>{examTypeLabel} - {termLabel}</Link>);
+          }
         }
       }
+      navbarNav = (
+        <div className="gray-nav">
+          <div className="container">
+            {navbarNav}
+          </div>
+        </div>
+      );
     }
 
     const suggestions = this.state.suggestions;
-    const searchResults = (
+    const searchResults = (suggestions && suggestions.length > 0) ? (
       <div className={classnames({ "nav-results": true, "nav-results-signed-in": isLoggedIn })}>
         {map(suggestions, (suggestion, index) => {
           const aClass = classnames({ bottom: index === suggestions.length - 1 });
@@ -138,14 +148,14 @@ class NavbarComponent extends Component {
           return <Link to={`/${suggestion.school_code}/${toLower(suggestion.code)}`} className={aClass} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
         })}
       </div>
-    );
+    ) : null;
 
     return (
       <div>
         {modal}
         <div className="nav">
           <div className="container">
-            <Link to="/"><img className="logo" src="/img/logo.svg" /></Link>
+            <Link to="/"><img className="logo" src="/img/logo.svg" alt="logo" /></Link>
             <input className={classnames({ "nav-search": true, "nav-search-signed-in": isLoggedIn })} name="search" placeholder="Search courses..." type="text" autoComplete="off" onChange={this.getSuggestions} ref="search" />
             {searchResults}
             <div className="material-icons nav-search-icon">search</div>
@@ -166,11 +176,7 @@ class NavbarComponent extends Component {
             )}
           </div>
         </div>
-        <div className="gray-nav">
-          <div className="container">
-            {navbarNav}
-          </div>
-        </div>
+        {navbarNav}
       </div>
     ); 
   }
