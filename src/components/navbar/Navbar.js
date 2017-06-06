@@ -12,6 +12,7 @@ class NavbarComponent extends Component {
     this.state = {
       modal: null,
       profileDropdownOn: false,
+      suggestionsDropdownOn: false,
       suggestions: []
     };
 
@@ -29,6 +30,10 @@ class NavbarComponent extends Component {
       const arrow = document.getElementsByClassName("nav-signed-in");
       if (logout.length > 0 && !logout[0].contains(e.target) && !arrow[0].contains(e.target) && self.state.profileDropdownOn) {
         self.setState({ profileDropdownOn: false });  
+      }
+      const searchResults = document.getElementsByClassName("nav-results");
+      if (searchResults.length > 0 && !searchResults[0].contains(e.target) && self.state.suggestionsDropdownOn) {
+        self.setState({ suggestionsDropdownOn: false });
       }
     });
   }
@@ -81,7 +86,7 @@ class NavbarComponent extends Component {
           name_highlighted: hit._highlightResult.name.value,
         };
       });
-      this.setState({ suggestions });
+      this.setState({ suggestions, suggestionsDropdownOn: true });
     });
   }
 
@@ -151,7 +156,7 @@ class NavbarComponent extends Component {
     }
 
     const suggestions = this.state.suggestions;
-    const searchResults = (suggestions && suggestions.length > 0) ? (
+    const searchResults = (suggestions && suggestions.length > 0 && this.state.suggestionsDropdownOn) ? (
       <div className={classnames({ "nav-results": true, "nav-results-signed-in": isLoggedIn })}>
         {map(suggestions, (suggestion, index) => {
           const aClass = classnames({ bottom: index === suggestions.length - 1 });
@@ -160,7 +165,6 @@ class NavbarComponent extends Component {
         })}
       </div>
     ) : null;
-    console.log("here", this.state.profileDropdownOn);
 
     return (
       <div>
