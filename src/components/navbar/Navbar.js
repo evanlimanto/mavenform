@@ -22,6 +22,17 @@ class NavbarComponent extends Component {
     this.toggleProfileDropdown = this.toggleProfileDropdown.bind(this);
   }
 
+  componentDidMount() {
+    const self = this;
+    window.addEventListener('click', function(e) {
+      const logout = document.getElementsByClassName("logout");
+      const arrow = document.getElementsByClassName("nav-signed-in");
+      if (logout.length > 0 && !logout[0].contains(e.target) && !arrow[0].contains(e.target) && self.state.profileDropdownOn) {
+        self.setState({ profileDropdownOn: false });  
+      }
+    });
+  }
+
   toggleProfileDropdown() {
     this.setState({
       profileDropdownOn: !this.state.profileDropdownOn
@@ -80,7 +91,7 @@ class NavbarComponent extends Component {
     let username = null;
     if (profile) {
       username = (has(profile, 'user_metadata') && has(profile.user_metadata, 'username')) ?
-      (profile.user_metadata.username) : (profile.nickname);
+      (profile.user_metadata.username) : (profile.given_name);
     }
 
     let modal = null;
@@ -149,6 +160,7 @@ class NavbarComponent extends Component {
         })}
       </div>
     ) : null;
+    console.log("here", this.state.profileDropdownOn);
 
     return (
       <div>
