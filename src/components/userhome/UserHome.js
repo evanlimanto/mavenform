@@ -105,6 +105,17 @@ class UserHomeComponent extends Component {
   }
 
   render() {
+    const schools = ['ucberkeley', 'ucsandiego', 'stanford'];
+    const schoolLabels = ['UC Berkeley', 'UC San Diego', 'Stanford'];
+    const schoolCards = map(schools, (school, key) => {
+      return (
+        <Link key={key} className="card" to={"/" + school}>
+          <span>{schoolLabels[key]}</span>
+          <span className="card-arrow">&#8594;</span>
+        </Link> 
+      );
+    });
+
     const bookmarkedCoursesBoxes = (
       <div className="card-container">
         {map(this.state.bookmarkedCourses, (courseCode, key) => {
@@ -193,7 +204,7 @@ class UserHomeComponent extends Component {
             <div className="container">
               <div className="center">
                 <h4>Dashboard</h4>
-                <h5>Your bookmarked courses</h5>
+                <h5>Your personal dashboard</h5>
               </div>
             </div>
             <hr className="s5" />
@@ -204,10 +215,17 @@ class UserHomeComponent extends Component {
                 </a>
               </div>
             )}
-            <hr className="s2" />
             <hr className="margin" />
           </div>
-          <div className="footer-holder">
+          <div className="schools">
+            <hr className="margin" />
+            <h4>Directory</h4>
+            <h5>Manually browse schools</h5>
+            <hr className="s3" />
+            <div className="card-container">
+              {schoolCards}
+              <hr className="margin-plus" />
+            </div>
           </div>
           <div className="blue center footer">
             <hr className="s2" />
