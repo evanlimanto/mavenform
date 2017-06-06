@@ -75,11 +75,12 @@ export default class AuthService {
             console.log(profile);
           this.setProfile(profile)
           const req = request.post('/createUser');
+          console.log(profile.user_id);
           req.field('auth_user_id', profile.user_id)
             .end((err, res) => {
               if (err) console.error(err);
+              else document.location = "/home";
             });
-          document.location = "/home";
         })
       }
     })

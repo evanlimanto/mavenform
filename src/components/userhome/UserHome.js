@@ -87,18 +87,21 @@ class UserHomeComponent extends Component {
   }
 
   selectSchool() {
+    const schoolArr = split(this.refs.selectedSchool.value, "~");
     const profile = this.props.auth.getProfile();
-    const schoolid = this.refs.selectedSchool.value;
+    const schoolCode = schoolArr[0];
+    const schoolid = schoolArr[1];
     const req = request.post('/selectSchool');
+    const self = this;
     req.field('school_id', schoolid)
       .field('auth_user_id', profile.user_id)
       .end((err, res) => {
         if (err || !res.ok)
           console.error(err);
         else {
-          this.setState({
-            school: schoolid,
-            showSelectSchoolModal: !this.state.selectSchoolModal,
+          self.setState({
+            selectedSchool: { code: schoolCode, id: schoolid },
+            showSelectSchoolModal: false,
           });
         }
       });
@@ -134,7 +137,7 @@ class UserHomeComponent extends Component {
             <hr className="s3"/>
             <select ref="selectedSchool">
               {map(this.props.schools, (school, key) => {
-                return <option value={school.id} key={key}>{school.name}</option>;
+                return <option value={school.code + "~" + school.id} key={key}>{school.name}</option>;
               })}
             </select>
             <div className="select-arrow">

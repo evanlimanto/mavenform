@@ -269,12 +269,13 @@ app.post('/addProblem', function(req, res) {
 });
 
 app.post('/createUser', function(req, res) {
-  const userid = req.body.userid;
-  const q = `insert into users (auth_user_id) values ($1) where not exists (select id from users where auth_user_id = $2)`;
-  client.query(q, [userid, userid], function(err, result) {
-    if (res) res.status(400).send(err);
+  const { auth_user_id } = req.body;
+  const q = `insert into users (auth_user_id) select $1
+    where not exists (select 1 from users where auth_user_id = $2)
+  `;
+  client.query(q, [auth_user_id, auth_user_id], function(err, result) {
+    if (err) console.error(err);
     else res.send("Success!");
-    res.end();
   });
 });
 
