@@ -23,6 +23,7 @@ body {
 .container {
   display: block;
   margin: auto;
+  width: 100%;
   max-width: 1000px;
 }
 
@@ -126,10 +127,4 @@ body {
 
 .hidden {
   display: none;
-}
-
-.mobile-back {
-  display: none;
-  float: left;
-  margin-left: 0 !important;
 }

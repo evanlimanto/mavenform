@@ -1,7 +1,8 @@
 .card-container {
   margin: auto;
-  width: 1020px;
-  text-align: left;
+  width: 100%;
+  max-width: 1020px;
+  text-align: center;
 }
 
 .card {
@@ -9,7 +10,8 @@
   vertical-align: top;
   display: inline-block;
   padding: 30px;
-  width: 305px;
+  width: 100%;
+  max-width: 305px;
   margin: 15px;
   border-radius: 5px;
   border: 1px solid #999;
