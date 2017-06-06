@@ -1,3 +1,13 @@
+.mobile-logo {
+  display: none;
+}
+
+.mobile-back {
+  display: none;
+  float: left;
+  margin-left: 0 !important;
+}
+
 @media (max-width: 1199px) {
   .content {
     max-width: 100%;
@@ -6,6 +16,28 @@
 
   .table-container-container {
     padding: 0 250px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .desktop-logo {
+    display: none;
+  }
+
+  .mobile-logo {
+    display: inline;
+  }
+
+  .search, .search-icon, .nav-search, .nav-search-icon {
+    display: none;
+  }
+
+  .mobile-logo .home-logo {
+    padding: 25px 15px;
+  }
+
+  .home-button {
+    margin: 19px 15px 19px 0;
   }
 }
 
@@ -35,10 +67,6 @@
   }
 
   .tooltip {
-    display: none;
-  }
-
-  .logo {
     display: none;
   }
 

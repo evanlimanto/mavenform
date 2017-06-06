@@ -97,7 +97,12 @@ class NavbarComponent extends Component {
         <div className="home-nav">
           {modal}
           <div className="container">
-            <Link to="/"><img className="logo home-logo" src="/img/logo.svg" alt="home logo" /></Link>
+            <Link to="/" className="desktop-logo">
+              <img className="logo home-logo" src="/img/logo.svg" alt="home logo" />
+            </Link>
+            <Link to="/" className="mobile-logo">
+              <img className="logo home-logo" src="/img/icon.svg" alt="home logo" />
+            </Link>
             <a className="home-button home-button-alt" onClick={this.loginModal}>Log In</a>
             <a className="home-button" onClick={this.signUpModal}>Sign Up</a>
           </div>
