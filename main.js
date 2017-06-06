@@ -198,7 +198,7 @@ app.get('/getExam/:schoolCode/:courseCode/:examTypeCode/:termCode', function(req
     where S.code = $1 and T.term_code = $2 and ET.type_code = $3 and C.code = $4;
   `;
   const getcontentq = `
-    select problem_num, subproblem_num, problem, solution from content where exam = $1
+    select problem_num, subproblem_num, problem, solution, choices from content where exam = $1
   `;
   async.waterfall([
     (callback) => {
