@@ -76,8 +76,11 @@ app.get('/getTranscribedExams', retrieveLists.getTranscribedExams);
 // Retrieve list of transcribed content
 app.get('/getTranscribedContent', retrieveLists.getTranscribedContent);
 
-// Retrieve list of courses with subjects
+// Retrieve dictionary of courses with subjects
 app.get('/getSchoolCourses/:schoolCode', retrieveLists.getSchoolCourses);
+
+// Retrieve dictionary of courses with subjects
+app.get('/getSchoolCoursesList/:schoolid', retrieveLists.getSchoolCoursesList);
 
 // Retrieve list of courses that are not bookmarked
 app.get('/getUnbookmarkedCourses/:school_id/:auth_user_id', retrieveLists.getUnbookmarkedCourses);
@@ -315,7 +318,7 @@ app.post('/processTranscription', function(req, res, next) {
     ws.write(file.data);
     ws.end();
   }, (err) => {
-    next(err); 
+    if (err) next(err); 
   });
 
   let doc = null;
@@ -362,7 +365,7 @@ app.post('/processTranscription', function(req, res, next) {
   });
 });
 
-app.get('/approveTranscription/:examid', function(req, res) {
+app.get('/approveTranscription/:examid', function(req, res, next) {
   const approvedExamId = req.params.examid;
 
   const imageq    = `select url from images_staging where examid = $1`;
@@ -375,46 +378,56 @@ app.get('/approveTranscription/:examid', function(req, res) {
   const deleteproblemsq = `delete from content_staging where exam = $1`;
   const delq = `delete from exams_staging where id = $1`;
 
+  let courseid, examtype, examid, schoolid, profs;
   async.series([
     (callback) => client.query(imageq, [approvedExamId], (err, result) =>
-      async.each(result.rows, (row) => {
+      async.each(result.rows, (row, eachCallback) => {
         const sourceFile = stagingBucket.file(row.url);
         async.waterfall([
           (innerCallback) => {
             sourceFile.move(bucket, innerCallback)
           },
           (destFile, resp, innerCallback) => {
-            destFile.makePublic(innerCallback)
+            destFile.makePublic((err, apiResponse) => innerCallback(err))
           }
-        ], callback)
-      })),
+        ], eachCallback)
+      }, callback)
+    ),
     (callback) => {
-      client.query(delimageq, [approvedExamId], callback);
+      client.query(delimageq, [approvedExamId], (err) => callback(err));
     }
   ], (err) => {
-    next(err);
-  });
-
-  async.waterfall([
-    (callback) => {
-      client.query(getq, [approvedExamId], callback);
-    },
-    (result, callback) => {
-      const { courseid, examtype, examid, schoolid, profs } = result.rows[0];
-      client.query(inq, [courseid, examtype, examid, schoolid, profs], callback);
-    },
-    (result, callback) => {
-      const id = result.rows[0].id;
-      client.query(insertproblemsq, [id, approvedExamId], (err) => callback(err));
-    },
-    (callback) => {
-      client.query(deleteproblemsq, [approvedExamId], (err) => callback(err)); 
-    },
-    (callback) => {
-      client.query(delq, [approvedExamId], (err) => callback(err));
+    if (err) next(err);
+    else {
+      async.waterfall([
+        (callback) => {
+          client.query(getq, [approvedExamId], callback);
+        },
+        (result, callback) => {
+          courseid = result.rows[0].courseid;
+          examtype = result.rows[0].examtype;
+          examid = result.rows[0].examid;
+          schoolid = result.rows[0].schoolid;
+          profs = result.rows[0].profs;
+          client.query(inq, [courseid, examtype, examid, schoolid, profs], (err) => callback(err));
+        },
+        (callback) => {
+          client.query(getidq, [courseid, examtype, examid, schoolid, profs], callback);
+        },
+        (result, callback) => {
+          const id = result.rows[0].id;
+          client.query(insertproblemsq, [id, approvedExamId], (err) => callback(err));
+        },
+        (callback) => {
+          client.query(deleteproblemsq, [approvedExamId], (err) => callback(err)); 
+        },
+        (callback) => {
+          client.query(delq, [approvedExamId], (err) => callback(err));
+        }
+      ], (err) => {
+        next(err);
+      });
     }
-  ], (err) => {
-    next(err);
   });
 });
 

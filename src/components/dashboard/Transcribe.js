@@ -57,7 +57,7 @@ class TranscribeComponent extends Component {
 
   populateCourses() {
     const schoolid = split(this.refs.school.value, '~')[1];
-    fetch(`/getSchoolCourses/${schoolid}`).then(
+    fetch(`/getSchoolCoursesList/${schoolid}`).then(
       (response) => response.json()
     ).then((json) => this.setState({ courses: json }));
   }
@@ -145,7 +145,6 @@ class TranscribeComponent extends Component {
     const year = this.refs.year.value;
     let termarr = reduce(this.props.terms, (res, item) => {
       const code = quarter[0] + quarter[1] + toString(year).slice(2, 4);
-      console.log(code, item.term_code);
       if (item.term_code === code) {
         return [item.term_code, item.id];
       }

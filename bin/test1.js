@@ -16,10 +16,28 @@ const q = `
   inner join subjects on courses.subjectid = subjects.id
 `;
 
+function courseCodeToLabel(course_code) {
+  if (!!!course_code)
+    return null;
+
+  let idx = -1;
+  for (var i = 0; i < course_code.length; i++) {
+    if (course_code[i] >= '0' && course_code[i] <= '9') {
+      idx = i;
+      break;
+    }
+  }
+  course_code = _.toUpper(course_code);
+  if (idx !== -1) {
+    course_code = course_code.slice(0, idx) + " " + course_code.slice(idx, course_code.length);
+  }
+  return course_code;
+}
+
 client.query(q, [], (err, result) => {
   _.forEach(result.rows, (row) => {
     let { code, course_name, school_name, subject_label, school_code } = row;
-    code = _.toUpper(code);
+    code = courseCodeToLabel(code);
     index.addObject({
       code: code,
       name: course_name,

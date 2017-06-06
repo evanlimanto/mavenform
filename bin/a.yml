@@ -1,0 +1,325 @@
+q1_1: |
+  1a) The contribution of a C-C bond is:
+  - 146 kcal/mole
+  - 99 kcal/mole
+  - 63 kcal/mole
+  - 83 kcal/mole
+
+q1_1_s: |
+  - 83 kcal/mole
+
+q1_2: |
+  b) The contribution of a C=C $\pi$ bond is:
+  - 146 kcal/mole
+  - 99 kcal/mole
+  - 63 kcal/mole
+  - 83 kcal/mole
+
+q1_2_s: |
+  - 63 kcal/mole
+
+q1_3: |
+  c) The contribution of a C=O $\pi$ bond is:
+  - 179 kcal/mole
+  - 111 kcal/mole
+  - 86 kcal/mole
+  - 93 kcal/mole
+
+q1_3_s: |
+  - 93 kcal/mole
+
+q1_4: |
+  d) The contribution of a C-O $\sigma$ bond is:
+  - 146 kcal/mole
+  - 99 kcal/mole
+  - 63 kcal/mole
+  - 86 kcal/mole
+
+q1_4_s: |
+  - 86 kcal/mole
+
+q1_5: |
+  e) The reduction of a simple C=C $\pi$ bond is:
+  - exothermic by 63 kcal/mole
+  - endothermic by 30 kcal/mole
+  - endothermic by 63 kcal/mole
+  - exothermic by 30 kcal/mole
+
+q1_5_s: |
+  - exothermic by 30 kcal/mole
+
+q1_6: |
+  f) The difference in energy between 1-butene and cis-2-butene is:
+  - 1.0 kcal/mole
+  - 2.7 kcal/mole
+  - 1.7 kcal/mole
+  - 0.9 kcal/mole
+
+q1_6_s: |
+  - 1.7 kcal/mole
+
+q1_7: |
+  g) The correct order of stability of carbocations is:
+  - $1^\circ > 2^\circ > 3^\circ$
+  - $2^\circ > 3^\circ > 1^\circ$
+  - $3^\circ > 2^\circ > 1^\circ$
+  - $2^\circ > 1^\circ > 3^\circ$
+
+q1_7_s: |
+  - $3^\circ > 2^\circ > 1^\circ$
+
+q1_8: |
+  h) The methyl group of an ethyl group $[CH_3CH_2—]$ in a molecule with more than $3$ carbon atoms is a:
+  - quintet
+  - sextet
+  - triple
+  - quarter 
+
+q1_8_s: |
+  - sextet
+
+q1_9: |
+  i) At equilibrium, two compounds that differ in energy by $4.1$ kcal/mole will be in a ration of approximately:
+  - 1:1
+  - 100:1
+  - 10:1
+  - 1000:1
+
+q1_9_s: |
+  - 1000:1
+
+q1_10: |
+  j) The correct average bond energies for the pi and sigma bonds between carbon and oxygen in the following compounds is:
+  <hr class="s2" />
+  [[q1-1.png]]
+  - 173&nbsp;&nbsp;&nbsp;&nbsp;176&nbsp;&nbsp;&nbsp;&nbsp;179
+  - 179&nbsp;&nbsp;&nbsp;&nbsp;176&nbsp;&nbsp;&nbsp;&nbsp;173
+  - 176&nbsp;&nbsp;&nbsp;&nbsp;173&nbsp;&nbsp;&nbsp;&nbsp;179
+  - 173&nbsp;&nbsp;&nbsp;&nbsp;179&nbsp;&nbsp;&nbsp;&nbsp;176
+
+q1_10_s: |
+  - 179&nbsp;&nbsp;&nbsp;&nbsp;176&nbsp;&nbsp;&nbsp;&nbsp;173
+
+q1_11: |
+  k) In electrophilic, aromatic substitution, a bromine substituent on a benzene ring is:
+  - Activating, o,p directing
+  - Deactivating, o,p directing
+  - Activating, m directing
+  - Deactivating, m directing
+
+q1_11_s: |
+  - Deactivating, o,p directing
+
+q1_12: |
+  l) In electrophilic, aromatic substitution, a nitro group on a benzene ring is:
+  - Activating, o,p directing
+  - Deactivating, o,p directing
+  - Activating, m directing
+  - Deactivating, m directing
+
+q1_12_s: |
+  - Deactivating, m directing
+
+q1_13: |
+  l) In electrophilic, aromatic substitution, a alkyl group on a benzene ring is:
+  - Activating, o,p directing
+  - Deactivating, o,p directing
+  - Activating, m directing
+  - Deactivating, m directing
+
+q1_13_s: |
+  - Activating, o,p directing
+
+q1_14: |
+  l) In electrophilic, aromatic substitution, a acyl group on a benzene ring is:
+  - Activating, o,p directing
+  - Deactivating, o,p directing
+  - Activating, m directing
+  - Deactivating, m directing
+
+q1_14_s: |
+  - Deactivating, m directing
+
+q2_1: |
+  2\. Show the mechanism for the formation of the active electrophile for each of the following electrophilic aromatic substitution reactions. Your mechanism must include curved arrows show the flow of electrons for all bonds made and broken. Answers outside the provided boxes will not receive credit.
+  <hr class="s2" />
+  [[q2-1.png]]
+
+q2_1_s: |
+  [[q2-2.png]]
+
+q3_1: |
+  3\. Shade the p orbitals in the diagrams below to depict the four molecular orbitals of butadiene. Indicate the number of electrons in each orbital in the boxes provided. If an orbital is empty, write 0. Indicate the orbitals as bonding, antibonding, and non-bonding, as appropriate.
+  <hr class="s2" />
+  [[q3-1.png]]
+
+q3_1_s: |
+  [[q3-1.png]]
+
+q4_1: |
+  4\. Provide a complete mechanism including curved arrows showing the flow of electrons for all bonds made and broken for the following reaction. You may use H+ as the source of a proton and you need not show where a proton goes when it is lost.
+  <hr class="s2" />
+  [[q4-1.png]]
+
+q4_1_s: |
+  [[q4-2.png]]
+
+q5_1: |
+  5\. Provide the expected major organic product from each of the following reactions. Do not show stereochemistry for products with only on center of chirality. If two centers are present in the product, you must show relative stereochemistry. You must place your answer in the box provided. Answers outside the boxes will not receive credit.
+  <hr class="s2" />
+  [[q5-1.png]]
+
+q5_1_s: |
+  [[q5-2.png]]
+
+q5_2: |
+  [[q5-3.png]]
+
+q5_2_s: |
+  [[q5-4.png]]
+
+q5_3: |
+  [[q5-5.png]]
+
+q5_3_s: |
+  [[q5-6.png]]
+
+q5_4: |
+  [[q5-7.png]]
+
+q5_4_s: |
+  [[q5-8.png]]
+
+q5_5: |
+  [[q5-9.png]]
+
+q5_5_s: |
+  [[q5-10.png]]
+
+q5_6: |
+  [[q5-11.png]]
+
+q5_6_s: |
+  [[q5-12.png]]
+
+q6_1: |
+  6\. Provide the expected major organic product from each of the following reactions. Show stereochemistry when significant. You must place your answer in the box provided. Answers outside the boxes will not receive credit.
+  <hr class="s2" />
+  [[q6-1.png]]
+
+q6_1_s: |
+  [[q6-2.png]]
+
+q6_2: |
+  [[q6-3.png]] 
+
+q6_2_s: |
+  [[q6-4.png]] 
+
+q6_3: |
+  [[q6-5.png]] 
+
+q6_3_s: |
+  [[q6-6.png]] 
+
+q6_4: |
+  [[q6-7.png]] 
+
+q6_4_s: |
+  [[q6-8.png]] 
+
+q6_5: |
+  [[q6-9.png]] 
+
+q6_5_s: |
+  [[q6-10.png]] 
+
+q6_6: |
+  [[q6-11.png]] 
+
+q6_6_s: |
+  [[q6-12.png]] 
+
+q7_1: |
+  7\. Provide the expected major organic product from each of the following reactions. Do not show stereochemistry. You must place your answer in the box provided. Answers outside the boxes will not receive credit.
+  <hr class="s2" />
+  [[q7-1.png]]
+
+q7_1_s: |
+  [[q7-2.png]]
+
+q7_2: |
+  [[q7-3.png]]
+
+q7_2_s: |
+  [[q7-4.png]]
+
+q7_3: |
+  [[q7-5.png]]
+
+q7_3_s: |
+  [[q7-6.png]]
+
+q7_4: |
+  [[q7-7.png]]
+
+q7_4_s: |
+  [[q7-8.png]]
+
+q7_5: |
+  [[q7-9.png]]
+
+q7_5_s: |
+  [[q7-10.png]]
+
+q7_6: |
+  [[q7-11.png]]
+
+q7_6_s: |
+  [[q7-12.png]]
+
+q8_1: |
+  8\. For each of the following reactions, provide two sets of reagents that could be used consecutively to convert the starting material to the product shown. Be very careful, the order of the two steps is important and simply reversing the two steps will result in a significant grade penalty. Your answers must be placed within the provided boxes.
+  <hr class="s2" />
+  [[q8-1.png]]
+
+q8_1_s: |
+  [[q8-2.png]]
+
+q8_2: |
+  [[q8-3.png]]
+
+q8_2_s: |
+  [[q8-4.png]]
+
+q8_3: |
+  [[q8-5.png]]
+
+q8_3_s: |
+  [[q8-6.png]]
+
+q8_4: |
+  [[q8-7.png]]
+
+q8_4_s: |
+  [[q8-8.png]]
+
+q9_1: |
+  9\. Provided below is the proton NMR spectrum of an unknown. Propose a structure consistent with the spectrum. Your answer must be placed inside the box provided.
+  <hr class="s2" />
+  [[q9-1.png]]
+
+q9_1_s: |
+  [[q9-2.png]]
+  <hr class="s2" />
+  The solution to the NMR question of both exams is quite simple:
+  <hr class="s1" />
+  The formula indicates the presence of one ring or one double bond: all 10 hydrogens can be seen as two CH3 and three CH2 groups; these five groups account for five of thesix carbons and all of the hydrogens leaving CO; cannot be an alcohol as no OH; cannot be an ehter as there are no H on carbon bearing O; thus, the O must be a ketone (C=O) and thus there is a double bond but no ring. Thus, you must put together CH3 CH3 CH2 CH2 CH2 C=O so as to account for the splitting; as there is no methyne carbon, there is no branching and all six carbons form a straight chain; the O cannot be on the end of the chain (that would be an aldehyde which would show a single proton); thus, the carbonyl group must be on the 2nd or 3rd carbon of the chain; on the 3rd carbon there are two CH3CH2 groups; on the 2nd carbon there is only one.
+
+q10_1: |
+  10\. Provide reagents that could be used to convert the starting material shown below to the indicated product. If a reaction requires a second step (e.g., the addition of water to provide a proton for the product) then use two arrows.
+  <hr class="s2" />
+  [[q10-1.png]]
+
+q10_1_s: |
+  [[q10-2.png]]

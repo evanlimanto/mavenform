@@ -44,7 +44,7 @@ renderer.link = function(href, title, text) {
 }
 renderer.list = function(body, ordered) {
   if (ordered) {
-    return `${replace(replace(body, '<li>', ''), '</li>', '')}`;
+    return replace(replace(body, '<li>', ''), '</li>', '');
   } else {
     return `<ul>${body}</ul>`;
   }
