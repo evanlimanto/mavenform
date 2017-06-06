@@ -147,6 +147,29 @@ exports.getSchoolCourses = (req, res, next) => {
   });
 };
 
+exports.getSchoolCoursesList = (req, res, next) => {
+  const schoolid = req.params.schoolid;
+  const q = `
+    select C.id, C.code, C.name from courses C
+    inner join schools on schools.id = C.schoolid
+    where schools.id = $1
+  `;
+  client.query(q, [schoolid], (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    const items = _.map(result.rows, (row) => {
+      return {
+        id: row.id,
+        code: row.code,
+        name: row.name, 
+      };
+    });
+    res.json(items);
+  });
+};
+
 exports.getUnbookmarkedCourses = (req, res, next) => {
   const school_id = req.params.school_id;
   const auth_user_id = req.params.auth_user_id;

@@ -45,7 +45,6 @@ class ExamContent extends Component {
   render() {
     const { courseCode, examTypeCode, termCode, profs } = this.props;
     const examContent = this.state.examContent;
-
     const content = map(examContent.info, (num_parts, part) => {
       const subparts = map(range(1, num_parts + 1), subpart => {
         const key = `${part}_${subpart}`;
@@ -58,7 +57,7 @@ class ExamContent extends Component {
         const choices = examContent.problems[key].choices || '';
         qcontent = preprocess(qcontent);
         solution = preprocess(solution);
-        if (courseCode === 'ugba10') {
+        if (choices && choices.length > 0) {
           return <MultipleChoiceQuestion id={part + "_" + subpart} courseid={courseCode} content={qcontent} solutionNum={solution} term={termCode} examtype={examTypeCode} key={key} choices={choices} />
         }
         return <Question id={part + "_" + subpart} courseid={courseCode} content={qcontent} solution={solution} term={termCode} examtype={examTypeCode} key={key} />
