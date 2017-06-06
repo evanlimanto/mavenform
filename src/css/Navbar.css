@@ -175,6 +175,12 @@
   color: #999;
 }
 
+.gray-nav .container {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .gray-nav a {
   color: #999;
 }

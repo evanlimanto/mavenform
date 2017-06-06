@@ -176,7 +176,8 @@ class NavbarComponent extends Component {
         {modal}
         <div className="nav">
           <div className="container">
-            <Link to="/"><img className="logo" src="/img/logo.svg" alt="logo" /></Link>
+            <Link className="desktop-logo" to="/"><img className="logo" src="/img/logo.svg" alt="logo" /></Link>
+            <Link className="mobile-logo" to="/"><img className="logo" src="/img/icon.svg" alt="logo" /></Link>
             <input className={classnames({ "nav-search": true, "nav-search-signed-in": isLoggedIn })} name="search" placeholder="Search courses..." type="text" autoComplete="off" onChange={this.getSuggestions} ref="search" />
             {searchResults}
             <div className="material-icons nav-search-icon">search</div>
