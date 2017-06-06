@@ -161,10 +161,10 @@ class NavbarComponent extends Component {
             <div className="material-icons nav-search-icon">search</div>
             {(isLoggedIn) ? (
               <span>
-                <span className="nav-button nav-signed-in">
+                <span className="nav-button nav-signed-in" onClick={this.toggleProfileDropdown}>
                   <div className="material-icons signed-in-icon">person</div>
                   {username}
-                  <div className="material-icons signed-in-arrow" onClick={this.toggleProfileDropdown}>keyboard_arrow_down</div>
+                  <div className="material-icons signed-in-arrow">keyboard_arrow_down</div>
                 </span>
                 {this.state.profileDropdownOn ? (<Link to="/logout" className="logout">Log Out</Link>) : null}
               </span>

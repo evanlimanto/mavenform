@@ -226,6 +226,10 @@
   border-top: 1px solid #ccc;;
 }
 
+.schools h4 {
+  padding-top: 0;
+}
+
 .footer-link, .header-link {
   color: #fff;
   border-bottom: 1px dashed #fff;
