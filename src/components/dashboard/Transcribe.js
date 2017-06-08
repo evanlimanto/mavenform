@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import cookies from 'browser-cookies';
 import { Question } from '../question';
 import { preprocess } from '../../utils';
 import { endsWith, join, keys, forEach, map, split, filter, reduce, range, toString } from 'lodash';
+
+import DashboardLogin from './DashboardLogin';
+
 const request = require('superagent');
 const yaml = require('js-yaml');
 
@@ -195,7 +199,15 @@ class TranscribeComponent extends Component {
       });
   }
 
+  isLoggedIn() {
+    return cookies.get('dashboard_user');
+  }
+
   render() {
+    if (!this.isLoggedIn()) {
+      return <DashboardLogin />;
+    }
+
     const examid = this.props.examid;
     let selSchool = '', selCourse = '', selCourseLabel = '', selType = '', selTerm = '', selYear = '', selProfs = '';
     let hasSelected = examid !== null && examid !== undefined;

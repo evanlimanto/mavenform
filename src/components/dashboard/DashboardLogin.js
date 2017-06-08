@@ -18,7 +18,6 @@ class DashboardLogin extends Component {
 
   login(e) {
     e.preventDefault();
-    const name = join(map(split(this.refs.name.value, ' '), (item) => capitalize(item)), ' ');
     const password = this.refs.password.value;
     const self = this;
     req.post('/dashboardLogin')
@@ -27,7 +26,7 @@ class DashboardLogin extends Component {
         if (err || !res.ok) {
           self.setState({ error: "Login failed." }); 
         } else {
-          cookies.set('dashboard_user', name, { expires: 1 });
+          cookies.set('dashboard_user', 'login', { expires: 1 });
           document.location = "/dashboard";
         }
       });
@@ -38,7 +37,6 @@ class DashboardLogin extends Component {
       <div className="dashboard-login-aligner">
         <form>
           <h1 className="dashboard-login-title">Studyform Transcription Dashboard</h1>
-          <input className="dashboard-login-input" placeholder="Name" ref="name" />
           <input className="dashboard-login-input" placeholder="Password" ref="password" type="password" />
           <button className="dashboard-login-btn" value="Login" onClick={(e) => this.login(e)}>Login</button>
           <p className="dashboard-error">{this.state.error}</p>
