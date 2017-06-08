@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Question } from '../question';
 import { preprocess } from '../../utils';
@@ -27,6 +28,7 @@ class TranscribeComponent extends Component {
       error: null,
       success: null,
       rawContent: null,
+      json: null,
       images: [],
       courses: []
     };
@@ -40,6 +42,22 @@ class TranscribeComponent extends Component {
 
   componentDidUpdate() {
     window.renderMJ();
+  }
+
+  componentDidMount() {
+    const examid = this.props.examid;
+    if (examid) {
+      fetch(`/getTranscribedExam/${examid}`)
+        .then((response) => response.json())
+        .then((json) => {
+          this.setState({ selected: json });
+        });
+      fetch(`/getTranscribedContent/${examid}`)
+        .then((response) => response.json())
+        .then((json) => {
+          this.setState({ transcribedContent: json }); 
+        });
+    }
   }
 
   onDrop(acceptedFiles, rejectedFiles) {
@@ -178,25 +196,48 @@ class TranscribeComponent extends Component {
   }
 
   render() {
+    const examid = this.props.examid;
+    let selSchool = '', selCourse = '', selCourseLabel = '', selType = '', selTerm = '', selYear = '', selProfs = '';
+    let hasSelected = examid !== null && examid !== undefined;
+    if (this.state.selected) {
+      const selected = this.state.selected;
+      selSchool = selected.school_code + '~' + selected.school_id;
+      selCourse = selected.course_code + '~' + selected.course_id;
+      selType = selected.type_code + '~' + selected.type_id;
+      const term_code = selected.term_code.substr(0, 2);
+      selYear = '20' + selected.term_code.substr(2, 4);
+      if (term_code === 'sp') {
+        selTerm = 'spring';
+      } else if (term_code === 'su') {
+        selTerm = 'summer';
+      } else if (term_code === 'fa') {
+        selTerm = 'fall';
+      } else if (term_code === 'wi') {
+        selTerm = 'winter';
+      }
+      selProfs = selected.profs;
+      selCourseLabel = selected.course_code + ' - ' + selected.course_name;
+    }
+
     const schoolsSelect = (
-      <select ref='school' onChange={this.populateCourses}>
-        <option selected value disabled> -- select a school -- </option>
+      <select ref='school' onChange={this.populateCourses} >
+        {selSchool ? null : <option selected value disabled> -- select a school -- </option>}
         {map(this.props.schools, (school, key) => {
           return <option key={key} value={school.code + '~' + school.id}>{school.name}</option>;
         })}
       </select>
     );
 
-    const coursesSelect = this.state.courses ? (
+    const coursesSelect = (
       <select ref='course'>
         {map(this.state.courses.sort((a, b) => a.code.localeCompare(b.code)), (course, key) => {
           return <option key={key} value={course.code + '~' + course.id}>{course.code} - {course.name}</option>
         })}
       </select>
-    ) : null;
+    );
 
     const examTypesSelect = (
-      <select ref='exam_type'>
+     <select ref='exam_type'>
         {map(this.props.exam_types, (exam_type, key) => {
           if (exam_type.id === 5 || exam_type.id === 6)
             return null;
@@ -258,7 +299,7 @@ class TranscribeComponent extends Component {
           <hr className="s2" />
           <div>
             <button className='blue' onClick={(e) => this.upload(e)}>SAVE</button>
-            <a className='gray cancel' href="/dashboard">CANCEL</a>
+            <Link className='gray cancel' to="/dashboard">Back</Link>
           </div>
           {this.state.error ? <p className='error'>{this.state.error}</p> : null}
           {this.state.success ? <p className='success'>{this.state.success}</p> : null}
@@ -274,8 +315,9 @@ class TranscribeComponent extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
+    examid: ownProps.match.params.examid,
     schools: state.schools,
     exam_types: state.exam_types,
     terms: state.terms

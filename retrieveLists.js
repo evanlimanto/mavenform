@@ -71,7 +71,7 @@ exports.getTerms = (req, res) => {
 
 exports.getTranscribedExams = (req, res) => {
   const q = `
-    select ES.id, ES.profs, courses.code as course_code, courses.name as course_name, schools.code as school_code, schools.name as school_name, terms.term_code, terms.term_label from exams_staging ES
+    select ES.id as id, ES.profs as profs, ES.datetime, exam_types.type_code as type_code, exam_types.type_label as type_label, courses.code as course_code, courses.name as course_name, schools.code as school_code, schools.name as school_name, terms.term_code, terms.term_label from exams_staging ES
     inner join courses on courses.id = ES.courseid
     inner join exam_types on exam_types.id = ES.examtype
     inner join schools on schools.id = ES.schoolid
@@ -81,6 +81,9 @@ exports.getTranscribedExams = (req, res) => {
     .then((result) => {
       const items = _.reduce(result.rows, function(dict, row) {
         dict[row.id] = {
+          datetime: row.datetime,
+          type_label: row.type_label,
+          type_code: row.type_code,
           course_code: row.course_code,
           course_name: row.course_name,
           school_code: row.school_code,
@@ -95,25 +98,82 @@ exports.getTranscribedExams = (req, res) => {
 };
 
 exports.getTranscribedContent = (req, res) => {
+  const { examid } = req.params;
+  const q = `
+    select problem_num, subproblem_num, problem, solution from content_staging
+    where exam = $1
+  `;
+  client.query(q, [examid], (err, result) => {
+    const items = _.map(result.rows, (row) => {
+      return {
+        problem_num: row.problem_num,
+        subproblem_num: row.subproblem_num,
+        problem: row.problem,
+        solution: row.solution,
+      };
+    });
+    res.json(items);
+  });
+};
+
+exports.getTranscribedContentDict = (req, res) => {
   const q = `
     select problem_num, subproblem_num, problem, solution, exam from content_staging
   `;
   client.query({ text: q })
-    .then((result) => {
-      const items = _.reduce(result.rows, function(dict, row) {
-        if (!_.has(dict, row.exam)) {
-          dict[row.exam] = [];
-        }
-        dict[row.exam].push({
-          problem_num: row.problem_num,
-          subproblem_num: row.subproblem_num,
-          problem: row.problem,
-          solution: row.solution,
-        });
-        return dict;
-      }, {});
-      res.json(items);
+  .then((result) => {
+    const items = _.reduce(result.rows, function(dict, row) {
+      if (!_.has(dict, row.exam)) {
+        dict[row.exam] = [];
+      }
+      dict[row.exam].push({
+        problem_num: row.problem_num,
+        subproblem_num: row.subproblem_num,
+        problem: row.problem,
+        solution: row.solution,
+      });
+      return dict;
+    }, {});
+    res.json(items);
+  })
+};
+
+exports.getTranscribedExam = (req, res) => {
+  const { examid } = req.params;
+  const q = `
+    select
+      ES.profs as profs,
+      courses.code as course_code,
+      courses.id as course_id,
+      courses.name as course_name,
+      exam_types.type_code type_code,
+      exam_types.id as type_id,
+      terms.term_code as term_code,
+      terms.id as term_id,
+      schools.code as school_code,
+      schools.id as school_id
+    from exams_staging ES
+    inner join courses on courses.id = ES.courseid
+    inner join exam_types on exam_types.id = ES.examtype
+    inner join terms on terms.id = ES.examid
+    inner join schools on schools.id = ES.schoolid
+    where ES.id = $1
+  `;
+  client.query(q, [examid], (err, result) => {
+    const row = result.rows[0];
+    res.send({
+      profs: row.profs,
+      course_name: row.course_name,
+      course_code: row.course_code,
+      course_id: row.course_id,
+      type_code: row.type_code,
+      type_id: row.type_id,
+      term_code: row.term_code,
+      term_id: row.term_id,
+      school_code: row.school_code,
+      school_id: row.school_id,
     });
+  });
 };
 
 exports.getSchoolCourses = (req, res, next) => {

@@ -4,7 +4,7 @@ import { map } from 'lodash';
 import { Question } from '../question';
 import { preprocess } from '../../utils';
 
-class TranscribedComponent extends Component {
+class Transcribed extends Component {
   constructor(props) {
     super(props);
 
@@ -20,7 +20,7 @@ class TranscribedComponent extends Component {
     fetch('/getTranscribedExams').then(
       (response) => response.json()
     ).then((examsJson) => {
-      fetch('/getTranscribedContent').then(
+      fetch('/getTranscribedContentDict').then(
         (response) => response.json()
       ).then(contentJson => this.setState({ exams: examsJson, content: contentJson }));
     });
@@ -70,15 +70,5 @@ class TranscribedComponent extends Component {
     );
   }
 }
-
-const mapStateToProps = (state) => {
-  return {
-
-  };
-};
-
-const Transcribed = connect(
-  mapStateToProps
-)(TranscribedComponent);
 
 export default Transcribed;

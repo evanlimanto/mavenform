@@ -24,10 +24,9 @@ const Routes = (
     <Route path="/logout" component={Logout} />
     <Route path="/marketing" component={Marketing} />
     <Route path="/profile" render={(props) => <Profile requireAuth={requireAuth} {...props} />} />
-    <Route path="/dashboard/content" component={DashboardContent} />
-    <Route path="/dashboard/imageupload" component={ImageUpload} />
-    <Route path="/dashboard/transcribe" component={Transcribe} />
     <Route path="/dashboard/transcribed" component={Transcribed} />
+    <Route path="/dashboard/transcribe/:examid" component={Transcribe} />
+    <Route path="/dashboard/transcribe" component={Transcribe} />
     <Route path="/dashboard" component={Dashboard} />
     <Route path="/upload" component={Upload} />
     <Route path="/home" render={(props) => <UserHome requireAuth={requireAuth} {...props} />} />

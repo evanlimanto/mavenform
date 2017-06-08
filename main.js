@@ -73,8 +73,14 @@ app.get('/getTerms', retrieveLists.getTerms);
 // Retrieve list of transcribed exams
 app.get('/getTranscribedExams', retrieveLists.getTranscribedExams);
 
+// Retrieve information for a transcribed exam
+app.get('/getTranscribedExam/:examid', retrieveLists.getTranscribedExam);
+
 // Retrieve list of transcribed content
-app.get('/getTranscribedContent', retrieveLists.getTranscribedContent);
+app.get('/getTranscribedContent/:examid', retrieveLists.getTranscribedContent);
+
+// Retrive dict of transcribed content
+app.get('/getTranscribedContentDict', retrieveLists.getTranscribedContentDict);
 
 // Retrieve dictionary of courses with subjects
 app.get('/getSchoolCourses/:schoolCode', retrieveLists.getSchoolCourses);
@@ -332,7 +338,7 @@ app.post('/processTranscription', function(req, res, next) {
     return k.match(/^q\d+_\d+$/);
   }), (k) => [k, _.split(k.slice(1), "_")]);
 
-  const inq    = `insert into exams_staging (courseid, examtype, examid, profs, schoolid) values($1, $2, $3, $4, $5)`;
+  const inq    = `insert into exams_staging (courseid, examtype, examid, profs, schoolid, datetime) values($1, $2, $3, $4, $5, now())`;
   const getq   = `select id from exams_staging where courseid = $1 and examtype = $2 and examid = $3 and profs = $4 and schoolid = $5`;
   const imageq = `insert into images_staging (examid, url) values($1, $2)`;
   const q      = `insert into content_staging (problem_num, subproblem_num, problem, solution, exam) values($1, $2, $3, $4, $5)`;
@@ -524,6 +530,15 @@ app.post('/applyMarketing', (req, res, next) => {
     }
     res.end();
   });
+});
+
+app.post('/dashboardLogin', (req, res) => {
+  const { password } = req.body;
+  if (password === "cloudfactory") {
+    res.send("Success!");
+  } else {
+    res.status(400).send("Invalid password!");
+  }
 });
 
 app.use(express.static(path.join(__dirname, '/build')));
