@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import cookies from 'browser-cookies';
-import { join, split, capitalize, map } from 'lodash';
 const req = require('superagent');
 
 require('../../css/Dashboard.css');

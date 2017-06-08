@@ -118,7 +118,7 @@ exports.getTranscribedContent = (req, res) => {
 
 exports.getTranscribedContentDict = (req, res) => {
   const q = `
-    select problem_num, subproblem_num, problem, solution, exam from content_staging
+    select problem_num, subproblem_num, problem, solution, exam, choices from content_staging
   `;
   client.query({ text: q })
   .then((result) => {
@@ -131,6 +131,7 @@ exports.getTranscribedContentDict = (req, res) => {
         subproblem_num: row.subproblem_num,
         problem: row.problem,
         solution: row.solution,
+        choices: row.choices,
       });
       return dict;
     }, {});
@@ -317,5 +318,50 @@ exports.getProfs = (req, res, next) => {
       return;
     }
     res.json({ profs: result.rows[0].profs });
+  });
+};
+
+exports.getCoursesList = (req, res, next) => {
+  const q = `
+    select courses.id as course_id, courses.code as course_code, courses.name as course_name,
+      schools.id as school_id, schools.name as school_name
+    from courses
+    inner join schools on courses.schoolid = schools.id
+  `;
+  client.query(q, [], (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    const items = _.map(result.rows, (item) => {
+      return {
+        course_id: item.course_id,
+        course_code: item.course_code,
+        course_name: item.course_name,
+        school_id: item.school_id,
+        scohol_name: item.school_name,
+      };
+    });
+    res.json(items);
+  });
+};
+
+exports.getSubjects = (req, res, next) => {
+  const q = `
+    select id, subject_code, subject_label from subjects
+  `;
+  client.query(q, [], (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    const items = _.map(result.rows, (item) => {
+      return {
+        subject_id: item.id,
+        subject_code: item.subject_code,
+        subject_label: item.subject_label,
+      };
+    });
+    res.json(items);
   });
 };

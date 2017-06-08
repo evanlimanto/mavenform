@@ -3,9 +3,9 @@ import Dropzone from 'react-dropzone';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import cookies from 'browser-cookies';
-import { Question } from '../question';
+import { MultipleChoiceQuestion, Question } from '../question';
 import { preprocess } from '../../utils';
-import { endsWith, join, keys, forEach, map, split, filter, reduce, range, toString } from 'lodash';
+import { has, endsWith, join, keys, forEach, map, split, filter, reduce, range, toString } from 'lodash';
 
 import DashboardLogin from './DashboardLogin';
 
@@ -103,6 +103,11 @@ class TranscribeComponent extends Component {
     const renderedContent = map(items, (item) => {
       const key = item[0]; 
       const content = augment(preprocess(doc[key]));
+      if (has(doc, key + '_i')) {
+        const solutionNum = doc[key + '_s'];
+        const choices = join(doc[key + '_i'], '~');
+        return <MultipleChoiceQuestion key={key} content={content} choices={choices} solutionNum={solutionNum}  />
+      }
       const solution = augment(preprocess(doc[key + '_s']));
       return <Question key={key} content={content} solution={solution} />
     });
@@ -208,6 +213,7 @@ class TranscribeComponent extends Component {
       return <DashboardLogin />;
     }
 
+    /*
     const examid = this.props.examid;
     let selSchool = '', selCourse = '', selCourseLabel = '', selType = '', selTerm = '', selYear = '', selProfs = '';
     let hasSelected = examid !== null && examid !== undefined;
@@ -230,10 +236,11 @@ class TranscribeComponent extends Component {
       selProfs = selected.profs;
       selCourseLabel = selected.course_code + ' - ' + selected.course_name;
     }
+    */
 
     const schoolsSelect = (
       <select ref='school' onChange={this.populateCourses} >
-        {selSchool ? null : <option selected value disabled> -- select a school -- </option>}
+        <option selected value disabled> -- select a school -- </option>
         {map(this.props.schools, (school, key) => {
           return <option key={key} value={school.code + '~' + school.id}>{school.name}</option>;
         })}

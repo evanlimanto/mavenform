@@ -119,7 +119,6 @@ class DashboardContentComponent extends Component {
   addProblem(e) {
     e.preventDefault();
     const { exam, problem_num, subproblem_num } = this.refs;
-    console.log(exam.value, problem_num.value, subproblem_num.value);
 
     fetch('/addProblem', {
       method: 'POST',

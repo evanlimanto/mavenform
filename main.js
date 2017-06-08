@@ -70,6 +70,9 @@ app.get('/getExamTypes', retrieveLists.getExamTypes);
 // Retrieve list of terms
 app.get('/getTerms', retrieveLists.getTerms);
 
+// Retrieve list of subjects
+app.get('/getSubjects', retrieveLists.getSubjects);
+
 // Retrieve list of transcribed exams
 app.get('/getTranscribedExams', retrieveLists.getTranscribedExams);
 
@@ -99,6 +102,9 @@ app.get('/getLabels', retrieveLists.getLabels);
 
 // Retrieve profs for an exam
 app.get('/getProfs/:schoolCode/:courseCode/:examTypeCode/:termCode', retrieveLists.getProfs);
+
+// Retrieve list of courses
+app.get('/getCoursesList', retrieveLists.getCoursesList);
 
 // File uploads
 app.post('/upload', function(req, res) {
@@ -252,6 +258,22 @@ app.post('/updateProblem', function(req, res) {
   });
 });
 
+// Add a course
+app.post('/addCourse', (req, res, next) => {
+  const { course_code, course_name, schoolid, subjectid } = req.body;
+  const q = `
+    insert into courses (code, name, schoolid, subjectid)
+    values($1, $2, $3, $4)
+  `;
+  client.query(q, [course_code, course_name, schoolid, subjectid], (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.send("Success!");
+  });
+});
+
 // Add an exam
 app.post('/addExam', function(req, res) {
   let { course_code, exam_type, exam_term, exam_year, profs } = req.body;
@@ -291,6 +313,7 @@ app.post('/createUser', function(req, res) {
 function replaceImagePlaceholders(basePath, content) {
   if (!content) return content;
   const regexp = /!!(.*?)!!/g;
+  console.log(content);
   const matches = content.match(regexp);
   _.forEach(matches, (match) => {
     const imageName = match.slice(2, match.length - 2);
@@ -341,7 +364,7 @@ app.post('/processTranscription', function(req, res, next) {
   const inq    = `insert into exams_staging (courseid, examtype, examid, profs, schoolid, datetime) values($1, $2, $3, $4, $5, now())`;
   const getq   = `select id from exams_staging where courseid = $1 and examtype = $2 and examid = $3 and profs = $4 and schoolid = $5`;
   const imageq = `insert into images_staging (examid, url) values($1, $2)`;
-  const q      = `insert into content_staging (problem_num, subproblem_num, problem, solution, exam) values($1, $2, $3, $4, $5)`;
+  const q      = `insert into content_staging (problem_num, subproblem_num, problem, solution, exam, choices) values($1, $2, $3, $4, $5, $6)`;
   async.waterfall([
     (callback) => {
       client.query(inq, [course_id, exam_type_id, term_id, profs, school_id], (err) => callback(err))
@@ -360,8 +383,14 @@ app.post('/processTranscription', function(req, res, next) {
           const problem_num = item[1][0];
           const subproblem_num = item[1][1];
           const content = replaceImagePlaceholders(basePath, doc[key]);
-          const solution = replaceImagePlaceholders(basePath, doc[key + "_s"]);
-          client.query(q, [problem_num, subproblem_num, content, solution, id], (err) => innerCallback(err));  
+          let choices = null, solution = null;
+          if (_.has(doc, key + "_i")) {
+            solution = doc[key + "_s"];
+            choices = _.join(doc[key + "_i"], "~");
+          } else {
+            solution = replaceImagePlaceholders(basePath, doc[key + "_s"]);
+          }
+          client.query(q, [problem_num, subproblem_num, content, solution, id, choices], (err) => innerCallback(err));  
         }, funcCallback)
       ], callback);
     }
@@ -379,8 +408,8 @@ app.get('/approveTranscription/:examid', function(req, res, next) {
   const getq      = `select courseid, examtype, examid, schoolid, profs from exams_staging where id = $1`;
   const inq       = `insert into exams (courseid, examtype, examid, schoolid, profs) values($1, $2, $3, $4, $5)`;
   const getidq    = `select id from exams where courseid = $1 and examtype = $2 and examid = $3 and schoolid = $4 and profs = $5`;
-  const insertproblemsq = `insert into content (problem_num, subproblem_num, problem, solution, exam)
-    select problem_num, subproblem_num, problem, solution, $1 from content_staging where exam = $2`;
+  const insertproblemsq = `insert into content (problem_num, subproblem_num, problem, solution, exam, choices)
+    select problem_num, subproblem_num, problem, solution, $1, choices from content_staging where exam = $2`;
   const deleteproblemsq = `delete from content_staging where exam = $1`;
   const delq = `delete from exams_staging where id = $1`;
 

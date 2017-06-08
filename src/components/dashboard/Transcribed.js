@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { map } from 'lodash';
-import { Question } from '../question';
+import { MultipleChoiceQuestion, Question } from '../question';
 import { preprocess } from '../../utils';
 
 class Transcribed extends Component {
@@ -32,6 +31,12 @@ class Transcribed extends Component {
 
   renderContent(id) {
     const renderedContent = map(this.state.content[id], (item, key) => {
+      if (item.choices) {
+        return <MultipleChoiceQuestion key={key}
+                content={preprocess(item.problem)}
+                choices={item.choices}
+                solutionNum={item.solution} />;
+      }
       return <Question key={key}
               content={preprocess(item.problem)}
               solution={preprocess(item.solution)} />;

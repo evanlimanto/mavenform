@@ -69,3 +69,7 @@
 .dashboard-error {
   color: red;
 }
+
+.dashboard-courses-container {
+  padding: 15px;
+}
