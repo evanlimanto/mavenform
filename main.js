@@ -290,7 +290,7 @@ app.post('/createUser', function(req, res) {
 
 function replaceImagePlaceholders(basePath, content) {
   if (!content) return content;
-  const regexp = /\[\[(.*?)\]\]/g;
+  const regexp = /!!(.*?)!!/g;
   const matches = content.match(regexp);
   _.forEach(matches, (match) => {
     const imageName = match.slice(2, match.length - 2);
