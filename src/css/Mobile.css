@@ -39,6 +39,18 @@
   .home-button {
     margin: 19px 15px 19px 0;
   }
+
+  .nav-button {
+    margin: 10px 0 10px 5px;
+  }
+
+  .gray-nav {
+    padding: 10px;
+  }
+
+  .department h1 {
+    padding-left: 10px;
+  }
 }
 
 @media (max-width: 899px) {
