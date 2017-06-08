@@ -1,7 +1,7 @@
 q1_1: |
   # Problem 1. Miscellaneous (20 pts)
   a) **(6 pts)** If $x[n] = e^{j(2\pi/3)n} + e^{j(2\pi/5)n}$, compute the coefficients for a length-$15$ DFT of the signal over the interval.
-  [[q1-1.png]]
+  !!q1-1.png!!
 
 q1_1_s: |
   Length $15$ contains integer multiple of periods of both components, so don't need to worry about spectral leakage.

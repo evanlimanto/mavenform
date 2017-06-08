@@ -10,7 +10,7 @@ const yaml = require('js-yaml');
 
 function augment(content) {
   if (!content) return content;
-  const regexp = /\[\[(.*?)\]\]/g;
+  const regexp = /!!(.*?)!!/g;
   const matches = content.match(regexp);
   forEach(matches, (match) => {
     const imageName = match.slice(2, match.length - 6);
@@ -132,7 +132,7 @@ class TranscribeComponent extends Component {
   }
 
   validateImages() {
-    const regexp = /\[\[(.*?)\]\]/g;
+    const regexp = /!!(.*?)!!/g;
     const matches = this.state.rawContent.match(regexp);
     if (!!matches && matches.length !== this.state.images.length) {
       return { res: false, error: 'Number of images doesn\'t match number of image placeholders!' };
