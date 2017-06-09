@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import cookies from 'browser-cookies';
 import { MultipleChoiceQuestion, Question } from '../question';
 import { preprocess } from '../../utils';
-import { has, endsWith, join, keys, forEach, map, split, filter, reduce, range, toString } from 'lodash';
+import { has, endsWith, join, keys, forEach, map, split, filter, reduce, range, toString, toLower } from 'lodash';
 
 import DashboardLogin from './DashboardLogin';
 
@@ -66,7 +66,7 @@ class TranscribeComponent extends Component {
 
   onDrop(acceptedFiles, rejectedFiles) {
     const result = reduce(acceptedFiles, (res, image) => {
-      if (!endsWith(image.name, '.png'))
+      if (!endsWith(toLower(image.name), '.png'))
         return false;
       return res;
     }, true);
