@@ -1,5 +1,4 @@
 import Course from './course';
-import Courses from './courses';
 import Exam from './exam';
 import Home from './home';
 import Navbar from './navbar';
@@ -24,7 +23,6 @@ import '../css/Admin.css';
 
 export {
 	Course,
-	Courses,
 	Exam,
 	Home,
 	Navbar,

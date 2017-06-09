@@ -8,6 +8,7 @@
     "enzyme": "^2.7.1",
     "esformatter-jsx": "^8.0.0",
     "glob-fs": "^0.1.6",
+    "node-webcrawler": "^0.8.0",
     "parse-json": "^2.2.0",
     "phantom": "^4.0.4",
     "react-scripts": "^1.0.7"
@@ -41,6 +42,7 @@
     "mixpanel": "^0.7.0",
     "node-cache": "^4.1.1",
     "node-glob": "^1.2.0",
+    "pdftohtmljs": "^0.4.2",
     "pg": "^6.1.5",
     "randomstring": "^1.1.5",
     "react": "^15.4.2",

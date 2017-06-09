@@ -17,6 +17,8 @@ const tracker = function(name, dict={}) {
 	}
 }
 
+export { ReactGA };
+
 export function viewCoursesEvent() {
 	tracker('view courses');
 }

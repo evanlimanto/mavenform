@@ -101,6 +101,7 @@ as.map(schools, (item, callback) => {
 });*/
 
 const json = JSON.parse(fs.readFileSync('./data2.json', 'utf-8'));
+/*
 let schoolItems = _.map(json, (school) => {
   if (!school)
     return null;
@@ -121,12 +122,12 @@ schoolItems = schoolItems.sort((a, b) => {
 });
 _.forEach(schoolItems, (school) => {
   _.forEach(school.courses, (course) => {
-    console.log(school.name, school.cnt, course.code, course.cnt); 
+    console.log(school.name, school.cnt, course.code, course.cnt);
   });
 });
+*/
 //_.forEach(schoolItems, (school) => console.log(school.name, school.cnt, school.courses));
 
-/*
 let items = _.map(json, (school) => {
   if (!school)
     return null;
@@ -143,4 +144,4 @@ items = items.sort((a, b) => {
 function printItem(item) {
   console.log(item.schoolName, item.org.cn, item.org.terms['Summer 2017'].cnt); 
 }
-_.forEach(items, printItem);*/
+_.forEach(items, printItem);

@@ -8,11 +8,6 @@ import Footer from '../footer';
 import Navbar from '../navbar';
 import { courseCodeToLabel } from '../../utils';
 
-const meta = {
-  description: 'List of Schools',
-  title: 'Schools',
-};
-
 class SchoolComponent extends Component {
   constructor(props) {
     super(props);
@@ -45,6 +40,12 @@ class SchoolComponent extends Component {
       );
     }) : "No courses yet. Check again for more updates!";
 
+    const schoolLabel = (this.props.labels && has(this.props.labels.schools, schoolCode)) ? this.props.labels.schools[schoolCode]: null;
+    const meta = {
+      description: `Interactive and course-specific study resources for ${schoolLabel}.`,
+      title: `${schoolLabel} - Studyform`,
+    };
+
     return (
       <div className="school">
         <DocumentMeta {...meta} />
@@ -53,10 +54,7 @@ class SchoolComponent extends Component {
           <div className="card-container center">
             <div className="container">
               <div className="center">
-                <h4>
-                {(this.props.labels && has(this.props.labels.schools, schoolCode)) ?
-                  this.props.labels.schools[schoolCode]: null}
-                </h4>
+                <h4>{schoolLabel}</h4>
                 <h5>Available courses</h5>
               </div>
             </div>

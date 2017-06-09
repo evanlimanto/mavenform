@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
+import { has } from 'lodash';
 
+import { courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
 import ExamContent from './ExamContent';
 import Footer from '../footer';
 import Navbar from '../navbar';
@@ -25,9 +27,10 @@ class ExamComponent extends Component {
   render() {
     const { schoolCode, courseCode, examType, termCode } = this.props;
     const profs = this.state.profs;
+    const schoolLabel = (this.props.labels && has(this.props.labels.schools, schoolCode)) ? this.props.labels.schools[schoolCode]: null;
     const meta = {
-      description: '',
-      title: '',
+      description: `Review past exam problems and solutions for the ${courseCodeToLabel(courseCode)} ${termToLabel(termCode)} ${examTypeToLabel(examType)} from ${schoolLabel}.`,
+      title: `${courseCodeToLabel(courseCode)} ${termToLabel(termCode)} ${examTypeToLabel(examType)} - ${schoolLabel} - Studyform`,
     };
 
     return (
@@ -47,6 +50,7 @@ const mapStateToProps = (state, ownProps) => {
     courseCode: ownProps.match.params.courseCode,
     examType: ownProps.match.params.examType,
     termCode: ownProps.match.params.termCode,
+    labels: state.labels,
   };
 };
 

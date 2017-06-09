@@ -13,7 +13,7 @@ const ScrollLink = Scroll.Link;
 const Element = Scroll.Element;
 
 const meta = {
-  description: 'Mavenform is a new and intuitive format to view and study past exams currently serving thousands of students at UC Berkeley.',
+  description: 'The ultimate bank of interactive and course-specific study resources.',
   title: 'Studyform',
 };
 
