@@ -18,7 +18,7 @@ class DashboardCourses extends Component {
   }
 
   componentDidMount() {
-    fetch('/getCoursesList')
+    fetch('/getCoursesBySchool')
       .then((response) => response.json())
       .then((json) => this.setState({ courses: json }));
     fetch('/getSchools')
@@ -39,14 +39,31 @@ class DashboardCourses extends Component {
     req.post('/addCourse')
       .send({ course_code, course_name, schoolid, subjectid })
       .end((err, res) => {
-        if (err || !res.ok) console.error(err);
-        else console.log("Success!");
+        if (err || !res.ok) throw new Error(err);
+        else document.location = "/dashboard/courses";
+      });
+  }
+
+  deleteCourse(id) {
+    req.post('/deleteCourse')
+      .field('course_id', id)
+      .end((err, res) => {
+        if (err || !res.ok) throw new Error(err);
+        else document.location = "/dashboard/courses";
       });
   }
 
   render() {
-    const coursesList = map(this.state.courses, (course, key) => {
-      return <div key={key}>{course.course_name}</div>;
+    const coursesList = map(this.state.courses, (schoolCourses, schoolName) => {
+      return (
+        <span key={schoolName}>
+          <h2>{schoolName}</h2>
+          {map(schoolCourses, (course, key) => {
+            return <div key={key}><a onClick={() => this.deleteCourse(course.course_id)}> x </a>{course.course_code} - {course.course_name}</div>;
+          })}
+          <br/>
+        </span>
+      );
     });
 
     const schoolsSelect = (

@@ -35,7 +35,7 @@ class CourseComponent extends Component {
       const profs = exam.profs;
       const url = `/${schoolCode}/${courseCode}/${typeCode}/${termCode}`;
       return (
-        <tr key={key} className="available" onClick={() => examClickEvent(courseCode, typeCode, termCode)}>
+        <tr key={key} className="available" onClick={() => examClickEvent(schoolCode, courseCode, typeCode, termCode)}>
           <td><Link to={url}>{typeLabel}</Link></td>
           <td><Link to={url}>{termLabel}</Link></td>
           <td><Link to={url}>{profs}</Link></td>

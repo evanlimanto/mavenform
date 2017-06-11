@@ -62,13 +62,6 @@ export function initStore(store) {
   );
 }
 
-export function preprocess(text) {
-  text = replace(text, /_/g, '\\_');
-  text = replace(text, /&amp;/g, '&');
-  text = MDRenderer(text);
-  return text;
-};
-
 export function courseCodeToLabel(course_code) {
   if (!!!course_code)
     return null;

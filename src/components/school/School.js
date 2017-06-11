@@ -6,6 +6,7 @@ import DocumentMeta from 'react-document-meta';
 
 import Footer from '../footer';
 import Navbar from '../navbar';
+import { courseClickEvent } from '../../events';
 import { courseCodeToLabel } from '../../utils';
 
 class SchoolComponent extends Component {
@@ -27,7 +28,7 @@ class SchoolComponent extends Component {
     const schoolCode = this.props.schoolCode;
     const courseItems = (keys(this.state.courses).length > 0) ? map(this.state.courses, (obj, subject) => {
       const courseBoxes = map(obj.courses, (course, key) => (
-        <Link className="card course-card" to={"/" + schoolCode + "/" + course.code} key={key}>
+        <Link className="card course-card" to={"/" + schoolCode + "/" + course.code} key={key} onClick={() => courseClickEvent(schoolCode, course.code)}>
           <span>{courseCodeToLabel(course.code)}</span>
           <span className="card-arrow">&#8594;</span>
         </Link>

@@ -52,7 +52,7 @@ class DashboardContentComponent extends Component {
   }
 
   getExam(id) {
-    fetch(`/getExam/${id}`).then(
+    fetch(`/getExamById/${id}`).then(
       (response) => response.json()
     ).then(
       (json) => {

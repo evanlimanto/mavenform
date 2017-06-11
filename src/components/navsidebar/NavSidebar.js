@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { has, map } from 'lodash';
 
-import { navSidebarClickEvent } from '../../events';
 import { courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
 
 const NavSidebarComponent = ({ exams, courseid, examid, thisExamType, isExam }) => {
@@ -25,7 +24,7 @@ const NavSidebarComponent = ({ exams, courseid, examid, thisExamType, isExam }) 
       if (isAvailable) {
         return (
           <div key={id} className="sidetab-container">
-            <Link to={url} className={sideTabClass} onClick={() => navSidebarClickEvent()}>
+            <Link to={url} className={sideTabClass}>
               {term}
               <span dangerouslySetInnerHTML={{__html: note}} />
             </Link>
@@ -52,7 +51,7 @@ const NavSidebarComponent = ({ exams, courseid, examid, thisExamType, isExam }) 
     <div className="menu">
       <h6>{courseCodeToLabel(courseid)}</h6>
       <div className="sidetab-container">
-        <Link to={`/${courseid}`} className={sidetabClass} onClick={() => navSidebarClickEvent()}>Index</Link>
+        <Link to={`/${courseid}`} className={sidetabClass}>Index</Link>
       </div>
       {sideTabs}
     </div>

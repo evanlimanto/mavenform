@@ -4,8 +4,10 @@ const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 
 exports.getExams = (req, res) => {
-  const q = `select E.id as id, C.code as courseid, E.examtype as examtype, E.examid as examid, E.profs as profs
-    from exams E inner join courses C on C.id = E.courseid`;
+  const q = `select E.id as id, C.code as courseid, ET.type_code as examtype, T.term_code as examid, E.profs as profs from exams E
+  inner join courses C on C.id = E.courseid
+  inner join exam_types ET on E.examtype = ET.id
+  inner join terms T on E.examid = T.id`;
   client.query({ text: q })
     .then((result) => {
       const multi_dict = _.reduce(result.rows, (dict, row) => {
@@ -342,6 +344,31 @@ exports.getCoursesList = (req, res, next) => {
         scohol_name: item.school_name,
       };
     });
+    res.json(items);
+  });
+};
+
+exports.getCoursesBySchool = (req, res, next) => {
+  const q = `
+    select courses.id as course_id, courses.code as course_code, courses.name as course_name, schools.name as school_name from courses
+    inner join schools on courses.schoolid = schools.id
+  `;
+  client.query(q, [], (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    const items = _.reduce(result.rows, (dict, row) => { 
+      if (!_.has(dict, row.school_name)) {
+        dict[row.school_name] = [];
+      }
+      dict[row.school_name].push({
+        course_id: row.course_id,
+        course_code: row.course_code,
+        course_name: row.course_name,
+      });
+      return dict;
+    }, {});
     res.json(items);
   });
 };

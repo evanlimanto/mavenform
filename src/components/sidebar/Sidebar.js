@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { map } from 'lodash';
 
-import { scrollNavClickEvent, PDFClickEvent } from '../../events';
+import { PDFClickEvent } from '../../events';
 
 const Scroll = require('react-scroll');
 
@@ -23,8 +23,7 @@ class SidebarComponent extends Component {
       return (
         <div className="sidetab-container" key={part}>
           {
-            <Scroll.Link activeClass="active" className="sidetab" to={part} spy={true} isDynamic={true} offset={-50} smooth={true} duration={500}
-             onClick={() => scrollNavClickEvent()}>
+            <Scroll.Link activeClass="active" className="sidetab" to={part} spy={true} isDynamic={true} offset={-50} smooth={true} duration={500}>
               {problemTitle}
             </Scroll.Link>
           }
