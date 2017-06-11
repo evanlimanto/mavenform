@@ -20,13 +20,13 @@
       asciimath2jax: {
         delimiters: [ ["@", "@"], ["@@", "@@"] ]
       },
-      AsciiMath: {displaystyle: false},
+      AsciiMath: { displaystyle: false },
       tex2jax: {
         inlineMath: [ ['$','$'] ],
         displayMath: [ ['$$','$$'] ],
-        processEscapes: true
+        processEscapes: true,
       },
-      "HTML-CSS": { availableFonts: ["TeX"], MMLorHTML: {prefer: "HTML"} },
+      "HTML-CSS": { availableFonts: ["TeX"], MMLorHTML: { prefer: "HTML" } },
       skipStartupTypeset: true,
     });
 		MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {

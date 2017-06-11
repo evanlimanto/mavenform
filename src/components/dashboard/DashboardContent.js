@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 
 import { Question } from '../question';
-import { preprocess } from '../../utils';
 
 class DashboardContentComponent extends Component {
   constructor(props) {
@@ -219,7 +218,7 @@ class DashboardContentComponent extends Component {
           </span>
           <br/>
           {(problem.problem !== "") ? <button onClick={() => this.saveProblem()}>Save</button> : null}
-          {(problem.problem !== "") ? <Question content={preprocess(problem.problem)} solution={preprocess(problem.solution)} /> : null}
+          {(problem.problem !== "") ? <Question content={problem.problem} solution={problem.solution} /> : null}
         </div>
       </div>
     );

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import cookies from 'browser-cookies';
 import { MultipleChoiceQuestion, Question } from '../question';
-import { preprocess } from '../../utils';
 import { has, endsWith, join, keys, forEach, map, split, filter, reduce, range, toString } from 'lodash';
 
 import DashboardLogin from './DashboardLogin';
@@ -103,13 +102,13 @@ class TranscribeComponent extends Component {
 
     const renderedContent = map(items, (item) => {
       const key = item[0]; 
-      const content = augment(preprocess(doc[key]));
+      const content = augment(doc[key]);
       if (has(doc, key + '_i')) {
         const solutionNum = doc[key + '_s'];
         const choices = join(doc[key + '_i'], '~');
         return <MultipleChoiceQuestion key={key} content={content} choices={choices} solutionNum={solutionNum}  />
       }
-      const solution = augment(preprocess(doc[key + '_s']));
+      const solution = augment(doc[key + '_s']);
       return <Question key={key} content={content} solution={solution} />
     });
 

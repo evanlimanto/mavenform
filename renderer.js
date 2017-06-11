@@ -2,55 +2,6 @@ const mjAPI = require('mathjax-node');
 const marked = require('marked');
 const _ = require('lodash');
 
-mjAPI.config({
-  MathJax: {
-    asciimath2jax: {
-      delimiters: [ ["@", "@"], ["@@", "@@"] ]
-    },
-    AsciiMath: { displaystyle: false },
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true
-    },
-    "HTML-CSS": { availableFonts: ["TeX"], MMLorHTML: {prefer: "HTML"} },
-  }
-});
-
-/*
-MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
-  var VARIANT = MathJax.OutputJax["HTML-CSS"].FONTDATA.VARIANT;
-  VARIANT["normal"].fonts.unshift("MathJax_SansSerif");
-  VARIANT["bold"].fonts.unshift("MathJax_SansSerif-bold");
-  VARIANT["italic"].fonts.unshift("MathJax_SansSerif-italic");
-  VARIANT["-tex-mathit"].fonts.unshift("MathJax_SansSerif-italic");
-});
-MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
-  var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;
-  VARIANT["normal"].fonts.unshift("MathJax_SansSerif");
-  VARIANT["bold"].fonts.unshift("MathJax_SansSerif-bold");
-  VARIANT["italic"].fonts.unshift("MathJax_SansSerif-italic");
-  VARIANT["-tex-mathit"].fonts.unshift("MathJax_SansSerif-italic");
-});
-MathJax.Hub.Register.LoadHook("[MathJax]/extensions/asciimath2jax.js",function () {
-  var AM = MathJax.Extension.asciimath2jax,
-      CREATEPATTERNS = AM.createPatterns;
-  AM.createPatterns = function () {
-    var result = CREATEPATTERNS.call(this);
-    this.match['@@'].mode = ";mode=display";
-    return result;
-  };
-});
-MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready",function () {
-  var AM = MathJax.InputJax.AsciiMath;
-  AM.postfilterHooks.Add(function (data) {
-    if (data.script.type.match(/;mode=display/))
-      {data.math.root.display = "block"}
-    return data;
-  });
-});
-*/
-
 marked.setOptions({
   renderer: new marked.Renderer(),
   gfm: true,

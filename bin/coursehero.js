@@ -51,6 +51,8 @@ schools = _.filter(schools, (school) => {
   return true;
 });
 
+schools = _.take(_.sortBy(schools, (school) => -school.document_count), 200)
+
 async.map(schools, (school, outerCallback) => {
   const url = `https://www.coursehero.com/sitemap/schools/${school.id}-${_.join(_.split(school.label, ' '), '-')}`;
   request(url, (err, response, body) => {

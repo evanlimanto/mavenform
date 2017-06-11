@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { map } from 'lodash';
 import { MultipleChoiceQuestion, Question } from '../question';
-import { preprocess } from '../../utils';
 
 class Transcribed extends Component {
   constructor(props) {
@@ -33,13 +32,13 @@ class Transcribed extends Component {
     const renderedContent = map(this.state.content[id], (item, key) => {
       if (item.choices) {
         return <MultipleChoiceQuestion key={key}
-                content={preprocess(item.problem)}
+                content={item.problem}
                 choices={item.choices}
                 solutionNum={item.solution} />;
       }
       return <Question key={key}
-              content={preprocess(item.problem)}
-              solution={preprocess(item.solution)} />;
+              content={item.problem}
+              solution={item.solution} />;
     });
     this.setState({ renderedContent });
   }

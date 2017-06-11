@@ -4,10 +4,6 @@ import { has, range, map } from 'lodash';
 import { Question, MultipleChoiceQuestion } from '../question';
 import { courseCodeToLabel, examTypeToLabel, preprocess, termToLabel } from '../../utils';
 
-const Scroll = require('react-scroll');
-const Element = Scroll.Element;
-const scrollSpy = Scroll.scrollSpy;
-
 class ExamContent extends Component {
   constructor(props) {
     super(props);
@@ -23,8 +19,6 @@ class ExamContent extends Component {
   componentWillReceiveProps(nextProps) {
     if (!(this.props.id === nextProps.id)) {
       this.props.getExamContent(nextProps.id);
-    } else if (this.props.examContentHasLoaded) {
-      Scroll.animateScroll.scrollToTop();
     }
   }
 
@@ -38,7 +32,6 @@ class ExamContent extends Component {
   }
 
   componentDidUpdate() {
-    scrollSpy.update();
     window.renderMJ();
   }
 
@@ -61,7 +54,7 @@ class ExamContent extends Component {
         return <Question id={part + "_" + subpart} courseCode={courseCode} content={qcontent} solution={solution} termCode={termCode} examType={examTypeCode} key={key} schoolCode={schoolCode} />
       });
 
-      return <Element name={part} key={part} className="element">{subparts}</Element>;
+      return <span className="element">{subparts}</span>;
     });
 
     const examDesc = (
