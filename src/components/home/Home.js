@@ -80,7 +80,7 @@ class HomeComponent extends Component {
           {map(suggestions, (suggestion, index) => {
             const aClass = classnames({ bottom: index === suggestions.length - 1 });
             const suggestionText = `${suggestion.school_name_highlighted} ${suggestion.code_highlighted}: ${suggestion.name_highlighted}`;
-            return <Link to={`/${suggestion.school_code}/${join(split(toLower(suggestion.code), ' '), '')}`} className={aClass} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
+            return <Link key={index} to={`/${suggestion.school_code}/${join(split(toLower(suggestion.code), ' '), '')}`} className={aClass} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
           })}
         </div>
       </div>

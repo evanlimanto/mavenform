@@ -15,7 +15,7 @@ const sm = require('sitemap');
 const yaml = require('js-yaml');
 const _ = require('lodash');
 
-const renderer = require('./renderer');
+const renderer = require('./src/renderer');
 const retrieveLists = require('./retrieveLists');
 
 // GCP Storage

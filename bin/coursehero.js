@@ -38,6 +38,7 @@ async.map(params, (param, callback) => {
 });
 */
 
+/*
 require('events').EventEmitter.defaultMaxListeners = Infinity;
 const schoolSet = new Set();
 let schools = _.filter(JSON.parse(fs.readFileSync('./coursehero_schools.json', 'utf-8')), (school) => school.document_count > 0 && school.country === 'United States');
@@ -51,12 +52,11 @@ schools = _.filter(schools, (school) => {
   return true;
 });
 
-schools = _.take(_.sortBy(schools, (school) => -school.document_count), 200)
+schools = _.take(_.sortBy(schools, (school) => -school.document_count), 100)
 
 async.map(schools, (school, outerCallback) => {
   const url = `https://www.coursehero.com/sitemap/schools/${school.id}-${_.join(_.split(school.label, ' '), '-')}`;
   request(url, (err, response, body) => {
-    console.log(school);
     if (err)
       return outerCallback(err);
     const $ = cheerio.load(body);
@@ -76,17 +76,4 @@ async.map(schools, (school, outerCallback) => {
 }, (err, results) => {
   fs.writeFileSync('./coursehero_courses.json', JSON.stringify(results), 'utf-8');
 });
-
-/*
-c.queue([{
-  uri: courseUrl,
-  callback: (err, result, $) => {
-    if (err)
-      return innerCallback(err);
-    const courseItems = $('.dl_courseSeal_info').parent().find('a:nth-child(1)');
-    const verifiedCourses = _.map(courseItems, (courseItem) => courseItem.children[0].data);
-              const filteredCourses = _.filter(_.map(verifiedCourses, (course) => _.trim(_.replace(course, /\t|\n/g, ''))), (course) => !course.includes('course'));
-              innerCallback(null, filteredCourses);
-            }
-          }]);
 */

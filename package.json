@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "asyncawait": "^1.0.6",
     "cheerio": "^1.0.0-rc.1",
     "commander": "^2.9.0",
     "concurrently": "^3.3.0",
@@ -40,7 +41,6 @@
     "lodash": "^4.17.4",
     "mailgun-js": "^0.11.2",
     "marked": "^0.3.6",
-    "mathjax-node": "^1.1.0",
     "mixpanel": "^0.7.0",
     "node-cache": "^4.1.1",
     "pg": "^6.1.5",
