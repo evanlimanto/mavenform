@@ -54,7 +54,6 @@ class HomeComponent extends Component {
           school_name_highlighted: hit._highlightResult.school_name.value,
           code: hit.code,
           code_highlighted: hit._highlightResult.code.value,
-          name: hit.name,
           name_highlighted: hit._highlightResult.name.value,
         };
       });
@@ -79,7 +78,7 @@ class HomeComponent extends Component {
         <div className="results">
           {map(suggestions, (suggestion, index) => {
             const aClass = classnames({ bottom: index === suggestions.length - 1 });
-            const suggestionText = `${suggestion.school_name_highlighted} ${suggestion.code_highlighted}: ${suggestion.name_highlighted}`;
+            const suggestionText = `${suggestion.school_name_highlighted} - ${suggestion.code_highlighted}`;
             return <Link key={index} to={`/${suggestion.school_code}/${join(split(toLower(suggestion.code), ' '), '')}`} className={aClass} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
           })}
         </div>

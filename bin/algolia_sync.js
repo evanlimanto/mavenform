@@ -1,5 +1,5 @@
 function courseCodeToLabel(course_code) {
-  if (!!!course_code)
+  if (!course_code)
     return null;
 
   let idx = -1;
@@ -52,7 +52,7 @@ client.connect();
 index.clearIndex();
 
 const q = `
-  select courses.id, courses.code as code, courses.name as name, schools.code as school_code, schools.name as school_name from courses
+  select courses.id, courses.code as code, schools.code as school_code, schools.name as school_name from courses
   inner join schools on courses.schoolid = schools.id
 `;
 
@@ -61,7 +61,6 @@ client.query(q, (err, result) => {
     let item = {
       objectID: row.id,
       code: courseCodeToLabel(row.code),
-      name: row.name,
       school_code: row.school_code,
       school_name: row.school_name,
     };

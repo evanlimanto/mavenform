@@ -185,7 +185,7 @@ app.get('/searchTags/:tag', function(req, res, next) {
 app.get('/getCourses/:schoolid', function(req, res, next) {
   const schoolid = req.params.schoolid;
   const q1 = `select id from schools where code = $1`;
-  const q2 = `select id, code, name from courses where schoolid = $1`;
+  const q2 = `select id, code from courses where schoolid = $1`;
   client.query({ text: q1, values: [schoolid]})
     .then((result) => {
       if (result.rows.length > 0) {
@@ -297,12 +297,12 @@ app.post('/updateProblem', function(req, res) {
 
 // Add a course
 app.post('/addCourse', (req, res, next) => {
-  const { course_code, course_name, schoolid, subjectid } = req.body;
+  const { course_code, schoolid, subjectid } = req.body;
   const q = `
-    insert into courses (code, name, schoolid, subjectid)
+    insert into courses (code, schoolid, subjectid)
     values($1, $2, $3, $4)
   `;
-  client.query(q, [course_code, course_name, schoolid, subjectid], (err, result) => {
+  client.query(q, [course_code, schoolid, subjectid], (err, result) => {
     if (err) {
       next(err);
       return;
@@ -398,13 +398,14 @@ app.post('/processTranscription', function(req, res, next) {
     return k.match(/^q\d+_\d+$/);
   }), (k) => [k, _.split(k.slice(1), "_")]);
 
-  const inq    = `insert into exams_staging (courseid, examtype, examid, profs, schoolid, datetime) values($1, $2, $3, $4, $5, now())`;
+  const inq    = `insert into exams_staging (courseid, examtype, examid, profs, schoolid, datetime) select $1, $2, $3, $4, $5, now()
+                  where not exists (select 1 from exams_staging where courseid = $6 and examtype = $7 and examid = $8 and profs = $9 and schoolid = $10)`;
   const getq   = `select id from exams_staging where courseid = $1 and examtype = $2 and examid = $3 and profs = $4 and schoolid = $5`;
   const imageq = `insert into images_staging (examid, url) values($1, $2)`;
   const q      = `insert into content_staging (problem_num, subproblem_num, problem, solution, exam, choices) values($1, $2, $3, $4, $5, $6)`;
   async.waterfall([
     (callback) => {
-      client.query(inq, [course_id, exam_type_id, term_id, profs, school_id], (err) => callback(err))
+      client.query(inq, [course_id, exam_type_id, term_id, profs, school_id, course_id, exam_type_id, term_id, profs, school_id], (err) => callback(err))
     },
     (callback) => {
       client.query(getq, [course_id, exam_type_id, term_id, profs, school_id], callback)

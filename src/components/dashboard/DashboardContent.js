@@ -153,7 +153,7 @@ class DashboardContentComponent extends Component {
     }, []);
 
     const coursesSelectItems = map(this.props.courses, (course) => {
-      return <option value={course.id} key={course.id}>{course.code} - {course.name}</option>;
+      return <option value={course.id} key={course.id}>{course.code}</option>;
     });
 
     const examSelectItems = map(this.props.exams.key_dict, (exam, key) => {

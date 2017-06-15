@@ -96,7 +96,6 @@ class TranscribeComponent extends Component {
     } catch (e) {
       return this.setState({ error: e });
     }
-    
     const items = map(filter(keys(doc), function(k) {
       return k.match(/^q\d+_\d+$/);
     }), (k) => [k, split(k.slice(1), '_')]);
@@ -235,7 +234,7 @@ class TranscribeComponent extends Component {
         selTerm = 'winter';
       }
       selProfs = selected.profs;
-      selCourseLabel = selected.course_code + ' - ' + selected.course_name;
+      selCourseLabel = selected.course_code;
     }
     */
 
@@ -251,7 +250,7 @@ class TranscribeComponent extends Component {
     const coursesSelect = (
       <select ref='course'>
         {map(this.state.courses.sort((a, b) => a.code.localeCompare(b.code)), (course, key) => {
-          return <option key={key} value={course.code + '~' + course.id}>{course.code} - {course.name}</option>
+          return <option key={key} value={course.code + '~' + course.id}>{course.code}</option>
         })}
       </select>
     );

@@ -38,7 +38,6 @@ async.map(params, (param, callback) => {
 });
 */
 
-/*
 require('events').EventEmitter.defaultMaxListeners = Infinity;
 const schoolSet = new Set();
 let schools = _.filter(JSON.parse(fs.readFileSync('./coursehero_schools.json', 'utf-8')), (school) => school.document_count > 0 && school.country === 'United States');
@@ -52,28 +51,60 @@ schools = _.filter(schools, (school) => {
   return true;
 });
 
-schools = _.take(_.sortBy(schools, (school) => -school.document_count), 100)
+schools = [{ id: '1937', label: 'Carnegie Mellon' }];
 
-async.map(schools, (school, outerCallback) => {
-  const url = `https://www.coursehero.com/sitemap/schools/${school.id}-${_.join(_.split(school.label, ' '), '-')}`;
-  request(url, (err, response, body) => {
-    if (err)
-      return outerCallback(err);
-    const $ = cheerio.load(body);
-    const items = $('.sl_courseSeal_info').parent().find('a:nth-child(1)');
-    async.map(_.values(items), (item, innerCallback) => {
-      if (_.has(item, 'attribs') && item.attribs.href) {
-        const courseUrl = url + item.attribs.href;
-        console.log(courseUrl);
-        innerCallback(null, courseUrl);
-      } else {
-        innerCallback(null);
-      }
+async.waterfall([
+  (callback) => {
+    async.map(schools, (school, outerCallback) => {
+      const url = `https://www.coursehero.com/sitemap/schools/${school.id}-${_.join(_.split(school.label, ' '), '-')}`;
+      console.log(school.label);
+      request(url, (err, response, body) => {
+        if (err) {
+          console.error(err);
+          return outerCallback(err);
+        }
+        const $ = cheerio.load(body);
+        const items = $('.sl_courseSeal_info').parent().find('a:nth-child(1)');
+        async.map(_.values(items), (item, innerCallback) => {
+          if (_.has(item, 'attribs') && item.attribs.href) {
+            const courseUrl = url + item.attribs.href;
+            console.log(courseUrl);
+            return innerCallback(null, [courseUrl, school.id]);
+          }
+          return innerCallback(null);
+        }, (err, results) => {
+          return outerCallback(err, results);
+        });
+      });
     }, (err, results) => {
-      outerCallback(err, results);
+      return callback(err, _.filter(_.flatten(results), (result) => !!result));
     });
-  });
-}, (err, results) => {
+  },
+  (results, callback) => {
+    async.map(results, (courseItem, outerCallback) => {
+      const url = courseItem[0];
+      const school = courseItem[1];
+      request(url, (err, response, body) => {
+        if (err)
+          return outerCallback(err);
+        const $ = cheerio.load(body);
+        const items = $('.dl_courseSeal_info').parent().find('a:nth-child(1)');
+        async.map(_.values(items), (item, innerCallback) => {
+          if (_.has(item, 'attribs') && item.attribs.href) {
+            const label = _.trim(item.children[0].data);
+            console.log(school, label);
+            return innerCallback(null, [school, label]);
+          }
+          return innerCallback(null);
+        }, (err, results) => {
+          return outerCallback(err, results);
+        });
+      });
+    }, (err, results) => {
+      return callback(err, _.filter(_.flatten(results), (result) => !!result)); 
+    });
+  }
+], (err, results) => {
   fs.writeFileSync('./coursehero_courses.json', JSON.stringify(results), 'utf-8');
 });
-*/
+

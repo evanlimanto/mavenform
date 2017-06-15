@@ -73,7 +73,7 @@ exports.getTerms = (req, res) => {
 
 exports.getTranscribedExams = (req, res) => {
   const q = `
-    select ES.id as id, ES.profs as profs, ES.datetime, exam_types.type_code as type_code, exam_types.type_label as type_label, courses.code as course_code, courses.name as course_name, schools.code as school_code, schools.name as school_name, terms.term_code, terms.term_label from exams_staging ES
+    select ES.id as id, ES.profs as profs, ES.datetime, exam_types.type_code as type_code, exam_types.type_label as type_label, courses.code as course_code, schools.code as school_code, schools.name as school_name, terms.term_code, terms.term_label from exams_staging ES
     inner join courses on courses.id = ES.courseid
     inner join exam_types on exam_types.id = ES.examtype
     inner join schools on schools.id = ES.schoolid
@@ -87,7 +87,6 @@ exports.getTranscribedExams = (req, res) => {
           type_label: row.type_label,
           type_code: row.type_code,
           course_code: row.course_code,
-          course_name: row.course_name,
           school_code: row.school_code,
           school_name: row.school_name,
           term_code: row.term_code,
@@ -148,7 +147,6 @@ exports.getTranscribedExam = (req, res) => {
       ES.profs as profs,
       courses.code as course_code,
       courses.id as course_id,
-      courses.name as course_name,
       exam_types.type_code type_code,
       exam_types.id as type_id,
       terms.term_code as term_code,
@@ -166,7 +164,6 @@ exports.getTranscribedExam = (req, res) => {
     const row = result.rows[0];
     res.send({
       profs: row.profs,
-      course_name: row.course_name,
       course_code: row.course_code,
       course_id: row.course_id,
       type_code: row.type_code,
@@ -182,10 +179,10 @@ exports.getTranscribedExam = (req, res) => {
 exports.getSchoolCourses = (req, res, next) => {
   const schoolCode = req.params.schoolCode;
   const q = `
-    select C.id, C.code, C.name, subjects.subject_code, subjects.subject_label from courses C
+    select C.id, C.code, subjects.subject_code, subjects.subject_label from courses C
     inner join schools on schools.id = C.schoolid
     inner join subjects on subjects.id = C.subjectid
-    where schools.code = $1
+    where schools.code = $1 and exists (select 1 from exams where courseid = C.id)
   `;
   client.query(q, [schoolCode], (err, result) => {
     if (err) {
@@ -202,7 +199,6 @@ exports.getSchoolCourses = (req, res, next) => {
       dict[row.subject_code].courses.push({
         id: row.id,
         code: row.code,
-        name: row.name,
       });
       return dict;
     }, {});
@@ -213,7 +209,7 @@ exports.getSchoolCourses = (req, res, next) => {
 exports.getSchoolCoursesList = (req, res, next) => {
   const schoolid = req.params.schoolid;
   const q = `
-    select C.id, C.code, C.name from courses C
+    select C.id, C.code from courses C
     inner join schools on schools.id = C.schoolid
     where schools.id = $1
   `;
@@ -226,7 +222,6 @@ exports.getSchoolCoursesList = (req, res, next) => {
       return {
         id: row.id,
         code: row.code,
-        name: row.name, 
       };
     });
     res.json(items);
@@ -237,7 +232,7 @@ exports.getUnbookmarkedCourses = (req, res, next) => {
   const school_id = req.params.school_id;
   const auth_user_id = req.params.auth_user_id;
   const q = `
-    select id, code, name from courses where id not in
+    select id, code from courses where id not in
     (select courseid from bookmarked_courses BC inner join users on BC.userid = users.id where users.auth_user_id = $1) and schoolid = $2;
   `;
   client.query(q, [auth_user_id, school_id], (err, result) => {
@@ -249,7 +244,6 @@ exports.getUnbookmarkedCourses = (req, res, next) => {
       return {
         id: row.id,
         code: row.code,
-        name: row.name,
       };
     });
     res.json(items);
@@ -260,8 +254,7 @@ exports.getCourseExams = (req, res, next) => {
   const { courseCode, schoolCode } = req.params;
   const q = `
     select E.id as id, ET.type_code as type_code, ET.type_label as type_label,
-      T.term_code as term_code, T.term_label as term_label,
-      E.profs as profs from exams E
+      T.term_code as term_code, T.term_label as term_label, E.profs as profs from exams E
     inner join courses C on C.id = E.courseid
     inner join exam_types ET on ET.id = E.examtype
     inner join terms T on T.id = E.examid
@@ -325,9 +318,8 @@ exports.getProfs = (req, res, next) => {
 
 exports.getCoursesList = (req, res, next) => {
   const q = `
-    select courses.id as course_id, courses.code as course_code, courses.name as course_name,
-      schools.id as school_id, schools.name as school_name
-    from courses
+    select courses.id as course_id, courses.code as course_code,
+      schools.id as school_id, schools.name as school_name from courses
     inner join schools on courses.schoolid = schools.id
   `;
   client.query(q, [], (err, result) => {
@@ -339,9 +331,8 @@ exports.getCoursesList = (req, res, next) => {
       return {
         course_id: item.course_id,
         course_code: item.course_code,
-        course_name: item.course_name,
         school_id: item.school_id,
-        scohol_name: item.school_name,
+        school_name: item.school_name,
       };
     });
     res.json(items);
@@ -350,7 +341,7 @@ exports.getCoursesList = (req, res, next) => {
 
 exports.getCoursesBySchool = (req, res, next) => {
   const q = `
-    select courses.id as course_id, courses.code as course_code, courses.name as course_name, schools.name as school_name from courses
+    select courses.id as course_id, courses.code as course_code, schools.name as school_name from courses
     inner join schools on courses.schoolid = schools.id
   `;
   client.query(q, [], (err, result) => {
@@ -365,7 +356,6 @@ exports.getCoursesBySchool = (req, res, next) => {
       dict[row.school_name].push({
         course_id: row.course_id,
         course_code: row.course_code,
-        course_name: row.course_name,
       });
       return dict;
     }, {});
