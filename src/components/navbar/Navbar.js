@@ -2,9 +2,13 @@ import React, { Component } from 'react'; import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { has, map, toLower } from 'lodash';
 import classnames from 'classnames';
+import isEmail from 'validator/lib/isEmail';
+import isEmpty from 'validator/lib/isEmpty';
 
 import Modal from '../modal';
 import { algoliaCourseIndex, courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
+
+const request = require('superagent');
 
 class NavbarComponent extends Component {
   constructor(props) {
@@ -13,14 +17,16 @@ class NavbarComponent extends Component {
       modal: null,
       profileDropdownOn: false,
       suggestionsDropdownOn: false,
-      suggestions: []
+      suggestions: [],
+      modalError: null,
     };
 
     this.closeModal = this.closeModal.bind(this);
-    this.loginModal = this.loginModal.bind(this);
-    this.signUpModal = this.signUpModal.bind(this);
+    this.showLoginModal = this.showLoginModal.bind(this);
+    this.showWaitlistModal = this.showWaitlistModal.bind(this);
     this.getSuggestions = this.getSuggestions.bind(this);
     this.toggleProfileDropdown = this.toggleProfileDropdown.bind(this);
+    this.setModalError = this.setModalError.bind(this);
   }
 
   componentDidMount() {
@@ -38,6 +44,10 @@ class NavbarComponent extends Component {
     });
   }
 
+  setModalError(text) {
+    this.setState({ modalError: text }); 
+  }
+
   toggleProfileDropdown() {
     this.setState({
       profileDropdownOn: !this.state.profileDropdownOn
@@ -50,15 +60,15 @@ class NavbarComponent extends Component {
     });
   }
 
-  loginModal() {
+  showLoginModal() {
     this.setState({
       modal: 'login'
     });
   }
 
-  signUpModal() {
+  showWaitlistModal() {
     this.setState({
-      modal: 'signup'
+      modal: 'waitlist'
     });
   }
 
@@ -90,6 +100,31 @@ class NavbarComponent extends Component {
     });
   }
 
+  waitlist() {
+    const email = this.refs.email.value;
+    if (!isEmail(email))
+      return this.setError('Invalid email.');
+    this.setError(null);
+    request
+      .post("/addToWaitlist")
+      .send({ email })
+      .end((err, res) => {
+        if (err || !res.ok) this.setError("Waitlist failed.");
+        else window.setTimeout(this.props.closeModal, 1000);
+      });
+  }
+
+  login() {
+    const email = this.refs.email.value;
+    const password = this.refs.password.value;
+    if (!isEmail(email))
+      return this.setError('Invalid email.');
+    if (isEmpty(password))
+      return this.setError('Empty passowrd.');
+    this.setError(null);
+    this.props.auth.login(email, password, this.setError);
+  }
+
   render() {
     const isLoggedIn = this.props.auth.loggedIn();
     const profile = this.props.auth.getProfile();
@@ -101,10 +136,42 @@ class NavbarComponent extends Component {
 
     let modal = null;
     if (!isLoggedIn) {
-      if (this.state.modal === 'signup') {
-        modal = <Modal signUp={true} closeModal={this.closeModal} loginModal={this.loginModal} signUpModal={this.signUpModal} />;
+      const isWaitlist = (this.state.modal === 'waitlist');
+      const infoContent = isWaitlist ? (
+        <div className="login-helper">
+          <span> Have an account? </span>
+          <a onClick={this.showLoginModal}> Login! </a>
+        </div>
+      ) : (
+        <div className="login-helper">
+          <span> Don't have an account? </span>
+          <a onClick={this.showWaitlistModal}> Get Early Access </a>
+        </div>
+      );
+      const modalContent = isWaitlist ? (
+        <span>
+          <input className="login-info" type="text" placeholder="Email" ref="email"/>
+          <hr className="s2" />
+          <a className="login-button blue" onClick={this.waitlist}>Get Early Access</a>
+        </span>
+      ) : (
+        <span>
+          <input className="login-info" type="text" placeholder="Email" ref="email"/>
+          <hr className="s1" />
+          <input className="login-info" type="password" placeholder="Password" ref="password"/>
+          <hr className="s2" />
+          <p className="forgot-pass">
+            <a className="forgot-pass">Don't remember your password?</a>
+          </p>
+          <hr className="s2" />
+          <a className="login-button blue" onClick={this.login}>Log In</a>
+        </span>
+      );
+
+      if (this.state.modal === 'waitlist') {
+        modal = <Modal closeModal={this.closeModal} infoContent={infoContent} modalContent={modalContent} errorText={this.state.modalError} />;
       } else if (this.state.modal === 'login') {
-        modal = <Modal signUp={false} closeModal={this.closeModal} loginModal={this.loginModal} signUpModal={this.signUpModal} />;
+        modal = <Modal closeModal={this.closeModal} infoContent={infoContent} modalContent={modalContent} errorText={this.state.modalError} />;
       }
     }
 
@@ -124,8 +191,8 @@ class NavbarComponent extends Component {
               <input className="home-search" name="search" placeholder="Search courses..." type="text" autoComplete="off" onChange={this.getSuggestions} ref="search" />
             </div>
             {searchResults}
-            <a className="home-button home-button-alt" onClick={this.loginModal}>Log In</a>
-            <a className="home-button" onClick={this.signUpModal}>Early Access</a>
+            <a className="home-button home-button-alt" onClick={this.showLoginModal}>Log In</a>
+            <a className="home-button" onClick={this.showWaitlistModal}>Early Access</a>
           </div>
         </div>
       );
@@ -208,8 +275,8 @@ class NavbarComponent extends Component {
               </span>
             ) : (
               <span>
-                <a className="nav-button nav-button-alt" onClick={this.loginModal}>Log In</a>
-                <a className="nav-button" onClick={this.signUpModal}>Early Access</a>
+                <a className="nav-button nav-button-alt" onClick={this.showLoginModal}>Log In</a>
+                <a className="nav-button" onClick={this.showWaitlistModal}>Early Access</a>
               </span>
             )}
           </div>

@@ -8,7 +8,9 @@ import Footer from '../footer';
 import Navbar from '../navbar';
 import { schoolClickEvent } from '../../events';
 import { algoliaCourseIndex } from '../../utils';
+import isEmail from 'validator/lib/isEmail';
 
+const request = require('superagent');
 const Scroll = require('react-scroll');
 const ScrollLink = Scroll.Link;
 const Element = Scroll.Element;
@@ -61,6 +63,19 @@ class HomeComponent extends Component {
     });
   }
 
+  waitlist(e) {
+    e.preventDefault();
+    const email = this.refs.email.value;
+    if (!isEmail(email))
+      return;
+    request
+      .post("/addToWaitlist")
+      .send({ email })
+      .end((err, res) => {
+        if (err || !res.ok) console.error(err);
+      });
+  }
+
   render() {
     const schoolCodes = ['ucberkeley', 'ucsandiego', 'stanford'];
     const schoolLabels = ['UC Berkeley', 'UC San Diego', 'Stanford'];
@@ -96,8 +111,8 @@ class HomeComponent extends Component {
             <hr className="s2" />
             <h5 className="h5-alt">The ultimate bank of interactive and course-specific study resources</h5>
             <div className="search-container">
-              <input className="search" name="search" placeholder="Enter school email address" type="text" autoComplete="off"/>
-              <input className="early-access" type="submit" value="Get Early Access" />
+              <input className="search" name="search" placeholder="Enter school email address" type="text" autoComplete="off" ref="email"/>
+              <input className="early-access" type="submit" value="Get Early Access" onClick={(e) => this.waitlist(e)} />
             </div>
             <div>
               <ScrollLink className="search-link" to="features" spy={true} smooth={true} duration={500}> 

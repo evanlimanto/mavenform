@@ -5,10 +5,9 @@ import classnames from 'classnames';
 import { map, split } from 'lodash';
 
 import Expire from './Expire';
-import { setQuestionCopied } from '../../actions';
 import { copyQuestionLinkEvent } from '../../events';
 
-const MultipleChoiceQuestionComponent = ({ id, courseid, content, examtype, term, copying, solutionNum, choices, copyQuestionLink, doneCopyingLink, showSolutions }) => {
+const MultipleChoiceQuestionComponent = ({ id, courseid, content, examtype, term, solutionNum, choices }) => {
   solutionNum = (solutionNum) ? (solutionNum - 1) : null;
   const options = map(split(choices, '~'), (choice, index) => {
     choice = `${String.fromCharCode(index + 65)}) ${choice}`;
@@ -55,26 +54,11 @@ const mapStateToProps = (state, ownProps) => {
     term: ownProps.term,
     choices: ownProps.choices,
     solutionNum: ownProps.solutionNum,
-    copying: state.question.copying,
-  };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    copyQuestionLink: (url) => {
-      copy(url);
-      copyQuestionLinkEvent();
-      dispatch(setQuestionCopied(true))
-    },
-    doneCopyingLink: () => {
-      dispatch(setQuestionCopied(false))
-    }
   };
 };
 
 const MultipleChoiceQuestion = connect(
   mapStateToProps,
-  mapDispatchToProps,
 )(MultipleChoiceQuestionComponent);
 
 export default MultipleChoiceQuestion;

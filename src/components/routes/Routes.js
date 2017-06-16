@@ -5,7 +5,7 @@ import Course from '../course';
 import { Dashboard, DashboardContent, DashboardCourses, Transcribe, Transcribed } from '../dashboard';
 import Exam from '../exam';
 import Home from '../home';
-import { Login, Logout } from '../login';
+import { Login, Logout, SecretSignup } from '../login';
 import NotFound from '../notfound';
 import Marketing from '../marketing';
 import Profile from '../profile';
@@ -28,6 +28,7 @@ const Routes = (
     <Route path="/dashboard/transcribe/:examid" component={Transcribe} />
     <Route path="/dashboard/transcribe" component={Transcribe} />
     <Route path="/dashboard" component={Dashboard} />
+    <Route path="/s3cr3tsignup" component={SecretSignup} />
     <Route path="/upload" component={Upload} />
     <Route path="/home" render={(props) => <UserHome requireAuth={requireAuth} {...props} />} />
     <Route path="/:schoolCode/:courseCode/:examType/:termCode" component={Exam} />

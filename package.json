@@ -39,6 +39,7 @@
     "jwt-decode": "^2.2.0",
     "loadjs": "^3.5.0",
     "lodash": "^4.17.4",
+    "mailchimp": "^1.2.0",
     "mailgun-js": "^0.11.2",
     "marked": "^0.3.6",
     "mixpanel": "^0.7.0",

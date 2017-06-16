@@ -4,6 +4,7 @@ import { concat, map, range, reduce } from 'lodash';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 
+import { preprocess } from '../../renderer';
 import { Question } from '../question';
 
 class DashboardContentComponent extends Component {

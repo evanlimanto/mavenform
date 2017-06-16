@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { has, range, map } from 'lodash';
 
 import { Question, MultipleChoiceQuestion } from '../question';
-import { courseCodeToLabel, examTypeToLabel, preprocess, termToLabel } from '../../utils';
+import { courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
 
 class ExamContent extends Component {
   constructor(props) {
@@ -54,7 +54,7 @@ class ExamContent extends Component {
         return <Question id={part + "_" + subpart} courseCode={courseCode} content={qcontent} solution={solution} termCode={termCode} examType={examTypeCode} key={key} schoolCode={schoolCode} />
       });
 
-      return <span className="element">{subparts}</span>;
+      return <span key={part} className="element">{subparts}</span>;
     });
 
     const examDesc = (

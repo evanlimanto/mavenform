@@ -167,7 +167,7 @@ class UserHomeComponent extends Component {
       <select ref="bookmark">
         {map(this.state.coursesToBookmark.sort((a, b) => a.code.localeCompare(b.code)), (course, key) => {
           return (
-            <option key={key} value={`${course.id}~${course.code}`}>{courseCodeToLabel(course.code)} - {course.name}</option>
+            <option key={key} value={`${course.id}~${course.code}`}>{courseCodeToLabel(course.code)}</option>
           );
         })}
       </select>

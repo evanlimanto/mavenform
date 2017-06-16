@@ -10,8 +10,8 @@ const glob = require('glob');
 const path = require('path');
 const NodeCache = require('node-cache');
 const pg = require('pg');
+const request = require('request');
 const randomstring = require('randomstring');
-const sm = require('sitemap');
 const yaml = require('js-yaml');
 const _ = require('lodash');
 
@@ -182,7 +182,7 @@ app.get('/searchTags/:tag', function(req, res, next) {
 });
 
 // Retrieve course listing
-app.get('/getCourses/:schoolid', function(req, res, next) {
+app.get('/getCourses/:schoolid', (req, res, next) => {
   const schoolid = req.params.schoolid;
   const q1 = `select id from schools where code = $1`;
   const q2 = `select id, code from courses where schoolid = $1`;
@@ -222,8 +222,8 @@ app.get('/getExamById/:examid', (req, res, next) => {
     const problems = _.reduce(result.rows, (result, row) => {
       const problem_num = row.problem_num;
       const subproblem_num = row.subproblem_num;
-      const problem = row.problem;
-      const solution = row.solution;
+      const problem = renderer.preprocess(row.problem);
+      const solution = renderer.preprocess(row.solution);
       const choices = row.choices;
       const key = `${problem_num}_${subproblem_num}`;
       result[key] = { problem, solution, choices };
@@ -350,7 +350,6 @@ app.post('/createUser', function(req, res) {
 function replaceImagePlaceholders(basePath, content) {
   if (!content) return content;
   const regexp = /!!(.*?)!!/g;
-  console.log(content);
   const matches = content.match(regexp);
   _.forEach(matches, (match) => {
     const imageName = match.slice(2, match.length - 2);
@@ -651,12 +650,28 @@ app.post('/addToWaitlist', (req, res, next) => {
   const { email } = req.body;
   const q = `insert into waitlist (email) values ($1)`;
 
-  client.query(q, [email], (err, result) => {
-    if (err) {
-      next(err);
-      return;
+  const options = {
+    method: 'POST',
+    url: 'https://us16.api.mailchimp.com/3.0/lists/bf5797b1e4',
+    auth: {
+      'user': 'anystring',
+      'pass': 'e2480866e411bcc372882f3bb98f4483-us16',
+    },
+    json: {
+      members: [{
+        email_address: email,
+        status: 'subscribed',
+      }],
+      update_existing: true,
     }
-    res.end();
+  };
+
+  async.parallel([
+    (callback) => client.query(q, [email], (err) => callback(err)),
+    (callback) => request(options, (err) => callback(err)),
+  ], (err) => {
+    if (err) return next(err);
+    return res.end();
   });
 });
 
@@ -668,6 +683,21 @@ app.post('/addToDiscussion', (req, res, next) => {
     values($1, $2, $3, $4)
   `;
   client.query(q, [content, parentid, userid, contentid], (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.end();
+  });
+});
+
+app.post('/reportError', (req, res, next) => {
+  const { content_id, error_content } = req.body;
+  const q = `
+    insert into reports (content_id, error) values($1, $2)
+  `;
+
+  client.query(q, [content_id, error_content], (err, result) => {
     if (err) {
       next(err);
       return;

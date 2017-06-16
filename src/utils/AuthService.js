@@ -28,25 +28,26 @@ export default class AuthService {
     this.logout = this.logout.bind(this)
   }
 
-  login(username, password) {
+  login(username, password, errorMessageHandler) {
     this.auth0.redirect.loginWithCredentials({
       connection: 'Username-Password-Authentication',
       username,
       password
     }, (err) => {
-      if (err) console.error(err);
-      console.error(err.original);
+      if (err && errorMessageHandler)
+        errorMessageHandler(err.description);
     })
   }
 
-  signup(email, username, password){
+  signup(email, username, password, errorMessageHandler){
     this.auth0.redirect.signupAndLogin({
       connection: 'Username-Password-Authentication',
       email,
       password,
       user_metadata: { username }
     }, (err) => {
-      if (err) console.error(err);
+      if (err && errorMessageHandler)
+        errorMessageHandler(err.description);
     })
   }
 
