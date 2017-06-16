@@ -4,10 +4,6 @@ import { has, range, map } from 'lodash';
 import { Question, MultipleChoiceQuestion } from '../question';
 import { courseCodeToLabel, examTypeToLabel, preprocess, termToLabel } from '../../utils';
 
-const Scroll = require('react-scroll');
-const Element = Scroll.Element;
-const scrollSpy = Scroll.scrollSpy;
-
 class ExamContent extends Component {
   constructor(props) {
     super(props);
@@ -23,8 +19,6 @@ class ExamContent extends Component {
   componentWillReceiveProps(nextProps) {
     if (!(this.props.id === nextProps.id)) {
       this.props.getExamContent(nextProps.id);
-    } else if (this.props.examContentHasLoaded) {
-      Scroll.animateScroll.scrollToTop();
     }
   }
 
@@ -38,12 +32,11 @@ class ExamContent extends Component {
   }
 
   componentDidUpdate() {
-    scrollSpy.update();
     window.renderMJ();
   }
 
   render() {
-    const { courseCode, examTypeCode, termCode, profs } = this.props;
+    const { schoolCode, courseCode, examTypeCode, termCode, profs } = this.props;
     const examContent = this.state.examContent;
     const content = map(examContent.info, (num_parts, part) => {
       const subparts = map(range(1, num_parts + 1), subpart => {
@@ -55,15 +48,13 @@ class ExamContent extends Component {
         let qcontent = examContent.problems[key].problem || '';
         let solution = examContent.problems[key].solution || '';
         const choices = examContent.problems[key].choices || '';
-        qcontent = preprocess(qcontent);
-        solution = preprocess(solution);
         if (choices && choices.length > 0) {
-          return <MultipleChoiceQuestion id={part + "_" + subpart} courseid={courseCode} content={qcontent} solutionNum={solution} term={termCode} examtype={examTypeCode} key={key} choices={choices} />
+          return <MultipleChoiceQuestion id={part + "_" + subpart} courseCode={courseCode} content={qcontent} solutionNum={solution} termCode={termCode} examType={examTypeCode} key={key} choices={choices} schoolCode={schoolCode} />
         }
-        return <Question id={part + "_" + subpart} courseid={courseCode} content={qcontent} solution={solution} term={termCode} examtype={examTypeCode} key={key} />
+        return <Question id={part + "_" + subpart} courseCode={courseCode} content={qcontent} solution={solution} termCode={termCode} examType={examTypeCode} key={key} schoolCode={schoolCode} />
       });
 
-      return <Element name={part} key={part} className="element">{subparts}</Element>;
+      return <span className="element">{subparts}</span>;
     });
 
     const examDesc = (

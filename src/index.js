@@ -10,9 +10,8 @@ import * as appReducers from './reducers';
 import { Routes } from './components';
 import initializeTracking from './tracking';
 import { initStore } from './utils';
+import { ReactGA } from './events';
 
-const ReactGA = require('react-ga');
-ReactGA.initialize('UA-20131732-5');
 ReactGA.set({ path: window.location.pathname });
 ReactGA.pageview(window.location.pathname);
 

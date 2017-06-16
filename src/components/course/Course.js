@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { map, toUpper } from 'lodash';
+import { has, map } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 
-import { examClickEvent } from '../../events';
 import { courseCodeToLabel } from '../../utils';
-
+import { examClickEvent } from '../../events';
 import Footer from '../footer';
 import Navbar from '../navbar';
 
@@ -36,7 +35,7 @@ class CourseComponent extends Component {
       const profs = exam.profs;
       const url = `/${schoolCode}/${courseCode}/${typeCode}/${termCode}`;
       return (
-        <tr key={key} className="available" onClick={() => examClickEvent(courseCode, typeCode, termCode)}>
+        <tr key={key} className="available" onClick={() => examClickEvent(schoolCode, courseCode, typeCode, termCode)}>
           <td><Link to={url}>{typeLabel}</Link></td>
           <td><Link to={url}>{termLabel}</Link></td>
           <td><Link to={url}>{profs}</Link></td>
@@ -45,9 +44,10 @@ class CourseComponent extends Component {
       );
     });
 
+    const schoolLabel = (this.props.labels && has(this.props.labels.schools, schoolCode)) ? this.props.labels.schools[schoolCode]: null;
     const meta = {
-      description: `${toUpper(courseCode)} - Past Exams`,
-      title: `${toUpper(courseCode)} - Past Exams`,
+      description: `Find interactive ${courseCodeToLabel(courseCode)} past midterms and finals from ${schoolLabel} here.`,
+      title: `${courseCodeToLabel(courseCode)} - ${schoolLabel} - Studyform`,
     };
 
     return (
@@ -92,6 +92,7 @@ const mapStateToProps = (state, ownProps) => {
     courseCode: ownProps.match.params.courseCode,
     schoolCode: ownProps.match.params.schoolCode,
     exams: state.exams.multi_dict,
+    labels: state.labels,
   }
 };
 

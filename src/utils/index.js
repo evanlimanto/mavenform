@@ -1,7 +1,6 @@
 import { replace, reduce, toUpper } from 'lodash';
 
 import { updateExamList, updateCourseList, updateSchoolList, updateExamTypesList, updateTermList, updateLabels } from '../actions';
-import MDRenderer from '../components/exam/MDRenderer';
 
 export const ENV_IS_DEV = process.env.NODE_ENV === "development";
 
@@ -62,15 +61,8 @@ export function initStore(store) {
   );
 }
 
-export function preprocess(text) {
-  text = replace(text, /_/g, '\\_');
-  text = replace(text, /&amp;/g, '&');
-  text = MDRenderer(text);
-  return text;
-};
-
 export function courseCodeToLabel(course_code) {
-  if (!!!course_code)
+  if (!course_code)
     return null;
 
   let idx = -1;

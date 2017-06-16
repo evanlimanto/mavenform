@@ -36,7 +36,6 @@ class Dashboard extends Component {
       return <DashboardLogin />;
     }
     const examsList = map(this.state.exams, (exam, key) => {
-      const url = `/dashboard/transcribe/${key}`;
       return (
         <tr className="available" key={key}>
           <td><a>{exam.type_label}</a></td>

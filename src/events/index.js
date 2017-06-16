@@ -7,48 +7,34 @@ const mixpanel = Mixpanel.init((window.location.hostname === "www.mavenform.com"
 const ReactGA = require('react-ga');
 ReactGA.initialize('UA-20131732-5');
 
-const tracker = function(name, dict={}) {
+const tracker = function(name, label) {
 	if (process.env.NODE_ENV === "development") {
     console.log(`Tracking event ${name}`);
   } else {
     const page = window.location.pathname;
     mixpanel.track(name, { page });
-		ReactGA.event({ category: name, action: page });
+		ReactGA.event({ category: name, action: page, label });
 	}
 }
 
-export function viewCoursesEvent() {
-	tracker('view courses');
+export { ReactGA };
+
+export function schoolClickEvent(schoolCode) {
+  tracker('school click', {
+    label: schoolCode,
+  });
 }
 
-export function learnMoreEvent() {
-	tracker('learn more');
-}
-
-export function examClickEvent(courseid, examtype, examid) {
-	tracker('exam click', {
-		courseid,
-		examtype,
-		examid,
-	});
-}
-
-export function courseClickEvent(courseid) {
+export function courseClickEvent(schoolCode, courseCode) {
 	tracker('course click', {
-		courseid
+    label: `${schoolCode} - ${courseCode}`
 	})
 }
 
-export function toggleAppModeEvent() {
-	tracker('toggle app mode');
-}
-
-export function navSidebarClickEvent() {
-	tracker('nav sidebar click');
-}
-
-export function scrollNavClickEvent() {
-	tracker('scroll nav click');
+export function examClickEvent(schoolCode, courseCode, typeCode, termCode) {
+	tracker('exam click', {
+    label: `${schoolCode} - ${courseCode} ${typeCode} ${termCode}`
+	});
 }
 
 export function copyQuestionLinkEvent() {

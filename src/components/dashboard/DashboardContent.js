@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 
 import { Question } from '../question';
-import { preprocess } from '../../utils';
 
 class DashboardContentComponent extends Component {
   constructor(props) {
@@ -52,7 +51,7 @@ class DashboardContentComponent extends Component {
   }
 
   getExam(id) {
-    fetch(`/getExam/${id}`).then(
+    fetch(`/getExamById/${id}`).then(
       (response) => response.json()
     ).then(
       (json) => {
@@ -154,7 +153,7 @@ class DashboardContentComponent extends Component {
     }, []);
 
     const coursesSelectItems = map(this.props.courses, (course) => {
-      return <option value={course.id} key={course.id}>{course.code} - {course.name}</option>;
+      return <option value={course.id} key={course.id}>{course.code}</option>;
     });
 
     const examSelectItems = map(this.props.exams.key_dict, (exam, key) => {
@@ -219,7 +218,7 @@ class DashboardContentComponent extends Component {
           </span>
           <br/>
           {(problem.problem !== "") ? <button onClick={() => this.saveProblem()}>Save</button> : null}
-          {(problem.problem !== "") ? <Question content={preprocess(problem.problem)} solution={preprocess(problem.solution)} /> : null}
+          {(problem.problem !== "") ? <Question content={problem.problem} solution={problem.solution} /> : null}
         </div>
       </div>
     );

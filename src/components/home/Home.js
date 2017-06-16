@@ -3,9 +3,10 @@ import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import DocumentMeta from 'react-document-meta';
-import { map, toLower } from 'lodash';
+import { map, toLower, join, split } from 'lodash';
 import Footer from '../footer';
 import Navbar from '../navbar';
+import { schoolClickEvent } from '../../events';
 import { algoliaCourseIndex } from '../../utils';
 
 const Scroll = require('react-scroll');
@@ -13,7 +14,7 @@ const ScrollLink = Scroll.Link;
 const Element = Scroll.Element;
 
 const meta = {
-  description: 'Mavenform is a new and intuitive format to view and study past exams currently serving thousands of students at UC Berkeley.',
+  description: 'The ultimate bank of interactive and course-specific study resources.',
   title: 'Studyform',
 };
 
@@ -47,14 +48,12 @@ class HomeComponent extends Component {
       offset: 0,
     }, (err, content) => {
       const suggestions = map(content.hits, (hit) => {
-        console.log(hit);
         return {
           school_code: hit.school_code,
           school_name: hit.school_name,
           school_name_highlighted: hit._highlightResult.school_name.value,
           code: hit.code,
           code_highlighted: hit._highlightResult.code.value,
-          name: hit.name,
           name_highlighted: hit._highlightResult.name.value,
         };
       });
@@ -63,11 +62,11 @@ class HomeComponent extends Component {
   }
 
   render() {
-    const schools = ['ucberkeley', 'ucsandiego', 'stanford'];
+    const schoolCodes = ['ucberkeley', 'ucsandiego', 'stanford'];
     const schoolLabels = ['UC Berkeley', 'UC San Diego', 'Stanford'];
-    const schoolCards = map(schools, (school, key) => {
+    const schoolCards = map(schoolCodes, (schoolCode, key) => {
       return (
-        <Link key={key} className="card" to={"/" + school}>
+        <Link key={key} className="card" to={"/" + schoolCode} onClick={() => schoolClickEvent(schoolCode)}>
           <span>{schoolLabels[key]}</span>
           <span className="card-arrow">&#8594;</span>
         </Link> 
@@ -79,8 +78,8 @@ class HomeComponent extends Component {
         <div className="results">
           {map(suggestions, (suggestion, index) => {
             const aClass = classnames({ bottom: index === suggestions.length - 1 });
-            const suggestionText = `${suggestion.school_name_highlighted} ${suggestion.code_highlighted}: ${suggestion.name_highlighted}`;
-            return <Link to={`/${suggestion.school_code}/${toLower(suggestion.code)}`} className={aClass} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
+            const suggestionText = `${suggestion.school_name_highlighted} - ${suggestion.code_highlighted}`;
+            return <Link key={index} to={`/${suggestion.school_code}/${join(split(toLower(suggestion.code), ' '), '')}`} className={aClass} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
           })}
         </div>
       </div>

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import isEmail from 'validator/lib/isEmail';
 import isEmpty from 'validator/lib/isEmpty';
-import { evtEmitter } from '../../utils/events';
 
 class ModalComponent extends Component {
   constructor(props) {
@@ -18,9 +17,7 @@ class ModalComponent extends Component {
     const email = this.refs.email.value;
     const username = this.refs.username.value;
     const password = this.refs.password.value;
-      console.log(email, username, password);
     if (isEmail(email) && !isEmpty(username) && !isEmpty(password)) {
-      console.log(email, username, password);
       this.props.auth.signup(email, username, password);
     }
   }

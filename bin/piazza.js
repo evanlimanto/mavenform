@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const fs = require('fs');
 const req = require('superagent');
+
 /*
 let letters = [];
 const schoolCodes = new Set();
@@ -42,18 +43,18 @@ async.map(params, (param, callback) => {
     });
 }, (err, results) => {
   if (err) console.error(err);
-  fs.writeFileSync('./data1.json', JSON.stringify(results), 'utf-8');
+  fs.writeFileSync('./piazza_schools.json', JSON.stringify(results), 'utf-8');
 });
 */
-/*
+
 const async = require('asyncawait/async');
 const await = require('asyncawait/await');
-const obj = JSON.parse(fs.readFileSync('./data.json', 'utf-8'));
+const obj = JSON.parse(fs.readFileSync('./piazza_schools.json', 'utf-8'));
 const uniqueSchools = {};
 _.forEach(obj, arr => _.forEach(arr, school => { uniqueSchools[school[0]] = school[1]; }));
 let schools = _.map(uniqueSchools, (a, b) => [b, a]);
 schools = schools.sort((a, b) => b[1] - a[1]);
-schools = _.filter(schools, (school) => school[1] > 10);
+schools = _.filter(schools, (school) => school[1] > 50);
 
 const as = require('async');
 const phantom = require('phantom');
@@ -96,11 +97,12 @@ as.map(schools, (item, callback) => {
 }, (err, results) => {
   if (err) console.error(err);
   else {
-    fs.writeFileSync('./data2.json', JSON.stringify(results), 'utf-8');    
+    fs.writeFileSync('./piazza_courses.json', JSON.stringify(results), 'utf-8');    
   }
-});*/
+});
 
-const json = JSON.parse(fs.readFileSync('./data2.json', 'utf-8'));
+/*
+const json = JSON.parse(fs.readFileSync('./piazza_courses.json', 'utf-8'));
 let schoolItems = _.map(json, (school) => {
   if (!school)
     return null;
@@ -121,9 +123,10 @@ schoolItems = schoolItems.sort((a, b) => {
 });
 _.forEach(schoolItems, (school) => {
   _.forEach(school.courses, (course) => {
-    console.log(school.name, school.cnt, course.code, course.cnt); 
+    console.log(school.name, school.cnt, course.code, course.cnt);
   });
 });
+*/
 //_.forEach(schoolItems, (school) => console.log(school.name, school.cnt, school.courses));
 
 /*
@@ -143,4 +146,5 @@ items = items.sort((a, b) => {
 function printItem(item) {
   console.log(item.schoolName, item.org.cn, item.org.terms['Summer 2017'].cnt); 
 }
-_.forEach(items, printItem);*/
+_.forEach(items, printItem);
+*/

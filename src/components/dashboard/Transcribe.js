@@ -3,9 +3,9 @@ import Dropzone from 'react-dropzone';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import cookies from 'browser-cookies';
+import { preprocess } from '../../renderer';
 import { MultipleChoiceQuestion, Question } from '../question';
-import { preprocess } from '../../utils';
-import { has, endsWith, join, keys, forEach, map, split, filter, reduce, range, toString } from 'lodash';
+import { toLower, has, endsWith, join, keys, forEach, map, split, filter, reduce, range, toString } from 'lodash';
 
 import DashboardLogin from './DashboardLogin';
 
@@ -36,6 +36,7 @@ class TranscribeComponent extends Component {
       images: [],
       courses: []
     };
+
     this.onDrop = this.onDrop.bind(this);
     this.upload = this.upload.bind(this);
     this.updateContent = this.updateContent.bind(this);
@@ -66,7 +67,7 @@ class TranscribeComponent extends Component {
 
   onDrop(acceptedFiles, rejectedFiles) {
     const result = reduce(acceptedFiles, (res, image) => {
-      if (!endsWith(image.name, '.png'))
+      if (!endsWith(toLower(image.name), '.png'))
         return false;
       return res;
     }, true);
@@ -95,7 +96,6 @@ class TranscribeComponent extends Component {
     } catch (e) {
       return this.setState({ error: e });
     }
-    
     const items = map(filter(keys(doc), function(k) {
       return k.match(/^q\d+_\d+$/);
     }), (k) => [k, split(k.slice(1), '_')]);
@@ -234,7 +234,7 @@ class TranscribeComponent extends Component {
         selTerm = 'winter';
       }
       selProfs = selected.profs;
-      selCourseLabel = selected.course_code + ' - ' + selected.course_name;
+      selCourseLabel = selected.course_code;
     }
     */
 
@@ -250,7 +250,7 @@ class TranscribeComponent extends Component {
     const coursesSelect = (
       <select ref='course'>
         {map(this.state.courses.sort((a, b) => a.code.localeCompare(b.code)), (course, key) => {
-          return <option key={key} value={course.code + '~' + course.id}>{course.code} - {course.name}</option>
+          return <option key={key} value={course.code + '~' + course.id}>{course.code}</option>
         })}
       </select>
     );

@@ -6,12 +6,8 @@ import DocumentMeta from 'react-document-meta';
 
 import Footer from '../footer';
 import Navbar from '../navbar';
+import { courseClickEvent } from '../../events';
 import { courseCodeToLabel } from '../../utils';
-
-const meta = {
-  description: 'List of Schools',
-  title: 'Schools',
-};
 
 class SchoolComponent extends Component {
   constructor(props) {
@@ -32,7 +28,7 @@ class SchoolComponent extends Component {
     const schoolCode = this.props.schoolCode;
     const courseItems = (keys(this.state.courses).length > 0) ? map(this.state.courses, (obj, subject) => {
       const courseBoxes = map(obj.courses, (course, key) => (
-        <Link className="card course-card" to={"/" + schoolCode + "/" + course.code} key={key}>
+        <Link className="card course-card" to={"/" + schoolCode + "/" + course.code} key={key} onClick={() => courseClickEvent(schoolCode, course.code)}>
           <span>{courseCodeToLabel(course.code)}</span>
           <span className="card-arrow">&#8594;</span>
         </Link>
@@ -45,6 +41,12 @@ class SchoolComponent extends Component {
       );
     }) : "No courses yet. Check again for more updates!";
 
+    const schoolLabel = (this.props.labels && has(this.props.labels.schools, schoolCode)) ? this.props.labels.schools[schoolCode]: null;
+    const meta = {
+      description: `Interactive and course-specific study resources for ${schoolLabel}.`,
+      title: `${schoolLabel} - Studyform`,
+    };
+
     return (
       <div className="school">
         <DocumentMeta {...meta} />
@@ -53,10 +55,7 @@ class SchoolComponent extends Component {
           <div className="card-container center">
             <div className="container">
               <div className="center">
-                <h4>
-                {(this.props.labels && has(this.props.labels.schools, schoolCode)) ?
-                  this.props.labels.schools[schoolCode]: null}
-                </h4>
+                <h4>{schoolLabel}</h4>
                 <h5>Available courses</h5>
               </div>
             </div>

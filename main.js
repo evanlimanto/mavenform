@@ -15,6 +15,7 @@ const sm = require('sitemap');
 const yaml = require('js-yaml');
 const _ = require('lodash');
 
+const renderer = require('./src/renderer');
 const retrieveLists = require('./retrieveLists');
 
 // GCP Storage
@@ -78,6 +79,9 @@ app.get('/getTranscribedExams', retrieveLists.getTranscribedExams);
 
 // Retrieve information for a transcribed exam
 app.get('/getTranscribedExam/:examid', retrieveLists.getTranscribedExam);
+
+// Retrieve courses grouped by school
+app.get('/getCoursesBySchool', retrieveLists.getCoursesBySchool);
 
 // Retrieve list of transcribed content
 app.get('/getTranscribedContent/:examid', retrieveLists.getTranscribedContent);
@@ -181,7 +185,7 @@ app.get('/searchTags/:tag', function(req, res, next) {
 app.get('/getCourses/:schoolid', function(req, res, next) {
   const schoolid = req.params.schoolid;
   const q1 = `select id from schools where code = $1`;
-  const q2 = `select id, code, name from courses where schoolid = $1`;
+  const q2 = `select id, code from courses where schoolid = $1`;
   client.query({ text: q1, values: [schoolid]})
     .then((result) => {
       if (result.rows.length > 0) {
@@ -195,6 +199,39 @@ app.get('/getCourses/:schoolid', function(req, res, next) {
           });
       }
     });
+});
+
+app.get('/getExamById/:examid', (req, res, next) => {
+  const { examid } = req.params;
+
+  const getcontentq = `
+    select problem_num, subproblem_num, problem, solution, choices from content where exam = $1
+  `;
+  client.query(getcontentq, [examid], (err, result) => {
+    const info = _.reduce(result.rows, (result, row) => {
+      const problem_num = row.problem_num;
+      const subproblem_num = row.subproblem_num;
+      if (_.has(result, problem_num)) {
+        result[problem_num] = Math.max(result[problem_num], subproblem_num);
+      } else {
+        result[problem_num] = subproblem_num;
+      }
+      return result;
+    }, {});
+
+    const problems = _.reduce(result.rows, (result, row) => {
+      const problem_num = row.problem_num;
+      const subproblem_num = row.subproblem_num;
+      const problem = row.problem;
+      const solution = row.solution;
+      const choices = row.choices;
+      const key = `${problem_num}_${subproblem_num}`;
+      result[key] = { problem, solution, choices };
+      return result;
+    }, {});
+    res.json({info, problems});
+    res.end();
+  })
 });
 
 // Retrieve exam contents
@@ -235,8 +272,8 @@ app.get('/getExam/:schoolCode/:courseCode/:examTypeCode/:termCode', function(req
     const problems = _.reduce(result.rows, (result, row) => {
       const problem_num = row.problem_num;
       const subproblem_num = row.subproblem_num;
-      const problem = row.problem;
-      const solution = row.solution;
+      const problem = renderer.preprocess(row.problem);
+      const solution = renderer.preprocess(row.solution);
       const choices = row.choices;
       const key = `${problem_num}_${subproblem_num}`;
       result[key] = { problem, solution, choices };
@@ -260,12 +297,12 @@ app.post('/updateProblem', function(req, res) {
 
 // Add a course
 app.post('/addCourse', (req, res, next) => {
-  const { course_code, course_name, schoolid, subjectid } = req.body;
+  const { course_code, schoolid, subjectid } = req.body;
   const q = `
-    insert into courses (code, name, schoolid, subjectid)
+    insert into courses (code, schoolid, subjectid)
     values($1, $2, $3, $4)
   `;
-  client.query(q, [course_code, course_name, schoolid, subjectid], (err, result) => {
+  client.query(q, [course_code, schoolid, subjectid], (err, result) => {
     if (err) {
       next(err);
       return;
@@ -361,13 +398,14 @@ app.post('/processTranscription', function(req, res, next) {
     return k.match(/^q\d+_\d+$/);
   }), (k) => [k, _.split(k.slice(1), "_")]);
 
-  const inq    = `insert into exams_staging (courseid, examtype, examid, profs, schoolid, datetime) values($1, $2, $3, $4, $5, now())`;
+  const inq    = `insert into exams_staging (courseid, examtype, examid, profs, schoolid, datetime) select $1, $2, $3, $4, $5, now()
+                  where not exists (select 1 from exams_staging where courseid = $6 and examtype = $7 and examid = $8 and profs = $9 and schoolid = $10)`;
   const getq   = `select id from exams_staging where courseid = $1 and examtype = $2 and examid = $3 and profs = $4 and schoolid = $5`;
   const imageq = `insert into images_staging (examid, url) values($1, $2)`;
   const q      = `insert into content_staging (problem_num, subproblem_num, problem, solution, exam, choices) values($1, $2, $3, $4, $5, $6)`;
   async.waterfall([
     (callback) => {
-      client.query(inq, [course_id, exam_type_id, term_id, profs, school_id], (err) => callback(err))
+      client.query(inq, [course_id, exam_type_id, term_id, profs, school_id, course_id, exam_type_id, term_id, profs, school_id], (err) => callback(err))
     },
     (callback) => {
       client.query(getq, [course_id, exam_type_id, term_id, profs, school_id], callback)
@@ -561,6 +599,32 @@ app.post('/applyMarketing', (req, res, next) => {
   });
 });
 
+app.post('/waitlistSignup', (req, res) => {
+  const { email } = req.body;
+  const q = `insert into waitlist (email) values ($1)`;
+
+  client.query(q, [], (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.end();
+  });
+});
+
+app.post('/contentFeedback', (req, res) => {
+  const { content_id } = req.body;
+  const q = `insert into content_feedback (content_id) values ($1)`;
+
+  client.query(q, [], (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.end();
+  });
+});
+
 app.post('/dashboardLogin', (req, res) => {
   const { password } = req.body;
   if (password === "cloudfactory") {
@@ -568,6 +632,48 @@ app.post('/dashboardLogin', (req, res) => {
   } else {
     res.status(400).send("Invalid password!");
   }
+});
+
+app.post('/deleteCourse', (req, res, next) => {
+  const { course_id } = req.body;
+  const q = `delete from courses where id = $1`;
+
+  client.query(q, [course_id], (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.end();
+  });
+});
+
+app.post('/addToWaitlist', (req, res, next) => {
+  const { email } = req.body;
+  const q = `insert into waitlist (email) values ($1)`;
+
+  client.query(q, [email], (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.end();
+  });
+});
+
+app.post('/addToDiscussion', (req, res, next) => {
+  const { content, parentid, userid, contentid } = req.body;
+  
+  const q = `
+    insert into discussion (content, parentid, userid, contentid)
+    values($1, $2, $3, $4)
+  `;
+  client.query(q, [content, parentid, userid, contentid], (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.end();
+  });
 });
 
 app.use(express.static(path.join(__dirname, '/build')));
