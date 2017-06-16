@@ -56,31 +56,12 @@ class ModalComponent extends Component {
             </div>
             <div className="modal-content">
               <hr className="s3"/>
-              <a className="login-button login-button-f" onClick={this.loginWithFacebook}>
-                <img className="f-logo" src="/img/f-logo/FB-f-Logo__white_100.png" alt="fb logo" />
-                <span> Continue with Facebook </span> 
-              </a>
-              <hr className="s1" />
-              <a className="login-button login-button-g" onClick={this.loginWithGoogle}>
-                <img className="g-logo" src="/img/g-logo.png" alt="google logo" />
-                <span> Continue with Google </span> 
-              </a>
-              <hr className="s2" />
-              <div className="divider"> 
-                <div className="divider-or"> OR </div>
-              </div>
-              <hr className="s4" />
               <input className="login-info" type="text" placeholder="Email" ref="email"/>
               <hr className="s1" />
+              {signUp ? null : <input className="login-info" type="password" placeholder="Password" ref="password"/>}
               {signUp ? (<span>
-                <input className="login-info" type="text" placeholder="Username" ref="username" />
-                <hr className="s1" /> 
-              </span>) : null}
-              <input className="login-info" type="password" placeholder="Password" ref="password"/>
-              {signUp ? (<span>
-                <hr className="s3" />
-                <a className="login-button blue" onClick={this.signUp}>Sign Up</a>
-                <hr className="s3" />
+                <hr className="s1" />
+                <a className="login-button blue" onClick={this.signUp}>Get Early Access</a>
               </span>) : (<span>
                 <hr className="s2" />
                 <p className="forgot-pass">
@@ -101,7 +82,7 @@ class ModalComponent extends Component {
           ) : (
             <div className="login-helper">
               <span> Don't have an account? </span>
-              <a onClick={signUpModal}> Sign up! </a>
+              <a onClick={signUpModal}> Get Early Access </a>
             </div>
           )}
         </div>

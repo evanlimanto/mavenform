@@ -1,8 +1,14 @@
 .content {
   margin: auto;
-  padding: 0 50px 125px;
+  padding: 0 150px 90px;
   /*80 monospaced characters*/
-  max-width: 775px;
+  max-width: 1000px;
+}
+
+/*adjust for links*/
+.content h1 {
+  position: relative;
+  top: -2px;
 }
 
 /*left: shift for visual adjustment*/
@@ -40,7 +46,7 @@ img {
 }
 
 .solution {
-  margin: 15px 0;
+  margin: 15px 0 0;
   border-radius: 5px;
   padding: 25px;
   color: #11aacc;
@@ -58,24 +64,47 @@ img {
   margin: 0;
 }
 
-.link {
+.arrow {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
   position: absolute;
-  left: -35px;
+  left: -40px;
+  font-size: 28px;
+  top: -2px;
   color: #ccc;
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  transform: rotate(-45deg);
 }
 
-.link:hover {
+.arrow:hover {
   cursor: pointer;
   color: #11aacc;
+}
+
+.question-options {
+  position: absolute;
+  z-index: 1;
+  background: #fff;
+  padding: 9px 13px 9px 10px;
+  left: -40px;
+  top: 40px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.question-option {
+  display: block;
+  padding: 5px;
+  color: #999;
+}
+
+.question-option .material-icons {
+  display: inline-block;
+  padding-right: 7px;
+}
+
+.question-option span {
+  vertical-align: middle;
 }
 
 .question table {
@@ -273,74 +302,6 @@ img {
 
 .question .tooltip-container {
   display: block;
-}
-
-.tooltip-container .tooltip {
-  visibility: hidden;
-  width: 130px;
-  background: #444;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  top: 100%;
-  left: -25%;
-  margin-left: -65px;
-}
-
-.tooltip-container .tooltip::after {
-  content: "";
-  position: absolute;
-  bottom: 100%;
-  left: 75%;
-  margin-left: -6px;
-  border-width: 6px;
-  border-style: solid;
-  border-color: transparent transparent #444 transparent;
-}
-
-.tooltip-container .material-icons:hover + .tooltip {
-  visibility: visible;
-}
-
-.tooltip-container .tooltip-link {
-  visibility: hidden;
-  width: 130px;
-  background: #444;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  top: -40px;
-  left: 20px;
-  margin-left: -65px;
-}
-
-.tooltip-container .tooltip-link::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  right: 80%;
-  margin-left: -6px;
-  border-width: 6px;
-  border-style: solid;
-  border-color: #444 transparent transparent transparent;
-}
-
-.tooltip-container .material-icons:hover + .tooltip-link {
-  visibility: visible;
-}
-
-.tooltip-container .tooltip-long {
-  width: 160px;
-}
-
-.tooltip-container .tooltip-long::after {
-  left: 62%;
 }
 
 .app-mode {

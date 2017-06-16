@@ -96,11 +96,11 @@ class HomeComponent extends Component {
             <div className="banner-header">Make Studying Easy</div>
             <hr className="s2" />
             <h5 className="h5-alt">The ultimate bank of interactive and course-specific study resources</h5>
-            <hr className="s5" />
             <div className="search-container">
-              <input className="search" name="search" placeholder="Search for your course to see what study resources are available..." type="text" autoComplete="off" onChange={this.getSuggestions} ref="search" />
-              {searchResults}
-              <div className="material-icons search-icon">search</div>
+              <input className="search" name="search" placeholder="Enter school email address" type="text" autoComplete="off"/>
+              <input className="early-access" type="submit" value="Get Early Access" />
+            </div>
+            <div>
               <ScrollLink className="search-link" to="features" spy={true} smooth={true} duration={500}> 
                 <div className="material-icons">info_outline</div>
                 Learn More 
@@ -110,9 +110,10 @@ class HomeComponent extends Component {
                 View Schools 
               </ScrollLink>
             </div>
+            <img className="banner-screen" src="img/screen.png" alt="banner" />
           </div>
         </div>
-        <Element name="features" className="card-container-container">
+        <Element name="features" className="features">
           <div className="center">
             <hr className="margin" />
             <h4 className="center">Features</h4>
@@ -137,10 +138,10 @@ class HomeComponent extends Component {
               <div className="material-icons">navigation</div>
               <h1>Navigable</h1>
               <hr className="s2" />
-              <p>Instead of struggling to manage 10 or more tabs of individual PDFs, just browse a single web app that easily navigates between any relevant exam.</p>
+              <p>Instead of struggling to manage 10 or more tabs of individual PDFs, just browse a single web app that easily navigates between any relevant resource.</p>
               <hr className="s1" />
             </div>
-            <img className="banner-screen" src="img/screen.png" alt="banner" />
+            <hr className="margin-plus" />
           </div>
         </Element>
         <Element name="schools" className="light-gray schools">

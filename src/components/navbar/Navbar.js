@@ -119,8 +119,13 @@ class NavbarComponent extends Component {
             <Link to="/" className="mobile-logo">
               <img className="logo home-logo" src="/img/icon.svg" alt="home logo" />
             </Link>
+            <div className="home-icon material-icons">search</div>
+            <div className="home-search-container">
+              <input className="home-search" name="search" placeholder="Search courses..." type="text" autoComplete="off" onChange={this.getSuggestions} ref="search" />
+            </div>
+            {searchResults}
             <a className="home-button home-button-alt" onClick={this.loginModal}>Log In</a>
-            <a className="home-button" onClick={this.signUpModal}>Sign Up</a>
+            <a className="home-button" onClick={this.signUpModal}>Early Access</a>
           </div>
         </div>
       );
@@ -151,13 +156,24 @@ class NavbarComponent extends Component {
           }
         }
       }
-      navbarNav = (
-        <div className="gray-nav">
-          <div className="container">
-            {navbarNav}
+      if (this.props.exam) {
+        navbarNav = (
+          <div className="gray-nav">
+            <div className="container">
+              {navbarNav}
+              <a className="utility-button">View Source</a>
+            </div>
           </div>
-        </div>
-      );
+        );
+      } else {
+        navbarNav = (
+          <div className="gray-nav">
+            <div className="container">
+              {navbarNav}
+            </div>
+          </div>
+        );
+      }
     }
 
     const suggestions = this.state.suggestions;
@@ -193,7 +209,7 @@ class NavbarComponent extends Component {
             ) : (
               <span>
                 <a className="nav-button nav-button-alt" onClick={this.loginModal}>Log In</a>
-                <a className="nav-button" onClick={this.signUpModal}>Sign Up</a>
+                <a className="nav-button" onClick={this.signUpModal}>Early Access</a>
               </span>
             )}
           </div>

@@ -23,15 +23,21 @@ const MultipleChoiceQuestionComponent = ({ id, courseid, content, examtype, term
   return (
     <div id={id} className="question mc-question">
       <div className="tooltip-container">
-        <a className="link material-icons" onClick={() => copyQuestionLink(url)}>link</a>
-          {(copying) ?
-            (<span className="tooltip-link blue">
-              <Expire
-               delay={2000}
-               callback={() => doneCopyingLink()}
-              >Link Copied!</Expire>
-             </span>) : (<span className="tooltip-link">Copy Link</span>)
-          }
+        <a className="arrow material-icons">keyboard_arrow_down</a>
+        <div className="question-options">
+          <a className="question-option">
+            <span className="material-icons">link</span>
+            <span>Copy Link</span>
+          </a>
+          <a className="question-option">
+            <span className="material-icons">report</span>
+            <span>Report Error</span>
+          </a>
+          <a className="question-option">
+            <span className="material-icons">share</span>
+            <span>Share Question</span>
+          </a>
+        </div>
       </div>
       <div dangerouslySetInnerHTML={{__html: content}}></div>
       <hr className="s1" />

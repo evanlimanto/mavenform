@@ -33,7 +33,7 @@ class ExamComponent extends Component {
     return (
       <div>
         <DocumentMeta {...meta} />
-        <Navbar schoolCode={schoolCode} courseCode={courseCode} examTypeCode={examType} termCode={termCode} />
+        <Navbar exam={true} schoolCode={schoolCode} courseCode={courseCode} examTypeCode={examType} termCode={termCode} />
         <ExamContent schoolCode={schoolCode} courseCode={courseCode} examTypeCode={examType} termCode={termCode} profs={profs} />
         <Footer />
       </div>

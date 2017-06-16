@@ -76,9 +76,11 @@ class ExamContent extends Component {
     );
 
     return (
-      <div className="content">
+      <div>
         {examDesc}
-        {content}
+        <div className="content">
+          {content}
+        </div>
       </div>
     );
   }

@@ -71,11 +71,16 @@
   user-select: none;
 }
 
+.nav .container {
+  display: flex;
+  flex-align: row;
+}
+
 .nav-search {
   display: block;
+  flex: 1;
   float: left;
   text-align: left;
-  width: 576px;
   margin: 10px 0 10px 10px;
   padding: 10px 12px;
   border-radius: 5px 0 0 5px;
@@ -169,7 +174,7 @@
   right: 0;
   z-index: 1;
   text-align: left;
-  padding: 10px 25px;
+  padding: 5px 25px;
   background: #f3f3f3;
   border-bottom: 1px solid #ccc;
   color: #999;
@@ -182,11 +187,26 @@
 }
 
 .gray-nav a {
+  margin: 0;
+  display: inline-block;
+  padding: 5px;
   color: #999;
 }
 
 .gray-nav a:hover, .gray-nav a.active {
   color: #11aacc;
+}
+
+.gray-nav .utility-button {
+  margin: 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 4px 10px;
+  float: right;
+}
+
+.gray-nav .utility-button:hover {
+  border: 1px solid #11aacc;
 }
 
 div.nav-results em {
