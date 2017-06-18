@@ -722,6 +722,26 @@ app.get('/getMarketingApps', (req, res, next) => {
   });
 });
 
+app.post('/changePassword', (req, res, next) => {
+  const { email } = req.body;
+  const options = {
+    method: 'POST',
+    url: 'https://mavenform.auth0.com/dbconnections/change_password',
+    headers: { 'content-type': 'application/json' },
+    body: {
+      client_id: 'oLKATgXnwtDDn8TwycvApVGECfBx2Zlq',
+      email: email,
+      connection: 'Username-Password-Authentication'
+    },
+    json: true
+  };
+
+  request(options, function (error, response, body) {
+    if (error) return next(error);
+    res.end();
+  });
+});
+
 app.use(express.static(path.join(__dirname, '/build')));
 
 app.get('*', (req, res) => {

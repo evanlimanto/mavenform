@@ -171,7 +171,7 @@ class NavbarComponent extends Component {
             <input className="login-info" type="password" placeholder="Password" ref="password"/>
             <hr className="s2" />
             <p className="forgot-pass">
-              <a className="forgot-pass">Don't remember your password?</a>
+              <Link className="forgot-pass" to="/forgotpassword">Don't remember your password?</Link>
             </p>
             <hr className="s2" />
             <a className="login-button blue" onClick={this.login}>Log In</a>

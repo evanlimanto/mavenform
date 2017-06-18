@@ -5,7 +5,7 @@ import Course from '../course';
 import { Dashboard, DashboardContent, DashboardCourses, Transcribe, Transcribed } from '../dashboard';
 import Exam from '../exam';
 import Home from '../home';
-import { Login, Logout, SecretSignup } from '../login';
+import { ForgotPassword, Login, Logout, SecretSignup } from '../login';
 import NotFound from '../notfound';
 import { Marketing, MarketingApps } from '../marketing';
 import Profile from '../profile';
@@ -21,6 +21,7 @@ const Routes = (
     <Route exact path="/" component={Home} />
     <Route path="/login" render={(props) => <Login parseAuthHash={parseAuthHash} {...props} />} />
     <Route path="/logout" component={Logout} />
+    <Route path="/forgotpassword" component={ForgotPassword} />
     <Route path="/marketing" component={Marketing} />
     <Route path="/profile" render={(props) => <Profile requireAuth={requireAuth} {...props} />} />
     <Route path="/dashboard/courses" component={DashboardCourses} />
