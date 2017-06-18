@@ -73,6 +73,9 @@ class HomeComponent extends Component {
       .send({ email })
       .end((err, res) => {
         if (err || !res.ok) console.error(err);
+        else {
+          document.location = "/waitlisted";
+        }
       });
   }
 

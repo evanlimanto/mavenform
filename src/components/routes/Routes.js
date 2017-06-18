@@ -12,6 +12,7 @@ import Profile from '../profile';
 import Upload from '../upload';
 import School from '../school';
 import UserHome from '../userhome';
+import Waitlisted from '../waitlisted';
 
 import { requireAuth, parseAuthHash } from '../../utils';
 
@@ -28,6 +29,7 @@ const Routes = (
     <Route path="/dashboard/transcribe/:examid" component={Transcribe} />
     <Route path="/dashboard/transcribe" component={Transcribe} />
     <Route path="/dashboard" component={Dashboard} />
+    <Route path="/waitlisted" component={Waitlisted} />
     <Route path="/s3cr3tsignup" component={SecretSignup} />
     <Route path="/m4rk3t1ng4pp5" component={MarketingApps} />
     <Route path="/upload" component={Upload} />
