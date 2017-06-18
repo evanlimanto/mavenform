@@ -135,44 +135,46 @@ class NavbarComponent extends Component {
     }
 
     let modal = null;
-    if (!isLoggedIn) {
+    if (!isLoggedIn && this.state.modal) {
+      let infoContent, modalContent;
       const isWaitlist = (this.state.modal === 'waitlist');
-      const infoContent = isWaitlist ? (
-        <div className="login-helper">
-          <span> Have an account? </span>
-          <a onClick={this.showLoginModal}> Login! </a>
-        </div>
-      ) : (
-        <div className="login-helper">
-          <span> Don't have an account? </span>
-          <a onClick={this.showWaitlistModal}> Get Early Access </a>
-        </div>
-      );
-      const modalContent = isWaitlist ? (
-        <span>
-          <input className="login-info" type="text" placeholder="Email" ref="email"/>
-          <hr className="s2" />
-          <a className="login-button blue" onClick={this.waitlist}>Get Early Access</a>
-        </span>
-      ) : (
-        <span>
-          <input className="login-info" type="text" placeholder="Email" ref="email"/>
-          <hr className="s1" />
-          <input className="login-info" type="password" placeholder="Password" ref="password"/>
-          <hr className="s2" />
-          <p className="forgot-pass">
-            <a className="forgot-pass">Don't remember your password?</a>
-          </p>
-          <hr className="s2" />
-          <a className="login-button blue" onClick={this.login}>Log In</a>
-        </span>
-      );
-
       if (this.state.modal === 'waitlist') {
-        modal = <Modal closeModal={this.closeModal} infoContent={infoContent} modalContent={modalContent} errorText={this.state.modalError} />;
+        infoContent = (
+          <div className="login-helper">
+            <span> Have an account? </span>
+            <a onClick={this.showLoginModal}> Login! </a>
+          </div>
+        );
+        modalContent = (
+          <span>
+            <input className="login-info" type="text" placeholder="Email" ref="email"/>
+            <hr className="s2" />
+            <a className="login-button blue" onClick={this.waitlist}>Get Early Access</a>
+          </span>
+        );
       } else if (this.state.modal === 'login') {
-        modal = <Modal closeModal={this.closeModal} infoContent={infoContent} modalContent={modalContent} errorText={this.state.modalError} />;
+        infoContent = (
+          <div className="login-helper">
+            <span> Don't have an account? </span>
+            <a onClick={this.showWaitlistModal}> Get Early Access </a>
+          </div>
+        );
+        modalContent = (
+          <span>
+            <input className="login-info" type="text" placeholder="Email" ref="email"/>
+            <hr className="s1" />
+            <input className="login-info" type="password" placeholder="Password" ref="password"/>
+            <hr className="s2" />
+            <p className="forgot-pass">
+              <a className="forgot-pass">Don't remember your password?</a>
+            </p>
+            <hr className="s2" />
+            <a className="login-button blue" onClick={this.login}>Log In</a>
+          </span>
+        );
       }
+
+      modal = <Modal closeModal={this.closeModal} infoContent={infoContent} modalContent={modalContent} errorText={this.state.modalError} />;
     }
 
     if (this.props.home) {
@@ -224,11 +226,12 @@ class NavbarComponent extends Component {
         }
       }
       if (this.props.exam) {
+        const url = `https://storage.googleapis.com/studyform/${schoolCode}/pdf/${courseCode}/${examTypeCode}-${termCode}-soln.pdf`;
         navbarNav = (
           <div className="gray-nav">
             <div className="container">
               {navbarNav}
-              <a className="utility-button">View Source</a>
+              <a className="utility-button" href={url} target="_blank">View Source</a>
             </div>
           </div>
         );

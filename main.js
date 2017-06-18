@@ -706,6 +706,24 @@ app.post('/reportError', (req, res, next) => {
   });
 });
 
+app.get('/getMarketingApps', (req, res, next) => {
+  const getq = `select name, email, school, essay1, essay2, resume from marketing_apps`;
+
+  client.query(getq, (err, results) => {
+    const items = _.map(results.rows, (row) => {
+      return {
+        name: row.name,
+        email: row.email,
+        school: row.school,
+        essay1: row.essay1, 
+        essay2: row.essay2,
+      };
+    });
+
+    res.json(items);
+  });
+});
+
 app.use(express.static(path.join(__dirname, '/build')));
 
 app.get('*', (req, res) => {

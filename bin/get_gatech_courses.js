@@ -17,22 +17,14 @@ client.connect();
 
 const urls = [
   "http://www.catalog.gatech.edu/coursesaz/cs/",
-  "http://www.catalog.gatech.edu/coursesaz/econ/",
-  "http://www.catalog.gatech.edu/coursesaz/ece/",
-  "http://www.catalog.gatech.edu/coursesaz/math/",
-  "http://www.catalog.gatech.edu/coursesaz/phys/",
-  "http://www.catalog.gatech.edu/coursesaz/me/",
-  "http://www.catalog.gatech.edu/coursesaz/chem/",
 ];
 
 const subjects = [
   "cs",
-  "econ",
-  "ece",
-  "math",
-  "phys",
-  "me",
-  "chem",
+];
+
+const codes = [
+  'cs',
 ];
 
 const getq = `select id, subject_code from subjects`;
@@ -41,4 +33,21 @@ client.query(getq, (err, result) => {
     d[row.subject_code] = row.id;
     return d;
   }, {});
- 
+
+  for (var i = 0; i < urls.length; i++) {
+    const url = urls[i];
+    const subject = subjects[i];
+    const code = codes[i];
+    request(url, (err, response, body) => {
+      const regex = new RegExp("(" + _.toUpper(subject) + " [0-9]+[A-Z]?)\.", "g");
+      while ((temp = regex.exec(body)) !== null) {
+        const item = temp[1];
+        const inq = `insert into courses (code, schoolid, subjectid) values ($1, 61, $2)`;
+        client.query(inq, [item, dict[code]], (err, result) => {
+          if (err) return console.error(err);
+          else return console.log(result);
+        });
+      }
+    });
+  }
+});

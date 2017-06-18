@@ -20,21 +20,15 @@ const tracker = function(name, label) {
 export { ReactGA };
 
 export function schoolClickEvent(schoolCode) {
-  tracker('school click', {
-    label: schoolCode,
-  });
+  tracker('school click', schoolCode);
 }
 
 export function courseClickEvent(schoolCode, courseCode) {
-	tracker('course click', {
-    label: `${schoolCode} - ${courseCode}`
-	})
+	tracker('course click', `${schoolCode} - ${courseCode}`)
 }
 
 export function examClickEvent(schoolCode, courseCode, typeCode, termCode) {
-	tracker('exam click', {
-    label: `${schoolCode} - ${courseCode} ${typeCode} ${termCode}`
-	});
+	tracker('exam click', `${schoolCode} - ${courseCode} ${typeCode} ${termCode}`);
 }
 
 export function copyQuestionLinkEvent() {
@@ -51,10 +45,6 @@ export function actionTakenEvent(action) {
 
 export function activeUserEvent() {
 	tracker('active user');
-}
-
-export function PDFClickEvent() {
-  tracker('pdf');
 }
 
 export function pageFocusEvent() {

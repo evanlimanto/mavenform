@@ -1,3 +1,4 @@
 import Marketing from './marketing';
+import MarketingApps from './MarketingApps';
 
-export default Marketing;
+export { Marketing, MarketingApps };

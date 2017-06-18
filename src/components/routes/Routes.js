@@ -7,7 +7,7 @@ import Exam from '../exam';
 import Home from '../home';
 import { Login, Logout, SecretSignup } from '../login';
 import NotFound from '../notfound';
-import Marketing from '../marketing';
+import { Marketing, MarketingApps } from '../marketing';
 import Profile from '../profile';
 import Upload from '../upload';
 import School from '../school';
@@ -29,6 +29,7 @@ const Routes = (
     <Route path="/dashboard/transcribe" component={Transcribe} />
     <Route path="/dashboard" component={Dashboard} />
     <Route path="/s3cr3tsignup" component={SecretSignup} />
+    <Route path="/m4rk3t1ng4pp5" component={MarketingApps} />
     <Route path="/upload" component={Upload} />
     <Route path="/home" render={(props) => <UserHome requireAuth={requireAuth} {...props} />} />
     <Route path="/:schoolCode/:courseCode/:examType/:termCode" component={Exam} />
