@@ -63,7 +63,8 @@ client.query(getq, (err, result) => {
     request(url, (err, result, body) => {
       const regexp = new RegExp(">(" + _.join(_.split(code, ' '), '&#160;') + ".*?)(:|<)", "g");
       while ((temp = regexp.exec(body)) !== null) {
-        const inq = `insert into courses (code, schoolid, subjectid) values($1, 38, $2)`;
+        const code = temp[1].replace(/&#160;/g, ' ');
+        const inq = `insert into courses (code_label, schoolid, subjectid) values($1, 38, $2)`;
         client.query(inq, [code, dict[subject]], (err, result) => {
           if (err) console.error(err);
           else console.log(result);

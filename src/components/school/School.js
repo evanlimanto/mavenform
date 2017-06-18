@@ -7,7 +7,7 @@ import DocumentMeta from 'react-document-meta';
 import Footer from '../footer';
 import Navbar from '../navbar';
 import { courseClickEvent } from '../../events';
-import { courseCodeToLabel } from '../../utils';
+import { courseCodeToLabel, normalizeCourseCode } from '../../utils';
 
 class SchoolComponent extends Component {
   constructor(props) {

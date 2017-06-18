@@ -24,10 +24,13 @@ class HomeComponent extends Component {
   constructor(props) {
     super(props);
 
-    this.getSuggestions = this.getSuggestions.bind(this);
     this.state = {
-      suggestions: []
+      suggestions: [],
+      waitlistErorr: null,
     };
+
+    this.getSuggestions = this.getSuggestions.bind(this);
+    this.waitlist = this.waitlist.bind(this);
   }
 
   componentWillMount() {
@@ -67,15 +70,14 @@ class HomeComponent extends Component {
     e.preventDefault();
     const email = this.refs.email.value;
     if (!isEmail(email))
-      return;
+      return this.setState({ waitlistError: "Invalid email." });
     request
       .post("/addToWaitlist")
       .send({ email })
       .end((err, res) => {
-        if (err || !res.ok) console.error(err);
-        else {
-          document.location = "/waitlisted";
-        }
+        if (err || !res.ok) this.setState({ waitlistError: "Waitlist failed." });
+        else document.location = "/waitlisted";
+        return;
       });
   }
 
@@ -116,6 +118,7 @@ class HomeComponent extends Component {
             <div className="search-container">
               <input className="search" name="search" placeholder="Enter school email address" type="text" autoComplete="off" ref="email"/>
               <input className="early-access" type="submit" value="Get Early Access" onClick={(e) => this.waitlist(e)} />
+              <p>{this.state.waitlistError}</p>
             </div>
             <div>
               <ScrollLink className="search-link" to="features" spy={true} smooth={true} duration={500}> 

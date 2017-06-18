@@ -247,7 +247,7 @@ app.get('/getExam/:schoolCode/:courseCode/:examTypeCode/:termCode', function(req
     where S.code = $1 and T.term_code = $2 and ET.type_code = $3 and C.code = $4;
   `;
   const getcontentq = `
-    select problem_num, subproblem_num, problem, solution, choices from content where exam = $1
+    select id as content_id, problem_num, subproblem_num, problem, solution, choices from content where exam = $1
   `;
   async.waterfall([
     (callback) => {
@@ -270,13 +270,11 @@ app.get('/getExam/:schoolCode/:courseCode/:examTypeCode/:termCode', function(req
     }, {});
 
     const problems = _.reduce(result.rows, (result, row) => {
-      const problem_num = row.problem_num;
-      const subproblem_num = row.subproblem_num;
-      const problem = renderer.preprocess(row.problem);
-      const solution = renderer.preprocess(row.solution);
-      const choices = row.choices;
+      let { content_id, problem_num, subproblem_num, problem, solution, choices } = row;
+      problem = renderer.preprocess(row.problem);
+      solution = renderer.preprocess(row.solution);
       const key = `${problem_num}_${subproblem_num}`;
-      result[key] = { problem, solution, choices };
+      result[key] = { problem, solution, choices, content_id };
       return result;
     }, {});
     res.json({info, problems});

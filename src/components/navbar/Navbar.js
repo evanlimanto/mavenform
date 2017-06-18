@@ -27,6 +27,8 @@ class NavbarComponent extends Component {
     this.getSuggestions = this.getSuggestions.bind(this);
     this.toggleProfileDropdown = this.toggleProfileDropdown.bind(this);
     this.setModalError = this.setModalError.bind(this);
+    this.waitlist = this.waitlist.bind(this);
+    this.login = this.login.bind(this);
   }
 
   componentDidMount() {
@@ -62,13 +64,15 @@ class NavbarComponent extends Component {
 
   showLoginModal() {
     this.setState({
-      modal: 'login'
+      modal: 'login',
+      modalError: null,
     });
   }
 
   showWaitlistModal() {
     this.setState({
-      modal: 'waitlist'
+      modal: 'waitlist',
+      modalError: null,
     });
   }
 
@@ -103,14 +107,15 @@ class NavbarComponent extends Component {
   waitlist() {
     const email = this.refs.email.value;
     if (!isEmail(email))
-      return this.setError('Invalid email.');
-    this.setError(null);
+      return this.setModalError('Invalid email.');
+    this.setModalError(null);
     request
       .post("/addToWaitlist")
       .send({ email })
       .end((err, res) => {
-        if (err || !res.ok) this.setError("Waitlist failed.");
-        else window.setTimeout(this.props.closeModal, 1000);
+        if (err || !res.ok) this.setModalError("Waitlist failed.");
+        else window.location = "/waitlisted";
+        return;
       });
   }
 
@@ -118,11 +123,11 @@ class NavbarComponent extends Component {
     const email = this.refs.email.value;
     const password = this.refs.password.value;
     if (!isEmail(email))
-      return this.setError('Invalid email.');
+      return this.setModalError('Invalid email.');
     if (isEmpty(password))
-      return this.setError('Empty passowrd.');
-    this.setError(null);
-    this.props.auth.login(email, password, this.setError);
+      return this.setModalError('Empty passowrd.');
+    this.setModalError(null);
+    this.props.auth.login(email, password, this.setModalError);
   }
 
   render() {

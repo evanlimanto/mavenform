@@ -48,10 +48,11 @@ class ExamContent extends Component {
         let qcontent = examContent.problems[key].problem || '';
         let solution = examContent.problems[key].solution || '';
         const choices = examContent.problems[key].choices || '';
+        const content_id = examContent.problems[key].content_id;
         if (choices && choices.length > 0) {
-          return <MultipleChoiceQuestion id={part + "_" + subpart} courseCode={courseCode} content={qcontent} solutionNum={solution} termCode={termCode} examType={examTypeCode} key={key} choices={choices} schoolCode={schoolCode} />
+          return <MultipleChoiceQuestion content_id={content_id} id={part + "_" + subpart} courseCode={courseCode} content={qcontent} solutionNum={solution} termCode={termCode} examType={examTypeCode} key={key} choices={choices} schoolCode={schoolCode} />
         }
-        return <Question id={part + "_" + subpart} courseCode={courseCode} content={qcontent} solution={solution} termCode={termCode} examType={examTypeCode} key={key} schoolCode={schoolCode} />
+        return <Question content_id={content_id} id={part + "_" + subpart} courseCode={courseCode} content={qcontent} solution={solution} termCode={termCode} examType={examTypeCode} key={key} schoolCode={schoolCode} />
       });
 
       return <span key={part} className="element">{subparts}</span>;

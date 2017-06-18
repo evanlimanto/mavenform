@@ -1,4 +1,4 @@
-import { reduce, toUpper } from 'lodash';
+import { join, split, reduce, toUpper } from 'lodash';
 
 import { updateExamList, updateCourseList, updateSchoolList, updateExamTypesList, updateTermList, updateLabels } from '../actions';
 
@@ -65,6 +65,7 @@ export function courseCodeToLabel(course_code) {
   if (!course_code)
     return null;
 
+  course_code = join(split(course_code, '-'), '');
   let idx = -1;
   for (var i = 0; i < course_code.length; i++) {
     if (course_code[i] >= '0' && course_code[i] <= '9') {
@@ -133,4 +134,8 @@ export function examTypeToLabel(exam_type) {
     default:
       return "Unknown Type";
   }
+}
+
+export function normalizeCourseCode(courseCode) {
+  return join(split(courseCode, ' '), '-');
 }
