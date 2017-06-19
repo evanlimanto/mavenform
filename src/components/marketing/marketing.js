@@ -80,7 +80,7 @@ class Marketing extends Component {
     return (
       <div className="marketing">
         <DocumentMeta {...meta} />
-        <Navbar />
+        <Navbar userHome={true} />
         <div className="card-container-container">
           <div className="card-container center">
             <div className="container">
@@ -88,7 +88,11 @@ class Marketing extends Component {
               <h5>Growth Strategy and Campus Ambassadorship</h5>
               <hr className="margin" />
               <div className="left-content">
-                <h1>Description</h1>
+                <h1>Company</h1>
+                <p>Studyform is a VC-backed education startup based in the Bay Area. We are creating a web app that helps students study by converting static course documents into interactive study resources. Our mission is to unlock the latent value of millions of past course documents in order to help students study and teachers teach.
+                </p>
+                <hr className="s5" />
+                <h1>Position</h1>
                 <p>We are looking for marketing interns to spearhead growth strategy for Studyform at your college or university campus. You will need to be both resourceful and versatile, as your responsibilities will range from strategy and research to social media outreach and direct marketing.
                   <hr className= "s1" />
                   As a marketing intern, you will research and analyze studying trends on your campus, formulate and design an optimized growth strategy, and then execute on that strategy through multiple marketing channels. You can expect to impact up to thousands of users.
@@ -138,10 +142,10 @@ class Marketing extends Component {
               </div>
               <div className="right-info">
                 <h1>Duration</h1>
-                <p>Summer 2017</p>
+                <p>8-12 weeks</p>
                 <hr className="s5" />
                 <h1>Compensation</h1>
-                <p>\$<span>1200 + </span>\$<span>100 per 300 users acquired</span></p>
+                <p>$<span>100 per 2 weeks + </span>$<span>100 per 400 users acquired</span></p>
                 <hr className="s5" />
                 <h1>Location</h1>
                 <p>Your Campus</p>

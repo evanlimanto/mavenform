@@ -4,12 +4,14 @@
 
 .left-content {
   float: left;
+  text-align: left;
   width: 650px;
   padding: 0 25px;
 }
 
 .right-info {
   float: right;
+  text-align: left;
   width: 350px;
   padding: 0 25px;
 }
