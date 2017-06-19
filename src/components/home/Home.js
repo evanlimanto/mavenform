@@ -70,9 +70,7 @@ class HomeComponent extends Component {
     e.preventDefault();
     const email = this.refs.email.value;
     if (!isEmail(email))
-      return this.setState({ waitlistError: "Invalid email." });
-    if (!endsWith(email, ".edu"))
-      return this.setState({ waitListError: "Email muse be an .edu email." });
+      return this.setState({ waitlistError: "Invalid or empty email." });
     request
       .post("/addToWaitlist")
       .send({ email })
@@ -120,8 +118,8 @@ class HomeComponent extends Component {
             <div className="search-container">
               <input className="search" name="search" placeholder="Enter school email address" type="text" autoComplete="off" ref="email"/>
               <input className="early-access" type="submit" value="Get Early Access" onClick={(e) => this.waitlist(e)} />
-              <p>{this.state.waitlistError}</p>
             </div>
+            <p className="home-error">{this.state.waitlistError}</p>
             <div>
               <ScrollLink className="search-link" to="features" spy={true} smooth={true} duration={500}> 
                 <div className="material-icons">info_outline</div>

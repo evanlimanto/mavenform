@@ -154,7 +154,7 @@
 }
 
 .admin p.error {
-  color: red;
+  color: #ee3344;
   margin: 0px 15px;
   display: inline;
 }

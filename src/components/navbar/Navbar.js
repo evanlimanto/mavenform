@@ -107,9 +107,7 @@ class NavbarComponent extends Component {
   waitlist() {
     const email = this.refs.email.value;
     if (!isEmail(email))
-      return this.setModalError('Invalid email.');
-    if (!endsWith(email))
-      return this.setModalError("Email muse be an .edu email.");
+      return this.setModalError('Invalid or empty email.');
     this.setModalError(null);
     request
       .post("/addToWaitlist")
@@ -125,9 +123,9 @@ class NavbarComponent extends Component {
     const email = this.refs.email.value;
     const password = this.refs.password.value;
     if (!isEmail(email))
-      return this.setModalError('Invalid email.');
+      return this.setModalError('Invalid or empty email.');
     if (isEmpty(password))
-      return this.setModalError('Empty passowrd.');
+      return this.setModalError('Empty password.');
     this.setModalError(null);
     this.props.auth.login(email, password, this.setModalError);
   }
@@ -184,6 +182,17 @@ class NavbarComponent extends Component {
       modal = <Modal closeModal={this.closeModal} infoContent={infoContent} modalContent={modalContent} errorText={this.state.modalError} />;
     }
 
+    const suggestions = this.state.suggestions;
+    const searchResults = (suggestions && suggestions.length > 0 && this.state.suggestionsDropdownOn) ? (
+      <div className={classnames({ "nav-results": true, "nav-results-signed-in": isLoggedIn })}>
+        {map(suggestions, (suggestion, index) => {
+          const aClass = classnames({ bottom: index === suggestions.length - 1 });
+          const suggestionText = `${suggestion.school_name_highlighted} ${suggestion.code_highlighted}: ${suggestion.name_highlighted}`;
+          return <Link to={`/${suggestion.school_code}/${toLower(suggestion.code)}`} className={aClass} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
+        })}
+      </div>
+    ) : null;
+
     if (this.props.home) {
       return (
         <div className="home-nav">
@@ -198,10 +207,12 @@ class NavbarComponent extends Component {
             <div className="home-icon material-icons">search</div>
             <div className="home-search-container">
               <input className="home-search" name="search" placeholder="Search courses..." type="text" autoComplete="off" onChange={this.getSuggestions} ref="search" />
+              {searchResults}
             </div>
-            {searchResults}
-            <a className="home-button home-button-alt" onClick={this.showLoginModal}>Log In</a>
-            <a className="home-button" onClick={this.showWaitlistModal}>Early Access</a>
+            <span>
+              <a className="home-button home-button-alt" onClick={this.showLoginModal}>Log In</a>
+              <a className="home-button" onClick={this.showWaitlistModal}>Early Access</a>
+            </span>
           </div>
         </div>
       );
@@ -253,17 +264,6 @@ class NavbarComponent extends Component {
       }
     }
 
-    const suggestions = this.state.suggestions;
-    const searchResults = (suggestions && suggestions.length > 0 && this.state.suggestionsDropdownOn) ? (
-      <div className={classnames({ "nav-results": true, "nav-results-signed-in": isLoggedIn })}>
-        {map(suggestions, (suggestion, index) => {
-          const aClass = classnames({ bottom: index === suggestions.length - 1 });
-          const suggestionText = `${suggestion.school_name_highlighted} ${suggestion.code_highlighted}: ${suggestion.name_highlighted}`;
-          return <Link to={`/${suggestion.school_code}/${toLower(suggestion.code)}`} className={aClass} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
-        })}
-      </div>
-    ) : null;
-
     return (
       <div>
         {modal}
@@ -271,9 +271,10 @@ class NavbarComponent extends Component {
           <div className="container">
             <Link className="desktop-logo" to="/"><img className="logo" src="/img/logo.svg" alt="logo" /></Link>
             <Link className="mobile-logo" to="/"><img className="logo" src="/img/icon.svg" alt="logo" /></Link>
-            <input className={classnames({ "nav-search": true, "nav-search-signed-in": isLoggedIn })} name="search" placeholder="Search courses..." type="text" autoComplete="off" onChange={this.getSuggestions} ref="search" />
-            {searchResults}
-            <div className="material-icons nav-search-icon">search</div>
+            <div className="nav-search-container">
+              <input className="nav-search" name="search" placeholder="Search courses..." type="text" autoComplete="off" onChange={this.getSuggestions} ref="search" />
+              {searchResults}
+            </div>
             {(isLoggedIn) ? (
               <span>
                 <span className="nav-button nav-signed-in" onClick={this.toggleProfileDropdown}>

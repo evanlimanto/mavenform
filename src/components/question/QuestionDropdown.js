@@ -86,14 +86,12 @@ class QuestionDropdown extends Component {
     let reportModal = null;
     if (this.state.showReportModal) {
       const infoContent = (
-        <div className="login-helper">
-          <span> Info text </span>
-          <a> Info link! </a>
+        <div>
         </div>
       );
       const modalContent = (
         <span>
-          <input className="login-info" type="text" placeholder="Content" ref="error_content"/>
+          <input className="login-info" type="text" placeholder="Please describe the typo in this question" ref="error_content"/>
           <hr className="s2" />
           <a className="login-button blue" onClick={(e) => this.reportError(e, content_id)}>Report</a>
         </span>

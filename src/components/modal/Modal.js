@@ -15,7 +15,6 @@ class Modal extends Component {
               <hr className="s3"/>
               {modalContent}
               <p className="modal-error-text">{errorText}</p>
-              <hr className="s3" />
             </div>
           </div>
           <hr className="s2" />
