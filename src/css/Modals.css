@@ -59,6 +59,12 @@
   padding: 30px 60px;
 }
 
+.modal-error-text {
+  text-align: left;
+  padding: 14px 0 16px;
+  color: #ee3344;
+}
+
 .modal-header {
   padding: 20px 40px;
   width: 100%;

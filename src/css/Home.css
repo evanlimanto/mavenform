@@ -23,6 +23,12 @@
   height: 80px;
 }
 
+.home-error {
+  position: relative;
+  top: 10px;
+  color: #ee3344;
+}
+
 .home-icon {
   color: rgba(255, 255, 255, 0.5);
   position: relative;
@@ -33,15 +39,15 @@
 
 .home-search-container {
   flex: 1;
-  padding-right: 25px;
   position: relative;
+  margin: 25px 0 25px 10px;
   left: -15px;
 }
 
 .home-search {
   display: block;
+  float: left;
   text-align: left;
-  margin: 25px 25px 25px 10px;
   padding: 5px 0 5px 22px;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
@@ -61,6 +67,19 @@
 
 .home-search::placeholder {
   color: rgba(255, 255, 255, 0.5);
+}
+
+.home-search-container .nav-results {
+  float: left;
+  text-align: left;
+  position: relative;
+  background: #fff;
+  width: 100%;
+  margin: 0;
+  top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: none;
 }
 
 .home-button {

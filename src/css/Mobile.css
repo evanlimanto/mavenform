@@ -28,10 +28,6 @@
     display: inline;
   }
 
-  .search, .search-icon, .nav-search, .nav-search-icon {
-    display: none;
-  }
-
   .mobile-logo .home-logo {
     padding: 25px 15px;
   }

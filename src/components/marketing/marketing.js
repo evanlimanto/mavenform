@@ -137,7 +137,7 @@ class Marketing extends Component {
                     Submit Application
                   </button>
                   <hr className="s1" />
-                  <span>{this.state.formStatus}</span>
+                  <span className="marketing-error">{this.state.formStatus}</span>
                 </form>
               </div>
               <div className="right-info">
