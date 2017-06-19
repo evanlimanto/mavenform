@@ -6,6 +6,7 @@ import DocumentMeta from 'react-document-meta';
 
 import Footer from '../footer';
 import Navbar from '../navbar';
+import NotFound from '../notfound';
 import { courseClickEvent } from '../../events';
 import { courseCodeToLabel, normalizeCourseCode } from '../../utils';
 
@@ -14,7 +15,7 @@ class SchoolComponent extends Component {
     super(props);
 
     this.state = {
-      courses: {}
+      courses: null
     };
   }
 
@@ -25,6 +26,9 @@ class SchoolComponent extends Component {
   }
 
   render() {
+    if (this.state.courses && this.state.courses.invalidCode)
+      return <NotFound />;
+
     const schoolCode = this.props.schoolCode;
     const courseItems = (keys(this.state.courses).length > 0) ? map(this.state.courses, (obj, subject) => {
       const courseBoxes = map(obj.courses, (course, key) => (

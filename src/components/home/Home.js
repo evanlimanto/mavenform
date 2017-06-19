@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import DocumentMeta from 'react-document-meta';
-import { map, toLower, join, split } from 'lodash';
+import { endsWith, map, toLower, join, split } from 'lodash';
 import Footer from '../footer';
 import Navbar from '../navbar';
 import { schoolClickEvent } from '../../events';
@@ -71,6 +71,8 @@ class HomeComponent extends Component {
     const email = this.refs.email.value;
     if (!isEmail(email))
       return this.setState({ waitlistError: "Invalid email." });
+    if (!endsWith(email, ".edu"))
+      return this.setState({ waitListError: "Email muse be an .edu email." });
     request
       .post("/addToWaitlist")
       .send({ email })

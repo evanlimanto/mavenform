@@ -4,7 +4,7 @@ import auth0 from 'auth0-js'
 import { has } from 'lodash'
 
 import { evtEmitter } from './events'
-const request = require('superagent');
+const req = require('superagent');
 
 export default class AuthService {
   constructor(clientId, domain) {
@@ -75,12 +75,13 @@ export default class AuthService {
           if (process.env.NODE_ENV === "development")
             console.log(profile);
           this.setProfile(profile)
-          const req = request.post('/createUser');
-          console.log(profile.user_id);
-          req.field('auth_user_id', profile.user_id)
+          req.post('/createUser')
+            .field('auth_user_id', profile.user_id)
             .end((err, res) => {
               if (err) console.error(err);
-              else document.location = "/home";
+              else {
+                this.history.goBack();
+              }
             });
         })
       }

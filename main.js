@@ -6,6 +6,7 @@ const express = require('express');
 const browserify = require('browserify');
 const fileUpload = require('express-fileupload');
 const fs = require('fs');
+const hash = require('string-hash');
 const glob = require('glob');
 const path = require('path');
 const NodeCache = require('node-cache');
@@ -715,6 +716,7 @@ app.get('/getMarketingApps', (req, res, next) => {
         school: row.school,
         essay1: row.essay1, 
         essay2: row.essay2,
+        resume: row.resume,
       };
     });
 
@@ -739,6 +741,21 @@ app.post('/changePassword', (req, res, next) => {
   request(options, function (error, response, body) {
     if (error) return next(error);
     res.end();
+  });
+});
+
+app.get('/getCourseAccessCode/:schoolCode/:courseCode', (req, res, next) => {
+  const { courseCode, schoolCode } = req.params;
+
+  const getq = `
+    select courses.access_code from courses
+    inner join schools on schools.id = courses.schoolid
+    where schools.code = $1 and courses.code = $2
+  `;
+  client.query(getq, [schoolCode, courseCode], (err, result) => {
+    if (err)
+      return next(err);
+    return res.json(hash(result.rows[0].access_code));
   });
 });
 

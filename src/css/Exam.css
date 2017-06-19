@@ -254,6 +254,11 @@ img {
   color: #1fab54;
 }
 
+.option.right-toggled {
+  border: 1px solid #1fab54;
+  color: #1fab54;
+}
+
 .option img {
   vertical-align: middle;
   padding-left: 10px;
@@ -395,4 +400,12 @@ img {
 .courses-back:hover {
   opacity: 1;
   color: #fff;
+}
+
+.dropdown-click {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }

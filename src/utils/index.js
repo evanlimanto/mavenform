@@ -12,7 +12,7 @@ export function parseAuthHash(auth, location) {
 
 export function requireAuth(auth, history) {
   if (!auth.loggedIn()) {
-    history.push('/');
+    history.goBack();
   }
 }
 

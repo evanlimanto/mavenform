@@ -54,7 +54,6 @@ class Marketing extends Component {
       return this.setState({ formStatus: "Please fill in a valid email." }); 
     }
 
-    const self = this;
     const req = request.post("/applyMarketing");
     req.field("name", name)
       .field("email", email)
@@ -63,9 +62,12 @@ class Marketing extends Component {
       .field("essay2", essay2)
       .attach(this.state.resume.name, this.state.resume)
       .end((err, res) => {
-        console.log(err, res);
-        if (err || !res.ok) self.setState({ formStatus: 'Submit failed. Contact us for help.' });
-        else self.setState({ formStatus: 'Application successfully submitted. We\'ll get in touch as soon as possible.' });
+        if (err || !res.ok) return this.setState({ formStatus: 'Submit failed. Contact us for help.' });
+        else {
+          this.setState({ formStatus: 'Application successfully submitted. We\'ll get in touch as soon as possible.' });
+          document.location = "/appsubmitted";
+          return;
+        }
       });
   }
 

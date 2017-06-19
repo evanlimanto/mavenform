@@ -178,31 +178,36 @@ exports.getTranscribedExam = (req, res) => {
 
 exports.getSchoolCourses = (req, res, next) => {
   const schoolCode = req.params.schoolCode;
+  const checkq = `select 1 from schools where code = $1`;
   const q = `
     select C.id, C.code, subjects.subject_code, subjects.subject_label from courses C
     inner join schools on schools.id = C.schoolid
     inner join subjects on subjects.id = C.subjectid
     where schools.code = $1 and exists (select 1 from exams where courseid = C.id)
   `;
-  client.query(q, [schoolCode], (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    const items = _.reduce(result.rows, (dict, row) => {
-      if (!_.has(dict, row.subject_code)) {
-        dict[row.subject_code] = {
-          label: row.subject_label,
-          courses: []
+  client.query(checkq, [schoolCode], (err, result) => {
+    if (err)
+      return next(err);
+    if (_.keys(result.rows).length === 0)
+      return res.json({ invalidCode: true });
+    client.query(q, [schoolCode], (err, result) => {
+      if (err)
+        return next(err);
+      const items = _.reduce(result.rows, (dict, row) => {
+        if (!_.has(dict, row.subject_code)) {
+          dict[row.subject_code] = {
+            label: row.subject_label,
+            courses: []
+          }
         }
-      }
-      dict[row.subject_code].courses.push({
-        id: row.id,
-        code: row.code,
-      });
-      return dict;
-    }, {});
-    res.json(items);
+        dict[row.subject_code].courses.push({
+          id: row.id,
+          code: row.code,
+        });
+        return dict;
+      }, {});
+      return res.json(items);
+    });
   });
 };
 

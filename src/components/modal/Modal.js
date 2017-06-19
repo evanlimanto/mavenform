@@ -5,8 +5,7 @@ class Modal extends Component {
     const { infoContent, modalContent, closeModal, errorText } = this.props;
     return (
       <div className="modal-container">
-        <div className="modal-click" onClick={closeModal}>
-        </div>
+        <div className="modal-click" onClick={closeModal}></div>
         <div className="modal-and-helper">
           <div className="modal">
             <div className="modal-header">

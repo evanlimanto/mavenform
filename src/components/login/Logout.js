@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 class LogoutComponent extends Component {
   componentWillMount() {
     this.props.auth.logout();
-    window.location = "/";
   }
 
   render() {

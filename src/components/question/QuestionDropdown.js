@@ -21,6 +21,7 @@ class QuestionDropdown extends Component {
     this.setCopied = this.setCopied.bind(this);
     this.copyQuestionLink = this.copyQuestionLink.bind(this);
     this.doneCopyingLink = this.doneCopyingLink.bind(this);
+    this.closeDropdown = this.closeDropdown.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.showShareQuestionModal = this.showShareQuestionModal.bind(this);
  
@@ -46,6 +47,10 @@ class QuestionDropdown extends Component {
 
   toggleDropdown() {
     this.setState({ dropdown: !this.state.dropdown });
+  }
+
+  closeDropdown() {
+    this.setState({ dropdown: false });
   }
 
   showReportModal() {

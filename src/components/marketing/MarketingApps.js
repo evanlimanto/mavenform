@@ -38,7 +38,7 @@ class MarketingApps extends Component {
             <br/>
             Essay 2: {app.essay2}
             <br/>
-            Resume: {"https://storage.googleapis.com/studyform-marketing/" + app.resume}
+            Resume: <a href={"https://storage.googleapis.com/studyform-marketing/" + app.resume} target="_blank"><u>Link</u></a>
             <br/>
             <br/>
           </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'; import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { has, map, toLower } from 'lodash';
+import { endsWith, has, map, toLower } from 'lodash';
 import classnames from 'classnames';
 import isEmail from 'validator/lib/isEmail';
 import isEmpty from 'validator/lib/isEmpty';
@@ -33,7 +33,7 @@ class NavbarComponent extends Component {
 
   componentDidMount() {
     const self = this;
-    window.addEventListener('click', function(e) {
+    window.addEventListener('click', (e) => {
       const logout = document.getElementsByClassName("logout");
       const arrow = document.getElementsByClassName("nav-signed-in");
       if (logout.length > 0 && !logout[0].contains(e.target) && !arrow[0].contains(e.target) && self.state.profileDropdownOn) {
@@ -108,6 +108,8 @@ class NavbarComponent extends Component {
     const email = this.refs.email.value;
     if (!isEmail(email))
       return this.setModalError('Invalid email.');
+    if (!endsWith(email))
+      return this.setModalError("Email muse be an .edu email.");
     this.setModalError(null);
     request
       .post("/addToWaitlist")
@@ -231,7 +233,7 @@ class NavbarComponent extends Component {
         }
       }
       if (this.props.exam) {
-        const url = `https://storage.googleapis.com/studyform/${schoolCode}/pdf/${courseCode}/${examTypeCode}-${termCode}-soln.pdf`;
+        const url = `https://storage.googleapis.com/studyform/${schoolCode}/pdf/${toLower(courseCode)}/${examTypeCode}-${termCode}-soln.pdf`;
         navbarNav = (
           <div className="gray-nav">
             <div className="container">
@@ -295,9 +297,10 @@ class NavbarComponent extends Component {
   }
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     auth: state.auth,
+    history: state.history,
     labels: state.labels,
   };
 };
