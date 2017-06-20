@@ -32,7 +32,7 @@ class SchoolComponent extends Component {
     const schoolCode = this.props.schoolCode;
     const courseItems = (this.state.courses === null) ? "Loading courses..." : (
       (keys(this.state.courses).length > 0) ?
-        map(this.state.courses, (obj, subject) => {
+        map(sortBy(this.state.courses, [(course) => course.label]), (obj, subject) => {
           const courseBoxes = map(sortBy(obj.courses, [(course) => toInteger((new RegExp("\\d+")).exec(course.code)[0])]), (course, key) => (
             <Link className="card course-card" to={"/" + schoolCode + "/" + course.code} key={key} onClick={() => courseClickEvent(schoolCode, course.code)}>
               <span>{course.code_label}</span>

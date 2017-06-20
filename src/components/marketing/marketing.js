@@ -30,7 +30,7 @@ class Marketing extends Component {
       return this.setState({ uploadStatus: 'Upload only one .pdf file.' }); 
     }
     const resume = acceptedFiles[0];
-    if (!(endsWith(resume.name, '.pdf')) {
+    if (!(endsWith(resume.name, '.pdf'))) {
       return this.setState({ uploadStatus: 'Resume must be in the pdf format.' });
     }
     this.setState({ resume, uploadStatus: null });
