@@ -10,8 +10,6 @@ const url = 'http://cs1331.gatech.edu/summer2017/cs1331-fall2016-exam1.pd'
 const path = `gatech/pdf/CS1331/mt1-fa16-exam.pdf`;
 const http = require('http');
 http.get(url, (response) => {
-  console.log(response);
-  return;
   const bucketFile = bucket.file(path);
   const ws = bucketFile.createWriteStream({
     public: true,

@@ -113,7 +113,7 @@ app.get('/getProfs/:schoolCode/:courseCode/:examTypeCode/:termCode', retrieveLis
 app.get('/getCoursesList', retrieveLists.getCoursesList);
 
 // File uploads
-app.post('/upload', function(req, res) {
+app.post('/upload', (req, res) => {
   if (!req.files)
     return res.status(400).send('No files were uploaded.');
 
@@ -125,7 +125,7 @@ app.post('/upload', function(req, res) {
         contentEncoding: file.encoding
       }
     });
-    ws.on('error', function(err) {
+    ws.on('error', (err) => {
       console.error(err);
     });
     ws.write(file.data);
@@ -133,11 +133,11 @@ app.post('/upload', function(req, res) {
   });
 
   res.send('Successfully uploaded files!');
-  res.end();
+  return res.end();
 });
 
 // Image uploads
-app.post('/uploadImage', function(req, res) {
+app.post('/uploadImage', (req, res) => {
   if (!req.files)
     return req.status(400).send('No files were uploaded.');
   const { problem_num, image_num, school, courseid, examtype, examid } = req.body;
@@ -150,37 +150,34 @@ app.post('/uploadImage', function(req, res) {
       contentEncoding: file.encoding
     }
   });
-  ws.on('error', function(err) {
+  ws.on('error', (err) => {
     console.error(err);
     res.status(400).send(err);
   });
-  ws.on('success', function(body) {
-    res.send('Succesfully uploaded ' + fileName).end();
-  });
   ws.write(file.data);
-  ws.end();
+  return ws.end();
 });
 
 // Search substring in problems
-app.get('/searchProblems/:query_str', function(req, res, next) {
+app.get('/searchProblems/:query_str', (req, res, next) => {
   const query_str = req.params.query_str;
   const q = `select * from content where problem like '%${query_str}%' or solution like '%${query_str}%'`;
-  client.query({ text: q })
-    .then((result) => {
-      res.json(result.rows);
-      res.end();
-    });
+  client.query(q, (err, result) => {
+    if (err)
+      return next(err);
+    return res.json(result.rows);
+  });
 });
 
 // Search tags
-app.get('/searchTags/:tag', function(req, res, next) {
+app.get('/searchTags/:tag', (req, res, next) => {
   const query_str = req.params.query_tag;
   const q = `select * from content where `;
-  client.query({ text: q})
-    .then((result) => {
-      res.json(result.rows);
-      res.end();
-    });
+  client.query(q, (err, result) => {
+    if (err)
+      return next(err);
+    return res.json(result.rows);
+  });
 });
 
 // Retrieve course listing
@@ -188,19 +185,22 @@ app.get('/getCourses/:schoolid', (req, res, next) => {
   const schoolid = req.params.schoolid;
   const q1 = `select id from schools where code = $1`;
   const q2 = `select id, code from courses where schoolid = $1`;
-  client.query({ text: q1, values: [schoolid]})
-    .then((result) => {
-      if (result.rows.length > 0) {
-        const id = result.rows[0].id;
-        client.query({ text: q2, values: [id]})
-          .then((result) => {
-            const items = _.map(result.rows, function (row) {
-              return { id: row.id, code: row.code, name: row.name };
-            });
-            res.json(items);
-          });
-      }
-    });
+  async.waterfall([
+    (callback) => client.query(q1, [schoolid], callback),
+    (result, callback) => {
+      if (result.rows.length === 0)
+        return callback(null, null);
+      return client.query(q2, [result.rows[0].id], callback);
+    },
+  ], (err, result) => {
+    if (err) return next(err);
+    if (result) {
+      const items = _.map(result.rows, (row) => {
+        return { id: row.id, code: row.code, name: row.name };
+      });
+      return res.json(items);
+    }
+  });
 });
 
 app.get('/getExamById/:examid', (req, res, next) => {
@@ -213,11 +213,10 @@ app.get('/getExamById/:examid', (req, res, next) => {
     const info = _.reduce(result.rows, (result, row) => {
       const problem_num = row.problem_num;
       const subproblem_num = row.subproblem_num;
-      if (_.has(result, problem_num)) {
+      if (_.has(result, problem_num))
         result[problem_num] = Math.max(result[problem_num], subproblem_num);
-      } else {
+      else
         result[problem_num] = subproblem_num;
-      }
       return result;
     }, {});
 
@@ -231,8 +230,7 @@ app.get('/getExamById/:examid', (req, res, next) => {
       result[key] = { problem, solution, choices };
       return result;
     }, {});
-    res.json({info, problems});
-    res.end();
+    return res.json({info, problems});
   })
 });
 
@@ -279,19 +277,25 @@ app.get('/getExam/:schoolCode/:courseCode/:examTypeCode/:termCode', function(req
       result[key] = { problem, solution, choices, content_id };
       return result;
     }, {});
-    res.json({info, problems});
-    res.end();
+
+    return res.json({info, problems});
   });
 });
 
 // Update problem contents
-app.post('/updateProblem', function(req, res) {
-  const { examid, problem_num, subproblem_num, problem_content, solution_content, choices_content } = req.body;
-  const q = `update content set problem=$1, solution=$2, choices=$3 where exam=$4 and problem_num=$5 and subproblem_num=$6`;
-  client.query(q, [problem_content, solution_content, choices_content, examid, problem_num, subproblem_num], function(err, result) {
-    if (err) res.status(400).send(err);
-    else res.send("Success!");
-    res.end();
+app.post('/updateProblem', (req, res, next) => {
+  const { examid, problem_num, subproblem_num, problem_content,
+          solution_content, choices_content } = req.body;
+  const q = `
+    update content set problem=$1, solution=$2, choices=$3
+    where exam=$4 and problem_num=$5 and subproblem_num=$6
+  `;
+
+  client.query(q, [problem_content, solution_content,
+                   choices_content, examid,
+                   problem_num, subproblem_num], (err, result) => {
+    if (err) return next(err);
+    return res.send("Success!");
   });
 });
 
@@ -303,16 +307,13 @@ app.post('/addCourse', (req, res, next) => {
     values($1, $2, $3, $4)
   `;
   client.query(q, [course_code, schoolid, subjectid], (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.send("Success!");
+    if (err) return next(err);
+    return res.send("Success!");
   });
 });
 
 // Add an exam
-app.post('/addExam', function(req, res) {
+app.post('/addExam', (req, res, next) => {
   let { course_code, exam_type, exam_term, exam_year, profs } = req.body;
   exam_year = _.toInteger(exam_year) - 2000;
   if (exam_year < 10) {
@@ -320,30 +321,28 @@ app.post('/addExam', function(req, res) {
   }
   const q = `insert into exams (courseid, examtype, examid, profs) values ($1, $2, $3, $4)`;
   client.query(q, [course_code, exam_type, _.toString(exam_term) + exam_year, profs], function(err, result) {
-    if (res) res.status(400).send(err);
-    else res.send("Success!");
-    res.end();
+    if (res) return next(err);
+    return res.send("Success!");
   });
 });
 
-app.post('/addProblem', function(req, res) {
+app.post('/addProblem', (req, res, next) => {
   const { examid, problem_num, subproblem_num } = req.body;
   const q = `insert into content (problem_num, subproblem_num, problem, solution, exam) values($1, $2, $3, $4, $5)`;
-  client.query(q, [problem_num, subproblem_num, "", "", examid], function(err, result) {
-    if (res) res.status(400).send(err);
-    else res.send("Success!");
-    res.end();
+  client.query(q, [problem_num, subproblem_num, "", "", examid], (err, result) => {
+    if (res) return next(err);
+    return res.send("Success!");
   });
 });
 
-app.post('/createUser', function(req, res) {
+app.post('/createUser', (req, res, next) => {
   const { auth_user_id } = req.body;
   const q = `insert into users (auth_user_id) select $1
     where not exists (select 1 from users where auth_user_id = $2)
   `;
-  client.query(q, [auth_user_id, auth_user_id], function(err, result) {
-    if (err) console.error(err);
-    else res.send("Success!");
+  client.query(q, [auth_user_id, auth_user_id], (err, result) => {
+    if (err) return next(err);
+    return res.send("Success!");
   });
 });
 
@@ -358,7 +357,7 @@ function replaceImagePlaceholders(basePath, content) {
   return content;
 }
 
-app.post('/processTranscription', function(req, res, next) {
+app.post('/processTranscription', (req, res, next) => {
   const { contents, course, course_id, term, term_id, profs, school, school_id,
           exam_type, exam_type_id, pdf_link } = req.body;
   const imageFiles = req.files;
@@ -444,12 +443,12 @@ app.post('/processTranscription', function(req, res, next) {
       ], callback);
     }
   ], (err, results) => {
-    if (err) next(err);
-    else res.send('Success!');
+    if (err) return next(err);
+    return res.send('Success!');
   });
 });
 
-app.get('/approveTranscription/:examid', function(req, res, next) {
+app.get('/approveTranscription/:examid', (req, res, next) => {
   const approvedExamId = req.params.examid;
 
   const imageq    = `select url from images_staging where examid = $1`;
@@ -508,7 +507,8 @@ app.get('/approveTranscription/:examid', function(req, res, next) {
         client.query(delq, [approvedExamId], (err) => callback(err));
       }
     ], (err) => {
-      next(err);
+      if (err) return next(err);
+      return;
     });
   });
 });
@@ -521,12 +521,9 @@ app.get('/getBookmarkedCourses/:userid', (req, res, next) => {
     inner join users on BC.userid = users.id
     where users.auth_user_id = $1`;
   client.query(q, [userid], (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
+    if (err) return next(err);
     const items = _.map(result.rows, (row) => row.code);
-    res.json(items);
+    return res.json(items);
   });
 });
 
@@ -537,10 +534,10 @@ app.get('/getUserSchool/:userid', (req, res, next) => {
     inner join schools on schools.id = users.schoolid where users.auth_user_id = $1`;
   client.query(q, [userid], (err, result) => {
     if (result.rows.length === 0) {
-      res.json({});
+      return res.json({});
     } else {
       const row = result.rows[0];
-      res.json({ id: row.id, name: row.name, code: row.code });
+      return res.json({ id: row.id, name: row.name, code: row.code });
     }
   });
 });
@@ -550,11 +547,8 @@ app.post('/selectSchool', (req, res, next) => {
 
   const q = `update users set schoolid = $1 where auth_user_id = $2`;
   client.query(q, [school_id, auth_user_id], (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.end();
+    if (err) return next(err);
+    return res.send("Success!");
   });
 });
 
@@ -566,11 +560,8 @@ app.post('/bookmarkCourse', (req, res, next) => {
       select id, $1 from users where auth_user_id = $2
   `;
   client.query(q, [course_id, auth_user_id], (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.end();
+    if (err) return next(err);
+    return res.send("Success!");
   });
 });
 
@@ -600,11 +591,8 @@ app.post('/applyMarketing', (req, res, next) => {
   `;
 
   client.query(q, [name, email, school, essay1, essay2, file.name], (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.end();
+    if (err) return next(err);
+    return res.send("Success!");
   });
 });
 
@@ -613,11 +601,8 @@ app.post('/waitlistSignup', (req, res) => {
   const q = `insert into waitlist (email) values ($1)`;
 
   client.query(q, [], (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.end();
+    if (err) return next(err);
+    return res.send("Success!");
   });
 });
 
@@ -626,20 +611,17 @@ app.post('/contentFeedback', (req, res) => {
   const q = `insert into content_feedback (content_id) values ($1)`;
 
   client.query(q, [], (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.end();
+    if (err) return next(err);
+    return res.send("Success!");
   });
 });
 
 app.post('/dashboardLogin', (req, res) => {
   const { password } = req.body;
   if (password === "cloudfactory") {
-    res.send("Success!");
+    return res.send("Success!");
   } else {
-    res.status(400).send("Invalid password!");
+    return res.status(400).send("Invalid password!");
   }
 });
 
@@ -648,11 +630,8 @@ app.post('/deleteCourse', (req, res, next) => {
   const q = `delete from courses where id = $1`;
 
   client.query(q, [course_id], (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.end();
+    if (err) return next(err);
+    return res.send("Success!");
   });
 });
 
@@ -681,7 +660,7 @@ app.post('/addToWaitlist', (req, res, next) => {
     (callback) => request(options, (err) => callback(err)),
   ], (err) => {
     if (err) return next(err);
-    return res.end();
+    return res.send("Success!");
   });
 });
 
@@ -693,26 +672,18 @@ app.post('/addToDiscussion', (req, res, next) => {
     values($1, $2, $3, $4)
   `;
   client.query(q, [content, parentid, userid, contentid], (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.end();
+    if (err) return next(err);
+    return res.send("Success!");
   });
 });
 
 app.post('/reportError', (req, res, next) => {
   const { content_id, error_content } = req.body;
-  const q = `
-    insert into reports (content_id, error) values($1, $2)
-  `;
+  const q = `insert into reports (content_id, error) values($1, $2)`;
 
   client.query(q, [content_id, error_content], (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.end();
+    if (err) return next(err);
+    return res.send("Success!");
   });
 });
 
@@ -720,6 +691,7 @@ app.get('/getMarketingApps', (req, res, next) => {
   const getq = `select name, email, school, essay1, essay2, resume from marketing_apps`;
 
   client.query(getq, (err, results) => {
+    if (err) return next(err);
     const items = _.map(results.rows, (row) => {
       return {
         name: row.name,
@@ -730,8 +702,7 @@ app.get('/getMarketingApps', (req, res, next) => {
         resume: row.resume,
       };
     });
-
-    res.json(items);
+    return res.json(items);
   });
 });
 
@@ -749,9 +720,9 @@ app.post('/changePassword', (req, res, next) => {
     json: true
   };
 
-  request(options, function (error, response, body) {
-    if (error) return next(error);
-    res.end();
+  request(options, function (err, response, body) {
+    if (err) return next(err);
+    return res.send("Success!");
   });
 });
 
@@ -764,8 +735,7 @@ app.get('/getCourseAccessCode/:schoolCode/:courseCode', (req, res, next) => {
     where schools.code = $1 and courses.code = $2
   `;
   client.query(getq, [schoolCode, courseCode], (err, result) => {
-    if (err)
-      return next(err);
+    if (err) return next(err);
     return res.json(hash(result.rows[0].access_code));
   });
 });

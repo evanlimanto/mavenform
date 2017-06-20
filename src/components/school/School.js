@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { keys, has, map } from 'lodash';
+import { keys, has, map, sortBy, split, toInteger } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 
 import Footer from '../footer';
 import Navbar from '../navbar';
 import NotFound from '../notfound';
 import { courseClickEvent } from '../../events';
-import { courseCodeToLabel, normalizeCourseCode } from '../../utils';
+import { normalizeCourseCode } from '../../utils';
 
 class SchoolComponent extends Component {
   constructor(props) {
@@ -30,20 +30,23 @@ class SchoolComponent extends Component {
       return <NotFound />;
 
     const schoolCode = this.props.schoolCode;
-    const courseItems = (keys(this.state.courses).length > 0) ? map(this.state.courses, (obj, subject) => {
-      const courseBoxes = map(obj.courses, (course, key) => (
-        <Link className="card course-card" to={"/" + schoolCode + "/" + course.code} key={key} onClick={() => courseClickEvent(schoolCode, course.code)}>
-          <span>{courseCodeToLabel(course.code)}</span>
-          <span className="card-arrow">&#8594;</span>
-        </Link>
-      ));
-      return (
-        <div className="department" key={subject}>
-          <h1>{obj.label}</h1>
-          {courseBoxes}
-        </div>
+    const courseItems = (this.state.courses === null) ? "Loading courses..." : (
+      (keys(this.state.courses).length > 0) ?
+        map(this.state.courses, (obj, subject) => {
+          const courseBoxes = map(sortBy(obj.courses, [(course) => toInteger(split(course.code_label, ' ')[1]) || 99999]), (course, key) => (
+            <Link className="card course-card" to={"/" + schoolCode + "/" + course.code} key={key} onClick={() => courseClickEvent(schoolCode, course.code)}>
+              <span>{course.code_label}</span>
+              <span className="card-arrow">&#8594;</span>
+            </Link>
+          ));
+          return (
+            <div className="department" key={subject}>
+              <h1>{obj.label}</h1>
+              {courseBoxes}
+            </div>
+          );
+        }) : "No courses yet. Check again for more updates!"
       );
-    }) : "No courses yet. Check again for more updates!";
 
     const schoolLabel = (this.props.labels && has(this.props.labels.schools, schoolCode)) ? this.props.labels.schools[schoolCode]: null;
     const meta = {

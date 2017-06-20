@@ -4,75 +4,76 @@ const renderer = require('./src/renderer');
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 
-exports.getExams = (req, res) => {
+exports.getExams = (req, res, next) => {
   const q = `select E.id as id, C.code as courseid, ET.type_code as examtype, T.term_code as examid, E.profs as profs from exams E
   inner join courses C on C.id = E.courseid
   inner join exam_types ET on E.examtype = ET.id
   inner join terms T on E.examid = T.id`;
-  client.query({ text: q })
-    .then((result) => {
-      const multi_dict = _.reduce(result.rows, (dict, row) => {
-        const id = row.id;
-        const courseid = row.courseid;
-        const examtype = row.examtype;
-        const examid = row.examid;
-        const profs = row.profs;
-        if (!_.has(dict, courseid)) {
-          dict[courseid] = {};
-        }
-        if (!_.has(dict[courseid], examtype)) {
-          dict[courseid][examtype] = {};
-        }
-        dict[courseid][examtype][examid] = { id, profs };
-        return dict;
-      }, {});
-      const key_dict = _.reduce(result.rows, (dict, row) => {
-        const id = row.id;
-        const courseid = row.courseid;
-        const examtype = row.examtype;
-        const examid = row.examid;
-        const profs = row.profs;
-        dict[id] = { courseid, examtype, examid, profs };
-        return dict;
-      }, {});
-      res.json({ multi_dict, key_dict });
-    });
+  client.query(q, (err, result) => {
+    if (err) return next(err);
+    const multi_dict = _.reduce(result.rows, (dict, row) => {
+      const id = row.id;
+      const courseid = row.courseid;
+      const examtype = row.examtype;
+      const examid = row.examid;
+      const profs = row.profs;
+      if (!_.has(dict, courseid)) {
+        dict[courseid] = {};
+      }
+      if (!_.has(dict[courseid], examtype)) {
+        dict[courseid][examtype] = {};
+      }
+      dict[courseid][examtype][examid] = { id, profs };
+      return dict;
+    }, {});
+    const key_dict = _.reduce(result.rows, (dict, row) => {
+      const id = row.id;
+      const courseid = row.courseid;
+      const examtype = row.examtype;
+      const examid = row.examid;
+      const profs = row.profs;
+      dict[id] = { courseid, examtype, examid, profs };
+      return dict;
+    }, {});
+
+    return res.json({ multi_dict, key_dict });
+  });
 };
 
-exports.getSchools = (req, res) => {
+exports.getSchools = (req, res, next) => {
   const q = 'select id, code, name from schools';
-  client.query({ text: q })
-    .then((result) => {
-      const items = _.map(result.rows, function(row) {
-        return { id: row.id, code: row.code, name: row.name };
-      });
-      res.json(items);
+  client.query(q, (err, result) =>{
+    if (err) return next(err);
+    const items = _.map(result.rows, function(row) {
+      return { id: row.id, code: row.code, name: row.name };
     });
+    return res.json(items);
+  });
 };
 
-exports.getExamTypes = (req, res) => {
+exports.getExamTypes = (req, res, next) => {
   const q = 'select id, type_code, type_label from exam_types';
-  client.query({ text: q })
-    .then((result) => {
-      const items = _.map(result.rows, function(row) {
-        return { id: row.id, type_code: row.type_code, type_label: row.type_label };
-      });
-      res.json(items);
+  client.query(q, (err, result) => {
+    if (err) return next(err);
+    const items = _.map(result.rows, function(row) {
+      return { id: row.id, type_code: row.type_code, type_label: row.type_label };
     });
+    return res.json(items);
+  });
 };
 
-exports.getTerms = (req, res) => {
+exports.getTerms = (req, res, next) => {
   const q = 'select id, term_code, term_label from terms';
-  client.query({ text: q })
-    .then((result) => {
-      const items = _.map(result.rows, function(row) {
-        return { id: row.id, term_code: row.term_code, term_label: row.term_label };
-      });
-      res.json(items);
+  client.query(q, (err, result) => {
+    if (err) return next(err);
+    const items = _.map(result.rows, function(row) {
+      return { id: row.id, term_code: row.term_code, term_label: row.term_label };
     });
+    return res.json(items);
+  });
 };
 
-exports.getTranscribedExams = (req, res) => {
+exports.getTranscribedExams = (req, res, next) => {
   const q = `
     select ES.id as id, ES.profs as profs, ES.datetime, exam_types.type_code as type_code, exam_types.type_label as type_label, courses.code as course_code, schools.code as school_code, schools.name as school_name, terms.term_code, terms.term_label from exams_staging ES
     inner join courses on courses.id = ES.courseid
@@ -80,32 +81,33 @@ exports.getTranscribedExams = (req, res) => {
     inner join schools on schools.id = ES.schoolid
     inner join terms on terms.id = ES.examid;
   `;
-  client.query({ text: q })
-    .then((result) => {
-      const items = _.reduce(result.rows, function(dict, row) {
-        dict[row.id] = {
-          datetime: row.datetime,
-          type_label: row.type_label,
-          type_code: row.type_code,
-          course_code: row.course_code,
-          school_code: row.school_code,
-          school_name: row.school_name,
-          term_code: row.term_code,
-          term_label: row.term_label,
-        };
-        return dict;
-      }, {});
-      res.json(items);
-    });
+  client.query(q, (err, result) => {
+    if (err) return next(err);
+    const items = _.reduce(result.rows, function(dict, row) {
+      dict[row.id] = {
+        datetime: row.datetime,
+        type_label: row.type_label,
+        type_code: row.type_code,
+        course_code: row.course_code,
+        school_code: row.school_code,
+        school_name: row.school_name,
+        term_code: row.term_code,
+        term_label: row.term_label,
+      };
+      return dict;
+    }, {});
+    return res.json(items);
+  });
 };
 
-exports.getTranscribedContent = (req, res) => {
+exports.getTranscribedContent = (req, res, next) => {
   const { examid } = req.params;
   const q = `
     select problem_num, subproblem_num, problem, solution from content_staging
     where exam = $1
   `;
   client.query(q, [examid], (err, result) => {
+    if (err) return next(err);
     const items = _.map(result.rows, (row) => {
       return {
         problem_num: row.problem_num,
@@ -114,16 +116,16 @@ exports.getTranscribedContent = (req, res) => {
         solution: renderer.preprocess(row.solution),
       };
     });
-    res.json(items);
+    return res.json(items);
   });
 };
 
-exports.getTranscribedContentDict = (req, res) => {
+exports.getTranscribedContentDict = (req, res, next) => {
   const q = `
     select problem_num, subproblem_num, problem, solution, exam, choices from content_staging
   `;
-  client.query({ text: q })
-  .then((result) => {
+  client.query(q, (err, result) => {
+    if (err) return next(err);
     const items = _.reduce(result.rows, function(dict, row) {
       if (!_.has(dict, row.exam)) {
         dict[row.exam] = [];
@@ -137,8 +139,8 @@ exports.getTranscribedContentDict = (req, res) => {
       });
       return dict;
     }, {});
-    res.json(items);
-  })
+    return res.json(items);
+  });
 };
 
 exports.getTranscribedExam = (req, res) => {
@@ -162,8 +164,9 @@ exports.getTranscribedExam = (req, res) => {
     where ES.id = $1
   `;
   client.query(q, [examid], (err, result) => {
+    if (err) return next(err);
     const row = result.rows[0];
-    res.send({
+    return res.json({
       profs: row.profs,
       course_code: row.course_code,
       course_id: row.course_id,
@@ -181,14 +184,13 @@ exports.getSchoolCourses = (req, res, next) => {
   const schoolCode = req.params.schoolCode;
   const checkq = `select 1 from schools where code = $1`;
   const q = `
-    select C.id, C.code, subjects.subject_code, subjects.subject_label from courses C
+    select C.id, C.code_label, C.code, subjects.subject_code, subjects.subject_label from courses C
     inner join schools on schools.id = C.schoolid
     inner join subjects on subjects.id = C.subjectid
-    where schools.code = $1 and exists (select 1 from exams where courseid = C.id)
+    where schools.code = $1
   `;
   client.query(checkq, [schoolCode], (err, result) => {
-    if (err)
-      return next(err);
+    if (err) return next(err);
     if (_.keys(result.rows).length === 0)
       return res.json({ invalidCode: true });
     client.query(q, [schoolCode], (err, result) => {
@@ -204,6 +206,7 @@ exports.getSchoolCourses = (req, res, next) => {
         dict[row.subject_code].courses.push({
           id: row.id,
           code: row.code,
+          code_label: row.code_label,
         });
         return dict;
       }, {});
@@ -220,17 +223,14 @@ exports.getSchoolCoursesList = (req, res, next) => {
     where schools.id = $1
   `;
   client.query(q, [schoolid], (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
+    if (err) return next(err);
     const items = _.map(result.rows, (row) => {
       return {
         id: row.id,
         code: row.code,
       };
     });
-    res.json(items);
+    return res.json(items);
   });
 };
 
@@ -242,17 +242,11 @@ exports.getUnbookmarkedCourses = (req, res, next) => {
     (select courseid from bookmarked_courses BC inner join users on BC.userid = users.id where users.auth_user_id = $1) and schoolid = $2;
   `;
   client.query(q, [auth_user_id, school_id], (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
+    if (err) return next(err);
     const items = _.map(result.rows, (row) => {
-      return {
-        id: row.id,
-        code: row.code,
-      };
+      return { id: row.id, code: row.code };
     });
-    res.json(items);
+    return res.json(items);
   });
 };
 
@@ -268,10 +262,7 @@ exports.getCourseExams = (req, res, next) => {
     where C.code = $1 and S.code = $2;
   `;
   client.query(q, [courseCode, schoolCode], (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
+    if (err) return next(err);
     const items = _.map(result.rows, (row) => {
       return {
         id: row.id,
@@ -282,24 +273,19 @@ exports.getCourseExams = (req, res, next) => {
         profs: row.profs,
       };
     });
-    res.json(items);
+    return res.json(items);
   });
 };
 
 exports.getLabels = (req, res, next) => {
   const q = `select code, name from schools`;
-  client.query(q, [], (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
+  client.query(q, (err, result) => {
+    if (err) return next(err);
     const items = _.reduce(result.rows, (dict, row) => {
       dict[row.code] = row.name; 
       return dict;
     }, {});
-    res.json({
-      schools: items 
-    });
+    return res.json({ schools: items  });
   });
 };
 
@@ -314,11 +300,8 @@ exports.getProfs = (req, res, next) => {
     where S.code = $1 and T.term_code = $2 and ET.type_code = $3 and C.code = $4;
   `;
   client.query(getidq, [schoolCode, termCode, examTypeCode, courseCode], (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.json({ profs: result.rows[0].profs });
+    if (err) return next(err);
+    return res.json({ profs: result.rows[0].profs });
   });
 };
 
@@ -328,11 +311,8 @@ exports.getCoursesList = (req, res, next) => {
       schools.id as school_id, schools.name as school_name from courses
     inner join schools on courses.schoolid = schools.id
   `;
-  client.query(q, [], (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
+  client.query(q, (err, result) => {
+    if (err) return next(err);
     const items = _.map(result.rows, (item) => {
       return {
         course_id: item.course_id,
@@ -341,7 +321,7 @@ exports.getCoursesList = (req, res, next) => {
         school_name: item.school_name,
       };
     });
-    res.json(items);
+    return res.json(items);
   });
 };
 
@@ -351,10 +331,7 @@ exports.getCoursesBySchool = (req, res, next) => {
     inner join schools on courses.schoolid = schools.id
   `;
   client.query(q, [], (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
+    if (err) return next(err);
     const items = _.reduce(result.rows, (dict, row) => { 
       if (!_.has(dict, row.school_name)) {
         dict[row.school_name] = [];
@@ -365,19 +342,14 @@ exports.getCoursesBySchool = (req, res, next) => {
       });
       return dict;
     }, {});
-    res.json(items);
+    return res.json(items);
   });
 };
 
 exports.getSubjects = (req, res, next) => {
-  const q = `
-    select id, subject_code, subject_label from subjects
-  `;
+  const q = `select id, subject_code, subject_label from subjects`;
   client.query(q, [], (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
+    if (err) return next(err);
     const items = _.map(result.rows, (item) => {
       return {
         subject_id: item.id,
@@ -385,6 +357,6 @@ exports.getSubjects = (req, res, next) => {
         subject_label: item.subject_label,
       };
     });
-    res.json(items);
+    return res.json(items);
   });
 };

@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import copy from 'copy-to-clipboard';
 import classnames from 'classnames';
 import { map, split } from 'lodash';
 
-import Expire from './Expire';
 import QuestionDropdown from './QuestionDropdown';
-import { copyQuestionLinkEvent } from '../../events';
 
 class MultipleChoiceQuestion extends Component {
   constructor(props) {

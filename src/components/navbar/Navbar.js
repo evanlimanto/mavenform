@@ -1,6 +1,6 @@
 import React, { Component } from 'react'; import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { endsWith, has, map, toLower } from 'lodash';
+import { has, map, toLower } from 'lodash';
 import classnames from 'classnames';
 import isEmail from 'validator/lib/isEmail';
 import isEmpty from 'validator/lib/isEmpty';

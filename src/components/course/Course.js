@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { has, map } from 'lodash';
+import { has, map, toString } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 import cookies from 'browser-cookies';
 
@@ -41,7 +41,7 @@ class CourseComponent extends Component {
     const cookiePath = schoolCode + '-' + courseCode;
     const storedAccessCode = cookies.get(cookiePath);
     if (storedAccessCode) {
-      if (storedAccessCode == hashedCode)
+      if (toString(storedAccessCode) === toString(hashedCode))
         return true;
       return false;
     }

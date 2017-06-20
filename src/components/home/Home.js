@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import DocumentMeta from 'react-document-meta';
-import { endsWith, map, toLower, join, split } from 'lodash';
+import { map, toLower, join, split } from 'lodash';
 import Footer from '../footer';
 import Navbar from '../navbar';
 import { schoolClickEvent } from '../../events';

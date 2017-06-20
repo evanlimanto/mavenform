@@ -38,7 +38,7 @@ class ExamComponent extends Component {
     const cookiePath = schoolCode + '-' + courseCode;
     const storedAccessCode = cookies.get(cookiePath);
     if (storedAccessCode) {
-      if (storedAccessCode == hashedCode)
+      if (toString(storedAccessCode) === toString(hashedCode))
         return true;
       return false;
     }
