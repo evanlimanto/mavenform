@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { keys, map } from 'lodash';
+import DocumentMeta from 'react-document-meta';
 
 class MarketingApps extends Component {
   constructor(props) {
@@ -19,12 +20,13 @@ class MarketingApps extends Component {
   }
 
   render() {
-    console.log(keys(this.state.apps));
     if (keys(this.state.apps).length === 0)
       return <h1>No apps submitted.</h1>
 
+    const meta = { robots: "noindex" };
     return (
       <div>
+      <DocumentMeta {...meta} />
       {map(this.state.apps, (app, key) => {
         return (
           <div key={key}>

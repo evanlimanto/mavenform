@@ -16,8 +16,6 @@ class ExamComponent extends Component {
     this.state = {
       profs: null
     };
-
-    this.checkAccessCode = this.checkAccessCode.bind(this);
   }
 
   componentDidMount() {
@@ -25,24 +23,6 @@ class ExamComponent extends Component {
     fetch(`/getProfs/${schoolCode}/${courseCode}/${examType}/${termCode}`).then(
       (response) => response.json()
     ).then((json) => this.setState({ profs: json.profs }));
-  }
-
-  componentWillMount() {
-    if (!this.checkAccessCode())
-      return this.props.history.goBack();
-  }
-
-  checkAccessCode() {
-    const hashedCode = this.state.hashedCode;
-    const { schoolCode, courseCode } = this.props;
-    const cookiePath = schoolCode + '-' + courseCode;
-    const storedAccessCode = cookies.get(cookiePath);
-    if (storedAccessCode) {
-      if (toString(storedAccessCode) === toString(hashedCode))
-        return true;
-      return false;
-    }
-    return false;
   }
 
   render() {

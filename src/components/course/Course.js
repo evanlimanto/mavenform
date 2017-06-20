@@ -117,7 +117,7 @@ class CourseComponent extends Component {
           <div className="center">
             <input className="access-code-input" type="text" placeholder="Access Code" ref="access_code" />
             <hr className="s2" />
-            <button className="access-code-button" onClick={this.updateAccessCode}>Access</button>
+            <input type="button" className="blue access-code-btn" onClick={this.updateAccessCode} value="Access" />
           </div>
         </div>
       </div>

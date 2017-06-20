@@ -17,18 +17,11 @@ function courseCodeToLabel(course_code) {
 }
 
 function getCourseNumber(courseCode) {
-  const item = _.split(courseCode, ' ')[1];
-  let idx = item.length;
-  for (var i = 0; i < item.length; i++) {
-    if (!(item[i] >= '0' && item[i] <= '9')) {
-      idx = i;
-      break;
-    }
-  }
-  let ret = [];
-  ret.push(_.toInteger(item.slice(0, idx))); // get integer part
-  ret.push(item.slice(idx, item.length)); // get letters part
-  return ret;
+  const numberRegexp = new RegExp('\\d+');
+  const letterRegexp = new RegExp('[a-zA-Z]+');
+  const numberMatch = numberRegexp.exec(courseCode);
+  const letterMatch = letterRegexp.exec(courseCode);
+  return [numberMatch ? numberMatch[0] : "", letterMatch ? letterMatch[0] : ""];
 }
 
 const config = {
@@ -52,26 +45,31 @@ client.connect();
 index.clearIndex();
 
 const q = `
-  select courses.id, courses.code as code, schools.code as school_code, schools.name as school_name from courses
+  select courses.id, courses.code as code, courses.code_label as code_label, schools.code as school_code, schools.name as school_name, subjects.subject_label as subject_label from courses
   inner join schools on courses.schoolid = schools.id
+  inner join subjects on courses.subjectid = subjects.id
 `;
 
 client.query(q, (err, result) => {
   _.forEach(result.rows, (row) => {
     let item = {
       objectID: row.id,
-      code: courseCodeToLabel(row.code),
+      code: row.code,
+      code_label: row.code_label,
       school_code: row.school_code,
       school_name: row.school_name,
+      subject_label: row.subject_label,
     };
-    const code = getCourseNumber(item.code);
+    const code = getCourseNumber(_.takeRight(_.split(item.code_label, ' ')));
     item.number = code[0];
     item.letter = code[1];
-    item.subject = _.split(item.code, ' ')[0]
+    item.subject = _.join(_.dropRight(_.split(item.code_label, ' ')), ' ');
     console.log(item);
+    return;
     index.saveObject(item, (err, content) => {
       if (err) return console.error(err);
       else console.log(content);
     });
   });
+  return;
 });

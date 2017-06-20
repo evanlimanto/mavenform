@@ -1,0 +1,18 @@
+.access-code-input {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 12px;
+  background: #fff;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #666;
+  border-radius: 5px;
+  border: 2px solid grey;
+  text-align: center;
+}
+
+.access-code-btn {
+  padding: 10px 75px 12px !important;
+  margin-right: 0px !important;
+}

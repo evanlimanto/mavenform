@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import DocumentMeta from 'react-document-meta';
 
 class SecretSignupComponent extends Component {
   signUp(e) {
@@ -11,8 +12,10 @@ class SecretSignupComponent extends Component {
   }
 
   render() {
+    const meta = { robots: "noindex" };
     return (
       <div style={{ margin: "50px" }}>
+        <DocumentMeta {...meta} />
         <input type="text" placeholder="Email" ref="email" />
         <hr className="s1" />
         <input type="text" placeholder="Username" ref="username" />

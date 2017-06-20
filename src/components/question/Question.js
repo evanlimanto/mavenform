@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import Solution from './Solution';
 import QuestionDropdown from './QuestionDropdown';
 
-const req = require('superagent');
-
 class Question extends Component {
   render() {
     const { id, content_id, schoolCode, courseCode, examType, termCode, solution, content } = this.props;
