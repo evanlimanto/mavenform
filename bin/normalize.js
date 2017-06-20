@@ -25,4 +25,5 @@ client.query(getq, (err, result) => {
       return console.log(result);
     });
   });
+  return;
 });

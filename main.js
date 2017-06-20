@@ -7,6 +7,7 @@ const browserify = require('browserify');
 const fileUpload = require('express-fileupload');
 const fs = require('fs');
 const hash = require('string-hash');
+const http = require('http');
 const glob = require('glob');
 const path = require('path');
 const NodeCache = require('node-cache');
@@ -359,8 +360,23 @@ function replaceImagePlaceholders(basePath, content) {
 
 app.post('/processTranscription', function(req, res, next) {
   const { contents, course, course_id, term, term_id, profs, school, school_id,
-          exam_type, exam_type_id } = req.body;
+          exam_type, exam_type_id, pdf_link } = req.body;
   const imageFiles = req.files;
+
+  const pdfPath = `${school}/pdf/${course}/${exam_type}-${term}-${randomstring.generate(10)}.pdf`;
+  http.get(pdf_link, (response) => {
+    if (_.has(response, 'statusCode') && response.statusCode === 404)
+      return;
+    const bucketFile = bucket.file(pdfPath);
+    const ws = bucketFile.createWriteStream({
+      public: true,
+      metadata: { contentType: 'application/pdf' }
+    }); 
+    ws.on('error', function(err) {
+      console.error(err);
+    });
+    return response.pipe(ws);
+  });
 
   const basePath = `${school}/img/${course}/${exam_type}-${term}`;
   async.forEach(imageFiles, (file, callback) => {
@@ -376,13 +392,10 @@ app.post('/processTranscription', function(req, res, next) {
     ws.on('error', function(err) {
       callback(err);
     });
-    ws.on('finish', function() {
-      console.log('Finished uploading file', fileName);
-    });
     ws.write(file.data);
-    ws.end();
+    return ws.end();
   }, (err) => {
-    if (err) next(err); 
+    if (err) return next(err); 
   });
 
   let doc = null;

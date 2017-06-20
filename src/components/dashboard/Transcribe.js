@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import cookies from 'browser-cookies';
 import { preprocess } from '../../renderer';
 import { MultipleChoiceQuestion, Question } from '../question';
-import { toLower, has, endsWith, join, keys, forEach, map, split, filter, reduce, range, toString } from 'lodash';
+import { toLower, has, endsWith, join, keys, forEach, map, split, filter, reduce, range, toString, sortBy } from 'lodash';
 
 import DashboardLogin from './DashboardLogin';
 
@@ -158,7 +158,7 @@ class TranscribeComponent extends Component {
 
   upload(e) {
     e.preventDefault();
-    if (this.state.error || !!! this.refs.school.value || !!!this.refs.course.value)
+    if (this.state.error || !this.refs.school.value || !this.refs.course.value || !this.refs.pdf.value)
       return;
     const validationResult = this.validateImages();
     if (!validationResult.res)
@@ -183,6 +183,7 @@ class TranscribeComponent extends Component {
     const exam_type = exam_type_arr[0], exam_type_id = exam_type_arr[1];
     const term = termarr[0], term_id = termarr[1];
     const profs = this.refs.profs.value;
+    const pdf_link = this.refs.pdf.value;
 
     const req = request.post('/processTranscription');
     forEach(this.state.images, (image) => {
@@ -194,7 +195,7 @@ class TranscribeComponent extends Component {
       .field('course', course).field('course_id', course_id)
       .field('term', term).field('term_id', term_id)
       .field('exam_type', exam_type).field('exam_type_id', exam_type_id)
-      .field('profs', profs)
+      .field('profs', profs).field('pdf_link', pdf_link)
       .end(function(err, res) {
         if (err || !res.ok) {
           self.setState({ error: err.text });
@@ -241,7 +242,7 @@ class TranscribeComponent extends Component {
     const schoolsSelect = (
       <select ref='school' onChange={this.populateCourses} >
         <option selected value disabled> -- select a school -- </option>
-        {map(this.props.schools, (school, key) => {
+        {map(sortBy(this.props.schools, (a) => a.name), (school, key) => {
           return <option key={key} value={school.code + '~' + school.id}>{school.name}</option>;
         })}
       </select>
@@ -308,6 +309,11 @@ class TranscribeComponent extends Component {
           <div>
             <label>Professors</label>
             <input type='text' placeholder='e.g. Alon, Ranade' ref='profs' />
+          </div>
+          <hr className="s1" />
+          <div>
+            <label>PDF Link</label>
+            <input type="text" placeholder='e.g. www.studyform.com/mt1-fa15-exam.pdf' ref='pdf' />
           </div>
           <hr className="s1" />
           <Dropzone onDrop={this.onDrop} className='dropzone'>

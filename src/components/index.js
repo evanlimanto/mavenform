@@ -14,6 +14,7 @@ import '../css/Cards.css';
 import '../css/Home.css';
 import '../css/School.css';
 import '../css/Exam.css';
+import '../css/Course.css';
 import '../css/Marketing.css';
 import '../css/Modals.css';
 import '../css/Mobile.css';

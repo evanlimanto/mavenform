@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { has, map } from 'lodash';
 import DocumentMeta from 'react-document-meta';
+import cookies from 'browser-cookies';
 
 import { courseCodeToLabel } from '../../utils';
 import { examClickEvent } from '../../events';
 import Footer from '../footer';
 import Navbar from '../navbar';
+
+const hash = require('string-hash');
 
 class CourseComponent extends Component {
   constructor(props) {
@@ -16,6 +19,9 @@ class CourseComponent extends Component {
     this.state = {
       exams: [] 
     };
+
+    this.checkAccessCode = this.checkAccessCode.bind(this);
+    this.updateAccessCode = this.updateAccessCode.bind(this);
   }
 
   componentDidMount() {
@@ -23,6 +29,31 @@ class CourseComponent extends Component {
     fetch(`/getCourseExams/${schoolCode}/${courseCode}`).then(
       (response) => response.json()
     ).then((json) => this.setState({ exams: json }));
+
+    fetch(`/getCourseAccessCode/${schoolCode}/${courseCode}`).then(
+      (response) => response.json()
+    ).then((json) => this.setState({ hashedCode: json }));
+  }
+
+  checkAccessCode() {
+    const hashedCode = this.state.hashedCode;
+    const { schoolCode, courseCode } = this.props;
+    const cookiePath = schoolCode + '-' + courseCode;
+    const storedAccessCode = cookies.get(cookiePath);
+    if (storedAccessCode) {
+      if (storedAccessCode == hashedCode)
+        return true;
+      return false;
+    }
+    return false;
+  }
+
+  updateAccessCode() {
+    const accessCode = this.refs.access_code.value;
+    const { schoolCode, courseCode } = this.props;
+    const cookiePath = schoolCode + '-' + courseCode;
+    cookies.set(cookiePath, toString(hash(accessCode)), { expires: 7 }); 
+    window.location.reload();
   }
 
   render() {
@@ -50,37 +81,53 @@ class CourseComponent extends Component {
       title: `${courseCodeToLabel(courseCode)} - ${schoolLabel} - Studyform`,
     };
 
+    const content = (this.props.auth.loggedIn() || this.checkAccessCode() ? (
+      <div>
+        <h4 className="center">{courseCodeToLabel(courseCode)}</h4>
+        <div className="center">
+          <h5>Index of resources</h5>
+        </div>
+        <hr className="s4" />
+        <div className="center">
+          <div className="table-container-container">
+            <div className="table-container">
+              <table className="exams center">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Term</th>
+                    <th>Instructors</th>
+                    <th>Studyform</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {available}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <hr className="margin" />
+        </div>
+      </div>
+    ) : (
+      <div>
+        <div>
+          <h4 className="center">Login or input access code to view content for {courseCodeToLabel(courseCode)}.</h4>
+          <hr className="s2" />
+          <div className="center">
+            <input className="access-code-input" type="text" placeholder="Access Code" ref="access_code" />
+            <hr className="s2" />
+            <button className="access-code-button" onClick={this.updateAccessCode}>Access</button>
+          </div>
+        </div>
+      </div>
+    ));
+
     return (
       <div>
         <DocumentMeta {...meta} />
         <Navbar schoolCode={schoolCode} courseCode={courseCode} />
-        <div>
-          <h4 className="center">{courseCodeToLabel(courseCode)}</h4>
-          <div className="center">
-            <h5>Index of resources</h5>
-          </div>
-          <hr className="s4" />
-          <div className="center">
-            <div className="table-container-container">
-              <div className="table-container">
-                <table className="exams center">
-                  <thead>
-                    <tr>
-                      <th>Type</th>
-                      <th>Term</th>
-                      <th>Instructors</th>
-                      <th>Studyform</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {available}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <hr className="margin" />
-          </div>
-        </div>
+        {content}
         <Footer />
       </div>
     );
@@ -89,6 +136,8 @@ class CourseComponent extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    auth: state.auth,
+    history: ownProps.history,
     courseCode: ownProps.match.params.courseCode,
     schoolCode: ownProps.match.params.schoolCode,
     exams: state.exams.multi_dict,
