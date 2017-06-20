@@ -27,11 +27,11 @@ class Marketing extends Component {
 
   onDrop(acceptedFiles, rejectedFiles) {
     if (acceptedFiles.length !== 1) {
-      return this.setState({ uploadStatus: 'Upload only one .doc, .docx or .pdf file.' }); 
+      return this.setState({ uploadStatus: 'Upload only one .pdf file.' }); 
     }
     const resume = acceptedFiles[0];
-    if (!(endsWith(resume.name, '.pdf') || endsWith(resume.name, '.doc') || endsWith(resume.name, '.docx'))) {
-      return this.setState({ uploadStatus: 'Resume must be in one of the following formats: doc, docx, pdf.' });
+    if (!(endsWith(resume.name, '.pdf')) {
+      return this.setState({ uploadStatus: 'Resume must be in the pdf format.' });
     }
     this.setState({ resume, uploadStatus: null });
   }
