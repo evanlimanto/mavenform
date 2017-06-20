@@ -285,9 +285,9 @@ app.get('/getExam/:schoolCode/:courseCode/:examTypeCode/:termCode', function(req
 
 // Update problem contents
 app.post('/updateProblem', function(req, res) {
-  const { examid, problem_num, subproblem_num, problem_content, solution_content } = req.body;
-  const q = `update content set problem=$1, solution=$2 where exam=$3 and problem_num=$4 and subproblem_num=$5`;
-  client.query(q, [problem_content, solution_content, examid, problem_num, subproblem_num], function(err, result) {
+  const { examid, problem_num, subproblem_num, problem_content, solution_content, choices_content } = req.body;
+  const q = `update content set problem=$1, solution=$2, choices=$3 where exam=$4 and problem_num=$5 and subproblem_num=$6`;
+  client.query(q, [problem_content, solution_content, choices_content, examid, problem_num, subproblem_num], function(err, result) {
     if (err) res.status(400).send(err);
     else res.send("Success!");
     res.end();
@@ -445,7 +445,7 @@ app.get('/approveTranscription/:examid', function(req, res, next) {
   const inq       = `insert into exams (courseid, examtype, examid, schoolid, profs) values($1, $2, $3, $4, $5)`;
   const getidq    = `select id from exams where courseid = $1 and examtype = $2 and examid = $3 and schoolid = $4 and profs = $5`;
   const insertproblemsq = `insert into content (problem_num, subproblem_num, problem, solution, exam, choices)
-    select problem_num, subproblem_num, problem, solution, $1, choices from content_staging where exam = $2`;
+    select problem_num, subproblem_num, replace(problem, 'https://storage.googleapis.com/studyform-staging', 'https://storage.googleapis.com/studyform'), replace(solution, 'https://storage.googleapis.com/studyform-staging', 'https://storage.googleapis.com/studyform'), $1, choices from content_staging where exam = $2`;
   const deleteproblemsq = `delete from content_staging where exam = $1`;
   const delq = `delete from exams_staging where id = $1`;
 
@@ -459,7 +459,7 @@ app.get('/approveTranscription/:examid', function(req, res, next) {
             sourceFile.move(bucket, innerCallback)
           },
           (destFile, resp, innerCallback) => {
-            destFile.makePublic((err, apiResponse) => innerCallback(err))
+            destFile.makePublic((err) => innerCallback(err))
           }
         ], eachCallback)
       }, callback)
@@ -469,36 +469,34 @@ app.get('/approveTranscription/:examid', function(req, res, next) {
     }
   ], (err) => {
     if (err) next(err);
-    else {
-      async.waterfall([
-        (callback) => {
-          client.query(getq, [approvedExamId], callback);
-        },
-        (result, callback) => {
-          courseid = result.rows[0].courseid;
-          examtype = result.rows[0].examtype;
-          examid = result.rows[0].examid;
-          schoolid = result.rows[0].schoolid;
-          profs = result.rows[0].profs;
-          client.query(inq, [courseid, examtype, examid, schoolid, profs], (err) => callback(err));
-        },
-        (callback) => {
-          client.query(getidq, [courseid, examtype, examid, schoolid, profs], callback);
-        },
-        (result, callback) => {
-          const id = result.rows[0].id;
-          client.query(insertproblemsq, [id, approvedExamId], (err) => callback(err));
-        },
-        (callback) => {
-          client.query(deleteproblemsq, [approvedExamId], (err) => callback(err)); 
-        },
-        (callback) => {
-          client.query(delq, [approvedExamId], (err) => callback(err));
-        }
-      ], (err) => {
-        next(err);
-      });
-    }
+    async.waterfall([
+      (callback) => {
+        client.query(getq, [approvedExamId], callback);
+      },
+      (result, callback) => {
+        courseid = result.rows[0].courseid;
+        examtype = result.rows[0].examtype;
+        examid = result.rows[0].examid;
+        schoolid = result.rows[0].schoolid;
+        profs = result.rows[0].profs;
+        client.query(inq, [courseid, examtype, examid, schoolid, profs], (err) => callback(err));
+      },
+      (callback) => {
+        client.query(getidq, [courseid, examtype, examid, schoolid, profs], callback);
+      },
+      (result, callback) => {
+        const id = result.rows[0].id;
+        client.query(insertproblemsq, [id, approvedExamId], (err) => callback(err));
+      },
+      (callback) => {
+        client.query(deleteproblemsq, [approvedExamId], (err) => callback(err)); 
+      },
+      (callback) => {
+        client.query(delq, [approvedExamId], (err) => callback(err));
+      }
+    ], (err) => {
+      next(err);
+    });
   });
 });
 

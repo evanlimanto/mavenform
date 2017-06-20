@@ -1,5 +1,6 @@
 const pg = require('pg');
 const _ = require('lodash');
+const renderer = require('./src/renderer');
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 
@@ -109,8 +110,8 @@ exports.getTranscribedContent = (req, res) => {
       return {
         problem_num: row.problem_num,
         subproblem_num: row.subproblem_num,
-        problem: row.problem,
-        solution: row.solution,
+        problem: renderer.preprocess(row.problem),
+        solution: renderer.preprocess(row.solution),
       };
     });
     res.json(items);
@@ -130,8 +131,8 @@ exports.getTranscribedContentDict = (req, res) => {
       dict[row.exam].push({
         problem_num: row.problem_num,
         subproblem_num: row.subproblem_num,
-        problem: row.problem,
-        solution: row.solution,
+        problem: renderer.preprocess(row.problem),
+        solution: renderer.preprocess(row.solution),
         choices: row.choices,
       });
       return dict;

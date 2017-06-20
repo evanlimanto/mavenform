@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 
 import { preprocess } from '../../renderer';
-import { Question } from '../question';
+import { MultipleChoiceQuestion, Question } from '../question';
 
 class DashboardContentComponent extends Component {
   constructor(props) {
@@ -18,6 +18,7 @@ class DashboardContentComponent extends Component {
       problem: {
         problem: "",
         solution: "",
+        choices: "",
       },
     };
 
@@ -28,6 +29,7 @@ class DashboardContentComponent extends Component {
     const { examid, problem_num, subproblem_num } = this.state;
     const problem_content = this.refs.problem.value;
     const solution_content = this.refs.solution.value;
+    const choices_content = this.refs.choices.value;
 
     fetch('/updateProblem', {
       method: 'POST',
@@ -41,6 +43,7 @@ class DashboardContentComponent extends Component {
         subproblem_num,
         problem_content,
         solution_content,
+        choices_content,
       })
     });
 
@@ -48,6 +51,7 @@ class DashboardContentComponent extends Component {
     this.state.content.problems[id] = {
       problem: problem_content,
       solution: solution_content,
+      choices: choices_content,
     };
   }
 
@@ -70,7 +74,7 @@ class DashboardContentComponent extends Component {
     });
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate() {
 		window.renderMJ();
   }
 
@@ -78,7 +82,8 @@ class DashboardContentComponent extends Component {
     this.setState({
       problem: {
         problem: this.refs.problem.value,
-        solution: this.refs.solution.value
+        solution: this.refs.solution.value,
+        choices: this.refs.choices.value,
       }
     })
     this.updateContent();
@@ -90,6 +95,7 @@ class DashboardContentComponent extends Component {
       problem: {
         problem: this.refs.problem.value,
         solution: this.refs.solution.value,
+        choices: this.refs.choices.value,
       }
     });
   }
@@ -217,9 +223,14 @@ class DashboardContentComponent extends Component {
           <span className="contentCol">
             <textarea value={problem.solution} ref="solution" onChange={this.handleChange} />
           </span>
+          <span className="contentCol">
+            <textarea value={problem.choices} ref="choices" onChange={this.handleChange} />
+          </span>
           <br/>
           {(problem.problem !== "") ? <button onClick={() => this.saveProblem()}>Save</button> : null}
-          {(problem.problem !== "") ? <Question content={problem.problem} solution={problem.solution} /> : null}
+          {(problem.problem !== "") ? ((problem.choices) ?
+            <MultipleChoiceQuestion content={problem.problem} solutionNum={problem.solution} choices={problem.choices} /> :
+            <Question content={problem.problem} solution={problem.solution} />) : null}
         </div>
       </div>
     );

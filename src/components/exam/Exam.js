@@ -64,6 +64,8 @@ class ExamComponent extends Component {
       title: `${courseCodeToLabel(courseCode)} ${termToLabel(termCode)} ${examTypeToLabel(examType)} - ${schoolLabel} - Studyform`,
     };
 
+    const content = <ExamContent schoolCode={schoolCode} courseCode={courseCode} examTypeCode={examType} termCode={termCode} profs={profs} />
+    /*
     const content = (this.props.auth.loggedIn() || this.checkAccessCode() ? (
       <ExamContent schoolCode={schoolCode} courseCode={courseCode} examTypeCode={examType} termCode={termCode} profs={profs} />
     ) : (
@@ -81,7 +83,8 @@ class ExamComponent extends Component {
           </div>
         </div>
       </div>
-  ));
+    ));
+    */
 
     return (
       <div>
