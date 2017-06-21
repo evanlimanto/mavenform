@@ -364,7 +364,7 @@ app.post('/processTranscription', (req, res, next) => {
   const imageFiles = req.files;
 
   const pdfPath = `${school}/pdf/${course}/${exam_type}-${term}-${randomstring.generate(10)}.pdf`;
-  if (validator.isURL(pdfPath))
+  if (false && validator.isURL(pdfPath))
     http.get(pdf_link, (response) => {
       if (_.has(response, 'statusCode') && response.statusCode === 404)
         return;
