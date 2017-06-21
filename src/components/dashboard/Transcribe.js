@@ -158,7 +158,7 @@ class TranscribeComponent extends Component {
 
   upload(e) {
     e.preventDefault();
-    if (this.state.error || !this.refs.school.value || !this.refs.course.value || !this.refs.pdf.value)
+    if (this.state.error || !this.refs.school.value || !this.refs.course.value)
       return;
     const validationResult = this.validateImages();
     if (!validationResult.res)
@@ -170,8 +170,8 @@ class TranscribeComponent extends Component {
 
     const quarter = this.refs.quarter.value;
     const year = this.refs.year.value;
-    let termarr = reduce(this.props.terms, (res, item) => {
-      const code = quarter[0] + quarter[1] + toString(year).slice(2, 4);
+    const termarr = reduce(this.props.terms, (res, item) => {
+      const code = ((quarter === "other") || (year === "other")) ? ("other") : (quarter[0] + quarter[1] + toString(year).slice(2, 4));
       if (item.term_code === code) {
         return [item.term_code, item.id];
       }
@@ -271,6 +271,7 @@ class TranscribeComponent extends Component {
         {map(['spring', 'summer', 'fall', 'winter'], (quarter) => {
           return <option key={quarter} value={quarter}>{quarter}</option>;
         })}
+        <option value="other">Other</option>
       </select>
     );
 
@@ -279,6 +280,7 @@ class TranscribeComponent extends Component {
         {map(range(2010, 2018), (year) => {
           return <option key={year} value={year}>{year}</option>;
         })}
+        <option value="other">Other</option>
       </select>
     );
 

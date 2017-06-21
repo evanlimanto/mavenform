@@ -14,6 +14,7 @@ const NodeCache = require('node-cache');
 const pg = require('pg');
 const request = require('request');
 const randomstring = require('randomstring');
+const validator = require('validator');
 const yaml = require('js-yaml');
 const _ = require('lodash');
 
@@ -363,19 +364,20 @@ app.post('/processTranscription', (req, res, next) => {
   const imageFiles = req.files;
 
   const pdfPath = `${school}/pdf/${course}/${exam_type}-${term}-${randomstring.generate(10)}.pdf`;
-  http.get(pdf_link, (response) => {
-    if (_.has(response, 'statusCode') && response.statusCode === 404)
-      return;
-    const bucketFile = bucket.file(pdfPath);
-    const ws = bucketFile.createWriteStream({
-      public: true,
-      metadata: { contentType: 'application/pdf' }
-    }); 
-    ws.on('error', function(err) {
-      console.error(err);
+  if (validator.isURL(pdfPath))
+    http.get(pdf_link, (response) => {
+      if (_.has(response, 'statusCode') && response.statusCode === 404)
+        return;
+      const bucketFile = bucket.file(pdfPath);
+      const ws = bucketFile.createWriteStream({
+        public: true,
+        metadata: { contentType: 'application/pdf' }
+      }); 
+      ws.on('error', function(err) {
+        console.error(err);
+      });
+      return response.pipe(ws);
     });
-    return response.pipe(ws);
-  });
 
   const basePath = `${school}/img/${course}/${exam_type}-${term}`;
   async.forEach(imageFiles, (file, callback) => {
