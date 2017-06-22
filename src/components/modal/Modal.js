@@ -12,7 +12,6 @@ class Modal extends Component {
               <img className="modal-logo" src="/img/logo.svg" alt="modal logo" />
             </div>
             <div className="modal-content">
-              <hr className="s3"/>
               {modalContent}
               <p className="modal-error-text">{errorText}</p>
             </div>

@@ -39,7 +39,7 @@ const subjects = [
   'econ',
   'ee',
   'engin',
-  'matsci',
+  'mse',
   'math',
   'mecheng',
   'physics',
@@ -61,8 +61,8 @@ client.query(getq, (err, result) => {
       const regexp = new RegExp("<strong>(" + course + ".*?)\\.", 'g');
       while ((temp = regexp.exec(body)) !== null) {
         const code = temp[1];
-        const inq = `insert into courses (code, schoolid, subjectid) values($1, 9, $2)`;
-        client.query(inq, [code, dict[subject]], (err, result) => {
+        const inq = `insert into courses (code_label, code, schoolid, subjectid) values($1, $2, 9, $3)`;
+        client.query(inq, [_.join(_.split(code, ' '), ''), code, dict[subject]], (err, result) => {
           if (err) return console.error(err);
           console.log(result);
         });

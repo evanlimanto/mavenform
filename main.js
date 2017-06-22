@@ -139,7 +139,7 @@ app.post('/upload', (req, res) => {
 
 // Image uploads
 app.post('/uploadImage', (req, res) => {
-  if (!req.files)
+  if (!req.files || req.files.length === 0)
     return req.status(400).send('No files were uploaded.');
   const { problem_num, image_num, school, courseid, examtype, examid } = req.body;
   const file = req.files[0];
@@ -195,12 +195,11 @@ app.get('/getCourses/:schoolid', (req, res, next) => {
     },
   ], (err, result) => {
     if (err) return next(err);
-    if (result) {
-      const items = _.map(result.rows, (row) => {
-        return { id: row.id, code: row.code, name: row.name };
-      });
-      return res.json(items);
-    }
+    if (!result) return res.json({});
+    const items = _.map(result.rows, (row) => {
+      return { id: row.id, code: row.code, name: row.name };
+    });
+    return res.json(items);
   });
 });
 
@@ -255,10 +254,20 @@ app.get('/getExam/:schoolCode/:courseCode/:examTypeCode/:termCode', function(req
       client.query(getidq, [schoolCode, termCode, examTypeCode, courseCode], callback);
     },
     (result, callback) => {
+      if (result.rows.length === 0) {
+        res.json({});
+        return callback(null, null);
+      }
       const id = result.rows[0].id;
       client.query(getcontentq, [id], callback);
     }
   ], (err, result) => {
+    if (err) {
+      res.status(400).send("Error.");
+      return next(err);
+    }
+    if (!result)
+      return res.json({});
     const info = _.reduce(result.rows, (result, row) => {
       const problem_num = row.problem_num;
       const subproblem_num = row.subproblem_num;
@@ -423,6 +432,8 @@ app.post('/processTranscription', (req, res, next) => {
       client.query(getq, [course_id, exam_type_id, term_id, profs, school_id], callback)
     },
     (result, callback) => {
+      if (result.rows.length === 0)
+        return callback(null, null);
       const id = result.rows[0].id;
       async.parallel([
         (funcCallback) => async.each(imageFiles, (file, innerCallback) => {
@@ -488,6 +499,8 @@ app.get('/approveTranscription/:examid', (req, res, next) => {
         client.query(getq, [approvedExamId], callback);
       },
       (result, callback) => {
+        if (result.rows.length === 0)
+          return callback(new Error("No rows."));
         courseid = result.rows[0].courseid;
         examtype = result.rows[0].examtype;
         examid = result.rows[0].examid;
@@ -568,6 +581,8 @@ app.post('/bookmarkCourse', (req, res, next) => {
 });
 
 app.post('/applyMarketing', (req, res, next) => {
+  if (!req.files || req.files.length === 0)
+    return res.status(400).send("No resume uploaded.");
   const marketingBucket = gcs.bucket('studyform-marketing'); 
   let file = _.values(req.files)[0];
   file.name = randomstring.generate(5) + "-" + file.name;
@@ -708,6 +723,25 @@ app.get('/getMarketingApps', (req, res, next) => {
   });
 });
 
+app.post('/signup', (req, res, next) => {
+  const { access_code, username, email, password } = req.body;
+
+  const q = `select id, code, used from access_codes where code = $1`;
+  const uq = `update access_codes set used = true where id = $1`;
+  client.query(q, [access_code], (err, result) => {
+    if (err) return next(err); 
+    if (result.rows.length === 0)
+      return res.status(400).send("Invalid access code.");
+    if (result.rows[0].used)
+      return res.status(400).send("Access code already used.");
+    const row = result.rows[0];
+    return client.query(uq, [row.id], (err, result) => {
+      if (err) return next(err);
+      return res.send("Success!");
+    });
+  });
+});
+
 app.post('/changePassword', (req, res, next) => {
   const { email } = req.body;
   const options = {
@@ -725,20 +759,6 @@ app.post('/changePassword', (req, res, next) => {
   request(options, function (err, response, body) {
     if (err) return next(err);
     return res.send("Success!");
-  });
-});
-
-app.get('/getCourseAccessCode/:schoolCode/:courseCode', (req, res, next) => {
-  const { courseCode, schoolCode } = req.params;
-
-  const getq = `
-    select courses.access_code from courses
-    inner join schools on schools.id = courses.schoolid
-    where schools.code = $1 and courses.code = $2
-  `;
-  client.query(getq, [schoolCode, courseCode], (err, result) => {
-    if (err) return next(err);
-    return res.json(hash(result.rows[0].access_code));
   });
 });
 

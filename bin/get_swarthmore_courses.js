@@ -59,7 +59,7 @@ client.query(getq, (err, result) => {
       while ((temp = regex.exec(body)) !== null) {
         const item = temp[1];
         const inq = `insert into courses (code, code_label, schoolid, subjectid) values ($1, $2, 54, $3)`;
-        client.query(inq, [_.join(_.split(code, ' ')), item, dict[code]], (err, result) => {
+        client.query(inq, [_.join(_.split(item, ' ')), item, dict[subject]], (err, result) => {
           if (err) return console.error(err);
           else return console.log(result);
         });

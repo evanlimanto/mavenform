@@ -4,24 +4,41 @@ import { connect } from 'react-redux';
 import { has, map, toString } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 import cookies from 'browser-cookies';
+import isEmail from 'validator/lib/isEmail';
+import isEmpty from 'validator/lib/isEmpty';
 
 import { courseCodeToLabel } from '../../utils';
 import { examClickEvent } from '../../events';
 import Footer from '../footer';
+import Modal from '../modal';
 import Navbar from '../navbar';
 
 const hash = require('string-hash');
+const req = require('superagent');
 
 class CourseComponent extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      exams: [] 
+      exams: [],
+      modalError: null,
+      signUpModalError: null,
+      modal: true,
     };
 
-    this.checkAccessCode = this.checkAccessCode.bind(this);
-    this.updateAccessCode = this.updateAccessCode.bind(this);
+    this.signup = this.signup.bind(this);
+    this.setModalError = this.setModalError.bind(this);
+    this.hideSignupModal = this.hideSignupModal.bind(this);
+    this.showSignupModal = this.showSignupModal.bind(this);
+  }
+
+  hideSignupModal() {
+    this.setState({ modal: false });
+  }
+
+  showSignupModal() {
+    this.setState({ modal: true });
   }
 
   componentDidMount() {
@@ -29,31 +46,32 @@ class CourseComponent extends Component {
     fetch(`/getCourseExams/${schoolCode}/${courseCode}`).then(
       (response) => response.json()
     ).then((json) => this.setState({ exams: json }));
-
-    fetch(`/getCourseAccessCode/${schoolCode}/${courseCode}`).then(
-      (response) => response.json()
-    ).then((json) => this.setState({ hashedCode: json }));
   }
 
-  checkAccessCode() {
-    const hashedCode = this.state.hashedCode;
-    const { schoolCode, courseCode } = this.props;
-    const cookiePath = schoolCode + '-' + courseCode;
-    const storedAccessCode = cookies.get(cookiePath);
-    if (storedAccessCode) {
-      if (toString(storedAccessCode) === toString(hashedCode))
-        return true;
-      return false;
-    }
-    return false;
+  setModalError(text) {
+    this.setState({ modalError: text }); 
   }
 
-  updateAccessCode() {
-    const accessCode = this.refs.access_code.value;
-    const { schoolCode, courseCode } = this.props;
-    const cookiePath = schoolCode + '-' + courseCode;
-    cookies.set(cookiePath, toString(hash(accessCode)), { expires: 7 }); 
-    window.location.reload();
+  signup(e) {
+    e.preventDefault();
+
+    const access_code = this.refs.access_code.value;
+    const username = this.refs.username.value;
+    const email = this.refs.email.value;
+    const password = this.refs.password.value;
+
+    if (isEmpty(access_code) || isEmpty(username) || isEmpty(email) || isEmpty(password))
+      return this.setState({ signUpModalError: "Fill in all fields." });
+
+    if (!isEmail(email))
+      return this.setstate({ signUpModalError: "Enter a valid email." });
+
+    req.post('/signup')
+      .send({ access_code })
+      .end((err, res) => {
+        if (err || !res.ok) return this.setState({ signUpModalError: res.text });
+        else return this.props.auth.signup(email, username, password);
+      });
   }
 
   render() {
@@ -81,7 +99,22 @@ class CourseComponent extends Component {
       title: `${courseCodeToLabel(courseCode)} - ${schoolLabel} - Studyform`,
     };
 
-    const content = (this.props.auth.loggedIn() || this.checkAccessCode() ? (
+    const modalContent = (
+      <span>
+        <div className="access-code-signup">Sign up with your Access Code to access content.</div>
+        <input className="login-info" type="text" placeholder="Access Code" ref="access_code" autoComplete="on" />
+        <hr className="s1" />
+        <input className="login-info" type="text" placeholder="Username" ref="username" autoComplete="on" />
+        <hr className="s1" />
+        <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="email" />
+        <hr className="s1" />
+        <input className="login-info" type="password" placeholder="Password" ref="password" autoComplete="on" />
+        <hr className="s2" />
+        <a className="login-button blue" onClick={(e) => this.signup(e)}>Sign Up</a>
+      </span>
+    );
+
+    const content = this.props.auth.loggedIn() ? (
       <div>
         <h4 className="center">{courseCodeToLabel(courseCode)}</h4>
         <div className="center">
@@ -111,22 +144,39 @@ class CourseComponent extends Component {
       </div>
     ) : (
       <div>
-        <div>
-          <h4 className="center">Login or input access code to view content for {courseCodeToLabel(courseCode)}.</h4>
-          <hr className="s2" />
-          <div className="center">
-            <input className="access-code-input" type="text" placeholder="Access Code" ref="access_code" />
-            <hr className="s2" />
-            <input type="button" className="blue access-code-btn" onClick={this.updateAccessCode} value="Access" />
+        <h4 className="center">{courseCodeToLabel(courseCode)}</h4>
+        <div className="center">
+          <h5>Index of resources</h5>
+        </div>
+        <hr className="s4" />
+        <div className="center">
+          <div className="table-container-container">
+            <div className="table-container">
+              <table className="exams center">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Term</th>
+                    <th>Instructors</th>
+                    <th>Studyform</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td colSpan="4" className="course-signup-td"><a onClick={this.showSignupModal} className="course-signup-link">Sign up</a> with your Access Code to access content.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
+          <hr className="margin" />
         </div>
       </div>
-    ));
+    );
 
     return (
       <div>
         <DocumentMeta {...meta} />
         <Navbar schoolCode={schoolCode} courseCode={courseCode} />
+        {(this.state.modal) ? <Modal modalContent={modalContent} errorText={this.state.modalError} closeModal={this.hideSignupModal} errorText={this.state.signUpModalError} /> : null}
         {content}
         <Footer />
       </div>

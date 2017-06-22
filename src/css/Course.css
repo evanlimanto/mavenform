@@ -1,18 +1,24 @@
-.access-code-input {
-  display: block;
-  margin: 0 auto;
-  padding: 10px 12px;
-  background: #fff;
-  font-family: 'Lato', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  color: #666;
-  border-radius: 5px;
-  border: 2px solid grey;
+.access-code-signup {
   text-align: center;
+  margin: 15px 0px;
+  color: grey;
 }
 
-.access-code-btn {
-  padding: 10px 75px 12px !important;
-  margin-right: 0px !important;
+a.course-signup-link {
+  border-bottom: 2px solid grey !important;
+  text-align: center !important;
+  padding: 0px !important;
+  display: inline !important;
+  font-size: 24px;
+}
+
+a.course-signup-link:hover {
+  color: #11aacc !important;
+  border-bottom: 2px solid #11aacc !important;
+}
+
+td.course-signup-td {
+  font-size: 24px;
+  text-align: center;
+  padding: 50px 10px;
 }

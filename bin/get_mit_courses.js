@@ -18,7 +18,7 @@ client.connect();
 const courses = [
   'civeng',
   'mecheng',
-  'matsci',
+  'mse',
   'chem',
   'eecs',
   'bio',
@@ -57,8 +57,8 @@ client.query(getq, (err, result) => {
       const regexp = new RegExp("<h3>(.*?) ", "g");
       while ((temp = regexp.exec(body)) !== null) {
         const code = temp[1];
-        const inq = `insert into courses (code, schoolid, subjectid) values($1, 24, $2)`;
-        client.query(inq, [code, dict[course]], (err, result) => {
+        const inq = `insert into courses (code, code_label, schoolid, subjectid) values($1, $2, 24, $3)`;
+        client.query(inq, [_.join(_.split(code, ' '), ''), code, dict[course]], (err, result) => {
           if (err) console.error(err);
           else console.log(result);
         });
