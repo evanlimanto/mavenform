@@ -150,7 +150,7 @@ class NavbarComponent extends Component {
         modalContent = (
           <span>
             <hr className="s3" />
-            <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="email"/>
+            <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="off"/>
             <hr className="s2" />
             <a className="login-button blue" onClick={this.waitlist}>Get Early Access</a>
           </span>
@@ -165,9 +165,9 @@ class NavbarComponent extends Component {
         modalContent = (
           <span>
             <hr className="s3" />
-            <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="email"/>
+            <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="off"/>
             <hr className="s1" />
-            <input className="login-info" type="password" placeholder="Password" ref="password" autoComplete="on"/>
+            <input className="login-info" type="password" placeholder="Password" ref="password" autoComplete="off"/>
             <hr className="s2" />
             <p className="forgot-pass">
               <Link className="forgot-pass" to="/forgotpassword">Don't remember your password?</Link>
