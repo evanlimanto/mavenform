@@ -20,6 +20,11 @@
 }
 
 @media (max-width: 1000px) {
+  .search-container {
+    padding: 20px;
+    display: block;
+  }
+
   .desktop-logo {
     display: none;
   }
@@ -52,6 +57,63 @@
 @media (max-width: 899px) {
   .nav {
     padding: 0 10px;
+  }
+
+  .home-search {
+    position: absolute;
+    width: 20px;
+  }
+
+  .home-icon {
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .home-search:focus {
+    width: 210px;
+    z-index: 2;
+    background: #11aacc;
+    box-shadow: 0 0 10px 10px #11aacc;
+    opacity: 0.9;
+    border-radius: 5px;
+  }
+
+  .nav-search {
+    position: absolute;
+    width: 100px;
+  }
+
+  .nav-search:focus {
+    width: 210px;
+    z-index: 2;
+  }
+
+  .nav-results {
+    top: 50px;
+    position: absolute;
+    width: 210px;
+  }
+
+  .search-container input {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+
+  .search-container .early-access {
+    margin-bottom: 50px;
+  }
+
+  .banner-screen, .search-link {
+    display: none;
+  }
+
+  .home-search-container .nav-results {
+    position: absolute;
+    z-index: 2;
+    top: 50px;
+    width: 210px;
   }
 
   .app-mode {
