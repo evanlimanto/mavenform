@@ -24,7 +24,7 @@ class CourseComponent extends Component {
       exams: [],
       modalError: null,
       signUpModalError: null,
-      modal: true,
+      modal: false,
     };
 
     this.signup = this.signup.bind(this);
@@ -98,19 +98,18 @@ class CourseComponent extends Component {
       description: `Find interactive ${courseCodeToLabel(courseCode)} past midterms and finals from ${schoolLabel} here.`,
       title: `${courseCodeToLabel(courseCode)} - ${schoolLabel} - Studyform`,
     };
-
+    const infoContent = (
+      <div className="login-helper">
+        <span> Already got an access code? </span>
+        <a> Sign up! </a>
+      </div>
+    );
     const modalContent = (
       <span>
-        <div className="access-code-signup">Sign up with your Access Code to access content.</div>
-        <input className="login-info" type="text" placeholder="Access Code" ref="access_code" autoComplete="on" />
-        <hr className="s1" />
-        <input className="login-info" type="text" placeholder="Username" ref="username" autoComplete="on" />
-        <hr className="s1" />
-        <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="email" />
-        <hr className="s1" />
-        <input className="login-info" type="password" placeholder="Password" ref="password" autoComplete="on" />
+        <hr className="s3" />
+        <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="email"/>
         <hr className="s2" />
-        <a className="login-button blue" onClick={(e) => this.signup(e)}>Sign Up</a>
+        <a className="login-button blue" onClick={this.waitlist}>Get Early Access</a>
       </span>
     );
 
@@ -162,7 +161,7 @@ class CourseComponent extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td colSpan="4" className="course-signup-td"><a onClick={this.showSignupModal} className="course-signup-link">Sign up</a> with your Access Code to access content.</td></tr>
+                  <tr><td colSpan="4" className="course-signup-td"><a onClick={this.showSignupModal} className="course-signup-link">Get early access</a> or <a className="course-signup-link">log in</a> to unlock all interactive study resources.</td></tr>
                 </tbody>
               </table>
             </div>
@@ -176,7 +175,7 @@ class CourseComponent extends Component {
       <div>
         <DocumentMeta {...meta} />
         <Navbar schoolCode={schoolCode} courseCode={courseCode} />
-        {(this.state.modal) ? <Modal modalContent={modalContent} errorText={this.state.modalError} closeModal={this.hideSignupModal} errorText={this.state.signUpModalError} /> : null}
+        {(this.state.modal) ? <Modal infoContent={infoContent} modalContent={modalContent} errorText={this.state.modalError} closeModal={this.hideSignupModal} errorText={this.state.signUpModalError} /> : null}
         {content}
         <Footer />
       </div>

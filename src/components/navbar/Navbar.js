@@ -143,8 +143,8 @@ class NavbarComponent extends Component {
       if (this.state.modal === 'waitlist') {
         infoContent = (
           <div className="login-helper">
-            <span> Have an account? </span>
-            <a onClick={this.showLoginModal}> Login! </a>
+            <span> Already got an access code? </span>
+            <a> Sign up! </a>
           </div>
         );
         modalContent = (
@@ -159,7 +159,7 @@ class NavbarComponent extends Component {
         infoContent = (
           <div className="login-helper">
             <span> Don't have an account? </span>
-            <a onClick={this.showWaitlistModal}> Get Early Access </a>
+            <a onClick={this.showWaitlistModal}> Get early access! </a>
           </div>
         );
         modalContent = (
