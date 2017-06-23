@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { forEach, reduce, keys, has, map, sortBy, split, toInteger, takeRight } from 'lodash';
+import { reduce, keys, has, map, sortBy, toInteger, takeRight } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 
 import Footer from '../footer';
 import Navbar from '../navbar';
 import NotFound from '../notfound';
 import { courseClickEvent } from '../../events';
-import { normalizeCourseCode } from '../../utils';
 
 class SchoolComponent extends Component {
   constructor(props) {

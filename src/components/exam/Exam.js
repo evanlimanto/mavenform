@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
-import { has, toString } from 'lodash';
-import cookies from 'browser-cookies';
+import { has } from 'lodash';
 
 import { courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
 import ExamContent from './ExamContent';

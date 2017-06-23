@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import DocumentMeta from 'react-document-meta';
-import { endsWith, map, toLower, join, split } from 'lodash';
+import { endsWith, map } from 'lodash';
 import Footer from '../footer';
 import Navbar from '../navbar';
 import { schoolClickEvent } from '../../events';
-import { algoliaCourseIndex } from '../../utils';
 import isEmail from 'validator/lib/isEmail';
 
 const request = require('superagent');
@@ -29,7 +27,6 @@ class HomeComponent extends Component {
       waitlistErorr: null,
     };
 
-    this.getSuggestions = this.getSuggestions.bind(this);
     this.waitlist = this.waitlist.bind(this);
   }
 
@@ -37,33 +34,6 @@ class HomeComponent extends Component {
     if (this.props.auth.loggedIn()) {
       this.props.history.push('/home'); 
     }
-  }
-
-  getSuggestions() {
-    const queryStr = this.refs.search.value;
-    if (queryStr.length === 0) {
-      this.setState({
-        suggestions: []
-      });
-      return;
-    }
-    algoliaCourseIndex.search({
-      query: queryStr,
-      length: 4,
-      offset: 0,
-    }, (err, content) => {
-      const suggestions = map(content.hits, (hit) => {
-        return {
-          school_code: hit.school_code,
-          school_name: hit.school_name,
-          school_name_highlighted: hit._highlightResult.school_name.value,
-          code: hit.code,
-          code_highlighted: hit._highlightResult.code.value,
-          name_highlighted: hit._highlightResult.name.value,
-        };
-      });
-      this.setState({ suggestions });
-    });
   }
 
   waitlist(e) {
@@ -96,18 +66,6 @@ class HomeComponent extends Component {
         </Link> 
       );
     });
-    const suggestions = this.state.suggestions;
-    const searchResults = (suggestions && suggestions.length > 0) ? (
-      <div className="results-container">
-        <div className="results">
-          {map(suggestions, (suggestion, index) => {
-            const aClass = classnames({ bottom: index === suggestions.length - 1 });
-            const suggestionText = `${suggestion.school_name_highlighted} - ${suggestion.code_highlighted}`;
-            return <Link key={index} to={`/${suggestion.school_code}/${join(split(toLower(suggestion.code), ' '), '')}`} className={aClass} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
-          })}
-        </div>
-      </div>
-    ) : null;
 
     return (
       <div className="home">

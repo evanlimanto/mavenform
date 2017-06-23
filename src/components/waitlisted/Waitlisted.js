@@ -15,16 +15,15 @@ class Waitlisted extends Component {
     return (
       <div className="school">
         <DocumentMeta {...meta} />
-        <Navbar />
+        <Navbar waitlisted={true} />
         <div className="container">
           <div className="center">
-            <h4>Thanks for signing up! We'll be in touch shortly.</h4>
+            <p className="waitlisted-message">Thanks for signing up! We'll be in touch shortly.</p>
           </div>
         </div>
         <Footer />
       </div>
     );
-    return <h1>Waitlisted!</h1>;
   }
 }
 

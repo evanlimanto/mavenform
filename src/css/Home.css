@@ -308,3 +308,9 @@
 .results em {
   text-decoration: underline;
 }
+
+p.waitlisted-message {
+  font-size: 28px;
+  color: grey;
+  padding: 180px 0px 10px;
+}

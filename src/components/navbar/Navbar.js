@@ -8,7 +8,7 @@ import isEmpty from 'validator/lib/isEmpty';
 import Modal from '../modal';
 import { algoliaCourseIndex, courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
 
-const request = require('superagent');
+const req = require('superagent');
 
 class NavbarComponent extends Component {
   constructor(props) {
@@ -23,12 +23,36 @@ class NavbarComponent extends Component {
 
     this.closeModal = this.closeModal.bind(this);
     this.showLoginModal = this.showLoginModal.bind(this);
+    this.showSignupModal = this.showSignupModal.bind(this);
     this.showWaitlistModal = this.showWaitlistModal.bind(this);
     this.getSuggestions = this.getSuggestions.bind(this);
     this.toggleProfileDropdown = this.toggleProfileDropdown.bind(this);
     this.setModalError = this.setModalError.bind(this);
     this.waitlist = this.waitlist.bind(this);
     this.login = this.login.bind(this);
+    this.signup = this.signup.bind(this);
+  }
+
+  signup(e) {
+    e.preventDefault();
+
+    const access_code = this.refs.access_code.value;
+    const username = this.refs.username.value;
+    const email = this.refs.email.value;
+    const password = this.refs.password.value;
+
+    if (isEmpty(access_code) || isEmpty(username) || isEmpty(email) || isEmpty(password))
+        return this.setState({ modalError: "Fill in all fields." });
+
+    if (!isEmail(email))
+        return this.setstate({ modalError: "Enter a valid email." });
+
+    req.post('/signup')
+      .send({ access_code })
+      .end((err, res) => {
+        if (err || !res.ok) return this.setState({ modalError: res.text });
+        else return this.props.auth.signup(email, username, password);
+      });
   }
 
   componentDidMount() {
@@ -76,6 +100,13 @@ class NavbarComponent extends Component {
     });
   }
 
+  showSignupModal() {
+    this.setState({
+      modal: 'signup',
+      modalError: null,
+    });
+  }
+
   getSuggestions() {
     const queryStr = this.refs.search.value;
     if (queryStr.length === 0) {
@@ -107,8 +138,7 @@ class NavbarComponent extends Component {
     if (!isEmail(email))
       return this.setModalError('Invalid or empty email.');
     this.setModalError(null);
-    request
-      .post("/addToWaitlist")
+    req.post("/addToWaitlist")
       .send({ email })
       .end((err, res) => {
         if (err || !res.ok) this.setModalError("Waitlist failed.");
@@ -143,8 +173,8 @@ class NavbarComponent extends Component {
       if (this.state.modal === 'waitlist') {
         infoContent = (
           <div className="login-helper">
-            <span> Already got an access code? </span>
-            <a> Sign up! </a>
+            <span> Already have an access code? </span>
+            <a onClick={this.showSignupModal}> Sign up! </a>
           </div>
         );
         modalContent = (
@@ -174,6 +204,21 @@ class NavbarComponent extends Component {
             </p>
             <hr className="s2" />
             <a className="login-button blue" onClick={this.login}>Log In</a>
+          </span>
+        );
+      } else if (this.state.modal === 'signup') {
+        modalContent = (
+          <span>
+            <div className="access-code-signup">Sign up with your Access Code to access content.</div>
+            <input className="login-info" type="text" placeholder="Access Code" ref="access_code" autoComplete="on" />
+            <hr className="s1" />
+            <input className="login-info" type="text" placeholder="Username" ref="username" autoComplete="on" />
+            <hr className="s1" />
+            <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="email" />
+            <hr className="s1" />
+            <input className="login-info" type="password" placeholder="Password" ref="password" autoComplete="on" />
+            <hr className="s2" />
+            <a className="login-button blue" onClick={this.signup}>Sign Up</a>
           </span>
         );
       }
@@ -249,7 +294,7 @@ class NavbarComponent extends Component {
           <div className="gray-nav">
             <div className="container">
               {navbarNav}
-              <a className="utility-button" href={url} target="_blank">View Source</a>
+              <a className="utility-button" href={url} target="_blank" rel="noopener noreferrer">View Source</a>
             </div>
           </div>
         );
@@ -263,6 +308,9 @@ class NavbarComponent extends Component {
         );
       }
     }
+
+    if (this.props.waitlisted)
+        navbarNav = null;
 
     return (
       <div>

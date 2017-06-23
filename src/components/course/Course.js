@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { has, map, toString } from 'lodash';
+import { has, map } from 'lodash';
 import DocumentMeta from 'react-document-meta';
-import cookies from 'browser-cookies';
 import isEmail from 'validator/lib/isEmail';
 import isEmpty from 'validator/lib/isEmpty';
 
@@ -13,7 +12,6 @@ import Footer from '../footer';
 import Modal from '../modal';
 import Navbar from '../navbar';
 
-const hash = require('string-hash');
 const req = require('superagent');
 
 class CourseComponent extends Component {
@@ -23,22 +21,58 @@ class CourseComponent extends Component {
     this.state = {
       exams: [],
       modalError: null,
-      signUpModalError: null,
-      modal: false,
+      modal: null,
     };
 
     this.signup = this.signup.bind(this);
+    this.login = this.login.bind(this);
+    this.waitlist = this.waitlist.bind(this);
     this.setModalError = this.setModalError.bind(this);
-    this.hideSignupModal = this.hideSignupModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+    this.showLoginModal = this.showLoginModal.bind(this);
     this.showSignupModal = this.showSignupModal.bind(this);
+    this.showWaitlistModal = this.showWaitlistModal.bind(this);
   }
 
-  hideSignupModal() {
-    this.setState({ modal: false });
+  login() {
+    const email = this.refs.email.value;
+    const password = this.refs.password.value;
+    if (!isEmail(email))
+      return this.setModalError('Invalid or empty email.');
+    if (isEmpty(password))
+      return this.setModalError('Empty password.');
+    this.setModalError(null);
+    this.props.auth.login(email, password, this.setModalError);
+  }
+
+  waitlist() {
+    const email = this.refs.email.value;
+    if (!isEmail(email))
+      return this.setModalError('Invalid or empty email.');
+    this.setModalError(null);
+    req.post("/addToWaitlist")
+      .send({ email })
+      .end((err, res) => {
+        if (err || !res.ok) this.setModalError("Waitlist failed.");
+        else window.location = "/waitlisted";
+        return;
+      });
+  }
+
+  hideModal() {
+    this.setState({ modal: null, modalError: null });
   }
 
   showSignupModal() {
-    this.setState({ modal: true });
+    this.setState({ modal: 'signup', modalError: null });
+  }
+
+  showWaitlistModal() {
+    this.setState({ modal: 'waitlist', modalError: null });
+  }
+
+  showLoginModal() {
+    this.setState({ modal: 'login', modalError: null });
   }
 
   componentDidMount() {
@@ -61,15 +95,15 @@ class CourseComponent extends Component {
     const password = this.refs.password.value;
 
     if (isEmpty(access_code) || isEmpty(username) || isEmpty(email) || isEmpty(password))
-      return this.setState({ signUpModalError: "Fill in all fields." });
+      return this.setState({ modalError: "Fill in all fields." });
 
     if (!isEmail(email))
-      return this.setstate({ signUpModalError: "Enter a valid email." });
+      return this.setstate({ modalError: "Enter a valid email." });
 
     req.post('/signup')
       .send({ access_code })
       .end((err, res) => {
-        if (err || !res.ok) return this.setState({ signUpModalError: res.text });
+        if (err || !res.ok) return this.setState({ modalError: res.text });
         else return this.props.auth.signup(email, username, password);
       });
   }
@@ -85,10 +119,10 @@ class CourseComponent extends Component {
       const url = `/${schoolCode}/${courseCode}/${typeCode}/${termCode}`;
       return (
         <tr key={key} className="available" onClick={() => examClickEvent(schoolCode, courseCode, typeCode, termCode)}>
-          <td><Link to={url}>{typeLabel}</Link></td>
-          <td><Link to={url}>{termLabel}</Link></td>
-          <td><Link to={url}>{profs}</Link></td>
-          <td><h6><Link to={url} className="table-link">CLICK TO VIEW &#8594;</Link></h6></td>
+        <td><Link to={url}>{typeLabel}</Link></td>
+        <td><Link to={url}>{termLabel}</Link></td>
+        <td><Link to={url}>{profs}</Link></td>
+        <td><h6><Link to={url} className="table-link">CLICK TO VIEW &#8594;</Link></h6></td>
         </tr>
       );
     });
@@ -98,86 +132,125 @@ class CourseComponent extends Component {
       description: `Find interactive ${courseCodeToLabel(courseCode)} past midterms and finals from ${schoolLabel} here.`,
       title: `${courseCodeToLabel(courseCode)} - ${schoolLabel} - Studyform`,
     };
-    const infoContent = (
-      <div className="login-helper">
-        <span> Already got an access code? </span>
-        <a> Sign up! </a>
+    const content = this.props.auth.loggedIn() ? (
+      <div>
+      <h4 className="center">{courseCodeToLabel(courseCode)}</h4>
+      <div className="center">
+      <h5>Index of resources</h5>
+      </div>
+      <hr className="s4" />
+      <div className="center">
+      <div className="table-container-container">
+      <div className="table-container">
+      <table className="exams center">
+      <thead>
+      <tr>
+      <th>Type</th>
+      <th>Term</th>
+      <th>Instructors</th>
+      <th>Studyform</th>
+      </tr>
+      </thead>
+      <tbody>
+      {available}
+      </tbody>
+      </table>
+      </div>
+      </div>
+      <hr className="margin" />
+      </div>
+      </div>
+    ) : (
+      <div>
+      <h4 className="center">{courseCodeToLabel(courseCode)}</h4>
+      <div className="center">
+      <h5>Index of resources</h5>
+      </div>
+      <hr className="s4" />
+      <div className="center">
+      <div className="table-container-container">
+      <div className="table-container">
+      <table className="exams center">
+      <thead>
+      <tr>
+      <th>Type</th>
+      <th>Term</th>
+      <th>Instructors</th>
+      <th>Studyform</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr><td colSpan="4" className="course-signup-td"><a onClick={this.showWaitlistModal} className="course-signup-link">Get early access</a> or <a className="course-signup-link" onClick={this.showLoginModal}>log in</a> to unlock all interactive study resources.</td></tr>
+      </tbody>
+      </table>
+      </div>
+      </div>
+      <hr className="margin" />
+      </div>
       </div>
     );
-    const modalContent = (
-      <span>
+
+    let infoContent = null, modalContent = null;
+    if (this.state.modal === 'waitlist') {
+      infoContent = (
+        <div className="login-helper">
+        <span> Already have an access code? </span>
+        <a onClick={this.showSignupModal}> Sign up! </a>
+        </div>
+      );
+      modalContent = (
+        <span>
         <hr className="s3" />
         <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="off"/>
         <hr className="s2" />
         <a className="login-button blue" onClick={this.waitlist}>Get Early Access</a>
-      </span>
-    );
-
-    const content = this.props.auth.loggedIn() ? (
-      <div>
-        <h4 className="center">{courseCodeToLabel(courseCode)}</h4>
-        <div className="center">
-          <h5>Index of resources</h5>
+        </span>
+      );
+    } else if (this.state.modal === 'signup') {
+      modalContent = (
+        <span>
+          <div className="access-code-signup">Sign up with your Access Code to access content.</div>
+          <input className="login-info" type="text" placeholder="Access Code" ref="access_code" autoComplete="on" />
+          <hr className="s1" />
+          <input className="login-info" type="text" placeholder="Username" ref="username" autoComplete="on" />
+          <hr className="s1" />
+          <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="email" />
+          <hr className="s1" />
+          <input className="login-info" type="password" placeholder="Password" ref="password" autoComplete="on" />
+          <hr className="s2" />
+          <a className="login-button blue" onClick={this.signup}>Sign Up</a>
+        </span>
+      );
+    } else if (this.state.modal === 'login') {
+      infoContent = (
+        <div className="login-helper">
+          <span> Don't have an account? </span>
+          <a onClick={this.showWaitlistModal}> Get early access! </a>
         </div>
-        <hr className="s4" />
-        <div className="center">
-          <div className="table-container-container">
-            <div className="table-container">
-              <table className="exams center">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Term</th>
-                    <th>Instructors</th>
-                    <th>Studyform</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {available}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <hr className="margin" />
-        </div>
-      </div>
-    ) : (
-      <div>
-        <h4 className="center">{courseCodeToLabel(courseCode)}</h4>
-        <div className="center">
-          <h5>Index of resources</h5>
-        </div>
-        <hr className="s4" />
-        <div className="center">
-          <div className="table-container-container">
-            <div className="table-container">
-              <table className="exams center">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Term</th>
-                    <th>Instructors</th>
-                    <th>Studyform</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td colSpan="4" className="course-signup-td"><a onClick={this.showSignupModal} className="course-signup-link">Get early access</a> or <a className="course-signup-link">log in</a> to unlock all interactive study resources.</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <hr className="margin" />
-        </div>
-      </div>
-    );
+      );
+      modalContent = (
+        <span>
+          <hr className="s3" />
+          <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="off"/>
+          <hr className="s1" />
+          <input className="login-info" type="password" placeholder="Password" ref="password" autoComplete="off"/>
+          <hr className="s2" />
+          <p className="forgot-pass">
+            <Link className="forgot-pass" to="/forgotpassword">Don't remember your password?</Link>
+          </p>
+          <hr className="s2" />
+          <a className="login-button blue" onClick={this.login}>Log In</a>
+        </span>
+      );
+    }
 
     return (
       <div>
-        <DocumentMeta {...meta} />
-        <Navbar schoolCode={schoolCode} courseCode={courseCode} />
-        {(this.state.modal) ? <Modal infoContent={infoContent} modalContent={modalContent} errorText={this.state.modalError} closeModal={this.hideSignupModal} errorText={this.state.signUpModalError} /> : null}
-        {content}
-        <Footer />
+      <DocumentMeta {...meta} />
+      <Navbar schoolCode={schoolCode} courseCode={courseCode} />
+      {(this.state.modal) ? <Modal infoContent={infoContent} modalContent={modalContent} errorText={this.state.modalError} closeModal={this.hideModal} /> : null}
+      {content}
+      <Footer />
       </div>
     );
   }
