@@ -107,7 +107,7 @@ class CourseComponent extends Component {
     const modalContent = (
       <span>
         <hr className="s3" />
-        <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="email"/>
+        <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="off"/>
         <hr className="s2" />
         <a className="login-button blue" onClick={this.waitlist}>Get Early Access</a>
       </span>
