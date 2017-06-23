@@ -479,19 +479,17 @@ app.get('/approveTranscription/:examid', (req, res, next) => {
     (callback) => client.query(imageq, [approvedExamId], (err, result) =>
       async.each(result.rows, (row, eachCallback) => {
         const sourceFile = stagingBucket.file(row.url);
-        async.waterfall([
-          (innerCallback) => {
-            sourceFile.move(bucket, innerCallback)
-          },
-          (destFile, resp, innerCallback) => {
-            destFile.makePublic((err) => innerCallback(err))
-          }
-        ], eachCallback)
+        return sourceFile.exists((err, exists) => {
+          if (exists)
+            return async.waterfall([
+              (innerCallback) => sourceFile.move(bucket, innerCallback),
+              (destFile, resp, innerCallback) => destFile.makePublic((err) => innerCallback(err))
+            ], eachCallback)
+          else return eachCallback(null);
+        });
       }, callback)
     ),
-    (callback) => {
-      client.query(delimageq, [approvedExamId], (err) => callback(err));
-    }
+    (callback) => client.query(delimageq, [approvedExamId], (err) => callback(err))
   ], (err) => {
     if (err) next(err);
     async.waterfall([
