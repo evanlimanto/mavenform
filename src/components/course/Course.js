@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { has, map } from 'lodash';
 import DocumentMeta from 'react-document-meta';
+import cookies from 'browser-cookies';
 import isEmail from 'validator/lib/isEmail';
 import isEmpty from 'validator/lib/isEmpty';
 
@@ -73,7 +74,10 @@ class CourseComponent extends Component {
       .send({ email })
       .end((err, res) => {
         if (err || !res.ok) this.setModalError("Waitlist failed.");
-        else window.location = "/waitlisted";
+        else {
+          cookies.set('waitlist_email', email, { expires: 1 });
+          window.location = "/waitlisted";
+        }
         return;
       });
   }

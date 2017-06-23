@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import DocumentMeta from 'react-document-meta';
 import { endsWith, map } from 'lodash';
+import cookies from 'browser-cookies';
 import Footer from '../footer';
 import Navbar from '../navbar';
 import { schoolClickEvent } from '../../events';
@@ -50,7 +51,10 @@ class HomeComponent extends Component {
       .send({ email })
       .end((err, res) => {
         if (err || !res.ok) this.setState({ waitlistError: "Waitlist failed." });
-        else document.location = "/waitlisted";
+        else {
+          cookies.set('waitlist_email', email, { expires: 1 });
+          document.location = "/waitlisted";
+        }
         return;
       });
   }
@@ -78,7 +82,7 @@ class HomeComponent extends Component {
             <hr className="s2" />
             <h5 className="h5-alt">The ultimate bank of interactive and course-specific study resources</h5>
             <div className="search-container">
-              <input className="search" name="search" placeholder="Enter school email address" type="text" autoComplete="off" ref="email"/>
+              <input className="search" name="search" placeholder="Enter your college email" type="text" autoComplete="off" ref="email"/>
               <input className="early-access" type="submit" value="Get Early Access" onClick={(e) => this.waitlist(e)} />
             </div>
             <p className="home-error">{this.state.waitlistError}</p>

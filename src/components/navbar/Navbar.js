@@ -2,6 +2,7 @@ import React, { Component } from 'react'; import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { has, map, toLower } from 'lodash';
 import classnames from 'classnames';
+import cookies from 'browser-cookies';
 import isEmail from 'validator/lib/isEmail';
 import isEmpty from 'validator/lib/isEmpty';
 
@@ -156,7 +157,10 @@ class NavbarComponent extends Component {
       .send({ email })
       .end((err, res) => {
         if (err || !res.ok) this.setModalError("Waitlist failed.");
-        else window.location = "/waitlisted";
+        else {
+          cookies.set('waitlist_email', email, { expires: 1 });
+          window.location = "/waitlisted";
+        }
         return;
       });
   }

@@ -650,35 +650,6 @@ app.post('/deleteCourse', (req, res, next) => {
   });
 });
 
-app.post('/addToWaitlist', (req, res, next) => {
-  const { email } = req.body;
-  const q = `insert into waitlist (email) values ($1)`;
-
-  const options = {
-    method: 'POST',
-    url: 'https://us16.api.mailchimp.com/3.0/lists/bf5797b1e4',
-    auth: {
-      'user': 'anystring',
-      'pass': 'e2480866e411bcc372882f3bb98f4483-us16',
-    },
-    json: {
-      members: [{
-        email_address: email,
-        status: 'subscribed',
-      }],
-      update_existing: true,
-    }
-  };
-
-  async.parallel([
-    (callback) => client.query(q, [email], (err) => callback(err)),
-    (callback) => request(options, (err) => callback(err)),
-  ], (err) => {
-    if (err) return next(err);
-    return res.send("Success!");
-  });
-});
-
 app.post('/addToDiscussion', (req, res, next) => {
   const { content, parentid, userid, contentid } = req.body;
   
@@ -755,6 +726,39 @@ app.post('/changePassword', (req, res, next) => {
   };
 
   request(options, function (err, response, body) {
+    if (err) return next(err);
+    return res.send("Success!");
+  });
+});
+
+app.post('/waitlistCourses', (req, res, next) => {
+  const { email, courses } = req.body;
+
+  const q = `insert into waitlist_courses (email, courses) values($1, $2)`;
+  client.query(q, [email, courses], (err, result) => {
+    if (err) return next(err);
+    return res.send("Success!");
+  });
+});
+
+app.post('/addToWaitlist', (req, res, next) => {
+  const { email } = req.body;
+  const q = `insert into waitlist (email) values ($1)`;
+
+  const options = {
+    method: 'POST',
+    url: 'https://api.mailgun.net/v3/lists/waitlist@mg.studyform.com/members',
+    auth: {
+      user: 'api',
+      pass: 'key-55424568d6fba5e1b922f7aedb80543b',
+    },
+    form: { address: email, upsert: "yes" }
+  };
+
+  async.parallel([
+    (callback) => client.query(q, [email], (err) => callback(err)),
+    (callback) => request(options, (err) => callback(err)),
+  ], (err) => {
     if (err) return next(err);
     return res.send("Success!");
   });

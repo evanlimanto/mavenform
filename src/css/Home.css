@@ -310,7 +310,49 @@
 }
 
 p.waitlisted-message {
-  font-size: 28px;
+  font-size: 22px;
   color: grey;
-  padding: 180px 0px 10px;
+  padding: 180px 20px 0px 20px;
+  line-height: 28px;
+}
+
+.optional-courses {
+  margin: 20px 20px 0px;
+  display: inline-block;
+  width: 60%;
+}
+
+.optional-courses-btn {
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 10px 10px;
+  background-color: #11aacc;
+  color: white;
+  position: relative;
+  bottom: 12px;
+  opacity: 0.9;
+  margin: 10px 0px;
+}
+
+.optional-courses-btn:hover {
+  cursor: pointer;
+  opacity: 1.0;
+}
+
+.optional-courses-choice {
+  background-color: #11aacc;
+}
+
+.Select--multi .Select-value {
+  border: #fff;
+  color: #fff;
+  background-color: #11aacc;
+}
+
+.Select--multi .Select-value-icon {
+  border-right: 1px solid #fff;
+}
+
+.Select--multi .Select-multi-value-wrapper {
+  float: left;
 }
