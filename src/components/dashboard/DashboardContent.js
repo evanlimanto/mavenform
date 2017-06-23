@@ -47,11 +47,13 @@ class DashboardContentComponent extends Component {
     });
 
     const id = `${problem_num}_${subproblem_num}`;
-    this.state.content.problems[id] = {
+    const content = this.state.content;
+    content.problems[id] = {
       problem: problem_content,
       solution: solution_content,
       choices: choices_content,
     };
+    this.setState({ content });
   }
 
   getExam(id) {

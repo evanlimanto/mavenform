@@ -9,7 +9,7 @@ a.course-signup-link {
   text-align: center !important;
   padding: 0px !important;
   display: inline !important;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 a.course-signup-link:hover {
@@ -18,7 +18,7 @@ a.course-signup-link:hover {
 }
 
 td.course-signup-td {
-  font-size: 24px;
+  font-size: 20px;
   text-align: center;
   padding: 50px 10px;
 }

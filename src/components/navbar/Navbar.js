@@ -22,6 +22,7 @@ class NavbarComponent extends Component {
     };
 
     this.closeModal = this.closeModal.bind(this);
+    this.showForgotPasswordModal = this.showForgotPasswordModal.bind(this);
     this.showLoginModal = this.showLoginModal.bind(this);
     this.showSignupModal = this.showSignupModal.bind(this);
     this.showWaitlistModal = this.showWaitlistModal.bind(this);
@@ -31,6 +32,7 @@ class NavbarComponent extends Component {
     this.waitlist = this.waitlist.bind(this);
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
+    this.forgotPassword = this.forgotPassword.bind(this);
   }
 
   signup(e) {
@@ -52,6 +54,23 @@ class NavbarComponent extends Component {
       .end((err, res) => {
         if (err || !res.ok) return this.setState({ modalError: res.text });
         else return this.props.auth.signup(email, username, password);
+      });
+  }
+
+  forgotPassword(e) {
+    e.preventDefault();
+
+    const email = this.refs.email.value;
+    if (!isEmail(email))
+      return this.setState({ error: "Invalid email." });
+
+    this.setState({ error: null });
+    req.post("/changePassword")
+      .send({ email })
+      .end((err, res) => {
+        if (err || !res.ok) return this.setState({ error: err.body });
+        document.location = "/";
+        return;
       });
   }
 
@@ -86,25 +105,20 @@ class NavbarComponent extends Component {
     });
   }
 
-  showLoginModal() {
-    this.setState({
-      modal: 'login',
-      modalError: null,
-    });
+  showSignupModal() {
+    this.setState({ modal: 'signup', modalError: null });
   }
 
   showWaitlistModal() {
-    this.setState({
-      modal: 'waitlist',
-      modalError: null,
-    });
+    this.setState({ modal: 'waitlist', modalError: null });
   }
 
-  showSignupModal() {
-    this.setState({
-      modal: 'signup',
-      modalError: null,
-    });
+  showLoginModal() {
+    this.setState({ modal: 'login', modalError: null });
+  }
+
+  showForgotPasswordModal() {
+    this.setState({ modal: 'forgotpassword', modalError: null });
   }
 
   getSuggestions() {
@@ -200,13 +214,19 @@ class NavbarComponent extends Component {
             <input className="login-info" type="password" placeholder="Password" ref="password" autoComplete="off"/>
             <hr className="s2" />
             <p className="forgot-pass">
-              <Link className="forgot-pass" to="/forgotpassword">Don't remember your password?</Link>
+              <a className="forgot-pass" onClick={this.showForgotPasswordModal}>Don't remember your password?</a>
             </p>
             <hr className="s2" />
             <a className="login-button blue" onClick={this.login}>Log In</a>
           </span>
         );
       } else if (this.state.modal === 'signup') {
+        infoContent = (
+          <div className="login-helper">
+            <span> Don't have an access code? </span>
+            <a onClick={this.showWaitlistModal}> Sign up on our waitlist! </a>
+          </div>
+        );
         modalContent = (
           <span>
             <div className="access-code-signup">Sign up with your Access Code to access content.</div>
@@ -219,6 +239,21 @@ class NavbarComponent extends Component {
             <input className="login-info" type="password" placeholder="Password" ref="password" autoComplete="on" />
             <hr className="s2" />
             <a className="login-button blue" onClick={this.signup}>Sign Up</a>
+          </span>
+        );
+      } else if (this.state.modal === 'forgotpassword') {
+        infoContent = (
+          <div className="login-helper">
+            <span> Remembered your password? </span>
+            <a onClick={this.showLoginModal}> Login! </a>
+          </div>
+        );
+        modalContent = (
+          <span>
+            <hr className="s3" />
+            <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="off"/>
+            <hr className="s2" />
+            <a className="login-button blue" onClick={this.login}>Send Recovery Email</a>
           </span>
         );
       }
