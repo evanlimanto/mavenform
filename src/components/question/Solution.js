@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import { map } from 'lodash';
+import { concat, map } from 'lodash';
 import req from 'superagent';
 import isEmpty from 'validator/lib/isEmpty';
 import { toggleSolutionEvent } from '../../events';
@@ -36,13 +36,14 @@ class SolutionComponent extends Component {
   }
 
   addComment() {
-    const user_id = this.props.auth.getProfile().user_id;
+    const { nickname, user_id } = this.props.auth.getProfile();
     const content_id = this.props.content_id;
     const comment = this.refs.comment.value;
 
     if (isEmpty(comment))
       return;
 
+    this.setState({ comments: concat(this.state.comments, { content: comment, nickname }) });
     req.post('/addComment')
       .send({ user_id, content_id, comment })
       .end((err, res) => {

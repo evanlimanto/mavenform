@@ -104,18 +104,6 @@ class HomeComponent extends Component {
             <hr className="margin" />
             <h4 className="center">Features</h4>
             <hr className="s3" />
-            <div>
-              <span>A bank of all past exams for your course.</span> 
-              <img src="/img/course.png" width="800" height="400" />
-            </div>
-            <hr className="s2" />
-            <div>
-              <img src="/img/exam.png" width="700" height="600" />
-              <span>Study on the go with discussions and solution toggling for individual exam questions.</span>
-            </div>
-            <hr className="s3" />
-            <h5>What's different about Studyform</h5>
-            <hr className="s3" />
             <div className="column">
               <div className="material-icons">touch_app</div>
               <h1>Interactive</h1>
@@ -136,6 +124,16 @@ class HomeComponent extends Component {
               <hr className="s2" />
               <p>Instead of struggling to manage 10 or more tabs of individual PDFs, just browse a single web app that easily navigates between any relevant resource.</p>
               <hr className="s1" />
+            </div>
+            <div>
+              <span className="feature-column">
+                <img src="/img/exam.png" className="feature-image-one" />
+                <div className="feature-caption">Study and discuss individual exam problems with your classmates.</div>
+              </span>
+              <span className="feature-column">
+                <img src="/img/course.png" className="feature-image-two" />
+                <div className="feature-caption">Learn from banks of past exams for all your courses.</div> 
+              </span>
             </div>
             <hr className="margin-plus" />
           </div>

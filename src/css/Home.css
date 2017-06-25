@@ -239,6 +239,29 @@
   padding: 0;
 }
 
+.feature-column {
+  display: inline-block;
+  margin-top: 50px;
+  padding: 0px 20px;
+}
+
+.feature-caption {
+  width: 450px;
+  margin: 0 auto;
+}
+
+img.feature-image-one {
+  margin-bottom: 15px;
+  width: 500px;
+  height: 450px;
+}
+
+img.feature-image-two {
+  margin-bottom: 25px;
+  width: 600px;
+  height: 450px;
+}
+
 .column {
   padding: 10px;
   display: inline-block;
