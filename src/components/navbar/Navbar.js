@@ -2,77 +2,22 @@ import React, { Component } from 'react'; import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { has, map, toLower } from 'lodash';
 import classnames from 'classnames';
-import cookies from 'browser-cookies';
-import isEmail from 'validator/lib/isEmail';
-import isEmpty from 'validator/lib/isEmpty';
 
-import Modal from '../modal';
+import { Modals } from '../modal';
 import { algoliaCourseIndex, courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
-
-const req = require('superagent');
+import { showLoginModal, showWaitlistModal } from '../../actions';
 
 class NavbarComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: null,
       profileDropdownOn: false,
       suggestionsDropdownOn: false,
       suggestions: [],
-      modalError: null,
     };
 
-    this.closeModal = this.closeModal.bind(this);
-    this.showForgotPasswordModal = this.showForgotPasswordModal.bind(this);
-    this.showLoginModal = this.showLoginModal.bind(this);
-    this.showSignupModal = this.showSignupModal.bind(this);
-    this.showWaitlistModal = this.showWaitlistModal.bind(this);
     this.getSuggestions = this.getSuggestions.bind(this);
     this.toggleProfileDropdown = this.toggleProfileDropdown.bind(this);
-    this.setModalError = this.setModalError.bind(this);
-    this.waitlist = this.waitlist.bind(this);
-    this.login = this.login.bind(this);
-    this.signup = this.signup.bind(this);
-    this.forgotPassword = this.forgotPassword.bind(this);
-  }
-
-  signup(e) {
-    e.preventDefault();
-
-    const access_code = this.refs.access_code.value;
-    const username = this.refs.username.value;
-    const email = this.refs.email.value;
-    const password = this.refs.password.value;
-
-    if (isEmpty(access_code) || isEmpty(username) || isEmpty(email) || isEmpty(password))
-        return this.setState({ modalError: "Fill in all fields." });
-
-    if (!isEmail(email))
-        return this.setstate({ modalError: "Enter a valid email." });
-
-    req.post('/signup')
-      .send({ access_code })
-      .end((err, res) => {
-        if (err || !res.ok) return this.setState({ modalError: res.text });
-        else return this.props.auth.signup(email, username, password);
-      });
-  }
-
-  forgotPassword(e) {
-    e.preventDefault();
-
-    const email = this.refs.email.value;
-    if (!isEmail(email))
-      return this.setState({ error: "Invalid email." });
-
-    this.setState({ error: null });
-    req.post("/changePassword")
-      .send({ email })
-      .end((err, res) => {
-        if (err || !res.ok) return this.setState({ error: err.body });
-        document.location = "/";
-        return;
-      });
   }
 
   componentDidMount() {
@@ -90,36 +35,8 @@ class NavbarComponent extends Component {
     });
   }
 
-  setModalError(text) {
-    this.setState({ modalError: text }); 
-  }
-
   toggleProfileDropdown() {
-    this.setState({
-      profileDropdownOn: !this.state.profileDropdownOn
-    });
-  }
-
-  closeModal() {
-    this.setState({
-      modal: null
-    });
-  }
-
-  showSignupModal() {
-    this.setState({ modal: 'signup', modalError: null });
-  }
-
-  showWaitlistModal() {
-    this.setState({ modal: 'waitlist', modalError: null });
-  }
-
-  showLoginModal() {
-    this.setState({ modal: 'login', modalError: null });
-  }
-
-  showForgotPasswordModal() {
-    this.setState({ modal: 'forgotpassword', modalError: null });
+    this.setState({ profileDropdownOn: !this.state.profileDropdownOn });
   }
 
   getSuggestions() {
@@ -146,35 +63,7 @@ class NavbarComponent extends Component {
       });
       this.setState({ suggestions, suggestionsDropdownOn: true });
     });
-  }
-
-  waitlist() {
-    const email = this.refs.email.value;
-    if (!isEmail(email))
-      return this.setModalError('Invalid or empty email.');
-    this.setModalError(null);
-    req.post("/addToWaitlist")
-      .send({ email })
-      .end((err, res) => {
-        if (err || !res.ok) this.setModalError("Waitlist failed.");
-        else {
-          cookies.set('waitlist_email', email, { expires: 1 });
-          window.location = "/waitlisted";
-        }
-        return;
-      });
-  }
-
-  login() {
-    const email = this.refs.email.value;
-    const password = this.refs.password.value;
-    if (!isEmail(email))
-      return this.setModalError('Invalid or empty email.');
-    if (isEmpty(password))
-      return this.setModalError('Empty password.');
-    this.setModalError(null);
-    this.props.auth.login(email, password, this.setModalError);
-  }
+  }j5 
 
   render() {
     const isLoggedIn = this.props.auth.loggedIn();
@@ -183,86 +72,6 @@ class NavbarComponent extends Component {
     if (profile) {
       username = (has(profile, 'user_metadata') && has(profile.user_metadata, 'username')) ?
       (profile.user_metadata.username) : (profile.given_name);
-    }
-
-    let modal = null;
-    if (!isLoggedIn && this.state.modal) {
-      let infoContent, modalContent;
-      if (this.state.modal === 'waitlist') {
-        infoContent = (
-          <div className="login-helper">
-            <span> Already have an access code? </span>
-            <a onClick={this.showSignupModal}> Sign up! </a>
-          </div>
-        );
-        modalContent = (
-          <span>
-            <hr className="s3" />
-            <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="off"/>
-            <hr className="s2" />
-            <a className="login-button blue" onClick={this.waitlist}>Get Early Access</a>
-          </span>
-        );
-      } else if (this.state.modal === 'login') {
-        infoContent = (
-          <div className="login-helper">
-            <span> Don't have an account? </span>
-            <a onClick={this.showWaitlistModal}> Get early access! </a>
-          </div>
-        );
-        modalContent = (
-          <span>
-            <hr className="s3" />
-            <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="off"/>
-            <hr className="s1" />
-            <input className="login-info" type="password" placeholder="Password" ref="password" autoComplete="off"/>
-            <hr className="s2" />
-            <p className="forgot-pass">
-              <a className="forgot-pass" onClick={this.showForgotPasswordModal}>Don't remember your password?</a>
-            </p>
-            <hr className="s2" />
-            <a className="login-button blue" onClick={this.login}>Log In</a>
-          </span>
-        );
-      } else if (this.state.modal === 'signup') {
-        infoContent = (
-          <div className="login-helper">
-            <span> Don't have an access code? </span>
-            <a onClick={this.showWaitlistModal}> Sign up on our waitlist! </a>
-          </div>
-        );
-        modalContent = (
-          <span>
-            <div className="access-code-signup">Sign up with your Access Code to access content.</div>
-            <input className="login-info" type="text" placeholder="Access Code" ref="access_code" autoComplete="on" />
-            <hr className="s1" />
-            <input className="login-info" type="text" placeholder="Username" ref="username" autoComplete="on" />
-            <hr className="s1" />
-            <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="email" />
-            <hr className="s1" />
-            <input className="login-info" type="password" placeholder="Password" ref="password" autoComplete="on" />
-            <hr className="s2" />
-            <a className="login-button blue" onClick={this.signup}>Sign Up</a>
-          </span>
-        );
-      } else if (this.state.modal === 'forgotpassword') {
-        infoContent = (
-          <div className="login-helper">
-            <span> Remembered your password? </span>
-            <a onClick={this.showLoginModal}> Login! </a>
-          </div>
-        );
-        modalContent = (
-          <span>
-            <hr className="s3" />
-            <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="off"/>
-            <hr className="s2" />
-            <a className="login-button blue" onClick={this.login}>Send Recovery Email</a>
-          </span>
-        );
-      }
-
-      modal = <Modal closeModal={this.closeModal} infoContent={infoContent} modalContent={modalContent} errorText={this.state.modalError} />;
     }
 
     const suggestions = this.state.suggestions;
@@ -280,7 +89,7 @@ class NavbarComponent extends Component {
     if (this.props.home) {
       return (
         <div className="home-nav">
-          {modal}
+          <Modals />
           <div className="container">
             <Link to="/" className="desktop-logo">
               <img className="logo home-logo" src="/img/logo.svg" alt="home logo" />
@@ -294,8 +103,8 @@ class NavbarComponent extends Component {
               {searchResults}
             </div>
             <span>
-              <a className="home-button home-button-alt" onClick={this.showLoginModal}>Log In</a>
-              <a className="home-button" onClick={this.showWaitlistModal}>Early Access</a>
+              <a className="home-button home-button-alt" onClick={this.props.showLoginModal}>Log In</a>
+              <a className="home-button" onClick={this.props.showWaitlistModal}>Early Access</a>
             </span>
           </div>
         </div>
@@ -353,7 +162,7 @@ class NavbarComponent extends Component {
 
     return (
       <div>
-        {modal}
+        <Modals ref={(instance) => { this.modals = instance; }} />
         <div className="nav">
           <div className="container">
             <Link className="desktop-logo" to="/"><img className="logo" src="/img/logo.svg" alt="logo" /></Link>
@@ -373,8 +182,8 @@ class NavbarComponent extends Component {
               </span>
             ) : (
               <span>
-                <a className="nav-button nav-button-alt" onClick={this.showLoginModal}>Log In</a>
-                <a className="nav-button" onClick={this.showWaitlistModal}>Early Access</a>
+                <a className="nav-button nav-button-alt" onClick={this.props.showLoginModal}>Log In</a>
+                <a className="nav-button" onClick={this.props.showWaitlistModal}>Early Access</a>
               </span>
             )}
           </div>
@@ -393,8 +202,16 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    showLoginModal: () => dispatch(showLoginModal()),
+    showWaitlistModal: () => dispatch(showWaitlistModal()),
+  };
+};
+
 const Navbar = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps,
 )(NavbarComponent);
 
 export default Navbar;

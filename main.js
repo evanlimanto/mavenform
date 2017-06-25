@@ -14,12 +14,15 @@ const NodeCache = require('node-cache');
 const pg = require('pg');
 const request = require('request');
 const randomstring = require('randomstring');
+const url = require('url');
 const validator = require('validator');
 const yaml = require('js-yaml');
 const _ = require('lodash');
 
 const renderer = require('./src/renderer');
 const retrieveLists = require('./retrieveLists');
+
+Error.stackTraceLimit = Infinity;
 
 // GCP Storage
 const gcloud = require('google-cloud')({
@@ -36,11 +39,18 @@ const examCache = new NodeCache({ stdTTL: 30 * 60, checkperiod: 10 * 60 });
 console.log("Using redis to cache exams:", useCache);
 
 // Postgres
-if (process.env.NODE_ENV !== 'development') {
-  pg.defaults.ssl = true;
-}
-const client = new pg.Client(process.env.DATABASE_URL);
-client.connect();
+const params = url.parse(process.env.DATABASE_URL);
+const auth = params.auth.split(':');
+
+const config = {
+  user: auth[0],
+  password: auth[1],
+  host: params.hostname,
+  port: params.port,
+  database: params.pathname.split('/')[1],
+  ssl: process.env.NODE_ENV !== 'development',
+};
+const pool = new pg.Pool(config);
 
 // Express
 const port = process.env.PORT || 8080;
@@ -50,17 +60,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
 app.use('/img', express.static(path.join(__dirname, '/src/img')));
-
-// Error handler middleware
-if (app.get('env') === 'development') {
-  app.use((err, req, res, next) => {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
 
 // Retrieve list of exams
 app.get('/getExams', retrieveLists.getExams);
@@ -163,7 +162,7 @@ app.post('/uploadImage', (req, res) => {
 app.get('/searchProblems/:query_str', (req, res, next) => {
   const query_str = req.params.query_str;
   const q = `select * from content where problem like '%${query_str}%' or solution like '%${query_str}%'`;
-  client.query(q, (err, result) => {
+  pool.query(q, (err, result) => {
     if (err)
       return next(err);
     return res.json(result.rows);
@@ -174,7 +173,7 @@ app.get('/searchProblems/:query_str', (req, res, next) => {
 app.get('/searchTags/:tag', (req, res, next) => {
   const query_str = req.params.query_tag;
   const q = `select * from content where `;
-  client.query(q, (err, result) => {
+  pool.query(q, (err, result) => {
     if (err)
       return next(err);
     return res.json(result.rows);
@@ -187,11 +186,11 @@ app.get('/getCourses/:schoolid', (req, res, next) => {
   const q1 = `select id from schools where code = $1`;
   const q2 = `select id, code from courses where schoolid = $1`;
   async.waterfall([
-    (callback) => client.query(q1, [schoolid], callback),
+    (callback) => pool.query(q1, [schoolid], callback),
     (result, callback) => {
       if (result.rows.length === 0)
         return callback(null, null);
-      return client.query(q2, [result.rows[0].id], callback);
+      return pool.query(q2, [result.rows[0].id], callback);
     },
   ], (err, result) => {
     if (err) return next(err);
@@ -209,7 +208,7 @@ app.get('/getExamById/:examid', (req, res, next) => {
   const getcontentq = `
     select problem_num, subproblem_num, problem, solution, choices from content where exam = $1
   `;
-  client.query(getcontentq, [examid], (err, result) => {
+  pool.query(getcontentq, [examid], (err, result) => {
     const info = _.reduce(result.rows, (result, row) => {
       const problem_num = row.problem_num;
       const subproblem_num = row.subproblem_num;
@@ -251,21 +250,17 @@ app.get('/getExam/:schoolCode/:courseCode/:examTypeCode/:termCode', function(req
   `;
   async.waterfall([
     (callback) => {
-      client.query(getidq, [schoolCode, termCode, examTypeCode, courseCode], callback);
+      pool.query(getidq, [schoolCode, termCode, examTypeCode, courseCode], callback);
     },
     (result, callback) => {
-      if (result.rows.length === 0) {
-        res.json({});
+      if (result.rows.length === 0)
         return callback(null, null);
-      }
       const id = result.rows[0].id;
-      client.query(getcontentq, [id], callback);
+      pool.query(getcontentq, [id], callback);
     }
   ], (err, result) => {
-    if (err) {
-      res.status(400).send("Error.");
+    if (err)
       return next(err);
-    }
     if (!result)
       return res.json({});
     const info = _.reduce(result.rows, (result, row) => {
@@ -301,7 +296,7 @@ app.post('/updateProblem', (req, res, next) => {
     where exam=$4 and problem_num=$5 and subproblem_num=$6
   `;
 
-  client.query(q, [problem_content, solution_content,
+  pool.query(q, [problem_content, solution_content,
                    choices_content, examid,
                    problem_num, subproblem_num], (err, result) => {
     if (err) return next(err);
@@ -316,7 +311,7 @@ app.post('/addCourse', (req, res, next) => {
     insert into courses (code, schoolid, subjectid)
     values($1, $2, $3, $4)
   `;
-  client.query(q, [course_code, schoolid, subjectid], (err, result) => {
+  pool.query(q, [course_code, schoolid, subjectid], (err, result) => {
     if (err) return next(err);
     return res.send("Success!");
   });
@@ -330,7 +325,7 @@ app.post('/addExam', (req, res, next) => {
     exam_year = "0" + _.toString(exam_year);
   }
   const q = `insert into exams (courseid, examtype, examid, profs) values ($1, $2, $3, $4)`;
-  client.query(q, [course_code, exam_type, _.toString(exam_term) + exam_year, profs], function(err, result) {
+  pool.query(q, [course_code, exam_type, _.toString(exam_term) + exam_year, profs], function(err, result) {
     if (res) return next(err);
     return res.send("Success!");
   });
@@ -339,18 +334,18 @@ app.post('/addExam', (req, res, next) => {
 app.post('/addProblem', (req, res, next) => {
   const { examid, problem_num, subproblem_num } = req.body;
   const q = `insert into content (problem_num, subproblem_num, problem, solution, exam) values($1, $2, $3, $4, $5)`;
-  client.query(q, [problem_num, subproblem_num, "", "", examid], (err, result) => {
+  pool.query(q, [problem_num, subproblem_num, "", "", examid], (err, result) => {
     if (res) return next(err);
     return res.send("Success!");
   });
 });
 
 app.post('/createUser', (req, res, next) => {
-  const { auth_user_id } = req.body;
-  const q = `insert into users (auth_user_id) select $1
-    where not exists (select 1 from users where auth_user_id = $2)
+  const { auth_user_id, nickname } = req.body;
+  const q = `insert into users (auth_user_id, nickname) select $1, $2
+    where not exists (select 1 from users where auth_user_id = $3)
   `;
-  client.query(q, [auth_user_id, auth_user_id], (err, result) => {
+  pool.query(q, [auth_user_id, nickname, auth_user_id], (err, result) => {
     if (err) return next(err);
     return res.send("Success!");
   });
@@ -426,10 +421,10 @@ app.post('/processTranscription', (req, res, next) => {
   const q      = `insert into content_staging (problem_num, subproblem_num, problem, solution, exam, choices) values($1, $2, $3, $4, $5, $6)`;
   async.waterfall([
     (callback) => {
-      client.query(inq, [course_id, exam_type_id, term_id, profs, school_id, course_id, exam_type_id, term_id, profs, school_id], (err) => callback(err))
+      pool.query(inq, [course_id, exam_type_id, term_id, profs, school_id, course_id, exam_type_id, term_id, profs, school_id], (err) => callback(err))
     },
     (callback) => {
-      client.query(getq, [course_id, exam_type_id, term_id, profs, school_id], callback)
+      pool.query(getq, [course_id, exam_type_id, term_id, profs, school_id], callback)
     },
     (result, callback) => {
       if (result.rows.length === 0)
@@ -437,7 +432,7 @@ app.post('/processTranscription', (req, res, next) => {
       const id = result.rows[0].id;
       async.parallel([
         (funcCallback) => async.each(imageFiles, (file, innerCallback) => {
-          client.query(imageq, [id, `${basePath}-${file.name}`], (err) => innerCallback(err));
+          pool.query(imageq, [id, `${basePath}-${file.name}`], (err) => innerCallback(err));
         }, funcCallback),
         (funcCallback) => async.each(items, (item, innerCallback) => {
           const key = item[0];
@@ -451,7 +446,7 @@ app.post('/processTranscription', (req, res, next) => {
           } else {
             solution = replaceImagePlaceholders(basePath, doc[key + "_s"]);
           }
-          client.query(q, [problem_num, subproblem_num, content, solution, id, choices], (err) => innerCallback(err));  
+          pool.query(q, [problem_num, subproblem_num, content, solution, id, choices], (err) => innerCallback(err));  
         }, funcCallback)
       ], callback);
     }
@@ -476,26 +471,31 @@ app.get('/approveTranscription/:examid', (req, res, next) => {
 
   let courseid, examtype, examid, schoolid, profs;
   async.series([
-    (callback) => client.query(imageq, [approvedExamId], (err, result) =>
-      async.each(result.rows, (row, eachCallback) => {
-        const sourceFile = stagingBucket.file(row.url);
-        return sourceFile.exists((err, exists) => {
-          if (exists)
-            return async.waterfall([
-              (innerCallback) => sourceFile.move(bucket, innerCallback),
-              (destFile, resp, innerCallback) => destFile.makePublic((err) => innerCallback(err))
-            ], eachCallback)
-          else return eachCallback(null);
-        });
-      }, callback)
-    ),
-    (callback) => client.query(delimageq, [approvedExamId], (err) => callback(err))
+    (callback) => pool.query(imageq, [approvedExamId], (err, result) => {
+      if (err)
+        return callback(err);
+      async.parallel([
+        (innerCallback) => pool.query(delimageq, [approvedExamId], innerCallback),
+        (innerCallback) => {
+          async.each(result.rows, (row, eachCallback) => {
+            const sourceFile = stagingBucket.file(row.url);
+            return sourceFile.exists((err, exists) => {
+              if (err) return eachCallback(err);
+              if (exists)
+                return async.waterfall([
+                  (innerCallback) => sourceFile.move(bucket, innerCallback),
+                  (destFile, resp, innerCallback) => destFile.makePublic((err) => innerCallback(err))
+                ], eachCallback)
+              else return eachCallback(null);
+            });
+          }, innerCallback)
+        }], callback);
+    }),
   ], (err) => {
-    if (err) next(err);
+    if (err)
+      return next(err);
     async.waterfall([
-      (callback) => {
-        client.query(getq, [approvedExamId], callback);
-      },
+      (callback) => pool.query(getq, [approvedExamId], callback),
       (result, callback) => {
         if (result.rows.length === 0)
           return callback(new Error("No rows."));
@@ -504,24 +504,18 @@ app.get('/approveTranscription/:examid', (req, res, next) => {
         examid = result.rows[0].examid;
         schoolid = result.rows[0].schoolid;
         profs = result.rows[0].profs;
-        client.query(inq, [courseid, examtype, examid, schoolid, profs], (err) => callback(err));
+        pool.query(inq, [courseid, examtype, examid, schoolid, profs], (err) => callback(err));
       },
-      (callback) => {
-        client.query(getidq, [courseid, examtype, examid, schoolid, profs], callback);
-      },
+      (callback) => pool.query(getidq, [courseid, examtype, examid, schoolid, profs], callback),
       (result, callback) => {
         const id = result.rows[0].id;
-        client.query(insertproblemsq, [id, approvedExamId], (err) => callback(err));
+        pool.query(insertproblemsq, [id, approvedExamId], (err) => callback(err));
       },
-      (callback) => {
-        client.query(deleteproblemsq, [approvedExamId], (err) => callback(err)); 
-      },
-      (callback) => {
-        client.query(delq, [approvedExamId], (err) => callback(err));
-      }
+      (callback) => pool.query(deleteproblemsq, [approvedExamId], (err) => callback(err)),
+      (callback) => pool.query(delq, [approvedExamId], (err) => callback(err)),
     ], (err) => {
       if (err) return next(err);
-      return;
+      return res.send("Success!");
     });
   });
 });
@@ -533,7 +527,7 @@ app.get('/getBookmarkedCourses/:userid', (req, res, next) => {
     inner join courses on BC.courseid = courses.id
     inner join users on BC.userid = users.id
     where users.auth_user_id = $1`;
-  client.query(q, [userid], (err, result) => {
+  pool.query(q, [userid], (err, result) => {
     if (err) return next(err);
     const items = _.map(result.rows, (row) => row.code);
     return res.json(items);
@@ -545,7 +539,7 @@ app.get('/getUserSchool/:userid', (req, res, next) => {
 
   const q = `select users.schoolid as id, schools.name as name, schools.code as code from users
     inner join schools on schools.id = users.schoolid where users.auth_user_id = $1`;
-  client.query(q, [userid], (err, result) => {
+  pool.query(q, [userid], (err, result) => {
     if (result.rows.length === 0) {
       return res.json({});
     } else {
@@ -559,7 +553,7 @@ app.post('/selectSchool', (req, res, next) => {
   const { auth_user_id, school_id } = req.body;
 
   const q = `update users set schoolid = $1 where auth_user_id = $2`;
-  client.query(q, [school_id, auth_user_id], (err, result) => {
+  pool.query(q, [school_id, auth_user_id], (err, result) => {
     if (err) return next(err);
     return res.send("Success!");
   });
@@ -572,7 +566,7 @@ app.post('/bookmarkCourse', (req, res, next) => {
     insert into bookmarked_courses(userid, courseid)
       select id, $1 from users where auth_user_id = $2
   `;
-  client.query(q, [course_id, auth_user_id], (err, result) => {
+  pool.query(q, [course_id, auth_user_id], (err, result) => {
     if (err) return next(err);
     return res.send("Success!");
   });
@@ -605,7 +599,7 @@ app.post('/applyMarketing', (req, res, next) => {
     values($1, $2, $3, $4, $5, $6)
   `;
 
-  client.query(q, [name, email, school, essay1, essay2, file.name], (err, result) => {
+  pool.query(q, [name, email, school, essay1, essay2, file.name], (err, result) => {
     if (err) return next(err);
     return res.send("Success!");
   });
@@ -615,7 +609,7 @@ app.post('/waitlistSignup', (req, res) => {
   const { email } = req.body;
   const q = `insert into waitlist (email) values ($1)`;
 
-  client.query(q, [], (err, result) => {
+  pool.query(q, [], (err, result) => {
     if (err) return next(err);
     return res.send("Success!");
   });
@@ -625,7 +619,7 @@ app.post('/contentFeedback', (req, res) => {
   const { content_id } = req.body;
   const q = `insert into content_feedback (content_id) values ($1)`;
 
-  client.query(q, [], (err, result) => {
+  pool.query(q, [], (err, result) => {
     if (err) return next(err);
     return res.send("Success!");
   });
@@ -644,7 +638,7 @@ app.post('/deleteCourse', (req, res, next) => {
   const { course_id } = req.body;
   const q = `delete from courses where id = $1`;
 
-  client.query(q, [course_id], (err, result) => {
+  pool.query(q, [course_id], (err, result) => {
     if (err) return next(err);
     return res.send("Success!");
   });
@@ -657,7 +651,7 @@ app.post('/addToDiscussion', (req, res, next) => {
     insert into discussion (content, parentid, userid, contentid)
     values($1, $2, $3, $4)
   `;
-  client.query(q, [content, parentid, userid, contentid], (err, result) => {
+  pool.query(q, [content, parentid, userid, contentid], (err, result) => {
     if (err) return next(err);
     return res.send("Success!");
   });
@@ -667,7 +661,7 @@ app.post('/reportError', (req, res, next) => {
   const { content_id, error_content } = req.body;
   const q = `insert into reports (content_id, error) values($1, $2)`;
 
-  client.query(q, [content_id, error_content], (err, result) => {
+  pool.query(q, [content_id, error_content], (err, result) => {
     if (err) return next(err);
     return res.send("Success!");
   });
@@ -676,7 +670,7 @@ app.post('/reportError', (req, res, next) => {
 app.get('/getMarketingApps', (req, res, next) => {
   const getq = `select name, email, school, essay1, essay2, resume from marketing_apps`;
 
-  client.query(getq, (err, results) => {
+  pool.query(getq, (err, results) => {
     if (err) return next(err);
     const items = _.map(results.rows, (row) => {
       return {
@@ -697,14 +691,14 @@ app.post('/signup', (req, res, next) => {
 
   const q = `select id, code, used from access_codes where code = $1`;
   const uq = `update access_codes set used = true where id = $1`;
-  client.query(q, [access_code], (err, result) => {
+  pool.query(q, [access_code], (err, result) => {
     if (err) return next(err); 
     if (result.rows.length === 0)
       return res.status(400).send("Invalid access code.");
     if (result.rows[0].used)
       return res.status(400).send("Access code already used.");
     const row = result.rows[0];
-    return client.query(uq, [row.id], (err, result) => {
+    return pool.query(uq, [row.id], (err, result) => {
       if (err) return next(err);
       return res.send("Success!");
     });
@@ -718,7 +712,7 @@ app.post('/changePassword', (req, res, next) => {
     url: 'https://mavenform.auth0.com/dbconnections/change_password',
     headers: { 'content-type': 'application/json' },
     body: {
-      client_id: 'oLKATgXnwtDDn8TwycvApVGECfBx2Zlq',
+      pool_id: 'oLKATgXnwtDDn8TwycvApVGECfBx2Zlq',
       email: email,
       connection: 'Username-Password-Authentication'
     },
@@ -735,7 +729,7 @@ app.post('/waitlistCourses', (req, res, next) => {
   const { email, courses } = req.body;
 
   const q = `insert into waitlist_courses (email, courses) values($1, $2)`;
-  client.query(q, [email, courses], (err, result) => {
+  pool.query(q, [email, courses], (err, result) => {
     if (err) return next(err);
     return res.send("Success!");
   });
@@ -756,7 +750,7 @@ app.post('/addToWaitlist', (req, res, next) => {
   };
 
   async.parallel([
-    (callback) => client.query(q, [email], (err) => callback(err)),
+    (callback) => pool.query(q, [email], (err) => callback(err)),
     (callback) => request(options, (err) => callback(err)),
   ], (err) => {
     if (err) return next(err);
@@ -764,7 +758,69 @@ app.post('/addToWaitlist', (req, res, next) => {
   });
 });
 
+app.post('/getProblem/:content_id', (req, res, next) => {
+  const { content_id } = req.params;
+
+  const getq = `select problem_num, subproblem_num, problem, solution, tags, choices from content where id = $1`;
+  pool.query(getq, [content_id], (err, result) => {
+    if (err) return next(err);
+    const row = result.rows[0];
+    return res.json({
+      problem_num: row.problem_num,
+      subproblem_num: row.subproblem_num,
+      problem: row.problem,
+      solution: row.solution,
+      tags: row.tags,
+      choices: row.choices,
+    });
+  });
+});
+
+app.post('/addComment', (req, res, next) => {
+  const { user_id, comment, content_id } = req.body;
+
+  const getq = `select id from users where auth_user_id = $1`;
+  const inq = `insert into discussion (content, userid, contentid) values($1, $2, $3)`;
+
+  async.waterfall([
+    (callback) => pool.query(getq, [user_id], callback),
+    (results, callback) => pool.query(inq, [comment, results.rows[0].id, content_id], callback),
+  ], (err) => {
+    if (err) return next(err);
+    return res.send("Success!");
+  });
+});
+
+app.get('/getComments/:contentid', (req, res, next) => {
+  const { contentid } = req.params;
+
+  const getq = `
+    select discussion.content as content, users.nickname as nickname from discussion
+    inner join users on discussion.userid = users.id
+    where contentid = $1
+  `;
+
+  pool.query(getq, [contentid], (err, result) => {
+    if (err) return next(err);
+    const items = _.map(result.rows, (row) => {
+      return {
+        content: row.content,
+        nickname: row.nickname,
+      }
+    });
+    return res.json(items);
+  });
+});
+
 app.use(express.static(path.join(__dirname, '/build')));
+
+// Error handler middleware
+if (app.get('env') === 'development') {
+  app.use((err, req, res, next) => {
+    res.status(err.status || 500);
+    return console.error(err);
+  });
+}
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/build', 'index.html'));

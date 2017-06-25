@@ -17,6 +17,10 @@
   flex-align: row;
 }
 
+.home-scrolls {
+  padding-bottom: 15px;
+}
+
 .home-logo {
   float: left;
   padding: 25px 0;

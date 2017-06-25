@@ -1,17 +1,5 @@
 import AuthService from '../utils/AuthService';
 
-export const exam = (state = { examContent: null, examContentHasLoaded: false }, action) => {
-  switch (action.type) {
-    case 'UPDATE_EXAM_CONTENT':
-      return {
-        examContent: action.examContent,
-        examContentHasLoaded: true,
-      };
-    default:
-      return state;
-	}
-};
-
 export const exams = (state = { key_dict: {}, multi_dict: {} }, action) => {
   switch (action.type) {
     case 'UPDATE_EXAM_LIST':
@@ -69,6 +57,25 @@ export const labels = (state = {}, action) => {
   switch (action.type) {
     case 'UPDATE_LABELS':
       return action.labels;
+    default:
+      return state;
+  }
+};
+
+export const modal = (state = { type: null, errorText: null }, action) => {
+  switch (action.type) {
+    case 'SHOW_LOGIN_MODAL':
+      return { type: 'login', errorText: null };
+    case 'SHOW_WAITLIST_MODAL':
+      return { type: 'waitlist', errorText: null };
+    case 'SHOW_SIGNUP_MODAL':
+      return { type: 'signup', errorText: null };
+    case 'SHOW_FORGOT_PASSWORD_MODAL':
+      return { type: 'forgotpassword', errorText: null };
+    case 'CLOSE_MODAL':
+      return { type: null, errorText: null };
+    case 'SET_MODAL_ERROR':
+      return { type: state.type, errorText: action.errorText };
     default:
       return state;
   }

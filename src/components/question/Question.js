@@ -7,7 +7,7 @@ class Question extends Component {
   render() {
     const { id, content_id, schoolCode, courseCode, examType, termCode, solution, content } = this.props;
 
-    const SolutionComponent = <Solution solution={solution} />;
+    const SolutionComponent = <Solution solution={solution} content_id={content_id} />;
     const QuestionDropdownComponent = <QuestionDropdown schoolCode={schoolCode} courseCode={courseCode} examType={examType} termCode={termCode} id={id} content_id={content_id} />;
 
     return (

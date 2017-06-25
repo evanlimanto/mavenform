@@ -131,18 +131,20 @@
   display: block;
   text-align: left;
   top: 59px;
-  /* margin-left: 834px; */
   width: 165px;
   padding: 10px 20px;
   border: 1px solid #ccc;
   border-top: none;
   border-radius: 0 0 5px 5px;
+  color: #ececec;
+  background-color: #11aacc;
+  opacity: 0.9;
 }
 
 .logout:hover {
-  border-top: 1px solid #ccc;
   background: #11aacc;
   color: #fff !important;
+  opacity: 1.0;
 }
 
 .gray-nav {

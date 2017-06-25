@@ -86,7 +86,7 @@ class HomeComponent extends Component {
               <input className="early-access" type="submit" value="Get Early Access" onClick={(e) => this.waitlist(e)} />
             </div>
             <p className="home-error">{this.state.waitlistError}</p>
-            <div>
+            <div className="home-scrolls">
               <ScrollLink className="search-link" to="features" spy={true} smooth={true} duration={500}> 
                 <div className="material-icons">info_outline</div>
                 Learn More 
@@ -96,14 +96,24 @@ class HomeComponent extends Component {
                 View Schools 
               </ScrollLink>
             </div>
-            <img className="banner-screen" src="img/screen.png" alt="banner" />
+            {/*<img className="banner-screen" src="img/screen.png" alt="banner" />*/}
           </div>
         </div>
         <Element name="features" className="features">
           <div className="center">
             <hr className="margin" />
             <h4 className="center">Features</h4>
-            <hr className="s1" />
+            <hr className="s3" />
+            <div>
+              <span>A bank of all past exams for your course.</span> 
+              <img src="/img/course.png" width="800" height="400" />
+            </div>
+            <hr className="s2" />
+            <div>
+              <img src="/img/exam.png" width="700" height="600" />
+              <span>Study on the go with discussions and solution toggling for individual exam questions.</span>
+            </div>
+            <hr className="s3" />
             <h5>What's different about Studyform</h5>
             <hr className="s3" />
             <div className="column">

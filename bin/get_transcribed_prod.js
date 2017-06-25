@@ -33,18 +33,10 @@ const i1 = `insert into content_staging (id, problem_num, subproblem_num, proble
 const i2 = `insert into exams_staging (id, courseid, examtype, examid, profs, schoolid, datetime) values ($1, $2, $3, $4, $5, $6, $7)`;
 const i3 = `insert into images_staging (id, examid, url) values ($1, $2, $3)`;
 
-const q4 = `select * from marketing_apps`;
-const i4 = `insert into marketing_apps (name, email, school, essay1, essay2, resume) values ($1, $2, $3, $4, $5, $6)`;
-
-const q5 = `select * from waitlist`;
-const i5 = `insert into waitlist (email) values ($1)`;
-
 async.parallel([
   (callback) => prod_client.query(q1, callback),
   (callback) => prod_client.query(q2, callback),
   (callback) => prod_client.query(q3, callback),
-  (callback) => prod_client.query(q4, callback),
-  (callback) => prod_client.query(q5, callback),
 ], (err, results) => {
   if (err) return console.error(err);
   const r1 = results[0];
@@ -62,8 +54,6 @@ async.parallel([
         return process.exit(0);
       });
     }, 
-    (callback) => local_client.query(i4, callback),
-    (callback) => local_client.query(i5, callback),
   ], (err) => {
     if (err) return err; 
   });

@@ -22,8 +22,8 @@ input[type=button] {
   text-align: left;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
-  font-size: 16px;
-  padding: 10px 15px 12px;
+  font-size: 14px;
+  padding: 10px 10px 12px;
   border-radius: 5px;
   margin-right: 10px;
   border: none;
@@ -52,6 +52,11 @@ img {
   color: #11aacc;
   border: 1px solid #11aacc;
   overflow-x: auto;
+}
+
+.solution-button {
+  padding: 6px 10px 7px !important;
+  font-size: 14px;
 }
 
 .solution * {
@@ -408,4 +413,100 @@ img {
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+a.comments-label {
+  color: grey;
+  font-size: 14px;
+}
+
+.comments-label:hover {
+  text-decoration: underline;
+}
+
+.comments-count {
+  -webkit-font-smoothing: antialiased;
+  border-radius: 2px;
+  background: #eee;
+  color: #999;
+  font-weight: bold;
+  min-width: 10px;
+  margin-left: 4px;
+  text-align: center;
+  font-size: 14px;
+  padding: 1px 3px;
+  display: inline-block;
+}
+
+.comments-label:hover .comments-count {
+  text-decoration: none;
+}
+
+.comment-box {
+  margin: 25px 0px;
+  padding: 15px 25px;
+  background-color: #f0f0f0;
+  border-radius: 2px;
+}
+
+.comment-input {
+  border: 1px solid #cfcfcf;
+  padding: 5px 5px;
+  margin-right: 20px;
+  font-size: 14px;
+  border-radius: 2px;
+  width: 80%;
+  background-color: white;
+}
+
+.comment-input::-webkit-input-placeholder {
+  color: #c0c0c0;
+}
+
+button.comment-button {
+  background-color: #11aacc;
+  padding: 6px 10px 7px;
+  margin-top: 10px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: left;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #fff;
+  opacity: 0.9;
+  -webkit-appearance: none;
+}
+
+.noselect {
+  user-select: none;
+}
+
+.comment {
+  margin-top: 20px;
+}
+
+.comment-header {
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.comment-content {
+  margin: 5px 0px;
+  font-size: 14px;
+}
+
+.comment-footer {
+  color: grey;
+}
+
+a.comment-action {
+  color: grey;
+  font-size: 14px;
+}
+
+a.comment-action:hover {
+  color:grey;
+  text-decoration: underline;
 }

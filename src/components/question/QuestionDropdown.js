@@ -3,7 +3,7 @@ import copy from 'copy-to-clipboard';
 
 import { copyQuestionLinkEvent } from '../../events';
 import Expire from './Expire';
-import Modal from '../modal';
+import { Modal } from '../modal';
 
 const req = require('superagent');
 

@@ -74,7 +74,7 @@
   "scripts": {
     "magic": "concurrently \"npm run start\" \"npm run watch\"",
     "server": "npm run build&&node main.js",
-    "start": "node main.js",
+    "start": "forever main.js",
     "watch": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

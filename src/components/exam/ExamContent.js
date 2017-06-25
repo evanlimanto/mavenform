@@ -16,12 +16,6 @@ class ExamContent extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!(this.props.id === nextProps.id)) {
-      this.props.getExamContent(nextProps.id);
-    }
-  }
-
   componentDidMount() {
     const { schoolCode, courseCode, examTypeCode, termCode } = this.props;
     fetch(`/getExam/${schoolCode}/${courseCode}/${examTypeCode}/${termCode}`).then(
@@ -45,8 +39,8 @@ class ExamContent extends Component {
           console.warn(`${key} doesn't exist in exam!`);
           return null;
         }
-        let qcontent = examContent.problems[key].problem || '';
-        let solution = examContent.problems[key].solution || '';
+        const qcontent = examContent.problems[key].problem || '';
+        const solution = examContent.problems[key].solution || '';
         const choices = examContent.problems[key].choices || '';
         const content_id = examContent.problems[key].content_id;
         if (choices && choices.length > 0) {

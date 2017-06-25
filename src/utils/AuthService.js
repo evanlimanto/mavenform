@@ -76,7 +76,7 @@ export default class AuthService {
             console.log(profile);
           this.setProfile(profile)
           req.post('/createUser')
-            .field('auth_user_id', profile.user_id)
+            .send({ auth_user_id: profile.user_id, nickname: profile.nickname })
             .end((err, res) => {
               if (err) console.error(err);
               else {
