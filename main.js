@@ -368,7 +368,7 @@ app.post('/processTranscription', (req, res, next) => {
   const imageFiles = req.files;
 
   const pdfPath = `${school}/pdf/${course}/${exam_type}-${term}-${randomstring.generate(10)}.pdf`;
-  if (validator.isURL(pdfPath))
+  if (false && validator.isURL(pdfPath))
     http.get(pdf_link, (response) => {
       if (_.has(response, 'statusCode') && response.statusCode === 404)
         return;
@@ -414,14 +414,14 @@ app.post('/processTranscription', (req, res, next) => {
     return k.match(/^q\d+_\d+$/);
   }), (k) => [k, _.split(k.slice(1), "_")]);
 
-  const inq    = `insert into exams_staging (courseid, examtype, examid, profs, schoolid, datetime) select $1, $2, $3, $4, $5, now()
-                  where not exists (select 1 from exams_staging where courseid = $6 and examtype = $7 and examid = $8 and profs = $9 and schoolid = $10)`;
+  const inq    = `insert into exams_staging (courseid, examtype, examid, profs, schoolid, datetime, source_url) select $1, $2, $3, $4, $5, now(), $6
+                  where not exists (select 1 from exams_staging where courseid = $7 and examtype = $8 and examid = $9 and profs = $10 and schoolid = $11)`;
   const getq   = `select id from exams_staging where courseid = $1 and examtype = $2 and examid = $3 and profs = $4 and schoolid = $5`;
   const imageq = `insert into images_staging (examid, url) values($1, $2)`;
   const q      = `insert into content_staging (problem_num, subproblem_num, problem, solution, exam, choices) values($1, $2, $3, $4, $5, $6)`;
   async.waterfall([
     (callback) => {
-      pool.query(inq, [course_id, exam_type_id, term_id, profs, school_id, course_id, exam_type_id, term_id, profs, school_id], (err) => callback(err))
+      pool.query(inq, [course_id, exam_type_id, term_id, profs, school_id, pdf_link, course_id, exam_type_id, term_id, profs, school_id], (err) => callback(err))
     },
     (callback) => {
       pool.query(getq, [course_id, exam_type_id, term_id, profs, school_id], callback)
@@ -461,15 +461,15 @@ app.get('/approveTranscription/:examid', (req, res, next) => {
 
   const imageq    = `select url from images_staging where examid = $1`;
   const delimageq = `delete from images_staging where examid = $1`;
-  const getq      = `select courseid, examtype, examid, schoolid, profs from exams_staging where id = $1`;
-  const inq       = `insert into exams (courseid, examtype, examid, schoolid, profs) values($1, $2, $3, $4, $5)`;
+  const getq      = `select courseid, examtype, examid, schoolid, profs, source_url from exams_staging where id = $1`;
+  const inq       = `insert into exams (courseid, examtype, examid, schoolid, profs, source_url) values($1, $2, $3, $4, $5, $6)`;
   const getidq    = `select id from exams where courseid = $1 and examtype = $2 and examid = $3 and schoolid = $4 and profs = $5`;
   const insertproblemsq = `insert into content (problem_num, subproblem_num, problem, solution, exam, choices)
     select problem_num, subproblem_num, replace(problem, 'https://storage.googleapis.com/studyform-staging', 'https://storage.googleapis.com/studyform'), replace(solution, 'https://storage.googleapis.com/studyform-staging', 'https://storage.googleapis.com/studyform'), $1, choices from content_staging where exam = $2`;
   const deleteproblemsq = `delete from content_staging where exam = $1`;
   const delq = `delete from exams_staging where id = $1`;
 
-  let courseid, examtype, examid, schoolid, profs;
+  let courseid, examtype, examid, schoolid, profs, source_url;
   async.series([
     (callback) => pool.query(imageq, [approvedExamId], (err, result) => {
       if (err)
@@ -504,7 +504,8 @@ app.get('/approveTranscription/:examid', (req, res, next) => {
         examid = result.rows[0].examid;
         schoolid = result.rows[0].schoolid;
         profs = result.rows[0].profs;
-        pool.query(inq, [courseid, examtype, examid, schoolid, profs], (err) => callback(err));
+        source_url = result.rows[0].source_url;
+        pool.query(inq, [courseid, examtype, examid, schoolid, profs, source_url], (err) => callback(err));
       },
       (callback) => pool.query(getidq, [courseid, examtype, examid, schoolid, profs], callback),
       (result, callback) => {
