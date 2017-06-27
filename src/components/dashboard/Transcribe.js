@@ -34,7 +34,8 @@ class TranscribeComponent extends Component {
       rawContent: null,
       json: null,
       images: [],
-      courses: []
+      courses: [],
+      uploading: false,
     };
 
     this.onDrop = this.onDrop.bind(this);
@@ -119,7 +120,7 @@ class TranscribeComponent extends Component {
     const images = document.getElementsByTagName('img');
     forEach(images, (node) => node ? node.remove() : null);
 
-    !!!this.state.images || forEach(this.state.images, (image) => {
+    !this.state.images || forEach(this.state.images, (image) => {
       const imageName = image.name.slice(0, image.name.length - 4);
       let imageSpan = document.getElementsByClassName('image-span-' + imageName);
       if (imageSpan.length > 0) {
@@ -190,6 +191,7 @@ class TranscribeComponent extends Component {
       req.attach(image.name, image);
     });
     const self = this;
+    this.setState({ uploading: true });
     req.field('contents', this.state.rawContent)
       .field('school', school).field('school_id', school_id)
       .field('course', course).field('course_id', course_id)
@@ -198,9 +200,9 @@ class TranscribeComponent extends Component {
       .field('profs', profs).field('pdf_link', pdf_link)
       .end(function(err, res) {
         if (err || !res.ok) {
-          self.setState({ error: err.text });
+          self.setState({ error: err.text, uploading: false });
         } else {
-          self.setState({ success: res.text });
+          self.setState({ success: res.text, uploading: false });
         }
       });
   }
@@ -325,9 +327,10 @@ class TranscribeComponent extends Component {
           <textarea ref='content' onKeyUp={this.updateContent} placeholder='Enter content here'></textarea>
           <hr className="s2" />
           <div>
-            <button className='blue' onClick={(e) => this.upload(e)}>SAVE</button>
+            <button className='blue' onClick={(e) => this.upload(e)}>{this.state.uploading ? <img src="../img/ring.svg" width="16" height="16" /> : "SAVE" }</button>
             <Link className='gray cancel' to="/dashboard">Back</Link>
           </div>
+          <hr className="s1" />
           {this.state.error ? <p className='error'>{this.state.error}</p> : null}
           {this.state.success ? <p className='success'>{this.state.success}</p> : null}
         </div>

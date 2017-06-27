@@ -83,7 +83,7 @@ class HomeComponent extends Component {
             <h5 className="h5-alt">The ultimate bank of interactive and course-specific study resources</h5>
             <div className="search-container">
               <input className="search" name="search" placeholder="Enter your college email" type="text" autoComplete="off" ref="email"/>
-              <input className="early-access" type="submit" value="Get Early Access" onClick={(e) => this.waitlist(e)} />
+              <button className="early-access" type="submit" onClick={(e) => this.waitlist(e)}>Get Early Access</button>
             </div>
             <p className="home-error">{this.state.waitlistError}</p>
             <div className="home-scrolls">
