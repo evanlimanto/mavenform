@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import DocumentMeta from 'react-document-meta';
-import { endsWith, map } from 'lodash';
+import { endsWith, map, toLower } from 'lodash';
 import cookies from 'browser-cookies';
 import Footer from '../footer';
 import Navbar from '../navbar';
 import { schoolClickEvent } from '../../events';
 import isEmail from 'validator/lib/isEmail';
+import { algoliaCourseIndex } from '../../utils';
 
 const request = require('superagent');
 const Scroll = require('react-scroll');
@@ -23,6 +25,7 @@ class HomeComponent extends Component {
   constructor(props) {
     super(props);
 
+    this.getSuggestions = this.getSuggestions.bind(this);
     this.state = {
       suggestions: [],
       waitlistErorr: null,
@@ -59,6 +62,35 @@ class HomeComponent extends Component {
       });
   }
 
+  getSuggestions() {
+    const queryStr = this.refs.search.value;
+    if (queryStr.length === 0) {
+      this.setState({
+        suggestions: []
+      });
+      return;
+    }
+    algoliaCourseIndex.search({
+      query: queryStr,
+      length: 4,
+      offset: 0,
+    }, (err, content) => {
+      const suggestions = map(content.hits, (hit) => {
+        console.log(hit);
+        return {
+          school_code: hit.school_code,
+          school_name: hit.school_name,
+          school_name_highlighted: hit._highlightResult.school_name.value,
+          code: hit.code,
+          code_highlighted: hit._highlightResult.code.value,
+          name: hit.name,
+          name_highlighted: hit._highlightResult.name.value,
+        };
+      });
+      this.setState({ suggestions });
+    });
+  }
+
   render() {
     const schoolCodes = ['ucberkeley', 'ucsandiego', 'gatech', 'columbia', 'iastate', 'psu', 'caltech', 'indiana', 'tamu', 'ucla', 'uow', 'washington'];
     const schoolLabels = ['UC Berkeley', 'UC San Diego', 'Georgia Tech', 'Columbia', 'Iowa State', 'Penn State', 'Caltech', 'Indiana University', 'Texas A&M', 'UCLA', 'University of Waterloo', 'University of Washington'];
@@ -70,6 +102,18 @@ class HomeComponent extends Component {
         </Link> 
       );
     });
+    const suggestions = this.state.suggestions;
+    const searchResults = (suggestions && suggestions.length > 0) ? (
+      <div className="results-container">
+        <div className="results">
+          {map(suggestions, (suggestion, index) => {
+            const aClass = classnames({ bottom: index === suggestions.length - 1 });
+            const suggestionText = `${suggestion.school_name_highlighted} ${suggestion.code_highlighted}: ${suggestion.name_highlighted}`;
+            return <Link to={`/${suggestion.school_code}/${toLower(suggestion.code)}`} className={aClass} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
+          })}
+        </div>
+      </div>
+    ) : null;
 
     return (
       <div className="home">
@@ -81,12 +125,13 @@ class HomeComponent extends Component {
             <div className="banner-header">Make Studying Easy</div>
             <hr className="s2" />
             <h5 className="h5-alt">The ultimate bank of interactive and course-specific study resources</h5>
+            <hr className="s5" />
             <div className="search-container">
-              <input className="search" name="search" placeholder="Enter your college email" type="text" autoComplete="off" ref="email"/>
-              <button className="early-access" type="submit" onClick={(e) => this.waitlist(e)}>Get Early Access</button>
+              <div className="material-icons search-icon">search</div>
+              <input className="search" name="search" placeholder="Search for your course to see what study resources are available..." type="text" autoComplete="off" onChange={this.getSuggestions} ref="search" />
+              {searchResults}
             </div>
-            <p className="home-error">{this.state.waitlistError}</p>
-            <div className="home-scrolls">
+            <div>
               <ScrollLink className="search-link" to="features" spy={true} smooth={true} duration={500}> 
                 <div className="material-icons">info_outline</div>
                 Learn More 
@@ -95,58 +140,20 @@ class HomeComponent extends Component {
                 <div className="material-icons school">school</div>
                 View Schools 
               </ScrollLink>
+              <hr className="s4" />
             </div>
-            {/*<img className="banner-screen" src="img/screen.png" alt="banner" />*/}
+            <hr className="s8" />
           </div>
         </div>
-        <Element name="features" className="features">
-          <div className="center">
-            <hr className="margin" />
-            <h4 className="center">Features</h4>
-            <hr className="s3" />
-            <div className="column">
-              <div className="material-icons">touch_app</div>
-              <h1>Interactive</h1>
-              <hr className="s2" />
-              <p>Use interactable elements like solution toggling and a live table of contents to make it easier to check practice exam answers and review notes.</p>
-              <hr className="s1" />
-            </div>
-            <div className="column">
-              <div className="material-icons">view_carousel</div>
-              <h1>Responsive</h1>
-              <hr className="s2" />
-              <p>No more need to zoom in and pan around. Unlike PDFs or other formats, Studyform is intuitive and legible with any device type and any screen width.</p>
-              <hr className="s1" />
-            </div>
-            <div className="column">
-              <div className="material-icons">navigation</div>
-              <h1>Navigable</h1>
-              <hr className="s2" />
-              <p>Instead of struggling to manage 10 or more tabs of individual PDFs, just browse a single web app that easily navigates between any relevant resource.</p>
-              <hr className="s1" />
-            </div>
-            <div>
-              <span className="feature-column">
-                <img src="/img/exam.png" className="feature-image-one" />
-                <div className="feature-caption">Study and discuss individual exam problems with your classmates.</div>
-              </span>
-              <span className="feature-column">
-                <img src="/img/course.png" className="feature-image-two" />
-                <div className="feature-caption">Learn from banks of past exams for all your courses.</div> 
-              </span>
-            </div>
-            <hr className="margin-plus" />
-          </div>
-        </Element>
-        <Element name="schools" className="light-gray schools">
-          <hr className="margin" />
+        <Element name="schools" className="schools">
+          <hr className="s7-5" />
           <h4 className="center">Schools</h4>
           <hr className="s1" />
           <h5>Currently supported schools</h5>
           <hr className="s3" />
           <div className="card-container">
             {schoolCards}
-            <hr className="margin-plus" />
+            <hr className="s8" />
           </div>
         </Element>
         <Footer />

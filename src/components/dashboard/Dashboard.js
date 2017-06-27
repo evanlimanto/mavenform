@@ -78,7 +78,7 @@ class Dashboard extends Component {
               </table>
             </div>
           </div>
-          <hr className="margin" />
+          <hr className="s7-5" />
           <button className="dashboard-logout-btn" onClick={this.logout}>Logout</button>
         </div>
       </div>

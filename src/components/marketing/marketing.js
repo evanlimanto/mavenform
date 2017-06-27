@@ -88,7 +88,7 @@ class Marketing extends Component {
             <div className="container">
               <h4>Marketing Intern</h4>
               <h5>Growth Strategy and Campus Ambassadorship</h5>
-              <hr className="margin" />
+              <hr className="s7-5" />
               <div className="left-content">
                 <h1>Company</h1>
                 <p>Studyform is a VC-backed education startup based in the Bay Area. We are creating a web app that helps students study by converting static course documents into interactive study resources. Our mission is to unlock the latent value of millions of past course documents in order to help students study and teachers teach.
@@ -153,7 +153,7 @@ class Marketing extends Component {
                 <p>Your Campus</p>
               </div>
             </div>
-            <hr className="margin" />
+            <hr className="s7-5" />
           </div>
         </div>
       </div>

@@ -97,14 +97,9 @@ class NavbarComponent extends Component {
             <Link to="/" className="mobile-logo">
               <img className="logo home-logo" src="/img/icon.svg" alt="home logo" />
             </Link>
-            <div className="home-icon material-icons">search</div>
-            <div className="home-search-container">
-              <input className="home-search" name="search" placeholder="Search courses..." type="text" autoComplete="off" onChange={this.getSuggestions} ref="search" />
-              {searchResults}
-            </div>
             <span>
               <a className="home-button home-button-alt" onClick={this.props.showLoginModal}>Log In</a>
-              <a className="home-button" onClick={this.props.showWaitlistModal}>Early Access</a>
+              <a className="home-button">Sign Up</a>
             </span>
           </div>
         </div>

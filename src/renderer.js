@@ -14,7 +14,7 @@ marked.setOptions({
 
 const renderer = new marked.Renderer();
 renderer.code = function(code, language) {
-  code = _.replace(code, /\r\n|\r|\n/g, '<hr class="scode" />');
+  code = _.replace(code, /\r\n|\r|\n/g, '<hr class="s0-5" />');
   code = _.replace(code, /\\_/g, '_'); // remove escapes
   code = _.replace(code, /\\./g, '.'); // remove escapes
   return `<code class="codediv">${code}</code>`;

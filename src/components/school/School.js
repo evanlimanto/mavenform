@@ -103,7 +103,7 @@ class SchoolComponent extends Component {
               {courseItems}
             </div>
             <hr className="s2" />
-            <hr className="margin" />
+            <hr className="s7-5" />
           </div>
           <Footer />
         </div>
