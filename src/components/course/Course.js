@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'; import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { has, map } from 'lodash';
 import DocumentMeta from 'react-document-meta';
@@ -53,61 +52,33 @@ class CourseComponent extends Component {
       description: `Find interactive ${courseCodeToLabel(courseCode)} past midterms and finals from ${schoolLabel} here.`,
       title: `${courseCodeToLabel(courseCode)} - ${schoolLabel} - Studyform`,
     };
-    const content = this.props.auth.loggedIn() ? (
+    const content = (
       <div>
-      <h4 className="center">{courseCodeToLabel(courseCode)}</h4>
-      <div className="center">
-      <h5>Index of resources</h5>
-      </div>
-      <hr className="s4" />
-      <div className="center">
-      <div className="table-container-container">
-      <div className="table-container">
-      <table className="exams center">
-      <thead>
-      <tr>
-      <th>Type</th>
-      <th>Term</th>
-      <th>Instructors</th>
-      <th>Studyform</th>
-      </tr>
-      </thead>
-      <tbody>
-      {available}
-      </tbody>
-      </table>
-      </div>
-      </div>
-      <hr className="margin" />
-      </div>
-      </div>
-    ) : (
-      <div>
-      <h4 className="center">{courseCodeToLabel(courseCode)}</h4>
-      <div className="center">
-      <h5>Index of resources</h5>
-      </div>
-      <hr className="s4" />
-      <div className="center">
-      <div className="table-container-container">
-      <div className="table-container">
-      <table className="exams center">
-      <thead>
-      <tr>
-      <th>Type</th>
-      <th>Term</th>
-      <th>Instructors</th>
-      <th>Studyform</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr><td colSpan="4" className="course-signup-td"><a onClick={this.props.showWaitlistModal} className="course-signup-link">Get early access</a> or <a className="course-signup-link" onClick={this.props.showLoginModal}>log in</a> to unlock all interactive study resources.</td></tr>
-      </tbody>
-      </table>
-      </div>
-      </div>
-      <hr className="margin" />
-      </div>
+        <h4 className="center">{courseCodeToLabel(courseCode)}</h4>
+        <div className="center">
+          <h5>Index of resources</h5>
+        </div>
+        <hr className="s4" />
+        <div className="center">
+        <div className="table-container-container">
+        <div className="table-container">
+        <table className="exams center">
+        <thead>
+        <tr>
+        <th>Type</th>
+        <th>Term</th>
+        <th>Instructors</th>
+        <th>Studyform</th>
+        </tr>
+        </thead>
+        <tbody>
+        {available}
+        </tbody>
+        </table>
+        </div>
+        </div>
+        <hr className="margin" />
+        </div>
       </div>
     );
 

@@ -44,19 +44,6 @@ class SchoolComponent extends Component {
       let index = 0;
       const courseBoxes = map(sortBy(obj.courses, [(course) => toInteger((new RegExp("\\d+")).exec(course.code)[0]),
                                                    (course) => takeRight(course.code)]), (course, key) => {
-        if (!this.state.expanded[subject]) {
-          index++;
-          if (index === 8)
-            return (
-              <a key={key} className="card course-card"
-                onClick={() => this.setState({ expanded: { [subject]: true }}) }>
-                <span>{keys(obj.courses).length - 7} more courses...</span>
-                <span className="card-arrow">&#8594;</span>
-              </a>
-            );
-          else if (index > 8)
-            return null;
-        }
         return (
           <Link className="card course-card" to={"/" + schoolCode + "/" + course.code}
            key={key} onClick={() => courseClickEvent(schoolCode, course.code)}>
