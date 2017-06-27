@@ -92,7 +92,7 @@ class TranscribeComponent extends Component {
     }
     let doc = null;
     try {
-      doc = yaml.safeLoad(contents);
+      doc = yaml.safeLoad(augment(contents));
     } catch (e) {
       return this.setState({ error: e });
     }
@@ -102,13 +102,13 @@ class TranscribeComponent extends Component {
 
     const renderedContent = map(items, (item) => {
       const key = item[0]; 
-      const content = augment(preprocess(doc[key]));
+      const content = preprocess(doc[key]);
       if (has(doc, key + '_i')) {
         const solutionNum = doc[key + '_s'];
         const choices = join(doc[key + '_i'], '~');
         return <MultipleChoiceQuestion key={key} content={content} choices={choices} solutionNum={solutionNum}  />
       }
-      const solution = augment(preprocess(doc[key + '_s']));
+      const solution = preprocess(doc[key + '_s']);
       return <Question key={key} content={content} solution={solution} />
     });
 
