@@ -20,10 +20,12 @@ const pool = new pg.Pool(config);
 
 exports.getExams =
   (req, res, next) => {
-    const q = `select E.id as id, C.code as courseid, ET.type_code as examtype, T.term_code as examid, E.profs as profs from exams E
-    inner join courses C on C.id = E.courseid
-    inner join exam_types ET on E.examtype = ET.id
-    inner join terms T on E.examid = T.id`;
+    const q = `
+      select E.id as id, C.code as courseid, ET.type_code as examtype, T.term_code as examid, E.profs as profs from exams E
+      inner join courses C on C.id = E.courseid
+      inner join exam_types ET on E.examtype = ET.id
+      inner join terms T on E.examid = T.id
+    `;
     pool.query(q, (err, result) => {
       if (err) return next(err);
       const multi_dict = _.reduce(result.rows, (dict, row) => {
@@ -210,7 +212,7 @@ exports.getSchoolCourses =
       select C.id, C.code_label, C.code, subjects.subject_code, subjects.subject_label from courses C
       inner join schools on schools.id = C.schoolid
       inner join subjects on subjects.id = C.subjectid
-      where schools.code = $1
+      where schools.code = $1 and exists (select 1 from exams where exams.courseid = C.id)
     `;
     pool.query(checkq, [schoolCode], (err, result) => {
       if (err) return next(err);

@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 import { Modals } from '../modal';
 import { algoliaCourseIndex, courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
-import { showLoginModal, showWaitlistModal } from '../../actions';
+import { showLoginModal, showSignupModal } from '../../actions';
 
 class NavbarComponent extends Component {
   constructor(props) {
@@ -99,7 +99,7 @@ class NavbarComponent extends Component {
             </Link>
             <span>
               <a className="home-button home-button-alt" onClick={this.props.showLoginModal}>Log In</a>
-              <a className="home-button">Sign Up</a>
+              <a className="home-button" onClick={this.props.showSignupModal}>Sign Up</a>
             </span>
           </div>
         </div>
@@ -178,7 +178,7 @@ class NavbarComponent extends Component {
             ) : (
               <span>
                 <a className="nav-button nav-button-alt" onClick={this.props.showLoginModal}>Log In</a>
-                <a className="nav-button" onClick={this.props.showWaitlistModal}>Early Access</a>
+                <a className="nav-button" onClick={this.props.showSignupModal}>Sign Up</a>
               </span>
             )}
           </div>
@@ -200,7 +200,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     showLoginModal: () => dispatch(showLoginModal()),
-    showWaitlistModal: () => dispatch(showWaitlistModal()),
+    showSignupModal: () => dispatch(showSignupModal()),
   };
 };
 

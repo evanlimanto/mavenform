@@ -66,8 +66,6 @@ export const modal = (state = { type: null, errorText: null }, action) => {
   switch (action.type) {
     case 'SHOW_LOGIN_MODAL':
       return { type: 'login', errorText: null };
-    case 'SHOW_WAITLIST_MODAL':
-      return { type: 'waitlist', errorText: null };
     case 'SHOW_SIGNUP_MODAL':
       return { type: 'signup', errorText: null };
     case 'SHOW_FORGOT_PASSWORD_MODAL':

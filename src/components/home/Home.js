@@ -92,8 +92,8 @@ class HomeComponent extends Component {
   }
 
   render() {
-    const schoolCodes = ['ucberkeley', 'ucsandiego', 'gatech', 'columbia', 'iastate', 'psu', 'caltech', 'indiana', 'tamu', 'ucla', 'uow', 'washington'];
-    const schoolLabels = ['UC Berkeley', 'UC San Diego', 'Georgia Tech', 'Columbia', 'Iowa State', 'Penn State', 'Caltech', 'Indiana University', 'Texas A&M', 'UCLA', 'University of Waterloo', 'University of Washington'];
+    const schoolCodes = ['ucberkeley', 'ucsandiego'];
+    const schoolLabels = ['UC Berkeley', 'UC San Diego'];
     const schoolCards = map(schoolCodes, (schoolCode, key) => {
       return (
         <Link key={key} className="card" to={"/" + schoolCode} onClick={() => schoolClickEvent(schoolCode)}>

@@ -22,23 +22,17 @@ class ModalsComponent extends Component {
   signup(e) {
     e.preventDefault();
 
-    const access_code = this.refs.access_code.value;
     const username = this.refs.username.value;
     const email = this.refs.email.value;
     const password = this.refs.password.value;
 
-    if (isEmpty(access_code) || isEmpty(username) || isEmpty(email) || isEmpty(password))
+    if (isEmpty(username) || isEmpty(email) || isEmpty(password))
         return this.setState({ modalError: "Fill in all fields." });
 
     if (!isEmail(email))
         return this.setstate({ modalError: "Enter a valid email." });
 
-    req.post('/signup')
-      .send({ access_code })
-      .end((err, res) => {
-        if (err || !res.ok) return this.setState({ modalError: res.text });
-        else return this.props.auth.signup(email, username, password);
-      });
+    return this.props.auth.signup(email, username, password);
   }
 
   waitlist() {
@@ -90,27 +84,13 @@ class ModalsComponent extends Component {
     const isLoggedIn = this.props.auth.loggedIn();
     if (isLoggedIn || !this.props.modal.type)
       return null;
+
     let infoContent, modalContent;
-    if (this.props.modal.type === 'waitlist') {
+    if (this.props.modal.type === 'login') {
       infoContent = (
         <div className="login-helper">
-          <span> Already have an access code? </span>
-          <a onClick={this.props.showSignupModal}> Sign up! </a>
-        </div>
-      );
-      modalContent = (
-        <span>
-          <hr className="s3" />
-          <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="off"/>
-          <hr className="s2" />
-          <a className="login-button blue" onClick={this.waitlist}>Get Early Access</a>
-        </span>
-      );
-    } else if (this.props.modal.type === 'login') {
-      infoContent = (
-        <div className="login-helper">
-          <span> Don't have an account? </span>
-          <a onClick={this.props.showWaitlistModal}> Get early access! </a>
+          <span> Have an account? </span>
+          <a onClick={this.props.showSignupModal}> Sign Up! </a>
         </div>
       );
       modalContent = (
@@ -130,15 +110,13 @@ class ModalsComponent extends Component {
     } else if (this.props.modal.type === 'signup') {
       infoContent = (
         <div className="login-helper">
-          <span> Don't have an access code? </span>
-          <a onClick={this.props.showWaitlistModal}> Sign up on our waitlist! </a>
+          <span> Have an account? </span>
+          <a onClick={this.props.showLoginModal}> Login! </a>
         </div>
       );
       modalContent = (
         <span>
-          <div className="access-code-signup">Sign up with your Access Code to access content.</div>
-          <input className="login-info" type="text" placeholder="Access Code" ref="access_code" autoComplete="on" />
-          <hr className="s1" />
+          <hr className="s3" />
           <input className="login-info" type="text" placeholder="Username" ref="username" autoComplete="on" />
           <hr className="s1" />
           <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="email" />
@@ -185,7 +163,6 @@ const mapDispatchToProps = (dispatch) => {
     closeModal: () => dispatch(closeModal()),
     showLoginModal: () => dispatch(showLoginModal()),
     showSignupModal: () => dispatch(showSignupModal()),
-    showWaitlistModal: () => dispatch(showWaitlistModal()),
     showForgotPasswordModal: () => dispatch(showForgotPasswordModal()),
     setModalError: (errorText) => dispatch(setModalError(errorText)),
   };
