@@ -24,71 +24,12 @@ const meta = {
 class HomeComponent extends Component {
   constructor(props) {
     super(props);
-
-    this.getSuggestions = this.getSuggestions.bind(this);
-    this.state = {
-      suggestions: [],
-      waitlistErorr: null,
-    };
-
-    this.waitlist = this.waitlist.bind(this);
   }
 
   componentWillMount() {
     if (this.props.auth.loggedIn()) {
       this.props.history.push('/home'); 
     }
-  }
-
-  waitlist(e) {
-    e.preventDefault();
-    const email = this.refs.email.value;
-    if (!isEmail(email))
-      return this.setState({ waitlistError: "Invalid or empty email." });
-    if (!endsWith(email, ".edu"))
-      return this.setState({ waitlistError: "Enter an .edu email." });
-
-    this.setState({ waitlistError: null });
-    request
-      .post("/addToWaitlist")
-      .send({ email })
-      .end((err, res) => {
-        if (err || !res.ok) this.setState({ waitlistError: "Waitlist failed." });
-        else {
-          cookies.set('waitlist_email', email, { expires: 1 });
-          document.location = "/waitlisted";
-        }
-        return;
-      });
-  }
-
-  getSuggestions() {
-    const queryStr = this.refs.search.value;
-    if (queryStr.length === 0) {
-      this.setState({
-        suggestions: []
-      });
-      return;
-    }
-    algoliaCourseIndex.search({
-      query: queryStr,
-      length: 4,
-      offset: 0,
-    }, (err, content) => {
-      const suggestions = map(content.hits, (hit) => {
-        console.log(hit);
-        return {
-          school_code: hit.school_code,
-          school_name: hit.school_name,
-          school_name_highlighted: hit._highlightResult.school_name.value,
-          code: hit.code,
-          code_highlighted: hit._highlightResult.code.value,
-          name: hit.name,
-          name_highlighted: hit._highlightResult.name.value,
-        };
-      });
-      this.setState({ suggestions });
-    });
   }
 
   render() {
@@ -102,18 +43,6 @@ class HomeComponent extends Component {
         </Link> 
       );
     });
-    const suggestions = this.state.suggestions;
-    const searchResults = (suggestions && suggestions.length > 0) ? (
-      <div className="results-container">
-        <div className="results">
-          {map(suggestions, (suggestion, index) => {
-            const aClass = classnames({ bottom: index === suggestions.length - 1 });
-            const suggestionText = `${suggestion.school_name_highlighted} ${suggestion.code_highlighted}: ${suggestion.name_highlighted}`;
-            return <Link to={`/${suggestion.school_code}/${toLower(suggestion.code)}`} className={aClass} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
-          })}
-        </div>
-      </div>
-    ) : null;
 
     return (
       <div className="home">
@@ -128,8 +57,13 @@ class HomeComponent extends Component {
             <hr className="s5" />
             <div className="search-container">
               <div className="material-icons search-icon">search</div>
-              <input className="search" name="search" placeholder="Search for your course to see what study resources are available..." type="text" autoComplete="off" onChange={this.getSuggestions} ref="search" />
-              {searchResults}
+              <input className="search" name="search" placeholder="Search for your course or for specific subjects and topics..." type="text" autoComplete="off" ref="search" />
+            </div>
+            <div className="results-container">
+              <div className="results">
+                <a>options</a>
+                <a>options</a>
+              </div>
             </div>
             <div>
               <ScrollLink className="search-link" to="features" spy={true} smooth={true} duration={500}> 
@@ -140,20 +74,47 @@ class HomeComponent extends Component {
                 <div className="material-icons school">school</div>
                 View Schools 
               </ScrollLink>
-              <hr className="s4" />
             </div>
-            <hr className="s8" />
           </div>
         </div>
-        <Element name="schools" className="schools">
+        <Element name="features" className="features">
+          <div className="center">
+            <hr className="s7-5" />
+            <h4 className="center">Features</h4>
+            <hr className="s3" />
+            <div className="column">
+              <div className="material-icons">touch_app</div>
+              <h1>Interactive</h1>
+              <hr className="s2" />
+              <p>Use interactive elements like solution toggling and live discussion to upgrade your studying experience.</p>
+              <hr className="s1" />
+            </div>
+            <div className="column">
+              <div className="material-icons">view_carousel</div>
+              <h1>Responsive</h1>
+              <hr className="s2" />
+              <p>No more need to zoom in and pan around. Studyform is intuitive and legible with any device type and any screen width.</p>
+              <hr className="s1" />
+            </div>
+            <div className="column">
+              <div className="material-icons">navigation</div>
+              <h1>Navigable</h1>
+              <hr className="s2" />
+              <p>Instead of struggling to search for and wrangle hundreds of PDFs, just browse through our pre-sorted directory.</p>
+              <hr className="s1" />
+            </div>
+            <hr className="s7-5" />
+          </div>
+        </Element>
+        <Element name="schools" className="light-gray schools">
           <hr className="s7-5" />
           <h4 className="center">Schools</h4>
           <hr className="s1" />
-          <h5>Currently supported schools</h5>
+          <h5>Browse resources by school</h5>
           <hr className="s3" />
           <div className="card-container">
             {schoolCards}
-            <hr className="s8" />
+            <hr className="s7-5" />
           </div>
         </Element>
         <Footer />

@@ -59,7 +59,7 @@
   text-align: center;
   position: relative;
   width: 100%;
-  padding: 110px 0 0;
+  padding: 100px 0 100px;
   background: #11aacc;
 }
 
@@ -225,6 +225,10 @@ img.feature-image-two {
   text-align: center;
 }
 
+.schools {
+  border-top: 1px solid #ccc;
+}
+
 .schools h4 {
   padding-top: 0;
 }
@@ -269,8 +273,37 @@ img.feature-image-two {
   right: 15px;
 }
 
-.results em {
-  text-decoration: underline;
+.results-container {
+  display: block;
+  width: 100%;
+  max-width: 655px;
+  margin: auto;
+  padding-left: 70px;
+}
+
+.results {
+  text-align: left;
+  background: #fff;
+  width: 100%;
+  border-top: 1px solid #ccc;
+  border-radius: 0 0 5px 5px;
+  z-index: 3;
+  box-shadow: 0 -5px 0 0 #fff;
+}
+
+.results a {
+  display: block;
+  padding: 10px 20px;
+  margin: 0;
+}
+
+.results a.bottom {
+  border-radius: 0 0 5px 5px;
+}
+
+.results a:hover {
+  background: #0088aa;
+  color: #fff;
 }
 
 p.waitlisted-message {

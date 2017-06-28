@@ -43,11 +43,11 @@
 
 .nav-signed-in {
   text-align: left;
-  padding: 8px 0 9px;
+  padding: 8px 9px 9px 0;
   border: none;
   background: transparent;
-  width: 165px;
   height: 39px;
+  opacity: 1;
 }
 
 .signed-in-icon {
@@ -78,7 +78,16 @@
 
 .nav-search-container {
   flex: 1;
+  position: relative;
   margin: 10px 0 10px 10px;
+}
+
+.nav-icon {
+  position: absolute;
+  margin: 20px 0 0 175px;
+  font-size: 20px;
+  z-index: 1;
+  color: #ccc;
 }
 
 .nav-search {
@@ -86,7 +95,7 @@
   width: 100%;
   float: left;
   text-align: left;
-  padding: 10px 12px;
+  padding: 10px 12px 10px 35px;
   border-radius: 5px;
   background: #fff;
   font-family: 'Lato', sans-serif;
