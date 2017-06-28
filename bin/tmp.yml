@@ -1,0 +1,249 @@
+q1_1: |
+  # 1. TRUE or FALSE? 45 points, each part 3 points
+
+  For each of the questions below, answer TRUE or FALSE.
+  <hr class="s1" />
+  <strong>Clearly indicate your correctly formatted answer: this is what is to be graded. No need to justify!</strong>
+  <hr class="s2" />
+  <strong>1.</strong> $(P \implies \neg Q) \equiv (Q \implies \neg P)$ 
+
+q1_1_s: |
+  <strong>Answer:</strong> TRUE. It's the contrapositive.
+
+q1_2: |
+  <strong>2.</strong> $\forall x \in S, [P(x) \lor Q(x)]$ is equivalent to $[∀x ∈ S, P(x)]∨[∀x ∈ S,Q(x)]$.
+
+q1_2_s: |
+  <strong>Answer:</strong> FALSE. Consider $S$ to be the natural numbers, $P(x)$ to be the number is even, and $Q(x)$ is the number is odd.
+
+q1_3: |
+  <strong>3.</strong> $(¬∀n ∈ N, P(n) \implies P(n+1)) ≡ ∃n ∈ N, ¬P(n)$.
+
+q1_3_s: |
+  <strong>Answer:</strong> FALSE. The left hand side is almost the principle of induction, but is missing the base case. The right hand side is equivalent to the principle of induction. In particular, the left hand side is False when $P(n)$ is always false. A little tricky.
+
+q1_4: |
+  <strong>4.</strong> In the stable marriage problem a female can only get her optimal partner in the female optimal pairing.
+
+q1_4_s: |
+  <strong>Answer:</strong> FALSE. The male optimal pairing could be female optimal for some of the females.
+
+q1_5: |
+  <strong>5.</strong> Consider a botched execution of the stable marriage algorithm: one shy man skips the first person on his list, but the algorithm still terminates. There is no rogue couple in this pairing.
+
+q1_5_s: |
+  <strong>Answer:</strong> FALSE. The woman could have had this man as her favorite. Sad, they never got together. This time for both the man and woman.
+  
+q1_6: |
+  <strong>6.</strong> Consider an algorithm for stable room-mates (or single gender) problem where we start with a pairing and continuing to pair any rogue couple. If this algorithm terminates we get a stable pairing.
+
+q1_6_s: |
+  <strong>Answer:</strong> TRUE. The presence of a rogue couple prevents termination, but the termination condition itself provides a guarantee there is no rogue couple.
+
+q1_7: |
+  <strong>7.</strong> The following statement is a proposition: <hr class="s1" />
+  "A planar graph requires at least six colors to be colored." <hr class="s1" />
+
+q1_7_s: |
+  <strong>Answer:</strong> TRUE. Its value happens to be false, we showed one can color planar graphs with five colors, and the four color theorem states that it can be colored with four.<hr class="s1" />
+  
+q1_8: |
+  <strong>8.</strong> There exists an undirected graph on n vertices such that no two vertices have the same degree.
+
+q1_8_s: |
+  <strong>Answer:</strong> FALSE. The degrees of the vertices are in the set $\\{0,...,n-1\\}$, and if a vertex has degree $0$ if no vertex can have degree $n-1$. Thus, either the degrees are from $\\{0,...,n-\\}$ or $\\{1,...,n-1\\}$. In either case, the pigeionhole principle implies that two vertices have the same degree.
+  
+q1_9: |
+  <strong>9.</strong> Any graph with a vertex of degree $d$ can be $d+1$ colored.
+
+q1_9_s: |
+  <strong>Answer:</strong> FALSE. The maximum degree must be at most $d$. <strong>Tricky. May test the wrong thing.</strong>
+  
+q1_10: |
+  <strong>10.</strong> Maximum degree of any planar graph is 6.
+
+q1_10_s: |
+  <strong>Answer:</strong> FALSE. Consider a graph with 8 vertices with an edge from vertex 1 to every other vertex. This is a tree, is planar, and the vertex 1 has degree 7.
+  
+q1_11: |
+  <strong>11.</strong> If a triangulated planar graph can be 4 colored then all planar graphs can be 4 colored.
+
+q1_11_s: |
+  <strong>Answer:</strong> TRUE. The four color theorem states this. Also, any planar graph with at least 3 vertices can be triangulated by adding edges to faces which have size more than 3. A coloring for this graph is also a coloring for the original planar graph.
+  
+q1_12: |
+  <strong>12.</strong> The number of edges to cut a 4 dimensional hypercube in half is less than the number of edges to cut <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q12-1.png"></span> in half. (To cut in half means the removing the edges to leave to connected components of exactly the same size. We are asking about the size of the removed set of edges.)
+
+q1_12_s: |
+  <strong>Answer:</strong> TRUE. The number of edges in a 4 dimensional hypercube to cut in half is 8. For a complete graph, there are 9 edges in any cut that splits the vertices in <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q12-2.png"></span> into two sets.
+  
+q1_13: |
+  <strong>13.</strong> Any degree 4 graph is planar since it obeys Euler’s formula. <hr class="s1" />
+
+q1_13_s: |
+  <strong>Answer:</strong> FALSE. The four dimensional hypercube is not planar. It has degree 4.
+  
+q1_14: |
+  <strong>14.</strong> If $gcd(x, y) = d$ and $gcd(y,z) = c$, then $gcd(x,z) ≥ gcd(c,d).$
+
+q1_14_s: |
+  <strong>Answer:</strong> TRUE. $gcd(c,d)$ divides $d$ and thus divides $x$, and $gcd(c,d)$ divides $c$ and thus divides $z$. Thus $gcd(c,d)$ divides both and the the $gcd(x,z)$ must be at least as large. <hr class="s1" />
+  
+q1_15: |
+  <strong>15.</strong> If $gcd(x, y) = d$ and $gcd(y,z) = c$, then $gcd(x,z) ≤ gcd(c,d)$.
+
+q1_15_s: |
+  <strong>Answer:</strong> FALSE. Let $x = z = 7$ and $y = 1$.
+
+q2_1: |
+  # 2. An expression or number: 3/3/3/3/3/3/8/8 points. Clearly indicate your correctly formatted answer: this is what is to be graded. No need to justify!
+  <strong>1.</strong> Recall that a bipartite graph is a graph, $G = (V,E)$ where $V = L∪R$ and $E ⊆ L × R$, or where edges connect vertices in $L$ with $R$. What is the sum of degrees of vertices in $L$ in terms of $|L|,|R|$, and $|E|$?
+  <hr class="s1" />
+  <strong>(Answer is an expression or number.)</strong><hr class="s1" />
+
+q2_1_s: |
+  <strong>Answer:</strong> $|E|$. Each edge is incident to one vertex in $L$, the sum of the degrees of vertices in $L$ count the number of such incidences.
+  
+q2_2: |
+  <strong>2.</strong> A connected simple graph, $G = (V,E)$ has one more vertex than it has edges. How many faces are there in a planar drawing of this graph.
+  <hr class="s1" />
+  <strong>(Answer is an expression or number.)</strong>
+
+q2_2_s: |
+  <strong>Answer:</strong> It’s a tree by definition, which is clearly planar as there are no cycles. There is one face, which is the “exterior" face.
+  
+q2_3: |
+  <strong>3.</strong> What is the maximum number of connected components for a graph with $n ≥ 3$ vertices if it has more than $(n−1)(n−2)/2$ edges.
+  <hr class="s1" />
+  <strong>(Answer: an expression or number.)</strong>
+
+q2_3_s: |
+  <strong>Answer:</strong> 1 component. Pigeonhole. Remove a vertex $v$. There are $n − 1$ vertices remaining, and between them, $(n−1)(n−2)/2$ pairs of vertices where there could be an edge. If there are more edges than this number, then there must be an edge from $v$ to the rest of the graph. This holds for any vertex $v$, so the graph is connected.
+  
+q2_4: |
+  <strong>4.</strong> Consider a planar graph $G$ where each face is incident to exactly $5$ edges. Derive an expression for the number of edges in $G, e$, in terms of the number of vertices, $v$ in $G$.
+  <hr class="s1" />
+  <strong>(Answer is an expression or number.)</strong>
+
+q2_4_s: |
+  <strong>Answer:</strong> Euler’s formula: $v+ f = e+2.$ Face edge incidences are $2e$ which equals $5f$. Plugging in, we obtain <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q2-4.png"></span>. Solving yields, <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q2-5.png"></span> <hr class="s1" />
+  Notice, this implies that the number of vertices is 2 (mod 3).
+  
+q2_5: |
+  <strong>5.</strong> How **many solutions** to 5$x$ = 10 (mod 30)?
+  <hr class="s1" />
+  <strong>(Answer is a number.)</strong> <hr class="s1" />
+
+q2_5_s: |
+  <strong>Answer:</strong> There are $5$ solutions - $2, 8, 14, 20$, and $26$. This can be done by trial and error. In general, the equation $ax = b$ (mod m) has a solution if and only if gcd($a,m$) divides $b$. If this is true, then the number of solutions is equal to gcd($a,m$).
+  
+q2_6: |
+  <strong>6.</strong> What are the last three digits of the product $9×99×999×...×999999999$?
+  <hr class="s1" />
+  <strong>(Answer is a number.)</strong>
+
+q2_6_s: |
+  <strong>Answer:</strong> We seek the value of the product mod 1000. Note that every term from 999 to 999999999 is equivalent to (−1) (mod 1000) There are 7 such terms, so their product yields(−1) 7 = −1 (mod 1000). Thus the last three digits are (−1)(9)(99) = −891 = 109.
+
+q2_7: |
+  <strong>7.</strong> Given any graph $G$ that has a $k$-coloring. Give a short argument for the correctness of your upper bound. (We do note that a really bad upper bound, say $|V|$ is not an interesting answer in terms of credit. The expressions may involve the variable $k$, the number of vertices and edges in $G$ as well as other introduced variable.)
+  <hr class="s2" />
+  (a) Provide an upper bound on the maximum number of colors that could be required if one removes an edge from $G$. <hr class="s1" /><strong>(Answer is an expression or number.)</strong>
+
+q2_7_s: |
+  $k$. The old coloring is still valid and it is easy to construct graphs where removing an edge does not reduce the number of colors required to color it.
+
+q2_8: |
+  (b) Provide an upper bound on the maximum number of colors one needs to color the graph if one adds an edge between two vertices in $G$. <strong>(Answer is an expression or number.)</strong><hr class="s1" /> 
+
+q2_8_s: |
+  $k +1$. May need to add a single color, i.e., change the color of one endpoint to a new color. 
+
+q2_9: |
+  (c) Provide an upper bound on the maximum number of colors one needs to color the graph if one adds ` edges between vertices in $G$ where the edges form a cycle. That is, the edges when viewed without any edges in $G$ form a cycle. <strong>(Answer is an expression or number.)</strong>
+
+q2_9_s: |
+  <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q7-1.png"></span> Begin with a vertex and if the next vertex has the same color, color it with a new color. This recolors at most every other vertex in the cycle. When one gets back to the beginning one may have to recolor that vertex, which gives the ceiling if the length is odd.
+
+q2_10: |
+  (d) Provide an upper bound on the maximum number of colors one needs to color the graph if one adds ` edges between vertices in $G$ where the edges form a tree. That is, the edges when viewed without any edges in $G$ form a tree on the incident vertices. <strong>(Answer is an expression.)</strong>
+
+q2_10_s: |
+  <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q7-2.png"></span> Here, start with a two-coloring of the tree, and than recolor the vertices in the smaller color set with new colors, and leave the other colors the same. The new edges are good as one endpoint is a new color, the old edges are good as they were good before. The smaller vertex set has size at most <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q7-3.png"></span> We can argue a tree has a two coloring by starting with a vertex coloring it red, coloring its neighbors blue, and then coloring all their neighbors red. Since there is no cycle, no conflict will arise.
+  <hr class="s1" />
+  Notice this is the same as the cycle, but in this argument you don’t get back to the original vertex. The difference in some sense is that the number of vertices here is <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q7-4.png"></span> where the number of vertices in the previous part was <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q7-5.png"></span><hr class="s1" />
+
+q2_11: |
+  <strong>8.</strong> Consider the graph $G$ formed with vertex set $V = \\{0,...,m-1\\}$, and edge set $E = \\{(x, y) : y = x+g (mod m)\\}$. Let $d = gcd(g,m)$, and <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q8-1.png"></span><hr class="s1" />
+  (a) What is the maximum degree of any vertex in the graph? <strong>(Answer is an expression.)</strong>
+
+q2_11_s: |
+  <strong>Answer:</strong> 2. Each vertex $x$ is incident to the edge $(x, x+g)$ and $(x, x−g)$. We note when $g = m/2$ there are parallel edges; if this was an issue for you and you did not receive credit please submit a regrade request.
+
+q2_12: |
+  (b) What is the length of the shortest cycle? <strong>(Answer is an expression.)</strong> 
+
+q2_12_s: |
+  <strong>Answer:</strong> $m/d. x + (m/d)g = x (mod m)$ since $g$ contains $d$ as a factor. If there were a shorter cycle $x + kg = x (mod m)$ says $kg = 0 (mod m)$, which implies that $kg = zm$, divide both sides by $d$ give <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q8-2.png"></span> Since $d = gcd(g,m)$ we know <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q8-3.png"></span> have no common prime factors. This, in turn, says $k$ must contain all those factors and must therefore have size at least <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q8-4.png"></span>
+  
+q2_13: |
+  <strong>9.</strong> (a) Give an example of a stable marriage instance with 2 men and 2 women where there are two different stable pairings. <strong>(Answer is a description of an instance.)</strong>
+
+q2_13_s: |
+  <strong>Answer:</strong> <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q9-1.png"></span><hr class="s1" />
+
+q2_14: |
+  (b) Give an example of a stable marriage instance with at least three different stable pairings. <strong>(Answer: You may use the table, but if you can describe a construction, that is fine too. Either list three stable pairings or argue they exist. )</strong><hr class="s2" />
+  <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q9-2.png"></span>
+
+q2_14_s: |
+  <strong>Answer:</strong> Have four men and women and essentially use two copies of the above where each man and woman in each copy put those in the other copy at the bottom of the preference list. This instance has 4 stable pairings.
+
+q3_1: |
+  # 3. Some Proofs: 5/5/6/6 points
+  <strong>1.</strong> Prove the statement: If <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q3-1.png"></span> is not divisible by 3, then n−1 is not divisible by 3.
+
+q3_1_s: |
+  <strong>Answer:</strong> Proof by Contrapositive is “If <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q3-2.png"></span> then <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q3-3.png"></span> We have $n = 3k +1$, we have <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q3-4.png"></span>
+  
+q3_2: |
+  <strong>2.</strong> Prove that if one directs the edges in a tree there is at least one vertex with zero in-degree, and one vertex that has zero out-degree.
+
+q3_2_s: |
+  <strong>Answer:</strong> As $n$-vertex trees contain $n-1$ edges the total out-degree is $n-1$, and the average out-degree is $(n−1)/n$. At least one vertex must be average or less and since degrees are integer, this implies that there is a zero out-degree. The same argument holds for in-degree.
+
+q3_3: |
+  <strong>3.</strong> Prove that the edges of any planar graph can be directed so that every vertex has at most out-degree 3. (Strengthen Inductive Claim: Prove that one can direct the edges of every planar graph drawing so that every vertex has out degree at most 3 and the vertices on the exterior face have out degree 2.) 
+
+q3_3_s: |
+  <strong>Answer:</strong> For one vertex, this is trivially true.
+  <hr class="s1" />
+  Given a drawing, we remove a single vertex $v$ on the exterior face. Note that there are two edges incident to $v$ adjacent to the exterior face and any other edge to $v$ are in the exterior face of the drawing for $G−v$ and not in the exterior face for $G$.
+  <hr class="s1" />
+  By induction, we have that inductive claim. In particular, we have directed the edges in $G − v$ so that the exterior face vertices has out-degree at most 2. We replace $v$ and direct the two exterior face edges outward, and direct all the other incident edges inward. The other incident edges may grow the outdegree of formerly exterior face vertices.
+
+q3_4: | 
+  <strong>4.</strong> We wish to prove that <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q4-1.png"></span>.<hr class="s1" />
+  Base case: <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q4-2.png"> .<hr class="s1" />
+  Induction Hypothesis: <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q4-3.png">.<hr class="s1" />
+  <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q4-4.png"></span><hr class="s1" />
+  But, this suggests that we need $3(n+1) ≤ 0$. This clearly does not work. Strengthen the claim and carry out the induction proof. Your answer should clearly state the new claim, and clearly identify new versions of inequalities 1 and 2. <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q4-5.png"></span>
+
+q3_4_s: |
+  <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q4-6.png"></span><hr class="s1" />
+
+q4_1: |
+  # 4. <strong>Stable trios: 8 points.</strong>
+  Suppose there are $n$ men, $n$ women, and $n$ pet dogs that we want to group into trios of one man, woman, and dog each. The men and women have preference lists for each other as in the usual stable marriage problem. In addition, the men and dogs have preference lists for each other. However, each woman has a set of dogs that she hates. <hr class="s2" />
+  We want to find a way to group the men, women, and dogs into trios of one man, one woman, and one dog each such that the following stability criteria hold: <hr class="s2" /> <strong>1.</strong> No man and dog not in the same trio prefer each other to their dog and man in their respective trios <hr class="s1" /> <strong>2.</strong> Each man is in a trio with the best dog he can get in any trio satisfying condition 1 <hr class="s1" /> <strong>3.</strong> No man and woman not in the same trio prefer each other to their woman and man in their respective trios <hr class="s1" /> <strong>4.</strong> No woman is in a trio with a dog that she hates <hr class="s2" />
+  Show how you can find a stable trio if one exists, and otherwise determine that there is no stable trio.
+
+q4_1_s: |
+  <strong>Answer:</strong> First pair the men with the dogs via the usual stable marriage algorithm, men proposing: this ensures condition 1 and 2 hold, and any stable trio must have the men paired with dogs in this way by uniqueness of a male optimal pairing. Then reorder every woman’s preference list as follows: put the men with dogs that she hates at the back of the list, while preserving the order of the men who do not have a dog that she hates. For example, if we had W : M1 &gt; M2 &gt; M3 and M1 is the only one who is paired with a dog she hates, we alter her preferences to W : M2 &gt; M3 &gt; M1. Then run stable marriage algorithm on the women and men with these new preference lists, women proposing.<hr class="s1" />
+  If the algorithm outputs a pairing that satisfies condition 3 and 4, we are done. <hr class="s1" />
+  If 4 is violated, some woman is paired with a man who owns a dog she hates – by female optimality, this woman cannot do any better, and by the way we rearranged her preference list, she must be paired with a man, $M$, who owns a dog she hates in every stable pairing. <hr class="s1" />
+  If 3 is violated, there is a man, $M$, and a women that like each other more than their partners; clearly the man’s dog is problematic since the pairing was female optimal. <hr class="s1" />
+  There may, however, be a different pairing, <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q4-7.png"></span> , where this rogue couple is not rogue. It induces a cycle with the current pairing $T$ that involves $M’s$ current woman, $W$, in $T$.<hr class="s1" />
+  This implies that one can find a cycle in the graph consisting of directed edges from women to men corresponding to pairs in $T$ and directed edges from men to women consisting of edges, $(x, y)$, where man x likes woman y more than his partner in $T$ and the man’s dog is not hated by woman $x$.   <hr class="s1" />
+  Thus, we can search for such a cycle using depth first search, and switch the pairing, from the edges in T in the cycle to the non-edges to form a new pairing. If we find no such cycle, we know that no <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/CS70/mt1-fa17-q4-8.png"></span> exists and can conclude that there is no solution.<hr class="s1" />
+  Note that if we find a cycle that fixes one such “rogue" pair, it only reduces the number of rogue pairs. Thus, this algorithm will terminate. 

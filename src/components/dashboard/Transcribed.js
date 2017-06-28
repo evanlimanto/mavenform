@@ -67,6 +67,7 @@ class Transcribed extends Component {
           <h1>Transcribed Exams</h1>
           {examsList}
         </span>
+        <textarea value={map(this.state.renderedContent, (content) => content.props.content + "\n" + content.props.solution)}></textarea>
         <span className='col'>
           {this.state.renderedContent}
         </span>

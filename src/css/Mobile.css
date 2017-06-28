@@ -25,6 +25,14 @@
     display: block;
   }
 
+  .search {
+    display: none;
+  }
+
+  .search-icon {
+    display: none; 
+  }
+
   .desktop-logo {
     display: none;
   }

@@ -55,17 +55,11 @@ class HomeComponent extends Component {
             <hr className="s2" />
             <h5 className="h5-alt">The ultimate bank of interactive and course-specific study resources</h5>
             <hr className="s5" />
-            <div className="search-container">
+						<div className="search-container">
+							<input type="text" className="search" name="search" placeholder="Search for your course to see what study resources are available..." autocomplete="off" />
               <div className="material-icons search-icon">search</div>
-              <input className="search" name="search" placeholder="Search for your course or for specific subjects and topics..." type="text" autoComplete="off" ref="search" />
             </div>
-            <div className="results-container">
-              <div className="results">
-                <a>options</a>
-                <a>options</a>
-              </div>
-            </div>
-            <div>
+            <div className="home-scrolls">
               <ScrollLink className="search-link" to="features" spy={true} smooth={true} duration={500}> 
                 <div className="material-icons">info_outline</div>
                 Learn More 

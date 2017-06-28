@@ -318,11 +318,11 @@ exports.getLabels =
     });
   };
 
-exports.getProfs = 
+exports.getExamInfo = 
   (req, res, next) => {
     const { schoolCode, courseCode, examTypeCode, termCode } = req.params;
     const getidq = `
-      select E.profs from exams E
+      select E.profs, E.source_url from exams E
       inner join courses C on C.id = E.courseid
       inner join exam_types ET on ET.id = E.examtype
       inner join terms T on T.id = E.examid
@@ -332,8 +332,8 @@ exports.getProfs =
     pool.query(getidq, [schoolCode, termCode, examTypeCode, courseCode], (err, result) => {
       if (err) return next(err);
       if (result.rows.length === 0)
-        return res.json({ profs: null });
-      return res.json({ profs: result.rows[0].profs });
+        return res.json({ profs: null, source_url: null });
+      return res.json({ profs: result.rows[0].profs, source_url: result.rows[0].source_url});
     });
   };
 

@@ -13,15 +13,16 @@ class ExamComponent extends Component {
     super(props);
 
     this.state = {
-      profs: null
+      profs: null,
+      source_url: null,
     };
   }
 
   componentDidMount() {
     const { schoolCode, courseCode, examType, termCode } = this.props;
-    fetch(`/getProfs/${schoolCode}/${courseCode}/${examType}/${termCode}`).then(
+    fetch(`/getExamInfo/${schoolCode}/${courseCode}/${examType}/${termCode}`).then(
       (response) => response.json()
-    ).then((json) => this.setState({ profs: json.profs }));
+    ).then((json) => this.setState({ profs: json.profs, source_url: json.source_url }));
   }
 
   render() {
@@ -37,7 +38,7 @@ class ExamComponent extends Component {
     return (
       <div>
         <DocumentMeta {...meta} />
-        <Navbar exam={true} schoolCode={schoolCode} courseCode={courseCode} examTypeCode={examType} termCode={termCode} />
+        <Navbar exam={true} schoolCode={schoolCode} courseCode={courseCode} examTypeCode={examType} termCode={termCode} source_url={this.state.source_url} />
         {content}
         <Footer />
       </div>

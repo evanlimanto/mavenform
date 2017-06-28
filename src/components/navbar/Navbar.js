@@ -132,12 +132,11 @@ class NavbarComponent extends Component {
         }
       }
       if (this.props.exam) {
-        const url = `https://storage.googleapis.com/studyform/${schoolCode}/pdf/${toLower(courseCode)}/${examTypeCode}-${termCode}-soln.pdf`;
         navbarNav = (
           <div className="gray-nav">
             <div className="container">
               {navbarNav}
-              <a className="utility-button" href={url} target="_blank" rel="noopener noreferrer">View Source</a>
+              <a className="utility-button" href={this.props.source_url} target="_blank" rel="noopener noreferrer">View Source</a>
             </div>
           </div>
         );
