@@ -274,17 +274,19 @@ img.feature-image-two {
 }
 
 .results-container {
-  display: block;
   width: 100%;
-  max-width: 655px;
+  max-width: 585px;
   margin: auto;
-  padding-left: 70px;
+  box-sizing: border-box;
+  position: relative;
 }
 
 .results {
+  position: absolute;
+  left: 35px;
   text-align: left;
-  background: #fff;
   width: 100%;
+  background: #fff;
   border-top: 1px solid #ccc;
   border-radius: 0 0 5px 5px;
   z-index: 3;
