@@ -106,8 +106,8 @@ app.get('/getCourseExams/:schoolCode/:courseCode', retrieveLists.getCourseExams)
 // Retrieve list of labels
 app.get('/getLabels', retrieveLists.getLabels);
 
-// Retrieve profs for an exam
-app.get('/getProfs/:schoolCode/:courseCode/:examTypeCode/:termCode', retrieveLists.getProfs);
+// Retrieve information for an exam
+app.get('/getExamInfo/:schoolCode/:courseCode/:examTypeCode/:termCode', retrieveLists.getExamInfo);
 
 // Retrieve list of courses
 app.get('/getCoursesList', retrieveLists.getCoursesList);

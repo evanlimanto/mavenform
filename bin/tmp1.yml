@@ -1,0 +1,178 @@
+q1_1: |
+  **1. What other courses are you taking this term? (1 point)**
+
+q2_1: |
+  **2. What activity do you really enjoy? Describe how it makes you feel. (1 point)**
+
+q3_1: |
+  # 3. Mechanical Basis (8 points)
+  (a) (3 points) Let vectors <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q3-1.png"><p align="center"><img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q3-2.png"></p>
+  Can the set of vectors<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q3-3.png">form a basis for the vector space<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q3-4.png">? Justify your answer.
+
+q3_2: |
+  (b) (5 points) Let <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q3-5.png">. Given a new set of vectors in <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q3-6.png">
+  <p align="center"><img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q3-7.png"></p>
+  Can the set of vectors <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q3-8.png"> be a basis for<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q3-9.png">?If so, express <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q3-10.png">as a linear combination of the basis vectors. Otherwise, choose a new basis using<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q3-11.png">and any number 
+  of additional vectors in the set, then express<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q3-12.png">as a linear combination of the newly constructed basis vectors.
+
+q4_1: |
+  # 4. Eigenvectors (10 points)
+  (a) (5 points) Find the eigenvectors and associated eigenvalues of 
+  M in terms of a and b.
+  <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q4-1.png"><hr class="s2" />
+
+q4_2: |
+  (b) (5 points) Let<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q4-2.png">
+
+q5_1: |
+  # 5. Eigenvalue Proof (10 points)
+  For two square matrices <strong>A</strong> and <strong>B</strong>, show that <strong>AB</strong> has the same eigenvalues as <strong>BA</strong>.<hr class=”s1” />
+  <i>Hint: Show that if <strong>AB</strong> or <strong>BA</strong> has an eigenvalue λ, then the other one has the same eigenvalue.</i>
+
+q6_1: |
+  <strong>6. Wall Shadows (15 points)</strong><hr class=”s1” />
+  Oh no, someone decided to build a wall between you and your 
+  favorite neighbor! They built a huge complicated
+  3D structure that you cannot fully see. However, you can observe 
+  the shadow cast by this structure.<hr class="s2" />
+  (a) (5 points) Let’s first try to model what the shadow of a 3D 
+  object might be. Create a transformation that flattens all 
+  components of a vector (vectors in 3D space) onto the xy-plane. 
+  That is, find a matrix A such that :<p align="center"><img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q6-1.png"></p>
+
+q6_2: |
+  (b) (5 points) Suppose you wanted to observe the height of the 
+  wall. Could you observe it just by seeing the shadow, assuming the 
+  shadow is created by the transformation from the matrix above?<hr class="s2" />
+
+q6_3: |
+  (c) (5 points) One of your friends comes along and wonders, if you 
+  apply the matrix again, whether you will get any new information. 
+  Realizing your matrix is really just a projection, you argue that 
+  projecting twice will give you no new information. We will show this 
+  generally for any two vectors. To prove this to your friend, show the following:
+  <hr class="S2" />
+  <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q6-2.png">
+
+q7_1: |
+  <strong>7. Structured Illumination (20 points)</strong>
+  In the lab, you acquired images using a single pixel imager and a 
+  projector. You did this by successively creating different 
+  illumination patterns (masks) and recording the total intensity at 
+  the single pixel detector. In this problem, consider a 3×3 
+  illumination grid, where we will use structured light patterns (not 
+  justsingle-pixel masks) to acquire image information.<hr class="s2" />
+  The 9 pixels, represented by<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q7-1.png">have values that are either 
+  0 (no light reflected by the object at that pixel location) or 1 (light is 
+  completely reflected by object at that pixel location). For example, 
+  if you use your sensor to look at the Campanile, pixels<hr class="s2" /><img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q7-2.png">would reflect light from an illumination source, or for
+  Cory Hall, the bottom two rows would reflect light, as shown in Fig. ??
+  <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q7-3.png"><p align="center">Figure 1: Campus objects represented with 9 pixels</p> 
+  For this problem, we will try to use just two mask patterns to 
+  recognize various objects around campus usingour sensor.<hr class="s2" />
+  (a) (2 points) For this part, consider the mask patterns shown in Fig. ??.
+  <hr class="s2" /><img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q7-4.png"><p align="center">Figure 2: Two scanning patterns</p> 
+  The value detected at our light sensor for a particular mask pattern 
+  is the dot-product of the mask pattern with the 9-pixel 
+  representation of the object. Using the two mask patterns in Fig. <strong>2</strong>, write down a matrix <strong>K</strong> to transform some image 
+  represented by a 9-element vector,<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q7-5.png"> into a 2-element
+  vector,<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q7-6.png"><hr class="s2" />
+
+q7_2: |
+  (b) (2 points) The objects we will image first are 9-pixel 
+  representations of the Campanile and Cory Hall,shown in Fig. 
+  <strong>??.</strong> Write down two vectors,<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q7-7.png">that represent the 
+  image data shown in Fig. ??, using 0 for dark pixels and 1 for light pixels.<hr class="s2" />
+
+q7_3: |
+  (c) (2 points) Use the K matrix from part a) to transform<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q7-8.png">into 2-element vectors,<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q7-9.png"><hr class="s2" />
+
+q7_4: |
+  (d) (4 points) Based on your results in part c), how would you use 
+  the elements of your output vector ~y to distinguish between the 
+  Campanile and Cory Hall?
+
+q7_5: |
+  (e) (2 points) Now, let’s consider using this method to look at other 
+  objects, like Sather Gate (arch-shaped) and the Greek Theater 
+  (bowl-shaped), which are represented in Fig. <strong>??.</strong>
+  <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q7-10.png"><p align="center">Figure 3: Sather Gate and the Greek Theater represented by 9 pixels</p>
+  Write down<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q7-11.png">vectors representing these two objects,<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q7-12.png">and compute the output vectors<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q7-13.png">using the same mask patterns from Fig. <strong>3.</strong><hr class="s2" />
+
+q7_6: |
+  (f) (4 points) Can you use the outputs you computed in the 
+  previous part,<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q7-14.png">to distinguish between Sather Gate and 
+  the Greek Theater? Why or why not?
+
+q7_7: |
+  (g) (2 points) The difference between the Sather and Greek objects are the pixels <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q7-15.png">When we generate the vector<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q7-16.png">the 5th and 8th elements of<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q7-17.png">select the 5th or 8th column of K. In terms of linear independence, what is the relationship between the 5th and 8th column of <strong>K?</strong>
+
+q7_8: |
+  (h) (2 points) You want to be able to distinguish all four objects with 
+  just two mask patterns, so you try one more thing: turning your 
+  illumination source 90◦clockwise. This makes the new mask 
+  patterns shown in Fig. <strong>??.</strong>
+  <hr class="s2" />
+  <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q7-18.png"><p align="center">Figure 4: Two scanning patterns, rotated by 90◦ </p><hr class="s1" />Write down the new matrix,<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q7-19.png">, representing the new 
+  mask patterns. In terms of linear independence,what is the 
+  relationship between the 5th and 8th column of <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q7-20.png"> Use 
+  this knowledge to say whetheror not you’ll be able to distinguish 
+  between Sather Gate and the Greek Theater.
+
+q8_1: |
+  # 8. Reservoirs That Give and Take (15 points)
+  Consider a network of three water reservoirs A, B, and C. At the 
+  end of each day water transfers among the reservoirs according to 
+  the directed graph shown below.
+  <p align="center"><img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q8-1.png"></p>
+  The parameters a, b, and c—which label the self-loops—denote the 
+  fractions of the water in reservoirs A,B, and C, respectively, that 
+  stay in the same reservoir at the end of each day n. The parameters 
+  d, e, and f denote the fractions of the reservoir contents that 
+  transfer to adjacent reservoirs at the end of each day,
+  according to the directed graph above.<hr class="s2" />
+  Assume that the reservoir system is conservative—no water enters 
+  or leaves the system, which means that the total water in the 
+  network is constant. Accordingly, for each node, the weights on its 
+  self-loop and its two outgoing edges sum to 1; for example, for 
+  Node A, we have<hr class="s2" /><p align="center">a+d + f = 1,</p>
+  and similar equations hold for the other nodes. Moreover, assume 
+  that all the edge weights are positive numbers—that is,<p align="center">0 &lt; a,b, c,d, e, f &lt; 1.</p> 
+  The state evolution equation governing the water flow dynamics in 
+  the reservoir system is given by s[n+1] =As[n], where the 3×3 
+  matrix A is the state transition matrix, and <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q8-2.png"> is the
+  nonnegative state vector that shows the water distribution among 
+  the three reservoirs at the end of Day n, as fractions of the total 
+  water in the network.<hr class=”s1” />
+  In particular,<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q8-3.png">where the symbol <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q8-4.png"> denotes 
+  componentwise inequality. Since the state vector represents the 
+  fractional distribution of water in the network, we have
+  <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q8-5.png"><hr class="s2" />
+  (a) (5 points) Determine the state transition matrix <strong>A.</strong>
+
+q8_2: |
+  (b) (5 points) Determine <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q8-6.png"> equilibrium state—that is, a 
+  state for which the following is true :<p align="center"><img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q8-7.png"> </p><hr class="s2" />
+
+q8_3: |
+  (c) (5 points) Suppose the state transition matrix for the network is 
+  given by<p align="center"><img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q8-8.png"> </p>
+  Is it possible to determine the state s[n] from the subsequent state 
+  s[n + 1]? Provide a reasonably concise, yet clear and convincing 
+  explanation to justify your answer. You’re NOT asked to compute
+  s[n] from s[n+1] explicitly, but rather to assert, with justification, 
+  whether it is possible to do so.
+
+q9_1: |
+  # 9. Eigenvalues of Transition Matrices (15 points)
+  (a) (5 points) Show that a square matrix <strong>A</strong> and its transpose<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q9-1.png"> Thave the same eigenvalues.
+
+q9_2: |
+  (b) (5 points) Let a square matrix <strong>A</strong> have rows which sum to 
+  one.Show that the vector<img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q9-2.png"> is an eigenvector
+  of <strong>A</strong> and find its corresponding eigenvalue.<hr class="s2" />
+
+q9_3: |
+  (c) (5 points) Show that a state transition matrix representing a 
+  conservative system will always have the eigenvalue <img src="https://storage.googleapis.com/studyform-staging/ucberkeley/img/EE16A/mt1-sp17-q9-3.png"> 
+  Recall that all columns of a conservative state transition matrix sum to one.

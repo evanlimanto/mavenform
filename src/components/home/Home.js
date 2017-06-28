@@ -81,11 +81,11 @@ class HomeComponent extends Component {
             <div className="banner-header">Make Studying Easy</div>
             <hr className="s2" />
             <h5 className="h5-alt">The ultimate bank of interactive and course-specific study resources</h5>
-            <div className="search-container">
-              <input className="search" name="search" placeholder="Enter your college email" type="text" autoComplete="off" ref="email"/>
-              <button className="early-access" type="submit" onClick={(e) => this.waitlist(e)}>Get Early Access</button>
+            <hr className="s5" />
+						<div className="search-container">
+							<input type="text" className="search" name="search" placeholder="Search for your course to see what study resources are available..." autocomplete="off" />
+              <div className="material-icons search-icon">search</div>
             </div>
-            <p className="home-error">{this.state.waitlistError}</p>
             <div className="home-scrolls">
               <ScrollLink className="search-link" to="features" spy={true} smooth={true} duration={500}> 
                 <div className="material-icons">info_outline</div>
