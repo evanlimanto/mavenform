@@ -22,8 +22,8 @@ input[type=button] {
   text-align: left;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
-  font-size: 14px;
-  padding: 10px 10px 12px;
+  font-size: 16px;
+  padding: 10px 15px 12px;
   border-radius: 5px;
   margin-right: 10px;
   border: none;
@@ -416,12 +416,13 @@ img {
 }
 
 a.comments-label {
-  color: grey;
-  font-size: 14px;
+  color: #999;
+  font-size: 16px;
+  padding-left: 10px;
 }
 
 .comments-label:hover {
-  text-decoration: underline;
+  color: #11aacc;
 }
 
 .comments-count {
@@ -443,19 +444,21 @@ a.comments-label {
 }
 
 .comment-box {
-  margin: 25px 0px;
-  padding: 15px 25px;
-  background-color: #f0f0f0;
-  border-radius: 2px;
+  margin: 30px 0px;
+  padding: 25px 25px 24px;
+  background-color: #efefef;
+  border-radius: 5px;
+  display: flex;
+  flex-flow: row;
 }
 
 .comment-input {
+  flex: 1;
   border: 1px solid #cfcfcf;
-  padding: 5px 5px;
-  margin-right: 20px;
+  padding: 10px 15px;
+  margin: 0 20px 0 0;
   font-size: 14px;
-  border-radius: 2px;
-  width: 80%;
+  border-radius: 5px;
   background-color: white;
 }
 
@@ -465,8 +468,7 @@ a.comments-label {
 
 button.comment-button {
   background-color: #11aacc;
-  padding: 6px 10px 7px;
-  margin-top: 10px;
+  padding: 10px 15px;
   color: white;
   border: none;
   border-radius: 5px;

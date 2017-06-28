@@ -69,18 +69,15 @@ class SolutionComponent extends Component {
     }
 
     const solutionButton = (
-      <input className={((this.state.showSolution) ? "gray" : "blue") + " solution-button"} type="button"
-       value="Solution" onClick={() => this.toggleSolution()}/>
+      <input className={((this.state.showSolution) ? "gray" : "blue")} type="button"
+       value={((this.state.showSolution) ? "Hide Solution" : "Show Solution")} onClick={() => this.toggleSolution()}/>
     );
 
     return (
       <div>
         <hr className="s3" />
         {solutionButton}
-        <a className="comments-label noselect" onClick={this.toggleComments}>
-          Comment
-          {/*<span className="comments-count">0</span>*/}
-        </a>
+        {solutionContent}
         {!this.state.showComments ||
           <div className="comment-box">
             <input type="text" placeholder="Add a comment..." className="comment-input" ref="comment" />
@@ -95,7 +92,6 @@ class SolutionComponent extends Component {
             </div>
           </div>
         }
-        {solutionContent}
       </div>
     );
   }
