@@ -82,10 +82,14 @@ body {
   background: #444;
 }
 
-.s1, .s2, .s3, .s4, .s5, .margin, .margin-plus, .scode {
+.s0-5, .s1, .s2, .s3, .s4, .s5, .s7-5, .s8 {
   display: block;
   width: 100%;
   clear: both;
+}
+
+.s0-5 {
+  height: 5px;
 }
 
 .s1 {
@@ -108,16 +112,12 @@ body {
   height: 50px;
 }
 
-.margin {
+.s7-5 {
   height: 75px;
 }
 
-.margin-plus {
+.s8 {
   height: 80px;
-}
-
-.scode {
-  height: 5px;
 }
 
 .active {

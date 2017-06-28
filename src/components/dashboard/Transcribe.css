@@ -3,7 +3,7 @@
   display: block;
   float: left;
   padding: 10px 15px;
-  margin-left: 10px;
+  s7-5-left: 10px;
 }
 
 .admin span.transcription {
@@ -39,32 +39,32 @@
   padding: 10px 5px;
   font-size: 16px;
   border-radius: 5px;
-  margin-left: 20px;
+  s7-5-left: 20px;
 }
 
 .admin .question img {
-  margin: 0px;
+  s7-5: 0px;
 }
 
 .admin input[type="text"], select {
-  margin-left: 15px;
+  s7-5-left: 15px;
   float: right;
   padding: 5px;
 }
 
 .admin hr.spacer {
-  margin: 20px 0px;
+  s7-5: 20px 0px;
 }
 
 .admin p.error {
   color: red;
-  margin: 0px 15px;
+  s7-5: 0px 15px;
   display: inline;
 }
 
 .admin p.success {
   color: green;
-  margin: 0px 15px;
+  s7-5: 0px 15px;
   display: inline;
 }
 

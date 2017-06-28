@@ -77,7 +77,7 @@ class CourseComponent extends Component {
         </table>
         </div>
         </div>
-        <hr className="margin" />
+        <hr className="s7-5" />
         </div>
       </div>
     );

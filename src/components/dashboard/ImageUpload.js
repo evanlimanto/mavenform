@@ -55,7 +55,7 @@ class ImageUploadComponent extends Component {
 
   render() {
     const schoolsSelect = (
-      <select style={{ "marginLeft": "20px" }} ref="school">
+      <select style={{ "s7-5Left": "20px" }} ref="school">
       {map(this.props.schools, (school, key) => {
         return <option key={key} value={school.code}>{school.name}</option>;
       })}
@@ -63,7 +63,7 @@ class ImageUploadComponent extends Component {
     );
 
     const examsSelect = (
-      <select style={{ "marginLeft": "20px" }} ref="exam">
+      <select style={{ "s7-5Left": "20px" }} ref="exam">
       {map(this.props.exams.key_dict, (exam, key) => {
         return <option value={key} key={key}>{exam.courseid} - {exam.examtype} - {exam.examid}</option>;
       })}
@@ -84,10 +84,10 @@ class ImageUploadComponent extends Component {
         {examsSelect}
         <br/>
         <label>Problem Number</label>
-        <input type="text" placeholder="1, 2, 3, etc" ref="problem_num" style={{ "marginLeft": "20px" }} />
+        <input type="text" placeholder="1, 2, 3, etc" ref="problem_num" style={{ "s7-5Left": "20px" }} />
         <br />
         <label>Image Number</label>
-        <input type="text" placeholder="1, 2, 3, etc" ref="image_num" style={{ "marginLeft": "20px" }} />
+        <input type="text" placeholder="1, 2, 3, etc" ref="image_num" style={{ "s7-5Left": "20px" }} />
         <br />
         <button onClick={(e) => this.upload(e)}>Upload</button>
       </form>

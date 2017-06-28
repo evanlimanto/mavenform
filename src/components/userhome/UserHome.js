@@ -218,16 +218,16 @@ class UserHomeComponent extends Component {
                 </a>
               </div>
             )}
-            <hr className="margin" />
+            <hr className="s7-5" />
           </div>
           <div className="schools">
-            <hr className="margin" />
+            <hr className="s7-5" />
             <h4>Directory</h4>
             <h5>Manually browse schools</h5>
             <hr className="s3" />
             <div className="card-container">
               {schoolCards}
-              <hr className="margin-plus" />
+              <hr className="s7-5-plus" />
             </div>
           </div>
           <div className="blue center footer">

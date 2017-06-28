@@ -97,11 +97,6 @@ class NavbarComponent extends Component {
             <Link to="/" className="mobile-logo">
               <img className="logo home-logo" src="/img/icon.svg" alt="home logo" />
             </Link>
-            <div className="home-icon material-icons">search</div>
-            <div className="home-search-container">
-              <input className="home-search" name="search" placeholder="Search courses..." type="text" autoComplete="off" onChange={this.getSuggestions} ref="search" />
-              {searchResults}
-            </div>
             <span>
               <a className="home-button home-button-alt" onClick={this.props.showLoginModal}>Log In</a>
               <a className="home-button" onClick={this.props.showSignupModal}>Sign Up</a>
@@ -166,18 +161,18 @@ class NavbarComponent extends Component {
           <div className="container">
             <Link className="desktop-logo" to="/"><img className="logo" src="/img/logo.svg" alt="logo" /></Link>
             <Link className="mobile-logo" to="/"><img className="logo" src="/img/icon.svg" alt="logo" /></Link>
-            <div className="nav-search-container">
+            <div className="material-icons nav-icon">search</div>
+            <div className="nav-search-container">             
               <input className="nav-search" name="search" placeholder="Search courses..." type="text" autoComplete="off" onChange={this.getSuggestions} ref="search" />
               {searchResults}
             </div>
             {(isLoggedIn) ? (
               <span>
-                <span className="nav-button nav-signed-in" onClick={this.toggleProfileDropdown}>
+                <span className="nav-button nav-signed-in">
                   <div className="material-icons signed-in-icon">person</div>
                   {username}
-                  <div className="material-icons signed-in-arrow">keyboard_arrow_down</div>
                 </span>
-                {this.state.profileDropdownOn ? (<Link to="/logout" className="logout">Log Out</Link>) : null}
+                <Link to="/logout" className="nav-button">Log Out</Link>
               </span>
             ) : (
               <span>
