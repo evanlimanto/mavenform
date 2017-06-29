@@ -12,7 +12,8 @@ class SolutionComponent extends Component {
     this.state = {
       showSolution: (process.env.NODE_ENV === 'development'),
       showComments: (process.env.NODE_ENV === 'development'),
-      comments: null,
+      comments: [],
+      error: null,
     };
 
     this.toggleSolution = this.toggleSolution.bind(this);
@@ -36,6 +37,9 @@ class SolutionComponent extends Component {
   }
 
   addComment() {
+    if (!this.props.auth.loggedIn())
+      return this.setState({ error: "Log in to comment." });
+
     const { nickname, user_id } = this.props.auth.getProfile();
     const content_id = this.props.content_id;
     const comment = this.refs.comment.value;
@@ -43,7 +47,7 @@ class SolutionComponent extends Component {
     if (isEmpty(comment))
       return;
 
-    this.setState({ comments: concat(this.state.comments, { content: comment, nickname }) });
+    this.setState({ comments: concat(this.state.comments, { content: comment, nickname }), error: null });
     req.post('/addComment')
       .send({ user_id, content_id, comment })
       .end((err, res) => {
@@ -82,6 +86,7 @@ class SolutionComponent extends Component {
           <div className="comment-box">
             <input type="text" placeholder="Add a comment..." className="comment-input" ref="comment" />
             <button className="comment-button" onClick={this.addComment}>Comment</button>
+            {!this.state.error || (<p className="error-text">{this.state.error}</p>)}
             <div className="comments">
               {map(this.state.comments, (comment, key) => (
                 <div key={key} className="comment">
