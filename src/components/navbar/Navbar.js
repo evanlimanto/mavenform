@@ -1,6 +1,6 @@
 import React, { Component } from 'react'; import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { has, map, toLower } from 'lodash';
+import { has, map, toUpper } from 'lodash';
 import classnames from 'classnames';
 
 import { Modals } from '../modal';
@@ -81,7 +81,7 @@ class NavbarComponent extends Component {
           {map(suggestions, (suggestion, index) => {
             const aClass = classnames({ bottom: index === suggestions.length - 1 });
             const suggestionText = `${suggestion.school_name_highlighted} ${suggestion.code_label_highlighted}`;
-            return <Link key={index} to={`/${suggestion.school_code}/${toLower(suggestion.code)}`} className={aClass} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
+            return <Link key={index} to={`/${suggestion.school_code}/${toUpper(suggestion.code)}`} className={aClass} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
           })}
         </div>
       ) : (<div className={classnames({ "nav-results": true, "nav-results-signed-in": isLoggedIn })}><a>No results.</a></div>)) : null;

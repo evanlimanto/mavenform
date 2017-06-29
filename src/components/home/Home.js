@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'; import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import DocumentMeta from 'react-document-meta';
-import { map, toLower } from 'lodash';
+import { map, toLower, toUpper } from 'lodash';
 import Footer from '../footer';
 import Navbar from '../navbar';
 import { schoolClickEvent } from '../../events';
@@ -84,7 +83,7 @@ class HomeComponent extends Component {
         <div className="results">
         {map(this.state.suggestions, (suggestion, index) => {
           const suggestionText = `${suggestion.school_name_highlighted} ${suggestion.code_label_highlighted}`;
-          return <Link key={index} to={`/${suggestion.school_code}/${toLower(suggestion.code)}`} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
+          return <Link key={index} to={`/${suggestion.school_code}/${toUpper(suggestion.code)}`} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
         })}
         </div>
       </div>
