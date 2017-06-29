@@ -1,4 +1,4 @@
-import { join, split, reduce, toUpper } from 'lodash';
+import { has, join, split, reduce, toUpper } from 'lodash';
 
 import { updateExamList, updateCourseList, updateSchoolList, updateExamTypesList, updateTermList, updateLabels } from '../actions';
 

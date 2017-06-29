@@ -6,7 +6,7 @@ import isEmpty from 'validator/lib/isEmpty';
 import req from 'superagent';
 
 import Modal from './Modal';
-import { closeModal, showLoginModal, showWaitlistModal, showSignupModal, showForgotPasswordModal, setModalError } from '../../actions';
+import { closeModal, showLoginModal, showSignupModal, showForgotPasswordModal, setModalError } from '../../actions';
 
 class ModalsComponent extends Component {
   constructor(props) {
@@ -118,7 +118,7 @@ class ModalsComponent extends Component {
           <hr className="s3" />
           <input className="login-info" type="text" placeholder="Username" ref="username" autoComplete="off" />
           <hr className="s1" />
-          <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="email" autoComplete="off" />
+          <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="off" />
           <hr className="s1" />
           <input className="login-info" type="password" placeholder="Password" ref="password" autoComplete="off" />
           <hr className="s2" />

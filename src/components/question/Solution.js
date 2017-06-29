@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import { concat, map } from 'lodash';
+import { concat, has, map } from 'lodash';
 import req from 'superagent';
 import isEmpty from 'validator/lib/isEmpty';
 import { toggleSolutionEvent } from '../../events';
@@ -11,14 +11,20 @@ class SolutionComponent extends Component {
     super(props);
     this.state = {
       showSolution: (process.env.NODE_ENV === 'development'),
-      showComments: (process.env.NODE_ENV === 'development'),
+      showComments: true,
       comments: [],
       error: null,
     };
 
     this.toggleSolution = this.toggleSolution.bind(this);
-    this.toggleComments = this.toggleComments.bind(this);
     this.addComment = this.addComment.bind(this);
+  }
+
+  componentDidMount() {
+    // TODO: Make this more efficient with 1 request
+    fetch(`/getComments/${this.props.content_id}`)
+      .then((response) => response.json())
+      .then((json) => this.setState({ comments: json }));
   }
 
   toggleSolution() {
@@ -26,21 +32,15 @@ class SolutionComponent extends Component {
     this.setState({ showSolution: !this.state.showSolution });
   }
 
-  toggleComments() {
-    if (this.state.comments === null) {
-      fetch(`/getComments/${this.props.content_id}`)
-        .then((response) => response.json())
-        .then((json) => this.setState({ comments: json, showComments: !this.state.showComments }));
-    } else {
-      this.setState({ showComments: !this.state.showComments });
-    }
-  }
-
   addComment() {
     if (!this.props.auth.loggedIn())
       return this.setState({ error: "Log in to comment." });
 
-    const { nickname, user_id } = this.props.auth.getProfile();
+    const profile = this.props.auth.getProfile();
+    const user_id = profile.user_id;
+    const nickname = (has(profile, 'user_metadata') && has(profile.user_metadata, 'username')) ?
+      (profile.user_metadata.username) : (profile.given_name);
+
     const content_id = this.props.content_id;
     const comment = this.refs.comment.value;
 
