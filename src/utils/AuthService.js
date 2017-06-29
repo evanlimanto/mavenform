@@ -13,7 +13,7 @@ export default class AuthService {
       clientID: '3SPCS4VBz4m9U3ftP37BdwoSm9r4obPN',
       domain: 'mavenform.auth0.com',
       responseType: 'token id_token',
-      redirectUri: '/login'
+      redirectUri: ((process.env.NODE_ENV === 'development') ? 'http://localhost:3000/login' : 'http://studyform.com/login'),
     })
     this.history = createBrowserHistory()
 
