@@ -18,6 +18,7 @@
   "dependencies": {
     "@google-cloud/storage": "^1.1.1",
     "algoliasearch": "^3.22.3",
+    "arr-flatten": "^1.0.3",
     "async": "^2.4.1",
     "auth0-js": "^8.5.0",
     "aws-sdk": "^2.42.0",
