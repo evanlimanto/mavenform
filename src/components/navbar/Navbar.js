@@ -97,10 +97,20 @@ class NavbarComponent extends Component {
             <Link to="/" className="mobile-logo">
               <img className="logo home-logo" src="/img/icon.svg" alt="home logo" />
             </Link>
-            <span>
-              <a className="home-button home-button-alt" onClick={this.props.showLoginModal}>Log In</a>
-              <a className="home-button" onClick={this.props.showSignupModal}>Sign Up</a>
-            </span>
+            {(isLoggedIn) ? (
+              <span>
+                <a className="home-button home-button-alt">
+                  <div className="material-icons signed-in-icon">person</div>
+                  {username}
+                </a>
+                <Link to="/logout" className="home-button">Log Out</Link>
+              </span>
+            ) : (
+              <span>
+                <a className="home-button home-button-alt" onClick={this.props.showLoginModal}>Log In</a>
+                <a className="home-button" onClick={this.props.showSignupModal}>Sign Up</a>
+              </span>
+            )}
           </div>
         </div>
       );

@@ -80,8 +80,8 @@ class SolutionComponent extends Component {
         {solutionContent}
         {!this.state.showComments ||
           <div className="comment-box">
-            <input type="text" placeholder="Add a comment..." className="comment-input" ref="comment" />
-            <button className="comment-button" onClick={this.addComment}>Comment</button>
+            <input type="text" placeholder="Ask a question or add a comment..." className="comment-input" ref="comment" />
+            <button className="comment-button" onClick={this.addComment}>Post</button>
             <div className="comments">
               {map(this.state.comments, (comment, key) => (
                 <div key={key} className="comment">

@@ -35,10 +35,6 @@ class SchoolComponent extends Component {
   }
 
   getCourseItems() {
-    if (this.state.courses === null)
-      return "Loading courses...";
-    if (keys(this.state.courses).length === 0)
-      return "No courses yet. Check again for more updates!";
     const schoolCode = this.props.schoolCode;
     return map(sortBy(this.state.courses, [(course) => course.label]), (obj, subject) => {
       let index = 0;
