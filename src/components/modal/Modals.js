@@ -81,8 +81,7 @@ class ModalsComponent extends Component {
   }
 
   getModal() {
-    const isLoggedIn = this.props.auth.loggedIn();
-    if (isLoggedIn || !this.props.modal.type)
+    if (!this.props.modal.type)
       return null;
 
     let infoContent, modalContent;
@@ -147,7 +146,7 @@ class ModalsComponent extends Component {
   }
 
   render() {
-    return this.getModal();    
+    return this.getModal();
   }
 }
 

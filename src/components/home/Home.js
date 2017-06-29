@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import DocumentMeta from 'react-document-meta';
-import { endsWith, map, toLower } from 'lodash';
-import cookies from 'browser-cookies';
+import { map, toLower } from 'lodash';
 import Footer from '../footer';
 import Navbar from '../navbar';
 import { schoolClickEvent } from '../../events';
-import isEmail from 'validator/lib/isEmail';
 import { algoliaCourseIndex } from '../../utils';
 
-const request = require('superagent');
 const Scroll = require('react-scroll');
 const ScrollLink = Scroll.Link;
 const Element = Scroll.Element;
@@ -24,12 +20,51 @@ const meta = {
 class HomeComponent extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      suggestions: [],
+    }
+    this.getSuggestions = this.getSuggestions.bind(this);
   }
 
-  componentWillMount() {
-    if (this.props.auth.loggedIn()) {
-      this.props.history.push('/home'); 
+  componentDidMount() {
+    window.addEventListener('click', (e) => {
+      const logout = document.getElementsByClassName("logout");
+      const arrow = document.getElementsByClassName("nav-signed-in");
+      if (logout.length > 0 && !logout[0].contains(e.target) && !arrow[0].contains(e.target) && this.state.profileDropdownOn) {
+        this.setState({ profileDropdownOn: false });  
+      }
+      const searchResults = document.getElementsByClassName("nav-results");
+      if (searchResults.length > 0 && !searchResults[0].contains(e.target) && this.state.suggestionsDropdownOn) {
+        this.setState({ suggestionsDropdownOn: false });
+      }
+    });
+  }
+
+  getSuggestions() {
+    const queryStr = this.refs.search.value;
+    if (queryStr.length === 0) {
+      this.setState({
+        suggestions: []
+      });
+      return;
     }
+    algoliaCourseIndex.search({
+      query: queryStr,
+      length: 4,
+      offset: 0,
+    }, (err, content) => {
+      const suggestions = map(content.hits, (hit) => {
+        return {
+          code: hit.code,
+          school_code: hit.school_code,
+          school_name: hit.school_name,
+          code_label_highlighted: hit._highlightResult.code_label.value,
+          school_name_highlighted: hit._highlightResult.school_name.value,
+        };
+      });
+      this.setState({ suggestions, suggestionsDropdownOn: true });
+    });
   }
 
   render() {
@@ -42,6 +77,11 @@ class HomeComponent extends Component {
           <span className="card-arrow">&#8594;</span>
         </Link> 
       );
+    });
+
+    const searchResults = map(this.state.suggestions, (suggestion, index) => {
+      const suggestionText = `${suggestion.school_name_highlighted} ${suggestion.code_label_highlighted}`;
+      return <Link key={index} to={`/${suggestion.school_code}/${toLower(suggestion.code)}`} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
     });
 
     return (
@@ -57,12 +97,11 @@ class HomeComponent extends Component {
             <hr className="s5" />
 						<div className="search-container">
 							<div className="material-icons search-icon">search</div>
-              <input className="search" name="search" placeholder="Search for your course or for specific subjects and topics..." type="text" autoComplete="off" ref="search" />
+              <input className="search" name="search" ref="search" placeholder="Search for your course or for specific subjects and topics..." type="text" autoComplete="off" onChange={this.getSuggestions} />
             </div>
             <div className="results-container">
               <div className="results">
-                <a>options</a>
-                <a>options</a>
+                {searchResults}
               </div>
             </div>
             <div className="home-scrolls">

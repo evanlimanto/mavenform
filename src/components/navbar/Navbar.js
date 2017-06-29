@@ -63,7 +63,7 @@ class NavbarComponent extends Component {
       });
       this.setState({ suggestions, suggestionsDropdownOn: true });
     });
-  }j5 
+  }
 
   render() {
     const isLoggedIn = this.props.auth.loggedIn();
@@ -156,7 +156,7 @@ class NavbarComponent extends Component {
 
     return (
       <div>
-        <Modals ref={(instance) => { this.modals = instance; }} />
+        <Modals />
         <div className="nav">
           <div className="container">
             <Link className="desktop-logo" to="/"><img className="logo" src="/img/logo.svg" alt="logo" /></Link>
