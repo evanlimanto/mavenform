@@ -116,11 +116,11 @@ class ModalsComponent extends Component {
       modalContent = (
         <span>
           <hr className="s3" />
-          <input className="login-info" type="text" placeholder="Username" ref="username" autoComplete="on" />
+          <input className="login-info" type="text" placeholder="Username" ref="username" autoComplete="off" />
           <hr className="s1" />
-          <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="email" />
+          <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="email" autoComplete="off" />
           <hr className="s1" />
-          <input className="login-info" type="password" placeholder="Password" ref="password" autoComplete="on" />
+          <input className="login-info" type="password" placeholder="Password" ref="password" autoComplete="off" />
           <hr className="s2" />
           <a className="login-button blue" onClick={this.signup}>Sign Up</a>
         </span>
