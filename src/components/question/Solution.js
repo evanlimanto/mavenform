@@ -59,9 +59,8 @@ class SolutionComponent extends Component {
   }
 
   render() {
-    var solutionContent = null;
-
-    if (this.props.solution) {
+    let solutionContent = null, solutionButton = null;
+    if (this.props.solution && this.props.solution.length > 0) {
       const solutionClass = classnames({
         solution: true,
         hidden: !this.state.showSolution,
@@ -71,12 +70,9 @@ class SolutionComponent extends Component {
           <span dangerouslySetInnerHTML={{'__html': this.props.solution}} />
         </div>
       );
+      solutionButton = (<input className={((this.state.showSolution) ? "gray" : "blue")} type="button"
+        value={((this.state.showSolution) ? "Hide Solution" : "Show Solution")} onClick={() => this.toggleSolution()}/>);
     }
-
-    const solutionButton = (
-      <input className={((this.state.showSolution) ? "gray" : "blue")} type="button"
-       value={((this.state.showSolution) ? "Hide Solution" : "Show Solution")} onClick={() => this.toggleSolution()}/>
-    );
 
     return (
       <div>
