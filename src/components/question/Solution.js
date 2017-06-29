@@ -5,6 +5,7 @@ import { concat, has, map } from 'lodash';
 import req from 'superagent';
 import isEmpty from 'validator/lib/isEmpty';
 import { toggleSolutionEvent } from '../../events';
+import { showLoginModal, showSignupModal } from '../../actions';
 
 class SolutionComponent extends Component {
   constructor(props) {
@@ -82,11 +83,17 @@ class SolutionComponent extends Component {
         <hr className="s3" />
         {solutionButton}
         {solutionContent}
-        {!this.state.showComments ||
+        {(!this.props.auth.loggedIn()) ? (
           <div className="comment-box">
-            <input type="text" placeholder="Ask a question or add a comment..." className="comment-input" ref="comment" />
-            <button className="comment-button" onClick={this.addComment}>Post</button>
-            {!this.state.error || (<p className="error-text">{this.state.error}</p>)}
+            <p className="comment-helper"><a onClick={this.props.showLoginModal}>Log in</a> or <a onClick={this.props.showSignupModal}>sign up</a> to see discussion or post a question.</p>
+          </div>
+        ) : (
+          <div className="comment-box">
+            <div className="poster-container">
+              <input type="text" placeholder="Ask a question or add a comment..." className="comment-input" ref="comment" />
+              <button className="comment-button" onClick={this.addComment}>Post</button>
+              {!this.state.error || (<p className="error-text">{this.state.error}</p>)}
+            </div>
             <div className="comments">
               {map(this.state.comments, (comment, key) => (
                 <div key={key} className="comment">
@@ -96,7 +103,7 @@ class SolutionComponent extends Component {
               ))}
             </div>
           </div>
-        }
+        )}
       </div>
     );
   }
@@ -108,8 +115,16 @@ const mapStateToProps = (state) => {
   }
 };
 
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    showLoginModal: () => dispatch(showLoginModal()),
+    showSignupModal: () => dispatch(showSignupModal()),
+  };
+};
+
 const Solution = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps,
 )(SolutionComponent);
 
 export default Solution;

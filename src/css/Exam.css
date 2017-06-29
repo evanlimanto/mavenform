@@ -446,11 +446,27 @@ a.comments-label {
 .comment-box {
   margin: 32px 0px;
   padding: 25px 25px 24px;
-  background-color: #f4f4f4;
+  background-color: #f3f3f3;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+.poster-container {
   display: flex;
   flex-flow: row;
+}
+
+.comment-helper {
+  color: #999;
+}
+
+.comment-helper a {
+  color: #999;
+  text-decoration: underline;
+}
+
+.comment-helper a:hover {
+  color: #11aacc;
 }
 
 .comment-input {
@@ -496,12 +512,13 @@ button.comment-button:hover {
 }
 
 .comment-header {
-  font-weight: 800;
+  font-weight: 700;
   font-size: 16px;
+  margin: 5px 0 0;
 }
 
 .comment-content {
-  margin: 5px 0px;
+  margin: 5px 0 0;
   font-size: 14px;
 }
 
