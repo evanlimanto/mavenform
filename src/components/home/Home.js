@@ -79,10 +79,16 @@ class HomeComponent extends Component {
       );
     });
 
-    const searchResults = map(this.state.suggestions, (suggestion, index) => {
-      const suggestionText = `${suggestion.school_name_highlighted} ${suggestion.code_label_highlighted}`;
-      return <Link key={index} to={`/${suggestion.school_code}/${toLower(suggestion.code)}`} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
-    });
+    const searchResults = (this.state.suggestions.length > 0) ? (
+      <div className="results-container">
+        <div className="results">
+        {map(this.state.suggestions, (suggestion, index) => {
+          const suggestionText = `${suggestion.school_name_highlighted} ${suggestion.code_label_highlighted}`;
+          return <Link key={index} to={`/${suggestion.school_code}/${toLower(suggestion.code)}`} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
+        })}
+        </div>
+      </div>
+    ) : null;
 
     return (
       <div className="home">
@@ -99,11 +105,7 @@ class HomeComponent extends Component {
 							<div className="material-icons search-icon">search</div>
               <input className="search" name="search" ref="search" placeholder="Search for your course or for specific subjects and topics..." type="text" autoComplete="off" onChange={this.getSuggestions} />
             </div>
-            <div className="results-container">
-              <div className="results">
-                {searchResults}
-              </div>
-            </div>
+            {searchResults}
             <div className="home-scrolls">
               <ScrollLink className="search-link" to="features" spy={true} smooth={true} duration={500}> 
                 <div className="material-icons">info_outline</div>
