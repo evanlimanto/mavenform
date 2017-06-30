@@ -56,7 +56,7 @@ schools = _.filter(schools, (school) => school[1] > 50);
 
 const phantom = require('phantom');
 as.map(schools, (item, callback) => {
-  (async (function() {
+  return (async (function() {
     const instance = await (phantom.create());
     const page = await (instance.createPage());
     await (page.on("onResourceRequested", function(requestData, networkRequest) {
@@ -67,6 +67,7 @@ as.map(schools, (item, callback) => {
       } else {
         console.info('Requesting', requestData.url)
       }
+      return;
     }));
     const status = await (page.open('https://piazza.com/' + item[0]));
     console.log(status);
