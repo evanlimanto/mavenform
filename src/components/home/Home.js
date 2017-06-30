@@ -98,11 +98,11 @@ class HomeComponent extends Component {
           <div className="banner-text">
             <div className="banner-header">Make Studying Easy</div>
             <hr className="s2" />
-            <h5 className="h5-alt">The ultimate bank of interactive and course-specific study resources</h5>
+            <h5 className="h5-alt">Find past exams and practice problems to solve and discuss online</h5>
             <hr className="s5" />
 						<div className="search-container">
 							<div className="material-icons search-icon">search</div>
-              <input className="search" name="search" ref="search" placeholder="Search for your course or for specific subjects and topics..." type="text" autoComplete="off" onChange={this.getSuggestions} />
+              <input className="search" name="search" ref="search" placeholder="Search for your course here (e.g. CS 61A, Math 1B, Econ 100)." type="text" autoComplete="off" onChange={this.getSuggestions} />
             </div>
             {searchResults}
             <div className="home-scrolls">
@@ -126,21 +126,21 @@ class HomeComponent extends Component {
               <div className="material-icons">touch_app</div>
               <h1>Interactive</h1>
               <hr className="s2" />
-              <p>Use interactive elements like solution toggling and live discussion to upgrade your studying experience.</p>
+              <p>Use interactive elements like solution toggling and a navigation menu to check your answers online and save time.</p>
+              <hr className="s1" />
+            </div>
+            <div className="column">
+              <div className="material-icons">people</div>
+              <h1>Collaborative</h1>
+              <hr className="s2" />
+              <p>Post a question or comment on any practice problem and discuss with other students studying the same topics.</p>
               <hr className="s1" />
             </div>
             <div className="column">
               <div className="material-icons">view_carousel</div>
               <h1>Responsive</h1>
               <hr className="s2" />
-              <p>No more need to zoom in and pan around. Studyform is intuitive and legible with any device type and any screen width.</p>
-              <hr className="s1" />
-            </div>
-            <div className="column">
-              <div className="material-icons">navigation</div>
-              <h1>Navigable</h1>
-              <hr className="s2" />
-              <p>Instead of struggling to search for and wrangle hundreds of PDFs, just browse through our pre-sorted directory.</p>
+              <p>If you need to study on the go, our interface is intuitive and legible with any device type and any screen width.</p>
               <hr className="s1" />
             </div>
             <hr className="s7-5" />

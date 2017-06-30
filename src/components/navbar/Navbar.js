@@ -99,10 +99,10 @@ class NavbarComponent extends Component {
             </Link>
             {(isLoggedIn) ? (
               <span>
-                <a className="home-button home-button-alt">
+                <div className="home-button home-button-alt signed-in-home">
                   <div className="material-icons signed-in-icon">person</div>
                   {username}
-                </a>
+                </div>
                 <Link to="/logout" className="home-button">Log Out</Link>
               </span>
             ) : (

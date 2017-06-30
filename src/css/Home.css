@@ -55,11 +55,19 @@
   border: transparent;
 }
 
+.signed-in-home {
+  opacity: 1;
+}
+
+.signed-in-home:hover {
+  cursor: default;
+}
+
 .banner {
   text-align: center;
   position: relative;
   width: 100%;
-  padding: 100px 0 100px;
+  padding: 100px 0 95px;
   background: #11aacc;
 }
 
