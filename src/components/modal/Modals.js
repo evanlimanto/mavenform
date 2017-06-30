@@ -52,7 +52,8 @@ class ModalsComponent extends Component {
       });
   }
 
-  login() {
+  login(e) {
+    e.preventDefault();
     const email = this.refs.email.value;
     const password = this.refs.password.value;
     if (!isEmail(email))
@@ -93,18 +94,18 @@ class ModalsComponent extends Component {
         </div>
       );
       modalContent = (
-        <span>
+        <form>
           <hr className="s3" />
-          <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="off"/>
+          <input className="login-info" type="text" placeholder="Email" ref="email" />
           <hr className="s1" />
-          <input className="login-info" type="password" placeholder="Password" ref="password" autoComplete="off"/>
+          <input className="login-info" type="password" placeholder="Password" ref="password" />
           <hr className="s2" />
           <p className="forgot-pass">
             <a className="forgot-pass" onClick={this.props.showForgotPasswordModal}>Don't remember your password?</a>
           </p>
           <hr className="s2" />
-          <a className="login-button blue" onClick={this.login}>Log In</a>
-        </span>
+          <button type="submit" className="login-button blue" onClick={(e) => this.login(e)}>Log In</button>
+        </form>
       );
     } else if (this.props.modal.type === 'signup') {
       infoContent = (
@@ -114,16 +115,16 @@ class ModalsComponent extends Component {
         </div>
       );
       modalContent = (
-        <span>
+        <form>
           <hr className="s3" />
-          <input className="login-info" type="text" placeholder="Username" ref="username" autoComplete="off" />
+          <input className="login-info" type="text" placeholder="Username" ref="username"  />
           <hr className="s1" />
-          <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="off" />
+          <input className="login-info" type="text" placeholder="Email" ref="email"  />
           <hr className="s1" />
-          <input className="login-info" type="password" placeholder="Password" ref="password" autoComplete="off" />
+          <input className="login-info" type="password" placeholder="Password" ref="password"  />
           <hr className="s2" />
-          <a className="login-button blue" onClick={this.signup}>Sign Up</a>
-        </span>
+          <button type="submit" className="login-button blue" onClick={(e) => this.signup(e)}>Sign Up</button>
+        </form>
       );
     } else if (this.props.modal.type === 'forgotpassword') {
       infoContent = (
@@ -133,12 +134,12 @@ class ModalsComponent extends Component {
         </div>
       );
       modalContent = (
-        <span>
+        <form>
           <hr className="s3" />
-          <input className="login-info" type="text" placeholder="Email" ref="email" autoComplete="off"/>
+          <input className="login-info" type="text" placeholder="Email" ref="email" />
           <hr className="s2" />
-          <a className="login-button blue" onClick={this.login}>Send Recovery Email</a>
-        </span>
+          <button type="submit" className="login-button blue" onClick={this.forgotPassword}>Send Recovery Email</button>
+        </form>
       );
     }
 

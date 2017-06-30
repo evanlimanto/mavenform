@@ -1,11 +1,11 @@
 const _ = require('lodash');
 const fs = require('fs');
 const req = require('superagent');
+const as = require('async');
 
 /*
 let letters = [];
-const schoolCodes = new Set();
-const params = [];
+let params = [];
 
 function dfs(depth, str) {
   if (depth > 0) {
@@ -13,7 +13,7 @@ function dfs(depth, str) {
   }
 
   _.each(letters, (letter) => {
-    if (depth + 1 <= 3)
+    if (depth + 1 <= 2)
       dfs(depth + 1, str + letter);
   });
 }
@@ -24,12 +24,10 @@ _.each(_.range(0, 26), (index) => {
 });
 
 dfs(0, "");
-
-const schoolList = [];
-async.map(params, (param, callback) => {
+as.map(params, (param, callback) => {
   const data = {"method": "network.filter_schools", "params": {"name": param } };
   const url = 'https://piazza.com/logic/api?method=network.filter_schools&aid=' + (new Date()).getTime().toString(36) + Math.round(Math.random() * 1679616).toString(36)
-  req.post(url)
+  return req.post(url)
     .send(data)
     .end((err, res) => {
       if (err) console.error(err);
@@ -38,12 +36,12 @@ async.map(params, (param, callback) => {
         const json = JSON.parse(resText);
         const codes = _.map(json.result.list, (item) => [item.email, item.cnt]);
         console.log(param, codes);
-        callback(err, codes);
+        return callback(err, codes);
       }
     });
 }, (err, results) => {
   if (err) console.error(err);
-  fs.writeFileSync('./piazza_schools.json', JSON.stringify(results), 'utf-8');
+  return fs.writeFileSync('./piazza_schools.json', JSON.stringify(results), 'utf-8');
 });
 */
 
@@ -56,10 +54,9 @@ let schools = _.map(uniqueSchools, (a, b) => [b, a]);
 schools = schools.sort((a, b) => b[1] - a[1]);
 schools = _.filter(schools, (school) => school[1] > 50);
 
-const as = require('async');
 const phantom = require('phantom');
 as.map(schools, (item, callback) => {
-  (async (function() {
+  return (async (function() {
     const instance = await (phantom.create());
     const page = await (instance.createPage());
     await (page.on("onResourceRequested", function(requestData, networkRequest) {
@@ -70,6 +67,7 @@ as.map(schools, (item, callback) => {
       } else {
         console.info('Requesting', requestData.url)
       }
+      return;
     }));
     const status = await (page.open('https://piazza.com/' + item[0]));
     console.log(status);
@@ -92,12 +90,12 @@ as.map(schools, (item, callback) => {
       } 
     )));
     await (instance.exit());
-    callback(null, classes);
+    return callback(null, classes);
   })())
 }, (err, results) => {
-  if (err) console.error(err);
+  if (err) return console.error(err);
   else {
-    fs.writeFileSync('./piazza_courses.json', JSON.stringify(results), 'utf-8');    
+    return fs.writeFileSync('./piazza_courses.json', JSON.stringify(results), 'utf-8');    
   }
 });
 

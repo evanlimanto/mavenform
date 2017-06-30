@@ -287,7 +287,8 @@ exports.getCourseExams =
       inner join exam_types ET on ET.id = E.examtype
       inner join terms T on T.id = E.examid
       inner join schools S on S.id = E.schoolid
-      where C.code = $1 and S.code = $2;
+      where C.code = $1 and S.code = $2
+      order by E.examtype asc, E.examid desc
     `;
     pool.query(q, [courseCode, schoolCode], (err, result) => {
       if (err) return next(err);

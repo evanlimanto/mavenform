@@ -19,9 +19,13 @@ class DashboardContentComponent extends Component {
         solution: "",
         choices: "",
       },
+      status: null
     };
 
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount() {
   }
 
   updateContent() {
@@ -53,7 +57,8 @@ class DashboardContentComponent extends Component {
       solution: solution_content,
       choices: choices_content,
     };
-    this.setState({ content });
+    this.setState({ content, status: 'saved!' });
+    window.setTimeout(() => this.setState({ status: null }), 1000);
   }
 
   getExam(id) {
@@ -217,7 +222,7 @@ class DashboardContentComponent extends Component {
         <span className="contentNavCol">{exams}</span>
         {subparts.length ? <span className="contentNavCol">{subparts}</span> : null}
         <div style={{"float": "left", "width": "1000px"}}>
-          <h1>{this.state.examid} {exam ? `: ${exam.courseid} - ${exam.examtype} - ${exam.examid}` : null}</h1>
+          <h1>{this.state.examid} {exam ? `: ${exam.courseid} - ${exam.examtype} - ${exam.examid}` : null} {this.state.status}</h1>
           <span className="contentCol">
             <textarea value={problem.problem} ref="problem" onChange={this.handleChange} />
           </span>
