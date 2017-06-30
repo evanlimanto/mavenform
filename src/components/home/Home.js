@@ -1,7 +1,7 @@
 import React, { Component } from 'react'; import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import DocumentMeta from 'react-document-meta';
-import { map, toLower, toUpper } from 'lodash';
+import { map, toUpper } from 'lodash';
 import Footer from '../footer';
 import Navbar from '../navbar';
 import { schoolClickEvent } from '../../events';
