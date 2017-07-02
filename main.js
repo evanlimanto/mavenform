@@ -39,7 +39,7 @@ const examCache = new NodeCache({ stdTTL: 30 * 60, checkperiod: 10 * 60 });
 console.log("Using redis to cache exams:", useCache);
 
 // Postgres
-const params = url.parse(process.env.DATABASE_URL);
+const params = url.parse(process.env.HEROKU_POSTGRESQL_PINK_URL);
 const auth = params.auth.split(':');
 
 const config = {
