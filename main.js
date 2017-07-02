@@ -39,7 +39,7 @@ const examCache = new NodeCache({ stdTTL: 30 * 60, checkperiod: 10 * 60 });
 console.log("Using redis to cache exams:", useCache);
 
 // Postgres
-const params = url.parse(process.env.DATABASE_URL);
+const params = url.parse(process.env.HEROKU_POSTGRESQL_PINK_URL);
 const auth = params.auth.split(':');
 
 const config = {
@@ -781,7 +781,7 @@ app.post('/addComment', (req, res, next) => {
   const { user_id, comment, content_id } = req.body;
 
   const getq = `select id from users where auth_user_id = $1`;
-  const inq = `insert into discussion (content, userid, contentid) values($1, $2, $3)`;
+  const inq = `insert into discussion (content, userid, contentid, datetime) values($1, $2, $3, now())`;
 
   async.waterfall([
     (callback) => pool.query(getq, [user_id], callback),
@@ -796,7 +796,7 @@ app.get('/getComments/:contentid', (req, res, next) => {
   const { contentid } = req.params;
 
   const getq = `
-    select discussion.content as content, users.nickname as nickname from discussion
+    select discussion.content as content, users.nickname as nickname, discussion.datetime as datetime, discussion.parentid as parentid from discussion
     inner join users on discussion.userid = users.id
     where contentid = $1
   `;
