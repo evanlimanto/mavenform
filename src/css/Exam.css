@@ -487,7 +487,6 @@ a.comments-label {
 button.comment-button {
   background-color: #11aacc;
   padding: 10px 15px;
-  color: white;
   border: none;
   border-radius: 5px;
   text-align: left;
@@ -523,16 +522,11 @@ button.comment-button:hover {
   font-size: 14px;
 }
 
-.comment-footer {
-  color: grey;
-}
-
-a.comment-action {
-  color: grey;
+.comment-actions > a {
   font-size: 14px;
+  color: grey;
 }
 
-a.comment-action:hover {
-  color:grey;
-  text-decoration: underline;
+.comment-actions > a:hover {
+  text-decoration: underline; 
 }

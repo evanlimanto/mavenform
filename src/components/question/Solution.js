@@ -23,9 +23,10 @@ class SolutionComponent extends Component {
 
   componentDidMount() {
     // TODO: Make this more efficient with 1 request
-    fetch(`/getComments/${this.props.content_id}`)
-      .then((response) => response.json())
-      .then((json) => this.setState({ comments: json }));
+    if (this.props.content_id) 
+      fetch(`/getComments/${this.props.content_id}`)
+        .then((response) => response.json())
+        .then((json) => this.setState({ comments: json }));
   }
 
   toggleSolution() {

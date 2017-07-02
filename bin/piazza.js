@@ -45,6 +45,8 @@ as.map(params, (param, callback) => {
 });
 */
 
+/*
+const phantom = require('phantom');
 const async = require('asyncawait/async');
 const await = require('asyncawait/await');
 const obj = JSON.parse(fs.readFileSync('./piazza_schools.json', 'utf-8'));
@@ -52,9 +54,8 @@ const uniqueSchools = {};
 _.forEach(obj, arr => _.forEach(arr, school => { uniqueSchools[school[0]] = school[1]; }));
 let schools = _.map(uniqueSchools, (a, b) => [b, a]);
 schools = schools.sort((a, b) => b[1] - a[1]);
-schools = _.filter(schools, (school) => school[1] > 50);
+schools = _.filter(schools, (school) => school[1] >= 50 && school[1] < 100);
 
-const phantom = require('phantom');
 as.map(schools, (item, callback) => {
   return (async (function() {
     const instance = await (phantom.create());
@@ -95,12 +96,12 @@ as.map(schools, (item, callback) => {
 }, (err, results) => {
   if (err) return console.error(err);
   else {
-    return fs.writeFileSync('./piazza_courses.json', JSON.stringify(results), 'utf-8');    
+    return fs.writeFileSync('./piazza_courses3.json', JSON.stringify(results), 'utf-8');    
   }
 });
+*/
 
-/*
-const json = JSON.parse(fs.readFileSync('./piazza_courses.json', 'utf-8'));
+const json = JSON.parse(fs.readFileSync('./piazza_courses3.json', 'utf-8'));
 let schoolItems = _.map(json, (school) => {
   if (!school)
     return null;
@@ -124,7 +125,6 @@ _.forEach(schoolItems, (school) => {
     console.log(school.name, school.cnt, course.code, course.cnt);
   });
 });
-*/
 //_.forEach(schoolItems, (school) => console.log(school.name, school.cnt, school.courses));
 
 /*

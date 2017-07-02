@@ -1,0 +1,880 @@
+1.1.2
+If $$f(x) = \frac{x^2 - x}{x - 1} \quad \text{and} \quad g(x) = x$$ is it true that $f = g$?
+
+1.1.2s
+The functions are not equal.
+
+1.1.4
+The graphs of $f$ and $g$ are given.
+![graph](https://storage.googleapis.com/studyform/math/img/q1.1.4.png)
+(a) State the values of $f(-4)$ and $g(3)$.
+(b) For what values of $x$ is $f(x) = g(x)$?
+(c) Estimate the solution of the equation $f(x) = -1$.
+(d) On what interval is $f$ decreasing?
+(e) State the domain and range of $f$.
+(f) State the domain and range of $g$.
+
+1.1.4s
+(a) $f(-4) = -2$, and $g(3) = 4$
+(b) $f(x) = g(x)$, when $x = -2$ and $x = 2$
+(c) $f(x) = -1 \implies x = -3, 4$
+(d) $f$ is decreasing on the interval $[0, 4]$.
+(e) Domain of $f$ is $[-4, 4]$. Range of $f$ is $[-2, 3]$.
+(f) Domain of $g$ is $[-4, 3]$. Range of $g$ is $[0.5, 4]$.
+
+1.1.7
+Determine whether the curve is the graph of a function of $x$. If it is, state the domain and range of the function.
+![graph](https://storage.googleapis.com/studyform/math/img/q1.1.7.png)
+
+1.1.7s
+It is not the graph of a function.
+
+1.1.8
+Determine whether the curve is the graph of a function of $x$. If it is, state the domain and range of the function.
+![graph](https://storage.googleapis.com/studyform/math/img/q1.1.8.png)
+
+1.1.8s
+It is a graph of a function. The domain is $-2 \le x \le 2$, and the range is $[-1, 2]$.
+
+1.1.9
+Determine whether the curve is the graph of a function of $x$. If it is, state the domain and range of the function.
+![graph](https://storage.googleapis.com/studyform/math/img/q1.1.9.png)
+
+1.1.9s
+It is a graph of a function. The domain is $[-3, 2]$, and the range is $[-3, 2) \cup [-1, 3]$.
+
+1.1.10
+Determine whether the curve is the graph of a function of $x$. If it is, state the domain and range of the function.
+![graph](https://storage.googleapis.com/studyform/math/img/q1.1.10.png)
+
+1.1.10s
+It is not the graph of a function.
+
+1.1.26
+A spherical balloon with radius $r$ inches has volume $V(r) = \frac{4}{3} \pi \r^3$.
+Find a function that represents the amount of air required to inflate the balloon from a radius of $r$ inches to a radius of $r + 1$ inches.
+
+1.1.26s
+$F(r) = 4\pi \left[r^2 + r + \frac{1}{3} \right]$
+
+1.1.27
+Evaluate the difference quotient for the given function. Simplify your answer.
+$f(x) = 4 + 3x - x^2, \quad \frac{f(3 + h) - f(3)}{h}$
+
+1.1.27s
+$-3 - h$
+
+1.1.35
+Find the domain of the function.
+$h(x) = \frac{1}{\sqrt[4]{x^2 - 5x}}$
+
+1.1.35s
+The domain of $h$ is $(-\infty, 0) \cup (5, \infty)$
+
+1.1.45
+Find the domain and sketch the graph of the function.
+$G(x) = \frac{3 + |x|}{x}$
+
+1.1.45s
+If $x > 0$, then $G(x) = 4$
+If $x < 0$, then $G(x) = 2$
+![graph](https://storage.googleapis.com/studyform/math/img/q1.1.45s.png)
+
+1.1.49
+Find the domain and sketch the graph of the function.
+$f(x) = \begin{cases} x + 2 \; \text{if} \; x \le -1 \\\\ x^2 \; \text{if} \; x > -1\end{cases}$
+
+1.1.49s
+The graph of $f(x)$ is a straight line $y = x + 2$ for $x \le -1$, and a parabola $y = x^2$ for $x > -1$.
+https://storage.googleapis.com/studyform/math/img/q1.1.49s.png
+
+1.1.53
+Find an expression for the function whose graph is the given curve.
+The bottom half of the parabola $x + (y - 1)^2 = 0$
+
+1.1.53s
+The function which represents the bottom half of the circle is $f(x) = 1 - \sqrt{-x}$, where $x \le 0$.
+
+1.1.61
+An open rectangular box with volume $2 \; \text{m}^3$ has a square base. Express the surface area of the box as a function of the length of a side of the base.
+
+1.1.61s
+The required function is $S = \frac{8}{a} + a^2 \qquad [a > 0]$
+
+1.1.65
+In a certain state the maximum speed permitted on freeways is $65$ mi/h and the minimum speed is $40$ mi/h. The fine for violating these limits is \$15 for every mile per hour above the maximum speed or below the minimum speed. Express the amount of the fine $F$ as a function of the driving speed $x$ and graph $F(x)$ for $0 \le x \le 100$.
+
+1.1.65s
+The fine function is
+$F(x) = \begin{cases} 15(40 - x), \quad & 0 \le x \lt 40 \\\\ 0, \quad & 40 \le x \le 65 \\\\ 15(x - 65) \quad & 65 \lt x \le 100 \end{cases}$
+![graph](https://storage.googleapis.com/studyform/math/img/q1.1.65s.png)
+
+1.1.69
+Graphs of $f$ and $g$ are shown. Decide whether each function is even, odd, or neither. Explain your reasoning.
+![graph](https://storage.googleapis.com/studyform/math/img/q1.1.69.png)
+
+1.1.69s
+$f(x)$ is an odd function because its graphs is symmetric about the origin.
+$g(x)$ is an even function because its graph is symmetric about the $y$-axis.
+
+1.2.2
+Classify each function as a power function, root function, polynomial (state its degree), rational function, algebraic function, trigonometric function, exponential function, or logarithmic function.
+(a) $y = \pi^x$
+(b) $y = x^\pi$
+(c) $y = x^2(2 - x^3)$
+(d) $y = \; \text{tan} \; t - \; \text{cos} \; t$
+(e) $y = \frac{s}{1 + s}$
+(f) $y = \frac{\sqrt{x^3 - 1}{1 + \sqrt[3]{x}}}$
+
+1.2.2s
+(a) It is an exponential function.
+(b) It is a power function.
+(c) It is a polynomial function of degree five.
+(d) It is a trigonometric function.
+(e) It is a rational function.
+(f) It is an algebraic function.
+
+1.2.3
+Match each equation with its graph. Explain your choices. (Don't use a computer or graphing calculator.)
+![graph](https://storage.googleapis.com/studyform/math/img/q1.2.3.png)
+(a) $y = x^2$
+(b) $y = x^5$
+(c) $y = x^8$
+
+1.2.3s
+(a) graph[h]
+(b) graph[f]
+(c) graph[g]
+
+1.2.15
+Biologists have noticed that the chirping rate of crickets of a certain species is related to temperature, and the relationship appears to be very nearly linear. A cricket produces $113$ chirps per minute at $70$ F and $173$ chirps per minute at $80$ F.
+(a) Find a linear equation that models the temperature $T$ as a function of the number of chirps per minute $N$.
+(b) What is the slope of the graph? What does it represent?
+(c) If the crickets are chirping at $150$ chirps per minute, estimate the temperature.
+
+1.2.15s
+(a) $T = \frac{N}{6} + \frac{307}{6}$
+(b) The slope is $1/6$. This represents the temperature in (F), which increases one-sixth as much as that of the rate of cricket chirps per minute.
+(c) When $N = 150$ chirps/minute, then $T(150) = 76 °$.
+
+1.2.17
+At the surface of the ocean, the water pressure is the same as the air pressure above the water, $15 \; \text{lb/in}^2$. Below the surface, the water pressure increases by $4.34 \; \text{lb/in}^2$ for every 10 ft of descent.
+(a) Express the water pressure as a function of the depth below the ocean surface.
+(b) At what depth is the pressure $100 \; \text{lb/in}^2$?
+
+1.2.17s
+(a) $P = 0.434d + 15$
+(b) $196$ feet
+
+1.3.1
+Suppose the graph of $f$ is given. Write equations for the graphs that are obtained from the graph of $f$ as follows.
+(a) Shift 3 units upward.
+(b) Shift 3 units downward.
+(c) Shift 3 units to the right.
+(d) Shift 3 units to the left.
+(e) Reflect about the x-axis.
+(f) Reflect about the y-axis.
+(g) Stretch vertically by a factor of 3.
+(h) Shrink vertically by a factor of 3.
+
+1.3.1s
+(a) $y = f(x) + 3$
+(b) $y = f(x) - 3$
+(c) $y = f(x - 3)$
+(d) $y = f(x + 3)$
+(e) $y = -f(x)$
+(f) $y = f(-x)$
+(g) $y = 3f(x)$
+(h) $y = \frac{1}{3} f(x)$
+
+1.3.29
+Find (a) $f + g$, (b) $f - g$, (c) $fg$, and (d) $f/g$ and state their domains.
+$f(x) = x^3 + 2x^2, \quad g(x) = 3x^2 - 1$
+
+1.3.29s
+(a) $f(x) + g(x) = x^3 + 5x^2 - 1$. The domain is $(-\infty, \infty)$.
+(b) $f(x) - g(x) = x^3 - x^2 + 1$. The domain is $(-\infty, \infty)$.
+(c) $f(x) \cdot g(x) = 3x^5 + 6x^4 - x^3 - 2x^2$. The domain is $(-\infty, \infty)$.
+(d) $\frac{f(x)}{g(x)} = \frac{x^3 + 2x^2}{3x^2 - 1}$. The domain is $\left\{ x | x \ne \pm \frac{1}{\sqrt{3}} \right\}$.
+
+1.3.53
+A stone is dropped into a lake, creating a circular ripple that travels outward at a speed of $60$ cm/s.
+(a) Express the radius $r$ of this circle as a function of the time $t$ (in seconds).
+(b) If $A$ is the area of this circle as a function of the radius, find $A ∘ r$ and interpret it.
+
+1.3.53s
+(a) $r(t) = 60t$ cm.
+(b) $A = 3600 \pi t^2$
+
+1.3.57
+The **Heaviside function** $H$ is defined by
+$$H(t) = \begin{cases} 0 \; \text{if} \; t < 0 \\\\ 1 \; \text{if} \; t \ge 0$$
+It is used in the study of electric circuits to represent the sudden surge of electric current, or voltage, when a switch is instantaneously turned on.
+(a) Sketch the graph of the Heaviside function.
+(b) Sketch the graph of the voltage $V(t)$ in a circuit if the switch is turned on at time $t = 0$ and $120$ volts are applied instantaneously to the circuit. Write a formula for $V(t)$ in terms of $H(t)$.
+
+1.3.61
+(a) If $g(x) = 2x + 1$ and $h(x) = 4x^2 + 4x + 7$, find a function $f$ such that $f ∘ g = h$. (Think about what operations you would have to perform on the formula for $g$ to end up with the formula for $h$.)
+(b) If $f(x) = 3x + 5$ and $h(x) = 3x^2 + 3x + 2$, find a function $g$ such that $f ∘ g = h$.
+
+1.3.61s
+(a) $f(x) = x^2 + 6$
+(b) $g(x) = x^2 + x - 1$
+
+1.3.63
+Suppose $g$ is an even function and let $h = f ∘ g$. Is $h$ always an even function?
+
+1.3.63s
+Any function over an even function is even.
+
+1.5.2
+Use the Law of Exponents to rewrite and simplify the expression.
+(a) $8^{4/3}$
+(b) $x(3x^2)^3$
+
+1.5.2s
+(a) $16$
+(b) $27x^7$
+
+1.5.17
+Starting with the graph of $y = e^x$, write the equation of the graph that results from
+(a) shifting 2 units downward
+(b) shifting 2 units to the right
+(c) reflecting about the x-axis
+(d) reflecting about the y-axis
+(e) reflecting about the x-axis and then about the y-axis
+
+1.5.17s
+(a) $y = e^x$
+(b) $y = e^x - 2$
+(c) $y = e^{x - 2}$
+(d) $y = -e^x$
+(e) $y = -e^{-x}$
+
+1.6.1
+(a) What is a one-to-one function?
+(b) How can you tell from the graph of a function whether it is one-to-one?
+
+1.6.1s
+(a) A function is said to be a **one-to-one** function if it never takes on the same value twice.
+(b) It must pass the **horizontal line test**.
+
+1.6.3
+Determine whether the function is one-to-one.
+![graph](https://storage.googleapis.com/studyform/math/img/q1.6.3.png)
+
+1.6.17
+If $g(x) = 3 + x + e^x$, find $g^{-1}(4)$.
+
+1.6.17s
+$g^{-1}(4) = 0$
+
+1.6.19
+The formula $C = \frac{5}{9}(F - 32), where $F \ge -459.67$, expresses the Celsius temperature $C$ as a function of the Fahrenheit temperature $F$. Find a formula for the inverse function and interpret it. What is the domain of the inverse function?
+
+1.6.19s
+The inverse function is $F = \frac{9}{5}C + 32$. The domain of the inverse function is $\{ C: C \ge -273.15 \}$.
+
+1.6.22
+Find a formula for the inverse of the function.
+$f(x) = \frac{4x - 1}{2x + 3}$
+
+1.6.22s
+The inverse of the function is $y = \frac{3x + 1}{4 - 2x}$.
+
+1.6.25
+$y = \; \text{ln}(x + 3)$
+
+1.6.25s
+The inverse of the function is $y = e^x - 3$.
+
+1.6.36
+Find the exact value of each expression.
+(a) $\text{ln}(1/e)$
+(b) $\text{log}_10 \sqrt{10}$
+
+1.6.36s
+(a) $-1$
+(b) $\frac{1}{2}$
+
+1.6.53
+Solve each equation for $x$.
+(a) $2^{x - 5} = 3$
+(b) $\text{ln} \; x + \; \text{ln}(x - 1) = 1$
+
+1.6.53s
+$x = 5 + \frac{\text{ln} \; 3}{\text{ln} \; 2}$
+
+1.6.69
+Prove that $\text{cos}(\text{sin}^{-1} \; x) = \sqrt{1 - x^2}$.
+
+1.6.69s
+$\text{cos}(\text{sin}^{-1} x) = \sqrt{1 - x^2}$
+
+1.6.71
+Simplify the expression. $\text{sin}(\text{tan}^{-1} \; x)$
+
+1.6.71s
+$\text{sin}(\text{tan}^{-1} x) = \frac{x}{\sqrt{x^2 + 1}}$
+
+2.2.17
+Sketch the graph of an example of a function $f$ that satisfies all of the given conditions.
+$\text{lim}_{x \to 3^{+}} f(x) = 4, \quad \text{lim}_{x \to 3^{-}} f(x) = 2, \quad \text{lim}_{x \to -2} f(x) = 2, f(3) = 3, f(-2) = 1$
+
+2.2.17s
+![graph](https://storage.googleapis.com/studyform/math/img/q2.2.17.png)
+
+2.2.31
+Determine the infinite limit.
+$\text{lim}_{x \to 1} \frac{2 - x}{(x - 1)^2}$
+
+2.2.31s
+$\infty$
+
+2.3.15
+Evaluate the limit, if it exists.
+$\text{lim}_{t \to -3} \frac{t^2 - 9}{2t^2 + 7t + 3}$
+
+2.3.15s
+$\frac{6}{5}$
+
+2.3.37
+If $4x - 9 \le f(x) \le x^2 - 4x + 7$ for $x \ge 0$, find $\text{lim}_{x \to 4} f(x)$.
+
+2.3.37s
+$\text{lim}_{x \to 4} f(x) = 7$
+
+2.3.41
+Find the limit, if it exists. If the limit does not exist, explain why.
+$\text{lim}_{x \to 3} (2x + | x - 3 |)$
+
+2.3.41s
+$6$
+
+2.3.57
+If $\text{lim}_{x \to 1} \frac{f(x) - 8}{x - 1} = 10$, find $\text{lim}_{x \to 1} f(x)$.
+
+2.3.57s
+$8$
+
+2.4.1
+Use the given graph of $f$ to find a number $\Delta$ such that
+$$\text{if} \quad |x - 1| < \Delta \quad \text{then} \quad |f(x) - 1| < 0.2$$
+![graph](https://storage.googleapis.com/studyform/math/img/q2.4.1.png)
+
+2.4.1s
+$0.1$ or any smaller positive number
+
+2.4.13
+(a) Find a number $\Delta$ such that if $|x - 2| < \Delta$, then $|4x - 8| < \epsilon$, where $\epsilon = 0.1$.
+(b) Repeat part (a) with $\epsilon = 0.01$.
+
+2.4.13s
+(a) $\Delta = 0.025$
+(b) $\Delta = 0.0025$
+
+2.5.3
+![graph](https://storage.googleapis.com/studyform/math/img/q2.5.3.png)
+(a) From the graph of $f$, state the numbers at which $f$ is discontinuous and explain why.
+(b) For each of the numbers stated in part(a), determine whether $f$ is continuous from the right, or from the left, or neither.
+
+2.5.3s
+(a) The function is discontinuous at $x = -4, x = -2, x = 2, x = 4$
+(b) At $x = -4$, the function is neither continuous from the left nor from the right.
+	At $x = -2$, the function is continuous from the left but not from the right.
+	At $x = 2$, the function is continuous from the right but not from the left.
+	At $x = 4$, the function is continuous from the right but not from the left.
+
+2.5.35
+Use continuity to evaluate the limit.
+$\text{lim}_{x \to 4} \frac{5 + \sqrt{x}}{\sqrt{5 + x}}$
+
+2.5.35s
+$\frac{7}{3}$
+
+2.7.1
+A curve has equation $y = f(x)$.
+(a) Write an expression for the slope of the secant line through the points $P(3, f(3))$ and $Q(x, f(x))$.
+(b) Write an expression for the slope of the tangent line at $P$.
+
+2.7.1s
+(a) $m = \frac{f(x) - f(3)}{x - 3}$
+(b) $m = \text{lim}_{x \to 3} \frac{f(x) - f(3)}{x - 3}$
+
+2.7.7
+Find an equation of the tangent line to the curve at the given point.
+$y = \sqrt{x}, \quad (1, 1)$
+
+2.7.7s
+$y = \frac{1}{2}(x + 1)$
+
+2.7.19
+If an equation of the tangent line to the curve $y = f(x)$ at the point where $a = 2$ is $y = 4x - 5$, find $f(2)$ and $f'(2)$.
+
+2.7.19s
+$f(2) = 3, f'(2) = 4$
+
+2.7.29
+Find $f'(a)$, where $f(t) = \frac{2t + 1}{t + 3}$.
+
+2.7.29s
+$f'(a) = \frac{5}{(a + 3)^2}$
+
+2.7.47
+The cost of producing $x$ ounces of gold from a new gold mine is $C = f(x)$ dollars.
+(a) What is the meaning of the derivative $f'(x)$? What are its units?
+(b) What does the statement $f'(800) = 17$ mean?
+(c) Do you think the values of $f'(x)$ will increase or decrease in the short term? What about the long term? Explain.
+
+2.7.47s
+(a) dollars/ounce
+(b) The equation represents the cost increasing with the rate of \$17 per ounce after $800$ ounces of gold have been produced.
+(c) The value of $f'(x)$ decreases in the short term and increases in the long term.
+
+3.1.23
+Differentiate the function.
+$y = \frac{x^2 + 4x + 3}{\sqrt{x}}$
+
+3.1.23s
+$y' = \frac{3}{2}\sqrt{x} + \frac{2}{\sqrt{x}} - \frac{3}{2x\sqrt{x}}$
+
+3.1.31
+$z = \frac{A}{y^{10}} + Be^y$
+
+3.1.31s
+$\frac{dx}{dy} = \frac{-10A}{y^{11}} + Be^y$
+
+3.1.35
+Find equations of the tangent line and normal line to the curve at the given point.
+$y = x^4 + 2e^x, \quad (0, 2)$
+
+3.1.35s
+$y = 2x + 2$
+
+3.1.43
+Find the first and second derivatives of the function.
+$f(x) = 10x^{10} + 5x^5 - x$
+
+3.1.43s
+f'(x) = 100x^9 + 25x^4 - 1
+f''(x) = 900x^8 + 100x^3
+
+3.1.51
+Find the points on the curve $y = 2x^3 + 3x^2 - 12x + 1$ where the tangent is horizontal.
+
+3.1.51s
+At points $(1, -6)$ and $(-2, 21)$.
+
+3.1.63
+Find a second-degree polynomial $P$ such that $P(2) = 5, P'(2) = 3$, and $P''(2) = 2$.
+
+3.1.63s
+$P = x^2 - x + 3$
+
+3.1.77
+Evaluate $\text{lim}_{x \to 1} \frac{x^{1000} - 1}{x - 1}$.
+
+3.1.77s
+$\text{lim}_{x \to 1} \frac{x^{1000} - 1}{x - 1} = 1000$
+
+3.2.45
+If $f(x) = e^xg(x)$, where $g(0) = 2$ and $g'(0) = 5$, find $f'(0)$.
+
+3.2.45s
+$7$
+
+3.3.22
+Find an equation of the tangent line to the curve at the given point.
+$y = e^x \text{cos} \; x, \quad (0, 1)$
+
+3.3.22s
+$y = 1 + x$
+
+3.3.41
+Find the limit.
+$\text{lim}_{t \to 0} \frac{\text{tan} \; 6t}{\text{sin} \; 2t}$
+
+3.3.41s
+$3$
+
+3.3.45
+Find the limit.
+$\text{lim}_{\theta \to 0} \frac{\text{sin} \; \theta}{\theta + \; \text{tan} \; \theta}$
+
+3.3.45
+$1/2$
+
+3.4.5
+Write the composite function in the form $f(g(x))$.
+$y = e^{\sqrt{x}}$
+
+3.4.5s
+$\frac{dy}{dx} = \frac{e^\sqrt{x}}{2\sqrt{x}}$
+
+3.1
+Calculate $y'$.
+$y = (x^2 + x^3)^4$
+
+3.1s
+$y' = \frac{3x^2 - x - 2}{2x^\frac{3}{2}}$
+
+3.7
+$y = \frac{t^4 - 1}{t^4 + 1}$
+
+3.7s
+$y' = \frac{8t^3}{(t^4 + 1)^2}$
+
+3.23
+$y = (1 - x^{-1})^{-1}$
+
+3.23s
+$y' = -(x - 1)^{-2}$
+
+3.51
+If $f(t) = \sqrt{4t + 1}$, find $f''(2)$.
+
+3.51s
+$-\frac{4}{27}$
+
+3.53
+Find $y''$ if $x^6 + y^6 = 1$.
+
+3.53s
+$y'' = \frac{-5x^4}{y^11}$
+
+3.57
+Find an equation of the tangent to the curve at the given point.
+$y = 4 \; \text{sin}^2 \; x$, \quad (\pi / 6, 1)$
+
+3.57s
+$y = 2\sqrt{3}x + 1 - \pi / \sqrt{3}$
+
+3.61
+Find equations of the tangent line and normal line to the curve at the given point.
+$y = (2 + x)e^{-x}, \quad (0, 2)$
+
+3.61s
+$y - x = 2$
+
+3.69
+Suppose that $h(x) = f(x)g(x)$ and $F(x) = f(g(x))$, where $f(2) = 3, g(2) = 5, g'(2) = 4, f'(2) = -2$, and $f'(5) = 11$. Find (a) $h'(2)$ and (b) $F'(2)$.
+
+3.69s
+$h'(2) = 2$
+$F'(2) = 44$
+
+3.71
+Find $f'$ in terms of $g'$.
+$f(x) = x^2 g(x)$
+
+3.71s
+$x[xg'(x) + 2g(x)]$
+
+3.75
+Find $f'$ in terms of $g'$.
+$f(x) = g(e^x)$
+
+3.75s
+$e^{\pi}g'(e^{\pi})$
+
+3.85
+Find a parabola $y = ax^2 + bx + c$ that passes through the point $(1, 4)$ and whose tangent lines at $x = -1$ and $x = 5$ have slopes $6$ and $-2$, respectively.
+
+3.85s
+$y = -\frac{2}{3}x^2 + \frac{14}{3}x$
+
+3.107
+Express the limit as a derivative and evaluate.
+$\text{lim}_{h \to 0} \frac{\sqrt[4]{16 + h} - 2}{h}$
+
+3.107s
+$\text{lim}_{h \to 0} \frac{\sqrt[4]{16 + h} - 2}{h} = 1/32$
+
+4.3
+Find the local and absolute extreme values of the function on the given interval.
+$f(x) = \frac{3x - 4}{x^2 + 1}, \quad [-2, 2]$
+
+4.3s
+The absolute and local minimum value is $f \left( -\frac{1}{3} \right) = -\frac{9}{2}$
+The absolute maximum value is $f(2) = \frac{2}{5}$
+
+4.7
+Evaluate the limit
+$\text{lim}_{x \to 0} \frac{e^x - 1}{\text{tan} \; x}$
+
+4.7s
+$\text{lim}_{x \to 0}\frac{e^x - 1}{\text{tan} \; x} = 1$
+
+4.9
+Evaluate the limit
+$\text{lim}_{x \to 0} \frac{e^{4x} - 1 - 4x}{x^2}$
+
+4.9s
+$\text{lim}_{x \to 0} \frac{e^{4x} - 1 - 4x}{x^2} = 8$
+
+4.67
+Find $f$.
+$f'(x) = \sqrt{x^3} + \sqrt[3]{x^2}$
+
+4.67s
+$f(x) = \frac{2}{5}x^{\frac{5}{2}} + \frac{3}{5}x^{\frac{5}{3}} + C$
+
+5.3
+Evaluate $$\int_{0}^{1} (x + \sqrt{1 - x^2}) dx$$ by interpreting it in terms of areas.
+
+5.3s
+$\int_{0}^{1} (x + \sqrt{1 - x^2}) dx = \frac{1}{2} + \frac{\pi}{4}$
+
+5.5
+If $\int_{0}^{6} f(x) dx = 10$ and $\int_{0}^{4} f(x) dx = 7$, find $\int_{4}^{6} f(x) dx$.
+
+5.5s
+$\int_{4}^{6} f(x) dx = 3$
+
+5.9
+Evaluate the integral.
+$\int_{1}^{2} (8x^3 + 3x^2) dx$
+
+5.9s
+$\int_{1}^{2} (8x^3 + 3x^2) dx = 37$
+
+5.11
+Evaluate the integral.
+$\int_{0}^{1} (1 - x^9) dx$
+
+5.11s
+$\int_{0}^{1} (1 - x^9) dx = \frac{9}{10}$
+
+5.61
+If $f$ is continuous and $\int_{0}^{2} f(x)dx = 6$, evaluate $\int_{0}^{\pi / 2} f(2 \; \text{sin} \; \theta) \; \text{cos} \theta d\theta$.
+
+5.61s
+$3$
+
+5.69
+If $f$ is continuous on $[0, 1]$, prove that $$\int_{0}^{1} f(x)dx = \int_{0}^{1} f(1 - x)dx$$
+
+5.69s
+$\int_{0}^{1} f(x) dx = \int_{0}^{1} f(1 - x)dx$
+
+6.1
+Find the area of the region bounded by the given curves.
+$y = x^2, y = 4x - x^2$
+
+6.1s
+$\frac{8}{3}$
+
+6.3
+$y = 1 - 2x^2, y = |x|$
+
+6.3s
+$\frac{7}{12}$ sq units.
+
+6.7
+Find the volume of the solid obtained by rotating the region bounded by the given curves about the specified axis.
+$y = 2x, y = x^2; \quad$ about the $x$-axis
+
+6.7s
+$V = \frac{64 \pi}{15}$
+
+6.9
+Find the volume of the solid obtained by rotating the region bounded by the given curves about the specified axis.
+$x = 0, x = 9 - y^2; \quad$ about $x = -1$
+
+6.9s
+$V = \frac{1656\pi}{5}$
+
+6.13
+Set up, but do not evaluate, an integral for the volume of the solid obtained by rotating the region bounded by the given curves about the specified axis.
+$y = \text{cos}^2 {x}, |x| \le \pi / 2, y = \frac{1}{4}; \quad$ about $x = \pi / 2$
+
+6.13s
+$V = 2\pi \int_{-\pi/3}^{\pi/3} \left( \frac{\pi}{2} - x \right) \left( \text{cos}^2 x - \frac{1}{4})dx$
+
+6.25
+The height of a monument is 20 m. A horizontal cross-section at a distance $x$ meters from the top is an equilateral triangle with side $\frac{1}{4} x$ meters. Find the volume of the monument.
+
+6.25s
+$V = \frac{125\sqrt{3}}{3} \; \text{m}^3$
+
+6.27
+A force of $30$ N is required to maintain a spring stretched from its natural length of $12$ cm to a length of $15$ cm. How much work is done in stretching the spring from $12$ cm to $20$ cm?
+
+6.27s
+$W = 3.2J$
+
+7.1
+Evaluate the integral.
+$\int_{1}^{2} \frac{(x + 1)^2}{x} dx
+
+7.1s
+$\frac{7}{2} + \text{ln} \; 2$
+
+7.3
+Evaluate the integral.
+$\int_{0}^{\pi / 2} \text{sin} \; \theta e^{\text{cos} \; \theta} d\theta$
+
+7.3s
+$e - 1$
+
+7.41
+Evaluate the integral or show that it is divergent.
+$\int_{1}^{\infty} \frac{1}{(2x + 1)^3} dx$
+
+7.41s
+$\frac{1}{36}$
+
+7.43
+Evaluate the integral or show that it is divergent.
+$\int_{2}^{\infty} \frac{dx}{x \; \text{ln} \; x} dx$
+
+7.43s
+It is divergent.
+
+7.45
+Evaluate the integral or show that it is divergent.
+$\int_{0}^{4} \frac{\text{ln} \; x}{\sqrt{x}} dx$
+
+7.45s
+$4 \; \text{ln} \; 4 - 8$
+
+7.73
+Find the area bounded by the curves $y = \; \text{cos} \; x$ and $y = \; \text{cos}^2 x$ between $x = 0$ and $x = \pi$.
+
+7.73s
+$A = 2$
+
+7.75
+The region under the curve $y = \; \text{cos}^2 x, 0 \le x \le \pi / 2$, is rotated about the $x$-axis. Find the volume of the resulting solid.
+
+7.75s
+$V = \frac{3\pi^2}{16}$
+
+9.5
+Solve the differential equation.
+$y' = xe^{-\text{sin} \; x} - y \; \text{cos} \; x$
+
+9.5s
+$y = e^{-\text{sin} \; x} \left( \frac{x^2}{2} + C \right)$
+
+9.7
+Solve the differential equation.
+$2ye^{y^2}y' = 2x + 3\sqrt{x}$
+
+9.7s
+$y = \sqrt{\text{ln} \left( x^2 + 2x^\frac{3}{2} + C \right)}$
+
+9.9
+Solve the initial value problem.
+$\frac{dr}{dt} + 2tr = r, \quad r(0) = 5$
+
+9.9s
+$r(t) = 5e^{t - t^2}$
+
+9.11
+Solve the initial value problem.
+$xy' - y = x \; \text{ln} \; x, \quad y(1) = 2$
+
+9.11s
+$y(x) = x\left(\frac{(\text{ln} x)^2}{2} + 2 \right)$
+
+9.15
+(a) Write the solution of the initial-value problem
+$$\frac{dP}{dt} = 0.1P \left( 1 - \frac{P}{2000} \right) \quad P(0) = 100$$
+(b) When does the population reach $1200$?
+
+9.15s
+$P = \frac{2000}{\left(1 + 19e^{-\frac{t}{10}})}$
+
+10.1
+Sketch the parametric curve and eliminate the parameter to find the Cartesian equation of the curve.
+$x = t^2 + 4t, \quad y = 2 - t, \quad -4 \le t \le 1$
+
+10.1s
+$x = y^2 - 8y + 12$
+
+10.3
+Sketch the parametric curve and eliminate the parameter to find the Cartesian equation of the curve.
+$x = 1 + e^{2t}, \quad y = e^t$
+
+10.3s
+$xy = 1$
+
+10.17
+Find a polar equation for the curve represented by the given Cartesian equation.
+$x + y = 2$
+
+10.17s
+$r = \frac{2}{\text{cos} \theta + \text{sin} \theta}$
+
+10.21
+Find the slope of the tangent line to the given curve at the point corresponding to the specified value of the parameter.
+$x = \; \text{ln} \; t, \; y = 1 = t^2; \quad t = 1$
+
+10.21s
+$2$
+
+10.23
+Find the slope of the tangent line to the given curve at the point corresponding to the specified value of the parameter.
+$r = e^{-\theta}; \quad \theta = \pi$
+
+10.23s
+$-1$
+
+10.25
+Find $dy/dx$ and $d^2y/dx^2$.
+$x = t + \; \text{sin} \; t, \quad y = t - \; \text{cos} \; t$
+
+10.25s
+$\frac{dy}{dx} = \frac{1 + \; \text{sin} t}{1 + \; \text{cos} t}$
+
+10.31
+Find the area enclosed by the curve $r^2 = 9 \; cos \; 5\theta$.
+
+10.31s
+$A = 18$
+
+10.33
+Find the points of intersection of the curves $r = 2$ and $r = 4 \; \text{cos} \; \theta$.
+
+10.33s
+$(2, \pi / 3)$ and $(2, -\pi / 3)$
+
+10.35
+Find the area of the region that lies inside both of the circles $r = 2 \; \text{sin} \; \theta$ and $r = \; \text{sin} \; \theta + \; \text{cos} \; \theta$.
+
+10.35s
+$A = \frac{1}{2}(\pi - 1)$
+
+10.37
+Find the length of the curve.
+$x = 3t^2, \quad y = 2t^3, \quad 0 \le t \le 2$
+
+10.37s
+$2[5\sqrt{5} - 1]$
+
+10.47
+Find the foci and vertices and sketch the graph.
+$6y^2 + x - 36y + 55 = 0$
+
+10.47s
+The foci are at $(\pm 1, 0)$ and the vertices are at $(\pm 3, 0)$.
+![graph](https://storage.googleapis.com/studyform/math/img/q10.47.png)
+
+10.49
+Find an equation of the ellipse with foci $(\pm 4 ,0)$ and vertices $(\pm 5, 0)$.
+
+10.49s
+$\frac{x^2}{25} + \frac{y^2}{9} = 1$
+
+10.51
+Find an equation of the hyperbola with foci $(0, \pm 4)$ and asymptotes $y = \pm 3x$.
+
+10.51s
+$\frac{10x^2}{144} - \frac{10y^2}{16} = 1$
+
+10.55
+Find a polar equation for the ellipse with focus at the origin, eccentricity $\frac{1}{3}$, and directrix with equation $r = 4 \; \text{sec} \; \theta$.
+
+10.55s
+$r = \frac{4}{3 + \; \text{cos} \theta}$
