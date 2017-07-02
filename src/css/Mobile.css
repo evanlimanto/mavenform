@@ -2,12 +2,6 @@
   display: none;
 }
 
-.mobile-back {
-  display: none;
-  float: left;
-  margin-left: 0 !important;
-}
-
 @media (max-width: 1199px) {
   .content {
     max-width: 100%;
@@ -19,18 +13,31 @@
   }
 }
 
-@media (max-width: 1000px) {
-  .search-container {
-    padding: 20px;
-    display: block;
+@media (max-width: 1020px) {
+  .nav, .home-nav {
+    padding: 0 15px;
   }
+}
 
-  .search {
+@media (max-width: 899px) {
+  .arrow {
     display: none;
   }
 
-  .search-icon {
-    display: none; 
+  .nav-search {
+    display: none;
+  }
+
+  .banner-text{
+    padding: 0 15px;
+  }
+
+  .banner {
+    padding-bottom: 50px;
+  }
+
+  .nav-icon {
+    display: none;
   }
 
   .desktop-logo {
@@ -39,32 +46,6 @@
 
   .mobile-logo {
     display: inline;
-  }
-
-  .mobile-logo .home-logo {
-    padding: 25px 15px;
-  }
-
-  .home-button {
-    margin: 19px 15px 19px 0;
-  }
-
-  .nav-button {
-    margin: 10px 0 10px 5px;
-  }
-
-  .gray-nav {
-    padding: 10px;
-  }
-
-  .department h1 {
-    padding-left: 10px;
-  }
-}
-
-@media (max-width: 899px) {
-  .nav {
-    padding: 0 10px;
   }
 
   .home-search {
@@ -86,48 +67,6 @@
     border-radius: 5px;
   }
 
-  .nav-search {
-    position: absolute;
-    width: 100px;
-  }
-
-  .nav-search:focus {
-    width: 210px;
-    z-index: 2;
-  }
-
-  .nav-results {
-    top: 50px;
-    position: absolute;
-    width: 210px;
-  }
-
-  .search-container input {
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-    border-radius: 5px;
-  }
-
-  .search-container .early-access {
-    margin-bottom: 50px;
-  }
-
-  .banner-screen, .search-link {
-    display: none;
-  }
-
-  .home-search-container .nav-results {
-    position: absolute;
-    z-index: 2;
-    top: 50px;
-    width: 210px;
-  }
-
-  .app-mode {
-    right: 10px;
-  }
-
   .exams td:nth-child(3), .exams th:nth-child(3) {
     display: none;
   }
@@ -139,40 +78,34 @@
   .table-container-container {
     padding: 0 25px;
   }
+}
 
-  .menu, .sidebar {
+@media (max-width: 499px) {
+  .modal-logo {
+    padding: 40px 25px;
+  }
+
+  .gray-nav .utility-button {
     display: none;
-  }
-
-  .tooltip {
-    display: none;
-  }
-
-  .mobile-back {
-    display: initial;
-  }
-
-  .link {
-    display: none;
-  }
-
-  .content {
-    overflow-x: auto;
   }
 
   .question {
-    left: 0;
+    overflow-x: auto;
   }
 
-  .banner-screen {
-    margin-top: 15px;
+  .department {
+    padding: 0 20px;
   }
-}
 
-@media (max-width: 399px) {
+  .department h1 {
+    padding-left: 0;
+    margin-left: 0;
+  }
+
   .course-card {
-    width: 90%;
-    margin: 15px 5%;
+    width: 100%;
+    max-width: 100%;
+    margin: 5px 0 10px;
   }
 
   .exams td:nth-child(4), .exams th:nth-child(4) {
