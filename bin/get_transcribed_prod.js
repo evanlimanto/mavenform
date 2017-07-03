@@ -12,11 +12,11 @@ const config = {
 };
 
 const prodConfig = {
-  user: 'wywhntmgwgishp',
-  database: 'd4de7agqe51r1g',
-  password: '99d4da5f646a2df74a609eb8fdea8a6fe4f084b8bf8d5dd7c796d9e8f48f0a14',
+  user: 'isrpjtdgvvipsw',
+  database: 'd8dard1pmcrhp5',
+  password: 'f7f3bde3c69375748921280793854cbd319fe1d9fe7c847bcc29eb012f2b94ab',
   port: 5432,
-  host: 'ec2-23-21-96-70.compute-1.amazonaws.com',
+  host: 'ec2-107-20-195-181.compute-1.amazonaws.com',
 };
 
 const local_client = new pg.Client(config);

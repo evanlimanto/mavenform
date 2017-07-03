@@ -36,7 +36,7 @@ class SchoolComponent extends Component {
 
   getCourseItems() {
     const schoolCode = this.props.schoolCode;
-    return map(sortBy(this.state.courses, [(course) => course.label]), (obj, subject) => {
+    return map(sortBy(this.state.courses, [(obj) => -keys(obj.courses).length]), (obj, subject) => {
       const courseBoxes = map(sortBy(obj.courses, [(course) => toInteger((new RegExp("\\d+")).exec(course.code)[0]),
                                                    (course) => takeRight(course.code)]), (course, key) => {
         return (
