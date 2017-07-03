@@ -20,6 +20,10 @@ body {
   color: #333;
 }
 
+input {
+  -webkit-appearance: none;
+}
+
 .container {
   display: block;
   margin: auto;
