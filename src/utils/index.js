@@ -130,6 +130,12 @@ export function examTypeToLabel(exam_type) {
       return 'Midterm 3';
     case 'final':
       return 'Final';
+    case 'mt1p':
+      return 'Midterm 1 - Practice';
+    case 'mt2p':
+      return 'Midterm 2 - Practice';
+    case 'finalp':
+      return 'Final - Practice';
     default:
       return "Unknown Type";
   }
