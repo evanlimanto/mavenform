@@ -1,18 +1,20 @@
-import Mixpanel from 'mixpanel';
+const mixpanel = require('mixpanel-browser');
 
-const MIXPANEL_ID_DEV = 'd9dbfd1988e5250bea11879c6a783054';
-const MIXPANEL_ID = 'af9797f751c2f22b4ba5f77f20cc6cc5';
+const MIXPANEL_ID_DEV = '838462058ed380687ee46dae27d0d027';
+const MIXPANEL_ID     = 'af9797f751c2f22b4ba5f77f20cc6cc5';
 
-const mixpanel = Mixpanel.init((window.location.hostname === "www.mavenform.com") ? MIXPANEL_ID : MIXPANEL_ID_DEV);
+mixpanel.init((window.location.hostname === "www.studyform.com") ? MIXPANEL_ID : MIXPANEL_ID_DEV);
+const distinct_id = mixpanel.get_distinct_id();
+
 const ReactGA = require('react-ga');
 ReactGA.initialize('UA-20131732-5');
 
 const tracker = function(name, label) {
+  const page = window.location.pathname;
+  mixpanel.track(name, { page, distinct_id, label });
 	if (process.env.NODE_ENV === "development") {
     console.log(`Tracking event ${name}`);
   } else {
-    const page = window.location.pathname;
-    mixpanel.track(name, { page });
 		ReactGA.event({ category: name, action: page, label });
 	}
 }
@@ -37,10 +39,6 @@ export function copyQuestionLinkEvent() {
 
 export function toggleSolutionEvent() {
 	tracker('toggle solution');
-}
-
-export function actionTakenEvent(action) {
-	tracker(action);
 }
 
 export function activeUserEvent() {

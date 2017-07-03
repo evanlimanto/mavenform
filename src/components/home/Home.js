@@ -22,7 +22,10 @@ class HomeComponent extends Component {
 
     this.state = {
       suggestions: [],
+      notificationBar: true,
     }
+
+    this.hideNotificationBar = this.hideNotificationBar.bind(this);
     this.getSuggestions = this.getSuggestions.bind(this);
   }
 
@@ -38,6 +41,10 @@ class HomeComponent extends Component {
         this.setState({ suggestionsDropdownOn: false });
       }
     });
+  }
+
+  hideNotificationBar() {
+    this.setState({ notificationBar: false });
   }
 
   getSuggestions() {
@@ -92,8 +99,15 @@ class HomeComponent extends Component {
     return (
       <div className="home">
         <DocumentMeta {...meta} />
-        <Navbar home={true} />
+				{!this.state.notificationBar || (
+          <div className="dark-gray center">
+						<hr className="s2" />
+						<a className="material-icons notification-x" onClick={this.hideNotificationBar}>close</a>
+						<p className="white-text notification-text">Need help with your math course? Message us on <a className="header-link" href="https://www.facebook.com/studyformapp/" target="_blank">Facebook</a> for free tutoring!</p>
+						<hr className="s2" />
+					</div>)}
         <div className="banner">
+          <Navbar home={true} />
           <div className="banner-img"></div>
           <div className="banner-text">
             <div className="banner-header">Make Studying Easy</div>
