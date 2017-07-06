@@ -127,7 +127,7 @@ class CommentsComponent extends Component {
     document.addEventListener('click', (evt) => {
       const actionsElement = document.getElementById("actions-" + commentid);
       const commentboxElement = document.getElementById("commentbox-" + commentid);
-      if (!actionsElement.contains(evt.target) && !commentboxElement.contains(evt.target)) {
+      if (actionsElement && commentboxElement && !actionsElement.contains(evt.target) && !commentboxElement.contains(evt.target)) {
         const actionsClassList = actionsElement.classList;
         const commentboxClassList = commentboxElement.classList;
         if (actionsClassList.contains("hidden")) {
