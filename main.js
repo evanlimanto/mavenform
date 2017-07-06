@@ -777,27 +777,12 @@ app.post('/getProblem/:content_id', (req, res, next) => {
   });
 });
 
-app.post('/addComment', (req, res, next) => {
-  const { user_id, comment, content_id } = req.body;
-
-  const getq = `select id from users where auth_user_id = $1`;
-  const inq = `insert into discussion (content, userid, contentid, datetime) values($1, $2, $3, now())`;
-
-  async.waterfall([
-    (callback) => pool.query(getq, [user_id], callback),
-    (results, callback) => pool.query(inq, [comment, results.rows[0].id, content_id], callback),
-  ], (err) => {
-    if (err) return next(err);
-    return res.send("Success!");
-  });
-});
-
 app.get('/getComments/:contentid', (req, res, next) => {
   const { contentid } = req.params;
 
   const getq = `
-    select discussion.content as content, users.nickname as nickname, discussion.datetime as datetime, discussion.parentid as parentid from discussion
-    inner join users on discussion.userid = users.id
+    select D.id as id, D.content as content, users.nickname as nickname, D.datetime as datetime, D.parentid as parentid from discussion D
+    inner join users on D.userid = users.id
     where contentid = $1
   `;
 
@@ -805,11 +790,39 @@ app.get('/getComments/:contentid', (req, res, next) => {
     if (err) return next(err);
     const items = _.map(result.rows, (row) => {
       return {
+        id: row.id,
         content: row.content,
         nickname: row.nickname,
+        datetime: row.datetime,
+        parentid: row.parentid,
       }
     });
     return res.json(items);
+  });
+});
+
+app.post('/addComment', (req, res, next) => {
+  const { parentid, userid, comment, contentid } = req.body;
+
+  const getq = `select id from users where auth_user_id = $1`;
+  const inq = `insert into discussion (content, userid, contentid, datetime, parentid) values($1, $2, $3, now())`;
+
+  async.waterfall([
+    (callback) => pool.query(getq, [userid], callback),
+    (results, callback) => pool.query(inq, [comment, results.rows[0].id, contentid, parentid], callback),
+  ], (err) => {
+    if (err) return next(err);
+    return res.send("Success!");
+  });
+});
+
+app.post('/replyComment', (req, res, next) => {
+  const { parentid, content, contentid, userid } = req.body;
+  const inq = `insert into discussion (content, userid, contentid, datetime, parentid) values($1, $2, $3, now(), $4)`;
+
+  pool.query(inq, [content, userid, contentid, parentid], (err, result) => {
+    if (err) return next(err);
+    return res.send("Success!"); 
   });
 });
 

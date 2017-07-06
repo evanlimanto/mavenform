@@ -146,7 +146,7 @@ class NavbarComponent extends Component {
           <div className="gray-nav">
             <div className="container">
               {navbarNav}
-              <a className="utility-button" href={this.props.source_url} target="_blank" rel="noopener noreferrer">View Source</a>
+              <a className="utility-button" href={this.props.source_url} target="_blank" rel="noopener noreferrer">View PDF</a>
             </div>
           </div>
         );

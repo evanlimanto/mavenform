@@ -376,3 +376,14 @@ p.waitlisted-message {
 .Select--multi .Select-multi-value-wrapper {
   float: left;
 }
+
+.feedback-link {
+  color: white;
+  opacity: 1.0;
+  text-decoration: underline;
+}
+
+.feedback-link:hover {
+  color: white;
+  opacity: 0.9;
+}
