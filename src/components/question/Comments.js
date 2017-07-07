@@ -142,7 +142,7 @@ class CommentsComponent extends Component {
         <div className="comment-header">{comment.nickname}</div>
         <div className="comment-upvotes">{comment.upvotes}</div>
         <div className="comment-content">{comment.content}</div>
-        <div className="comment-actions" id={"actions-" + commentid}><a onClick={() => this.showReplyBox(commentid)}>Reply</a> · <a>Upvote</a></div>
+        <div className="comment-actions" id={"actions-" + commentid}><a onClick={() => this.showReplyBox(commentid)}>Reply</a></div>
         <div className="poster-container hidden" id={"commentbox-" + commentid}>
           <input type="text" placeholder="Ask a question or add a comment..." className="comment-input" ref={"comment-" + commentid} />
           <button className="comment-button" onClick={() => this.replyComment(commentid)}>Post</button>
@@ -162,7 +162,6 @@ class CommentsComponent extends Component {
   }
 
   render() {
-    console.log(this.state.comments);
     return (!this.props.auth.loggedIn()) ? (
       <div className="comment-box">
         <p className="comment-helper"><a onClick={this.props.showLoginModal}>Log in</a> or <a onClick={this.props.showSignupModal}>sign up</a> to see discussion or post a question.</p>
