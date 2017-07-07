@@ -40,6 +40,9 @@ class QuestionDropdown extends Component {
 
   doneCopyingLink() {
     this.setCopied(false);
+    const dropdownElement = document.getElementById("dropdown-" + this.props.content_id);
+    if (!dropdownElement.classList.contains("hidden"))
+      dropdownElement.classList.add("hidden");
   }
 
   showReportModal() {
@@ -136,7 +139,7 @@ class QuestionDropdown extends Component {
               <span className="material-icons">link</span>
               <span>Copy Link</span>
             </a>
-          ) : <Expire delay={1500} callback={this.doneCopyingLink}>Copied!</Expire>}
+          ) : <Expire delay={1000} callback={this.doneCopyingLink}><span className="question-option">Copied!</span></Expire>}
           <a onClick={this.showReportModal} className="question-option">
             <span className="material-icons">report</span>
             <span>Report Error</span>
