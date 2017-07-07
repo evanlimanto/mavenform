@@ -781,7 +781,9 @@ app.get('/getComments/:contentid', (req, res, next) => {
   const { contentid } = req.params;
 
   const getq = `
-    select D.id as id, D.content as content, users.nickname as nickname, D.datetime as datetime, D.parentid as parentid from discussion D
+    select D.id as id, D.content as content, users.nickname as nickname,
+      D.datetime as datetime, D.parentid as parentid,
+      D.upvotes as upvotes from discussion D
     inner join users on D.userid = users.id
     where contentid = $1
   `;
@@ -795,6 +797,7 @@ app.get('/getComments/:contentid', (req, res, next) => {
         nickname: row.nickname,
         datetime: row.datetime,
         parentid: row.parentid,
+        upvotes: row.upvotes,
       }
     });
     return res.json(items);
@@ -823,6 +826,21 @@ app.post('/replyComment', (req, res, next) => {
   pool.query(inq, [content, userid, contentid, parentid], (err, result) => {
     if (err) return next(err);
     return res.send("Success!"); 
+  });
+});
+
+app.get('/getUpvotes/:contentid', (req, res, next) => {
+  const { contentid } = req.params;
+  const getq = `select contentid, userid, commentid from upvotes where contentid = $1`;
+
+  pool.query(getq, [contentid], (err, result) => {
+    const items = _.map(result.rows, (row) => {
+      return {
+        contentid: row.contentid,
+        userid: row.userid,
+        commentid: row.commentid,
+      };
+    });
   });
 });
 

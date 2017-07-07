@@ -140,6 +140,7 @@ class CommentsComponent extends Component {
     ret.push((
       <div key={commentid} className="comment" style={{ "marginLeft": toString(25 * depth) + "px" }}>
         <div className="comment-header">{comment.nickname}</div>
+        <div className="comment-upvotes">{comment.upvotes}</div>
         <div className="comment-content">{comment.content}</div>
         <div className="comment-actions" id={"actions-" + commentid}><a onClick={() => this.showReplyBox(commentid)}>Reply</a> · <a>Upvote</a></div>
         <div className="poster-container hidden" id={"commentbox-" + commentid}>
@@ -161,7 +162,7 @@ class CommentsComponent extends Component {
   }
 
   render() {
-    console.log(this.state.commentsTree, this.state.commentsRoots);
+    console.log(this.state.comments);
     return (!this.props.auth.loggedIn()) ? (
       <div className="comment-box">
         <p className="comment-helper"><a onClick={this.props.showLoginModal}>Log in</a> or <a onClick={this.props.showSignupModal}>sign up</a> to see discussion or post a question.</p>
