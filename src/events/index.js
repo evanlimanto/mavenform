@@ -3,7 +3,7 @@ const mixpanel = require('mixpanel-browser');
 const MIXPANEL_ID_DEV = '838462058ed380687ee46dae27d0d027';
 const MIXPANEL_ID     = 'af9797f751c2f22b4ba5f77f20cc6cc5';
 
-mixpanel.init((window.location.hostname === "www.studyform.com") ? MIXPANEL_ID : MIXPANEL_ID_DEV);
+mixpanel.init((window.location.hostname.indexOf("studyform.com") !== -1) ? MIXPANEL_ID : MIXPANEL_ID_DEV);
 
 const ReactGA = require('react-ga');
 ReactGA.initialize('UA-20131732-5');

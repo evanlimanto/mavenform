@@ -13,7 +13,6 @@ class QuestionDropdown extends Component {
 
     this.state = {
       copying: false,
-      dropdown: false,
       showReportModal: false,
       showShareQuestionModal: false,
     };
@@ -21,13 +20,11 @@ class QuestionDropdown extends Component {
     this.setCopied = this.setCopied.bind(this);
     this.copyQuestionLink = this.copyQuestionLink.bind(this);
     this.doneCopyingLink = this.doneCopyingLink.bind(this);
-    this.closeDropdown = this.closeDropdown.bind(this);
-    this.toggleDropdown = this.toggleDropdown.bind(this);
     this.showShareQuestionModal = this.showShareQuestionModal.bind(this);
- 
     this.closeShareQuestionModal = this.closeShareQuestionModal.bind(this);
     this.showReportModal = this.showReportModal.bind(this);
     this.closeReportModal = this.closeReportModal.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
   }
 
   setCopied(isCopying) {
@@ -43,14 +40,6 @@ class QuestionDropdown extends Component {
 
   doneCopyingLink() {
     this.setCopied(false);
-  }
-
-  toggleDropdown() {
-    this.setState({ dropdown: !this.state.dropdown });
-  }
-
-  closeDropdown() {
-    this.setState({ dropdown: false });
   }
 
   showReportModal() {
@@ -80,17 +69,34 @@ class QuestionDropdown extends Component {
       });
   }
 
+  componentDidMount() {
+    const copylinkElement = document.getElementById("copylink-" + this.props.content_id);
+    const dropdownToggleElement = document.getElementById("dropdowntoggle-" + this.props.content_id);
+    const dropdownElement = document.getElementById("dropdown-" + this.props.content_id);
+    document.addEventListener('click', (evt) => {
+      if (!copylinkElement.contains(evt.target) && !dropdownToggleElement.contains(evt.target) && !dropdownElement.contains(evt.target) ) {
+        dropdownElement.classList.add("hidden");
+      }
+    });
+  }
+
+  toggleDropdown() {
+    const dropdownElement = document.getElementById("dropdown-" + this.props.content_id);
+    if (dropdownElement.classList.contains("hidden"))
+      dropdownElement.classList.remove("hidden");
+    else
+      dropdownElement.classList.add("hidden");
+  }
+
   render() {
     const { id, content_id, schoolCode, courseCode, examType, termCode } = this.props;
 
     let reportModal = null;
     if (this.state.showReportModal) {
-      const infoContent = (
-        <div>
-        </div>
-      );
+      const infoContent = (<div></div>);
       const modalContent = (
         <span>
+          <hr className="s2" />
           <input className="login-info" type="text" placeholder="Please describe the typo in this question" ref="error_content"/>
           <hr className="s2" />
           <a className="login-button blue" onClick={(e) => this.reportError(e, content_id)}>Report</a>
@@ -123,25 +129,23 @@ class QuestionDropdown extends Component {
       <div className="tooltip-container">
         {reportModal}
         {shareQuestionModal}
-        <a onClick={this.toggleDropdown} className="arrow material-icons">keyboard_arrow_down</a>
-        {!this.state.dropdown || (
-          <div className="question-options">
-            {(!this.state.copying) ? (
-              <a className="question-option" onClick={(e) => this.copyQuestionLink(e, url)}>
-                <span className="material-icons">link</span>
-                <span>Copy Link</span>
-              </a>
-            ) : <Expire delay={1500} callback={this.doneCopyingLink}>Copied!</Expire>}
-            <a onClick={this.showReportModal} className="question-option">
-              <span className="material-icons">report</span>
-              <span>Report Error</span>
+        <a onClick={this.toggleDropdown} className="arrow material-icons" id={"dropdowntoggle-" + content_id}>keyboard_arrow_down</a>
+        <div className="question-options hidden" id={"dropdown-" + content_id}>
+          {(!this.state.copying) ? (
+            <a className="question-option" onClick={(e) => this.copyQuestionLink(e, url)} id={"copylink-" + content_id}>
+              <span className="material-icons">link</span>
+              <span>Copy Link</span>
             </a>
-            <a onClick={this.showShareQuestionModal} className="question-option">
-              <span className="material-icons">share</span>
-              <span>Share Question</span>
-            </a>
-          </div>
-        )}
+          ) : <Expire delay={1500} callback={this.doneCopyingLink}>Copied!</Expire>}
+          <a onClick={this.showReportModal} className="question-option">
+            <span className="material-icons">report</span>
+            <span>Report Error</span>
+          </a>
+          {/*<a onClick={this.showShareQuestionModal} className="question-option">
+            <span className="material-icons">share</span>
+            <span>Share Question</span>
+          </a>*/}
+        </div>
       </div>
     );
   }
