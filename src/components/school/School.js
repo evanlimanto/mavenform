@@ -35,6 +35,10 @@ class SchoolComponent extends Component {
   }
 
   getCourseItems() {
+    if (this.state.courses === null) {
+      return <p>Loading courses...</p>;
+    }
+
     const schoolCode = this.props.schoolCode;
     return map(sortBy(this.state.courses, [(obj) => -keys(obj.courses).length]), (obj, subject) => {
       const courseBoxes = map(sortBy(obj.courses, [(course) => toInteger((new RegExp("\\d+")).exec(course.code)[0]),

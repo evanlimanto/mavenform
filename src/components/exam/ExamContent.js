@@ -9,10 +9,7 @@ class ExamContent extends Component {
     super(props);
 
     this.state = {
-      examContent: {
-        info: {},
-        problems: {},
-      }
+      examContent: null
     };
   }
 
@@ -22,7 +19,7 @@ class ExamContent extends Component {
       (response) => response.json()
     ).then(
       (json) => this.setState({ examContent: json })
-    );
+    )
   }
 
   componentDidUpdate() {
@@ -32,7 +29,7 @@ class ExamContent extends Component {
   render() {
     const { schoolCode, courseCode, examTypeCode, termCode, profs } = this.props;
     const examContent = this.state.examContent;
-    const content = map(examContent.info, (num_parts, part) => {
+    const content = (!examContent) ? <p>Loading content...</p> : map(examContent.info, (num_parts, part) => {
       const subparts = map(range(1, num_parts + 1), subpart => {
         const key = `${part}_${subpart}`;
         if (!has(examContent.problems, key)) {
@@ -56,7 +53,7 @@ class ExamContent extends Component {
       <div id="header-text">
         <div className="center">
           <h4>{courseCodeToLabel(courseCode)}</h4>
-          <h5>{examTypeToLabel(examTypeCode)} | {termToLabel(termCode)} | {profs}</h5>
+          <h5>{examTypeToLabel(examTypeCode)} | {termToLabel(termCode)} {!this.props.profs || "| " + profs}</h5>
         </div>
       </div>
     );

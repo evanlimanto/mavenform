@@ -15,7 +15,7 @@ class CourseComponent extends Component {
     super(props);
 
     this.state = {
-      exams: [],
+      exams: null,
       modalError: null,
       modal: null,
     };
@@ -60,6 +60,7 @@ class CourseComponent extends Component {
         </div>
         <hr className="s4" />
         <div className="center">
+        {!!this.state.exams || <p>Loading exams...</p>}
         <div className="table-container-container">
         <div className="table-container">
         <table className="exams center">
