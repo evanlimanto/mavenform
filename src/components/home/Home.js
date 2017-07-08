@@ -103,7 +103,7 @@ class HomeComponent extends Component {
           <div className="dark-gray center">
 						<hr className="s2" />
 						<a className="material-icons notification-x" onClick={this.hideNotificationBar}>close</a>
-						<p className="white-text notification-text">Need help with your math course? Message us on <a className="header-link" href="https://www.facebook.com/studyformapp/" target="_blank">Facebook</a> for free tutoring!</p>
+						<p className="white-text notification-text">Need help studying for a math exam? Message our Facebook <a className="header-link" href="https://www.facebook.com/studyformapp/" target="_blank">page</a> for free tutoring!</p>
 						<hr className="s2" />
 					</div>)}
         <div className="banner">

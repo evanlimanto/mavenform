@@ -35,6 +35,13 @@ em {
   max-width: 1000px;
 }
 
+.loader {
+  padding: 100px 0;
+  font-size: 20px;
+  text-align: center;
+  color: #ccc;
+}
+
 .footer-holder {
   width: 100%;
   height: 62px;

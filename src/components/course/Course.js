@@ -60,6 +60,7 @@ class CourseComponent extends Component {
         </div>
         <hr className="s4" />
         <div className="center">
+        {!!this.state.exams || <p className="loader">Loading exams...</p>}
         <div className="table-container-container">
         <div className="table-container">
         <table className="exams center">

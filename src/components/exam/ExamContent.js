@@ -29,7 +29,7 @@ class ExamContent extends Component {
   render() {
     const { schoolCode, courseCode, examTypeCode, termCode, profs } = this.props;
     const examContent = this.state.examContent;
-    const content = (!examContent) ? <p>Loading content...</p> : map(examContent.info, (num_parts, part) => {
+    const content = (!examContent) ? <p className="loader">Loading content...</p> : map(examContent.info, (num_parts, part) => {
       const subparts = map(range(1, num_parts + 1), subpart => {
         const key = `${part}_${subpart}`;
         if (!has(examContent.problems, key)) {

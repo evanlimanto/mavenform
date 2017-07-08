@@ -36,7 +36,7 @@ class SchoolComponent extends Component {
 
   getCourseItems() {
     if (this.state.courses === null) {
-      return <p>Loading courses...</p>;
+      return <p className="loader">Loading courses...</p>;
     }
 
     const schoolCode = this.props.schoolCode;
