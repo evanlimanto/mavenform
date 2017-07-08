@@ -139,7 +139,12 @@ class QuestionDropdown extends Component {
               <span className="material-icons">link</span>
               <span>Copy Link</span>
             </a>
-          ) : <Expire delay={1000} callback={this.doneCopyingLink}><span className="question-option">Copied!</span></Expire>}
+          ) : <Expire delay={1000} callback={this.doneCopyingLink}>
+            <span className="question-option">
+              <span className="material-icons">link</span>
+              <span>Copied!</span>
+            </span>
+          </Expire>}
           <a onClick={this.showReportModal} className="question-option">
             <span className="material-icons">report</span>
             <span>Report Error</span>
