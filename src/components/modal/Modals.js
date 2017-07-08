@@ -85,7 +85,10 @@ class ModalsComponent extends Component {
     if (!this.props.modal.type)
       return null;
 
-    let infoContent, modalContent;
+    let infoContent, modalContent, headerContent;
+    if (this.props.modal.type !== 'reporttypo') {
+      headerContent = <img className="modal-logo" src="/img/logo.svg" alt="modal logo" />;
+    }
     if (this.props.modal.type === 'login') {
       infoContent = (
         <div className="login-helper">

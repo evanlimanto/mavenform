@@ -137,7 +137,7 @@ class UserHomeComponent extends Component {
 
     const hasSelectedSchool = has(this.state, 'selectedSchool') && (keys(this.state.selectedSchool).length > 0);
     const selectSchoolModal = (this.state.showSelectSchoolModal) ? (
-     <div className="modal-container">
+      <div className="modal-container">
         <div className="modal-click" onClick={this.toggleSelectSchoolModal}>
         </div>
         <div className="modal">

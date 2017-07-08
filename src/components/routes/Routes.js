@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Course from '../course';
-import { Dashboard, DashboardContent, DashboardCourses, Transcribe, Transcribed } from '../dashboard';
+import { Dashboard, DashboardContent, DashboardCourses, DashboardComments, Transcribe, Transcribed } from '../dashboard';
 import Exam from '../exam';
 import Home from '../home';
 import { Login, Logout, SecretSignup, Signup } from '../login';
@@ -24,6 +24,7 @@ const Routes = (
     <Route path="/signup" component={Signup} />
     <Route path="/marketing" component={Marketing} />
     <Route path="/profile" render={(props) => <Profile requireAuth={requireAuth} {...props} />} />
+    <Route path="/dashboard/comments" component={DashboardComments} />
     <Route path="/dashboard/courses" component={DashboardCourses} />
     <Route path="/dashboard/content" component={DashboardContent} />
     <Route path="/dashboard/transcribed" component={Transcribed} />

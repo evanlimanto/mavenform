@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import copy from 'copy-to-clipboard';
+import classnames from 'classnames';
 
 import { copyQuestionLinkEvent } from '../../events';
 import Expire from './Expire';
@@ -25,6 +26,7 @@ class QuestionDropdown extends Component {
     this.showReportModal = this.showReportModal.bind(this);
     this.closeReportModal = this.closeReportModal.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.reportError = this.reportError.bind(this);
   }
 
   setCopied(isCopying) {
@@ -69,6 +71,7 @@ class QuestionDropdown extends Component {
       .send({ content_id, error_content })
       .end((err, res) => {
         if (err || !res.ok) console.error(err);
+        else this.closeShareQuestionModal();
       });
   }
 
@@ -96,16 +99,16 @@ class QuestionDropdown extends Component {
 
     let reportModal = null;
     if (this.state.showReportModal) {
+      const headerContent = (<h1>Report A Typo</h1>);
       const infoContent = (<div></div>);
       const modalContent = (
         <span>
-          <hr className="s2" />
-          <input className="login-info" type="text" placeholder="Please describe the typo in this question" ref="error_content"/>
+          <input className="login-info" type="text" placeholder="Please describe the typo in this question.." ref="error_content"/>
           <hr className="s2" />
           <a className="login-button blue" onClick={(e) => this.reportError(e, content_id)}>Report</a>
         </span>
       );
-      reportModal = <Modal closeModal={this.closeReportModal} infoContent={infoContent} modalContent={modalContent} />;
+      reportModal = <Modal closeModal={this.closeReportModal} headerContent={headerContent} infoContent={infoContent} modalContent={modalContent} />;
     }
 
     let shareQuestionModal = null;
@@ -134,12 +137,11 @@ class QuestionDropdown extends Component {
         {shareQuestionModal}
         <a onClick={this.toggleDropdown} className="arrow material-icons" id={"dropdowntoggle-" + content_id}>keyboard_arrow_down</a>
         <div className="question-options hidden" id={"dropdown-" + content_id}>
-          {(!this.state.copying) ? (
-            <a className="question-option" onClick={(e) => this.copyQuestionLink(e, url)} id={"copylink-" + content_id}>
-              <span className="material-icons">link</span>
-              <span>Copy Link</span>
-            </a>
-          ) : <Expire delay={1000} callback={this.doneCopyingLink}><span className="question-option">Copied!</span></Expire>}
+          <a className={classnames({"question-option": true, "hidden": this.state.copying})} onClick={(e) => this.copyQuestionLink(e, url)} id={"copylink-" + content_id}>
+            <span className="material-icons">link</span>
+            <span>Copy Link</span>
+          </a>
+          {!this.state.copying || <Expire delay={1000} callback={this.doneCopyingLink}><span className="question-option">Copied!</span></Expire>}
           <a onClick={this.showReportModal} className="question-option">
             <span className="material-icons">report</span>
             <span>Report Error</span>
