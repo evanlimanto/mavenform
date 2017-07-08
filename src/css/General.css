@@ -24,6 +24,10 @@ input {
   -webkit-appearance: none;
 }
 
+em {
+  text-decoration: underline;
+}
+
 .container {
   display: block;
   margin: auto;

@@ -808,7 +808,7 @@ app.post('/addComment', (req, res, next) => {
   const { parentid, userid, comment, contentid } = req.body;
 
   const getq = `select id from users where auth_user_id = $1`;
-  const inq = `insert into discussion (content, userid, contentid, datetime, parentid) values($1, $2, $3, now())`;
+  const inq = `insert into discussion (content, userid, contentid, datetime, parentid) values($1, $2, $3, now(), $4)`;
 
   async.waterfall([
     (callback) => pool.query(getq, [userid], callback),
@@ -834,6 +834,7 @@ app.get('/getUpvotes/:contentid', (req, res, next) => {
   const getq = `select contentid, userid, commentid from upvotes where contentid = $1`;
 
   pool.query(getq, [contentid], (err, result) => {
+    if (err) return console.erorr(err);
     const items = _.map(result.rows, (row) => {
       return {
         contentid: row.contentid,
@@ -841,6 +842,35 @@ app.get('/getUpvotes/:contentid', (req, res, next) => {
         commentid: row.commentid,
       };
     });
+    return res.json(items);
+  });
+});
+
+app.get('/getComments', (req, res, next) => {
+  const getq = `select * from discussion`;
+
+  pool.query(getq, (err, result) => {
+    if (err) return next(err);
+    const items = _.map(result.rows, (row) => {
+      return {
+        id: row.id,
+        content: row.content,
+        userid: row.userid,
+        contentid: row.contentid,
+        upvotes: row.upvotes,
+      };
+    });
+    return res.json(items);
+  });
+});
+
+app.post('/deleteQuestionComment', (req, res, next) => {
+  const { id } = req.body;
+  const delq = `delete from discussion where id = $1`;
+
+  pool.query(delq, [id], (err, result) => {
+    if (err) return next(err);
+    return res.send("Success!");
   });
 });
 

@@ -54,7 +54,7 @@ class CommentsComponent extends Component {
       return this.setState({ error: "Log in to comment." });
 
     const profile = this.props.auth.getProfile();
-    const user_id = profile.user_id;
+    const userid = profile.user_id;
     const nickname = (has(profile, 'user_metadata') && has(profile.user_metadata, 'username')) ?
       (profile.user_metadata.username) : (profile.given_name);
 
@@ -73,7 +73,7 @@ class CommentsComponent extends Component {
     });
     this.setState({ comments: concat(this.state.comments, { content: comment, nickname }), error: null });
     req.post('/addComment')
-      .send({ user_id, content_id, comment, parentid: null })
+      .send({ userid, content_id, comment, parentid: null })
       .end((err, res) => {
         this.refs.comment.value = null;
         if (err || !res.ok) return console.error(err);
@@ -86,7 +86,7 @@ class CommentsComponent extends Component {
       return this.setState({ error: "Log in to comment." });
 
     const profile = this.props.auth.getProfile();
-    const user_id = profile.user_id;
+    const userid = profile.user_id;
     const nickname = (has(profile, 'user_metadata') && has(profile.user_metadata, 'username')) ?
       (profile.user_metadata.username) : (profile.given_name);
 
@@ -108,7 +108,7 @@ class CommentsComponent extends Component {
     actionsClassList.remove("hidden");
     commentboxClassList.add("hidden");
     req.post('/addComment')
-      .send({ user_id, content_id, comment, parentid })
+      .send({ userid, content_id, comment, parentid })
       .end((err, res) => {
         this.refs["comment-" + parentid].value = null;
         if (err || !res.ok) return console.error(err);

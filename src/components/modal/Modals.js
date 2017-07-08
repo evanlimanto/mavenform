@@ -146,7 +146,7 @@ class ModalsComponent extends Component {
       );
     }
 
-    return <Modal closeModal={this.props.closeModal} infoContent={infoContent} modalContent={modalContent} errorText={this.props.modal.errorText} />;
+    return <Modal closeModal={this.props.closeModal} infoContent={infoContent} modalContent={modalContent} errorText={this.props.modal.errorText} headerContent={headerContent} />;
   }
 
   render() {
