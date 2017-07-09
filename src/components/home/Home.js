@@ -84,6 +84,12 @@ class HomeComponent extends Component {
         </Link> 
       );
     });
+    const subjectCards = [(
+      <Link className="card" to={"/math"}>
+        <span>Mathematics</span>
+        <span className="card-arrow">&#8594;</span>
+      </Link>
+    )];
 
     const searchResults = (this.state.suggestions.length > 0) ? (
       <div className="results-container">
@@ -168,6 +174,17 @@ class HomeComponent extends Component {
           <hr className="s3" />
           <div className="card-container">
             {schoolCards}
+            <hr className="s7-5" />
+          </div>
+        </Element>
+        <Element name="subjects" className="schools">
+          <hr className="s7-5" />
+          <h4 className="center">Subjects</h4>
+          <hr className="s1" />
+          <h5>Browse resources by subject</h5>
+          <hr className="s3" />
+          <div className="card-container">
+            {subjectCards}
             <hr className="s7-5" />
           </div>
         </Element>

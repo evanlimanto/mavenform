@@ -122,12 +122,25 @@ class NavbarComponent extends Component {
 
     const { schoolCode, courseCode, examTypeCode, termCode } = this.props;
     const courseLabel = courseCodeToLabel(courseCode);
-    const schoolLabel = this.props.labels.schools[schoolCode];
+    const schoolLabel = schoolCode === "math" ? "Math" : this.props.labels.schools[schoolCode];
     const examTypeLabel = examTypeToLabel(examTypeCode);
     const termLabel = termToLabel(termCode); 
     const numLayers = !!schoolLabel + !!courseLabel + !!examTypeLabel;
     let navbarNav = null;
-    if (!this.props.userHome) {
+    if (this.props.math) {
+      navbarNav = [<Link key='home' to='/'>Home</Link>];
+      navbarNav.push(<span key='homeSpan'> > </span>);
+      navbarNav.push(<Link key='school' to={'/math'}>Math</Link>);
+      navbarNav.push(<span key='mathSpan'> > </span>);
+      navbarNav.push(<Link key='topic' to={'/math/' + this.props.topic} className="active">{this.props.label}</Link>);
+      navbarNav = (
+        <div className="gray-nav">
+          <div className="container">
+            {navbarNav}
+          </div>
+        </div>
+      );
+    } else if (!this.props.userHome) {
       navbarNav = [<Link key='home' to='/' className={classnames({ active: numLayers === 0 })}>Home</Link>];
       if (schoolLabel) {
         navbarNav.push(<span key='homeSpan'> > </span>);
@@ -141,24 +154,14 @@ class NavbarComponent extends Component {
           }
         }
       }
-      if (this.props.exam) {
-        navbarNav = (
-          <div className="gray-nav">
-            <div className="container">
-              {navbarNav}
-              <a className="utility-button" href={this.props.source_url} target="_blank" rel="noopener noreferrer">View PDF</a>
-            </div>
+      navbarNav = (
+        <div className="gray-nav">
+          <div className="container">
+            {navbarNav}
+            {!this.props.exam || <a className="utility-button" href={this.props.source_url} target="_blank" rel="noopener noreferrer">View PDF</a>}
           </div>
-        );
-      } else {
-        navbarNav = (
-          <div className="gray-nav">
-            <div className="container">
-              {navbarNav}
-            </div>
-          </div>
-        );
-      }
+        </div>
+      );
     }
 
     if (this.props.waitlisted)

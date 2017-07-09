@@ -112,6 +112,12 @@ app.get('/getExamInfo/:schoolCode/:courseCode/:examTypeCode/:termCode', retrieve
 // Retrieve list of courses
 app.get('/getCoursesList', retrieveLists.getCoursesList);
 
+// Retrieve list of math topics
+app.get('/getMathTopics', retrieveLists.getMathTopics);
+
+// Retrieve math content by topic
+app.get('/getMathContent/:topic', retrieveLists.getMathContent);
+
 // File uploads
 app.post('/upload', (req, res) => {
   if (!req.files)
@@ -871,6 +877,16 @@ app.post('/deleteQuestionComment', (req, res, next) => {
   pool.query(delq, [id], (err, result) => {
     if (err) return next(err);
     return res.send("Success!");
+  });
+});
+
+app.get('/getMathLabel/:code', (req, res, next) => {
+  const { code } = req.params;
+  const getq = `select concept from math_topics where code = $1`;
+
+  pool.query(getq, [code], (err, result) => {
+    if (err) return next(err);
+    return res.send({ concept: result.rows[0].concept });
   });
 });
 

@@ -384,13 +384,53 @@ exports.getCoursesBySchool =
 exports.getSubjects = 
   (req, res, next) => {
     const q = `select id, subject_code, subject_label from subjects`;
-    pool.query(q, [], (err, result) => {
+    pool.query(q, (err, result) => {
       if (err) return next(err);
       const items = _.map(result.rows, (item) => {
         return {
           subject_id: item.id,
           subject_code: item.subject_code,
           subject_label: item.subject_label,
+        };
+      });
+      return res.json(items);
+    });
+  };
+
+exports.getMathTopics =
+  (req, res, next) => {
+    const getq = `
+      select id, topic, concept, code from math_topics
+      where exists (select 1 from math_content where tag = math_topics.id);
+    `;
+    pool.query(getq, (err, result) => {
+      if (err) return next(err);
+      const items = _.reduce(result.rows, (dict, row) => {
+        if (!_.has(dict, row.topic)) {
+          dict[row.topic] = [];
+        }
+        dict[row.topic].push({ id: row.id, label: row.concept, code: row.code });
+        return dict;
+      }, {});
+      return res.json(items);
+    });
+  };
+
+exports.getMathContent =
+  (req, res, next) => {
+    const { topic } = req.params;
+    const getq = `
+      select content, solution from math_content
+      inner join math_topics on
+      math_content.tag = math_topics.id
+      where math_topics.code = $1
+    `;
+    pool.query(getq, [topic], (err, result) => {
+      if (err) return next(err);
+      const items = _.map(result.rows, (row) => {
+        return {
+          content: renderer.preprocess(row.content),
+          solution: renderer.preprocess(row.solution),
         };
       });
       return res.json(items);
