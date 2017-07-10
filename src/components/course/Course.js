@@ -86,7 +86,7 @@ class CourseComponent extends Component {
     );
 
     let topicsContent = null, mathTopics = null;
-    if (schoolCode === 'ucsandiego' && (courseCode === 'MATH10A' || courseCode === 'MATH20C')) {
+    if (schoolCode === 'ucsandiego' && (courseCode === 'MATH10A' || courseCode === 'MATH20C' || courseCode === 'MATH20D')) {
       if (courseCode === 'MATH10A') {
         mathTopics = [
           { concept: 'Functions', code: 'functions' },
@@ -101,6 +101,11 @@ class CourseComponent extends Component {
           { concept: 'Limits and Derivatives', code: 'limitsandderivatives' },
           { concept: 'Differentiation', code: 'differentiation' },
           { concept: 'Multiple Integrals', code: 'multipleintegrals' }
+        ];
+      } else if (courseCode === 'MATH20D') {
+        mathTopics = [
+          { concept: 'First-Order Equations', code: 'firstordereqns' },
+          { concept: 'Linear Second-Order Equations', code: 'linearsecondordereqns' },
         ];
       }
       const topicCards = map(mathTopics, (topic) => {
