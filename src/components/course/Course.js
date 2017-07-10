@@ -86,7 +86,7 @@ class CourseComponent extends Component {
     );
 
     let topicsContent = null, mathTopics = null;
-    if (schoolCode === 'ucsandiego' && (courseCode === 'MATH10A' || courseCode === 'MATH20C' || courseCode === 'MATH20D')) {
+    if (schoolCode === 'ucsandiego' && (courseCode === 'MATH10A' || courseCode === 'MATH20C')) {
       if (courseCode === 'MATH10A') {
         mathTopics = [
           { concept: 'Functions', code: 'functions' },
