@@ -1,162 +1,76 @@
-q14_13: |
-  Find the first partial derivatives of $f(x, y) = (5y^3 + 2x^2y)^8$.
+q15_3: |
+  Calculate the iterated integral.
+  $$\int_1^2 \int_0^2 (y + 2xe^y) dx \; dy$$
 
-q14_13_s: |
-  Given function is $f(x, y) = (5y^3 + 2x^y)^8$.
-  <hr class="s1" />
-  We have to find the first partial derivatives. Differentiate the given function with respect to $x$ by keeping $y$ as constant. We get
+q15_3_s: |
   $$\begin{align}
-  f_x (x, y) &= \frac{\partial}{\partial x}((5y^3 + 2x^y)^8) \\\\
-  &= 8(5y^3 + 2x^2 y)^7 \frac{\partial}{\partial x} (5y^3 + 2x^2y) \\\\
-  &= 32xy(5y^3 + 2x^2y)^7
+  \int_1^2 \int_0^2 (y + 2xe^y) dx \; dy
+  &= \int_1^2 (yx + x^2e^y) |_{x=0}^{x=2} dy \\\\
+  &= \int_1^2 [y(2 - 0) + (4 - 0)e^y] dy \\\\
+  &= \int_1^2 (2y + 4e^y) dy \\\\
+  &= (y^2 + 4e^y) |_1^2 \\\\
+  &= 4e^2 - 4e + 3
   \end{align}$$
-  Differentiate the given function with respect to $y$ by keeping $x$ as constant. We get
+
+q15_11: |
+  Describe the region whose area is given by the integral
+  $$\int_0^{\pi / 2} \int_0^{\sin 2 \theta} r dr \; d\theta$$
+
+q15_11_s: |
+  Within the integral, $0 \le \theta \le \frac{\pi}{2}$ and $r = \sin 2\theta$.
+  <hr class="s1" />
+  This is the region inside the first quadrant loop of the four-leaf rose $r = \sin 2\theta$.
+
+q15_12: |
+  Describe the solid whose volume is given by the integral
+  $$\int_0^{\pi / 2} \int_0^{\pi / 2} \int_1^2 \rho^2 \sin \phi d \rho d \phi d \theta$$
+  and evaluate the integral.
+
+q15_12_s: |
+  The region of integration is
+  $$E = \left\\{ (\rho, \theta, \phi) : 1 \le \rho \le 2, 0 \le \theta \le \frac{\pi}{2}, 0 \le \phi \le \frac{\pi}{2} \right\\}$$
+  The region is given in spherical coordinates. Angle $\theta$ separates the position vector $\rho$ of the point in the region with the $x$-axis. Angle $\phi$ separates the position vector $\rho$ with the $z$-axis. In region $E$, $0 \le \theta \le $\frac{\pi}{2}$ and $0 \le \phi \le \frac{\pi}{2}$. This shows that the region lies in the first octant. Also, $1 \le \rho \le 2$, indicates that region $E$ is the region between two spheres with radius $1$ and $2$ that lie in the first octant.
   $$\begin{align}
-  f_y (x, y) &= \frac{\partial}{\partial y}((5y^3 + 2x^2y)^8) \\\\
-  &= 8(5y^3 + 2x^2y)^7 \frac{\partial}{\partial y}(5y^3 + 2x^2y) \\\\
-  &= 8(15y^2 + 2x^2)(5y^3 + 2x^2y)^7
+  \int_0^{\pi/2} \int_0^{\pi/2} \int_1^2 \rho^2 \sin \phi d\rho \; d\phi \; d\theta &= \int_0^{\pi/2} \int_0^{\pi/2} \sin \phi d\phi \int_1^2 \rho^2 d\rho \\\\
+  &= ( \theta )_0^{\pi/2} ( -\cos \phi )_0^{\pi/2} \left( \frac{\rho^3}{3} \right)_1^2 \\\\
+  &= (\frac{\pi}{2})(1)(\frac{8}{3} - \frac{1}{3}) \\\\
+  &= \frac{7\pi}{6}
   \end{align}$$
 
-q14_19: |
-  Find all second partial derivatives of $f(x, y) = 4x^3 - xy^2$.
+q15_15: |
+  Calculate the value of the multiple integral $\int \int_R ye^{xy} dA$, where $R = \{ (x, y) | 0 \le x \le 2, 0 \le y \le 3 \}$.
 
-q14_19_s: |
-  $$f_x = 12x^2 - y^2 \\\\
-  f_{xx} = 24x \\\\
-  f_y = -2xy \\\\
-  f_{yy} = -2x \\\\
-  f_{xy} = -2y \\\\
-  f_{yx} = -2y$$
-
-q14_25: |
-  Find equations of (a) the tangent plane and (b) the normal line to the given surface at the specified point for $z = 3x^2 - y^2 + 2x, \quad (1, -2, 1)$
-
-q14_25_s: |
-  (a) Take $f(x, y, z) = 3x^2 - y^2 + 2x - z$
-  <hr class="s1" />
-  Then, $f_x = 6x + 2, f_y = -2y, f_z = -1$
-  <hr class="s2" />
-  The equation of the tangent plane at $(1, -2, 1)$ is represented by
-  $$f_x(1, -2, 1)(x - 1) + f_y(1, -2, 1)(y + 2) + f_z(1, -2, 1)(z - 1) = 0 \\\\
-  (6 + 2)(x - 1)(4)(y + 2) + (-1)(z - 1) = 0 \\\\
-  8x + 4y - z + 1 = 0 \\\\
-  z = 8x + 4y + 1$$
-  (b) The equation of the normal line is expressed as
-  $$\frac{x - 1}{f_x (1, -2, 1)} = \frac{y + 2}{f_y(1, -2, 1)} = \frac{z - 1}{f_z(1, -2, 1)} \\\\
-  \frac{x - 1}{8} = \frac{y + 2}{4} = 1 - z$$
-
-q14_32: |
-  Find $du$ if $u = \ln (1 + se^{2t})$
-
-q14_32_s: |
-  Consider the function $u = \ln (1 + se^{2t})$. The objective is to find the value of $du$. Differentiate the function with respect to $t$.
+q15_15_s: |
   $$\begin{align}
-  \frac{du}{dt} &= \frac{d}{dt}(\ln (1 + se^{2t})) \\\\
-  &= \frac{1}{(1 + se^{2t})} \frac{d}{dt} ((1 + se^{2t})) \\\\
-  &= \frac{1}{(1 + se^{2t})} (0 + s(2e^{2t})) \\\\
-  du &= \frac{2se^{2t}}{(1 + se^{2t})}dt
+  \int_0^3 \int_0^2 y \cdot e^{xy} dx \; dy \\\\
+  &= \int_0^3 y \cdot \frac{e^{xy}}{y} |_{x=0}^{x=2} dy \\\\
+  &= \int_0^3 (e^{2y} - e^0) dy \\\\
+  &= \left( \frac{e^{2y}}{2} - y \right) |_0^3 \\\\
+  &= \frac{e^6}{2} - \frac{7}{2}
   \end{align}$$
 
-q14_42: |
-  If $\cos (xyz) = 1 + x^2 y^2 + z^2$, find $\frac{\partial z}{\partial x}$ and $\frac{\partial z}{\partial y}$.
+q15_23: |
+  Calculate the value of the multiple integral $\int \int \int_E xy dV$, where $E = \{ (x, y, z) | 0 \le x \le 3, 0 \le y \le x, 0 \le z \le x + y \}$.
 
-q14_42_s: |
-  Differentiate the given function with respect to $x$ by keeping $y$ as constant.
-  <hr class="s1" />
-  We get
-  $$\frac{\partial}{\partial x}\cos (xyz) = \frac{\partial}{\partial x} (1 + x^2y^2 + z^2) \\\\
-  \implies -\sin(xyz) \frac{\partial}{\partial x}(xyz) = 2xy^2 + 2z \frac{\partial z}{\partial x} \\\\
-  \implies -\sin(xyz) (yz + xy \frac{\partial z}{\partial x}) = 2xy^2 + 2z \frac{\partial z}{\partial x} \\\\
-  \implies \frac{\partial z}{\partial x}(-xy \sin (xyz) - 2z) = 2xy^2 + yz \sin (xyz) \\\\
-  \implies \frac{\partial z}{\partial x} = -\frac{2xy^2 + yz \sin (xyz)}{xy \sin (xyz) + 2z}$$
-  Differentiate the given function with respect to $y$ by keeping $x$ as constant.
-  <hr class="s1" />
-  We get
-  $$\frac{\partial}{\partial y} \cos (xyz) = \frac{\partial}{\partial y}(1 + x^2y^2 + z^2) \\\\
-  \implies -\sin (xyz) \frac{\partial}{\partial y}(xyzz) = 2yx^2 + 2z \frac{\partial z}{\partial y} \\\\
-  \implies -\sin (xyz) \left( xz + xy \frac{\partial z}{\partial y} \right) = 2yx^2 + 2z \frac{\partial z}{\partial y} \\\\
-  \implies -\frac{\partial z}{\partial y} (xy \sin (xyz) + 2z) = 2yx^2 + xz \sin (xyz) \\\\
-  \implies \frac{\partial z}{\partial y} = -\frac{2yx^2 + xz \sin (xyz)}{xy \sin (xyz) + 2z}$$
-
-q14_45: |
-  Find the directional derivative of $f(x, y) = x^2 e^{-y}, (-2, 0)$ in the direction toward the point $(2, -3)$.
-
-q14_45_s: |
-  Given $f(x, y) = x^2e^{-y}$, we have to find the directional derivative of the given function at $(-2, 0)$ in the direction toward the point $(2, -3)$.
-  <hr class="s1" />
-  We know that the directional derivative of $f$ in the direction of the unit vector $\vec{u}$ is $D_u f(x, y) = \nabla \cdot \vec{u}$.
-  <hr class="s1" />
-  We first find the gradient vector of $f$ at $(-2, 0)$.
-  $$\begin{align} \nabla f(x, y) &= \frac{\partial}{\partial x} (x^2 e^{-y}) \hat{i} + \frac{\partial}{\partial y} (x^2 e^{-y}) \hat{j} \\\\
-  &= (2x e^{-y}) \hat{i} - (x^2 e^{-y}) \hat{j} \\\\
-  \nabla f(-2, 0) &= -4 \hat{i} -4 \hat{j} \end{align}$$
-
-q14_47: |
-  Find the maximum rate of change of $f(x, y) = x^2 y + \sqrt{y}$ at the point $(2, 1)$. In which direction does it occur?
-
-q14_47_s: |
-  $f_x = 2x, f_y = x^2 + \frac{1}{2\sqrt{y}}$
-  <hr class="s1" />
-  The gradient of $f$ is $\nabla f(x, y) = < f_x, f_y > = < 2x, x^2 + \frac{1}{2\sqrt{y}} >$
-  <hr class="s1" />
-  Then, $\nabla f(2, 1) = < 4, \frac{9}{2} >$.
-  <hr class="s1" />
-  The rate of change of $f$ at $(2, 1)$ has maximum value $| \nabla f(2, 1) |$ and it takes place in the direction of $\nabla f$.
-  <hr class="s1" />
-  That is, maximum rate of change of $f$ is
-  $$| \nabla f(2, 1) | = \sqrt{16 + \frac{81}{4}} = \frac{\sqrt{145}}{2}$$
-  And it takes place in the direction of $< 4, \frac{9}{2} >$.
-
-q14_51: |
-  Find the local maximum and minimum values and saddle points of the function $f(x, y) = x^2 - xy + y^2 + 9x - 6y + 10$.
-
-q14_51_s: |
-  $f_x = 2x - y + 9, f_y = -x + 2y - 6$.
-  <hr class="s1" />
-  First, we find the critical points by setting $f_x = 0, f_y = 0$.
-  We get $$2x - y + 9 = 0 \\\\ -x + 2y - 6 = 0$$. By solving these equations, we find $y = 1, x = -4$. Then the only critical point is $(-4, 1)$.
-  <hr class="s2" />
-  Now $f_{xx} = 2, f_{yy} = 2, f_{xy} = -1$.
-  <hr class="s1" />
-  Then $$\begin{align} D &= f_{xx}f_{yy} - f_{xy}^2 \\\\ &= 2(2) - 1 \\\\ &= 3 \end{align}$$
-  At $(-4, 1), D = 3 > 0$ and $f_{xx} = 2 > 0$.
-  <hr class="s1" />
-  That is, $(-4, 1)$ is a point of local minimum and $f(-4, 1) = -11$.
-  <hr class="s1" />
-  Thus, the point of local minimum is $(-4, 1)$ and the minimum value of $f$ is $f(-4, 1) = -11$.
-
-q14_59: 
-  Use Lagrange multipliers to find the maximum and minimum values of $f(x, y) = x^2y$ subject to $x^2 + y^2 = 1$
-
-q14_59_s: |
-  $f_x = 2xy, f_y = x^2$. The given constraint $g(x, y) = x^2 + y^2 = 1$.
-  <hr class="s1" />
-  By Lagrange's method of multipliers, we find all $x, y$, and $\lambda$, such that $\nabla f(x, y) = \lambda \nabla g(x, y)$ and $g(x, y) = 1$.
-  $$f_x = \lambda g_x, f_y = \lambda g_y, g(x, y) = 1 \\\\
-  \begin{align} 
-  2xy = \lambda 2x \quad & (1) \\\\
-  x^2 = \lambda 2y \quad & (2) \\\\
-  x^2 + y^2 = 1 \quad & (3)
+q15_23_s: |
+  $$\begin{align}
+  \int \int \int xy \; dV
+  &= \int_0^3 \int_0^x \int_0^{x+y} xy \; dz \; dy \; dx \\\\
+  &= \int_0^3 \int_0^x (xyz)_{z=0}^{z=x+y} dy \; dx \\\\
+  &= \int_0^3 \int_0^x xy (x+y) dy \; dx \\\\
+  &= \int_0^3 \left[ \frac{x^2y^2}{2} + \frac{xy^3}{3} \right]_{y=0}^{y=x} dx \\\\
+  &= \int_0^3 \left( \frac{x^4}{2} + \frac{x^4}{3} \right) dx \\\\
+  &= \frac{5}{6} \int_0^3 x^4 dx \\\\
+  &= \frac{81}{2}
   \end{align}$$
-  If $\lambda = 0$ and $x = 0$ and we use this in the last equation, then $y = \pm 1$.
-  <hr class="s2" />
-  If $\lambda \ne 0$, then $x$ and $y \ne 0$.
-  <hr class="s1" />
-  From equation $(1), y = \lambda$.
-  <hr class="s1" />
-  From equation $(2), x^2 = \lambda 2y = 2 \lambda^2$
-  <hr class="s1" />
-  Using this in equation $(3), 3\lambda^2 = 1 \implies \lambda = \pm \frac{1}{\sqrt{3}}$
-  <hr class="s1" />
-  Then, $y = \pm \frac{1}{\sqrt{3}}, x = \pm \sqrt{\frac{2}{3}}$
-  <hr class="s2" />
-  Then the extreme points of $f$ are
-  $$(0, \pm 1), \left( \pm \sqrt{\frac{2}{3}}, \frac{1}{\sqrt{3}} \right), \left( \pm \sqrt{\frac{2}{3}}, \frac{-1}{\sqrt{3}} \right)$$
-  Now, evaluating $f$ at these extreme points,
-  $$f(0, \pm 1) = 0 \\\\
-  f \left( \pm \sqrt{\frac{2}{3}}, \frac{1}{\sqrt{3}} \right) = \frac{2}{3} \times \frac{1}{\sqrt{3}} = \frac{2}{3 \sqrt{3}}) \\\\
-  f \left( \pm \sqrt{\frac{2}{3}}, \frac{-1}{\sqrt{3}} \right) = \frac{-2}{3 \sqrt{3}}$$
-  Thus, the maximum value of $f$
-  $$f \left( \pm \sqrt{\frac{2}{3}}, \frac{1}{\sqrt{3}} \right) = \frac{2}{3 \sqrt{3}}$$
-  And the minimum value of $f$
-  $$f \left( \pm \sqrt{\frac{2}{3}}, \frac{-1}{\sqrt{3}} \right) = \frac{-2}{3 \sqrt{3}}$$
+
+q15_29: |
+  Find the volume of the solid under the paraboloid $z = x^2 + 4y^2$ and above the rectangle $R = [0, 2] \times [1, 4]$.
+
+q15_29_s: |
+  $$\begin{align}
+  V &= \int_0^2 \int_1^4 x^2 + 4y^2 dy \; dx \\\\
+  &= \int_0^2 \left( x^2y + \frac{4y^3}{3} \right) |_{y=1}^{y=4} dx \\\\
+  &= \int_0^2 (3x^2 + 84) dx \\\\
+  &= 176
+  \end{align}$$

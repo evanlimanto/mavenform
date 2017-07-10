@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { map } from 'lodash';
+import { map, sortBy } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 
 import Footer from '../footer';
@@ -30,7 +30,7 @@ class Math extends Component {
     }
 
     return map(this.state.math_topics, (obj, topic) => {
-      const courseBoxes = map(obj, (item, key) => {
+      const courseBoxes = map(sortBy(obj, [(item) => item.id]), (item, key) => {
         return (
           <Link className="card course-card" to={"/math/" + item.code} key={key}>
             <span>{item.label}</span>

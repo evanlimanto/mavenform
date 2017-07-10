@@ -18,6 +18,7 @@ class CourseComponent extends Component {
       exams: null,
       modalError: null,
       modal: null,
+      mathTopics: null,
     };
   }
 
@@ -84,12 +85,54 @@ class CourseComponent extends Component {
       </div>
     );
 
+    let topicsContent = null, mathTopics = null;
+    if (schoolCode === 'ucsandiego' && (courseCode === 'MATH10A' || courseCode === 'MATH20C' || courseCode === 'MATH20D')) {
+      if (courseCode === 'MATH10A') {
+        mathTopics = [
+          { concept: 'Functions', code: 'functions' },
+          { concept: 'Limits and Derivatives', code: 'limitsandderivatives' },
+          { concept: 'Differentiation', code: 'differentiation' },
+          { concept: 'Applications of Differentiation', code: 'applicationsofdifferentiation' },
+        ];
+      } else if (courseCode === 'MATH20C') {
+        mathTopics = [
+          { concept: 'Vectors, Planes and Surfaces', code: 'vectorsplanesandsurfaces' },
+          { concept: 'Functions', code: 'functions' },
+          { concept: 'Limits and Derivatives', code: 'limitsandderivatives' },
+          { concept: 'Differentiation', code: 'differentiation' },
+          { concept: 'Multiple Integrals', code: 'multipleintegrals' }
+        ];
+      }
+      const topicCards = map(mathTopics, (topic) => {
+        return (
+          <Link className="card" to={"/math/" + topic.code}>
+            <span>{topic.concept}</span>
+            <span className="card-arrow">&#8594;</span>
+          </Link>
+        );
+      });
+      topicsContent = (
+        <div name="subjects" className="light-gray schools">
+          <hr className="s7-5" />
+          <h4 className="center">Topics</h4>
+          <hr className="s1" />
+          <h5>Browse resources by topic</h5>
+          <hr className="s3" />
+          <div className="card-container">
+            {topicCards}
+            <hr className="s7-5" />
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div>
       <DocumentMeta {...meta} />
       <Navbar schoolCode={schoolCode} courseCode={courseCode} />
       <Modals />
       {content}
+      {topicsContent}
       <Footer />
       </div>
     );
@@ -99,7 +142,6 @@ class CourseComponent extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     auth: state.auth,
-    history: ownProps.history,
     courseCode: ownProps.match.params.courseCode,
     schoolCode: ownProps.match.params.schoolCode,
     exams: state.exams.multi_dict,
