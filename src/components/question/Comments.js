@@ -12,7 +12,7 @@ class CommentsComponent extends Component {
 
     this.state = {
       showComments: true,
-      comments: {},
+      commentRoots: [],
     };
 
     this.dfs = this.dfs.bind(this);
@@ -64,20 +64,19 @@ class CommentsComponent extends Component {
     if (isEmpty(comment))
       return;
 
-    const newid = max(map(keys(this.state.commentsTree), (key) => toInteger(key))) + 1;
-    let obj = {};
-    obj[newid] = { children: [], content: comment, datetime: null, nickname };
-    this.setState({
-      commentsTree: assign(this.state.commentsTree, obj),
-      commentsRoots: concat(this.state.commentsRoots, newid),
-    });
-    this.setState({ comments: concat(this.state.comments, { content: comment, nickname }), error: null });
     req.post('/addComment')
       .send({ userid, content_id, comment, parentid: null })
       .end((err, res) => {
         this.refs.comment.value = null;
         if (err || !res.ok) return console.error(err);
-        return;
+        
+        const newid = toInteger(res.text);
+        let obj = {};
+        obj[newid] = { id: newid, children: [], content: comment, datetime: null, nickname };
+        this.setState({
+          commentsTree: assign(this.state.commentsTree, obj),
+          commentsRoots: concat(this.state.commentsRoots, newid),
+        });
       });
   }
 
@@ -99,7 +98,7 @@ class CommentsComponent extends Component {
     const newid = max(map(keys(this.state.commentsTree), (key) => toInteger(key))) + 1;
     const newTree = cloneDeep(this.state.commentsTree);
     newTree[parentid].children.push(newid);
-    newTree[newid] = { children: [], content: comment, datetime: null, nickname };
+    newTree[newid] = { id: newid, children: [], content: comment, datetime: null, nickname };
     this.setState({ commentsTree: newTree });
     const actionsElement = document.getElementById("actions-" + parentid);
     const commentboxElement = document.getElementById("commentbox-" + parentid);
@@ -162,7 +161,6 @@ class CommentsComponent extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (!this.props.auth.loggedIn()) ? (
       <div className="comment-box">
         <p className="comment-helper"><a onClick={this.props.showLoginModal}>Log in</a> or <a onClick={this.props.showSignupModal}>sign up</a> to see discussion or post a question.</p>
