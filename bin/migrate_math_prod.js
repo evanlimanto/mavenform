@@ -26,7 +26,7 @@ pg.defaults.ssl = true;
 const prod_client = new pg.Client(prodConfig);
 prod_client.connect();
 
-const q1 = `select * from math_content where id > 276`;
+const q1 = `select * from math_content where id > 283`;
 const i1 = `insert into math_content (id, content, solution, tag) values($1, $2, $3, $4)`;
 
 async.parallel([

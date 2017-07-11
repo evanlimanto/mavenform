@@ -162,6 +162,7 @@ class CommentsComponent extends Component {
   }
 
   render() {
+    console.log(this.state);
     return (!this.props.auth.loggedIn()) ? (
       <div className="comment-box">
         <p className="comment-helper"><a onClick={this.props.showLoginModal}>Log in</a> or <a onClick={this.props.showSignupModal}>sign up</a> to see discussion or post a question.</p>

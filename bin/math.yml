@@ -1,39 +1,57 @@
-q1_31: |
-  Solve the initial value problem.
-  $$(x^3 - y) dx + x \; dy = 0, \quad y(1) = 3$$
+q1_1: |
+  Find the unknown values:
+  $$(-21, 23) - (a, 6) = (-25, b)$$
 
-q1_31_s: |
-  $$\frac{dy}{dx} = -\frac{x^3 - y}{x} \\\\
-  \frac{dy}{dx} - \frac{y}{x} = -x^2$$
-  Therefore the integrating factor is
-  $$\mu (x) = e^{\int -\frac{dx}{x}} = e^{- \ln x} = \frac{1}{x}$$
-  Multiply both sides by $\mu (x) = \frac{1}{x}$, to get
-  $$\frac{1}{x} \frac{dy}{dx} - \frac{y}{x^2} = -x \\\\
-  d \left( \frac{y}{x} \right) = -x \; dx \\\\
-  \frac{y}{x} = -\frac{x^2}{2} + \frac{C}{2} \\\\
-  y = \frac{x}{2} (C - x^2)$$
-  Therefore the general solution is $y = \frac{x}{2} (C - x^2)$.
+q1_1_s: |
+  $$a = 4, b = 17$$
+
+q1_13: |
+  Use set theoretic or vector notation or both to describe the points that lie in the plane spanned by $v_1 = (2, 7, 0)$ and $v_2 = (0, 2, 7)$.
+
+q1_13_s: |
+  Let any point in the plane be $\vec{r} = (x, y, z)$.
+  Then $\vec{r}$ will be of the form $\vec{r} = s\vec{v_1} + t\vec{v_2}$,
+  where $s, t \in \mathbb{R}$
   <hr class="s1" />
-  Considering the initial condition $y(1) = 3$,
-  $$\frac{1}{2}(C - 1^2) = 3 \\\\
-  C = 7$$
-  Therefore the solution of the initial value problem is $$y = \frac{x}{2} (7 - x^2)$$
+  $\implies \vec{r} = s(2, 7, 0) + t(0, 2, 7) \\\\
+  \implies (x, y, z) = (2s, 7s + 2t, 7t)$
+  <hr class="s2" />
+  Any point in the plane spanned by the given vectors is $\vec{r} = (2s, 7s + 2t, 7t)$.
 
-q1_33: |
-  Solve the initial value problem.
-  $$(t + x + 3) dt + dx = 0, \quad x(0) = 1$$
+q1_15: |
+  Use set theoretic or vector notation or both to describe the points that lie in the line passing through $(-1, -1, -1)$ in the direction of $\mathbf{j}$.
 
-q1_33_s: |
-  $$t \; dt + (x + 3) dt + dx = 0 \\\\
-  \frac{dx}{dt} = -t - x - 3 \\\\
-  \frac{dx}{dt} + x = -t - 3$$
-  Integrating Factor $= e^{\int dt} = e^t$.
-  $$e^t \frac{dx}{dt} + xe^t = e^t (-t -3) \\\\
-  \frac{d}{dt} (xe^t) = e^t (-t -3) \\\\
-  xe^t = \int e^t (-t-3) dt \\\\
-  xe^t = -\int e^t (t + 3) dt \\\\
-  xe^t = -(t + 3)e^t + e^t + c \\\\
-  x = -t - 2 + ce^t$$
-  Since $x(0) = 1 \implies x = 1$ when $t = 0$
-  $$1 = 0 - 2 + ce^0 \implies c = 3 \\\\
-  x = -t -2 + 3e^t$$
+q1_15_s: |
+  Let a general point on the line be $\vec{r} = (x, y, z)$.
+  <hr class="s1" />
+  We have a formula that is the equation of the line $l$ through the tip of $\mathbf{a}$ and passing in the direction of the vector $\mathbf{v}$ is $l(t) = \mathbf{a} + t\mathbf{v}$ where the parameter $t$ takes on all real values.
+  <hr class="s1" />
+  In coordinate form the equations are
+  $$x = x_1 + at \\\\
+  y = y_1 + bt \\\\
+  z = z_1 + ct$$
+  Where $\mathbf{a} = (x_1, y_1, z_1)$ and $v = (a, b, c)$.
+  <hr class="s1" />
+  Here $(x_1, y_1, z_1) = (-1, -1, -1)$ and $v = (0, 1, 0)$.
+  <hr class="s1" />
+  Computing $\vec{r} = (x, y, z)$
+  $$x = (-1) + 0(t) = -1 \\\\
+  y = (-1) + 1(t) = -1 + t \\\\
+  z = (-1) + 0(t) = -1$$
+  Therefore, $\vec{r} = (-1, -1 + t, -1)$.
+
+q1_17: |
+  Use set theoretic or vector notation or both to describe the points that lie in the line passing through $(-1, -1, -1)$ and $(1, -1, 2)$.
+
+q1_17_s: |
+  Let given points be $P = (-1, -1, -1)$ and $Q = (1, -1, 2)$.
+  Now we have to describe the points that lie in the given configuration.
+  <hr class="s1" />
+  The parametric equations of the line $l$ through the points $(x_1, y_1, z_1)$ and $(x_2, y_2, z_2)$ are $$x = x_1 + (x_2 - x_1)t \\\\ y = y_1 + (y_2 - y_1)t \\\\ z = z_1 + (z_2 - z_1)t$$
+  Where $(x, y, z)$ is the general point of $l$ and the parameter $t$ takes on all real values.
+  <hr class="s1" />
+  The parametric equations of the line through the points $P$ and $Q$ is
+  $$x = -1 + 2t \\\\
+  y = -1 \\\\
+  z = -1 + 3t$$
+  Any point on the line passing through the given items is $(x, y, z) = (-1 + 2t, -1, -1 + 3t)$ and hence the points lie in the given configuration.

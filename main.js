@@ -811,14 +811,14 @@ app.get('/getComments/:contentid', (req, res, next) => {
 });
 
 app.post('/addComment', (req, res, next) => {
-  const { parentid, userid, comment, contentid } = req.body;
+  const { parentid, userid, comment, content_id } = req.body;
 
   const getq = `select id from users where auth_user_id = $1`;
   const inq = `insert into discussion (content, userid, contentid, datetime, parentid) values($1, $2, $3, now(), $4)`;
 
   async.waterfall([
     (callback) => pool.query(getq, [userid], callback),
-    (results, callback) => pool.query(inq, [comment, results.rows[0].id, contentid, parentid], callback),
+    (results, callback) => pool.query(inq, [comment, results.rows[0].id, content_id, parentid], callback),
   ], (err) => {
     if (err) return next(err);
     return res.send("Success!");
