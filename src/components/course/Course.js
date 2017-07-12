@@ -86,7 +86,8 @@ class CourseComponent extends Component {
     );
 
     let topicsContent = null, mathTopics = null;
-    if (schoolCode === 'ucsandiego' && (courseCode === 'MATH10A' || courseCode === 'MATH20C' || courseCode === 'MATH20D')) {
+    if ((schoolCode === 'ucsandiego' && (courseCode === 'MATH10A' || courseCode === 'MATH20C' || courseCode === 'MATH20D')) ||
+        (schoolCode === 'ucberkeley' && (courseCode === 'MATH53' || courseCode === 'MATH1A'))) {
       if (courseCode === 'MATH10A') {
         mathTopics = [
           { concept: 'Functions', code: 'functions' },
@@ -96,16 +97,38 @@ class CourseComponent extends Component {
         ];
       } else if (courseCode === 'MATH20C') {
         mathTopics = [
-          { concept: 'Vectors, Planes and Surfaces', code: 'vectorsplanesandsurfaces' },
-          { concept: 'Functions', code: 'functions' },
-          { concept: 'Limits and Derivatives', code: 'limitsandderivatives' },
-          { concept: 'Differentiation', code: 'differentiation' },
-          { concept: 'Multiple Integrals', code: 'multipleintegrals' }
+          { concept: 'Vectors in 2D and 3D Space', code: 'vectors' },
+          { concept: 'Inner Product, Length and Distance', code: 'innerproductlengthdistance' },
+          { concept: 'Matrices, Determinants and the Cross Product', code: 'matricesdeterminantscrossproduct' },
+          { concept: 'Limits and Continuity', code: 'limitsandcontinuity' },
         ];
       } else if (courseCode === 'MATH20D') {
         mathTopics = [
           { concept: 'First-Order Equations', code: 'firstordereqns' },
           { concept: 'Linear Second-Order Equations', code: 'linearsecondordereqns' },
+        ];
+      } else if (courseCode === 'MATH53') {
+        mathTopics = [
+          { concept: 'Parametric Equations', code: 'parametriceqns' },
+          { concept: 'Vectors, Planes and Surfaces', code: 'vectorsplanesandsurfaces' },
+          { concept: 'Vector Functions', code: 'vectorfunctions' },
+          { concept: 'Partial Derivatives', code: 'partialderivatives' },
+          { concept: 'Multiple Integrals', code: 'multipleintegrals' },
+          { concept: 'Vector Calculus', code: 'vectorcalculus' },
+        ];
+      } else if (courseCode === 'MATH54') {
+        mathTopics = [
+          { concept: 'First-Order Equations', code: 'firstordereqns' },
+          { concept: 'Linear Second-Order Equations', code: 'linearsecondordereqns' },
+        ];
+      } else if (courseCode === 'MATH1A') {
+        mathTopics = [
+          { concept: 'Functions', code: 'functions' },
+          { concept: 'Limits and Derivatives', code: 'limitsandderivatives' },
+          { concept: 'Differentiation', code: 'differentiation' },
+          { concept: 'Applications of Differentiation', code: 'applicationsofdifferentiation' },
+          { concept: 'Integrals', code: 'integrals' },
+          { concept: 'Applications of Integration', code: 'applicationsofintegration' },
         ];
       }
       const topicCards = map(mathTopics, (topic) => {

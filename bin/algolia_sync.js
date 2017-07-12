@@ -42,10 +42,8 @@ const pg = require('pg');
 const client = new pg.Client(config);
 client.connect();
 
-index.clearIndex();
-
 const q = `
-  select courses.id, courses.code as code, courses.code_label as code_label, schools.code as school_code, schools.name as school_name, subjects.subject_label as subject_label from courses
+  select courses.id, courses.code as code, courses.code_label as code_label, courses.label as label, schools.code as school_code, schools.name as school_name, subjects.subject_label as subject_label from courses
   inner join schools on courses.schoolid = schools.id
   inner join subjects on courses.subjectid = subjects.id
   where exists (select 1 from exams where exams.courseid = courses.id)
@@ -56,6 +54,7 @@ client.query(q, (err, result) => {
     let item = {
       objectID: row.id,
       code: row.code,
+      label: row.label,
       code_label: row.code_label,
       school_code: row.school_code,
       school_name: row.school_name,
@@ -65,7 +64,7 @@ client.query(q, (err, result) => {
     item.number = code[0];
     item.letter = code[1];
     item.subject = _.join(_.dropRight(_.split(item.code_label, ' ')), ' ');
-    index.saveObject(item, (err, content) => {
+    index.partialUpdateObject(item, (err, content) => {
       if (err) return console.error(err);
       else console.log(content);
     });

@@ -61,12 +61,14 @@ class HomeComponent extends Component {
       offset: 0,
     }, (err, content) => {
       const suggestions = map(content.hits, (hit) => {
+        console.log(hit);
         return {
           code: hit.code,
           school_code: hit.school_code,
           school_name: hit.school_name,
           code_label_highlighted: hit._highlightResult.code_label.value,
           school_name_highlighted: hit._highlightResult.school_name.value,
+          label_highlighted: hit._highlightResult.label.value,
         };
       });
       this.setState({ suggestions, suggestionsDropdownOn: true });
@@ -95,7 +97,7 @@ class HomeComponent extends Component {
       <div className="results-container">
         <div className="results">
         {map(this.state.suggestions, (suggestion, index) => {
-          const suggestionText = `${suggestion.school_name_highlighted} ${suggestion.code_label_highlighted}`;
+          const suggestionText = `${suggestion.school_name_highlighted} ${suggestion.code_label_highlighted} - ${suggestion.label_highlighted}`;
           return <Link key={index} to={`/${suggestion.school_code}/${toUpper(suggestion.code)}`} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
         })}
         </div>
