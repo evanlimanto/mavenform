@@ -38,10 +38,10 @@ const Routes = (
     <Route path="/m4rk3t1ng4pp5" component={MarketingApps} />
     <Route path="/upload" component={Upload} />
     <Route path="/math/:topic" component={MathContent} />
-    <Route path="/:schoolCode/:courseCode/:topic" component={MathContent} />
     <Route path="/math" component={Math} />
     <Route path="/home" render={(props) => <UserHome requireAuth={requireAuth} {...props} />} />
     <Route path="/:schoolCode/:courseCode/:examType/:termCode" render={(props) => <Exam requireAuth={requireAuth} {...props} />} />
+    <Route path="/:schoolCode/:courseCode/:topic" component={MathContent} />
     <Route path="/:schoolCode/:courseCode" component={Course} />
     <Route path="/:schoolCode" component={School} />
 
