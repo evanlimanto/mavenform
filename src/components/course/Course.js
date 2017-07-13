@@ -101,6 +101,10 @@ class CourseComponent extends Component {
           { concept: 'Inner Product, Length and Distance', code: 'innerproductlengthdistance' },
           { concept: 'Matrices, Determinants and the Cross Product', code: 'matricesdeterminantscrossproduct' },
           { concept: 'Limits and Continuity', code: 'limitsandcontinuity' },
+          { concept: 'Differentiation', code: 'differentiation' },
+          { concept: 'Introduction to Paths and Curves', code: 'intropathscurves' },
+          { concept: 'Properties of the Derivative', code: 'propertiesofderivative' },
+          { concept: 'Gradients and Directional Derivatives', code: 'gradientsanddirectionalderivatives' },
         ];
       } else if (courseCode === 'MATH20D') {
         mathTopics = [

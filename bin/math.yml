@@ -1,105 +1,170 @@
 q1_1: |
-  Let $f: \mathbb{R}^2 \implies \mathbb{R}$ and suppose that $\lim_{(x, y) \to (1, 3)} f(x, y) = 5$. What can you say about the value $f(1, 3)$?
+  Show that the directional derivative of $f(x, y, z) = z^2x + y^3$ at $(1, 1, 2)$ in the direction $(1 / \sqrt{5})\mathbf{i} + (2 / \sqrt{5})\mathbf{j}$ is $2\sqrt{5}$.
 
 q1_1_s: |
-  Here, $f(x, y)$ is not defined. So it cannot be said whether the function is continuous or not. Also it is not mentioned in the question. Limits are defined only for continuous functions.
+  We have $\nabla f = (z^2, 3y^2, 2xz)$.
+  <hr class="s1" />
+  The directional derivative of $f(x, y, z)$ in the direction $\left( \frac{1}{\sqrt{5}} \right) i + \left( \frac{2}{\sqrt{5}} \right) j$ is given by
+  $$\begin{align}
+  \nabla f \cdot v &= (z^2, 3y^2, 2xz) \cdot \left( \frac{1}{\sqrt{5}}, \frac{2}{\sqrt{5}}, 0 \right) \\\\
+  &= \left( \frac{z^2}{\sqrt{5}} + \frac{6y^2}{\sqrt{5}} \right)
+  \end{align}$$
+  At $(1, 1, 2), \nabla \cdot v = \left( \frac{4}{\sqrt{5}} + \frac{6}{\sqrt{5}} \right) = 2\sqrt{5}$.
 
 q1_3: |
-  Compute the limits:
-  <hr class="s1" />
-  (a) $\lim_{(x, y) \to (0, 1)} x^3y$
-  <hr class="s1" />
-  (b) $\lim_{x \to 0} \frac{\cos x - 1}{x^2}$
-  <hr class="s1" />
-  (c) $\lim_{h \to 0} \frac{e^h - 1}{h}$
+  Compute the directional derivative of the following function along unit vectors at the indicated points in directions parallel to the given vector:
+  $$f(x, y) = x^y, (x_0, y_0) = (e, e), \mathbf{d} = 5\mathbf{i} + 12\mathbf{j}$$
 
 q1_3_s: |
-  (a)
+  The directional derivative of $f$ at $(e, e)$ is
+  $$D_u f(e, e) = \nabla f(e, e) \cdot \mathbf{u} \cdots (1)$$
+  Find the unit vector for the direction vector $\mathbf{d}$.
   $$\begin{align}
-  \lim_{(x, y) \to (0, 1)} x^3y &= \left( \lim_{(x, y) \to (0, 1)} x^3 \right) \cdot \left( \lim_{(x, y) \to (0, 1)} y \right) \\\\
-  &= (0)^3 \cdot (1) \\\\
-  &= 0
+  \mathbf{u} &= \frac{\mathbf{d}}{| \mathbf{d} |} \\\\
+  &= \frac{5}{\sqrt{(5)^2 + (12)^2}}\mathbf{i} + \frac{12}{\sqrt{(5)^2 + (12)^2}} \mathbf{j} \\\\
+  &= \frac{5}{13} \mathbf{i} + \frac{12}{13} \mathbf{j}
   \end{align}$$
-  (b) Consider the limit $\lim_{x \to 0} \frac{\cos x - 1}{x^2}$.
+  Here the function involves only $2$ variables so the gradient is $\nabla f = < f_x, f_y >$. Find the partial derivatives with respect to $x$ and $y$.
+  $f_x = \frac{\partial}{\partial x}(x^y) = yx^{y-1}$ and $f_y = \frac{\partial}{\partial y}(x^y) = x^y \ln x$.
   <hr class="s1" />
-  Compute the limit as follows:
-  $$\begin{align}
-  \lim_{x \to 0} \frac{\cos x - 1}{x^2} &= \lim_{x \to 0}{1 - 1}{0^2} \\\\
-  &= \frac{0}{0} \; (\text{indeterminant form})
-  \end{align}$$
-  So, use L'Hospital Rule to find the limit as follows:
-  $$\begin{align}
-  \lim_{x \to 0} \frac{\cos x - 1}{x^2} &= \lim_{x \to 0} \frac{- \sin x - 0}{2x} \\\\
-  &= \lim_{x \to 0} - \frac{\sin x}{2x} \\\\
-  &= -\frac{1}{2} \quad \text{since} \; \lim_{a \to 0} \frac{\sin a}{a} = 1
-  \end{align}$$
-  Hence, $\lim_{x \to 0} \frac{\cos x - 1}{x^2} = -\frac{1}{2}$
+  Therefore, the gradient in terms of $\mathbf{i}$ and $\mathbf{j}$ is $\nabla f = yx^{y-1}\mathbf{i} + x^y \ln x \mathbf{j}$.
   <hr class="s1" />
-  (c) Consider the following limit $\lim_{h \to 0} \frac{e^h - 1}{h}$.
+  Plugging in the point $(e, e)$ to $\nabla f$, we have
+  $$\begin{align}
+  \nabla f(e, e) &= ee^{e-1} \mathbf{i} + e^e \ln e\mathbf{j} \\\\
+  &= e^e \mathbf{i} + e^e \mathbf{j}
+  \end{align}$$
+  So, from $(1)$, the directional derivative is
+  $$\begin{align}
+  D_u f(e, e) &= \nabla f(e, e) \cdot \mathbf{u} \\\\
+  &= (e^e \mathbf{i} + e^e \mathbf{j}) \cdot \left( \frac{5}{13} \mathbf{i} + \frac{12}{13} \mathbf{j}) \\\\
+  &= e^e \left( \frac{5}{13} + \frac{12}{13} \right) \\\\
+  &= \frac{17e^e}{13}
+  \end{align}$$
+
+q1_5: |
+  (a) Let $f: \mathbb{R}^3 \to \mathbb{R}, \mathbf{x}_0 \in \mathbb{R}^3$. If $\mathbf{v}$ is a unit vector in $\mathbb{R}^3$, show that the maximum value of the directional derivative of $f$ at $\mathbf{x}_0$ along $\mathbf{v}$ is $|| \nabla f(\mathbf{x}_0) ||$.
   <hr class="s1" />
-  Compute the following limit:
+  (b) Let $f(x, y, z) = x^3 - y^3 + z^3$. Find the maximum value for the directional derivative of $f$ at the point $(1, 2, 3)$.
+
+q1_5_s: |
+  (a) Consider that $\nabla f(x)$ points in the direction along which $f$ is increasing the fastest (Assume $\nabla f(x) \ne 0)$.
+  <hr class="s1" />
+  Therefore the maximum value of the directional derivative is
   $$\begin{align}
-  \lim_{h \to 0} \frac{e^h - 1}{h} &= \frac{e^0 - 1}{0} \\\\
-  &= \frac{0}{0}
+  Df(x_0) \frac{\nabla f(x_0)}{|| \nabla f(x_0) ||} &= \nabla f(x_0) \frac{\nabla f(x_0)}{|| \nabla f(x_0) ||} \\\\ &= || \nabla f(x_0) ||
   \end{align}$$
-  Use L'Hospital Rule and solve as follows:
+  (b) Use the above obtained result to find the maximum value of the directional derivative at the point $(1, 2, 3)$.
+  <hr class="s1" />
+  Now $\nabla f(x) = 3x^2 \mathbf{i} - 3y^2 \mathbf{j} + 3z^2\mathbf{k}$.
+  <hr class="s1" />
+  The maximum value is
+  $$|| \nabla f(x) || = \sqrt{(3x^2)^2 + (-3y^2)^2 + (3z^2)^2} \\\\
+  || \nabla f(x_0) || = \sqrt{(3(1)^2)^2 + (-3(2)^2)^2 + (3(3)^2)^2} = 21\sqrt{2}$$
+  Hence, the maximum value for the directional derivative of $f$ at the point $(1, 2, 3)$ is $21\sqrt{2}$.
+
+q1_7: |
+  Find the rate of change of $f(x, y, z) = xyz$ in the direction normal to the surface $yx^2 + xy^2 + yz^2 = 3$ at $(1, 1, 1)$.
+
+q1_7_s: |
+  The gradient of the function is $\nabla f(x, y, z) = (yz, xz, xy)$.
+  <hr class="s1" />
+  Equation for the surface is $g(x, y, z) = yx^2 + xy^2 + yz^2 - 3$.
+  <hr class="s1" />
+  To find the normal to the surface, first find the gradient of the surface
+  $$\nabla g = (2yx + y^2) \mathbf{i} + (x^2 + 2xy + z^2) \mathbf{j} + (2yz) \mathbf{k}$$
+  At the point $(1, 1, 1)$,
+  $$\nabla g(1, 1, 1) = 3\mathbf{i} + 4\mathbf{j} + 2\mathbf{k}$$
+  Normal to the surface at the point is
   $$\begin{align}
-  \lim_{h \to 0} \frac{e^h - 1}{h} &= \lim_{h \to 0}\frac{e^h}{1} \\\\ &= \frac{e^0}{1} = 1
+  \mathbf{n} &= \frac{3\mathbf{i} + 4\mathbf{j} + 2\mathbf{k}}{|| 3\mathbf{i} + 4\mathbf{j} + 2\mathbf{k}||} \\\\
+  &= \frac{3}{\sqrt{29}} \mathbf{i} + \frac{4}{\sqrt{29}} \mathbf{j} + \frac{2}{\sqrt{29}} \mathbf{k}
   \end{align}$$
-  Hence, $\lim_{h \to 0} \frac{e^h - 1}{h} = 1$.
+  The rate of change of $f$ is given by
+  $$\nabla f \cdot \mathbf{n} = (yz \mathbf{i} + xz \mathbf{j} + xy \mathbf{k}) \cdot \left( \frac{3}{\sqrt{29}}\mathbf{i} + \frac{4}{\sqrt{29}}\mathbf{j} + \frac{2}{\sqrt{29}}\mathbf{k} \right)$$
+  Therefore, at $(1, 1, 1)$ the rate of change of $f$ is
+  $$\begin{align}
+  \nabla f \cdot \mathbf{n} &= ((1)(1) \mathbf{i} + (1)(1) \mathbf{j} + (1)(1) \mathbf{k}) \cdot \left( \frac{3}{\sqrt{29}}\mathbf{i} + \frac{4}{\sqrt{29}}\mathbf{j} + \frac{2}{\sqrt{29}}\mathbf{k} \right) \\\\
+  &= \frac{3 + 4 + 2}{\sqrt{29}} \\\\
+  &= \frac{9}{\sqrt{29}}
+  \end{align}$$
 
 q1_9: |
-  Compute the following limits if they exist:
-  <hr class="s1" />
-  (a) $\lim_{(x, y) \to (0, 0)} \frac{e^{xy} - 1}{y}$
-  <hr class="s1" />
-  (b) $\lim_{(x, y) \to (0, 0)} \frac{\cos (xy) - 1}{x^2y^2}$
-  <hr class="s1" />
-  (c) $\lim_{(x, y) \to (0, 0)} \frac{xy}{x^2 + y^2 + 2}$
+  Find the equation for the plane tangent to the surface $z = f(x, y)$ at the indicated point:
+  $$z = x^3 + y^3 - 6xy$, at the point $(1, 2, -3)$$
 
 q1_9_s: |
-  We know that
-  $$e^{xy} = 1 + xy + \frac{(xy)^2}{2} + \cdots$$
-  Hence 
+  Let $S$ be the surface consisting of those $(x, y, z) such that $f(x, y, z) = k$ for constant $k$. Then, then tangent plane of $S$ at a point $(x_0, y_0, z_0)$ of $S$ is defined by the equation $\nabla f(x_0, y_0, z_0) \cdot (x - x_0, y - y_0, z - z_0) = 0$ if $\nabla f(x_0, y_0, z_0) \ne 0$. That is, the tangent plane is the set of points $(x, y, z)$ that satisfies the above equation
+  $$\nabla f = (3x^2 - 6y)i + (3y^2 - 6x)j$$
+  So, the tangent plane is defined by the equation
+  $$(3-12,12-6,-1) \cdot (x-1,y-2,z+3) = 0 \\\\
+  9(1-x) + 6(y-2) - (z+3) = 0$$
+
+q1_13: |
+  Find a unit normal to the surface $\cos (xy) = e^x - 2$ at $(1, \pi, 0)$.
+
+q1_13_s: |
+  If a curve is represented by $f(x, y, z) = 0$, then $\nabla f(x_0, y_0, z_0)$ is the normal vector to the curve at the point $(x_0, y_0, z_0)$.
+  <hr class="s1" />
+  For this, find the partial derivatives at $f(x, y, z)$ with respect to $x, y$ and $z$.
   $$\begin{align}
-  \lim_{(x, y) \to (0, 0)} \frac{e^{xy} - 1}{y} &= \lim_{(x, y) \to (0, 0)} \frac{1 + xy + \frac{(xy)^2}{2} + \cdots - 1}{y} \\\\
-  &= \lim_{(x, y) \to (0, 0)} \frac{xy + \frac{(xy)^2}{2} + \cdots}{y} \\\\
-  &= \lim_{(x, y) \to (0, 0)} \frac{y(x + x^y + \cdots)}{y} \\\\
-  &= \lim_{(x, y) \to (0, 0)} x + x^y + \cdots \\\\
-  &= 0
+  f_x &= \frac{\partial}{\partial x}(f(x, y, z)) \\\\
+  &= \frac{\partial}{\partial x}(e^z - 2 - \cos (xy)) \\\\
+  &= y \sin (xy)
+  \end{align}$$
+  $$\begin{align}
+  f_y &= \frac{\partial}{\partial y}(f(x, y, z)) \\\\
+  &= \frac{\partial}{\partial y} (e^z - 2 - \cos (xy)) \\\\
+  &= x \sin (xy)
+  \end{align}$$
+  $$\begin{align}
+  f_z &= \frac{\partial}{\partial z}(f(x, y, z)) \\\\
+  &= \frac{\partial}{\partial z}(e^z - 2 - \cos (xy)) \\\\
+  &= e^z
   \end{align}$$
 
-q1_15: |
-  Where is the function $f(x, y) = \frac{1}{x^2 + y^2}$ continuous?
+q1_17: |
+  For the following functions $f: \mathbb{R}^3 \to \mathbb{R}$ and $g: \mathbb{R} \to \mathbb{R}^3$, find $\nabla f$ and $g'$ and evaluate $(f \circ g)'(1)$.
+  $$f(x, y, z) = xz + yz + xy, g(t) = (e^t, \cos t, \sin t)$$
 
-q1_15_s: |
-  A function is continuous at a point $(x_0, y_0)$ only if it's defined at that point. Here the function is not defined when $x = 0, y = 0$. That is,
-  $$f(0, 0) = \frac{1}{(0)^2 + (0)^2} = \infty$$
-  So, the function is continuous everywhere except at $(0, 0)$.
-
-q1_25: |
-  (a) Can $[\sin (x + y)]/(x + y)$ be made continuous by suitably defining it at $(0, 0)$?
-  <hr class="s1" />
-  (b) Can $xy/(x^2 + y^2)$ be made continuous by suitably defining it at $(0, 0)$?
-  <hr class="s1" />
-  Prove that $f: \mathbb{R}^2 \to \mathbb{R}, (x, y) \to ye^x + \sin x + (xy)^4$ is continuous.
-
-q1_25_s: |
-  (a) Observe that $(x, y)$ approaches $(0, 0)$, so the expression $x + y$ must approach $0$.
-  <hr class="s1" />
-  Let $x + y = t$. Clearly, $t \to 0$.
-  $$\lim_{(x, y) \to (0, 0)} \frac{\sin (x + y)}{(x + y)} &= \lim_{t \to 0} \frac{\sin t}{t} = 1$$
-  Therefore, the given function is continuous at $(0, 0)$.
-  <hr class="s1" />
-  (b) The partial limits of $f$ along the path $(x, y) = (0, 0)$ is equal to zero.
-  <hr class="s1" />
-  Suppose the partial limit of $f$ along the path $y = x$ is
+q1_17_s: |
+  First, find $\nabla f$. For this, find the partial derivatives for $f(x, y, z)$ with respect to $x, y$ and $z$.
   $$\begin{align}
-  \lim_{(x, y) \to (x, x)} \frac{xy}{x^2 + y^2} &= \frac{x(x)}{x^2 + x^2} \\\\
-  &= \frac{x^2}{2x^2} \\\\ &= \frac{1}{2}
+  f_x &= \frac{\partial}{\partial x}(f(x, y, z)) \\\\
+  &= \frac{\partial}{\partial x}(xz + yz + xy) \\\\
+  &= z + y
   \end{align}$$
-  Therefore, $\lim_{(x, y) \to (0, 0)} f(x, y)$ does not exist. Thus, the given function is not continuous at $(0, 0)$.
+  $$\begin{align}
+  f_y &= \frac{\partial}{\partial y}(f(x, y, z)) \\\\
+  &= \frac{\partial}{\partial y}(xz + yz + xy) \\\\
+  &= z + x
+  \end{align}$$
+  $$\begin{align}
+  f_z = \frac{\partial}{\partial z}(f(x, y, z)) \\\\
+  &= \frac{\partial}{\partial z}(xz + yz + xy) \\\\
+  &= x + y
+  \end{align}$$
+  Therefore the gradient vector is
+  $$\begin{align}
+  \nabla f(x, y, z) &= \frac{\partial f}{\partial x} \mathbf{i} + \frac{\partial f}{\partial y} \mathbf{j} + \frac{\partial f}{\partial z}\mathbf{k} \\\\
+  &= (y + z) \mathbf{i} + (z + x) \mathbf{j} + (x + y) \mathbf{k}
+  \end{align}$$
+  Now, find $g'(t)$:
+  $$\begin{align}g'(t) &= \frac{d}{dt} (e^t, \cos t, \sin t) \\\\ &= (e^t, -\sin t, \cos t) \end{align}$$
+  Find $(f \circ g)'(1)$.
   <hr class="s1" />
-  (c) Consider $f: \mathbb{R}^2 \to \mathbb{R}$. The partial limits of $f$ along the path $(x, y) = (0, 0)$ is equal to zero. Suppose the partial limit of $f$ along the path $y = x, x = 0$ is
-  $$\lim_{(x, y) \to (y, 0)} ye^x + \sin x + (xy)^4 = 0$$
-  Therefore, the given function is continuous.
+  By the definition of composite function, $(f \circ g)(x) = f(g(x))$.
+  $$\begin{align}
+  (f \circ g)(t) &= f(g(t)) \\\\
+  &= f(e^t, \cos t, \sin t) \\\\
+  &= \sin te^t + \cos t(\sin t) + e^t \cos t \\\\
+  &= (\cos t + \sin t) e^t + \frac{1}{2} \sin 2t
+  \end{align}$$
+  To fined the derivative, differentiate $(f \circ g)$ with respect to $t$.
+  $$(f \circ g)'(t) = (\cos t + \sin t) e^t + (\cos t - \sin t)e^t + \cos 2t$$
+  At $t = 1$,
+  $$\begin{align}
+  (f \circ g)'(1) &= 2 \cos te^t + \cos 2t \\\\
+  &= 2e \cos 1 + \cos 2
+  \end{align}$$
+  Therefore, $(f \circ g)'(1) = 2e \cos 1 + \cos 2$.
