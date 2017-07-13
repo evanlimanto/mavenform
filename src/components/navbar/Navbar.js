@@ -14,6 +14,7 @@ class NavbarComponent extends Component {
       profileDropdownOn: false,
       suggestionsDropdownOn: false,
       suggestions: [],
+      math_label: null,
     };
 
     this.getSuggestions = this.getSuggestions.bind(this);
@@ -21,6 +22,10 @@ class NavbarComponent extends Component {
   }
 
   componentDidMount() {
+    if (this.props.topic)
+      fetch('/getMathLabel/' + this.props.topic)
+        .then((response) => response.json())
+        .then((json) => this.setState({ math_label: json.concept }));
     const self = this;
     window.addEventListener('click', (e) => {
       const logout = document.getElementsByClassName("logout");
@@ -120,12 +125,13 @@ class NavbarComponent extends Component {
       return false;
     }
 
-    const { schoolCode, courseCode, examTypeCode, termCode } = this.props;
+    const { schoolCode, courseCode, examTypeCode, termCode, topic } = this.props;
     const courseLabel = courseCodeToLabel(courseCode);
     const schoolLabel = schoolCode === "math" ? "Math" : this.props.labels.schools[schoolCode];
     const examTypeLabel = examTypeToLabel(examTypeCode);
     const termLabel = termToLabel(termCode); 
-    const numLayers = !!schoolLabel + !!courseLabel + !!examTypeLabel;
+    const mathTopicLabel = this.state.math_label;
+    const numLayers = !!schoolLabel + !!courseLabel + !!examTypeLabel + !!mathTopicLabel;
     let navbarNav = null;
     if (this.props.math) {
       navbarNav = [<Link key='home' to='/'>Home</Link>];
@@ -151,6 +157,9 @@ class NavbarComponent extends Component {
           if (examTypeLabel) {
             navbarNav.push(<span key='examSpan'> > </span>);
             navbarNav.push(<Link key='exam' to={'/' + schoolCode + '/' + courseCode + '/' + examTypeCode + '/' + termCode} className={classnames({ active: numLayers === 3 })}>{examTypeLabel} - {termLabel}</Link>);
+          } else if (this.state.math_label) {
+            navbarNav.push(<span key='examSpan'> > </span>);
+            navbarNav.push(<Link key='exam' to={'/' + schoolCode + '/' + courseCode + '/' + this.props.topic} className={classnames({ active: numLayers === 3 })}>{this.state.math_label}</Link>);
           }
         }
       }

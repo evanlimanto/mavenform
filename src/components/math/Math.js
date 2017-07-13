@@ -53,10 +53,9 @@ class Math extends Component {
 
     const courseItems = this.getCourseItems();
     const meta = {
-      description: `Mathematics interactive and course-specific study resources.`,
+      description: `Interactive study resources for Mathematics.`,
       title: `Mathematics - Studyform`,
     };
-
     return (
       <div className="school">
         <DocumentMeta {...meta} />

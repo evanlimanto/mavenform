@@ -87,7 +87,7 @@ class HomeComponent extends Component {
       );
     });
     const subjectCards = [(
-      <Link className="card" to={"/math"}>
+      <Link key={"math"} className="card" to={"/math"}>
         <span>Mathematics</span>
         <span className="card-arrow">&#8594;</span>
       </Link>

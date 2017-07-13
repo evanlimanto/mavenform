@@ -42,11 +42,11 @@ class MathContentComponent extends Component {
         </div>
       );
     });
-    
+   
     return (
       <div>
         <DocumentMeta {...meta} />
-        <Navbar math={true} topic={this.props.topic} label={this.state.label} />
+        <Navbar math={!this.props.courseCode} schoolCode={this.props.schoolCode} courseCode={this.props.courseCode} topic={this.props.topic} label={this.state.label} />
         <div id="header-text">
           <div className="center">
             <h4>{this.state.label || this.props.topic}</h4>
@@ -63,7 +63,9 @@ class MathContentComponent extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    topic: ownProps.match.params.topic
+    topic: ownProps.match.params.topic,
+    schoolCode: ownProps.match.params.schoolCode,
+    courseCode: ownProps.match.params.courseCode,
   };
 };
 
