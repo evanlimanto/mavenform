@@ -86,7 +86,7 @@ class CourseComponent extends Component {
     );
 
     let topicsContent = null, mathTopics = null;
-    if ((schoolCode === 'ucsandiego' && (courseCode === 'MATH10A' || courseCode === 'MATH20C' || courseCode === 'MATH20D')) ||
+    if ((schoolCode === 'ucsandiego' && (courseCode === 'MATH10A' || courseCode === 'MATH20C' || courseCode === 'MATH20D') || (courseCode === 'MATH18')) ||
         (schoolCode === 'ucberkeley' && (courseCode === 'MATH53' || courseCode === 'MATH1A'))) {
       if (courseCode === 'MATH10A') {
         mathTopics = [
@@ -133,6 +133,13 @@ class CourseComponent extends Component {
           { concept: 'Applications of Differentiation', code: 'applicationsofdifferentiation' },
           { concept: 'Integrals', code: 'integrals' },
           { concept: 'Applications of Integration', code: 'applicationsofintegration' },
+        ];
+      } else if (courseCode === 'MATH18') {
+        mathTopics = [
+          { concept: 'Systems of Linear Equations', code: 'systemsoflineareqns' },
+          { concept: 'Row Reduction and Echelon Forms', code: 'rowreductionechelonforms' },
+          { concept: 'Vector Equations', code: 'vectoreqns' },
+          { concept: 'The Matrix Equation Ax = b', code: 'matrixeqnaxb' },
         ];
       }
       const topicCards = map(mathTopics, (topic) => {

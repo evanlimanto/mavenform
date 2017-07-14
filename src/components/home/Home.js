@@ -12,7 +12,7 @@ const ScrollLink = Scroll.Link;
 const Element = Scroll.Element;
 
 const meta = {
-  description: 'The ultimate bank of interactive and course-specific study resources.',
+  description: 'The ultimate bank of interactive and course-specific study resources. Ace your courses with Studyform.',
   title: 'Studyform',
 };
 

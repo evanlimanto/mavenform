@@ -26,8 +26,8 @@ pg.defaults.ssl = true;
 const prod_client = new pg.Client(prodConfig);
 prod_client.connect();
 
-const q1 = `select * from math_content where id > 308`;
-const q2 = `select * from math_topics where id > 43`;
+const q1 = `select * from math_content where tag > 51`;
+const q2 = `select * from math_topics where id > 51`;
 const i1 = `insert into math_content (id, content, solution, tag) values($1, $2, $3, $4)`;
 const i2 = `insert into math_topics (id, topic, concept, code) values($1, $2, $3, $4)`;
 
@@ -42,7 +42,7 @@ async.parallel([
   return async.parallel([
     (callback) => {
       async.series([
-        (outerCallback) => async.each(r2.rows, (row, callback) => prod_client.query(i2, [row.id, row.toipc, row.concept, row.code], callback), outerCallback),
+        (outerCallback) => async.each(r2.rows, (row, callback) => prod_client.query(i2, [row.id, row.topic, row.concept, row.code], callback), outerCallback),
         (outerCallback) => async.each(r1.rows, (row, callback) => prod_client.query(i1, [row.id, row.content, row.solution, row.tag], callback), outerCallback),
       ], (err, results) => {
         if (err) return console.error(err);
@@ -50,6 +50,7 @@ async.parallel([
       });
     }, 
   ], (err) => {
-    if (err) return err; 
+    if (err) return err;
+    return process.exit(0);
   });
 });

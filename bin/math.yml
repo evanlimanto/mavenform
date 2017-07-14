@@ -1,170 +1,115 @@
-q1_1: |
-  Show that the directional derivative of $f(x, y, z) = z^2x + y^3$ at $(1, 1, 2)$ in the direction $(1 / \sqrt{5})\mathbf{i} + (2 / \sqrt{5})\mathbf{j}$ is $2\sqrt{5}$.
-
-q1_1_s: |
-  We have $\nabla f = (z^2, 3y^2, 2xz)$.
+q1_22: |
+  Let $\mathbf{v}_1 = \left[ \begin{array}{c} 0 \\\\ 0 \\\\ -2 \end{array} \right], \mathbf{v}_2 = \left[ \begin{array}{c} 0 \\\\ -3 \\\\ 8 \end{array} \right], \mathbf{v}_3 = \left[ \begin{array}{c} 4 \\\\ -1 \\\\ -5 \end{array} \right]$.
   <hr class="s1" />
-  The directional derivative of $f(x, y, z)$ in the direction $\left( \frac{1}{\sqrt{5}} \right) i + \left( \frac{2}{\sqrt{5}} \right) j$ is given by
-  $$\begin{align}
-  \nabla f \cdot v &= (z^2, 3y^2, 2xz) \cdot \left( \frac{1}{\sqrt{5}}, \frac{2}{\sqrt{5}}, 0 \right) \\\\
-  &= \left( \frac{z^2}{\sqrt{5}} + \frac{6y^2}{\sqrt{5}} \right)
-  \end{align}$$
-  At $(1, 1, 2), \nabla \cdot v = \left( \frac{4}{\sqrt{5}} + \frac{6}{\sqrt{5}} \right) = 2\sqrt{5}$.
+  Does $\\{ \mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3 \\}$ span $\mathbb{R}^3$? Why or why not?
 
-q1_3: |
-  Compute the directional derivative of the following function along unit vectors at the indicated points in directions parallel to the given vector:
-  $$f(x, y) = x^y, (x_0, y_0) = (e, e), \mathbf{d} = 5\mathbf{i} + 12\mathbf{j}$$
-
-q1_3_s: |
-  The directional derivative of $f$ at $(e, e)$ is
-  $$D_u f(e, e) = \nabla f(e, e) \cdot \mathbf{u} \cdots (1)$$
-  Find the unit vector for the direction vector $\mathbf{d}$.
-  $$\begin{align}
-  \mathbf{u} &= \frac{\mathbf{d}}{| \mathbf{d} |} \\\\
-  &= \frac{5}{\sqrt{(5)^2 + (12)^2}}\mathbf{i} + \frac{12}{\sqrt{(5)^2 + (12)^2}} \mathbf{j} \\\\
-  &= \frac{5}{13} \mathbf{i} + \frac{12}{13} \mathbf{j}
-  \end{align}$$
-  Here the function involves only $2$ variables so the gradient is $\nabla f = < f_x, f_y >$. Find the partial derivatives with respect to $x$ and $y$.
-  $f_x = \frac{\partial}{\partial x}(x^y) = yx^{y-1}$ and $f_y = \frac{\partial}{\partial y}(x^y) = x^y \ln x$.
+q1_22_s: |
+  Let $V = [V_1 V_2 V_3] = \left[ \begin{array}{c c c} 0 & 0 & 4 \\\\ 0 & -3 & -1 \\\\ -2 & 8 & -5 \end{array} \right]$.
   <hr class="s1" />
-  Therefore, the gradient in terms of $\mathbf{i}$ and $\mathbf{j}$ is $\nabla f = yx^{y-1}\mathbf{i} + x^y \ln x \mathbf{j}$.
+  Now, we reduce the matrix $V$.
   <hr class="s1" />
-  Plugging in the point $(e, e)$ to $\nabla f$, we have
-  $$\begin{align}
-  \nabla f(e, e) &= ee^{e-1} \mathbf{i} + e^e \ln e\mathbf{j} \\\\
-  &= e^e \mathbf{i} + e^e \mathbf{j}
-  \end{align}$$
-  So, from $(1)$, the directional derivative is
-  $$\begin{align}
-  D_u f(e, e) &= \nabla f(e, e) \cdot \mathbf{u} \\\\
-  &= (e^e \mathbf{i} + e^e \mathbf{j}) \cdot \left( \frac{5}{13} \mathbf{i} + \frac{12}{13} \mathbf{j}) \\\\
-  &= e^e \left( \frac{5}{13} + \frac{12}{13} \right) \\\\
-  &= \frac{17e^e}{13}
-  \end{align}$$
-
-q1_5: |
-  (a) Let $f: \mathbb{R}^3 \to \mathbb{R}, \mathbf{x}_0 \in \mathbb{R}^3$. If $\mathbf{v}$ is a unit vector in $\mathbb{R}^3$, show that the maximum value of the directional derivative of $f$ at $\mathbf{x}_0$ along $\mathbf{v}$ is $|| \nabla f(\mathbf{x}_0) ||$.
+  By interchanging $R_3$ by $R_1 \implies \left[ \begin{array}{c c c} -2 & 8 & -5 \\\\ 0 & -3 & 1 \\\\ 0 & 0 & 4 \end{array} \right]$.
   <hr class="s1" />
-  (b) Let $f(x, y, z) = x^3 - y^3 + z^3$. Find the maximum value for the directional derivative of $f$ at the point $(1, 2, 3)$.
+  The matrix $V$ has a pivot in each row, so the columns of the matrix $V$ span $\mathbb{R}^3$ since each $b$ in $\mathbb{R}^3$ is a linear combination of the columns of $V$.
 
-q1_5_s: |
-  (a) Consider that $\nabla f(x)$ points in the direction along which $f$ is increasing the fastest (Assume $\nabla f(x) \ne 0)$.
+q1_27: |
+  Let $\mathbf{q}_1, \mathbf{q}_2, \mathbf{q}_3$ and $\mathbf{v}$ represent vectors in $\mathbb{R}^5$, and let $x_1, x_2$ and $x_3$ denote scalars. Write the following vector equation as a matrix equation. Identify any symbols you choose to use.
+  $$x_1 \mathbf{q}_1 + x_2 \mathbf{q}_2 + x_3 \mathbf{q}_3 = \mathbf{v}$$
+
+q1_27_s: |
+  Consider the vector equation
+  $$x_1 \mathbf{q}_1 + x_2 \mathbf{q}_2 + x_3 \mathbf{q}_3 = \mathbf{v}$$
+  Where $\mathbf{q}_1, \mathbf{q}_2, \mathbf{q}_3$ and $\mathbf{v}$ represent vectors in $\mathbb{R}^5$ and $x_1, x_3, x_3$ represent scalars.
   <hr class="s1" />
-  Therefore the maximum value of the directional derivative is
-  $$\begin{align}
-  Df(x_0) \frac{\nabla f(x_0)}{|| \nabla f(x_0) ||} &= \nabla f(x_0) \frac{\nabla f(x_0)}{|| \nabla f(x_0) ||} \\\\ &= || \nabla f(x_0) ||
-  \end{align}$$
-  (b) Use the above obtained result to find the maximum value of the directional derivative at the point $(1, 2, 3)$.
+  The objective is to rewrite the vector equation as a matrix equation.
   <hr class="s1" />
-  Now $\nabla f(x) = 3x^2 \mathbf{i} - 3y^2 \mathbf{j} + 3z^2\mathbf{k}$.
+  The vector equation $x_1 \mathbf{a}_1 + \cdots + x_n \mathbf{a}_n = \mathbf{b}$ can be expressed by a matrix equation as
+  $$[ \mathbf{a}_1 \mathbf{a}_2 \cdots \mathbf{a}_n] \left[ \begin{array}{c} x_1 \\\\ \vdots \\\\ x_n \end{array} \right] = \mathbf{b}$$
+  Where $\mathbf{a}_1, \dots, \mathbf{a}_n$ are columns of $A$ and $x_1, \dots, x_n$ are entries of $\mathbf{x}$.
   <hr class="s1" />
-  The maximum value is
-  $$|| \nabla f(x) || = \sqrt{(3x^2)^2 + (-3y^2)^2 + (3z^2)^2} \\\\
-  || \nabla f(x_0) || = \sqrt{(3(1)^2)^2 + (-3(2)^2)^2 + (3(3)^2)^2} = 21\sqrt{2}$$
-  Hence, the maximum value for the directional derivative of $f$ at the point $(1, 2, 3)$ is $21\sqrt{2}$.
-
-q1_7: |
-  Find the rate of change of $f(x, y, z) = xyz$ in the direction normal to the surface $yx^2 + xy^2 + yz^2 = 3$ at $(1, 1, 1)$.
-
-q1_7_s: |
-  The gradient of the function is $\nabla f(x, y, z) = (yz, xz, xy)$.
+  So, set up the vectors $\mathbf{q}_1, \mathbf{q}_2, \mathbf{q}_3$ as the columns of a matrix, say $Q$ and place the weights $x_1, x_2, x_3$ as entries of a column vector, say $\mathbf{x}$.
   <hr class="s1" />
-  Equation for the surface is $g(x, y, z) = yx^2 + xy^2 + yz^2 - 3$.
+  Here, the matrix product of $Q$ and $\mathbf{x}$ is possible, because the number of columns $\mathbf{q}_1, \mathbf{q}_2, \mathbf{q}_3$ in $Q$ is same as the number of entries $x_1, x_2, x_3$ in $\mathbf{x}$.
   <hr class="s1" />
-  To find the normal to the surface, first find the gradient of the surface
-  $$\nabla g = (2yx + y^2) \mathbf{i} + (x^2 + 2xy + z^2) \mathbf{j} + (2yz) \mathbf{k}$$
-  At the point $(1, 1, 1)$,
-  $$\nabla g(1, 1, 1) = 3\mathbf{i} + 4\mathbf{j} + 2\mathbf{k}$$
-  Normal to the surface at the point is
-  $$\begin{align}
-  \mathbf{n} &= \frac{3\mathbf{i} + 4\mathbf{j} + 2\mathbf{k}}{|| 3\mathbf{i} + 4\mathbf{j} + 2\mathbf{k}||} \\\\
-  &= \frac{3}{\sqrt{29}} \mathbf{i} + \frac{4}{\sqrt{29}} \mathbf{j} + \frac{2}{\sqrt{29}} \mathbf{k}
-  \end{align}$$
-  The rate of change of $f$ is given by
-  $$\nabla f \cdot \mathbf{n} = (yz \mathbf{i} + xz \mathbf{j} + xy \mathbf{k}) \cdot \left( \frac{3}{\sqrt{29}}\mathbf{i} + \frac{4}{\sqrt{29}}\mathbf{j} + \frac{2}{\sqrt{29}}\mathbf{k} \right)$$
-  Therefore, at $(1, 1, 1)$ the rate of change of $f$ is
-  $$\begin{align}
-  \nabla f \cdot \mathbf{n} &= ((1)(1) \mathbf{i} + (1)(1) \mathbf{j} + (1)(1) \mathbf{k}) \cdot \left( \frac{3}{\sqrt{29}}\mathbf{i} + \frac{4}{\sqrt{29}}\mathbf{j} + \frac{2}{\sqrt{29}}\mathbf{k} \right) \\\\
-  &= \frac{3 + 4 + 2}{\sqrt{29}} \\\\
-  &= \frac{9}{\sqrt{29}}
-  \end{align}$$
+  Therefore, the given vector equation can be expressed by a matrix equation as
+  $$[\mathbf{q}_1 \mathbf{q}_2 \mathbf{q}_3] \left[ \begin{array}{c} x_1 \\\\ x_2 \\\\ x_3 \end{array} \right] = \mathbf{v} \; \text{or} \; Q\mathbf{x} = \mathbf{v}$$
 
-q1_9: |
-  Find the equation for the plane tangent to the surface $z = f(x, y)$ at the indicated point:
-  $$z = x^3 + y^3 - 6xy$, at the point $(1, 2, -3)$$
+q1_29: |
+  Construct a $3 \times 3$ matrix, not in echelon form, whose columns span $\mathbb{R}^3$. Show that the matrix you construct has the desired property.
 
-q1_9_s: |
-  Let $S$ be the surface consisting of those $(x, y, z) such that $f(x, y, z) = k$ for constant $k$. Then, then tangent plane of $S$ at a point $(x_0, y_0, z_0)$ of $S$ is defined by the equation $\nabla f(x_0, y_0, z_0) \cdot (x - x_0, y - y_0, z - z_0) = 0$ if $\nabla f(x_0, y_0, z_0) \ne 0$. That is, the tangent plane is the set of points $(x, y, z)$ that satisfies the above equation
-  $$\nabla f = (3x^2 - 6y)i + (3y^2 - 6x)j$$
-  So, the tangent plane is defined by the equation
-  $$(3-12,12-6,-1) \cdot (x-1,y-2,z+3) = 0 \\\\
-  9(1-x) + 6(y-2) - (z+3) = 0$$
-
-q1_13: |
-  Find a unit normal to the surface $\cos (xy) = e^x - 2$ at $(1, \pi, 0)$.
-
-q1_13_s: |
-  If a curve is represented by $f(x, y, z) = 0$, then $\nabla f(x_0, y_0, z_0)$ is the normal vector to the curve at the point $(x_0, y_0, z_0)$.
+q1_29_s: |
+  The columns of a matrix $A$ span $\mathbb{R}^3$ if and only if $A$ has a pivot position in each row.
   <hr class="s1" />
-  For this, find the partial derivatives at $f(x, y, z)$ with respect to $x, y$ and $z$.
-  $$\begin{align}
-  f_x &= \frac{\partial}{\partial x}(f(x, y, z)) \\\\
-  &= \frac{\partial}{\partial x}(e^z - 2 - \cos (xy)) \\\\
-  &= y \sin (xy)
-  \end{align}$$
-  $$\begin{align}
-  f_y &= \frac{\partial}{\partial y}(f(x, y, z)) \\\\
-  &= \frac{\partial}{\partial y} (e^z - 2 - \cos (xy)) \\\\
-  &= x \sin (xy)
-  \end{align}$$
-  $$\begin{align}
-  f_z &= \frac{\partial}{\partial z}(f(x, y, z)) \\\\
-  &= \frac{\partial}{\partial z}(e^z - 2 - \cos (xy)) \\\\
-  &= e^z
-  \end{align}$$
-
-q1_17: |
-  For the following functions $f: \mathbb{R}^3 \to \mathbb{R}$ and $g: \mathbb{R} \to \mathbb{R}^3$, find $\nabla f$ and $g'$ and evaluate $(f \circ g)'(1)$.
-  $$f(x, y, z) = xz + yz + xy, g(t) = (e^t, \cos t, \sin t)$$
-
-q1_17_s: |
-  First, find $\nabla f$. For this, find the partial derivatives for $f(x, y, z)$ with respect to $x, y$ and $z$.
-  $$\begin{align}
-  f_x &= \frac{\partial}{\partial x}(f(x, y, z)) \\\\
-  &= \frac{\partial}{\partial x}(xz + yz + xy) \\\\
-  &= z + y
-  \end{align}$$
-  $$\begin{align}
-  f_y &= \frac{\partial}{\partial y}(f(x, y, z)) \\\\
-  &= \frac{\partial}{\partial y}(xz + yz + xy) \\\\
-  &= z + x
-  \end{align}$$
-  $$\begin{align}
-  f_z = \frac{\partial}{\partial z}(f(x, y, z)) \\\\
-  &= \frac{\partial}{\partial z}(xz + yz + xy) \\\\
-  &= x + y
-  \end{align}$$
-  Therefore the gradient vector is
-  $$\begin{align}
-  \nabla f(x, y, z) &= \frac{\partial f}{\partial x} \mathbf{i} + \frac{\partial f}{\partial y} \mathbf{j} + \frac{\partial f}{\partial z}\mathbf{k} \\\\
-  &= (y + z) \mathbf{i} + (z + x) \mathbf{j} + (x + y) \mathbf{k}
-  \end{align}$$
-  Now, find $g'(t)$:
-  $$\begin{align}g'(t) &= \frac{d}{dt} (e^t, \cos t, \sin t) \\\\ &= (e^t, -\sin t, \cos t) \end{align}$$
-  Find $(f \circ g)'(1)$.
+  So, first consider a $3 \times 3$ matrix that is in echelon form, and having $3$ pivot positions in each of its rows. Let that matrix be $B$. Now, apply a finite number of operations (at least $1$) on it, to get a matrix (say $A$), which is equivalent to $B$, but not in echelon form.
   <hr class="s1" />
-  By the definition of composite function, $(f \circ g)(x) = f(g(x))$.
-  $$\begin{align}
-  (f \circ g)(t) &= f(g(t)) \\\\
-  &= f(e^t, \cos t, \sin t) \\\\
-  &= \sin te^t + \cos t(\sin t) + e^t \cos t \\\\
-  &= (\cos t + \sin t) e^t + \frac{1}{2} \sin 2t
-  \end{align}$$
-  To fined the derivative, differentiate $(f \circ g)$ with respect to $t$.
-  $$(f \circ g)'(t) = (\cos t + \sin t) e^t + (\cos t - \sin t)e^t + \cos 2t$$
-  At $t = 1$,
-  $$\begin{align}
-  (f \circ g)'(1) &= 2 \cos te^t + \cos 2t \\\\
-  &= 2e \cos 1 + \cos 2
-  \end{align}$$
-  Therefore, $(f \circ g)'(1) = 2e \cos 1 + \cos 2$.
+  Thus, the matrix $A$ also have a pivot position in each row as it is equivalent to $B$, and $B$ has a pivot position in each of its rows.
+  <hr class="s1" />
+  Therefore, the required matrix is $A$, as it is a $3 \times 3$ matrix that is not in echelon form, and its columns span $\mathbb{R}^3$.
+  <hr class="s2" />
+  For example, consider a $3 \times 3$ matrix as $A$,
+  $$A = \left[ \begin{array}{c c c} 1 & 2 & 1 \\\\ -3 & -1 & 2 \\\\ 0 & 1 & 3 \end{array} \right]$$
+  To verify that the matrix $A$ has the property that the columns of $A$ span $\mathbb{R}^3$, reduce the matrix $A$ into its echelon form, $B$, by using a finite number of row operations.
+  $$B = \left[ \begin{array}{c c c} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \end{array} \right]$$
+  Then, it can be observed that there are $3$ pivot positions in each row of $B$. It follows that the matrix $A$ also has a pivot position in each row.
+  <hr class="s1" />
+  Therefore, the columns of $A$ span $\mathbb{R}^3$.
+
+q1_31: |
+  Let $A$ be a $3 \times 2$ matrix. Explain why the equation $A\mathbf{x} = \mathbf{b}$ cannot be consistent for all $\mathbf{b}$ in $\mathbb{R}^3$. Generalize your argument to the case of an arbitrary $A$ with more rows than columns.
+
+q1_31_s: |
+  Let $A$ be a $3 \times 2$ matrix.
+  <hr class="s1" />
+  The objective is to explain why the equation $A\mathbf{x} = \mathbf{b}$ cannot be consistent for all $\mathbf{b}$ in $\mathbb{R}^3$.
+  <hr class="s1" />
+  The equation $A\mathbf{x} = \mathbf{b}$ is consistent for all $\mathbf{b}$ in $\mathbb{R}^m$ if and only if $A$ has a pivot position in each row.
+  <hr class="s1" />
+  Here, the matrix $A$ is of $3$ rows and $2$ columns. Then, the matrix product $A \mathbf{x}$ to be defined for the number of variables (or entries in $\mathbf{x}$) is $2$.
+  <hr class="s1" />
+  So, there are at most $2$ pivot positions in the matrix $A$, therefore, there exist at least one row not having a pivot position.
+  <hr class="s1" />
+  If $A$ does not have a pivot position in at least one row, then the equation $A\mathbf{x} = \mathbf{b}$ cannot be consistent for each $\mathbf{b}$ in $\mathbb{R}^3$.
+  <hr class="s1" />
+  In general, if the number of rows $m$ is more than the number of columns $n$ in a matrix $A$, then the number of pivot positions is less than the number of rows. Therefore, there exists at least one row that does not contain a pivot position.
+  <hr class="s1" />
+  Hence, the equation $A\mathbf{x} = \mathbf{b}$ is inconsistent, for each matrix $A$ with more rows than columns.
+
+q1_32: |
+  Could a set of three vectors in $\mathbb{R}^4$ span all of $\mathbb{R}^4$? Explain. What about $n$ vectors in $\mathbb{R}^m$ when $n$ is less than $m$?
+
+q1_32_s: |
+  A set of three vectors in $\mathbb{R}^4$ represents a matrix of $3$ column vectors, and each vector contains $4$ entries (that is, a matrix of $4$ rows, and $3$ columns).
+  <hr class="s1" />
+  Let $A$ be that $4 \times 3$ matrix.
+  <hr class="s1" />
+  The columns of $A$ span $\mathbb{R}^m$ is and only if $A$ has a pivot position in each row.
+  <hr class="s1" />
+  So, there are at most $3$ pivot positions in the matrix $A$, but the number of rows is $4$. Therefore, there exists at least one row not having a pivot position.
+  <hr class="s1" />
+  If $A$ does not have a pivot position in at least one row, then the columns of $A$ do not span $\mathbb{R}^4$.
+  <hr class="s1" />
+  It implies that the set of $3$ vectors of $A$ does not span all of $\mathbb{R}^4$.
+  <hr class="s1" />
+  In general, the set of $n$ vectors in $\mathbb{R}^m$ represents a matrix of $m$ rows, and $n$ columns (an $m \times n$ matrix).
+  <hr class="s1" />
+  So, there are at most $n$ pivot positions in the matrix $A$, but $n$ is less than the number of rows $m$. Therefore, there exists at least one row that does not contain a pivot position.
+  <hr class="s1" />
+  Hence, the set of $n$ vectors of $A$ does not span all of $\mathbb{R}^m$, for $n < m$.
+
+q1_34: |
+  Suppose $A$ is a $3 \times 3$ amtrix and $\mathbf{b}$ is a vector in $\mathbb{R}^3$ with the property that $A \mathbf{x} = \mathbf{b}$ has a unique solution. Explain why the columns of $A$ must span $\mathbb{R}^3$.
+
+q1_34_s: |
+  If the equation $Ax = b$ has a unique solution, then the associated system of equations does not have any free variables. If every variable is a basic variable, then each column of $A$ is a pivot column. So the reduced echelon form of $A$ must be $\left[ \begin{array}{c c c} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \end{array} \right]$. Now it is clear that $A$ has a pivot position in each row. These statements are logically equivalent:
+  - For each bin $\mathbb{R}^n$ the equation $Ax = b$ has a solution.
+  - Each $b$ in $\mathbb{R}^n$ is a linear combination of the columns of $A$.
+  - The columns of $A$ span $\mathbb{R}^n$.
+  - $A$ has a pivot position in every row.
+
+q1_35: |
+  Let $A$ be a $3 \times 4$ matrix, let $\mathbf{y}_1$ and $\mathbf{y}_2$ be vectors in $\mathbb{R}^3$ and let $\mathbf{w} = \mathbf{y}_1 + \mathbf{y}_2$. Suppose $\mathbf{y}_1 = A\mathbf{x}_1$ and $\mathbf{y}_2 = A\mathbf{x}_2$ for some vectors $\mathbf{x}_1$ and $\mathbf{x}_2$ in $\mathbb{R}^4$. What fact allows you to conlude that the system $A\mathbf{x} = \mathbf{w}$ is consistent? (Note: $\mathbf{x}_1$ and $\mathbf{x}_2$ denote vectors, not scalar entries in vectors.)
+
+q1_35_s: |
+  Given $Ax_1 = y_1$ and $Ax_2 = y_2$, you are asked to show that the equation $Ax = w$ has a solution, where $w = y_1 + y_2$. Observe that $w = Ax_1 + Ax_2$. Now by the theorem, if $A$ is an $m \times n$ matrix, $u, v$ are vectors in $\mathbb{R}^n$, and $c$ is a scalar, then
+  $$A(U + V) = AU + AV$$
+  Replace $x_1$ and $x_2$ in place of $u$ and $v$. That is, $w = Ax_1 + Ax_2 = A(x_1 + x_2)$. So the vector $x = x_1 + x_2$ is a solution of $w = Ax$.
