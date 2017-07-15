@@ -3,7 +3,7 @@ const domain = 'mg.studyform.com';
 const request = require('request');
 const data = {
   from: 'Kevin Wu <kevin@studyform.com>',
-  to: 'math18-small@studyform.com',
+  to: 'math18-small@mg.studyform.com',
   subject: 'Math 18 Past Exams and Practice Problems',
   html: `
   Hi!

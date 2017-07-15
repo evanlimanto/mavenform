@@ -17,19 +17,19 @@ request(options, (err, response, body) => {
 });
 */
 const data = {
-  from: 'Kevin Wu <kevintxwu@berkeley.edu>',
-  to: 'kevin@studyform.com',
+  from: 'Kevin Wu <kevin@studyform.com>',
+  to: 'kevintxwu@gmail.com',
   subject: 'Math 18 Past Exams and Practice Problems',
   html: `
-  Hi there,
+  Hi!
   <br/><br/>
-  Do you need past exams and practice problems to study from for Math 18?
+  I’m Kevin. My friends and I are working on a project to help students study for classes like Math 18.
   <br/><br/>
-  A group of students and I took some past exams and converted them into an interactive format that’s way easier to study form. For the exams we could, we even added solution walkthroughs. We added mobile-friendliness, discussion, and a directory of problems sorted by topic.
+  We took some Math 18 past exams and practice problems and converted them into an interactive format that’s way easier to study from. For most of the problems, we’ve included step-by-step solutions. We’ve even added some other features like discussion and study by topic.
   <br/><br/>
-  We’re trying our best to help make studying less painful as a student. You can check out our project at: http://studyform.com/ucsandiego/MATH18
+  It’s all FREE. We’re just trying to see how we can make studying easier for everyone. If you’re interested, check it out here: http://www.studyform.com/ucsd
   <br/><br/>
-  Feel free to let me know if you have any feedback or questions.
+  Feel free to let me know if you have any questions or comments.
   <br/><br/>
   Best,<br/>
   Kevin
