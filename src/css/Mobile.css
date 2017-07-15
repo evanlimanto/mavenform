@@ -9,7 +9,7 @@
   }
 
   .table-container-container {
-    padding: 0 250px;
+    padding: 0 25px;
   }
 }
 
@@ -108,7 +108,17 @@
     margin: 5px 0 10px;
   }
 
-  .exams td:nth-child(4), .exams th:nth-child(4) {
+  .topic-card-container {
+    padding: 0 20px;
+  }
+
+  .topic-card {
+    width: 100%;
+    max-width: 100%;
+    margin: 5px 0 10px;
+  }
+
+  .exams td:nth-child(4), .exams th:nth-child(4), .exams td:nth-child(5), .exams th:nth-child(5) {
     display: none;
   }
 }

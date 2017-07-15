@@ -157,7 +157,7 @@ class CourseComponent extends Component {
           <hr className="s5" />
           <h5>Based on the exams above, these are our suggested practice problems by topic...</h5>
           <hr className="s4" />
-          <div className="card-container">
+          <div className="card-container topic-card-container">
             {topicCards}
             <hr className="s7-5" />
           </div>
