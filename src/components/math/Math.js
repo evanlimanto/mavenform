@@ -32,7 +32,7 @@ class Math extends Component {
     return map(this.state.math_topics, (obj, topic) => {
       const courseBoxes = map(sortBy(obj, [(item) => item.id]), (item, key) => {
         return (
-          <Link className="card course-card" to={"/math/" + item.code} key={key}>
+          <Link className="card topic-card" to={"/math/" + item.code} key={key}>
             <span>{item.label}</span>
             <span className="card-arrow">&#8594;</span>
           </Link>

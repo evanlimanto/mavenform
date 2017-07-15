@@ -10,7 +10,6 @@ class Modal extends Component {
           <div className="modal">
             <div className="modal-header">{headerContent}</div>
             <div className="modal-content">
-              <hr className="s3"/>
               {modalContent}
               <p className="modal-error-text">{errorText}</p>
             </div>

@@ -43,7 +43,7 @@ class CourseComponent extends Component {
         <td><Link to={url}>{typeLabel}</Link></td>
         <td><Link to={url}>{termLabel}</Link></td>
         <td><Link to={url}>{profs}</Link></td>
-        <td><Link to={url}>{exam.solutions_available ? "Available" : "Unavailable"}</Link></td>
+        <td><Link to={url}>{exam.solutions_available ? ( <span className="available">Available</span> ) : ( <span className="unavailable">Unavailable</span> )}</Link></td>
         <td><h6><Link to={url} className="table-link">CLICK TO VIEW &#8594;</Link></h6></td>
         </tr>
       );
@@ -58,7 +58,7 @@ class CourseComponent extends Component {
       <div>
         <h4 className="center">{courseCodeToLabel(courseCode)}</h4>
         <div className="center">
-          <h5>Index of resources</h5>
+          <h5>Index of study resources</h5>
         </div>
         <hr className="s4" />
         <div className="center">
@@ -82,7 +82,6 @@ class CourseComponent extends Component {
         {!!this.state.exams || <p>Loading exams...</p>}
         </div>
         </div>
-        <hr className="s7-5" />
         </div>
       </div>
     );
@@ -147,19 +146,17 @@ class CourseComponent extends Component {
       }
       const topicCards = map(mathTopics, (topic) => {
         return (
-          <Link key={topic.code} className="card" to={"/" + schoolCode + "/" + courseCode + "/" + topic.code}>
+          <Link key={topic.code} className="card topic-card" to={"/" + schoolCode + "/" + courseCode + "/" + topic.code}>
             <span>{topic.concept}</span>
             <span className="card-arrow">&#8594;</span>
           </Link>
         );
       });
       topicsContent = (
-        <div name="subjects" className="light-gray schools">
-          <hr className="s7-5" />
-          <h4 className="center">Topics</h4>
-          <hr className="s1" />
-          <h5>Browse resources by topic</h5>
-          <hr className="s3" />
+        <div name="subjects">
+          <hr className="s5" />
+          <h5>Based on the exams above, these are our suggested practice problems by topic...</h5>
+          <hr className="s4" />
           <div className="card-container">
             {topicCards}
             <hr className="s7-5" />

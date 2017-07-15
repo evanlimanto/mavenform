@@ -22,3 +22,11 @@ td.course-signup-td {
   text-align: center;
   padding: 50px 10px;
 }
+
+.available {
+  color: #11aacc;
+}
+
+.unavailable {
+  opacity: 0.25;
+}

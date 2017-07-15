@@ -524,9 +524,14 @@ button.comment-button:hover {
 
 .comment-actions > a {
   font-size: 14px;
-  color: grey;
+  color: #999;
+  text-decoration: underline;
 }
 
 .comment-actions > a:hover {
-  text-decoration: underline; 
+  color: #11aacc;
+}
+
+.copied {
+  color: #11aacc;
 }
