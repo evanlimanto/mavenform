@@ -144,7 +144,7 @@ class CourseComponent extends Component {
       }
       const topicCards = map(mathTopics, (topic) => {
         return (
-          <Link key={topic.code} className="card" to={"/" + schoolCode + "/" + courseCode + "/" + topic.code}>
+          <Link key={topic.code} className="card topic-card" to={"/" + schoolCode + "/" + courseCode + "/" + topic.code}>
             <span>{topic.concept}</span>
             <span className="card-arrow">&#8594;</span>
           </Link>

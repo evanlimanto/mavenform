@@ -107,13 +107,6 @@ class HomeComponent extends Component {
     return (
       <div className="home">
         <DocumentMeta {...meta} />
-				{!this.state.notificationBar || (
-          <div className="dark-gray center">
-						<hr className="s2" />
-						<a className="material-icons notification-x" onClick={this.hideNotificationBar}>close</a>
-						<p className="white-text notification-text">Need help studying for a math exam? Message our Facebook <a className="header-link" href="https://www.facebook.com/studyformapp/" target="_blank">page</a> for free tutoring!</p>
-						<hr className="s2" />
-					</div>)}
         <div className="banner">
           <Navbar home={true} />
           <div className="banner-img"></div>
