@@ -32,7 +32,9 @@ class ModalsComponent extends Component {
     if (!isEmail(email))
         return this.setState({ modalError: "Enter a valid email." });
 
-    return this.props.auth.signup(email, username, password);
+    document.getElementById("signup").innerHTML = "Signing up...";
+    this.props.auth.signup(email, username, password);
+    document.getElementById("signup").innerHTML = "Sign up";
   }
 
   waitlist() {
@@ -61,7 +63,9 @@ class ModalsComponent extends Component {
     if (isEmpty(password))
       return this.props.setModalError('Empty password.');
     this.props.setModalError(null);
+    document.getElementById("login").innerHTML = "Logging in...";
     this.props.auth.login(email, password, this.props.setModalError);
+    document.getElementById("login").innerHTML = "Log in";
   }
 
   forgotPassword(e) {
@@ -107,7 +111,7 @@ class ModalsComponent extends Component {
             <a className="forgot-pass" onClick={this.props.showForgotPasswordModal}>Don't remember your password?</a>
           </p>
           <hr className="s2" />
-          <button type="submit" className="login-button blue" onClick={(e) => this.login(e)}>Log In</button>
+          <button type="submit" className="login-button blue" onClick={(e) => this.login(e)} id="login">Log In</button>
         </form>
       );
     } else if (this.props.modal.type === 'signup') {
@@ -126,7 +130,7 @@ class ModalsComponent extends Component {
           <hr className="s1" />
           <input className="login-info" type="password" placeholder="Password" ref="password"  />
           <hr className="s2" />
-          <button type="submit" className="login-button blue" onClick={(e) => this.signup(e)}>Sign Up</button>
+          <button type="submit" className="login-button blue" onClick={(e) => this.signup(e)} id="signup">Sign Up</button>
         </form>
       );
     } else if (this.props.modal.type === 'forgotpassword') {
