@@ -76,7 +76,7 @@ class HomeComponent extends Component {
   }
 
   render() {
-    const schoolCodes = ['ucberkeley', 'ucsandiego', 'gatech'];
+    const schoolCodes = ['ucb', 'ucsd', 'gatech'];
     const schoolLabels = ['UC Berkeley', 'UC San Diego', 'Georgia Tech'];
     const schoolCards = map(schoolCodes, (schoolCode, key) => {
       return (
