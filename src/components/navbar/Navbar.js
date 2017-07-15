@@ -76,7 +76,7 @@ class NavbarComponent extends Component {
     let username = null;
     if (profile) {
       username = (has(profile, 'user_metadata') && has(profile.user_metadata, 'username')) ?
-      (profile.user_metadata.username) : (profile.given_name);
+        (profile.user_metadata.username) : (profile.given_name);
     }
 
     const suggestions = this.state.suggestions;
