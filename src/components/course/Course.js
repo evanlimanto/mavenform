@@ -88,8 +88,8 @@ class CourseComponent extends Component {
     );
 
     let topicsContent = null, mathTopics = null;
-    if ((schoolCode === 'ucsandiego' && (courseCode === 'MATH10A' || courseCode === 'MATH20C' || courseCode === 'MATH20D') || (courseCode === 'MATH18')) ||
-        (schoolCode === 'ucberkeley' && (courseCode === 'MATH53' || courseCode === 'MATH1A'))) {
+    if ((schoolCode === 'ucsd' && (courseCode === 'MATH10A' || courseCode === 'MATH20C' || courseCode === 'MATH20D') || (courseCode === 'MATH18')) ||
+        (schoolCode === 'ucb' && (courseCode === 'MATH53' || courseCode === 'MATH1A'))) {
       if (courseCode === 'MATH10A') {
         mathTopics = [
           { concept: 'Functions', code: 'functions' },
