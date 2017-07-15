@@ -1,5 +1,5 @@
 const api_key = 'key-55424568d6fba5e1b922f7aedb80543b';
-const domain = 'mg.studyform.com';
+const domain = 'appf667630e02fa4f73a131ca1cde3f02c1.mailgun.org';
 const request = require('request');
 const data = {
   from: 'Kevin Wu <kevin@studyform.com>',
