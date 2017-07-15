@@ -18,7 +18,7 @@ request(options, (err, response, body) => {
 */
 const data = {
   from: 'Kevin Wu <kevin@studyform.com>',
-  to: 'evan@studyform.com',
+  to: 'cse30-small@studyform.com',
   subject: 'CSE 30 Past Exams and Practice Problems',
   html: `
   Hi!
