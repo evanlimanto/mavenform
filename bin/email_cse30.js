@@ -1,24 +1,9 @@
 const api_key = 'key-55424568d6fba5e1b922f7aedb80543b';
 const domain = 'mg.studyform.com';
 const request = require('request');
-/*
-const options = {
-  method: 'POST',
-  url: 'https://api.mailgun.net/v3/lists/waitlist@mg.studyform.com/members',
-  auth: {
-    user: 'api',
-    pass: 'key-55424568d6fba5e1b922f7aedb80543b',
-  },
-  form: { address: "evanlimanto@berkeley.edu", upsert: "yes", subscribed: true }
-};
-
-request(options, (err, response, body) => {
-  console.log(err, response, body);
-});
-*/
 const data = {
   from: 'Kevin Wu <kevin@studyform.com>',
-  to: 'cse30-small@studyform.com',
+  to: 'cse30@studyform.com',
   subject: 'CSE 30 Past Exams and Practice Problems',
   html: `
   Hi!
