@@ -99,11 +99,12 @@ class QuestionDropdown extends Component {
 
     let reportModal = null;
     if (this.state.showReportModal) {
-      const headerContent = (<h1>Report A Typo</h1>);
+      const headerContent = (<h1>Report Error</h1>);
       const infoContent = (<div></div>);
       const modalContent = (
         <span>
-          <input className="login-info" type="text" placeholder="Please describe the typo in this question.." ref="error_content"/>
+          <hr className="s3" />
+          <input className="login-info" type="text" placeholder="Please describe the typo or error here..." ref="error_content"/>
           <hr className="s2" />
           <a className="login-button blue" onClick={(e) => this.reportError(e, content_id)}>Report</a>
         </span>
@@ -141,7 +142,12 @@ class QuestionDropdown extends Component {
             <span className="material-icons">link</span>
             <span>Copy Link</span>
           </a>
-          {!this.state.copying || <Expire delay={1000} callback={this.doneCopyingLink}><span className="question-option">Copied!</span></Expire>}
+          {!this.state.copying || <Expire delay={1000} callback={this.doneCopyingLink}>
+              <span className="question-option copied">
+                <span className="material-icons">link</span>
+                <span>Copied!</span>
+              </span>
+            </Expire>}
           <a onClick={this.showReportModal} className="question-option">
             <span className="material-icons">report</span>
             <span>Report Error</span>

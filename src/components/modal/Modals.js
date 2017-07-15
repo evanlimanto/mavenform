@@ -92,7 +92,7 @@ class ModalsComponent extends Component {
     if (this.props.modal.type === 'login') {
       infoContent = (
         <div className="login-helper">
-          <span> Have an account? </span>
+          <span> Don't have an account? </span>
           <a onClick={this.props.showSignupModal}> Sign Up! </a>
         </div>
       );
