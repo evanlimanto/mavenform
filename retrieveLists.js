@@ -281,7 +281,7 @@ exports.getCourseExams =
   (req, res, next) => {
     const { courseCode, schoolCode } = req.params;
     const q = `
-      select E.id as id, ET.type_code as type_code, ET.type_label as type_label,
+      select E.id as id, E.solutions_available as solutions_available, ET.type_code as type_code, ET.type_label as type_label,
         T.term_code as term_code, T.term_label as term_label, E.profs as profs from exams E
       inner join courses C on C.id = E.courseid
       inner join exam_types ET on ET.id = E.examtype
@@ -295,6 +295,7 @@ exports.getCourseExams =
       const items = _.map(result.rows, (row) => {
         return {
           id: row.id,
+          solutions_available: row.solutions_available,
           type_code: row.type_code,
           type_label: row.type_label,
           term_code: row.term_code,

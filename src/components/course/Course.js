@@ -43,6 +43,7 @@ class CourseComponent extends Component {
         <td><Link to={url}>{typeLabel}</Link></td>
         <td><Link to={url}>{termLabel}</Link></td>
         <td><Link to={url}>{profs}</Link></td>
+        <td><Link to={url}>{exam.solutions_available ? "Available" : "Unavailable"}</Link></td>
         <td><h6><Link to={url} className="table-link">CLICK TO VIEW &#8594;</Link></h6></td>
         </tr>
       );
@@ -70,6 +71,7 @@ class CourseComponent extends Component {
         <th>Type</th>
         <th>Term</th>
         <th>Instructors</th>
+        <th>Solutions</th>
         <th>Studyform</th>
         </tr>
         </thead>
@@ -140,6 +142,7 @@ class CourseComponent extends Component {
           { concept: 'Row Reduction and Echelon Forms', code: 'rowreductionechelonforms' },
           { concept: 'Vector Equations', code: 'vectoreqns' },
           { concept: 'The Matrix Equation Ax = b', code: 'matrixeqnaxb' },
+          { concept: 'Solution Sets of Linear Systems', code: 'solutionsetsoflinearsystems' },
         ];
       }
       const topicCards = map(mathTopics, (topic) => {

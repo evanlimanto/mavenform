@@ -30,7 +30,7 @@ class ModalsComponent extends Component {
         return this.setState({ modalError: "Fill in all fields." });
 
     if (!isEmail(email))
-        return this.setstate({ modalError: "Enter a valid email." });
+        return this.setState({ modalError: "Enter a valid email." });
 
     return this.props.auth.signup(email, username, password);
   }

@@ -26,8 +26,8 @@ pg.defaults.ssl = true;
 const prod_client = new pg.Client(prodConfig);
 prod_client.connect();
 
-const q1 = `select * from math_content where tag > 51`;
-const q2 = `select * from math_topics where id > 51`;
+const q1 = `select * from math_content where tag >= 56`;
+const q2 = `select * from math_topics where id >= 56`;
 const i1 = `insert into math_content (id, content, solution, tag) values($1, $2, $3, $4)`;
 const i2 = `insert into math_topics (id, topic, concept, code) values($1, $2, $3, $4)`;
 
