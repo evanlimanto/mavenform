@@ -25,7 +25,7 @@ _.forEach(kk, (key) => {
   const skey = key + "_s";
   const content = doc[key];
   const soln = doc[skey];
-  client.query(inq, [content, soln, 54], (err, result) => {
+  client.query(inq, [content, soln, 57], (err, result) => {
     if (err) return console.error(err);
     else return console.log(result);
   });

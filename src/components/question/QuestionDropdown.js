@@ -15,14 +15,11 @@ class QuestionDropdown extends Component {
     this.state = {
       copying: false,
       showReportModal: false,
-      showShareQuestionModal: false,
     };
 
     this.setCopied = this.setCopied.bind(this);
     this.copyQuestionLink = this.copyQuestionLink.bind(this);
     this.doneCopyingLink = this.doneCopyingLink.bind(this);
-    this.showShareQuestionModal = this.showShareQuestionModal.bind(this);
-    this.closeShareQuestionModal = this.closeShareQuestionModal.bind(this);
     this.showReportModal = this.showReportModal.bind(this);
     this.closeReportModal = this.closeReportModal.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
@@ -55,23 +52,16 @@ class QuestionDropdown extends Component {
     this.setState({ showReportModal: false });
   }
 
-  showShareQuestionModal() {
-    this.setState({ showShareQuestionModal: true });
-  }
-
-  closeShareQuestionModal() {
-    this.setState({ showShareQuestionModal: false });
-  }
-
   reportError(e, content_id) {
     e.preventDefault();
 
     const error_content = this.refs.error_content.value;
+    const self = this;
     req.post('/reportError')
       .send({ content_id, error_content })
       .end((err, res) => {
         if (err || !res.ok) console.error(err);
-        else this.closeShareQuestionModal();
+        else self.closeReportModal();
       });
   }
 
@@ -111,30 +101,11 @@ class QuestionDropdown extends Component {
       reportModal = <Modal closeModal={this.closeReportModal} headerContent={headerContent} infoContent={infoContent} modalContent={modalContent} />;
     }
 
-    let shareQuestionModal = null;
-    if (this.state.showShareQuestionModal) {
-      const infoContent = (
-        <div className="login-helper">
-          <span> Info text </span>
-          <a> Info link! </a>
-        </div>
-      );
-      const modalContent = (
-        <span>
-          <input className="login-info" type="text" placeholder="Content" ref="error_content"/>
-          <hr className="s2" />
-          <a className="login-button blue" onClick={(e) => this.reportError(e, content_id)}>Report</a>
-        </span>
-      );
-      shareQuestionModal = <Modal closeModal={this.closeShareQuestionModal} infoContent={infoContent} modalContent={modalContent} />;
-    }
-
     const url = `${document.location.origin}/${schoolCode}/${courseCode}/${examType}/${termCode}#${id}`;
 
     return (
       <div className="tooltip-container">
         {reportModal}
-        {shareQuestionModal}
         <a onClick={this.toggleDropdown} className="arrow material-icons" id={"dropdowntoggle-" + content_id}>keyboard_arrow_down</a>
         <div className="question-options hidden" id={"dropdown-" + content_id}>
           <a className={classnames({"question-option": true, "hidden": this.state.copying})} onClick={(e) => this.copyQuestionLink(e, url)} id={"copylink-" + content_id}>
@@ -146,10 +117,6 @@ class QuestionDropdown extends Component {
             <span className="material-icons">report</span>
             <span>Report Error</span>
           </a>
-          {/*<a onClick={this.showShareQuestionModal} className="question-option">
-            <span className="material-icons">share</span>
-            <span>Share Question</span>
-          </a>*/}
         </div>
       </div>
     );

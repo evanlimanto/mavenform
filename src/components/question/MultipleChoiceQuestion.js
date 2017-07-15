@@ -23,9 +23,8 @@ class MultipleChoiceQuestion extends Component {
 
   render() {
     const { id, content_id, schoolCode, courseCode, examType, termCode, content, choices } = this.props;
-    let solutionNum = this.props.solutionNum;
-    solutionNum = (solutionNum) ? (solutionNum - 1) : null;
-    const options = map(split(choices, '~'), (choice, index) => {
+    let solutionNum = this.props.solutionNum ? (this.props.solutionNum - 1) : null;
+    const options = solutionNum ? map(split(choices, '~'), (choice, index) => {
       choice = `${String.fromCharCode(index + 65)}) ${choice}`;
       const optionClass = classnames({
         option: true,
@@ -33,6 +32,9 @@ class MultipleChoiceQuestion extends Component {
         "right-toggled": (index === solutionNum) && this.state.showSolution,
       });
       return <div key={index} tabIndex="0" className={optionClass} dangerouslySetInnerHTML={{__html: choice}}></div>;
+    }) : map(split(choices, '~'), (choice, index) => {
+      choice = `${String.fromCharCode(index + 65)}) ${choice}`;
+      return <div>{choice}</div>;
     });
 
     const QuestionDropdownComponent = <QuestionDropdown schoolCode={schoolCode} courseCode={courseCode} examType={examType} termCode={termCode} id={id} content_id={content_id} />;
@@ -44,8 +46,8 @@ class MultipleChoiceQuestion extends Component {
         <hr className="s1" />
         {options}
         <hr className="s3" />
-        <input className={(this.state.showSolution) ? "gray" : "blue"} type="button"
-          value={(this.state.showSolution) ? "Hide Solution" : "Show Solution"} onClick={() => this.toggleSolution()}/>
+        {!solutionNum || <input className={(this.state.showSolution) ? "gray" : "blue"} type="button"
+          value={(this.state.showSolution) ? "Hide Solution" : "Show Solution"} onClick={() => this.toggleSolution()}/>}
       </div>
     );
   }
