@@ -2,7 +2,7 @@ const api_key = 'key-55424568d6fba5e1b922f7aedb80543b';
 const domain = 'mg.studyform.com';
 const request = require('request');
 const data = {
-  from: 'Kevin Wu <kevin@berkeley.edu>',
+  from: 'Kevin Wu <kevintxwu@berkeley.edu>',
   to: 'math18-small@studyform.com',
   subject: 'Math 18 Past Exams and Practice Problems',
   html: `
