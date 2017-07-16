@@ -141,7 +141,6 @@ class CourseComponent extends Component {
           { concept: 'Row Reduction and Echelon Forms', code: 'rowreductionechelonforms' },
           { concept: 'Vector Equations', code: 'vectoreqns' },
           { concept: 'The Matrix Equation Ax = b', code: 'matrixeqnaxb' },
-          { concept: 'Solution Sets of Linear Systems', code: 'solutionsetsoflinearsystems' },
         ];
       }
       const topicCards = map(mathTopics, (topic) => {
