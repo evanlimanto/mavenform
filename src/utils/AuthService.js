@@ -12,7 +12,7 @@ export default class AuthService {
       clientID: '3SPCS4VBz4m9U3ftP37BdwoSm9r4obPN',
       domain: 'mavenform.auth0.com',
       responseType: 'token id_token',
-      redirectUri: ((process.env.NODE_ENV === 'development') ? 'http://localhost:3000/login' : 'http://studyform.com/login'),
+      redirectUri: ((process.env.NODE_ENV === 'development') ? 'http://localhost:3000/login' : 'http://www.studyform.com/login'),
     })
 
     this.login = this.login.bind(this)
