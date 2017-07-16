@@ -32,8 +32,10 @@ export default class AuthService {
       username,
       password
     }, (err) => {
-      if (err && errorMessageHandler)
+      if (err && errorMessageHandler) {
+    	document.getElementById("login").innerHTML = "Log In";
         errorMessageHandler(err.description);
+      }
     })
   }
 
@@ -44,8 +46,10 @@ export default class AuthService {
       password,
       user_metadata: { username }
     }, (err) => {
-      if (err && errorMessageHandler)
+      if (err && errorMessageHandler) {
+    	document.getElementById("signup").innerHTML = "Sign Up";
         errorMessageHandler(err.description);
+      }
     })
   }
 

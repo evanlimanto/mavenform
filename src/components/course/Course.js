@@ -140,7 +140,8 @@ class CourseComponent extends Component {
           { concept: 'Systems of Linear Equations', code: 'systemsoflineareqns' },
           { concept: 'Row Reduction and Echelon Forms', code: 'rowreductionechelonforms' },
           { concept: 'Vector Equations', code: 'vectoreqns' },
-          { concept: 'The Matrix Equation Ax = b', code: 'matrixeqnaxb' },
+	  { concept: 'Solution Sets of Linear Systems', code: 'solutionsetsoflinearsystems' },
+	  { concept: 'Introduction to Linear Transformations', code: 'introtolineartransformations' },
         ];
       }
       const topicCards = map(mathTopics, (topic) => {
