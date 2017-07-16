@@ -1,5 +1,4 @@
 import { isTokenExpired } from './jwtHelper'
-import createBrowserHistory from 'history/createBrowserHistory'
 import auth0 from 'auth0-js'
 import { has } from 'lodash'
 
@@ -15,7 +14,6 @@ export default class AuthService {
       responseType: 'token id_token',
       redirectUri: ((process.env.NODE_ENV === 'development') ? 'http://localhost:3000/login' : 'http://studyform.com/login'),
     })
-    this.history = createBrowserHistory()
 
     this.login = this.login.bind(this)
     this.signup = this.signup.bind(this)
@@ -80,7 +78,7 @@ export default class AuthService {
             .end((err, res) => {
               if (err) console.error(err);
               else {
-                this.history.goBack();
+		document.location = document.referrer;
               }
             });
         })

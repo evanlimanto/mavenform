@@ -34,7 +34,7 @@ class ModalsComponent extends Component {
 
     document.getElementById("signup").innerHTML = "Signing up...";
     this.props.auth.signup(email, username, password);
-    document.getElementById("signup").innerHTML = "Sign up";
+    document.getElementById("signup").innerHTML = "Sign Up";
   }
 
   waitlist() {
