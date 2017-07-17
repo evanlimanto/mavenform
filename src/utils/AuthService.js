@@ -1,5 +1,4 @@
 import { isTokenExpired } from './jwtHelper'
-import createBrowserHistory from 'history/createBrowserHistory'
 import auth0 from 'auth0-js'
 import { has } from 'lodash'
 
@@ -13,9 +12,8 @@ export default class AuthService {
       clientID: '3SPCS4VBz4m9U3ftP37BdwoSm9r4obPN',
       domain: 'mavenform.auth0.com',
       responseType: 'token id_token',
-      redirectUri: ((process.env.NODE_ENV === 'development') ? 'http://localhost:3000/login' : 'http://studyform.com/login'),
+      redirectUri: ((process.env.NODE_ENV === 'development') ? 'http://localhost:3000/login' : 'http://www.studyform.com/login'),
     })
-    this.history = createBrowserHistory()
 
     this.login = this.login.bind(this)
     this.signup = this.signup.bind(this)
@@ -34,8 +32,10 @@ export default class AuthService {
       username,
       password
     }, (err) => {
-      if (err && errorMessageHandler)
+      if (err && errorMessageHandler) {
+    	document.getElementById("login").innerHTML = "Log In";
         errorMessageHandler(err.description);
+      }
     })
   }
 
@@ -46,8 +46,10 @@ export default class AuthService {
       password,
       user_metadata: { username }
     }, (err) => {
-      if (err && errorMessageHandler)
+      if (err && errorMessageHandler) {
+    	document.getElementById("signup").innerHTML = "Sign Up";
         errorMessageHandler(err.description);
+      }
     })
   }
 
@@ -80,7 +82,7 @@ export default class AuthService {
             .end((err, res) => {
               if (err) console.error(err);
               else {
-                this.history.goBack();
+		document.location = document.referrer;
               }
             });
         })

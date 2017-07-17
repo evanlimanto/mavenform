@@ -32,9 +32,8 @@ class ModalsComponent extends Component {
     if (!isEmail(email))
         return this.setState({ modalError: "Enter a valid email." });
 
-    document.getElementById("signup").innerHTML = "Signing up...";
+    document.getElementById("signup").innerHTML = "Signing Up...";
     this.props.auth.signup(email, username, password);
-    document.getElementById("signup").innerHTML = "Sign up";
   }
 
   waitlist() {
@@ -62,10 +61,9 @@ class ModalsComponent extends Component {
       return this.props.setModalError('Invalid or empty email.');
     if (isEmpty(password))
       return this.props.setModalError('Empty password.');
+    document.getElementById("login").innerHTML = "Logging In...";
     this.props.setModalError(null);
-    document.getElementById("login").innerHTML = "Logging in...";
     this.props.auth.login(email, password, this.props.setModalError);
-    document.getElementById("login").innerHTML = "Log in";
   }
 
   forgotPassword(e) {

@@ -138,7 +138,7 @@ class NavbarComponent extends Component {
       navbarNav.push(<span key='homeSpan'> > </span>);
       navbarNav.push(<Link key='school' to={'/math'}>Math</Link>);
       navbarNav.push(<span key='mathSpan'> > </span>);
-      navbarNav.push(<Link key='topic' to={'/math/' + this.props.topic} className="active">{this.props.label}</Link>);
+      navbarNav.push(<Link key='topic' to={'/math/' + topic} className="active">{this.props.label}</Link>);
       navbarNav = (
         <div className="gray-nav">
           <div className="container">
@@ -159,7 +159,7 @@ class NavbarComponent extends Component {
             navbarNav.push(<Link key='exam' to={'/' + schoolCode + '/' + courseCode + '/' + examTypeCode + '/' + termCode} className={classnames({ active: numLayers === 3 })}>{examTypeLabel} - {termLabel}</Link>);
           } else if (this.state.math_label) {
             navbarNav.push(<span key='examSpan'> > </span>);
-            navbarNav.push(<Link key='exam' to={'/' + schoolCode + '/' + courseCode + '/' + this.props.topic} className={classnames({ active: numLayers === 3 })}>{this.state.math_label}</Link>);
+            navbarNav.push(<Link key='exam' to={'/' + schoolCode + '/' + courseCode + '/' + topic} className={classnames({ active: numLayers === 3 })}>{this.state.math_label}</Link>);
           }
         }
       }
