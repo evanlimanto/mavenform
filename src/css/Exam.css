@@ -522,13 +522,17 @@ button.comment-button:hover {
   font-size: 14px;
 }
 
-.comment-actions > a {
+.comment-actions a {
   font-size: 14px;
   color: #999;
   text-decoration: underline;
 }
 
-.comment-actions > a:hover {
+.comment-actions span {
+  color: #999;
+}
+
+.comment-actions a:hover {
   color: #11aacc;
 }
 

@@ -789,7 +789,7 @@ app.get('/getComments/:contentid', (req, res, next) => {
   const getq = `
     select D.id as id, D.content as content, users.nickname as nickname,
       D.datetime as datetime, D.parentid as parentid,
-      D.upvotes as upvotes from discussion D
+      D.upvotes as upvotes, D.deleted as deleted from discussion D
     inner join users on D.userid = users.id
     where contentid = $1
   `;
@@ -804,6 +804,7 @@ app.get('/getComments/:contentid', (req, res, next) => {
         datetime: row.datetime,
         parentid: row.parentid,
         upvotes: row.upvotes,
+        deleted: row.deleted,
       }
     });
     return res.json(items);
@@ -822,6 +823,28 @@ app.post('/addComment', (req, res, next) => {
   ], (err, results) => {
     if (err) return next(err);
     return res.send(_.toString(results.rows[0].id));
+  });
+});
+
+app.get('/deleteComment/:commentid', (req, res, next) => {
+  const { commentid } = req.params;
+
+  const updateq = `update discussion set deleted = true where id = $1`;
+
+  pool.query(updateq, [commentid], (err, result) => {
+    if (err) return next(err);
+    return res.send("Success!");
+  });
+});
+
+app.get('/undeleteComment/:commentid', (req, res, next) => {
+  const { commentid } = req.params;
+
+  const updateq = `update discussion set deleted = false where id = $1`;
+
+  pool.query(updateq, [commentid], (err, result) => {
+    if (err) return next(err);
+    return res.send("Success!");
   });
 });
 

@@ -19,6 +19,12 @@ class CommentsComponent extends Component {
     this.addComment = this.addComment.bind(this);
     this.getCommentDivs = this.getCommentDivs.bind(this);
     this.processComments = this.processComments.bind(this);
+    this.toggleComment = this.toggleComment.bind(this);
+
+    const profile = this.props.auth.getProfile();
+    this.userid = profile.user_id;
+    this.nickname = (has(profile, 'user_metadata') && has(profile.user_metadata, 'username')) ?
+      (profile.user_metadata.username) : (profile.given_name);
   }
 
   componentDidMount() {
@@ -29,13 +35,24 @@ class CommentsComponent extends Component {
         .then((json) => this.processComments(json));
   }
 
+  toggleComment(commentid, will_delete) {
+    const newTree = cloneDeep(this.state.commentsTree);
+    newTree[commentid].deleted = will_delete;
+    this.setState({ commentsTree: newTree });
+    if (will_delete) {
+      fetch(`/deleteComment/${commentid}`);
+    } else {
+      fetch(`/undeleteComment/${commentid}`);
+    }
+  }
+
   processComments(json) {
     const tree = {};
     const roots = [];
     json = sortBy(json, [(item) => item.id]);
     forEach(json, (item) => {
-      const { id, parentid, datetime, nickname, content } = item;
-      tree[id] = { datetime, nickname, content, children: [] };
+      const { id, parentid, datetime, nickname, content, deleted } = item;
+      tree[id] = { datetime, nickname, content, children: [], deleted };
       if (parentid) {
         if (!has(tree, parentid)) throw new Error("Parent comment not found.");
         tree[parentid].children.push(id);
@@ -53,11 +70,6 @@ class CommentsComponent extends Component {
     if (!this.props.auth.loggedIn())
       return this.setState({ error: "Log in to comment." });
 
-    const profile = this.props.auth.getProfile();
-    const userid = profile.user_id;
-    const nickname = (has(profile, 'user_metadata') && has(profile.user_metadata, 'username')) ?
-      (profile.user_metadata.username) : (profile.given_name);
-
     const content_id = this.props.content_id;
     const comment = this.refs.comment.value;
 
@@ -65,14 +77,14 @@ class CommentsComponent extends Component {
       return;
 
     req.post('/addComment')
-      .send({ userid, content_id, comment, parentid: null })
+      .send({ userid: this.userid, content_id, comment, parentid: null })
       .end((err, res) => {
         this.refs.comment.value = null;
         if (err || !res.ok) return console.error(err);
-        
+
         const newid = toInteger(res.text);
         let obj = {};
-        obj[newid] = { id: newid, children: [], content: comment, datetime: null, nickname };
+        obj[newid] = { id: newid, children: [], content: comment, datetime: null, nickname: this.nickname, deleted: false };
         this.setState({
           commentsTree: assign(this.state.commentsTree, obj),
           commentsRoots: concat(this.state.commentsRoots, newid),
@@ -84,11 +96,6 @@ class CommentsComponent extends Component {
     if (!this.props.auth.loggedIn())
       return this.setState({ error: "Log in to comment." });
 
-    const profile = this.props.auth.getProfile();
-    const userid = profile.user_id;
-    const nickname = (has(profile, 'user_metadata') && has(profile.user_metadata, 'username')) ?
-      (profile.user_metadata.username) : (profile.given_name);
-
     const content_id = this.props.content_id;
     const comment = this.refs["comment-" + parentid].value;
 
@@ -98,7 +105,7 @@ class CommentsComponent extends Component {
     const newid = max(map(keys(this.state.commentsTree), (key) => toInteger(key))) + 1;
     const newTree = cloneDeep(this.state.commentsTree);
     newTree[parentid].children.push(newid);
-    newTree[newid] = { id: newid, children: [], content: comment, datetime: null, nickname };
+    newTree[newid] = { id: newid, children: [], content: comment, datetime: null, nickname: this.nickname, deleted: false };
     this.setState({ commentsTree: newTree });
     const actionsElement = document.getElementById("actions-" + parentid);
     const commentboxElement = document.getElementById("commentbox-" + parentid);
@@ -107,7 +114,7 @@ class CommentsComponent extends Component {
     actionsClassList.remove("hidden");
     commentboxClassList.add("hidden");
     req.post('/addComment')
-      .send({ userid, content_id, comment, parentid })
+      .send({ userid: this.userid, content_id, comment, parentid })
       .end((err, res) => {
         this.refs["comment-" + parentid].value = null;
         if (err || !res.ok) return console.error(err);
@@ -141,9 +148,12 @@ class CommentsComponent extends Component {
         <div className="comment-header">{comment.nickname}</div>
         <div className="comment-upvotes">{comment.upvotes}</div>
         <hr className="s0-5" />
-        <div className="comment-content">{comment.content}</div>
+        <div className="comment-content">{comment.deleted ? "[DELETED]" : comment.content}</div>
         <hr className="s1" />
-        <div className="comment-actions" id={"actions-" + commentid}><a onClick={() => this.showReplyBox(commentid)}>Reply</a></div>
+        <div className="comment-actions" id={"actions-" + commentid}>
+          <a onClick={() => this.showReplyBox(commentid)}>Reply</a>
+          {(comment.nickname !== this.nickname) || (comment.deleted ? (<span> · <a onClick={() => this.toggleComment(commentid, false)}>Undelete</a></span>) : (<span> · <a onClick={() => this.toggleComment(commentid, true)}>Delete</a></span>))}
+        </div>
         <div className="poster-container hidden" id={"commentbox-" + commentid}>
           <input type="text" placeholder="Ask a question or add a comment..." className="comment-input" ref={"comment-" + commentid} />
           <button className="comment-button" onClick={() => this.replyComment(commentid)}>Post</button>
