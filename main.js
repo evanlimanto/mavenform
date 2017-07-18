@@ -850,7 +850,7 @@ app.post('/addComment', (req, res, next) => {
         const data = {
           from: 'Discussion <discussion@studyform.com>',
           to: 'founders@studyform.com',
-          subject: 'Somone posted a discussion message!',
+          subject: 'Someone posted a discussion message!',
           html: `
           User with nickname: ${r0.nickname}, id: ${userid} just posted a comment!
           <br/>
