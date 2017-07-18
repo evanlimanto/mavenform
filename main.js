@@ -27,6 +27,14 @@ Error.stackTraceLimit = Infinity;
 // Mailgun
 const mg_api_key = 'key-55424568d6fba5e1b922f7aedb80543b';
 const mg_domain = 'mg.studyform.com';
+const mg_options = {
+  url: 'https://api.mailgun.net/v3/' + mg_domain + '/messages',
+  method: 'POST',
+  auth: {
+    user: 'api',
+    pass: mg_api_key,
+  },
+};
 
 // GCP Storage
 const gcloud = require('google-cloud')({
@@ -818,15 +826,59 @@ app.get('/getComments/:contentid', (req, res, next) => {
 app.post('/addComment', (req, res, next) => {
   const { parentid, userid, comment, content_id } = req.body;
 
-  const getq = `select id from users where auth_user_id = $1`;
+  const getq = `select id, nickname from users where auth_user_id = $1`;
+  const getexamq = `
+    select content.problem_num, content.subproblem_num, courses.code_label, schools.name as school_name, exam_types.type_label, terms.term_label from content
+    inner join exams on exams.id = content.exam
+    inner join courses on courses.id = exams.courseid
+    inner join exam_types on exam_types.id = exams.examtype
+    inner join terms on terms.id = exams.examid
+    inner join schools on schools.id = courses.schoolid
+    where content.id = $1;
+  `;
   const inq = `insert into discussion (content, userid, contentid, datetime, parentid) values($1, $2, $3, now(), $4) returning id`;
 
-  async.waterfall([
-    (callback) => pool.query(getq, [userid], callback),
-    (results, callback) => pool.query(inq, [comment, results.rows[0].id, content_id, parentid], callback),
-  ], (err, results) => {
+  async.parallel([
+    (outerCallback) => {
+      async.parallel([
+        (callback) => pool.query(getq, [userid], callback),
+        (callback) => pool.query(getexamq, [content_id], callback),
+      ], (err, results) => {
+        const r0 = results[0].rows[0], r1 = results[1].rows[0];
+        if (err)
+          return outerCallback(err);
+        const data = {
+          from: 'Discussion <discussion@studyform.com>',
+          to: 'founders@studyform.com',
+          subject: 'Somone posted a discussion message!',
+          html: `
+          User with nickname: ${r0.nickname}, id: ${userid} just posted a comment!
+          <br/>
+          Course: ${r1.school_name} - ${r1.code_label}
+          <br/>
+          Type: ${r1.type_label}
+          <br/>
+          Term: ${r1.term_label}
+          <br/>
+          Problem: ${r1.problem_num}
+          <br/>
+          Subproblem: ${r1.subproblem_num}
+          <br/>
+          Content: ${comment}`,
+        };
+        return request.post(_.extend(mg_options, { form: data }), outerCallback);
+      })
+    },
+    (outerCallback) => async.waterfall([
+      (callback) => pool.query(getq, [userid], callback),
+      (results, callback) => pool.query(inq, [comment, results.rows[0].id, content_id, parentid], callback)
+    ], (err, results) => {
+      res.send(_.toString(results.rows[0].id));
+      return outerCallback(err);
+    })
+  ], (err) => {
     if (err) return next(err);
-    return res.send(_.toString(results.rows[0].id));
+    return;
   });
 });
 
