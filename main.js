@@ -24,6 +24,10 @@ const retrieveLists = require('./retrieveLists');
 
 Error.stackTraceLimit = Infinity;
 
+// Mailgun
+const mg_api_key = 'key-55424568d6fba5e1b922f7aedb80543b';
+const mg_domain = 'mg.studyform.com';
+
 // GCP Storage
 const gcloud = require('google-cloud')({
   projectId: 'studyform-168904',
@@ -887,6 +891,7 @@ app.get('/getComments', (req, res, next) => {
         userid: row.userid,
         contentid: row.contentid,
         upvotes: row.upvotes,
+        deleted: row.deleted,
       };
     });
     return res.json(items);
