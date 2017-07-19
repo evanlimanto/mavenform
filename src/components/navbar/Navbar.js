@@ -72,13 +72,6 @@ class NavbarComponent extends Component {
 
   render() {
     const isLoggedIn = this.props.auth.loggedIn();
-    const profile = this.props.auth.getProfile();
-    let username = null;
-    if (profile) {
-      username = (has(profile, 'user_metadata') && has(profile.user_metadata, 'username')) ?
-        (profile.user_metadata.username) : (profile.given_name);
-    }
-
     const suggestions = this.state.suggestions;
     const searchResults = (suggestions && this.state.suggestionsDropdownOn) ?
       ((suggestions.length > 0) ? (
@@ -106,7 +99,7 @@ class NavbarComponent extends Component {
               <span>
                 <div className="home-button home-button-alt signed-in-home">
                   <div className="material-icons signed-in-icon">person</div>
-                  {username}
+                  {this.props.auth.getProfile().user_metadata.username}
                 </div>
                 <Link to="/logout" className="home-button">Log Out</Link>
               </span>
@@ -192,7 +185,7 @@ class NavbarComponent extends Component {
               <span>
                 <span className="nav-button nav-signed-in">
                   <div className="material-icons signed-in-icon">person</div>
-                  {username}
+                  {this.props.auth.getProfile().user_metadata.username}
                 </span>
                 <Link to="/logout" className="nav-button">Log Out</Link>
               </span>

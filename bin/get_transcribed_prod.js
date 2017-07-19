@@ -26,9 +26,10 @@ pg.defaults.ssl = true;
 const prod_client = new pg.Client(prodConfig);
 prod_client.connect();
 
-const q1 = `select * from content_staging where exam > 186`;
-const q2 = `select * from exams_staging where id > 186`;
-const q3 = `select * from images_staging where examid > 186`;
+const id = 191;
+const q1 = `select * from content_staging where exam > ${id}`;
+const q2 = `select * from exams_staging where id > ${id}`;
+const q3 = `select * from images_staging where examid > ${id}`;
 const i1 = `insert into content_staging (id, problem_num, subproblem_num, problem, solution, exam, choices) values ($1, $2, $3, $4, $5, $6, $7)`;
 const i2 = `insert into exams_staging (id, courseid, examtype, examid, profs, schoolid, datetime, source_url) values ($1, $2, $3, $4, $5, $6, $7, $8)`;
 const i3 = `insert into images_staging (id, examid, url) values ($1, $2, $3)`;

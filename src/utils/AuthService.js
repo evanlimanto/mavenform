@@ -47,7 +47,7 @@ export default class AuthService {
       user_metadata: { username }
     }, (err) => {
       if (err && errorMessageHandler) {
-    	document.getElementById("signup").innerHTML = "Sign Up";
+        document.getElementById("signup").innerHTML = "Sign Up";
         errorMessageHandler(err.description);
       }
     })
@@ -78,12 +78,10 @@ export default class AuthService {
             console.log(profile);
           this.setProfile(profile)
           req.post('/createUser')
-            .send({ auth_user_id: profile.user_id, nickname: profile.nickname })
+            .send({ auth_user_id: profile.user_id, nickname: profile.user_metadata.username })
             .end((err, res) => {
               if (err) console.error(err);
-              else {
-		document.location = document.referrer;
-              }
+              else document.location = document.referrer;
             });
         })
       }

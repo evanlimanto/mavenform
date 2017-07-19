@@ -23,8 +23,7 @@ class CommentsComponent extends Component {
 
     const profile = this.props.auth.getProfile();
     this.userid = profile.user_id;
-    this.nickname = (has(profile, 'user_metadata') && has(profile.user_metadata, 'username')) ?
-      (profile.user_metadata.username) : (profile.given_name);
+    this.nickname = profile.user_metadata.username;
   }
 
   componentDidMount() {
