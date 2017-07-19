@@ -29,25 +29,26 @@ class ExamContent extends Component {
   render() {
     const { schoolCode, courseCode, examTypeCode, termCode, profs } = this.props;
     const examContent = this.state.examContent;
-    const content = (!examContent) ? <p className="loader">Loading content...</p> : map(examContent.info, (num_parts, part) => {
-      const subparts = map(range(1, num_parts + 1), subpart => {
-        const key = `${part}_${subpart}`;
-        if (!has(examContent.problems, key)) {
-          console.warn(`${key} doesn't exist in exam!`);
-          return null;
-        }
-        const qcontent = examContent.problems[key].problem || '';
-        const solution = examContent.problems[key].solution || '';
-        const choices = examContent.problems[key].choices || '';
-        const content_id = examContent.problems[key].content_id;
-        if (choices && choices.length > 0) {
-          return <MultipleChoiceQuestion content_id={content_id} id={part + "_" + subpart} courseCode={courseCode} content={qcontent} solutionNum={solution} termCode={termCode} examType={examTypeCode} key={key} choices={choices} schoolCode={schoolCode} />
-        }
-        return <Question content_id={content_id} id={part + "_" + subpart} courseCode={courseCode} content={qcontent} solution={solution} termCode={termCode} examType={examTypeCode} key={key} schoolCode={schoolCode} />
-      });
+    const content = (!examContent) ? (<p className="loader">Loading content...</p>) :
+      map(examContent.info, (num_parts, part) => {
+        const subparts = map(range(1, num_parts + 1), subpart => {
+          const key = `${part}_${subpart}`;
+          if (!has(examContent.problems, key)) {
+            console.warn(`${key} doesn't exist in exam!`);
+            return null;
+          }
+          const qcontent = examContent.problems[key].problem || '';
+          const solution = examContent.problems[key].solution || '';
+          const choices = examContent.problems[key].choices || '';
+          const content_id = examContent.problems[key].content_id;
+          if (choices && choices.length > 0) {
+            return <MultipleChoiceQuestion content_id={content_id} id={part + "_" + subpart} courseCode={courseCode} content={qcontent} solutionNum={solution} termCode={termCode} examType={examTypeCode} key={key} choices={choices} schoolCode={schoolCode} />
+          }
+          return <Question key={part + "_" + subpart} content_id={content_id} id={part + "_" + subpart} courseCode={courseCode} content={qcontent} solution={solution} termCode={termCode} examType={examTypeCode} key={key} schoolCode={schoolCode} />
+        });
 
-      return <span key={part} className="element">{subparts}</span>;
-    });
+        return <span key={part} className="element">{subparts}</span>;
+      });
 
     const examDesc = (
       <div id="header-text">

@@ -8,7 +8,7 @@ class Footer extends Component {
         </div>
         <div className="blue center footer">
           <hr className="s2" />
-          <p className="white-text">Got feedback? Let us know <a className="feedback-link" href="https://goo.gl/forms/lNRTlct9SBSiAtrO2" target="_blank">here</a>!</p>
+          <p className="white-text">Got feedback? Let us know <a className="feedback-link" href="https://goo.gl/forms/lNRTlct9SBSiAtrO2" target="_blank" rel="noopener noreferrer">here</a>!</p>
           <hr className="s2" />
         </div>
       </span>

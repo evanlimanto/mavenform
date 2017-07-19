@@ -119,7 +119,7 @@ export default class AuthService {
   getProfile() {
     // Retrieves the profile data from localStorage
     const profile = localStorage.getItem('profile')
-    return profile ? JSON.parse(localStorage.profile) : {}
+    return profile ? JSON.parse(localStorage.profile) : null;
   }
 
   getUserId() {

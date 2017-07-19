@@ -22,13 +22,15 @@ class CommentsComponent extends Component {
     this.toggleComment = this.toggleComment.bind(this);
 
     const profile = this.props.auth.getProfile();
-    this.userid = profile.user_id;
-    this.nickname = profile.user_metadata.username;
+    if (profile) {
+      this.userid = profile.user_id;
+      this.nickname = profile.user_metadata.username;
+    }
   }
 
   componentDidMount() {
     // TODO: Make this more efficient with 1 request
-    if (this.props.content_id) 
+    if (this.props.content_id)
       fetch(`/getComments/${this.props.content_id}`)
         .then((response) => response.json())
         .then((json) => this.processComments(json));

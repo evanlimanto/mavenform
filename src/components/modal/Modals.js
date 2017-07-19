@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import cookies from 'browser-cookies';
 import isEmail from 'validator/lib/isEmail';
 import isEmpty from 'validator/lib/isEmpty';
 import req from 'superagent';
@@ -11,10 +10,6 @@ import { closeModal, showLoginModal, showSignupModal, showForgotPasswordModal, s
 class ModalsComponent extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      modalError: null
-    };
 
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
@@ -30,16 +25,13 @@ class ModalsComponent extends Component {
     const password = this.refs.password.value;
 
     if (isEmpty(username) || isEmpty(email) || isEmpty(password))
-        return this.setState({ modalError: "Fill in all fields." });
+        return this.props.setModalError("Fill in all fields.");
 
     if (!isEmail(email))
-        return this.setState({ modalError: "Enter a valid email." });
+        return this.props.setModalError("Enter a valid email.");
 
     document.getElementById("signup").innerHTML = "Signing Up...";
-    this.props.auth.signup(email, username, password, (modalError) => {
-      document.getElementById("signup").innerHTML = "Sign Up";
-      this.setState({ modalError })
-    });
+    this.props.auth.signup(email, username, password, this.props.setModalError);
   }
 
   login(e) {
@@ -51,7 +43,6 @@ class ModalsComponent extends Component {
     if (isEmpty(password))
       return this.props.setModalError('Empty password.');
     document.getElementById("login").innerHTML = "Logging In...";
-    this.props.setModalError(null);
     this.props.auth.login(email, password, this.props.setModalError);
   }
 
@@ -137,7 +128,7 @@ class ModalsComponent extends Component {
       );
     }
 
-    return <Modal closeModal={this.props.closeModal} infoContent={infoContent} modalContent={modalContent} errorText={this.state.modalError} headerContent={headerContent} />;
+    return <Modal closeModal={this.props.closeModal} infoContent={infoContent} modalContent={modalContent} errorText={this.props.modal.errorText} headerContent={headerContent} />;
   }
 
   render() {
