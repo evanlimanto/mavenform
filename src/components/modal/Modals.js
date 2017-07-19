@@ -12,9 +12,12 @@ class ModalsComponent extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      modalError: null
+    };
+
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
-    this.waitlist = this.waitlist.bind(this);
     this.forgotPassword = this.forgotPassword.bind(this);
     this.getModal = this.getModal.bind(this);
   }
@@ -33,24 +36,10 @@ class ModalsComponent extends Component {
         return this.setState({ modalError: "Enter a valid email." });
 
     document.getElementById("signup").innerHTML = "Signing Up...";
-    this.props.auth.signup(email, username, password);
-  }
-
-  waitlist() {
-    const email = this.refs.email.value;
-    if (!isEmail(email))
-      return this.props.setModalError('Invalid or empty email.');
-    this.props.setModalError(null);
-    req.post("/addToWaitlist")
-      .send({ email })
-      .end((err, res) => {
-        if (err || !res.ok) this.props.setModalError("Waitlist failed.");
-        else {
-          cookies.set('waitlist_email', email, { expires: 1 });
-          window.location = "/waitlisted";
-        }
-        return;
-      });
+    this.props.auth.signup(email, username, password, (modalError) => {
+      document.getElementById("signup").innerHTML = "Sign Up";
+      this.setState({ modalError })
+    });
   }
 
   login(e) {
@@ -148,7 +137,7 @@ class ModalsComponent extends Component {
       );
     }
 
-    return <Modal closeModal={this.props.closeModal} infoContent={infoContent} modalContent={modalContent} errorText={this.props.modal.errorText} headerContent={headerContent} />;
+    return <Modal closeModal={this.props.closeModal} infoContent={infoContent} modalContent={modalContent} errorText={this.state.modalError} headerContent={headerContent} />;
   }
 
   render() {

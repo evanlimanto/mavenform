@@ -40,17 +40,26 @@ export default class AuthService {
   }
 
   signup(email, username, password, errorMessageHandler){
-    this.auth0.redirect.signupAndLogin({
-      connection: 'Username-Password-Authentication',
-      email,
-      password,
-      user_metadata: { username }
-    }, (err) => {
-      if (err && errorMessageHandler) {
-        document.getElementById("signup").innerHTML = "Sign Up";
-        errorMessageHandler(err.description);
-      }
-    })
+    const self = this;
+    req.post('/checkUsername')
+      .send({ username })
+      .end((err, res) => {
+        if (!res.body.has) {
+          return self.auth0.redirect.signupAndLogin({
+            connection: 'Username-Password-Authentication',
+            email,
+            password,
+            user_metadata: { username }
+          }, (err) => {
+            if (err && errorMessageHandler) {
+              document.getElementById("signup").innerHTML = "Sign Up";
+              errorMessageHandler(err.description);
+            }
+          })
+        } else {
+          errorMessageHandler("Username already taken.");
+        }
+      });
   }
 
   loginWithFacebook() {

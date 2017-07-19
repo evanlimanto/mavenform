@@ -624,16 +624,6 @@ app.post('/applyMarketing', (req, res, next) => {
   });
 });
 
-app.post('/waitlistSignup', (req, res) => {
-  const { email } = req.body;
-  const q = `insert into waitlist (email) values ($1)`;
-
-  pool.query(q, [], (err, result) => {
-    if (err) return next(err);
-    return res.send("Success!");
-  });
-});
-
 app.post('/contentFeedback', (req, res) => {
   const { content_id } = req.body;
   const q = `insert into content_feedback (content_id) values ($1)`;
@@ -739,39 +729,6 @@ app.post('/changePassword', (req, res, next) => {
   };
 
   request(options, function (err, response, body) {
-    if (err) return next(err);
-    return res.send("Success!");
-  });
-});
-
-app.post('/waitlistCourses', (req, res, next) => {
-  const { email, courses } = req.body;
-
-  const q = `insert into waitlist_courses (email, courses) values($1, $2)`;
-  pool.query(q, [email, courses], (err, result) => {
-    if (err) return next(err);
-    return res.send("Success!");
-  });
-});
-
-app.post('/addToWaitlist', (req, res, next) => {
-  const { email } = req.body;
-  const q = `insert into waitlist (email) values ($1)`;
-
-  const options = {
-    method: 'POST',
-    url: 'https://api.mailgun.net/v3/lists/waitlist@mg.studyform.com/members',
-    auth: {
-      user: 'api',
-      pass: 'key-55424568d6fba5e1b922f7aedb80543b',
-    },
-    form: { address: email, upsert: "yes" }
-  };
-
-  async.parallel([
-    (callback) => pool.query(q, [email], (err) => callback(err)),
-    (callback) => request(options, (err) => callback(err)),
-  ], (err) => {
     if (err) return next(err);
     return res.send("Success!");
   });
@@ -967,6 +924,16 @@ app.get('/getMathLabel/:code', (req, res, next) => {
   pool.query(getq, [code], (err, result) => {
     if (err) return next(err);
     return res.send({ concept: result.rows[0].concept });
+  });
+});
+
+app.post('/checkUsername', (req, res, next) => {
+  const { username } = req.body;
+  const getq = `select 1 from users where nickname = $1`;
+
+  pool.query(getq, [username], (err, result) => {
+    if (err) return next(err);
+    return res.send({ has: result.rows.length > 0 });
   });
 });
 
