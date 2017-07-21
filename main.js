@@ -782,7 +782,7 @@ app.post('/addComment', (req, res, next) => {
   `;
 
   async.parallel([
-    (outerCallback) => async.parallel([
+    (outerCallback) => parentid ? async.parallel([
       (callback) => pool.query(getrecipientq, [parentid], callback),
       (callback) => pool.query(getreplierq, [userid], callback),
       (callback) => pool.query(getexamq, [content_id], callback),
@@ -805,7 +805,7 @@ app.post('/addComment', (req, res, next) => {
         `,
       };
       return request.post(_.extend(mg_options, { form: data }), outerCallback);
-    }),
+    }) : outerCallback(null),
     (outerCallback) => async.parallel([
       (callback) => pool.query(getq, [userid], callback),
       (callback) => pool.query(getexamq, [content_id], callback),
