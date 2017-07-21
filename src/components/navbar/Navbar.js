@@ -177,7 +177,7 @@ class NavbarComponent extends Component {
             <Link className="desktop-logo" to="/"><img className="logo" src="/img/logo.svg" alt="logo" /></Link>
             <Link className="mobile-logo" to="/"><img className="logo" src="/img/icon.svg" alt="logo" /></Link>
             <div className="material-icons nav-icon">search</div>
-            <div className="nav-search-container">             
+            <div className="nav-search-container">
               <input className="nav-search" name="search" placeholder="Search courses..." type="text" autoComplete="off" onChange={this.getSuggestions} ref="search" />
               {searchResults}
             </div>

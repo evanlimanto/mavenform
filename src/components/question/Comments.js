@@ -5,6 +5,8 @@ import isEmpty from 'validator/lib/isEmpty';
 
 const req = require('superagent');
 
+const replaceLinks = (text) => text.replace(/(\bhttps?:\/\/\S+)/gi, '<a href="$1" target="_blank">$1</a>', "g");
+
 class CommentsComponent extends Component {
   constructor(props) {
     super(props);
@@ -190,7 +192,7 @@ class CommentsComponent extends Component {
         <div className="comment-header">{comment.nickname}</div>
         <div className="comment-upvotes">{comment.upvotes}</div>
         <hr className="s0-5" />
-        <div className="comment-content" id={"comment-" + commentid}>{comment.deleted ? "[DELETED]" : comment.content}</div>
+        <div className="comment-content" id={"comment-" + commentid} dangerouslySetInnerHTML={{ __html: replaceLinks(comment.content) }} />
         <div className="poster-container hidden" id={"updatebox-" + commentid}>
           <textarea className="comment-input" ref={"updatecomment-" + commentid}>{comment.content}</textarea>
           <button className="comment-button" onClick={() => this.updateComment(commentid)}>Update</button>
