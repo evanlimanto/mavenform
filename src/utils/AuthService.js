@@ -87,7 +87,7 @@ export default class AuthService {
             console.log(profile);
           this.setProfile(profile)
           req.post('/createUser')
-            .send({ auth_user_id: profile.user_id, nickname: profile.user_metadata.username })
+            .send({ auth_user_id: profile.user_id, nickname: profile.user_metadata.username, email: profile.email })
             .end((err, res) => {
               if (err) console.error(err);
               else document.location = document.referrer;
@@ -146,6 +146,6 @@ export default class AuthService {
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token')
     localStorage.removeItem('profile')
-    document.location = "/";
+    document.location = document.referrer;
   }
 }

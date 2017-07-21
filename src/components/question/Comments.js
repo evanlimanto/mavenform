@@ -156,7 +156,7 @@ class CommentsComponent extends Component {
           {(comment.nickname !== this.nickname) || (comment.deleted ? (<span> · <a onClick={() => this.toggleComment(commentid, false)}>Undelete</a></span>) : (<span> · <a onClick={() => this.toggleComment(commentid, true)}>Delete</a></span>))}
         </div>
         <div className="poster-container hidden" id={"commentbox-" + commentid}>
-          <input type="text" placeholder="Ask a question or add a comment..." className="comment-input" ref={"comment-" + commentid} />
+          <textarea placeholder="Ask a question or add a comment..." className="comment-input" ref={"comment-" + commentid} />
           <button className="comment-button" onClick={() => this.replyComment(commentid)}>Post</button>
         </div>
       </div>
@@ -181,7 +181,7 @@ class CommentsComponent extends Component {
     ) : (
       <div className="comment-box">
         <div className="poster-container">
-          <input type="text" placeholder="Ask a question or add a comment..." className="comment-input" ref="comment" />
+          <textarea placeholder="Ask a question or add a comment..." className="comment-input" ref="comment" />
           <button className="comment-button" onClick={this.addComment}>Post</button>
           {!this.state.error || (<p className="error-text">{this.state.error}</p>)}
         </div>

@@ -359,11 +359,11 @@ app.post('/addProblem', (req, res, next) => {
 });
 
 app.post('/createUser', (req, res, next) => {
-  const { auth_user_id, nickname } = req.body;
-  const q = `insert into users (auth_user_id, nickname) select $1, $2
-    where not exists (select 1 from users where auth_user_id = $3)
+  const { auth_user_id, nickname, email } = req.body;
+  const q = `insert into users (auth_user_id, nickname, email) select $1, $2, $3
+    where not exists (select 1 from users where auth_user_id = $4)
   `;
-  pool.query(q, [auth_user_id, nickname, auth_user_id], (err, result) => {
+  pool.query(q, [auth_user_id, nickname, email, auth_user_id], (err, result) => {
     if (err) return next(err);
     return res.send("Success!");
   });
@@ -695,25 +695,6 @@ app.get('/getMarketingApps', (req, res, next) => {
   });
 });
 
-app.post('/signup', (req, res, next) => {
-  const { access_code, username, email, password } = req.body;
-
-  const q = `select id, code, used from access_codes where code = $1`;
-  const uq = `update access_codes set used = true where id = $1`;
-  pool.query(q, [access_code], (err, result) => {
-    if (err) return next(err); 
-    if (result.rows.length === 0)
-      return res.status(400).send("Invalid access code.");
-    if (result.rows[0].used)
-      return res.status(400).send("Access code already used.");
-    const row = result.rows[0];
-    return pool.query(uq, [row.id], (err, result) => {
-      if (err) return next(err);
-      return res.send("Success!");
-    });
-  });
-});
-
 app.post('/changePassword', (req, res, next) => {
   const { email } = req.body;
   const options = {
@@ -784,8 +765,14 @@ app.post('/addComment', (req, res, next) => {
   const { parentid, userid, comment, content_id } = req.body;
 
   const getq = `select id, nickname from users where auth_user_id = $1`;
+  const inq = `insert into discussion (content, userid, contentid, datetime, parentid) values($1, $2, $3, now(), $4) returning id`;
+  const getrecipientq = `select U.nickname, U.email from users U inner join discussion D on D.userid = U.id where D.id = $1`;
+  const getreplierq = `select nickname from users U where auth_user_id = $1`;
   const getexamq = `
-    select content.problem_num, content.subproblem_num, courses.code_label, schools.name as school_name, exam_types.type_label, terms.term_label from content
+    select content.problem_num as problem_num, content.subproblem_num as subproblem_num,
+      courses.code_label, schools.name as school_name, schools.code as school_code,
+      exam_types.type_label, terms.term_label, exam_types.type_code as type_code,
+      terms.term_code as term_code, courses.code as course_code from content
     inner join exams on exams.id = content.exam
     inner join courses on courses.id = exams.courseid
     inner join exam_types on exam_types.id = exams.examtype
@@ -793,39 +780,60 @@ app.post('/addComment', (req, res, next) => {
     inner join schools on schools.id = courses.schoolid
     where content.id = $1;
   `;
-  const inq = `insert into discussion (content, userid, contentid, datetime, parentid) values($1, $2, $3, now(), $4) returning id`;
 
   async.parallel([
-    (outerCallback) => {
-      async.parallel([
-        (callback) => pool.query(getq, [userid], callback),
-        (callback) => pool.query(getexamq, [content_id], callback),
-      ], (err, results) => {
-        const r0 = results[0].rows[0], r1 = results[1].rows[0];
-        if (err)
-          return outerCallback(err);
-        const data = {
-          from: 'Discussion <discussion@studyform.com>',
-          to: 'founders@studyform.com',
-          subject: 'Someone posted a discussion message!',
-          html: `
-          User with nickname: ${r0.nickname}, id: ${userid} just posted a comment!
-          <br/>
-          Course: ${r1.school_name} - ${r1.code_label}
-          <br/>
-          Type: ${r1.type_label}
-          <br/>
-          Term: ${r1.term_label}
-          <br/>
-          Problem: ${r1.problem_num}
-          <br/>
-          Subproblem: ${r1.subproblem_num}
-          <br/>
-          Content: ${comment}`,
-        };
-        return request.post(_.extend(mg_options, { form: data }), outerCallback);
-      })
-    },
+    (outerCallback) => async.parallel([
+      (callback) => pool.query(getrecipientq, [parentid], callback),
+      (callback) => pool.query(getreplierq, [userid], callback),
+      (callback) => pool.query(getexamq, [content_id], callback),
+    ], (err, results) => {
+      if (err) return next(err);
+      const r0 = results[0].rows[0];
+      const r1 = results[1].rows[0];
+      const r2 = results[2].rows[0];
+
+      // Email recipient
+      const url = `http://www.studyform.com/${r2.school_code}/${r2.course_code}/${r2.type_code}/${r2.term_code}#${r2.problem_num}_${r2.subproblem_num}`;
+      const data = {
+        from: 'Discussion <discussion@studyform.com>',
+        to: r0.email,
+        subject: '[Studyform] Someone replied to your comment!',
+        html: `
+        Hi ${r0.nickname}, ${r1.nickname} just replied to your comment on ${r2.code_label} ${r2.type_label} ${r2.term_label}!
+        <br/>
+        Navigate to <a href="${url}" target="_blank">${url}</a> to view the response.
+        `,
+      };
+      return request.post(_.extend(mg_options, { form: data }), outerCallback);
+    }),
+    (outerCallback) => async.parallel([
+      (callback) => pool.query(getq, [userid], callback),
+      (callback) => pool.query(getexamq, [content_id], callback),
+    ], (err, results) => {
+      const r0 = results[0].rows[0], r1 = results[1].rows[0];
+      if (err)
+        return outerCallback(err);
+      const data = {
+        from: 'Discussion <discussion@studyform.com>',
+        to: 'founders@studyform.com',
+        subject: 'Someone posted a discussion message!',
+        html: `
+        User with nickname: ${r0.nickname}, id: ${userid} just posted a comment!
+        <br/>
+        Course: ${r1.school_name} - ${r1.code_label}
+        <br/>
+        Type: ${r1.type_label}
+        <br/>
+        Term: ${r1.term_label}
+        <br/>
+        Problem: ${r1.problem_num}
+        <br/>
+        Subproblem: ${r1.subproblem_num}
+        <br/>
+        Content: ${comment}`,
+      };
+      return request.post(_.extend(mg_options, { form: data }), outerCallback);
+    }),
     (outerCallback) => async.waterfall([
       (callback) => pool.query(getq, [userid], callback),
       (results, callback) => pool.query(inq, [comment, results.rows[0].id, content_id, parentid], callback)
@@ -858,16 +866,6 @@ app.get('/undeleteComment/:commentid', (req, res, next) => {
   pool.query(updateq, [commentid], (err, result) => {
     if (err) return next(err);
     return res.send("Success!");
-  });
-});
-
-app.post('/replyComment', (req, res, next) => {
-  const { parentid, content, contentid, userid } = req.body;
-  const inq = `insert into discussion (content, userid, contentid, datetime, parentid) values($1, $2, $3, now(), $4)`;
-
-  pool.query(inq, [content, userid, contentid, parentid], (err, result) => {
-    if (err) return next(err);
-    return res.send("Success!"); 
   });
 });
 
