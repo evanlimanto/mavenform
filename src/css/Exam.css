@@ -474,6 +474,7 @@ a.comments-label {
   flex: 1;
   border: 1px solid #ccc;
   padding: 10px 15px;
+  height: 40px;
   margin: 0 20px 0 0;
   font-size: 14px;
   border-radius: 5px;
@@ -488,6 +489,7 @@ button.comment-button {
   background-color: #11aacc;
   padding: 10px 15px;
   border: none;
+  max-height: 40px;
   border-radius: 5px;
   text-align: left;
   font-family: 'Lato', sans-serif;
