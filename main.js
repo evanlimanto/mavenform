@@ -935,6 +935,16 @@ app.post('/checkUsername', (req, res, next) => {
   });
 });
 
+app.post('/updateComment', (req, res, next) => {
+  const { commentid, content } = req.body;
+  const updateq = `update discussion set content = $1 where id = $2`;
+
+  pool.query(updateq, [content, commentid], (err, result) => {
+    if (err) return next(err);
+    return res.send("Success!");
+  });
+});
+
 app.use(express.static(path.join(__dirname, '/build')));
 
 // Error handler middleware

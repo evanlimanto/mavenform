@@ -33,7 +33,7 @@ export default class AuthService {
       password
     }, (err) => {
       if (err && errorMessageHandler) {
-    	document.getElementById("login").innerHTML = "Log In";
+      document.getElementById("login").innerHTML = "Log In";
         errorMessageHandler(err.description);
       }
     })
@@ -57,6 +57,7 @@ export default class AuthService {
             }
           })
         } else {
+          document.getElementById("signup").innerHTML = "Sign Up";
           errorMessageHandler("Username already taken.");
         }
       });
@@ -146,6 +147,6 @@ export default class AuthService {
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token')
     localStorage.removeItem('profile')
-    document.location = document.referrer;
+    document.location = "/";
   }
 }

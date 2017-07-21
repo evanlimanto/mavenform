@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'; import { connect } from 'react-redux';
 
 import { cloneDeep, assign, max, keys, forEach, toString, flattenDeep, has, concat, map, sortBy, toInteger } from 'lodash';
 import isEmpty from 'validator/lib/isEmpty';
@@ -20,6 +19,7 @@ class CommentsComponent extends Component {
     this.getCommentDivs = this.getCommentDivs.bind(this);
     this.processComments = this.processComments.bind(this);
     this.toggleComment = this.toggleComment.bind(this);
+    this.updateComment = this.updateComment.bind(this);
 
     const profile = this.props.auth.getProfile();
     if (profile) {
@@ -108,6 +108,7 @@ class CommentsComponent extends Component {
     newTree[parentid].children.push(newid);
     newTree[newid] = { id: newid, children: [], content: comment, datetime: null, nickname: this.nickname, deleted: false };
     this.setState({ commentsTree: newTree });
+
     const actionsElement = document.getElementById("actions-" + parentid);
     const commentboxElement = document.getElementById("commentbox-" + parentid);
     const actionsClassList = actionsElement.classList;
@@ -128,6 +129,36 @@ class CommentsComponent extends Component {
     document.getElementById("actions-" + commentid).classList.add("hidden");
   }
 
+  showEditCommentBox(commentid) {
+    document.getElementById("updatebox-" + commentid).classList.remove("hidden");
+    document.getElementById("comment-" + commentid).classList.add("hidden");
+  }
+
+  updateComment(commentid) {
+    const content = this.refs["updatecomment-" + commentid].value;
+    const newTree = cloneDeep(this.state.commentsTree);
+    newTree[commentid].content = content;
+    this.setState({ commentsTree: newTree });
+
+    const commentElement = document.getElementById("comment-" + commentid);
+    const updateboxElement = document.getElementById("updatebox-" + commentid);
+    if (commentElement && updateboxElement) {
+      const commentClassList = commentElement.classList;
+      const updateboxClassList = updateboxElement.classList;
+      if (commentClassList.contains("hidden")) {
+        commentClassList.remove("hidden");
+        updateboxClassList.add("hidden");
+      }
+    }
+
+    req.post("/updateComment")
+      .send({ commentid, content })
+      .end((err, res) => {
+        if (err || !res.ok) return console.error(err);
+        return;
+      });
+  }
+
   dfs(commentid, depth) {
     let ret = [];
     const comment = this.state.commentsTree[commentid];
@@ -142,6 +173,16 @@ class CommentsComponent extends Component {
           commentboxClassList.add("hidden");
         }
       }
+      const commentElement = document.getElementById("comment-" + commentid);
+      const updateboxElement = document.getElementById("updatebox-" + commentid);
+      if (commentElement && updateboxElement && !actionsElement.contains(evt.target) && !updateboxElement.contains(evt.target)) {
+        const commentClassList = commentElement.classList;
+        const updateboxClassList = updateboxElement.classList;
+        if (commentClassList.contains("hidden")) {
+          commentClassList.remove("hidden");
+          updateboxClassList.add("hidden");
+        }
+      }
     });
 
     ret.push((
@@ -149,15 +190,20 @@ class CommentsComponent extends Component {
         <div className="comment-header">{comment.nickname}</div>
         <div className="comment-upvotes">{comment.upvotes}</div>
         <hr className="s0-5" />
-        <div className="comment-content">{comment.deleted ? "[DELETED]" : comment.content}</div>
+        <div className="comment-content" id={"comment-" + commentid}>{comment.deleted ? "[DELETED]" : comment.content}</div>
+        <div className="poster-container hidden" id={"updatebox-" + commentid}>
+          <textarea className="comment-input" ref={"updatecomment-" + commentid}>{comment.content}</textarea>
+          <button className="comment-button" onClick={() => this.updateComment(commentid)}>Update</button>
+        </div>
         <hr className="s1" />
         <div className="comment-actions" id={"actions-" + commentid}>
           <a onClick={() => this.showReplyBox(commentid)}>Reply</a>
           {(comment.nickname !== this.nickname) || (comment.deleted ? (<span> · <a onClick={() => this.toggleComment(commentid, false)}>Undelete</a></span>) : (<span> · <a onClick={() => this.toggleComment(commentid, true)}>Delete</a></span>))}
+          {(comment.nickname !== this.nickname) || (<span> · <a onClick={() => this.showEditCommentBox(commentid)}>Edit</a></span>)}
         </div>
         <div className="poster-container hidden" id={"commentbox-" + commentid}>
           <textarea placeholder="Ask a question or add a comment..." className="comment-input" ref={"comment-" + commentid} />
-          <button className="comment-button" onClick={() => this.replyComment(commentid)}>Post</button>
+          <button className="comment-button" onClick={() => this.replyComment(commentid, comment.content)}>Post</button>
         </div>
       </div>
     ));
