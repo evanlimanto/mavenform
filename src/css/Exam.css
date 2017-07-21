@@ -541,3 +541,13 @@ button.comment-button:hover {
 .copied {
   color: #11aacc;
 }
+
+.comment-link {
+  font-size: 14px;
+  color: #11aacc;
+  text-decoration: underline;
+}
+
+.comment-link:hover {
+  opacity: 0.9;
+}

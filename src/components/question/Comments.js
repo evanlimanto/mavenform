@@ -5,7 +5,7 @@ import isEmpty from 'validator/lib/isEmpty';
 
 const req = require('superagent');
 
-const replaceLinks = (text) => text.replace(/(\bhttps?:\/\/\S+)/gi, '<a href="$1" target="_blank">$1</a>', "g");
+const replaceLinks = (text) => text.replace(/(\bhttps?:\/\/\S+)/gi, '<a href="$1" class="comment-link" target="_blank">$1</a>', "g");
 
 class CommentsComponent extends Component {
   constructor(props) {
