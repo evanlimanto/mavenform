@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
 import { map } from 'lodash';
 import { MultipleChoiceQuestion, Question } from '../question';
 
@@ -11,6 +12,7 @@ class Transcribed extends Component {
       exams: null,
       renderedContent: null,
       success: null,
+      selectedid: null,
     }
   }
 
@@ -40,7 +42,7 @@ class Transcribed extends Component {
               content={item.problem}
               solution={item.solution} />;
     });
-    this.setState({ renderedContent });
+    this.setState({ renderedContent, selectedid: id });
   }
 
   approveContent(id) {
@@ -58,7 +60,7 @@ class Transcribed extends Component {
 
     const { exams } = this.state;
     const examsList = map(exams, (exam, key) => {
-      return <div key={key}><a onClick={() => this.renderContent(key)}>{exam.school_name}: {exam.course_code} - {exam.term_label}</a><button className='approve' onClick={() => this.approveContent(key)}>Approve</button></div>;
+      return <div key={key}><a className={classnames({"active": key === this.state.selectedid})} onClick={() => this.renderContent(key)}>{exam.school_name}: {exam.course_code} - {exam.term_label}</a><button className='approve' onClick={() => this.approveContent(key)}>Approve</button></div>;
     });
     return (
       <div>
@@ -68,7 +70,7 @@ class Transcribed extends Component {
           {examsList}
         </span>
         <textarea value={map(this.state.renderedContent, (content) => content.props.content + "\n" + content.props.solution)}></textarea>
-        <span className='col'>
+        <span className='col' style={{ "width": "50%" }}>
           {this.state.renderedContent}
         </span>
       </div>
