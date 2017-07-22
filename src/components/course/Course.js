@@ -142,7 +142,20 @@ class CourseComponent extends Component {
           { concept: 'Vector Equations', code: 'vectoreqns' },
           { concept: 'Introduction to Linear Transformations', code: 'introtolineartransformations' },
         ];
+      } else if (courseCode ==== 'MATH102') {
+        mathTopics = [
+          { concept: 'Matrix Algebra', code: 'matalg' },
+          { concept: 'Determinants', code: 'determinants' },
+          { concept: 'Eigenvalues and Eigenvectors', code: 'eigenvaluesandeigenvectors' },
+          { concept: 'Vector Spaces', code: 'vectorspaces' },
+          { concept: 'Systems of Linear Equations', code: 'systemsoflineareqns' },
+          { concept: 'Introduction to Linear Transformations', code: 'introtolineartransformations' },
+          { concept: 'Orthogonality', code: 'orthogonality' },
+          { concept: 'Least Squares', code: 'lstsq' },
+          { concept: 'Diagonalization', code: 'diagonalization' },
+        ];
       }
+
       const topicCards = map(mathTopics, (topic) => {
         return (
           <Link key={topic.code} className="card topic-card" to={"/" + schoolCode + "/" + courseCode + "/" + topic.code}>
