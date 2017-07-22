@@ -87,7 +87,7 @@ class CourseComponent extends Component {
     );
 
     let topicsContent = ( <hr className="s8" /> ), mathTopics = null;
-    if ((schoolCode === 'ucsd' && (courseCode === 'MATH10A' || courseCode === 'MATH20C' || courseCode === 'MATH20D') || (courseCode === 'MATH18')) ||
+    if ((schoolCode === 'ucsd' && (courseCode === 'MATH10A' || courseCode === 'MATH20C' || courseCode === 'MATH20D') || (courseCode === 'MATH18') || (courseCode === 'MATH102')) ||
         (schoolCode === 'ucb' && (courseCode === 'MATH53' || courseCode === 'MATH1A'))) {
       if (courseCode === 'MATH10A') {
         mathTopics = [

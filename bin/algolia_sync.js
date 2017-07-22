@@ -64,6 +64,7 @@ client.query(q, (err, result) => {
     item.number = code[0];
     item.letter = code[1];
     item.subject = _.join(_.dropRight(_.split(item.code_label, ' ')), ' ');
+    console.log(item);
     index.partialUpdateObject(item, (err, content) => {
       if (err) return console.error(err);
       else console.log(content);
