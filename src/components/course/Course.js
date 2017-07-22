@@ -147,9 +147,8 @@ class CourseComponent extends Component {
           { concept: 'Systems of Linear Equations', code: 'systemsoflineareqns' },
           { concept: 'Introduction to Linear Transformations', code: 'introtolineartransformations' },
           { concept: 'Eigenvectors and Eigenvalues', code: 'eigenvectorsandeigenvalues' },
-          { concept: 'Orthogonality', code: 'orthogonality' },
-          { concept: 'Least Squares', code: 'lstsq' },
           { concept: 'Diagonalization', code: 'diagonalization' },
+          { concept: 'Orthogonal Sets', code: 'orthogonalsets' },
           { concept: 'Homogenous Linear Equations', code: 'homogenouslineareqns'},
           { concept: 'First-Order Equations', code: 'firstordereqns' },
         ];
