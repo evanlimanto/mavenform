@@ -165,10 +165,6 @@ class DashboardContentComponent extends Component {
       return res;
     }, []);
 
-    const coursesSelectItems = map(this.props.courses, (course) => {
-      return <option value={course.id} key={course.id}>{course.code}</option>;
-    });
-
     const examSelectItems = map(this.props.exams.key_dict, (exam, key) => {
       return <option value={key} key={key}>{exam.courseid} - {exam.examtype} - {exam.examid}</option>;
     });
@@ -178,35 +174,6 @@ class DashboardContentComponent extends Component {
     return (
       <div className="contentContainer">
         <div className="backLink"><Link to="/dashboard">Back to Dashboard</Link></div>
-        <h1>Add Exam</h1>
-        <form>
-          <select ref="exam_course_code">
-            {coursesSelectItems}
-          </select>
-          &nbsp;&nbsp;
-          <select ref="exam_type">
-            <option value="mt1">Midterm 1</option>
-            <option value="mt2">Midterm 2</option>
-            <option value="mt3">Midterm 3</option>
-            <option value="final">Final</option>
-          </select>
-          &nbsp;&nbsp;
-          <select ref="exam_term">
-            <option value="sp">Spring</option>
-            <option value="su">Summer</option>
-            <option value="fa">Fall</option>
-            <option value="wi">Winter</option>
-          </select>
-          &nbsp;&nbsp;
-          <select ref="exam_year">
-            {map(range(2000, 2021), (year) => <option key={year} value={year}>{year}</option>) }
-          </select>
-          &nbsp;&nbsp;
-          <input type="text" ref="profs" placeholder="Profs" />&nbsp;&nbsp;
-          <button onClick={(e) => this.addExam(e)}>Add Exam</button>
-        </form>
-        <hr className="s2" />
-
         <h1>Add Problem</h1>
         <form>
           <select ref="exam">
@@ -247,7 +214,6 @@ const mapStateToProps = (state) => {
   return {
     auth: state.auth,
     exams: state.exams,
-    courses: state.courses,
   };
 };
 

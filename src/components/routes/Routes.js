@@ -44,7 +44,6 @@ const Routes = (
     <Route path="/:schoolCode/:courseCode/:topic" component={MathContent} />
     <Route path="/:schoolCode/:courseCode" component={Course} />
     <Route path="/:schoolCode" component={School} />
-
     <Route component={NotFound} />
   </Switch>
 );

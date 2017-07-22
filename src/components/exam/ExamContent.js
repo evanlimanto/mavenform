@@ -44,7 +44,7 @@ class ExamContent extends Component {
           if (choices && choices.length > 0) {
             return <MultipleChoiceQuestion content_id={content_id} id={part + "_" + subpart} courseCode={courseCode} content={qcontent} solutionNum={solution} termCode={termCode} examType={examTypeCode} key={key} choices={choices} schoolCode={schoolCode} />
           }
-          return <Question key={part + "_" + subpart} content_id={content_id} id={part + "_" + subpart} courseCode={courseCode} content={qcontent} solution={solution} termCode={termCode} examType={examTypeCode} key={key} schoolCode={schoolCode} />
+          return <Question content_id={content_id} id={part + "_" + subpart} courseCode={courseCode} content={qcontent} solution={solution} termCode={termCode} examType={examTypeCode} key={key} schoolCode={schoolCode} />
         });
 
         return <span key={part} className="element">{subparts}</span>;

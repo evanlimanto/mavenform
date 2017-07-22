@@ -3,6 +3,7 @@ import auth0 from 'auth0-js'
 import { has } from 'lodash'
 
 import { evtEmitter } from './events'
+import { canUseDOM } from '../utils'
 const req = require('superagent');
 
 export default class AuthService {
@@ -12,7 +13,7 @@ export default class AuthService {
       clientID: '3SPCS4VBz4m9U3ftP37BdwoSm9r4obPN',
       domain: 'mavenform.auth0.com',
       responseType: 'token id_token',
-      redirectUri: ((process.env.NODE_ENV === 'development') ? 'http://localhost:3000/login' : 'http://www.studyform.com/login'),
+      redirectUri: canUseDOM ? window.location.origin + '/login' : null,
     })
 
     this.login = this.login.bind(this)
@@ -99,6 +100,8 @@ export default class AuthService {
   }
 
   loggedIn() {
+    if (!canUseDOM)
+      return false;
     // Checks if there is a saved token and it's still valid
     const token = this.getToken()
     return !!token && !isTokenExpired(token)

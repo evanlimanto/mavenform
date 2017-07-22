@@ -5,13 +5,6 @@ export const updateExamList = (exams) => {
   };
 };
 
-export const updateCourseList = (courses) => {
-  return {
-    type: 'UPDATE_COURSE_LIST',
-    courses: courses,
-  };
-};
-
 export const updateSchoolList = (schools) => {
   return {
     type: 'UPDATE_SCHOOL_LIST',

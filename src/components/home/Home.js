@@ -19,7 +19,6 @@ const meta = {
 class HomeComponent extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       suggestions: [],
       notificationBar: true,

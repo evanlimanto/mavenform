@@ -18,15 +18,6 @@ export const schools = (state = [], action) => {
   }
 };
 
-export const courses = (state = [], action) => {
-  switch (action.type) {
-    case 'UPDATE_COURSE_LIST':
-      return action.courses;
-    default:
-      return state;
-  }
-};
-
 const authState = new AuthService('tgMckz0tmKMhju4VwEnPLxEH4BDExL21', 'mavenform.auth0.com')
 export const auth = (state = authState, action) => {
   switch (action.type) {

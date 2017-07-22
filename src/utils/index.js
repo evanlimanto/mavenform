@@ -1,8 +1,12 @@
 import { join, split, reduce, toUpper } from 'lodash';
 
-import { updateExamList, updateCourseList, updateSchoolList, updateExamTypesList, updateTermList, updateLabels } from '../actions';
-
 export const ENV_IS_DEV = process.env.NODE_ENV === "development";
+export const BASE_URL = "http://localhost:8080"; //ENV_IS_DEV ? "http://localhost:8080" : "http://www.studyform.com"
+export const canUseDOM = !!(
+  typeof window !== 'undefined' &&
+  window.document &&
+  window.document.createElement
+);
 
 export function parseAuthHash(auth, location) {
   if (/access_token|id_token|error/.test(location.hash)) {
@@ -21,45 +25,6 @@ const APP_ID = 'NPJP92R96D'
 const SEARCH_API_KEY = '22cd6e2a19445d1444df8fb7a3d00f52'
 const algolia = require('algoliasearch')(APP_ID, SEARCH_API_KEY);
 export const algoliaCourseIndex = algolia.initIndex('courses');
-
-// Redux store
-export function initStore(store) {
-  fetch(`/getExams`).then(
-    (response) => response.json()
-  ).then(
-    (json) => store.dispatch(updateExamList(json))
-  );
-
-  fetch(`/getCourses/ucberkeley`).then(
-    (response) => response.json()
-  ).then(
-    (json) => store.dispatch(updateCourseList(json))
-  );
-
-  fetch(`/getSchools`).then(
-    (response) => response.json()
-  ).then(
-    (json) => store.dispatch(updateSchoolList(json))
-  );
-
-  fetch(`/getExamTypes`).then(
-    (response) => response.json()
-  ).then(
-    (json) => store.dispatch(updateExamTypesList(json))
-  );
-
-  fetch(`/getTerms`).then(
-    (response) => response.json()
-  ).then(
-    (json) => store.dispatch(updateTermList(json))
-  );
-
-  fetch(`/getLabels`).then(
-    (response) => response.json()
-  ).then(
-    (json) => store.dispatch(updateLabels(json))
-  );
-}
 
 export function courseCodeToLabel(course_code) {
   if (!course_code)
