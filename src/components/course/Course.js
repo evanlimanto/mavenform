@@ -142,7 +142,7 @@ class CourseComponent extends Component {
           { concept: 'Vector Equations', code: 'vectoreqns' },
           { concept: 'Introduction to Linear Transformations', code: 'introtolineartransformations' },
         ];
-      } else if (courseCode ==== 'MATH102') {
+      } else if (courseCode === 'MATH102') {
         mathTopics = [
           { concept: 'Matrix Algebra', code: 'matalg' },
           { concept: 'Determinants', code: 'determinants' },
