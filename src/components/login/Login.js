@@ -1,10 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { parseAuthHash } from '../../utils';
 
 class LoginComponent extends React.Component {
   componentWillMount() {
     const { auth, location } = this.props;
-    this.props.parseAuthHash(auth, location);
+    parseAuthHash(auth, location);
   }
 
   render() {

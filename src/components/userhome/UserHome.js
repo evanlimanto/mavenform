@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import { Link } from 'react-router-dom';
 import { concat, has, map, keys, split } from 'lodash';
-import { courseCodeToLabel } from '../../utils';
+import { courseCodeToLabel, requireAuth } from '../../utils';
 import Navbar from '../navbar';
 
 const request = require('superagent');
@@ -33,7 +33,7 @@ class UserHomeComponent extends Component {
 
   componentWillMount() {
     const { auth, history } = this.props
-    this.props.requireAuth(auth, history)
+    requireAuth(auth, history)
   }
 
   componentDidMount() {
