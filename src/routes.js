@@ -1,20 +1,19 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
 import { map } from 'lodash';
 
-import Course from '../course';
-import { Dashboard, DashboardContent, DashboardCourses, DashboardComments, Transcribe, Transcribed } from '../dashboard';
-import Exam from '../exam';
-import Home from '../home';
-import { Login, Logout, SecretSignup, Signup } from '../login';
-import NotFound from '../notfound';
-import { AppSubmitted, Marketing, MarketingApps } from '../marketing';
-import { Math, MathContent } from '../math';
-import Profile from '../profile';
-import Upload from '../upload';
-import School from '../school';
-import UserHome from '../userhome';
-import Waitlisted from '../waitlisted';
+import Course from './components/course';
+import { Dashboard, DashboardContent, DashboardCourses, DashboardComments, Transcribe, Transcribed } from './components/dashboard';
+import Exam from './components/exam';
+import Home from './components/home';
+import { Login, Logout, SecretSignup, Signup } from './components/login';
+import NotFound from './components/notfound';
+import { AppSubmitted, Marketing, MarketingApps } from './components/marketing';
+import { Math, MathContent } from './components/math';
+import Profile from './components/profile';
+import Upload from './components/upload';
+import School from './components/school';
+import UserHome from './components/userhome';
+import Waitlisted from './components/waitlisted';
 
 const routes = [
   { path: '/', component: Home, exact: true },
@@ -44,10 +43,4 @@ const routes = [
   { path: '/', component: NotFound },
 ];
 
-const Routes = (
-  <Switch>
-    {map(routes, (route) => <Route path={route.path} component={route.component} exact={route.exact} />)}
-  </Switch>
-);
-
-export default Routes;
+export default routes;
