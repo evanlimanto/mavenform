@@ -1,4 +1,5 @@
-import React, { Component } from 'react'; import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { has, map } from 'lodash';
 import DocumentMeta from 'react-document-meta';
@@ -15,7 +16,6 @@ class CourseComponent extends Component {
     super(props);
 
     this.state = {
-      exams: null,
       modalError: null,
       modal: null,
       mathTopics: null,
@@ -23,15 +23,19 @@ class CourseComponent extends Component {
   }
 
   componentDidMount() {
-    const { courseCode, schoolCode } = this.props;
-    fetch(`/getCourseExams/${schoolCode}/${courseCode}`).then(
-      (response) => response.json()
-    ).then((json) => this.setState({ exams: json }));
+    CourseComponent.fetchData(this.props.dispatch, this.props);
+  }
+
+  static fetchData(dispatch, props) {
+    const { courseCode, schoolCode } = props;
+    return fetch(`/getCourseExams/${schoolCode}/${courseCode}`)
+      .then((response) => response.json())
+      .then((json) => dispatch({ type: 'UPDATE_COURSE_EXAMS', exams: json }));
   }
 
   render() {
     const { courseCode, schoolCode } = this.props;
-    const available = map(this.state.exams, (exam, key) => {
+    const available = map(this.props.exams, (exam, key) => {
       const typeCode = exam.type_code;
       const typeLabel = exam.type_label;
       const termCode = exam.term_code;
@@ -62,7 +66,7 @@ class CourseComponent extends Component {
         </div>
         <hr className="s4" />
         <div className="center">
-        {!!this.state.exams || <p className="loader">Loading exams...</p>}
+        {!!this.props.exams || <p className="loader">Loading exams...</p>}
         <div className="table-container-container">
         <div className="table-container">
         <table className="exams center">
@@ -79,7 +83,7 @@ class CourseComponent extends Component {
         {available}
         </tbody>
         </table>
-        {!!this.state.exams || <p>Loading exams...</p>}
+        {!!this.props.exams || <p>Loading exams...</p>}
         </div>
         </div>
         </div>
@@ -193,7 +197,7 @@ const mapStateToProps = (state, ownProps) => {
     auth: state.auth,
     courseCode: ownProps.match.params.courseCode,
     schoolCode: ownProps.match.params.schoolCode,
-    exams: state.exams.multi_dict,
+    exams: state.courseExams,
     labels: state.labels,
   }
 };
@@ -203,6 +207,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     showLoginModal: () => dispatch(showLoginModal()),
     showWaitlistModal: () => dispatch(showWaitlistModal()),
+    dispatch,
   };
 };
 

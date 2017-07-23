@@ -1,8 +1,18 @@
 import AuthService from '../utils/AuthService';
+import * as Actions from '../actions';
 
 export const exams = (state = { key_dict: {}, multi_dict: {} }, action) => {
   switch (action.type) {
-    case 'UPDATE_EXAM_LIST':
+    case Actions.UPDATE_EXAM_LIST:
+      return action.exams;
+    default:
+      return state;
+  }
+};
+
+export const courseExams = (state = [], action) => {
+  switch (action.type) {
+    case Actions.UPDATE_COURSE_EXAMS:
       return action.exams;
     default:
       return state;
@@ -11,7 +21,7 @@ export const exams = (state = { key_dict: {}, multi_dict: {} }, action) => {
 
 export const schools = (state = [], action) => {
   switch (action.type) {
-    case 'UPDATE_SCHOOL_LIST':
+    case Actions.UPDATE_SCHOOL_LIST:
       return action.schools;
     default:
       return state;
@@ -20,7 +30,7 @@ export const schools = (state = [], action) => {
 
 export const courses = (state = [], action) => {
   switch (action.type) {
-    case 'UPDATE_COURSE_LIST':
+    case Actions.UPDATE_COURSE_LIST:
       return action.courses;
     default:
       return state;
@@ -37,7 +47,7 @@ export const auth = (state = authState, action) => {
 
 export const exam_types = (state = [], action) => {
   switch (action.type) {
-    case 'UPDATE_EXAM_TYPES_LIST':
+    case Actions.UPDATE_EXAM_TYPES_LIST:
       return action.exam_types;
     default:
       return state;
@@ -46,7 +56,7 @@ export const exam_types = (state = [], action) => {
 
 export const terms = (state = [], action) => {
   switch (action.type) {
-    case 'UPDATE_TERM_LIST':
+    case Actions.UPDATE_TERM_LIST:
       return action.terms;
     default:
       return state;
@@ -55,7 +65,7 @@ export const terms = (state = [], action) => {
 
 export const labels = (state = {}, action) => {
   switch (action.type) {
-    case 'UPDATE_LABELS':
+    case Actions.UPDATE_LABELS:
       return action.labels;
     default:
       return state;
@@ -64,15 +74,15 @@ export const labels = (state = {}, action) => {
 
 export const modal = (state = { type: null, errorText: null }, action) => {
   switch (action.type) {
-    case 'SHOW_LOGIN_MODAL':
+    case Actions.SHOW_LOGIN_MODAL:
       return { type: 'login', errorText: null };
-    case 'SHOW_SIGNUP_MODAL':
+    case Actions.SHOW_SIGNUP_MODAL:
       return { type: 'signup', errorText: null };
-    case 'SHOW_FORGOT_PASSWORD_MODAL':
+    case Actions.SHOW_FORGOT_PASSWORD_MODAL:
       return { type: 'forgotpassword', errorText: null };
-    case 'CLOSE_MODAL':
+    case Actions.CLOSE_MODAL:
       return { type: null, errorText: null };
-    case 'SET_MODAL_ERROR':
+    case Actions.SET_MODAL_ERROR:
       return { type: state.type, errorText: action.errorText };
     default:
       return state;

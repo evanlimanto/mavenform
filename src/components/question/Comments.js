@@ -20,7 +20,7 @@ class CommentsComponent extends Component {
     this.addComment = this.addComment.bind(this);
     this.getCommentDivs = this.getCommentDivs.bind(this);
     this.processComments = this.processComments.bind(this);
-    this.toggleComment = this.toggleComment.bind(this);
+    this.deleteComment = this.deleteComment.bind(this);
     this.updateComment = this.updateComment.bind(this);
 
     const profile = this.props.auth.getProfile();
@@ -38,15 +38,11 @@ class CommentsComponent extends Component {
         .then((json) => this.processComments(json));
   }
 
-  toggleComment(commentid, will_delete) {
+  deleteComment(commentid) {
     const newTree = cloneDeep(this.state.commentsTree);
-    newTree[commentid].deleted = will_delete;
+    newTree[commentid].deleted = true;
     this.setState({ commentsTree: newTree });
-    if (will_delete) {
-      fetch(`/deleteComment/${commentid}`);
-    } else {
-      fetch(`/undeleteComment/${commentid}`);
-    }
+    fetch(`/deleteComment/${commentid}`);
   }
 
   processComments(json) {
@@ -192,7 +188,7 @@ class CommentsComponent extends Component {
         <div className="comment-header">{comment.nickname}</div>
         <div className="comment-upvotes">{comment.upvotes}</div>
         <hr className="s0-5" />
-        <div className="comment-content" id={"comment-" + commentid} dangerouslySetInnerHTML={{ __html: replaceLinks(comment.content) }} />
+        <div className="comment-content" id={"comment-" + commentid} dangerouslySetInnerHTML={{ __html: comment.deleted ? "[DELETED]" : replaceLinks(comment.content) }} />
         <div className="poster-container hidden" id={"updatebox-" + commentid}>
           <textarea className="comment-input" ref={"updatecomment-" + commentid}>{comment.content}</textarea>
           <button className="comment-button" onClick={() => this.updateComment(commentid)}>Update</button>
@@ -200,7 +196,7 @@ class CommentsComponent extends Component {
         <hr className="s1" />
         <div className="comment-actions" id={"actions-" + commentid}>
           <a onClick={() => this.showReplyBox(commentid)}>Reply</a>
-          {(comment.nickname !== this.nickname) || (comment.deleted ? (<span> · <a onClick={() => this.toggleComment(commentid, false)}>Undelete</a></span>) : (<span> · <a onClick={() => this.toggleComment(commentid, true)}>Delete</a></span>))}
+          {comment.deleted || (<span> · <a onClick={() => this.deleteComment(commentid)}>Delete</a></span>)}
           {(comment.nickname !== this.nickname) || (<span> · <a onClick={() => this.showEditCommentBox(commentid)}>Edit</a></span>)}
         </div>
         <div className="poster-container hidden" id={"commentbox-" + commentid}>
