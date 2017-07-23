@@ -1,6 +1,5 @@
 const async = require('async');
 const express = require('express');
-const router = express.Router();
 const pg = require('pg');
 const _ = require('lodash');
 const url = require('url');
@@ -105,7 +104,7 @@ const getLabels = (callback) => {
       dict[row.code] = row.name; 
       return dict;
     }, {});
-    return res.json({ schools: items  });
+    return callback(null, { schools: items });
   });
 };
 
@@ -113,7 +112,7 @@ const getLabels = (callback) => {
 const getInitial = (req, res, next) => {
   async.parallel([
     getExams,
-    getSchoos,
+    getSchools,
     getExamTypes,
     getTerms,
     getLabels,
@@ -424,46 +423,46 @@ const getMathContent =
     });
   };
 
-// Retrieve initial data
-router.get('/getInitial', getInitial);
+module.exports = (app) => {
+  // Retrieve initial data
+  app.get('/getInitial', getInitial);
 
-// Retrieve list of subjects
-router.get('/getSubjects', getSubjects);
+  // Retrieve list of subjects
+  app.get('/getSubjects', getSubjects);
 
-// Retrieve list of transcribed exams
-router.get('/getTranscribedExams', getTranscribedExams);
+  // Retrieve list of transcribed exams
+  app.get('/getTranscribedExams', getTranscribedExams);
 
-// Retrieve information for a transcribed exam
-router.get('/getTranscribedExam/:examid', getTranscribedExam);
+  // Retrieve information for a transcribed exam
+  app.get('/getTranscribedExam/:examid', getTranscribedExam);
 
-// Retrieve courses grouped by school
-router.get('/getCoursesBySchool', getCoursesBySchool);
+  // Retrieve courses grouped by school
+  app.get('/getCoursesBySchool', getCoursesBySchool);
 
-// Retrieve list of transcribed content
-router.get('/getTranscribedContent/:examid', getTranscribedContent);
+  // Retrieve list of transcribed content
+  app.get('/getTranscribedContent/:examid', getTranscribedContent);
 
-// Retrive dict of transcribed content
-router.get('/getTranscribedContentDict', getTranscribedContentDict);
+  // Retrive dict of transcribed content
+  app.get('/getTranscribedContentDict', getTranscribedContentDict);
 
-// Retrieve dictionary of courses with subjects
-router.get('/getSchoolCourses/:schoolCode', getSchoolCourses);
+  // Retrieve dictionary of courses with subjects
+  app.get('/getSchoolCourses/:schoolCode', getSchoolCourses);
 
-// Retrieve dictionary of courses with subjects
-router.get('/getSchoolCoursesList/:schoolid', getSchoolCoursesList);
+  // Retrieve dictionary of courses with subjects
+  app.get('/getSchoolCoursesList/:schoolid', getSchoolCoursesList);
 
-// Retrieve list of exams
-router.get('/getCourseExams/:schoolCode/:courseCode', getCourseExams);
+  // Retrieve list of exams
+  app.get('/getCourseExams/:schoolCode/:courseCode', getCourseExams);
 
-// Retrieve list of labels
-router.get('/getLabels', getLabels);
+  // Retrieve list of labels
+  app.get('/getLabels', getLabels);
 
-// Retrieve information for an exam
-router.get('/getExamInfo/:schoolCode/:courseCode/:examTypeCode/:termCode', getExamInfo);
+  // Retrieve information for an exam
+  app.get('/getExamInfo/:schoolCode/:courseCode/:examTypeCode/:termCode', getExamInfo);
 
-// Retrieve list of math topics
-router.get('/getMathTopics', getMathTopics);
+  // Retrieve list of math topics
+  app.get('/getMathTopics', getMathTopics);
 
-// Retrieve math content by topic
-router.get('/getMathContent/:topic', getMathContent);
-
-module.exports = router;
+  // Retrieve math content by topic
+  app.get('/getMathContent/:topic', getMathContent);
+}

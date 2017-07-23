@@ -4,33 +4,24 @@ import { connect } from 'react-redux';
 import { has, map } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 
-import { showLoginModal, showWaitlistModal } from '../../actions';
-import { courseCodeToLabel } from '../../utils';
+import { showLoginModal, showWaitlistModal, UPDATE_COURSE_EXAMS } from '../../actions';
+import { courseCodeToLabel, BASE_URL } from '../../utils';
 import { examClickEvent } from '../../events';
 import Footer from '../footer';
 import { Modals } from '../modal';
 import Navbar from '../navbar';
 
 class CourseComponent extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      modalError: null,
-      modal: null,
-      mathTopics: null,
-    };
-  }
-
   componentDidMount() {
     CourseComponent.fetchData(this.props.dispatch, this.props);
   }
 
   static fetchData(dispatch, props) {
     const { courseCode, schoolCode } = props;
-    return fetch(`/getCourseExams/${schoolCode}/${courseCode}`)
+    console.log("fetchCourse");
+    return fetch(`${BASE_URL}/getCourseExams/${schoolCode}/${courseCode}`)
       .then((response) => response.json())
-      .then((json) => dispatch({ type: 'UPDATE_COURSE_EXAMS', exams: json }));
+      .then((json) => dispatch({ type: UPDATE_COURSE_EXAMS, exams: json }));
   }
 
   render() {
@@ -194,20 +185,17 @@ class CourseComponent extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    auth: state.auth,
-    courseCode: ownProps.match.params.courseCode,
-    schoolCode: ownProps.match.params.schoolCode,
+    courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
+    schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
     exams: state.courseExams,
     labels: state.labels,
   }
 };
 
-
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     showLoginModal: () => dispatch(showLoginModal()),
     showWaitlistModal: () => dispatch(showWaitlistModal()),
-    dispatch,
   };
 };
 

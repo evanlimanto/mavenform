@@ -1,6 +1,7 @@
+export const UPDATE_INITIAL_STATE = 'UPDATE_INITIAL_STATE';
 export const updateInitialState = (data) => {
   return {
-    type: 'UPDATE_INITIAL_STATE',
+    type: UPDATE_INITIAL_STATE,
     data: data
   }
 };
@@ -11,6 +12,14 @@ export const updateCourseExams = (exams) => {
     type: UPDATE_COURSE_EXAMS,
     exams: exams,
   };
+};
+
+export const UPDATE_SCHOOL_COURSES = 'UPDATE_SCHOOL_COURSES';
+export const updateSchoolCourses = (courses) => {
+  return {
+    type: UPDATE_SCHOOL_COURSES,
+    courses: courses,
+  }
 };
 
 export const SHOW_LOGIN_MODAL = 'SHOW_LOGIN_MODAL';

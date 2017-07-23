@@ -3,8 +3,44 @@ import * as Actions from '../actions';
 
 export const exams = (state = { key_dict: {}, multi_dict: {} }, action) => {
   switch (action.type) {
-    case 'UPDATE_INITIAL_STATE':
+    case Actions.UPDATE_INITIAL_STATE:
       return action.data.exams;
+    default:
+      return state;
+  }
+};
+
+export const schools = (state = [], action) => {
+  switch (action.type) {
+    case Actions.UPDATE_INITIAL_STATE:
+      return action.data.schools;
+    default:
+      return state;
+  }
+};
+
+export const exam_types = (state = [], action) => {
+  switch (action.type) {
+    case Actions.UPDATE_INITIAL_STATE:
+      return action.data.exam_types;
+    default:
+      return state;
+  }
+};
+
+export const terms = (state = [], action) => {
+  switch (action.type) {
+    case Actions.UPDATE_INITIAL_STATE:
+      return action.data.terms;
+    default:
+      return state;
+  }
+};
+
+export const labels = (state = {}, action) => {
+  switch (action.type) {
+    case Actions.UPDATE_INITIAL_STATE:
+      return action.data.labels;
     default:
       return state;
   }
@@ -19,37 +55,10 @@ export const courseExams = (state = [], action) => {
   }
 };
 
-export const schools = (state = [], action) => {
+export const schoolCourses = (state = [], action) => {
   switch (action.type) {
-    case 'UPDATE_INITIAL_STATE':
-      return action.data.schools;
-    default:
-      return state;
-  }
-};
-
-export const exam_types = (state = [], action) => {
-  switch (action.type) {
-    case 'UPDATE_INITIAL_STATE':
-      return action.data.exam_types;
-    default:
-      return state;
-  }
-};
-
-export const terms = (state = [], action) => {
-  switch (action.type) {
-    case 'UPDATE_INITIAL_STATE':
-      return action.data.terms;
-    default:
-      return state;
-  }
-};
-
-export const labels = (state = {}, action) => {
-  switch (action.type) {
-    case 'UPDATE_INITIAL_STATE':
-      return action.data.labels;
+    case Actions.UPDATE_SCHOOL_COURSES:
+      return action.courses;
     default:
       return state;
   }

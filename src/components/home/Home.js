@@ -115,8 +115,8 @@ class HomeComponent extends Component {
             <hr className="s2" />
             <h5 className="h5-alt">Find past exams and practice problems to solve and discuss online</h5>
             <hr className="s5" />
-						<div className="search-container">
-							<div className="material-icons search-icon">search</div>
+            <div className="search-container">
+              <div className="material-icons search-icon">search</div>
               <input className="search" name="search" ref="search" placeholder="Search for your course here (e.g. CS 61A, Math 1B, Econ 100)." type="text" autoComplete="off" onChange={this.getSuggestions} />
             </div>
             {searchResults}
