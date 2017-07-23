@@ -40,7 +40,7 @@ const React = require('react');
 const { renderToString } = require('react-dom/server');
 const { Provider } = require('react-redux');
 const { Routes } = require('../src/components');
-const { StaticRouter } = require('react-router');
+const { matchPath, StaticRouter } = require('react-router');
 const { default: configureStore } = require('../src/utils/configureStore');
 
 app.use('/', (req, res) => {
@@ -52,6 +52,8 @@ app.use('/', (req, res) => {
       return res.status(404).end()
     }
 
+    const match = matchPath(req.url);
+
     const context = {};
     const store = configureStore();
     const markup = renderToString(
@@ -61,7 +63,6 @@ app.use('/', (req, res) => {
         </StaticRouter>
       </Provider>
     );
-    console.log(req.url, context, markup);
     if (context.url) {
       // Somewhere a <Redirect> was rendered
       redirect(301, context.url)

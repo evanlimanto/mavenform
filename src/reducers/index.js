@@ -1,9 +1,19 @@
 import AuthService from '../utils/AuthService';
+import * as Actions from '../actions';
 
 export const exams = (state = { key_dict: {}, multi_dict: {} }, action) => {
   switch (action.type) {
     case 'UPDATE_INITIAL_STATE':
       return action.data.exams;
+    default:
+      return state;
+  }
+};
+
+export const courseExams = (state = [], action) => {
+  switch (action.type) {
+    case Actions.UPDATE_COURSE_EXAMS:
+      return action.exams;
     default:
       return state;
   }
@@ -16,7 +26,7 @@ export const schools = (state = [], action) => {
     default:
       return state;
   }
-};j5
+};
 
 export const exam_types = (state = [], action) => {
   switch (action.type) {
@@ -47,15 +57,15 @@ export const labels = (state = {}, action) => {
 
 export const modal = (state = { type: null, errorText: null }, action) => {
   switch (action.type) {
-    case 'SHOW_LOGIN_MODAL':
+    case Actions.SHOW_LOGIN_MODAL:
       return { type: 'login', errorText: null };
-    case 'SHOW_SIGNUP_MODAL':
+    case Actions.SHOW_SIGNUP_MODAL:
       return { type: 'signup', errorText: null };
-    case 'SHOW_FORGOT_PASSWORD_MODAL':
+    case Actions.SHOW_FORGOT_PASSWORD_MODAL:
       return { type: 'forgotpassword', errorText: null };
-    case 'CLOSE_MODAL':
+    case Actions.CLOSE_MODAL:
       return { type: null, errorText: null };
-    case 'SET_MODAL_ERROR':
+    case Actions.SET_MODAL_ERROR:
       return { type: state.type, errorText: action.errorText };
     default:
       return state;

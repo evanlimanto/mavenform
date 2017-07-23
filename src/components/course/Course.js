@@ -16,7 +16,6 @@ class CourseComponent extends Component {
     super(props);
 
     this.state = {
-      exams: null,
       modalError: null,
       modal: null,
       mathTopics: null,
@@ -24,15 +23,19 @@ class CourseComponent extends Component {
   }
 
   componentDidMount() {
-    const { courseCode, schoolCode } = this.props;
-    fetch(`/getCourseExams/${schoolCode}/${courseCode}`).then(
-      (response) => response.json()
-    ).then((json) => this.setState({ exams: json }));
+    CourseComponent.fetchData(this.props.dispatch, this.props);
+  }
+
+  static fetchData(dispatch, props) {
+    const { courseCode, schoolCode } = props;
+    return fetch(`/getCourseExams/${schoolCode}/${courseCode}`)
+      .then((response) => response.json())
+      .then((json) => dispatch({ type: 'UPDATE_COURSE_EXAMS', exams: json }));
   }
 
   render() {
     const { courseCode, schoolCode } = this.props;
-    const available = map(this.state.exams, (exam, key) => {
+    const available = map(this.props.exams, (exam, key) => {
       const typeCode = exam.type_code;
       const typeLabel = exam.type_label;
       const termCode = exam.term_code;
@@ -63,7 +66,7 @@ class CourseComponent extends Component {
         </div>
         <hr className="s4" />
         <div className="center">
-        {!!this.state.exams || <p className="loader">Loading exams...</p>}
+        {!!this.props.exams || <p className="loader">Loading exams...</p>}
         <div className="table-container-container">
         <div className="table-container">
         <table className="exams center">
@@ -80,7 +83,7 @@ class CourseComponent extends Component {
         {available}
         </tbody>
         </table>
-        {!!this.state.exams || <p>Loading exams...</p>}
+        {!!this.props.exams || <p>Loading exams...</p>}
         </div>
         </div>
         </div>
@@ -88,7 +91,7 @@ class CourseComponent extends Component {
     );
 
     let topicsContent = ( <hr className="s8" /> ), mathTopics = null;
-    if ((schoolCode === 'ucsd' && (courseCode === 'MATH10A' || courseCode === 'MATH20C' || courseCode === 'MATH20D') || (courseCode === 'MATH18')) ||
+    if ((schoolCode === 'ucsd' && (courseCode === 'MATH10A' || courseCode === 'MATH20C' || courseCode === 'MATH20D') || (courseCode === 'MATH18') || (courseCode === 'MATH102')) ||
         (schoolCode === 'ucb' && (courseCode === 'MATH53' || courseCode === 'MATH1A'))) {
       if (courseCode === 'MATH10A') {
         mathTopics = [
@@ -143,7 +146,18 @@ class CourseComponent extends Component {
           { concept: 'Vector Equations', code: 'vectoreqns' },
           { concept: 'Introduction to Linear Transformations', code: 'introtolineartransformations' },
         ];
+      } else if (courseCode === 'MATH102') {
+        mathTopics = [
+          { concept: 'Systems of Linear Equations', code: 'systemsoflineareqns' },
+          { concept: 'Introduction to Linear Transformations', code: 'introtolineartransformations' },
+          { concept: 'Eigenvectors and Eigenvalues', code: 'eigenvectorsandeigenvalues' },
+          { concept: 'Diagonalization', code: 'diagonalization' },
+          { concept: 'Orthogonal Sets', code: 'orthogonalsets' },
+          { concept: 'Homogenous Linear Equations', code: 'homogenouslineareqns'},
+          { concept: 'First-Order Equations', code: 'firstordereqns' },
+        ];
       }
+
       const topicCards = map(mathTopics, (topic) => {
         return (
           <Link key={topic.code} className="card topic-card" to={"/" + schoolCode + "/" + courseCode + "/" + topic.code}>
@@ -183,7 +197,7 @@ const mapStateToProps = (state, ownProps) => {
     auth: state.auth,
     courseCode: ownProps.match.params.courseCode,
     schoolCode: ownProps.match.params.schoolCode,
-    exams: state.exams.multi_dict,
+    exams: state.courseExams,
     labels: state.labels,
   }
 };
@@ -193,6 +207,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     showLoginModal: () => dispatch(showLoginModal()),
     showWaitlistModal: () => dispatch(showWaitlistModal()),
+    dispatch,
   };
 };
 
