@@ -1,3 +1,4 @@
+const async = require('async');
 const express = require('express');
 const router = express.Router();
 const pg = require('pg');
@@ -20,80 +21,114 @@ const config = {
 };
 const pool = new pg.Pool(config);
 
-const getExams =
-  (req, res, next) => {
-    const q = `
-      select E.id as id, C.code as courseid, ET.type_code as examtype, T.term_code as examid, E.profs as profs from exams E
-      inner join courses C on C.id = E.courseid
-      inner join exam_types ET on E.examtype = ET.id
-      inner join terms T on E.examid = T.id
-    `;
-    pool.query(q, (err, result) => {
-      if (err) return next(err);
-      const multi_dict = _.reduce(result.rows, (dict, row) => {
-        const id = row.id;
-        const courseid = row.courseid;
-        const examtype = row.examtype;
-        const examid = row.examid;
-        const profs = row.profs;
-        if (!_.has(dict, courseid)) {
-          dict[courseid] = {};
-        }
-        if (!_.has(dict[courseid], examtype)) {
-          dict[courseid][examtype] = {};
-        }
-        dict[courseid][examtype][examid] = { id, profs };
-        return dict;
-      }, {});
-      const key_dict = _.reduce(result.rows, (dict, row) => {
-        const id = row.id;
-        const courseid = row.courseid;
-        const examtype = row.examtype;
-        const examid = row.examid;
-        const profs = row.profs;
-        dict[id] = { courseid, examtype, examid, profs };
-        return dict;
-      }, {});
+const getExams = (callback) => {
+  const q = `
+    select E.id as id, C.code as courseid, ET.type_code as examtype, T.term_code as examid, E.profs as profs from exams E
+    inner join courses C on C.id = E.courseid
+    inner join exam_types ET on E.examtype = ET.id
+    inner join terms T on E.examid = T.id
+  `;
+  pool.query(q, (err, result) => {
+    if (err)
+      return callback(err);
+    const multi_dict = _.reduce(result.rows, (dict, row) => {
+      const id = row.id;
+      const courseid = row.courseid;
+      const examtype = row.examtype;
+      const examid = row.examid;
+      const profs = row.profs;
+      if (!_.has(dict, courseid)) {
+        dict[courseid] = {};
+      }
+      if (!_.has(dict[courseid], examtype)) {
+        dict[courseid][examtype] = {};
+      }
+      dict[courseid][examtype][examid] = { id, profs };
+      return dict;
+    }, {});
+    const key_dict = _.reduce(result.rows, (dict, row) => {
+      const id = row.id;
+      const courseid = row.courseid;
+      const examtype = row.examtype;
+      const examid = row.examid;
+      const profs = row.profs;
+      dict[id] = { courseid, examtype, examid, profs };
+      return dict;
+    }, {});
 
-      return res.json({ multi_dict, key_dict });
-    });
-  };
+    return callback(null, { multi_dict, key_dict });
+  });
+};
 
-const getSchools =
-  (req, res, next) => {
-    const q = 'select id, code, name from schools';
-    pool.query(q, (err, result) =>{
-      if (err) return next(err);
-      const items = _.map(result.rows, function(row) {
-        return { id: row.id, code: row.code, name: row.name };
-      });
-      return res.json(items);
+const getSchools = (callback) => {
+  const q = 'select id, code, name from schools';
+  pool.query(q, (err, result) =>{
+    if (err)
+      return callback(err);
+    const items = _.map(result.rows, function(row) {
+      return { id: row.id, code: row.code, name: row.name };
     });
-  };
+    return callback(null, items);
+  });
+};
 
-const getExamTypes =
-  (req, res, next) => {
-    const q = 'select id, type_code, type_label from exam_types';
-    pool.query(q, (err, result) => {
-      if (err) return next(err);
-      const items = _.map(result.rows, function(row) {
-        return { id: row.id, type_code: row.type_code, type_label: row.type_label };
-      });
-      return res.json(items);
+const getExamTypes = (callback) => {
+  const q = 'select id, type_code, type_label from exam_types';
+  pool.query(q, (err, result) => {
+    if (err)
+      return callback(err);
+    const items = _.map(result.rows, function(row) {
+      return { id: row.id, type_code: row.type_code, type_label: row.type_label };
     });
-  };
+    return callback(null, items);
+  });
+};
 
-const getTerms =
-  (req, res, next) => {
-    const q = 'select id, term_code, term_label from terms';
-    pool.query(q, (err, result) => {
-      if (err) return next(err);
-      const items = _.map(result.rows, function(row) {
-        return { id: row.id, term_code: row.term_code, term_label: row.term_label };
-      });
-      return res.json(items);
+const getTerms = (callback) => {
+  const q = 'select id, term_code, term_label from terms';
+  pool.query(q, (err, result) => {
+    if (err)
+      callback(err);
+    const items = _.map(result.rows, function(row) {
+      return { id: row.id, term_code: row.term_code, term_label: row.term_label };
     });
-  };
+    return callback(null, items);
+  });
+};
+
+const getLabels = (callback) => {
+  const q = `select code, name from schools`;
+  pool.query(q, (err, result) => {
+    if (err)
+      return callback(err);
+    const items = _.reduce(result.rows, (dict, row) => {
+      dict[row.code] = row.name; 
+      return dict;
+    }, {});
+    return res.json({ schools: items  });
+  });
+};
+
+// Combine all initial data into one single response
+const getInitial = (req, res, next) => {
+  async.parallel([
+    getExams,
+    getSchoos,
+    getExamTypes,
+    getTerms,
+    getLabels,
+  ], (err, results) => {
+    if (err)
+      return next(err);
+    return res.json({
+      exams: results[0],
+      schools: results[1],
+      exam_types: results[2],
+      terms: results[3],
+      labels: results[4],
+    });
+  })
+};
 
 const getTranscribedExams =
   (req, res, next) => {
@@ -262,23 +297,6 @@ const getSchoolCoursesList =
     });
   };
 
-const getUnbookmarkedCourses =
-  (req, res, next) => {
-    const school_id = req.params.school_id;
-    const auth_user_id = req.params.auth_user_id;
-    const q = `
-      select id, code from courses where id not in
-      (select courseid from bookmarked_courses BC inner join users on BC.userid = users.id where users.auth_user_id = $1) and schoolid = $2;
-    `;
-    pool.query(q, [auth_user_id, school_id], (err, result) => {
-      if (err) return next(err);
-      const items = _.map(result.rows, (row) => {
-        return { id: row.id, code: row.code };
-      });
-      return res.json(items);
-    });
-  };
-
 const getCourseExams =
   (req, res, next) => {
     const { courseCode, schoolCode } = req.params;
@@ -309,19 +327,6 @@ const getCourseExams =
     });
   };
 
-const getLabels =
-  (req, res, next) => {
-    const q = `select code, name from schools`;
-    pool.query(q, (err, result) => {
-      if (err) return next(err);
-      const items = _.reduce(result.rows, (dict, row) => {
-        dict[row.code] = row.name; 
-        return dict;
-      }, {});
-      return res.json({ schools: items  });
-    });
-  };
-
 const getExamInfo =
   (req, res, next) => {
     const { schoolCode, courseCode, examTypeCode, termCode } = req.params;
@@ -338,27 +343,6 @@ const getExamInfo =
       if (result.rows.length === 0)
         return res.json({ profs: null, source_url: null });
       return res.json({ profs: result.rows[0].profs, source_url: result.rows[0].source_url});
-    });
-  };
-
-const getCoursesList =
-  (req, res, next) => {
-    const q = `
-      select courses.id as course_id, courses.code as course_code,
-        schools.id as school_id, schools.name as school_name from courses
-      inner join schools on courses.schoolid = schools.id
-    `;
-    pool.query(q, (err, result) => {
-      if (err) return next(err);
-      const items = _.map(result.rows, (item) => {
-        return {
-          course_id: item.course_id,
-          course_code: item.course_code,
-          school_id: item.school_id,
-          school_name: item.school_name,
-        };
-      });
-      return res.json(items);
     });
   };
 
@@ -440,17 +424,8 @@ const getMathContent =
     });
   };
 
-// Retrieve list of exams
-router.get('/getExams', getExams);
-
-// Retrieve list of schools
-router.get('/getSchools', getSchools);
-
-// Retrieve list of exam types
-router.get('/getExamTypes', getExamTypes);
-
-// Retrieve list of terms
-router.get('/getTerms', getTerms);
+// Retrieve initial data
+router.get('/getInitial', getInitial);
 
 // Retrieve list of subjects
 router.get('/getSubjects', getSubjects);
@@ -476,9 +451,6 @@ router.get('/getSchoolCourses/:schoolCode', getSchoolCourses);
 // Retrieve dictionary of courses with subjects
 router.get('/getSchoolCoursesList/:schoolid', getSchoolCoursesList);
 
-// Retrieve list of courses that are not bookmarked
-router.get('/getUnbookmarkedCourses/:school_id/:auth_user_id', getUnbookmarkedCourses);
-
 // Retrieve list of exams
 router.get('/getCourseExams/:schoolCode/:courseCode', getCourseExams);
 
@@ -487,9 +459,6 @@ router.get('/getLabels', getLabels);
 
 // Retrieve information for an exam
 router.get('/getExamInfo/:schoolCode/:courseCode/:examTypeCode/:termCode', getExamInfo);
-
-// Retrieve list of courses
-router.get('/getCoursesList', getCoursesList);
 
 // Retrieve list of math topics
 router.get('/getMathTopics', getMathTopics);

@@ -1,4 +1,5 @@
-import React, { Component } from 'react'; import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { has, map } from 'lodash';
 import DocumentMeta from 'react-document-meta';
@@ -40,11 +41,11 @@ class CourseComponent extends Component {
       const url = `/${schoolCode}/${courseCode}/${typeCode}/${termCode}`;
       return (
         <tr key={key} className="available" onClick={() => examClickEvent(schoolCode, courseCode, typeCode, termCode)}>
-        <td><Link to={url}>{typeLabel}</Link></td>
-        <td><Link to={url}>{termLabel}</Link></td>
-        <td><Link to={url}>{profs}</Link></td>
-        <td><Link to={url}>{exam.solutions_available ? ( <span className="available">Available</span> ) : ( <span className="unavailable">Unavailable</span> )}</Link></td>
-        <td><h6><Link to={url} className="table-link">CLICK TO VIEW &#8594;</Link></h6></td>
+          <td><Link to={url}>{typeLabel}</Link></td>
+          <td><Link to={url}>{termLabel}</Link></td>
+          <td><Link to={url}>{profs}</Link></td>
+          <td><Link to={url}>{exam.solutions_available ? ( <span className="available">Available</span> ) : ( <span className="unavailable">Unavailable</span> )}</Link></td>
+          <td><h6><Link to={url} className="table-link">CLICK TO VIEW &#8594;</Link></h6></td>
         </tr>
       );
     });

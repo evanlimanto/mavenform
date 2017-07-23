@@ -1,36 +1,8 @@
-export const updateExamList = (exams) => {
+export const updateInitialState = (data) => {
   return {
-    type: 'UPDATE_EXAM_LIST',
-    exams: exams,
-  };
-};
-
-export const updateSchoolList = (schools) => {
-  return {
-    type: 'UPDATE_SCHOOL_LIST',
-    schools: schools,
-  };
-};
-
-export const updateExamTypesList = (exam_types) => {
-  return {
-    type: 'UPDATE_EXAM_TYPES_LIST',
-    exam_types: exam_types
-  };
-};
-
-export const updateTermList = (terms) => {
-  return {
-    type: 'UPDATE_TERM_LIST',
-    terms: terms
-  };
-};
-
-export const updateLabels = (labels) => {
-  return {
-    type: 'UPDATE_LABELS',
-    labels: labels,
-  };
+    type: 'UPDATE_INITIAL_STATE',
+    data: data
+  }
 };
 
 export const showLoginModal = () => { return { type: 'SHOW_LOGIN_MODAL' }; };

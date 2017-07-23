@@ -61,28 +61,6 @@ router.post('/uploadImage', (req, res) => {
   return ws.end();
 });
 
-// Search substring in problems
-router.get('/searchProblems/:query_str', (req, res, next) => {
-  const query_str = req.params.query_str;
-  const q = `select * from content where problem like '%${query_str}%' or solution like '%${query_str}%'`;
-  config.pool.query(q, (err, result) => {
-    if (err)
-      return next(err);
-    return res.json(result.rows);
-  });
-});
-
-// Search tags
-router.get('/searchTags/:tag', (req, res, next) => {
-  const query_str = req.params.query_tag;
-  const q = `select * from content where `;
-  config.pool.query(q, (err, result) => {
-    if (err)
-      return next(err);
-    return res.json(result.rows);
-  });
-});
-
 // Retrieve course listing
 router.get('/getCourses/:schoolid', (req, res, next) => {
   const schoolid = req.params.schoolid;
