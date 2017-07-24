@@ -28,7 +28,7 @@ class MathContentComponent extends Component {
   componentDidUpdate() {
     window.renderMJ();
   }
-  
+
   render() {
     const meta = {
       description: `Interactive and course-specific study resources for Mathematics`,

@@ -7,7 +7,7 @@ import * as appReducers from '../reducers';
 import { BASE_URL } from '../utils';
 
 function initStore(store) {
-  fetch(`${BASE_URL}/getInitial`)
+  return fetch(`${BASE_URL}/getInitial`)
     .then((response) => response.json())
     .then((json) => store.dispatch(updateInitialState(json)))
 }
@@ -21,8 +21,7 @@ function configureStore() {
     }),
     applyMiddleware(middleware)
   );
-  initStore(store);
   return store;
 }
 
-export default configureStore;
+export { configureStore, initStore };

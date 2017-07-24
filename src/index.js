@@ -8,7 +8,7 @@ import createHistory from 'history/createBrowserHistory';
 
 import routes from './routes';
 import initializeTracking from './tracking';
-import configureStore from './utils/configureStore';
+import { configureStore, initStore } from './utils/configureStore';
 import { ReactGA } from './events';
 
 import './css/General.css';
@@ -35,7 +35,8 @@ history.listen((location, action) => {
   ReactGA.pageview(location.pathname);
 })
 
-const store = configureStore(); // TODO: make this sync
+const store = configureStore();
+initStore(store); // async
 initializeTracking();
 
 ReactDOM.render((

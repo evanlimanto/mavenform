@@ -4,7 +4,7 @@ import DocumentMeta from 'react-document-meta';
 import { has, map, range } from 'lodash';
 
 import { updateExamInfo } from '../../actions';
-import { BASE_URL, courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
+import { BASE_URL, canUseDOM, courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
 import { Question, MultipleChoiceQuestion } from '../question';
 import Footer from '../footer';
 import Navbar from '../navbar';
@@ -19,6 +19,11 @@ class ExamComponent extends Component {
     return fetch(`${BASE_URL}/getExamInfo/${schoolCode}/${courseCode}/${examType}/${termCode}`)
       .then((response) => response.json())
       .then((json) => dispatch(updateExamInfo(json)));
+  }
+
+  componentDidUpdate() {
+    if (canUseDOM)
+      window.renderMJ();
   }
 
   render() {

@@ -38,7 +38,7 @@ const { renderToString } = require('react-dom/server');
 const { Provider } = require('react-redux');
 const { default: routes } = require('../src/routes');
 const { matchPath, StaticRouter } = require('react-router');
-const { default: configureStore } = require('../src/utils/configureStore');
+const { configureStore, initStore } = require('../src/utils/configureStore');
 
 app.use('/', (req, res) => {
   console.log(req.url);
@@ -50,44 +50,44 @@ app.use('/', (req, res) => {
     }
 
     const store = configureStore();
-    const matches = [];
+    initStore(store).then(() => {
+      const matches = [];
+      routes.some((route) => {
+        const match = matchPath(req.url, { path: route.path, exact: route.exact });
+        if (match) {
+          console.log(match);
+          matches.push({
+            component: route.component,
+            params: match.params,
+            fetchData: () => (
+              route.component.fetchData ?
+              route.component.fetchData(store.dispatch, match.params) :
+              new Promise((resolve, reject) => resolve(null))
+            )
+          });
+        }
+        return match;
+      });
 
-    routes.some((route) => {
-      const match = matchPath(req.url, { path: route.path, exact: route.exact });
-      if (match) {
-        console.log(match);
-        matches.push({
-          component: route.component,
-          params: match.params,
-          fetchData: () => (
-            route.component.fetchData ?
-            route.component.fetchData(store.dispatch, match.params) :
-            new Promise((resolve, reject) => resolve(null))
-          )
-        });
-      }
-      return match;
-    });
-
-    console.log(matches[0]);
-    const Component = matches[0].component;
-    matches[0].fetchData().then(() => {
-      const context = {};
-      const markup = renderToString(
-        <Provider store={store}>
-          <StaticRouter context={context} url={req.url}>
-            <Component {...matches[0].params} />
-          </StaticRouter>
-        </Provider>
-      );
-      if (context.url) {
-        // Somewhere a <Redirect> was rendered
-        redirect(301, context.url)
-      } else {
-        // We're good, send a response
-        const RenderedApp = htmlData.replace('{{SSR}}', markup)
-        res.send(RenderedApp)
-      }
+      const Component = matches[0].component;
+      matches[0].fetchData().then(() => {
+        const context = {};
+        const markup = renderToString(
+          <Provider store={store}>
+            <StaticRouter context={context} url={req.url}>
+              <Component {...matches[0].params} />
+            </StaticRouter>
+          </Provider>
+        );
+        if (context.url) {
+          // Somewhere a <Redirect> was rendered
+          redirect(301, context.url)
+        } else {
+          // We're good, send a response
+          const RenderedApp = htmlData.replace('{{SSR}}', markup)
+          res.send(RenderedApp)
+        }
+      });
     });
   });
 });
