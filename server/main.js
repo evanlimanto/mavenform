@@ -1,31 +1,31 @@
 'use strict';
 
-require('ignore-styles')
+require('ignore-styles');
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
-const bodyParser = require('body-parser');
-const compression = require('compression');
-const fileUpload = require('express-fileupload')
-const fs = require('fs');
-const morgan = require('morgan');
-const path = require('path');
-const express = require('express');
-const _ = require('lodash');
+var bodyParser = require('body-parser');
+var compression = require('compression');
+var fileUpload = require('express-fileupload');
+var fs = require('fs');
+var morgan = require('morgan');
+var path = require('path');
+var express = require('express');
+var _ = require('lodash');
 
 require('babel-register')({
   ignore: /\/(build|node_modules)\//,
   presets: ['env', 'react-app']
-})
+});
 
-const app = express();
+var app = express();
 
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
-app.use(morgan('combined'))
+app.use(morgan('combined'));
 
 app.use('/img', express.static(path.join(__dirname, '../src/img')));
 app.use('/static', express.static(path.join(__dirname, '../build/static')));
@@ -33,63 +33,80 @@ app.use('/static', express.static(path.join(__dirname, '../build/static')));
 require('./paths')(app);
 require('./retrieveLists')(app);
 
-const React = require('react');
-const { renderToString } = require('react-dom/server');
-const { Provider } = require('react-redux');
-const { default: routes } = require('../src/routes');
-const { matchPath, StaticRouter } = require('react-router');
-const { configureStore, initStore } = require('../src/utils/configureStore');
+var React = require('react');
 
-app.use('/', (req, res) => {
+var _require = require('react-dom/server'),
+    renderToString = _require.renderToString;
+
+var _require2 = require('react-redux'),
+    Provider = _require2.Provider;
+
+var _require3 = require('../src/routes'),
+    routes = _require3.default;
+
+var _require4 = require('react-router'),
+    matchPath = _require4.matchPath,
+    StaticRouter = _require4.StaticRouter;
+
+var _require5 = require('../src/utils/configureStore'),
+    configureStore = _require5.configureStore,
+    initStore = _require5.initStore;
+
+app.use('/', function (req, res) {
   console.log(req.url);
-  const filePath = path.resolve(__dirname, '..', 'build', 'index.html')
-  fs.readFile(filePath, 'utf8', (err, htmlData) => {
+  var filePath = path.resolve(__dirname, '..', 'build', 'index.html');
+  fs.readFile(filePath, 'utf8', function (err, htmlData) {
     if (err) {
-      console.error('read err', err)
-      return res.status(404).end()
+      console.error('read err', err);
+      return res.status(404).end();
     }
 
-    const store = configureStore();
-    initStore(store).then(() => {
-      const matches = [];
-      routes.some((route) => {
-        const match = matchPath(req.url, { path: route.path, exact: route.exact });
+    var store = configureStore();
+    initStore(store).then(function () {
+      var matches = [];
+      routes.some(function (route) {
+        var match = matchPath(req.url, { path: route.path, exact: route.exact });
         if (match) {
           console.log(match);
           matches.push({
             component: route.component,
             params: match.params,
-            fetchData: () => (
-              route.component.fetchData ?
-              route.component.fetchData(store.dispatch, match.params) :
-              new Promise((resolve, reject) => resolve(null))
-            )
+            fetchData: function fetchData() {
+              return route.component.fetchData ? route.component.fetchData(store.dispatch, match.params) : new Promise(function (resolve, reject) {
+                return resolve(null);
+              });
+            }
           });
         }
         return match;
       });
 
-      const Component = matches[0].component;
-      matches[0].fetchData().then(() => {
-        const context = {};
-        const markup = renderToString(
-          <Provider store={store}>
-            <StaticRouter context={context} url={req.url}>
-              <Component {...matches[0].params} />
-            </StaticRouter>
-          </Provider>
-        );
+      var Component = matches[0].component;
+      matches[0].fetchData().then(function () {
+        var context = {};
+        var markup = renderToString(React.createElement(
+          Provider,
+          { store: store },
+          React.createElement(
+            StaticRouter,
+            { context: context, url: req.url },
+            React.createElement(Component, matches[0].params)
+          )
+        ));
         if (context.url) {
           // Somewhere a <Redirect> was rendered
-          redirect(301, context.url)
+          redirect(301, context.url);
         } else {
           // We're good, send a response
-          const RenderedApp = htmlData.replace('{{SSR}}', markup)
-          res.send(RenderedApp)
+          var RenderedApp = htmlData.replace('{{SSR}}', markup);
+          res.send(RenderedApp);
         }
       });
     });
   });
 });
 
-app.listen(process.env.PORT || 8080, () => console.log('Started server on port', process.env.PORT || 8080));
+app.listen(process.env.PORT || 8080, function () {
+  return console.log('Started server on port', process.env.PORT || 8080);
+});
+

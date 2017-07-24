@@ -119,12 +119,12 @@
     "webpack-manifest-plugin": "1.1.0",
     "whatwg-fetch": "2.0.3"
   },
-  "main": "main.js",
+  "main": "server/main.js",
   "proxy": "http://localhost:8080",
   "scripts": {
     "magic": "concurrently \"npm run start\" \"npm run watch\"",
-    "server": "npm run build&&babel-node server/main.js",
-    "start": "babel-node server/main.js",
+    "server": "npm run build && node server/main.js",
+    "start": "node server/main.js",
     "watch": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
