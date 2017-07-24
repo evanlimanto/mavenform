@@ -38,5 +38,5 @@ const config = {
 const pool = new pg.Pool(config);
 
 module.exports = {
-  mg_api_key, mg_domain, marketingBucket, stagingBucket, bucket, pool
+  mg_options, mg_api_key, mg_domain, marketingBucket, stagingBucket, bucket, pool
 }

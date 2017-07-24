@@ -8,12 +8,6 @@ export const canUseDOM = !!(
   window.document.createElement
 );
 
-export function parseAuthHash(auth, location) {
-  if (/access_token|id_token|error/.test(location.hash)) {
-    auth.parseHash(location.hash);
-  }
-}
-
 export function requireAuth(auth, history) {
   if (!auth.loggedIn()) {
     history.goBack();

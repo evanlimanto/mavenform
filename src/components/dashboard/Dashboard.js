@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { map } from 'lodash';
 import dateFormat from 'dateformat';
-import canUseDOM from '../../utils';
+import { canUseDOM } from '../../utils';
 
 import DashboardLogin from './DashboardLogin';
 const cookies = canUseDOM ? require('browser-cookies') : null;
-
 
 require('../../css/Dashboard.css');
 

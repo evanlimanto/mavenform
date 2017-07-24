@@ -4,7 +4,11 @@ import { connect } from 'react-redux'
 class LoginComponent extends React.Component {
   componentWillMount() {
     const { auth, location } = this.props;
-    this.props.parseAuthHash(auth, location);
+    if (!location)
+      return;
+    if (/access_token|id_token|error/.test(location.hash)) {
+      auth.parseHash(location.hash);
+    }
   }
 
   render() {

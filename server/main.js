@@ -53,7 +53,6 @@ var _require5 = require('../src/utils/configureStore'),
     initStore = _require5.initStore;
 
 app.use('/', function (req, res) {
-  console.log(req.url);
   var filePath = path.resolve(__dirname, '..', 'build', 'index.html');
   fs.readFile(filePath, 'utf8', function (err, htmlData) {
     if (err) {
@@ -67,7 +66,6 @@ app.use('/', function (req, res) {
       routes.some(function (route) {
         var match = matchPath(req.url, { path: route.path, exact: route.exact });
         if (match) {
-          console.log(match);
           matches.push({
             component: route.component,
             params: match.params,
