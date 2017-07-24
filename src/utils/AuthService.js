@@ -108,12 +108,16 @@ export default class AuthService {
   }
 
   setToken(accessToken, idToken) {
+    if (!canUseDOM)
+      return;
     // Saves user access token and ID token into local storage
     localStorage.setItem('access_token', accessToken)
     localStorage.setItem('id_token', idToken)
   }
 
   setProfile(profile) {
+    if (!canUseDOM)
+      return;
     // Saves profile data to localStorage
     localStorage.setItem('profile', JSON.stringify(profile))
     // Triggers profile_updated event to update the UI
@@ -121,6 +125,8 @@ export default class AuthService {
   }
 
   getProfile() {
+    if (!canUseDOM)
+      return;
     // Retrieves the profile data from localStorage
     const profile = localStorage.getItem('profile')
     return profile ? JSON.parse(localStorage.profile) : null;
@@ -131,10 +137,14 @@ export default class AuthService {
   }
 
   getAccessToken() {
+    if (!canUseDOM)
+      return;
     return localStorage.getItem('access_token')
   }
 
   getToken() {
+    if (!canUseDOM)
+      return;
     // Retrieves the user token from localStorage
     return localStorage.getItem('id_token')
   }
@@ -147,6 +157,8 @@ export default class AuthService {
   }
 
   logout() {
+    if (!canUseDOM)
+      return;
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token')
     localStorage.removeItem('profile')

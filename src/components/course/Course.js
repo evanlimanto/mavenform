@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { has, map } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 
-import { showLoginModal, showWaitlistModal, UPDATE_COURSE_EXAMS } from '../../actions';
+import { showLoginModal, showWaitlistModal, updateCourseExams } from '../../actions';
 import { courseCodeToLabel, BASE_URL } from '../../utils';
 import { examClickEvent } from '../../events';
 import Footer from '../footer';
@@ -18,10 +18,9 @@ class CourseComponent extends Component {
 
   static fetchData(dispatch, props) {
     const { courseCode, schoolCode } = props;
-    console.log("fetchCourse");
     return fetch(`${BASE_URL}/getCourseExams/${schoolCode}/${courseCode}`)
       .then((response) => response.json())
-      .then((json) => dispatch({ type: UPDATE_COURSE_EXAMS, exams: json }));
+      .then((json) => dispatch(updateCourseExams(json)));
   }
 
   render() {
@@ -196,6 +195,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     showLoginModal: () => dispatch(showLoginModal()),
     showWaitlistModal: () => dispatch(showWaitlistModal()),
+    dispatch
   };
 };
 

@@ -1,45 +1,80 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
-import { has } from 'lodash';
+import { has, map, range } from 'lodash';
 
-import { courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
-import ExamContent from './ExamContent';
+import { updateExamInfo } from '../../actions';
+import { BASE_URL, courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
+import { Question, MultipleChoiceQuestion } from '../question';
 import Footer from '../footer';
 import Navbar from '../navbar';
 
 class ExamComponent extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      profs: null,
-      source_url: null,
-    };
+  componentDidMount() {
+    ExamComponent.fetchData(this.props.dispatch, this.props);
   }
 
-  componentDidMount() {
-    const { schoolCode, courseCode, examType, termCode } = this.props;
-    fetch(`/getExamInfo/${schoolCode}/${courseCode}/${examType}/${termCode}`).then(
-      (response) => response.json()
-    ).then((json) => this.setState({ profs: json.profs, source_url: json.source_url }));
+  static fetchData(dispatch, props) {
+    const { schoolCode, courseCode, examType, termCode } = props;
+    return fetch(`${BASE_URL}/getExamInfo/${schoolCode}/${courseCode}/${examType}/${termCode}`)
+      .then((response) => response.json())
+      .then((json) => dispatch(updateExamInfo(json)));
   }
 
   render() {
     const { schoolCode, courseCode, examType, termCode } = this.props;
-    const profs = this.state.profs;
+    const examInfo = this.props.examInfo;
     const schoolLabel = (this.props.labels && has(this.props.labels.schools, schoolCode)) ? this.props.labels.schools[schoolCode]: null;
     const meta = {
       description: `Review past exam problems and solutions for the ${courseCodeToLabel(courseCode)} ${termToLabel(termCode)} ${examTypeToLabel(examType)} from ${schoolLabel}.`,
       title: `${courseCodeToLabel(courseCode)} ${termToLabel(termCode)} ${examTypeToLabel(examType)} - ${schoolLabel} - Studyform`,
     };
 
-    const content = <ExamContent schoolCode={schoolCode} courseCode={courseCode} examTypeCode={examType} termCode={termCode} profs={profs} />
+    const examContent = (!examInfo) ? (<p className="loader">Loading content...</p>) :
+      map(this.props.examInfo.info, (num_parts, part) => {
+        const subparts = map(range(1, num_parts + 1), subpart => {
+          const key = `${part}_${subpart}`;
+          if (!has(examInfo.problems, key)) {
+            console.warn(`${key} doesn't exist in exam!`);
+            return null;
+          }
+          const content = examInfo.problems[key].problem || '';
+          const solution = examInfo.problems[key].solution || '';
+          const choices = examInfo.problems[key].choices || '';
+          const content_id = examInfo.problems[key].content_id;
+          const props = {
+            content_id, courseCode, schoolCode, content, solution, termCode, examType, choices,
+            id: part + "_" + subpart,
+            solutionNum: solution
+          }
+          if (choices && choices.length > 0) {
+            return <MultipleChoiceQuestion key={key} {...props} />
+          }
+          return <Question key={key} {...props} />
+        });
+
+        return <span key={part} className="element">{subparts}</span>;
+      });
+
+    const examDesc = (
+      <div id="header-text">
+        <div className="center">
+          <h4>{courseCodeToLabel(courseCode)}</h4>
+          <h5>{examTypeToLabel(examType)} | {termToLabel(termCode)} {!examInfo.profs || "| " + examInfo.profs}</h5>
+        </div>
+      </div>
+    );
+
     return (
       <div>
         <DocumentMeta {...meta} />
-        <Navbar exam={true} schoolCode={schoolCode} courseCode={courseCode} examTypeCode={examType} termCode={termCode} source_url={this.state.source_url} />
-        {content}
+        <Navbar exam={true} schoolCode={schoolCode} courseCode={courseCode} examType={examType} termCode={termCode} source_url={this.props.examInfo.source_url} />
+        <div>
+          {examDesc}
+          <div className="content">
+            {examContent}
+          </div>
+        </div>
         <Footer />
       </div>
     );
@@ -49,17 +84,22 @@ class ExamComponent extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     auth: state.auth,
-    history: ownProps.history,
-    schoolCode: ownProps.match.params.schoolCode,
-    courseCode: ownProps.match.params.courseCode,
-    examType: ownProps.match.params.examType,
-    termCode: ownProps.match.params.termCode,
+    schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
+    courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
+    examType: ownProps.examType || ownProps.match.params.examType,
+    termCode: ownProps.termCode || ownProps.match.params.termCode,
     labels: state.labels,
+    examInfo: state.examInfo,
   };
 };
 
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return { dispatch };
+}
+
 const Exam = connect(
   mapStateToProps,
+  mapDispatchToProps,
 )(ExamComponent);
 
 export default Exam;

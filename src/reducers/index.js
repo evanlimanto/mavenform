@@ -64,6 +64,24 @@ export const schoolCourses = (state = [], action) => {
   }
 };
 
+export const examInfo = (state = {}, action) => {
+  switch (action.type) {
+    case Actions.UPDATE_EXAM_INFO:
+      return action.info;
+    default:
+      return state;
+  }
+};
+
+export const examContent = (state = null, action) => {
+  switch (action.type) {
+    case Actions.UPDATE_EXAM_CONTENT:
+      return action.examContent;
+    default:
+      return state;
+  }
+};
+
 export const modal = (state = { type: null, errorText: null }, action) => {
   switch (action.type) {
     case Actions.SHOW_LOGIN_MODAL:

@@ -7,7 +7,7 @@ import DocumentMeta from 'react-document-meta';
 import Footer from '../footer';
 import Navbar from '../navbar';
 import NotFound from '../notfound';
-import { UPDATE_SCHOOL_COURSES } from '../../actions';
+import { updateSchoolCourses } from '../../actions';
 import { courseClickEvent } from '../../events';
 import { BASE_URL } from '../../utils';
 
@@ -24,15 +24,9 @@ class SchoolComponent extends Component {
 
   static fetchData(dispatch, props) {
     const { schoolCode } = props;
-    console.log("fetchSchool");
     return fetch(`${BASE_URL}/getSchoolCourses/${schoolCode}`)
       .then((response) => response.json())
-      .then((json) =>
-        dispatch({
-          type: UPDATE_SCHOOL_COURSES,
-          courses: json,
-        })
-      );
+      .then((json) => dispatch(updateSchoolCourses(json)));
   }
 
   getCourseItems() {
@@ -107,8 +101,13 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return { dispatch };
+}
+
 const School = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps,
 )(SchoolComponent);
 
 export default School;

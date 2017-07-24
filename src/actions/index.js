@@ -22,6 +22,22 @@ export const updateSchoolCourses = (courses) => {
   }
 };
 
+export const UPDATE_EXAM_INFO = 'UPDATE_EXAM_INFO';
+export const updateExamInfo = (info) => {
+  return {
+    type: UPDATE_EXAM_INFO,
+    info: info,
+  }
+};
+
+export const UPDATE_EXAM_CONTENT = 'UPDATE_EXAM_CONTENT';
+export const updateExamContent = (examContent) => {
+  return {
+    type: UPDATE_EXAM_CONTENT,
+    examContent: examContent,
+  };
+};
+
 export const SHOW_LOGIN_MODAL = 'SHOW_LOGIN_MODAL';
 export const showLoginModal = () => { return { type: SHOW_LOGIN_MODAL }; };
 export const SHOW_WAITLIST_MODAL = 'SHOW_WAITLIST_MODAL';

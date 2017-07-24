@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { has, range, map } from 'lodash';
 
+import { updateExamContent } from '../../actions';
 import { Question, MultipleChoiceQuestion } from '../question';
-import { courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
+import { BASE_URL, courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
 
-class ExamContent extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      examContent: null
-    };
+class ExamContentComponent extends Component {
+  componentDidMount() {
+    ExamContentComponent.fetchData(this.props.dispatch, this.props);
   }
 
-  componentDidMount() {
-    const { schoolCode, courseCode, examTypeCode, termCode } = this.props;
-    fetch(`/getExam/${schoolCode}/${courseCode}/${examTypeCode}/${termCode}`).then(
-      (response) => response.json()
-    ).then(
-      (json) => this.setState({ examContent: json })
-    )
+  static fetchData(dispatch, props) {
+    const { schoolCode, courseCode, examTypeCode, termCode } = props;
+    return fetch(`${BASE_URL}/getExam/${schoolCode}/${courseCode}/${examTypeCode}/${termCode}`)
+      .then((response) => response.json())
+      .then((json) => dispatch(updateExamContent(json)));
   }
 
   componentDidUpdate() {
@@ -28,7 +24,7 @@ class ExamContent extends Component {
 
   render() {
     const { schoolCode, courseCode, examTypeCode, termCode, profs } = this.props;
-    const examContent = this.state.examContent;
+    const examContent = this.props.examContent;
     const content = (!examContent) ? (<p className="loader">Loading content...</p>) :
       map(examContent.info, (num_parts, part) => {
         const subparts = map(range(1, num_parts + 1), subpart => {
@@ -69,5 +65,20 @@ class ExamContent extends Component {
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    examContent: state.examContent,
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return { dispatch };
+};
+
+const ExamContent = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ExamContentComponent);
 
 export default ExamContent;

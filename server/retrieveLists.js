@@ -329,19 +329,45 @@ const getCourseExams =
 const getExamInfo =
   (req, res, next) => {
     const { schoolCode, courseCode, examTypeCode, termCode } = req.params;
-    const getidq = `
-      select E.profs, E.source_url from exams E
+    const getq = `
+      select E.id, E.profs, E.source_url from exams E
       inner join courses C on C.id = E.courseid
       inner join exam_types ET on ET.id = E.examtype
       inner join terms T on T.id = E.examid
       inner join schools S on S.id = E.schoolid
       where S.code = $1 and T.term_code = $2 and ET.type_code = $3 and C.code = $4;
     `;
-    pool.query(getidq, [schoolCode, termCode, examTypeCode, courseCode], (err, result) => {
+    const getcontentq = `
+      select id as content_id, problem_num, subproblem_num, problem, solution, choices from content where exam = $1
+    `;
+    pool.query(getq, [schoolCode, termCode, examTypeCode, courseCode], (err, result) => {
       if (err) return next(err);
       if (result.rows.length === 0)
-        return res.json({ profs: null, source_url: null });
-      return res.json({ profs: result.rows[0].profs, source_url: result.rows[0].source_url});
+        return res.json({});
+      const { id, profs, source_url } = result.rows[0];
+      pool.query(getcontentq, [id], (err, result) => {
+        const info = _.reduce(result.rows, (result, row) => {
+          const problem_num = row.problem_num;
+          const subproblem_num = row.subproblem_num;
+          if (_.has(result, problem_num)) {
+            result[problem_num] = Math.max(result[problem_num], subproblem_num);
+          } else {
+            result[problem_num] = subproblem_num;
+          }
+          return result;
+        }, {});
+
+        const problems = _.reduce(result.rows, (result, row) => {
+          let { content_id, problem_num, subproblem_num, problem, solution, choices } = row;
+          problem = renderer.preprocess(row.problem);
+          solution = renderer.preprocess(row.solution);
+          const key = `${problem_num}_${subproblem_num}`;
+          result[key] = { problem, solution, choices, content_id };
+          return result;
+        }, {});
+
+        return res.json({ id, info, problems, profs, source_url });
+      });
     });
   };
 
