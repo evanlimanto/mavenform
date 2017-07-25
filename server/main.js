@@ -7,6 +7,7 @@ require('isomorphic-fetch');
 
 var bodyParser = require('body-parser');
 var compression = require('compression');
+var cors = require('cors');
 var fileUpload = require('express-fileupload');
 var fs = require('fs');
 var morgan = require('morgan');
@@ -22,6 +23,7 @@ require('babel-register')({
 var app = express();
 
 app.use(compression());
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());

@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'; import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { has, map } from 'lodash';
+import { has, map, replace } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 
 import { showLoginModal, showWaitlistModal, updateCourseExams } from '../../actions';
@@ -30,8 +29,8 @@ class CourseComponent extends Component {
       const typeLabel = exam.type_label;
       const termCode = exam.term_code;
       const termLabel = exam.term_label;
-      const profs = exam.profs;
-      const url = `/${schoolCode}/${courseCode}/${typeCode}/${termCode}`;
+      const profs = exam.profs, regexp = /, /g;
+      const url = `/${schoolCode}/${courseCode}/${typeCode}/${termCode}/${replace(profs, regexp, '-')}`;
       return (
         <tr key={key} className="available" onClick={() => examClickEvent(schoolCode, courseCode, typeCode, termCode)}>
           <td><Link to={url}>{typeLabel}</Link></td>

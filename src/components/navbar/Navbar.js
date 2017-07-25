@@ -90,10 +90,10 @@ class NavbarComponent extends Component {
           <Modals />
           <div className="container">
             <Link to="/" className="desktop-logo">
-              <img className="logo home-logo" src="/img/logo.svg" alt="home logo" />
+              <img className="logo home-logo" src="/img/logo.svg" alt="Studyform Logo" />
             </Link>
             <Link to="/" className="mobile-logo">
-              <img className="logo home-logo" src="/img/icon.svg" alt="home logo" />
+              <img className="logo home-logo" src="/img/icon.svg" alt="Studyform Logo" />
             </Link>
             {(isLoggedIn) ? (
               <span>
@@ -174,8 +174,8 @@ class NavbarComponent extends Component {
         <Modals />
         <div className="nav">
           <div className="container">
-            <Link className="desktop-logo" to="/"><img className="logo" src="/img/logo.svg" alt="logo" /></Link>
-            <Link className="mobile-logo" to="/"><img className="logo" src="/img/icon.svg" alt="logo" /></Link>
+            <Link className="desktop-logo" to="/"><img className="logo" src="/img/logo.svg" alt="Studyform Logo" /></Link>
+            <Link className="mobile-logo" to="/"><img className="logo" src="/img/icon.svg" alt="Studyform Logo" /></Link>
             <div className="material-icons nav-icon">search</div>
             <div className="nav-search-container">
               <input className="nav-search" name="search" placeholder="Search courses..." type="text" autoComplete="off" onChange={this.getSuggestions} ref="search" />

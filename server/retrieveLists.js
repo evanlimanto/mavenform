@@ -328,23 +328,23 @@ const getCourseExams =
 
 const getExamInfo =
   (req, res, next) => {
-    const { schoolCode, courseCode, examTypeCode, termCode } = req.params;
+    const { schoolCode, courseCode, examTypeCode, termCode, profs } = req.params;
     const getq = `
-      select E.id, E.profs, E.source_url from exams E
+      select E.id, E.source_url from exams E
       inner join courses C on C.id = E.courseid
       inner join exam_types ET on ET.id = E.examtype
       inner join terms T on T.id = E.examid
       inner join schools S on S.id = E.schoolid
-      where S.code = $1 and T.term_code = $2 and ET.type_code = $3 and C.code = $4;
+      where S.code = $1 and T.term_code = $2 and ET.type_code = $3 and C.code = $4 and E.profs = $5
     `;
     const getcontentq = `
       select id as content_id, problem_num, subproblem_num, problem, solution, choices from content where exam = $1
     `;
-    pool.query(getq, [schoolCode, termCode, examTypeCode, courseCode], (err, result) => {
+    pool.query(getq, [schoolCode, termCode, examTypeCode, courseCode, profs], (err, result) => {
       if (err) return next(err);
       if (result.rows.length === 0)
         return res.json({});
-      const { id, profs, source_url } = result.rows[0];
+      const { id, source_url } = result.rows[0];
       pool.query(getcontentq, [id], (err, result) => {
         const info = _.reduce(result.rows, (result, row) => {
           const problem_num = row.problem_num;
@@ -484,7 +484,7 @@ module.exports = (app) => {
   app.get('/getLabels', getLabels);
 
   // Retrieve information for an exam
-  app.get('/getExamInfo/:schoolCode/:courseCode/:examTypeCode/:termCode', getExamInfo);
+  app.get('/getExamInfo/:schoolCode/:courseCode/:examTypeCode/:termCode/:profs', getExamInfo);
 
   // Retrieve list of math topics
   app.get('/getMathTopics', getMathTopics);

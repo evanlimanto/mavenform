@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { reduce, keys, has, map, sortBy, toInteger, takeRight } from 'lodash';
+import { keys, has, map, sortBy, toInteger, takeRight } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 
 import Footer from '../footer';

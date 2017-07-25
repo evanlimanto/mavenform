@@ -33,7 +33,7 @@ const routes = [
   { path: '/math/:topic', component: MathContent },
   { path: '/math', component: Math },
   { path: '/home', component: UserHome },
-  { path: '/:schoolCode/:courseCode/:examType/:termCode', component: Exam },
+  { path: '/:schoolCode/:courseCode/:examType/:termCode/:profs', component: Exam },
   { path: '/:schoolCode/:courseCode/:topic', component: MathContent },
   { path: '/:schoolCode/:courseCode', component: Course },
   { path: '/:schoolCode', component: School },

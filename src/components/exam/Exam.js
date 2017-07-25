@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
-import { has, map, range } from 'lodash';
+import { has, map, range, replace } from 'lodash';
 
 import { updateExamInfo } from '../../actions';
 import { BASE_URL, canUseDOM, courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
@@ -15,8 +15,9 @@ class ExamComponent extends Component {
   }
 
   static fetchData(dispatch, props) {
-    const { schoolCode, courseCode, examType, termCode } = props;
-    return fetch(`${BASE_URL}/getExamInfo/${schoolCode}/${courseCode}/${examType}/${termCode}`)
+    const { schoolCode, courseCode, examType, termCode, profs } = props;
+    const regexp = /-/g;
+    return fetch(`${BASE_URL}/getExamInfo/${schoolCode}/${courseCode}/${examType}/${termCode}/${replace(profs, regexp, ', ')}`)
       .then((response) => response.json())
       .then((json) => dispatch(updateExamInfo(json)));
   }
@@ -27,7 +28,7 @@ class ExamComponent extends Component {
   }
 
   render() {
-    const { schoolCode, courseCode, examType, termCode } = this.props;
+    const { schoolCode, courseCode, examType, termCode, profs } = this.props;
     const examInfo = this.props.examInfo;
     const schoolLabel = (this.props.labels && has(this.props.labels.schools, schoolCode)) ? this.props.labels.schools[schoolCode]: null;
     const meta = {
@@ -65,7 +66,7 @@ class ExamComponent extends Component {
       <div id="header-text">
         <div className="center">
           <h4>{courseCodeToLabel(courseCode)}</h4>
-          <h5>{examTypeToLabel(examType)} | {termToLabel(termCode)} {!examInfo.profs || "| " + examInfo.profs}</h5>
+          <h5>{examTypeToLabel(examType)} | {termToLabel(termCode)} {!profs || "| " + profs}</h5>
         </div>
       </div>
     );
@@ -93,6 +94,7 @@ const mapStateToProps = (state, ownProps) => {
     courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
     examType: ownProps.examType || ownProps.match.params.examType,
     termCode: ownProps.termCode || ownProps.match.params.termCode,
+    profs: replace(ownProps.profs || ownProps.match.params.profs, /-/g, ', '),
     labels: state.labels,
     examInfo: state.examInfo,
   };
