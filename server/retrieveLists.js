@@ -498,6 +498,17 @@ const getTopicInfo =
     });
   };
 
+const getCourseTopics =
+  (req, res, next) => {
+    const getq = `
+      select T.topic, T.concept, T.code from topics T
+      inner join course_topics CT on CT.topicid = T.id
+      inner join courses C on CT.courseid = C.id
+      inner join schools S on C.schoolid = S.id
+      where S.code = $1 and C.code = $2
+    `;
+  };
+
 module.exports = (app) => {
   // Retrieve initial data
   app.get('/getInitial', getInitial);
@@ -543,4 +554,7 @@ module.exports = (app) => {
 
   // Retrieve content by topic
   app.get('/getTopicInfo/:code', getTopicInfo);
+
+  // Retrieve topics by course
+  app.get('/getCourseTopics/:schoolCode/:courseCode', getCourseTopics);
 }

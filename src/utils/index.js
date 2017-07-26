@@ -1,12 +1,12 @@
 import { join, split, reduce, toUpper } from 'lodash';
 
 export const ENV_IS_DEV = process.env.NODE_ENV === "development";
-export const BASE_URL = "http://localhost:8080"; //ENV_IS_DEV ? "http://localhost:8080" : "http://www.studyform.com"
 export const canUseDOM = !!(
   typeof window !== 'undefined' &&
   window.document &&
   window.document.createElement
 );
+export const BASE_URL = ENV_IS_DEV ? "http://localhost:8080" : (canUseDOM ? window.location.origin : null);
 
 export function requireAuth(auth, history) {
   if (!auth.loggedIn()) {
