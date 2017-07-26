@@ -10,7 +10,6 @@ import Upload from './components/upload';
 import School from './components/school';
 import { TopicContent } from './components/topic';
 import UserHome from './components/userhome';
-import Waitlisted from './components/waitlisted';
 
 const routes = [
   { path: '/', component: Home, exact: true },
@@ -25,7 +24,6 @@ const routes = [
   { path: '/dashboard/transcribed', component: Transcribed },
   { path: '/dashboard/transcribe', component: Transcribe },
   { path: '/dashboard', component: Dashboard },
-  { path: '/waitlisted', component: Waitlisted },
   { path: '/appsubmitted', component: AppSubmitted },
   { path: '/s3cr3tsignup', component: SecretSignup },
   { path: '/m4rk3t1ng4pp5', component: MarketingApps },

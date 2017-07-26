@@ -1,7 +1,8 @@
-import React, { Component } from 'react'; import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { has, map, replace } from 'lodash';
-import DocumentMeta from 'react-document-meta';
+import { map, replace } from 'lodash';
+import { Helmet } from 'react-helmet';
 
 import { showLoginModal, showWaitlistModal, updateCourseExams } from '../../actions';
 import { courseCodeToLabel, BASE_URL } from '../../utils';
@@ -20,6 +21,19 @@ class CourseComponent extends Component {
     return fetch(`${BASE_URL}/getCourseExams/${schoolCode}/${courseCode}`)
       .then((response) => response.json())
       .then((json) => dispatch(updateCourseExams(json)));
+  }
+
+  static getMeta(props) {
+    const { courseCode, schoolCode, labels } = props;
+    const title = ((labels.schools) ? `${labels.schools[schoolCode]} ${courseCodeToLabel(courseCode)} - Studyform` : "Studyform");
+    const description = `Study and discuss past exams and practice problems` +
+      ((labels.schools) ? ` for ${labels.schools[schoolCode]} ${courseCodeToLabel(courseCode)}.` : `.`);
+    return (
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+      </Helmet>
+    );
   }
 
   render() {
@@ -42,11 +56,6 @@ class CourseComponent extends Component {
       );
     });
 
-    const schoolLabel = (this.props.labels && has(this.props.labels.schools, schoolCode)) ? this.props.labels.schools[schoolCode]: null;
-    const meta = {
-      description: `Find interactive ${courseCodeToLabel(courseCode)} past midterms and finals from ${schoolLabel} here.`,
-      title: `${courseCodeToLabel(courseCode)} - ${schoolLabel} - Studyform`,
-    };
     const content = (
       <div>
         <h4 className="center">{courseCodeToLabel(courseCode)}</h4>
@@ -170,7 +179,7 @@ class CourseComponent extends Component {
 
     return (
       <div>
-      <DocumentMeta {...meta} />
+      {CourseComponent.getMeta(this.props)}
       <Navbar schoolCode={schoolCode} courseCode={courseCode} />
       <Modals />
       {content}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import DocumentMeta from 'react-document-meta';
+import { Helmet } from 'react-helmet';
 import { map, toUpper } from 'lodash';
 import Footer from '../footer';
 import Navbar from '../navbar';
@@ -12,19 +12,25 @@ const Scroll = require('react-scroll');
 const ScrollLink = Scroll.Link;
 const Element = Scroll.Element;
 
-const meta = {
-  description: 'The ultimate bank of interactive and course-specific study resources. Ace your courses with Studyform.',
-  title: 'Studyform',
-};
-
 class HomeComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       suggestions: [],
+      notificationBar: true,
     }
 
+    this.hideNotificationBar = this.hideNotificationBar.bind(this);
     this.getSuggestions = this.getSuggestions.bind(this);
+  }
+
+  static getMeta(props) {
+    return (
+      <Helmet>
+        <title>Studyform - Make Studying Easy</title>
+        <meta name="description" content="Find past exams and practice problems to solve and discuss online. Ace your courses with Studyform." />
+      </Helmet>
+    );
   }
 
   componentDidMount() {
@@ -39,6 +45,10 @@ class HomeComponent extends Component {
         this.setState({ suggestionsDropdownOn: false });
       }
     });
+  }
+
+  hideNotificationBar() {
+    this.setState({ notificationBar: false });
   }
 
   getSuggestions() {
@@ -93,7 +103,7 @@ class HomeComponent extends Component {
 
     return (
       <div className="home">
-        <DocumentMeta {...meta} />
+        {HomeComponent.getMeta()}
         <div className="banner">
           <Navbar home={true} />
           <div className="banner-img"></div>
