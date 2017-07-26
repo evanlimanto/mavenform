@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { applyMiddleware, createStore, combineReducers } from 'redux';
-import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
+import { ConnectedRouter } from 'react-router-redux';
 import { map } from 'lodash';
 import { Route, Switch } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 
-import * as appReducers from './reducers';
 import routes from './routes';
 import initializeTracking from './tracking';
-import { initStore } from './utils';
+import { configureStore, initStore } from './utils/configureStore';
 import { ReactGA } from './events';
 
 import './css/General.css';
@@ -37,17 +35,8 @@ history.listen((location, action) => {
   ReactGA.pageview(location.pathname);
 })
 
-const middleware = routerMiddleware(history)
-
-const store = createStore(
-  combineReducers({
-    ...appReducers,
-    router: routerReducer
-  }),
-  applyMiddleware(middleware)
-);
-
-initStore(store);
+const store = configureStore();
+initStore(store); // async
 initializeTracking();
 
 ReactDOM.render((

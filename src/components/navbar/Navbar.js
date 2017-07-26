@@ -14,7 +14,6 @@ class NavbarComponent extends Component {
       profileDropdownOn: false,
       suggestionsDropdownOn: false,
       suggestions: [],
-      math_label: null,
     };
 
     this.getSuggestions = this.getSuggestions.bind(this);
@@ -22,10 +21,6 @@ class NavbarComponent extends Component {
   }
 
   componentDidMount() {
-    if (this.props.topic)
-      fetch('/getMathLabel/' + this.props.topic)
-        .then((response) => response.json())
-        .then((json) => this.setState({ math_label: json.concept }));
     const self = this;
     window.addEventListener('click', (e) => {
       const logout = document.getElementsByClassName("logout");
@@ -90,10 +85,10 @@ class NavbarComponent extends Component {
           <Modals />
           <div className="container">
             <Link to="/" className="desktop-logo">
-              <img className="logo home-logo" src="/img/logo.svg" alt="home logo" />
+              <img className="logo home-logo" src="/img/logo.svg" alt="Studyform Logo" />
             </Link>
             <Link to="/" className="mobile-logo">
-              <img className="logo home-logo" src="/img/icon.svg" alt="home logo" />
+              <img className="logo home-logo" src="/img/icon.svg" alt="Studyform Logo" />
             </Link>
             {(isLoggedIn) ? (
               <span>
@@ -118,28 +113,14 @@ class NavbarComponent extends Component {
       return false;
     }
 
-    const { schoolCode, courseCode, examTypeCode, termCode, topic } = this.props;
+    const { schoolCode, courseCode, examTypeCode, termCode, topic, label } = this.props;
     const courseLabel = courseCodeToLabel(courseCode);
-    const schoolLabel = schoolCode === "math" ? "Math" : this.props.labels.schools[schoolCode];
+    const schoolLabel = this.props.labels.schools[schoolCode];
     const examTypeLabel = examTypeToLabel(examTypeCode);
     const termLabel = termToLabel(termCode); 
-    const mathTopicLabel = this.state.math_label;
-    const numLayers = !!schoolLabel + !!courseLabel + !!examTypeLabel + !!mathTopicLabel;
+    const numLayers = !!schoolLabel + !!courseLabel + !!examTypeLabel + !!label;
     let navbarNav = null;
-    if (this.props.math) {
-      navbarNav = [<Link key='home' to='/'>Home</Link>];
-      navbarNav.push(<span key='homeSpan'> > </span>);
-      navbarNav.push(<Link key='school' to={'/math'}>Math</Link>);
-      navbarNav.push(<span key='mathSpan'> > </span>);
-      navbarNav.push(<Link key='topic' to={'/math/' + topic} className="active">{this.props.label}</Link>);
-      navbarNav = (
-        <div className="gray-nav">
-          <div className="container">
-            {navbarNav}
-          </div>
-        </div>
-      );
-    } else if (!this.props.userHome) {
+    if (!this.props.userHome) {
       navbarNav = [<Link key='home' to='/' className={classnames({ active: numLayers === 0 })}>Home</Link>];
       if (schoolLabel) {
         navbarNav.push(<span key='homeSpan'> > </span>);
@@ -150,9 +131,9 @@ class NavbarComponent extends Component {
           if (examTypeLabel) {
             navbarNav.push(<span key='examSpan'> > </span>);
             navbarNav.push(<Link key='exam' to={'/' + schoolCode + '/' + courseCode + '/' + examTypeCode + '/' + termCode} className={classnames({ active: numLayers === 3 })}>{examTypeLabel} - {termLabel}</Link>);
-          } else if (this.state.math_label) {
+          } else if (label) {
             navbarNav.push(<span key='examSpan'> > </span>);
-            navbarNav.push(<Link key='exam' to={'/' + schoolCode + '/' + courseCode + '/' + topic} className={classnames({ active: numLayers === 3 })}>{this.state.math_label}</Link>);
+            navbarNav.push(<Link key='exam' to={'/' + schoolCode + '/' + courseCode + '/' + topic} className={classnames({ active: numLayers === 3 })}>{label}</Link>);
           }
         }
       }
@@ -174,8 +155,8 @@ class NavbarComponent extends Component {
         <Modals />
         <div className="nav">
           <div className="container">
-            <Link className="desktop-logo" to="/"><img className="logo" src="/img/logo.svg" alt="logo" /></Link>
-            <Link className="mobile-logo" to="/"><img className="logo" src="/img/icon.svg" alt="logo" /></Link>
+            <Link className="desktop-logo" to="/"><img className="logo" src="/img/logo.svg" alt="Studyform Logo" /></Link>
+            <Link className="mobile-logo" to="/"><img className="logo" src="/img/icon.svg" alt="Studyform Logo" /></Link>
             <div className="material-icons nav-icon">search</div>
             <div className="nav-search-container">
               <input className="nav-search" name="search" placeholder="Search courses..." type="text" autoComplete="off" onChange={this.getSuggestions} ref="search" />

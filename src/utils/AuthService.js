@@ -3,6 +3,7 @@ import auth0 from 'auth0-js'
 import { has } from 'lodash'
 
 import { evtEmitter } from './events'
+import { canUseDOM } from '../utils'
 const req = require('superagent');
 
 export default class AuthService {
@@ -12,7 +13,7 @@ export default class AuthService {
       clientID: '3SPCS4VBz4m9U3ftP37BdwoSm9r4obPN',
       domain: 'mavenform.auth0.com',
       responseType: 'token id_token',
-      redirectUri: ((process.env.NODE_ENV === 'development') ? 'http://localhost:3000/login' : 'http://www.studyform.com/login'),
+      redirectUri: canUseDOM ? window.location.origin + '/login' : null,
     })
 
     this.login = this.login.bind(this)
@@ -99,18 +100,24 @@ export default class AuthService {
   }
 
   loggedIn() {
+    if (!canUseDOM)
+      return false;
     // Checks if there is a saved token and it's still valid
     const token = this.getToken()
     return !!token && !isTokenExpired(token)
   }
 
   setToken(accessToken, idToken) {
+    if (!canUseDOM)
+      return;
     // Saves user access token and ID token into local storage
     localStorage.setItem('access_token', accessToken)
     localStorage.setItem('id_token', idToken)
   }
 
   setProfile(profile) {
+    if (!canUseDOM)
+      return;
     // Saves profile data to localStorage
     localStorage.setItem('profile', JSON.stringify(profile))
     // Triggers profile_updated event to update the UI
@@ -118,6 +125,8 @@ export default class AuthService {
   }
 
   getProfile() {
+    if (!canUseDOM)
+      return;
     // Retrieves the profile data from localStorage
     const profile = localStorage.getItem('profile')
     return profile ? JSON.parse(localStorage.profile) : null;
@@ -128,10 +137,14 @@ export default class AuthService {
   }
 
   getAccessToken() {
+    if (!canUseDOM)
+      return;
     return localStorage.getItem('access_token')
   }
 
   getToken() {
+    if (!canUseDOM)
+      return;
     // Retrieves the user token from localStorage
     return localStorage.getItem('id_token')
   }
@@ -144,6 +157,8 @@ export default class AuthService {
   }
 
   logout() {
+    if (!canUseDOM)
+      return;
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token')
     localStorage.removeItem('profile')

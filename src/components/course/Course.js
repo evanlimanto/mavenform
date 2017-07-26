@@ -1,36 +1,25 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'; import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { has, map } from 'lodash';
+import { has, map, replace } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 
-import { showLoginModal, showWaitlistModal } from '../../actions';
-import { courseCodeToLabel } from '../../utils';
+import { showLoginModal, showWaitlistModal, updateCourseExams } from '../../actions';
+import { courseCodeToLabel, BASE_URL } from '../../utils';
 import { examClickEvent } from '../../events';
 import Footer from '../footer';
 import { Modals } from '../modal';
 import Navbar from '../navbar';
 
 class CourseComponent extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      modalError: null,
-      modal: null,
-      mathTopics: null,
-    };
-  }
-
   componentDidMount() {
     CourseComponent.fetchData(this.props.dispatch, this.props);
   }
 
   static fetchData(dispatch, props) {
     const { courseCode, schoolCode } = props;
-    return fetch(`/getCourseExams/${schoolCode}/${courseCode}`)
+    return fetch(`${BASE_URL}/getCourseExams/${schoolCode}/${courseCode}`)
       .then((response) => response.json())
-      .then((json) => dispatch({ type: 'UPDATE_COURSE_EXAMS', exams: json }));
+      .then((json) => dispatch(updateCourseExams(json)));
   }
 
   render() {
@@ -40,15 +29,15 @@ class CourseComponent extends Component {
       const typeLabel = exam.type_label;
       const termCode = exam.term_code;
       const termLabel = exam.term_label;
-      const profs = exam.profs;
-      const url = `/${schoolCode}/${courseCode}/${typeCode}/${termCode}`;
+      const profs = exam.profs, regexp = /, /g;
+      const url = `/${schoolCode}/${courseCode}/${typeCode}/${termCode}/${replace(profs, regexp, '-')}`;
       return (
         <tr key={key} className="available" onClick={() => examClickEvent(schoolCode, courseCode, typeCode, termCode)}>
-        <td><Link to={url}>{typeLabel}</Link></td>
-        <td><Link to={url}>{termLabel}</Link></td>
-        <td><Link to={url}>{profs}</Link></td>
-        <td><Link to={url}>{exam.solutions_available ? ( <span className="available">Available</span> ) : ( <span className="unavailable">Unavailable</span> )}</Link></td>
-        <td><h6><Link to={url} className="table-link">CLICK TO VIEW &#8594;</Link></h6></td>
+          <td><Link to={url}>{typeLabel}</Link></td>
+          <td><Link to={url}>{termLabel}</Link></td>
+          <td><Link to={url}>{profs}</Link></td>
+          <td><Link to={url}>{exam.solutions_available ? ( <span className="available">Available</span> ) : ( <span className="unavailable">Unavailable</span> )}</Link></td>
+          <td><h6><Link to={url} className="table-link">CLICK TO VIEW &#8594;</Link></h6></td>
         </tr>
       );
     });
@@ -194,20 +183,18 @@ class CourseComponent extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    auth: state.auth,
-    courseCode: ownProps.match.params.courseCode,
-    schoolCode: ownProps.match.params.schoolCode,
+    courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
+    schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
     exams: state.courseExams,
     labels: state.labels,
   }
 };
 
-
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     showLoginModal: () => dispatch(showLoginModal()),
     showWaitlistModal: () => dispatch(showWaitlistModal()),
-    dispatch,
+    dispatch
   };
 };
 

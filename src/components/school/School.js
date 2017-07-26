@@ -1,46 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { reduce, keys, has, map, sortBy, toInteger, takeRight } from 'lodash';
+import { keys, has, map, sortBy, toInteger, takeRight } from 'lodash';
 import DocumentMeta from 'react-document-meta';
 
 import Footer from '../footer';
 import Navbar from '../navbar';
 import NotFound from '../notfound';
+import { updateSchoolCourses } from '../../actions';
 import { courseClickEvent } from '../../events';
+import { BASE_URL } from '../../utils';
 
 class SchoolComponent extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      courses: null
-    };
-
     this.getCourseItems = this.getCourseItems.bind(this);
   }
 
   componentDidMount() {
-    fetch(`/getSchoolCourses/${this.props.schoolCode}`)
+    SchoolComponent.fetchData(this.props.dispatch, this.props);
+  }
+
+  static fetchData(dispatch, props) {
+    const { schoolCode } = props;
+    return fetch(`${BASE_URL}/getSchoolCourses/${schoolCode}`)
       .then((response) => response.json())
-      .then((json) => 
-        this.setState({
-          courses: json,
-          expanded: reduce(keys(json), (dict, subject) => {
-            dict[subject] = false;
-            return dict;
-          }, {}) 
-        })
-      );
+      .then((json) => dispatch(updateSchoolCourses(json)));
   }
 
   getCourseItems() {
-    if (this.state.courses === null) {
+    if (!this.props.courses) {
       return <p className="loader">Loading courses...</p>;
     }
 
     const schoolCode = this.props.schoolCode;
-    return map(sortBy(this.state.courses, [(obj) => -keys(obj.courses).length]), (obj, subject) => {
+    return map(sortBy(this.props.courses, [(obj) => -keys(obj.courses).length]), (obj, subject) => {
       const courseBoxes = map(sortBy(obj.courses, [(course) => toInteger((new RegExp("\\d+")).exec(course.code)[0]),
                                                    (course) => takeRight(course.code)]), (course, key) => {
         return (
@@ -61,7 +56,7 @@ class SchoolComponent extends Component {
   }
 
   render() {
-    if (this.state.courses && this.state.courses.invalidCode)
+    if (this.props.courses && this.props.courses.invalidCode)
       return <NotFound />;
 
     const schoolCode = this.props.schoolCode;
@@ -100,13 +95,19 @@ class SchoolComponent extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    courses: state.schoolCourses,
     labels: state.labels,
-    schoolCode: ownProps.match.params.schoolCode
+    schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode
   };
 };
 
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return { dispatch };
+}
+
 const School = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps,
 )(SchoolComponent);
 
 export default School;

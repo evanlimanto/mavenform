@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import cookies from 'browser-cookies';
 import { preprocess } from '../../renderer';
+import { canUseDOM } from '../../utils';
 import { MultipleChoiceQuestion, Question } from '../question';
 import { toLower, has, endsWith, join, keys, forEach, map, split, filter, reduce, range, toString, sortBy } from 'lodash';
 
 import DashboardLogin from './DashboardLogin';
 
+const cookies = canUseDOM ? require('browser-cookies') : null;
+const LoadingSVG = require('../../img/ring.svg');
 const request = require('superagent');
 const yaml = require('js-yaml');
 
@@ -48,22 +50,6 @@ class TranscribeComponent extends Component {
 
   componentDidUpdate() {
     window.renderMJ();
-  }
-
-  componentDidMount() {
-    const examid = this.props.examid;
-    if (examid) {
-      fetch(`/getTranscribedExam/${examid}`)
-        .then((response) => response.json())
-        .then((json) => {
-          this.setState({ selected: json });
-        });
-      fetch(`/getTranscribedContent/${examid}`)
-        .then((response) => response.json())
-        .then((json) => {
-          this.setState({ transcribedContent: json }); 
-        });
-    }
   }
 
   onDrop(acceptedFiles, rejectedFiles) {
@@ -117,6 +103,9 @@ class TranscribeComponent extends Component {
   }
 
   updateImages() {
+    if (!canUseDOM)
+      return;
+
     const images = document.getElementsByTagName('img');
     forEach(images, (node) => node ? node.remove() : null);
 
@@ -208,6 +197,8 @@ class TranscribeComponent extends Component {
   }
 
   isLoggedIn() {
+    if (!cookies)
+      return false;
     return cookies.get('dashboard_user');
   }
 
@@ -215,31 +206,6 @@ class TranscribeComponent extends Component {
     if (!this.isLoggedIn()) {
       return <DashboardLogin />;
     }
-
-    /*
-    const examid = this.props.examid;
-    let selSchool = '', selCourse = '', selCourseLabel = '', selType = '', selTerm = '', selYear = '', selProfs = '';
-    let hasSelected = examid !== null && examid !== undefined;
-    if (this.state.selected) {
-      const selected = this.state.selected;
-      selSchool = selected.school_code + '~' + selected.school_id;
-      selCourse = selected.course_code + '~' + selected.course_id;
-      selType = selected.type_code + '~' + selected.type_id;
-      const term_code = selected.term_code.substr(0, 2);
-      selYear = '20' + selected.term_code.substr(2, 4);
-      if (term_code === 'sp') {
-        selTerm = 'spring';
-      } else if (term_code === 'su') {
-        selTerm = 'summer';
-      } else if (term_code === 'fa') {
-        selTerm = 'fall';
-      } else if (term_code === 'wi') {
-        selTerm = 'winter';
-      }
-      selProfs = selected.profs;
-      selCourseLabel = selected.course_code;
-    }
-    */
 
     const schoolsSelect = (
       <select ref='school' onChange={this.populateCourses} >
@@ -327,7 +293,7 @@ class TranscribeComponent extends Component {
           <textarea ref='content' onKeyUp={this.updateContent} placeholder='Enter content here'></textarea>
           <hr className="s2" />
           <div>
-            <button className='blue' onClick={(e) => this.upload(e)}>{this.state.uploading ? <img src="../img/ring.svg" width="16" height="16" /> : "SAVE" }</button>
+            <button className='blue' onClick={(e) => this.upload(e)}>{this.state.uploading ? <LoadingSVG width={16} height={16} /> : "SAVE" }</button>
             <Link className='gray cancel' to="/dashboard">Back</Link>
           </div>
           <hr className="s1" />
@@ -347,7 +313,6 @@ class TranscribeComponent extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    examid: ownProps.match.params.examid,
     schools: state.schools,
     exam_types: state.exam_types,
     terms: state.terms

@@ -73,8 +73,8 @@
   "proxy": "http://localhost:8080",
   "scripts": {
     "magic": "concurrently \"npm run start\" \"npm run watch\"",
-    "server": "npm run build&&node main.js",
-    "start": "forever main.js",
+    "server": "npm run build && node server/main.js",
+    "start": "forever server/main.js",
     "watch": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

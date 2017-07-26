@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import copy from 'copy-to-clipboard';
 import classnames from 'classnames';
 
+import { BASE_URL } from '../../utils';
 import { copyQuestionLinkEvent } from '../../events';
 import Expire from './Expire';
 import { Modal } from '../modal';
@@ -102,7 +103,7 @@ class QuestionDropdown extends Component {
       reportModal = <Modal closeModal={this.closeReportModal} headerContent={headerContent} infoContent={infoContent} modalContent={modalContent} />;
     }
 
-    const url = `${document.location.origin}/${schoolCode}/${courseCode}/${examType}/${termCode}#${id}`;
+    const url = `${BASE_URL}/${schoolCode}/${courseCode}/${examType}/${termCode}#${id}`;
 
     return (
       <div className="tooltip-container">

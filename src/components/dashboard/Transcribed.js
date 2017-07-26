@@ -60,7 +60,7 @@ class Transcribed extends Component {
 
     const { exams } = this.state;
     const examsList = map(exams, (exam, key) => {
-      return <div key={key}><a className={classnames({"active": key === this.state.selectedid})} onClick={() => this.renderContent(key)}>{exam.school_name}: {exam.course_code} - {exam.term_label}</a><button className='approve' onClick={() => this.approveContent(key)}>Approve</button></div>;
+      return <div key={key}><a className={classnames({"active": key === this.state.selectedid})} onClick={() => this.renderContent(key)}>{exam.school_name}: {exam.course_code} - {exam.type_label}, {exam.term_label}</a><button className='approve' onClick={() => this.approveContent(key)}>Approve</button></div>;
     });
     return (
       <div>

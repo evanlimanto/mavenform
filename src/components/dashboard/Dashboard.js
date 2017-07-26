@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import cookies from 'browser-cookies';
 import { map } from 'lodash';
-import DashboardLogin from './DashboardLogin';
 import dateFormat from 'dateformat';
+import { canUseDOM } from '../../utils';
+
+import DashboardLogin from './DashboardLogin';
+const cookies = canUseDOM ? require('browser-cookies') : null;
 
 require('../../css/Dashboard.css');
 
@@ -17,11 +19,14 @@ class Dashboard extends Component {
   }
 
   isLoggedIn() {
+    if (!cookies)
+      return false;
     return cookies.get('dashboard_user');
   }
 
   logout() {
-    cookies.erase('dashboard_user');
+    if (cookies)
+      cookies.erase('dashboard_user');
     document.location = '/dashboard';
   }
 
