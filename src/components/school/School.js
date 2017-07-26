@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { keys, has, map, sortBy, toInteger, takeRight } from 'lodash';
-import DocumentMeta from 'react-document-meta';
+import { Helmet } from 'react-helmet';
 
 import Footer from '../footer';
 import Navbar from '../navbar';
@@ -20,6 +20,19 @@ class SchoolComponent extends Component {
 
   componentDidMount() {
     SchoolComponent.fetchData(this.props.dispatch, this.props);
+  }
+
+  static getMeta(props) {
+    const { schoolCode, labels } = props;
+    const title = ((labels.schools) ? `${labels.schools[schoolCode]} - Studyform` : "Studyform");
+    const description = `Study from interactive past exams and practice problems` +
+      ((labels.schools) ? ` for ${labels.schools[schoolCode]} courses.` : `.`);
+    return (
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+      </Helmet>
+    );
   }
 
   static fetchData(dispatch, props) {
@@ -62,14 +75,10 @@ class SchoolComponent extends Component {
     const schoolCode = this.props.schoolCode;
     const courseItems = this.getCourseItems();
     const schoolLabel = (this.props.labels && has(this.props.labels.schools, schoolCode)) ? this.props.labels.schools[schoolCode] : null;
-    const meta = {
-      description: `Interactive and course-specific study resources for ${schoolLabel}.`,
-      title: `${schoolLabel} - Studyform`,
-    };
 
     return (
       <div className="school">
-        <DocumentMeta {...meta} />
+        {SchoolComponent.getMeta(this.props)}
         <Navbar schoolCode={schoolCode} />
         <div className="card-container-container">
           <div className="card-container center">

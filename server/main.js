@@ -54,6 +54,9 @@ var _require5 = require('../src/utils/configureStore'),
     configureStore = _require5.configureStore,
     initStore = _require5.initStore;
 
+var _require6 = require('react-helmet'),
+    Helmet = _require6.Helmet;
+
 app.use('/', function (req, res) {
   var filePath = path.resolve(__dirname, '..', 'build', 'index.html');
   fs.readFile(filePath, 'utf8', function (err, htmlData) {
@@ -93,12 +96,14 @@ app.use('/', function (req, res) {
             React.createElement(Component, matches[0].params)
           )
         ));
+        matches[0].component.getMeta(Object.assign({}, matches[0].params, { labels: store.getState().labels }));
+        var helmet = Helmet.renderStatic();
         if (context.url) {
           // Somewhere a <Redirect> was rendered
           redirect(301, context.url);
         } else {
           // We're good, send a response
-          var RenderedApp = htmlData.replace('{{SSR}}', markup);
+          var RenderedApp = htmlData.replace('<div id="root"></div>', markup).replace('<title>Studyform</title>', helmet.title.toString() + helmet.meta.toString());
           res.send(RenderedApp);
         }
       });

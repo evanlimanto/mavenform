@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import DocumentMeta from 'react-document-meta';
 import { has, map, range, replace } from 'lodash';
+import { Helmet } from 'react-helmet';
 
 import { updateExamInfo } from '../../actions';
 import { BASE_URL, canUseDOM, courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
@@ -12,6 +12,18 @@ import Navbar from '../navbar';
 class ExamComponent extends Component {
   componentDidMount() {
     ExamComponent.fetchData(this.props.dispatch, this.props);
+  }
+
+  static getMeta(props) {
+    const { courseCode, examType, termCode, labels } = props;
+    const title = ((labels.schools) ? `${courseCodeToLabel(courseCode)} ${termToLabel(termCode)} ${examTypeToLabel(examType)} - Studyform` : "Studyform");
+    const description = `Study and discuss past exam problems and solutions for ${courseCodeToLabel(courseCode)} ${termToLabel(termCode)} ${examTypeToLabel(examType)}.`;
+    return (
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+      </Helmet>
+    );
   }
 
   static fetchData(dispatch, props) {
@@ -30,11 +42,6 @@ class ExamComponent extends Component {
   render() {
     const { schoolCode, courseCode, examType, termCode, profs } = this.props;
     const examInfo = this.props.examInfo;
-    const schoolLabel = (this.props.labels && has(this.props.labels.schools, schoolCode)) ? this.props.labels.schools[schoolCode]: null;
-    const meta = {
-      description: `Review past exam problems and solutions for the ${courseCodeToLabel(courseCode)} ${termToLabel(termCode)} ${examTypeToLabel(examType)} from ${schoolLabel}.`,
-      title: `${courseCodeToLabel(courseCode)} ${termToLabel(termCode)} ${examTypeToLabel(examType)} - ${schoolLabel} - Studyform`,
-    };
 
     const examContent = (!examInfo) ? (<p className="loader">Loading content...</p>) :
       map(this.props.examInfo.info, (num_parts, part) => {
@@ -73,7 +80,7 @@ class ExamComponent extends Component {
 
     return (
       <div>
-        <DocumentMeta {...meta} />
+        {ExamComponent.getMeta(this.props)}
         <Navbar exam={true} schoolCode={schoolCode} courseCode={courseCode} examType={examType} termCode={termCode} source_url={this.props.examInfo.source_url} />
         <div>
           {examDesc}
