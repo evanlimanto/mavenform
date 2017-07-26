@@ -30,11 +30,11 @@ export const updateExamInfo = (info) => {
   }
 };
 
-export const UPDATE_EXAM_CONTENT = 'UPDATE_EXAM_CONTENT';
-export const updateExamContent = (examContent) => {
+export const UPDATE_TOPIC_INFO = 'UPDATE_TOPIC_INFO';
+export const updateTopicInfo = (info) => {
   return {
-    type: UPDATE_EXAM_CONTENT,
-    examContent: examContent,
+    type: UPDATE_TOPIC_INFO,
+    info: info,
   };
 };
 

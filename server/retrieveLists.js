@@ -449,6 +449,55 @@ const getMathContent =
     });
   };
 
+const getTopicInfo =
+  (req, res, next) => {
+    const { code } = req.params;
+    const getinfoq = `
+      select T.topic, T.concept, S.subject_label from topics T
+      inner join subjects S on T.subjectid = S.id
+      where code = $1`;
+    const getq = `
+      select C.id as content_id, problem_num, subproblem_num, problem, solution, choices from content C
+      inner join topics T on T.id = C.topicid
+      where T.code = $1
+    `;
+    async.parallel([
+      (callback) => pool.query(getinfoq, [code], callback),
+      (callback) => {
+        pool.query(getq, [code], (err, result) => {
+          if (err)
+            return callback(err);
+          const info = _.reduce(result.rows, (result, row) => {
+            const problem_num = row.problem_num;
+            const subproblem_num = row.subproblem_num;
+            if (_.has(result, problem_num)) {
+              result[problem_num] = Math.max(result[problem_num], subproblem_num);
+            } else {
+              result[problem_num] = subproblem_num;
+            }
+            return result;
+          }, {});
+
+          const problems = _.reduce(result.rows, (result, row) => {
+            let { content_id, problem_num, subproblem_num, problem, solution, choices } = row;
+            problem = renderer.preprocess(row.problem);
+            solution = renderer.preprocess(row.solution);
+            const key = `${problem_num}_${subproblem_num}`;
+            result[key] = { problem, solution, choices, content_id };
+            return result;
+          }, {});
+
+          return callback(null, { info, problems });
+        });
+      },
+    ], (err, result) => {
+      if (err) return next(err);
+      const { topic, concept, subject_label } = result[0].rows[0];
+      const { info, problems } = result[1];
+      return res.json({ topicLabel: topic, conceptLabel: concept, subjectLabel: subject_label, info, problems });
+    });
+  };
+
 module.exports = (app) => {
   // Retrieve initial data
   app.get('/getInitial', getInitial);
@@ -491,4 +540,7 @@ module.exports = (app) => {
 
   // Retrieve math content by topic
   app.get('/getMathContent/:topic', getMathContent);
+
+  // Retrieve content by topic
+  app.get('/getTopicInfo/:code', getTopicInfo);
 }

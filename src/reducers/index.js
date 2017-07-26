@@ -73,10 +73,10 @@ export const examInfo = (state = {}, action) => {
   }
 };
 
-export const examContent = (state = null, action) => {
+export const topicInfo = (state = {}, action) => {
   switch (action.type) {
-    case Actions.UPDATE_EXAM_CONTENT:
-      return action.examContent;
+    case Actions.UPDATE_TOPIC_INFO:
+      return action.info;
     default:
       return state;
   }

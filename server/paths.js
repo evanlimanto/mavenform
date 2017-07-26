@@ -197,7 +197,7 @@ module.exports = (app) => {
     const basePath = `${school}/img/${course}/${exam_type}-${term}`;
     async.forEach(imageFiles, (file, callback) => {
       const fileName = `${basePath}-${file.name}`;
-      const bucketFile = stagingBucket.file(fileName);
+      const bucketFile = config.stagingBucket.file(fileName);
       const ws = bucketFile.createWriteStream({
         public: true,
         metadata: {
@@ -289,7 +289,7 @@ module.exports = (app) => {
           (innerCallback) => config.pool.query(delimageq, [approvedExamId], innerCallback),
           (innerCallback) => {
             async.each(result.rows, (row, eachCallback) => {
-              const sourceFile = stagingBucket.file(row.url);
+              const sourceFile = config.stagingBucket.file(row.url);
               return sourceFile.exists((err, exists) => {
                 if (err) return eachCallback(err);
                 if (exists)

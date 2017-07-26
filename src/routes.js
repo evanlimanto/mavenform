@@ -5,10 +5,11 @@ import Home from './components/home';
 import { Login, Logout, SecretSignup, Signup } from './components/login';
 import NotFound from './components/notfound';
 import { AppSubmitted, Marketing, MarketingApps } from './components/marketing';
-import { Math, MathContent } from './components/math';
+import { Math } from './components/math';
 import Profile from './components/profile';
 import Upload from './components/upload';
 import School from './components/school';
+import { TopicContent } from './components/topic';
 import UserHome from './components/userhome';
 import Waitlisted from './components/waitlisted';
 
@@ -30,11 +31,10 @@ const routes = [
   { path: '/s3cr3tsignup', component: SecretSignup },
   { path: '/m4rk3t1ng4pp5', component: MarketingApps },
   { path: '/upload', component: Upload },
-  { path: '/math/:topic', component: MathContent },
   { path: '/math', component: Math },
   { path: '/home', component: UserHome },
   { path: '/:schoolCode/:courseCode/:examType/:termCode/:profs', component: Exam },
-  { path: '/:schoolCode/:courseCode/:topic', component: MathContent },
+  { path: '/:schoolCode/:courseCode/:code', component: TopicContent },
   { path: '/:schoolCode/:courseCode', component: Course },
   { path: '/:schoolCode', component: School },
   { path: '/', component: NotFound },
