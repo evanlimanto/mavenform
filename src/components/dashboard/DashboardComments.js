@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { map } from 'lodash';
+import { BASE_URL } from '../../utils';
 
 const req = require('superagent');
 
@@ -14,13 +15,13 @@ class DashboardComments extends Component {
   }
 
   componentDidMount() {
-    fetch('/getComments')
+    fetch(`${BASE_URL}/getComments`)
       .then((response) => response.json())
       .then((json) => this.setState({ comments: json }));
   }
 
   deleteComment(id) {
-    req.post('/deleteQuestionComment')
+    req.post(`${BASE_URL}/deleteQuestionComment`)
       .send({ id })
       .end((err, res) => {
         if (err || !res.ok) return console.error(err);

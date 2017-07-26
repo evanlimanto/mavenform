@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { concat, map, range, reduce } from 'lodash';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
-
+import { BASE_URL } from '../../utils';
 import { MultipleChoiceQuestion, Question } from '../question';
 
 class DashboardContentComponent extends Component {
@@ -34,7 +34,7 @@ class DashboardContentComponent extends Component {
     const solution_content = this.refs.solution.value;
     const choices_content = this.refs.choices.value;
 
-    fetch('/updateProblem', {
+    fetch(`${BASE_URL}/updateProblem`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -62,7 +62,7 @@ class DashboardContentComponent extends Component {
   }
 
   getExam(id) {
-    fetch(`/getExamById/${id}`).then(
+    fetch(`${BASE_URL}/getExamById/${id}`).then(
       (response) => response.json()
     ).then(
       (json) => {

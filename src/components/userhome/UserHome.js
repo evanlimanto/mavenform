@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import { Link } from 'react-router-dom';
 import { concat, has, map, keys, split } from 'lodash';
-import { courseCodeToLabel } from '../../utils';
+import { courseCodeToLabel, BASE_URL } from '../../utils';
 import Navbar from '../navbar';
 
 const request = require('superagent');
@@ -38,10 +38,10 @@ class UserHomeComponent extends Component {
 
   componentDidMount() {
     const userid = this.props.auth.getProfile().user_id;
-    fetch(`/getBookmarkedCourses/${userid}`)
+    fetch(`${BASE_URL}/getBookmarkedCourses/${userid}`)
       .then((response) => response.json())
       .then((json) => this.setState({ bookmarkedCourses: json }));
-    fetch(`/getUserSchool/${userid}`)
+    fetch(`${BASE_URL}/getUserSchool/${userid}`)
       .then((response) => response.json())
       .then((json) => this.setState({ selectedSchool: json }));
   }
@@ -49,7 +49,7 @@ class UserHomeComponent extends Component {
   getUnbookmarkedCourses() {
     const userid = this.props.auth.getProfile().user_id;
     const schoolid = this.state.selectedSchool.id;
-    fetch(`/getUnbookmarkedCourses/${schoolid}/${userid}`)
+    fetch(`${BASE_URL}/getUnbookmarkedCourses/${schoolid}/${userid}`)
       .then((response) => response.json())
       .then((json) => this.setState({ coursesToBookmark: json }));
   }

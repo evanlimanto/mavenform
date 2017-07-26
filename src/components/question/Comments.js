@@ -1,7 +1,8 @@
-import React, { Component } from 'react'; import { connect } from 'react-redux';
-
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { cloneDeep, assign, max, keys, forEach, toString, flattenDeep, has, concat, map, sortBy, toInteger } from 'lodash';
 import isEmpty from 'validator/lib/isEmpty';
+import { BASE_URL } from '../../utils';
 
 const req = require('superagent');
 
@@ -33,7 +34,7 @@ class CommentsComponent extends Component {
   componentDidMount() {
     // TODO: Make this more efficient with 1 request
     if (this.props.content_id)
-      fetch(`/getComments/${this.props.content_id}`)
+      fetch(`${BASE_URL}/getComments/${this.props.content_id}`)
         .then((response) => response.json())
         .then((json) => this.processComments(json));
   }
@@ -42,7 +43,7 @@ class CommentsComponent extends Component {
     const newTree = cloneDeep(this.state.commentsTree);
     newTree[commentid].deleted = true;
     this.setState({ commentsTree: newTree });
-    fetch(`/deleteComment/${commentid}`);
+    fetch(`${BASE_URL}/deleteComment/${commentid}`);
   }
 
   processComments(json) {
@@ -75,7 +76,7 @@ class CommentsComponent extends Component {
     if (isEmpty(comment))
       return;
 
-    req.post('/addComment')
+    req.post(`${BASE_URL}/addComment`)
       .send({ userid: this.userid, content_id, comment, parentid: null })
       .end((err, res) => {
         this.refs.comment.value = null;

@@ -22,10 +22,8 @@ class HomeComponent extends Component {
     super(props);
     this.state = {
       suggestions: [],
-      notificationBar: true,
     }
 
-    this.hideNotificationBar = this.hideNotificationBar.bind(this);
     this.getSuggestions = this.getSuggestions.bind(this);
   }
 
@@ -41,10 +39,6 @@ class HomeComponent extends Component {
         this.setState({ suggestionsDropdownOn: false });
       }
     });
-  }
-
-  hideNotificationBar() {
-    this.setState({ notificationBar: false });
   }
 
   getSuggestions() {

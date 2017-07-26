@@ -5,7 +5,6 @@ import Home from './components/home';
 import { Login, Logout, SecretSignup, Signup } from './components/login';
 import NotFound from './components/notfound';
 import { AppSubmitted, Marketing, MarketingApps } from './components/marketing';
-import { Math } from './components/math';
 import Profile from './components/profile';
 import Upload from './components/upload';
 import School from './components/school';
@@ -31,7 +30,6 @@ const routes = [
   { path: '/s3cr3tsignup', component: SecretSignup },
   { path: '/m4rk3t1ng4pp5', component: MarketingApps },
   { path: '/upload', component: Upload },
-  { path: '/math', component: Math },
   { path: '/home', component: UserHome },
   { path: '/:schoolCode/:courseCode/:examType/:termCode/:profs', component: Exam },
   { path: '/:schoolCode/:courseCode/:code', component: TopicContent },

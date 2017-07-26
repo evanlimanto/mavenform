@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { map } from 'lodash';
 import dateFormat from 'dateformat';
-import { canUseDOM } from '../../utils';
+import { canUseDOM, BASE_URL } from '../../utils';
 
 import DashboardLogin from './DashboardLogin';
 const cookies = canUseDOM ? require('browser-cookies') : null;
@@ -31,7 +31,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    fetch('/getTranscribedExams')
+    fetch(`${BASE_URL}/getTranscribedExams`)
       .then((response) => response.json())
       .then((examsJson) => this.setState({ exams: examsJson }));
   }
