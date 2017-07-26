@@ -103,7 +103,7 @@ app.use('/', function (req, res) {
           redirect(301, context.url);
         } else {
           // We're good, send a response
-          var RenderedApp = htmlData.replace('<div id="root"></div>', markup).replace('<title>Studyform</title>', helmet.title.toString() + helmet.meta.toString());
+          var RenderedApp = htmlData.replace('<div id="root"></div>', `<div id="root">markup</div>`).replace('<title>Studyform</title>', helmet.title.toString() + helmet.meta.toString());
           res.send(RenderedApp);
         }
       });
