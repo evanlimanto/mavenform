@@ -96,14 +96,15 @@ app.use('/', function (req, res) {
             React.createElement(Component, matches[0].params)
           )
         ));
-        matches[0].component.getMeta(Object.assign({}, matches[0].params, { labels: store.getState().labels }));
+        if (matches[0].component.getMeta)
+          matches[0].component.getMeta(Object.assign({}, matches[0].params, { labels: store.getState().labels }));
         var helmet = Helmet.renderStatic();
         if (context.url) {
           // Somewhere a <Redirect> was rendered
           redirect(301, context.url);
         } else {
           // We're good, send a response
-          var RenderedApp = htmlData.replace('<div id="root"></div>', `<div id="root">markup</div>`).replace('<title>Studyform</title>', helmet.title.toString() + helmet.meta.toString());
+          var RenderedApp = htmlData.replace('<div id="root"></div>', `<div id="root">${markup}</div>`).replace('<title>Studyform</title>', helmet.title.toString() + helmet.meta.toString());
           res.send(RenderedApp);
         }
       });
