@@ -57,7 +57,7 @@ class TopicContentComponent extends Component {
     return (
       <div>
         <DocumentMeta {...meta} />
-        <Navbar math={!this.props.courseCode} schoolCode={this.props.schoolCode} courseCode={this.props.courseCode} topic={this.props.topic} label={this.props.conceptLabel} />
+        <Navbar math={!this.props.courseCode} schoolCode={this.props.schoolCode} courseCode={this.props.courseCode} concept={this.props.code} label={this.props.topicInfo.conceptLabel} />
         <div id="header-text">
           <div className="center">
             <h4>{topicInfo.topicLabel || topicInfo.conceptLabel}</h4>

@@ -82,6 +82,15 @@ export const topicInfo = (state = {}, action) => {
   }
 };
 
+export const courseTopics = (state = [], action) => {
+  switch (action.type) {
+    case Actions.UPDATE_COURSE_TOPICS:
+      return action.topics;
+    default:
+      return state;
+  }
+};
+
 export const modal = (state = { type: null, errorText: null }, action) => {
   switch (action.type) {
     case Actions.SHOW_LOGIN_MODAL:

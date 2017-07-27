@@ -22,7 +22,7 @@ const pool = new pg.Pool(config);
 
 const getExams = (callback) => {
   const q = `
-    select E.id as id, C.code as courseid, ET.type_code as examtype, T.term_code as examid, E.profs as profs from exams E
+    select E.id as id, C.code as courseid, ET.type_code as examtype, T.term_code as examid, E.profs as profs, E.source_url as source_url from exams E
     inner join courses C on C.id = E.courseid
     inner join exam_types ET on E.examtype = ET.id
     inner join terms T on E.examid = T.id
@@ -31,27 +31,19 @@ const getExams = (callback) => {
     if (err)
       return callback(err);
     const multi_dict = _.reduce(result.rows, (dict, row) => {
-      const id = row.id;
-      const courseid = row.courseid;
-      const examtype = row.examtype;
-      const examid = row.examid;
-      const profs = row.profs;
+      const { id, courseid, examtype, examid, profs, source_url } = row;
       if (!_.has(dict, courseid)) {
         dict[courseid] = {};
       }
       if (!_.has(dict[courseid], examtype)) {
         dict[courseid][examtype] = {};
       }
-      dict[courseid][examtype][examid] = { id, profs };
+      dict[courseid][examtype][examid] = { id, profs, source_url };
       return dict;
     }, {});
     const key_dict = _.reduce(result.rows, (dict, row) => {
-      const id = row.id;
-      const courseid = row.courseid;
-      const examtype = row.examtype;
-      const examid = row.examid;
-      const profs = row.profs;
-      dict[id] = { courseid, examtype, examid, profs };
+      const { id, courseid, examtype, examid, profs, source_url } = row;
+      dict[id] = { courseid, examtype, examid, profs, source_url };
       return dict;
     }, {});
 
@@ -409,46 +401,6 @@ const getSubjects =
     });
   };
 
-const getMathTopics =
-  (req, res, next) => {
-    const getq = `
-      select id, topic, concept, code from math_topics
-      where exists (select 1 from math_content where tag = math_topics.id);
-    `;
-    pool.query(getq, (err, result) => {
-      if (err) return next(err);
-      const items = _.reduce(result.rows, (dict, row) => {
-        if (!_.has(dict, row.topic)) {
-          dict[row.topic] = [];
-        }
-        dict[row.topic].push({ id: row.id, label: row.concept, code: row.code });
-        return dict;
-      }, {});
-      return res.json(items);
-    });
-  };
-
-const getMathContent =
-  (req, res, next) => {
-    const { topic } = req.params;
-    const getq = `
-      select content, solution from math_content
-      inner join math_topics on
-      math_content.tag = math_topics.id
-      where math_topics.code = $1
-    `;
-    pool.query(getq, [topic], (err, result) => {
-      if (err) return next(err);
-      const items = _.map(result.rows, (row) => {
-        return {
-          content: renderer.preprocess(row.content),
-          solution: renderer.preprocess(row.solution),
-        };
-      });
-      return res.json(items);
-    });
-  };
-
 const getTopicInfo =
   (req, res, next) => {
     const { code } = req.params;
@@ -500,6 +452,7 @@ const getTopicInfo =
 
 const getCourseTopics =
   (req, res, next) => {
+    const { courseCode, schoolCode } = req.params;
     const getq = `
       select T.topic, T.concept, T.code from topics T
       inner join course_topics CT on CT.topicid = T.id
@@ -507,6 +460,16 @@ const getCourseTopics =
       inner join schools S on C.schoolid = S.id
       where S.code = $1 and C.code = $2
     `;
+    pool.query(getq, [schoolCode, courseCode], (err, result) => {
+      const items = _.map(result.rows, (row) => {
+        return {
+          topic: row.topic,
+          concept: row.concept,
+          code: row.code,
+        };
+      });
+      return res.json(items);
+    });
   };
 
 module.exports = (app) => {
@@ -545,12 +508,6 @@ module.exports = (app) => {
 
   // Retrieve information for an exam
   app.get('/getExamInfo/:schoolCode/:courseCode/:examTypeCode/:termCode/:profs', getExamInfo);
-
-  // Retrieve list of math topics
-  app.get('/getMathTopics', getMathTopics);
-
-  // Retrieve math content by topic
-  app.get('/getMathContent/:topic', getMathContent);
 
   // Retrieve content by topic
   app.get('/getTopicInfo/:code', getTopicInfo);

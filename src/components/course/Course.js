@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { map, replace } from 'lodash';
 import { Helmet } from 'react-helmet';
 
-import { showLoginModal, showWaitlistModal, updateCourseExams } from '../../actions';
+import { showLoginModal, showWaitlistModal, updateCourseExams, updateCourseTopics } from '../../actions';
 import { courseCodeToLabel, BASE_URL } from '../../utils';
 import { examClickEvent } from '../../events';
 import Footer from '../footer';
@@ -18,9 +18,14 @@ class CourseComponent extends Component {
 
   static fetchData(dispatch, props) {
     const { courseCode, schoolCode } = props;
-    return fetch(`${BASE_URL}/getCourseExams/${schoolCode}/${courseCode}`)
-      .then((response) => response.json())
-      .then((json) => dispatch(updateCourseExams(json)));
+    return Promise.all([
+      fetch(`${BASE_URL}/getCourseExams/${schoolCode}/${courseCode}`)
+        .then((response) => response.json())
+        .then((json) => dispatch(updateCourseExams(json))),
+      fetch(`${BASE_URL}/getCourseTopics/${schoolCode}/${courseCode}`)
+        .then((response) => response.json())
+        .then((json) => dispatch(updateCourseTopics(json)))
+    ]);
   }
 
   static getMeta(props) {
@@ -88,94 +93,26 @@ class CourseComponent extends Component {
       </div>
     );
 
-    let topicsContent = ( <hr className="s8" /> ), mathTopics = null;
-    if ((schoolCode === 'ucsd' && (courseCode === 'MATH10A' || courseCode === 'MATH20C' || courseCode === 'MATH20D') || (courseCode === 'MATH18') || (courseCode === 'MATH102')) ||
-        (schoolCode === 'ucb' && (courseCode === 'MATH53' || courseCode === 'MATH1A'))) {
-      if (courseCode === 'MATH10A') {
-        mathTopics = [
-          { concept: 'Functions', code: 'functions' },
-          { concept: 'Limits and Derivatives', code: 'limitsandderivatives' },
-          { concept: 'Differentiation', code: 'differentiation' },
-          { concept: 'Applications of Differentiation', code: 'applicationsofdifferentiation' },
-        ];
-      } else if (courseCode === 'MATH20C') {
-        mathTopics = [
-          { concept: 'Vectors in 2D and 3D Space', code: 'vectors' },
-          { concept: 'Inner Product, Length and Distance', code: 'innerproductlengthdistance' },
-          { concept: 'Matrices, Determinants and the Cross Product', code: 'matricesdeterminantscrossproduct' },
-          { concept: 'Limits and Continuity', code: 'limitsandcontinuity' },
-          { concept: 'Differentiation', code: 'differentiation' },
-          { concept: 'Introduction to Paths and Curves', code: 'intropathscurves' },
-          { concept: 'Properties of the Derivative', code: 'propertiesofderivative' },
-          { concept: 'Gradients and Directional Derivatives', code: 'gradientsanddirectionalderivatives' },
-        ];
-      } else if (courseCode === 'MATH20D') {
-        mathTopics = [
-          { concept: 'First-Order Equations', code: 'firstordereqns' },
-          { concept: 'Linear Second-Order Equations', code: 'linearsecondordereqns' },
-        ];
-      } else if (courseCode === 'MATH53') {
-        mathTopics = [
-          { concept: 'Parametric Equations', code: 'parametriceqns' },
-          { concept: 'Vectors, Planes and Surfaces', code: 'vectorsplanesandsurfaces' },
-          { concept: 'Vector Functions', code: 'vectorfunctions' },
-          { concept: 'Partial Derivatives', code: 'partialderivatives' },
-          { concept: 'Multiple Integrals', code: 'multipleintegrals' },
-          { concept: 'Vector Calculus', code: 'vectorcalculus' },
-        ];
-      } else if (courseCode === 'MATH54') {
-        mathTopics = [
-          { concept: 'First-Order Equations', code: 'firstordereqns' },
-          { concept: 'Linear Second-Order Equations', code: 'linearsecondordereqns' },
-        ];
-      } else if (courseCode === 'MATH1A') {
-        mathTopics = [
-          { concept: 'Functions', code: 'functions' },
-          { concept: 'Limits and Derivatives', code: 'limitsandderivatives' },
-          { concept: 'Differentiation', code: 'differentiation' },
-          { concept: 'Applications of Differentiation', code: 'applicationsofdifferentiation' },
-          { concept: 'Integrals', code: 'integrals' },
-          { concept: 'Applications of Integration', code: 'applicationsofintegration' },
-        ];
-      } else if (courseCode === 'MATH18') {
-        mathTopics = [
-          { concept: 'Systems of Linear Equations', code: 'systemsoflineareqns' },
-          { concept: 'Row Reduction and Echelon Forms', code: 'rowreductionechelonforms' },
-          { concept: 'Vector Equations', code: 'vectoreqns' },
-          { concept: 'Introduction to Linear Transformations', code: 'introtolineartransformations' },
-        ];
-      } else if (courseCode === 'MATH102') {
-        mathTopics = [
-          { concept: 'Systems of Linear Equations', code: 'systemsoflineareqns' },
-          { concept: 'Introduction to Linear Transformations', code: 'introtolineartransformations' },
-          { concept: 'Eigenvectors and Eigenvalues', code: 'eigenvectorsandeigenvalues' },
-          { concept: 'Diagonalization', code: 'diagonalization' },
-          { concept: 'Orthogonal Sets', code: 'orthogonalsets' },
-          { concept: 'Homogenous Linear Equations', code: 'homogenouslineareqns'},
-          { concept: 'First-Order Equations', code: 'firstordereqns' },
-        ];
-      }
-
-      const topicCards = map(mathTopics, (topic) => {
-        return (
-          <Link key={topic.code} className="card topic-card" to={"/" + schoolCode + "/" + courseCode + "/" + topic.code}>
-            <span>{topic.concept}</span>
-            <span className="card-arrow">&#8594;</span>
-          </Link>
-        );
-      });
-      topicsContent = (
-        <div name="subjects">
-          <hr className="s5" />
-          <h5>Based on the exams above, these are our suggested practice problems by topic...</h5>
-          <hr className="s4" />
-          <div className="card-container topic-card-container">
-            {topicCards}
-            <hr className="s7-5" />
-          </div>
-        </div>
+    const topicCards = map(this.props.topics, (topic) => {
+      return (
+        <Link key={topic.code} className="card topic-card" to={"/" + schoolCode + "/" + courseCode + "/" + topic.code}>
+          <span>{topic.concept}</span>
+          <span className="card-arrow">&#8594;</span>
+        </Link>
       );
-    }
+    });
+
+    const topicsContent = (this.props.topics.length > 0) ? (
+      <div name="subjects">
+        <hr className="s5" />
+        <h5>Based on the exams above, these are our suggested practice problems by topic...</h5>
+        <hr className="s4" />
+        <div className="card-container topic-card-container">
+          {topicCards}
+          <hr className="s7-5" />
+        </div>
+      </div>
+    ) : <hr className="s8" />;
 
     return (
       <div>
@@ -194,6 +131,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
     schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
+    topics: state.courseTopics,
     exams: state.courseExams,
     labels: state.labels,
   }

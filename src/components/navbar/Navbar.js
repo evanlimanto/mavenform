@@ -113,7 +113,7 @@ class NavbarComponent extends Component {
       return false;
     }
 
-    const { schoolCode, courseCode, examTypeCode, termCode, topic, label } = this.props;
+    const { schoolCode, courseCode, examTypeCode, termCode, concept, label, profs } = this.props;
     const courseLabel = courseCodeToLabel(courseCode);
     const schoolLabel = this.props.labels.schools[schoolCode];
     const examTypeLabel = examTypeToLabel(examTypeCode);
@@ -130,10 +130,10 @@ class NavbarComponent extends Component {
           navbarNav.push(<Link key='course' to={'/' + schoolCode + '/' + courseCode} className={classnames({ active: numLayers === 2 })}>{courseLabel}</Link>);
           if (examTypeLabel) {
             navbarNav.push(<span key='examSpan'> > </span>);
-            navbarNav.push(<Link key='exam' to={'/' + schoolCode + '/' + courseCode + '/' + examTypeCode + '/' + termCode} className={classnames({ active: numLayers === 3 })}>{examTypeLabel} - {termLabel}</Link>);
+            navbarNav.push(<Link key='exam' to={'/' + schoolCode + '/' + courseCode + '/' + examTypeCode + '/' + termCode + '/' + profs} className={classnames({ active: numLayers === 3 })}>{examTypeLabel} - {termLabel}</Link>);
           } else if (label) {
             navbarNav.push(<span key='examSpan'> > </span>);
-            navbarNav.push(<Link key='exam' to={'/' + schoolCode + '/' + courseCode + '/' + topic} className={classnames({ active: numLayers === 3 })}>{label}</Link>);
+            navbarNav.push(<Link key='exam' to={'/' + schoolCode + '/' + courseCode + '/' + concept} className={classnames({ active: numLayers === 3 })}>{label}</Link>);
           }
         }
       }

@@ -25,9 +25,6 @@ class DashboardContentComponent extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
-  }
-
   updateContent() {
     const { examid, problem_num, subproblem_num } = this.state;
     const problem_content = this.refs.problem.value;
@@ -106,28 +103,6 @@ class DashboardContentComponent extends Component {
     });
   }
 
-  addExam(e) {
-    e.preventDefault();
-    const { exam_course_code, exam_type, exam_term, exam_year, profs } = this.refs;
-
-    fetch('/addExam', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        course_code: exam_course_code.value,
-        exam_type: exam_type.value,
-        exam_term: exam_term.value,
-        exam_year: exam_year.value,
-        profs: profs.value
-      })
-    }).then(
-      (response) => console.log(response.body)
-    );
-  }
-
   addProblem(e) {
     e.preventDefault();
     const { exam, problem_num, subproblem_num } = this.refs;
@@ -186,10 +161,11 @@ class DashboardContentComponent extends Component {
         </form>
         <hr className="s2" />
 
-        <span className="contentNavCol">{exams}</span>
-        {subparts.length ? <span className="contentNavCol">{subparts}</span> : null}
+        <span className="contentNavCol" style={{ height: "150px", "overflow-y": "scroll" }}>{exams}</span>
+        {subparts.length ? <span className="contentNavCol" style={{ height: "150px", "overflow-y": "scroll" }}>{subparts}</span> : null}
         <div style={{"float": "left", "width": "1000px"}}>
-          <h1>{this.state.examid} {exam ? `: ${exam.courseid} - ${exam.examtype} - ${exam.examid}` : null} {this.state.status}</h1>
+          <h1>{this.state.examid} {!exam || `: ${exam.courseid} - ${exam.examtype} - ${exam.examid}`}
+          {!exam || <a href={exam.source_url} target="_blank">URL</a>} {this.state.status}</h1>
           <span className="contentCol">
             <textarea value={problem.problem} ref="problem" onChange={this.handleChange} />
           </span>

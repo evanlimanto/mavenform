@@ -38,6 +38,14 @@ export const updateTopicInfo = (info) => {
   };
 };
 
+export const UPDATE_COURSE_TOPICS = 'UPDATE_COURSE_TOPICS';
+export const updateCourseTopics = (topics) => {
+  return {
+    type: UPDATE_COURSE_TOPICS,
+    topics: topics,
+  };
+};
+
 export const SHOW_LOGIN_MODAL = 'SHOW_LOGIN_MODAL';
 export const showLoginModal = () => { return { type: SHOW_LOGIN_MODAL }; };
 export const SHOW_WAITLIST_MODAL = 'SHOW_WAITLIST_MODAL';

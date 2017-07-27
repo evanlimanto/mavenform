@@ -81,7 +81,7 @@ class ExamComponent extends Component {
     return (
       <div>
         {ExamComponent.getMeta(this.props)}
-        <Navbar exam={true} schoolCode={schoolCode} courseCode={courseCode} examType={examType} termCode={termCode} source_url={this.props.examInfo.source_url} />
+        <Navbar exam={true} schoolCode={schoolCode} courseCode={courseCode} examTypeCode={examType} termCode={termCode} source_url={this.props.examInfo.source_url} profs={profs} />
         <div>
           {examDesc}
           <div className="content">
