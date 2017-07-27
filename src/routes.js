@@ -1,5 +1,5 @@
 import Course from './components/course';
-import { Dashboard, DashboardContent, DashboardCourses, DashboardComments, Transcribe, Transcribed } from './components/dashboard';
+import { Dashboard, DashboardContent, DashboardCourses, DashboardComments, Tagging, Transcribe, Transcribed } from './components/dashboard';
 import Exam from './components/exam';
 import Home from './components/home';
 import { Login, Logout, SecretSignup, Signup } from './components/login';
@@ -23,6 +23,7 @@ const routes = [
   { path: '/dashboard/content', component: DashboardContent },
   { path: '/dashboard/transcribed', component: Transcribed },
   { path: '/dashboard/transcribe', component: Transcribe },
+  { path: '/dashboard/tagging', component: Tagging },
   { path: '/dashboard', component: Dashboard },
   { path: '/appsubmitted', component: AppSubmitted },
   { path: '/s3cr3tsignup', component: SecretSignup },

@@ -247,8 +247,8 @@ const getSchoolCourses =
       if (_.keys(result.rows).length === 0)
         return res.json({ invalidCode: true });
       pool.query(q, [schoolCode], (err, result) => {
-        if (err)
-          return next(err);
+        if (err) return next(err);
+        if (result.rows.length === 0) return res.json({ notfound: true });
         const items = _.reduce(result.rows, (dict, row) => {
           if (!_.has(dict, row.subject_code)) {
             dict[row.subject_code] = {
@@ -303,6 +303,7 @@ const getCourseExams =
     `;
     pool.query(q, [courseCode, schoolCode], (err, result) => {
       if (err) return next(err);
+      if (result.rows.length === 0) return res.json({ notfound: true });
       const items = _.map(result.rows, (row) => {
         return {
           id: row.id,
@@ -444,6 +445,7 @@ const getTopicInfo =
       },
     ], (err, result) => {
       if (err) return next(err);
+      if (result[0].rows.length === 0) return next();
       const { topic, concept, subject_label } = result[0].rows[0];
       const { info, problems } = result[1];
       return res.json({ topicLabel: topic, conceptLabel: concept, subjectLabel: subject_label, info, problems });
@@ -461,6 +463,7 @@ const getCourseTopics =
       where S.code = $1 and C.code = $2
     `;
     pool.query(getq, [schoolCode, courseCode], (err, result) => {
+      if (result.rows.length === 0) return res.json({ notfound: true });
       const items = _.map(result.rows, (row) => {
         return {
           topic: row.topic,

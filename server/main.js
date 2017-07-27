@@ -2,6 +2,7 @@
 
 require('ignore-styles');
 
+require('string.prototype.startswith');
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
@@ -57,7 +58,13 @@ var _require5 = require('../src/utils/configureStore'),
 var _require6 = require('react-helmet'),
     Helmet = _require6.Helmet;
 
-app.use('/', function (req, res) {
+var _require7 = require('../src/components/notfound'),
+    NotFound = _require7.default;
+
+app.use('/', function (req, res, next) {
+  if (req.url.startsWith("/img") || req.url.startsWith("/static"))
+    return next();
+
   var filePath = path.resolve(__dirname, '..', 'build', 'index.html');
   fs.readFile(filePath, 'utf8', function (err, htmlData) {
     if (err) {
@@ -109,6 +116,17 @@ app.use('/', function (req, res) {
         }
       });
     });
+  });
+});
+
+app.use(function (req, res, next) {
+  console.log(404);
+  res.status(404);
+  var markup = renderToString(React.createElement(NotFound));
+  var filePath = path.resolve(__dirname, '..', 'build', 'index.html');
+  fs.readFile(filePath, 'utf8', function (err, htmlData) {
+    var RenderedApp = htmlData.replace('<div id="root"></div>', `<div id="root">${markup}</div>`);
+    res.send(RenderedApp);
   });
 });
 

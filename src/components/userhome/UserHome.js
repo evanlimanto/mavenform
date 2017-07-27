@@ -31,11 +31,6 @@ class UserHomeComponent extends Component {
     this.toggleSelectSchoolModal = this.toggleSelectSchoolModal.bind(this);
   }
 
-  componentWillMount() {
-    const { auth, history } = this.props
-    this.props.requireAuth(auth, history)
-  }
-
   componentDidMount() {
     const userid = this.props.auth.getProfile().user_id;
     fetch(`${BASE_URL}/getBookmarkedCourses/${userid}`)

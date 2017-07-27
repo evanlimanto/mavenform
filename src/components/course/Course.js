@@ -10,6 +10,7 @@ import { examClickEvent } from '../../events';
 import Footer from '../footer';
 import { Modals } from '../modal';
 import Navbar from '../navbar';
+import NotFound from '../notfound';
 
 class CourseComponent extends Component {
   componentDidMount() {
@@ -42,6 +43,9 @@ class CourseComponent extends Component {
   }
 
   render() {
+    if (this.props.exams.notfound)
+      return <NotFound />;
+
     const { courseCode, schoolCode } = this.props;
     const available = map(this.props.exams, (exam, key) => {
       const typeCode = exam.type_code;

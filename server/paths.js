@@ -352,6 +352,7 @@ module.exports = (app) => {
     const q = `select users.schoolid as id, schools.name as name, schools.code as code from users
       inner join schools on schools.id = users.schoolid where users.auth_user_id = $1`;
     config.pool.query(q, [userid], (err, result) => {
+      if (err) return next(err);
       if (result.rows.length === 0) {
         return res.json({});
       } else {

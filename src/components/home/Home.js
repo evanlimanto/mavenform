@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet';
 import { map, toUpper } from 'lodash';
 import Footer from '../footer';
 import Navbar from '../navbar';
+//import UserHome from '../userhome';
 import { schoolClickEvent } from '../../events';
 import { algoliaCourseIndex } from '../../utils';
 
@@ -38,7 +39,7 @@ class HomeComponent extends Component {
       const logout = document.getElementsByClassName("logout");
       const arrow = document.getElementsByClassName("nav-signed-in");
       if (logout.length > 0 && !logout[0].contains(e.target) && !arrow[0].contains(e.target) && this.state.profileDropdownOn) {
-        this.setState({ profileDropdownOn: false });  
+        this.setState({ profileDropdownOn: false });
       }
       const searchResults = document.getElementsByClassName("nav-results");
       if (searchResults.length > 0 && !searchResults[0].contains(e.target) && this.state.suggestionsDropdownOn) {
@@ -79,6 +80,9 @@ class HomeComponent extends Component {
   }
 
   render() {
+    /*if (this.props.auth.loggedIn())
+      return <UserHome />;*/
+
     const schoolCodes = ['ucb', 'ucsd', 'gatech', 'ucd'];
     const schoolLabels = ['UC Berkeley', 'UC San Diego', 'Georgia Tech', 'UC Davis'];
     const schoolCards = map(schoolCodes, (schoolCode, key) => {

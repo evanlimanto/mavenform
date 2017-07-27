@@ -43,9 +43,10 @@ class SchoolComponent extends Component {
   }
 
   getCourseItems() {
-    if (!this.props.courses) {
+    if (!this.props.courses)
       return <p className="loader">Loading courses...</p>;
-    }
+    if (this.props.courses.notfound)
+      return <NotFound />;
 
     const schoolCode = this.props.schoolCode;
     return map(sortBy(this.props.courses, [(obj) => -keys(obj.courses).length]), (obj, subject) => {
