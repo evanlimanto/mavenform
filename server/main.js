@@ -33,6 +33,7 @@ app.use(morgan('combined'));
 app.use('/img', express.static(path.join(__dirname, '../src/img')));
 app.use('/static', express.static(path.join(__dirname, '../build/static')));
 
+require('./sitemap')(app);
 require('./paths')(app);
 require('./retrieveLists')(app);
 

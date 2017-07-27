@@ -54,8 +54,7 @@ const getExams = (callback) => {
 const getSchools = (callback) => {
   const q = 'select id, code, name from schools';
   pool.query(q, (err, result) =>{
-    if (err)
-      return callback(err);
+    if (err) return callback(err);
     const items = _.map(result.rows, function(row) {
       return { id: row.id, code: row.code, name: row.name };
     });

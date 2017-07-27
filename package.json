@@ -75,6 +75,7 @@
     "react-stickynode": "^1.2.1",
     "redux": "^3.6.0",
     "redux-router": "^2.1.2",
+    "sitemap": "^1.13.0",
     "string-hash": "^1.1.3",
     "string.prototype.startswith": "^0.2.0",
     "superagent": "^3.5.2",
