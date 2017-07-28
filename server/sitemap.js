@@ -1,25 +1,13 @@
 const _ = require('lodash');
 const async = require('async');
 const sm = require('sitemap');
-const pg = require('pg');
-
-const config = {
-  user: 'evanlimanto',
-  database: 'mavenform',
-  password: '',
-  port: 5432,
-  host: 'localhost',
-  max: 5,
-};
-
-const client = new pg.Client(config);
-client.connect();
+const config = require('./config');
 
 const getAvailableSchools = (callback) => {
   const q = `
     select code from schools where exists (select 1 from exams where schoolid = schools.id)
   `;
-  client.query(q, (err, result) => {
+  config.pool.query(q, (err, result) => {
     if (err) return callback(err);
     return callback(null, _.map(result.rows, (row) => row.code));
   });
@@ -31,7 +19,7 @@ const getAvailableCourses = (callback, schoolCode) => {
     inner join schools S on C.schoolid = S.id
     where exists (select 1 from exams where courseid = C.id) and S.code = $1;
   `;
-  client.query(q, [schoolCode], (err, result) => {
+  config.pool.query(q, [schoolCode], (err, result) => {
     if (err) return callback(err);
     return callback(null, _.map(result.rows, (row) => row.course_code));
   });
@@ -54,7 +42,7 @@ const getCourseInfo = (callback, schoolCode, courseCode) => {
     where S.code = $1 and C.code = $2;
   `;
   async.parallel([
-    (callback) => client.query(getexamq, [schoolCode, courseCode], (err, result) => {
+    (callback) => config.pool.query(getexamq, [schoolCode, courseCode], (err, result) => {
       if (err) return callback(err);
       return callback(null, _.map(result.rows, (row) => {
         return {
@@ -64,7 +52,7 @@ const getCourseInfo = (callback, schoolCode, courseCode) => {
         };
       }));
     }),
-    (callback) => client.query(gettopicq, [schoolCode, courseCode], (err, result) => {
+    (callback) => config.pool.query(gettopicq, [schoolCode, courseCode], (err, result) => {
       if (err) return callback(err);
       return callback(null, _.map(result.rows, (row) => row.code));
     }),
