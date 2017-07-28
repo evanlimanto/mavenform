@@ -730,16 +730,6 @@ module.exports = (app) => {
     });
   });
 
-  app.get('/getMathLabel/:code', (req, res, next) => {
-    const { code } = req.params;
-    const getq = `select concept from math_topics where code = $1`;
-
-    config.pool.query(getq, [code], (err, result) => {
-      if (err) return next(err);
-      return res.send({ concept: result.rows[0].concept });
-    });
-  });
-
   app.post('/checkUsername', (req, res, next) => {
     const { username } = req.body;
     const getq = `select 1 from users where nickname = $1`;

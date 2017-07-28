@@ -80,8 +80,8 @@ class HomeComponent extends Component {
   }
 
   render() {
-    if (this.props.auth.loggedIn())
-      return <UserHome />;
+    /*if (this.props.auth.loggedIn())
+      return <UserHome />;*/
 
     const schoolCodes = ['ucb', 'ucsd', 'gatech', 'ucd'];
     const schoolLabels = ['UC Berkeley', 'UC San Diego', 'Georgia Tech', 'UC Davis'];
