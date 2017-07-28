@@ -1,5 +1,4 @@
-'use strict';
-
+'use strict'; 
 require('ignore-styles');
 
 require('string.prototype.startswith');
@@ -129,6 +128,10 @@ app.use(function (req, res, next) {
     var RenderedApp = htmlData.replace('<div id="root"></div>', `<div id="root">${markup}</div>`);
     res.send(RenderedApp);
   });
+});
+
+process.on('uncaughtException', function (err) {
+  console.log(err);
 });
 
 app.listen(process.env.PORT || 8080, function () {
