@@ -6,7 +6,7 @@ import isEmpty from 'validator/lib/isEmpty';
 import req from 'superagent';
 
 import Modal from './Modal';
-import { closeModal, showLoginModal, showSignupModal, showForgotPasswordModal, setModalError, updateCoursesToBookmark } from '../../actions';
+import { closeModal, showLoginModal, showSignupModal, showForgotPasswordModal, setModalError } from '../../actions';
 
 class ModalsComponent extends Component {
   constructor(props) {
@@ -68,7 +68,6 @@ class ModalsComponent extends Component {
 
   selectSchool() {
     const schoolArr = split(this.refs.selectedSchool.value, '~');
-    const schoolCode = schoolArr[0];
     const schoolid = schoolArr[1];
     const profile = this.props.auth.getProfile();
     req.post('/selectSchool')
@@ -84,9 +83,9 @@ class ModalsComponent extends Component {
     const courseid = this.refs.selectedCourse.value;
     req.post('/bookmarkCourse')
       .send({ auth_user_id: userid, course_id: courseid })
-      .end(function(err, res) {
+      .end((err, res) => {
         if (err || !res.ok) console.error(err);
-        else this.props.closeModal();
+        else document.location = "/";
       });
   }
 

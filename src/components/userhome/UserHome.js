@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { concat, has, map, keys, split } from 'lodash';
+import { map } from 'lodash';
 
 import { showAddCourseModal, showSelectSchoolModal, updateCoursesToBookmark } from '../../actions';
 import { courseCodeToLabel, BASE_URL } from '../../utils';
 import { Modals } from '../modal';
 import Footer from '../footer';
 import Navbar from '../navbar';
-
-const req = require('superagent');
 
 class UserHomeComponent extends Component {
   constructor(props) {
