@@ -1,0 +1,56 @@
+q1_1: |
+  1\. Evaluate the following derivatives
+  <hr class="s1" />
+  (a) (6 points) $\frac{d}{dt} \frac{2^t}{\sinh(t) + 1}$
+
+q1_1_s: |
+  $\frac{(\sinh(t) + 1)(\ln(2))(2^t) - 2^t \cosh(t)}{(\sinh(t) + 1)^2}$
+
+q1_2: |
+  (b) (6 points) $\frac{d^2}{dx^2} \cos(\pi x - \pi)$
+
+q1_2_s: |
+  $-\pi^2 \cos(\pi x - \pi)$
+
+q1_3: |
+  (c) (6 points) $g'(\ln(2) + \tan^{-1}(2))$, where $g(\theta) = f^{-1}(\theta)$ and $f(\theta) = \ln(\theta) + \tan^{-1}(\theta)$
+
+q1_3_s: |
+  $\frac{10}{7}$
+
+q2_1: |
+  2\. (6 points) A ladder which is $13$ m tall is sliding down a wall. Suppose
+  the top of the ladder is sliding down the wall at $0.5$ m/s. At what rate is the
+  bottom of the ladder sliding away from the wall when it is $5$ m away from the
+  wall? Do not forget to include units of measurement in your final answer.
+
+q2_1_s: |
+  $\frac{6}{5}$ m/s
+
+q3_1: |
+  3\. Let $f(x) = x(x - 2)^2$.
+  <hr class="s1" />
+  (a) (3 points) Find all the critical points of $f(x)$ and use the first derivative test to determine whether each critical point is a local maximum or a local minimum.
+
+q3_1_s: |
+  $\frac{2}{3}$, local max; $2$, local min.
+
+q3_2: |
+  (b) (3 points) Find the maximum and minimum values of $f(x)$ on the interval $[-1, 1]$.
+
+q3_2_s: |
+  max: $\frac{32}{27}$; min: $-9$
+
+q4_1: |
+  4\. Let $f(x) = \cos(x)$.
+  <hr class="s1" />
+  (a) (3 points) Evaluate $f(\pi / 3 - \pi / 4 + 2\pi)$ exactly.
+
+q4_1_s: |
+  $\frac{\sqrt{2} + \sqrt{6}}{4}$
+
+q4_2: |
+  (b) (3 points) Find the linearization $L(x)$ for the function $f(x)$ at the point $a = \pi/3 − \pi/4 + 2\pi$.
+
+q4_2_s: |
+  $L(x) = \frac{\sqrt{2} + \sqrt{6}}{4} + \left( \frac{\sqrt{2} - \sqrt{6}}{4} \right) \left( x - \left[ \frac{\pi}{3} - \frac{\pi}{4} + 2\pi \right] \right)$

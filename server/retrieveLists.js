@@ -474,6 +474,50 @@ const getCourseTopics =
     });
   };
 
+const getTopicsList =
+  (req, res, next) => {
+    const getq = `
+      select id as topicid, T.topic, T.concept, T.code, S.id as subjectid, S.subject_label from topics T
+      inner join subjects S on S.id = T.subjectid
+    `;
+    pool.query(getq, (err, result) => {
+      const items = _.map(result.rows, (row) => {
+        const { topicid, topic, concept, code, subjectid, subject_label } = row;
+        return { topicid, topic, concept, code, subjectid, subject_label };
+      });
+      return res.json(items);
+    });
+  };
+
+const getContent =
+  (req, res, next) => {
+    const getq = `select * from content`;
+    pool.query(getq, (err, result) => {
+      const items = _.map(result.rows, (row) => {
+        return {};
+      });
+      return res.json(items);
+    });
+  };
+
+const getBookmarkedCourses =
+  (req, res, next) => {
+    const { auth_user_id } = req.params;
+    const getq = `
+      select C.id, C.code_label, C.label from bookmarked_courses BC
+      inner join courses C on BC.courseid = C.id
+      inner join users U on BC.userid = U.id
+      where U.auth_user_id = $1;
+    `;
+    pool.query(getq, [auth_user_id], (err, result) => {
+      const items = _.map(result.rows, (row) => {
+        const { id, code_label, label } = row;
+        return { id, code_label, label };
+      });
+      return res.json(items);
+    });
+  };
+
 module.exports = (app) => {
   // Retrieve initial data
   app.get('/getInitial', getInitial);
@@ -516,4 +560,7 @@ module.exports = (app) => {
 
   // Retrieve topics by course
   app.get('/getCourseTopics/:schoolCode/:courseCode', getCourseTopics);
+
+  // Retrieve bookmarked courses
+  app.get('/getBookmarkedCourses/:auth_user_id', getBookmarkedCourses);
 }

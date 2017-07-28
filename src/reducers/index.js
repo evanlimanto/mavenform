@@ -91,6 +91,24 @@ export const courseTopics = (state = [], action) => {
   }
 };
 
+export const coursesToBookmark = (state = [], action) => {
+  switch (action.type) {
+    case Actions.UPDATE_COURSES_TO_BOOKMARK:
+      return action.courses;
+    default:
+      return state;
+  }
+};
+
+export const courseLabel = (state = null, action) => {
+  switch (action.type) {
+    case Actions.UPDATE_COURSE_LABEL:
+      return action.label;
+    default:
+      return state;
+  }
+};
+
 export const modal = (state = { type: null, errorText: null }, action) => {
   switch (action.type) {
     case Actions.SHOW_LOGIN_MODAL:
@@ -99,10 +117,23 @@ export const modal = (state = { type: null, errorText: null }, action) => {
       return { type: 'signup', errorText: null };
     case Actions.SHOW_FORGOT_PASSWORD_MODAL:
       return { type: 'forgotpassword', errorText: null };
+    case Actions.SHOW_SELECT_SCHOOL_MODAL:
+      return { type: 'selectschool', errorText: null };
+    case Actions.SHOW_ADD_COURSE_MODAL:
+      return { type: 'addcourse', errorText: null };
     case Actions.CLOSE_MODAL:
       return { type: null, errorText: null };
     case Actions.SET_MODAL_ERROR:
       return { type: state.type, errorText: action.errorText };
+    default:
+      return state;
+  }
+};
+
+export const userSchool = (state = { code: null }, action) => {
+  switch (action.type) {
+    case Actions.UPDATE_USER_SCHOOL:
+      return action.school;
     default:
       return state;
   }

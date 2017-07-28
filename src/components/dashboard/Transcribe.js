@@ -10,7 +10,6 @@ import { toLower, has, endsWith, join, keys, forEach, map, split, filter, reduce
 import DashboardLogin from './DashboardLogin';
 
 const cookies = canUseDOM ? require('browser-cookies') : null;
-const LoadingSVG = require('../../img/ring.svg');
 const request = require('superagent');
 const yaml = require('js-yaml');
 
@@ -293,7 +292,7 @@ class TranscribeComponent extends Component {
           <textarea ref='content' onKeyUp={this.updateContent} placeholder='Enter content here'></textarea>
           <hr className="s2" />
           <div>
-            <button className='blue' onClick={(e) => this.upload(e)}>{this.state.uploading ? <LoadingSVG width={16} height={16} /> : "SAVE" }</button>
+            <button className='blue' onClick={(e) => this.upload(e)}>{this.state.uploading ? <img src="/img/ring.svg" width="16" height="16" /> : "SAVE" }</button>
             <Link className='gray cancel' to="/dashboard">Back</Link>
           </div>
           <hr className="s1" />

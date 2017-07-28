@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { map, replace } from 'lodash';
 import { Helmet } from 'react-helmet';
 
-import { showLoginModal, showWaitlistModal, updateCourseExams, updateCourseTopics } from '../../actions';
+import { showLoginModal, showWaitlistModal, updateCourseExams, updateCourseTopics, updateCourseLabel } from '../../actions';
 import { courseCodeToLabel, BASE_URL } from '../../utils';
 import { examClickEvent } from '../../events';
 import Footer from '../footer';
@@ -25,15 +25,18 @@ class CourseComponent extends Component {
         .then((json) => dispatch(updateCourseExams(json))),
       fetch(`${BASE_URL}/getCourseTopics/${schoolCode}/${courseCode}`)
         .then((response) => response.json())
-        .then((json) => dispatch(updateCourseTopics(json)))
+        .then((json) => dispatch(updateCourseTopics(json))),
+      fetch(`${BASE_URL}/getCourseLabel/${schoolCode}/${courseCode}`)
+        .then((response) => response.json())
+        .then((json) => dispatch(updateCourseLabel(json.label)))
     ]);
   }
 
   static getMeta(props) {
-    const { courseCode, schoolCode, labels } = props;
+    const { courseCode, schoolCode, labels, courseLabel } = props;
     const title = ((labels.schools) ? `${labels.schools[schoolCode]} ${courseCodeToLabel(courseCode)} - Studyform` : "Studyform");
     const description = `Study and discuss past exams and practice problems` +
-      ((labels.schools) ? ` for ${labels.schools[schoolCode]} ${courseCodeToLabel(courseCode)}.` : `.`);
+      ((labels.schools) ? ` for ${labels.schools[schoolCode]} ${courseCodeToLabel(courseCode)} - ${courseLabel}.` : `.`);
     return (
       <Helmet>
         <title>{title}</title>
@@ -69,7 +72,7 @@ class CourseComponent extends Component {
       <div>
         <h4 className="center">{courseCodeToLabel(courseCode)}</h4>
         <div className="center">
-          <h5>Index of study resources</h5>
+          <h5>{!this.props.courseLabel || this.props.courseLabel}</h5>
         </div>
         <hr className="s4" />
         <div className="center">
@@ -135,6 +138,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
     schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
+    courseLabel: state.courseLabel,
     topics: state.courseTopics,
     exams: state.courseExams,
     labels: state.labels,

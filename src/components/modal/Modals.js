@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { map, sortBy, split } from 'lodash';
 import isEmail from 'validator/lib/isEmail';
 import isEmpty from 'validator/lib/isEmpty';
 import req from 'superagent';
 
 import Modal from './Modal';
-import { closeModal, showLoginModal, showSignupModal, showForgotPasswordModal, setModalError } from '../../actions';
+import { closeModal, showLoginModal, showSignupModal, showForgotPasswordModal, setModalError, updateCoursesToBookmark } from '../../actions';
 
 class ModalsComponent extends Component {
   constructor(props) {
@@ -13,8 +14,10 @@ class ModalsComponent extends Component {
 
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
+    this.selectSchool = this.selectSchool.bind(this);
     this.forgotPassword = this.forgotPassword.bind(this);
     this.getModal = this.getModal.bind(this);
+    this.bookmarkCourse = this.bookmarkCourse.bind(this);
   }
 
   signup(e) {
@@ -60,6 +63,30 @@ class ModalsComponent extends Component {
         if (err || !res.ok) return this.setState({ error: err.body });
         document.location = "/";
         return;
+      });
+  }
+
+  selectSchool() {
+    const schoolArr = split(this.refs.selectedSchool.value, '~');
+    const schoolCode = schoolArr[0];
+    const schoolid = schoolArr[1];
+    const profile = this.props.auth.getProfile();
+    req.post('/selectSchool')
+      .send({ school_id: schoolid, auth_user_id: profile.user_id })
+      .end((err, res) => {
+        if (err || !res.ok) return console.error(err);
+        else document.location = "/";
+      });
+  }
+
+  bookmarkCourse() {
+    const userid = this.props.auth.getProfile().user_id;
+    const courseid = this.refs.selectedCourse.value;
+    req.post('/bookmarkCourse')
+      .send({ auth_user_id: userid, course_id: courseid })
+      .end(function(err, res) {
+        if (err || !res.ok) console.error(err);
+        else this.props.closeModal();
       });
   }
 
@@ -126,6 +153,42 @@ class ModalsComponent extends Component {
           <button type="submit" className="login-button blue" onClick={this.forgotPassword}>Send Recovery Email</button>
         </form>
       );
+    } else if (this.props.modal.type === 'selectschool') {
+      headerContent = <h1>Select Your School</h1>;
+      modalContent = (
+        <span>
+          <hr className="s3" />
+          <select ref="selectedSchool">
+            {map(sortBy(this.props.schools, [(school) => school.name]), (school, key) => {
+              return <option value={school.code + "~" + school.id} key={key}>{school.name}</option>;
+            })}
+          </select>
+          <div className="select-arrow">
+            <div className="material-icons">keyboard_arrow_down</div>
+          </div>
+          <hr className="s2" />
+          <a className="login-button blue" onClick={this.selectSchool}>Confirm</a>
+          <hr className="s2"/>
+        </span>
+      );
+    } else if (this.props.modal.type === 'addcourse') {
+      headerContent = <h1>Add Course</h1>;
+      modalContent = (
+        <span>
+          <hr className="s3"/>
+          <select ref="selectedCourse">
+            {map(sortBy(this.props.coursesToBookmark, [(course) => course.code_label]), (course, key) => {
+              return <option value={course.id} key={key}>{course.code_label}</option>;
+            })}
+          </select>
+          <div className="select-arrow">
+            <div className="material-icons">keyboard_arrow_down</div>
+          </div>
+          <hr className="s2" />
+          <a className="login-button blue" onClick={this.bookmarkCourse}>Add To Dashboard</a>
+          <hr className="s2"/>
+        </span>
+      );
     }
 
     return <Modal closeModal={this.props.closeModal} infoContent={infoContent} modalContent={modalContent} errorText={this.props.modal.errorText} headerContent={headerContent} />;
@@ -136,10 +199,12 @@ class ModalsComponent extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     auth: state.auth,
     modal: state.modal,
+    schools: state.schools,
+    coursesToBookmark: state.coursesToBookmark,
   };
 };
 

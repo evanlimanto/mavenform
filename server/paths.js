@@ -232,6 +232,7 @@ module.exports = (app) => {
     const q      = `insert into content_staging (problem_num, subproblem_num, problem, solution, exam, choices) values($1, $2, $3, $4, $5, $6)`;
     async.waterfall([
       (callback) => {
+        console.log("insert");
         config.pool.query(inq, [course_id, exam_type_id, term_id, profs, school_id, pdf_link, course_id, exam_type_id, term_id, profs, school_id], (err) => callback(err))
       },
       (callback) => {
@@ -257,7 +258,7 @@ module.exports = (app) => {
             } else {
               solution = replaceImagePlaceholders(basePath, doc[key + "_s"]);
             }
-            config.pool.query(q, [problem_num, subproblem_num, content, solution, id, choices], (err) => innerCallback(err));  
+            config.pool.query(q, [problem_num, subproblem_num, content, solution, id, choices], (err) => innerCallback(err));
           }, funcCallback)
         ], callback);
       }
@@ -362,6 +363,26 @@ module.exports = (app) => {
     });
   });
 
+  app.get('/getCoursesToBookmark/:userid', (req, res, next) => {
+    const userid = req.params.userid;
+
+    const getq = `
+      select C.id, C.code_label from courses C
+      inner join users U on C.schoolid = U.schoolid
+      where U.auth_user_id = $1
+      and C.id not in
+        (select BC.courseid from bookmarked_courses BC inner join users U on BC.userid = U.id where U.auth_user_id = $1)
+    `;
+    config.pool.query(getq, [userid], (err, result) => {
+      if (err) return next(err);
+      const items = _.map(result.rows, (row) => {
+        const { id, code_label } = row;
+        return { id, code_label };
+      });
+      return res.json(items);
+    });
+  });
+
   app.post('/selectSchool', (req, res, next) => {
     const { auth_user_id, school_id } = req.body;
 
@@ -376,7 +397,7 @@ module.exports = (app) => {
     const { auth_user_id, course_id } = req.body;
 
     const q = `
-      insert into bookmarked_courses(userid, courseid)
+      insert into bookmarked_courses (userid, courseid)
         select id, $1 from users where auth_user_id = $2
     `;
     config.pool.query(q, [course_id, auth_user_id], (err, result) => {
@@ -736,6 +757,20 @@ module.exports = (app) => {
     config.pool.query(updateq, [content, commentid], (err, result) => {
       if (err) return next(err);
       return res.send("Success!");
+    });
+  });
+
+  app.get('/getCourseLabel/:schoolCode/:courseCode', (req, res, next) => {
+    const { schoolCode, courseCode } = req.params;
+    const getq = `
+      select C.label from courses C
+      inner join schools S on S.id = C.schoolid
+      where S.code = $1 and C.code = $2
+    `;
+    config.pool.query(getq, [schoolCode, courseCode], (err, result) => {
+      if (err) return next(err);
+      if (result.rows.length === 0) return res.json({ label: null });
+      return res.json({ label: result.rows[0].label });
     });
   });
 }

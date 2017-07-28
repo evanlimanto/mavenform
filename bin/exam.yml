@@ -1,0 +1,38 @@
+q1_1: |
+  1\. (6 points) For each of the following, compute $\frac{dy}{dx}$:
+  <hr class="s1" />
+  (a) $y = \ln \left( \frac{2x + 5}{x + 2} \right)$
+
+q1_2: |
+  (b) $y = 10^{x^2 + 5x}$
+
+q1_3: |
+  (c) $\sin(5x + y) = 2x$
+
+q2_1: |
+  2\. (5 points) Compute the following limit:
+  $$\lim_{x \to 0} \frac{\tan^{-1}(2\sin(x))}{\sin(7x)}$$
+  **Note:** $\tan^{-1}$ denotes the inverse of the tangent function. It is also denoted arctan.
+
+q3_1: |
+  3\. (6 points) Let $f(x) = \sin^2(x) - 2\cos(x)$.
+  <hr class="s1" />
+  (a) List the $x$-coordinate of each critical point on the interval $(0, 2\pi)$ and identify each as belonging to a local maximum, local minimum, or neither of these.
+
+q3_2: |
+  (b) Find the absolute extreme values for $f(x)$ on the interval $[0, 2\pi]$.
+
+q4_1: |
+  4\. (6 points) The graph below is the graph of the **derivative** of $f$.
+  <hr class="s2" />
+  !!q4-1.png!!
+  <hr class="s2" />
+  List the $x$-coordinate of each critical point of $f$ on the interval $(-2, 5)$ and identify each as belonging to a local maximum, local minimum, or neither of these.
+
+q5_1: |
+  5\. (6 points) Compute the following:
+  <hr class="s1" />
+  (a) $\frac{d}{dx} (x^{2x})$
+
+q5_2: |
+  (b) $\lim_{x \to 0^+} (x^{2x})$

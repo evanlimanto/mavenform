@@ -46,6 +46,30 @@ export const updateCourseTopics = (topics) => {
   };
 };
 
+export const UPDATE_USER_SCHOOL = 'UPDATE_USER_SCHOOL';
+export const updateUserSchool = (school) => {
+  return {
+    type: UPDATE_USER_SCHOOL,
+    school: school,
+  };
+};
+
+export const UPDATE_COURSES_TO_BOOKMARK = 'UPDATE_COURSES_TO_BOOKMARK';
+export const updateCoursesToBookmark = (courses) => {
+  return {
+    type: UPDATE_COURSES_TO_BOOKMARK,
+    courses: courses,
+  };
+};
+
+export const UPDATE_COURSE_LABEL = 'UPDATE_COURSE_LABEL';
+export const updateCourseLabel = (label) => {
+  return {
+    type: UPDATE_COURSE_LABEL,
+    label: label,
+  };
+};
+
 export const SHOW_LOGIN_MODAL = 'SHOW_LOGIN_MODAL';
 export const showLoginModal = () => { return { type: SHOW_LOGIN_MODAL }; };
 export const SHOW_WAITLIST_MODAL = 'SHOW_WAITLIST_MODAL';
@@ -54,6 +78,10 @@ export const SHOW_FORGOT_PASSWORD_MODAL = 'SHOW_FORGOT_PASSWORD_MODAL';
 export const showForgotPasswordModal = () => { return { type: SHOW_FORGOT_PASSWORD_MODAL }; };
 export const SHOW_SIGNUP_MODAL = 'SHOW_SIGNUP_MODAL';
 export const showSignupModal = () => { return { type: SHOW_SIGNUP_MODAL }; };
+export const SHOW_SELECT_SCHOOL_MODAL = 'SHOW_SELECT_SCHOOL_MODAL';
+export const showSelectSchoolModal = () => { return { type: SHOW_SELECT_SCHOOL_MODAL }; };
+export const SHOW_ADD_COURSE_MODAL = 'SHOW_ADD_COURSE_MODAL';
+export const showAddCourseModal = () => { return { type: SHOW_ADD_COURSE_MODAL }; };
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const closeModal = () => { return { type: CLOSE_MODAL }; };
 

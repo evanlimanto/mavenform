@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import { map, toUpper } from 'lodash';
 import Footer from '../footer';
 import Navbar from '../navbar';
-//import UserHome from '../userhome';
+import UserHome from '../userhome';
 import { schoolClickEvent } from '../../events';
 import { algoliaCourseIndex } from '../../utils';
 
@@ -80,8 +80,8 @@ class HomeComponent extends Component {
   }
 
   render() {
-    /*if (this.props.auth.loggedIn())
-      return <UserHome />;*/
+    if (this.props.auth.loggedIn())
+      return <UserHome />;
 
     const schoolCodes = ['ucb', 'ucsd', 'gatech', 'ucd'];
     const schoolLabels = ['UC Berkeley', 'UC San Diego', 'Georgia Tech', 'UC Davis'];
