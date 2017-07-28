@@ -8,6 +8,7 @@ import { AppSubmitted, Marketing, MarketingApps } from './components/marketing';
 import Profile from './components/profile';
 import Upload from './components/upload';
 import School from './components/school';
+import Sitemap from './components/sitemap';
 import { TopicContent } from './components/topic';
 import UserHome from './components/userhome';
 
@@ -30,6 +31,7 @@ const routes = [
   { path: '/m4rk3t1ng4pp5', component: MarketingApps },
   { path: '/upload', component: Upload },
   { path: '/home', component: UserHome },
+  { path: '/sitemap.xml', component: Sitemap },
   { path: '/:schoolCode/:courseCode/:examType/:termCode/:profs', component: Exam },
   { path: '/:schoolCode/:courseCode/:code', component: TopicContent },
   { path: '/:schoolCode/:courseCode', component: Course },
