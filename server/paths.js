@@ -218,7 +218,7 @@ module.exports = (app) => {
     try {
       doc = yaml.safeLoad(contents);
     } catch (err) {
-      next(e);
+      next(err);
     }
 
     const items = _.map(_.filter(_.keys(doc), function(k) {

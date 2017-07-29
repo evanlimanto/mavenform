@@ -161,8 +161,8 @@ class DashboardContentComponent extends Component {
         </form>
         <hr className="s2" />
 
-        <span className="contentNavCol" style={{ height: "150px", "overflow-y": "scroll" }}>{exams}</span>
-        {subparts.length ? <span className="contentNavCol" style={{ height: "150px", "overflow-y": "scroll" }}>{subparts}</span> : null}
+        <span className="contentNavCol" style={{ height: "150px", "overflowY": "scroll" }}>{exams}</span>
+        {subparts.length ? <span className="contentNavCol" style={{ height: "150px", "overflowY": "scroll" }}>{subparts}</span> : null}
         <div style={{"float": "left", "width": "1000px"}}>
           <h1>{this.state.examid} {!exam || `: ${exam.courseid} - ${exam.examtype} - ${exam.examid}`}
           {!exam || <a href={exam.source_url} target="_blank">URL</a>} {this.state.status}</h1>

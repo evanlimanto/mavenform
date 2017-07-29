@@ -26,7 +26,7 @@ pg.defaults.ssl = true;
 const prod_client = new pg.Client(prodConfig);
 prod_client.connect();
 
-const id = 324;
+const id = 327;
 const q1 = `select * from exams where id >= ${id}`;
 const q2 = `select * from content where exam >= ${id}`;
 const i1 = `insert into exams (id, courseid, examtype, examid, profs, schoolid, source_url) values($1, $2, $3, $4, $5, $6, $7)`;

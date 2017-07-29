@@ -83,8 +83,8 @@ class HomeComponent extends Component {
     /*if (this.props.auth.loggedIn())
       return <UserHome />;*/
 
-    const schoolCodes = ['ucb', 'ucsd', 'gatech', 'ucd'];
-    const schoolLabels = ['UC Berkeley', 'UC San Diego', 'Georgia Tech', 'UC Davis'];
+    const schoolCodes = ['ucb', 'ucsd', 'gatech', 'ucd', 'uci'];
+    const schoolLabels = ['UC Berkeley', 'UC San Diego', 'Georgia Tech', 'UC Davis', 'UC Irvine'];
     const schoolCards = map(schoolCodes, (schoolCode, key) => {
       return (
         <Link key={key} className="card" to={"/" + schoolCode} onClick={() => schoolClickEvent(schoolCode)}>

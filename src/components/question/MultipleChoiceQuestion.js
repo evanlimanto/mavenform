@@ -24,7 +24,7 @@ class MultipleChoiceQuestion extends Component {
   render() {
     const { id, content_id, schoolCode, courseCode, examType, termCode, content, choices } = this.props;
     let solutionNum = this.props.solutionNum ? (this.props.solutionNum - 1) : null;
-    const options = solutionNum ? map(split(choices, '~'), (choice, index) => {
+    const options = (solutionNum !== null) ? map(split(choices, '~'), (choice, index) => {
       choice = `${String.fromCharCode(index + 65)}) ${choice}`;
       const optionClass = classnames({
         option: true,
@@ -34,7 +34,7 @@ class MultipleChoiceQuestion extends Component {
       return <div key={index} tabIndex="0" className={optionClass} dangerouslySetInnerHTML={{__html: choice}}></div>;
     }) : map(split(choices, '~'), (choice, index) => {
       choice = `${String.fromCharCode(index + 65)}) ${choice}`;
-      return <div>{choice}</div>;
+      return <div key={index}>{choice}</div>;
     });
 
     const QuestionDropdownComponent = <QuestionDropdown schoolCode={schoolCode} courseCode={courseCode} examType={examType} termCode={termCode} id={id} content_id={content_id} />;

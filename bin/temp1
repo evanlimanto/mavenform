@@ -1,0 +1,106 @@
+q1_1: |
+  1\. (6 points) The function $f$ and its partial derivatives have the following values at $(3, 4)$:
+  $$f(3, 4) = 7, \quad  \frac{\partial f}{\partial x}(3, 4) = -3, \quad \frac{\partial f}{\partial y}(3, 4) = 2$$
+  (a) Give the equation of the tangent plane to the surface $z = f(x, y)$ at the point $(3, 4)$.
+
+q1_1_s: |
+  We use the equation for the tangent plane:
+  $$z = f(3, 4) + \frac{\partial f}{\partial x}(3, 4)(x - 3) + \frac{\partial f}{\partial y}(3, 4)(y - 4)$$
+  With the information we are given, the equation of the plane is:
+  $$z = 7 - 3(x - 3) + 2(y - 4)$$
+
+q1_2: |
+  (b) Use the linear approximation of $f(x, y)$ to estimate the value of $f(3.1, 3.8)$.
+
+q1_2_s: |
+  Let
+  $$L(x, y) = 7 - 3(x - 3) + 2(y - 4)$$
+  be the *linear approximation* of $f$ near $(3, 4)$. Then since $(3.1, 3.8)$ is near $(3, 4)$, we have
+  $$f(3.1, 3.8) \approx L(3.1, 3.8) = 7 - 3(0.1) + 2(-0.2) = 6.3$$
+
+q2_1: |
+  2\. (6 points) Let $g$ be a function given by the formula $g(x, y) = e^{-2x} \cos (Ay)$.
+  <hr class="s1" />
+  (a) Compute all second order partial derivatives of $g$.
+
+q2_1_s: |
+  We have
+  $$\frac{\partial f}{\partial x} = -2e^{-2x} \cos(Ay) \\\\
+  \frac{\partial f}{\partial y} = -Ae^{-2x} \sin(Ay) \\\\
+  \frac{\partial^2 f}{\partial x^2} = 4e^{-2x} \cos(Ay) \\\\
+  \frac{\partial^2 f}{\partial y \partial x} = 2Ae^{-2x} \sin(Ay) \\\\
+  \frac{\partial^2 f}{\partial y^2} = -A^2e^{-2x} \cos(Ay) \\\\
+  \frac{\partial^2 f}{\partial x \partial y} = 2Ae^{-2x} \sin(Ay)$$
+  It is not necessary to do both *mixed partials* if you
+  correctly cite Clairaut’s Theorem. Since $f(x, y)$ is the product
+  of an exponential and a trigonometric function, it has continuous
+  second partials and therefore the mixed partials must be equal.
+
+q2_2: |
+  (b) Find all values of $A$ (if any) for which $g$ is a solution to Laplace's Equation: $\frac{\partial^2 g}{\partial x^2} + \frac{\partial^2 g}{\partial y^2} = 0$.
+
+q2_2_s: |
+  We are looking for all real numbers $A$ so that
+  $$4e^{-2x} \cos(Ay) - A^2e^{-2x}\cos(Ay) = 0$$
+  Since the equation is supposed to hold for all $x$ and $y$ values, we can cancel out the $e^{-2x} \cos(Ay)$ terms to get
+  $$A^2 = 4 \implies A = \pm 2$$
+
+q3_1: |
+  3\. (6 points) Assume the temperature at a point $(x, y)$ is $T(x, y)$ degrees Celsius and assume that
+  $$\frac{\partial T}{\partial x}(3, 6) = 12 \; \text{and} \; \frac{\partial T}{\partial y}(3, 6) = 10$$
+  A small Egyptian scarab beetle crawls so that its position after $t$ seconds is given by
+  $$x = \sqrt{3 + t} \; \text{and} \; y = 3 + \frac{1}{2}t$$
+  How fast is the temperature rising on the Egyptian scarab beetle's path after $6$ seconds?
+
+q3_1_s: |
+  Let $\vec{c}(t) = (\sqrt{3 + t}, 3 + \frac{1}{2}t)$ be the path function that describes the position of the beetle. Then the composition function $(T ◦ \vec{c})(t)$ describes the temperature of the beetle at $t$ seconds. Therefore, we are being asked to calculate $(T ◦ \vec{c})'(t)$. By the chain rule, we have
+  $$D(T ◦ \vec{c} )(t) = [ DT ] (\vec{c} (t)) [ D \vec{c} ] (t)$$
+  In this special case, this simplifies to
+  $$(T ◦ \vec{c})'(t) = \nabla T(\vec{c}(t)) \cdot \vec{c}'(t)$$
+  After $6$ seconds, the position of the beetle is
+  $$\vec{c}(6) = (3, 6)$$
+  Therefore,
+  $$(T ◦ \vec{c})'(6) = \nabla T(3, 6) \cdot \vec{c}'(6)$$
+  We are given that $\nabla T(3, 6) = (12, 10)$, and a quick calculation shows $\vec{c}'(6) = (\frac{1}{6}, \frac{1}{2})$.
+  <hr class="s1" />
+  So we have
+  $$(T ◦ \vec{c})'(6) = (12, 10) \cdot \left( \frac{1}{6}, \frac{1}{2} \right) = 7$$
+
+q4_1: |
+  4\. (6 points) Find the global maximum and global minimum values of $h(x, y) = 2x^2 + 2y^2 + 8x + 16$ on the closed set $D = \\{ (x, y) | x^2 + y^2 \le 25 \\}$.
+
+q4_1_s: |
+  First observe that the domain $D$ is both *closed and bounded*, and that
+  $h$ is a continuous function (it is just a polynomial). Therefore, the Extreme Value Theorem guarantees the existence of global extrema. To
+  find the global extrema, we follow a three step process:
+  <hr class="s1" />
+  **Step 1:** Locate critical points on the interior of the domain.
+  <hr class="s1" />
+  **Step 2:** Locate any critical points on the boundary of the domain. Since the domain is a circle,  it will be convenient to use the method of
+  Lagrange multipliers for step 2, though for this particular function, it is
+  better to use ad hoc methods. For the sake of practice, we will do both.
+  <hr class="s1" />
+  **Step 3:** Plug all of the critical points into the function and see which
+  gives us the largest number and which gives us the smallest.
+  <hr class="s2" />
+  **Step 1: (Find critical points on the interior)** To find critical
+  points on the interior, we need to solve for when $\nabla h = \vec{0}$. *Remark:* We should also take note of any points where $h$ is not differentiable, but as we noted earlier, $h$ is a polynomial and is therefore differentiable everywhere. Since
+  $$\nabla h = (4x + 8, 4y)$$
+  it is trivial to check that $\nabla f = \vec{0}$ only at the point $(-2, 0)$. Since this point is in the interior of our domain, it gives us a critical point.
+  <hr class="s2" />
+  **Step 2: (Optimize $h$ on the boundary using Lagrange multipliers)** Now we must find critical points on the boundary, $x^2 + y^2 = 25$, by optimizing the function $h(x, y) = 2x^2 + 2y^x + 8x + 16$ *subject to the constraint* $g(x, y) = x^2 + y^2 = 25$. Note that $\nabla g = (2x, 2y) = (0, 0)$ only at the point $(x, y) = (0, 0)$. Since $(0, 0)$ is *not* on the constraint, we can disregard this point and move on to solving the Lagrange condition
+  $$\nabla h = \lambda \nabla g \implies (4x + 8, 4y) = \lambda (2x, 2y) \\\\
+  x^2 + y^2 = 25$$
+  The first equation gives us
+  $$4x + 8 = \lambda 2x, \; \text{and} 4y = \lambda 2y$$
+  Using the equation $4y = \lambda 2y$, we see that either $y = 0$ (in which case it doesn't make sense to divide by $y$), or $\lambda = 2$.
+  <hr class="s2" />
+  **Case 1:** If $y = 0$, then $x^2 + y^2 = 25$ implies $x^2 = 25 \implies x = \pm 5$. Therefore, we pick up two points where $h$ could potentially have an extreme: $(5, 0), (-5, 0)$.
+  <hr class="s1" />
+  **Case 2:** If $\lambda = 2$, then $4x + 8 = \lambda 2x$ implies $4x + 8 = 4x \implies 8 = 0$. Since this makes no sense, $\lambda$ cannot possibly be $2$. Therefore, we get no critical points in this case.
+  <hr class="s2" />
+  **Step 2: (Finding critical points on the boundary using ad hoc methods)** On the boundary, $x^2 + y^2 = 25, h(x, y)$ becomes
+  $$h(x, y) = 2(x^2 + y^2) + 8x + 16 = 50 + 8x + 16 = 8x + 66$$
+  where $-5 \le x \le 5$. This is a linear function with positive slope, so $h$ has a maximum of $106$ and a minimum of $26$ when restricted to the circle $x^2 + y^2 = 25$.
+  <hr class="s2" />
+  **Step 3: (Plug them in)** Now we must plug in all of the points we found: $(5, 0), (-5, 0)$, and $(-2, 0)$. If you plug all of these points into $h$, you will see that $h$ has a maximum of $106$ occurring at $(5, 0)$, and a minimum of $8$ occurring at $(-2, 0)$.

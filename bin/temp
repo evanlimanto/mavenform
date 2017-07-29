@@ -1,0 +1,32 @@
+6.3: 1,3,5,7,9,11,13,15,17,19,21,23
+
+Orthogonal Projections
+
+q1_1: |
+  Let $$\mathbf{u}_1 = \left[ \begin{array}{cZ} 0 \\\\ 1 \\\\ -4 \\\\ -1 \end{array} \right], \mathbf{u}_2 = \left[ \begin{array}{c} 3 \\\\ 5 \\\\ 1 \\\\ 1 \end{array} \right], \mathbf{u}_3 = \left[ \begin{array}{c} 1 \\\\ 0 \\\\ 1 \\\\ -4 \end{array} \right], \mathbf{u}_4 = \left[ \begin{array}{c} 5 \\\\ -3 \\\\ -1 \\\\ 1 \end{array} \right], \mathbf{x} = \left[ \begin{array}{c} 10 \\\\ -8 \\\\ 2 \\\\ 0 \end{array} \right]$$
+  Write $\mathbf{x}$ as the sum of two vectors, one in $\text{Span} \\{ \mathbf{u}_1, \mathbf{u}_2, \mathbf{u}_3 \\}$ and the other in $\text{Span} \\{ \mathbf{u}_4 \\}$.
+
+q1_3: |
+  Verify that $\\{ \mathbf{u}_1, \mathbf{u}_2 \\}$ is an orthogonal set, and then find the orthogonal projection of $\mathbf{y}$ onto $\text{Span} \\{ \mathbf{u}_1, \mathbf{u}_2 \\}$.
+  $$\mathbf{y} = \left[ \begin{array}{c} -1 \\\\ 4 \\\\ 3 \end{array} \right] \mathbf{u}_1 = \left[ \begin{array}{c} 1 \\\\ 1 \\\\ 0 \end{array} \right], \mathbf{u}_2 = \left[ \begin{array}{c} -1 \\\\ 1 \\\\ 0 \end{array} \right]$$
+
+q1_7: |
+  Let $W$ be the subspace spanned by the $\mathbf{u}$'s, and write $\mathbf{y}$ as the sum of a vector in $W$ and a vector orthogonal to $W$.
+  $$\mathbf{y} = \left[ \begin{array}{c} 1 \\\\ 3 \\\\ 5 \end{array} \right], \mathbf{u}_1 = \left[ \begin{array}{c} 1 \\\\ 3 \\\\ -2 \end{array} \right], \mathbf{u}_2 = \left[ \begin{array}{c} 5 \\\\ 1 \\\\ 4 \end{array} \right]$$
+
+q1_11: |
+  Find the closest point to $\mathbf{y}$ in the subspace $W$ spanned by $\mathbf{v}_1$ and $\mathbf{v}_2$.
+  $$\mathbf{y} = \left[ \begin{array}{c} 3 \\\\ 1 \\\\ 5 \\\\ 1 \end{array} \right], \mathbf{v}_1 = \left[ \begin{array}{c} 3 \\\\ 1 \\\\ -1 \\\\ 1 \end{array} \right], \mathbf{v}_2 = \left[ \begin{array}{c} 1 \\\\ -1 \\\\ 1 \\\\ -1 \end{array} \right]$$
+
+q1_21: |
+  All vectors and subspaces are in $\mathbb{R}^n$. Mark each statement True or False. Justify your answer.
+  <hr class="s1" />
+  a. If $\mathbf{z}$ is orthogonal to $\mathbf{u}_1$ and to $\mathbf{u}_2$ and if $W = \text{Span} \\{ \mathbf{u}_1, \mathbf{u}_2 \\}$ then $\mathbf{z}$ must be in $W^\bot$.
+  <hr class="s1" />
+  b. For each $\mathbf{y}$ and each subspace $W$, the vector $\mathbf{y} - \text{proj}_W \mathbf{y}$ is orthogonal to $W$.
+  <hr class="s1" />
+  c. The orthogonal projection $\hat{\mathbf{y}}$ of $\mathbf{y}$ onto a subspace $W$ can sometimes depend on the orthogonal basis for $W$ used to compute $\hat{\mathbf{y}}$.
+  <hr class="s1" />
+  d. If $\mathbf{y}$ is a subspace $W$, then the orthogonal projection of $\mathbf{y}$ onto $W$ is $\mathbf{y}$ itself.
+  <hr class="s1" />
+  e. If the columns of an $n \times p$ matrix $U$ are orthonormal, then $UU^T\mathbf{y}$ is the orthogonal projection of $\mathbf{y}$ onto the column space of $U$.
