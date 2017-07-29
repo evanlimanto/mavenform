@@ -419,22 +419,18 @@ const getTopicInfo =
         pool.query(getq, [code], (err, result) => {
           if (err)
             return callback(err);
-          const info = _.reduce(result.rows, (result, row) => {
+          const info = _.reduce(result.rows, (result, row, index) => {
             const problem_num = row.problem_num;
-            const subproblem_num = row.subproblem_num;
-            if (_.has(result, problem_num)) {
-              result[problem_num] = Math.max(result[problem_num], subproblem_num);
-            } else {
-              result[problem_num] = subproblem_num;
-            }
+            const subproblem_num = row.subproblem_num || 1;
+            result[index] = 1;
             return result;
           }, {});
 
-          const problems = _.reduce(result.rows, (result, row) => {
+          const problems = _.reduce(result.rows, (result, row, index) => {
             let { content_id, problem_num, subproblem_num, problem, solution, choices } = row;
             problem = renderer.preprocess(row.problem);
             solution = renderer.preprocess(row.solution);
-            const key = `${problem_num}_${subproblem_num}`;
+            const key = `${index}`;
             result[key] = { problem, solution, choices, content_id };
             return result;
           }, {});

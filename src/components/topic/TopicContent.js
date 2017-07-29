@@ -34,8 +34,8 @@ class TopicContentComponent extends Component {
     const topicInfo = this.props.topicInfo;
     const content = (!topicInfo) ? (<p className="loader">Loading content...</p>) :
       map(topicInfo.info, (num_parts, part) => {
-        const subparts = map(range(1, num_parts + 1), subpart => {
-          const key = `${part}_${subpart}`;
+        const subparts = map(range(1, 2), subpart => {
+          const key = `${part}`;
           const content = topicInfo.problems[key].problem || '';
           const solution = topicInfo.problems[key].solution || '';
           const choices = topicInfo.problems[key].choices || '';
@@ -60,7 +60,7 @@ class TopicContentComponent extends Component {
         <Navbar schoolCode={this.props.schoolCode} courseCode={this.props.courseCode} concept={this.props.code} label={this.props.topicInfo.conceptLabel} />
         <div id="header-text">
           <div className="center">
-            <h4>{topicInfo.topicLabel || topicInfo.conceptLabel}</h4>
+            <h4>{topicInfo.conceptLabel}</h4>
           </div>
         </div>
         <div className="content">

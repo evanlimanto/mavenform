@@ -35,11 +35,12 @@ const i2 = `insert into content_staging (id, problem_num, subproblem_num, proble
 const i3 = `insert into images_staging (id, examid, url) values ($1, $2, $3)`;
 
 async.parallel([
-  (callback) => local_client.query(q1, callback),
-  (callback) => local_client.query(q2, callback),
-  (callback) => local_client.query(q3, callback),
+  (callback) => prod_client.query(q1, callback),
+  (callback) => prod_client.query(q2, callback),
+  (callback) => prod_client.query(q3, callback),
 ], (err, results) => {
   if (err) return console.error(err);
+  console.log(results);
   const r1 = results[0];
   const r2 = results[1];
   const r3 = results[2];
@@ -47,9 +48,9 @@ async.parallel([
   return async.parallel([
     (callback) => {
       async.series([
-        (outerCallback) => async.each(r1.rows, (row, callback) => prod_client.query(i1, [row.id, row.courseid, row.examtype, row.examid, row.profs, row.schoolid, row.datetime, row.source_url], callback), outerCallback),
-        (outerCallback) => async.each(r2.rows, (row, callback) => prod_client.query(i2, [row.id, row.problem_num, row.subproblem_num, row.problem, row.solution, row.choices, row.exam], callback), outerCallback),
-        (outerCallback) => async.each(r3.rows, (row, callback) => prod_client.query(i3, [row.id, row.examid, row.url], outerCallback)),
+        (outerCallback) => async.each(r1.rows, (row, callback) => local_client.query(i1, [row.id, row.courseid, row.examtype, row.examid, row.profs, row.schoolid, row.datetime, row.source_url], callback), outerCallback),
+        (outerCallback) => async.each(r3.rows, (row, callback) => local_client.query(i3, [row.id, row.examid, row.url], callback), outerCallback),
+        (outerCallback) => async.each(r2.rows, (row, callback) => local_client.query(i2, [row.id, row.problem_num, row.subproblem_num, row.problem, row.solution, row.choices, row.exam], callback), outerCallback),
       ], (err, results) => {
         if (err) return console.error(err);
         return process.exit(0);

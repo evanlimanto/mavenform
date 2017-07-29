@@ -26,19 +26,19 @@ pg.defaults.ssl = true;
 const prod_client = new pg.Client(prodConfig);
 prod_client.connect();
 
-const id = 327;
+const id = 333;
 const q1 = `select * from exams where id >= ${id}`;
 const q2 = `select * from content where exam >= ${id}`;
 const i1 = `insert into exams (id, courseid, examtype, examid, profs, schoolid, source_url) values($1, $2, $3, $4, $5, $6, $7)`;
 const i2 = `insert into content (id, problem_num, subproblem_num, problem, solution, tags, choices, exam) values ($1, $2, $3, $4, $5, $6, $7, $8)`;
 
 async.parallel([
-  (callback) => local_client.query(q1, callback),
+//  (callback) => local_client.query(q1, callback),
   (callback) => local_client.query(q2, callback),
 ], (err, results) => {
   if (err) return console.error(err);
-  const r1 = results[0];
-  const r2 = results[1];
+ // const r1 = results[0];
+  const r2 = results[0];
 
   return async.parallel([
     (callback) => {
