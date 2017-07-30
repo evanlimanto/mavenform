@@ -130,6 +130,12 @@ export const modal = (state = { type: null, errorText: null }, action) => {
       return { type: 'selectschool', errorText: null };
     case Actions.SHOW_ADD_COURSE_MODAL:
       return { type: 'addcourse', errorText: null };
+    case Actions.SHOW_UPLOAD_SUCCESS_MODAL:
+      return { type: 'uploadsuccess', errorText: null };
+    case Actions.SHOW_REPORT_SUCCESS_MODAL:
+      return { type: 'reportsuccess', errorText: null };
+    case Actions.SHOW_REPORT_ERROR_MODAL:
+      return { type: 'reporterror', errorText: null, content_id: action.content_id };
     case Actions.CLOSE_MODAL:
       return { type: null, errorText: null };
     case Actions.SET_MODAL_ERROR:

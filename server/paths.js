@@ -20,24 +20,41 @@ module.exports = (app) => {
     if (!req.files)
       return res.status(400).send('No files were uploaded.');
 
-    _.forEach(req.files, (file) => {
-      const bucketFile = config.bucket.file(file.name);
-      const ws = bucketFile.createWriteStream({
-        public: true,
-        metadata: {
-          contentEncoding: file.encoding
-        }
+    const nonce = randomstring.generate(10);
+    const { schoolCode, courseCode, auth_user_id } = req.body;
+    const getq = `select id from users where auth_user_id = $1`;
+    const inq = `
+      insert into exam_uploads (courseid, filename, userid)
+        select C.id, $1, $2 from courses C
+        inner join schools S on C.schoolid = S.id
+        where S.code = $3 and C.code = $4
+    `;
+    config.pool.query(getq, [auth_user_id], (err, result) => {
+      if (err) return next(err);
+      const userid = (result.rows.length > 0) ? result.rows[0].id : null;
+      async.each(req.files, (file, outerCallback) => {
+        const filename = nonce + "-" + file.name;
+        const bucketFile = config.uploadsBucket.file(filename);
+        async.parallel([
+          (callback) => {
+            const ws = bucketFile.createWriteStream({
+              public: true,
+              metadata: { contentEncoding: file.encoding }
+            });
+            ws.on('error', (err) => console.error(err));
+            ws.write(file.data);
+            ws.end();
+            return callback();
+          },
+          (callback) => config.pool.query(inq, [filename, userid, schoolCode, courseCode], callback)
+        ], outerCallback);
+      }, (err) => {
+        if (err) return next(err);
+        res.send('Successfully uploaded files!');
       });
-      ws.on('error', (err) => {
-        console.error(err);
-      });
-      ws.write(file.data);
-      ws.end();
     });
-
-    res.send('Successfully uploaded files!');
-    return res.end();
   });
+
 
   // Image uploads
   app.post('/uploadImage', (req, res) => {

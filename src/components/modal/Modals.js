@@ -6,7 +6,7 @@ import isEmpty from 'validator/lib/isEmpty';
 import req from 'superagent';
 
 import Modal from './Modal';
-import { closeModal, showLoginModal, showSignupModal, showForgotPasswordModal, setModalError } from '../../actions';
+import { closeModal, showLoginModal, showSignupModal, showForgotPasswordModal, showReportSuccessModal, setModalError } from '../../actions';
 
 class ModalsComponent extends Component {
   constructor(props) {
@@ -18,6 +18,19 @@ class ModalsComponent extends Component {
     this.forgotPassword = this.forgotPassword.bind(this);
     this.getModal = this.getModal.bind(this);
     this.bookmarkCourse = this.bookmarkCourse.bind(this);
+    this.reportError = this.reportError.bind(this);
+  }
+
+  reportError() {
+    const error_content = document.getElementById("error_content").value;
+    const content_id = this.props.modal.content_id;
+    const self = this;
+    req.post('/reportError')
+      .send({ content_id, error_content })
+      .end((err, res) => {
+        if (err || !res.ok) console.error(err);
+        else self.props.showReportSuccessModal();
+      });
   }
 
   signup(e) {
@@ -188,12 +201,39 @@ class ModalsComponent extends Component {
           <hr className="s2"/>
         </span>
       );
+    } else if (this.props.modal.type === 'uploadsuccess') {
+      headerContent = <h1>Uploaded Files!</h1>;
+      modalContent = (
+        <span>
+          <hr className="s3" />
+          Files successfully uploaded! We will process these as soon as possible.
+        </span>
+      );
+    } else if (this.props.modal.type === 'reportsuccess') {
+      headerContent = <h1>Report Error</h1>;
+      modalContent = (
+        <span>
+          <hr className="s3" />
+          Error successfully reported! We will fix this as soon as possible.
+        </span>
+      );
+    } else if (this.props.modal.type === 'reporterror') {
+      headerContent = <h1>Report Error</h1>;
+      modalContent = (
+        <span>
+          <hr className="s3" />
+          <input className="login-info" type="text" placeholder="Please describe the typo or error here..." id="error_content"/>
+          <hr className="s2" />
+          <a className="login-button blue" onClick={this.reportError}>Report</a>
+        </span>
+      );
     }
 
     return <Modal closeModal={this.props.closeModal} infoContent={infoContent} modalContent={modalContent} errorText={this.props.modal.errorText} headerContent={headerContent} />;
   }
 
   render() {
+    console.log(this.props.modal);
     return this.getModal();
   }
 }
@@ -213,6 +253,7 @@ const mapDispatchToProps = (dispatch) => {
     showLoginModal: () => dispatch(showLoginModal()),
     showSignupModal: () => dispatch(showSignupModal()),
     showForgotPasswordModal: () => dispatch(showForgotPasswordModal()),
+    showReportSuccessModal: () => dispatch(showReportSuccessModal()),
     setModalError: (errorText) => dispatch(setModalError(errorText)),
   };
 };

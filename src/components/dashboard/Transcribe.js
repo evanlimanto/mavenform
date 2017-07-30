@@ -133,7 +133,7 @@ class TranscribeComponent extends Component {
     const regexp = /!!(.*?)!!/g;
     const matches = this.state.rawContent.match(regexp);
     if (!!matches && matches.length !== this.state.images.length) {
-      return { res: false, error: 'Number of images doesn\'t match number of image placeholders!' };
+      return { res: false, error: 'Number of images doesn\'t match number of image placeholders! Needed: ' + matches.length + ', Got: ' + this.state.images.length };
     }
 
     const imageSet = new Set(map(this.state.images, (image) => image.name));

@@ -22,6 +22,7 @@ const gcs = gcloud.storage();
 const bucket = gcs.bucket('studyform');
 const stagingBucket = gcs.bucket('studyform-staging');
 const marketingBucket = gcs.bucket('studyform-marketing');
+const uploadsBucket = gcs.bucket('studyform-uploads');
 
 // Postgres
 const params = url.parse(process.env.DATABASE_URL);
@@ -38,5 +39,5 @@ const config = {
 const pool = new pg.Pool(config);
 
 module.exports = {
-  mg_options, mg_api_key, mg_domain, marketingBucket, stagingBucket, bucket, pool
+  mg_options, mg_api_key, mg_domain, marketingBucket, stagingBucket, uploadsBucket, bucket, pool
 }

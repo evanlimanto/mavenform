@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { map, replace } from 'lodash';
 import { Helmet } from 'react-helmet';
+import Dropzone from 'react-dropzone';
 
-import { showLoginModal, showWaitlistModal, updateCourseExams, updateCourseTopics, updateCourseLabel } from '../../actions';
+import { showLoginModal, showUploadSuccessModal, updateCourseExams, updateCourseTopics, updateCourseLabel } from '../../actions';
 import { courseCodeToLabel, BASE_URL } from '../../utils';
 import { examClickEvent } from '../../events';
 import Footer from '../footer';
@@ -12,7 +13,14 @@ import { Modals } from '../modal';
 import Navbar from '../navbar';
 import NotFound from '../notfound';
 
+const request = require('superagent');
+
 class CourseComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.onDrop = this.onDrop.bind(this);
+  }
+
   componentDidMount() {
     CourseComponent.fetchData(this.props.dispatch, this.props);
   }
@@ -43,6 +51,22 @@ class CourseComponent extends Component {
         <meta name="description" content={description} />
       </Helmet>
     );
+  }
+
+  onDrop(acceptedFiles, rejectedFiles) {
+    const profile = this.props.auth.getProfile();
+    const req = request.post('/upload');
+    acceptedFiles.forEach((file) => {
+      req.attach(file.name, file);
+    });
+    req.field('schoolCode', this.props.schoolCode)
+      .field('courseCode', this.props.courseCode);
+    if (profile)
+      req.field('auth_user_id', profile.user_id)
+    req.end((err, res) => {
+        if (err || !res.ok) console.log(err);
+        else this.props.showUploadSuccessModal();
+    });
   }
 
   render() {
@@ -92,7 +116,7 @@ class CourseComponent extends Component {
         <tbody>
         <tr>
           <td className="upload-exam-container" colSpan="5">
-            <div className="upload-exam"> Click to upload an exam to convert </div>
+            <Dropzone onDrop={this.onDrop} className="upload-exam"> Click to upload an exam to convert (.pdf, .doc, .docx, .jpg, .png files only) </Dropzone>
           </td>
         </tr>
         {available}
@@ -147,13 +171,14 @@ const mapStateToProps = (state, ownProps) => {
     topics: state.courseTopics,
     exams: state.courseExams,
     labels: state.labels,
+    auth: state.auth,
   }
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     showLoginModal: () => dispatch(showLoginModal()),
-    showWaitlistModal: () => dispatch(showWaitlistModal()),
+    showUploadSuccessModal: () => dispatch(showUploadSuccessModal()),
     dispatch
   };
 };

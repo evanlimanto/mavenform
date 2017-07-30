@@ -90,6 +90,12 @@ export const SHOW_SELECT_SCHOOL_MODAL = 'SHOW_SELECT_SCHOOL_MODAL';
 export const showSelectSchoolModal = () => { return { type: SHOW_SELECT_SCHOOL_MODAL }; };
 export const SHOW_ADD_COURSE_MODAL = 'SHOW_ADD_COURSE_MODAL';
 export const showAddCourseModal = () => { return { type: SHOW_ADD_COURSE_MODAL }; };
+export const SHOW_UPLOAD_SUCCESS_MODAL = 'SHOW_UPLOAD_SUCCESS_MODAL';
+export const showUploadSuccessModal = () => { return { type: SHOW_UPLOAD_SUCCESS_MODAL }; };
+export const SHOW_REPORT_SUCCESS_MODAL = 'SHOW_REPORT_SUCCESS_MODAL';
+export const showReportSuccessModal = () => { return { type: SHOW_REPORT_SUCCESS_MODAL }; };
+export const SHOW_REPORT_ERROR_MODAL = 'SHOW_REPORT_ERROR_MODAL';
+export const showReportErrorModal = (content_id) => { return { type: SHOW_REPORT_ERROR_MODAL, content_id }; };
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const closeModal = () => { return { type: CLOSE_MODAL }; };
 
