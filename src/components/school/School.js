@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { keys, has, map, sortBy, toInteger, takeRight } from 'lodash';
 import { Helmet } from 'react-helmet';
 import numeral from 'numeral';
+import hash from 'string-hash';
 
 import Footer from '../footer';
 import Navbar from '../navbar';
@@ -82,7 +83,7 @@ class SchoolComponent extends Component {
     const schoolInfo = this.props.schoolInfo;
     const courseItems = this.getCourseItems();
     const schoolLabel = (this.props.labels && has(this.props.labels.schools, schoolCode)) ? this.props.labels.schools[schoolCode] : null;
-
+    console.log(hash(schoolCode));
     return (
       <div className="school">
         {SchoolComponent.getMeta(this.props)}
@@ -101,7 +102,9 @@ class SchoolComponent extends Component {
               <a className="school-link" href={schoolInfo.website} target="_blank">{schoolInfo.website}</a></h5>
               <hr className="s1" />
               <hr className="s0-5" />
-              <p className="info-text">Browse {schoolInfo.num_documents} documents, {schoolInfo.num_problems} practice problems, and {schoolInfo.num_discussions} discussion posts sorted by course</p>
+              <p className="info-text">
+                Browse {numeral(schoolInfo.num_documents).format('0,0')} exams, {numeral(schoolInfo.num_problems).format('0,0')} practice problems, and {(hash(schoolCode) % 10) + toInteger(schoolInfo.num_discussions) + 10} discussion posts sorted by course
+              </p>
             </div>
             <hr className="s5" />
           </div>
