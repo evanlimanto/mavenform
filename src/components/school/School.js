@@ -90,7 +90,7 @@ class SchoolComponent extends Component {
         <div className="card-container center">
           <div className="container info-container">
             <hr className="s5" />
-            <img className="info-img" src={`../img/${schoolCode}.png`} />
+            <img className="info-img" src={`/img/${schoolCode}.png`} />
             <div className="info">
               <h4 className="info-title">{schoolLabel}</h4>
               <hr className="s1" />
