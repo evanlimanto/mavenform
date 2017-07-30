@@ -147,3 +147,19 @@ em {
 .border-top {
   border-top: 1px solid #ccc;
 }
+
+.shadow-top {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  position: relative;
+}
+
+.gray-filler {
+  position: fixed;
+  z-index: -99;
+  background: #f4f4f4;
+  top: 400px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

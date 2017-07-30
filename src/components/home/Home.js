@@ -159,10 +159,10 @@ class HomeComponent extends Component {
               <p>If you need to study on the go, our interface is intuitive and legible with any device type and any screen width.</p>
               <hr className="s1" />
             </div>
-            <hr className="s7-5" />
+            <img className="banner-screen" src="/img/screen2.png"/> 
           </div>
         </Element>
-        <Element name="schools" className="light-gray border-top">
+        <Element name="schools" className="light-gray border-top shadow-top">
           <hr className="s7-5" />
           <h4 className="center">Schools</h4>
           <hr className="s1" />
