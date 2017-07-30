@@ -30,3 +30,23 @@ td.course-signup-td {
 .unavailable {
   opacity: 0.25;
 }
+
+td.upload-exam-container {
+  opacity: 1;
+  padding: 5px;
+}
+
+.upload-exam {
+  text-align: center;
+  color: #999;
+  border: 1px dashed #999;
+  padding: 10px 0 12px 0;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.upload-exam:hover {
+  cursor: pointer;
+  color: #11aacc;
+  border: 1px dashed #11aacc;
+}

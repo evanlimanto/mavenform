@@ -90,6 +90,11 @@ class CourseComponent extends Component {
         </tr>
         </thead>
         <tbody>
+        <tr>
+          <td className="upload-exam-container" colSpan="5">
+            <div className="upload-exam"> Click to upload an exam to convert </div>
+          </td>
+        </tr>
         {available}
         </tbody>
         </table>
