@@ -24,6 +24,7 @@ import './css/Marketing.css';
 import './css/Modals.css';
 import './css/Mobile.css';
 import './css/Admin.css';
+import './css/Info.css';
 
 ReactGA.set({ path: window.location.pathname });
 ReactGA.pageview(window.location.pathname);

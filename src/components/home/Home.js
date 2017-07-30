@@ -112,13 +112,13 @@ class HomeComponent extends Component {
           <Navbar home={true} />
           <div className="banner-img"></div>
           <div className="banner-text">
-            <div className="banner-header">Make Studying Easy</div>
+            <div className="banner-header">Study More Effectively</div>
             <hr className="s2" />
-            <h5 className="h5-alt">Find past exams and practice problems to solve and discuss online</h5>
+            <h5 className="h5-alt">A new and interactive format for past exams and practice problems</h5>
             <hr className="s5" />
             <div className="search-container">
               <div className="material-icons search-icon">search</div>
-              <input className="search" name="search" ref="search" placeholder="Search for your course here (e.g. CS 61A, Math 1B, Econ 100)." type="text" autoComplete="off" onChange={this.getSuggestions} />
+              <input className="search" name="search" ref="search" placeholder="Find resources by course here (e.g. CS 61A, Math 1B, Econ 100)." type="text" autoComplete="off" onChange={this.getSuggestions} />
             </div>
             {searchResults}
             <div className="home-scrolls">
@@ -162,7 +162,7 @@ class HomeComponent extends Component {
             <hr className="s7-5" />
           </div>
         </Element>
-        <Element name="schools" className="light-gray schools">
+        <Element name="schools" className="light-gray border-top">
           <hr className="s7-5" />
           <h4 className="center">Schools</h4>
           <hr className="s1" />

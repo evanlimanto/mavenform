@@ -1,0 +1,41 @@
+.info-container {
+  padding-top: 100px;
+  text-align: left;
+}
+
+.info-img {
+  display: inline-block;
+  vertical-align: middle;
+  height: 120px;
+  width: 120px;
+  border-radius: 5px;
+  margin: 5px 40px 0 5px;
+  border: 1px solid #ccc;
+}
+
+.info {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.info-title {
+  padding: 0;
+  text-align: left;
+}
+
+.info-subtitle {
+  text-align: left;
+}
+
+.info-text {
+  color: #666;
+}
+
+.school-link {
+  color: #11aacc;
+  font-size: 20px;
+}
+
+.school-link:hover {
+  text-decoration: underline;
+}

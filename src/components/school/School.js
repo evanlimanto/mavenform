@@ -81,23 +81,34 @@ class SchoolComponent extends Component {
       <div className="school">
         {SchoolComponent.getMeta(this.props)}
         <Navbar schoolCode={schoolCode} />
-        <div className="card-container-container">
-          <div className="card-container center">
-            <div className="container">
-              <div className="center">
-                <h4>{schoolLabel}</h4>
-                <h5>Available courses</h5>
-              </div>
+        <div className="card-container center">
+          <div className="container info-container">
+            <hr className="s5" />
+            <img className="info-img" src="../img/ucb.jpg" />
+            <div className="info">
+              <h4 className="info-title">{schoolLabel}</h4>
+              <hr className="s1" />
+              <h5 className="info-subtitle">Berkeley, CA 94720
+              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+              40,173 students
+              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+              <a className="school-link">http://www.berkeley.edu</a></h5>
+              <hr className="s1" />
+              <hr className="s0-5" />
+              <p className="info-text">Browse 157 documents, 1230 practice problems, and 5 discussion posts sorted by course</p>
             </div>
-            <hr className="s1" />
-            <div className="card-container">
-              {courseItems}
-            </div>
-            <hr className="s2" />
-            <hr className="s7-5" />
+            <hr className="s5" />
           </div>
-          <Footer />
         </div>
+        <div className="light-gray border-top">
+          <hr className="s2" />
+          <div className="card-container">
+            {courseItems}
+          </div>
+          <hr className="s2" />
+          <hr className="s7-5" />
+        </div>
+        <Footer />
       </div>
     );
   }

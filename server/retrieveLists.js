@@ -16,7 +16,7 @@ const config = {
   host: params.hostname,
   port: params.port,
   database: params.pathname.split('/')[1],
-  ssl: process.env.NODE_ENV !== 'development',
+  ssl: true,
 };
 const pool = new pg.Pool(config);
 
