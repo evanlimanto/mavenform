@@ -77,6 +77,10 @@ em {
   color: #fff;
 }
 
+.lighter {
+  opacity: 0.6;
+}
+
 .blue {
   background: #11aacc !important;
 }
