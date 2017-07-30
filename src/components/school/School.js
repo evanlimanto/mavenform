@@ -117,6 +117,7 @@ class SchoolComponent extends Component {
           <hr className="s2" />
           <hr className="s7-5" />
         </div>
+        <div className="gray-filler"></div>
         <Footer />
       </div>
     );
