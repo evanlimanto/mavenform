@@ -73,6 +73,15 @@ export const examInfo = (state = {}, action) => {
   }
 };
 
+export const schoolInfo = (state = {}, action) => {
+  switch (action.type) {
+    case Actions.UPDATE_SCHOOL_INFO:
+      return action.info;
+    default:
+      return state;
+  }
+};
+
 export const topicInfo = (state = {}, action) => {
   switch (action.type) {
     case Actions.UPDATE_TOPIC_INFO:

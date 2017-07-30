@@ -26,24 +26,24 @@ pg.defaults.ssl = true;
 const prod_client = new pg.Client(prodConfig);
 prod_client.connect();
 
-const id = 333;
+const id = 352;
 const q1 = `select * from exams where id >= ${id}`;
 const q2 = `select * from content where exam >= ${id}`;
-const i1 = `insert into exams (id, courseid, examtype, examid, profs, schoolid, source_url) values($1, $2, $3, $4, $5, $6, $7)`;
+const i1 = `insert into exams (id, courseid, examtype, examid, profs, schoolid, source_url, solutions_available) values($1, $2, $3, $4, $5, $6, $7, $8)`;
 const i2 = `insert into content (id, problem_num, subproblem_num, problem, solution, tags, choices, exam) values ($1, $2, $3, $4, $5, $6, $7, $8)`;
 
 async.parallel([
-//  (callback) => local_client.query(q1, callback),
+  (callback) => local_client.query(q1, callback),
   (callback) => local_client.query(q2, callback),
 ], (err, results) => {
   if (err) return console.error(err);
- // const r1 = results[0];
+  const r1 = results[0];
   const r2 = results[0];
 
   return async.parallel([
     (callback) => {
       async.series([
-        (outerCallback) => async.each(r1.rows, (row, callback) => prod_client.query(i1, [row.id, row.courseid, row.examtype, row.examid, row.profs, row.schoolid, row.source_url], callback), outerCallback),
+        (outerCallback) => async.each(r1.rows, (row, callback) => prod_client.query(i1, [row.id, row.courseid, row.examtype, row.examid, row.profs, row.schoolid, row.source_url, row.solutions_available], callback), outerCallback),
         (outerCallback) => async.each(r2.rows, (row, callback) => prod_client.query(i2, [row.id, row.problem_num, row.subproblem_num, row.problem, row.solution, row.tags, row.choices, row.exam], callback), outerCallback),
       ], (err, results) => {
         if (err) return console.error(err);

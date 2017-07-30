@@ -232,7 +232,6 @@ module.exports = (app) => {
     const q      = `insert into content_staging (problem_num, subproblem_num, problem, solution, exam, choices) values($1, $2, $3, $4, $5, $6)`;
     async.waterfall([
       (callback) => {
-        console.log("insert");
         config.pool.query(inq, [course_id, exam_type_id, term_id, profs, school_id, pdf_link, course_id, exam_type_id, term_id, profs, school_id], (err) => callback(err))
       },
       (callback) => {
@@ -761,6 +760,51 @@ module.exports = (app) => {
       if (err) return next(err);
       if (result.rows.length === 0) return res.json({ label: null });
       return res.json({ label: result.rows[0].label });
+    });
+  });
+
+  app.get('/getSchoolInfo/:schoolCode/', (req, res, next) => {
+    const { schoolCode } = req.params;
+    const getq = `
+      select name, address, num_students, website from schools
+      where code = $1
+    `;
+    const getnumdisq = `
+      select count(*) as num_discussions from discussion D
+        inner join content C on D.contentid = C.id
+        inner join exams E on C.exam = E.id
+        inner join schools S on E.schoolid = S.id
+        where S.code = $1;
+    `;
+
+    const getnumproblemsq = `
+      select count(*) as num_problems from content C
+        inner join exams E on C.exam = E.id
+        inner join schools S on E.schoolid = S.id
+        where S.code = $1;
+    `;
+
+    const getnumdocsq = `
+      select count(*) as num_documents from exams E
+        inner join schools S on E.schoolid = S.id
+        where S.code = $1;
+    `;
+
+    async.parallel([
+      (callback) => config.pool.query(getnumdisq, [schoolCode], callback),
+      (callback) => config.pool.query(getnumproblemsq, [schoolCode], callback),
+      (callback) => config.pool.query(getnumdocsq, [schoolCode], callback),
+    ], (err, results) => {
+      if (err) return next(err);
+      const num_discussions = results[0].rows[0].num_discussions;
+      const num_problems = results[1].rows[0].num_problems;
+      const num_documents = results[2].rows[0].num_documents;
+      config.pool.query(getq, [schoolCode], (err, result) => {
+        if (err) return next(err);
+        if (result.rows.length === 0) return res.json({ name: null });
+        const { name, address, num_students, website } = result.rows[0];
+        return res.json({ name, address, num_students, website, num_discussions, num_problems, num_documents });
+      });
     });
   });
 }

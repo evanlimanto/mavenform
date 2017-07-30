@@ -3,18 +3,18 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { keys, has, map, sortBy, toInteger, takeRight } from 'lodash';
 import { Helmet } from 'react-helmet';
+import numeral from 'numeral';
 
 import Footer from '../footer';
 import Navbar from '../navbar';
 import NotFound from '../notfound';
-import { updateSchoolCourses } from '../../actions';
+import { updateSchoolCourses, updateSchoolInfo } from '../../actions';
 import { courseClickEvent } from '../../events';
 import { BASE_URL } from '../../utils';
 
 class SchoolComponent extends Component {
   constructor(props) {
     super(props);
-
     this.getCourseItems = this.getCourseItems.bind(this);
   }
 
@@ -37,9 +37,14 @@ class SchoolComponent extends Component {
 
   static fetchData(dispatch, props) {
     const { schoolCode } = props;
-    return fetch(`${BASE_URL}/getSchoolCourses/${schoolCode}`)
-      .then((response) => response.json())
-      .then((json) => dispatch(updateSchoolCourses(json)));
+    return Promise.all([
+      fetch(`${BASE_URL}/getSchoolCourses/${schoolCode}`)
+        .then((response) => response.json())
+        .then((json) => dispatch(updateSchoolCourses(json))),
+      fetch(`${BASE_URL}/getSchoolInfo/${schoolCode}`)
+        .then((response) => response.json())
+        .then((json) => dispatch(updateSchoolInfo(json)))
+    ]);
   }
 
   getCourseItems() {
@@ -74,6 +79,7 @@ class SchoolComponent extends Component {
       return <NotFound />;
 
     const schoolCode = this.props.schoolCode;
+    const schoolInfo = this.props.schoolInfo;
     const courseItems = this.getCourseItems();
     const schoolLabel = (this.props.labels && has(this.props.labels.schools, schoolCode)) ? this.props.labels.schools[schoolCode] : null;
 
@@ -84,18 +90,18 @@ class SchoolComponent extends Component {
         <div className="card-container center">
           <div className="container info-container">
             <hr className="s5" />
-            <img className="info-img" src="../img/ucb.jpg" />
+            <img className="info-img" src={`../img/${schoolCode}.png`} />
             <div className="info">
               <h4 className="info-title">{schoolLabel}</h4>
               <hr className="s1" />
-              <h5 className="info-subtitle">Berkeley, CA 94720
+              <h5 className="info-subtitle">{schoolInfo.address}
               &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              40,173 students
+              {numeral(schoolInfo.num_students).format('0,0')} students
               &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <a className="school-link">http://www.berkeley.edu</a></h5>
+              <a className="school-link" href={schoolInfo.website} target="_blank">{schoolInfo.website}</a></h5>
               <hr className="s1" />
               <hr className="s0-5" />
-              <p className="info-text">Browse 157 documents, 1230 practice problems, and 5 discussion posts sorted by course</p>
+              <p className="info-text">Browse {schoolInfo.num_documents} documents, {schoolInfo.num_problems} practice problems, and {schoolInfo.num_discussions} discussion posts sorted by course</p>
             </div>
             <hr className="s5" />
           </div>
@@ -116,8 +122,9 @@ class SchoolComponent extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    courses: state.schoolCourses,
     labels: state.labels,
+    courses: state.schoolCourses,
+    schoolInfo: state.schoolInfo,
     schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode
   };
 };

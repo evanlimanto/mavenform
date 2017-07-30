@@ -70,6 +70,14 @@ export const updateCourseLabel = (label) => {
   };
 };
 
+export const UPDATE_SCHOOL_INFO = 'UPDATE_SCHOOL_INFO';
+export const updateSchoolInfo = (info) => {
+  return {
+    type: UPDATE_SCHOOL_INFO,
+    info: info,
+  };
+};
+
 export const SHOW_LOGIN_MODAL = 'SHOW_LOGIN_MODAL';
 export const showLoginModal = () => { return { type: SHOW_LOGIN_MODAL }; };
 export const SHOW_WAITLIST_MODAL = 'SHOW_WAITLIST_MODAL';
