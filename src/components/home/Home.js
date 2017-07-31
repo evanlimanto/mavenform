@@ -28,8 +28,8 @@ class HomeComponent extends Component {
   static getMeta(props) {
     return (
       <Helmet>
-        <title>Studyform - Make Studying Easy</title>
-        <meta name="description" content="Find past exams and practice problems to solve and discuss online. Ace your courses with Studyform." />
+        <title>Studyform - Study More Effectively</title>
+        <meta name="description" content="Find past exams and practice problems to solve and discuss . Ace your courses with Studyform." />
       </Helmet>
     );
   }

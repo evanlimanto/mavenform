@@ -233,7 +233,6 @@ class ModalsComponent extends Component {
   }
 
   render() {
-    console.log(this.props.modal);
     return this.getModal();
   }
 }

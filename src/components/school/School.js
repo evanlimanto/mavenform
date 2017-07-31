@@ -83,7 +83,6 @@ class SchoolComponent extends Component {
     const schoolInfo = this.props.schoolInfo;
     const courseItems = this.getCourseItems();
     const schoolLabel = (this.props.labels && has(this.props.labels.schools, schoolCode)) ? this.props.labels.schools[schoolCode] : null;
-    console.log(hash(schoolCode));
     return (
       <div className="school">
         {SchoolComponent.getMeta(this.props)}
