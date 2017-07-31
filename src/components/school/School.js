@@ -88,7 +88,7 @@ class SchoolComponent extends Component {
       <div className="school">
         {SchoolComponent.getMeta(this.props)}
         <Navbar schoolCode={schoolCode} />
-        <div className="card-container center">
+        <div className="container center">
           <div className="container info-container">
             <hr className="s5" />
             <img className="info-img" src={`/img/${schoolCode}.png`} />
@@ -103,7 +103,7 @@ class SchoolComponent extends Component {
               <hr className="s1" />
               <hr className="s0-5" />
               <p className="info-text">
-                Browse {numeral(schoolInfo.num_documents).format('0,0')} exams, {numeral(schoolInfo.num_problems).format('0,0')} practice problems, and {(hash(schoolCode) % 10) + toInteger(schoolInfo.num_discussions) + 10} discussion posts sorted by course
+                Browse {numeral(schoolInfo.num_documents).format('0,0')} exams, {numeral(schoolInfo.num_problems).format('0,0')} practice problems, and {(hash(schoolCode) % 10) + toInteger(schoolInfo.num_discussions) + 10} discussion posts below
               </p>
             </div>
             <hr className="s5" />

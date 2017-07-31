@@ -70,37 +70,49 @@ class CourseComponent extends Component {
 
     const content = (
       <div>
-        <h4 className="center">{courseCodeToLabel(courseCode)}</h4>
+       <div className="container info-container">
+          <hr className="s5" />
+          <img className="info-img" src={`/img/subject/cs.png`} />
+          <div className="info">
+            <h4 className="info-title">{courseCodeToLabel(courseCode)}</h4>
+            <hr className="s1" />
+            <h5 className="info-subtitle">{!this.props.courseLabel || this.props.courseLabel}
+              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+              <a className="school-link" href="/ucb">UC Berkeley</a></h5>
+            <hr className="s1" />
+            <hr className="s0-5" />
+            <p className="info-text">
+              Browse, discuss, and upload exams and practice problems below
+            </p>
+          </div>
+        </div>
+        <hr className="s5" />
         <div className="center">
-          <h5>{!this.props.courseLabel || this.props.courseLabel}</h5>
-        </div>
-        <hr className="s4" />
-        <div className="center">
-        {!!this.props.exams || <p className="loader">Loading exams...</p>}
-        <div className="table-container-container">
-        <div className="table-container">
-        <table className="exams center">
-        <thead>
-        <tr>
-        <th>Type</th>
-        <th>Term</th>
-        <th>Instructors</th>
-        <th>Solutions</th>
-        <th>Studyform</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td className="upload-exam-container" colSpan="5">
-            <div className="upload-exam"> Click to upload an exam to convert </div>
-          </td>
-        </tr>
-        {available}
-        </tbody>
-        </table>
-        {!!this.props.exams || <p>Loading exams...</p>}
-        </div>
-        </div>
+          {!!this.props.exams || <p className="loader">Loading exams...</p>}
+          <div className="table-container-container">
+          <div className="table-container">
+          <table className="exams center">
+          <thead>
+          <tr>
+          <th>Type</th>
+          <th>Term</th>
+          <th>Instructors</th>
+          <th>Solutions</th>
+          <th>Studyform</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td className="upload-exam-container" colSpan="5">
+              <div className="upload-exam"> Click to upload an exam to convert </div>
+            </td>
+          </tr>
+          {available}
+          </tbody>
+          </table>
+          {!!this.props.exams || <p>Loading exams...</p>}
+          </div>
+          </div>
         </div>
       </div>
     );

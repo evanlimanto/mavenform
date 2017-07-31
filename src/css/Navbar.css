@@ -9,6 +9,10 @@
   background: #11aacc;
 }
 
+.nav-container {
+  padding: 0 5px;
+}
+
 .logo {
   float: left;
   padding: 15px 0;
@@ -129,10 +133,6 @@
 .nav-results a:hover {
   background: #11aacc;
   color: #fff !important;
-}
-
-.nav-search-signed-in {
-  width: 594px;
 }
 
 .logout {
