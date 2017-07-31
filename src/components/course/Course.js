@@ -5,7 +5,7 @@ import { map, replace } from 'lodash';
 import { Helmet } from 'react-helmet';
 import Dropzone from 'react-dropzone';
 
-import { showLoginModal, showUploadSuccessModal, updateCourseExams, updateCourseTopics, updateCourseLabel } from '../../actions';
+import { showLoginModal, showUploadSuccessModal, updateCourseExams, updateCourseTopics, updateCourseLabel, updateCourseSubject } from '../../actions';
 import { courseCodeToLabel, BASE_URL } from '../../utils';
 import { examClickEvent } from '../../events';
 import Footer from '../footer';
@@ -36,7 +36,10 @@ class CourseComponent extends Component {
         .then((json) => dispatch(updateCourseTopics(json))),
       fetch(`${BASE_URL}/getCourseLabel/${schoolCode}/${courseCode}`)
         .then((response) => response.json())
-        .then((json) => dispatch(updateCourseLabel(json.label)))
+        .then((json) => dispatch(updateCourseLabel(json.label))),
+      fetch(`${BASE_URL}/getCourseSubject/${schoolCode}/${courseCode}`)
+        .then((response) => response.json())
+        .then((json) => dispatch(updateCourseSubject(json.subject)))
     ]);
   }
 
@@ -94,11 +97,23 @@ class CourseComponent extends Component {
 
     const content = (
       <div>
-        <h4 className="center">{courseCodeToLabel(courseCode)}</h4>
-        <div className="center">
-          <h5>{!this.props.courseLabel || this.props.courseLabel}</h5>
+       <div className="container info-container">
+          <hr className="s5" />
+          <img className="info-img" src={`/img/subject/${this.props.courseSubject || "misc"}.png`} />
+          <div className="info">
+            <h4 className="info-title">{courseCodeToLabel(courseCode)}</h4>
+            <hr className="s1" />
+            <h5 className="info-subtitle">{!this.props.courseLabel || this.props.courseLabel}
+              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+              <Link className="school-link" to={`/${schoolCode}`}>{!this.props.labels || !this.props.labels.schools || this.props.labels.schools[schoolCode]}</Link></h5>
+            <hr className="s1" />
+            <hr className="s0-5" />
+            <p className="info-text">
+              Browse, discuss, and upload exams and practice problems below
+            </p>
+          </div>
         </div>
-        <hr className="s4" />
+        <hr className="s5" />
         <div className="center">
         {!!this.props.exams || <p className="loader">Loading exams...</p>}
         <div className="table-container-container">
@@ -168,6 +183,7 @@ const mapStateToProps = (state, ownProps) => {
     courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
     schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
     courseLabel: state.courseLabel,
+    courseSubject: state.courseSubject,
     topics: state.courseTopics,
     exams: state.courseExams,
     labels: state.labels,

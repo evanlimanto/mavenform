@@ -766,6 +766,22 @@ module.exports = (app) => {
     });
   });
 
+  app.get('/getCourseSubject/:schoolCode/:courseCode', (req, res, next) => {
+    const { courseCode, schoolCode } = req.params;
+    const getq = `
+      select S.subject_code from courses C
+      inner join subjects S on C.subjectid = S.id
+      inner join schools on schools.id = C.schoolid
+      where schools.code = $1 and C.code = $2
+    `;
+
+    config.pool.query(getq, [schoolCode, courseCode], (err, result) => {
+      if (err) return next(err);
+      if (result.rows.length === 0) return res.json({ subject: null });
+      return res.send({ subject: result.rows[0].subject_code });
+    });
+  });
+
   app.get('/getCourseLabel/:schoolCode/:courseCode', (req, res, next) => {
     const { schoolCode, courseCode } = req.params;
     const getq = `

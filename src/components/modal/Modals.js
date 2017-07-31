@@ -202,11 +202,11 @@ class ModalsComponent extends Component {
         </span>
       );
     } else if (this.props.modal.type === 'uploadsuccess') {
-      headerContent = <h1>Uploaded Files!</h1>;
+      headerContent = <h1>Exam Uploaded!</h1>;
       modalContent = (
         <span>
           <hr className="s3" />
-          Files successfully uploaded! We will process these as soon as possible.
+          Thanks for uploading your exam! We will work on validating and converting it as soon as possible.
         </span>
       );
     } else if (this.props.modal.type === 'reportsuccess') {

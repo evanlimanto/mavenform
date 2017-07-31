@@ -83,7 +83,7 @@ class NavbarComponent extends Component {
       return (
         <div className="home-nav">
           <Modals />
-          <div className="container">
+          <div className="container nav-container">
             <Link to="/" className="desktop-logo">
               <img className="logo home-logo" src="/img/logo.svg" alt="Studyform Logo" />
             </Link>
@@ -154,7 +154,7 @@ class NavbarComponent extends Component {
       <div>
         <Modals />
         <div className="nav">
-          <div className="container">
+          <div className="container nav-container">
             <Link className="desktop-logo" to="/"><img className="logo" src="/img/logo.svg" alt="Studyform Logo" /></Link>
             <Link className="mobile-logo" to="/"><img className="logo" src="/img/icon.svg" alt="Studyform Logo" /></Link>
             <div className="material-icons nav-icon">search</div>

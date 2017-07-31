@@ -70,6 +70,14 @@ export const updateCourseLabel = (label) => {
   };
 };
 
+export const UPDATE_COURSE_SUBJECT = 'UPDATE_COURSE_SUBJECT';
+export const updateCourseSubject = (subject) => {
+  return {
+    type: UPDATE_COURSE_SUBJECT,
+    subject: subject
+  };
+};
+
 export const UPDATE_SCHOOL_INFO = 'UPDATE_SCHOOL_INFO';
 export const updateSchoolInfo = (info) => {
   return {

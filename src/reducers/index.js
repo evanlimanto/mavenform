@@ -118,6 +118,15 @@ export const courseLabel = (state = null, action) => {
   }
 };
 
+export const courseSubject = (state = null, action) => {
+  switch (action.type) {
+    case Actions.UPDATE_COURSE_SUBJECT:
+      return action.subject;
+    default:
+      return state;
+  }
+};
+
 export const modal = (state = { type: null, errorText: null }, action) => {
   switch (action.type) {
     case Actions.SHOW_LOGIN_MODAL:
