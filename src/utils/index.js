@@ -6,7 +6,7 @@ export const canUseDOM = !!(
   window.document &&
   window.document.createElement
 );
-export const BASE_URL = ENV_IS_DEV ? "http://localhost:8080" : (process.env.HOST || document.location.origin);
+export const BASE_URL = ENV_IS_DEV ? "http://localhost:8080" : (process.env.HOST || "http://www.studyform.com");
 
 export function requireAuth(auth, history) {
   if (!auth.loggedIn()) {
