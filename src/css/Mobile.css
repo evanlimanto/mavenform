@@ -78,6 +78,28 @@
   .table-container-container {
     padding: 0 25px;
   }
+
+  .banner-screen {
+    height: 75px;
+    opacity: 0;
+  }
+
+  .info-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .info-container h4 {
+    padding-top: 15px;
+  }
+
+  .gray-filler {
+    display: none;
+  }
+
+  .results-container {
+    max-width: 275px;
+  }
 }
 
 @media (max-width: 499px) {
