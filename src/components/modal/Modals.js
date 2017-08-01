@@ -202,19 +202,23 @@ class ModalsComponent extends Component {
         </span>
       );
     } else if (this.props.modal.type === 'uploadsuccess') {
-      headerContent = <h1>Exam Uploaded!</h1>;
+      headerContent = <h1>Exam Uploaded</h1>;
       modalContent = (
         <span>
           <hr className="s3" />
-          Thanks for uploading your exam! We will work on validating and converting it as soon as possible.
+          <p>Thanks for uploading your exam! We will work on validating and converting it as soon as possible.</p>
+          <hr className="s2" />
+          <a className="login-button blue" onClick={this.props.closeModal}>Okay</a>
         </span>
       );
     } else if (this.props.modal.type === 'reportsuccess') {
-      headerContent = <h1>Report Error</h1>;
+      headerContent = <h1>Error Reported</h1>;
       modalContent = (
         <span>
           <hr className="s3" />
-          Error successfully reported! We will fix this as soon as possible.
+          <p>Error successfully reported! We will work on fixing it as soon as possible.</p>
+          <hr className="s2" />
+          <a className="login-button blue" onClick={this.props.closeModal}>Okay</a>
         </span>
       );
     } else if (this.props.modal.type === 'reporterror') {
