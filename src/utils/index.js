@@ -59,6 +59,8 @@ export function termToLabel(term) {
     label = "Spring";
   } else if (term[0] === 's' && term[1] === 'u') {
     label = "Summer";
+  } else if (term === "general") {
+    return "General";
   } else {
     return "Unknown Term";
   }
@@ -93,8 +95,10 @@ export function examTypeToLabel(exam_type) {
       return 'Midterm 1 - Practice';
     case 'mt2p':
       return 'Midterm 2 - Practice';
-    case 'finalp':
-      return 'Final - Practice';
+    case 'finalp1':
+      return 'Final - Practice 1';
+    case 'finalp2':
+      return 'Final - Practice 2';
     default:
       return "Unknown Type";
   }

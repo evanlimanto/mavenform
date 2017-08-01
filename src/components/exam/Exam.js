@@ -73,7 +73,7 @@ class ExamComponent extends Component {
       <div id="header-text">
         <div className="center">
           <h4>{courseCodeToLabel(courseCode)}</h4>
-          <h5>{examTypeToLabel(examType)} | {termToLabel(termCode)} {!profs || "| " + profs}</h5>
+          <h5>{examTypeToLabel(examType)} | {termToLabel(termCode)} {!(profs && profs !== "None") || "| " + profs}</h5>
         </div>
       </div>
     );
