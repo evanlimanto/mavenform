@@ -96,10 +96,6 @@
   .gray-filler {
     display: none;
   }
-
-  .results-container {
-    max-width: 275px;
-  }
 }
 
 @media (max-width: 499px) {
@@ -142,5 +138,9 @@
 
   .exams td:nth-child(4), .exams th:nth-child(4), .exams td:nth-child(5), .exams th:nth-child(5) {
     display: none;
+  }
+
+  .results-container {
+    max-width: 275px;
   }
 }
