@@ -160,7 +160,7 @@ class TranscribeComponent extends Component {
     const quarter = this.refs.quarter.value;
     const year = this.refs.year.value;
     const termarr = reduce(this.props.terms, (res, item) => {
-      const code = ((quarter === "other") || (year === "other")) ? ("other") : (quarter[0] + quarter[1] + toString(year).slice(2, 4));
+      const code = ((quarter === "other") || (year === "other")) ? ("general") : (quarter[0] + quarter[1] + toString(year).slice(2, 4));
       if (item.term_code === code) {
         return [item.term_code, item.id];
       }
