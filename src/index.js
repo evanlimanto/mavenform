@@ -10,6 +10,7 @@ import routes from './routes';
 import initializeTracking from './tracking';
 import { configureStore, initStore } from './utils/configureStore';
 import { ReactGA } from './events';
+import ScrollToTop from './components/scrolltotop';
 
 import './css/General.css';
 import './css/Typography.css';
@@ -43,9 +44,11 @@ initializeTracking();
 ReactDOM.render((
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Switch>
-        {map(routes, (route, key) => <Route key={key} path={route.path} component={route.component} exact={route.exact} />)}
-      </Switch>
+      <ScrollToTop>
+        <Switch>
+          {map(routes, (route, key) => <Route key={key} path={route.path} component={route.component} exact={route.exact} />)}
+        </Switch>
+      </ScrollToTop>
     </ConnectedRouter>
   </Provider>
 ), document.getElementById('root'));
