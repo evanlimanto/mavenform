@@ -104,7 +104,7 @@ module.exports = (app) => {
     const { examid } = req.params;
 
     const getcontentq = `
-      select problem_num, subproblem_num, problem, solution, choices from content where exam = $1
+      select problem_num, subproblem_num, problem, solution, choices, topicid from content where exam = $1
     `;
     config.pool.query(getcontentq, [examid], (err, result) => {
       const info = _.reduce(result.rows, (result, row) => {
@@ -118,13 +118,11 @@ module.exports = (app) => {
       }, {});
 
       const problems = _.reduce(result.rows, (result, row) => {
-        const problem_num = row.problem_num;
-        const subproblem_num = row.subproblem_num;
+        const { problem_num, subproblem_num, topicid, choices } = row;
         const problem = renderer.preprocess(row.problem);
         const solution = renderer.preprocess(row.solution);
-        const choices = row.choices;
         const key = `${problem_num}_${subproblem_num}`;
-        result[key] = { problem, solution, choices };
+        result[key] = { problem, solution, topicid, choices };
         return result;
       }, {});
       return res.json({info, problems});
@@ -134,15 +132,15 @@ module.exports = (app) => {
   // Update problem contents
   app.post('/updateProblem', (req, res, next) => {
     const { examid, problem_num, subproblem_num, problem_content,
-            solution_content, choices_content } = req.body;
+            solution_content, choices_content, topicid } = req.body;
     const q = `
-      update content set problem=$1, solution=$2, choices=$3
-      where exam=$4 and problem_num=$5 and subproblem_num=$6
+      update content set problem=$1, solution=$2, choices=$3, topicid=$4
+      where exam=$5 and problem_num=$6 and subproblem_num=$7
     `;
 
     config.pool.query(q, [problem_content, solution_content,
-                    choices_content, examid,
-                    problem_num, subproblem_num], (err, result) => {
+                          choices_content, topicid, examid,
+                          problem_num, subproblem_num], (err, result) => {
       if (err) return next(err);
       return res.send("Success!");
     });

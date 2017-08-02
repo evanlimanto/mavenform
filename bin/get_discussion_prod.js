@@ -26,7 +26,7 @@ pg.defaults.ssl = true;
 const prod_client = new pg.Client(prodConfig);
 prod_client.connect();
 
-const q1 = `select * from discussion where id = 22`;
+const q1 = `select * from discussion where id >= 121`;
 const i1 = `insert into discussion (content, userid, contentid, datetime, parentid, upvotes) values($1, $2, $3, $4, $5, $6)`;
 
 prod_client.query(q1, (err, results) => {

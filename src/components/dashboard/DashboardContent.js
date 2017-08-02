@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { concat, map, range, reduce } from 'lodash';
+import { concat, map, range, reduce, sortBy } from 'lodash';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import { BASE_URL } from '../../utils';
@@ -30,6 +30,7 @@ class DashboardContentComponent extends Component {
     const problem_content = this.refs.problem.value;
     const solution_content = this.refs.solution.value;
     const choices_content = this.refs.choices.value;
+    const topicid = this.refs.topic.value;
 
     fetch(`${BASE_URL}/updateProblem`, {
       method: 'POST',
@@ -44,6 +45,7 @@ class DashboardContentComponent extends Component {
         problem_content,
         solution_content,
         choices_content,
+        topicid,
       })
     });
 
@@ -87,6 +89,7 @@ class DashboardContentComponent extends Component {
         problem: this.refs.problem.value,
         solution: this.refs.solution.value,
         choices: this.refs.choices.value,
+        topicid: this.refs.topic.value,
       }
     })
     this.updateContent();
@@ -99,6 +102,7 @@ class DashboardContentComponent extends Component {
         problem: this.refs.problem.value,
         solution: this.refs.solution.value,
         choices: this.refs.choices.value,
+        topicid: this.refs.topic.value,
       }
     });
   }
@@ -144,6 +148,13 @@ class DashboardContentComponent extends Component {
       return <option value={key} key={key}>{exam.courseid} - {exam.examtype} - {exam.examid}</option>;
     });
 
+    const topicSelectItems = (!this.state.problem.problem) || (
+      <select ref="topic" value={this.state.problem.topicid || null} onChange={this.handleChange}>
+        {!this.state.problem.topicid ? <option selected value={null} disabled> -- select a topic -- </option> : null}
+        {map(sortBy(this.props.topics, [(topic) => topic.topic, (topic) => topic.concept]), (topic, key) => <option key={key} value={topic.id}>{topic.topic} - {topic.concept}</option>)}
+      </select>
+    );
+
     const problem = this.state.problem;
     const exam = (this.state.examid) ? this.props.exams.key_dict[this.state.examid] : null;
     return (
@@ -165,7 +176,7 @@ class DashboardContentComponent extends Component {
         {subparts.length ? <span className="contentNavCol" style={{ height: "150px", "overflowY": "scroll" }}>{subparts}</span> : null}
         <div style={{"float": "left", "width": "1000px"}}>
           <h1>{this.state.examid} {!exam || `: ${exam.courseid} - ${exam.examtype} - ${exam.examid}`}
-          {!exam || <a href={exam.source_url} target="_blank">URL</a>} {this.state.status}</h1>
+          {!exam || <a href={exam.source_url} target="_blank">URL</a>} {this.state.status} &nbsp; &nbsp; {topicSelectItems}</h1>
           <span className="contentCol">
             <textarea value={problem.problem} ref="problem" onChange={this.handleChange} />
           </span>
@@ -190,6 +201,7 @@ const mapStateToProps = (state) => {
   return {
     auth: state.auth,
     exams: state.exams,
+    topics: state.topics,
   };
 };
 

@@ -99,6 +99,19 @@ const getLabels = (callback) => {
   });
 };
 
+const getTopics = (callback) => {
+  const q = `select id, topic, concept, code from topics`;
+  pool.query(q, (err, result) => {
+    if (err)
+      return callback(err);
+    const items = _.map(result.rows, (row) => {
+      const { id, topic, concept, code } = row;
+      return { id, topic, concept, code };
+    });
+    return callback(null, items);
+  });
+};
+
 // Combine all initial data into one single response
 const getInitial = (req, res, next) => {
   async.parallel([
@@ -107,6 +120,7 @@ const getInitial = (req, res, next) => {
     getExamTypes,
     getTerms,
     getLabels,
+    getTopics,
   ], (err, results) => {
     if (err)
       return next(err);
@@ -116,6 +130,7 @@ const getInitial = (req, res, next) => {
       exam_types: results[2],
       terms: results[3],
       labels: results[4],
+      topics: results[5],
     });
   })
 };

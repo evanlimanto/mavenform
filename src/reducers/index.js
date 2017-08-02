@@ -46,6 +46,15 @@ export const labels = (state = {}, action) => {
   }
 };
 
+export const topics = (state = [], action) => {
+  switch (action.type) {
+    case Actions.UPDATE_INITIAL_STATE:
+      return action.data.topics;
+    default:
+      return state;
+  }
+};
+
 export const courseExams = (state = [], action) => {
   switch (action.type) {
     case Actions.UPDATE_COURSE_EXAMS:
