@@ -4,13 +4,13 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { map } from 'lodash';
 import { Route, Switch } from 'react-router-dom';
-import createHistory from 'history/createBrowserHistory';
 
 import routes from './routes';
 import initializeTracking from './tracking';
 import { configureStore, initStore } from './utils/configureStore';
 import { ReactGA } from './events';
 import ScrollToTop from './components/scrolltotop';
+import history from './utils/history';
 
 import './css/General.css';
 import './css/Typography.css';
@@ -29,13 +29,6 @@ import './css/Info.css';
 
 ReactGA.set({ path: window.location.pathname });
 ReactGA.pageview(window.location.pathname);
-
-const history = createHistory()
-history.listen((location, action) => {
-  // Track all pageviews, "PUSH" and "POP"
-  ReactGA.set({ path: location.pathname });
-  ReactGA.pageview(location.pathname);
-})
 
 const store = configureStore();
 initStore(store); // async

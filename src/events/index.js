@@ -13,28 +13,17 @@ const ReactGA = canUseDOM ? require('react-ga') : null;
 const tracker = function(name, label) {
   const page = window.location.pathname;
   !mixpanel || mixpanel.track(name, { page, label });
+  const count = (page.match(/\//g) || []).length;
   if (process.env.NODE_ENV === "development") {
     console.log(`Tracking event ${name}`);
   } else {
-    !ReactGA || ReactGA.event({ category: name, action: page, label });
+    // Track events on exams only
+    if (count === 5)
+      !ReactGA || ReactGA.event({ category: name, action: page, label });
   }
 }
 
-export { ReactGA };
-
-let startTime = Date.now();
-export function startSession() {
-  startTime = Date.now();
-}
-
-export function endSession() {
-  let length = Math.floor((Date.now() - startTime) / 1000);
-  const hours = Math.floor(length / 3600); length = length % 3600;
-  const minutes = Math.floor(length / 60); length = length % 60;
-  const seconds = length;
-  !mixpanel || mixpanel.track('Session Length', { page: window.location.pathname, length_str: `${hours}h ${minutes}m ${seconds}s`, length_seconds: length });
-}
-
+export { ReactGA, mixpanel };
 
 export function schoolClickEvent(schoolCode) {
   tracker('school click', schoolCode);
@@ -62,4 +51,12 @@ export function pageFocusEvent() {
 
 export function pageBlurEvent() {
   tracker('page blur');
+}
+
+export function actionTakenEvent(action) {
+  tracker(action);
+}
+
+export function activeUserEvent() {
+  tracker('active user');
 }
