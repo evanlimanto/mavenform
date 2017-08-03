@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { map, range } from 'lodash';
 import { connect } from 'react-redux';
-import DocumentMeta from 'react-document-meta';
+import { Helmet } from 'react-helmet';
 
 import Navbar from '../navbar';
 import Footer from '../footer';
@@ -26,11 +26,19 @@ class TopicContentComponent extends Component {
       window.renderMJ();
   }
 
+  static getMeta(props) {
+    const topicInfo = props.topicInfo;
+    const title = `${topicInfo.conceptLabel} - Studyform`;
+    const description = `Interactive study resorces for ${topicInfo.subjectLabel}, ${topicInfo.topicLabel} - ${topicInfo.conceptLabel}`;
+    return (
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+      </Helmet>
+    );
+  }
+
   render() {
-    const meta = {
-      description: `Interactive study resources for ${this.props.topicLabel} - ${this.props.conceptLabel}`,
-      title: `${this.subjectLabel} - Studyform`,
-    };
     const topicInfo = this.props.topicInfo;
     const content = (!topicInfo) ? (<p className="loader">Loading content...</p>) :
       map(topicInfo.info, (num_parts, part) => {
@@ -56,7 +64,7 @@ class TopicContentComponent extends Component {
 
     return (
       <div>
-        <DocumentMeta {...meta} />
+        {TopicContentComponent.getMeta(this.props)}
         <Navbar schoolCode={this.props.schoolCode} courseCode={this.props.courseCode} concept={this.props.code} label={this.props.topicInfo.conceptLabel} />
         <div id="header-text">
           <div className="center">

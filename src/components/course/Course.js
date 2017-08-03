@@ -83,7 +83,9 @@ class CourseComponent extends Component {
       const termCode = exam.term_code;
       const termLabel = exam.term_label;
       const profs = exam.profs, regexp = /, /g;
-      const url = `/${schoolCode}/${courseCode}/${typeCode}/${termCode}/${replace(profs, regexp, '-')}`;
+      let url = `/${schoolCode}/${courseCode}/${typeCode}-${termCode}`;
+      if (profs !== "None")
+        url = url + `-${replace(profs, regexp, '_')}`;
       return (
         <tr key={key} className="available" onClick={() => examClickEvent(schoolCode, courseCode, typeCode, termCode)}>
           <td><Link to={url}>{typeLabel}</Link></td>

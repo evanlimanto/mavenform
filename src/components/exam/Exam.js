@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { has, map, range, replace } from 'lodash';
+import { has, map, range, replace, split } from 'lodash';
 import { Helmet } from 'react-helmet';
 
 import { updateExamInfo } from '../../actions';
 import { BASE_URL, canUseDOM, courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
 import { Question, MultipleChoiceQuestion } from '../question';
+import { TopicContent } from '../topic';
 import Footer from '../footer';
 import Navbar from '../navbar';
 
@@ -15,7 +16,11 @@ class ExamComponent extends Component {
   }
 
   static getMeta(props) {
-    const { courseCode, examType, termCode, labels } = props;
+    const { courseCode, labels, examStr } = props;
+    const examArr = split(examStr, '-');
+    const examType = examArr[0];
+    const termCode = examArr[1];
+    const profs = examArr[2];
     const title = ((labels.schools) ? `${courseCodeToLabel(courseCode)} ${termToLabel(termCode)} ${examTypeToLabel(examType)} - Studyform` : "Studyform");
     const description = `Study and discuss past exam problems and solutions for ${courseCodeToLabel(courseCode)} ${termToLabel(termCode)} ${examTypeToLabel(examType)}.`;
     return (
@@ -27,9 +32,12 @@ class ExamComponent extends Component {
   }
 
   static fetchData(dispatch, props) {
-    const { schoolCode, courseCode, examType, termCode, profs } = props;
-    const regexp = /-/g;
-    return fetch(`${BASE_URL}/getExamInfo/${schoolCode}/${courseCode}/${examType}/${termCode}/${replace(profs, regexp, ', ')}`)
+    const { schoolCode, courseCode, examStr } = props;
+    const examArr = split(examStr, '-');
+    const examType = examArr[0];
+    const termCode = examArr[1];
+    const profs = (examArr.length <= 2) ? "None": examArr[2];
+    return fetch(`${BASE_URL}/getExamInfo/${schoolCode}/${courseCode}/${examType}/${termCode}/${replace(profs, /_/g, ', ')}`)
       .then((response) => response.json())
       .then((json) => dispatch(updateExamInfo(json)));
   }
@@ -40,7 +48,13 @@ class ExamComponent extends Component {
   }
 
   render() {
-    const { schoolCode, courseCode, examType, termCode, profs } = this.props;
+    const { schoolCode, courseCode, examStr } = this.props;
+    const examArr = split(examStr, '-');
+    if (examArr.length === 1)
+      return <TopicContent schoolCode={schoolCode} courseCode={courseCode} code={examArr[0]} />;
+    const examType = examArr[0];
+    const termCode = examArr[1];
+    const profs = replace((examArr.length <= 2) ? "None" : examArr[2], /_/g, ', ');
     const examInfo = this.props.examInfo;
 
     const examContent = (!examInfo) ? (<p className="loader">Loading content...</p>) :
@@ -99,9 +113,7 @@ const mapStateToProps = (state, ownProps) => {
     auth: state.auth,
     schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
     courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
-    examType: ownProps.examType || ownProps.match.params.examType,
-    termCode: ownProps.termCode || ownProps.match.params.termCode,
-    profs: replace(ownProps.profs || ownProps.match.params.profs, /-/g, ', '),
+    examStr: ownProps.examStr || ownProps.match.params.examStr,
     labels: state.labels,
     examInfo: state.examInfo,
   };
