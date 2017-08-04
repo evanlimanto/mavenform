@@ -1,0 +1,2132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head> 
+	  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	  <title>UCI Campus Directory</title>
+	  <link href="directory.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript">
+			<!--
+			function denc( str, mt )
+			{
+				if (str == "&nbsp;")
+					return "&nbsp;";
+				
+				var tpyrcne = '0&;5#81647329';
+				var fixed = '&#;0987654321';	
+				var decoded = ''; 
+				
+				for (i=0; i<str.length; i++) {
+					decoded += tpyrcne.charAt(fixed.indexOf(str.charAt(i)))
+				}
+				
+				if (mt)
+				{
+				 return "<a href='&#109;&#97;&#105;&#108;&#116;&#111;&#58;" + decoded + "'>" + decoded + "</a>";	
+				} else {
+					return decoded ;
+				}
+				
+			}
+			
+			function clearAdvancedForm()
+			{
+				document.getElementById( "form_fname" ).value = "";
+				document.getElementById( "form_lname" ).value = "";
+				document.getElementById( "form_email" ).value = "";
+				document.getElementById( "form_ucinetid" ).value = "";
+				document.getElementById( "form_phone" ).value = "";
+				document.getElementById( "form_department" ).value = "";
+				
+				document.getElementById( "fname_default" ).selected = true;
+				document.getElementById( "lname_default" ).selected = true;
+				document.getElementById( "email_default" ).selected = true;
+				document.getElementById( "ucinetid_default" ).selected = true;
+				document.getElementById( "department_default" ).selected = true;
+				
+				document.getElementById( "searchgroup_default" ).selected = true;				
+			}
+			
+			function flipDeliveryPoint()
+			{
+				dp = document.getElementById("deliveryPoint");
+				dp_msg = document.getElementById("dp_message");
+				if (dp.style.display == 'none') 
+				{ 
+					dp.style.display = 'block'
+					dp_msg.innerHTML = '[Hide Delivery Point]'; 
+				} else { 
+					dp.style.display = 'none'
+					dp_msg.innerHTML = '[Show Delivery Point]';
+				}
+			}
+			
+			function load()
+			{
+				document.getElementById('basic_keywords').focus();
+			}
+			-->
+		</script>
+  </head>
+  <body onload="load();">
+		<div id="container">
+			<div id="header">
+				<div class="header-text">
+					<div class="date">Friday, August 4th, 2017</div>
+					<div class="global-links"><a href="http://www.uci.edu/campusmap/">Campus Maps</a> : <a href="http://today.uci.edu/">UC Irvine Today</a></div>	
+				</div><br/>
+				<div class="header-bg"><a href="http://www.uci.edu"><img src="images/banner2.jpg" alt="UC Irvine, Campus Directory" border="0" /></a></div>
+				<!-- <div class="rotating-images"><img src="images/rotate/image11.jpg" alt="Fac/Staff Picture 1" class="left" 
+									/><img src="images/rotate/image12.jpg" alt="Fac/Staff Picture 2" class="mid" 
+									/><img src="images/rotate/image10.jpg" alt="Fact/Staff Picture 3" class="right" 
+				/></div> -->
+					<!-- <img src="images/rotate/image82.jpg" alt="Fac/Staff Picture 3" width="49" height="60" />
+					<img src="images/rotate/image102.jpg" alt="Fac/Staff Picture 4" width="49" height="60" />
+					<img src="images/rotate/image43.jpg" alt="Fac/Staff Picture 5" width="49" height="60" />
+					<img src="images/rotate/image99.jpg" alt="Fac/Staff Picture 6" width="49" height="60" />
+					<img src="images/rotate/image6.jpg" alt="Fac/Staff Picture 7" width="49" height="60" />
+					<img src="images/rotate/image70.jpg" alt="Fac/Staff Picture 8" width="49" height="60" />
+					<img src="images/rotate/image14.jpg" alt="Fac/Staff Picture 9" width="49" height="60" />
+					<img src="images/rotate/image24.jpg" alt="Fac/Staff Picture 10" width="49" height="60" />
+					<img src="images/rotate/image22.jpg" alt="Fac/Staff Picture 11" width="49" height="60" />
+					<img src="images/rotate/image54.jpg" alt="Fac/Staff Picture 12" width="49" height="60" />
+					<img src="images/rotate/image100.jpg" alt="Fac/Staff Picture 13" width="49" height="60" />
+					<img src="images/rotate/image58.jpg" alt="Fac/Staff Picture 14" width="49" height="60" />
+					<img src="images/rotate/image46.jpg" alt="Fac/Staff Picture 15" width="49" height="60" /> -->
+			</div>
+			<div id="wrapper">
+				<div id="leftcolumn">
+			  	<ul>
+			  		<li><a href="/index.php?action=update_directory">How to Update Directory Information</a></li>
+			      <li><a href="/index.php?action=search_tips&amp;form_type=advanced_search">Search Tips</a></li>
+			      <li><a href="/index.php?action=about_directory">About the UCI Directory</a> </li>
+			      <li class="redtext"><a href=" https://portal.uci.edu/uPortal/viewXmlFile.jsp?cmsUri=public/MainMenuEmergencyManagement.xml">UCI Preparedness &amp; Emergency Response </a></li>
+		        <li class="operator"><strong>Campus Operator<br />
+				  	        (949) 824-5011</strong></li>
+			      <li><a href="/index.php?action=ucdirectories">UC Directories</a> </li>
+			    	<li><a href="http://psearch.ics.uci.edu">Search the directory using ICS's powerful search technology: <br/><br/><img src="images/psearch.png" alt="PSearch Logo" border="0"/></a></li>
+					</ul>
+					<div class="sideimage">Maintained by the<br/>
+					<a href="http://www.oit.uci.edu"><img src="images/OIT-Logo-150.png" alt="Office of Information Technology" style="border: 0px; margin-left: -10px;" /></a>
+			    </div>
+			  </div> 
+			
+			<!-- left column ends -->	  	
+				
+				<div id="centercolumn">
+					
+			    
+			     
+			    <h1 align="left">Search for People &amp; Departments <span class="basicsearch">[ <a href="/index.php?form_type=basic_search">Basic Search</a> ]</span></h1> 
+			    <form action="" method="get" name="advanced_search" id="advanced_search">
+			        <label for="searchgroup">Search Group</label>  
+			        <select name="search_group" size="1" class="adv-field" accesskey="1" tabindex="1" title="Search Group" id="searchgroup">
+			          <option id="searchgroup_default" value="all" >Faculty, Staff, Students &amp; Departments</option> <!-- &amp; Associated Accounts -->
+			          <option value="facstaff" >Faculty and Staff Only</option>
+			          <option value="students" SELECTED>Students Only</option>
+								<option value="departments" >Departments Only</option>
+			        </select>
+			  		<br/>
+			        <label for="form_fname">First&nbsp;Name/Nickname</label>
+			        <input type="text" maxlength="60" name="form_fname" accesskey="2" tabindex="2" id="form_fname" value="kevin"/>
+							<label class="hiddenLabel" for="form_fname_filter">First Name Search Type</label>
+							<select name="form_fname_filter" id="form_fname_filter" size="1" class="adv-field" accesskey="3" tabindex="3" title="">
+								<option value="exact" >Exact</option>
+								<option id="fname_default" value="starts with" SELECTED>Starts With</option>
+							</select>
+			      <br/>
+			        <label for="form_lname">Last&nbsp;Name</label>
+			        <input type="text" maxlength="60" name="form_lname" accesskey="4" tabindex="4" id="form_lname" value="" />
+							<label class="hiddenLabel" for="form_lname_filter">Last Name Search Type</label>
+							<select name="form_lname_filter" id="form_lname_filter" size="1" class="adv-field" accesskey="5" tabindex="5" title="">
+								<option value="exact" >Exact</option>
+								<option id="lname_default" value="starts with" SELECTED>Starts With</option>
+							</select>
+			      <br/>
+			        <label for="form_email">E-mail</label>
+			        <input type="text" maxlength="60" name="form_email" accesskey="6" tabindex="6" id="form_email" value="" />
+							<label class="hiddenLabel" for="form_email_filter">E-mail Search Type</label>
+							<select name="form_email_filter" id="form_email_filter" size="1" class="adv-field" accesskey="7" tabindex="7" title="">
+								<option value="exact" >Exact</option>
+								<option id="email_default" value="starts with" SELECTED>Starts With</option>
+							</select>
+			      <br/>
+			        <label for="form_ucinetid">UCInetID</label>
+			        <input type="text" maxlength="60" name="form_ucinetid" accesskey="8" tabindex="8" id="form_ucinetid" value="" />
+							<label class="hiddenLabel" for="form_ucinetid_filter">UCInetID Search Type</label>
+							<select name="form_ucinetid_filter" id="form_ucinetid_filter" size="1" class="adv-field" accesskey="9" tabindex="9" title="">
+								<option value="exact" >Exact</option>
+								<option id="ucinetid_default" value="starts with" SELECTED>Starts With</option>
+							</select>
+						<br/>
+			        <label for="form_department">Department</label>
+			        <input type="text" maxlength="60" name="form_department" accesskey="10" tabindex="10" id="form_department" value="" />
+							<label class="hiddenLabel" for="form_department_filter">Department Search Type</label>
+							<select name="form_department_filter" id="form_department_filter" size="1" class="adv-field" accesskey="11" tabindex="11" title="">
+								<option value="exact" >Exact</option>
+								<option id="department_default" value="starts with" SELECTED>Starts With</option>
+							</select>
+			      <br/>
+			        <label for="form_phone">Telephone</label>
+			        <input type="text" maxlength="60" name="form_phone" accesskey="12" tabindex="12" id="form_phone" value="" />
+			      <p class="search-buttons">      
+			        <input type="submit" name="advanced_submit" value="Search" accesskey="14" tabindex="14" id="Submit" />
+			        <input type="button" name="Reset" value="Clear Form" accesskey="15" tabindex="15" onclick="clearAdvancedForm();" />
+							
+			        <input type="hidden" name="form_type" value="advanced_search" />
+			      </p>
+			    </form>
+			    
+			    
+		      
+		      
+		      
+		      <div class="error">
+		        <p>
+		        Your search 
+						
+						returned over 100 results, the first 100 are displayed
+		        below.<br/>Try narrowing your search or use the <a href="/index.php?form_type=advanced_search">Advanced Search</a>.
+		        </p>
+		      </div>
+		      
+		      <div class="search-table">
+		        <table border="0" cellspacing="0" cellpadding="0" summary="Search results">
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kadson&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Adson</a> &nbsp;<br/>
+		            <span class="departmentmajor">Undclrd</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#914;#97&&;#9770;#9777;#977&;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kagahee&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Michael Agahee</a> &nbsp;<br/>
+		            <span class="departmentmajor">Engr ME</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#914;#97&3;#914;#97&5;#97&7;#97&7;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=aguirrk2&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Aguirre</a> &nbsp;<br/>
+		            <span class="departmentmajor">Bio Sci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#914;#97&3;#9774;#97&0;#9775;#9775;#97&4;#90&;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kevina2&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Alvarez</a> &nbsp;<br/>
+		            <span class="departmentmajor">Engr ME</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&7;#9778;#97&0;#977&;#914;#90&;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=ankj&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Johnathan An</a> &nbsp;<br/>
+		            <span class="departmentmajor">Bio Sci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#914;#977&;#97&4;#97&6;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=markka&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Mark Kevin Anderson</a> &nbsp;<br/>
+		            <span class="departmentmajor">Crm Law</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&1;#914;#9775;#97&4;#97&4;#914;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kandrad1&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Eugene Andrade</a> &nbsp;<br/>
+		            <span class="departmentmajor">Physics</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#914;#977&;#97&&;#9775;#914;#97&&;#951;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kpanthon&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Patrick Anthony</a> (Kevin anthony)<br/>
+		            <span class="departmentmajor">ICIT</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&7;#9778;#97&0;#977&;#914;#977&;#9776;#97&5;#9777;#977&;#9727;#958;#958;#951;#965;#97&3;#97&1;#914;#97&0;#97&8;#956;#911;#9777;#97&1;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=arantem&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Mark Kevin Mirasol Arante</a> &nbsp;<br/>
+		            <span class="departmentmajor">UCI Food Services<br />Edu Sci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#914;#9775;#914;#977&;#9776;#97&7;#97&1;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kavalosr&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Avalos Reyes</a> &nbsp;<br/>
+		            <span class="departmentmajor">EngrCpE</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#914;#9778;#914;#97&8;#9777;#9770;#9775;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kbache&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Michael Bache</a> (Kevin)<br/>
+		            <span class="departmentmajor">Computer Science<br />CmptSci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kabacon&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Agustin Bacon</a> &nbsp;<br/>
+		            <span class="departmentmajor">Math</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#914;#918;#914;#911;#9777;#977&;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=jkbaez&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Jeff Kevin Baez-Rangel</a> &nbsp;<br/>
+		            <span class="departmentmajor">UCI Food Services<br />Engr EE</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&6;#97&4;#918;#914;#97&7;#9722;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kdbaik&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Dongwook Baik</a> &nbsp;<br/>
+		            <span class="departmentmajor">Psych</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&&;#918;#914;#97&0;#97&4;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kbakenie&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Ernest-Gordon Bakenie</a> &nbsp;<br/>
+		            <span class="departmentmajor">Philos</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#918;#914;#97&4;#97&7;#977&;#97&0;#97&7;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=balcarck&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Stewart Balcarcel</a> &nbsp;<br/>
+		            <span class="departmentmajor">Psy Beh</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#918;#914;#97&8;#911;#914;#9775;#911;#97&4;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=barajask&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Barajas</a> &nbsp;<br/>
+		            <span class="departmentmajor">Adm FE</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#918;#914;#9775;#914;#97&6;#914;#9770;#97&4;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kcbarnes&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Charles Barnes</a> &nbsp;<br/>
+		            <span class="departmentmajor">Social Ecology Administration<br />Law</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#911;#918;#914;#9775;#977&;#97&7;#9770;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kbarnum&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Chang Barnum</a> &nbsp;<br/>
+		            <span class="departmentmajor">Graduate Student, Mathematics<br />Math</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#918;#914;#9775;#977&;#9774;#97&1;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kbarrer2&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Barrera</a> &nbsp;<br/>
+		            <span class="departmentmajor">Pol Sci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#918;#914;#9775;#9775;#97&7;#9775;#90&;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kbatton&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Thomas Batton</a> &nbsp;<br/>
+		            <span class="departmentmajor">Classic</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#918;#914;#9776;#9776;#9777;#977&;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kbauer1&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Bauer</a> &nbsp;<br/>
+		            <span class="departmentmajor">Graduate Student, Physics and Astronomy<br />Physics</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#918;#914;#9774;#97&7;#9775;#951;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kbeery&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Beery</a> &nbsp;<br/>
+		            <span class="departmentmajor">UrbPlan</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#918;#97&7;#97&7;#9775;#9727;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=bendezuk&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Bendezu</a> &nbsp;<br/>
+		            <span class="departmentmajor">Flm&Mda</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#918;#97&7;#977&;#97&&;#97&7;#9722;#9774;#97&4;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=berakr&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Rimal Bera</a> &nbsp;<br/>
+		            <span class="departmentmajor">Med</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#918;#97&7;#9775;#914;#97&4;#9775;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kabernar&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Aaron Bernardo</a> &nbsp;<br/>
+		            <span class="departmentmajor">Bio Sci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#914;#918;#97&7;#9775;#977&;#914;#9775;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=ablanque&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Angel Kevin Blanquel</a> &nbsp;<br/>
+		            <span class="departmentmajor">Undclrd</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#914;#918;#97&8;#914;#977&;#9773;#9774;#97&7;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=bornkamd&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Derek Kevin Bornkamp</a> &nbsp;<br/>
+		            <span class="departmentmajor">BusEcon</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#918;#9777;#9775;#977&;#97&4;#914;#97&1;#97&&;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=ckbravo&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Christopher Kevin Bravo</a> &nbsp;<br/>
+		            <span class="departmentmajor">Physics and Astronomy<br />Engr EE</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#911;#97&4;#918;#9775;#914;#9778;#9777;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kbrito1&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Brito</a> &nbsp;<br/>
+		            <span class="departmentmajor">Gen&Sex</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#918;#9775;#97&0;#9776;#9777;#951;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=brittonk&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin M. T. Britton</a> &nbsp;<br/>
+		            <span class="departmentmajor">Intl St</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#918;#9775;#97&0;#9776;#9776;#9777;#977&;#97&4;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kbrum&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Donald Brum</a> &nbsp;<br/>
+		            <span class="departmentmajor">Pol Sci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#918;#9775;#9774;#97&1;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kevinb2&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Bui</a> &nbsp;<br/>
+		            <span class="departmentmajor">CmptSci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&7;#9778;#97&0;#977&;#918;#90&;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kevinhb&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Hoai-Viet Bui</a> &nbsp;<br/>
+		            <span class="departmentmajor">EngrBMP</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&7;#9778;#97&0;#977&;#97&5;#918;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kjcaball&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Jaime Caballero</a> &nbsp;<br/>
+		            <span class="departmentmajor">Student Government & Student Media<br />Bus Adm</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&6;#911;#914;#918;#914;#97&8;#97&8;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kcabrer2&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Cabrera</a> &nbsp;<br/>
+		            <span class="departmentmajor">Biological Sciences-Minority Programs<br />CMB</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#911;#914;#918;#9775;#97&7;#9775;#90&;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kacabrer&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Alexander Cabrera</a> &nbsp;<br/>
+		            <span class="departmentmajor">Undclrd</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#914;#911;#914;#918;#9775;#97&7;#9775;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kcarizon&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Emralino Carizon</a> &nbsp;<br/>
+		            <span class="departmentmajor">Bio Sci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#911;#914;#9775;#97&0;#9722;#9777;#977&;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=carlislk&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Michael Carlisle</a> &nbsp;<br/>
+		            <span class="departmentmajor">CmptSci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#911;#914;#9775;#97&8;#97&0;#9770;#97&8;#97&4;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kcarmody&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Carmody</a> &nbsp;<br/>
+		            <span class="departmentmajor">Adm FE</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#911;#914;#9775;#97&1;#9777;#97&&;#9727;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kjcaste1&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Justin Castellanos</a> &nbsp;<br/>
+		            <span class="departmentmajor">Pol Sci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&6;#911;#914;#9770;#9776;#97&7;#951;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=gcastil&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Glenn Kevin Castil</a> &nbsp;<br/>
+		            <span class="departmentmajor">Flm&Mda</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&3;#911;#914;#9770;#9776;#97&0;#97&8;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kcastil3&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Castillo</a> &nbsp;<br/>
+		            <span class="departmentmajor">Library<br />Engr ME</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#911;#914;#9770;#9776;#97&0;#97&8;#907;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kacasti2&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Apollo Castillo</a> &nbsp;<br/>
+		            <span class="departmentmajor">CmptSci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#914;#911;#914;#9770;#9776;#97&0;#90&;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kchan9&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Chan</a> &nbsp;<br/>
+		            <span class="departmentmajor">Math</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#911;#97&5;#914;#977&;#904;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kkchandr&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Kristoffer Chandra</a> &nbsp;<br/>
+		            <span class="departmentmajor">Bus Adm</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&4;#911;#97&5;#914;#977&;#97&&;#9775;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=changk10&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Chang</a> &nbsp;<br/>
+		            <span class="departmentmajor">Bus Adm</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#911;#97&5;#914;#977&;#97&3;#97&4;#951;#958;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kjchang1&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Jl Chang</a> &nbsp;<br/>
+		            <span class="departmentmajor">Engr CE</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&6;#911;#97&5;#914;#977&;#97&3;#951;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=changkj2&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Joon Chang</a> &nbsp;<br/>
+		            <span class="departmentmajor">Intl St</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#911;#97&5;#914;#977&;#97&3;#97&4;#97&6;#90&;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=chaok5&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Chao</a> &nbsp;<br/>
+		            <span class="departmentmajor">Undclrd</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#911;#97&5;#914;#9777;#97&4;#903;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=khchao&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Heng Chao</a> &nbsp;<br/>
+		            <span class="departmentmajor">CSGames</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&5;#911;#97&5;#914;#9777;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=ktchase&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Tyler Chase</a> &nbsp;<br/>
+		            <span class="departmentmajor">CSGames</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#9776;#911;#97&5;#914;#9770;#97&7;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kchau5&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Chau</a> &nbsp;<br/>
+		            <span class="departmentmajor">Student Government & Student Media<br />PhrmSci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#911;#97&5;#914;#9774;#903;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kmchau1&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Minh Chau</a> &nbsp;<br/>
+		            <span class="departmentmajor">CSE</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&1;#911;#97&5;#914;#9774;#951;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kcchavez&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Christopher Chavez</a> &nbsp;<br/>
+		            <span class="departmentmajor">Flm&Mda</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#911;#911;#97&5;#914;#9778;#97&7;#9722;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kchea1&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Chea</a> &nbsp;<br/>
+		            <span class="departmentmajor">Psy Beh</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#911;#97&5;#97&7;#914;#951;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kevinc10&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Chen</a> &nbsp;<br/>
+		            <span class="departmentmajor">Psy Beh</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&7;#9778;#97&0;#977&;#911;#951;#958;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=chenk16&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Chen</a> &nbsp;<br/>
+		            <span class="departmentmajor">BusEcon</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#911;#97&5;#97&7;#977&;#97&4;#951;#905;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=chenk17&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Chen</a> &nbsp;<br/>
+		            <span class="departmentmajor">DUE-Academic Testing Center<br />Engr AE</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#911;#97&5;#97&7;#977&;#97&4;#951;#900;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kevic14&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Chen</a> &nbsp;<br/>
+		            <span class="departmentmajor">Psy Beh</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&7;#9778;#97&0;#911;#951;#902;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kachen1&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin A. Chen</a> &nbsp;<br/>
+		            <span class="departmentmajor">CmptSci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#914;#911;#97&5;#97&7;#977&;#951;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=khchen1&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Hank Chen</a> &nbsp;<br/>
+		            <span class="departmentmajor">CmptSci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&5;#911;#97&5;#97&7;#977&;#951;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kevinhc1&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Hsinwen Chen</a> &nbsp;<br/>
+		            <span class="departmentmajor">Graduate Student- Nowick, Chemistry<br />Chem</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#956;#911;#97&5;#97&7;#977&;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									Phone: (949) 824-2771
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=chenkj2&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Julian Chen</a> &nbsp;<br/>
+		            <span class="departmentmajor">Econ</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#911;#97&5;#97&7;#977&;#97&4;#97&6;#90&;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=yankangc&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Yankang Chen</a> (Kevin)<br/>
+		            <span class="departmentmajor">Math</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#9727;#914;#977&;#97&4;#914;#977&;#97&3;#911;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kevinhc2&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Huong Cheng</a> &nbsp;<br/>
+		            <span class="departmentmajor">Undclrd</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&7;#9778;#97&0;#977&;#97&5;#911;#90&;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kychew&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Yam Chew</a> &nbsp;<br/>
+		            <span class="departmentmajor">EngrCpE</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#9727;#911;#97&5;#97&7;#9771;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kchian&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Lucas Chian</a> &nbsp;<br/>
+		            <span class="departmentmajor">CSE</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#911;#97&5;#97&0;#914;#977&;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kcsebast&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Chittinappily Sebastian</a> &nbsp;<br/>
+		            <span class="departmentmajor">Informatics<br />CmptSci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#911;#9770;#97&7;#918;#914;#9770;#9776;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=chiuk3&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Chiu</a> &nbsp;<br/>
+		            <span class="departmentmajor">Q Econ</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#911;#97&5;#97&0;#9774;#97&4;#907;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kpcho&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Peter Cho</a> &nbsp;<br/>
+		            <span class="departmentmajor">Pol Sci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#9772;#911;#97&5;#9777;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=choik4&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Choi</a> &nbsp;<br/>
+		            <span class="departmentmajor">Psy Beh</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#911;#97&5;#9777;#97&0;#97&4;#902;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kwchoi1&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Choi</a> &nbsp;<br/>
+		            <span class="departmentmajor">CmptSci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#956;#911;#97&5;#9777;#97&0;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kchou6&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Chou</a> &nbsp;<br/>
+		            <span class="departmentmajor">PhrmSci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#911;#97&5;#9777;#9774;#905;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=chowk3&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Chow</a> &nbsp;<br/>
+		            <span class="departmentmajor">CmptSci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#911;#97&5;#9777;#9771;#97&4;#907;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=chuk3&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Chu</a> &nbsp;<br/>
+		            <span class="departmentmajor">Psy Beh</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#911;#97&5;#9774;#97&4;#907;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=yunjoc&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Chung</a> &nbsp;<br/>
+		            <span class="departmentmajor">Engr ME</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#9727;#9774;#977&;#97&6;#9777;#911;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=clarkka&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Andres Clark</a> &nbsp;<br/>
+		            <span class="departmentmajor">Math</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#911;#97&8;#914;#9775;#97&4;#97&4;#914;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kcco&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Cheng Co</a> &nbsp;<br/>
+		            <span class="departmentmajor">PhrmSci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#911;#911;#9777;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kjcochra&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Jacob Cochran</a> &nbsp;<br/>
+		            <span class="departmentmajor">Summer Sessions<br />Psy Beh</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&6;#911;#9777;#911;#97&5;#9775;#914;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kcohen1&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Cohen</a> &nbsp;<br/>
+		            <span class="departmentmajor">Bio Sci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#911;#9777;#97&5;#97&7;#977&;#951;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kmcolbur&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Marc Colburn</a> &nbsp;<br/>
+		            <span class="departmentmajor">Japanse</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&1;#911;#9777;#97&8;#918;#9774;#9775;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=ckcolin&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Christian Kevin Colin</a> &nbsp;<br/>
+		            <span class="departmentmajor">Undclrd</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#911;#97&4;#911;#9777;#97&8;#97&0;#977&;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=cookkc&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Cook</a> &nbsp;<br/>
+		            <span class="departmentmajor">Undclrd</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#911;#9777;#9777;#97&4;#97&4;#911;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=cordonk&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Ryan Cordon</a> &nbsp;<br/>
+		            <span class="departmentmajor">Lit Jrn</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#911;#9777;#9775;#97&&;#9777;#977&;#97&4;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kmcortes&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Mario Cortes</a> &nbsp;<br/>
+		            <span class="departmentmajor">Pol Sci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&1;#911;#9777;#9775;#9776;#97&7;#9770;#965;#97&3;#97&1;#914;#97&0;#97&8;#918;#9777;#972&;#956;#97&7;#9770;#956;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kcrampto&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Thomas Crampton</a> &nbsp;<br/>
+		            <span class="departmentmajor">Graduate Student- Apkarian, Chemistry<br />Chem</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#911;#9775;#914;#97&1;#9772;#9776;#9777;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									Phone: (949) 824-6791
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kcreaven&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Vincent Creaven</a> &nbsp;<br/>
+		            <span class="departmentmajor">EngrChm</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#911;#9775;#97&7;#914;#9778;#97&7;#977&;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kcristob&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Eduardo Cristobal Mendoza</a> &nbsp;<br/>
+		            <span class="departmentmajor">Engr ME</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#911;#9775;#97&0;#9770;#9776;#9777;#918;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=cronina&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Andrew Kevin Cronin</a> &nbsp;<br/>
+		            <span class="departmentmajor">Pol Sci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#911;#9775;#9777;#977&;#97&0;#977&;#914;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=cruzek&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Duane Cruze Jr.</a> &nbsp;<br/>
+		            <span class="departmentmajor">Campus Recreation<br />Pol Sci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#911;#9775;#9774;#9722;#97&7;#97&4;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kdalisay&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Dalisay</a> &nbsp;<br/>
+		            <span class="departmentmajor">Flm&Mda</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&&;#914;#97&8;#97&0;#9770;#914;#9727;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=ktdeguzm&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Troy Buan De Guzman</a> &nbsp;<br/>
+		            <span class="departmentmajor">Bren Events Center<br />Engr EE</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#9776;#97&&;#97&7;#97&3;#9774;#9722;#97&1;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kddejesu&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Dominic De Jesus</a> &nbsp;<br/>
+		            <span class="departmentmajor">Engr EE</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&&;#97&&;#97&7;#97&6;#97&7;#9770;#9774;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kdebulga&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Neil Debulgado</a> &nbsp;<br/>
+		            <span class="departmentmajor">Chem</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&&;#97&7;#918;#9774;#97&8;#97&3;#914;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=xdedenba&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Xavier Kevin Dedenbach</a> &nbsp;<br/>
+		            <span class="departmentmajor">Engr EE</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#972&;#97&&;#97&7;#97&&;#97&7;#977&;#918;#914;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kdeloss1&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Delos Santos</a> &nbsp;<br/>
+		            <span class="departmentmajor">PhrmSci</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&&;#97&7;#97&8;#9777;#9770;#9770;#951;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kding1&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Ding</a> &nbsp;<br/>
+		            <span class="departmentmajor">Account</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&&;#97&0;#977&;#97&3;#951;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kevind2&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Do</a> &nbsp;<br/>
+		            <span class="departmentmajor">CSE</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&7;#9778;#97&0;#977&;#97&&;#90&;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+							
+		          <tr>
+		            <td width="55%"><a href='/index.php?uid=kdotran&return=search_group%3Dstudents%26form_fname_filter%3Dstarts%2Bwith%26form_lname%3D%26form_lname_filter%3Dstarts%2Bwith%26form_email%3D%26form_email_filter%3Dstarts%2Bwith%26form_ucinetid%3D%26form_ucinetid_filter%3Dstarts%2Bwith%26form_department%3D%26form_department_filter%3Dstarts%2Bwith%26form_phone%3D%26advanced_submit%3DSearch%26form_type%3Dadvanced_search%26form_fname%3Dkevin'>Kevin Do-Tran</a> &nbsp;<br/>
+		            <span class="departmentmajor">EngrBMP</span><br />
+		            <span class="departmentmajor"></span></td>
+		            <td width="45%" class="contactinfo">
+		            	
+									E-mail: 
+									<script type="text/javascript">
+										<!--
+										document.write(denc('#97&4;#97&&;#9777;#9776;#9775;#914;#977&;#965;#9774;#911;#97&0;#956;#97&7;#97&&;#9774;',1));
+										-->
+									</script><br/>
+									
+									
+									&nbsp;
+		            </td>
+		        	</tr>
+							
+	          </table>
+
+	        </div>
+	        
+	        		
+	        
+	        
+	        
+	        
+	        
+	        
+		
+					
+					
+					<div class="notices">
+						<a href="/index.php?action=update_directory">Update Data in the Directory</a> |
+						<a href="http://www.oit.uci.edu/contact-us/">Site Feedback</a>
+					</div>
+					
+		      
+		      
+			    <hr />
+		  	  <div class="privacynotice">
+		    	  <p><strong>Privacy Notice:</strong>
+                            <br>
+                            This directory has been compiled for the use and convenience of the faculty, staff, students, and affiliates of the University of California, Irvine and others dealing with UC Irvine. It is the property of the Regents of the University of California. In accordance with the California Information Practices Act, neither this directory nor the information contained herein may be used, rented, distributed, or sold for commercial purposes. Compilation or redistribution of information from this directory is strictly forbidden. Upon using this directory, you submit to these terms of use.  For more details, please see the <a href='http://policy.ucop.edu/doc/7020469/BFB-RMP-12'> University guidelines for assuring privacy of personal information in mailing lists and telephone directories.</a>
+                          </p>
+                          <p><strong>Note:</strong>
+                            <br>
+                            Directory information provided here should not be used as a verification of UCI employment.
+                          </p>
+                          <p align='center'> 
+                            ~ Directory data is updated daily ~
+                          </p>
+			  </div>
+			  
+		  	</div> <!-- center column end -->
+			</div> <!-- wrapper end -->
+		</div> <!-- container end -->
+	</body>
+</html>
