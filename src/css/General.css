@@ -183,7 +183,8 @@ em {
   display: inline-block;
   padding: 15px 25px 15px 5px;
   background: #fff;
-  color: #666;
+  font-weight: 700;
+  color: #333;
 }
 
 .tab {
@@ -210,4 +211,8 @@ em {
   top: 0;
   z-index: 3;
   border-bottom: 1px solid #ccc;
+}
+
+.extra {
+  padding-top: 53px;
 }

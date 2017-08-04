@@ -115,6 +115,11 @@ i {
   color: #999;
 }
 
+.soft {
+  font-weight: 400;
+  color: #ccc;
+}
+
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #ccc;
 }

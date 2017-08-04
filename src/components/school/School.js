@@ -30,8 +30,10 @@ class SchoolComponent extends Component {
     $(window).bind('scroll', function () {
       if ($(window).scrollTop() > num) {
         $('.tab-sticky').addClass('fixed');
+        $('.dep-sticky').addClass('extra');
       } else {
         $('.tab-sticky').removeClass('fixed');
+        $('.dep-sticky').removeClass('extra');
       }
     });
   }
@@ -80,8 +82,8 @@ class SchoolComponent extends Component {
         );
       });
       return (
-        <Element className="department" key={subject}>
-          <h1>{obj.label} ({split(obj.courses[0].code_label, ' ')[0]})</h1>
+        <Element name={split(obj.courses[0].code_label, ' ')[0]}className="department" key={subject}>
+          <h1>{obj.label} <span className="soft">({split(obj.courses[0].code_label, ' ')[0]})</span></h1>
           {courseBoxes}
         </Element>
       );
@@ -125,22 +127,21 @@ class SchoolComponent extends Component {
           <div className="container tab-container-container">
             <div className="tab-container">
               <div className="dark-tab">Departments</div>
-              <ScrollLink className="tab active-tab">CS</ScrollLink>
-              <ScrollLink className="tab">MATH</ScrollLink>
-              <ScrollLink className="tab">EE</ScrollLink>
-              <ScrollLink className="tab">UGBA</ScrollLink>
-              <ScrollLink className="tab">STAT</ScrollLink>
-              <ScrollLink className="tab">CHEM</ScrollLink>
+              <ScrollLink className="tab" activeClass="active-tab" to="CS" spy={true} smooth={true} duration={500} isDynamic={true}>CS</ScrollLink>
+              <ScrollLink className="tab" activeClass="active-tab" to="MATH" spy={true} smooth={true} duration={500} isDynamic={true}>MATH</ScrollLink>
+              <ScrollLink className="tab" activeClass="active-tab" to="EE" spy={true} smooth={true} duration={500} isDynamic={true}>EE</ScrollLink>
+              <ScrollLink className="tab" activeClass="active-tab" to="STAT" spy={true} smooth={true} duration={500} isDynamic={true}>STAT</ScrollLink>
+              <ScrollLink className="tab" activeClass="active-tab" to="UGBA" spy={true} smooth={true} duration={500} isDynamic={true}>UGBA</ScrollLink>
+              <ScrollLink  className="tab" activeClass="active-tab" to="CHEM" spy={true} smooth={true} duration={500} isDynamic={true}>CHEM</ScrollLink>
             </div>
           </div>
         </div>
-        <div className="light-gray border-top">
+        <div className="light-gray border-top dep-sticky">
           <hr className="s2" />
           <div className="card-container">
             {courseItems}
           </div>
-          <hr className="s2" />
-          <hr className="s7-5" />
+          <hr className="s5" />
         </div>
         <div className="gray-filler"></div>
         <Footer />
