@@ -251,10 +251,12 @@ const getSchoolCourses =
     const schoolCode = req.params.schoolCode;
     const checkq = `select 1 from schools where code = $1`;
     const q = `
-      select C.id, C.code_label, C.code, subjects.subject_code, subjects.subject_label from courses C
-      inner join schools on schools.id = C.schoolid
-      inner join subjects on subjects.id = C.subjectid
-      where schools.code = $1 and exists (select 1 from exams where exams.courseid = C.id)
+      select C.id, C.code_label, C.code, subjects.subject_code, subjects.subject_label, sum(case when exams.id is not NULL then 1 else 0 end) as exam_count from exams
+      full join courses C on C.id = exams.courseid
+      left join subjects on subjects.id = C.subjectid
+      left join schools on schools.id = C.schoolid
+      where schools.code = $1
+      group by C.id, C.code_label, C.code, subjects.subject_code, subjects.subject_label
     `;
     pool.query(checkq, [schoolCode], (err, result) => {
       if (err) return next(err);
@@ -274,6 +276,7 @@ const getSchoolCourses =
             id: row.id,
             code: row.code,
             code_label: row.code_label,
+            exam_count: row.exam_count,
           });
           return dict;
         }, {});

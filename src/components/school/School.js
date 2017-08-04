@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { keys, has, map, sortBy, split, toInteger, takeRight } from 'lodash';
+import { range, concat, take, forEach, keys, has, map, reduce, sortBy, split, toInteger, takeRight, toUpper } from 'lodash';
 import { Helmet } from 'react-helmet';
 import numeral from 'numeral';
 import hash from 'string-hash';
@@ -70,20 +70,39 @@ class SchoolComponent extends Component {
       return <NotFound />;
 
     const schoolCode = this.props.schoolCode;
-    return map(sortBy(this.props.courses, [(obj) => -keys(obj.courses).length]), (obj, subject) => {
-      const courseBoxes = map(sortBy(obj.courses, [(course) => toInteger((new RegExp("\\d+")).exec(course.code)[0]),
-                                                   (course) => takeRight(course.code)]), (course, key) => {
+    const sortedCourseCodes = sortBy(keys(this.props.courses), [(code) =>
+      -reduce(this.props.courses[code].courses, (total, course) => total = total + toInteger(course.exam_count), 0)
+    ]);
+    return map(sortedCourseCodes, (courseCode) => {
+      const obj = this.props.courses[courseCode];
+      const sortedCourses = sortBy(obj.courses, [(course) => toInteger(course.exam_count) === 0,
+                                                 (course) => toInteger((new RegExp("\\d+")).exec(course.code)[0]),
+                                                 (course) => takeRight(course.code)]);
+      let courseBoxes = map(sortedCourses, (course, key) => {
         return (
           <Link className="card course-card" to={"/" + schoolCode + "/" + course.code}
            key={key} onClick={() => courseClickEvent(schoolCode, course.code)}>
-            <span>{course.code_label}</span>
+            <span dangerouslySetInnerHTML={{ __html: `${course.code_label} ${toInteger(course.exam_count) === 0 ? "<span class='soft'>(New)</span>" : ""}` }}></span>
             <span className="card-arrow">&#8594;</span>
           </Link>
         );
       });
+      if (sortedCourses.length > 8) {
+        const showHiddenCourses = () => {
+          document.getElementById("showhidden-" + courseCode).classList.add("hidden");
+          document.getElementById("courses-" + courseCode).classList.remove("hidden");
+        }
+        courseBoxes = [
+          take(courseBoxes, 7),
+          (<a id={"showhidden-" + courseCode} className="card course-card" key={-1} onClick={showHiddenCourses}><span>View more courses</span><span className="card-arrow">&#8594;</span></a>),
+          (<span className="hidden" id={"courses-" + courseCode} key={-2}>
+            {takeRight(courseBoxes, courseBoxes.length - 7)}
+          </span>)
+        ]
+      }
       return (
-        <Element name={split(obj.courses[0].code_label, ' ')[0]}className="department" key={subject}>
-          <h1>{obj.label} <span className="soft">({split(obj.courses[0].code_label, ' ')[0]})</span></h1>
+        <Element name={toUpper(courseCode)} className="department" key={toUpper(courseCode)}>
+          <h1>{obj.label} <span className="soft">({toUpper(courseCode)})</span></h1>
           {courseBoxes}
         </Element>
       );
@@ -97,6 +116,9 @@ class SchoolComponent extends Component {
     const schoolCode = this.props.schoolCode;
     const schoolInfo = this.props.schoolInfo;
     const courseItems = this.getCourseItems();
+    const sortedCourseCodes = sortBy(keys(this.props.courses), [(code) =>
+      -reduce(this.props.courses[code].courses, (total, course) => total = total + toInteger(course.exam_count), 0)
+    ]);
     const schoolLabel = (this.props.labels && has(this.props.labels.schools, schoolCode)) ? this.props.labels.schools[schoolCode] : null;
     return (
       <div className="school">
@@ -127,12 +149,8 @@ class SchoolComponent extends Component {
           <div className="container tab-container-container">
             <div className="tab-container">
               <div className="dark-tab">Departments</div>
-              <ScrollLink className="tab" activeClass="active-tab" to="CS" spy={true} smooth={true} duration={500} isDynamic={true}>CS</ScrollLink>
-              <ScrollLink className="tab" activeClass="active-tab" to="MATH" spy={true} smooth={true} duration={500} isDynamic={true}>MATH</ScrollLink>
-              <ScrollLink className="tab" activeClass="active-tab" to="EE" spy={true} smooth={true} duration={500} isDynamic={true}>EE</ScrollLink>
-              <ScrollLink className="tab" activeClass="active-tab" to="STAT" spy={true} smooth={true} duration={500} isDynamic={true}>STAT</ScrollLink>
-              <ScrollLink className="tab" activeClass="active-tab" to="UGBA" spy={true} smooth={true} duration={500} isDynamic={true}>UGBA</ScrollLink>
-              <ScrollLink  className="tab" activeClass="active-tab" to="CHEM" spy={true} smooth={true} duration={500} isDynamic={true}>CHEM</ScrollLink>
+              {map(range(0, Math.min(sortedCourseCodes.length, 6)),
+                (key) => <ScrollLink key={key} className="tab" activeClass="active-tab" to={toUpper(sortedCourseCodes[key])} spy={true} smooth={true} duration={500} isDynamic={true}>{toUpper(sortedCourseCodes[key])}</ScrollLink>)}
             </div>
           </div>
         </div>

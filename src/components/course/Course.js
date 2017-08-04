@@ -73,11 +73,10 @@ class CourseComponent extends Component {
   }
 
   render() {
-    if (this.props.exams.notfound)
-      return <NotFound />;
-
     const { courseCode, schoolCode } = this.props;
-    const available = map(this.props.exams, (exam, key) => {
+    const exams = map(this.props.exams, (exam, key) => {
+      if (key === "notfound")
+        return null;
       const typeCode = exam.type_code;
       const typeLabel = exam.type_label;
       const termCode = exam.term_code;
@@ -97,6 +96,7 @@ class CourseComponent extends Component {
       );
     });
 
+    console.log(this.props.courseLabel);
     const content = (
       <div>
        <div className="container info-container">
@@ -105,8 +105,7 @@ class CourseComponent extends Component {
           <div className="info">
             <h4 className="info-title">{courseCodeToLabel(courseCode)}</h4>
             <hr className="s1" />
-            <h5 className="info-subtitle">{!this.props.courseLabel || this.props.courseLabel}
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+            <h5 className="info-subtitle">{!this.props.courseLabel || `${this.props.courseLabel}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;`}
               <Link className="school-link" to={`/${schoolCode}`}>{!this.props.labels || !this.props.labels.schools || this.props.labels.schools[schoolCode]}</Link></h5>
             <hr className="s1" />
             <hr className="s0-5" />
@@ -136,7 +135,7 @@ class CourseComponent extends Component {
             <Dropzone onDrop={this.onDrop} className="upload-exam"> Click to upload an exam to convert (.pdf, .doc, .docx, .jpg, .png files only) </Dropzone>
           </td>
         </tr>
-        {available}
+        {exams}
         </tbody>
         </table>
         {!!this.props.exams || <p>Loading exams...</p>}

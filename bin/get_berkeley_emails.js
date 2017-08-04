@@ -4,13 +4,21 @@ const fs = require('fs');
 const cheerio = require('cheerio');
 const request = require('request');
 
-//const params = _.take(_.shuffle(_.split(fs.readFileSync("first-names.txt"), '\r\n')), 2);
+const options = {
+  headers: {
+    'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36",
+    'Referer': 'http://peoplefinder.auburn.edu/peoplefinder/index.php'
+  }
+};
+let params = _.shuffle(_.split(fs.readFileSync("first-names.txt"), '\n'));
 const baseUrl = "http://www.berkeley.edu/directory/results?search-term=";
-const params = ["Xu", "Wu"];
+params = ["Kevin"];
 async.map(params, (param, outerCallback) => {
-  const url = baseUrl + param;
-  request(url, (err, response, body) => {
+  const url = baseUrl + _.upperFirst(_.toLower(param));
+  console.log(url);
+  request(url, options, (err, response, body) => {
     if (err) return outerCallback(err);
+    console.log(response);
     const regexp = new RegExp(/<li><a href="\/directory(.*?)">(.*?)<\/a>/, "g");
     const paths = [];
     while ((temp = regexp.exec(body)) !== null) {
@@ -20,7 +28,7 @@ async.map(params, (param, outerCallback) => {
     }
     return async.map(paths, (path, callback) => {
       const newUrl = "http://www.berkeley.edu/directory" + _.replace(path[0], " ", "%20");
-      request(newUrl, (err, response, body) => {
+      request(newUrl, options, (err, response, body) => {
         if (err) return callback(err);
         const innerRegexp = new RegExp(/<p><label>(.*?)<\/label><br\/>(.*?)<\/p>/, "g");
         const items = {};
@@ -39,5 +47,7 @@ async.map(params, (param, outerCallback) => {
   });
 }, (err, results) => {
   if (err) return console.error(err);
-  return console.log(results);
+  const res = _.filter(_.flatten(results), (a) => a);
+  console.log(res.length);
+  fs.writeFileSync('./berkeley_emails.json', JSON.stringify(res, null, '\t'));
 });
