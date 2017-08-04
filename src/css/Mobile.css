@@ -24,6 +24,10 @@
     display: none;
   }
 
+  .tab-sticky {
+    display: none;
+  }
+
   .nav-search {
     display: none;
   }

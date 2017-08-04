@@ -98,7 +98,7 @@ em {
 }
 
 .dark-gray {
-  background: #444;
+  background: #e3e3e3;
 }
 
 .s0-5, .s1, .s2, .s3, .s4, .s5, .s7-5, .s8 {
@@ -166,4 +166,48 @@ em {
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+.tab-sticky {
+  background: #fff;
+  width: 100%;
+}
+
+.tab-container {
+  display: inline-block;
+  max-width: 1010px;
+  border-right: 1px solid #ccc;
+}
+
+.dark-tab {
+  display: inline-block;
+  padding: 15px 25px 15px 5px;
+  background: #fff;
+  color: #666;
+}
+
+.tab {
+  display: inline-block;
+  padding: 15px 25px;
+  border-left: 1px solid #ccc;
+  color: #999;
+  background: #fff;
+}
+
+.tab:hover {
+  cursor: pointer;
+  background: #f4f4f4;
+  color: #11aacc;
+}
+
+.active-tab {
+  background: #f4f4f4;
+  color: #11aacc;
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
+  z-index: 3;
+  border-bottom: 1px solid #ccc;
 }

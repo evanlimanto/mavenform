@@ -5,13 +5,17 @@ import { keys, has, map, sortBy, toInteger, takeRight } from 'lodash';
 import { Helmet } from 'react-helmet';
 import numeral from 'numeral';
 import hash from 'string-hash';
-
+import $ from 'jquery';
 import Footer from '../footer';
 import Navbar from '../navbar';
 import NotFound from '../notfound';
 import { updateSchoolCourses, updateSchoolInfo } from '../../actions';
 import { courseClickEvent } from '../../events';
 import { BASE_URL } from '../../utils';
+
+const Scroll = require('react-scroll');
+const ScrollLink = Scroll.Link;
+const Element = Scroll.Element;
 
 class SchoolComponent extends Component {
   constructor(props) {
@@ -21,6 +25,15 @@ class SchoolComponent extends Component {
 
   componentDidMount() {
     SchoolComponent.fetchData(this.props.dispatch, this.props);
+
+    var num = 300;
+    $(window).bind('scroll', function () {
+      if ($(window).scrollTop() > num) {
+        $('.tab-sticky').addClass('fixed');
+      } else {
+        $('.tab-sticky').removeClass('fixed');
+      }
+    });
   }
 
   static getMeta(props) {
@@ -67,10 +80,10 @@ class SchoolComponent extends Component {
         );
       });
       return (
-        <div className="department" key={subject}>
+        <Element name={obj} className="department" key={subject}>
           <h1>{obj.label}</h1>
           {courseBoxes}
-        </div>
+        </Element>
       );
     });
   }
@@ -106,6 +119,19 @@ class SchoolComponent extends Component {
               </p>
             </div>
             <hr className="s5" />
+          </div>
+        </div>
+        <div className="border-top tab-sticky">
+          <div className="container tab-container-container">
+            <div className="tab-container">
+              <div className="dark-tab">Departments</div>
+              <ScrollLink className="tab active-tab">CS</ScrollLink>
+              <ScrollLink className="tab">MATH</ScrollLink>
+              <ScrollLink className="tab">EE</ScrollLink>
+              <ScrollLink className="tab">UGBA</ScrollLink>
+              <ScrollLink className="tab">STAT</ScrollLink>
+              <ScrollLink className="tab">CHEM</ScrollLink>
+            </div>
           </div>
         </div>
         <div className="light-gray border-top">
