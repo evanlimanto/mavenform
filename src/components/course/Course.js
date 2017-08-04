@@ -105,7 +105,7 @@ class CourseComponent extends Component {
           <div className="info">
             <h4 className="info-title">{courseCodeToLabel(courseCode)}</h4>
             <hr className="s1" />
-            <h5 className="info-subtitle">{!this.props.courseLabel || `${this.props.courseLabel}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;`}
+            <h5 className="info-subtitle">{!this.props.courseLabel || <span dangerouslySetInnerHTML={{ __html: `${this.props.courseLabel}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;`}} />}
               <Link className="school-link" to={`/${schoolCode}`}>{!this.props.labels || !this.props.labels.schools || this.props.labels.schools[schoolCode]}</Link></h5>
             <hr className="s1" />
             <hr className="s0-5" />

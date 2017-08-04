@@ -4,40 +4,27 @@ const fs = require('fs');
 const cheerio = require('cheerio');
 const request = require('request');
 const jsdom = require('jsdom');
+const { JSDOM } = jsdom;
 
-function denc( str )
-{
-if (str == "&nbsp;")
-  return "&nbsp;";
-
-var tpyrcne = '16;35&4829#07';
-var fixed = '&#;0987654321';	
-var decoded = ''; 
-
-for (i=0; i<str.length; i++) {
-	decoded += tpyrcne.charAt(fixed.indexOf(str.charAt(i)))
-}
-return decoded;
-
-}
-
-let params = _.shuffle(_.split(fs.readFileSync("first-names.txt"), '\n'));
+let params = _.take(_.shuffle(_.split(fs.readFileSync("first-names.txt"), '\n')), 10);
 const baseUrl = "http://directory.uci.edu/index.php?search_group=students&form_fname_filter=starts+with&form_lname=&form_lname_filter=starts+with&form_email=&form_email_filter=starts+with&form_ucinetid=&form_ucinetid_filter=starts+with&form_department=&form_department_filter=starts+with&form_phone=&advanced_submit=Search&form_type=advanced_search";
-params = ["kevin"];
-/*const data = fs.readFileSync("test.html");
-const items = _.split(data, "\n");
-console.log(denc(items[0]));*/
 async.map(params, (param, outerCallback) => {
   const url = baseUrl + "&form_fname=" + param;
   request(url, (err, response, body) => {
     if (err) return outerCallback(err);
-    const regexp = new RegExp(/denc\('(.*?)',1\)/, "g");
-    console.log(body);
-    fs.writeFileSync('test.html', body);
+    body = body.replace('onload="load();"', '');
+    body = (new JSDOM(body, { runScripts: "dangerously" })).serialize();
+    const regexp = new RegExp(/mailto:(.*?)"/, "g");
+    const emails = [];
     while ((temp = regexp.exec(body)) != null) {
       console.log(temp[1]);
+      emails.push([param, temp[1]]);
     }
+    return outerCallback(null, emails);
   });
 }, (err, results) => {
-  if (err) return console.error(err);
+  console.log("done");
+  const res = _.flatten(results);
+  console.log(res.length);
+  return fs.writeFileSync("uci_emails.json", JSON.stringify(res, null, '\t'));
 });
