@@ -470,7 +470,7 @@ const getCourseTopics =
       inner join course_topics CT on CT.topicid = T.id
       inner join courses C on CT.courseid = C.id
       inner join schools S on C.schoolid = S.id
-      where S.code = $1 and C.code = $2
+      where S.code = $1 and C.code = $2 and exists (select 1 from content where content.topicid = T.id)
     `;
     pool.query(getq, [schoolCode, courseCode], (err, result) => {
       if (result.rows.length === 0) return res.json({ notfound: true });
