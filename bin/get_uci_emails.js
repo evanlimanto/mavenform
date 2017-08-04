@@ -3,6 +3,7 @@ const async = require('async');
 const fs = require('fs');
 const cheerio = require('cheerio');
 const request = require('request');
+const jsdom = require('jsdom');
 
 function denc( str )
 {
