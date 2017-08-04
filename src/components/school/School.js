@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { keys, has, map, sortBy, toInteger, takeRight } from 'lodash';
+import { keys, has, map, sortBy, split, toInteger, takeRight } from 'lodash';
 import { Helmet } from 'react-helmet';
 import numeral from 'numeral';
 import hash from 'string-hash';
@@ -80,8 +80,8 @@ class SchoolComponent extends Component {
         );
       });
       return (
-        <Element name={obj} className="department" key={subject}>
-          <h1>{obj.label}</h1>
+        <Element className="department" key={subject}>
+          <h1>{obj.label} ({split(obj.courses[0].code_label, ' ')[0]})</h1>
           {courseBoxes}
         </Element>
       );

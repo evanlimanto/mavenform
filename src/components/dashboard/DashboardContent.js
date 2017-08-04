@@ -126,6 +126,7 @@ class DashboardContentComponent extends Component {
   }
 
   render() {
+    console.log(this.state);
     const exams = map(this.props.exams.key_dict, (exam, key) => {
       const linkClass = classnames({
         highlighted: key === this.state.examid
@@ -150,7 +151,7 @@ class DashboardContentComponent extends Component {
 
     const topicSelectItems = (!this.state.problem.problem) || (
       <select ref="topic" value={this.state.problem.topicid || null} onChange={this.handleChange}>
-        {!this.state.problem.topicid ? <option selected value={null} disabled> -- select a topic -- </option> : null}
+        <option selected value={null}> -- select a topic -- </option>
         {map(sortBy(this.props.topics, [(topic) => topic.topic, (topic) => topic.concept]), (topic, key) => <option key={key} value={topic.id}>{topic.topic} - {topic.concept}</option>)}
       </select>
     );

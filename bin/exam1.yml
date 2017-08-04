@@ -1,57 +1,747 @@
 q1_1: |
-  1\. Find the following integrals.
+  # 1. Montague's (8 pts)
+  a. For the graph  below, write the order in which vertices are visited using the specified algorithm. Each node’s neighbors are given in alphabetical order. The starting point, vertex A, is provided for you.
   <hr class="s1" />
-  (a) $\int \left( \frac{1}{x^2} - x^2 - \frac{1}{3} \right) dx
+  <p align="center">!!q1-1.png!!</p>
+  <hr class="s1" />
+  DFS:
+  <hr class="s1" />
+  BFS:
+  <hr class="s1" />
+  Dijkstra's:
+
+q1_1_s: |
+  DFS: A C D B E F G H
+  <hr class="s1" />
+  BFS: A C G D H F B E
+  <hr class="s1" />
+  Dijkstra's: A G C D H B E F
 
 q1_2: |
-  (b) $\int (r^2 + r + 1) e^r \; dr$
+  b. Given the following graph
+  <hr lcass="s1" />
+  <p align="center">!!q1-2.png!!</p>
+  <hr class="s1" />
+  What is a valid topologically sorted ordering of the vertices?
+
+q1_2_s: |
+  A C E H D F B G
+  <hr class="s1" />
+  A C H E D F B G
+  <hr class="s1" />
+  A E C H D F B G
+
+q1_3: |
+  How many possible orderings are there?
+
+q1_3_s: |
+  3
+
+q1_4: |
+  Parts c­-e refer to the following weighted undirected graph below.
+  <hr class="s1" />
+  <p align="center">!!q1-4.png!!</p>
+  <hr class="s2" />
+  c. Draw the intermediate state of the graph during execution of Kruskal's Algorithm after four edges have been added:
+  <hr class="s1" />
+  <p align="center">!!q1-5.png!!</p>
+
+q1_5: |
+  d. Draw a tree representation of the union­find (disjoin sets) data structure, without path compression, at the same point in the algorithm:
+  <hr class="s1" />
+  <p align="center">!!q1-6.png!!</p>
+
+q1_6: |
+  e. Now suppose the algorithm has reached completion, but designers want to secretly add another edge to the graph of integer weight w. For each of the following conditions, circle whether adding an edge of that weight to the graph will, might, or will not change the edges in a MST:
+  <hr class="s1" />
+  If w < 4, a MST [will / might / will not] change.
+  <hr class="s1" />
+  If 5 < w < 7, a MST [will / might / will not] change.
+  <hr class="s1" />
+  If 20 < w, a MST [will / might / will not] change.
+  <hr class="s1" />
+  If 90 < w, a MST [will / might / will not] change.
+
+q1_6_s: |
+  If w < 4, a MST **will** change.
+  <hr class="s1" />
+  If 5 < w < 7, a MST **might** change.
+  <hr class="s1" />
+  If 20 < w, a MST **might** change.
+  <hr class="s1" />
+  If 90 < w, a MST **will not** change.
+  <hr class="s2" />
+  For w < 4, it will become a lightest edge, and must be added by Kruskal’s.
+  <hr class="s1" />
+  For 5 < w < 20, it may be redundant with another edge already connecting two parts.
+  <hr class="s1" />
+  For 90 < w, it will be the heaviest edge, and the graph is already connectable without using it.
 
 q2_1: |
-  2\. Suppose that $f$ and $g$ are continuous functions and
-  $$\int_1^5 f(x) dx = -1, \; \int_5^7 f(x) dx = 2, \quad \int_1^7 g(x) dx = 3$$
-  Use the properties of definite integrals to find
+  # 2. Kimchi Garden (6 pts)
+  For any weighted, undirected graph, determine whether each statement is true (T) or false (F) and circle your choice. If you choose false, provide a counterexample in the space below the statement.
   <hr class="s1" />
-  (a) $\int_1^7 f(x) dx$
+  a. Adding 1 to each edge weight will not change any MSTs. 
+
+q2_1_s: |
+  true
 
 q2_2: |
-  (b) $\int_7^5 f(x) dx$
+  b. Adding 1 to each edge weight will not change the shortest paths between vertices. 
+
+q2_2_s: |
+  False.
+  <hr class="s1" />
+  <p align="center">!!q2-2.png!!</p>
 
 q2_3: |
-  (c) $\int_1^7 (3f(x) - 2g(x)) dx$
+  c. If a graph of $V$ vertices has more than $|V| ­- 1$ edges, and there is a unique edge $F$ of highest weight, it cannot be a part of *any* MST.
+
+q2_3_s: |
+  False.
+  <hr class="s1" />
+  <p align="center">!!q2-3.png!!</p>
+
+q2_4: |
+  d. The shortest path between two nodes s and t must be a part of some MST
+
+q2_4_s: |
+  False.
+  <hr class="s1" />
+  <p align="center">!!q2-4.png!!</p>
+
+q2_5: |
+  e. If we could sort a list in O(1) time, the runtime of Kruskal’s would asymptotically improve.
+
+q2_5_s: |
+  True.
+
+q2_6: |
+  f. If there is a path between all pairs of vertices in a directed graph, there must be a cycle in the graph.
+
+q2_6_s: |
+  False.
+  <hr class="s1" />
+  <p align="center">!!q2-5.png!!</p>
 
 q3_1: |
-  3\. Find the following definite integrals.
-  <hr class="s1" />
-  (a) $\int_{-1}^{-\frac{1}{2}} t^{-2} \sin \left( 1 + \frac{1}{t} \right) dt$
+  # 3. Tamon Tea (2 pts)
+  Recall the class definition of `IntNode` as defined below:
 
-q3_2: |
-  (b) $\int_1^2 \frac{e^{2 \ln x}}{x} dx$ (Hint: simplify the integrand)
+  ```
+  public class IntNode {
+      int item;
+      IntNode next;
+      public IntNode(int item, IntNode next) {
+          this.item = item;
+          this.next = next;
+      }
+  }
+  ```
+  Write the `breakTheLoop` method below, which takes in an `IntNode`. You are guaranteed that the list this node belongs to is **circular** (the "last" element of the list points to the "first"), it is in **sorted increasing** order, and all its items are **unique**. However, the node passed in to `breakTheLoop` can point to any node in the circular list.
+  <hr class="s2" />
+  `breakTheLoop` should destructively turn the list into a non­circular list where the first node contains the lowest number and return the first node. You may iterate through the circular list at most once. You may not need all the lines below.
+
+q3_1_s: |
+  ```
+  public static IntNode breakTheLoop(IntNode n) {
+      assert n != null;
+      while (n.item < n.next.item) {
+          n = n.next;
+      }
+      IntNode toReturn = n.next;
+      n.next = null;
+      return toReturn;
+  }
+  ```
 
 q4_1: |
-  4\. Use partial fractions to find the following integral.
-  $$\int \frac{x^2 + 1}{(x^2 - 1)(x + 1)} dx$$
+  # 4. Jasmine Thai Lunch Special (5 pts)
+  a. Provide the best case and worst case runtimes in theta notation in terms of N for the following operations and data structures. Assume N to be the number of nodes in the tree. Additionally, each node correctly maintains the size of the subtree rooted at it.
+
+  |Operations|BST|Red-Black Tree|
+  |----------|---|--------------|
+  |`// Returns true if the object is in the tree`<hr class="s1" />`boolean contains(T o);`|Best: <hr class="s1" />Worst: |Best: <hr class="s1" />Worst: |
+  |`// Inserts the given object.`<hr class="s1" />`void insert(T o);`|Best: <hr class="s1" />Worst:|Best: <hr class="s1" />Worst:|
+  |`// Returns the ith smallest object in the tree.`<hr class="s1" />`T getElement(int i);`|Best: <hr class="s1" />Worst: |Best: <hr class="s1" />Worst:|
+
+q4_1_s: |
+  !!q4-1.png!!
+
+q4_2: |
+  b. Professor Sarallahan Kyao at Harbuvard University decided to use a self­-balancing binary search tree. However, the code became somehow corrupt and you, as a faithful assistant, have the job of fixing it.
+  <hr class="s2" />
+  At each node, we keep an int variable called height, which keeps track of the height of the subtree rooted at the node. A leaf node has a height of 0, and each non­leaf node has a height of `1 + max(left.height, right.height)`. Professor Kyao demands that for each node, the left child's height and right child's height differ by no more than 1. That is, `Math.abs(left.height ‐ right.height) <= 1`. Thus, whenever one of our left or right subtrees is not balanced, or their height differs by more than 1, we should rebalance.
+  <hr class="s2" />
+  Fill in the blanks below so that the code correctly calls `rebalance()` as needed.
+
+  ```
+  class WhatTree {
+      Node root;
+      static class Node {
+          int item, height;
+          Node left, right;
+
+          Node(int item, int height) {
+              this.item = item;
+              this.height = height;
+          }
+      }
+
+      public void insert(int item) {
+          root = insert(root, item);
+      }
+
+      private static Node insert(Node node, int item) {
+          if (node == null) {
+              ________________________________
+          }
+          if (node.item == item) {
+              return node;
+          } else if (node.item < item) {
+              ________________________________
+          } else {
+              ________________________________
+          }
+          node.height = findHeight(node);
+
+          if (________________________________) {
+              node = rebalance(node);
+          }
+          return node;
+      }
+
+      private static boolean isBalanced(Node n) {
+          if (n == null) return true;
+          if (Math.abs(________________________________) {
+              return ________________________________
+          } else if (________________________________) {
+              return ________________________________
+          }
+          return ________________________________
+      }
+
+      // Finds the height of a node.
+      private static int findHeight(Node n) { ... }
+      // Assume this works properly
+      private static boolean rebalance(Node n) { ... }
+  }
+  ```
+
+q4_2_s: |
+  ```
+  class WhatTree {
+      Node root;
+      static class Node {
+          int item, height;
+          Node left, right;
+
+          Node(int item, int height) {
+              this.item = item;
+              this.height = height;
+          }
+      }
+
+      public void insert(int item) {
+          root = insert(root, item);
+      }
+
+      private static Node insert(Node node, int item) {
+          if (node == null) {
+              return new Node(item, 0);
+          }
+          if (node.item == item) {
+              return node;
+          } else if (node.item < item) {
+              node.right = insert(node.right, item);
+          } else {
+              node.left = insert(node.left, item);
+          }
+          node.height = findHeight(node);
+
+          if (!isBalanced(node)) {
+              node = rebalance(node);
+          }
+          return node;
+      }
+
+      private static boolean isBalanced(Node n) {
+          if (n == null) return true;
+          if (Math.abs(n.left.height ‐ n.right.height)) > 1) {
+              return false;
+          } else if (!isBalanced(n.left) || !isBalanced(n.right)) {
+              return false;
+          }
+          return true;
+      }
+      
+      // Finds the height of a node.
+      private static int findHeight(Node n) { ... }
+      // Assume this works properly
+      private static boolean rebalance(Node n) { ... }
+  }
+  ```
 
 q5_1: |
-  5\. Find the volume of the solid generated by revolving the region bounded by $y = 2 - x^2$ and the line $y = 1$ and $x = -1$ about the $x$-axis using disc/washer method.
-  <hr class="s1" />
+  # 5. SF Soup Company (4 pts)
+  a. Consider a `HashMap<Integer, String>` with an underlying array of size 5. Draw the resulting structure after the following operations.
+  ```
+  put(3, "monument");
+  put(8, "shrine");
+  put(3, "worker");
+  put(5, "granary");
+  ```
+  <hr class="s2" />
   <p align="center">!!q5-1.png!!</p>
 
+q5_1_s: |
+  Worker replaces monument, as their keys are the same.
+
+q5_2: |
+  b. Two instances of a class are **deep-­equals** if all its fields are `.equals()`. Consider the `FastMap`, a variant of a `HashMap` that avoids collisions. A `FastMap` requires the following for every key `K` inserted into it: (1) Instances of `K` have a unique final int id field, which is set upon construction to the number of unique instances of `K` created so far. (2) The `hashCode()` method for K returns id. (3) The `equals(Object o)` method for K returns whether the two objects are deep equals. (4) Once a `FastMap` is instantiated, no more instances of K can be constructed.
+  <hr class="s2" />
+  The `FastMap`’s underlying array size is initialized to be the number of instances created (the highest id) and a `FastMap` does not resize.
+  <hr class="s2" />
+  What is the worst case runtime of put, get, and remove (they are the same) on a `FastMap`?
+
+q5_2_s: |
+  O(1)
+
+q5_3: |
+  If the `FastMap` does indeed prevent collisions, justify your answer. Otherwise, give a counterexample.
+
+q5_3_s: |
+  Since each id is unique, hashCodes are also unique. Since the FastMap’s underlying array is the size of the maximum id, nothing needs to share the same bucket. Thus there are no collisions. 
+  <hr class="s2" />
+  Alternatively, note that we’re limited by the size of an integer. If more than 2^32 instances of K are created, the id will overflow and start looping around, reusing ids. At this point, the correctness of FastMap is broken. Any runtime and explanation pointing out this fact receives full credit.
+
 q6_1: |
-  6\. Let $f(x) = kx^{\frac{3}{2}}$ be a function on the interval $[0, 1]$, where $k$ is a positive constant.
+  # 6. Momo Masala (7 pts)
+  a. For each of the following scenarios below, fill in the blank with the letter corresponding to the sorting algorithm that would perform the best, with respect to **total runtime**, on sorting a **large array** (unless otherwise specified). Then provide the tight **asymptotic runtime** of the sort you chose, on the array, in Big­O notation, where N is the length of the array (for quicksort, provide the average/majority case runtime).
   <hr class="s1" />
-  (a) Find $k$ for which $f(x)$ will be a probability density function of some random variable.
+  A. Insertion Sort, B. Mergesort, C. In­Place Quicksort, D. Radix sort, E. Bubble Sort
+  <hr class="s2" />
+  1\. Java `int`s
+
+q6_1_s: |
+  D, O(N). Fixed length integers should be sorted with radix sort.
 
 q6_2: |
-  (b) Set up an integral for the expectation random variable. You don't need to evaluate it.
+  2\. Floating point numbers of any length (e.g. $2.5, 3.1415$)
+
+q6_2_s: |
+  C, O(N log N). Arbitrary length rules out radix sort, so we use quicksort, which is best on arrays.
 
 q6_3: |
-  (c) Set up an integral for the variance of the random variable. You don't have to evaluate it.
+  3. Comparable objects.
+
+q6_3_s: |
+  C, O(N log N). Quicksort is fastest on arrays.
+
+q6_4: |
+  4. Comparable objects, given that there are O(N) inversions. 
+
+q6_4_s: |
+  A, O(N). We can do insertion sort in linear time.
+
+q6_5: |
+  5. Comparable objects, given that there are $O(N^{1.5})$ inversions.
+
+q6_5_s: |
+  C, O(N log N). N log N is better than $N^{1.5}$.
+
+q6_6: |
+  6. Strings of length $O(\log(N)^{2})$.
+
+q6_6_s: |
+  D, O(N). Radix sort with a radix in $O(\log(N)^2)$ will have a constant number of passes.
+
+q6_7: |
+  7. Java `int`s, and the array length is less than 40.
+
+q6_7_s: |
+  A, O(1). Insertion sort is best when the list is short.
+
+q6_8: |
+  8. Linked List of Comparable objects.
+
+q6_8_s: |
+  B, O(N log N). Mergesort is best on linkedlists.
+
+q6_9: |
+  b. Suppose you are given a list of N objects, comparable in O(1) time. Based on the data set you are working with, you know the objects can only be in one of O(4^N) possible permutations. Give an asymptotic lower bound on the running time of sorting this list. Briefly justify your answer.
+
+q6_9_s: |
+  Lower bound: Ω(N)
+  <hr class="s1" />
+  Justification: A sorting algorithm must ask Q questions in Ω(Q) time and receive 2^Q possible answers, and $2^Q \ge O(4^N)$ to cover all possible permutations. Thus, Q >= O(N), and the algorithm is in Ω(N)
+
+q6_10: |
+  What does this imply about the space complexity of a sorting algorithm that has the runtime of the lower bound? Provide an asymptotic upper bound of the space complexity. Justify your answer.
+
+q6_10_s: |
+  Upper bound: O(N)
+  <hr class="s1" />
+  Justification: An algorithm can only use as much space as it has time. Thus an algorithm taking O(N) time must take O(N) space.
 
 q7_1: |
-  7\. Consider the integral $\int_{-1}^{2} \sin x \; dx$.
+  # 7. Snack Shack: The Pork Belly Cubano
+  Provide a brief description of how to solve each of the following graph problems efficiently. Provide a worst­case runtime bound in Big­ϴ notation in terms of V and E. Let W U G mean weighted, undirected graph.
   <hr class="s1" />
-  (a) Use Simpson's Rule with $n = 8$ to approximate the integral. You do not have to simplify the answer.
+  a. Find a path from node s to node t in a strongly connected, directed graph.
+
+q7_1_s: |
+  Description: Run DFS starting from node s. Terminate at t, saving back pointers.
+  <hr class="s1" />
+  Comment: BFS is also acceptable. Running Dijkstra’s or A* is unnecessary as we don’t want a shortest path.
+  <hr class="s1" />
+  Runtime: ϴ(|V| + |E|). ϴ(|E|) is also okay because it’s connected.
 
 q7_2: |
-  (b) If you wanted to use the trapezoid rule to approximate this integral with an error of less than $0.01$, how many trapezoids would you need? The error $E$ in approximating $\int_a^b f(x) dx$ using the trapezoid rule is
-  $$|E| \le \frac{(b - a)^3}{12n^2} \left[ \max_{a \le x \le b} | f''(x) | \right]$$
+  b. On a connected WUG, find the shortest path from s to t that goes through a given edge e=(u,v).
+
+q7_2_s: |
+  Description: Run Dijkstra’s from s to u, and v to t with (u, v) removed. Run Dijkstra’s from s to v, and u to t with (u, v) removed. Take the minimum of the two.
+  <hr class="s1" />
+  Runtime: ϴ(|E| log |V|)
+
+q7_3: |
+  c. Determine if a cycle exists in a directed graph.
+
+q7_3_s: |
+  Description: Run DFS. If a node encountered is in the call stack (can be maintained as a set), there’s a cycle.
+  <hr class="s1" />
+  Runtime: ϴ(|V| + |E|)
+
+q7_4: |
+  d. Given a connected W U G, find the maximum spanning tree, the spanning tree of maximal weight
+
+q7_4_s: |
+  Description: Run Kruskal’s, with the list of edges sorted in reverse, from heaviest to lightest.
+  <hr class="s1" />
+  Runtime: ϴ(|E| log |E|)
+
+q7_5: |
+  e. (Extra Credit, 2 pts) Find the longest path between any two nodes in a weighted, directed, acyclic graph.
+
+q7_5_s: |
+  Description: Suppose we want to find the longest path from s to t. Topologically sort the graph. Initialize all the # distances to ­Infinity. Starting from s, iterate through the vertices in sorted order. Update distances according to $\text{dist}(v) = \max_{\text{all edges e = (u, v)}} \\{ \text{dist}(u) + \text{dist}(u, v) \\}$. This is okay and even handles negative edges as iterating through in sorted order ensures all nodes u pointing into v are visited before v. Return dist(t).
+  <hr class="s1" />
+  Comment: Dijkstra’s **does not work.**
+
+q7_6: |
+  f. (Extra Credit, 3 pts) Given a weighted, undirected graph where the weights are bounded by k, give an algorithm and data structure to find the shortest s­t path in O((|V|+|E|) log(k)) time.
+
+q7_6_s: |
+  Description: Observe that at any point during execution of Dijkstra’s, the values in the heap will always range from HEAP_MIN to HEAP_MIN + k. Maintain an indexed (on 0 through k) heap of size k, where each node just stores a list of the entries that have that priority (to save on growing the size of the heap). Thus the heap operations in Dijkstra’s will only take O(log k) time.
+
+q8_1: |
+  # 8. Little Gem Belgian Waffles (5 pts)
+  a. Less than a hundred years after returning to the Undying Lands, Elrond has found a new hobby: forging legendary water bottles to be given away at Valar career fairs. He is an ardent fan of Java, so he represents each of his creations as a WaterBottle implements Comparable<WaterBottle> and ranks them on a large number of quality factors. This way, when he sorts them, the water bottles are ranked from worst to best.
+  <hr class="s2" />
+  He wants to send the highest k quality water bottles of his n water bottles back to his daughter Arwen, where k is still undecided. He doesn't want to sort the entire list of water bottles, because that would be too slow. Help him implement a function that runs in ϴ(n log k) time that will find the k highest quality water bottles in descending order. 
+  <hr class="s2" />
+  Recall that `PriorityQueue`, `ArrayDeque`, and `LinkedList` implement Queue. ArrayList and LinkedList implement List. You may not need all lines.
+  ```
+  public static List<WaterBottle> topK(List<WaterBottle> all, int k) {
+      List<WaterBottle> ret = ________________;
+      Queue<WaterBottle> q = ________________;
+      for (________________) {
+          q.add(________________);
+          ________________
+          ________________
+          ________________
+      }
+      while (________________) {
+          ________________
+      }
+      return ret;
+  }
+  ```
+
+q8_1_s: |
+  ```
+  public static List<WaterBottle> topK(List<WaterBottle> all, int k) {
+      List<WaterBottle> ret = new ArrayList<>();
+      Queue<WaterBottle> q = new PriorityQueue<>();
+      for (WaterBottle b : all) {
+          q.add(b);
+          if (q.size() > k) {
+              q.poll();
+          }
+      }
+      while (!q.isEmpty()) {
+          ret.add(q.poll());
+      }
+      return ret;
+  }
+  ```
+
+q8_2: |
+  Give a brief justification of the runtime:
+
+q8_2_s: |
+  The PriorityQueue maintains a size of k. We insert into and remove from the queue n times for a runtime of ϴ(n log k).
+
+q9_1: |
+  # 9. Kamado Sushi (4 pts)
+  The quicksort algorithm can be modified for finding the kth smallest element in an array. This is called the quickselect algorithm as briefly discussed in lab, and finds the item at sorted index j = k ‐ 1. The partition step is the same as quicksort, and it only differs in the recursive call, recursing on the partition that contains the kth smallest element.
+  <hr class="s1" />
+  a. Using the first element of the list as the pivot, show the way the list is partitioned at each step when `quickselect(j = 5)` is called, trying to find the sixth smallest element. Circle the partition that is recursed on
+  <hr class="s1" />
+  `42 93 50 39 81 94 23 28 95 89`
+  <hr class="s2" />
+
+  |Left Partition|Pivot Partition|Right Partition|j|
+  |-|-|-|-|
+  ||42||5|
+  |||||
+  |||||
+  |||||
+
+q9_1_s: |
+  |Left Partition|Pivot Partition|Right Partition|j|
+  |-|-|-|-|
+  |39 23 28|42|93 50 81 94 95 89|5|
+  |50 81 89|93|94 95|1|
+  ||50|81 89|1|
+  ||81|89|0|
+
+q9_2: |
+  b. What is the best, worst, and average case runtime of quickselect?
+
+q9_2_s: |
+  Best: ϴ(n)
+  <hr class="s1" />
+  Worst: ϴ(n^2)
+  <hr class="s1" />
+  Average: ϴ(n)
+
+q9_3: |
+  c. Quickselect can be used to find the median of an array. What if, instead of selecting a pivot at random when quicksorting, instead we use quickselect to find the median and use that as the pivot? What is the worst, best, and average case runtime of quicksort now?
+
+q9_3_s: |
+  Best: ϴ(n log n)
+  <hr class="s1" />
+  Worst: ϴ(n^2 log n)
+  <hr class="s1" />
+  Average: ϴ(n log n)
+
+q10_1: |
+  # 10. Chengdu Restaurant (4 pts)
+  For the below regex problems, assume these are **non-­java** strings, so double escaping is not necessary.
+  <hr class="s1" />
+  a. Consider the regex "[hello]\w+rld". Circle all strings that the regex fully matches.
+  <hr class="s2" />
+  "helloworld", "hworld", "smallworld", "hellowrld", "otherworld"
+
+q10_1_s: |
+  "helloworld", "hworld", hellowrld", "otherworld"
+
+q10_2: |
+  b. Consider the regex "[a‐d0‐9]+\\[^\d]{2,5}". Circle all strings that the regex fully matches.
+
+q10_2_s: |
+  "d00d+42", "61b\party", "aa61bb+cc", "000+ooo", "9a9\\+hue", "4242+meaning"
+
+q10_3: |
+  For parts c-­d, write regular expressions that will fulfill the conditions below. Be sure to escape special characters.
+  <hr class="s2" />
+  c. Match any occurrences of a string that has an "A" at the beginning and end, and greedily, any positive number of "B" in between.
+  <hr class="s1" />
+  Fully matched inputs: "ABA", "ABBBBBBA"
+  <hr class="s1" />
+  Non­matching inputs: "AAAABBBB", "AAAA", "", "BBBABBB", "AABABABABABA"
+
+q10_3_s: |
+  Regex: AB+A
+
+q10_4: |
+  d. Match a valid alphanumeric lowercase email address.
+  <hr class="s1" />
+  Fully matched inputs: "alan42@cs61bl.io", "party@gmail.com"
+  <hr class="s1" />
+  Non­matching inputs: "dun@goofed", "CAPITALS@stop.shouting", "n.onalph_anum@r1c.com"
+
+q10_4_s: |
+  Regex: [a‐z0‐9]+@[a‐z0‐9]+\.[a‐z]+
+
+q11_1: |
+  # 11. Ellenos Real Greek Yogurt (7 pts)
+  a. We can implement a `PriorityQueue` an array­based binary heap. Consider a heap where the keys are integers, and the priority is the key itself. Write out the values of the array representation after the following calls:
+  <hr class="s2" />
+  Starting array: [ X , 0 , 6 , 1 , 9 , 7 , 4 , 13 , 17 , 12 ]
+  <hr class="s1" />
+  removeMin(): [ X ,  ]
+  <hr class="s1" />
+  add(3): [ X ,  ]
+  <hr class="s1" />
+  changePriority(17, 2): [ X ,  ]
+
+q11_1_s: |
+  Starting array: [ X , 0 , 6 , 1 , 9 , 7 , 4 , 13 , 17 , 12 ]
+  <hr class="s1" />
+  removeMin(): [ X , 1 , 6 , 4 , 9 , 7 , 12 , 13 , 17 ]
+  <hr class="s1" />
+  add(3): [ X , 1 , 3 , 4 , 6 , 7 , 12 , 13 , 17 , 9 ]
+  <hr class="s1" />
+  changePriority(17, 2): [ X , 1 , 2 , 4 , 3 , 7 , 12 , 13 , 6 , 9 ]
+
+q11_2: |
+  b. Recall that `changePriority` on a `PriorityQueue` takes linear time. This means that we cannot use `changePriority` as given in Dijkstra’s algorithm, otherwise the runtime will not be satisfactory. Augment the `ArrayHeap` that you wrote in lab18 such that `changePriority` takes O(log n) time. You may not need all lines.
+
+  ```
+  public class ArrayHeap<T> {
+      private ArrayList<Node> contents;
+      /** Put any additional fields here and initialize them in the constructor. */
+      ________________________________
+
+      public ArrayHeap() {
+          contents = new ArrayList<>();
+          contents.add(null);
+          ________________________________
+      }
+
+      private class Node {
+          T item; double priority;
+          /** Put any additional fields here and initialize them in the constructor. */
+          ________________________________
+          private Node(________________________________) {
+              this.item = item;
+              this.priority = priority;
+              ________________________________
+          }
+      }
+
+      /** Bubbles up the node currently at the given index. */
+      private void bubbleUp(int index) { ... }
+
+      /** Bubbles down the node currently at the given index. */
+      private void bubbleDown(int index) { ... }
+
+      /** Always called whenever nodes are swapped by bubbleUp and bubbleDown */
+      private void swap(int index1, int index2) {
+          Node node1 = contents.get(index1);
+          Node node2 = contents.get(index2);
+          contents.set(index1, node2);
+          contents.set(index2, node1);
+          ________________________________
+          ________________________________
+      }
+
+      /** Inserts an item with the given priority value. Same as enqueue, or offer. */
+      public void insert(________________________________) {
+          Node n = new Node(item, priority, contents.size());
+          contents.add(n);
+          bubbleUp(contents.size() ‐ 1);
+          ________________________________
+      }
+      /** Returns and removes the Node with the smallest priority value. */
+      public Node removeMin() {
+          swap(1, contents.size() ‐ 1);
+          Node results = contents.remove(contents.size() ‐ 1);
+          bubbleDown(1);
+          ________________________________
+          return results;
+      }
+
+      /** Changes the node in this heap with the given item to have the given
+      * priority. You can assume the heap will not have two nodes with the same
+      * item. You can assume item is indeed in the heap. */
+      public void changePriority(T item, double priority) {
+          ________________________________
+          ________________________________
+          ________________________________
+          ________________________________
+          ________________________________
+          ________________________________
+          ________________________________
+      }
+      /** Equally correct implementation for changePriority */
+      public void changePriority2(T item, double priority) {
+          ________________________________
+          ________________________________
+          ________________________________
+          ________________________________
+      }
+  }
+  ```
+
+q11_2_s: |
+  ```
+  public class ArrayHeap<T> {
+      private ArrayList<Node> contents;
+      /** Put any additional fields here and initialize them in the constructor. */
+      private HashMap<T, Node> map;
+
+      public ArrayHeap() {
+          contents = new ArrayList<>();
+          contents.add(null);
+          map = new HashMap<>();
+      }
+
+      private class Node {
+          T item; double priority;
+          /** Put any additional fields here and initialize them in the constructor. */
+          int index;
+          private Node(T item, double priority, int index) {
+              this.item = item;
+              this.priority = priority;
+              this.index = index;
+          }
+      }
+
+      /** Bubbles up the node currently at the given index. */
+      private void bubbleUp(int index) { ... }
+
+      /** Bubbles down the node currently at the given index. */
+      private void bubbleDown(int index) { ... }
+
+      /** Always called whenever nodes are swapped by bubbleUp and bubbleDown */
+      private void swap(int index1, int index2) {
+          Node node1 = contents.get(index1);
+          Node node2 = contents.get(index2);
+          contents.set(index1, node2);
+          contents.set(index2, node1);
+          node1.index = index2;
+          node2.index = index1;
+      }
+
+      /** Inserts an item with the given priority value. Same as enqueue, or offer. */
+      public void insert(T item, double priority) {
+          Node n = new Node(item, priority, contents.size());
+          contents.add(n);
+          bubbleUp(contents.size() ‐ 1);
+          map.put(item, n);
+      }
+      /** Returns and removes the Node with the smallest priority value. */
+      public Node removeMin() {
+          swap(1, contents.size() ‐ 1);
+          Node results = contents.remove(contents.size() ‐ 1);
+          bubbleDown(1);
+          map.remove(results.item);
+          return results;
+      }
+
+      /** Changes the node in this heap with the given item to have the given
+      * priority. You can assume the heap will not have two nodes with the same
+      * item. You can assume item is indeed in the heap. */
+      public void changePriority(T item, double priority) {
+          Node n = map.get(item);
+          double prevPriority = n.priority;
+          n.priority = priority;
+          if (n.prevPriority < priority) {
+              bubbleDown(n.index);
+          } else {
+              bubbleUp(n.index);
+          }
+      }
+      /** Equally correct implementation for changePriority */
+      public void changePriority2(T item, double priority) {
+          Node n = map.get(item);
+          n.priority = priority;
+          bubbleDown(n.index);
+          bubbleUp(n.index);
+      }
+  }
+  ```

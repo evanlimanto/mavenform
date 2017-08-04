@@ -83,8 +83,8 @@ class HomeComponent extends Component {
     /*if (this.props.auth.loggedIn())
       return <UserHome />;*/
 
-    const schoolCodes = ['ucb', 'ucsd', 'ucd', 'uci', 'ucla', 'gatech', 'auburn', 'asu'];
-    const schoolLabels = ['UC Berkeley', 'UC San Diego', 'UC Davis', 'UC Irvine', 'UC Los Angeles', 'Georgia Tech', 'Auburn', 'Arizona State'];
+    const schoolCodes = ['ucb', 'ucsd', 'ucd', 'uci', 'ucla', 'ucsb', 'gatech', 'auburn', 'asu'];
+    const schoolLabels = ['UC Berkeley', 'UC San Diego', 'UC Davis', 'UC Irvine', 'UC Los Angeles', 'UC Santa Barbara', 'Georgia Tech', 'Auburn', 'Arizona State'];
     const schoolCards = map(schoolCodes, (schoolCode, key) => {
       return (
         <Link key={key} className="card" to={"/" + schoolCode} onClick={() => schoolClickEvent(schoolCode)}>
