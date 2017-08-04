@@ -82,7 +82,7 @@ class SchoolComponent extends Component {
         return (
           <Link className="card course-card" to={"/" + schoolCode + "/" + course.code}
            key={key} onClick={() => courseClickEvent(schoolCode, course.code)}>
-            <span dangerouslySetInnerHTML={{ __html: `${course.code_label} ${toInteger(course.exam_count) === 0 ? "<span class='soft'>(New)</span>" : ""}` }}></span>
+            <span className="course-code" dangerouslySetInnerHTML={{ __html: `${course.code_label} ${toInteger(course.exam_count) === 0 ? "<span class='soft'>(New)</span>" : ""}` }}></span>
             <span className="card-arrow">&#8594;</span>
           </Link>
         );
@@ -94,7 +94,7 @@ class SchoolComponent extends Component {
         }
         courseBoxes = [
           take(courseBoxes, 7),
-          (<a id={"showhidden-" + courseCode} className="card course-card" key={-1} onClick={showHiddenCourses}><span>View more courses</span><span className="card-arrow">&#8594;</span></a>),
+          (<a id={"showhidden-" + courseCode} className="card course-card" key={-1} onClick={showHiddenCourses}><span>View more courses</span></a>),
           (<span className="hidden" id={"courses-" + courseCode} key={-2}>
             {takeRight(courseBoxes, courseBoxes.length - 7)}
           </span>)
