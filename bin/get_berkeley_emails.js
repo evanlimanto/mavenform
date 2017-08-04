@@ -7,7 +7,7 @@ const request = require('request');
 const options = {
   headers: {
     'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36",
-    'Referer': 'http://peoplefinder.auburn.edu/peoplefinder/index.php'
+    'Referer': 'http://www.berkeley.edu/directory/results?search-term='
   }
 };
 let params = _.shuffle(_.split(fs.readFileSync("first-names.txt"), '\n'));

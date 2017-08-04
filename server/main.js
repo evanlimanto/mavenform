@@ -119,6 +119,10 @@ app.use('/', function (req, res, next) {
   });
 });
 
+app.get('/img/*', function(req, res) {
+  res.sendfile(path.resolve('src/img/subject/misc.png'))
+});
+
 app.use(function (req, res, next) {
   console.log(404);
   res.status(404);

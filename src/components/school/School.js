@@ -149,7 +149,7 @@ class SchoolComponent extends Component {
           <div className="container tab-container-container">
             <div className="tab-container">
               <div className="dark-tab">Departments</div>
-              {map(range(0, Math.min(sortedCourseCodes.length, 6)),
+              {map(range(0, sortedCourseCodes.length),
                 (key) => <ScrollLink key={key} className="tab" activeClass="active-tab" to={toUpper(sortedCourseCodes[key])} spy={true} smooth={true} duration={500} isDynamic={true}>{toUpper(sortedCourseCodes[key])}</ScrollLink>)}
             </div>
           </div>
