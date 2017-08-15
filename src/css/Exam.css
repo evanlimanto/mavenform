@@ -553,8 +553,8 @@ button.comment-button:hover {
 }
 
 .solutionBox {
-  padding: 10px 15px 11px;
-  font-size: 16px;
+  padding: 11px 15px;
+  font-size: 14px;
   border-radius: 5px;
   color: #111;
   border: 1px solid #ccc;
