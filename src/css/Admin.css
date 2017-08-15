@@ -11,9 +11,11 @@
   border-radius: 5px;
 }
 
-.contentContainer .contentCol textarea {
-  width: 250px;
+textarea.contentCol {
+  width: 200px;
   height: 100px;
+  margin: 10px 20px;
+  display: inline-block;
 }
 
 .contentContainer .backLink {

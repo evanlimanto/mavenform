@@ -73,3 +73,7 @@
 .dashboard-courses-container {
   padding: 15px;
 }
+
+textarea {
+  border: 1px solid black;
+}

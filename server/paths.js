@@ -132,14 +132,14 @@ module.exports = (app) => {
   // Update problem contents
   app.post('/updateProblem', (req, res, next) => {
     const { examid, problem_num, subproblem_num, problem_content,
-            solution_content, choices_content, topicid } = req.body;
+            solution_content, choices_content, final_solution, topicid } = req.body;
     const q = `
-      update content set problem=$1, solution=$2, choices=$3, topicid=$4
-      where exam=$5 and problem_num=$6 and subproblem_num=$7
+      update content set problem=$1, solution=$2, choices=$3, topicid=$4, final_solution=$5,
+      where exam=$6 and problem_num=$7 and subproblem_num=$8
     `;
 
     config.pool.query(q, [problem_content, solution_content,
-                          choices_content, topicid, examid,
+                          choices_content, topicid, examid, final_solution,
                           problem_num, subproblem_num], (err, result) => {
       if (err) return next(err);
       return res.send("Success!");

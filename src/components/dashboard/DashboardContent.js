@@ -30,6 +30,7 @@ class DashboardContentComponent extends Component {
     const problem_content = this.refs.problem.value;
     const solution_content = this.refs.solution.value;
     const choices_content = this.refs.choices.value;
+    const final_solution_content = this.refs.final_solution.value;
     const topicid = this.refs.topic.value;
 
     fetch(`${BASE_URL}/updateProblem`, {
@@ -44,6 +45,7 @@ class DashboardContentComponent extends Component {
         subproblem_num,
         problem_content,
         solution_content,
+        final_solution_content,
         choices_content,
         topicid,
       })
@@ -54,7 +56,9 @@ class DashboardContentComponent extends Component {
     content.problems[id] = {
       problem: problem_content,
       solution: solution_content,
+      final_solution: final_solution_content,
       choices: choices_content,
+      topicid,
     };
     this.setState({ content, status: 'saved!' });
     window.setTimeout(() => this.setState({ status: null }), 1000);
@@ -84,14 +88,7 @@ class DashboardContentComponent extends Component {
   }
 
   saveProblem() {
-    this.setState({
-      problem: {
-        problem: this.refs.problem.value,
-        solution: this.refs.solution.value,
-        choices: this.refs.choices.value,
-        topicid: this.refs.topic.value,
-      }
-    })
+    this.handleChange();
     this.updateContent();
     window.renderMJ();
   }
@@ -101,6 +98,7 @@ class DashboardContentComponent extends Component {
       problem: {
         problem: this.refs.problem.value,
         solution: this.refs.solution.value,
+        final_solution: this.refs.final_solution.value,
         choices: this.refs.choices.value,
         topicid: this.refs.topic.value,
       }
@@ -162,37 +160,30 @@ class DashboardContentComponent extends Component {
       <div className="contentContainer">
         <div className="backLink"><Link to="/dashboard">Back to Dashboard</Link></div>
         <h1>Add Problem</h1>
-        <form>
-          <select ref="exam">
-            {examSelectItems}
-          </select>
-          &nbsp;&nbsp;
-          <input type="text" ref="problem_num" placeholder="problem number" />&nbsp;&nbsp;
-          <input type="text" ref="subproblem_num" placeholder="subproblem number" />&nbsp;&nbsp;
-          <button onClick={(e) => this.addProblem(e)}>Add Problem</button>
-        </form>
+        <select ref="exam">
+          {examSelectItems}
+        </select>
+        &nbsp;&nbsp;
+        <input type="text" ref="problem_num" placeholder="problem number" />&nbsp;&nbsp;
+        <input type="text" ref="subproblem_num" placeholder="subproblem number" />&nbsp;&nbsp;
+        <button onClick={(e) => this.addProblem(e)}>Add Problem</button>
         <hr className="s2" />
-
-        <span className="contentNavCol" style={{ height: "150px", "overflowY": "scroll" }}>{exams}</span>
-        {subparts.length ? <span className="contentNavCol" style={{ height: "150px", "overflowY": "scroll" }}>{subparts}</span> : null}
-        <div style={{"float": "left", "width": "1000px"}}>
-          <h1>{this.state.examid} {!exam || `: ${exam.courseid} - ${exam.examtype} - ${exam.examid}`}
-          {!exam || <a href={exam.source_url} target="_blank">URL</a>} {this.state.status} &nbsp; &nbsp; {topicSelectItems}</h1>
-          <span className="contentCol">
-            <textarea value={problem.problem} ref="problem" onChange={this.handleChange} />
-          </span>
-          <span className="contentCol">
-            <textarea value={problem.solution} ref="solution" onChange={this.handleChange} />
-          </span>
-          <span className="contentCol">
-            <textarea value={problem.choices} ref="choices" onChange={this.handleChange} />
-          </span>
-          <br/>
+        <div>
+          <span className="contentNavCol" style={{ height: "200px", "overflowY": "scroll" }}>{exams}</span>
+          {subparts.length ? <span className="contentNavCol" style={{ height: "200px", "overflowY": "scroll" }}>{subparts}</span> : null}
+          <h1>{this.state.examid} {!exam || `: ${exam.courseid} - ${exam.examtype} - ${exam.examid}`} {!exam || <a href={exam.source_url} target="_blank">URL</a>} {this.state.status}</h1>
+          {topicSelectItems}
+          <div>
+            <textarea className="contentCol" value={problem.problem} ref="problem" onChange={this.handleChange} placeholder="problem" />
+            <textarea className="contentCol" value={problem.solution} ref="solution" onChange={this.handleChange} placeholder="solution" />
+            <textarea className="contentCol" value={problem.choices} ref="choices" onChange={this.handleChange} placeholder="choices" />
+            <textarea className="contentCol" value={problem.final_solution} ref="final_solution" onChange={this.handleChange} placeholder="final solution" />
+          </div>
           {(problem.problem !== "") ? <button onClick={() => this.saveProblem()}>Save</button> : null}
-          {(problem.problem !== "") ? ((problem.choices) ?
-            <MultipleChoiceQuestion content={problem.problem} solutionNum={problem.solution} choices={problem.choices} /> :
-            <Question content={problem.problem} solution={problem.solution} />) : null}
         </div>
+        {(problem.problem !== "") ? ((problem.choices) ?
+          <MultipleChoiceQuestion content={problem.problem} solutionNum={problem.solution} choices={problem.choices} /> :
+          <Question content={problem.problem} solution={problem.solution} />) : null}
       </div>
     );
   }

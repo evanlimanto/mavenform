@@ -12,7 +12,7 @@ class Question extends Component {
       <div id={id} className="question">
         <QuestionDropdown schoolCode={schoolCode} courseCode={courseCode} examType={examType} termCode={termCode} id={id} content_id={content_id} />
         <div dangerouslySetInnerHTML={{__html: content}}></div>
-        <Solution solution={solution} />
+        <Solution solution={solution} final_solution={final_solution} />
         <Comments content_id={content_id} />
       </div>
     );

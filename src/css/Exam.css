@@ -551,3 +551,32 @@ button.comment-button:hover {
 .comment-link:hover {
   opacity: 0.9;
 }
+
+.solutionBox {
+  padding: 11px;
+  font-size: 14px;
+  border-radius: 5px;
+  color: #33aacc;
+  border: 1px solid #33aacc;
+  display: inline;
+  margin-right: 10px;
+  width: 40%;
+}
+
+.solutionBox.correct {
+  border: 1px solid #76e03f;
+}
+
+.solutionBox.wrong {
+  border: 1px solid #eb0018;
+}
+
+.solutionStatus {
+  position: absolute;
+  right: 15px;
+  top: -5px;
+}
+
+.solutionBoxWrapper {
+  position: relative;
+}

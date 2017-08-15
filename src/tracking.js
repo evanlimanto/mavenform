@@ -1,7 +1,7 @@
 import { forEach } from 'lodash';
 
 import { activeUserEvent, actionTakenEvent, pageFocusEvent, pageBlurEvent } from './events';
-import { canUseDOM, ENV_IS_DEV } from './utils';
+import { canUseDOM } from './utils';
 import { mixpanel } from './events';
 
 export default function initializeTracking() {
