@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { cloneDeep, assign, max, keys, forEach, toString, flattenDeep, has, concat, map, sortBy, toInteger } from 'lodash';
 import isEmpty from 'validator/lib/isEmpty';
 import { BASE_URL } from '../../utils';
+import { showLoginModal, showSignupModal } from '../../actions';
 
 const req = require('superagent');
 
@@ -238,14 +239,22 @@ class CommentsComponent extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     auth: state.auth
   }
 };
 
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    showLoginModal: () => dispatch(showLoginModal()),
+    showSignupModal: () => dispatch(showSignupModal()),
+  };
+};
+
 const Comments = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps,
 )(CommentsComponent);
 
 export default Comments;
