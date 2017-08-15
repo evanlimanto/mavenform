@@ -149,8 +149,8 @@ class DashboardContentComponent extends Component {
       return <option value={key} key={key}>{exam.courseid} - {exam.examtype} - {exam.examid}</option>;
     });
 
-    const topicSelectItems = (!this.state.problem.problem) || (
-      <select ref="topic" value={this.state.problem.topicid || null} onChange={this.handleChange}>
+    const topicSelectItems = (
+      <select ref="topic" value={this.state.problem.topicid ? this.state.problem.topicid : ""} onChange={this.handleChange}>
         <option selected value={null}> -- select a topic -- </option>
         {map(sortBy(this.props.topics, [(topic) => topic.topic, (topic) => topic.concept]), (topic, key) => <option key={key} value={topic.id}>{topic.topic} - {topic.concept}</option>)}
       </select>

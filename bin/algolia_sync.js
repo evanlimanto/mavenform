@@ -46,7 +46,7 @@ const q = `
   select courses.id, courses.code as code, courses.code_label as code_label, courses.label as label, schools.code as school_code, schools.name as school_name, subjects.subject_label as subject_label from courses
   inner join schools on courses.schoolid = schools.id
   inner join subjects on courses.subjectid = subjects.id
-  where exists (select 1 from exams where exams.courseid = courses.id)
+  -- where exists (select 1 from exams where exams.courseid = courses.id)
 `;
 
 client.query(q, (err, result) => {

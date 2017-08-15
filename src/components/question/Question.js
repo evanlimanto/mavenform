@@ -6,7 +6,7 @@ import QuestionDropdown from './QuestionDropdown';
 
 class Question extends Component {
   render() {
-    const { id, content_id, schoolCode, courseCode, examType, termCode, solution, content } = this.props;
+    const { id, content_id, schoolCode, courseCode, examType, termCode, solution, content, final_solution } = this.props;
 
     return (
       <div id={id} className="question">

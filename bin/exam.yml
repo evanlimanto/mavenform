@@ -1,76 +1,167 @@
+https://docs.google.com/file/d/0By4uhFzCAQUUUmNqMWNWVV8wSDQ/view?pli=1
 q1_1: |
-  1\. Using the given graph of the function $f$, find the following.
+  1. You and your two best friends have agreed to meet at The Apple Pan to celebrate the end of finals week. Due to L.A. traffic, each of you arrives at a time between 5:30 PM and 6:30 PM chosen at random with uniform probability. Let us represent each of your arrival times with independent random variables $X_1, X_2, X_3$ that are uniformly distributed on the interval $[0, 1]$. Define the random variable $Z$ to be the minimum of the values of $X_1, X_2$, and $X_3$
+  $$Z = \min \\{ X_1, X_2, X_3 \\}$$
+  We can think of $Z$ as representing the arrival time of the first person to get to The Apple Pan.
+  <hr class="s1" />
+  (a) Write the cumulative distribution function for $Z$.
+
+q1_1_s: |
+  First consider the two variable case $y = \min \\{ X_1, X_2 \\}$. The event $Y > y$ corresponds to $X_1 > y$ and $X_2 > y$.
   <hr class="s1" />
   <p align="center">!!q1-1.png!!</p>
+  $Pr(Y > y) = \begin{cases} 1 & \text{for} \; y \le 0 \\\\ (1 - y)^2 & \text{for} \; 0 < y < 1 \\\\ 0 & \text{for} \; y \ge 1 \end{cases}$
   <hr class="s1" />
-  (a) the intercepts, if any
+  $F_Y(y) = \begin{cases} 0 & \text{for} \; y \le 0 \\\\ 1 - (1 - y)^2 & \text{for} 0 < y < 1 \\\\ 1 & \text{for} \; y \ge 1 \end{cases}$
   <hr class="s1" />
-  (b) its domain and range
+  Hence, for the three variable case $z = \min \\{ X_1, X_2, X_3 \\}$.
   <hr class="s1" />
-  (c) the intervals on which it is increasing, decreasing, or constant
-  <hr class="s1" />
-  (d) whether it is even, odd, or neither
+  $F_Z(z) = \begin{cases} 0 & \text{for} z \le 0 \\\\ 1 - (1 - z)^3 & \text{for} 0 < z < 1 \\\\ 1 & \text{for} z \ge 1 \end{cases}$
+
+q1_2: |
+  (b) Write the probability density function for $Z$.
+
+q1_2_s: |
+  $f(z) = F'(z) = \begin{cases} 0 & \text{for} z < 0 \\\\ 3(1 - z)^2 & \text{for} 0 < z < 1 \\\\ 0 & \text{for} z \ge 1 \end{cases}$
+
+q1_3: |
+  (c) Find $E(Z)$.
+
+q1_3_s: |
+  $E(Z) &= \int_0^1 z f(z) = \int_0^1 3z(1 - z)^2 = \frac{1}{4}$
+
+q1_4: |
+  (d) Find $\text{Var}(Z)$.
+
+q1_4_s: |
+  $\text{Var}(Z) = E(Z^2) - E(Z)^2 \\\\
+  E(Z^2) = \int_0^1 z^2 f(z) = \frac{1}{10} \\\\
+  \texzt{Var}(Z) = \frac{1}{10} - \frac{1}{16} = \frac{3}{80}$
+
+q1_5: |
+  (e) Find the exact probability that $Z > E(Z)$.
+
+q1_5_s: |
+  $P(Z > \frac{1}{4}) = (1 - \frac{1}{4})^3 = \frac{27}{64}$
 
 q2_1: |
-  2\. Complete the square of the given quadratic expression. Then, graph the function using the technique of shifting.
-  $$f(x) = x^2 - 6x + 4$$
+  CAMDEN, NJ - After several weeks of eating at various Cambdne-area participating Burger King restaurants, local resident Bert Gruhey has succeeded in collecting all four Star Wars glasses, according to a report published yesterday in the Wall Street Journal.
+  <hr class="s1" />
+  "I have collected all four," Gruhey said. "I have Han, Luke, C-3P0, and lando. There are no more to collect."
+  <hr class="s2" />
+  2(a) Assume that the distribution of glasses is uniform. Let $X$ be a random variable that equals the number of Whopper Meal Deals that Bert purchased until he succeeded in collecting all four Star Wars glasses. Compute $E(X)$.
+
+q2_1_s: |
+  For i = 1, 2, 3, 4, let $x_i$ = # of Happy Meals purchased between $(i-1)^{th}$ and $i^{th}$ cup.
+  <hr class="s1" />
+  $x_1 = 1, x_2$ is geometrically distributed with $p_2 = \frac{3}{4}$
+  <hr class="s1" />
+  $x_3$ is geometrically distributed with $p_3 = \frac{2}{4} = \frac{1}{2}$
+  <hr class="s1" />
+  $x_4$ is geometrically distributed with $p_4 = \frac{1}{4}$
+  <hr class="s2" />
+  $\begin{align}
+  x = x_1 + x_2 + x_3 + x_4 \implies E(X) &= E(X_1) + E(X_2) + E(X_3) + E(X_4) \\\\
+  &= 1 + \frac{4}{3} + \frac{4}{2} + \frac{4}{1} \\\\
+  &= \frac{25}{3}
+  \end{align}$
+
+q2_2: |
+  (b) Compute $\text{Var}(X)$.
+
+q2_2_s: |
+  We have $X_1, X_2, X_3, X_4$ are independent so
+  <hr class="s1" />
+  $\begin{align}
+  \text{Var}(X) &= \text{Var}(X_1) + \text{Var}(X_2) + \text{Var}(X_3) + \text{Var}(X_4) \\\\
+  &= 0 + \frac{1 - \left( \frac{3}{4} \right)}{(\frac{3}{4})^2} + \frac{1 - \left( \frac{1}{2} \right)}{(\frac{2}{4})^2} + \frac{1 - \left( \frac{1}{4} \right)}{(\frac{1}{4})^2} \\\\
+  &= \frac{1/4}{9/16} + \frac{2/4}{4/16} + \frac{3/4}{1/16} = \frac{4}{9} + 2 + 12 = 14\frac{4}{9}
+  \end{align}$
+
+q2_3: |
+  (c) Use Markov's Inequality to give an upper bound on the probability that Bert Gruhey purchased at least $25$ Whopper Meal Deals until he succeeded in collecting all four Star Wars glasses.
+
+q2_3_s: |
+  $P(X \ge 25) \le \frac{E(X)}{25} = \frac{1}{3}$
 
 q3_1: |
-  3\. For $f(x) = \sqrt{x}$ and $g(x) = 2x + 5$, find the following composite functions and state the domain of each.
+  <p align="center">!!q3-1.png!!</p>
   <hr class="s1" />
-  (a) $f \circ g$
+  3. Let $g(x)$ be a function in $[0, 1]$ with values in $[0, 1]$ as in the diagram above. Monte Carlo integration is a technique for estimating the area of the region under $g(x)$. First choose a large number of independent values $X_n$ uniformly at random from $[0, 1]$. Define the random variables $Y_n = g(X_n)$, and define the sample average
+  $$\overline{Y_n} = \frac{1}{n} \sum_{i=1}^{n} Y_i$$
+  We are going to use the Law of Large Numbers to show that the sample average $\overline{Y_n}$ becomes a more reliable estimate of
+  $$\int_0^1 g(x) \; dx$$
+  The area of the region under $g(x)$ as $n \to \infty$. Note that the variables $Y_n$ are independent and identically distributed.
   <hr class="s1" />
-  (b) $g \circ f$
+  (a) Show that $E(Y_n) = \int_0^1 g(x) \; dx$
+
+q3_1_s: |
+  Let $f_n(x)$ be the probability density function of $x_n$.
   <hr class="s1" />
-  (c) $f \circ f$
+  $E(Y_n) = E(g(X_n)) = \int_0^1 g(x) f_n(x) \; dx = \int_0^1 g(x) \; dx$
   <hr class="s1" />
-  (d) $g \circ g$
+  Since $x_n$ is uniformly distributed on $[0, 1]$ so its pdf $f_n(x) = 1$ on $[0, 1]$.
+
+q3_2: |
+  (b) Show that $\text{Var}(Y_n) < 1$.
+
+q3_2_s: |
+  Let $\mu = E(Y_n)$. We saw in part (a) that $\mu = \int_0^1 g(x) \; dx < 1$ because it is the area under $g(x)$ from $x = 0$ to $x = 1$ and $g(x)$ in $[0, 1]$ for all $x$ in $[0, 1]$.
+  <hr class="s1" />
+  $\begin{align}
+  \text{Var}(Y_n) &= E((Y_n - \mu)^2) = E((g(X_n) - \mu)^2) = \int_0^1 (g(x) - \mu)^2 f_n(x) dx \\\\
+  &= \int_0^1 (g(x) - \mu)^2 dx
+  \end{align}$ because $f_n(x) = 1$ on $[0, 1]$.
+  <hr class="s1" />
+  $< 1$ because for all $x$ in $[0, 1], g(x)$ is in $[0, 1]$ and $\mu$ is in $[0, 1]$ implies $(g(x) - \mu)^2$ is in $[0, 1]$ so the area under this function from $x = 0$ to $x = 1$ is at most $1$.
+
+q3_3: |
+  (c) Show that $E(\overline{Y_n}) = \int_0^1 g(x) \; dx$.
+
+q3_3_s: |
+  $\begin{align}
+  E(\overline{Y_n}) &= E(\frac{1}{n} \sum_{i=1}^{n} Y_i) = \frac{1}{n} E(\sum_{i=1}^{n} Y_i) \\\\
+  &= \frac{1}{n} \sum_{i=1}^{n} E(Y_i) \; \text{by linearity of expectation} \\\\
+  &= \frac{1}{n} \cdot n E(Y_1) \; \text{because} \; Y_1, \dots, Y_n \; \text{are i.i.d} \\\\
+  &= E(Y_1) = \int_0^1 g(x) \; dx
+  \end{align}$
+
+q3_4: |
+  (d) Show that $\text{Var}(\overline{Y_n}) < 1/n$.
+
+q3_4_s: |
+  !!q3-4.png!!
+
+q3_5: |
+  (e) Use Chebychev's Inequality to give an upper bound for the probabilty that $\overline{Y_n}$ differs from $\int_0^1 g(x) \; dx$ by more than $\epsilon$ in terms of $n$ and $\epsilon$ only.
+
+q3_5_s: |
+  !!q3-5.png!!
+
+q3_6: |
+  (f) Use your answer to part (e) to give a lower bound on the number of points $X_n$ that we must sample to determine $\int_0^1 g(x) \; dx$ within $0.05$ of its true value with probability greater than $0.9$.
+
+q3_6_s: |
+  !!q3-6.png!!
 
 q4_1: |
-  4\. Find the average rate of change of $f(x) = x^2 + 4$
+  4. A true-false examination has $100$ questions. You answer each question correctly with probability $3/5$. Your frenemy just guesses on each question. A passing score is $60$ or more correct answers.
   <hr class="s1" />
-  (a) From $0$ to $2$
-  <hr class="s1" />
-  (b) From $-2$ to $0$
-  <hr class="s1" />
-  (c) From $-2$ to $1$
+  (a) Estimate the probability that you pass the exam.
+
+q4_1_s: |
+  !!q4-1.png!!
+
+q4_2: |
+  (b) Estimate the probabilty that your frenemy passes the exam.
+
+q4_2_s: |
+  !!q4-2.png!!
 
 q5_1: |
-  5\. Determine, without graphing, whether the given quadratic function has a maximum value or a minimum value and then find the value.
-  $$f(x) = 3x^2 + 6x - 6$$
-
-q6_1: |
-  6\. Find the complex zeros of the polynomial function. Write $f$ in factored form.
-  $$f(x) = x^3 - 5x^2 + 8x - 6$$
-
-q7_1: |
-  7\. Write the augmented matrix of the given system of equations.
-  $$\begin{cases} x + y - z & = 2 \\\\ 5x - 6y & = 2 \\\\ 4x + 6y - z & = 1 \end{cases}$$
-
-q8_1: |
-  8\. Evaluate each expression using the values in the given table.
+  5\. At the first fork in a Choose Your Own Adventure novel, a reader is equally likely to pick exactly one of three choices $c_1, c_2$ or $c_3$. The reader dies at the end of the novel with probability $0.6$ if she opted for the choice $c_1$, with probability $0.8$ if she opted for choice $c_2$, and with probability $0.4$ if she opted for choice $c_3$.
   <hr class="s1" />
-  <p align="center">!!q8-1.png!!</p>  
-  <hr class="s1" />
-  (a) $(f \circ g)(-2)$
+  (a) Given that reader dies at the end of the novel, what is the probability that she opted for choice $c_1$?
 
-q8_2: |
-  (b) $(g \circ f)(0)$
-
-q8_3: |
-  (c) $(f \circ f)(2)$
-
-q9_1: |
-  9\. Change the exponential statement to an equivalent statement involving a logarithm.
-  $$9.3 = 3^x$$
-
-q10_1: |
-  10\. For the linear function $g(x) = 4x + 2$,
-  <hr class="s1" />
-  (a) Determine the slope and $y$-intercept.
-  <hr class="s1" />
-  (b) Use the slope and $y$-intercept to graph the linear function.
-  <hr class="s1" />
-  (c) Determine the average rate of change of the function.
-  <hr class="s1" />
-  (d) Determine whether the linear function is increasing, decreasing, or constant.
+q5_1_s: |
+  !!q5-1.png!!

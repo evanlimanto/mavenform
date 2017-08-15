@@ -348,7 +348,7 @@ const getExamInfo =
       where S.code = $1 and T.term_code = $2 and ET.type_code = $3 and C.code = $4 and E.profs = $5
     `;
     const getcontentq = `
-      select id as content_id, problem_num, subproblem_num, problem, solution, choices from content where exam = $1
+      select id as content_id, problem_num, subproblem_num, problem, solution, choices, final_solution from content where exam = $1
     `;
     pool.query(getq, [schoolCode, termCode, examTypeCode, courseCode, profs], (err, result) => {
       if (err) return next(err);
@@ -368,11 +368,11 @@ const getExamInfo =
         }, {});
 
         const problems = _.reduce(result.rows, (result, row) => {
-          let { content_id, problem_num, subproblem_num, problem, solution, choices } = row;
+          let { content_id, problem_num, subproblem_num, problem, solution, choices, final_solution } = row;
           problem = renderer.preprocess(row.problem);
           solution = renderer.preprocess(row.solution);
           const key = `${problem_num}_${subproblem_num}`;
-          result[key] = { problem, solution, choices, content_id };
+          result[key] = { problem, solution, choices, content_id, final_solution };
           return result;
         }, {});
 

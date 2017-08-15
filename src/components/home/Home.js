@@ -6,7 +6,7 @@ import { map, toUpper } from 'lodash';
 import Footer from '../footer';
 import Navbar from '../navbar';
 import UserHome from '../userhome';
-import { schoolClickEvent } from '../../events';
+import { schoolClickEvent, courseSearchResultClickEvent } from '../../events';
 import { algoliaCourseIndex } from '../../utils';
 
 const Scroll = require('react-scroll');
@@ -72,7 +72,7 @@ class HomeComponent extends Component {
           school_name: hit.school_name,
           code_label_highlighted: hit._highlightResult.code_label.value,
           school_name_highlighted: hit._highlightResult.school_name.value,
-          label_highlighted: hit._highlightResult.label.value,
+          label_highlighted: hit._highlightResult.label ? hit._highlightResult.label.value: null,
         };
       });
       this.setState({ suggestions, suggestionsDropdownOn: true });
@@ -98,8 +98,8 @@ class HomeComponent extends Component {
       <div className="results-container">
         <div className="results">
         {map(this.state.suggestions, (suggestion, index) => {
-          const suggestionText = `${suggestion.school_name_highlighted} ${suggestion.code_label_highlighted} - ${suggestion.label_highlighted}`;
-          return <Link key={index} to={`/${suggestion.school_code}/${toUpper(suggestion.code)}`} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
+          const suggestionText = `${suggestion.school_name_highlighted} ${suggestion.code_label_highlighted} ${suggestion.label_highlighted ? "- " + suggestion.label_highlighted : null}`;
+          return <Link onClick={() => courseSearchResultClickEvent(suggestion.school_code, suggestion.code)} key={index} to={`/${suggestion.school_code}/${toUpper(suggestion.code)}`} dangerouslySetInnerHTML={{__html: suggestionText}}></Link>;
         })}
         </div>
       </div>

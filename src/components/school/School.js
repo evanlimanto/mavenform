@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { range, concat, take, forEach, keys, has, map, reduce, sortBy, split, toInteger, takeRight, toUpper } from 'lodash';
+import { range, take, keys, has, map, reduce, sortBy, toInteger, takeRight, toUpper } from 'lodash';
 import { Helmet } from 'react-helmet';
 import numeral from 'numeral';
 import hash from 'string-hash';

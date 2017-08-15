@@ -7,9 +7,6 @@ import { showReportErrorModal, showReportSuccessModal } from '../../actions';
 import { BASE_URL } from '../../utils';
 import { copyQuestionLinkEvent } from '../../events';
 import Expire from './Expire';
-import { Modal } from '../modal';
-
-const req = require('superagent');
 
 class QuestionDropdownComponent extends Component { 
   constructor(props) {

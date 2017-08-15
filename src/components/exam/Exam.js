@@ -69,10 +69,11 @@ class ExamComponent extends Component {
           const solution = examInfo.problems[key].solution || '';
           const choices = examInfo.problems[key].choices || '';
           const content_id = examInfo.problems[key].content_id;
+          const final_solution = examInfo.problems[key].final_solution;
           const props = {
-            content_id, courseCode, schoolCode, content, solution, termCode, examType, choices,
+            content_id, courseCode, schoolCode, content, solution, termCode, examType, choices, final_solution,
             id: part + "_" + subpart,
-            solutionNum: solution
+            solutionNum: solution,
           }
           if (choices && choices.length > 0) {
             return <MultipleChoiceQuestion key={key} {...props} />

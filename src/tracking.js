@@ -7,21 +7,12 @@ import { mixpanel } from './events';
 export default function initializeTracking() {
   if (!canUseDOM)
     return;
-  const profile = JSON.parse(localStorage.getItem('profile'))
-  if (profile)
-    !mixpanel || mixpanel.identify(profile.user_id);
-
   let sessionStartTime = Date.now();
   let sessionLength = 0;
 
   window.onbeforeunload = function(e) {
     let length = Math.floor((sessionLength + Date.now() - sessionStartTime) / 1000);
-    const savedLength = length;
-    const hours = Math.floor(length / 3600); length = length % 3600;
-    const minutes = Math.floor(length / 60); length = length % 60;
-    const seconds = length;
-    if (!ENV_IS_DEV)
-      !mixpanel || mixpanel.track('Session Length', { page: window.location.pathname, length_str: `${hours}h ${minutes}m ${seconds}s`, length_seconds: savedLength });
+    !mixpanel || mixpanel.track('Session Length', { last_page: window.location.pathname, length_seconds: length });
   }
 
   function createEventTracker(name) {

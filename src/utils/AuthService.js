@@ -1,8 +1,10 @@
 import { isTokenExpired } from './jwtHelper'
 import auth0 from 'auth0-js'
 import { has } from 'lodash'
+import rs from 'randomstring'
 
 import { evtEmitter } from './events'
+import { mixpanel } from '../events'
 import { canUseDOM } from '../utils'
 const req = require('superagent');
 
@@ -34,7 +36,7 @@ export default class AuthService {
       password
     }, (err) => {
       if (err && errorMessageHandler) {
-      document.getElementById("login").innerHTML = "Log In";
+        document.getElementById("login").innerHTML = "Log In";
         errorMessageHandler(err.description);
       }
     })
@@ -92,7 +94,15 @@ export default class AuthService {
             .send({ auth_user_id: profile.user_id, nickname: profile.user_metadata.username, email: profile.email })
             .end((err, res) => {
               if (err) console.error(err);
-              else document.location = document.referrer;
+              else {
+                mixpanel.identify(profile.user_id);
+                mixpanel.people.set_once('First Login Date', new Date());
+                mixpanel.people.set({
+                  "$email": profile.email,
+                  "$name": profile.user_metadata.username
+                });
+                document.location = document.referrer;
+              }
             });
         })
       }
@@ -162,6 +172,7 @@ export default class AuthService {
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token')
     localStorage.removeItem('profile')
+    mixpanel.identify(rs.generate(20));
     document.location = "/";
   }
 }

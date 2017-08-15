@@ -120,9 +120,9 @@ class ModalsComponent extends Component {
       modalContent = (
         <form>
           <hr className="s3" />
-          <input className="login-info" type="text" placeholder="Email" ref="email" />
+          <input className="login-info" type="text" placeholder="Email" ref="email" autocomplete="on" />
           <hr className="s1" />
-          <input className="login-info" type="password" placeholder="Password" ref="password" />
+          <input className="login-info" type="password" placeholder="Password" ref="password" autocomplete="on" />
           <hr className="s2" />
           <p className="forgot-pass">
             <a className="forgot-pass" onClick={this.props.showForgotPasswordModal}>Don't remember your password?</a>

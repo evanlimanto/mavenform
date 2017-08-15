@@ -7,6 +7,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import routes from './routes';
 import initializeTracking from './tracking';
+import { canUseDOM } from './utils';
 import { configureStore, initStore } from './utils/configureStore';
 import { ReactGA } from './events';
 import ScrollToTop from './components/scrolltotop';
@@ -29,6 +30,10 @@ import './css/Info.css';
 
 ReactGA.set({ path: window.location.pathname });
 ReactGA.pageview(window.location.pathname);
+
+if (canUseDOM) {
+  window.Intercom("boot", { app_id: "dpdcfp8e" });
+}
 
 const store = configureStore();
 initStore(store); // async

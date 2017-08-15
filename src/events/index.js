@@ -1,4 +1,12 @@
 import { canUseDOM } from '../utils';
+import _ from 'lodash';
+
+!canUseDOM || require('autotrack/lib/plugins/clean-url-tracker');
+!canUseDOM || require('autotrack/lib/plugins/event-tracker');
+!canUseDOM || require('autotrack/lib/plugins/impression-tracker');
+!canUseDOM || require('autotrack/lib/plugins/max-scroll-tracker');
+!canUseDOM || require('autotrack/lib/plugins/page-visibility-tracker');
+!canUseDOM || require('autotrack/lib/plugins/url-change-tracker');
 
 const mixpanel = canUseDOM ? require('mixpanel-browser') : null;
 
@@ -6,13 +14,17 @@ const MIXPANEL_ID_DEV = '838462058ed380687ee46dae27d0d027';
 const MIXPANEL_ID     = 'af9797f751c2f22b4ba5f77f20cc6cc5';
 
 !mixpanel || mixpanel.init((window.location.hostname.indexOf("studyform.com") !== -1) ? MIXPANEL_ID : MIXPANEL_ID_DEV);
+!mixpanel || mixpanel.track('Page Landing', { page: document.location.pathname });
 
 const ReactGA = canUseDOM ? require('react-ga') : null;
 !ReactGA || ReactGA.initialize('UA-20131732-5');
+if (ReactGA) {
+  const trackers = ['cleanUrlTracker', 'eventTracker', 'impressionTracker', 'maxScrollTracker', 'pageVisibilityTracker', 'urlChangeTracker'];
+  _.forEach(trackers, (tracker) => ReactGA.ga('require', tracker));
+}
 
 const tracker = function(name, label) {
   const page = window.location.pathname;
-  !mixpanel || mixpanel.track(name, { page, label });
   const count = (page.match(/\//g) || []).length;
   if (process.env.NODE_ENV === "development") {
     console.log(`Tracking event ${name}`);
@@ -26,7 +38,11 @@ const tracker = function(name, label) {
 export { ReactGA, mixpanel };
 
 export function schoolClickEvent(schoolCode) {
-  tracker('school click', schoolCode);
+  mixpanel.track('School Click', { schoolCode });
+}
+
+export function courseSearchResultClickEvent(schoolCode, courseCode) {
+  mixpanel.track('Course Search Click', { schoolCode, courseCode });
 }
 
 export function courseClickEvent(schoolCode, courseCode) {
@@ -42,7 +58,7 @@ export function copyQuestionLinkEvent() {
 }
 
 export function toggleSolutionEvent() {
-	tracker('toggle solution');
+  mixpanel.track('Solution Toggle', { page: document.location.pathname });
 }
 
 export function pageFocusEvent() {
