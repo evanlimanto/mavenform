@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { concat, map, range, reduce, sortBy } from 'lodash';
+import { cloneDeep, concat, map, range, reduce, sortBy, toString } from 'lodash';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
+import Autocomplete from 'react-autocomplete';
 import { BASE_URL } from '../../utils';
 import { MultipleChoiceQuestion, Question } from '../question';
 
@@ -22,7 +23,14 @@ class DashboardContentComponent extends Component {
       status: null
     };
 
+    this.updateTopicId = this.updateTopicId.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  updateTopicId(id) {
+    const newProblem = cloneDeep(this.state.problem);
+    newProblem.topicid = id;
+    this.setState({ problem: newProblem });
   }
 
   updateContent() {
@@ -32,6 +40,7 @@ class DashboardContentComponent extends Component {
     const choices_content = this.refs.choices.value;
     const final_solution_content = this.refs.final_solution.value;
     const topicid = this.refs.topic.value;
+    const difficulty = this.refs.difficulty.value;
 
     fetch(`${BASE_URL}/updateProblem`, {
       method: 'POST',
@@ -48,6 +57,7 @@ class DashboardContentComponent extends Component {
         final_solution_content,
         choices_content,
         topicid,
+        difficulty,
       })
     });
 
@@ -59,6 +69,7 @@ class DashboardContentComponent extends Component {
       final_solution: final_solution_content,
       choices: choices_content,
       topicid,
+      difficulty,
     };
     this.setState({ content, status: 'saved!' });
     window.setTimeout(() => this.setState({ status: null }), 1000);
@@ -101,6 +112,7 @@ class DashboardContentComponent extends Component {
         final_solution: this.refs.final_solution.value,
         choices: this.refs.choices.value,
         topicid: this.refs.topic.value,
+        difficulty: this.refs.difficulty.value,
       }
     });
   }
@@ -124,7 +136,6 @@ class DashboardContentComponent extends Component {
   }
 
   render() {
-    console.log(this.state);
     const exams = map(this.props.exams.key_dict, (exam, key) => {
       const linkClass = classnames({
         highlighted: key === this.state.examid
@@ -137,7 +148,9 @@ class DashboardContentComponent extends Component {
         const linkClass = classnames({
           highlighted: part === this.state.problem_num && subpart === this.state.subproblem_num
         });
-        return <div key={`${part}-${subpart}`}><a className={linkClass} onClick={() => this.selectProblem(part, subpart)}>Question {part} Part {subpart}</a></div>;
+        const id = `${part}_${subpart}`;
+        return <div key={`${part}-${subpart}`}><a className={linkClass} onClick={() => this.selectProblem(part, subpart)}>Question {part} Part {subpart}
+          {this.state.content.problems[id].topicid ? "(tagged)" : "(untagged)"}</a></div>;
       });
       res = concat(res, subparts);
       return res;
@@ -151,6 +164,13 @@ class DashboardContentComponent extends Component {
       <select ref="topic" value={this.state.problem.topicid ? this.state.problem.topicid : ""} onChange={this.handleChange}>
         <option selected value={null}> -- select a topic -- </option>
         {map(sortBy(this.props.topics, [(topic) => topic.topic, (topic) => topic.concept]), (topic, key) => <option key={key} value={topic.id}>{topic.topic} - {topic.concept}</option>)}
+      </select>
+    );
+
+    const difficultySelectItems = (
+      <select ref="difficulty" value={this.state.problem.difficulty ? this.state.problem.difficulty : ""} onChange={this.handleChange}>
+        <option selected value={null}> -- select a difficulty -- </option>
+        {map(range(1, 11), (num) => <option key={num} value={num}>{num}</option>)}
       </select>
     );
 
@@ -173,17 +193,18 @@ class DashboardContentComponent extends Component {
           {subparts.length ? <span className="contentNavCol" style={{ height: "200px", "overflowY": "scroll" }}>{subparts}</span> : null}
           <h1>{this.state.examid} {!exam || `: ${exam.courseid} - ${exam.examtype} - ${exam.examid}`} {!exam || <a href={exam.source_url} target="_blank">URL</a>} {this.state.status}</h1>
           {topicSelectItems}
+          {difficultySelectItems}
           <div>
-            <textarea className="contentCol" value={problem.problem} ref="problem" onChange={this.handleChange} placeholder="problem" />
-            <textarea className="contentCol" value={problem.solution} ref="solution" onChange={this.handleChange} placeholder="solution" />
-            <textarea className="contentCol" value={problem.choices} ref="choices" onChange={this.handleChange} placeholder="choices" />
-            <textarea className="contentCol" value={problem.final_solution} ref="final_solution" onChange={this.handleChange} placeholder="final solution" />
+            <textarea className="contentCol" value={problem.problem ? problem.problem : ""} ref="problem" onChange={this.handleChange} placeholder="problem" />
+            <textarea className="contentCol" value={problem.solution ? problem.solution : ""} ref="solution" onChange={this.handleChange} placeholder="solution" />
+            <textarea className="contentCol" value={problem.choices ? problem.choices: ""} ref="choices" onChange={this.handleChange} placeholder="choices" />
+            <textarea className="contentCol" value={problem.final_solution ? problem.final_solution : ""} ref="final_solution" onChange={this.handleChange} placeholder="final solution" />
           </div>
           {(problem.problem !== "") ? <button onClick={() => this.saveProblem()}>Save</button> : null}
         </div>
         {(problem.problem !== "") ? ((problem.choices) ?
           <MultipleChoiceQuestion content={problem.problem} solutionNum={problem.solution} choices={problem.choices} /> :
-          <Question content={problem.problem} solution={problem.solution} />) : null}
+          <Question content={problem.problem} solution={problem.solution} final_solution={problem.final_solution} />) : null}
       </div>
     );
   }

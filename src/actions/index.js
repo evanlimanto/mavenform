@@ -86,6 +86,14 @@ export const updateSchoolInfo = (info) => {
   };
 };
 
+export const UPDATE_COMMENTS = 'UPDATE_COMMENTS';
+export const updateComments = (comments) => {
+  return {
+    type: UPDATE_COMMENTS,
+    comments: comments,
+  };
+};
+
 export const SHOW_LOGIN_MODAL = 'SHOW_LOGIN_MODAL';
 export const showLoginModal = () => { return { type: SHOW_LOGIN_MODAL }; };
 export const SHOW_WAITLIST_MODAL = 'SHOW_WAITLIST_MODAL';

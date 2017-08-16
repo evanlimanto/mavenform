@@ -94,7 +94,7 @@ class SchoolComponent extends Component {
         }
         courseBoxes = [
           take(courseBoxes, 7),
-          (<a id={"showhidden-" + courseCode} className="card course-card" key={-1} onClick={showHiddenCourses}><span>View more courses</span></a>),
+          (<a id={"showhidden-" + courseCode} className="card course-card" key={-1} onClick={showHiddenCourses}><span>View more courses</span><span className="card-arrow">+</span></a>),
           (<span className="hidden" id={"courses-" + courseCode} key={-2}>
             {takeRight(courseBoxes, courseBoxes.length - 7)}
           </span>)

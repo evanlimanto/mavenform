@@ -6,15 +6,30 @@ import { Helmet } from 'react-helmet';
 import Navbar from '../navbar';
 import Footer from '../footer';
 import { Question, MultipleChoiceQuestion } from '../question';
-import { updateTopicInfo } from '../../actions';
+import { updateComments, updateTopicInfo } from '../../actions';
 import { BASE_URL, canUseDOM } from '../../utils';
 
 class TopicContentComponent extends Component {
   static fetchData(dispatch, props) {
-    const { code } = props;
+    const { code, topicInfo } = props;
     return fetch(`${BASE_URL}/getTopicInfo/${code}`)
       .then((response) => response.json())
-      .then((json) => dispatch(updateTopicInfo(json)));
+      .then((json) => {
+        dispatch(updateTopicInfo(json))
+        return json;
+      }).then((topicInfo) => {
+        return fetch(`${BASE_URL}/getComments`, {
+          method: 'post',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            contentids: map(topicInfo.info, (num_parts, part) => topicInfo.problems[part].content_id)
+          }),
+        }).then((response) => response.json())
+          .then((json) => dispatch(updateComments(json)))
+      })
   }
 
   componentDidMount() {
@@ -51,7 +66,11 @@ class TopicContentComponent extends Component {
           const props = {
             content_id, content, solution, choices,
             id: part + "_" + subpart,
-            solutionNum: solution
+            solutionNum: solution,
+            term_label: topicInfo.problems[key].term_label,
+            type_label: topicInfo.problems[key].type_label,
+            difficulty: topicInfo.problems[key].difficulty,
+            comments: this.props.comments[content_id],
           }
           if (choices && choices.length > 0) {
             return <MultipleChoiceQuestion key={key} {...props} />
@@ -59,7 +78,7 @@ class TopicContentComponent extends Component {
           return <Question key={key} {...props} />
         });
 
-        return <span key={part} className="element">{subparts}</span>;
+        return <span key={part} className="element">{subparts}</span>
       });
 
     return (
@@ -81,11 +100,13 @@ class TopicContentComponent extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  console.log(state);
   return {
     code: ownProps.code || ownProps.match.params.code,
     schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
     courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
     topicInfo: state.topicInfo,
+    comments: state.comments,
   };
 };
 

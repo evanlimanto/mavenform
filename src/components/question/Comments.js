@@ -31,14 +31,6 @@ class CommentsComponent extends Component {
     }
   }
 
-  componentDidMount() {
-    // TODO: Make this more efficient with 1 request
-    if (this.props.content_id)
-      fetch(`${BASE_URL}/getComments/${this.props.content_id}`)
-        .then((response) => response.json())
-        .then((json) => this.processComments(json));
-  }
-
   deleteComment(commentid) {
     const newTree = cloneDeep(this.state.commentsTree);
     newTree[commentid].deleted = true;
@@ -46,7 +38,13 @@ class CommentsComponent extends Component {
     fetch(`${BASE_URL}/deleteComment/${commentid}`);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.comments)
+      this.processComments(nextProps.comments);
+  }
+
   processComments(json) {
+    console.log(json);
     const tree = {};
     const roots = [];
     json = sortBy(json, [(item) => item.id]);

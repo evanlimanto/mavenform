@@ -425,10 +425,14 @@ const getTopicInfo =
     const getinfoq = `
       select T.topic, T.concept, S.subject_label from topics T
       inner join subjects S on T.subjectid = S.id
-      where code = $1`;
+      where T.code = $1`;
     const getq = `
-      select C.id as content_id, problem_num, subproblem_num, problem, solution, choices from content C
+      select C.id as content_id, problem_num, subproblem_num,
+        problem, solution, choices, difficulty, ET.type_label, terms.term_label from content C
       inner join topics T on T.id = C.topicid
+      inner join exams E on E.id = C.exam
+      inner join exam_types ET on ET.id = E.examtype
+      inner join terms on terms.id = examid
       where T.code = $1
     `;
     async.parallel([
@@ -445,11 +449,12 @@ const getTopicInfo =
           }, {});
 
           const problems = _.reduce(result.rows, (result, row, index) => {
-            let { content_id, problem_num, subproblem_num, problem, solution, choices } = row;
+            let { content_id, problem_num, subproblem_num, problem, solution, choices, difficulty } = row;
             problem = renderer.preprocess(row.problem);
             solution = renderer.preprocess(row.solution);
+            const { type_label, term_label } = row;
             const key = `${index}`;
-            result[key] = { problem, solution, choices, content_id };
+            result[key] = { problem, solution, choices, content_id, type_label, term_label, difficulty };
             return result;
           }, {});
 
@@ -458,7 +463,7 @@ const getTopicInfo =
       },
     ], (err, result) => {
       if (err) return next(err);
-      if (result[0].rows.length === 0) return next();
+      if (result[0].rows.length === 0) return res.json({});
       const { topic, concept, subject_label } = result[0].rows[0];
       const { info, problems } = result[1];
       return res.json({ topicLabel: topic, conceptLabel: concept, subjectLabel: subject_label, info, problems });
@@ -469,11 +474,13 @@ const getCourseTopics =
   (req, res, next) => {
     const { courseCode, schoolCode } = req.params;
     const getq = `
-      select T.topic, T.concept, T.code from topics T
+      select T.topic, T.concept, T.code, count(*) as problem_count from topics T
       inner join course_topics CT on CT.topicid = T.id
       inner join courses C on CT.courseid = C.id
       inner join schools S on C.schoolid = S.id
+      right join content on content.topicid = T.id
       where S.code = $1 and C.code = $2 and exists (select 1 from content where content.topicid = T.id)
+      group by T.topic, T.concept, T.code
     `;
     pool.query(getq, [schoolCode, courseCode], (err, result) => {
       if (result.rows.length === 0) return res.json({ notfound: true });
@@ -482,6 +489,7 @@ const getCourseTopics =
           topic: row.topic,
           concept: row.concept,
           code: row.code,
+          problem_count: row.problem_count,
         };
       });
       return res.json(items);

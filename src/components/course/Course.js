@@ -148,7 +148,7 @@ class CourseComponent extends Component {
     const topicCards = map(this.props.topics, (topic) => {
       return (
         <Link key={topic.code} className="card topic-card" to={"/" + schoolCode + "/" + courseCode + "/" + topic.code}>
-          <span>{topic.concept}</span>
+          <span>{topic.concept} (<b>{topic.problem_count} problem{topic.problem_count <= 1 || "s"}</b>)</span>
           <span className="card-arrow">&#8594;</span>
         </Link>
       );

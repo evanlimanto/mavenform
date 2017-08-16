@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { has, map, range, replace, split } from 'lodash';
+import { has, map, range, replace, split, flatten } from 'lodash';
 import { Helmet } from 'react-helmet';
 
-import { updateExamInfo } from '../../actions';
+import { updateExamInfo, updateComments } from '../../actions';
 import { BASE_URL, canUseDOM, courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
 import { Question, MultipleChoiceQuestion } from '../question';
 import { TopicContent } from '../topic';
@@ -39,7 +39,25 @@ class ExamComponent extends Component {
     const profs = (examArr.length <= 2) ? "None": examArr[2];
     return fetch(`${BASE_URL}/getExamInfo/${schoolCode}/${courseCode}/${examType}/${termCode}/${replace(profs, /_/g, ', ')}`)
       .then((response) => response.json())
-      .then((json) => dispatch(updateExamInfo(json)));
+      .then((json) => {
+        dispatch(updateExamInfo(json))
+        return json;
+      })
+      .then((examInfo) => {
+        return fetch(`${BASE_URL}/getComments`, {
+          method: 'post',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            contentids: flatten(map(examInfo.info, (num_parts, part) => map(range(1, num_parts + 1), (subpart) => {
+              return examInfo.problems[`${part}_${subpart}`].content_id
+            })))
+          }),
+        }).then((response) => response.json())
+          .then((json) => dispatch(updateComments(json)))
+      });
   }
 
   componentDidUpdate() {
@@ -74,6 +92,7 @@ class ExamComponent extends Component {
             content_id, courseCode, schoolCode, content, solution, termCode, examType, choices, final_solution,
             id: part + "_" + subpart,
             solutionNum: solution,
+            comments: this.props.comments[content_id]
           }
           if (choices && choices.length > 0) {
             return <MultipleChoiceQuestion key={key} {...props} />
@@ -117,6 +136,7 @@ const mapStateToProps = (state, ownProps) => {
     examStr: ownProps.examStr || ownProps.match.params.examStr,
     labels: state.labels,
     examInfo: state.examInfo,
+    comments: state.comments,
   };
 };
 

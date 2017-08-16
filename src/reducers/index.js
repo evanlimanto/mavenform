@@ -136,6 +136,15 @@ export const courseSubject = (state = null, action) => {
   }
 };
 
+export const comments = (state = {}, action) => {
+  switch (action.type) {
+    case Actions.UPDATE_COMMENTS:
+      return action.comments;
+    default:
+      return state;
+  }
+}
+
 export const modal = (state = { type: null, errorText: null }, action) => {
   switch (action.type) {
     case Actions.SHOW_LOGIN_MODAL:

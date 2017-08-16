@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'; import { connect } from 'react-redux';
 import classnames from 'classnames';
-import { replace } from 'lodash'
+import { replace, toLower } from 'lodash'
 import { toggleSolutionEvent } from '../../events';
 import { showLoginModal, showSignupModal } from '../../actions';
 
@@ -23,9 +22,10 @@ class SolutionComponent extends Component {
     this.setState({ showSolution: !this.state.showSolution });
   }
 
-  checkSolution() {
-    const solutionContent = replace(this.refs.user_solution.value, / /g, '');
-    const expectedSolutionContent = replace(this.props.final_solution.value, / /g, '');
+  checkSolution(e) {
+    e.preventDefault();
+    const solutionContent = toLower(replace(this.refs.user_solution.value, / /g, ''));
+    const expectedSolutionContent = toLower(replace(this.props.final_solution, / /g, ''));
     if (solutionContent === expectedSolutionContent)
       this.setState({ checkedSolutionStatus: "correct" })
     else
@@ -54,7 +54,7 @@ class SolutionComponent extends Component {
             <input type="text" className={"solutionBox " + this.state.checkedSolutionStatus} placeholder="Enter your answer..." ref="user_solution" />
             {!this.state.checkedSolutionStatus || <img src={`/img/${this.state.checkedSolutionStatus}-symbol.svg`} width="32" height="32" className="solutionStatus" />}
           </span>
-          <input className="blue" type="button" value="Check Solution" onClick={this.checkSolution} />
+          <input className="blue" type="button" value="Check Solution" onClick={(e) => this.checkSolution(e)} />
         </span>
       );
     }

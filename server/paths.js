@@ -104,7 +104,8 @@ module.exports = (app) => {
     const { examid } = req.params;
 
     const getcontentq = `
-      select problem_num, subproblem_num, problem, solution, choices, topicid from content where exam = $1
+      select problem_num, subproblem_num, problem, solution, choices,
+        topicid, final_solution, difficulty from content where exam = $1
     `;
     config.pool.query(getcontentq, [examid], (err, result) => {
       const info = _.reduce(result.rows, (result, row) => {
@@ -121,8 +122,10 @@ module.exports = (app) => {
         const { problem_num, subproblem_num, topicid, choices } = row;
         const problem = renderer.preprocess(row.problem);
         const solution = renderer.preprocess(row.solution);
+        const final_solution = row.final_solution;
+        const difficulty = row.difficulty;
         const key = `${problem_num}_${subproblem_num}`;
-        result[key] = { problem, solution, topicid, choices };
+        result[key] = { problem, solution, topicid, choices, final_solution, difficulty };
         return result;
       }, {});
       return res.json({info, problems});
@@ -132,14 +135,15 @@ module.exports = (app) => {
   // Update problem contents
   app.post('/updateProblem', (req, res, next) => {
     const { examid, problem_num, subproblem_num, problem_content,
-            solution_content, choices_content, final_solution, topicid } = req.body;
+            solution_content, choices_content, final_solution_content,
+            difficulty, topicid } = req.body;
     const q = `
-      update content set problem=$1, solution=$2, choices=$3, topicid=$4, final_solution=$5,
-      where exam=$6 and problem_num=$7 and subproblem_num=$8
+      update content set problem=$1, solution=$2, choices=$3, topicid=$4, final_solution=$5, difficulty=$6
+      where exam=$7 and problem_num=$8 and subproblem_num=$9
     `;
 
     config.pool.query(q, [problem_content, solution_content,
-                          choices_content, topicid, examid, final_solution,
+                          choices_content, topicid, final_solution_content, difficulty, examid,
                           problem_num, subproblem_num], (err, result) => {
       if (err) return next(err);
       return res.send("Success!");
@@ -562,30 +566,26 @@ module.exports = (app) => {
     });
   });
 
-  app.get('/getComments/:contentid', (req, res, next) => {
-    const { contentid } = req.params;
+  app.post('/getComments', (req, res, next) => {
+    const { contentids } = req.body;
 
     const getq = `
       select D.id as id, D.content as content, users.nickname as nickname,
         D.datetime as datetime, D.parentid as parentid,
-        D.upvotes as upvotes, D.deleted as deleted from discussion D
+        D.upvotes as upvotes, D.deleted as deleted, D.contentid from discussion D
       inner join users on D.userid = users.id
-      where contentid = $1
+      where contentid in (${_.join(contentids, ', ')})
     `;
 
-    config.pool.query(getq, [contentid], (err, result) => {
+    config.pool.query(getq, (err, result) => {
       if (err) return next(err);
-      const items = _.map(result.rows, (row) => {
-        return {
-          id: row.id,
-          content: row.content,
-          nickname: row.nickname,
-          datetime: row.datetime,
-          parentid: row.parentid,
-          upvotes: row.upvotes,
-          deleted: row.deleted,
-        }
-      });
+      const items = _.reduce(result.rows, (dict, row) => {
+        const { id, content, nickname, datetime, parentid, upvotes, deleted, contentid } = row;
+        if (!_.has(dict, contentid))
+          dict[contentid] = [];
+        dict[contentid].push({ id, content, nickname, datetime, parentid, upvotes, deleted });
+        return dict;
+      }, {});
       return res.json(items);
     });
   });
