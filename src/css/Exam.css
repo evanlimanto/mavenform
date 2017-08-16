@@ -553,28 +553,30 @@ button.comment-button:hover {
 }
 
 .solutionBox {
-  padding: 11px;
+  padding: 11px 15px;
   font-size: 14px;
   border-radius: 5px;
-  color: #33aacc;
-  border: 1px solid #33aacc;
+  color: #111;
+  border: 1px solid #ccc;
   display: inline;
   margin-right: 10px;
   width: 40%;
 }
 
 .solutionBox.correct {
-  border: 1px solid #76e03f;
+  border: 1px solid #77cc11;
 }
 
 .solutionBox.wrong {
-  border: 1px solid #eb0018;
+  border: 1px solid #eeaaaa;
 }
 
 .solutionStatus {
   position: absolute;
-  right: 15px;
-  top: -5px;
+  right: 16px;
+  top: -1px;
+  width: 24px;
+  height: 24px;
 }
 
 .solutionBoxWrapper {

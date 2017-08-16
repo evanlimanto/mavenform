@@ -52,7 +52,7 @@ class SolutionComponent extends Component {
         <span>
           <span className="solutionBoxWrapper">
             <input type="text" className={"solutionBox " + this.state.checkedSolutionStatus} placeholder="Enter your answer..." ref="user_solution" />
-            {!this.state.checkedSolutionStatus || <img src={`/img/${this.state.checkedSolutionStatus}-symbol.svg`} width="32" height="32" className="solutionStatus" />}
+            {!this.state.checkedSolutionStatus || <img src={`/img/${this.state.checkedSolutionStatus}-symbol.svg`} className="solutionStatus" />}
           </span>
           <input className="blue" type="button" value="Check Solution" onClick={(e) => this.checkSolution(e)} />
         </span>

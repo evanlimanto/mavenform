@@ -120,8 +120,8 @@ module.exports = (app) => {
 
       const problems = _.reduce(result.rows, (result, row) => {
         const { problem_num, subproblem_num, topicid, choices } = row;
-        const problem = renderer.preprocess(row.problem);
-        const solution = renderer.preprocess(row.solution);
+        const problem = row.problem;
+        const solution = row.solution;
         const final_solution = row.final_solution;
         const difficulty = row.difficulty;
         const key = `${problem_num}_${subproblem_num}`;
@@ -134,9 +134,11 @@ module.exports = (app) => {
 
   // Update problem contents
   app.post('/updateProblem', (req, res, next) => {
-    const { examid, problem_num, subproblem_num, problem_content,
-            solution_content, choices_content, final_solution_content,
-            difficulty, topicid } = req.body;
+    let { examid, problem_num, subproblem_num, problem_content,
+          solution_content, choices_content, final_solution_content,
+          difficulty, topicid } = req.body;
+    if (difficulty === "")
+      difficulty = null;
     const q = `
       update content set problem=$1, solution=$2, choices=$3, topicid=$4, final_solution=$5, difficulty=$6
       where exam=$7 and problem_num=$8 and subproblem_num=$9

@@ -33,7 +33,7 @@ class Question extends Component {
     };
     const difficultyBar = difficulty ? (
       <span>
-        Difficulty
+        Difficulty: {difficulty <= 3 ? ("Easy") : (difficulty <= 6 ? "Medium" : "Hard")}
         <Line options={options} initialAnimate={true} progress={difficulty/10.0} containerClassName="progress-container" />
       </span>
     ): null

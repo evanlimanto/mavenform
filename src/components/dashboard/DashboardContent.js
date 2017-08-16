@@ -6,6 +6,7 @@ import classnames from 'classnames';
 import Autocomplete from 'react-autocomplete';
 import { BASE_URL } from '../../utils';
 import { MultipleChoiceQuestion, Question } from '../question';
+import renderer from '../../renderer';
 
 class DashboardContentComponent extends Component {
   constructor(props) {
@@ -204,7 +205,7 @@ class DashboardContentComponent extends Component {
         </div>
         {(problem.problem !== "") ? ((problem.choices) ?
           <MultipleChoiceQuestion content={problem.problem} solutionNum={problem.solution} choices={problem.choices} /> :
-          <Question content={problem.problem} solution={problem.solution} final_solution={problem.final_solution} />) : null}
+          <Question content={renderer.preprocess(problem.problem)} solution={renderer.preprocess(problem.solution)} final_solution={problem.final_solution} />) : null}
       </div>
     );
   }
