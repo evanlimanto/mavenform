@@ -114,7 +114,16 @@ class CourseComponent extends Component {
             </p>
           </div>
         </div>
-        <hr className="s5" />
+        <hr className="s1" />
+        <div className="container">
+          <div className="int-box">
+            <p className="int-helper">
+              <span className="int-highlight">Interactive study mode available.</span> Study from an AI-generated problem set personalized to your course term and professor.
+            </p>
+            <button className="int-button">Go</button>
+          </div>
+        </div>
+        <hr className="s1" />
         <div className="center">
         {!!this.props.exams || <p className="loader">Loading exams...</p>}
         <div className="table-container-container">
