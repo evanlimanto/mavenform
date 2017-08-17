@@ -33,6 +33,14 @@ ReactGA.pageview(window.location.pathname);
 
 if (canUseDOM) {
   window.Intercom("boot", { app_id: "dpdcfp8e" });
+  if (localStorage.profile) {
+    const profile = JSON.parse(localStorage.profile);
+    window.Intercom("update", {
+      name: profile.user_metadata.username, // Full name
+      email: profile.email, // Email address
+      created_at: new Date(),
+    });
+  }
 }
 
 const store = configureStore();

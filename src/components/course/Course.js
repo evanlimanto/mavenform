@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { map, range, replace, take } from 'lodash';
+import { map, range, replace } from 'lodash';
 import { Helmet } from 'react-helmet';
 import Dropzone from 'react-dropzone';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
@@ -12,7 +12,6 @@ import { examClickEvent } from '../../events';
 import Footer from '../footer';
 import { Modals } from '../modal';
 import Navbar from '../navbar';
-import NotFound from '../notfound';
 
 const request = require('superagent');
 
@@ -33,7 +32,8 @@ class CourseComponent extends Component {
 
   static fetchData(dispatch, props) {
     const { courseCode, schoolCode } = props;
-    const auth_user_id = props.auth ? props.auth.getProfile().user_id : null;
+    const profile = props.auth.getProfile();
+    const auth_user_id = profile ? profile.user_id : null;
     return Promise.all([
       fetch(`${BASE_URL}/getCourseExams/${schoolCode}/${courseCode}`)
         .then((response) => response.json())

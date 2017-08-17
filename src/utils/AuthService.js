@@ -173,6 +173,7 @@ export default class AuthService {
     localStorage.removeItem('id_token')
     localStorage.removeItem('profile')
     mixpanel.identify(rs.generate(20));
+    window.Intercom("shutdown");
     document.location = "/";
   }
 }
