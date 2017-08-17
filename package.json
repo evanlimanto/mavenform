@@ -65,6 +65,7 @@
     "pg": "^6.1.5",
     "randomstring": "^1.1.5",
     "react": "^15.4.2",
+    "react-addons-css-transition-group": "^15.6.0",
     "react-autocomplete": "^1.5.10",
     "react-document-meta": "^2.1.1",
     "react-dom": "^15.4.2",

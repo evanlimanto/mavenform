@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { map, replace } from 'lodash';
+import { map, range, replace } from 'lodash';
 import { Helmet } from 'react-helmet';
 import Dropzone from 'react-dropzone';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import { showLoginModal, showUploadSuccessModal, updateCourseExams, updateCourseTopics, updateCourseLabel, updateCourseSubject } from '../../actions';
 import { courseCodeToLabel, BASE_URL } from '../../utils';
@@ -19,6 +20,11 @@ class CourseComponent extends Component {
   constructor(props) {
     super(props);
     this.onDrop = this.onDrop.bind(this);
+    this.getInfo = this.getInfo.bind(this);
+    this.registerClass = this.registerClass.bind(this);
+    this.state = {
+      getInfo: false,
+    };
   }
 
   componentDidMount() {
@@ -54,6 +60,28 @@ class CourseComponent extends Component {
         <meta name="description" content={description} />
       </Helmet>
     );
+  }
+
+  registerClass() {
+    const term = this.refs.term.value;
+    const year = this.refs.year.value;
+    const professor = this.refs.professor.value;
+    const auth_user_id = this.props.auth.getProfile().user_id;
+    const { courseCode, schoolCode } = this.props;
+
+    request.post('/registerClass')
+      .send({ term, year, professor, auth_user_id, courseCode, schoolCode })
+      .end((err, res) => {
+        if (err || !res.ok)
+          return console.error(err);
+        document.location = `/${schoolCode}/${courseCode}/interactive`;
+      });
+  }
+
+  getInfo() {
+    if (!this.props.auth.loggedIn())
+      return this.props.showLoginModal();
+    this.setState({ getInfo: true });
   }
 
   onDrop(acceptedFiles, rejectedFiles) {
@@ -96,7 +124,6 @@ class CourseComponent extends Component {
       );
     });
 
-    console.log(this.props.courseLabel);
     const content = (
       <div>
        <div className="container info-container">
@@ -118,9 +145,26 @@ class CourseComponent extends Component {
         <div className="container">
           <div className="int-box">
             <p className="int-helper">
-              <span className="int-highlight">Interactive study mode available.</span> Study from an AI-generated problem set personalized to your course term and professor.
+              <span className="int-highlight">Interactive study mode available.</span> Study from an AI-generated problem set personalized based on your course syllabus.
             </p>
-            <button className="int-button">Go</button>
+            <button className="int-button" onClick={this.getInfo}>Get Started</button>
+            <ReactCSSTransitionGroup
+              transitionName="getInfo"
+              transitionEnterTimeout={500}
+              transitionLeaveTimeout={500}>
+            {this.state.getInfo ? (
+              <div key={0}>
+                <hr className="s2" />
+                <p>Great! To get started, all we need is information about your class.</p>
+                <hr className="s1" />
+                <div>
+                  <div>Term/Quarter: <select ref="term">{map(['fa', 'sp', 'su', 'wi'], (semester) => <option key={semester} value={semester}>{semester}</option>)}</select></div>
+                  <div>Year: <select ref="year">{map(range(2017, 2021), (year) => <option key={year} value={year - 2000}>{year}</option>)}</select></div>
+                  <div>Professor: <input type="text" placeholder="Professor" ref="professor" /></div>
+                  <input type="button" className="blue" value="Sign Up" />
+                </div>
+              </div>) : null}
+            </ReactCSSTransitionGroup>
           </div>
         </div>
         <hr className="s1" />

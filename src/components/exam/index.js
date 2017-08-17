@@ -1,3 +1,4 @@
 import Exam from './Exam';
+import ProblemSet from './ProblemSet';
 
-export default Exam;
+export { Exam, ProblemSet };

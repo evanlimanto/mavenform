@@ -90,3 +90,14 @@ button.int-button:hover {
   opacity: 1;
   cursor: pointer;
 }
+
+.getInfo-enter {
+  max-height: 0px;
+  opacity: 0.00;
+}
+
+.getInfo-enter.getInfo-enter-active {
+  opacity: 1;
+  max-height: 500px;
+  transition: opacity 500ms ease-in, max-height 500ms ease-in;
+}

@@ -796,6 +796,42 @@ module.exports = (app) => {
     });
   });
 
+  app.post('/registerClass', (req, res, next) => {
+    const { courseid, term, year, professor, auth_user_id, courseCode, schoolCode } = req.body;
+
+    const inq = `
+      insert into bookmarked_courses (userid, courseid, professor, termid)
+      select q1.id, q2.id, $1, q3.id from
+        (select id from users where auth_user_id = $2) as q1
+        cross join
+        (select courses.id from courses inner join schools on courses.schoolid = schools.id where courses.code = $3 and schools.code = $4) q2
+        cross join
+        (select id from terms where term_code = $5) as q3
+    `;
+    config.pool.query(inq, [professor, auth_user_id, courseCode, schoolCode, term + _.toString(year)], (err, result) => {
+      if (err) return next(err);
+      return res.send("Success!");
+    });
+  });
+
+  app.get('/checkUserClassRegistered/:schoolCode/:courseCode/:auth_user_id', (req, res, next) => {
+    const { schoolCode, courseCode, auth_user_id } = req.params;
+
+    const getq = `
+      select 1 from bookmarked_courses BC
+      inner join users on users.id = BC.userid
+      inner join courses on courses.id = BC.courseid
+      inner join schools on schools.id = courses.schoolid
+      where schools.code = $1 and courses.code = $2 and users.auth_user_id = $3
+    `;
+    config.pool.query(getq, [schoolCode, courseCode, auth_user_id], (err, result) => {
+      if (err) return next(err);
+      if (result.rows.length === 0)
+        return res.send("Empty");
+      return res.send("Available");
+    });
+  });
+
   app.get('/getSchoolInfo/:schoolCode/', (req, res, next) => {
     const { schoolCode } = req.params;
     const getq = `

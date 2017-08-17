@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 import { updateExamInfo, updateComments } from '../../actions';
 import { BASE_URL, canUseDOM, courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
 import { Question, MultipleChoiceQuestion } from '../question';
+import { Interactive } from '../course';
 import { TopicContent } from '../topic';
 import Footer from '../footer';
 import Navbar from '../navbar';
@@ -67,6 +68,8 @@ class ExamComponent extends Component {
 
   render() {
     const { schoolCode, courseCode, examStr } = this.props;
+    if (examStr === "interactive")
+      return <Interactive schoolCode={schoolCode} courseCode={courseCode} />;
     const examArr = split(examStr, '-');
     if (examArr.length === 1)
       return <TopicContent schoolCode={schoolCode} courseCode={courseCode} code={examArr[0]} />;

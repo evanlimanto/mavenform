@@ -1,3 +1,4 @@
 import Course from './Course';
+import Interactive from './Interactive';
 
-export default Course;
+export { Course, Interactive };

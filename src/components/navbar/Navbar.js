@@ -113,12 +113,12 @@ class NavbarComponent extends Component {
       return false;
     }
 
-    const { schoolCode, courseCode, examTypeCode, termCode, concept, label, profs } = this.props;
+    const { schoolCode, courseCode, examTypeCode, termCode, concept, label, profs, interactive } = this.props;
     const courseLabel = courseCodeToLabel(courseCode);
     const schoolLabel = this.props.labels.schools[schoolCode];
     const examTypeLabel = examTypeToLabel(examTypeCode);
     const termLabel = termToLabel(termCode); 
-    const numLayers = !!schoolLabel + !!courseLabel + !!examTypeLabel + !!label;
+    const numLayers = !!schoolLabel + !!courseLabel + !!examTypeLabel + !!label + !!interactive;
     let navbarNav = null;
     if (!this.props.userHome) {
       navbarNav = [<Link key='home' to='/' className={classnames({ active: numLayers === 0 })}>Home</Link>];
@@ -134,6 +134,9 @@ class NavbarComponent extends Component {
           } else if (label) {
             navbarNav.push(<span key='examSpan'> > </span>);
             navbarNav.push(<Link key='exam' to={'/' + schoolCode + '/' + courseCode + '/' + concept} className={classnames({ active: numLayers === 3 })}>{label}</Link>);
+          } else if (interactive) {
+            navbarNav.push(<span key='examSpan'> > </span>);
+            navbarNav.push(<Link key='exam' to={'/' + schoolCode + '/' + courseCode + '/interactive'} className="active">Interactive</Link>);
           }
         }
       }
