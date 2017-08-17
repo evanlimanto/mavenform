@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { has, map, range, replace, split, flatten } from 'lodash';
 import { Helmet } from 'react-helmet';
 
-import { updateExamInfo, updateComments } from '../../actions';
-import { BASE_URL, canUseDOM, courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
-import { Question, MultipleChoiceQuestion } from '../question';
-import { Interactive } from '../course';
-import { TopicContent } from '../topic';
+import { canUseDOM } from '../../utils';
 import Footer from '../footer';
 import Navbar from '../navbar';
 
@@ -46,6 +41,7 @@ class ExamComponent extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  console.log(ownProps);
   return {
     auth: state.auth,
     schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,

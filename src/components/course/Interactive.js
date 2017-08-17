@@ -3,14 +3,12 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 
-import { showLoginModal, showUploadSuccessModal, updateCourseLabel, updateCourseSubject } from '../../actions';
+import { showCourseRegisterModal, showLoginModal, showUploadSuccessModal, updateCourseLabel, updateCourseSubject } from '../../actions';
 import { courseCodeToLabel, BASE_URL } from '../../utils';
 import { Course } from '../course';
 import Footer from '../footer';
 import { Modals } from '../modal';
 import Navbar from '../navbar';
-
-const request = require('superagent');
 
 class InteractiveComponent extends Component {
   componentWillMount() {
@@ -32,6 +30,11 @@ class InteractiveComponent extends Component {
         .then((response) => response.json())
         .then((json) => dispatch(updateCourseSubject(json.subject)))
     ]);
+  }
+
+  componentWillMount() {
+    if (this.props.registered)
+      this.props.showCourseRegisterModal();
   }
 
   static getMeta(props) {
@@ -88,6 +91,7 @@ const mapStateToProps = (state, ownProps) => {
     courseSubject: state.courseSubject,
     labels: state.labels,
     auth: state.auth,
+    registered: ownProps.location.search === "?registered=true"
   }
 };
 
@@ -95,6 +99,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     showLoginModal: () => dispatch(showLoginModal()),
     showUploadSuccessModal: () => dispatch(showUploadSuccessModal()),
+    showCourseRegisterModal: () => dispatch(showCourseRegisterModal()),
     dispatch
   };
 };

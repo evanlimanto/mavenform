@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { cloneDeep, concat, map, range, reduce, sortBy, toString } from 'lodash';
+import { cloneDeep, concat, map, range, reduce, sortBy } from 'lodash';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
-import Autocomplete from 'react-autocomplete';
 import { BASE_URL } from '../../utils';
 import { MultipleChoiceQuestion, Question } from '../question';
 import renderer from '../../renderer';

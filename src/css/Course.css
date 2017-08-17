@@ -94,7 +94,6 @@ button.int-button {
 }
 
 button.int-button:hover {
-  opacity: 1;
   cursor: pointer;
 }
 
@@ -107,6 +106,35 @@ button.int-button:hover {
   opacity: 1;
   max-height: 500px;
   transition: opacity 500ms ease-in, max-height 500ms ease-in;
+}
+
+.getInfo-leave {
+  max-height: 500px;
+  opacity: 1;
+}
+
+.getInfo-leave.getInfo-leave-active {
+  opacity: 0;
+  max-height: 0px;
+  transition: opacity 500ms ease-in, max-height 500ms ease-in;
+}
+
+.getInfoButton-enter {
+  opacity: 0.00;
+}
+
+.getInfoButton-enter.getInfoButton-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.getInfoButton-leave {
+  opacity: 1;
+}
+
+.getInfoButton-leave.getInfoButton-leave-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
 }
 
 input[type="text"].professor-info {

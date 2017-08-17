@@ -7,14 +7,6 @@ const ProgressBar = require('react-progressbar.js')
 const Line = ProgressBar.Line;
 
 class Question extends Component {
-  componentDidMount() {
-    const bar = new ProgressBar.Line("progress-container-" + this.props.content_id, {
-
-      initialAnimate: true,
-      progress: this.props.difficulty / 10.0,
-    });
-  }
-
   render() {
     const { id, content_id, schoolCode, courseCode, examType, termCode, solution, content, final_solution, term_label, type_label, difficulty, comments } = this.props;
     const options = {

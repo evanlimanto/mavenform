@@ -26,7 +26,7 @@ pg.defaults.ssl = true;
 const prod_client = new pg.Client(prodConfig);
 prod_client.connect();
 
-const id = 285;
+const id = 0;
 const q1 = `select * from content_staging where exam > ${id}`;
 const q2 = `select * from exams_staging where id > ${id}`;
 const q3 = `select * from images_staging where examid > ${id}`;

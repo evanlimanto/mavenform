@@ -120,6 +120,8 @@ export const SHOW_REPORT_SUCCESS_MODAL = 'SHOW_REPORT_SUCCESS_MODAL';
 export const showReportSuccessModal = () => { return { type: SHOW_REPORT_SUCCESS_MODAL }; };
 export const SHOW_REPORT_ERROR_MODAL = 'SHOW_REPORT_ERROR_MODAL';
 export const showReportErrorModal = (content_id) => { return { type: SHOW_REPORT_ERROR_MODAL, content_id }; };
+export const SHOW_COURSE_REGISTER_MODAL = 'SHOW_COURSE_REGISTER_MODAL';
+export const showCourseRegisterModal = () => { return { type: SHOW_COURSE_REGISTER_MODAL }; };
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const closeModal = () => { return { type: CLOSE_MODAL }; };
 

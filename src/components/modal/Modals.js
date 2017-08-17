@@ -231,6 +231,14 @@ class ModalsComponent extends Component {
           <a className="login-button blue" onClick={this.reportError}>Report</a>
         </span>
       );
+    } else if (this.props.modal.type === 'courseregister') {
+      headerContent = <h1>Selected Section</h1>;
+      modalContent = (
+        <span>
+          <hr className="s3" />
+          <p>Thank your for registering! Now you will be able to access AI-generated custom problems for this course.</p>
+        </span>
+      );
     }
 
     return <Modal closeModal={this.props.closeModal} infoContent={infoContent} modalContent={modalContent} errorText={this.props.modal.errorText} headerContent={headerContent} />;

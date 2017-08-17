@@ -21,6 +21,8 @@ class CourseComponent extends Component {
     this.onDrop = this.onDrop.bind(this);
     this.getInfo = this.getInfo.bind(this);
     this.registerClass = this.registerClass.bind(this);
+    this.setProfessor = this.setProfessor.bind(this);
+    this.professor = null;
     this.state = {
       getInfo: false,
     };
@@ -28,6 +30,10 @@ class CourseComponent extends Component {
 
   componentDidMount() {
     CourseComponent.fetchData(this.props.dispatch, this.props);
+  }
+
+  setProfessor(professor) {
+    this.professor = professor;
   }
 
   static fetchData(dispatch, props) {
@@ -67,9 +73,9 @@ class CourseComponent extends Component {
   }
 
   registerClass() {
-    const term = this.refs.term.value;
-    const year = this.refs.year.value;
-    const professor = this.refs.professor.value;
+    const term = "fa";
+    const year = 2017;
+    const professor = this.professor;
     const auth_user_id = this.props.auth.getProfile().user_id;
     const { courseCode, schoolCode } = this.props;
 
@@ -81,14 +87,14 @@ class CourseComponent extends Component {
       .end((err, res) => {
         if (err || !res.ok)
           return console.error(err);
-        document.location = `/${schoolCode}/${courseCode}/problemset`;
+        document.location = `/${schoolCode}/${courseCode}/problemset?register=true`;
       });
   }
 
   getInfo() {
     if (!this.props.auth.loggedIn())
       return this.props.showLoginModal();
-    this.setState({ getInfo: true });
+    this.setState({ getInfo: !this.state.getInfo });
   }
 
   onDrop(acceptedFiles, rejectedFiles) {
@@ -162,9 +168,9 @@ class CourseComponent extends Component {
                   <span className="int-highlight">Interactive study mode available.</span> Study from an AI-generated study guide personalized to your class and professor.
                 </p>
                 <ReactCSSTransitionGroup
-                  transitionName="getInfo"
+                  transitionName="getInfoButton"
                   transitionEnterTimeout={500}
-                  transitionLeaveTimeout={100}>
+                  transitionLeaveTimeout={500}>
                   {this.state.getInfo ? null : (<button className="int-button" onClick={this.getInfo}>Get Started</button>)}
                 </ReactCSSTransitionGroup>
               </span>
@@ -178,27 +184,27 @@ class CourseComponent extends Component {
                 <hr className="s2" />
                 <p className="int-helper">Great! To get started, please select the option below that best matches your class information and syllabus.</p>
                 <hr className="s1" />
-                <div className="card int-card" tabIndex="0" >
-                  <div className="int-card-h">Math 10A 001</div>
+                <div className="card int-card" tabIndex="0" onClick={this.setProfessor("Stevens")}>
+                  <div className="int-card-h">{courseCodeToLabel(courseCode)} 001</div>
                   <p><span className="int-highlight">Instructor(s): </span> Stevens</p>
                   <p><span className="int-highlight">Term:</span> Fall 2017</p>
                   <p><span className="int-highlight">Syllabus:</span> <a>Available</a></p>
                 </div>
-                <div className="card int-card" tabIndex="0" >
-                  <div className="int-card-h">Math 10A 002</div>
+                <div className="card int-card" tabIndex="0" onClick={this.setProfessor("Jeggers")}>
+                  <div className="int-card-h">{courseCodeToLabel(courseCode)} 002</div>
                   <p><span className="int-highlight">Instructor(s):</span> Jeggers</p>
                   <p><span className="int-highlight">Term:</span> Fall 2017</p>
                   <p><span className="int-highlight">Syllabus:</span> <a>Available</a></p>
                 </div>
-                <div className="card int-card" tabIndex="0" >
-                  <div className="int-card-h">Math 10A 003</div>
+                <div className="card int-card" tabIndex="0" onClick={this.setProfessor("None")}>
+                  <div className="int-card-h">{courseCodeToLabel(courseCode)} 003</div>
                   <p><span className="int-highlight">Instructor(s):</span> Potato, Patata</p>
                   <p><span className="int-highlight">Term:</span> Fall 2017</p>
                   <p><span className="int-highlight">Syllabus:</span> Unavailable</p>
                 </div>
                 <hr className="s2" />
                 <input type="button" className="blue" value="Sign Up" onClick={this.registerClass} />
-                <input type="button" className="gray" value="Cancel"/>
+                <input type="button" className="gray" value="Cancel" onClick={this.getInfo}/>
               </div>) : null}
             </ReactCSSTransitionGroup>
           </div>

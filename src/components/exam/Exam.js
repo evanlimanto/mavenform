@@ -6,7 +6,6 @@ import { Helmet } from 'react-helmet';
 import { updateExamInfo, updateComments } from '../../actions';
 import { BASE_URL, canUseDOM, courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
 import { Question, MultipleChoiceQuestion } from '../question';
-import { Interactive } from '../course';
 import { TopicContent } from '../topic';
 import Footer from '../footer';
 import Navbar from '../navbar';
@@ -21,7 +20,6 @@ class ExamComponent extends Component {
     const examArr = split(examStr, '-');
     const examType = examArr[0];
     const termCode = examArr[1];
-    const profs = examArr[2];
     const title = ((labels.schools) ? `${courseCodeToLabel(courseCode)} ${termToLabel(termCode)} ${examTypeToLabel(examType)} - Studyform` : "Studyform");
     const description = `Study and discuss past exam problems and solutions for ${courseCodeToLabel(courseCode)} ${termToLabel(termCode)} ${examTypeToLabel(examType)}.`;
     return (

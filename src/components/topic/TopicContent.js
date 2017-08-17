@@ -11,7 +11,7 @@ import { BASE_URL, canUseDOM } from '../../utils';
 
 class TopicContentComponent extends Component {
   static fetchData(dispatch, props) {
-    const { code, topicInfo } = props;
+    const { code } = props;
     return fetch(`${BASE_URL}/getTopicInfo/${code}`)
       .then((response) => response.json())
       .then((json) => {
