@@ -16,6 +16,12 @@ class ExamComponent extends Component {
     ExamComponent.fetchData(this.props.dispatch, this.props);
   }
 
+  componentWillMount() {
+    const { schoolCode, courseCode } = this.props;
+    if (!this.props.auth.loggedIn())
+      document.location = `/${schoolCode}/${courseCode}`;
+  }
+
   static getMeta(props) {
   }
 
@@ -28,11 +34,11 @@ class ExamComponent extends Component {
   }
 
   render() {
-    const { schoolCode, courseCode } = this.props;
+    const { schoolCode, courseCode, problemSetType } = this.props;
     return (
       <div>
         {ExamComponent.getMeta(this.props)}
-        <Navbar exam={true} schoolCode={schoolCode} courseCode={courseCode} problemset={true} />
+        <Navbar schoolCode={schoolCode} courseCode={courseCode} problemset={true} problemSetType={problemSetType} />
         <Footer />
       </div>
     );
@@ -44,6 +50,7 @@ const mapStateToProps = (state, ownProps) => {
     auth: state.auth,
     schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
     courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
+    problemSetType: ownProps.problemSetType || ownProps.match.params.problemSetType,
     labels: state.labels,
   };
 };

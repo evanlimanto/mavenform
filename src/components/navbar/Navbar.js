@@ -113,12 +113,12 @@ class NavbarComponent extends Component {
       return false;
     }
 
-    const { schoolCode, courseCode, examTypeCode, termCode, concept, label, profs, problemset } = this.props;
+    const { schoolCode, courseCode, examTypeCode, termCode, concept, label, profs, problemset, problemSetType } = this.props;
     const courseLabel = courseCodeToLabel(courseCode);
     const schoolLabel = this.props.labels.schools[schoolCode];
     const examTypeLabel = examTypeToLabel(examTypeCode);
     const termLabel = termToLabel(termCode); 
-    const numLayers = !!schoolLabel + !!courseLabel + !!examTypeLabel + !!label + !!problemset;
+    const numLayers = !!schoolLabel + !!courseLabel + !!examTypeLabel + !!label + !!problemset + !!problemSetType;
     let navbarNav = null;
     if (!this.props.userHome) {
       navbarNav = [<Link key='home' to='/' className={classnames({ active: numLayers === 0 })}>Home</Link>];
@@ -135,8 +135,12 @@ class NavbarComponent extends Component {
             navbarNav.push(<span key='examSpan'> > </span>);
             navbarNav.push(<Link key='exam' to={'/' + schoolCode + '/' + courseCode + '/' + concept} className={classnames({ active: numLayers === 3 })}>{label}</Link>);
           } else if (problemset) {
-            navbarNav.push(<span key='examSpan'> > </span>);
-            navbarNav.push(<Link key='exam' to={'/' + schoolCode + '/' + courseCode + '/problemset'} className="active">Problem Set</Link>);
+            navbarNav.push(<span key='problemSetSpan'> > </span>);
+            navbarNav.push(<Link key='problemSet' to={'/' + schoolCode + '/' + courseCode + '/problemset'} className={classnames({ active: numLayers === 3})}>Problem Set</Link>);
+            if (problemSetType) {
+              navbarNav.push(<span key='problemSetTypeSpan'> > </span>);
+              navbarNav.push(<Link key='problemSetType' to={'/' + schoolCode + '/' + courseCode + '/problemset/' + problemSetType} className={classnames({ active: numLayers === 4})}>{examTypeToLabel(problemSetType)}</Link>);
+            }
           }
         }
       }
