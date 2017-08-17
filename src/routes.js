@@ -31,6 +31,7 @@ const routes = [
   { path: '/upload', component: Upload },
   { path: '/home', component: UserHome },
   { path: '/:schoolCode/:courseCode/problemset/:problemSetType', component: ProblemSet },
+  { path: '/:schoolCode/:courseCode/problemset', component: Interactive },
   { path: '/:schoolCode/:courseCode/:examStr', component: Exam },
   { path: '/:schoolCode/:courseCode', component: Course },
   { path: '/:schoolCode', component: School },

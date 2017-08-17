@@ -17,19 +17,6 @@ class ExamComponent extends Component {
   }
 
   static getMeta(props) {
-    const { courseCode, labels, examStr } = props;
-    const examArr = split(examStr, '-');
-    const examType = examArr[0];
-    const termCode = examArr[1];
-    const profs = examArr[2];
-    const title = ((labels.schools) ? `${courseCodeToLabel(courseCode)} ${termToLabel(termCode)} ${examTypeToLabel(examType)} - Studyform` : "Studyform");
-    const description = `Study and discuss past exam problems and solutions for ${courseCodeToLabel(courseCode)} ${termToLabel(termCode)} ${examTypeToLabel(examType)}.`;
-    return (
-      <Helmet>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-      </Helmet>
-    );
   }
 
   static fetchData(dispatch, props) {
@@ -41,7 +28,14 @@ class ExamComponent extends Component {
   }
 
   render() {
-    return false;
+    const { schoolCode, courseCode } = this.props;
+    return (
+      <div>
+        {ExamComponent.getMeta(this.props)}
+        <Navbar exam={true} schoolCode={schoolCode} courseCode={courseCode} problemset={true} />
+        <Footer />
+      </div>
+    );
   }
 }
 
@@ -51,8 +45,6 @@ const mapStateToProps = (state, ownProps) => {
     schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
     courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
     labels: state.labels,
-    examInfo: state.examInfo,
-    comments: state.comments,
   };
 };
 

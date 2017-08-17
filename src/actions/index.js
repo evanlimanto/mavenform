@@ -94,6 +94,14 @@ export const updateComments = (comments) => {
   };
 };
 
+export const UPDATE_CLASS_REGISTERED = 'UPDATE_CLASS_REGISTERED';
+export const updateClassRegistered = (registered) => {
+  return {
+    type: UPDATE_CLASS_REGISTERED,
+    registered: registered,
+  };
+};
+
 export const SHOW_LOGIN_MODAL = 'SHOW_LOGIN_MODAL';
 export const showLoginModal = () => { return { type: SHOW_LOGIN_MODAL }; };
 export const SHOW_WAITLIST_MODAL = 'SHOW_WAITLIST_MODAL';

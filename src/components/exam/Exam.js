@@ -68,8 +68,6 @@ class ExamComponent extends Component {
 
   render() {
     const { schoolCode, courseCode, examStr } = this.props;
-    if (examStr === "interactive")
-      return <Interactive schoolCode={schoolCode} courseCode={courseCode} />;
     const examArr = split(examStr, '-');
     if (examArr.length === 1)
       return <TopicContent schoolCode={schoolCode} courseCode={courseCode} code={examArr[0]} />;

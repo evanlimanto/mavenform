@@ -143,6 +143,15 @@ export const comments = (state = {}, action) => {
     default:
       return state;
   }
+};
+
+export const classRegistered = (state = null, action) => {
+  switch (action.type) {
+    case Actions.UPDATE_CLASS_REGISTERED:
+      return action.registered;
+    default:
+      return state;
+  }
 }
 
 export const modal = (state = { type: null, errorText: null }, action) => {

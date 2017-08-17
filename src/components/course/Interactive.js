@@ -22,10 +22,6 @@ class InteractiveComponent extends Component {
     InteractiveComponent.fetchData(this.props.dispatch, this.props);
   }
 
-  componentWillMount() {
-    
-  }
-
   static fetchData(dispatch, props) {
     const { courseCode, schoolCode } = props;
     return Promise.all([
@@ -39,16 +35,6 @@ class InteractiveComponent extends Component {
   }
 
   static getMeta(props) {
-    const { courseCode, schoolCode, labels, courseLabel } = props;
-    const title = ((labels.schools) ? `${labels.schools[schoolCode]} ${courseCodeToLabel(courseCode)} - Studyform` : "Studyform");
-    const description = `Study and discuss past exams and practice problems` +
-      ((labels.schools) ? ` for ${labels.schools[schoolCode]} ${courseCodeToLabel(courseCode)} - ${courseLabel}.` : `.`);
-    return (
-      <Helmet>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-      </Helmet>
-    );
   }
 
   render() {
@@ -66,7 +52,7 @@ class InteractiveComponent extends Component {
           <hr className="s1" />
           <hr className="s0-5" />
           <p className="info-text">
-            Browse, discuss, and upload exams and practice problems below
+            Browse and discuss auto-generated practice problems below.
           </p>
         </div>
       </div>
@@ -75,15 +61,18 @@ class InteractiveComponent extends Component {
     return (
       <div>
       {InteractiveComponent.getMeta(this.props)}
-      <Navbar schoolCode={schoolCode} courseCode={courseCode} interactive={true} />
+      <Navbar schoolCode={schoolCode} courseCode={courseCode} problemset={true} />
       <Modals />
       {content}
       <hr className="s3" />
       <div className="container">
-        <p>Based on your class syllabus and our document bank, we’ve generated the following study guides.</p>
-        <div><Link to={`/${schoolCode}/${courseCode}/problemset/mt1`}>Midterm 1 (free)</Link></div>
-        <div><Link to={`/${schoolCode}/${courseCode}/problemset/mt2`}>Midterm 2 (paid)</Link></div>
-        <div><Link to={`/${schoolCode}/${courseCode}/problemset/final`}>Final (paid)</Link></div>
+        <div className="study-guide-summary-container">
+          <h5 align="center">Based on your class syllabus and our document bank, we’ve generated the following study guides.</h5>
+          <hr className="s2" />
+          <Link className="card" to={`/${schoolCode}/${courseCode}/problemset/mt1`}>Midterm 1 (free)</Link>
+          <Link className="card" to={`/${schoolCode}/${courseCode}/problemset/mt2`}>Midterm 2 (paid)</Link>
+          <Link className="card" to={`/${schoolCode}/${courseCode}/problemset/final`}>Final (paid)</Link>
+        </div>
       </div>
       <Footer />
       </div>

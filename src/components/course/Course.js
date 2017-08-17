@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { map, range, replace } from 'lodash';
+import { map, range, replace, take } from 'lodash';
 import { Helmet } from 'react-helmet';
 import Dropzone from 'react-dropzone';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import { showLoginModal, showUploadSuccessModal, updateCourseExams, updateCourseTopics, updateCourseLabel, updateCourseSubject } from '../../actions';
+import { showLoginModal, showUploadSuccessModal, updateCourseExams, updateCourseTopics, updateCourseLabel, updateCourseSubject, updateClassRegistered } from '../../actions';
 import { courseCodeToLabel, BASE_URL } from '../../utils';
 import { examClickEvent } from '../../events';
 import Footer from '../footer';
@@ -33,6 +33,7 @@ class CourseComponent extends Component {
 
   static fetchData(dispatch, props) {
     const { courseCode, schoolCode } = props;
+    const auth_user_id = props.auth ? props.auth.getProfile().user_id : null;
     return Promise.all([
       fetch(`${BASE_URL}/getCourseExams/${schoolCode}/${courseCode}`)
         .then((response) => response.json())
@@ -45,7 +46,10 @@ class CourseComponent extends Component {
         .then((json) => dispatch(updateCourseLabel(json.label))),
       fetch(`${BASE_URL}/getCourseSubject/${schoolCode}/${courseCode}`)
         .then((response) => response.json())
-        .then((json) => dispatch(updateCourseSubject(json.subject)))
+        .then((json) => dispatch(updateCourseSubject(json.subject))),
+      fetch(`${BASE_URL}/checkUserClassRegistered/${schoolCode}/${courseCode}/${auth_user_id}`)
+        .then((response) => response.text())
+        .then((text) => dispatch(updateClassRegistered(text === "Available")))
     ]);
   }
 
@@ -69,12 +73,15 @@ class CourseComponent extends Component {
     const auth_user_id = this.props.auth.getProfile().user_id;
     const { courseCode, schoolCode } = this.props;
 
+    if (professor.length === 0)
+      return;
+
     request.post('/registerClass')
       .send({ term, year, professor, auth_user_id, courseCode, schoolCode })
       .end((err, res) => {
         if (err || !res.ok)
           return console.error(err);
-        document.location = `/${schoolCode}/${courseCode}/interactive`;
+        document.location = `/${schoolCode}/${courseCode}/problemset`;
       });
   }
 
@@ -142,27 +149,46 @@ class CourseComponent extends Component {
           </div>
         </div>
         <hr className="s1" />
-        <div className="container">
+        <div className="container interactive-container">
           <div className="int-box">
-            <p className="int-helper">
-              <span className="int-highlight">Interactive study mode available.</span> Study from an AI-generated problem set personalized based on your course syllabus.
-            </p>
-            <button className="int-button" onClick={this.getInfo}>Get Started</button>
+            {this.props.classRegistered ? (
+              <p className="int-helper">
+                <span className="int-highlight">You've signed up for the AI-generated problem set for this course! </span>
+                <Link className="int-browse-link" to={`/${schoolCode}/${courseCode}/problemset`}>Click here to browse.</Link>
+              </p>
+            ) : (
+              <span>
+                <p className="int-helper">
+                  <span className="int-highlight">Interactive study mode available.</span> Study from an AI-generated problem set personalized based on your course syllabus.
+                </p>
+                <ReactCSSTransitionGroup
+                  transitionName="getInfo"
+                  transitionEnterTimeout={500}
+                  transitionLeaveTimeout={100}>
+                  {this.state.getInfo ? null : (<button className="int-button" onClick={this.getInfo}>Get Started</button>)}
+                </ReactCSSTransitionGroup>
+              </span>
+            )}
             <ReactCSSTransitionGroup
               transitionName="getInfo"
               transitionEnterTimeout={500}
               transitionLeaveTimeout={500}>
             {this.state.getInfo ? (
-              <div key={0}>
+              <div key={0} className="int-form">
                 <hr className="s2" />
-                <p>Great! To get started, all we need is information about your class.</p>
+                <p className="int-highlight">Great! To get started, all we need is information about your class.</p>
                 <hr className="s1" />
-                <div>
-                  <div>Term/Quarter: <select ref="term">{map(['fa', 'sp', 'su', 'wi'], (semester) => <option key={semester} value={semester}>{semester}</option>)}</select></div>
-                  <div>Year: <select ref="year">{map(range(2017, 2021), (year) => <option key={year} value={year - 2000}>{year}</option>)}</select></div>
-                  <div>Professor: <input type="text" placeholder="Professor" ref="professor" /></div>
-                  <input type="button" className="blue" value="Sign Up" />
+                <div className="int-row">
+                  <label className="int-label">Term/Quarter</label><select ref="term">{map(['fall', 'spring', 'summer', 'winter'], (semester) => <option key={semester} value={semester.slice(0, 2)}>{semester}</option>)}</select>
                 </div>
+                <div className="int-row">
+                  <label className="int-label">Year</label><select ref="year">{map(range(2017, 2021), (year) => <option key={year} value={year - 2000}>{year}</option>)}</select>
+                </div>
+                <div className="int-row">
+                  <label className="int-label">Professor</label><input type="text" placeholder="Professor" ref="professor" className="professor-info" />
+                </div>
+                <hr className="s2" />
+                <input type="button" className="blue" value="Sign Up" onClick={this.registerClass} />
               </div>) : null}
             </ReactCSSTransitionGroup>
           </div>
@@ -240,6 +266,7 @@ const mapStateToProps = (state, ownProps) => {
     courseSubject: state.courseSubject,
     topics: state.courseTopics,
     exams: state.courseExams,
+    classRegistered: state.classRegistered,
     labels: state.labels,
     auth: state.auth,
   }

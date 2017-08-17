@@ -86,6 +86,13 @@ button.int-button {
   -webkit-appearance: none;
 }
 
+@media (max-width: 1199px) {
+  button.int-button {
+    float: none;
+    margin-top: 15px;
+  }
+}
+
 button.int-button:hover {
   opacity: 1;
   cursor: pointer;
@@ -100,4 +107,53 @@ button.int-button:hover {
   opacity: 1;
   max-height: 500px;
   transition: opacity 500ms ease-in, max-height 500ms ease-in;
+}
+
+input[type="text"].professor-info {
+  border-radius: 5px;
+  background: #fff;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #666;
+  padding: 5px 10px;
+  width: 200px;
+}
+
+@media (max-width: 1199px) {
+  .interactive-container {
+    padding: 0px 25px;
+  }
+}
+
+.int-form label, .int-form select {
+  display: inline-block;
+}
+
+.int-form label {
+  width: 80px;
+  font-size: 14px;
+  color: #000;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.int-form select {
+  width: 200px;
+  font-size: 14px;
+  background: white;
+}
+
+.int-row {
+  margin: 5px 0px;
+}
+
+.int-browse-link {
+  color: #999;
+}
+
+@media (max-width: 1199px) {
+  .study-guide-summary-container {
+    margin: 0 25px;
+  }
 }
