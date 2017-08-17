@@ -45,6 +45,43 @@
   text-overflow: ellipsis;
 }
 
+.int-card {
+  width: auto;
+  padding-left: 35px;
+  padding-right: 40px;
+  margin-left: 0;
+  margin-right: 25px;
+  color: #333;
+}
+
+.int-card p {
+  color: #999;
+  margin-top: 2px;
+}
+
+.int-card a {
+  color: #11aacc;
+}
+
+.int-card a:hover {
+  text-decoration: underline;
+}
+
+.int-card:hover, .int-card:focus {
+  border: 1px #11aacc solid;
+  color: #333;
+}
+
+.int-card:focus {
+  background: rgba(17, 170, 204, 0.05);
+}
+
+.int-card-h {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
 .add-school {
   border: 1px dashed #11aacc;
   color: #11aacc;

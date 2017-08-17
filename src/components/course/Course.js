@@ -159,7 +159,7 @@ class CourseComponent extends Component {
             ) : (
               <span>
                 <p className="int-helper">
-                  <span className="int-highlight">Interactive study mode available.</span> Study from an AI-generated problem set personalized based on your course syllabus.
+                  <span className="int-highlight">Interactive study mode available.</span> Study from an AI-generated study guide personalized to your class and professor.
                 </p>
                 <ReactCSSTransitionGroup
                   transitionName="getInfo"
@@ -176,19 +176,29 @@ class CourseComponent extends Component {
             {this.state.getInfo ? (
               <div key={0} className="int-form">
                 <hr className="s2" />
-                <p className="int-highlight">Great! To get started, all we need is information about your class.</p>
+                <p className="int-helper">Great! To get started, please select the option below that best matches your class information and syllabus.</p>
                 <hr className="s1" />
-                <div className="int-row">
-                  <label className="int-label">Term/Quarter</label><select ref="term">{map(['fall', 'spring', 'summer', 'winter'], (semester) => <option key={semester} value={semester.slice(0, 2)}>{semester}</option>)}</select>
+                <div className="card int-card" tabIndex="0" >
+                  <div className="int-card-h">Math 10A 001</div>
+                  <p><span className="int-highlight">Instructor(s): </span> Stevens</p>
+                  <p><span className="int-highlight">Term:</span> Fall 2017</p>
+                  <p><span className="int-highlight">Syllabus:</span> <a>Available</a></p>
                 </div>
-                <div className="int-row">
-                  <label className="int-label">Year</label><select ref="year">{map(range(2017, 2021), (year) => <option key={year} value={year - 2000}>{year}</option>)}</select>
+                <div className="card int-card" tabIndex="0" >
+                  <div className="int-card-h">Math 10A 002</div>
+                  <p><span className="int-highlight">Instructor(s):</span> Jeggers</p>
+                  <p><span className="int-highlight">Term:</span> Fall 2017</p>
+                  <p><span className="int-highlight">Syllabus:</span> <a>Available</a></p>
                 </div>
-                <div className="int-row">
-                  <label className="int-label">Professor</label><input type="text" placeholder="Professor" ref="professor" className="professor-info" />
+                <div className="card int-card" tabIndex="0" >
+                  <div className="int-card-h">Math 10A 003</div>
+                  <p><span className="int-highlight">Instructor(s):</span> Potato, Patata</p>
+                  <p><span className="int-highlight">Term:</span> Fall 2017</p>
+                  <p><span className="int-highlight">Syllabus:</span> Unavailable</p>
                 </div>
                 <hr className="s2" />
                 <input type="button" className="blue" value="Sign Up" onClick={this.registerClass} />
+                <input type="button" className="gray" value="Cancel"/>
               </div>) : null}
             </ReactCSSTransitionGroup>
           </div>
