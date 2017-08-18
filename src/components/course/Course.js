@@ -109,7 +109,7 @@ class CourseComponent extends Component {
 
   registerClass() {
     const term = "fa";
-    const year = 17;
+    const year = 2017;
     const professor = this.professor;
     const auth_user_id = this.props.auth.getProfile().user_id;
     const { courseCode, schoolCode } = this.props;
@@ -183,7 +183,7 @@ class CourseComponent extends Component {
             <hr className="s1" />
             <hr className="s0-5" />
             <p className="info-text">
-              Browse, discuss, and upload exams and practice problems below
+              Browse, discuss, and upload exams and practice problems below.
             </p>
           </div>
         </div>
@@ -243,7 +243,7 @@ class CourseComponent extends Component {
         <tbody>
         <tr>
           <td className="upload-exam-container" colSpan="5">
-            <Dropzone onDrop={this.onDrop} className="upload-exam"> Click to upload an exam to convert (.pdf, .doc, .docx, .jpg, .png files only) </Dropzone>
+            <Dropzone onDrop={this.onDrop} className="upload-exam"> Click to upload an exam or document to convert (.pdf, .doc, .docx, .jpg, .png files only) </Dropzone>
           </td>
         </tr>
         {exams}

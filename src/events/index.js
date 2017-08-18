@@ -1,13 +1,6 @@
 import { canUseDOM } from '../utils';
 import _ from 'lodash';
 
-!canUseDOM || require('autotrack/lib/plugins/clean-url-tracker');
-!canUseDOM || require('autotrack/lib/plugins/event-tracker');
-!canUseDOM || require('autotrack/lib/plugins/impression-tracker');
-!canUseDOM || require('autotrack/lib/plugins/max-scroll-tracker');
-!canUseDOM || require('autotrack/lib/plugins/page-visibility-tracker');
-!canUseDOM || require('autotrack/lib/plugins/url-change-tracker');
-
 const mixpanel = canUseDOM ? require('mixpanel-browser') : null;
 
 const MIXPANEL_ID_DEV = '838462058ed380687ee46dae27d0d027';
@@ -18,10 +11,6 @@ const MIXPANEL_ID     = 'af9797f751c2f22b4ba5f77f20cc6cc5';
 
 const ReactGA = canUseDOM ? require('react-ga') : null;
 !ReactGA || ReactGA.initialize('UA-20131732-5');
-if (ReactGA) {
-  const trackers = ['cleanUrlTracker', 'eventTracker', 'impressionTracker', 'maxScrollTracker', 'pageVisibilityTracker', 'urlChangeTracker'];
-  _.forEach(trackers, (tracker) => ReactGA.ga('require', tracker));
-}
 
 const tracker = function(name, label) {
   const page = window.location.pathname;

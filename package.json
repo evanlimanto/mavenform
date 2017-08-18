@@ -25,7 +25,6 @@
     "arr-flatten": "^1.0.3",
     "async": "^2.4.1",
     "auth0-js": "^8.5.0",
-    "autotrack": "^2.4.1",
     "aws-sdk": "^2.42.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react-app": "^3.0.1",

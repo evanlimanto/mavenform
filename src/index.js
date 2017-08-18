@@ -12,6 +12,7 @@ import { configureStore, initStore } from './utils/configureStore';
 import { ReactGA } from './events';
 import ScrollToTop from './components/scrolltotop';
 import history from './utils/history';
+import registerServiceWorker from './registerServiceWorker';
 
 import './css/General.css';
 import './css/Typography.css';
@@ -58,3 +59,4 @@ ReactDOM.render((
     </ConnectedRouter>
   </Provider>
 ), document.getElementById('root'));
+registerServiceWorker();
