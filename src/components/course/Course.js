@@ -15,6 +15,41 @@ import Navbar from '../navbar';
 
 const request = require('superagent');
 
+class InteractiveCards extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: null
+    };
+    this.clickBox = this.clickBox.bind(this);
+  };
+
+  clickBox(index, professor) {
+    this.props.setProfessor(professor);
+    this.setState({ selected: index });
+  }
+
+  render() {
+    const { courseCode } = this.props;
+    const professors = ["Stevens", "Jeggers", "None"];
+    const codes = ["001", "002", "003"];
+    const syllabi = ["Available", "Available", "None"];
+    const cards = map(range(0, 3), (index) => {
+      return (
+        <div className={"card int-card " + ((index === this.state.selected) ? "active" : "")} onClick={() => this.clickBox(index, professors[index])} key={index}>
+          <div className="int-card-h">{courseCodeToLabel(courseCode)} {codes[index]}</div>
+          <p><span className="int-highlight">Instructor(s): </span> Stevens</p>
+          <p><span className="int-highlight">Term:</span> Fall 2017</p>
+          <p><span className="int-highlight">Syllabus:</span> <a>{syllabi[index]}</a></p>
+        </div>
+      );
+    });
+    return (
+      <div>{cards}</div>
+    );
+  }
+}
+
 class CourseComponent extends Component {
   constructor(props) {
     super(props);
@@ -74,14 +109,12 @@ class CourseComponent extends Component {
 
   registerClass() {
     const term = "fa";
-    const year = 2017;
+    const year = 17;
     const professor = this.professor;
     const auth_user_id = this.props.auth.getProfile().user_id;
     const { courseCode, schoolCode } = this.props;
-
     if (professor.length === 0)
       return;
-
     request.post('/registerClass')
       .send({ term, year, professor, auth_user_id, courseCode, schoolCode })
       .end((err, res) => {
@@ -184,24 +217,7 @@ class CourseComponent extends Component {
                 <hr className="s2" />
                 <p className="int-helper">Great! To get started, please select the option below that best matches your class information and syllabus.</p>
                 <hr className="s1" />
-                <div className="card int-card" tabIndex="0" onClick={this.setProfessor("Stevens")}>
-                  <div className="int-card-h">{courseCodeToLabel(courseCode)} 001</div>
-                  <p><span className="int-highlight">Instructor(s): </span> Stevens</p>
-                  <p><span className="int-highlight">Term:</span> Fall 2017</p>
-                  <p><span className="int-highlight">Syllabus:</span> <a>Available</a></p>
-                </div>
-                <div className="card int-card" tabIndex="0" onClick={this.setProfessor("Jeggers")}>
-                  <div className="int-card-h">{courseCodeToLabel(courseCode)} 002</div>
-                  <p><span className="int-highlight">Instructor(s):</span> Jeggers</p>
-                  <p><span className="int-highlight">Term:</span> Fall 2017</p>
-                  <p><span className="int-highlight">Syllabus:</span> <a>Available</a></p>
-                </div>
-                <div className="card int-card" tabIndex="0" onClick={this.setProfessor("None")}>
-                  <div className="int-card-h">{courseCodeToLabel(courseCode)} 003</div>
-                  <p><span className="int-highlight">Instructor(s):</span> Potato, Patata</p>
-                  <p><span className="int-highlight">Term:</span> Fall 2017</p>
-                  <p><span className="int-highlight">Syllabus:</span> Unavailable</p>
-                </div>
+                <InteractiveCards setProfessor={this.setProfessor} courseCode={courseCode} />
                 <hr className="s2" />
                 <input type="button" className="blue" value="Sign Up" onClick={this.registerClass} />
                 <input type="button" className="gray" value="Cancel" onClick={this.getInfo}/>

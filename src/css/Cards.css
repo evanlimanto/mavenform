@@ -72,7 +72,9 @@
   color: #333;
 }
 
-.int-card:focus {
+.int-card.active {
+  border: 1px #11aacc solid;
+  color: #333;
   background: rgba(17, 170, 204, 0.05);
 }
 
