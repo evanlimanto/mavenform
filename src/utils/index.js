@@ -1,4 +1,4 @@
-import { join, split, reduce, toUpper } from 'lodash';
+import { join, map, split, reduce, toUpper } from 'lodash';
 
 export const ENV_IS_DEV = process.env.NODE_ENV === "development";
 export const canUseDOM = !!(
@@ -8,17 +8,17 @@ export const canUseDOM = !!(
 );
 export const BASE_URL = ENV_IS_DEV ? "http://localhost:8080" : (process.env.HOST || "http://www.studyform.com");
 
-export function requireAuth(auth, history) {
-  if (!auth.loggedIn()) {
-    history.goBack();
-  }
-}
-
 // Algolia search
 const APP_ID = 'NPJP92R96D'
 const SEARCH_API_KEY = '22cd6e2a19445d1444df8fb7a3d00f52'
 const algolia = require('algoliasearch')(APP_ID, SEARCH_API_KEY);
 export const algoliaCourseIndex = algolia.initIndex('courses');
+
+export function requireAuth(auth, history) {
+  if (!auth.loggedIn()) {
+    history.goBack();
+  }
+}
 
 export function courseCodeToLabel(course_code) {
   if (!course_code)
@@ -106,4 +106,26 @@ export function examTypeToLabel(exam_type) {
 
 export function normalizeCourseCode(courseCode) {
   return join(split(courseCode, ' '), '-');
+}
+
+export function getSuggestions(queryStr, setState) {
+  if (queryStr.length === 0)
+    return setState({ suggestions: [] });
+  algoliaCourseIndex.search({
+    query: queryStr,
+    length: 4,
+    offset: 0,
+  }, (err, content) => {
+    const suggestions = map(content.hits, (hit) => {
+      return {
+        code: hit.code,
+        school_code: hit.school_code,
+        school_name: hit.school_name,
+        code_label_highlighted: hit._highlightResult.code_label.value,
+        school_name_highlighted: hit._highlightResult.school_name.value,
+        label_highlighted: hit._highlightResult.label ? hit._highlightResult.label.value: null,
+      };
+    });
+    return setState({ suggestions, suggestionsDropdownOn: true });
+  });
 }

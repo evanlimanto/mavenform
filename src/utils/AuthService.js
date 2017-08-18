@@ -3,7 +3,6 @@ import auth0 from 'auth0-js'
 import { has } from 'lodash'
 import rs from 'randomstring'
 
-import { evtEmitter } from './events'
 import { mixpanel } from '../events'
 import { canUseDOM } from '../utils'
 const req = require('superagent');
@@ -130,8 +129,6 @@ export default class AuthService {
       return;
     // Saves profile data to localStorage
     localStorage.setItem('profile', JSON.stringify(profile))
-    // Triggers profile_updated event to update the UI
-    evtEmitter.emit('profile_updated', profile);
   }
 
   getProfile() {

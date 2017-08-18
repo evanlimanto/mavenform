@@ -127,7 +127,7 @@ class SchoolComponent extends Component {
         <div className="container center">
           <div className="container info-container">
             <hr className="s5" />
-            <img className="info-img" src={`/img/${schoolCode}.png`} />
+            <img className="info-img" src={`/img/${schoolCode}.png`} alt="school-logo" />
             <div className="info">
               <h4 className="info-title">{schoolLabel}</h4>
               <hr className="s1" />

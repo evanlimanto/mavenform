@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'; import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { map, toUpper } from 'lodash';
+import Scroll from 'react-scroll';
+import supportsWebP from 'supports-webp';
+
 import Footer from '../footer';
 import Navbar from '../navbar';
-import UserHome from '../userhome';
 import { schoolClickEvent, courseSearchResultClickEvent } from '../../events';
-import { algoliaCourseIndex } from '../../utils';
+import { getSuggestions } from '../../utils';
 
-const Scroll = require('react-scroll');
 const ScrollLink = Scroll.Link;
 const Element = Scroll.Element;
 
@@ -22,7 +22,6 @@ class HomeComponent extends Component {
     }
 
     this.hideNotificationBar = this.hideNotificationBar.bind(this);
-    this.getSuggestions = this.getSuggestions.bind(this);
   }
 
   static getMeta(props) {
@@ -52,37 +51,7 @@ class HomeComponent extends Component {
     this.setState({ notificationBar: false });
   }
 
-  getSuggestions() {
-    const queryStr = this.refs.search.value;
-    if (queryStr.length === 0) {
-      this.setState({
-        suggestions: []
-      });
-      return;
-    }
-    algoliaCourseIndex.search({
-      query: queryStr,
-      length: 4,
-      offset: 0,
-    }, (err, content) => {
-      const suggestions = map(content.hits, (hit) => {
-        return {
-          code: hit.code,
-          school_code: hit.school_code,
-          school_name: hit.school_name,
-          code_label_highlighted: hit._highlightResult.code_label.value,
-          school_name_highlighted: hit._highlightResult.school_name.value,
-          label_highlighted: hit._highlightResult.label ? hit._highlightResult.label.value: null,
-        };
-      });
-      this.setState({ suggestions, suggestionsDropdownOn: true });
-    });
-  }
-
   render() {
-    /*if (this.props.auth.loggedIn())
-      return <UserHome />;*/
-
     const schoolCodes = ['ucb', 'ucsd', 'ucd', 'uci', 'ucla', 'ucsb', 'gatech', 'auburn', 'asu'];
     const schoolLabels = ['UC Berkeley', 'UC San Diego', 'UC Davis', 'UC Irvine', 'UC Los Angeles', 'UC Santa Barbara', 'Georgia Tech', 'Auburn', 'Arizona State'];
     const schoolCards = map(schoolCodes, (schoolCode, key) => {
@@ -110,7 +79,7 @@ class HomeComponent extends Component {
         {HomeComponent.getMeta()}
         <div className="banner">
           <Navbar home={true} />
-          <div className="banner-img"></div>
+          <div className={"banner-img " + (supportsWebP ? "webp" : "no-webp")}></div>
           <div className="banner-text">
             <div className="banner-header">Study More Effectively</div>
             <hr className="s2" />
@@ -118,7 +87,7 @@ class HomeComponent extends Component {
             <hr className="s5" />
             <div className="search-container">
               <div className="material-icons search-icon">search</div>
-              <input className="search" name="search" ref="search" placeholder="Find resources by course here (e.g. CS 61A, Math 1B, Econ 100)." type="text" autoComplete="off" onChange={this.getSuggestions} />
+              <input className="search" name="search" ref="search" placeholder="Find resources by course here (e.g. CS 61A, Math 1B, Econ 100)." type="text" autoComplete="off" onChange={() => getSuggestions(this.refs.search.value, this.setState)} />
             </div>
             {searchResults}
             <div className="home-scrolls">
@@ -159,7 +128,7 @@ class HomeComponent extends Component {
               <p>If you need to study on the go, our interface is intuitive and legible with any device type and any screen width.</p>
               <hr className="s1" />
             </div>
-            <img className="banner-screen" src="/img/screen2.png"/> 
+            <img className="banner-screen" src={"/img/screen" + (supportsWebP ? ".webp" : ".png")} alt="banner" /> 
           </div>
         </Element>
         <Element name="schools" className="light-gray border-top shadow-top">

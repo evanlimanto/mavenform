@@ -1,10 +1,11 @@
-import React, { Component } from 'react'; import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { has, map, toUpper } from 'lodash';
 import classnames from 'classnames';
 
 import { Modals } from '../modal';
-import { algoliaCourseIndex, courseCodeToLabel, examTypeToLabel, termToLabel } from '../../utils';
+import { courseCodeToLabel, examTypeToLabel, termToLabel, getSuggestions } from '../../utils';
 import { showLoginModal, showSignupModal } from '../../actions';
 
 class NavbarComponent extends Component {
@@ -16,7 +17,6 @@ class NavbarComponent extends Component {
       suggestions: [],
     };
 
-    this.getSuggestions = this.getSuggestions.bind(this);
     this.toggleProfileDropdown = this.toggleProfileDropdown.bind(this);
   }
 
@@ -37,32 +37,6 @@ class NavbarComponent extends Component {
 
   toggleProfileDropdown() {
     this.setState({ profileDropdownOn: !this.state.profileDropdownOn });
-  }
-
-  getSuggestions() {
-    const queryStr = this.refs.search.value;
-    if (queryStr.length === 0) {
-      this.setState({
-        suggestions: []
-      });
-      return;
-    }
-    algoliaCourseIndex.search({
-      query: queryStr,
-      length: 4,
-      offset: 0,
-    }, (err, content) => {
-      const suggestions = map(content.hits, (hit) => {
-        return {
-          code: hit.code,
-          school_code: hit.school_code,
-          school_name: hit.school_name,
-          code_label_highlighted: hit._highlightResult.code_label.value,
-          school_name_highlighted: hit._highlightResult.school_name.value,
-        };
-      });
-      this.setState({ suggestions, suggestionsDropdownOn: true });
-    });
   }
 
   render() {
@@ -166,7 +140,7 @@ class NavbarComponent extends Component {
             <Link className="mobile-logo" to="/"><img className="logo" src="/img/icon.svg" alt="Studyform Logo" /></Link>
             <div className="material-icons nav-icon">search</div>
             <div className="nav-search-container">
-              <input className="nav-search" name="search" placeholder="Search courses..." type="text" autoComplete="off" onChange={this.getSuggestions} ref="search" />
+              <input className="nav-search" name="search" placeholder="Search courses..." type="text" autoComplete="off" onChange={() => getSuggestions(this.refs.search.value, this.setState)} ref="search" />
               {searchResults}
             </div>
             {(isLoggedIn) ? (

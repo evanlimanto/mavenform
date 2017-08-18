@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { map, range, replace } from 'lodash';
 import { Helmet } from 'react-helmet';
 import Dropzone from 'react-dropzone';
+import req from 'superagent';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import { showLoginModal, showUploadSuccessModal, updateCourseExams, updateCourseTopics, updateCourseLabel, updateCourseSubject, updateClassRegistered } from '../../actions';
@@ -12,8 +13,6 @@ import { examClickEvent } from '../../events';
 import Footer from '../footer';
 import { Modals } from '../modal';
 import Navbar from '../navbar';
-
-const request = require('superagent');
 
 class InteractiveCards extends Component {
   constructor(props) {
@@ -115,7 +114,7 @@ class CourseComponent extends Component {
     const { courseCode, schoolCode } = this.props;
     if (professor.length === 0)
       return;
-    request.post('/registerClass')
+    req.post('/registerClass')
       .send({ term, year, professor, auth_user_id, courseCode, schoolCode })
       .end((err, res) => {
         if (err || !res.ok)
@@ -132,15 +131,15 @@ class CourseComponent extends Component {
 
   onDrop(acceptedFiles, rejectedFiles) {
     const profile = this.props.auth.getProfile();
-    const req = request.post('/upload');
+    const request = req.post('/upload');
     acceptedFiles.forEach((file) => {
-      req.attach(file.name, file);
+      request.attach(file.name, file);
     });
-    req.field('schoolCode', this.props.schoolCode)
+    request.field('schoolCode', this.props.schoolCode)
       .field('courseCode', this.props.courseCode);
     if (profile)
-      req.field('auth_user_id', profile.user_id)
-    req.end((err, res) => {
+      request.field('auth_user_id', profile.user_id)
+    request.end((err, res) => {
         if (err || !res.ok) console.log(err);
         else this.props.showUploadSuccessModal();
     });
@@ -174,7 +173,7 @@ class CourseComponent extends Component {
       <div>
        <div className="container info-container">
           <hr className="s5" />
-          <img className="info-img" src={`/img/subject/${this.props.courseSubject || "misc"}.png`} />
+          <img className="info-img" src={`/img/subject/${this.props.courseSubject || "misc"}.png`} alt="subject-logo" />
           <div className="info">
             <h4 className="info-title">{courseCodeToLabel(courseCode)}</h4>
             <hr className="s1" />

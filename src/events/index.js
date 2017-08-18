@@ -1,5 +1,4 @@
 import { canUseDOM } from '../utils';
-import _ from 'lodash';
 
 const mixpanel = canUseDOM ? require('mixpanel-browser') : null;
 

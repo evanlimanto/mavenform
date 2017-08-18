@@ -94,6 +94,15 @@
   height: 100%;
   width: 100%;
   top: 0;
+}
+
+.webp.banner-img {
+  background: url('../img/banner.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+.no-webp.banner-img {
   background: url('../img/banner.jpg');
   background-size: cover;
   background-position: center;

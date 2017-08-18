@@ -5,17 +5,11 @@ import { Helmet } from 'react-helmet';
 
 import { showCourseRegisterModal, showLoginModal, showUploadSuccessModal, updateCourseLabel, updateCourseSubject } from '../../actions';
 import { courseCodeToLabel, BASE_URL } from '../../utils';
-import { Course } from '../course';
 import Footer from '../footer';
 import { Modals } from '../modal';
 import Navbar from '../navbar';
 
 class InteractiveComponent extends Component {
-  componentWillMount() {
-    if (!this.props.auth.loggedIn())
-      return <Course {...this.props} />;
-  }
-
   componentDidMount() {
     InteractiveComponent.fetchData(this.props.dispatch, this.props);
   }
@@ -46,7 +40,7 @@ class InteractiveComponent extends Component {
     const content = (
       <div className="container info-container">
         <hr className="s5" />
-        <img className="info-img" src={`/img/subject/${this.props.courseSubject || "misc"}.png`} />
+        <img className="info-img" src={`/img/subject/${this.props.courseSubject || "misc"}.png`} alt="subject-logo" />
         <div className="info">
           <h4 className="info-title">{courseCodeToLabel(courseCode)}</h4>
           <hr className="s1" />
