@@ -8,7 +8,7 @@ import req from 'superagent';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import { showLoginModal, showUploadSuccessModal, updateCourseExams, updateCourseTopics, updateCourseLabel, updateCourseSubject, updateClassRegistered } from '../../actions';
-import { courseCodeToLabel, BASE_URL } from '../../utils';
+import { canUseDOM, courseCodeToLabel, BASE_URL } from '../../utils';
 import { examClickEvent } from '../../events';
 import Footer from '../footer';
 import { Modals } from '../modal';
@@ -72,7 +72,7 @@ class CourseComponent extends Component {
 
   static fetchData(dispatch, props) {
     const { courseCode, schoolCode } = props;
-    const profile = props.auth.getProfile();
+    const profile = canUseDOM ? props.auth.getProfile() : null;
     const auth_user_id = profile ? profile.user_id : null;
     return Promise.all([
       fetch(`${BASE_URL}/getCourseExams/${schoolCode}/${courseCode}`)
