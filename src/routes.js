@@ -15,7 +15,7 @@ const routes = [
   { path: '/logout', component: Logout },
   { path: '/signup', component: Signup },
   { path: '/marketing', component: Marketing },
-  { path: '/profile', component: Profile },
+  { path: '/profile', component: UserHome },
   { path: '/dashboard/comments', component: DashboardComments },
   { path: '/dashboard/courses', component: DashboardCourses },
   { path: '/dashboard/content', component: DashboardContent },

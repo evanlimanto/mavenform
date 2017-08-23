@@ -44,9 +44,9 @@ class UserHomeComponent extends Component {
             </Link>
           );
         })}
-        <a className="card course-card add-course" onClick={this.props.showAddCourseModal}>
+        {/*<a className="card course-card add-course" onClick={this.props.showAddCourseModal}>
           <span>+ &nbsp; Add Course</span>
-        </a>
+        </a>*/}
       </div>
     );
     return (

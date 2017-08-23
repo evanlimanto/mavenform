@@ -808,7 +808,7 @@ module.exports = (app) => {
         cross join
         (select id from terms where term_code = $5) as q3
     `;
-    config.pool.query(inq, [professor, auth_user_id, courseCode, schoolCode, term + _.toString(year)], (err, result) => {
+    config.pool.query(inq, [professor, auth_user_id, courseCode, schoolCode, term + _.toString(year - 2000)], (err, result) => {
       if (err) return next(err);
       return res.send("Success!");
     });

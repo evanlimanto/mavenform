@@ -38,6 +38,14 @@ export const updateTopicInfo = (info) => {
   };
 };
 
+export const UPDATE_PROBLEMSET_INFO = 'UPDATE_PROBLEMSET_INFO';
+export const updateProblemSetInfo = (info) => {
+  return {
+    type: UPDATE_PROBLEMSET_INFO,
+    info: info,
+  };
+};
+
 export const UPDATE_COURSE_TOPICS = 'UPDATE_COURSE_TOPICS';
 export const updateCourseTopics = (topics) => {
   return {

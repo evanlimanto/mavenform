@@ -169,6 +169,46 @@ class CourseComponent extends Component {
       );
     });
 
+    const interactiveBox = (courseCode === "MATH18") ? (
+      <div className="container interactive-container">
+        <div className="int-box">
+          {this.props.classRegistered ? (
+            <p className="int-helper">
+              <span className="int-highlight">You've signed up for the AI-generated problem set for this course! </span>
+              <Link className="int-browse-link" to={`/${schoolCode}/${courseCode}/problemset`}>Click here to browse.</Link>
+            </p>
+          ) : (
+            <span>
+              <p className="int-helper">
+                  <span className="int-highlight">Interactive study mode available.</span> Study from an AI-generated study guide personalized to your class and professor.
+                </p>
+              <ReactCSSTransitionGroup
+                transitionName="getInfoButton"
+                transitionEnterTimeout={500}
+                transitionLeaveTimeout={500}>
+                {this.state.getInfo ? null : (<button className="int-button" onClick={this.getInfo}>Get Started</button>)}
+              </ReactCSSTransitionGroup>
+            </span>
+          )}
+          <ReactCSSTransitionGroup
+            transitionName="getInfo"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={500}>
+          {this.state.getInfo ? (
+            <div key={0} className="int-form">
+              <hr className="s2" />
+              <p className="int-helper">Great! To get started, please select the option below that best matches your class information and syllabus.</p>
+              <hr className="s1" />
+              <InteractiveCards setProfessor={this.setProfessor} courseCode={courseCode} />
+              <hr className="s2" />
+              <input type="button" className="blue" value="Sign Up" onClick={this.registerClass} />
+              <input type="button" className="gray" value="Cancel" onClick={this.getInfo}/>
+            </div>) : null}
+          </ReactCSSTransitionGroup>
+        </div>
+      </div>
+    ) : null;
+
     const content = (
       <div>
        <div className="container info-container">
@@ -187,43 +227,7 @@ class CourseComponent extends Component {
           </div>
         </div>
         <hr className="s1" />
-        <div className="container interactive-container">
-          <div className="int-box">
-            {this.props.classRegistered ? (
-              <p className="int-helper">
-                <span className="int-highlight">You've signed up for the AI-generated problem set for this course! </span>
-                <Link className="int-browse-link" to={`/${schoolCode}/${courseCode}/problemset`}>Click here to browse.</Link>
-              </p>
-            ) : (
-              <span>
-                <p className="int-helper">
-                  <span className="int-highlight">Interactive study mode available.</span> Study from an AI-generated study guide personalized to your class and professor.
-                </p>
-                <ReactCSSTransitionGroup
-                  transitionName="getInfoButton"
-                  transitionEnterTimeout={500}
-                  transitionLeaveTimeout={500}>
-                  {this.state.getInfo ? null : (<button className="int-button" onClick={this.getInfo}>Get Started</button>)}
-                </ReactCSSTransitionGroup>
-              </span>
-            )}
-            <ReactCSSTransitionGroup
-              transitionName="getInfo"
-              transitionEnterTimeout={500}
-              transitionLeaveTimeout={500}>
-            {this.state.getInfo ? (
-              <div key={0} className="int-form">
-                <hr className="s2" />
-                <p className="int-helper">Great! To get started, please select the option below that best matches your class information and syllabus.</p>
-                <hr className="s1" />
-                <InteractiveCards setProfessor={this.setProfessor} courseCode={courseCode} />
-                <hr className="s2" />
-                <input type="button" className="blue" value="Sign Up" onClick={this.registerClass} />
-                <input type="button" className="gray" value="Cancel" onClick={this.getInfo}/>
-              </div>) : null}
-            </ReactCSSTransitionGroup>
-          </div>
-        </div>
+        {interactiveBox}
         <hr className="s1" />
         <div className="center">
         {!!this.props.exams || <p className="loader">Loading exams...</p>}

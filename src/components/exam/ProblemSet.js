@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import { map, range } from 'lodash';
 
-import { canUseDOM } from '../../utils';
+import { updateProblemSetInfo } from '../../actions';
+import { BASE_URL } from '../../utils';
+import { Question, MultipleChoiceQuestion } from '../question';
 import Footer from '../footer';
 import Navbar from '../navbar';
 
-class ExamComponent extends Component {
+class ProblemSetComponent extends Component {
   componentDidMount() {
-    ExamComponent.fetchData(this.props.dispatch, this.props);
+    ProblemSetComponent.fetchData(this.props.dispatch, this.props);
+  }
+
+  componentDidUpdate() {
+    window.renderMJ();
   }
 
   componentWillMount() {
@@ -21,19 +28,49 @@ class ExamComponent extends Component {
   }
 
   static fetchData(dispatch, props) {
-  }
-
-  componentDidUpdate() {
-    if (canUseDOM)
-      window.renderMJ();
+    const { schoolCode, courseCode, problemSetType } = props;
+    return fetch(`${BASE_URL}/getProblemSet/${schoolCode}/${courseCode}/${problemSetType}`)
+      .then((response) => response.json())
+      .then((json) => dispatch(updateProblemSetInfo(json)));
   }
 
   render() {
-    const { schoolCode, courseCode, problemSetType } = this.props;
+    const problemSetInfo = this.props.problemSetInfo;
+    const content = (!problemSetInfo) ? (<p className="loader">Loading content...</p>) :
+      map(problemSetInfo.info, (num_parts, part) => {
+        const subparts = map(range(1, 2), subpart => {
+          const key = `${part}`;
+          const content = problemSetInfo.problems[key].problem || '';
+          const solution = problemSetInfo.problems[key].solution || '';
+          const choices = problemSetInfo.problems[key].choices || '';
+          const content_id = problemSetInfo.problems[key].content_id;
+          const props = {
+            content_id, content, solution, choices,
+            id: part + "_" + subpart,
+            solutionNum: solution,
+            difficulty: problemSetInfo.problems[key].difficulty,
+          }
+          if (choices && choices.length > 0) {
+            return <MultipleChoiceQuestion key={key} {...props} />
+          }
+          return <Question key={key} {...props} />
+        });
+
+        return <span key={part} className="element">{subparts}</span>
+      });
+
     return (
       <div>
-        {ExamComponent.getMeta(this.props)}
-        <Navbar schoolCode={schoolCode} courseCode={courseCode} problemset={true} problemSetType={problemSetType} />
+        {ProblemSetComponent.getMeta(this.props)}
+        <Navbar schoolCode={this.props.schoolCode} courseCode={this.props.courseCode} concept={this.props.code} label={this.props.problemSetInfo.conceptLabel} />
+        <div id="header-text">
+          <div className="center">
+            <h4>{problemSetInfo.conceptLabel}</h4>
+          </div>
+        </div>
+        <div className="content">
+          {content}
+        </div>
         <Footer />
       </div>
     );
@@ -41,13 +78,13 @@ class ExamComponent extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(ownProps);
   return {
     auth: state.auth,
     schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
     courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
     problemSetType: ownProps.problemSetType || ownProps.match.params.problemSetType,
     labels: state.labels,
+    problemSetInfo: state.problemSetInfo
   };
 };
 
@@ -55,9 +92,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return { dispatch };
 }
 
-const Exam = connect(
+const ProblemSet = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ExamComponent);
+)(ProblemSetComponent);
 
-export default Exam;
+export default ProblemSet;

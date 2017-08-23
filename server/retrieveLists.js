@@ -540,6 +540,44 @@ const getBookmarkedCourses =
     });
   };
 
+const getProblemSet =
+  (req, res, next) => {
+    const { schoolCode, courseCode, examtype } = req.params;
+    const getq = `
+      select content.problem as problem, content.solution as solution, content.choices as choices,
+        content.id as content_id, ET.type_label as type_label, T.term_label as term_label,
+        content.difficulty as difficulty from problemset P
+      inner join content on content.id = P.contentid
+      inner join terms T on T.id = P.termid
+      inner join exam_types ET on ET.id = P.examtypeid
+      inner join courses on P.courseid = courses.id
+      inner join schools S on courses.schoolid = S.id
+      where courses.code = $1 and S.code = $2 and ET.type_code = $3
+    `;
+    pool.query(getq, [courseCode, schoolCode, examtype], (err, result) => {
+      if (err)
+        return console.error(err);
+      const info = _.reduce(result.rows, (result, row, index) => {
+        const problem_num = row.problem_num;
+        const subproblem_num = row.subproblem_num || 1;
+        result[index] = 1;
+        return result;
+      }, {});
+
+      const problems = _.reduce(result.rows, (result, row, index) => {
+        let { content_id, problem_num, subproblem_num, problem, solution, choices, difficulty } = row;
+        problem = renderer.preprocess(row.problem);
+        solution = renderer.preprocess(row.solution);
+        const { type_label, term_label } = row;
+        const key = `${index}`;
+        result[key] = { problem, solution, choices, content_id, type_label, term_label, difficulty };
+        return result;
+      }, {});
+
+      return res.json({ info, problems });
+    });
+  };
+
 module.exports = (app) => {
   // Retrieve initial data
   app.get('/getInitial', getInitial);
@@ -585,4 +623,7 @@ module.exports = (app) => {
 
   // Retrieve bookmarked courses
   app.get('/getBookmarkedCourses/:auth_user_id', getBookmarkedCourses);
+
+  // Retrieve problemset contents
+  app.get('/getProblemSet/:schoolCode/:courseCode/:examtype', getProblemSet);
 }

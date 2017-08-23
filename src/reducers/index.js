@@ -100,6 +100,16 @@ export const topicInfo = (state = {}, action) => {
   }
 };
 
+export const problemSetInfo = (state = {}, action) => {
+  console.log(action);
+  switch (action.type) {
+    case Actions.UPDATE_PROBLEMSET_INFO:
+      return action.info;
+    default:
+      return state;
+  }
+};
+
 export const courseTopics = (state = [], action) => {
   switch (action.type) {
     case Actions.UPDATE_COURSE_TOPICS:

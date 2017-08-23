@@ -201,3 +201,13 @@
 div.nav-results em {
   text-decoration: underline;
 }
+
+.profile-link {
+  color: white;
+  opacity: 0.9;
+}
+
+.profile-link:hover {
+  color: white;
+  opacity: 1.0;
+}
