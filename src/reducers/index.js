@@ -101,7 +101,6 @@ export const topicInfo = (state = {}, action) => {
 };
 
 export const problemSetInfo = (state = {}, action) => {
-  console.log(action);
   switch (action.type) {
     case Actions.UPDATE_PROBLEMSET_INFO:
       return action.info;

@@ -100,7 +100,6 @@ class TopicContentComponent extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
   return {
     code: ownProps.code || ownProps.match.params.code,
     schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
