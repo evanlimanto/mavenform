@@ -1,127 +1,49 @@
 q1_1: |
-  1\. Express the following limit as a definite integral on the interval $[0, 1]$
-  $$\lim_{n \to x} \sum_{i = 1}^{n} \frac{e^{2x_i}}{1 + \sin x_i} \delta x$$
-  You do not need to evaluate the integral.
+  Evaluate the Riemann sum for $f(x) = 3 - \frac{1}{2}x, 2 \le x \le 14$, with six subintervals, taking the sample points to be left end-points. Explain, with the aid of a diagram, what the Riemann sum represents.
 
-q1_1_s; |
-  $a = 0, b = 1$.
-  $$\lim_{n \to \infty} \sum_{i=1}^{n} \frac{e^{2x_i}}{1 + \sin x_i} = \int_0^1 \frac{e^x}{1 + \sin x} dx$$
-
-q2_1: |
-  2\. Evalute the following indefinite integrals.
+q1_1_s: |
+  We have $\sum_{i=1}^{6} f(x_i) \Delta x$ where $\Delta x = \frac{14 - 2}{6} = 2$ and $x_i$ denote the left endpoint of the $i^{th}$ subinterval.
   <hr class="s1" />
-  a) $\int x^3 \sqrt[3]{x^2 + 1} dx$
-
-q2_1_s: |
-  Assume $u = x^2 + 1$. $du = 2x \; dx$.
-  $$\begin{align}
-  I &= \int x^3 \; u^{1/3} \; \frac{du}{2x} \\\\
-  &= \frac{1}{2} \int x^2 \; u^{1/3} du \\\\
-  &= \frac{1}{2} \int (u - 1)u^{1/3} du \\\\
-  &= \frac{1}{2} \int (u^{4/3} - u^{1/3}) du \\\\
-  &= \frac{1}{2} (\frac{3}{7}u^{7/3} - \frac{3}{4}u^{4/3}) + C \\\\
-  &= \frac{1}{2} ( \frac{3}{7} (x^2 + 1)^{7/3}) - \fracd{1}{2} \cdot \frac{3}{4} (x^2 + 1)^{4/3} + C
-  \end{align}$$
-
-q2_2: |
-  $\int \frac{\sin(\ln t)}{t} dt$
-
-q2_2_s: |
-  $\ln t = u \implies \frac{dt}{t} = du$
+  The subintervals are $[2, 4], [4, 6], [6, 8], [8, 10], [10, 12]$, and the left endpoints are $2, 4, 6, 8, 10$.
   <hr class="s1" />
-  $\int \frac{\sin (\ln t)}{t} dt = \int \sin u \; du$
+  We have
+  $\begin{align}
+  \sum_{i=1}^{6} f(x_i) \Delta x &= f(2) \Delta x + f(4) \Delta x + f(6) + \Delta x + f(8) \Delta + f(10) \Delta + f(12) \Delta \\\\
+  &= 2 \cdot 2 + 1 \cdot 2 + 0 \cdot 2 + (-1)2 + (-2)2 + (-3)2 \\\\
+  &= -6
+  \end{align}$
   <hr class="s1" />
-  $-\cos u + C = -\cos(\ln t) + C$
-
-q3_1: |
-  3\. Water leaks out from the bottom of a storage tank at a rate of $r(t) = 100 - 2t$ liters per minutes for $0 \le t \le 50$. Find the amount of water that leaks out during the first $20$ minutes?
-
-q3_1_s: |
-  Net Change Theorem:
+  Consider the illustration below.
   <hr class="s1" />
-  Since we are interested in the amount of water in the first $20$ minutes, $t_1 = 0, t_2 = 20$, rate of leak: $r(t) = 100 - 2t$.
-  <hr class="s2" />
-  Amount of water that leaks $= \int_0^{20} (100 - 2t) dt = 100t - t^2|_0^{20} = 1600$ liters.
+  <p align="center">!!q1-1.png!!</p>
+  <hr class="s1" />
+  The Riemann sum represents the sum of the areas of the shaded rectangles where the rectangles above the $x$-axis contribute positive area and the rectangles below the $x$-axis contribute negative area.
+  <hr class="s1" />
+  Note that there is no rectangle over the interval $[6, 8]$ because $f(6) = 0$.
+  <hr class="s1" />
+  So the Riemann sum is an approximation to the net area between the graph of $f$ and the $x$-axis where area above the $x$-axis counts as positive area and area below the $x$-axis counts as negative area.
 
 q4_1: |
-  4\. Evalute the following definite integrals if they exist Show all your work)
+  (a) Find the Riemann sum for $f(x) = \sin x, 0 \le x \le 3 \pi / 2$, with six terms, taking the sample points to be right end-points. (Give your answer correct to six decimal places). Explain what the Riemann sum represents with the aid of a sketch.
   <hr class="s1" />
-  a) $\int_0^1 \frac{e^x}{1 + e^{2x}} dx$
-
-q4_1_s: |
-  Let's assume $u = e^x \implies du = e^x \cdot dx$.
-  <hr class="s1" />
-  $\int \frac{e^x}{1 + e^{2x}} dx = \int \frac{du}{1 + u^2} = \arctan u + C = \arctan(e^x) + C$
-  <hr class="s1" />
-  $\int_0^1 \frac{e^x}{1 + e^{2x}} dx = \arctan(e^x) |_0^1 = \arctan(e^1) - \arctan(\frac{e^0}) = \arctan e - \frac{\pi}{4}$
-
-q4_2: |
-  b) $\int_0^1 (\sqrt[5]{5} + 1) dt$
-
-q4_2_s: |
-  $\int_0^1 (t^{1/5} + 1) dt = \frac{5}{6} t^{6/5} + t|_0^1 = \frac{11}{6}$
-
-q5_1: |
-  5\. True or False (you do not need to provide any explanation)
-  <hr class="s1" />
-  a) If $f$ is continuous on $[a, b]$, then $\frac{d}{dx}(\int_a^b f(x) dx) = f(x)$
-
-q5_1_s: |
-  False
-
-q5_2: |
-  b) If $f$ is continuous on $[a, b]$, then $\int_a^b f(x) dx = -2 \int_b^a f(x) dx$
-
-q5_2_s: |
-  False
-
-q5_3: |
-  c) If $f$ is continuous on $[a, b]$, then $\int_a^b 4f(x) dx = 4\int_a^b f(x) dx$
-
-q5_3_s: |
-  True
-
-q5_4: |
-  d) If $f$ is continuous on $[a, b]$, then $\int_a^b \sqrt{f(x)} dx = \sqrt{\int_a^b f(x) dx}$
-
-q5_4_s: |
-  False
-
-q6_1: |
-  6\. Find the volume of the solid obtained by rotating the region enclosed by the curves, $y = x^2$ and $y = x$ about the line $x = -2$
-
-q6_1_s: |
-  $r_i = 2 + y, r_0 = 2 + \sqrt{y} \implies A = \pi r_0^2 - \pi r_i^2$.
-  <hr class="s1" />
-  $A = \pi (4 + y + 4\sqrt{y} - (4 + y^2 + 4y)) = \pi (-y^2 - 3y + 4y^{1/2})$
-  <hr class="s1" />
-  $x = x^2 \implies x = 0, y = 0 \; \text{or} \; x = 1, y = 1$. Volume = $\pi \int_0^1 (-y^2 - 3y + 4y^{1/2}) dy = \pi(-y^3/3 - 3y^2/2 + 4 \cdot \frac{2}{3}y^{3/2}|_0^1 = \frac{5\pi}{6}$
-
-q7_1: |
-  7\. Find the area of the region enclosed by the curves $y = x^2 - 4x$ and $y = 2x$.
-
-q7_1_s: |
-  $x^2 - 4x = 2x \implies x^2 - 6x = 0, x = 0, x = 6$.
-  <hr class="s1" />
-  Area$ = \int_0^6 (f(x) - g(x)) dx$
-  <hr class="s1" />
-  Area$ = \int_0^6 [2x - (x^2 - 4x)] dx = 36$
-
-q8_1: |
-  8\. If $f(x) = \int_3^{x^4} \sqrt{t^2 + 6} dt$, find $f'(x)$.
-
-q8_1_s: |
-  $f'(x) = \frac{d}{dx} \int_3^{x^4} \sqrt{t^2 + 6} dt = \left( \frac{d}{du} \int_3^4 \sqrt{t^2 + 6} dt \right) \cdot \frac{du}{dx}$
-  <hr class="s1" />
-  Assume $u = x^4$.
-  <hr class="s1" /.>
-  $\sqrt{u^2 + 6}(4x^3) = 4x^3 \sqrt{(x^4)^2 + 6} = 4x^3 \sqrt{x^8 + 6}$
+  (b) Repeat part (a) with midpoints as the sample points.
 
 q9_1: |
-  9\. If $g(t)$ is a continuous function on the interval $[0, \pi]$, $\int_0^{\pi/4} g(t) dt = \frac{\pi}{4}, \int_{\pi/4}^{\pi/2} g(t) dt = \frac{\pi}{4}$ and $\int_{\pi/2}^{\pi} g(t) dt = \frac{\pi}{2}$, then evaluate $\int_0^{\pi} (g(t) - \cos t) dt$
+  Use the Midpoint Rule with the given value of $n$ to approximate the integral. Round the answer to four decimal places.
+  <hr class="s1" />
+  $\int_0^8 \sin \sqrt{x} dx, \; n = 4$
 
-q9_1_s: |
-  $\int_0^{\pi/4} g(t) dt + \int_{\pi/4}^{\pi/2} g(t) dt + \int_{\pi/2}^{\pi} g(t) dt = \int_0^{\pi} g(t) dt \\\\
-  \implies \frac{\pi}{4} + \frac{\pi}{2} + \frac{\pi}{2} = \int_0^{\pi} g(t) dt) \implies \int_0^\pi g(t) dt = \pi$
-  <hr class="s2" />
-  $\int_0^\pi (g(t) - \cos t) dt = \int_0^\pi g(t) dt - \int_0^\pi \cos t \; dt = \int_0^\pi g(t) dt = \pi$.
+q19_1: |
+  Express the limit as a definite integral on the given interval.
+  <hr class="s1" />
+  $\lim_{n \to \infty} \sum_{i=1}^{n} [5(x_i^{\*})^3 - 4x_i^{\*}] \Delta x, \; [2, 7]$
+
+q37_1: |
+  Evaluate the integral by interpreting it in terms of areas.
+  <hr class="s1" />
+  $\int_{-3}^{0} (1 + \sqrt{9 - x^2}) dx$
+
+q57_1: |
+  Use the properties of integrals to verify the inequality without evaluating the integrals.
+  <hr class="s1" />
+  $2 \le \int_{-1}^{1} \sqrt{1 + x^2} dx \le 2 \sqrt{2}$

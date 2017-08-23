@@ -1,73 +1,31 @@
-q1_1: |
-  Find a general solution to the given differential equation.
-  $$y'' + 6y' + 9y = 0$$
-
-q1_1_s: |
-  Auxiliary equation is $r^2 + 6r + 9 = 0 \implies (r + 3)^2 = 0 \implies r = -3, -3$ are repeated roots.
+q9_1: |
+  Use the Fundamental Theorem of Calculus to find the derivative of the function.
   <hr class="s1" />
-  So, $e^{-3t}, te^{-3t}$ are two linearly independent solutions. Hence the solution is $y = c_1e^{-3t} + c_2te^{-3t}$.
+  $g(s) = \int_5^s (t - t^2)^8 dt$
 
-q1_3: |
-  Find a general solution to the given differential equation.
-  $$y'' - y' - 2y = 0$$
-
-q1_3_s: |
-  Auxiliary equation is $r^2 - r - 2 = 0 \implies (r - 2)(r + 1) = 0 \implies r = 2, -1$.
+q13_1: |
+  Use the Fundamental Theorem of Calculus to find the derivative of the function.
   <hr class="s1" />
-  So $e^{2t}, e^{-t}$ are two linearly independent solutions. Hence the solution is $y = c_1e^{2t} + c_2e^{-t}$.
+  $h(x) = \int_1^{e^x} \ln t \; dt$
 
-q1_13: |
-  Solve the given initial value problem.
-  $$y'' + 2y' - 8y = 0; \; y(0) = 3, y'(0) = -12$$
-
-q1_13_s: |
-  Auxiliary equation is $r^2 + 2r - 8 = 0 \implies r = 2, -4$. So $e^{2t}, e^{-4t}$ are the two linearly independent solutions. Hence the solution is $y = c_1e^{2t} + c_2^{-4t}$.
-  $$y' = 2c_1e^{2t} - 4c_2e^{-4t} \\\\
-  y'' = 4c_1e^{2t} + 16c_2e^{-4t} \\\\
-  y(0) = c_1e^{2 \times 0} + c_2e^{-4 \times 0} = c_1 + c_2 = 3$$
-  And $y'(0) = 2c_1 - 4c_2 = -12 \implies c_1 - 2c_2 = -6$.
-  $$\begin{cases} c_1 + c_2 &= 3 \\\\ c_1 - 2c_2 &= -6 \end{cases}$$
-  Solving, we get $c_1 = 0, c_2 = 3. Hence the solution is $y = 3e^{-4t}$.
-
-q1_15: |
-  Solve the given initial value problem.
-  $$y'' + y' = 0; \; y(0) = 2, y'(0) = 1$$
-
-q1_15_s: |
-  Auxiliary equation is $r^2 - 4r - 5 = 0 \implies r = 5, -1$. So, $e^{5t}, e^{-t}$ are the linearly independent solutions. Hence, the solution is $y = c_1e^{5t} + c_2e^{-t}$.
-  $$y' = 5c_1e^{5t} - c_2e^{-t} \\\\
-  y(-1) = c_1e^{-5} + c_2e = 3 \\\\
-  y'(-1) = 5c_1e^{-5} - c_2e = 9 \\\\
-  \implies c_2 = 3 - c_1e^{-5} \\\\
-  \implies c_2 = 3e^{-1} - c_1e^{-6}$$
-  Then, $5c_1e^{-5} = 9 + c_2e = 12 - c_1e^{-5} \implies 6c_1e^{-5} = 12 \implies c_1 = 2e^5, c_2 = e^{-1}$. Hence, the solution is $y = 2e^{5(1+t)} + e^{-(t+1)}$.
-
-q1_21: |
-  (a) Substituting $y = e^{rt}$, find the auxiliary equation for the first-order linear equation $ay' + by = 0$, where $a$ and $b4 are constants with $a \ne 0$.
+q37_1: |
+  Evaluate the integral.
   <hr class="s1" />
-  (b) Use the result of part (a) to find the general solution.
+  $\int_0^1 (x^e + e^x) dx$
 
-q1_21_s: |
-  (a) We have $a \times re^{rt} + be^{rt} = 0 \implies (ar + b)e^{rt} = 0$. So, $ar + b = 0$ is the auxiliary equation.
+q55_1: |
+  Find the deriative of the function.
   <hr class="s1" />
-  (b) Then, we have $ar + b = 0 \implies r = \frac{-b}{a}$. So, $e^{\frac{-b}{at}}$ is the solution. So, $y = ce^{\frac{-bt}{a}}$ is the general solution of the given equation, $c =$ constant.
+  $g(x) = \int_{2x}^{3x} \frac{u^2 - 1}{u^2 + 1} du$
 
-q1_27: |
-  Determine whether the functions $y_1$ and $y_2$ are linearly dependent on the interval $(0, 1)$.
-  $$y_1(t) = \cos t \sin t, y_2(t) = \sin 2t$$
+q63_1: |
+  If $f(1) = 12, f'$ is continuous, and $\int_1^4 f'(x) dx = 17$, what is the value of $f(4)$?
 
-q1_27_s: |
-  $$y_1(t) = \cos t \sin t \\\\
-  y_2(t) = \sin 2t = 2\sin t \cos t$$
-  So, $y_2(t) = 2y_1(t)$. Hence $y_1(t)$ and $y_2(t)$ are linearly dependent.
-
-q1_37: |
-  Find three linearly independent solutions of the given third-order differential equation and write a general solution as an arbitrary linear combination of these.
-  $$y''' + y'' - 6y' + 4y = 0$$
-
-q1_37_s: |
-  Auxiliary equation is $r^3 + r^2 - 6r + 4 = 0 \implies r = -1, -1 \pm \sqrt{5}$.
+q73_1: |
+  (a) Show that $1 \le \sqrt{1 + x^3} \le 1 + x^3$ for $x \ge 0$.
   <hr class="s1" />
-  So, the three roots are $r = 1, \sqrt{5} - 1, -\sqrt{5} - 1$.
-  <hr class="s1" />
-  So, $e^{t}, e^{t(\sqrt{5} - 1)}, e^{-(\sqrt{5} + 1)t}$ are three linearly independent solutions. Hence, the solution is $y = c_1e^t + c_2e^{(\sqrt{5} - 1)t} + c_3e^{-(1 + \sqrt{5})t}$.
+  (b) Show that $1 \le \int_0^1 \sqrt{1 + x^3} dx \le 1.25$.
+
+q77_1: |
+  Find a function $f$ and a number $a$ such that
+  $$6 + \int_a^x \frac{f(t)}{t^2} dt = 2\sqrt{x} \; \text{for all} \; x > 0$$

@@ -23,17 +23,16 @@ class Question extends Component {
         bar.path.setAttribute('stroke', state.color);
       },
     };
-    const difficultyBar = difficulty ? (
+    /*const difficultyBar = difficulty ? (
       <span>
         Difficulty: {difficulty <= 3 ? ("Easy") : (difficulty <= 6 ? "Medium" : "Hard")}
         <Line options={options} initialAnimate={true} progress={difficulty/10.0} containerClassName="progress-container" />
       </span>
-    ): null
+    ): null*/
 
     return (
       <div id={id} className="question">
         <h2>{type_label} {term_label}</h2>
-        {difficultyBar}
         <QuestionDropdown schoolCode={schoolCode} courseCode={courseCode} examType={examType} termCode={termCode} id={id} content_id={content_id} />
         <div dangerouslySetInnerHTML={{__html: content}}></div>
         <Solution solution={solution} final_solution={final_solution} />
