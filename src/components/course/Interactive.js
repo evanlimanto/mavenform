@@ -67,8 +67,8 @@ class InteractiveComponent extends Component {
           <h5 align="center">Based on your class syllabus and our document bank, we’ve generated the following study guides.</h5>
           <hr className="s2" />
           <Link className="card" to={`/${schoolCode}/${courseCode}/problemset/mt1`}>Midterm 1</Link>
-          <Link className="card" to={`/${schoolCode}/${courseCode}/problemset/mt2`}>Midterm 2 (locked)</Link>
-          <Link className="card" to={`/${schoolCode}/${courseCode}/problemset/final`}>Final (locked)</Link>
+          <a className="card" to="">Midterm 2 (locked)</a>
+          <a className="card" to="">Final (locked)</a>
         </div>
       </div>
       <Footer />

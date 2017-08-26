@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import { map, range } from 'lodash';
 
 import { updateProblemSetInfo } from '../../actions';
-import { BASE_URL } from '../../utils';
+import { BASE_URL, examTypeToLabel } from '../../utils';
 import { Question, MultipleChoiceQuestion } from '../question';
 import Footer from '../footer';
 import Navbar from '../navbar';
@@ -65,7 +65,7 @@ class ProblemSetComponent extends Component {
         <Navbar schoolCode={this.props.schoolCode} courseCode={this.props.courseCode} concept={this.props.code} label={this.props.problemSetInfo.conceptLabel} />
         <div id="header-text">
           <div className="center">
-            <h4>{problemSetInfo.conceptLabel}</h4>
+            <h4>{examTypeToLabel(this.props.problemSetType)} Problem Set</h4>
           </div>
         </div>
         <div className="content">

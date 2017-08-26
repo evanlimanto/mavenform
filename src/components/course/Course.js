@@ -30,16 +30,16 @@ class InteractiveCards extends Component {
 
   render() {
     const { courseCode } = this.props;
-    const professors = ["Stevens", "Jeggers", "None"];
+    const professors = ["Drimbe", "Jeggers", "None"];
     const codes = ["001", "002", "003"];
     const syllabi = ["Available", "Available", "None"];
     const cards = map(range(0, 3), (index) => {
       return (
-        <div className={"card int-card " + ((index === this.state.selected) ? "active" : "")} onClick={() => this.clickBox(index, professors[index])} key={index}>
+        <div key={index} className={"card int-card " + ((index === this.state.selected) ? "active" : "")} onClick={() => this.clickBox(index, professors[index])} key={index}>
           <div className="int-card-h">{courseCodeToLabel(courseCode)} {codes[index]}</div>
-          <p><span className="int-highlight">Instructor(s): </span> Stevens</p>
-          <p><span className="int-highlight">Term:</span> Fall 2017</p>
-          <p><span className="int-highlight">Syllabus:</span> <a>{syllabi[index]}</a></p>
+          <p><span className="int-highlight">Instructor(s): </span> {professors[index]}</p>
+          <p><span className="int-highlight">Syllabus: </span>
+            {(index === 0) ? <a target="_blank" href="http://math.ucsd.edu/~ddrimbe/math18s/syllabus.html">{syllabi[index]}</a> : <a>None</a>}</p>
         </div>
       );
     });

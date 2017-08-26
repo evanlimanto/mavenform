@@ -137,7 +137,7 @@ module.exports = (app) => {
     let { examid, problem_num, subproblem_num, problem_content,
           solution_content, choices_content, final_solution_content,
           difficulty, topicid } = req.body;
-    if (difficulty === "" || !difficulty || difficulty.length > 2)
+    if (difficulty === "" || !difficulty || difficulty.length > 2 || difficulty === "-- select a topic --")
       difficulty = null;
     const q = `
       update content set problem=$1, solution=$2, choices=$3, topicid=$4, final_solution=$5, difficulty=$6
