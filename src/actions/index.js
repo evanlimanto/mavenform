@@ -110,6 +110,14 @@ export const updateClassRegistered = (registered) => {
   };
 };
 
+export const UPDATE_TOPICS_LIST = 'UPDATE_TOPICS_LIST';
+export const updateTopicsList = (topics) => {
+  return {
+    type: UPDATE_TOPICS_LIST,
+    topics: topics,
+  };
+};
+
 export const SHOW_LOGIN_MODAL = 'SHOW_LOGIN_MODAL';
 export const showLoginModal = () => { return { type: SHOW_LOGIN_MODAL }; };
 export const SHOW_WAITLIST_MODAL = 'SHOW_WAITLIST_MODAL';

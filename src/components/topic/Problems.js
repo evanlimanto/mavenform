@@ -7,6 +7,8 @@ import hash from 'string-hash';
 import classnames from 'classnames';
 import { CSSTransitionGroup } from 'react-transition-group';
 
+import { updateTopicInfo } from '../../actions';
+import { BASE_URL } from '../../utils';
 import Navbar from '../navbar';
 import Footer from '../footer';
 
@@ -19,16 +21,22 @@ class ProblemsComponent extends Component {
       showSolution: false,
       showContents: true,
       answerStatus: null,
+      progress: 0,
+      correct: 0,
+      wrong: 0,
+      numProblems: 5,
     };
-    this.check = this.check.bind(this);
     this.checkAnswer = this.checkAnswer.bind(this);
     this.correctAnswer = this.correctAnswer.bind(this);
     this.wrongAnswer = this.wrongAnswer.bind(this);
     this.reset = this.reset.bind(this);
   }
 
-  check() {
-    this.correctAnswer();
+  static fetchData(dispatch, props) {
+    const { code } = props;
+    return fetch(`${BASE_URL}/getTopicInfo/${code}`)
+      .then((response) => response.json())
+      .then((json) => dispatch(updateTopicInfo(json)));
   }
 
   componentDidUpdate() {
@@ -36,37 +44,55 @@ class ProblemsComponent extends Component {
   }
 
   correctAnswer() {
-    this.setState({ answerStatus: "correct", showSolution: true });
+    this.setState({
+      answerStatus: "correct",
+      showSolution: true,
+      progress: this.state.progress + 1,
+      correct: this.state.correct + 1
+    });
   }
 
   wrongAnswer() {
-    this.setState({ answerStatus: "wrong", showSolution: true });
+    this.setState({
+      answerStatus: "wrong",
+      showSolution: true,
+      progress: this.state.progress + 1,
+      wrong: this.state.wrong + 1
+    });
   }
 
   checkAnswer() {
-    const answerValue = this.refs.answer.value;
-    return (answerValue === "0");
+    if (this.refs.answer) {
+      const answerValue = this.refs.answer.value;
+      if (answerValue === "0")
+        return this.correctAnswer();
+      return this.wrongAnswer();
+    }
   }
 
   reset() {
-    console.log("reset");
     this.setState({
       showSolution: false,
       answerStatus: null,
       showContents: false
-    }, () => window.setTimeout(() => this.setState({ showContents: true }), 1000));
+    }, () => window.setTimeout(() => this.setState({ showContents: true }), 300));
+  }
+
+  componentWillMount() {
+    const self = this;
+    document.addEventListener("keydown", (e) => {
+      if (e.keyCode === 13) {
+        self.state.showSolution ? self.reset() : self.checkAnswer();
+      }
+    }, false);
   }
 
   componentDidMount() {
     window.renderMJ();
-    const self = this;
-    document.addEventListener("keydown", (e) => {
-      if (e.keyCode === 13)
-        self.state.showSolution ? self.reset() : (self.checkAnswer() ? self.correctAnswer() : self.wrongAnswer());
-    }, false);
   }
 
   render() {
+    const topicCode = this.props.topicCode;
     const solution = this.state.showSolution ? (
       <div className="problem-solution">
         The dot product of two vectors is the sum of the component-wise products of each of their entries.
@@ -78,8 +104,14 @@ class ProblemsComponent extends Component {
         What is the dot product of the two vectors {"$\\vec{u} = < 5, 1, 2>$"} and {"$\\vec{v} = < -2, 4, 3>$"}?
         {solution}
         <div className="problem-answer">
-          <label className={classnames({ "correct-answer-style": this.state.answerStatus === "correct" })}>Answer</label>
-          <input type="text" placeholder="Enter your answer here" className={classnames({ "correct-answer-style": this.state.answerStatus === "correct" })} ref="answer" />
+          <label className={classnames({
+            "correct-answer-style": this.state.answerStatus === "correct",
+            "wrong-answer-style": this.state.answerStatus === "wrong",
+          })}>Answer</label>
+          <input type="text" placeholder="Enter your answer here" className={classnames({
+            "correct-answer-style": this.state.answerStatus === "correct",
+            "wrong-answer-style": this.state.answerStatus === "wrong",
+          })} ref="answer" />
         </div>
       </div>
     )] : [];
@@ -88,20 +120,28 @@ class ProblemsComponent extends Component {
       <div className="background">
         <Navbar />
         <div className="box">
+          <Line className="problems-progress" percent={Math.floor(this.state.progress * 100.0 / this.state.numProblems)} strokeWidth="1" strokeColor="#66BB66" />
           <div className="problem-content">
             <CSSTransitionGroup
               transitionName="contents"
-              transitionEnterTimeout={0}
-              transitionLeaveTimeout={0}>
+              transitionEnterTimeout={200}
+              transitionLeaveTimeout={300}>
               {contents}
             </CSSTransitionGroup>
           </div>
-          <div className={classnames({"box-footer": true, "correct-answer": this.state.answerStatus === "correct"})}>
-            {this.state.answerStatus === "correct" ? (<div className="answer-status">Correct!</div>) : null}
-            <button className="skip-button" onClick={this.reset}>
-              Skip
-            </button>
-            <button className="check-button" onClick={this.state.showSolution ? this.reset : this.check}>
+          <div className={classnames({
+            "box-footer": true,
+            "correct-answer": this.state.answerStatus === "correct",
+            "wrong-answer": this.state.answerStatus === "wrong"
+          })}>
+            {this.state.answerStatus === "correct" ? (<div className="answer-status correct-answer-style">Correct!</div>) :
+              (this.state.answerStatus === "wrong" ? (<div className="answer-status wrong-answer-style">Read the solution above.</div>) : null)}
+            {this.state.answerStatus ? null : (
+              <button className="skip-button" onClick={this.reset}>
+                Skip
+              </button>
+            )}
+            <button className="check-button" onClick={this.state.showSolution ? this.reset : this.checkAnswer}>
               {this.state.showSolution ? "Next" : "Solve"}
             </button>
           </div>
@@ -114,6 +154,7 @@ class ProblemsComponent extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    topicCode: ownProps.topicCode || ownProps.match.params.topicCode
   };
 };
 

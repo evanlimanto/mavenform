@@ -496,13 +496,15 @@ const getCourseTopics =
     });
   };
 
-const getTopicsList =
+const getAvailableTopics =
   (req, res, next) => {
     const getq = `
-      select id as topicid, T.topic, T.concept, T.code, S.id as subjectid, S.subject_label from topics T
+      select T.id as topicid, T.topic, T.concept, T.code, S.id as subjectid, S.subject_label from topics T
       inner join subjects S on S.id = T.subjectid
+      where exists (select 1 from content where topicid = T.id) and T.subjectid = 7;
     `;
     pool.query(getq, (err, result) => {
+      if (err) return next(err);
       const items = _.map(result.rows, (row) => {
         const { topicid, topic, concept, code, subjectid, subject_label } = row;
         return { topicid, topic, concept, code, subjectid, subject_label };
@@ -626,4 +628,7 @@ module.exports = (app) => {
 
   // Retrieve problemset contents
   app.get('/getProblemSet/:schoolCode/:courseCode/:examtype', getProblemSet);
+
+  // Retrieve available topics
+  app.get('/getAvailableTopics', getAvailableTopics);
 }

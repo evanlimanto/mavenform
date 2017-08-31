@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { map, range } from 'lodash';
+import { forEach, has, map, range } from 'lodash';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { Line } from 'rc-progress';
@@ -9,10 +9,12 @@ import hash from 'string-hash';
 import Navbar from '../navbar';
 import Footer from '../footer';
 
+import { BASE_URL } from '../../utils';
+import { updateTopicsList } from '../../actions';
+
 require('../../css/Math.css');
 
 function getGreenToRed(percent){
-  console.log(Math);
   let r, g;
   r = percent<50 ? 255 : Math.floor(255-(percent*2-100)*255/100);
   g = percent>50 ? 255 : Math.floor((percent*2)*255/100);
@@ -24,16 +26,54 @@ function getGreenToRed(percent){
 }
 
 class MathComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.getCategorizedTopics = this.getCategorizedTopics.bind(this);
+  }
+
+  componentDidMount() {
+    MathComponent.fetchData(this.props.dispatch, this.props);
+  }
+
+  static fetchData(dispatch, props) {
+    return fetch(`${BASE_URL}/getAvailableTopics`)
+      .then((response) => response.json())
+      .then((json) => dispatch(updateTopicsList(json)));
+  }
+
+  getCategorizedTopics() {
+    const dict = {};
+    forEach(this.props.topicsList, (item) => {
+      if (!has(dict, item.topic))
+        dict[item.topic] = [];
+      dict[item.topic].push(item);
+    });
+    return dict;
+  }
+
   render() {
-    const topics = ["General Concepts", "Multiple Integrals"];
-    const subtopics = [
-      ["Vectors", "Derivatives", "Integrals", "Planes", "Coordinates"],
-      ["Integrals over Planes", "Integrals in Polar Coordinates"],
-    ];
-    const fromColor = '00FF00';
-    const toColor = 'FFA05A';
-    const fromVal = parseInt(fromColor, 16);
-    const toVal = parseInt(toColor, 16);
+    const topicsDict = this.getCategorizedTopics();
+    const topicItems = map(this.getCategorizedTopics(), (items, topic) => {
+      const arr = map(items, (item) => {
+        const percent = hash(item.concept) % 100;
+        const hexColor = "#" + getGreenToRed(percent);
+        return (
+          <div key={item.concept} className="subtopic">
+            <Line className="progress" percent={percent} strokeWidth="5" strokeColor={hexColor} />
+            <Link to={`/interactive/math53/${item.code}`}>{item.concept}</Link>
+            <label>({Math.floor(percent/100 * 5)} / 5)</label>
+          </div>
+        );
+      });
+
+      return (
+        <div key={topic} className="topic-container">
+          <div className="topic">{topic}</div>
+          <hr className="s2" />
+          {arr}
+        </div>
+      );
+    });
     return (
       <div>
         <Navbar />
@@ -42,28 +82,7 @@ class MathComponent extends Component {
             <h4>Math 53</h4>
           </div>
         </div>
-        <div className="content">
-          {map(range(0, 2), (index) => {
-            const items = map(subtopics[index], (subtopic) => {
-              const percent = hash(subtopic) % 100;
-              const hexColor = "#" + getGreenToRed(percent);
-              return (
-                <div className="subtopic">
-                  <Line className="progress" percent={percent} strokeWidth="5" strokeColor={hexColor} />
-                  <label><Link to="/interactive/math53/problems">{subtopic}</Link></label>
-                  <label>({Math.floor(percent/100 * 5)} / 5)</label>
-                </div>
-              );
-            });
-            return (
-              <div className="topic-container">
-                <div className="topic">{topics[index]}</div>
-                <hr className="s2" />
-                {items}
-              </div>
-            );
-          })}
-        </div>
+        <div className="content">{topicItems}</div>
         <Footer />
       </div>
     );
@@ -72,6 +91,7 @@ class MathComponent extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    topicsList: state.topicsList
   };
 };
 

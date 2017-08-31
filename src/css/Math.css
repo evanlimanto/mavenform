@@ -5,20 +5,21 @@
 }
 
 .topic {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 600;
   margin: 15px 0px 10px;
 }
 
 .subtopic {
   width: 20%;
-  margin: 10px;
   float: left;
+  margin: 15px 10px;
+  height: 100px;
 }
 
-.subtopic > label {
-  text-align: center;
-  font-size: 14px;
+.subtopic > label, .subtopic > a {
+  text-align: left;
+  font-size: 14px !important;
 }
 
 .background {
@@ -35,7 +36,7 @@
   height: auto;
   min-height: 500px;
   max-width: 1000px;
-  margin: -250px auto auto;
+  margin: -265px auto auto;
   top: 50%;
   position: relative;
 }
@@ -75,7 +76,7 @@
 }
 
 .check-button {
-  background-color: #66BB66;
+  background-color: #80D480;
   color: white;
   font-size: 20px;
   margin: 20px 40px;
@@ -116,16 +117,24 @@
 }
 
 .correct-answer {
-  background-color: #A4FF48;
+  background-color: #DDFF99;
+}
+
+.wrong-answer {
+  background-color: #FEA4A4;
 }
 
 .correct-answer-style {
-  border-color: #66BB66 !important;
-  color: #66BB66 !important;
+  border-color: #80D480 !important;
+  color: #80D480 !important;
+}
+
+.wrong-answer-style {
+  border-color: #FF1515 !important;
+  color: #FF1515 !important;
 }
 
 .answer-status {
-  color: #66BB66;
   float: left;
   margin: 30px 50px;
   font-size: 24px;
@@ -149,4 +158,8 @@
 .contents-leave.contents-leave-active {
   opacity: 0.01;
   transition: opacity 100ms ease-in;
+}
+
+.problems-progress {
+  margin: 25px;
 }

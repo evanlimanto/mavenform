@@ -163,6 +163,15 @@ export const classRegistered = (state = null, action) => {
   }
 }
 
+export const topicsList = (state = [], action) => {
+  switch (action.type) {
+    case Actions.UPDATE_TOPICS_LIST:
+      return action.topics;
+    default:
+      return state;
+  }
+};
+
 export const modal = (state = { type: null, errorText: null }, action) => {
   switch (action.type) {
     case Actions.SHOW_LOGIN_MODAL:
