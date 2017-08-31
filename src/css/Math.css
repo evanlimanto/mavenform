@@ -1,0 +1,152 @@
+.topic-container {
+  display: inline-block;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.topic {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 15px 0px 10px;
+}
+
+.subtopic {
+  width: 20%;
+  margin: 10px;
+  float: left;
+}
+
+.subtopic > label {
+  text-align: center;
+  font-size: 14px;
+}
+
+.background {
+  background-color: #E9E9E9;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.box {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(0,0,0,.04);
+  height: auto;
+  min-height: 500px;
+  max-width: 1000px;
+  margin: -250px auto auto;
+  top: 50%;
+  position: relative;
+}
+
+.problem-content {
+  height: 425px;
+  padding: 25px;
+}
+
+.box-footer {
+  background-color: #ccc;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.box-footer::after { 
+  content: " ";
+  display: block; 
+  height: 0; 
+  clear: both;
+}
+
+.skip-button {
+  background-color: #ccc;
+  border: 1px solid #888;
+  color: #888;
+  font-size: 20px;
+  margin: 20px 40px;
+  float: left;
+  padding: 10px 30px;
+  border-radius: 12px;
+}
+
+.skip-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.check-button {
+  background-color: #66BB66;
+  color: white;
+  font-size: 20px;
+  margin: 20px 40px;
+  float: right;
+  padding: 10px 30px;
+  border-radius: 12px;
+}
+
+.check-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.problem-answer {
+  margin: 15px 0px 100px;
+  position: absolute;
+  bottom: 0;
+}
+
+.problem-answer label {
+  color: grey;
+  display: inline;
+}
+
+.problem-answer input {
+  border: 1px solid grey;
+  border-radius: 5px;
+  color: grey;
+  padding: 5px 15px 5px 10px;
+  text-align: left;
+  margin: 0px 15px;
+  font-size: 20px;
+}
+
+.problem-solution {
+  color: #33aacc;
+  margin: 30px 0px;
+}
+
+.correct-answer {
+  background-color: #A4FF48;
+}
+
+.correct-answer-style {
+  border-color: #66BB66 !important;
+  color: #66BB66 !important;
+}
+
+.answer-status {
+  color: #66BB66;
+  float: left;
+  margin: 30px 50px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Transitions */
+.contents-enter {
+  opacity: 0.01;
+}
+
+.contents-enter.contents-enter-active {
+  opacity: 1;
+  transition: opacity 100ms ease-in;
+}
+
+.contents-leave {
+  opacity: 1;
+}
+
+.contents-leave.contents-leave-active {
+  opacity: 0.01;
+  transition: opacity 100ms ease-in;
+}

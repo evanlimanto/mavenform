@@ -34,7 +34,7 @@ class UserHomeComponent extends Component {
   }
 
   render() {
-    const bookmarkedCoursesBoxes = (
+    const bookmarkedCoursesBoxes = (this.state.bookmarkedCourses.length > 0) ? (
       <div className="card-container">
         {map(this.state.bookmarkedCourses, (courseCode, key) => {
           return (
@@ -48,7 +48,7 @@ class UserHomeComponent extends Component {
           <span>+ &nbsp; Add Course</span>
         </a>*/}
       </div>
-    );
+    ) : (<h5>You have no courses yet.</h5>);
     return (
       <div className="userhome">
         <Modals />

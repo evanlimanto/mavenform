@@ -5,6 +5,7 @@ import Home from './components/home';
 import { Login, Logout, SecretSignup, Signup } from './components/login';
 import NotFound from './components/notfound';
 import { AppSubmitted, Marketing, MarketingApps } from './components/marketing';
+import { Math53, Problems } from './components/topic';
 import Profile from './components/profile';
 import School from './components/school';
 import UserHome from './components/userhome';
@@ -26,6 +27,8 @@ const routes = [
   { path: '/s3cr3tsignup', component: SecretSignup },
   { path: '/m4rk3t1ng4pp5', component: MarketingApps },
   { path: '/home', component: UserHome },
+  { path: '/interactive/math53/problems', component: Problems },
+  { path: '/interactive/math53', component: Math53 },
   { path: '/:schoolCode/:courseCode/problemset/:problemSetType', component: ProblemSet },
   { path: '/:schoolCode/:courseCode/problemset', component: Interactive },
   { path: '/:schoolCode/:courseCode/:examStr', component: Exam },
