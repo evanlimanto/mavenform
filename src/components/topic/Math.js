@@ -61,7 +61,7 @@ class MathComponent extends Component {
           <div key={item.concept} className="subtopic">
             <Line className="progress" percent={percent} strokeWidth="5" strokeColor={hexColor} />
             <Link to={`/interactive/math53/${item.code}`}>{item.concept}</Link>
-            <label>({Math.floor(percent/100 * 5)} / 5)</label>
+            <label>({Math.floor(percent/100 * 5)} / 5) &nbsp; <i className="fa fa-lock" aria-hidden="true"></i></label>
           </div>
         );
       });
