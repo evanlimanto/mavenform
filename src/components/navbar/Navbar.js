@@ -98,7 +98,21 @@ class NavbarComponent extends Component {
     const termLabel = termToLabel(termCode); 
     const numLayers = !!schoolLabel + !!courseLabel + !!examTypeLabel + !!label + !!problemset + !!problemSetType;
     let navbarNav = null;
-    if (!this.props.userHome) {
+    if (this.props.interactive) {
+      navbarNav = [<Link key={0} to='/'>Home</Link>];
+      const { navbarLabels, links } = this.props;
+      let link = "";
+      for (var i = 0; i < navbarLabels.length; i++) {
+        link += "/";
+        link += links[i];
+        navbarNav.push(<span key={i * 2 + 1}> > </span>);
+        navbarNav.push(
+          <Link key={i * 2 + 2} to={link}
+            className={classnames({ active: i === navbarLabels.length - 1 })}
+          >{navbarLabels[i]}</Link>
+        );
+      }
+    } else if (!this.props.userHome) {
       navbarNav = [<Link key='home' to='/' className={classnames({ active: numLayers === 0 })}>Home</Link>];
       if (schoolLabel) {
         navbarNav.push(<span key='homeSpan'> > </span>);
@@ -122,15 +136,15 @@ class NavbarComponent extends Component {
           }
         }
       }
-      navbarNav = (
-        <div className="gray-nav">
-          <div className="container">
-            {navbarNav}
-            {!this.props.exam || <a className="utility-button" href={this.props.source_url} target="_blank" rel="noopener noreferrer">View PDF</a>}
-          </div>
-        </div>
-      );
     }
+    navbarNav = (
+      <div className="gray-nav">
+        <div className="container">
+          {navbarNav}
+          {!this.props.exam || <a className="utility-button" href={this.props.source_url} target="_blank" rel="noopener noreferrer">View PDF</a>}
+        </div>
+      </div>
+    );
 
     if (this.props.waitlisted)
         navbarNav = null;

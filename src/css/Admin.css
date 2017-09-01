@@ -15,6 +15,7 @@ textarea.contentCol {
   width: 200px;
   height: 100px;
   margin: 10px 20px;
+  float: left;
   display: inline-block;
 }
 

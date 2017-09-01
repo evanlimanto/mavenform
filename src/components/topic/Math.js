@@ -76,7 +76,7 @@ class MathComponent extends Component {
     });
     return (
       <div>
-        <Navbar />
+        <Navbar interactive={true} links={["interactive/math53"]} navbarLabels={["Math 53"]} />
         <div id="header-text">
           <div className="center">
             <h4>Math 53</h4>

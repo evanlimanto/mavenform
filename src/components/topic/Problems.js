@@ -6,6 +6,7 @@ import { Line } from 'rc-progress';
 import hash from 'string-hash';
 import classnames from 'classnames';
 import { CSSTransitionGroup } from 'react-transition-group';
+import { Link } from 'react-router-dom';
 
 import { updateTopicInfo } from '../../actions';
 import { BASE_URL } from '../../utils';
@@ -26,6 +27,7 @@ class ProblemsComponent extends Component {
       correct: 0,
       wrong: 0,
     };
+    this.problemCount = 1;
     this.checkAnswer = this.checkAnswer.bind(this);
     this.correctAnswer = this.correctAnswer.bind(this);
     this.wrongAnswer = this.wrongAnswer.bind(this);
@@ -34,6 +36,7 @@ class ProblemsComponent extends Component {
 
   componentDidMount() {
     ProblemsComponent.fetchData(this.props.dispatch, this.props);
+    window.renderMJ();
   }
 
   static fetchData(dispatch, props) {
@@ -43,7 +46,8 @@ class ProblemsComponent extends Component {
       .then((json) => dispatch(updateTopicInfo(json)))
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentWillUpdate(nextProps, nextState) {
+    this.problemCount = keys(nextProps.topicInfo.problems).length;
     window.renderMJ();
   }
 
@@ -93,11 +97,20 @@ class ProblemsComponent extends Component {
   }
 
   render() {
-    if (this.state.progress === keys(this.props.topicInfo.problems).length && !this.state.showSolution) {
+    const navbar = <Navbar interactive={true} links={["interactive/math53", this.props.topicCode]} navbarLabels={["Math 53", this.props.topicInfo.topicLabel]} />
+    if (this.state.progress === this.problemCount && !this.state.showSolution) {
       return (
         <div className="background">
-          <Navbar />
+          {navbar}
           <div className="box">
+            <div className="end-text">
+              <h1 className="congratulations-text">Congratulations! You have mastered {this.props.topicInfo.topicLabel}</h1>
+              <hr className="s2" />
+              <h2 className="info-text">Your correctly answered {this.state.correct} out of {this.problemCount} problem{this.problemCount > 1 ? "s" : ""}.</h2>
+            </div>
+            <div className="box-footer">
+              <Link to="/interactive/math53"><button className="check-button">Continue</button></Link>
+            </div>
           </div>
           <Footer />
         </div>
@@ -124,9 +137,9 @@ class ProblemsComponent extends Component {
 
     return (
       <div className="background">
-        <Navbar />
+        {navbar}
         <div className="box">
-          <Line className="problems-progress" percent={Math.floor(this.state.progressIndicator * 100.0 / keys(this.props.topicInfo.problems).length)} strokeWidth="1" strokeColor="#66BB66" />
+          <Line className="problems-progress" percent={Math.floor(this.state.progressIndicator * 100.0 / this.problemCount)} strokeWidth="1" strokeColor="#66BB66" />
           <div className="problem-content">
             <CSSTransitionGroup
               transitionName="contents"

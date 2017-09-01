@@ -45,7 +45,6 @@ class CommentsComponent extends Component {
   }
 
   processComments(json) {
-    console.log(json);
     const tree = {};
     const roots = [];
     json = sortBy(json, [(item) => item.id]);

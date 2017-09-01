@@ -185,3 +185,18 @@
 .problems-progress {
   margin: 25px;
 }
+
+h1.congratulations-text {
+  font-size: 32px;
+  font-weight: 500;
+  margin: 20px 0;
+  text-align: center;
+}
+
+h2.info-text {
+  text-align: center;
+}
+
+.end-text {
+  padding: 150px 0px;
+}
