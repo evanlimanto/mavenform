@@ -9,6 +9,7 @@ marked.setOptions({
   pedantic: false,
   smartLists: true,
   smartypants: false,
+  sanitize: false,
 });
 
 const renderer = new marked.Renderer();

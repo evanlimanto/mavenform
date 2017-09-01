@@ -22,6 +22,7 @@ class ProblemsComponent extends Component {
       showContents: true,
       answerStatus: null,
       progress: 0,
+      progressIndicator: 0,
       correct: 0,
       wrong: 0,
     };
@@ -50,7 +51,8 @@ class ProblemsComponent extends Component {
     this.setState({
       answerStatus: "correct",
       showSolution: true,
-      correct: this.state.correct + 1
+      correct: this.state.correct + 1,
+      progressIndicator: this.state.progressIndicator + 1
     });
   }
 
@@ -58,7 +60,8 @@ class ProblemsComponent extends Component {
     this.setState({
       answerStatus: "wrong",
       showSolution: true,
-      wrong: this.state.wrong + 1
+      wrong: this.state.wrong + 1,
+      progressIndicator: this.state.progressIndicator + 1
     });
   }
 
@@ -104,10 +107,8 @@ class ProblemsComponent extends Component {
     const itemContent = this.props.topicInfo.problems[this.state.progress];
     const contents = this.state.showContents ? [(
       <div key={0}>
-        {itemContent.problem}
-        <div className="problem-solution">
-          {!this.state.showSolution || itemContent.solution}
-        </div>
+        <div dangerouslySetInnerHTML={{ __html: itemContent.problem }}></div>
+        <div className="problem-solution" dangerouslySetInnerHTML={{ __html: this.state.showSolution ? itemContent.solution : null }}></div>
         <div className="problem-answer">
           <label className={classnames({
             "correct-answer-style": this.state.answerStatus === "correct",
@@ -125,7 +126,7 @@ class ProblemsComponent extends Component {
       <div className="background">
         <Navbar />
         <div className="box">
-          <Line className="problems-progress" percent={Math.floor(this.state.progress * 100.0 / keys(this.props.topicInfo.problems).length)} strokeWidth="1" strokeColor="#66BB66" />
+          <Line className="problems-progress" percent={Math.floor(this.state.progressIndicator * 100.0 / keys(this.props.topicInfo.problems).length)} strokeWidth="1" strokeColor="#66BB66" />
           <div className="problem-content">
             <CSSTransitionGroup
               transitionName="contents"
