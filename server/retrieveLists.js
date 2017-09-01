@@ -428,11 +428,8 @@ const getTopicInfo =
       where T.code = $1`;
     const getq = `
       select C.id as content_id, problem_num, subproblem_num,
-        problem, solution, choices, difficulty, ET.type_label, terms.term_label from content C
+        problem, solution, choices, difficulty from content C
       inner join topics T on T.id = C.topicid
-      inner join exams E on E.id = C.exam
-      inner join exam_types ET on ET.id = E.examtype
-      inner join terms on terms.id = examid
       where T.code = $1
     `;
     async.parallel([
@@ -441,21 +438,21 @@ const getTopicInfo =
         pool.query(getq, [code], (err, result) => {
           if (err)
             return callback(err);
-          const info = _.reduce(result.rows, (result, row, index) => {
+          const info = _.reduce(result.rows, (res, row, index) => {
             const problem_num = row.problem_num;
             const subproblem_num = row.subproblem_num || 1;
-            result[index] = 1;
-            return result;
+            res[index] = 1;
+            return res;
           }, {});
 
-          const problems = _.reduce(result.rows, (result, row, index) => {
+          const problems = _.reduce(result.rows, (res, row, index) => {
             let { content_id, problem_num, subproblem_num, problem, solution, choices, difficulty } = row;
             problem = renderer.preprocess(row.problem);
             solution = renderer.preprocess(row.solution);
             const { type_label, term_label } = row;
             const key = `${index}`;
-            result[key] = { problem, solution, choices, content_id, type_label, term_label, difficulty };
-            return result;
+            res[key] = { problem, solution, choices, content_id, type_label, term_label, difficulty };
+            return res;
           }, {});
 
           return callback(null, { info, problems });

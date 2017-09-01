@@ -48,6 +48,9 @@ class ProblemsComponent extends Component {
 
   componentWillUpdate(nextProps, nextState) {
     this.problemCount = keys(nextProps.topicInfo.problems).length;
+  }
+
+  componentDidUpdate() {
     window.renderMJ();
   }
 
@@ -97,6 +100,7 @@ class ProblemsComponent extends Component {
   }
 
   render() {
+    console.log(this.props, this.state);
     const navbar = <Navbar interactive={true} links={["interactive/math53", this.props.topicCode]} navbarLabels={["Math 53", this.props.topicInfo.topicLabel]} />
     if (this.state.progress === this.problemCount && !this.state.showSolution) {
       return (
