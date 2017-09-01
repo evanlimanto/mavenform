@@ -498,16 +498,19 @@ const getCourseTopics =
 
 const getAvailableTopics =
   (req, res, next) => {
+    const { courseid } = req.params;
     const getq = `
-      select T.id as topicid, T.topic, T.concept, T.code, S.id as subjectid, S.subject_label from topics T
-      inner join subjects S on S.id = T.subjectid
-      where exists (select 1 from content where topicid = T.id) and T.subjectid = 7;
+      select T.id as topicid, T.topic, T.concept, T.code, count(*) from topics T
+      inner join course_topics CT on CT.topicid = T.id
+      right join content C on C.topicid = T.id
+      where exists (select 1 from content where topicid = T.id) and CT.courseid = $1
+      group by T.id;
     `;
-    pool.query(getq, (err, result) => {
+    pool.query(getq, [courseid], (err, result) => {
       if (err) return next(err);
       const items = _.map(result.rows, (row) => {
-        const { topicid, topic, concept, code, subjectid, subject_label } = row;
-        return { topicid, topic, concept, code, subjectid, subject_label };
+        const { topicid, topic, concept, code, subjectid, subject_label, count } = row;
+        return { topicid, topic, concept, code, subjectid, subject_label, count };
       });
       return res.json(items);
     });
@@ -630,5 +633,5 @@ module.exports = (app) => {
   app.get('/getProblemSet/:schoolCode/:courseCode/:examtype', getProblemSet);
 
   // Retrieve available topics
-  app.get('/getAvailableTopics', getAvailableTopics);
+  app.get('/getAvailableTopics/:courseid', getAvailableTopics);
 }
