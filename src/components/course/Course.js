@@ -182,13 +182,12 @@ class CourseComponent extends Component {
               <p className="int-helper">
                   <span className="int-highlight">Interactive study mode available.</span> Study from an AI-generated study guide personalized to your class and professor.
                 </p>
-              {/*<ReactCSSTransitionGroup
+              <ReactCSSTransitionGroup
                 transitionName="getInfoButton"
                 transitionEnterTimeout={500}
                 transitionLeaveTimeout={500}>
                 {this.state.getInfo ? null : (<button className="int-button" onClick={this.getInfo}>Get Started</button>)}
-              </ReactCSSTransitionGroup>*/}
-              <Link to="/interactive/math53"><button className="int-button">Get Started</button></Link>
+              </ReactCSSTransitionGroup>
             </span>
           )}
           <ReactCSSTransitionGroup
