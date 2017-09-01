@@ -36,13 +36,13 @@
   height: auto;
   min-height: 500px;
   max-width: 1000px;
-  margin: -265px auto auto;
+  margin: -255px auto auto;
   top: 50%;
   position: relative;
 }
 
 .problem-content {
-  height: 425px;
+  height: 400px;
   padding: 25px;
 }
 
@@ -96,6 +96,15 @@
   bottom: 0;
 }
 
+@media(max-width: 699px) {
+  .problem-answer {
+    margin-bottom: 180px;
+  }
+  .problem-solution {
+    margin-bottom: 200px;
+  }
+}
+
 .problem-answer label {
   color: grey;
   display: inline;
@@ -112,10 +121,11 @@
 }
 
 .problem-solution {
-  height: 200px;
+  height: 260px;
   color: #33aacc;
   margin: 30px 0px;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {

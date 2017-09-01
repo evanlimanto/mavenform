@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'; import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { has, map, toUpper } from 'lodash';
 import classnames from 'classnames';
@@ -18,6 +17,7 @@ class NavbarComponent extends Component {
     };
 
     this.toggleProfileDropdown = this.toggleProfileDropdown.bind(this);
+    this.updateSearchResults = this.updateSearchResults.bind(this);
   }
 
   componentDidMount() {
@@ -37,6 +37,10 @@ class NavbarComponent extends Component {
 
   toggleProfileDropdown() {
     this.setState({ profileDropdownOn: !this.state.profileDropdownOn });
+  }
+
+  updateSearchResults(results) {
+    this.setState(results);
   }
 
   render() {
@@ -140,7 +144,9 @@ class NavbarComponent extends Component {
             <Link className="mobile-logo" to="/"><img className="logo" src="/img/icon.svg" alt="Studyform Logo" /></Link>
             <div className="material-icons nav-icon">search</div>
             <div className="nav-search-container">
-              <input className="nav-search" name="search" placeholder="Search courses..." type="text" autoComplete="off" onChange={() => getSuggestions(this.refs.search.value, this.setState)} ref="search" />
+              <input className="nav-search" name="search"
+                placeholder="Search courses..." type="text" autoComplete="off"
+                onChange={() => getSuggestions(this.refs.search.value, this.updateSearchResults)} ref="search" />
               {searchResults}
             </div>
             {(isLoggedIn) ? (

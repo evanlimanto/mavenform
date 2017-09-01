@@ -22,6 +22,7 @@ class HomeComponent extends Component {
     }
 
     this.hideNotificationBar = this.hideNotificationBar.bind(this);
+    this.updateSearchResults = this.updateSearchResults.bind(this);
   }
 
   static getMeta(props) {
@@ -49,6 +50,10 @@ class HomeComponent extends Component {
 
   hideNotificationBar() {
     this.setState({ notificationBar: false });
+  }
+
+  updateSearchResults(results) {
+    this.setState(results);
   }
 
   render() {
@@ -87,7 +92,9 @@ class HomeComponent extends Component {
             <hr className="s5" />
             <div className="search-container">
               <div className="material-icons search-icon">search</div>
-              <input className="search" name="search" ref="search" placeholder="Find resources by course here (e.g. CS 61A, Math 1B, Econ 100)." type="text" autoComplete="off" onChange={() => getSuggestions(this.refs.search.value, this.setState)} />
+              <input className="search" name="search" ref="search"
+                placeholder="Find resources by course here (e.g. CS 61A, Math 1B, Econ 100)."
+                type="text" autoComplete="off" onChange={() => getSuggestions(this.refs.search.value, this.updateSearchResults)} />
             </div>
             {searchResults}
             <div className="home-scrolls">

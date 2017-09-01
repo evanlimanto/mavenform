@@ -108,14 +108,16 @@ export function normalizeCourseCode(courseCode) {
   return join(split(courseCode, ' '), '-');
 }
 
-export function getSuggestions(queryStr, setState) {
+export function getSuggestions(queryStr, callback) {
   if (queryStr.length === 0)
-    return setState({ suggestions: [] });
+    return { suggestions: [] };
   algoliaCourseIndex.search({
     query: queryStr,
     length: 4,
     offset: 0,
   }, (err, content) => {
+    if (err)
+      console.error(err);
     const suggestions = map(content.hits, (hit) => {
       return {
         code: hit.code,
@@ -126,6 +128,6 @@ export function getSuggestions(queryStr, setState) {
         label_highlighted: hit._highlightResult.label ? hit._highlightResult.label.value: null,
       };
     });
-    return setState({ suggestions, suggestionsDropdownOn: true });
+    return callback({ suggestions, suggestionsDropdownOn: true });
   });
 }
