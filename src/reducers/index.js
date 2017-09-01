@@ -91,7 +91,7 @@ export const schoolInfo = (state = {}, action) => {
   }
 };
 
-export const topicInfo = (state = {}, action) => {
+export const topicInfo = (state = { problems: { 0: {} } }, action) => {
   switch (action.type) {
     case Actions.UPDATE_TOPIC_INFO:
       return action.info;

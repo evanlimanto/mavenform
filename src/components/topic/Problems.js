@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { map, range } from 'lodash';
+import { keys, map, range } from 'lodash';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { Line } from 'rc-progress';
@@ -24,7 +24,6 @@ class ProblemsComponent extends Component {
       progress: 0,
       correct: 0,
       wrong: 0,
-      numProblems: 5,
     };
     this.checkAnswer = this.checkAnswer.bind(this);
     this.correctAnswer = this.correctAnswer.bind(this);
@@ -32,14 +31,18 @@ class ProblemsComponent extends Component {
     this.reset = this.reset.bind(this);
   }
 
-  static fetchData(dispatch, props) {
-    const { code } = props;
-    return fetch(`${BASE_URL}/getTopicInfo/${code}`)
-      .then((response) => response.json())
-      .then((json) => dispatch(updateTopicInfo(json)));
+  componentDidMount() {
+    ProblemsComponent.fetchData(this.props.dispatch, this.props);
   }
 
-  componentDidUpdate() {
+  static fetchData(dispatch, props) {
+    const { topicCode } = props;
+    return fetch(`${BASE_URL}/getTopicInfo/${topicCode}`)
+      .then((response) => response.json())
+      .then((json) => dispatch(updateTopicInfo(json)))
+  }
+
+  componentDidUpdate(prevProps, prevState) {
     window.renderMJ();
   }
 
@@ -47,7 +50,6 @@ class ProblemsComponent extends Component {
     this.setState({
       answerStatus: "correct",
       showSolution: true,
-      progress: this.state.progress + 1,
       correct: this.state.correct + 1
     });
   }
@@ -56,7 +58,6 @@ class ProblemsComponent extends Component {
     this.setState({
       answerStatus: "wrong",
       showSolution: true,
-      progress: this.state.progress + 1,
       wrong: this.state.wrong + 1
     });
   }
@@ -74,7 +75,8 @@ class ProblemsComponent extends Component {
     this.setState({
       showSolution: false,
       answerStatus: null,
-      showContents: false
+      showContents: false,
+      progress: this.state.progress + 1,
     }, () => window.setTimeout(() => this.setState({ showContents: true }), 300));
   }
 
@@ -87,22 +89,25 @@ class ProblemsComponent extends Component {
     }, false);
   }
 
-  componentDidMount() {
-    window.renderMJ();
-  }
-
   render() {
-    const topicCode = this.props.topicCode;
-    const solution = this.state.showSolution ? (
-      <div className="problem-solution">
-        The dot product of two vectors is the sum of the component-wise products of each of their entries.
-        In this case, the dot product is $5 \cdot (-2) + 1 \cdot 4 + 2 \cdot 3 = 0$.
-      </div>
-    ) : null;
+    if (this.state.progress === keys(this.props.topicInfo.problems).length && !this.state.showSolution) {
+      return (
+        <div className="background">
+          <Navbar />
+          <div className="box">
+          </div>
+          <Footer />
+        </div>
+      );
+    }
+
+    const itemContent = this.props.topicInfo.problems[this.state.progress];
     const contents = this.state.showContents ? [(
       <div key={0}>
-        What is the dot product of the two vectors {"$\\vec{u} = < 5, 1, 2>$"} and {"$\\vec{v} = < -2, 4, 3>$"}?
-        {solution}
+        {itemContent.problem}
+        <div className="problem-solution">
+          {!this.state.showSolution || itemContent.solution}
+        </div>
         <div className="problem-answer">
           <label className={classnames({
             "correct-answer-style": this.state.answerStatus === "correct",
@@ -120,7 +125,7 @@ class ProblemsComponent extends Component {
       <div className="background">
         <Navbar />
         <div className="box">
-          <Line className="problems-progress" percent={Math.floor(this.state.progress * 100.0 / this.state.numProblems)} strokeWidth="1" strokeColor="#66BB66" />
+          <Line className="problems-progress" percent={Math.floor(this.state.progress * 100.0 / keys(this.props.topicInfo.problems).length)} strokeWidth="1" strokeColor="#66BB66" />
           <div className="problem-content">
             <CSSTransitionGroup
               transitionName="contents"
@@ -154,7 +159,8 @@ class ProblemsComponent extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    topicCode: ownProps.topicCode || ownProps.match.params.topicCode
+    topicCode: ownProps.topicCode || ownProps.match.params.topicCode,
+    topicInfo: state.topicInfo
   };
 };
 
