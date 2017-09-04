@@ -154,7 +154,15 @@ class ProblemsComponent extends Component {
             Iterated Integrals
           </div>
           <div className="problem-content">
-            <h3>Problem 2</h3>
+            <h3>
+              Problem 2
+              <span className="reason-circle">
+                <div className="tooltip-container">
+                  <i className="fa fa-question-circle" aria-hidden="true"></i>
+                  <div className="tooltip">This problem came from Auroux's Midterm 1 in Fall 2016. It was suggested for you because it is medium difficulty, covers iterated integrals, and has high relevance to your specific instructor.</div>
+                </div>
+              </span>
+            </h3>
             <hr className="s2" />
             <CSSTransitionGroup
               transitionName="contents"

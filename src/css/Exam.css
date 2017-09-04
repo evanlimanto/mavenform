@@ -306,33 +306,6 @@ img {
 
 /*NAVIGATION*/
 
-.tooltip-container {
-  position: relative;
-  display: inline-block;
-}
-
-.question .tooltip-container {
-  display: block;
-}
-
-.app-mode {
-  position: fixed;
-  top: 10px;
-  right: 25px;
-  width: 30px;
-  height: 30px;
-  padding: 4px;
-}
-
-.app-mode * {
-  color: #ccc;
-}
-
-.app-mode .tooltip {
-  top: 135%;
-  left: -65%;
-}
-
 .menu {
   position: fixed;
   top: 50px;
