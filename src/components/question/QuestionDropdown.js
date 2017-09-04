@@ -65,7 +65,7 @@ class QuestionDropdownComponent extends Component {
     const url = `${BASE_URL}/${schoolCode}/${courseCode}/${examType}/${termCode}#${id}`;
 
     return (
-      <div className="tooltip-container">
+      <div className="dropdown-container">
         <a onClick={this.toggleDropdown} className="arrow material-icons" id={"dropdowntoggle-" + content_id}>keyboard_arrow_down</a>
         <div className="question-options hidden" id={"dropdown-" + content_id}>
           <a className={classnames({"question-option": true, "hidden": this.state.copying})} onClick={(e) => this.copyQuestionLink(e, url)} id={"copylink-" + content_id}>

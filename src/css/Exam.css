@@ -304,6 +304,10 @@ img {
   max-height: 80px;
 }
 
+.dropdown-container {
+  position: relative;
+}
+
 /*NAVIGATION*/
 
 .menu {
