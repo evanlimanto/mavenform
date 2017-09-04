@@ -59,9 +59,11 @@ class MathComponent extends Component {
         const hexColor = "#" + getGreenToRed(percent);
         return (
           <div key={item.concept} className="subtopic">
-            <Line className="progress" percent={percent} strokeWidth="5" strokeColor={hexColor} />
+            <Line className="progress" percent={percent} strokeWidth="4" strokeColor={hexColor} />
+            <hr className="s1" />
             <Link to={`/interactive/math53/${item.code}`}>{item.concept}</Link>
-            <label>({Math.floor(percent/100 * item.count)} / {item.count}) &nbsp; <i className="fa fa-lock" aria-hidden="true"></i></label>
+            <hr className="s0-5" />
+            <label>({Math.floor(percent/100 * item.count)}/{item.count}) &nbsp;</label>
           </div>
         );
       });
@@ -77,12 +79,52 @@ class MathComponent extends Component {
     return (
       <div>
         <Navbar interactive={true} links={["interactive/math53"]} navbarLabels={["Math 53"]} />
-        <div id="header-text">
-          <div className="center">
-            <h4>Math 53</h4>
+        <div className="container info-container">
+          <hr className="s5" />
+          <img className="info-img" src="/img/interactive.svg" alt="subject-logo" />
+          <div className="info">
+            <h4 className="info-title">MATH 53 001</h4>
+            <hr className="s1" />
+            <h5 className="info-subtitle">Interactive Study Guide&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Auroux&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a className="school-link">Syllabus</a></h5>
+            <hr className="s1" />
+            <hr className="s0-5" />
+            <p className="info-text">
+              Interactive problem sets personalized to your class and professor.
+            </p>
           </div>
         </div>
-        <div className="content">{topicItems}</div>
+        <hr className="s5" />
+        <div className="container interactive-container">
+          <div className="int-box int-box-top">
+            <p className="int-helper">
+              <i className="fa fa-check-circle" aria-hidden="true"></i>
+              &nbsp;&nbsp;&nbsp;
+              <span className="int-highlight">Midterm 1 </span>
+              Review
+            </p>
+            <button className="int-button gray">Hide</button>
+          </div>
+          <div className="int-box int-box-white">{topicItems}</div>
+          <div className="int-box int-box-mid">
+            <p className="int-helper">
+              <i className="fa fa-check-circle" aria-hidden="true"></i>
+              &nbsp;&nbsp;&nbsp;
+              <span className="int-highlight">Midterm 2 </span>
+              Review
+            </p>
+            <button className="int-button int-button-white">View</button>
+          </div>
+          <div className="int-box int-box-bot">
+            <p className="int-helper">
+              <i className="fa fa-lock" aria-hidden="true"></i>
+              &nbsp;&nbsp;&nbsp;
+              <span className="int-highlight">Final </span>
+              Review
+            </p>
+            <button className="int-button">Unlock</button>
+          </div>
+        </div>
+        <hr className="s7-5" />
         <Footer />
       </div>
     );

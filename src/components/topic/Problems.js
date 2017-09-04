@@ -125,7 +125,11 @@ class ProblemsComponent extends Component {
     const contents = this.state.showContents ? [(
       <div key={0}>
         <div dangerouslySetInnerHTML={{ __html: itemContent.problem }}></div>
-        <div className="problem-solution" dangerouslySetInnerHTML={{ __html: this.state.showSolution ? itemContent.solution : null }}></div>
+        $\int_0^2 \int_1^0 (x^2y^2 +$
+          <input className="inline-input"></input>
+          $) dy \; dx =$
+        <input className="inline-input"></input>
+        {/*<div className="problem-solution" dangerouslySetInnerHTML={{ __html: this.state.showSolution ? itemContent.solution : null }}></div>
         <div className="problem-answer">
           <label className={classnames({
             "correct-answer-style": this.state.answerStatus === "correct",
@@ -135,7 +139,7 @@ class ProblemsComponent extends Component {
             "correct-answer-style": this.state.answerStatus === "correct",
             "wrong-answer-style": this.state.answerStatus === "wrong",
           })} ref="answer" />
-        </div>
+        </div>*/}
       </div>
     )] : [];
 
@@ -143,16 +147,40 @@ class ProblemsComponent extends Component {
       <div className="background">
         {navbar}
         <div className="box">
-          <Line className="problems-progress" percent={Math.floor(this.state.progressIndicator * 100.0 / this.problemCount)} strokeWidth="1" strokeColor="#66BB66" />
+          {/*<Line className="problems-progress" percent={Math.floor(this.state.progressIndicator * 100.0 / this.problemCount)} strokeWidth="1" strokeColor="#66BB66" />*/}
+          <div className="box-header">
+            <a><i className="fa fa-chevron-left back-arrow" aria-hidden="true"></i></a>
+            &nbsp;&nbsp;&nbsp;
+            Iterated Integrals
+          </div>
           <div className="problem-content">
+            <h3>Problem 2</h3>
+            <hr className="s2" />
             <CSSTransitionGroup
               transitionName="contents"
               transitionEnterTimeout={200}
               transitionLeaveTimeout={300}>
               {contents}
             </CSSTransitionGroup>
+
           </div>
-          <div className={classnames({
+          <div className="box-footer">
+            <span className="progress-label">Progress</span>
+            <div className="progress-circle progress-done"></div>
+            <div className="progress-circle progress-current"></div>
+            <div className="progress-circle"></div>
+            <div className="progress-circle"></div>
+            <div className="progress-circle"></div>
+            <div className="progress-circle"></div>
+            <span className="progress-label progress-label-light">(2/5)</span>
+            <span className="box-buttons">
+              <input className="green" type="button" value="Check Answer" />
+              &nbsp;
+              <input className="blue" type="button" value="Show Solution" />
+              {/*<input className="white" type="button" value="Next Problem" />*/}
+            </span>
+          </div>
+          {/*<div className={classnames({
             "box-footer": true,
             "correct-answer": this.state.answerStatus === "correct",
             "wrong-answer": this.state.answerStatus === "wrong"
@@ -167,7 +195,7 @@ class ProblemsComponent extends Component {
             <button className="check-button" onClick={this.state.showSolution ? this.reset : this.checkAnswer}>
               {this.state.showSolution ? "Next" : "Solve"}
             </button>
-          </div>
+          </div>*/}
         </div>
         <Footer />
       </div>

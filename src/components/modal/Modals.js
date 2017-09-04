@@ -180,7 +180,6 @@ class ModalsComponent extends Component {
           </div>
           <hr className="s2" />
           <a className="login-button blue" onClick={this.selectSchool}>Confirm</a>
-          <hr className="s2"/>
         </span>
       );
     } else if (this.props.modal.type === 'addcourse') {
@@ -198,7 +197,6 @@ class ModalsComponent extends Component {
           </div>
           <hr className="s2" />
           <a className="login-button blue" onClick={this.bookmarkCourse}>Add To Dashboard</a>
-          <hr className="s2"/>
         </span>
       );
     } else if (this.props.modal.type === 'uploadsuccess') {

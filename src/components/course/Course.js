@@ -173,14 +173,17 @@ class CourseComponent extends Component {
       <div className="container interactive-container">
         <div className="int-box">
           {this.props.classRegistered ? (
-            <p className="int-helper">
-              <span className="int-highlight">You've signed up for the AI-generated problem set for this course! </span>
-              <Link className="int-browse-link" to={`/${schoolCode}/${courseCode}/problemset`}>Click here to browse.</Link>
-            </p>
+            <span>
+              <p className="int-helper">
+                You've already signed up for the interactive study guide for <span className="int-highlight">MATH 53 001</span>.
+              </p>
+              <button className="int-button int-button-white int-button-spacer">Remove</button>
+              <button className="int-button">View</button>
+            </span>
           ) : (
             <span>
               <p className="int-helper">
-                  <span className="int-highlight">Interactive study mode available.</span> Study from an AI-generated study guide personalized to your class and professor.
+                  <span className="int-highlight">Interactive study mode available.</span> Study from an interactive study guide personalized to your class and professor.
                 </p>
               <ReactCSSTransitionGroup
                 transitionName="getInfoButton"
@@ -286,7 +289,7 @@ class CourseComponent extends Component {
       <Navbar schoolCode={schoolCode} courseCode={courseCode} />
       <Modals />
       {content}
-      {topicsContent}
+      <hr className="s8" />
       <Footer />
       </div>
     );

@@ -97,6 +97,17 @@ em {
   background: #77cc11;
 }
 
+.white {
+  background: #fff !important;
+  color: #999 !important;
+  border: 1px solid #ccc !important;
+  opacity: 1 !important;
+}
+
+.white:hover {
+  background: #fafafa !important;
+}
+
 .light-gray {
   background: #f4f4f4;
 }

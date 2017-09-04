@@ -137,14 +137,16 @@ class NavbarComponent extends Component {
         }
       }
     }
-    navbarNav = (
-      <div className="gray-nav">
-        <div className="container">
-          {navbarNav}
-          {!this.props.exam || <a className="utility-button" href={this.props.source_url} target="_blank" rel="noopener noreferrer">View PDF</a>}
+    if (!this.props.userHome) {
+      navbarNav = (
+        <div className="gray-nav">
+          <div className="container">
+            {navbarNav}
+            {!this.props.exam || <a className="utility-button" href={this.props.source_url} target="_blank" rel="noopener noreferrer">View PDF</a>}
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
 
     if (this.props.waitlisted)
         navbarNav = null;
