@@ -151,7 +151,10 @@ class ProblemsComponent extends Component {
           <div className="box-header">
             <a><i className="fa fa-chevron-left back-arrow" aria-hidden="true"></i></a>
             &nbsp;&nbsp;&nbsp;
-            Iterated Integrals
+            <span className="box-title">Iterated Integrals</span>
+            <span className="box-buttons">
+              <input className="white" type="button" value="Ask Question" />
+            </span>
           </div>
           <div className="problem-content">
             <h3>
