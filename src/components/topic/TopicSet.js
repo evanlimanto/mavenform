@@ -93,7 +93,7 @@ class TopicSetComponent extends Component {
     });
     return (
       <div>
-        <Navbar interactive={true} links={["courses", `interactive/${schoolCode}/${courseCode}`]} navbarLabels={["Courses", courseCodeToLabel(courseCode)]} />
+        <Navbar interactive={true} links={[`interactive/${schoolCode}/${courseCode}`]} navbarLabels={[courseCodeToLabel(courseCode)]} />
         <div className="container info-container">
           <hr className="s5" />
           <img className="info-img" src="/img/interactive.svg" alt="subject-logo" />

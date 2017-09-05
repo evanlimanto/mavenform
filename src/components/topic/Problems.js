@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import { keys, map, range } from 'lodash';
+import { keys, range, map } from 'lodash';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { Line } from 'rc-progress';
-import hash from 'string-hash';
 import classnames from 'classnames';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { Link } from 'react-router-dom';
 
 import { updateTopicInfo } from '../../actions';
-import { BASE_URL } from '../../utils';
+import { BASE_URL, courseCodeToLabel } from '../../utils';
 import Navbar from '../navbar';
 import Footer from '../footer';
 
@@ -26,6 +24,7 @@ class ProblemsComponent extends Component {
       progressIndicator: 0,
       correct: 0,
       wrong: 0,
+      problemStatus: map(range(0, 10), () => false),
     };
     this.problemCount = 1;
     this.checkAnswer = this.checkAnswer.bind(this);
@@ -101,7 +100,7 @@ class ProblemsComponent extends Component {
 
   render() {
     const { courseCode, schoolCode } = this.props;
-    const navbar = <Navbar interactive={true} links={["courses", `${schoolCode}/${courseCode}`, this.props.topicCode]} navbarLabels={["Courses", "Math 53", this.props.topicInfo.topicLabel]} />
+    const navbar = <Navbar interactive={true} links={[`interactive/${schoolCode}/${courseCode}`, this.props.topicCode]} navbarLabels={[courseCodeToLabel(courseCode), this.props.topicInfo.topicLabel]} />
     if (this.state.progress === this.problemCount && !this.state.showSolution) {
       return (
         <div className="background">
@@ -129,17 +128,6 @@ class ProblemsComponent extends Component {
           <input className="inline-input"></input>
           $) dy \; dx =$
         <input className="inline-input"></input>
-        {/*<div className="problem-solution" dangerouslySetInnerHTML={{ __html: this.state.showSolution ? itemContent.solution : null }}></div>
-        <div className="problem-answer">
-          <label className={classnames({
-            "correct-answer-style": this.state.answerStatus === "correct",
-            "wrong-answer-style": this.state.answerStatus === "wrong",
-          })}>Answer</label>
-          <input type="text" placeholder="Enter your answer here" className={classnames({
-            "correct-answer-style": this.state.answerStatus === "correct",
-            "wrong-answer-style": this.state.answerStatus === "wrong",
-          })} ref="answer" />
-        </div>*/}
       </div>
     )] : [];
 
@@ -147,9 +135,8 @@ class ProblemsComponent extends Component {
       <div className="background">
         {navbar}
         <div className="box">
-          {/*<Line className="problems-progress" percent={Math.floor(this.state.progressIndicator * 100.0 / this.problemCount)} strokeWidth="1" strokeColor="#66BB66" />*/}
           <div className="box-header">
-            <a><i className="fa fa-chevron-left back-arrow" aria-hidden="true"></i></a>
+            <Link to={`/interactive/${schoolCode}/${courseCode}`}><i className="fa fa-chevron-left back-arrow" aria-hidden="true"></i></Link>
             &nbsp;&nbsp;&nbsp;
             <span className="box-title">Iterated Integrals</span>
             <span className="box-buttons">
@@ -158,7 +145,7 @@ class ProblemsComponent extends Component {
           </div>
           <div className="problem-content">
             <h3>
-              Problem 2
+              Problem {this.state.progressIndicator + 1}
               <span className="reason-circle">
                 <div className="tooltip-container">
                   <i className="fa fa-question-circle" aria-hidden="true"></i>
@@ -177,36 +164,15 @@ class ProblemsComponent extends Component {
           </div>
           <div className="box-footer">
             <span className="progress-label">Progress</span>
-            <div className="progress-circle progress-done"></div>
-            <div className="progress-circle progress-current"></div>
-            <div className="progress-circle"></div>
-            <div className="progress-circle"></div>
-            <div className="progress-circle"></div>
-            <div className="progress-circle"></div>
-            <span className="progress-label progress-label-light">(2/5)</span>
+            {map(range(0, this.problemCount), (index) =>
+              <div className={classnames({"progress-circle": true, "progress-done": this.state.problemStatus[index-1], "progress-current": index === this.state.progressIndicator})}></div>)}
+            <span className="progress-label progress-label-light">({this.state.progressIndicator + 1}/{this.problemCount})</span>
             <span className="box-buttons">
               <input className="green" type="button" value="Check Answer" />
               &nbsp;
               <input className="blue" type="button" value="Show Solution" />
-              {/*<input className="white" type="button" value="Next Problem" />*/}
             </span>
           </div>
-          {/*<div className={classnames({
-            "box-footer": true,
-            "correct-answer": this.state.answerStatus === "correct",
-            "wrong-answer": this.state.answerStatus === "wrong"
-          })}>
-            {this.state.answerStatus === "correct" ? (<div className="answer-status correct-answer-style">Correct!</div>) :
-              (this.state.answerStatus === "wrong" ? (<div className="answer-status wrong-answer-style">Read the solution above.</div>) : null)}
-            {this.state.answerStatus ? null : (
-              <button className="skip-button" onClick={this.reset}>
-                Skip
-              </button>
-            )}
-            <button className="check-button" onClick={this.state.showSolution ? this.reset : this.checkAnswer}>
-              {this.state.showSolution ? "Next" : "Solve"}
-            </button>
-          </div>*/}
         </div>
         <Footer />
       </div>

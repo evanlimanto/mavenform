@@ -52,7 +52,7 @@ class UserHomeComponent extends Component {
     return (
       <div className="userhome">
         <Modals />
-        <Navbar userHome={true} />
+        <Navbar interactive={true} links={["course"]} navbarLabels={["Courses"]} />
         <div className="container">
           <div className="center">
             <h4>Your Courses</h4>
