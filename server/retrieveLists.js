@@ -252,7 +252,7 @@ const getSchoolCourses =
     const checkq = `select 1 from schools where code = $1`;
     const q = `
       select C.id, C.code_label, C.code, subjects.subject_code, subjects.subject_label, sum(case when exams.id is not NULL then 1 else 0 end) as exam_count from exams
-      full join courses C on C.id = exams.courseid
+      left join courses C on C.id = exams.courseid
       left join subjects on subjects.id = C.subjectid
       left join schools on schools.id = C.schoolid
       where schools.code = $1
@@ -495,15 +495,17 @@ const getCourseTopics =
 
 const getAvailableTopics =
   (req, res, next) => {
-    const { courseid } = req.params;
+    const { schoolCode, courseCode } = req.params;
     const getq = `
       select T.id as topicid, T.topic, T.concept, T.code, count(*) from topics T
       inner join course_topics CT on CT.topicid = T.id
+      inner join courses on courses.id = CT.courseid
+      inner join schools on schools.id = courses.schoolid
       right join content C on C.topicid = T.id
-      where exists (select 1 from content where topicid = T.id) and CT.courseid = $1
+      where exists (select 1 from content where topicid = T.id) and courses.code = $1 and schools.code = $2
       group by T.id;
     `;
-    pool.query(getq, [courseid], (err, result) => {
+    pool.query(getq, [courseCode, schoolCode], (err, result) => {
       if (err) return next(err);
       const items = _.map(result.rows, (row) => {
         const { topicid, topic, concept, code, subjectid, subject_label, count } = row;
@@ -580,6 +582,26 @@ const getProblemSet =
     });
   };
 
+const getCourseLectures =
+  (req, res, next) => {
+    const { schoolCode, courseCode } = req.params;
+    const getq = `
+      select lectures.id, lecture_code, professor, syllabus_url from lectures
+      inner join courses on lectures.courseid = courses.id
+      inner join schools on courses.schoolid = schools.id
+      where courses.code = $1 and schools.code = $2;
+    `;
+    pool.query(getq, [courseCode, schoolCode], (err, result) => {
+      if (err)
+        return console.error(err);
+      const items = _.map(result.rows, (row) => {
+        const { id, lecture_code, professor, syllabus_url } = row;
+        return { id, lecture_code, professor, syllabus_url };
+      });
+      return res.json(items);
+    });
+  };
+
 module.exports = (app) => {
   // Retrieve initial data
   app.get('/getInitial', getInitial);
@@ -630,5 +652,8 @@ module.exports = (app) => {
   app.get('/getProblemSet/:schoolCode/:courseCode/:examtype', getProblemSet);
 
   // Retrieve available topics
-  app.get('/getAvailableTopics/:courseid', getAvailableTopics);
+  app.get('/getAvailableTopics/:schoolCode/:courseCode', getAvailableTopics);
+
+  // Retrieve course lectures
+  app.get('/getCourseLectures/:schoolCode/:courseCode', getCourseLectures);
 }

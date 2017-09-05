@@ -7,7 +7,8 @@ import Dropzone from 'react-dropzone';
 import req from 'superagent';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import { showLoginModal, showUploadSuccessModal, updateCourseExams, updateCourseTopics, updateCourseLabel, updateCourseSubject, updateClassRegistered } from '../../actions';
+import { showLoginModal, showUploadSuccessModal, updateCourseExams, updateCourseTopics,
+         updateCourseLabel, updateCourseSubject, updateRegisteredLecture, updateCourseLectures } from '../../actions';
 import { canUseDOM, courseCodeToLabel, BASE_URL } from '../../utils';
 import { examClickEvent } from '../../events';
 import Footer from '../footer';
@@ -23,23 +24,18 @@ class InteractiveCards extends Component {
     this.clickBox = this.clickBox.bind(this);
   };
 
-  clickBox(index, professor) {
-    this.props.setProfessor(professor);
-    this.setState({ selected: index });
+  clickBox(id) {
+    this.setState({ selected: id });
+    this.props.setSelectedLecture(id);
   }
 
   render() {
-    const { courseCode } = this.props;
-    const professors = ["Drimbe", "Jeggers", "None"];
-    const codes = ["001", "002", "003"];
-    const syllabi = ["Available", "Available", "None"];
-    const cards = map(range(0, 3), (index) => {
+    const cards = map(this.props.courseLectures, (lecture) => {
       return (
-        <div key={index} className={"card int-card " + ((index === this.state.selected) ? "active" : "")} onClick={() => this.clickBox(index, professors[index])} key={index}>
-          <div className="int-card-h">{courseCodeToLabel(courseCode)} {codes[index]}</div>
-          <p><span className="int-highlight">Instructor(s): </span> {professors[index]}</p>
-          <p><span className="int-highlight">Syllabus: </span>
-            {(index === 0) ? <a target="_blank" href="http://math.ucsd.edu/~ddrimbe/math18s/syllabus.html">{syllabi[index]}</a> : <a>None</a>}</p>
+        <div key={lecture.id} className={"card int-card " + ((lecture.id === this.state.selected) ? "active" : "")} onClick={() => this.clickBox(lecture.id)}>
+          <div className="int-card-h">{courseCodeToLabel(this.props.courseCode)} {lecture.lecture_code}</div>
+          <p><span className="int-highlight">Instructor(s): </span> {lecture.professor}</p>
+          <p><span className="int-highlight">Syllabus: </span><a target="_blank" href={lecture.syllabus_url}>Syllabus</a></p>
         </div>
       );
     });
@@ -55,7 +51,8 @@ class CourseComponent extends Component {
     this.onDrop = this.onDrop.bind(this);
     this.getInfo = this.getInfo.bind(this);
     this.registerClass = this.registerClass.bind(this);
-    this.setProfessor = this.setProfessor.bind(this);
+    this.unregisterClass = this.unregisterClass.bind(this);
+    this.setSelectedLecture = this.setSelectedLecture.bind(this);
     this.professor = null;
     this.state = {
       getInfo: false,
@@ -66,8 +63,8 @@ class CourseComponent extends Component {
     CourseComponent.fetchData(this.props.dispatch, this.props);
   }
 
-  setProfessor(professor) {
-    this.professor = professor;
+  setSelectedLecture(id) {
+    this.selectedId = id;
   }
 
   static fetchData(dispatch, props) {
@@ -78,18 +75,18 @@ class CourseComponent extends Component {
       fetch(`${BASE_URL}/getCourseExams/${schoolCode}/${courseCode}`)
         .then((response) => response.json())
         .then((json) => dispatch(updateCourseExams(json))),
-      fetch(`${BASE_URL}/getCourseTopics/${schoolCode}/${courseCode}`)
-        .then((response) => response.json())
-        .then((json) => dispatch(updateCourseTopics(json))),
       fetch(`${BASE_URL}/getCourseLabel/${schoolCode}/${courseCode}`)
         .then((response) => response.json())
         .then((json) => dispatch(updateCourseLabel(json.label))),
       fetch(`${BASE_URL}/getCourseSubject/${schoolCode}/${courseCode}`)
         .then((response) => response.json())
         .then((json) => dispatch(updateCourseSubject(json.subject))),
-      fetch(`${BASE_URL}/checkUserClassRegistered/${schoolCode}/${courseCode}/${auth_user_id}`)
-        .then((response) => response.text())
-        .then((text) => dispatch(updateClassRegistered(text === "Available")))
+      fetch(`${BASE_URL}/getCourseLectures/${schoolCode}/${courseCode}`)
+        .then((response) => response.json())
+        .then((json) => dispatch(updateCourseLectures(json))),
+      fetch(`${BASE_URL}/getRegisteredLecture/${schoolCode}/${courseCode}/${auth_user_id}`)
+        .then((response) => response.json())
+        .then((json) => dispatch(updateRegisteredLecture(json.lecture_code)))
     ]);
   }
 
@@ -107,19 +104,28 @@ class CourseComponent extends Component {
   }
 
   registerClass() {
-    const term = "fa";
-    const year = 2017;
-    const professor = this.professor;
-    const auth_user_id = this.props.auth.getProfile().user_id;
     const { courseCode, schoolCode } = this.props;
-    if (professor.length === 0)
-      return;
+    const auth_user_id = this.props.auth.getProfile().user_id;
+    const id = this.selectedId;
     req.post('/registerClass')
-      .send({ term, year, professor, auth_user_id, courseCode, schoolCode })
+      .send({ auth_user_id, lectureid: id })
       .end((err, res) => {
         if (err || !res.ok)
           return console.error(err);
-        document.location = `/${schoolCode}/${courseCode}/problemset?register=true`;
+        document.location = `/interactive/${schoolCode}/${courseCode}`;
+      });
+  }
+
+  unregisterClass() {
+    const auth_user_id = this.props.auth.getProfile().user_id;
+    const { courseCode, schoolCode } = this.props;
+    const self = this;
+    req.post('/unregisterClass')
+      .send({ auth_user_id, courseCode, schoolCode })
+      .end((err, res) => {
+        if (err || !res.ok)
+          return console.error(err);
+        self.props.dispatch(updateRegisteredLecture(null));
       });
   }
 
@@ -172,13 +178,13 @@ class CourseComponent extends Component {
     const interactiveBox = (courseCode === "MATH53") ? (
       <div className="container interactive-container">
         <div className="int-box">
-          {this.props.classRegistered ? (
+          {this.props.registeredLecture ? (
             <span>
               <p className="int-helper">
                 You've already signed up for the interactive study guide for <span className="int-highlight">MATH 53 001</span>.
               </p>
-              <button className="int-button int-button-white int-button-spacer">Remove</button>
-              <button className="int-button">View</button>
+              <button className="int-button int-button-white int-button-spacer" onClick={this.unregisterClass}>Remove</button>
+              <Link to={`/interactive/${schoolCode}/${courseCode}`}><button className="int-button">View</button></Link>
             </span>
           ) : (
             <span>
@@ -187,8 +193,8 @@ class CourseComponent extends Component {
                 </p>
               <ReactCSSTransitionGroup
                 transitionName="getInfoButton"
-                transitionEnterTimeout={500}
-                transitionLeaveTimeout={500}>
+                transitionEnterTimeout={200}
+                transitionLeaveTimeout={200}>
                 {this.state.getInfo ? null : (<button className="int-button" onClick={this.getInfo}>Get Started</button>)}
               </ReactCSSTransitionGroup>
             </span>
@@ -202,7 +208,7 @@ class CourseComponent extends Component {
               <hr className="s2" />
               <p className="int-helper">Great! To get started, please select the option below that best matches your class information and syllabus.</p>
               <hr className="s1" />
-              <InteractiveCards setProfessor={this.setProfessor} courseCode={courseCode} />
+              <InteractiveCards courseLectures={this.props.courseLectures} courseCode={courseCode} setSelectedLecture={this.setSelectedLecture} />
               <hr className="s2" />
               <input type="button" className="blue" value="Sign Up" onClick={this.registerClass} />
               <input type="button" className="gray" value="Cancel" onClick={this.getInfo}/>
@@ -304,7 +310,8 @@ const mapStateToProps = (state, ownProps) => {
     courseSubject: state.courseSubject,
     topics: state.courseTopics,
     exams: state.courseExams,
-    classRegistered: state.classRegistered,
+    registeredLecture: state.registeredLecture,
+    courseLectures: state.courseLectures,
     labels: state.labels,
     auth: state.auth,
   }

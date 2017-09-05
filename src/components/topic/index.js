@@ -1,5 +1,5 @@
 import TopicContent from './TopicContent';
-import Math53 from './Math';
 import Problems from './Problems';
+import TopicSet from './TopicSet';
 
-export { TopicContent, Math53, Problems };
+export { TopicContent, Problems, TopicSet };

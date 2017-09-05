@@ -64,6 +64,15 @@ export const courseExams = (state = [], action) => {
   }
 };
 
+export const courseLectures = (state = [], action) => {
+  switch (action.type) {
+    case Actions.UPDATE_COURSE_LECTURES:
+      return action.lectures;
+    default:
+      return state;
+  }
+};
+
 export const schoolCourses = (state = [], action) => {
   switch (action.type) {
     case Actions.UPDATE_SCHOOL_COURSES:
@@ -136,6 +145,15 @@ export const courseLabel = (state = null, action) => {
   }
 };
 
+export const registeredLecture = (state = null, action) => {
+  switch (action.type) {
+    case Actions.UPDATE_REGISTERED_LECTURE:
+      return action.lecture_code;
+    default:
+      return state;
+  }
+};
+
 export const courseSubject = (state = null, action) => {
   switch (action.type) {
     case Actions.UPDATE_COURSE_SUBJECT:
@@ -153,15 +171,6 @@ export const comments = (state = {}, action) => {
       return state;
   }
 };
-
-export const classRegistered = (state = null, action) => {
-  switch (action.type) {
-    case Actions.UPDATE_CLASS_REGISTERED:
-      return action.registered;
-    default:
-      return state;
-  }
-}
 
 export const topicsList = (state = [], action) => {
   switch (action.type) {

@@ -4,15 +4,17 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { Line } from 'rc-progress';
 import { Link } from 'react-router-dom';
+import classnames from 'classnames';
 import hash from 'string-hash';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import Navbar from '../navbar';
 import Footer from '../footer';
 
-import { BASE_URL } from '../../utils';
+import { BASE_URL, courseCodeToLabel } from '../../utils';
 import { updateTopicsList } from '../../actions';
 
-require('../../css/Math.css');
+require('../../css/TopicSet.css');
 
 function getGreenToRed(percent){
   let r, g;
@@ -25,20 +27,32 @@ function getGreenToRed(percent){
   return r + g + "00";
 }
 
-class MathComponent extends Component {
+class TopicSetComponent extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      show: [false, false, false],
+    };
     this.getCategorizedTopics = this.getCategorizedTopics.bind(this);
+    this.toggleShow = this.toggleShow.bind(this);
   }
 
   componentDidMount() {
-    MathComponent.fetchData(this.props.dispatch, this.props);
+    TopicSetComponent.fetchData(this.props.dispatch, this.props);
   }
 
   static fetchData(dispatch, props) {
-    return fetch(`${BASE_URL}/getAvailableTopics/888`)
+    const { schoolCode, courseCode } = props;
+    return fetch(`${BASE_URL}/getAvailableTopics/${schoolCode}/${courseCode}`)
       .then((response) => response.json())
       .then((json) => dispatch(updateTopicsList(json)));
+  }
+
+  toggleShow(index) {
+    const show = this.state.show;
+    const newShow = [show[0], show[1], show[2]];
+    newShow[index] = !newShow[index];
+    this.setState({ show: newShow });
   }
 
   getCategorizedTopics() {
@@ -52,6 +66,7 @@ class MathComponent extends Component {
   }
 
   render() {
+    const { courseCode, schoolCode } = this.props;
     const topicsDict = this.getCategorizedTopics();
     const topicItems = map(this.getCategorizedTopics(), (items, topic) => {
       const arr = map(items, (item) => {
@@ -61,7 +76,7 @@ class MathComponent extends Component {
           <div key={item.concept} className="subtopic">
             <Line className="progress" percent={percent} strokeWidth="4" strokeColor={hexColor} />
             <hr className="s1" />
-            <Link to={`/interactive/math53/${item.code}`}>{item.concept}</Link>
+            <Link to={`/interactive/${schoolCode}/${courseCode}/${item.code}`}>{item.concept}</Link>
             <hr className="s0-5" />
             <label>({Math.floor(percent/100 * item.count)}/{item.count}) &nbsp;</label>
           </div>
@@ -78,7 +93,7 @@ class MathComponent extends Component {
     });
     return (
       <div>
-        <Navbar interactive={true} links={["interactive/math53"]} navbarLabels={["Math 53"]} />
+        <Navbar interactive={true} links={["courses", `interactive/${schoolCode}/${courseCode}`]} navbarLabels={["Courses", courseCodeToLabel(courseCode)]} />
         <div className="container info-container">
           <hr className="s5" />
           <img className="info-img" src="/img/interactive.svg" alt="subject-logo" />
@@ -102,17 +117,22 @@ class MathComponent extends Component {
               <span className="int-highlight">Midterm 1 </span>
               Review
             </p>
-            <button className="int-button gray">Hide</button>
+            <button className={classnames({"int-button": true, "gray": this.state.show[0], "int-button-white": !this.state.show[0]})} onClick={() => this.toggleShow(0)}>{this.state.show[0] ? "Hide" : "View"}</button>
           </div>
-          <div className="int-box int-box-white">{topicItems}</div>
+          <ReactCSSTransitionGroup
+            transitionName="topicItems"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={500}>
+            {this.state.show[0] ? <div className="int-box int-box-white">{topicItems}</div> : null}
+          </ReactCSSTransitionGroup>
           <div className="int-box int-box-mid">
             <p className="int-helper">
-              <i className="fa fa-check-circle" aria-hidden="true"></i>
+              <i className="fa fa-lock" aria-hidden="true"></i>
               &nbsp;&nbsp;&nbsp;
               <span className="int-highlight">Midterm 2 </span>
               Review
             </p>
-            <button className="int-button int-button-white">View</button>
+            <button className="int-button">Unlock</button>
           </div>
           <div className="int-box int-box-bot">
             <p className="int-helper">
@@ -133,7 +153,9 @@ class MathComponent extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    topicsList: state.topicsList
+    topicsList: state.topicsList,
+    courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
+    schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
   };
 };
 
@@ -141,9 +163,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return { dispatch };
 };
 
-const Math53 = connect(
+const TopicSet = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(MathComponent);
+)(TopicSetComponent);
 
-export default Math53;
+export default TopicSet;

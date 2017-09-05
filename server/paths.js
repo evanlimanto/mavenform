@@ -797,38 +797,52 @@ module.exports = (app) => {
   });
 
   app.post('/registerClass', (req, res, next) => {
-    const { courseid, term, year, professor, auth_user_id, courseCode, schoolCode } = req.body;
+    const { auth_user_id, lectureid } = req.body;
 
     const inq = `
-      insert into bookmarked_courses (userid, courseid, professor, termid)
-      select q1.id, q2.id, $1, q3.id from
-        (select id from users where auth_user_id = $2) as q1
-        cross join
-        (select courses.id from courses inner join schools on courses.schoolid = schools.id where courses.code = $3 and schools.code = $4) q2
-        cross join
-        (select id from terms where term_code = $5) as q3
+      insert into bookmarked_courses (userid, lectureid)
+      select q1.id, $1 from (select id from users where auth_user_id = $2) as q1
     `;
-    config.pool.query(inq, [professor, auth_user_id, courseCode, schoolCode, term + _.toString(year - 2000)], (err, result) => {
+    config.pool.query(inq, [lectureid, auth_user_id], (err, result) => {
       if (err) return next(err);
       return res.send("Success!");
     });
   });
 
-  app.get('/checkUserClassRegistered/:schoolCode/:courseCode/:auth_user_id', (req, res, next) => {
+  app.post('/unregisterClass', (req, res, next) => {
+    const { auth_user_id, courseCode, schoolCode } = req.body;
+
+    const delq = `
+      delete from bookmarked_courses
+      where userid = (select id from users where auth_user_id = $1) and
+      lectureid in (select lectures.id from lectures
+          inner join courses on lectures.courseid = courses.id
+          inner join schools on courses.schoolid = schools.id
+          where courses.code = $2 and schools.code = $3
+      )
+    `;
+    config.pool.query(delq, [auth_user_id, courseCode, schoolCode], (err, result) => {
+      if (err) return next(err);
+      return res.send("Success!");
+    });
+  });
+
+  app.get('/getRegisteredLecture/:schoolCode/:courseCode/:auth_user_id', (req, res, next) => {
     const { schoolCode, courseCode, auth_user_id } = req.params;
 
     const getq = `
-      select 1 from bookmarked_courses BC
-      inner join users on users.id = BC.userid
-      inner join courses on courses.id = BC.courseid
-      inner join schools on schools.id = courses.schoolid
-      where schools.code = $1 and courses.code = $2 and users.auth_user_id = $3
+      select L.lecture_code as lecture_code from bookmarked_courses BC
+      inner join users U on BC.userid = U.id
+      inner join lectures L on L.id = BC.lectureid
+      inner join courses C on L.courseid = C.id
+      inner join schools S on C.schoolid = S.id
+      where S.code = $1 and C.code = $2 and U.auth_user_id = $3;
     `;
     config.pool.query(getq, [schoolCode, courseCode, auth_user_id], (err, result) => {
       if (err) return next(err);
       if (result.rows.length === 0)
-        return res.send("Empty");
-      return res.send("Available");
+        return res.send({ lecture_code: null });
+      return res.json({ lecture_code: result.rows[0].lecture_code });
     });
   });
 

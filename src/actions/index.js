@@ -102,11 +102,11 @@ export const updateComments = (comments) => {
   };
 };
 
-export const UPDATE_CLASS_REGISTERED = 'UPDATE_CLASS_REGISTERED';
-export const updateClassRegistered = (registered) => {
+export const UPDATE_REGISTERED_LECTURE = 'UPDATE_REGISTERED_LECTURE';
+export const updateRegisteredLecture = (lecture_code) => {
   return {
-    type: UPDATE_CLASS_REGISTERED,
-    registered: registered,
+    type: UPDATE_REGISTERED_LECTURE,
+    lecture_code: lecture_code,
   };
 };
 
@@ -115,6 +115,14 @@ export const updateTopicsList = (topics) => {
   return {
     type: UPDATE_TOPICS_LIST,
     topics: topics,
+  };
+};
+
+export const UPDATE_COURSE_LECTURES = 'UPDATE_COURSE_LECTURES';
+export const updateCourseLectures = (lectures) => {
+  return {
+    type: UPDATE_COURSE_LECTURES,
+    lectures: lectures,
   };
 };
 

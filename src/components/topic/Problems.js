@@ -13,7 +13,7 @@ import { BASE_URL } from '../../utils';
 import Navbar from '../navbar';
 import Footer from '../footer';
 
-require('../../css/Math.css');
+require('../../css/TopicSet.css');
 
 class ProblemsComponent extends Component {
   constructor(props) {
@@ -100,8 +100,8 @@ class ProblemsComponent extends Component {
   }
 
   render() {
-    console.log(this.props, this.state);
-    const navbar = <Navbar interactive={true} links={["interactive/math53", this.props.topicCode]} navbarLabels={["Math 53", this.props.topicInfo.topicLabel]} />
+    const { courseCode, schoolCode } = this.props;
+    const navbar = <Navbar interactive={true} links={["courses", `${schoolCode}/${courseCode}`, this.props.topicCode]} navbarLabels={["Courses", "Math 53", this.props.topicInfo.topicLabel]} />
     if (this.state.progress === this.problemCount && !this.state.showSolution) {
       return (
         <div className="background">
@@ -206,6 +206,8 @@ class ProblemsComponent extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     topicCode: ownProps.topicCode || ownProps.match.params.topicCode,
+    courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
+    schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
     topicInfo: state.topicInfo
   };
 };

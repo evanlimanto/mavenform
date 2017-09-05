@@ -169,7 +169,7 @@ class NavbarComponent extends Component {
               <span>
                 <span className="nav-button nav-signed-in">
                   <div className="material-icons signed-in-icon">person</div>
-                  <Link to="/profile" className="profile-link">{this.props.auth.getProfile().user_metadata.username}</Link>
+                  <Link to="/courses" className="profile-link">{this.props.auth.getProfile().user_metadata.username}</Link>
                 </span>
                 <Link to="/logout" className="nav-button">Log Out</Link>
               </span>

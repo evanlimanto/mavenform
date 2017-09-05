@@ -284,3 +284,26 @@ h2.info-text {
   position: relative;
   top: 1px;
 }
+
+/* Transitions */
+.topicItems-enter {
+  opacity: 0.0;
+  max-height: 0px;
+}
+
+.topicItems-enter.topicItems-enter-active {
+  opacity: 1.0;
+  max-height: 3000px;
+  transition: opacity 500ms ease-in, max-height 200ms ease-in;
+}
+
+.topicItems-leave {
+  opacity: 1.0;
+  max-height: 3000px;
+}
+
+.topicItems-leave.topicItems-leave-active {
+  opacity: 0.0;
+  max-height: 0px;
+  transition: opacity 500ms ease-in, max-height 500ms ease-in;
+}
