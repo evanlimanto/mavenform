@@ -46,13 +46,19 @@
   font-family: 'Lato', sans-serif;
   font-weight: 700;
   font-size: 20px;
-  padding: 25px 20px;
+  padding: 15px 10px 15px 20px;
+  height: 73px;
   border-bottom: 1px solid #ccc;
+}
+
+.box-title {
+  position: relative;
+  top: 10px;
 }
 
 .back-arrow {
   position: relative;
-  top: -1px;
+  top: 9px;
   color: #ccc;
 }
 
@@ -71,7 +77,7 @@
   bottom: 0;
   border-top: 1px solid #ccc;
   width: 100%;
-  padding: 16px 30px 15px;
+  padding: 16px 10px 15px;
 }
 
 .progress-label {
@@ -306,4 +312,59 @@ h2.info-text {
   opacity: 0.0;
   max-height: 0px;
   transition: opacity 500ms ease-in, max-height 500ms ease-in;
+}
+
+.reason-circle {
+  position: relative;
+  left: 10px;
+}
+
+.reason-circle i {
+  color: #ccc;
+}
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  position: absolute;
+  top: 35px;
+  left: -20px;
+  display: none;
+  width: 500px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #111;
+  background: #fff;
+  padding: 15px 20px;
+  z-index: 3;
+  border: 1px solid #ccc;
+}
+
+.tooltip::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent #fff transparent;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: -18px;
+  left: 19.5px;
+  border-width: 9px;
+  z-index: -1;
+  border-style: solid;
+  border-color: transparent transparent #ccc transparent;
+}
+
+.tooltip-container i:hover ~ .tooltip, .tooltip:hover {
+  display: block;
 }

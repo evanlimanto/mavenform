@@ -100,11 +100,11 @@ class TopicSetComponent extends Component {
           <div className="info">
             <h4 className="info-title">MATH 53 001</h4>
             <hr className="s1" />
-            <h5 className="info-subtitle">Interactive Study Guide&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Auroux&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a className="school-link">Syllabus</a></h5>
+            <h5 className="info-subtitle">Auroux&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Fall 2017&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a className="school-link">Syllabus</a></h5>
             <hr className="s1" />
             <hr className="s0-5" />
             <p className="info-text">
-              Interactive problem sets personalized to your class and professor.
+              Interactive study guide personalized to your class and professor.
             </p>
           </div>
         </div>
