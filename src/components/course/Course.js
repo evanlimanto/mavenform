@@ -235,9 +235,10 @@ class CourseComponent extends Component {
             </p>
           </div>
         </div>
-        <hr className="s1" />
+        <hr className="s3" />
         {interactiveBox}
         <hr className="s1" />
+        <hr className="s0-5" />
         <div className="center">
         {!!this.props.exams || <p className="loader">Loading exams...</p>}
         <div className="table-container-container">
