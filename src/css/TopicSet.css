@@ -290,7 +290,7 @@ h2.info-text {
 .topicItems-enter.topicItems-enter-active {
   opacity: 1.0;
   max-height: 3000px;
-  transition: opacity 500ms ease-in, max-height 200ms ease-in;
+  transition: opacity 200ms ease-in, max-height 200ms ease-in;
 }
 
 .topicItems-leave {
@@ -301,7 +301,7 @@ h2.info-text {
 .topicItems-leave.topicItems-leave-active {
   opacity: 0.0;
   max-height: 0px;
-  transition: opacity 500ms ease-in, max-height 500ms ease-in;
+  transition: opacity 200ms ease-in, max-height 200ms ease-in;
 }
 
 .reason-circle {

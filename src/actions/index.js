@@ -134,6 +134,14 @@ export const updateCompletedProblems = (topicids) => {
   }
 };
 
+export const UPDATE_COMPLETED_PROBLEM_COUNTS = 'UPDATE_COMPLETED_PROBLEM_COUNTS';
+export const updateCompletedProblemCounts = (problemCounts) => {
+  return {
+    type: UPDATE_COMPLETED_PROBLEM_COUNTS,
+    problemCounts: problemCounts,
+  };
+};
+
 export const SHOW_LOGIN_MODAL = 'SHOW_LOGIN_MODAL';
 export const showLoginModal = () => { return { type: SHOW_LOGIN_MODAL }; };
 export const SHOW_WAITLIST_MODAL = 'SHOW_WAITLIST_MODAL';

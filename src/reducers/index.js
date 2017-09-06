@@ -190,6 +190,15 @@ export const completedProblems = (state = [], action) => {
   }
 };
 
+export const completedProblemCounts = (state = {}, action) => {
+  switch (action.type) {
+    case Actions.UPDATE_COMPLETED_PROBLEM_COUNTS:
+      return action.problemCounts;
+    default:
+      return state;
+  }
+};
+
 export const modal = (state = { type: null, errorText: null }, action) => {
   switch (action.type) {
     case Actions.SHOW_LOGIN_MODAL:

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { forEach, has, map, range } from 'lodash';
+import { forEach, has, toInteger, map, range } from 'lodash';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { Line } from 'rc-progress';
@@ -12,7 +12,7 @@ import Navbar from '../navbar';
 import Footer from '../footer';
 
 import { BASE_URL, courseCodeToLabel } from '../../utils';
-import { updateTopicsList } from '../../actions';
+import { updateCompletedProblemCounts, updateTopicsList } from '../../actions';
 
 require('../../css/TopicSet.css');
 
@@ -43,9 +43,15 @@ class TopicSetComponent extends Component {
 
   static fetchData(dispatch, props) {
     const { schoolCode, courseCode } = props;
-    return fetch(`${BASE_URL}/getAvailableTopics/${schoolCode}/${courseCode}`)
-      .then((response) => response.json())
-      .then((json) => dispatch(updateTopicsList(json)));
+    const auth_user_id = props.auth.getProfile().user_id;
+    return Promise.all([
+      fetch(`${BASE_URL}/getAvailableTopics/${schoolCode}/${courseCode}`)
+        .then((response) => response.json())
+        .then((json) => dispatch(updateTopicsList(json))),
+      fetch(`${BASE_URL}/getCompletedProblemsCount/${schoolCode}/${courseCode}/${auth_user_id}`)
+        .then((response) => response.json())
+        .then((json) => dispatch(updateCompletedProblemCounts(json)))
+    ]);
   }
 
   toggleShow(index) {
@@ -70,7 +76,7 @@ class TopicSetComponent extends Component {
     const topicsDict = this.getCategorizedTopics();
     const topicItems = map(this.getCategorizedTopics(), (items, topic) => {
       const arr = map(items, (item) => {
-        const percent = 0;
+        const percent = Math.floor(toInteger(this.props.completedProblemCounts[item.code] || 0) / item.count * 100.0);
         const hexColor = "#" + getGreenToRed(percent);
         return (
           <div key={item.concept} className="subtopic">
@@ -121,8 +127,8 @@ class TopicSetComponent extends Component {
           </div>
           <ReactCSSTransitionGroup
             transitionName="topicItems"
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={500}>
+            transitionEnterTimeout={200}
+            transitionLeaveTimeout={200}>
             {this.state.show[0] ? <div className="int-box int-box-white">{topicItems}</div> : null}
           </ReactCSSTransitionGroup>
           <div className="int-box int-box-mid">
@@ -156,6 +162,8 @@ const mapStateToProps = (state, ownProps) => {
     topicsList: state.topicsList,
     courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
     schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
+    completedProblemCounts: state.completedProblemCounts,
+    auth: state.auth,
   };
 };
 

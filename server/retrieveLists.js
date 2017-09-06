@@ -623,6 +623,31 @@ const getCompletedProblems =
     });
   };
 
+const getCompletedProblemsCount =
+  (req, res, next) => {
+    const { schoolCode, courseCode, auth_user_id } = req.params;
+    const getq = `
+      select T.code, count(*) from problems_solved PS
+        inner join course_topics CT on CT.id = PS.ctsid
+        inner join courses C on C.id = CT.courseid
+        inner join schools S on S.id = C.schoolid
+        inner join topics T on T.id = CT.topicid
+        inner join users U on U.id = PS.userid
+        where S.code = $1 and C.code = $2 and U.auth_user_id = $3
+        group by T.code;
+    `;
+    pool.query(getq, [schoolCode, courseCode, auth_user_id], (err, result) => {
+      if (err)
+        return console.error(err);
+      const items = _.reduce(result.rows, (dict, row) => {
+        const { code, count } = row;
+        dict[code] = count;
+        return dict;
+      }, {});
+      return res.json(items);
+    });
+  };
+
 module.exports = (app) => {
   // Retrieve initial data
   app.get('/getInitial', getInitial);
@@ -683,4 +708,6 @@ module.exports = (app) => {
 
   // Retrieve completed problems
   app.get('/getCompletedProblems/:schoolCode/:courseCode/:topicCode/:auth_user_id', getCompletedProblems);
+  app.get('/getCompletedProblemsCount/:schoolCode/:courseCode/:auth_user_id', getCompletedProblemsCount);
+
 }
