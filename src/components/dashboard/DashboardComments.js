@@ -31,9 +31,17 @@ class DashboardComments extends Component {
 
   render() {
     const comments = map(this.state.comments, (comment) => {
-      return <div>{comment.content} &nbsp; &nbsp; <a onClick={() => this.deleteComment(comment.id)}>x</a></div>;
+      return <div className="admin-comment">{comment.content} &nbsp; &nbsp; <a>View</a><a onClick={() => this.deleteComment(comment.id)}>Delete</a></div>;
     });
-    return <div>{comments}</div>;
+    return <div className="admin-general">
+      <div className="admin-nav">
+        <a className="admin-link" href="/dashboard">TRANSCRIBE</a>
+        <a className="admin-link" href="/dashboard/courses">COURSES</a>
+        <a className="admin-link" href="/dashboard/problems">PROBLEMS</a>
+        <a className="admin-link admin-link-active" href="/dashboard/comments">COMMENTS</a>
+      </div>
+      {comments}
+    </div>;
   }
 }
 

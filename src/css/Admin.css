@@ -1,20 +1,71 @@
+.admin-general {
+  padding: 15px;
+}
+
+.adjust {
+  padding: 0 5px;
+}
+
+.admin-general .table-container-container {
+  max-width: 100%;
+}
+
+.admin-comment {
+  padding: 5px;
+}
+
+.admin-comment a, .admin-function {
+  text-decoration: underline;
+  color: #ccc;
+  margin-right: 10px;
+}
+
+.admin-comment a:hover, .admin-function:hover {
+  color: #11aacc;
+}
+
+.admin-nav {
+  padding: 10px 0;
+}
+
+.admin-link {
+  color: #ccc;
+  padding: 5px;
+  border: 1px solid #ccc;
+  margin: 0 5px;
+}
+
+.admin-link-active{
+  color: #11aacc;
+  border: 1px solid #11aacc;
+}
+
+.admin-link:hover {
+  border: 1px solid #11aacc;
+}
+
 .contentContainer {
-  margin: 10px;
+  padding: 15px;
 }
 
 .contentContainer .contentNavCol {
   float: left;
   width: 200px;
-  border: 2px solid black;
-  padding: 10px;
+  border: 1px solid black;
+  padding: 5px;
   margin: 0px 5px;
-  border-radius: 5px;
+}
+
+.contentNavCol a {
+  font-size: 12px;
+  line-height: 16px;
 }
 
 textarea.contentCol {
   width: 200px;
-  height: 100px;
-  margin: 10px 20px;
+  height: 145px;
+  padding: 5px;
+  margin: 10px 10px 0 0;
   float: left;
   display: inline-block;
 }
@@ -27,9 +78,36 @@ textarea.contentCol {
   color: blue;
 }
 
-.contentContainer input, .contentContainer select, .contentContainer button {
+.contentContainer .question {
+  padding-top: 0;
+  max-width: 1000px;
+}
+
+.contentContainer input, .contentContainer select {
   border: 1px solid black;
-  border-radius: 1px;
+  border-radius: 0px;
+  margin-right: 10px;
+}
+
+.contentContainer button {
+  color: #fff;
+  background: #11aacc;
+  box-shadow: 0 0 0 4px #11aacc;
+  width: 100px;
+  margin-left: 5px;
+  opacity: 0.9;
+}
+
+.contentContainer button:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.question input, .comment-box button {
+  width: auto;
+  border-radius: 5px !important;
+  border: none !important;
+  box-shadow: none;
 }
 
 .admin {

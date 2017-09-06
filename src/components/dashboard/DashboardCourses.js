@@ -59,7 +59,7 @@ class DashboardCourses extends Component {
         <span key={schoolName}>
           <h2>{schoolName}</h2>
           {map(schoolCourses, (course, key) => {
-            return <div key={key}><a onClick={() => this.deleteCourse(course.course_id)}> x </a>{course.course_code} - {course.course_name}</div>;
+            return <div key={key}>{course.course_code} - {(this.state.examid) ? course.course_name : "NO COURSE NAME"}<a className="admin-function" style={{"marginLeft" : "20px"}}onClick={() => this.deleteCourse(course.course_id)}>Delete</a></div>;
           })}
           <br/>
         </span>
@@ -84,16 +84,25 @@ class DashboardCourses extends Component {
 
     return (
       <div className="dashboard-courses-container">
-        <h1>Courses</h1>
-        {coursesList}
-        <form>
-          <br/><br/>
+        <div className="admin-nav">
+          <a className="admin-link" href="/dashboard">TRANSCRIBE</a>
+          <a className="admin-link admin-link-active" href="/dashboard/courses">COURSES</a>
+          <a className="admin-link" href="/dashboard/problems">PROBLEMS</a>
+          <a className="admin-link" href="/dashboard/comments">COMMENTS</a>
+        </div>
+        <hr className="s1" />
+        <form style={{"padding" : "5px"}}>
           <input type="text" ref="code" placeholder="Course Code" />
           <input type="text" ref="name" placeholder="Course Name" />
           {schoolsSelect}
           {subjectsSelect}
-          <button onClick={(e) => this.addCourse(e)}>Add Course</button>
+          <button onClick={(e) => this.addCourse(e)}>ADD COURSE</button>
         </form>
+        <hr className="s1" />
+        <div style={{"padding" : "5px"}}>
+          <h1>COURSES</h1>
+          {coursesList}
+        </div>
       </div>
     );    
   }

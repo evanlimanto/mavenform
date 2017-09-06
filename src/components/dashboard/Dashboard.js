@@ -54,37 +54,44 @@ class Dashboard extends Component {
     });
 
     return (
-      <div>
-        <hr className="s5" />
-        <h1 className="center">ALL TRANSCIPTIONS</h1>
-        <div className="center">
-          <div className="table-container-container">
-            <div className="table-container">
-              <table className="exams center">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Term</th>
-                    <th>Instructors</th>
-                    <th>Last Modified</th>
-                    <th>Studyform</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="available" >
-                    <td><Link to="/dashboard/transcribe">-</Link></td>
-                    <td><Link to="/dashboard/transcribe">-</Link></td>
-                    <td><Link to="/dashboard/transcribe">-</Link></td>
-                    <td><Link to="/dashboard/transcribe">-</Link></td>
-                    <td><h6><Link className="table-link" to="/dashboard/transcribe">CREATE NEW &#8594;</Link></h6></td>
-                  </tr>
-                  {examsList}
-                </tbody>
-              </table>
+      <div className="admin-general">
+        <div className="admin-nav">
+          <a className="admin-link admin-link-active" href="/dashboard">TRANSCRIBE</a>          
+          <a className="admin-link" href="/dashboard/courses">COURSES</a>
+          <a className="admin-link" href="/dashboard/problems">PROBLEMS</a>
+          <a className="admin-link" href="/dashboard/comments">COMMENTS</a>
+          <a className="admin-link" onClick={this.logout}>LOG OUT</a>
+        </div>
+        <hr className="s2" />
+        <div className="adjust">
+          <h1>ALL TRANSCIPTIONS</h1>
+          <div className="center">
+            <div className="table-container-container">
+              <div className="table-container">
+                <table className="exams center">
+                  <thead>
+                    <tr>
+                      <th>Type</th>
+                      <th>Term</th>
+                      <th>Instructors</th>
+                      <th>Last Modified</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="available" >
+                      <td><Link to="/dashboard/transcribe">-</Link></td>
+                      <td><Link to="/dashboard/transcribe">-</Link></td>
+                      <td><Link to="/dashboard/transcribe">-</Link></td>
+                      <td><Link to="/dashboard/transcribe">-</Link></td>
+                      <td><h6><Link className="table-link" to="/dashboard/transcribe">CREATE NEW &#8594;</Link></h6></td>
+                    </tr>
+                    {examsList}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-          <hr className="s7-5" />
-          <button className="dashboard-logout-btn" onClick={this.logout}>Logout</button>
         </div>
       </div>
     );

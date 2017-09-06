@@ -293,7 +293,7 @@ class TranscribeComponent extends Component {
           <hr className="s2" />
           <div>
             <button className='blue' onClick={(e) => this.upload(e)}>{this.state.uploading ? <img src="/img/ring.svg" width="16" height="16" alt="loading" /> : "SAVE" }</button>
-            <Link className='gray cancel' to="/dashboard">Back</Link>
+            <Link className='gray cancel' to="/dashboard">BACK</Link>
           </div>
           <hr className="s1" />
           {this.state.error ? <p className='error'>{this.state.error}</p> : null}

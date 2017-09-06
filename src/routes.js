@@ -19,7 +19,7 @@ const routes = [
   { path: '/courses', component: UserHome },
   { path: '/dashboard/comments', component: DashboardComments },
   { path: '/dashboard/courses', component: DashboardCourses },
-  { path: '/dashboard/content', component: DashboardContent },
+  { path: '/dashboard/problems', component: DashboardContent },
   { path: '/dashboard/transcribed', component: Transcribed },
   { path: '/dashboard/transcribe', component: Transcribe },
   { path: '/dashboard', component: Dashboard },

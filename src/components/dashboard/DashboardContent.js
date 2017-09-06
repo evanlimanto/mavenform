@@ -178,33 +178,42 @@ class DashboardContentComponent extends Component {
     const exam = (this.state.examid) ? this.props.exams.key_dict[this.state.examid] : null;
     return (
       <div className="contentContainer">
-        <div className="backLink"><Link to="/dashboard">Back to Dashboard</Link></div>
-        <h1>Add Problem</h1>
-        <select ref="exam">
+        <div className="admin-nav">
+          <a className="admin-link" href="/dashboard">TRANSCRIBE</a>
+          <a className="admin-link" href="/dashboard/courses">COURSES</a>
+          <a className="admin-link admin-link-active" href="/dashboard/problems">PROBLEMS</a>
+          <a className="admin-link" href="/dashboard/comments">COMMENTS</a>
+        </div>
+        <hr className="s1" />
+        <select ref="exam" style={{"margin-left" : "5px"}}>
           {examSelectItems}
         </select>
         &nbsp;&nbsp;
         <input type="text" ref="problem_num" placeholder="problem number" />&nbsp;&nbsp;
         <input type="text" ref="subproblem_num" placeholder="subproblem number" />&nbsp;&nbsp;
-        <button onClick={(e) => this.addProblem(e)}>Add Problem</button>
+        <button onClick={(e) => this.addProblem(e)}>ADD PROBLEM</button>
         <hr className="s2" />
         <div>
+          <h1 style={{"margin-left" : "5px"}}>PROBLEMS</h1>
           <span className="contentNavCol" style={{ height: "200px", "overflowY": "scroll" }}>{exams}</span>
-          {subparts.length ? <span className="contentNavCol" style={{ height: "200px", "overflowY": "scroll" }}>{subparts}</span> : null}
-          <h1>{this.state.examid} {!exam || `: ${exam.courseid} - ${exam.examtype} - ${exam.examid}`} {!exam || <a href={exam.source_url} target="_blank">URL</a>} {this.state.status}</h1>
+          {subparts.length ? <span className="contentNavCol" style={{ height: "200px", "overflowY": "scroll", "marginRight" : "10px" }}>{subparts}</span> : <span className="contentNavCol" style={{ height: "200px", "overflowY": "scroll", "marginRight" : "10px" }}>NO EXAM SELECTED YET</span>}
+          <p style={{ "paddingBottom" : "4px" }}><strong>EXAM:</strong> ({this.state.examid}) {!exam || ` ${exam.courseid} - ${exam.examtype} - ${exam.examid}`} {!exam || <a href={exam.source_url} target="_blank" style={{"textDecoration" : "underline", "marginLeft" : "10px"}}>[SOURCE PDF]</a>} {this.state.status}</p>
           {topicSelectItems}
           {difficultySelectItems}
+          {(problem.problem !== "") ? <button onClick={() => this.saveProblem()}>SAVE</button> : <button>SAVE</button>}
           <div>
-            <textarea className="contentCol" value={problem.problem ? problem.problem : ""} ref="problem" onChange={this.handleChange} placeholder="problem" />
-            <textarea className="contentCol" value={problem.solution ? problem.solution : ""} ref="solution" onChange={this.handleChange} placeholder="solution" />
-            <textarea className="contentCol" value={problem.choices ? problem.choices: ""} ref="choices" onChange={this.handleChange} placeholder="choices" />
-            <textarea className="contentCol" value={problem.final_solution ? problem.final_solution : ""} ref="final_solution" onChange={this.handleChange} placeholder="final solution" />
+            <textarea className="contentCol" value={problem.problem ? problem.problem : ""} ref="problem" onChange={this.handleChange} placeholder="PROBLEM CONTENT" />
+            <textarea className="contentCol" value={problem.solution ? problem.solution : ""} ref="solution" onChange={this.handleChange} placeholder="FREE RESPONSE SOLUTION" />
+            <textarea className="contentCol" value={problem.choices ? problem.choices: ""} ref="choices" onChange={this.handleChange} placeholder="MULTIPLE CHOICE OPTIONS" />
+            <textarea className="contentCol" value={problem.final_solution ? problem.final_solution : ""} ref="final_solution" onChange={this.handleChange} placeholder="MULTIPLE CHOICE SOLUTION" />
           </div>
-          {(problem.problem !== "") ? <button onClick={() => this.saveProblem()}>Save</button> : null}
         </div>
-        {(problem.problem !== "") ? ((problem.choices) ?
+        <hr className="s1" />
+        <div className="normal-buttons">
+          {(problem.problem !== "") ? ((problem.choices) ?
           <MultipleChoiceQuestion content={problem.problem} solutionNum={problem.solution} choices={problem.choices} /> :
           <Question content={renderer.preprocess(problem.problem)} solution={renderer.preprocess(problem.solution)} final_solution={problem.final_solution} />) : null}
+        </div>
       </div>
     );
   }
