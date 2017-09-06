@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { forEach, has, toInteger, map, range } from 'lodash';
+import { forEach, has, toInteger, map } from 'lodash';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { Line } from 'rc-progress';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
-import hash from 'string-hash';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import Navbar from '../navbar';

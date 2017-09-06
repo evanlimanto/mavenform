@@ -37,6 +37,7 @@ class TranscribeComponent extends Component {
       images: [],
       courses: [],
       uploading: false,
+      transcribedExam: {},
     };
 
     this.onDrop = this.onDrop.bind(this);
@@ -49,6 +50,28 @@ class TranscribeComponent extends Component {
 
   componentDidUpdate() {
     window.renderMJ();
+  }
+
+  componentDidMount() {
+    const { transcribedExamId } = this.props;
+    if (transcribedExamId) {
+      fetch(`/getTranscribedContent/${transcribedExamId}`)
+        .then((response) => response.json())
+        .then((json) => {
+          const content = map(sortBy(json, [(item) => item.problem_num, (item) => item.subproblem_num]), (item, key) => {
+            if (item.choices) {
+              return <MultipleChoiceQuestion key={key}
+                      content={item.problem}
+                      choices={item.choices}
+                      solutionNum={item.solution} />;
+            }
+            return <Question key={key}
+                    content={item.problem}
+                    solution={item.solution} />;
+          });
+          this.setState({ content });
+        });
+    }
   }
 
   onDrop(acceptedFiles, rejectedFiles) {
@@ -195,6 +218,15 @@ class TranscribeComponent extends Component {
       });
   }
 
+  approveExam() {
+    const { transcribedExamId } = this.props;
+    fetch(`/approveTranscription/${transcribedExamId}`).then(
+      (res, err) => {
+        if (err) console.error(err);
+        else this.setState({ success: 'Success!' });
+      });
+  }
+
   isLoggedIn() {
     if (!cookies)
       return false;
@@ -293,7 +325,7 @@ class TranscribeComponent extends Component {
           <hr className="s2" />
           <div>
             <button className='blue' onClick={(e) => this.upload(e)}>{this.state.uploading ? <img src="/img/ring.svg" width="16" height="16" alt="loading" /> : "SAVE" }</button>
-            <button className='white'> APPROVE </button>
+            <button className='white' onClick={this.approveExam}> APPROVE </button>
             <Link className='gray cancel' to="/dashboard">BACK</Link>
           </div>
           <hr className="s1" />
@@ -313,9 +345,10 @@ class TranscribeComponent extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    transcribedExamId: ownProps.transcribedExamId || ownProps.match.params.transcribedExamId,
     schools: state.schools,
     exam_types: state.exam_types,
-    terms: state.terms
+    terms: state.terms,
   }; 
 };
 

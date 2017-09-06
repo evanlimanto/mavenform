@@ -43,12 +43,11 @@ class Dashboard extends Component {
     const examsList = map(this.state.exams, (exam, key) => {
       return (
         <tr className="available" key={key}>
-          <td><a>{exam.type_label}</a></td>
-          <td><a>{exam.term_label}</a></td>
-          <td><a>{exam.profs}</a></td>
-          <td><a>{dateFormat(exam.datetime, "ddd, mmmm d, yyyy, h:MM TT")}</a></td>
-          <td><h6><a className="table-link">EDIT / APPROVE &#8594;</a></h6></td>
-          {/*<td><h6><Link className="table-link" to={url}>CLICK TO EDIT &#8594;</Link></h6></td>*/}
+          <td><Link to={"/dashboard/transcribe/" + key}>{exam.type_label}</Link></td>
+          <td><Link to={"/dashboard/transcribe/" + key}>{exam.term_label}</Link></td>
+          <td><Link to={"/dashboard/transcribe/" + key}>{exam.profs}</Link></td>
+          <td><Link to={"/dashboard/transcribe/" + key}>{dateFormat(exam.datetime, "ddd, mmmm d, yyyy, h:MM TT")}</Link></td>
+          <td><h6><Link to={"/dashboard/transcribe/" + key} className="table-link">EDIT / APPROVE &#8594;</Link></h6></td>
         </tr>
       );
     });

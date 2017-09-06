@@ -717,20 +717,24 @@ module.exports = (app) => {
     });
   });
 
-  app.get('/getComments', (req, res, next) => {
-    const getq = `select * from discussion`;
+  app.get('/getAllComments', (req, res, next) => {
+    const getq = `
+      select D.id, D.content, courses.code as course_code,
+        S.code as school_code, E.profs, T.term_code, ET.type_code from discussion D
+      inner join users on D.userid = users.id
+      inner join content C on C.id = D.contentid
+      inner join exams E on E.id = C.exam
+      inner join courses on courses.id = E.courseid
+      inner join schools S on courses.schoolid = S.id
+      inner join terms T on E.examid = T.id
+      inner join exam_types ET on E.examtype = ET.id
+    `;
 
     config.pool.query(getq, (err, result) => {
       if (err) return next(err);
       const items = _.map(result.rows, (row) => {
-        return {
-          id: row.id,
-          content: row.content,
-          userid: row.userid,
-          contentid: row.contentid,
-          upvotes: row.upvotes,
-          deleted: row.deleted,
-        };
+        const { id, content, school_code, course_code, profs, term_code, type_code } = row;
+        return { id, content, school_code, course_code, profs, term_code, type_code };
       });
       return res.json(items);
     });

@@ -138,7 +138,10 @@ const getInitial = (req, res, next) => {
 const getTranscribedExams =
   (req, res, next) => {
     const q = `
-      select ES.id as id, ES.profs as profs, ES.datetime, exam_types.type_code as type_code, exam_types.type_label as type_label, courses.code as course_code, schools.code as school_code, schools.name as school_name, terms.term_code, terms.term_label from exams_staging ES
+      select ES.id as id, ES.profs as profs, ES.datetime,
+        exam_types.type_code as type_code, exam_types.type_label as type_label,
+        courses.code as course_code, schools.code as school_code, schools.name as school_name,
+        terms.term_code, terms.term_label from exams_staging ES
       inner join courses on courses.id = ES.courseid
       inner join exam_types on exam_types.id = ES.examtype
       inner join schools on schools.id = ES.schoolid
@@ -167,7 +170,7 @@ const getTranscribedContent =
   (req, res, next) => {
     const { examid } = req.params;
     const q = `
-      select problem_num, subproblem_num, problem, solution from content_staging
+      select problem_num, subproblem_num, problem, solution, choices from content_staging
       where exam = $1
     `;
     pool.query(q, [examid], (err, result) => {
@@ -178,6 +181,7 @@ const getTranscribedContent =
           subproblem_num: row.subproblem_num,
           problem: renderer.preprocess(row.problem),
           solution: renderer.preprocess(row.solution),
+          choices: row.choices,
         };
       });
       return res.json(items);

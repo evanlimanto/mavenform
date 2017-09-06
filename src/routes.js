@@ -21,6 +21,7 @@ const routes = [
   { path: '/dashboard/courses', component: DashboardCourses },
   { path: '/dashboard/problems', component: DashboardContent },
   { path: '/dashboard/transcribed', component: Transcribed },
+  { path: '/dashboard/transcribe/:transcribedExamId', component: Transcribe },
   { path: '/dashboard/transcribe', component: Transcribe },
   { path: '/dashboard', component: Dashboard },
   { path: '/appsubmitted', component: AppSubmitted },
