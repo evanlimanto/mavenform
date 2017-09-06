@@ -47,7 +47,7 @@ class Dashboard extends Component {
           <td><a>{exam.term_label}</a></td>
           <td><a>{exam.profs}</a></td>
           <td><a>{dateFormat(exam.datetime, "ddd, mmmm d, yyyy, h:MM TT")}</a></td>
-          <td><a>Transcribed</a></td>
+          <td><h6><a className="table-link">EDIT / APPROVE &#8594;</a></h6></td>
           {/*<td><h6><Link className="table-link" to={url}>CLICK TO EDIT &#8594;</Link></h6></td>*/}
         </tr>
       );
@@ -75,16 +75,16 @@ class Dashboard extends Component {
                       <th>Term</th>
                       <th>Instructors</th>
                       <th>Last Modified</th>
-                      <th>Status</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="available" >
+                    <tr className="available">
                       <td><Link to="/dashboard/transcribe">-</Link></td>
                       <td><Link to="/dashboard/transcribe">-</Link></td>
                       <td><Link to="/dashboard/transcribe">-</Link></td>
                       <td><Link to="/dashboard/transcribe">-</Link></td>
-                      <td><h6><Link className="table-link" to="/dashboard/transcribe">CREATE NEW &#8594;</Link></h6></td>
+                      <td><h6><Link className="table-link" to="/dashboard/transcribe">CREATE NEW  &#8594;</Link></h6></td>
                     </tr>
                     {examsList}
                   </tbody>
