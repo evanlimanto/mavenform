@@ -58,9 +58,7 @@ class TranscribeComponent extends Component {
       fetch(`/getTranscribedContent/${transcribedExamId}`)
         .then((response) => response.json())
         .then((json) => {
-          console.log(json);
-          const content = map(json, (item, key) => {
-            console.log(item);
+          const content = map(sortBy(json, [(item) => item.problem_num, (item) => item.subproblem_num]), (item, key) => {
             if (item.choices) {
               return <MultipleChoiceQuestion key={key}
                       content={item.problem}
