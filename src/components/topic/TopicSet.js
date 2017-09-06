@@ -70,7 +70,7 @@ class TopicSetComponent extends Component {
     const topicsDict = this.getCategorizedTopics();
     const topicItems = map(this.getCategorizedTopics(), (items, topic) => {
       const arr = map(items, (item) => {
-        const percent = hash(item.concept) % 100;
+        const percent = 0;
         const hexColor = "#" + getGreenToRed(percent);
         return (
           <div key={item.concept} className="subtopic">
