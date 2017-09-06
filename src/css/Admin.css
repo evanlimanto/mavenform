@@ -129,6 +129,11 @@ textarea.contentCol {
   padding: 0 30px 0 20px;
 }
 
+.transcribed-content .question {
+  position: relative;
+  top: -40px;
+}
+
 .transcribed-content .dropdown-container, .transcribed-content .comment-box {
   display: none;
 }
@@ -160,7 +165,7 @@ textarea.contentCol {
   opacity: 1;
 }
 
-.question input, .comment-box button {
+.question input[type="button"], .comment-box button {
   width: auto;
   border-radius: 5px !important;
   border: none !important;

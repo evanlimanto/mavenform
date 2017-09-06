@@ -91,7 +91,7 @@ class Transcribed extends Component {
           </span>
           <span className="col val-container">
             <h1 className="transcribed-header">TRANSCRIPTION</h1>
-            <textarea className="transcribed-val" value={map(this.state.renderedContent, (content) => content.props.content + "\n" + content.props.solution)}></textarea>
+            <textarea className="transcribed-val" value={map(this.state.renderedContent, (content) => content.props.content + "\n\n" + content.props.solution + "\n\n\n\n\n")}></textarea>
           </span>
         </div>
       </div>
