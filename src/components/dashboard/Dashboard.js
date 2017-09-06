@@ -56,7 +56,7 @@ class Dashboard extends Component {
     return (
       <div className="admin-general">
         <div className="admin-nav">
-          <a className="admin-link admin-link-active" href="/dashboard">TRANSCRIBE</a>          
+          <a className="admin-link admin-link-active" href="/dashboard">TRANSCRIPTIONS</a>          
           <a className="admin-link" href="/dashboard/courses">COURSES</a>
           <a className="admin-link" href="/dashboard/problems">PROBLEMS</a>
           <a className="admin-link" href="/dashboard/comments">COMMENTS</a>
@@ -64,7 +64,7 @@ class Dashboard extends Component {
         </div>
         <hr className="s2" />
         <div className="adjust">
-          <h1>ALL TRANSCIPTIONS</h1>
+          <h1>TRANSCIPTIONS</h1>
           <div className="center">
             <div className="table-container-container">
               <div className="table-container">
