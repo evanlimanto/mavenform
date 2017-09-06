@@ -179,7 +179,8 @@ class DashboardContentComponent extends Component {
     return (
       <div className="contentContainer">
         <div className="admin-nav">
-          <a className="admin-link" href="/dashboard">TRANSCRIPTIONS</a>
+          <a className="admin-link" href="/dashboard">TRANSCRIBE</a>
+          <a className="admin-link" href="/dashboard/transcribed">APPROVE</a> 
           <a className="admin-link" href="/dashboard/courses">COURSES</a>
           <a className="admin-link admin-link-active" href="/dashboard/problems">PROBLEMS</a>
           <a className="admin-link" href="/dashboard/comments">COMMENTS</a>

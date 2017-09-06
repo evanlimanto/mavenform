@@ -35,7 +35,8 @@ class DashboardComments extends Component {
     });
     return <div className="admin-general">
       <div className="admin-nav">
-        <a className="admin-link" href="/dashboard">TRANSCRIPTIONS</a>
+        <a className="admin-link" href="/dashboard">TRANSCRIBE</a>
+        <a className="admin-link" href="/dashboard/transcribed">APPROVE</a> 
         <a className="admin-link" href="/dashboard/courses">COURSES</a>
         <a className="admin-link" href="/dashboard/problems">PROBLEMS</a>
         <a className="admin-link admin-link-active" href="/dashboard/comments">COMMENTS</a>
