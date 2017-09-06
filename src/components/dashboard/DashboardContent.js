@@ -185,7 +185,7 @@ class DashboardContentComponent extends Component {
           <a className="admin-link" href="/dashboard/comments">COMMENTS</a>
         </div>
         <hr className="s1" />
-        <select ref="exam" style={{"margin-left" : "5px"}}>
+        <select ref="exam" style={{"marginLeft" : "5px"}}>
           {examSelectItems}
         </select>
         &nbsp;&nbsp;
@@ -194,7 +194,7 @@ class DashboardContentComponent extends Component {
         <button onClick={(e) => this.addProblem(e)}>ADD PROBLEM</button>
         <hr className="s2" />
         <div>
-          <h1 style={{"margin-left" : "5px"}}>PROBLEMS</h1>
+          <h1 style={{"marginLeft" : "5px"}}>PROBLEMS</h1>
           <span className="contentNavCol" style={{ height: "200px", "overflowY": "scroll" }}>{exams}</span>
           {subparts.length ? <span className="contentNavCol" style={{ height: "200px", "overflowY": "scroll", "marginRight" : "10px" }}>{subparts}</span> : <span className="contentNavCol" style={{ height: "200px", "overflowY": "scroll", "marginRight" : "10px" }}>NO EXAM SELECTED YET</span>}
           <p style={{ "paddingBottom" : "4px" }}><strong>EXAM:</strong> ({this.state.examid}) {!exam || ` ${exam.courseid} - ${exam.examtype} - ${exam.examid}`} {!exam || <a href={exam.source_url} target="_blank" style={{"textDecoration" : "underline", "marginLeft" : "10px"}}>[SOURCE PDF]</a>} {this.state.status}</p>

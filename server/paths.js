@@ -846,35 +846,25 @@ module.exports = (app) => {
     });
   });
 
-  app.post('/updateProgress/:schoolCode/:courseCode/:topicCode/:auth_user_id/:numProblems', (req, res, next) => {
-    const { schoolCode, courseCode, topicCode, auth_user_id, numProblems } = req.params;
+  app.post('/saveProgress', (req, res, next) => {
+    const { schoolCode, courseCode, topicCode, auth_user_id, numProblems, contentid } = req.body;
 
-    const inq = `
-      insert into progress (ctsid, num_solved, userid)
-      select A.id, $1, B.id from
-      (select CT.id from course_topics CT
-       inner join courses C on C.id = CT.courseid
-       inner join schools S on S.id = C.schoolid
-       inner join topics T on T.id = CT.topicid
-       where C.code = $2 and S.code = $3 and T.code = $4) as A,
-      (select id from users where auth_user_id = $5) as B;
-    `;
-    const updateq =`
-      update progress set num_solved = $1 where
-      ctsid = (select CT.id from course_topics CT
+    const progressinq = `
+      with A as (select CT.id from course_topics CT
         inner join courses C on C.id = CT.courseid
         inner join schools S on S.id = C.schoolid
         inner join topics T on T.id = CT.topicid
-        where C.code = $2 and S.code = $3 and T.code = $4)
-      and userid = (select id from users where auth_user_id = $5)
+        where C.code = $2 and S.code = $3 and T.code = $4),
+          B as (select id from users where auth_user_id = $5)
+      insert into problems_solved (ctsid, contentid, userid)
+      select A.id, $1, B.id from A cross join B
+      where not exists (select 1 from problems_solved where ctsid = A.id and userid = B.id and contentid = $1)
     `;
-    async.parallel([
-      (callback) => config.pool.query(inq, [numProblems, courseCode, schoolCode, topicCode, auth_user_id], callback),
-      (callback) => config.pool.query(updateq, [numProblems, courseCode, schoolCode, topicCode, auth_user_id], callback),
-    ], (err) => {
-      if (err) return next(err);
+    config.pool.query(progressinq, [contentid, courseCode, schoolCode, topicCode, auth_user_id], (err, result) => {
+      if (err)
+        return next(err);
       return res.send("Success!");
-    })
+    });
   });
 
   app.get('/getSchoolInfo/:schoolCode/', (req, res, next) => {

@@ -181,6 +181,15 @@ export const topicsList = (state = [], action) => {
   }
 };
 
+export const completedProblems = (state = [], action) => {
+  switch (action.type) {
+    case Actions.UPDATE_COMPLETED_PROBLEMS:
+      return action.topicids;
+    default:
+      return state;
+  }
+};
+
 export const modal = (state = { type: null, errorText: null }, action) => {
   switch (action.type) {
     case Actions.SHOW_LOGIN_MODAL:

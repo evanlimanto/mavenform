@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { map } from 'lodash';
+import { map, sortBy } from 'lodash';
 
 const req = require('superagent');
 require('../../css/Dashboard.css');
@@ -18,15 +18,17 @@ class DashboardCourses extends Component {
   }
 
   componentDidMount() {
-    fetch('/getCoursesBySchool')
-      .then((response) => response.json())
-      .then((json) => this.setState({ courses: json }));
-    fetch('/getSchools')
-      .then((response) => response.json())
-      .then((json) => this.setState({ schools: json }));
-    fetch('/getSubjects')
-      .then((response) => response.json())
-      .then((json) => this.setState({ subjects: json }));
+    Promise.all([
+      fetch('/getCoursesBySchool')
+        .then((response) => response.json())
+        .then((json) => this.setState({ courses: json })),
+      fetch('/getSchools')
+        .then((response) => response.json())
+        .then((json) => this.setState({ schools: json })),
+      fetch('/getSubjects')
+        .then((response) => response.json())
+        .then((json) => this.setState({ subjects: json }))
+    ]);
   }
 
   addCourse(e) {
@@ -68,7 +70,7 @@ class DashboardCourses extends Component {
 
     const schoolsSelect = (
       <select ref="school">
-        {map(this.state.schools, (school, key) => {
+        {map(sortBy(this.state.schools, [(school) => school]), (school, key) => {
           return <option key={key} value={school.id}>{school.name}</option>;
         })}
       </select>

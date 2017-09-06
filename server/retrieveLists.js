@@ -603,6 +603,26 @@ const getCourseLectures =
     });
   };
 
+const getCompletedProblems =
+  (req, res, next) => {
+    const { schoolCode, courseCode, topicCode, auth_user_id } = req.params;
+    const getq = `
+      select PS.contentid from problems_solved PS
+        inner join course_topics CT on CT.id = PS.ctsid
+        inner join courses C on C.id = CT.courseid
+        inner join schools S on S.id = C.schoolid
+        inner join topics T on T.id = CT.topicid
+        inner join users U on U.id = PS.userid
+        where S.code = $1 and C.code = $2 and T.code = $3 and U.auth_user_id = $4;
+    `;
+    pool.query(getq, [schoolCode, courseCode, topicCode, auth_user_id], (err, result) => {
+      if (err)
+        return console.error(err);
+      const items = _.map(result.rows, (row) => row.contentid);
+      return res.json(items);
+    });
+  };
+
 module.exports = (app) => {
   // Retrieve initial data
   app.get('/getInitial', getInitial);
@@ -657,4 +677,10 @@ module.exports = (app) => {
 
   // Retrieve course lectures
   app.get('/getCourseLectures/:schoolCode/:courseCode', getCourseLectures);
+
+  // Retrieve schools
+  app.get('/getSchools', (req, res, next) => getSchools((err, result) => res.json(result)));
+
+  // Retrieve completed problems
+  app.get('/getCompletedProblems/:schoolCode/:courseCode/:topicCode/:auth_user_id', getCompletedProblems);
 }

@@ -126,6 +126,14 @@ export const updateCourseLectures = (lectures) => {
   };
 };
 
+export const UPDATE_COMPLETED_PROBLEMS = 'UPDATE_COMPLETED_PROBLEMS';
+export const updateCompletedProblems = (topicids) => {
+  return {
+    type: UPDATE_COMPLETED_PROBLEMS,
+    topicids: topicids,
+  }
+};
+
 export const SHOW_LOGIN_MODAL = 'SHOW_LOGIN_MODAL';
 export const showLoginModal = () => { return { type: SHOW_LOGIN_MODAL }; };
 export const SHOW_WAITLIST_MODAL = 'SHOW_WAITLIST_MODAL';

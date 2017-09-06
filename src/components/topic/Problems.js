@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { cloneDeep, keys, range, map } from 'lodash';
+import { cloneDeep, keys, includes, range, map, reduce } from 'lodash';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import classnames from 'classnames';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { Link } from 'react-router-dom';
+import req from 'superagent';
 
-import { updateTopicInfo } from '../../actions';
+import { updateTopicInfo, updateCompletedProblems } from '../../actions';
 import { BASE_URL, courseCodeToLabel } from '../../utils';
 import Navbar from '../navbar';
 import Footer from '../footer';
@@ -26,11 +27,12 @@ class ProblemsComponent extends Component {
       problemStatus: map(range(0, 10), () => false),
     };
     this.problemCount = 1;
-    this.checkAnswer = this.checkAnswer.bind(this);
-    this.correctAnswer = this.correctAnswer.bind(this);
-    this.wrongAnswer = this.wrongAnswer.bind(this);
     this.reset = this.reset.bind(this);
+    this.checkAnswer = this.checkAnswer.bind(this);
+    this.wrongAnswer = this.wrongAnswer.bind(this);
+    this.saveProgress = this.saveProgress.bind(this);
     this.showSolution = this.showSolution.bind(this);
+    this.correctAnswer = this.correctAnswer.bind(this);
     this.navigateProblem = this.navigateProblem.bind(this);
   }
 
@@ -40,10 +42,16 @@ class ProblemsComponent extends Component {
   }
 
   static fetchData(dispatch, props) {
-    const { topicCode } = props;
-    return fetch(`${BASE_URL}/getTopicInfo/${topicCode}`)
-      .then((response) => response.json())
-      .then((json) => dispatch(updateTopicInfo(json)))
+    const { courseCode, schoolCode, topicCode } = props;
+    const auth_user_id = props.auth.getProfile().user_id;
+    return Promise.all([
+      fetch(`${BASE_URL}/getTopicInfo/${topicCode}`)
+        .then((response) => response.json())
+        .then((json) => dispatch(updateTopicInfo(json))),
+      fetch(`${BASE_URL}/getCompletedProblems/${schoolCode}/${courseCode}/${topicCode}/${auth_user_id}`)
+        .then((response) => response.json())
+        .then((json) => dispatch(updateCompletedProblems(json)))
+    ]);
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -54,7 +62,7 @@ class ProblemsComponent extends Component {
     window.renderMJ();
   }
 
-  correctAnswer() {
+  correctAnswer(contentid) {
     const newProblemStatus = cloneDeep(this.state.problemStatus);
     newProblemStatus[this.state.progressIndicator] = true;
     this.setState({
@@ -62,7 +70,7 @@ class ProblemsComponent extends Component {
       showSolution: true,
       correct: this.state.correct + 1,
       problemStatus: newProblemStatus,
-    });
+    }, () => this.saveProgress(contentid));
   }
 
   wrongAnswer() {
@@ -73,19 +81,34 @@ class ProblemsComponent extends Component {
     });
   }
 
-  checkAnswer() {
+  checkAnswer(contentid) {
     if (this.refs.answer) {
       const answerValue = this.refs.answer.value;
       if (answerValue === "0")
-        return this.correctAnswer();
+        return this.correctAnswer(contentid);
       return this.wrongAnswer();
     }
   }
 
-  showSolution() {
+  showSolution(contentid) {
     const newProblemStatus = cloneDeep(this.state.problemStatus);
     newProblemStatus[this.state.progressIndicator] = true;
-    this.setState({ showSolution: true, problemStatus: newProblemStatus });
+    this.setState({
+      showSolution: true,
+      problemStatus: newProblemStatus
+    }, () => this.saveProgress(contentid));
+  }
+
+  saveProgress(contentid) {
+    const auth_user_id = this.props.auth.getProfile().user_id;
+    const { schoolCode, courseCode, topicCode } = this.props;
+    const numProblems = reduce(this.state.problemStatus, (sum, val) => sum + val, 0);
+    req.post('/saveProgress')
+      .send({ schoolCode, courseCode, topicCode, auth_user_id, numProblems, contentid })
+      .end((err, res) => {
+        if (err || !res.ok)
+          return console.error(err);
+      });
   }
 
   reset() {
@@ -132,7 +155,6 @@ class ProblemsComponent extends Component {
     }
 
     const itemContent = this.props.topicInfo.problems[this.state.progressIndicator];
-    console.log(itemContent);
     const contents = this.state.showContents ? [(
       <div key={0}>
         <div dangerouslySetInnerHTML={{ __html: itemContent.problem }}></div>
@@ -162,7 +184,7 @@ class ProblemsComponent extends Component {
           <div className="problem-content">
             <h3>
               Problem {this.state.progressIndicator + 1}
-              <span className="reason-circle">
+              {itemContent.suggestion_text ? (<span className="reason-circle">
                 <div className="tooltip-container">
                   <i className="fa fa-question-circle" aria-hidden="true"></i>
                   <div className="tooltip">
@@ -170,7 +192,7 @@ class ProblemsComponent extends Component {
                     {/*This problem came from Auroux's Midterm 1 in Fall 2016. It was suggested for you because it is medium difficulty, covers iterated integrals, and has high relevance to your specific instructor.*/}
                   </div>
                 </div>
-              </span>
+              </span>) : null}
             </h3>
             <hr className="s2" />
             <CSSTransitionGroup
@@ -185,15 +207,15 @@ class ProblemsComponent extends Component {
             {map(range(0, this.problemCount), (index) =>
               <div key={index} onClick={() => this.navigateProblem(index)} className={classnames({
                 "progress-circle": true,
-                "progress-done": this.state.problemStatus[index],
+                "progress-done": this.state.problemStatus[index] || includes(this.props.completedProblems, this.props.topicInfo.problems[index].content_id),
                 "progress-current": index === this.state.progressIndicator && !this.state.problemStatus[index]
               })}></div>
             )}
             <span className="progress-label progress-label-light">({this.state.progressIndicator + 1}/{this.problemCount})</span>
             <span className="box-buttons">
-              <input className="green" type="button" value="Check Answer" onClick={this.checkAnswer} />
+              <input className="green" type="button" value="Check Answer" onClick={() => this.checkAnswer(itemContent.content_id)} />
               &nbsp;
-              <input className="blue" type="button" value="Show Solution" onClick={this.showSolution} />
+              <input className="blue" type="button" value="Show Solution" onClick={() => this.showSolution(itemContent.content_id)} />
             </span>
           </div>
         </div>
@@ -208,7 +230,9 @@ const mapStateToProps = (state, ownProps) => {
     topicCode: ownProps.topicCode || ownProps.match.params.topicCode,
     courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
     schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
-    topicInfo: state.topicInfo
+    completedProblems: state.completedProblems,
+    topicInfo: state.topicInfo,
+    auth: state.auth,
   };
 };
 
