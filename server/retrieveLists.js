@@ -428,7 +428,8 @@ const getTopicInfo =
       where T.code = $1`;
     const getq = `
       select C.id as content_id, problem_num, subproblem_num,
-        problem, solution, choices, difficulty from content C
+        problem, solution, choices, difficulty,
+        suggestion_text, interactive_problem, interactive_solution from content C
       inner join topics T on T.id = C.topicid
       where T.code = $1
     `;
@@ -446,12 +447,12 @@ const getTopicInfo =
           }, {});
 
           const problems = _.reduce(result.rows, (res, row, index) => {
-            let { content_id, problem_num, subproblem_num, problem, solution, choices, difficulty } = row;
+            let { content_id, problem_num, subproblem_num, problem, solution, choices, difficulty, suggestion_text, interactive_problem, interactive_solution } = row;
             problem = renderer.preprocess(row.problem);
             solution = renderer.preprocess(row.solution);
             const { type_label, term_label } = row;
             const key = `${index}`;
-            res[key] = { problem, solution, choices, content_id, type_label, term_label, difficulty };
+            res[key] = { problem, solution, choices, content_id, type_label, term_label, difficulty, suggestion_text, interactive_problem, interactive_solution };
             return res;
           }, {});
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { keys, range, map } from 'lodash';
+import { cloneDeep, keys, range, map } from 'lodash';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import classnames from 'classnames';
@@ -20,7 +20,6 @@ class ProblemsComponent extends Component {
       showSolution: false,
       showContents: true,
       answerStatus: null,
-      progress: 0,
       progressIndicator: 0,
       correct: 0,
       wrong: 0,
@@ -31,6 +30,8 @@ class ProblemsComponent extends Component {
     this.correctAnswer = this.correctAnswer.bind(this);
     this.wrongAnswer = this.wrongAnswer.bind(this);
     this.reset = this.reset.bind(this);
+    this.showSolution = this.showSolution.bind(this);
+    this.navigateProblem = this.navigateProblem.bind(this);
   }
 
   componentDidMount() {
@@ -54,11 +55,13 @@ class ProblemsComponent extends Component {
   }
 
   correctAnswer() {
+    const newProblemStatus = cloneDeep(this.state.problemStatus);
+    newProblemStatus[this.state.progressIndicator] = true;
     this.setState({
       answerStatus: "correct",
       showSolution: true,
       correct: this.state.correct + 1,
-      progressIndicator: this.state.progressIndicator + 1
+      problemStatus: newProblemStatus,
     });
   }
 
@@ -67,7 +70,6 @@ class ProblemsComponent extends Component {
       answerStatus: "wrong",
       showSolution: true,
       wrong: this.state.wrong + 1,
-      progressIndicator: this.state.progressIndicator + 1
     });
   }
 
@@ -80,13 +82,22 @@ class ProblemsComponent extends Component {
     }
   }
 
+  showSolution() {
+    const newProblemStatus = cloneDeep(this.state.problemStatus);
+    newProblemStatus[this.state.progressIndicator] = true;
+    this.setState({ showSolution: true, problemStatus: newProblemStatus });
+  }
+
   reset() {
     this.setState({
       showSolution: false,
       answerStatus: null,
       showContents: false,
-      progress: this.state.progress + 1,
     }, () => window.setTimeout(() => this.setState({ showContents: true }), 300));
+  }
+
+  navigateProblem(index) {
+    this.setState({ progressIndicator: index, showSolution: false });
   }
 
   componentWillMount() {
@@ -101,7 +112,7 @@ class ProblemsComponent extends Component {
   render() {
     const { courseCode, schoolCode } = this.props;
     const navbar = <Navbar interactive={true} links={[`interactive/${schoolCode}/${courseCode}`, this.props.topicCode]} navbarLabels={[courseCodeToLabel(courseCode), this.props.topicInfo.topicLabel]} />
-    if (this.state.progress === this.problemCount && !this.state.showSolution) {
+    if (this.state.progressIndicator === this.problemCount && !this.state.showSolution) {
       return (
         <div className="background">
           {navbar}
@@ -120,14 +131,19 @@ class ProblemsComponent extends Component {
       );
     }
 
-    const itemContent = this.props.topicInfo.problems[this.state.progress];
+    const itemContent = this.props.topicInfo.problems[this.state.progressIndicator];
+    console.log(itemContent);
     const contents = this.state.showContents ? [(
       <div key={0}>
         <div dangerouslySetInnerHTML={{ __html: itemContent.problem }}></div>
-        $\int_0^2 \int_1^0 (x^2y^2 +$
+        {/*$\int_0^2 \int_1^0 (x^2y^2 +$
           <input className="inline-input"></input>
           $) dy \; dx =$
-        <input className="inline-input"></input>
+        <input className="inline-input"></input>*/}
+        {itemContent.interactive_problem}
+        <div dangerouslySetInnerHTML={{ __html: this.state.showSolution ?
+          `<hr class="s2" /><h3>Solution</h3><div class="problem-solution">${itemContent.solution}</div>` : null }}
+        ></div>
       </div>
     )] : [];
 
@@ -138,7 +154,7 @@ class ProblemsComponent extends Component {
           <div className="box-header">
             <Link to={`/interactive/${schoolCode}/${courseCode}`}><i className="fa fa-chevron-left back-arrow" aria-hidden="true"></i></Link>
             &nbsp;&nbsp;&nbsp;
-            <span className="box-title">Iterated Integrals</span>
+            <span className="box-title">{this.props.topicInfo.topicLabel}</span>
             <span className="box-buttons">
               <input className="white" type="button" value="Ask Question" />
             </span>
@@ -149,7 +165,10 @@ class ProblemsComponent extends Component {
               <span className="reason-circle">
                 <div className="tooltip-container">
                   <i className="fa fa-question-circle" aria-hidden="true"></i>
-                  <div className="tooltip">This problem came from Auroux's Midterm 1 in Fall 2016. It was suggested for you because it is medium difficulty, covers iterated integrals, and has high relevance to your specific instructor.</div>
+                  <div className="tooltip">
+                    {itemContent.suggestion_text}
+                    {/*This problem came from Auroux's Midterm 1 in Fall 2016. It was suggested for you because it is medium difficulty, covers iterated integrals, and has high relevance to your specific instructor.*/}
+                  </div>
                 </div>
               </span>
             </h3>
@@ -160,17 +179,21 @@ class ProblemsComponent extends Component {
               transitionLeaveTimeout={300}>
               {contents}
             </CSSTransitionGroup>
-
           </div>
           <div className="box-footer">
             <span className="progress-label">Progress</span>
             {map(range(0, this.problemCount), (index) =>
-              <div className={classnames({"progress-circle": true, "progress-done": this.state.problemStatus[index-1], "progress-current": index === this.state.progressIndicator})}></div>)}
+              <div key={index} onClick={() => this.navigateProblem(index)} className={classnames({
+                "progress-circle": true,
+                "progress-done": this.state.problemStatus[index],
+                "progress-current": index === this.state.progressIndicator && !this.state.problemStatus[index]
+              })}></div>
+            )}
             <span className="progress-label progress-label-light">({this.state.progressIndicator + 1}/{this.problemCount})</span>
             <span className="box-buttons">
-              <input className="green" type="button" value="Check Answer" />
+              <input className="green" type="button" value="Check Answer" onClick={this.checkAnswer} />
               &nbsp;
-              <input className="blue" type="button" value="Show Solution" />
+              <input className="blue" type="button" value="Show Solution" onClick={this.showSolution} />
             </span>
           </div>
         </div>
