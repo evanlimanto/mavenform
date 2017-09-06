@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { map } from 'lodash';
+import { map, replace } from 'lodash';
+import { Link } from 'react-router-dom';
 import { BASE_URL } from '../../utils';
 
 const req = require('superagent');
@@ -15,7 +16,7 @@ class DashboardComments extends Component {
   }
 
   componentDidMount() {
-    fetch(`${BASE_URL}/getComments`)
+    fetch(`${BASE_URL}/getAllComments`)
       .then((response) => response.json())
       .then((json) => this.setState({ comments: json }));
   }
@@ -31,7 +32,8 @@ class DashboardComments extends Component {
 
   render() {
     const comments = map(this.state.comments, (comment) => {
-      return <div className="admin-comment">{comment.content} &nbsp; &nbsp; <a>View</a><a onClick={() => this.deleteComment(comment.id)}>Delete</a></div>;
+      const url = `/${comment.school_code}/${comment.course_code}/${comment.type_code}-${comment.term_code}-${replace(comment.profs, /, /g, '_')}`;
+      return <div className="admin-comment">{comment.content} &nbsp; &nbsp; <Link to={url}>View</Link><a onClick={() => this.deleteComment(comment.id)}>Delete</a></div>;
     });
     return <div className="admin-general">
       <div className="admin-nav">
