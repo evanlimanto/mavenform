@@ -645,6 +645,7 @@ const getCourseProblemSets =
         if (!_.has(dict, courseid))
           dict[courseid] = [];
         dict[courseid].push({ id, ps_label, ps_code });
+        return dict;
       }, {});
       return res.json(items);
     });

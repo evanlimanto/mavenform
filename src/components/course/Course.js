@@ -7,8 +7,8 @@ import Dropzone from 'react-dropzone';
 import req from 'superagent';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import { showLoginModal, showUploadSuccessModal, updateCourseExams, updateCourseTopics,
-         updateCourseLabel, updateCourseSubject, updateRegisteredLecture, updateCourseLectures } from '../../actions';
+import { showLoginModal, showUploadSuccessModal, updateCourseExams, updateCourseLabel,
+         updateCourseSubject, updateRegisteredLecture, updateCourseLectures } from '../../actions';
 import { canUseDOM, courseCodeToLabel, BASE_URL } from '../../utils';
 import { examClickEvent } from '../../events';
 import Footer from '../footer';
@@ -277,18 +277,6 @@ class CourseComponent extends Component {
         </Link>
       );
     });
-
-    const topicsContent = (this.props.topics.length > 0) ? (
-      <div name="subjects">
-        <hr className="s5" />
-        <h5>Based on the exams above, these are our suggested practice problems by topic...</h5>
-        <hr className="s4" />
-        <div className="card-container topic-card-container">
-          {topicCards}
-          <hr className="s7-5" />
-        </div>
-      </div>
-    ) : <hr className="s8" />;
 
     return (
       <div>

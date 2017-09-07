@@ -883,6 +883,15 @@ module.exports = (app) => {
     });
   });
 
+  app.post('/addProblemset', (req, res, next) => {
+    const { courseid, ps_label, ps_code } = req.body;
+    const inq = `insert into problemsets (courseid, ps_label, ps_code) values($1, $2, $3)`;
+    config.pool.query(inq, [courseid, ps_label, ps_code], (err, result) => {
+      if (err) return next(err);
+      return res.send("Success!");
+    });
+  });
+
   app.get('/getSchoolInfo/:schoolCode', (req, res, next) => {
     const { schoolCode } = req.params;
     const getq = `

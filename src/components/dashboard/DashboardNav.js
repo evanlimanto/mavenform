@@ -22,12 +22,12 @@ class DashboardNav extends Component {
       { path: "/dashboard/interactive", label: "interactive" },
       { label: "logout", onClick: this.logout }
     ];
-    const items = map(links, (link) => {
+    const items = map(links, (link, key) => {
       const classname = classnames({
         "admin-link": true,
         "admin-link-active": link.path === document.location.pathname
       });
-      return (<a className={classname} href={link.path} onClick={link.onClick}>{upperCase(link.label)}</a>);
+      return (<a key={key} className={classname} href={link.path} onClick={link.onClick}>{upperCase(link.label)}</a>);
     });
     return (
       <div className="admin-nav">
