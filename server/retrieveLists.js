@@ -617,7 +617,7 @@ const getCompletedProblemsCount =
 const getAvailableCourses =
   (req, res, next) => {
     const getq = `
-      select C.id, C.code_label, as course_code, C.label as course_label, S.name as school_label from courses C
+      select C.id, C.code_label as course_code, C.label as course_label, S.name as school_label from courses C
       inner join schools S on S.id = C.schoolid
       where exists (select 1 from exams where exams.courseid = C.id);
     `;
@@ -755,8 +755,6 @@ module.exports = (app) => {
   app.get('/getTopics', (req, res, next) => getTopics((err, result) => res.json(result)));
 
   // Retrieve problemsets
-  app.get('/getProblemSets', getProblemSets);
-
   app.get('/getCourseProblemSets', getCourseProblemSets);
   app.get('/getProblemSetTopics', getProblemSetTopics);
   app.get('/getProblemSetTopicProblems', getProblemSetTopicProblems);
