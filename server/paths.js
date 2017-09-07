@@ -883,6 +883,26 @@ module.exports = (app) => {
     });
   });
 
+  app.post('/addTopicToProblemSet', (req, res, next) => {
+    const { psid, topicid } = req.body;
+    const inq = `insert into problemset_topics (psid, topicid) values($1, $2)`;
+    config.pool.query(inq, [psid, topicid], (err, result) => {
+      if (err)
+        return next(err);
+      return res.send("Success!");
+    });
+  });
+
+  app.post('/removeTopicFromProblemSet', (req, res, next) => {
+    const { psid, topicid } = req.body;
+    const delq = `delete from problemset_topics where psid = $1 and topicid = $2`;
+    config.pool.query(inq, [psid, topicid], (err, result) => {
+      if (err)
+        return next(err);
+      return res.send("Success!");
+    });
+  });
+
   app.post('/addProblemset', (req, res, next) => {
     const { courseid, ps_label, ps_code } = req.body;
     const inq = `insert into problemsets (courseid, ps_label, ps_code) values($1, $2, $3)`;

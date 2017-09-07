@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { cloneDeep, concat, map, sortBy } from 'lodash';
+import { cloneDeep, concat, filter, map, sortBy } from 'lodash';
 import classnames from 'classnames';
 import req from 'superagent';
+import { DragDropContextProvider } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
+import TopicCard from './TopicCard';
+import TopicContainer from './TopicContainer';
+import TopicListContainer from './TopicListContainer';
 import DashboardNav from './DashboardNav';
 
 class Interactive extends Component {
@@ -15,11 +20,17 @@ class Interactive extends Component {
       problemSetTopics: {},
       problemSetTopicProblems: {},
 
-      selectedCourse: null,
+      selectedCourse: 888,
+      selectedProblemSet: 4,
     };
-    this.addProblemSet = this.addProblemSet.bind(this);
+    this.selectCourse = this.selectCourse.bind(this);
     this.getCourseList = this.getCourseList.bind(this);
+    this.addProblemSet = this.addProblemSet.bind(this);
+    this.selectProblemSet = this.selectProblemSet.bind(this);
+    this.getProblemSetTopics = this.getProblemSetTopics.bind(this);
     this.getCourseProblemSets = this.getCourseProblemSets.bind(this);
+    this.addTopicToProblemSet = this.addTopicToProblemSet.bind(this);
+    this.removeTopicFromProblemSet = this.removeTopicFromProblemSet.bind(this);
   }
 
   componentDidMount() {
@@ -27,9 +38,6 @@ class Interactive extends Component {
       fetch('/getAvailableCourses')
         .then((response) => response.json())
         .then((json) => this.setState({ courseList: json })),
-      fetch('/getTopics')
-        .then((response) => response.json())
-        .then((json) => this.setState({ topicList: json })),
       fetch('/getCourseProblemSets')
         .then((response) => response.json())
         .then((json) => this.setState({ courseProblemSets: json })),
@@ -58,12 +66,19 @@ class Interactive extends Component {
       .end((err, res) => {
         if (err || !res.ok)
           return console.error(err);
+        fetch('/getCourseProblemSets')
+          .then((response) => response.json())
+          .then((json) => this.setState({ courseProblemSets: json }))
       })
     );
   }
 
   selectCourse(courseid) {
     this.setState({ selectedCourse: courseid });
+  }
+
+  selectProblemSet(psid) {
+    this.setState({ selectedProblemSet: psid });
   }
 
   getCourseList() {
@@ -85,7 +100,8 @@ class Interactive extends Component {
       </form>
     );
     const problemSets = (courseProblemSets && courseProblemSets[selectedCourse]) ? map(courseProblemSets[selectedCourse],
-      (ps, key) => <div key={key}><a>{ps.ps_label}</a></div>) : "No Problem Sets yet!";
+      (ps, key) => <div key={key}><a className={classnames({ highlighted: ps.id === this.state.selectedProblemSet })}
+                    onClick={() => this.selectProblemSet(ps.id)}>{ps.ps_label}</a></div>) : "No Problem Sets yet!";
     return (
       <span>
         <h1>ADD PROBLEMSET</h1>
@@ -97,20 +113,77 @@ class Interactive extends Component {
     );
   }
 
+  getProblemSetTopics() {
+    const { problemSetTopics, selectedProblemSet } = this.state;
+    if (!selectedProblemSet)
+      return false;
+    console.log("problemSetTopics", problemSetTopics);
+    const topics = (problemSetTopics && problemSetTopics[selectedProblemSet]) ? map(problemSetTopics[selectedProblemSet],
+      (topic, key) => <TopicCard key={key} id={topic.id} topic={topic.topic} concept={topic.concept} />) :"No Topics yet!";
+    return (
+      <span>
+        <h1>TOPICS</h1>
+        <TopicContainer problemSetTopics={topics} addTopicToProblemSet={this.addTopicToProblemSet} removeTopicFromProblemSet={this.removeTopicFromProblemSet} />
+        <hr className="s2" />
+        <h1>TOPIC LIST</h1>
+        <TopicListContainer problemSetTopics={topics} addTopicToProblemSet={this.addTopicToProblemSet} removeTopicFromProblemSet={this.removeTopicFromProblemSet} />
+      </span>
+    );
+  }
+
+  addTopicToProblemSet(topic) {
+    const psid = this.state.selectedProblemSet;
+    const newProblemSetTopics = concat(this.state.problemSetTopics[psid] ? cloneDeep(this.state.problemSetTopics[psid]): [], topic);
+    this.setState({
+      problemSetTopics: {
+        ...this.state.problemSetTopics,
+        [psid]: newProblemSetTopics,
+      }
+    }, () => req.post('/addTopicToProblemSet')
+      .send({ psid, topicid: topic.id })
+      .end((err, res) => {
+        if (err || !res.ok)
+          return console.error(err);
+      })
+    );
+  }
+
+  removeTopicFromProblemSet(topic) {
+    const psid = this.state.selectedProblemSet;
+    const newProblemSetTopics = filter(this.state.problemSetTopics[psid] ? cloneDeep(this.state.problemSetTopics[psid]) : this.state.problemSetTopics[psid], (item) => item.id != topic.id);
+    this.setState({
+      problemSetTopics: {
+        ...this.state.problemSetTopics,
+        [psid]: newProblemSetTopics,
+      }
+    }, () => req.post('/removeTopicFromProblemSet')
+      .send({ psid, topicid: topic.id })
+      .end((err, res) => {
+        if (err || !res.ok)
+          return console.error(err);
+      })
+    );
+  }
+
   render() {
     const courseList = this.getCourseList();
     const courseProblemSets = this.getCourseProblemSets();
+    const problemSetTopics = this.getProblemSetTopics();
     return (
-      <div className="contentContainer">
-        <DashboardNav />
-        <span className="interactive-col interactive-courses">
-          <h1>COURSES</h1>
-          {courseList}
-        </span>
-        <span className="interactive-col">
-          {courseProblemSets}
-        </span>
-      </div>
+      <DragDropContextProvider backend={HTML5Backend}>
+        <div className="contentContainer">
+          <DashboardNav />
+          <span className="interactive-col interactive-courses">
+            <h1>COURSES</h1>
+            {courseList}
+          </span>
+          <span className="interactive-col">
+            {courseProblemSets}
+            <hr className="s2" />
+            {problemSetTopics}
+          </span>
+        </div>
+      </DragDropContextProvider>
     );
   }
 }
