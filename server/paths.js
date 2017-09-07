@@ -871,7 +871,19 @@ module.exports = (app) => {
     });
   });
 
-  app.get('/getSchoolInfo/:schoolCode/', (req, res, next) => {
+  app.post('/addTopic', (req, res, next) => {
+    const { topic, concept, code, subjectid } = req.body;
+    const inq = `
+      insert into topics (topic, concept, code, subjectid) values($1, $2, $3, $4)
+    `;
+    config.pool.query(inq, [topic, concept, code, subjectid], (err, result) => {
+      if (err)
+        return next(err);
+      return res.send("Success!");
+    });
+  });
+
+  app.get('/getSchoolInfo/:schoolCode', (req, res, next) => {
     const { schoolCode } = req.params;
     const getq = `
       select name, address, num_students, website from schools

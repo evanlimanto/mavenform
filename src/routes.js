@@ -1,5 +1,5 @@
-import { Course, Interactive } from './components/course';
-import { Dashboard, DashboardContent, DashboardCourses, DashboardComments, Transcribe, Transcribed } from './components/dashboard';
+import { Course } from './components/course';
+import { Dashboard, DashboardContent, DashboardCourses, DashboardComments, DashboardTopics, Interactive, Transcribe, Transcribed } from './components/dashboard';
 import { Exam, ProblemSet } from './components/exam';
 import Home from './components/home';
 import { Login, Logout, SecretSignup, Signup } from './components/login';
@@ -17,9 +17,11 @@ const routes = [
   { path: '/signup', component: Signup },
   { path: '/marketing', component: Marketing },
   { path: '/courses', component: UserHome },
+  { path: '/dashboard/interactive', component: Interactive },
   { path: '/dashboard/comments', component: DashboardComments },
   { path: '/dashboard/courses', component: DashboardCourses },
   { path: '/dashboard/problems', component: DashboardContent },
+  { path: '/dashboard/topics', component: DashboardTopics },
   { path: '/dashboard/transcribed', component: Transcribed },
   { path: '/dashboard/transcribe/:transcribedExamId', component: Transcribe },
   { path: '/dashboard/transcribe', component: Transcribe },

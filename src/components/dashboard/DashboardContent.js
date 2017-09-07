@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { cloneDeep, concat, map, range, reduce, sortBy } from 'lodash';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
+
+import DashboardNav from './DashboardNav';
 import { BASE_URL } from '../../utils';
 import { MultipleChoiceQuestion, Question } from '../question';
 import renderer from '../../renderer';
@@ -178,12 +180,7 @@ class DashboardContentComponent extends Component {
     const exam = (this.state.examid) ? this.props.exams.key_dict[this.state.examid] : null;
     return (
       <div className="contentContainer">
-        <div className="admin-nav">
-          <a className="admin-link" href="/dashboard">TRANSCRIPTIONS</a>
-          <a className="admin-link" href="/dashboard/courses">COURSES</a>
-          <a className="admin-link admin-link-active" href="/dashboard/problems">PROBLEMS</a>
-          <a className="admin-link" href="/dashboard/comments">COMMENTS</a>
-        </div>
+        <DashboardNav />
         <hr className="s1" />
         <select ref="exam" style={{"marginLeft" : "5px"}}>
           {examSelectItems}
@@ -206,6 +203,8 @@ class DashboardContentComponent extends Component {
             <textarea className="contentCol" value={problem.solution ? problem.solution : ""} ref="solution" onChange={this.handleChange} placeholder="FREE RESPONSE SOLUTION" />
             <textarea className="contentCol" value={problem.choices ? problem.choices: ""} ref="choices" onChange={this.handleChange} placeholder="MULTIPLE CHOICE OPTIONS" />
             <textarea className="contentCol" value={problem.final_solution ? problem.final_solution : ""} ref="final_solution" onChange={this.handleChange} placeholder="MULTIPLE CHOICE SOLUTION" />
+            <textarea className="contentCol" value={problem.interactive_problem ? problem.interactive_problem : ""} ref="interactive_problem" onChange={this.handleChange} placeholder="INTERATIVE PROBLEM" />
+            <textarea className="contentCol" value={problem.interactive_solution ? problem.interactive_solution : ""} ref="interactive_solution" onChange={this.handleChange} placeholder="INTERATIVE SOLUTION" />
           </div>
         </div>
         <hr className="s1" />

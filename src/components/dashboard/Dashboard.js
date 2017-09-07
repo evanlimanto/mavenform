@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { map } from 'lodash';
 import dateFormat from 'dateformat';
-import { canUseDOM, BASE_URL } from '../../utils';
 
+import DashboardNav from './DashboardNav';
+import { canUseDOM, BASE_URL } from '../../utils';
 import DashboardLogin from './DashboardLogin';
 const cookies = canUseDOM ? require('browser-cookies') : null;
 
@@ -22,12 +23,6 @@ class Dashboard extends Component {
     if (!cookies)
       return false;
     return cookies.get('dashboard_user');
-  }
-
-  logout() {
-    if (cookies)
-      cookies.erase('dashboard_user');
-    document.location = '/dashboard';
   }
 
   componentDidMount() {
@@ -54,13 +49,7 @@ class Dashboard extends Component {
 
     return (
       <div className="admin-general">
-        <div className="admin-nav">
-          <a className="admin-link admin-link-active" href="/dashboard">TRANSCRIPTIONS</a>          
-          <a className="admin-link" href="/dashboard/courses">COURSES</a>
-          <a className="admin-link" href="/dashboard/problems">PROBLEMS</a>
-          <a className="admin-link" href="/dashboard/comments">COMMENTS</a>
-          <a className="admin-link" onClick={this.logout}>LOG OUT</a>
-        </div>
+        <DashboardNav />
         <hr className="s2" />
         <div className="adjust">
           <h1>TRANSCIPTIONS</h1>

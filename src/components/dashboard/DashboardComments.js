@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { map, replace } from 'lodash';
 import { Link } from 'react-router-dom';
+
+import DashboardNav from './DashboardNav';
 import { BASE_URL } from '../../utils';
 
 const req = require('superagent');
@@ -36,12 +38,7 @@ class DashboardComments extends Component {
       return <div className="admin-comment">{comment.content} &nbsp; &nbsp; <Link to={url}>View</Link><a onClick={() => this.deleteComment(comment.id)}>Delete</a></div>;
     });
     return <div className="admin-general">
-      <div className="admin-nav">
-        <a className="admin-link" href="/dashboard">TRANSCRIPTIONS</a>
-        <a className="admin-link" href="/dashboard/courses">COURSES</a>
-        <a className="admin-link" href="/dashboard/problems">PROBLEMS</a>
-        <a className="admin-link admin-link-active" href="/dashboard/comments">COMMENTS</a>
-      </div>
+      <DashboardNav />
       <hr className="s2"/>
       <h1 style={{"padding-left" : "5px"}}>COMMENTS</h1>
       {comments}

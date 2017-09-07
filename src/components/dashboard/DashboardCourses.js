@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { map, sortBy } from 'lodash';
+import req from 'superagent';
 
-const req = require('superagent');
+import DashboardNav from './DashboardNav';
 require('../../css/Dashboard.css');
 
 class DashboardCourses extends Component { 
@@ -86,12 +87,7 @@ class DashboardCourses extends Component {
 
     return (
       <div className="dashboard-courses-container">
-        <div className="admin-nav">
-          <a className="admin-link" href="/dashboard">TRANSCRIPTIONS</a>
-          <a className="admin-link admin-link-active" href="/dashboard/courses">COURSES</a>
-          <a className="admin-link" href="/dashboard/problems">PROBLEMS</a>
-          <a className="admin-link" href="/dashboard/comments">COMMENTS</a>
-        </div>
+        <DashboardNav />
         <hr className="s1" />
         <form style={{"padding" : "5px"}}>
           <input type="text" ref="code" placeholder="Course Code" />
@@ -106,7 +102,7 @@ class DashboardCourses extends Component {
           {coursesList}
         </div>
       </div>
-    );    
+    );
   }
 }
 
