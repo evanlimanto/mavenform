@@ -654,17 +654,18 @@ const getCourseProblemSets =
 const getProblemSetTopics =
   (req, res, next) => {
     const getq = `
-      select PST.id, PST.psid, T.topic, T.concept from problemset_topics PST
+      select PST.id, PST.topicid, PST.psid, T.topic, T.concept from problemset_topics PST
       inner join topics T on PST.topicid = T.id
     `;
     pool.query(getq, (err, result) => {
       if (err)
         return next(err);
       const items = _.reduce(result.rows, (dict, row) => {
-        const { id, psid, topic, concept } = row;
+        const { id, psid, topicid, topic, concept } = row;
         if (!_.has(dict, psid))
           dict[psid] = [];
-        dict[psid].push({ id, topic, concept });
+        dict[psid].push({ id, topicid, topic, concept });
+        return dict;
       }, {});
       return res.json(items);
     });
@@ -685,6 +686,7 @@ const getProblemSetTopicProblems =
         if (!_.has(dict, pstopicsid))
           dict[pstopicsid] = [];
         dict[pstopicsid].push({ id, problem, solution, choices, exam, final_solution, interactive_solution, interactive_problem });
+        return dict;
       }, {});
       return res.json(items);
     });

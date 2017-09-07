@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { cloneDeep, concat, filter, map, sortBy } from 'lodash';
 import classnames from 'classnames';
 import req from 'superagent';
-import { DragDropContextProvider } from 'react-dnd';
+import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
 import TopicCard from './TopicCard';
@@ -117,16 +117,13 @@ class Interactive extends Component {
     const { problemSetTopics, selectedProblemSet } = this.state;
     if (!selectedProblemSet)
       return false;
-    console.log("problemSetTopics", problemSetTopics);
-    const topics = (problemSetTopics && problemSetTopics[selectedProblemSet]) ? map(problemSetTopics[selectedProblemSet],
-      (topic, key) => <TopicCard key={key} id={topic.id} topic={topic.topic} concept={topic.concept} />) :"No Topics yet!";
     return (
       <span>
         <h1>TOPICS</h1>
-        <TopicContainer problemSetTopics={topics} addTopicToProblemSet={this.addTopicToProblemSet} removeTopicFromProblemSet={this.removeTopicFromProblemSet} />
+        <TopicContainer problemSetTopics={problemSetTopics[selectedProblemSet]} addTopicToProblemSet={this.addTopicToProblemSet} removeTopicFromProblemSet={this.removeTopicFromProblemSet} />
         <hr className="s2" />
         <h1>TOPIC LIST</h1>
-        <TopicListContainer problemSetTopics={topics} addTopicToProblemSet={this.addTopicToProblemSet} removeTopicFromProblemSet={this.removeTopicFromProblemSet} />
+        <TopicListContainer problemSetTopics={problemSetTopics[selectedProblemSet]} addTopicToProblemSet={this.addTopicToProblemSet} removeTopicFromProblemSet={this.removeTopicFromProblemSet} />
       </span>
     );
   }
@@ -140,7 +137,7 @@ class Interactive extends Component {
         [psid]: newProblemSetTopics,
       }
     }, () => req.post('/addTopicToProblemSet')
-      .send({ psid, topicid: topic.id })
+      .send({ psid, topicid: topic.topicid })
       .end((err, res) => {
         if (err || !res.ok)
           return console.error(err);
@@ -150,14 +147,15 @@ class Interactive extends Component {
 
   removeTopicFromProblemSet(topic) {
     const psid = this.state.selectedProblemSet;
-    const newProblemSetTopics = filter(this.state.problemSetTopics[psid] ? cloneDeep(this.state.problemSetTopics[psid]) : this.state.problemSetTopics[psid], (item) => item.id != topic.id);
+    console.log(this.state.problemSetTopics[psid]);
+    const newProblemSetTopics = filter(this.state.problemSetTopics[psid] ? cloneDeep(this.state.problemSetTopics[psid]) : this.state.problemSetTopics[psid], (item) => item.topicid !== topic.topicid);
     this.setState({
       problemSetTopics: {
         ...this.state.problemSetTopics,
         [psid]: newProblemSetTopics,
       }
     }, () => req.post('/removeTopicFromProblemSet')
-      .send({ psid, topicid: topic.id })
+      .send({ psid, topicid: topic.topicid })
       .end((err, res) => {
         if (err || !res.ok)
           return console.error(err);
@@ -166,26 +164,25 @@ class Interactive extends Component {
   }
 
   render() {
+    console.log("state", this.state);
     const courseList = this.getCourseList();
     const courseProblemSets = this.getCourseProblemSets();
     const problemSetTopics = this.getProblemSetTopics();
     return (
-      <DragDropContextProvider backend={HTML5Backend}>
-        <div className="contentContainer">
-          <DashboardNav />
-          <span className="interactive-col interactive-courses">
-            <h1>COURSES</h1>
-            {courseList}
-          </span>
-          <span className="interactive-col">
-            {courseProblemSets}
-            <hr className="s2" />
-            {problemSetTopics}
-          </span>
-        </div>
-      </DragDropContextProvider>
+      <div className="contentContainer">
+        <DashboardNav />
+        <span className="interactive-col interactive-courses">
+          <h1>COURSES</h1>
+          {courseList}
+        </span>
+        <span className="interactive-col">
+          {courseProblemSets}
+          <hr className="s2" />
+          {problemSetTopics}
+        </span>
+      </div>
     );
   }
 }
 
-export default Interactive;
+export default DragDropContext(HTML5Backend)(Interactive);

@@ -31,9 +31,10 @@ class TopicListContainer extends Component {
   }
 
   getTopicList() {
-    const problemSetTopicIds = map(this.props.problemSetTopics, (topic) => topic.id);
-    return map(sortBy(filter(this.state.topicList, (topic) => !includes(problemSetTopicIds, topic.id)), [(topic) => topic.topic, (topic) => topic.concept]), (topic, key) =>
-      <TopicCard key={key} id={topic.id} topic={topic.topic} concept={topic.concept} />
+    const problemSetTopicIds = map(this.props.problemSetTopics, (topic) => topic.topicid);
+    return map(sortBy(
+      filter(this.state.topicList, (topic) => !includes(problemSetTopicIds, topic.id)), [(topic) => topic.topic, (topic) => topic.concept]), (topic, key) =>
+      <TopicCard key={key} topicid={topic.id} topic={topic.topic} concept={topic.concept} />
     );
   }
 
@@ -47,7 +48,7 @@ class TopicListContainer extends Component {
 }
 
 const enhance = compose(
-  DropTarget(ItemTypes.CARD, {}, (connect, monitor) => ({
+  DropTarget(ItemTypes.CARD, boxTarget, (connect, monitor) => ({
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
   })),

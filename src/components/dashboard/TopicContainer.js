@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { DropTarget } from 'react-dnd';
+import { map } from 'lodash';
 import { compose } from 'redux';
+
 import ItemTypes from './ItemTypes';
+import TopicCard from './TopicCard';
 
 const boxTarget = {
   drop(props) {
@@ -16,8 +19,12 @@ const boxTarget = {
 class TopicContainer extends Component {
   render() {
     const { problemSetTopics, connectDropTarget } = this.props;
+    const topics = (problemSetTopics && problemSetTopics.length > 0) ? map(problemSetTopics,
+      (topic, key) =>
+        <TopicCard key={key} topicid={topic.topicid} topic={topic.topic} concept={topic.concept} />)
+      : "No Topics yet!";
     return (
-      connectDropTarget(<div style={{ border: "1px solid grey" }}>{problemSetTopics}</div>)
+      connectDropTarget(<div style={{ border: "1px solid grey" }}>{topics}</div>)
     );
   }
 }

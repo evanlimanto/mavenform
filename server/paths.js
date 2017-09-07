@@ -896,7 +896,7 @@ module.exports = (app) => {
   app.post('/removeTopicFromProblemSet', (req, res, next) => {
     const { psid, topicid } = req.body;
     const delq = `delete from problemset_topics where psid = $1 and topicid = $2`;
-    config.pool.query(inq, [psid, topicid], (err, result) => {
+    config.pool.query(delq, [psid, topicid], (err, result) => {
       if (err)
         return next(err);
       return res.send("Success!");

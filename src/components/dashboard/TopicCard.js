@@ -6,20 +6,22 @@ import ItemTypes from './ItemTypes';
 const cardSource = {
   beginDrag(props) {
     return {
-      id: props.id,
+      topicid: props.topicid,
+      topic: props.topic,
+      concept: props.concept,
     };
   },
 
   endDrag(props, monitor) {
     const item = monitor.getItem();
-    console.log(item);
     const dropResult = monitor.getDropResult();
 
+    console.log(item, dropResult);
     if (dropResult) {
       if (dropResult.name === "problemSetTopics") {
-        dropResult.addTopicToProblemSet(item.id)
+        dropResult.addTopicToProblemSet(item)
       } else if (dropResult.name === "topicList") {
-        dropResult.removeTopicFromProblemSet(item.id)
+        dropResult.removeTopicFromProblemSet(item)
       }
     }
   }
