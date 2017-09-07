@@ -37,12 +37,14 @@ class DashboardComments extends Component {
       const url = `/${comment.school_code}/${comment.course_code}/${comment.type_code}-${comment.term_code}-${replace(comment.profs, /, /g, '_')}`;
       return <div className="admin-comment">{comment.content} &nbsp; &nbsp; <Link to={url}>View</Link><a onClick={() => this.deleteComment(comment.id)}>Delete</a></div>;
     });
-    return <div className="admin-general">
-      <DashboardNav />
-      <hr className="s2"/>
-      <h1 style={{"padding-left" : "5px"}}>COMMENTS</h1>
-      {comments}
-    </div>;
+    return (
+      <div className="admin-general">
+        <DashboardNav />
+        <hr className="s2"/>
+        <h1 style={{"padding-left" : "5px"}}>COMMENTS</h1>
+        {comments}
+      </div>
+    );
   }
 }
 
