@@ -385,6 +385,20 @@ const getExamInfo =
     });
   };
 
+const getExamInfoById =
+  (req, res, next) => {
+    const { examid } = req.body;
+    const getq = `
+      select id, courseid, examtype, examid, profs, schoolid, source_url, solutions_available from exams
+      where id = $1
+    `;
+    pool.query(getq, [examid], (err, result) => {
+      if (err) return next(err);
+      const { id, courseid, examtype, examid, profs, schoolid, source_url, solutions_available } = result.rows[0];
+      return ({ id, courseid, examtype, examid, profs, schoolid, source_url, solutions_available });
+    });
+  };
+
 const getCoursesBySchool =
   (req, res, next) => {
     const q = `
@@ -728,6 +742,7 @@ module.exports = (app) => {
 
   // Retrieve information for an exam
   app.get('/getExamInfo/:schoolCode/:courseCode/:examTypeCode/:termCode/:profs', getExamInfo);
+  app.get('/getExamInfoById/:examid', getExamInfoById);
 
   // Retrieve content by topic
   app.get('/getTopicInfo/:code', getTopicInfo);

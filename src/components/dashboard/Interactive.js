@@ -26,6 +26,7 @@ class Interactive extends Component {
     this.selectCourse = this.selectCourse.bind(this);
     this.getCourseList = this.getCourseList.bind(this);
     this.addProblemSet = this.addProblemSet.bind(this);
+    this.deleteProblemSet = this.deleteProblemSet.bind(this);
     this.selectProblemSet = this.selectProblemSet.bind(this);
     this.getProblemSetTopics = this.getProblemSetTopics.bind(this);
     this.getCourseProblemSets = this.getCourseProblemSets.bind(this);
@@ -73,6 +74,17 @@ class Interactive extends Component {
     );
   }
 
+  deleteProblemSet(psid) {
+    req.post('/deleteProblemSet')
+      .send({ psid })
+      .end((err, res) => {
+        if (err || !res.ok)
+          return console.error(err);
+        // refresh page
+        document.location = document.location;
+      });
+  }
+
   selectCourse(courseid) {
     this.setState({ selectedCourse: courseid });
   }
@@ -100,8 +112,12 @@ class Interactive extends Component {
       </form>
     );
     const problemSets = (courseProblemSets && courseProblemSets[selectedCourse]) ? map(courseProblemSets[selectedCourse],
-      (ps, key) => <div key={key}><a className={classnames({ highlighted: ps.id === this.state.selectedProblemSet })}
-                    onClick={() => this.selectProblemSet(ps.id)}>{ps.ps_label}</a></div>) : "No Problem Sets yet!";
+      (ps, key) => (
+        <div key={key}>
+          <a className={classnames({ highlighted: ps.id === this.state.selectedProblemSet })}
+            onClick={() => this.selectProblemSet(ps.id)}>{ps.ps_label}</a>&nbsp;
+          <a className="admin-function" onClick={() => this.deleteProblemSet(ps.id)}>Delete</a>
+        </div>)) : "No Problem Sets yet!";
     return (
       <span>
         <h1>ADD PROBLEMSET</h1>
@@ -147,7 +163,6 @@ class Interactive extends Component {
 
   removeTopicFromProblemSet(topic) {
     const psid = this.state.selectedProblemSet;
-    console.log(this.state.problemSetTopics[psid]);
     const newProblemSetTopics = filter(this.state.problemSetTopics[psid] ? cloneDeep(this.state.problemSetTopics[psid]) : this.state.problemSetTopics[psid], (item) => item.topicid !== topic.topicid);
     this.setState({
       problemSetTopics: {
@@ -164,7 +179,6 @@ class Interactive extends Component {
   }
 
   render() {
-    console.log("state", this.state);
     const courseList = this.getCourseList();
     const courseProblemSets = this.getCourseProblemSets();
     const problemSetTopics = this.getProblemSetTopics();

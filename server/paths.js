@@ -912,6 +912,28 @@ module.exports = (app) => {
     });
   });
 
+  app.post('/deleteProblemset', (req, res, next) => {
+    const { psid } = req.body;
+    const delq1 = `
+      delete from problems_solved where ctsid in
+      (select id from problemset_problems where pstopicsid = 36);
+    `;
+    const delq = `
+      delete from problemset_problems where pstopicsid = 36;
+    `;
+    const delq3 = `
+      delete from problemset_topics where id = 36;
+    `;
+    async.series([
+      (callback) => config.pool.query(delq1, callback),
+      (callback) => config.pool.query(delq2, callback),
+      (callback) => config.pool.query(delq3, callback),
+    ], (err) => {
+      if (err) return console.error(err);
+      return res.send("Success!");
+    })
+  });
+
   app.get('/getSchoolInfo/:schoolCode', (req, res, next) => {
     const { schoolCode } = req.params;
     const getq = `

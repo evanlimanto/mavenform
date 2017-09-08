@@ -78,13 +78,14 @@ class DashboardContentComponent extends Component {
   }
 
   getExam(id) {
-    fetch(`${BASE_URL}/getExamById/${id}`).then(
-      (response) => response.json()
-    ).then(
-      (json) => {
-        this.setState({ examid: id, content: json })
-      }
-    );
+    Promise.all([
+      fetch(`${BASE_URL}/getExamById/${id}`)
+        .then((response) => response.json())
+        .then((json) => this.setState({ examid: id, content: json })),
+      fetch(`${BASE_URL}/getExamInfoById/${id}`)
+        .then((response) => response.json())
+        .then((json) => this.setState({ examInfo: json }))
+    ])
   }
 
   selectProblem(part, subpart) {
@@ -203,8 +204,8 @@ class DashboardContentComponent extends Component {
             <textarea className="contentCol" value={problem.solution ? problem.solution : ""} ref="solution" onChange={this.handleChange} placeholder="FREE RESPONSE SOLUTION" />
             <textarea className="contentCol" value={problem.choices ? problem.choices: ""} ref="choices" onChange={this.handleChange} placeholder="MULTIPLE CHOICE OPTIONS" />
             <textarea className="contentCol" value={problem.final_solution ? problem.final_solution : ""} ref="final_solution" onChange={this.handleChange} placeholder="MULTIPLE CHOICE SOLUTION" />
-            <textarea className="contentCol" value={problem.interactive_problem ? problem.interactive_problem : ""} ref="interactive_problem" onChange={this.handleChange} placeholder="INTERATIVE PROBLEM" />
-            <textarea className="contentCol" value={problem.interactive_solution ? problem.interactive_solution : ""} ref="interactive_solution" onChange={this.handleChange} placeholder="INTERATIVE SOLUTION" />
+            <textarea className="contentCol" value={problem.interactive_problem ? problem.interactive_problem : ""} ref="interactive_problem" onChange={this.handleChange} placeholder="INTERACTIVE PROBLEM" />
+            <textarea className="contentCol" value={problem.interactive_solution ? problem.interactive_solution : ""} ref="interactive_solution" onChange={this.handleChange} placeholder="INTERACTIVE SOLUTION" />
           </div>
         </div>
         <hr className="s1" />
