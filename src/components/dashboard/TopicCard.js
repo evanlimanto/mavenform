@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { compose } from 'redux';
 import { DragSource } from 'react-dnd';
+import classnames from 'classnames';
+
 import ItemTypes from './ItemTypes';
 
 const cardSource = {
@@ -16,7 +18,6 @@ const cardSource = {
     const item = monitor.getItem();
     const dropResult = monitor.getDropResult();
 
-    console.log(item, dropResult);
     if (dropResult) {
       if (dropResult.name === "problemSetTopics") {
         dropResult.addTopicToProblemSet(item)
@@ -29,9 +30,13 @@ const cardSource = {
 
 class TopicCard extends Component {
   render() {
-    const { connectDragSource, isDragging, topic, concept } = this.props;
+    const { canSelect, connectDragSource, isDragging, topic, concept, topicid, selectTopic, selected } = this.props;
     const opacity = isDragging ? 0.4 : 1.0;
-    return connectDragSource(<div style={{ opacity }}>{topic} - {concept}</div>);
+    return connectDragSource(
+      <div style={{ opacity }}>{topic} - {concept}&nbsp;
+        {canSelect ? <a className={classnames({"admin-function": true, highlighted: selected})} onClick={() => selectTopic ? selectTopic(topicid) : null}>Select</a> : null}
+      </div>
+    );
   }
 }
 

@@ -22,16 +22,20 @@ class Interactive extends Component {
 
       selectedCourse: 888,
       selectedProblemSet: 4,
+      selectedTopic: 131,
     };
     this.selectCourse = this.selectCourse.bind(this);
     this.getCourseList = this.getCourseList.bind(this);
     this.addProblemSet = this.addProblemSet.bind(this);
+    this.selectTopic = this.selectTopic.bind(this);
     this.deleteProblemSet = this.deleteProblemSet.bind(this);
     this.selectProblemSet = this.selectProblemSet.bind(this);
+    this.addProblemToTopic = this.addProblemToTopic.bind(this);
     this.getProblemSetTopics = this.getProblemSetTopics.bind(this);
     this.getCourseProblemSets = this.getCourseProblemSets.bind(this);
     this.addTopicToProblemSet = this.addTopicToProblemSet.bind(this);
     this.removeTopicFromProblemSet = this.removeTopicFromProblemSet.bind(this);
+    this.getProblemSetTopicProblems = this.getProblemSetTopicProblems.bind(this);
   }
 
   componentDidMount() {
@@ -93,6 +97,10 @@ class Interactive extends Component {
     this.setState({ selectedProblemSet: psid });
   }
 
+  selectTopic(topicid) {
+    this.setState({ selectedTopic: topicid });
+  }
+
   getCourseList() {
     return map(sortBy(this.state.courseList, [(course) => course.school_label, (course) => course.course_code]), (course, key) =>
       <div key={key}><a className={classnames({ highlighted: course.id === this.state.selectedCourse })}
@@ -129,6 +137,29 @@ class Interactive extends Component {
     );
   }
 
+  deleteProblemFromTopic(contentid) {
+    const { selectedProblemSet, selectedTopic } = this.state;
+    req.post('/deleteProblemFromTopic')
+      .send({ psid: selectedProblemSet, topicid: selectedTopic, contentid })
+      .end((err, res) => {
+        if (err || !res.ok)
+          return console.error(err);
+      });
+  }
+
+  getProblemSetTopicProblems() {
+    const { selectedProblemSet, selectedTopic } = this.state;
+    if (!selectedTopic)
+      return false;
+    const problemIds = this.state.problemSetTopicProblems[[selectedProblemSet, selectedTopic]];
+    return (
+      <span>
+        <h1>PROBLEMS</h1>
+        <ul>{map(problemIds, (problem, key) => <li key={key}>{problem.contentid} <a className="admin-function" onClick={() => this.deleteProblemFromTopic(problem.contentid)}>Delete</a></li>)}</ul>
+      </span>
+    );
+  }
+
   getProblemSetTopics() {
     const { problemSetTopics, selectedProblemSet } = this.state;
     if (!selectedProblemSet)
@@ -136,12 +167,31 @@ class Interactive extends Component {
     return (
       <span>
         <h1>TOPICS</h1>
-        <TopicContainer problemSetTopics={problemSetTopics[selectedProblemSet]} addTopicToProblemSet={this.addTopicToProblemSet} removeTopicFromProblemSet={this.removeTopicFromProblemSet} />
+        <TopicContainer problemSetTopics={problemSetTopics[selectedProblemSet]}
+          addTopicToProblemSet={this.addTopicToProblemSet}
+          removeTopicFromProblemSet={this.removeTopicFromProblemSet}
+          selectTopic={this.selectTopic}
+          selectedTopic={this.state.selectedTopic} />
         <hr className="s2" />
         <h1>TOPIC LIST</h1>
-        <TopicListContainer problemSetTopics={problemSetTopics[selectedProblemSet]} addTopicToProblemSet={this.addTopicToProblemSet} removeTopicFromProblemSet={this.removeTopicFromProblemSet} />
+        <TopicListContainer problemSetTopics={problemSetTopics[selectedProblemSet]}
+          addTopicToProblemSet={this.addTopicToProblemSet}
+          removeTopicFromProblemSet={this.removeTopicFromProblemSet} />
       </span>
     );
+  }
+
+  addProblemToTopic(e) {
+    e.preventDefault();
+    const contentid = this.refs.contentid.value;
+    const psid = this.state.selectedProblemSet;
+    const topicid = this.state.selectedTopic;
+    req.post('/addProblemToTopic')
+      .send({ psid, topicid, contentid })
+      .end((err, res) => {
+        if (err || !res.ok)
+          return console.error(err);
+      });
   }
 
   addTopicToProblemSet(topic) {
@@ -182,6 +232,7 @@ class Interactive extends Component {
     const courseList = this.getCourseList();
     const courseProblemSets = this.getCourseProblemSets();
     const problemSetTopics = this.getProblemSetTopics();
+    const problemSetTopicProblems = this.getProblemSetTopicProblems();
     return (
       <div className="contentContainer">
         <DashboardNav />
@@ -193,6 +244,14 @@ class Interactive extends Component {
           {courseProblemSets}
           <hr className="s2" />
           {problemSetTopics}
+          <hr className="s2" />
+          <h1>ADD PROBLEM</h1>
+          <form>
+            <input type="text" ref="contentid" placeholder="Content ID" />
+            <button onClick={(e) => this.addProblemToTopic(e)}>ADD</button>
+          </form>
+          <hr className="s2" />
+          {problemSetTopicProblems}
         </span>
       </div>
     );

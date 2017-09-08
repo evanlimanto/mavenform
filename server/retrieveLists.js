@@ -688,18 +688,19 @@ const getProblemSetTopics =
 const getProblemSetTopicProblems =
   (req, res, next) => {
     const getq = `
-      select PSP.id, PSP.pstopicsid, C.problem, C.solution, C.choices,
+      select PSP.id, PSP.contentid, PSP.pstopicsid, PT.psid, PT.topicid, C.problem, C.solution, C.choices,
         C.exam, C.final_solution, C.interactive_solution, C.interactive_problem from problemset_problems PSP
-      inner join content C on C.id = PSP.contentid;
+      inner join content C on C.id = PSP.contentid
+      inner join problemset_topics PT on PT.id = PSP.pstopicsid;
     `;
     pool.query(getq, (err, result) => {
       if (err)
         return next(err);
       const items = _.reduce(result.rows, (dict, row) => {
-        const { id, pstopicsid, problem, solution, choices, exam, final_solution, interactive_solution, interactive_problem } = row;
-        if (!_.has(dict, pstopicsid))
-          dict[pstopicsid] = [];
-        dict[pstopicsid].push({ id, problem, solution, choices, exam, final_solution, interactive_solution, interactive_problem });
+        const { id, contentid, pstopicsid, psid, topicid, problem, solution, choices, exam, final_solution, interactive_solution, interactive_problem } = row;
+        if (!_.has(dict, [psid, topicid]))
+          dict[[psid, topicid]] = [];
+        dict[[psid, topicid]].push({ id, contentid, problem, solution, choices, exam, final_solution, interactive_solution, interactive_problem });
         return dict;
       }, {});
       return res.json(items);
