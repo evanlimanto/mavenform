@@ -79,22 +79,23 @@ class Interactive extends Component {
   }
 
   deleteProblemSet(psid) {
+    console.log(psid);
     req.post('/deleteProblemSet')
       .send({ psid })
       .end((err, res) => {
         if (err || !res.ok)
           return console.error(err);
         // refresh page
-        document.location = document.location;
+        document.location.href = document.location.href;
       });
   }
 
   selectCourse(courseid) {
-    this.setState({ selectedCourse: courseid });
+    this.setState({ selectedCourse: courseid, selectedProblemSet: null, selectedTopic: null });
   }
 
   selectProblemSet(psid) {
-    this.setState({ selectedProblemSet: psid });
+    this.setState({ selectedProblemSet: psid, selectedTopic: null });
   }
 
   selectTopic(topicid) {
@@ -119,6 +120,7 @@ class Interactive extends Component {
         <button onClick={(e) => this.addProblemSet(e)}>SUBMIT</button>
       </form>
     );
+    console.log(courseProblemSets[selectedCourse]);
     const problemSets = (courseProblemSets && courseProblemSets[selectedCourse]) ? map(courseProblemSets[selectedCourse],
       (ps, key) => (
         <div key={key}>
@@ -152,10 +154,15 @@ class Interactive extends Component {
     if (!selectedTopic)
       return false;
     const problemIds = this.state.problemSetTopicProblems[[selectedProblemSet, selectedTopic]];
+    const problems = (problemIds && problemIds.length > 0) ? (
+      <ul>
+        {map(problemIds, (problem, key) => <li key={key}>{problem.contentid} <a className="admin-function" onClick={() => this.deleteProblemFromTopic(problem.contentid)}>Delete</a></li>)}
+      </ul>
+    ) : "No problems yet!"
     return (
       <span>
         <h1>PROBLEMS</h1>
-        <ul>{map(problemIds, (problem, key) => <li key={key}>{problem.contentid} <a className="admin-function" onClick={() => this.deleteProblemFromTopic(problem.contentid)}>Delete</a></li>)}</ul>
+        {problems}
       </span>
     );
   }

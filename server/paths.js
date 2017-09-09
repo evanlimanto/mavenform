@@ -930,7 +930,7 @@ module.exports = (app) => {
     });
   });
 
-  app.post('/addProblemset', (req, res, next) => {
+  app.post('/addProblemSet', (req, res, next) => {
     const { courseid, ps_label, ps_code } = req.body;
     const inq = `insert into problemsets (courseid, ps_label, ps_code) values($1, $2, $3)`;
     config.pool.query(inq, [courseid, ps_label, ps_code], (err, result) => {
@@ -939,22 +939,22 @@ module.exports = (app) => {
     });
   });
 
-  app.post('/deleteProblemset', (req, res, next) => {
+  app.post('/deleteProblemSet', (req, res, next) => {
     const { psid } = req.body;
     const delq1 = `
-      delete from problems_solved where ctsid in
-      (select id from problemset_problems where pstopicsid = 36);
+      delete from problemset_problems where pstopicsid in
+      (select id from problemset_topics where psid = $1);
     `;
-    const delq = `
-      delete from problemset_problems where pstopicsid = 36;
+    const delq2 = `
+      delete from problemset_topics where psid = $1;
     `;
     const delq3 = `
-      delete from problemset_topics where id = 36;
+      delete from problemsets where id = $1;
     `;
     async.series([
-      (callback) => config.pool.query(delq1, callback),
-      (callback) => config.pool.query(delq2, callback),
-      (callback) => config.pool.query(delq3, callback),
+      (callback) => config.pool.query(delq1, [psid], callback),
+      (callback) => config.pool.query(delq2, [psid], callback),
+      (callback) => config.pool.query(delq3, [psid], callback),
     ], (err) => {
       if (err) return console.error(err);
       return res.send("Success!");
