@@ -79,14 +79,23 @@ class Interactive extends Component {
   }
 
   deleteProblemSet(psid) {
-    console.log(psid);
+    const { selectedCourse } = this.state;
+    const self = this;
     req.post('/deleteProblemSet')
       .send({ psid })
       .end((err, res) => {
         if (err || !res.ok)
           return console.error(err);
         // refresh page
-        document.location.href = document.location.href;
+        const newCourseProblemSets = filter(
+          self.state.courseProblemSets[selectedCourse] ? self.state.courseProblemSets[selectedCourse] : [],
+          (item) => item.id !== psid);
+        self.setState({
+          courseProblemSets: {
+            ...self.state.courseProblemSets,
+            [selectedCourse]: newCourseProblemSets,
+          }
+        });
       });
   }
 
@@ -120,7 +129,6 @@ class Interactive extends Component {
         <button onClick={(e) => this.addProblemSet(e)}>SUBMIT</button>
       </form>
     );
-    console.log(courseProblemSets[selectedCourse]);
     const problemSets = (courseProblemSets && courseProblemSets[selectedCourse]) ? map(courseProblemSets[selectedCourse],
       (ps, key) => (
         <div key={key}>
@@ -141,11 +149,20 @@ class Interactive extends Component {
 
   deleteProblemFromTopic(contentid) {
     const { selectedProblemSet, selectedTopic } = this.state;
+    const self = this;
     req.post('/deleteProblemFromTopic')
       .send({ psid: selectedProblemSet, topicid: selectedTopic, contentid })
       .end((err, res) => {
         if (err || !res.ok)
           return console.error(err);
+        const newTopicProblems = filter(this.state.problemSetTopicProblems[[selectedProblemSet, selectedTopic]] ?
+          cloneDeep(this.state.problemSetTopicProblems[[selectedProblemSet, selectedTopic]]) : [], (item) => item.contentid !== contentid);
+        self.setState({
+          problemSetTopicProblems: {
+            ...this.state.problemSetTopicProblems,
+            [[selectedProblemSet, selectedTopic]]: newTopicProblems
+          }
+        });
       });
   }
 
@@ -193,11 +210,19 @@ class Interactive extends Component {
     const contentid = this.refs.contentid.value;
     const psid = this.state.selectedProblemSet;
     const topicid = this.state.selectedTopic;
+    const self = this;
     req.post('/addProblemToTopic')
       .send({ psid, topicid, contentid })
       .end((err, res) => {
         if (err || !res.ok)
           return console.error(err);
+        const newTopicProblems = this.state.problemSetTopicProblems[[psid, topicid]] ? concat(cloneDeep(this.state.problemSetTopicProblems[[psid, topicid]]), { contentid }) : [{contentid}];
+        self.setState({
+          problemSetTopicProblems: {
+            ...this.state.problemSetTopicProblems,
+            [[psid, topicid]]: newTopicProblems
+          }
+        });
       });
   }
 
