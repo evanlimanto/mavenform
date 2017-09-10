@@ -210,6 +210,7 @@ class DashboardContentComponent extends Component {
         </div>
         <hr className="s1" />
         <div className="normal-buttons">
+          <h1>Problem ID: {problem.id}</h1>
           {(problem.problem !== "") ? ((problem.choices) ?
           <MultipleChoiceQuestion content={problem.problem} solutionNum={problem.solution} choices={problem.choices} /> :
           <Question content={renderer.preprocess(problem.problem)} solution={renderer.preprocess(problem.solution)} final_solution={problem.final_solution} />) : null}

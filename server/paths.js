@@ -104,7 +104,7 @@ module.exports = (app) => {
     const { examid } = req.params;
 
     const getcontentq = `
-      select problem_num, subproblem_num, problem, solution, choices,
+      select id, problem_num, subproblem_num, problem, solution, choices,
         topicid, final_solution, difficulty from content where exam = $1
     `;
     config.pool.query(getcontentq, [examid], (err, result) => {
@@ -119,13 +119,9 @@ module.exports = (app) => {
       }, {});
 
       const problems = _.reduce(result.rows, (result, row) => {
-        const { problem_num, subproblem_num, topicid, choices } = row;
-        const problem = row.problem;
-        const solution = row.solution;
-        const final_solution = row.final_solution;
-        const difficulty = row.difficulty;
+        const { id, problem, solution, difficulty, final_solution, problem_num, subproblem_num, topicid, choices } = row;
         const key = `${problem_num}_${subproblem_num}`;
-        result[key] = { problem, solution, topicid, choices, final_solution, difficulty };
+        result[key] = { id, problem, solution, topicid, choices, final_solution, difficulty };
         return result;
       }, {});
       return res.json({info, problems});
