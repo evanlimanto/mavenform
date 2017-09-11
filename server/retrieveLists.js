@@ -646,6 +646,76 @@ const getAvailableCourses =
     });
   };
 
+const getCourseProblemSetsByCode =
+  (req, res, next) => {
+    const { schoolCode, courseCode } = req.params;
+    const getq = `
+      select PS.id, PS.ps_label, PS.ps_code from problemsets PS
+      inner join courses C on PS.courseid = C.id
+      inner join schools S on C.schoolid = S.id
+      where S.code = $1 and C.code = $2;
+    `;
+    pool.query(getq, [schoolCode, courseCode], (err, result) => {
+      if (err)
+        return next(err);
+      const items = _.map(result.rows, (row) => {
+        const { id, ps_label, ps_code } = row;
+        return { id, ps_label, ps_code };
+      });
+      return res.json(items);
+    });
+  };
+
+const getProblemSetTopicsByCode =
+  (req, res, next) => {
+    const { schoolCode, courseCode } = req.params;
+    const getq = `
+      select PST.id, PST.psid, PST.topicid, T.topic, T.concept from problemset_topics PST
+      inner join topics T on PST.topicid = T.id
+      inner join problemsets PS on PST.psid = PS.id
+      inner join courses C on PS.courseid = C.id
+      inner join schools S on C.schoolid = S.id
+      where S.code = $1 and C.code = $2;
+    `;
+    pool.query(getq, [schoolCode, courseCode], (err, result) => {
+      if (err)
+        return next(err);
+      const items = _.reduce(result.rows, (dict, row) => {
+        const { id, psid, topicid, topic, concept } = row;
+        if (!_.has(dict, psid))
+          dict[psid] = [];
+        dict[psid].push({ id, topicid, topic, concept });
+        return dict;
+      }, {});
+      return res.json(items);
+    });
+  };
+
+const getProblemSetTopicProblemsByCode =
+  (req, res, next) => {
+    const { schoolCode, courseCode, topicCode } = req.params;
+    const getq = `
+      select PSP.id, PSP.contentid, PT.psid, PT.topicid, C.problem, C.solution, C.choices,
+        C.exam, C.final_solution, C.interactive_solution, C.interactive_problem from problemset_problems PSP
+      inner join content C on C.id = PSP.contentid
+      inner join problemset_topics PT on PT.id = PSP.pstopicsid
+      inner join topics T on T.id = PT.topicid
+      inner join problemsets PS on PS.id = PT.psid
+      inner join courses on PS.courseid = courses.id
+      inner join schools S on courses.schoolid = S.id
+      where S.code = $1 and courses.code = $2 and T.code = $3
+    `;
+    pool.query(getq, [schoolCode, courseCode, topicCode], (err, result) => {
+      if (err)
+        return next(err);
+      const items = _.map(result.rows, (row) => {
+        const { id, problem, solution, choices, exam, final_solution, interactive_solution, interactive_problem } = row;
+        return { id, problem, solution, choices, exam, final_solution, interactive_solution, interactive_problem };
+      }, {});
+      return res.json(items);
+    });
+  };
+
 const getCourseProblemSets =
   (req, res, next) => {
     const getq = `
@@ -777,4 +847,8 @@ module.exports = (app) => {
   app.get('/getCourseProblemSets', getCourseProblemSets);
   app.get('/getProblemSetTopics', getProblemSetTopics);
   app.get('/getProblemSetTopicProblems', getProblemSetTopicProblems);
+
+  app.get('/getCourseProblemSetsByCode/:schoolCode/:courseCode', getCourseProblemSetsByCode);
+  app.get('/getProblemSetTopicsByCode/:schoolCode/:courseCode', getProblemSetTopicsByCode);
+  app.get('/getProblemSetTopicProblemsByCode/:schoolCode/:courseCode/:topicCode', getProblemSetTopicProblemsByCode);
 }

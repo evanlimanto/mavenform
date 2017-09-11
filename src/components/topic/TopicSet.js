@@ -37,7 +37,16 @@ class TopicSetComponent extends Component {
   }
 
   componentDidMount() {
+    const { schoolCode, courseCode } = this.props;
     TopicSetComponent.fetchData(this.props.dispatch, this.props);
+    Promise.all([
+      fetch(`/getCourseProblemSetsByCode/${schoolCode}/${courseCode}`)
+        .then((response) => response.json())
+        .then((json) => this.setState({ courseProblemSets: json })),
+      fetch(`/getProblemSetTopicsByCode/${schoolCode}/${courseCode}`)
+        .then((response) => response.json())
+        .then((json) => this.setState({ problemSetTopics: json }))
+    ]);
   }
 
   static fetchData(dispatch, props) {
@@ -49,7 +58,7 @@ class TopicSetComponent extends Component {
         .then((json) => dispatch(updateTopicsList(json))),
       fetch(`${BASE_URL}/getCompletedProblemsCount/${schoolCode}/${courseCode}/${auth_user_id}`)
         .then((response) => response.json())
-        .then((json) => dispatch(updateCompletedProblemCounts(json)))
+        .then((json) => dispatch(updateCompletedProblemCounts(json))),
     ]);
   }
 
@@ -71,6 +80,7 @@ class TopicSetComponent extends Component {
   }
 
   render() {
+    console.log(this.state);
     const { courseCode, schoolCode } = this.props;
     const topicsDict = this.getCategorizedTopics();
     const topicItems = map(this.getCategorizedTopics(), (items, topic) => {
@@ -96,6 +106,22 @@ class TopicSetComponent extends Component {
         </div>
       );
     });
+    const containers = map(this.state.courseProblemSets, (set, index) => {
+      return (
+        <span key={index}>
+          <div className="int-box">
+            <p className="int-helper">
+              {index === 0 ? (<i className="fa fa-check-circle" aria-hidden="true"></i>) : (<i className="fa fa-lock" aria-hidden="true"></i>)}
+              &nbsp;&nbsp;&nbsp;
+              <span className="int-highlight">{set.ps_label} </span>
+              Review
+            </p>
+            <button className={classnames({"int-button": true, "gray": this.state.show[0], "int-button-white": !this.state.show[0]})} onClick={() => this.toggleShow(0)}>{this.state.show[0] ? "Hide" : "View"}</button>
+          </div>
+          {this.state.show[index] ? <div className="int-box int-box-white">{topicItems}</div> : null}
+        </span>
+      );
+    })
     return (
       <div>
         <Navbar interactive={true} links={[`interactive/${schoolCode}/${courseCode}`]} navbarLabels={[courseCodeToLabel(courseCode)]} />
@@ -115,39 +141,7 @@ class TopicSetComponent extends Component {
         </div>
         <hr className="s5" />
         <div className="container interactive-container">
-          <div className="int-box int-box-top">
-            <p className="int-helper">
-              <i className="fa fa-check-circle" aria-hidden="true"></i>
-              &nbsp;&nbsp;&nbsp;
-              <span className="int-highlight">Midterm 1 </span>
-              Review
-            </p>
-            <button className={classnames({"int-button": true, "gray": this.state.show[0], "int-button-white": !this.state.show[0]})} onClick={() => this.toggleShow(0)}>{this.state.show[0] ? "Hide" : "View"}</button>
-          </div>
-          <ReactCSSTransitionGroup
-            transitionName="topicItems"
-            transitionEnterTimeout={200}
-            transitionLeaveTimeout={200}>
-            {this.state.show[0] ? <div className="int-box int-box-white">{topicItems}</div> : null}
-          </ReactCSSTransitionGroup>
-          <div className="int-box int-box-mid">
-            <p className="int-helper">
-              <i className="fa fa-lock" aria-hidden="true"></i>
-              &nbsp;&nbsp;&nbsp;
-              <span className="int-highlight">Midterm 2 </span>
-              Review
-            </p>
-            <button className="int-button">Unlock</button>
-          </div>
-          <div className="int-box int-box-bot">
-            <p className="int-helper">
-              <i className="fa fa-lock" aria-hidden="true"></i>
-              &nbsp;&nbsp;&nbsp;
-              <span className="int-highlight">Final </span>
-              Review
-            </p>
-            <button className="int-button">Unlock</button>
-          </div>
+          {containers}
         </div>
         <hr className="s7-5" />
         <Footer />
