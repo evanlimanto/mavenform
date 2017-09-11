@@ -1,5 +1,5 @@
 import { Course } from './components/course';
-import { Dashboard, DashboardContent, DashboardCourses, DashboardComments, DashboardTopics, Interactive, Transcribe, Transcribed } from './components/dashboard';
+import { Dashboard, DashboardContent, DashboardCourses, DashboardComments, DashboardProblem, DashboardTopics, Interactive, Transcribe, Transcribed } from './components/dashboard';
 import { Exam, ProblemSet } from './components/exam';
 import Home from './components/home';
 import { Login, Logout, SecretSignup, Signup } from './components/login';
@@ -21,6 +21,7 @@ const routes = [
   { path: '/dashboard/comments', component: DashboardComments },
   { path: '/dashboard/courses', component: DashboardCourses },
   { path: '/dashboard/problems', component: DashboardContent },
+  { path: '/dashboard/problem/:problemid', component: DashboardProblem },
   { path: '/dashboard/topics', component: DashboardTopics },
   { path: '/dashboard/transcribed', component: Transcribed },
   { path: '/dashboard/transcribe/:transcribedExamId', component: Transcribe },
@@ -31,8 +32,8 @@ const routes = [
   { path: '/s3cr3tsignup', component: SecretSignup },
   { path: '/m4rk3t1ng4pp5', component: MarketingApps },
   { path: '/home', component: UserHome },
-  { path: '/interactive/:schoolCode/:courseCode/:topicCode', component: Problems },
   { path: '/interactive/:schoolCode/:courseCode', component: TopicSet },
+  { path: '/interactive/:schoolCode/:courseCode/:topicCode', component: Problems },
   { path: '/:schoolCode/:courseCode/problemset/:problemSetType', component: ProblemSet },
   { path: '/:schoolCode/:courseCode/:examStr', component: Exam },
   { path: '/:schoolCode/:courseCode', component: Course },

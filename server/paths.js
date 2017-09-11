@@ -577,7 +577,7 @@ module.exports = (app) => {
 
     config.pool.query(getq, (err, result) => {
       if (err) return next(err);
-      const items = _.reduce(result.rows, (dict, row) => {
+      const ieems = _.reduce(result.rows, (dict, row) => {
         const { id, content, nickname, datetime, parentid, upvotes, deleted, contentid } = row;
         if (!_.has(dict, contentid))
           dict[contentid] = [];
@@ -880,9 +880,33 @@ module.exports = (app) => {
   });
 
   app.post('/addTopicToProblemSet', (req, res, next) => {
-    const { psid, topicid } = req.body;
-    const inq = `insert into problemset_topics (psid, topicid) values($1, $2)`;
-    config.pool.query(inq, [psid, topicid], (err, result) => {
+    const { psid, topic_label, topic_code, topic_order } = req.body;
+    const inq = `
+      insert into problemset_topics (psid, topic_label, topic_code, topic_order)
+      select A.id, $1, $2, $3 from
+      (select id from problemsets where courseid = $4 and ps_code = $5) as A
+    `;
+    config.pool.query(inq, [psid, topic_label, topic_code, topic_order], (err, result) => {
+      if (err)
+        return next(err);
+      return res.send("Success!");
+    });
+  });
+
+  app.post('/addSubTopicToTopic', (req, res, next) => {
+    const { subtopic_label, subtopic_code, subtopic_order, pstid } = req.body;
+    const inq = `insert into problemset_subtopics (pstid, subtopic_label, subtopic_code, subtopic_order) values($1, $2, $3, $4)`;
+    config.pool.query(inq, [pstid, subtopic_label, subtopic_code, subtopic_order], (err, result) => {
+      if (err)
+        return next(err);
+      return res.send("Success!");
+    });
+  });
+
+  app.post('/addProblemToSubTopic', (req, res, next) => {
+    const { problemid, problem_order, pssid } = req.body;
+    const inq = `insert into problemset_problems (contentid, pssid, problem_order) values($1, $2, $3)`;
+    config.pool.query(inq, [problemid, pssid, problem_order], (err, result) => {
       if (err)
         return next(err);
       return res.send("Success!");
@@ -890,36 +914,47 @@ module.exports = (app) => {
   });
 
   app.post('/removeTopicFromProblemSet', (req, res, next) => {
-    const { psid, topicid } = req.body;
-    const delq = `delete from problemset_topics where psid = $1 and topicid = $2`;
-    config.pool.query(delq, [psid, topicid], (err, result) => {
-      if (err)
-        return next(err);
+    const { psid, topic_code } = req.body;
+    const delq1 = `
+      delete from problemset_problems where pssid in
+      (select id from problemset_subtopics where pstid in
+        (select id from problemset_topics where topic_code = $1 and psid = $2))
+    `;
+    const delq2 = `
+      delete from problemset_subtopics where pstid in
+      (select id from problemset_topics where topic_code = $1 and psid = $2)
+    `;
+    const delq3 = `delete from problemset_topics where topic_code = $1 and psid = $2`;
+    async.series([
+      (callback) => config.pool.query(delq1, [topic_code, psid], callback),
+      (callback) => config.pool.query(delq2, [topic_code, psid], callback),
+      (callback) => config.pool.query(delq3, [topic_code, psid], callback),
+    ], (err) => {
+      if (err) return next(err);
       return res.send("Success!");
     });
   });
 
-  app.post('/addProblemToTopic', (req, res, next) => {
-    const { psid, contentid, topicid } = req.body;
-    const inq = `
-      insert into problemset_problems (contentid, pstopicsid)
-      select $1, A.id from
-      (select id from problemset_topics where psid = $2 and topicid = $3) as A;
+  app.post('/removeSubTopicFromTopic', (req, res, next) => {
+    const { pstid, subtopic_code } = req.body;
+    const delq1 = `
+      delete from problemset_problems where pssid in
+      (select id from problemset_subtopics where subtopic_code = $1 = and pstid = $2)
     `;
-    config.pool.query(inq, [contentid, psid, topicid], (err, result) => {
-      if (err)
-        return next(err);
+    const delq2 = `delete from problemset_subtopics where subtopic_code = $1 and pstid = $2`;
+    async.series([
+      (callback) => config.pool.query(delq1, [subtopic_code, pstid], callback),
+      (callback) => config.pool.query(delq2, [subtopic_code, pstid], callback),
+    ], (err) => {
+      if (err) return next(err);
       return res.send("Success!");
     });
   });
 
-  app.post('/deleteProblemFromTopic', (req, res, next) => {
-    const { psid, contentid, topicid } = req.body;
-    const delq = `
-      delete from problemset_problems
-      where contentid = $1 and pstopicsid = (select id from problemset_topics where psid = $2 and topicid = $3)
-    `;
-    config.pool.query(delq, [contentid, psid, topicid], (err, result) => {
+  app.post('/removeProblemFromSubTopic', (req, res, next) => {
+    const { problemid, pssid } = req.body;
+    const delq = `delete from problemset_problems where contentid = $1 and pssid = $2`;
+    config.pool.query(delq, [problemid, pssid], (err, result) => {
       if (err)
         return next(err);
       return res.send("Success!");
@@ -927,7 +962,7 @@ module.exports = (app) => {
   });
 
   app.post('/addProblemSet', (req, res, next) => {
-    const { courseid, ps_label, ps_code } = req.body;
+    const { courseid, ps_label, ps_code, order } = req.body;
     const inq = `insert into problemsets (courseid, ps_label, ps_code) values($1, $2, $3)`;
     config.pool.query(inq, [courseid, ps_label, ps_code], (err, result) => {
       if (err) return next(err);
@@ -935,26 +970,45 @@ module.exports = (app) => {
     });
   });
 
-  app.post('/deleteProblemSet', (req, res, next) => {
-    const { psid } = req.body;
+  app.post('/removeProblemSet', (req, res, next) => {
+    const { courseid, ps_code } = req.body;
     const delq1 = `
-      delete from problemset_problems where pstopicsid in
-      (select id from problemset_topics where psid = $1);
+      delete from problemset_problems where pssid in
+      (select id from problemset_subtopics where pstid in
+        (select id from problemset_topics where psid = (select id from problemsets where courseid = $1 and ps_code = $2)))
     `;
     const delq2 = `
-      delete from problemset_topics where psid = $1;
+      delete from problemset_subtopics where pstid in
+        (select id from problemset_topics where psid = (select id from problemsets where courseid = $1 and ps_code = $2))
     `;
     const delq3 = `
-      delete from problemsets where id = $1;
+      delete from problemset_topics
+      where psid = (select id from problemsets where courseid = $1 and ps_code = $2)
+    `;
+    const delq4 = `
+      delete from problemsets where courseid = $1 and ps_code = $2
     `;
     async.series([
-      (callback) => config.pool.query(delq1, [psid], callback),
-      (callback) => config.pool.query(delq2, [psid], callback),
-      (callback) => config.pool.query(delq3, [psid], callback),
+      (callback) => config.pool.query(delq1, [courseid, ps_code], callback),
+      (callback) => config.pool.query(delq2, [courseid, ps_code], callback),
+      (callback) => config.pool.query(delq3, [courseid, ps_code], callback),
+      (callback) => config.pool.query(delq4, [courseid, ps_code], callback),
     ], (err) => {
       if (err) return console.error(err);
       return res.send("Success!");
     })
+  });
+
+  app.get('/getProblemById/:problemid', (req, res, next) => {
+    const { problemid } = req.params;
+    const getq = `
+      select * from content where id = $1;
+    `;
+    config.pool.query(getq, [problemid], (err, result) => {
+      if (err)
+        return next(err);
+      return res.json({ ...result.rows[0] });
+    });
   });
 
   app.get('/getSchoolInfo/:schoolCode', (req, res, next) => {

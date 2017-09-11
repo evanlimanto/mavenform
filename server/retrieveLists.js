@@ -646,89 +646,19 @@ const getAvailableCourses =
     });
   };
 
-const getCourseProblemSetsByCode =
-  (req, res, next) => {
-    const { schoolCode, courseCode } = req.params;
-    const getq = `
-      select PS.id, PS.ps_label, PS.ps_code from problemsets PS
-      inner join courses C on PS.courseid = C.id
-      inner join schools S on C.schoolid = S.id
-      where S.code = $1 and C.code = $2;
-    `;
-    pool.query(getq, [schoolCode, courseCode], (err, result) => {
-      if (err)
-        return next(err);
-      const items = _.map(result.rows, (row) => {
-        const { id, ps_label, ps_code } = row;
-        return { id, ps_label, ps_code };
-      });
-      return res.json(items);
-    });
-  };
-
-const getProblemSetTopicsByCode =
-  (req, res, next) => {
-    const { schoolCode, courseCode } = req.params;
-    const getq = `
-      select PST.id, PST.psid, PST.topicid, T.topic, T.concept from problemset_topics PST
-      inner join topics T on PST.topicid = T.id
-      inner join problemsets PS on PST.psid = PS.id
-      inner join courses C on PS.courseid = C.id
-      inner join schools S on C.schoolid = S.id
-      where S.code = $1 and C.code = $2;
-    `;
-    pool.query(getq, [schoolCode, courseCode], (err, result) => {
-      if (err)
-        return next(err);
-      const items = _.reduce(result.rows, (dict, row) => {
-        const { id, psid, topicid, topic, concept } = row;
-        if (!_.has(dict, psid))
-          dict[psid] = [];
-        dict[psid].push({ id, topicid, topic, concept });
-        return dict;
-      }, {});
-      return res.json(items);
-    });
-  };
-
-const getProblemSetTopicProblemsByCode =
-  (req, res, next) => {
-    const { schoolCode, courseCode, topicCode } = req.params;
-    const getq = `
-      select PSP.id, PSP.contentid, PT.psid, PT.topicid, C.problem, C.solution, C.choices,
-        C.exam, C.final_solution, C.interactive_solution, C.interactive_problem from problemset_problems PSP
-      inner join content C on C.id = PSP.contentid
-      inner join problemset_topics PT on PT.id = PSP.pstopicsid
-      inner join topics T on T.id = PT.topicid
-      inner join problemsets PS on PS.id = PT.psid
-      inner join courses on PS.courseid = courses.id
-      inner join schools S on courses.schoolid = S.id
-      where S.code = $1 and courses.code = $2 and T.code = $3
-    `;
-    pool.query(getq, [schoolCode, courseCode, topicCode], (err, result) => {
-      if (err)
-        return next(err);
-      const items = _.map(result.rows, (row) => {
-        const { id, problem, solution, choices, exam, final_solution, interactive_solution, interactive_problem } = row;
-        return { id, problem, solution, choices, exam, final_solution, interactive_solution, interactive_problem };
-      }, {});
-      return res.json(items);
-    });
-  };
-
 const getCourseProblemSets =
   (req, res, next) => {
     const getq = `
-      select id, courseid, ps_label, ps_code from problemsets
+      select id, courseid, ps_label, ps_code, ps_order from problemsets
     `;
     pool.query(getq, (err, result) => {
       if (err)
         return next(err);
       const items = _.reduce(result.rows, (dict, row) => {
-        const { id, courseid, ps_label, ps_code } = row;
+        const { id, courseid, ps_label, ps_code, ps_order } = row;
         if (!_.has(dict, courseid))
           dict[courseid] = [];
-        dict[courseid].push({ id, ps_label, ps_code });
+        dict[courseid].push({ id, ps_label, ps_code, ps_order });
         return dict;
       }, {});
       return res.json(items);
@@ -738,39 +668,54 @@ const getCourseProblemSets =
 const getProblemSetTopics =
   (req, res, next) => {
     const getq = `
-      select PST.id, PST.topicid, PST.psid, T.topic, T.concept from problemset_topics PST
-      inner join topics T on PST.topicid = T.id
+      select id, psid, topic_label, topic_code, topic_order from problemset_topics PST
     `;
     pool.query(getq, (err, result) => {
       if (err)
         return next(err);
       const items = _.reduce(result.rows, (dict, row) => {
-        const { id, psid, topicid, topic, concept } = row;
+        const { id, psid, topic_label, topic_code, topic_order } = row;
         if (!_.has(dict, psid))
           dict[psid] = [];
-        dict[psid].push({ id, topicid, topic, concept });
+        dict[psid].push({ id, topic_label, topic_code, topic_order });
         return dict;
       }, {});
       return res.json(items);
     });
   };
 
-const getProblemSetTopicProblems =
+const getTopicSubTopics =
   (req, res, next) => {
     const getq = `
-      select PSP.id, PSP.contentid, PSP.pstopicsid, PT.psid, PT.topicid, C.problem, C.solution, C.choices,
-        C.exam, C.final_solution, C.interactive_solution, C.interactive_problem from problemset_problems PSP
-      inner join content C on C.id = PSP.contentid
-      inner join problemset_topics PT on PT.id = PSP.pstopicsid;
+      select id, pstid, subtopic_label, subtopic_code, subtopic_order from problemset_subtopics PSS
     `;
     pool.query(getq, (err, result) => {
       if (err)
         return next(err);
       const items = _.reduce(result.rows, (dict, row) => {
-        const { id, contentid, pstopicsid, psid, topicid, problem, solution, choices, exam, final_solution, interactive_solution, interactive_problem } = row;
-        if (!_.has(dict, [psid, topicid]))
-          dict[[psid, topicid]] = [];
-        dict[[psid, topicid]].push({ id, contentid, problem, solution, choices, exam, final_solution, interactive_solution, interactive_problem });
+        const { id, pstid, subtopic_label, subtopic_code, subtopic_order } = row;
+        if (!_.has(dict, pstid))
+          dict[pstid] = [];
+        dict[pstid].push({ id, subtopic_label, subtopic_code, subtopic_order });
+        return dict;
+      }, {});
+      return res.json(items);
+    });
+  };
+
+const getSubTopicProblems =
+  (req, res, next) => {
+    const getq = `
+      select id, contentid, pssid, problem_order from problemset_problems
+    `;
+    pool.query(getq, (err, result) => {
+      if (err)
+        return next(err);
+      const items = _.reduce(result.rows, (dict, row) => {
+        const { id, contentid, pssid, problem_order } = row;
+        if (!_.has(dict, pssid))
+          dict[pssid] = [];
+        dict[pssid].push({ id, contentid, problem_order });
         return dict;
       }, {});
       return res.json(items);
@@ -846,9 +791,6 @@ module.exports = (app) => {
   // Retrieve problemsets
   app.get('/getCourseProblemSets', getCourseProblemSets);
   app.get('/getProblemSetTopics', getProblemSetTopics);
-  app.get('/getProblemSetTopicProblems', getProblemSetTopicProblems);
-
-  app.get('/getCourseProblemSetsByCode/:schoolCode/:courseCode', getCourseProblemSetsByCode);
-  app.get('/getProblemSetTopicsByCode/:schoolCode/:courseCode', getProblemSetTopicsByCode);
-  app.get('/getProblemSetTopicProblemsByCode/:schoolCode/:courseCode/:topicCode', getProblemSetTopicProblemsByCode);
+  app.get('/getTopicSubTopics', getTopicSubTopics);
+  app.get('/getSubTopicProblems', getSubTopicProblems);
 }
