@@ -649,16 +649,16 @@ const getAvailableCourses =
 const getCourseLectures =
   (req, res, next) => {
     const getq = `
-      select professor, syllabus_url, lecture_code, termid, courseid from lectures;
+      select id, professor, syllabus_url, lecture_code, termid, courseid from lectures;
     `;
     pool.query(getq, (err, result) => {
       if (err)
         return next(err);
       const items = _.reduce(result.rows, (dict, row) => {
-        const { professor, syllabus_url, lecture_code, termid, courseid } = row;
+        const { id, professor, syllabus_url, lecture_code, termid, courseid } = row;
         if (!_.has(dict, courseid))
           dict[courseid] = [];
-        dict[courseid].push({ professor, syllabus_url, lecture_code, termid });
+        dict[courseid].push({ id, professor, syllabus_url, lecture_code, termid });
         return dict;
       }, {});
       return res.json(items);

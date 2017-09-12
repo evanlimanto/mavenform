@@ -37,8 +37,10 @@ class Interactive extends Component {
     this.getLectureProblemSets = this.getLectureProblemSets.bind(this);
 
     this.selectCourse = this.selectCourse.bind(this);
-    this.selectTopic = this.selectTopic.bind(this);
+    this.selectLecture = this.selectLecture.bind(this);
     this.selectProblemSet = this.selectProblemSet.bind(this);
+    this.selectTopic = this.selectTopic.bind(this);
+    this.selectSubTopic = this.selectSubTopic.bind(this);
 
     this.addProblemSet = this.addProblemSet.bind(this);
     this.removeProblemSet = this.removeProblemSet.bind(this);
@@ -77,7 +79,11 @@ class Interactive extends Component {
   }
 
   selectCourse(courseid) {
-    this.setState({ selectedCourse: courseid, selectedProblemSet: null, selectedTopic: null, selectedSubTopic: null });
+    this.setState({ selectedCourse: courseid, selectedLecture: null, selectedProblemSet: null, selectedTopic: null, selectedSubTopic: null });
+  }
+
+  selectLecture(lectureid) {
+    this.setState({ selectedLecture: lectureid, selectedProblemSet: null, selectedTopic: null, selectedSubTopic: null });
   }
 
   selectProblemSet(psid) {
@@ -450,8 +456,8 @@ class Interactive extends Component {
     const lectures = (courseLectures && courseLectures[selectedCourse]) ? map(courseLectures[selectedCourse],
       (lecture, key) => (
         <div key={key}>
-          <a className={classnames({ highlighted: lecture.id === this.state.selectedCourse })}
-            onClick={() => this.selectedLecture(lecture.id)}>{lecture.lecture_code}</a>&nbsp;
+          <a className={classnames({ highlighted: lecture.id === this.state.selectedLecture })}
+            onClick={() => this.selectLecture(lecture.id)}>{lecture.lecture_code}</a>&nbsp;
           <a className="admin-function" onClick={() => this.removeLecture(lecture.id)}>Delete</a>
         </div>)) : "No Lectures yet!";
     return (
