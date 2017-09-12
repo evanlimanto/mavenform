@@ -22,18 +22,19 @@ class Interactive extends Component {
     this.state = {
       courseList: [],
       topicList: [],
-      courseProblemSets: {},
+      lectureProblemSets: {},
       problemSetTopics: {},
       problemSetTopicProblems: {},
 
       selectedCourse: 888,
+      selecdtedLecture: null,
       selectedProblemSet: null,
       selectedTopic: null,
       selectedSubTopic: null,
     };
     this.getCourseList = this.getCourseList.bind(this);
     this.getProblemSetTopics = this.getProblemSetTopics.bind(this);
-    this.getCourseProblemSets = this.getCourseProblemSets.bind(this);
+    this.getLectureProblemSets = this.getLectureProblemSets.bind(this);
 
     this.selectCourse = this.selectCourse.bind(this);
     this.selectTopic = this.selectTopic.bind(this);
@@ -57,9 +58,12 @@ class Interactive extends Component {
       fetch('/getAvailableCourses')
         .then((response) => response.json())
         .then((json) => this.setState({ courseList: json })),
-      fetch('/getCourseProblemSets')
+      fetch('/getCourseLectures')
         .then((response) => response.json())
-        .then((json) => this.setState({ courseProblemSets: json })),
+        .then((json) => this.setState({ courseLectures: json })),
+      fetch('/getLectureProblemSets')
+        .then((response) => response.json())
+        .then((json) => this.setState({ lectureProblemSets: json })),
       fetch('/getProblemSetTopics')
         .then((response) => response.json())
         .then((json) => this.setState({ problemSetTopics: json })),
@@ -90,40 +94,84 @@ class Interactive extends Component {
 
   addProblemSet(e) {
     e.preventDefault();
-    const { selectedCourse, courseProblemSets } = this.state;
+    const { selectedLecture, lectureProblemSets } = this.state;
     const ps_code = this.refs.ps_code.value;
     const ps_label = this.refs.ps_label.value;
     const ps_order = this.refs.ps_order.value;
     const self = this;
     req.post('/addProblemSet')
-      .send({ courseid: selectedCourse, ps_code, ps_label, ps_order })
+      .send({ lectureid: selectedLecture, ps_code, ps_label, ps_order })
       .end((err, res) => {
         if (err || !res.ok)
           return console.error(err);
         const id = res.text;
         const arr = concat(
-          cloneOrEmpty(courseProblemSets[selectedCourse]),
+          cloneOrEmpty(lectureProblemSets[selectedLecture]),
           { id, ps_code, ps_label, ps_order }
         );
         self.setState({
-          courseProblemSets: {
-            ...courseProblemSets,
-            [selectedCourse]: arr
+          lectureProblemSets: {
+            ...lectureProblemSets,
+            [selectedLecture]: arr
           }
         });
       })
   }
 
-  removeProblemSet(id) {
-    const { courseProblemSets, selectedCourse } = this.state;
+  addLecture(e) {
+    e.preventDefault();
+    const { selectedCourse, courseLectures } = this.state;
+    const professor = this.refs.professor.value;
+    const syllabus_url = this.refs.syllabus_url.value;
+    const lecture_code = this.refs.lecture_code.value;
+    const lecture_order = this.refs.lecture_order.value;
+    const self = this;
+    req.post('/addLecture')
+      .send({ courseid: selectedCourse, professor, syllabus_url, lecture_code, lecture_order })
+      .end((err, res) => {
+        if (err || !res.ok)
+          return console.error(err);
+        const id = res.text;
+        const arr = concat(
+          cloneOrEmpty(courseLectures[selectedCourse]),
+          { id, professor, syllabus_url, lecture_code, lecture_order }
+        );
+        self.setState({
+          courseLectures: {
+            ...courseLectures,
+            [selectedCourse]: arr
+          }
+        });
+      });
+  }
+
+  removeLecture(id) {
+    const { selectedCourse, courseLectures } = this.state;
     const arr = filter(
-      cloneOrEmpty(courseProblemSets[selectedCourse]),
+      cloneOrEmpty(courseLectures[selectedCourse]),
       (ps) => ps.id !== id
     );
     this.setState({
-      courseProblemSets: {
-        ...courseProblemSets,
+      courseLectures: {
+        ...courseLectures,
         [selectedCourse]: arr
+      }
+    }, () => req.post('/removeLecture')
+      .send({ id })
+      .end((err, res) => null)
+    );
+  }
+
+  removeProblemSet(id) {
+    const { lectureProblemSets, selectedLecture } = this.state;
+    const arr = filter(
+      cloneOrEmpty(lectureProblemSets[selectedLecture]),
+      (ps) => ps.id !== id
+    );
+    this.setState({
+      lectureProblemSets: {
+        ...lectureProblemSets,
+        [selectedLecture]: arr
       }
     }, () => req.post('/removeProblemSet')
       .send({ id })
@@ -138,9 +186,9 @@ class Interactive extends Component {
     );
   }
 
-  getCourseProblemSets() {
-    const { courseProblemSets, selectedCourse } = this.state;
-    if (!selectedCourse)
+  getLectureProblemSets() {
+    const { lectureProblemSets, selectedLecture } = this.state;
+    if (!selectedLecture)
       return false;
     const form = (
       <form>
@@ -150,7 +198,7 @@ class Interactive extends Component {
         <button onClick={(e) => this.addProblemSet(e)}>SUBMIT</button>
       </form>
     );
-    const problemSets = (courseProblemSets && courseProblemSets[selectedCourse]) ? map(courseProblemSets[selectedCourse],
+    const problemSets = (lectureProblemSets && lectureProblemSets[selectedLecture]) ? map(lectureProblemSets[selectedLecture],
       (ps, key) => (
         <div key={key}>
           <a className={classnames({ highlighted: ps.id === this.state.selectedProblemSet })}
@@ -386,9 +434,41 @@ class Interactive extends Component {
     );
   }
 
+  getCourseLectures() {
+    const { courseLectures, selectedCourse } = this.state;
+    if (!selectedCourse)
+      return false;
+    const form = (
+      <form>
+        <input type="text" placeholder="Professor" ref="professor" />
+        <input type="text" placeholder="Syllabus URL" ref="syllabus_url" />
+        <input type="text" placeholder="code" ref="lecture_code" />
+        <input type="text" placeholder="order" ref="lecture_order" />
+        <button onClick={(e) => this.addLecture(e)}>SUBMIT</button>
+      </form>
+    );
+    const lectures = (courseLectures && courseLectures[selectedCourse]) ? map(courseLectures[selectedCourse],
+      (lecture, key) => (
+        <div key={key}>
+          <a className={classnames({ highlighted: lecture.id === this.state.selectedCourse })}
+            onClick={() => this.selectedLecture(lecture.id)}>{lecture.lecture_code}</a>&nbsp;
+          <a className="admin-function" onClick={() => this.removeLecture(lecture.id)}>Delete</a>
+        </div>)) : "No Lectures yet!";
+    return (
+      <span>
+        <h1>ADD LECTURE</h1>
+        {form}
+        <hr className="s1" />
+        <h1>LECTURES</h1>
+        {lectures}
+      </span>
+    );
+  }
+
   render() {
     const courseList = this.getCourseList();
-    const courseProblemSets = this.getCourseProblemSets();
+    const courseLectures = this.getCourseLectures();
+    const lectureProblemSets = this.getLectureProblemSets();
     const problemSetTopics = this.getProblemSetTopics();
     const topicSubTopics = this.getTopicSubTopics();
     const subTopicProblems = this.getSubTopicProblems();
@@ -400,7 +480,9 @@ class Interactive extends Component {
           {courseList}
         </span>
         <span className="interactive-col">
-          {courseProblemSets}
+          {courseLectures}
+          <hr className="s2" />
+          {lectureProblemSets}
           <hr className="s2" />
           {problemSetTopics}
           <hr className="s2" />

@@ -550,7 +550,7 @@ const getBookmarkedCourses =
     const { auth_user_id } = req.params;
     const getq = `
       select C.id, C.code_label, C.label from bookmarked_courses BC
-      inner join courses C on BC.courseid = C.id
+      inner join courses C on BC.lectureid = C.id
       inner join users U on BC.userid = U.id
       where U.auth_user_id = $1;
     `;
@@ -563,7 +563,7 @@ const getBookmarkedCourses =
     });
   };
 
-const getCourseLectures =
+const getCourseLecturesByCode =
   (req, res, next) => {
     const { schoolCode, courseCode } = req.params;
     const getq = `
@@ -646,19 +646,38 @@ const getAvailableCourses =
     });
   };
 
-const getCourseProblemSets =
+const getCourseLectures =
   (req, res, next) => {
     const getq = `
-      select id, courseid, ps_label, ps_code, ps_order from problemsets
+      select professor, syllabus_url, lecture_code, termid, courseid from lectures;
     `;
     pool.query(getq, (err, result) => {
       if (err)
         return next(err);
       const items = _.reduce(result.rows, (dict, row) => {
-        const { id, courseid, ps_label, ps_code, ps_order } = row;
+        const { professor, syllabus_url, lecture_code, termid, courseid } = row;
         if (!_.has(dict, courseid))
           dict[courseid] = [];
-        dict[courseid].push({ id, ps_label, ps_code, ps_order });
+        dict[courseid].push({ professor, syllabus_url, lecture_code, termid });
+        return dict;
+      }, {});
+      return res.json(items);
+    });
+  };
+
+const getLectureProblemSets =
+  (req, res, next) => {
+    const getq = `
+      select id, lectureid, ps_label, ps_code, ps_order from problemsets
+    `;
+    pool.query(getq, (err, result) => {
+      if (err)
+        return next(err);
+      const items = _.reduce(result.rows, (dict, row) => {
+        const { id, lectureid, ps_label, ps_code, ps_order } = row;
+        if (!_.has(dict, lectureid))
+          dict[lectureid] = [];
+        dict[lectureid].push({ id, ps_label, ps_code, ps_order });
         return dict;
       }, {});
       return res.json(items);
@@ -722,6 +741,71 @@ const getSubTopicProblems =
     });
   };
 
+const getLectureProblemSetsByCode =
+  (req, res, next) => {
+    const { schoolCode, courseCode } = req.params;
+    const getq = `
+      select PS.id, PS.ps_label, PS.ps_code from problemsets PS
+      inner lectures L on L.id = PS.lectureid
+      inner join courses C on C.id = L.courseid
+      inner join schools S on S.id = C.schoolid
+      where C.code = $1 and S.code = $2 order by PS.ps_order ASC
+    `;
+    pool.query(getq, [schoolCode, courseCode], (err, result) => {
+      if (err)
+        return next(err);
+      const items = _.map(result.rows, (row) => {
+        const { id, ps_label, ps_code } = row;
+        return { id, ps_label, ps_code };
+      });
+      return res.json(items);
+    });
+  }
+
+const getProblemSetTopicsByCode =
+  (req, res, next) => {
+    const { schoolCode, courseCode } = req.params;
+    const getq = `
+      select PST.id, PST.psid, PST.topic_label, PST.topic_code from problemset_topics PST
+      inner join problemsets PS on PS.id = PST.psid
+      inner join lectures L on PS.lectureid = L.id
+      inner join courses C on C.id = L.courseid
+      inner join schools S on S.id = C.schoolid
+      where C.code = $1 and S.code = $2 order by PST.topic_order ASC
+    `;
+    pool.query(getq, [schoolCode, courseCode], (err, result) => {
+      if (err)
+        return next(err);
+      const items = _.reduce(result.rows, (dict, row) => {
+        const { id, psid, topic_label, topic_code } = row;
+        if (!_.has(dict, psid))
+          dict[psid] = [];
+        dict[psid].push({ id, topic_label, topic_code });
+        return dict;
+      }, {});
+      return res.json(items);
+    });
+  };
+
+const getProblemSetInfo =
+  (req, res, next) => {
+    const { schoolCode, courseCode, auth_user_id } = req.params;
+    const getq = `
+      select * from bookmarked_courses BC
+      inner join users U on BC.userid = U.id
+      inner join lectures L on BC.lectureid = L.id
+      inner join courses C on L.courseid = C.id
+      inner join schools S on C.schoolid = S.id
+      where U.auth_user_id = $1 and S.code = $2 and C.code = $3
+    `;
+    pool.query(getq, [auth_user_id, schoolCode, courseCode], (err, result) => {
+      if (err)
+        return next(err);
+      const items = _.map(result.rows, (row) => {
+      })
+    });
+  };
+
 module.exports = (app) => {
   // Retrieve initial data
   app.get('/getInitial', getInitial);
@@ -773,7 +857,7 @@ module.exports = (app) => {
   app.get('/getAvailableTopics/:schoolCode/:courseCode', getAvailableTopics);
 
   // Retrieve course lectures
-  app.get('/getCourseLectures/:schoolCode/:courseCode', getCourseLectures);
+  app.get('/getCourseLecturesByCode/:schoolCode/:courseCode', getCourseLecturesByCode);
 
   // Retrieve schools
   app.get('/getSchools', (req, res, next) => getSchools((err, result) => res.json(result)));
@@ -789,8 +873,12 @@ module.exports = (app) => {
   app.get('/getTopics', (req, res, next) => getTopics((err, result) => res.json(result)));
 
   // Retrieve problemsets
-  app.get('/getCourseProblemSets', getCourseProblemSets);
+  app.get('/getCourseLectures', getCourseLectures);
+  app.get('/getLectureProblemSets', getLectureProblemSets);
   app.get('/getProblemSetTopics', getProblemSetTopics);
   app.get('/getTopicSubTopics', getTopicSubTopics);
   app.get('/getSubTopicProblems', getSubTopicProblems);
+
+  app.get('/getLectureProblemSetsByCode', getLectureProblemSetsByCode);
+  app.get('/getProblemSetInfo/:auth_user_id/:schoolCode/:courseCode', getProblemSetInfo);
 }

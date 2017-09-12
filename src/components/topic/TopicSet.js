@@ -38,28 +38,26 @@ class TopicSetComponent extends Component {
 
   componentDidMount() {
     const { schoolCode, courseCode } = this.props;
-    TopicSetComponent.fetchData(this.props.dispatch, this.props);
-    Promise.all([
-      fetch(`/getCourseProblemSetsByCode/${schoolCode}/${courseCode}`)
-        .then((response) => response.json())
-        .then((json) => this.setState({ courseProblemSets: json })),
-      fetch(`/getProblemSetTopicsByCode/${schoolCode}/${courseCode}`)
-        .then((response) => response.json())
-        .then((json) => this.setState({ problemSetTopics: json }))
-    ]);
-  }
-
-  static fetchData(dispatch, props) {
-    const { schoolCode, courseCode } = props;
-    const auth_user_id = props.auth.getProfile().user_id;
-    return Promise.all([
-      fetch(`${BASE_URL}/getAvailableTopics/${schoolCode}/${courseCode}`)
-        .then((response) => response.json())
-        .then((json) => dispatch(updateTopicsList(json))),
-      fetch(`${BASE_URL}/getCompletedProblemsCount/${schoolCode}/${courseCode}/${auth_user_id}`)
-        .then((response) => response.json())
-        .then((json) => dispatch(updateCompletedProblemCounts(json))),
-    ]);
+    const auth_user_id = this.props.auth.getProfile().user_id;
+    const self = this;
+    fetch(`/getProblemSetInfo/${auth_user_id}/${schoolCode}/${courseCode}`)
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        self.setState({ problemSetInfo: json })}
+        )
+    fetch(`/getCourseProblemSetsByCode/${schoolCode}/${courseCode}`)
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        self.setState({ courseProblemSets: json })}
+        )
+    fetch(`/getProblemSetTopicsByCode/${schoolCode}/${courseCode}`)
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        self.setState({ problemSetTopics: json })}
+        )
   }
 
   toggleShow(index) {
