@@ -883,52 +883,57 @@ module.exports = (app) => {
     const { psid, topic_label, topic_code, topic_order } = req.body;
     const inq = `
       insert into problemset_topics (psid, topic_label, topic_code, topic_order)
-      select A.id, $1, $2, $3 from
-      (select id from problemsets where courseid = $4 and ps_code = $5) as A
+      values ($1, $2, $3, $4) returning id
     `;
     config.pool.query(inq, [psid, topic_label, topic_code, topic_order], (err, result) => {
       if (err)
         return next(err);
-      return res.send("Success!");
+      return res.send({ id: result.rows[0].id });
     });
   });
 
   app.post('/addSubTopicToTopic', (req, res, next) => {
-    const { subtopic_label, subtopic_code, subtopic_order, pstid } = req.body;
-    const inq = `insert into problemset_subtopics (pstid, subtopic_label, subtopic_code, subtopic_order) values($1, $2, $3, $4)`;
+    const { pstid, subtopic_label, subtopic_code, subtopic_order } = req.body;
+    const inq = `
+      insert into problemset_subtopics (pstid, subtopic_label, subtopic_code, subtopic_order)
+      values ($1, $2, $3, $4) returning id
+    `;
     config.pool.query(inq, [pstid, subtopic_label, subtopic_code, subtopic_order], (err, result) => {
       if (err)
         return next(err);
-      return res.send("Success!");
+      return res.send({ id: result.rows[0].id });
     });
   });
 
   app.post('/addProblemToSubTopic', (req, res, next) => {
-    const { problemid, problem_order, pssid } = req.body;
-    const inq = `insert into problemset_problems (contentid, pssid, problem_order) values($1, $2, $3)`;
-    config.pool.query(inq, [problemid, pssid, problem_order], (err, result) => {
+    const { pssid, problemid, problem_order } = req.body;
+    const inq = `
+      insert into problemset_problems (pssid, contentid, problem_order)
+      values($1, $2, $3) returning id
+    `;
+    config.pool.query(inq, [pssid, problemid, problem_order], (err, result) => {
       if (err)
         return next(err);
-      return res.send("Success!");
+      return res.send({ id: result.rows[0].id });
     });
   });
 
   app.post('/removeTopicFromProblemSet', (req, res, next) => {
-    const { psid, topic_code } = req.body;
+    const { id } = req.body;
     const delq1 = `
       delete from problemset_problems where pssid in
-      (select id from problemset_subtopics where pstid in
-        (select id from problemset_topics where topic_code = $1 and psid = $2))
+      (select id from problemset_subtopics where pstid = $1)
     `;
     const delq2 = `
-      delete from problemset_subtopics where pstid in
-      (select id from problemset_topics where topic_code = $1 and psid = $2)
+      delete from problemset_subtopics where pstid = $1
     `;
-    const delq3 = `delete from problemset_topics where topic_code = $1 and psid = $2`;
+    const delq3 = `
+      delete from problemset_topics where id = $1
+    `;
     async.series([
-      (callback) => config.pool.query(delq1, [topic_code, psid], callback),
-      (callback) => config.pool.query(delq2, [topic_code, psid], callback),
-      (callback) => config.pool.query(delq3, [topic_code, psid], callback),
+      (callback) => config.pool.query(delq1, [id], callback),
+      (callback) => config.pool.query(delq2, [id], callback),
+      (callback) => config.pool.query(delq3, [id], callback),
     ], (err) => {
       if (err) return next(err);
       return res.send("Success!");
@@ -936,15 +941,16 @@ module.exports = (app) => {
   });
 
   app.post('/removeSubTopicFromTopic', (req, res, next) => {
-    const { pstid, subtopic_code } = req.body;
+    const { id } = req.body;
     const delq1 = `
-      delete from problemset_problems where pssid in
-      (select id from problemset_subtopics where subtopic_code = $1 = and pstid = $2)
+      delete from problemset_problems where pssid = $1
     `;
-    const delq2 = `delete from problemset_subtopics where subtopic_code = $1 and pstid = $2`;
+    const delq2 = `
+      delete from problemset_subtopics where id = $1
+    `;
     async.series([
-      (callback) => config.pool.query(delq1, [subtopic_code, pstid], callback),
-      (callback) => config.pool.query(delq2, [subtopic_code, pstid], callback),
+      (callback) => config.pool.query(delq1, [id], callback),
+      (callback) => config.pool.query(delq2, [id], callback),
     ], (err) => {
       if (err) return next(err);
       return res.send("Success!");
@@ -952,9 +958,9 @@ module.exports = (app) => {
   });
 
   app.post('/removeProblemFromSubTopic', (req, res, next) => {
-    const { problemid, pssid } = req.body;
-    const delq = `delete from problemset_problems where contentid = $1 and pssid = $2`;
-    config.pool.query(delq, [problemid, pssid], (err, result) => {
+    const { id } = req.body;
+    const delq = `delete from problemset_problems where id = $1`;
+    config.pool.query(delq, [id], (err, result) => {
       if (err)
         return next(err);
       return res.send("Success!");
@@ -971,28 +977,28 @@ module.exports = (app) => {
   });
 
   app.post('/removeProblemSet', (req, res, next) => {
-    const { courseid, ps_code } = req.body;
+    const { id } = req.body;
     const delq1 = `
       delete from problemset_problems where pssid in
       (select id from problemset_subtopics where pstid in
-        (select id from problemset_topics where psid = (select id from problemsets where courseid = $1 and ps_code = $2)))
+        (select id from problemset_topics where psid = $1))
     `;
     const delq2 = `
       delete from problemset_subtopics where pstid in
-        (select id from problemset_topics where psid = (select id from problemsets where courseid = $1 and ps_code = $2))
+        (select id from problemset_topics where psid = $1)
     `;
     const delq3 = `
       delete from problemset_topics
-      where psid = (select id from problemsets where courseid = $1 and ps_code = $2)
+      where psid = $1
     `;
     const delq4 = `
-      delete from problemsets where courseid = $1 and ps_code = $2
+      delete from problemsets where id = $1
     `;
     async.series([
-      (callback) => config.pool.query(delq1, [courseid, ps_code], callback),
-      (callback) => config.pool.query(delq2, [courseid, ps_code], callback),
-      (callback) => config.pool.query(delq3, [courseid, ps_code], callback),
-      (callback) => config.pool.query(delq4, [courseid, ps_code], callback),
+      (callback) => config.pool.query(delq1, [id], callback),
+      (callback) => config.pool.query(delq2, [id], callback),
+      (callback) => config.pool.query(delq3, [id], callback),
+      (callback) => config.pool.query(delq4, [id], callback),
     ], (err) => {
       if (err) return console.error(err);
       return res.send("Success!");

@@ -715,7 +715,7 @@ const getSubTopicProblems =
         const { id, contentid, pssid, problem_order } = row;
         if (!_.has(dict, pssid))
           dict[pssid] = [];
-        dict[pssid].push({ id, contentid, problem_order });
+        dict[pssid].push({ id, problemid: contentid, problem_order });
         return dict;
       }, {});
       return res.json(items);

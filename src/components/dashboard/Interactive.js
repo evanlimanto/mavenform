@@ -76,16 +76,16 @@ class Interactive extends Component {
     this.setState({ selectedCourse: courseid, selectedProblemSet: null, selectedTopic: null, selectedSubTopic: null });
   }
 
-  selectProblemSet(ps_code) {
-    this.setState({ selectedProblemSet: ps_code, selectedTopic: null, selectedSubTopic: null });
+  selectProblemSet(psid) {
+    this.setState({ selectedProblemSet: psid, selectedTopic: null, selectedSubTopic: null });
   }
 
-  selectTopic(topic_code) {
-    this.setState({ selectedTopic: topic_code, selectedSubTopic: null });
+  selectTopic(topicid) {
+    this.setState({ selectedTopic: topicid, selectedSubTopic: null });
   }
 
-  selectSubTopic(subtopic_code) {
-    this.setState({ selectedSubTopic: subtopic_code });
+  selectSubTopic(subtopicid) {
+    this.setState({ selectedSubTopic: subtopicid });
   }
 
   addProblemSet(e) {
@@ -94,26 +94,31 @@ class Interactive extends Component {
     const ps_code = this.refs.ps_code.value;
     const ps_label = this.refs.ps_label.value;
     const ps_order = this.refs.ps_order.value;
-    const arr = concat(
-      cloneOrEmpty(courseProblemSets[selectedCourse]),
-      { courseid: selectedCourse, ps_code, ps_label, ps_order }
-    );
-    this.setState({
-      courseProblemSets: {
-        ...courseProblemSets,
-        [selectedCourse]: arr
-      }
-    }, () => req.post('/addProblemSet')
+    const self = this;
+    req.post('/addProblemSet')
       .send({ courseid: selectedCourse, ps_code, ps_label, ps_order })
-      .end((err, res) => null)
-    );
+      .end((err, res) => {
+        if (err || !res.ok)
+          return console.error(err);
+        const id = res.text;
+        const arr = concat(
+          cloneOrEmpty(courseProblemSets[selectedCourse]),
+          { id, ps_code, ps_label, ps_order }
+        );
+        self.setState({
+          courseProblemSets: {
+            ...courseProblemSets,
+            [selectedCourse]: arr
+          }
+        });
+      })
   }
 
-  removeProblemSet(ps_code) {
+  removeProblemSet(id) {
     const { courseProblemSets, selectedCourse } = this.state;
     const arr = filter(
       cloneOrEmpty(courseProblemSets[selectedCourse]),
-      (ps) => ps.ps_code !== ps_code
+      (ps) => ps.id !== id
     );
     this.setState({
       courseProblemSets: {
@@ -121,7 +126,7 @@ class Interactive extends Component {
         [selectedCourse]: arr
       }
     }, () => req.post('/removeProblemSet')
-      .send({ courseid: selectedCourse, ps_code })
+      .send({ id })
       .end((err, res) => null)
     );
   }
@@ -148,9 +153,9 @@ class Interactive extends Component {
     const problemSets = (courseProblemSets && courseProblemSets[selectedCourse]) ? map(courseProblemSets[selectedCourse],
       (ps, key) => (
         <div key={key}>
-          <a className={classnames({ highlighted: ps.ps_code === this.state.selectedProblemSet })}
-            onClick={() => this.selectProblemSet(ps.ps_code)}>{ps.ps_label}</a>&nbsp;
-          <a className="admin-function" onClick={() => this.removeProblemSet(ps.ps_code)}>Delete</a>
+          <a className={classnames({ highlighted: ps.id === this.state.selectedProblemSet })}
+            onClick={() => this.selectProblemSet(ps.id)}>{ps.ps_label}</a>&nbsp;
+          <a className="admin-function" onClick={() => this.removeProblemSet(ps.id)}>Delete</a>
         </div>)) : "No Problem Sets yet!";
     return (
       <span>
@@ -165,38 +170,43 @@ class Interactive extends Component {
 
   addTopicToProblemSet(e) {
     e.preventDefault();
-    const { selectedProblemSet, problemSetTopics } = this.state;
+    const { selectedCourse, selectedProblemSet, problemSetTopics } = this.state;
     const topic_label = this.refs.topic_label.value;
     const topic_code = this.refs.topic_code.value;
     const topic_order = this.refs.topic_order.value;
-    const arr = concat(
-      cloneOrEmpty(problemSetTopics[selectedProblemSet]),
-      { topic_label, topic_code, topic_order }
-    );
-    this.setState({
-      problemSetTopics: {
-        ...problemSetTopics,
-        [selectedProblemSet]: arr
-      }
-    }, () => req.post('/addTopicToProblemSet')
-      .send({ topic_label, topic_code, topic_order, ps_code: selectedProblemSet })
-      .end((err, res) => null)
-    );
+    const self = this;
+    req.post('/addTopicToProblemSet')
+      .send({ courseid: selectedCourse, topic_label, topic_code, topic_order, psid: selectedProblemSet })
+      .end((err, res) => {
+        if (err || !res.ok)
+          return console.error(err);
+        const id = res.text;
+        const arr = concat(
+          cloneOrEmpty(problemSetTopics[selectedProblemSet]),
+          { id, topic_label, topic_code, topic_order }
+        );
+        self.setState({
+          problemSetTopics: {
+            ...problemSetTopics,
+            [selectedProblemSet]: arr
+          }
+        });
+      });
   }
 
-  removeTopicFromProblemSet(topic_code) {
+  removeTopicFromProblemSet(id) {
     const { selectedProblemSet, problemSetTopics } = this.state;
     const arr = filter(
       cloneOrEmpty(problemSetTopics[selectedProblemSet]),
-      (topic) => topic.topic_code !== topic_code
+      (topic) => topic.id !== id
     );
     this.setState({
       problemSetTopics: {
         ...problemSetTopics,
         [selectedProblemSet]: arr
       }
-    }, req.post('/removeTopicFromProblemSet')
-      .send({ psid: selectedProblemSet, topic_code })
+    }, () => req.post('/removeTopicFromProblemSet')
+      .send({ id })
       .end((err, res) => null)
     );
   }
@@ -216,9 +226,9 @@ class Interactive extends Component {
     const topics = (problemSetTopics && problemSetTopics[selectedProblemSet]) ? map(problemSetTopics[selectedProblemSet],
       (topic, key) => (
         <div key={key}>
-          <a className={classnames({ highlighted: topic.topic_code === selectedTopic })}
-            onClick={() => this.selectTopic(topic.topic_code)}>{topic.topic_label}</a>&nbsp;
-          <a className="admin-function" onClick={() => this.removeTopicFromProblemSet(topic.topic_code)}>Delete</a>
+          <a className={classnames({ highlighted: topic.id === selectedTopic })}
+            onClick={() => this.selectTopic(topic.id)}>{topic.topic_label}</a>&nbsp;
+          <a className="admin-function" onClick={() => this.removeTopicFromProblemSet(topic.id)}>Delete</a>
         </div>)) : "No Topics yet!";
     return (
       <span>
@@ -233,30 +243,35 @@ class Interactive extends Component {
 
   addSubTopicToTopic(e) {
     e.preventDefault();
-    const { topicSubTopics, selectedTopic } = this.state;
+    const { selectedTopic, topicSubTopics } = this.state;
     const subtopic_label = this.refs.subtopic_label.value;
     const subtopic_code = this.refs.subtopic_code.value;
     const subtopic_order = this.refs.subtopic_order.value;
-    const arr = concat(
-      cloneOrEmpty(topicSubTopics[selectedTopic]),
-      { subtopic_label, subtopic_code, subtopic_order }
-    );
-    this.setState({
-      topicSubTopics: {
-        ...topicSubTopics,
-        [selectedTopic]: arr
-      }
-    }, () => req.post('/addSubTopicToTopic')
-      .send({ subtopic_label, subtopic_code, subtopic_order, pstid: selectedTopic })
-      .end((err, res) => null)
-    );
+    const self = this;
+    req.post('/addSubTopicToTopic')
+      .send({ pstid: selectedTopic, subtopic_label, subtopic_code, subtopic_order })
+      .end((err, res) => {
+        if (err || !res.ok)
+          return console.error(err);
+        const id = res.text;
+        const arr = concat(
+          cloneOrEmpty(topicSubTopics[selectedTopic]),
+          { id, subtopic_label, subtopic_code, subtopic_order }
+        );
+        self.setState({
+          topicSubTopics: {
+            ...topicSubTopics,
+            [selectedTopic]: arr
+          }
+        });
+      })
   }
 
-  removeSubTopicFromTopic(subtopic_code) {
+  removeSubTopicFromTopic(id) {
     const { selectedTopic, topicSubTopics } = this.state;
     const arr = filter(
       cloneOrEmpty(topicSubTopics[selectedTopic]),
-      (subtopic) => subtopic.subtopic_code !== subtopic_code
+      (subtopic) => subtopic.id !== id
     );
     this.setState({
       topicSubTopics: {
@@ -264,7 +279,7 @@ class Interactive extends Component {
         [selectedTopic]: arr
       }
     }, () => req.post('/removeSubTopicFromTopic')
-      .send({ pstid: selectedTopic, subtopic_code })
+      .send({ id })
       .end((err, res) => null)
     );
   }
@@ -284,9 +299,9 @@ class Interactive extends Component {
     const subtopics = (topicSubTopics && topicSubTopics[selectedTopic]) ? map(topicSubTopics[selectedTopic],
       (subtopic, key) => (
         <div key={key}>
-          <a className={classnames({ highlighted: subtopic.subtopic_code === selectedSubTopic })}
-            onClick={() => this.selectSubTopic(subtopic.subtopic_code)}>{subtopic.subtopic_label}</a>&nbsp;
-          <a className="admin-function" onClick={() => this.removeSubTopicFromTopic(subtopic.subtopic_code)}>Delete</a>
+          <a className={classnames({ highlighted: subtopic.id === selectedSubTopic })}
+            onClick={() => this.selectSubTopic(subtopic.id)}>{subtopic.subtopic_label}</a>&nbsp;
+          <a className="admin-function" onClick={() => this.removeSubTopicFromTopic(subtopic.id)}>Delete</a>
         </div>
       )) : "No Subtopics yet!";
     return (
@@ -302,30 +317,34 @@ class Interactive extends Component {
 
   addProblemToSubTopic(e) {
     e.preventDefault();
-    const { selectedSubTopic, subTopicProblems } = this.state;
+    const { selectedCourse, selectedTopic, selectedSubTopic, subTopicProblems } = this.state;
     const problemid = this.refs.problem.value;
     const problem_order = this.refs.problem_order.value;
-    const pssid = this.state.selectedSubTopic;
-    const arr = concat(
-      cloneOrEmpty(subTopicProblems[selectedSubTopic]),
-      { problemid, problem_order, pssid }
-    );
-    this.setState({
-      subTopicProblems: {
-        ...subTopicProblems,
-        [selectedSubTopic]: arr,
-      }
-    }, () => req.post('/addProblemToSubTopic')
-      .send({ problemid, problem_order, pssid })
-      .end((err, res) => null)
-    );
+    const self = this;
+    req.post('/addProblemToSubTopic')
+      .send({ problemid, problem_order, pssid: selectedSubTopic })
+      .end((err, res) => {
+        if (err || !res.ok)
+          return console.error(err);
+        const id = res.text;
+        const arr = concat(
+          cloneOrEmpty(subTopicProblems[selectedSubTopic]),
+          { problemid, problem_order, id }
+        );
+        self.setState({
+          subTopicProblems: {
+            ...subTopicProblems,
+            [selectedSubTopic]: arr,
+          }
+        });
+      });
   }
 
-  removeProblemFromSubTopic(problemid) {
+  removeProblemFromSubTopic(id) {
     const { subTopicProblems, selectedSubTopic } = this.state;
     const arr = filter(
       cloneOrEmpty(subTopicProblems[selectedSubTopic]),
-      (problem) => problem.id !== problemid
+      (problem) => problem.id !== id
     );
     this.setState({
       subTopicProblems: {
@@ -333,7 +352,7 @@ class Interactive extends Component {
         [selectedSubTopic]: arr
       }
     }, () => req.post('/removeProblemFromSubTopic')
-      .send({ pssid: selectedSubTopic, problemid })
+      .send({ id })
       .end((err, res) => null)
     );
   }
@@ -352,7 +371,7 @@ class Interactive extends Component {
     const problems = (subTopicProblems && subTopicProblems[selectedSubTopic]) ? map(subTopicProblems[selectedSubTopic],
       (problem, key) => (
         <div key={key}>
-          <a href={`/dashboard/problem/${problem.id}`}>{problem.id}</a>&nbsp;
+          <a href={`/dashboard/problem/${problem.problemid}`} target="_blank">{problem.problemid}</a>&nbsp;
           <a className="admin-function" onClick={() => this.removeProblemFromSubTopic(problem.id)}>Delete</a>
         </div>
       )) : "No Problems yet!";
