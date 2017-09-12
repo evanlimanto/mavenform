@@ -35,7 +35,9 @@ class InteractiveCards extends Component {
         <div key={lecture.id} className={"card int-card " + ((lecture.id === this.state.selected) ? "active" : "")} onClick={() => this.clickBox(lecture.id)}>
           <div className="int-card-h">{courseCodeToLabel(this.props.courseCode)} {lecture.lecture_code}</div>
           <p><span className="int-highlight">Instructor(s): </span> {lecture.professor}</p>
-          <p><span className="int-highlight">Syllabus: </span><a target="_blank" href={lecture.syllabus_url}>Syllabus</a></p>
+          <p><span className="int-highlight">Syllabus: </span>
+          {lecture.syllabus_url && lecture.syllabus_url.length > 0 ? (<a target="_blank" href={lecture.syllabus_url}>Syllabus</a>) : "Unavailable"}
+          </p>
         </div>
       );
     });
@@ -81,7 +83,7 @@ class CourseComponent extends Component {
       fetch(`${BASE_URL}/getCourseSubject/${schoolCode}/${courseCode}`)
         .then((response) => response.json())
         .then((json) => dispatch(updateCourseSubject(json.subject))),
-      fetch(`${BASE_URL}/getCourseLectures/${schoolCode}/${courseCode}`)
+      fetch(`${BASE_URL}/getCourseLecturesByCode/${schoolCode}/${courseCode}`)
         .then((response) => response.json())
         .then((json) => dispatch(updateCourseLectures(json))),
       fetch(`${BASE_URL}/getRegisteredLecture/${schoolCode}/${courseCode}/${auth_user_id}`)

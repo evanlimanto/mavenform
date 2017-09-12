@@ -44,10 +44,10 @@ class TopicSetComponent extends Component {
       fetch(`/getProblemSetInfo/${auth_user_id}/${schoolCode}/${courseCode}`)
         .then((response) => response.json())
         .then((json) => self.setState({ problemSetInfo: json })),
-      fetch(`/getCourseProblemSetsByCode/${schoolCode}/${courseCode}`)
+      fetch(`/getLectureProblemSetsByCode/${auth_user_id}/${schoolCode}/${courseCode}`)
         .then((response) => response.json())
         .then((json) => self.setState({ courseProblemSets: json })),
-      fetch(`/getProblemSetTopicsByCode/${schoolCode}/${courseCode}`)
+      fetch(`/getProblemSetTopicsByCode/${auth_user_id}/${schoolCode}/${courseCode}`)
         .then((response) => response.json())
         .then((json) => self.setState({ problemSetTopics: json }))
     ])

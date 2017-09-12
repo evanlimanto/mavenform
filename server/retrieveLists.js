@@ -745,20 +745,22 @@ const getSubTopicProblems =
 
 const getLectureProblemSetsByCode =
   (req, res, next) => {
-    const { schoolCode, courseCode } = req.params;
+    const { auth_user_id, schoolCode, courseCode } = req.params;
     const getq = `
-      select PS.id, PS.ps_label, PS.ps_code, PS.paid from problemsets PS
-      inner lectures L on L.id = PS.lectureid
+      select PS.id, ps_label, ps_code, ps_order, paid from bookmarked_courses BC
+      inner join lectures L on BC.lectureid = L.id
       inner join courses C on C.id = L.courseid
       inner join schools S on S.id = C.schoolid
-      where C.code = $1 and S.code = $2 order by PS.ps_order ASC
+      inner join problemsets PS on PS.lectureid = L.id
+      inner join users U on U.id = BC.userid
+      where auth_user_id = $1 and S.code = $2 and C.code = $3
+      order by ps_order asc
     `;
-    pool.query(getq, [schoolCode, courseCode], (err, result) => {
+    pool.query(getq, [auth_user_id, schoolCode, courseCode], (err, result) => {
       if (err)
         return next(err);
       const items = _.map(result.rows, (row) => {
-        const { id, ps_label, ps_code } = row;
-        return { id, ps_label, ps_code };
+        return { ...row };
       });
       return res.json(items);
     });
@@ -766,23 +768,25 @@ const getLectureProblemSetsByCode =
 
 const getProblemSetTopicsByCode =
   (req, res, next) => {
-    const { schoolCode, courseCode } = req.params;
+    const { auth_user_id, schoolCode, courseCode } = req.params;
     const getq = `
-      select PST.id, PST.psid, PST.topic_label, PST.topic_code from problemset_topics PST
-      inner join problemsets PS on PS.id = PST.psid
-      inner join lectures L on PS.lectureid = L.id
+      select PST.id, PST.psid, topic_label, topic_order, topic_code from bookmarked_courses BC
+      inner join lectures L on BC.lectureid = L.id
       inner join courses C on C.id = L.courseid
       inner join schools S on S.id = C.schoolid
-      where C.code = $1 and S.code = $2 order by PST.topic_order ASC
+      inner join problemsets PS on PS.lectureid = L.id
+      inner join problemset_topics PST on PST.psid = PS.id
+      where auth_user_id = $1 and S.code = $2 and C.code = $3
+      order by topic_order asc
     `;
-    pool.query(getq, [schoolCode, courseCode], (err, result) => {
+    pool.query(getq, [auth_user_id, schoolCode, courseCode], (err, result) => {
       if (err)
         return next(err);
       const items = _.reduce(result.rows, (dict, row) => {
-        const { id, psid, topic_label, topic_code } = row;
+        const { id, psid, topic_label, topic_code, topic_order } = row;
         if (!_.has(dict, psid))
           dict[psid] = [];
-        dict[psid].push({ id, topic_label, topic_code });
+        dict[psid].push({ id, topic_label, topic_code, topic_order });
         return dict;
       }, {});
       return res.json(items);
@@ -882,5 +886,6 @@ module.exports = (app) => {
   app.get('/getSubTopicProblems', getSubTopicProblems);
 
   app.get('/getLectureProblemSetsByCode', getLectureProblemSetsByCode);
+  app.get('/getProblemSetTopicsByCode', getProblemSetTopicsByCode);
   app.get('/getProblemSetInfo/:auth_user_id/:schoolCode/:courseCode', getProblemSetInfo);
 }

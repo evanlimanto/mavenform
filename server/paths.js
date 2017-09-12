@@ -969,7 +969,7 @@ module.exports = (app) => {
 
   app.post('/addProblemSet', (req, res, next) => {
     const { lectureid, ps_label, ps_code, ps_order, paid } = req.body;
-    const inq = `insert into problemsets (lectureid, lectureid, ps_label, ps_code, ps_order, paid) values($1, $2, $3, $4, $5)`;
+    const inq = `insert into problemsets (lectureid, ps_label, ps_code, ps_order, paid) values($1, $2, $3, $4, $5)`;
     config.pool.query(inq, [lectureid, ps_label, ps_code, ps_order, paid], (err, result) => {
       if (err) return next(err);
       return res.send("Success!");
