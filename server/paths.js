@@ -990,8 +990,11 @@ module.exports = (app) => {
 
   app.post('/removeLecture', (req, res, next) => {
     const { id } = req.body;
-    const delq5 = `
+    const delq6 = `
       delete from lectures where id = $1
+    `;
+    const delq5 = `
+      delete from bookmarked_courses where lectureid = $1
     `;
     const delq4 = `
       delete from problemsets where lectureid = $1
@@ -1017,6 +1020,7 @@ module.exports = (app) => {
       (callback) => config.pool.query(delq3, [id], callback),
       (callback) => config.pool.query(delq4, [id], callback),
       (callback) => config.pool.query(delq5, [id], callback),
+      (callback) =. config.pool.query(delq6, [id], callback),
     ], (err) => {
       if (err)
         return next(err);

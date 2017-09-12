@@ -457,7 +457,7 @@ class Interactive extends Component {
       (lecture, key) => (
         <div key={key}>
           <a className={classnames({ highlighted: lecture.id === this.state.selectedLecture })}
-            onClick={() => this.selectLecture(lecture.id)}>{lecture.lecture_code}</a>&nbsp;
+            onClick={() => this.selectLecture(lecture.id)}>{lecture.lecture_code} - {lecture.professor}</a>&nbsp;
           <a className="admin-function" onClick={() => this.removeLecture(lecture.id)}>Delete</a>
         </div>)) : "No Lectures yet!";
     return (
@@ -472,6 +472,7 @@ class Interactive extends Component {
   }
 
   render() {
+    console.log(this.state);
     const courseList = this.getCourseList();
     const courseLectures = this.getCourseLectures();
     const lectureProblemSets = this.getLectureProblemSets();
