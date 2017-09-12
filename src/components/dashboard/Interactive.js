@@ -104,9 +104,10 @@ class Interactive extends Component {
     const ps_code = this.refs.ps_code.value;
     const ps_label = this.refs.ps_label.value;
     const ps_order = this.refs.ps_order.value;
+    const paid = this.refs.paid.value;
     const self = this;
     req.post('/addProblemSet')
-      .send({ lectureid: selectedLecture, ps_code, ps_label, ps_order })
+      .send({ lectureid: selectedLecture, ps_code, ps_label, ps_order, paid })
       .end((err, res) => {
         if (err || !res.ok)
           return console.error(err);
@@ -201,6 +202,10 @@ class Interactive extends Component {
         <input type="text" placeholder="Label" ref="ps_label" />
         <input type="text" placeholder="code" ref="ps_code" />
         <input type="text" placeholder="order" ref="ps_order" />
+        <select ref="paid">
+          <option value="true">True</option>
+          <option value="false">False</option>
+        </select>
         <button onClick={(e) => this.addProblemSet(e)}>SUBMIT</button>
       </form>
     );

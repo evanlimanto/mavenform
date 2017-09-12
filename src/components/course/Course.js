@@ -175,7 +175,7 @@ class CourseComponent extends Component {
       );
     });
 
-    const interactiveBox = (courseCode === "MATH53") ? (
+    const interactiveBox = (courseCode === "MATH53" || courseCode === "MATH54" || courseCode === "MATH1A" || courseCode === "MATH1B") ? (
       <div className="container interactive-container">
         <div className="int-box">
           {this.props.registeredLecture ? (

@@ -649,7 +649,8 @@ const getAvailableCourses =
 const getCourseLectures =
   (req, res, next) => {
     const getq = `
-      select id, professor, syllabus_url, lecture_code, termid, courseid from lectures;
+      select id, professor, syllabus_url, lecture_code, termid, courseid, lecture_order from lectures
+      order by lecture_order asc;
     `;
     pool.query(getq, (err, result) => {
       if (err)
@@ -669,6 +670,7 @@ const getLectureProblemSets =
   (req, res, next) => {
     const getq = `
       select id, lectureid, ps_label, ps_code, ps_order from problemsets
+      order by ps_order asc
     `;
     pool.query(getq, (err, result) => {
       if (err)
@@ -745,7 +747,7 @@ const getLectureProblemSetsByCode =
   (req, res, next) => {
     const { schoolCode, courseCode } = req.params;
     const getq = `
-      select PS.id, PS.ps_label, PS.ps_code from problemsets PS
+      select PS.id, PS.ps_label, PS.ps_code, PS.paid from problemsets PS
       inner lectures L on L.id = PS.lectureid
       inner join courses C on C.id = L.courseid
       inner join schools S on S.id = C.schoolid

@@ -40,24 +40,17 @@ class TopicSetComponent extends Component {
     const { schoolCode, courseCode } = this.props;
     const auth_user_id = this.props.auth.getProfile().user_id;
     const self = this;
-    fetch(`/getProblemSetInfo/${auth_user_id}/${schoolCode}/${courseCode}`)
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        self.setState({ problemSetInfo: json })}
-        )
-    fetch(`/getCourseProblemSetsByCode/${schoolCode}/${courseCode}`)
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        self.setState({ courseProblemSets: json })}
-        )
-    fetch(`/getProblemSetTopicsByCode/${schoolCode}/${courseCode}`)
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        self.setState({ problemSetTopics: json })}
-        )
+    Promise.all([
+      fetch(`/getProblemSetInfo/${auth_user_id}/${schoolCode}/${courseCode}`)
+        .then((response) => response.json())
+        .then((json) => self.setState({ problemSetInfo: json })),
+      fetch(`/getCourseProblemSetsByCode/${schoolCode}/${courseCode}`)
+        .then((response) => response.json())
+        .then((json) => self.setState({ courseProblemSets: json })),
+      fetch(`/getProblemSetTopicsByCode/${schoolCode}/${courseCode}`)
+        .then((response) => response.json())
+        .then((json) => self.setState({ problemSetTopics: json }))
+    ])
   }
 
   toggleShow(index) {

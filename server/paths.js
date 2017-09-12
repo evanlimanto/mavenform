@@ -968,9 +968,9 @@ module.exports = (app) => {
   });
 
   app.post('/addProblemSet', (req, res, next) => {
-    const { lectureid, ps_label, ps_code, ps_order } = req.body;
-    const inq = `insert into problemsets (lectureid, lectureid, ps_label, ps_code, ps_order) values($1, $2, $3, $4)`;
-    config.pool.query(inq, [lectureid, ps_label, ps_code, ps_order], (err, result) => {
+    const { lectureid, ps_label, ps_code, ps_order, paid } = req.body;
+    const inq = `insert into problemsets (lectureid, lectureid, ps_label, ps_code, ps_order, paid) values($1, $2, $3, $4, $5)`;
+    config.pool.query(inq, [lectureid, ps_label, ps_code, ps_order, paid], (err, result) => {
       if (err) return next(err);
       return res.send("Success!");
     });
@@ -1020,7 +1020,7 @@ module.exports = (app) => {
       (callback) => config.pool.query(delq3, [id], callback),
       (callback) => config.pool.query(delq4, [id], callback),
       (callback) => config.pool.query(delq5, [id], callback),
-      (callback) =. config.pool.query(delq6, [id], callback),
+      (callback) => config.pool.query(delq6, [id], callback),
     ], (err) => {
       if (err)
         return next(err);
