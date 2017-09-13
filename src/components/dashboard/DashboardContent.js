@@ -179,6 +179,7 @@ class DashboardContentComponent extends Component {
 
     const problem = this.state.problem;
     const exam = (this.state.examid) ? this.props.exams.key_dict[this.state.examid] : null;
+    console.log(exam);
     return (
       <div className="contentContainer">
         <DashboardNav />
@@ -195,7 +196,8 @@ class DashboardContentComponent extends Component {
           <h1 style={{"marginLeft" : "5px"}}>PROBLEMS</h1>
           <span className="contentNavCol" style={{ height: "200px", "overflowY": "scroll" }}>{exams}</span>
           {subparts.length ? <span className="contentNavCol" style={{ height: "200px", "overflowY": "scroll", "marginRight" : "10px" }}>{subparts}</span> : <span className="contentNavCol" style={{ height: "200px", "overflowY": "scroll", "marginRight" : "10px" }}>NO EXAM SELECTED YET</span>}
-          <p style={{ "paddingBottom" : "4px" }}><strong>EXAM:</strong> ({this.state.examid}) {!exam || ` ${exam.courseid} - ${exam.examtype} - ${exam.examid}`} {!exam || <a href={exam.source_url} target="_blank" style={{"textDecoration" : "underline", "marginLeft" : "10px"}}>[SOURCE PDF]</a>} {this.state.status}</p>
+          <p style={{ "paddingBottom" : "4px" }}><strong>EXAM:</strong> ({this.state.examid}) {!exam || ` ${exam.courseid} - ${exam.examtype} - ${exam.examid}`} {!exam || <a href={exam.source_url} target="_blank" style={{"textDecoration" : "underline", "marginLeft" : "10px"}}>[SOURCE PDF]</a>} {this.state.status}
+          &nbsp;&nbsp;|&nbsp;&nbsp;{exam ? "Professor: " + exam.profs : null}</p>
           {topicSelectItems}
           {difficultySelectItems}
           {(problem.problem !== "") ? <button onClick={() => this.saveProblem()}>SAVE</button> : <button>SAVE</button>}

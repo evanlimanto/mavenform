@@ -159,6 +159,7 @@ const getTranscribedExams =
           school_name: row.school_name,
           term_code: row.term_code,
           term_label: row.term_label,
+          profs: row.profs,
         };
         return dict;
       }, {});
