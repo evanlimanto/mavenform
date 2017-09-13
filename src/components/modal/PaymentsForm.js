@@ -1,29 +1,70 @@
 import React, { Component } from 'react';
-import { CardElement, injectStripe } from 'react-stripe-elements';
+import { connect } from 'react-redux';
+import { CardElement, PostalCodeElement, injectStripe } from 'react-stripe-elements';
+import req from 'superagent';
 
-class PaymentsForm extends Component {
+import { closeModal, showPaymentSuccessfulModal } from '../../actions';
+
+class PaymentsFormComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = { loading: false };
+  }
+
   handleSubmit(ev) {
-    // We don't want to let default form submission happen here, which would refresh the page.
     ev.preventDefault();
+    this.setState({ loading: true });
 
-    // Within the context of `Elements`, this call to createToken knows which Element to
-    // tokenize, since there's only one in this group.
-    this.props.stripe.createToken({name: 'Jenny Rosen'}).then(({token}) => {
-      console.log('Received Stripe token:', token);
+    const name = this.refs.name.value;
+    const auth_user_id = this.props.auth.getProfile().user_id;
+    const { schoolCode, courseCode, ps_label, ps_id } = this.props.modal;
+    const self = this;
+    const description = `Payment for ${schoolCode} ${courseCode} ${ps_label}`;
+    this.props.stripe.createToken({name}).then(({token}) => {
+      req.post('/submitPayment')
+        .set('Content-Type', 'application/json')
+        .send({ stripeToken: token.id, auth_user_id, ps_id, description })
+        .end((err, res) => {
+          if (err || !res.ok)
+            return console.error(err);
+          self.props.showPaymentSuccessfulModal();
+        })
     });
   }
 
   render() {
     return (
-      <form action="/charge" method="post" id="payment-form">
+      <form id="payment-form">
         <div className="form-row" style={{ margin: "15px 0px" }}>
-          <label>Card Details <CardElement style={{base: {fontSize: '18px'}}} /></label>
+          <label style={{ margin: "15px 0px"}}>Price: $5.99</label>
+          <input className="login-info" type="text" ref="name" placeholder="Name" />
+          <CardElement style={{base: {fontSize: '18px'}}} />
           <div id="card-errors" role="alert"></div>
         </div>
-        <button className="login-button blue" onClick={this.handleSubmit}>Submit Payment</button>
+        <button className="login-button blue" onClick={this.handleSubmit}>{this.state.loading ? "Paying.." : "Submit Payment"}</button>
       </form>
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    auth: state.auth,
+    modal: state.modal,
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    closeModal: () => dispatch(closeModal()),
+    showPaymentSuccessfulModal:() => dispatch(showPaymentSuccessfulModal()),
+  }
+};
+
+const PaymentsForm = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PaymentsFormComponent);
 
 export default injectStripe(PaymentsForm);

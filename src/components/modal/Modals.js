@@ -238,14 +238,27 @@ class ModalsComponent extends Component {
       modalContent = (
         <span>
           <hr className="s3" />
-          <p>Thank your for registering! Now you will be able to access AI-generated custom problems for this course.</p>
+          <p>Thank you for registering! Now you will be able to access AI-generated custom problems for this course.</p>
         </span>
       );
     } else if (this.props.modal.type === 'payments') {
+      headerContent = (
+        <h1>Unlock {this.props.modal.ps_label}</h1>
+      );
       modalContent = (
         <Elements>
           <PaymentsForm />
         </Elements>
+      );
+    } else if (this.props.modal.type === 'payment_successful') {
+      headerContent = (
+        <h1>Payment Successful!</h1>
+      );
+      modalContent = (
+        <span>
+          <hr className="s3" />
+          Thank you! You can now access the unlocked problem set.
+        </span>
       );
     }
 

@@ -163,7 +163,9 @@ export const showReportErrorModal = (content_id) => { return { type: SHOW_REPORT
 export const SHOW_COURSE_REGISTER_MODAL = 'SHOW_COURSE_REGISTER_MODAL';
 export const showCourseRegisterModal = () => { return { type: SHOW_COURSE_REGISTER_MODAL }; };
 export const SHOW_PAYMENTS_MODAL = 'SHOW_PAYMENTS_MODAL';
-export const showPaymentsModal = () => { return { type: SHOW_PAYMENTS_MODAL }; };
+export const showPaymentsModal = (ps_id, ps_label, schoolCode, courseCode) => { return { type: SHOW_PAYMENTS_MODAL, ps_id, ps_label, schoolCode, courseCode }; };
+export const SHOW_PAYMENT_SUCCESSFUL_MODAL = 'SHOW_PAYMENT_SUCCESSFUL_MODAL';
+export const showPaymentSuccessfulModal = () => { return { type: SHOW_PAYMENT_SUCCESSFUL_MODAL }; };
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const closeModal = () => { return { type: CLOSE_MODAL }; };
 

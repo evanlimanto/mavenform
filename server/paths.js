@@ -1117,4 +1117,27 @@ module.exports = (app) => {
       });
     });
   });
+
+  app.post('/submitPayment', (req, res, next) => {
+    const { stripeToken, auth_user_id, ps_id, description } = req.body;
+    const inq = `
+      insert into unlocked (psid, userid)
+      select $1, A.id from
+      (select id from users where auth_user_id = $2) as A
+    `;
+    config.stripe.charges.create({
+      amount: 599,
+      currency: "usd",
+      description: description,
+      source: stripeToken,
+    }, (err, charge) => {
+      if (err)
+        return next(err);
+      config.pool.query(inq, [ps_id, auth_user_id], (err, result) => {
+        if (err)
+          return next(err);
+        return res.send("Success!");
+      });
+    });
+  });
 }

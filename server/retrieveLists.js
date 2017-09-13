@@ -868,6 +868,22 @@ const getLectureInfo =
     });
   };
 
+const getUnlockedSetsByUser =
+  (req, res, next) => {
+    const { auth_user_id } = req.params;
+    const getq = `
+      select psid from unlocked UN
+      inner join users US on US.id = UN.userid
+      where US.auth_user_id = $1
+    `;
+    pool.query(getq, [auth_user_id], (err, result) => {
+      if (err)
+        return next(err);
+      const items = _.map(result.rows, (row) => row.psid );
+      return res.json(items);
+    });
+  };
+
 module.exports = (app) => {
   // Retrieve initial data
   app.get('/getInitial', getInitial);
@@ -944,4 +960,5 @@ module.exports = (app) => {
   app.get('/getLectureInfo/:auth_user_id/:schoolCode/:courseCode', getLectureInfo);
 
   app.get('/getSubTopicInfo/:auth_user_id/:schoolCode/:courseCode/:topicCode', getSubTopicInfo);
+  app.get('/getUnlockedSetsByUser/:auth_user_id', getUnlockedSetsByUser);
 }

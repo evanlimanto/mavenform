@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { forEach, has, toInteger, map } from 'lodash';
+import { includes, forEach, has, toInteger, map } from 'lodash';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { Line } from 'rc-progress';
@@ -60,7 +60,10 @@ class TopicSetComponent extends Component {
         .then((json) => this.setState({ completedProblemsCount: json })),
       fetch(`/getTopicSubTopicsByCode/${auth_user_id}/${schoolCode}/${courseCode}`)
         .then((response) => response.json())
-        .then((json) => this.setState({ topicSubTopics: json }))
+        .then((json) => this.setState({ topicSubTopics: json })),
+      fetch(`/getUnlockedSetsByUser/${auth_user_id}`)
+        .then((response) => response.json())
+        .then((json) => this.setState({ unlockedSets: json }))
     ])
   }
 
@@ -82,11 +85,10 @@ class TopicSetComponent extends Component {
   }
 
   render() {
-    console.log(this.state);
     const { courseCode, schoolCode } = this.props;
     const { lectureInfo } = this.state;
     const containers = map(this.state.lectureProblemSets, (set, index) => {
-      const topicItems = map(this.state.problemSetTopics[set.id], (topic, topicKey) => {
+      let topicItems = map(this.state.problemSetTopics[set.id], (topic, topicKey) => {
         const arr = map(this.state.topicSubTopics[topic.id], (subtopic, subtopicKey) => {
           const percent = Math.floor(toInteger(this.state.completedProblemsCount[subtopic.id] || 0) / subtopic.problem_count * 100.0);
           const hexColor = "#" + getGreenToRed(percent);
@@ -109,18 +111,21 @@ class TopicSetComponent extends Component {
           </div>
         );
       });
+      if (topicItems.length === 0)
+        topicItems = <h1 style={{ marginTop: "30px" }}>No topics yet. Check again for updates!</h1>;
+      const isUnlocked = !set.paid || includes(this.state.unlockedSets, set.id);
       return (
         <span key={index}>
           <div className="int-box">
             <p className="int-helper">
-              {set.paid ? (<i className="fa fa-lock" aria-hidden="true"></i>) : (<i className="fa fa-check-circle" aria-hidden="true"></i>)}
+              {isUnlocked ? (<i className="fa fa-check-circle" aria-hidden="true"></i>) : (<i className="fa fa-lock" aria-hidden="true"></i>)}
               &nbsp;&nbsp;&nbsp;
               <span className="int-highlight">{set.ps_label} </span>
               Review
             </p>
             <button className={classnames({"int-button": true, "gray": this.state.show[index], "int-button-white": !this.state.show[index]})}
-              onClick={() => set.paid ? this.props.showPaymentsModal() : this.toggleShow(index)}>
-              {set.paid ? "Unlock" : (this.state.show[index] ? "Hide" : "View")}
+              onClick={() => isUnlocked ? this.toggleShow(index) : this.props.showPaymentsModal(set.id, set.ps_label, schoolCode, courseCode)}>
+              {isUnlocked ? (this.state.show[index] ? "Hide" : "View") : "Unlock"}
             </button>
           </div>
           {this.state.show[index] ? <div className="int-box int-box-white">{topicItems}</div> : null}
@@ -167,7 +172,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    showPaymentsModal: () => dispatch(showPaymentsModal()),
+    showPaymentsModal: (ps_label) => dispatch(showPaymentsModal(ps_label)),
     dispatch
   };
 };

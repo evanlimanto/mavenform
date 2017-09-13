@@ -220,7 +220,9 @@ export const modal = (state = { type: null, errorText: null }, action) => {
     case Actions.SHOW_COURSE_REGISTER_MODAL:
       return { type: 'courseregister' };
     case Actions.SHOW_PAYMENTS_MODAL:
-      return { type: 'payments' };
+      return { type: 'payments', ps_id: action.ps_id, ps_label: action.ps_label, schoolCode: action.schoolCode, courseCode: action.courseCode };
+    case Actions.SHOW_PAYMENT_SUCCESSFUL_MODAL:
+      return { type: 'payment_successful' };
     case Actions.CLOSE_MODAL:
       return { type: null, errorText: null };
     case Actions.SET_MODAL_ERROR:

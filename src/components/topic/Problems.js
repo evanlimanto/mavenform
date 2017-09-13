@@ -133,7 +133,6 @@ class ProblemsComponent extends Component {
   }
 
   render() {
-    console.log(this.state);
     const { courseCode, schoolCode } = this.props;
     const navbar = <Navbar interactive={true}
                     links={[`interactive/${schoolCode}/${courseCode}`, this.props.topicCode]}

@@ -200,3 +200,10 @@
 .forgot-pass a:hover {
   color: #11aacc;
 }
+
+.StripeElement {
+  margin: 15px 0px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 12px;
+}

@@ -209,7 +209,6 @@ class Interactive extends Component {
         <button onClick={(e) => this.addProblemSet(e)}>SUBMIT</button>
       </form>
     );
-    console.log(lectureProblemSets);
     const problemSets = (lectureProblemSets && lectureProblemSets[selectedLecture]) ? map(lectureProblemSets[selectedLecture],
       (ps, key) => (
         <div key={key}>
@@ -478,7 +477,6 @@ class Interactive extends Component {
   }
 
   render() {
-    console.log(this.state);
     const courseList = this.getCourseList();
     const courseLectures = this.getCourseLectures();
     const lectureProblemSets = this.getLectureProblemSets();
