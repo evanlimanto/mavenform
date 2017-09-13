@@ -437,55 +437,6 @@ const getSubjects =
     });
   };
 
-const getTopicInfo =
-  (req, res, next) => {
-    const { code } = req.params;
-    const getinfoq = `
-      select T.topic, T.concept, S.subject_label from topics T
-      inner join subjects S on T.subjectid = S.id
-      where T.code = $1`;
-    const getq = `
-      select C.id as content_id, problem_num, subproblem_num,
-        problem, solution, choices, difficulty,
-        suggestion_text, interactive_problem, interactive_solution from content C
-      inner join topics T on T.id = C.topicid
-      where T.code = $1
-    `;
-    async.parallel([
-      (callback) => pool.query(getinfoq, [code], callback),
-      (callback) => {
-        pool.query(getq, [code], (err, result) => {
-          if (err)
-            return callback(err);
-          const info = _.reduce(result.rows, (res, row, index) => {
-            const problem_num = row.problem_num;
-            const subproblem_num = row.subproblem_num || 1;
-            res[index] = 1;
-            return res;
-          }, {});
-
-          const problems = _.reduce(result.rows, (res, row, index) => {
-            let { content_id, problem_num, subproblem_num, problem, solution, choices, difficulty, suggestion_text, interactive_problem, interactive_solution } = row;
-            problem = renderer.preprocess(row.problem);
-            solution = renderer.preprocess(row.solution);
-            const { type_label, term_label } = row;
-            const key = `${index}`;
-            res[key] = { problem, solution, choices, content_id, type_label, term_label, difficulty, suggestion_text, interactive_problem, interactive_solution };
-            return res;
-          }, {});
-
-          return callback(null, { info, problems });
-        });
-      },
-    ], (err, result) => {
-      if (err) return next(err);
-      if (result[0].rows.length === 0) return res.json({});
-      const { topic, concept, subject_label } = result[0].rows[0];
-      const { info, problems } = result[1];
-      return res.json({ topicLabel: topic, conceptLabel: concept, subjectLabel: subject_label, info, problems });
-    });
-  };
-
 const getCourseTopics =
   (req, res, next) => {
     const { courseCode, schoolCode } = req.params;
@@ -583,19 +534,88 @@ const getCourseLecturesByCode =
     });
   };
 
+const getSubTopicInfo =
+  (req, res, next) => {
+    const { auth_user_id, schoolCode, courseCode, topicCode } = req.params;
+    const getinfoq = `
+      select PSS.subtopic_label from bookmarked_courses BC
+      inner join lectures L on BC.lectureid = L.id
+      inner join courses C on C.id = L.courseid
+      inner join schools S on S.id = C.schoolid
+      inner join users U on U.id = BC.userid
+      inner join problemsets PS on PS.lectureid = L.id
+      inner join problemset_topics PST on PST.psid = PS.id
+      inner join problemset_subtopics PSS on PSS.pstid = PST.id
+      where U.auth_user_id = $1 and S.code = $2 and C.code = $3 and PSS.subtopic_code = $4
+    `;
+    const getq = `
+      select C.id as content_id, C.problem_num, C.subproblem_num,
+        C.problem, C.solution, C.choices, C.difficulty,
+        C.suggestion_text, C.interactive_problem, C.interactive_solution
+        from bookmarked_courses BC
+      inner join lectures L on BC.lectureid = L.id
+      inner join courses on courses.id = L.courseid
+      inner join schools S on S.id = C.schoolid
+      inner join users U on U.id = BC.userid
+      inner join problemsets PS on PS.lectureid = L.id
+      inner join problemset_topics PST on PST.psid = PS.id
+      inner join problemset_subtopics PSS on PSS.pstid = PST.id
+      inner join problemset_problems PSP on PSP.pssid = PSS.id
+      inner join content C on PSP.contentid = C.id
+      where U.auth_user_id = $1 and S.code = $2 and C.code = $3 and PSS.subtopic_code = $4
+    `;
+    async.parallel([
+      (callback) => pool.query(getinfoq, [code], callback),
+      (callback) => {
+        pool.query(getq, [code], (err, result) => {
+          if (err)
+            return callback(err);
+          const info = _.reduce(result.rows, (res, row, index) => {
+            const problem_num = row.problem_num;
+            const subproblem_num = row.subproblem_num || 1;
+            res[index] = 1;
+            return res;
+          }, {});
+
+          const problems = _.reduce(result.rows, (res, row, index) => {
+            let { content_id, problem_num, subproblem_num, problem, solution, choices, difficulty, suggestion_text, interactive_problem, interactive_solution } = row;
+            problem = renderer.preprocess(row.problem);
+            solution = renderer.preprocess(row.solution);
+            const { type_label, term_label } = row;
+            const key = `${index}`;
+            res[key] = { problem, solution, choices, content_id, type_label, term_label, difficulty, suggestion_text, interactive_problem, interactive_solution };
+            return res;
+          }, {});
+
+          return callback(null, { info, problems });
+        });
+      },
+    ], (err, result) => {
+      if (err) return next(err);
+      if (result[0].rows.length === 0) return res.json({});
+      const { subtopic_label } = result[0].rows[0];
+      const { info, problems } = result[1];
+      return res.json({ subtopic_label, info, problems });
+    });
+  };
+
 const getCompletedProblems =
   (req, res, next) => {
     const { schoolCode, courseCode, topicCode, auth_user_id } = req.params;
     const getq = `
-      select PS.contentid from problems_solved PS
-        inner join course_topics CT on CT.id = PS.ctsid
-        inner join courses C on C.id = CT.courseid
-        inner join schools S on S.id = C.schoolid
-        inner join topics T on T.id = CT.topicid
-        inner join users U on U.id = PS.userid
-        where S.code = $1 and C.code = $2 and T.code = $3 and U.auth_user_id = $4;
+      select problems_solved.pspid from bookmarked_courses BC
+      inner join lectures L on BC.lectureid = L.id
+      inner join courses C on C.id = L.courseid
+      inner join schools S on S.id = C.schoolid
+      inner join users U on U.id = BC.userid
+      inner join problemsets PS on PS.lectureid = L.id
+      inner join problemset_topics PST on PST.psid = PS.id
+      inner join problemset_subtopics PSS on PSS.pstid = PST.id
+      inner join problemset_problems PSP on PSP.pssid = PSS.id
+      inner join problems_solved on problems_solved.pspid = PSP.id
+      where U.auth_user_id = $1 and S.code = $2 and C.code = $3 and PSS.subtopic_code = $4
     `;
-    pool.query(getq, [schoolCode, courseCode, topicCode, auth_user_id], (err, result) => {
+    pool.query(getq, [auth_user_id, schoolCode, courseCode, topicCode], (err, result) => {
       if (err)
         return console.error(err);
       const items = _.map(result.rows, (row) => row.contentid);
@@ -887,9 +907,6 @@ module.exports = (app) => {
   app.get('/getExamInfo/:schoolCode/:courseCode/:examTypeCode/:termCode/:profs', getExamInfo);
   app.get('/getExamInfoById/:examid', getExamInfoById);
 
-  // Retrieve content by topic
-  app.get('/getTopicInfo/:code', getTopicInfo);
-
   // Retrieve topics by course
   app.get('/getCourseTopics/:schoolCode/:courseCode', getCourseTopics);
 
@@ -926,4 +943,6 @@ module.exports = (app) => {
   app.get('/getProblemSetTopicsByCode/:auth_user_id/:schoolCode/:courseCode', getProblemSetTopicsByCode);
   app.get('/getTopicSubTopicsByCode/:auth_user_id/:schoolCode/:courseCode', getTopicSubTopicsByCode);
   app.get('/getLectureInfo/:auth_user_id/:schoolCode/:courseCode', getLectureInfo);
+
+  app.get('/getSubTopicInfo/:auth_user_id/:schoolCode/:courseCode/:topicCode', getSubTopicInfo);
 }

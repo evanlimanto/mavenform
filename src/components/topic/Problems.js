@@ -45,7 +45,7 @@ class ProblemsComponent extends Component {
     const { courseCode, schoolCode, topicCode } = props;
     const auth_user_id = props.auth.getProfile().user_id;
     return Promise.all([
-      fetch(`${BASE_URL}/getTopicInfo/${topicCode}`)
+      fetch(`${BASE_URL}/getSubTopicInfo/${auth_user_id}/${schoolCode}/${courseCode}/${topicCode}`)
         .then((response) => response.json())
         .then((json) => dispatch(updateTopicInfo(json))),
       fetch(`${BASE_URL}/getCompletedProblems/${schoolCode}/${courseCode}/${topicCode}/${auth_user_id}`)
@@ -133,6 +133,7 @@ class ProblemsComponent extends Component {
   }
 
   render() {
+    console.log(this.state);
     const { courseCode, schoolCode } = this.props;
     const navbar = <Navbar interactive={true} links={[`interactive/${schoolCode}/${courseCode}`, this.props.topicCode]} navbarLabels={[courseCodeToLabel(courseCode), this.props.topicInfo.topicLabel]} />
     if (this.state.progressIndicator === this.problemCount && !this.state.showSolution) {
