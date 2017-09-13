@@ -114,7 +114,7 @@ class Interactive extends Component {
         const id = res.text;
         const arr = concat(
           cloneOrEmpty(lectureProblemSets[selectedLecture]),
-          { id, ps_code, ps_label, ps_order }
+          { id, ps_code, ps_label, ps_order, paid }
         );
         self.setState({
           lectureProblemSets: {
@@ -209,11 +209,12 @@ class Interactive extends Component {
         <button onClick={(e) => this.addProblemSet(e)}>SUBMIT</button>
       </form>
     );
+    console.log(lectureProblemSets);
     const problemSets = (lectureProblemSets && lectureProblemSets[selectedLecture]) ? map(lectureProblemSets[selectedLecture],
       (ps, key) => (
         <div key={key}>
           <a className={classnames({ highlighted: ps.id === this.state.selectedProblemSet })}
-            onClick={() => this.selectProblemSet(ps.id)}>{ps.ps_label}</a>&nbsp;
+            onClick={() => this.selectProblemSet(ps.id)}>{ps.ps_label} - {ps.ps_code} - paid: {ps.paid ? "Yes" : "No"} - order: {ps.ps_order}</a>&nbsp;
           <a className="admin-function" onClick={() => this.removeProblemSet(ps.id)}>Delete</a>
         </div>)) : "No Problem Sets yet!";
     return (
@@ -462,7 +463,7 @@ class Interactive extends Component {
       (lecture, key) => (
         <div key={key}>
           <a className={classnames({ highlighted: lecture.id === this.state.selectedLecture })}
-            onClick={() => this.selectLecture(lecture.id)}>{lecture.lecture_code} - {lecture.professor}</a>&nbsp;
+            onClick={() => this.selectLecture(lecture.id)}>{lecture.lecture_code} - {lecture.professor} | Syllabus: {lecture.syllabus_url} | Order: {lecture.lecture_order}</a>&nbsp;
           <a className="admin-function" onClick={() => this.removeLecture(lecture.id)}>Delete</a>
         </div>)) : "No Lectures yet!";
     return (

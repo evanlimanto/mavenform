@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { map } from 'lodash';
 import { Route, Switch } from 'react-router-dom';
+import { StripeProvider } from 'react-stripe-elements';
 
 import routes from './routes';
 import initializeTracking from './tracking';
@@ -24,7 +25,6 @@ import './css/School.css';
 import './css/Exam.css';
 import './css/Course.css';
 import './css/Marketing.css';
-import './css/Modals.css';
 import './css/Mobile.css';
 import './css/Admin.css';
 import './css/Info.css';
@@ -52,9 +52,11 @@ ReactDOM.render((
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <ScrollToTop>
-        <Switch>
-          {map(routes, (route, key) => <Route key={key} path={route.path} component={route.component} exact={route.exact} />)}
-        </Switch>
+        <StripeProvider apiKey="pk_test_EGjrXw5z4UoMqXjcXugwf7Z8">
+          <Switch>
+            {map(routes, (route, key) => <Route key={key} path={route.path} component={route.component} exact={route.exact} />)}
+          </Switch>
+        </StripeProvider>
       </ScrollToTop>
     </ConnectedRouter>
   </Provider>

@@ -567,7 +567,7 @@ const getCourseLecturesByCode =
   (req, res, next) => {
     const { schoolCode, courseCode } = req.params;
     const getq = `
-      select lectures.id, lecture_code, professor, syllabus_url from lectures
+      select lectures.id, lecture_code, lecture_order, professor, syllabus_url from lectures
       inner join courses on lectures.courseid = courses.id
       inner join schools on courses.schoolid = schools.id
       where courses.code = $1 and schools.code = $2;
@@ -576,8 +576,8 @@ const getCourseLecturesByCode =
       if (err)
         return console.error(err);
       const items = _.map(result.rows, (row) => {
-        const { id, lecture_code, professor, syllabus_url } = row;
-        return { id, lecture_code, professor, syllabus_url };
+        const { id, lecture_code, lecture_order, professor, syllabus_url } = row;
+        return { id, lecture_code, lecture_order, professor, syllabus_url };
       });
       return res.json(items);
     });
@@ -669,17 +669,17 @@ const getCourseLectures =
 const getLectureProblemSets =
   (req, res, next) => {
     const getq = `
-      select id, lectureid, ps_label, ps_code, ps_order from problemsets
+      select id, lectureid, ps_label, ps_code, ps_order, paid from problemsets
       order by ps_order asc
     `;
     pool.query(getq, (err, result) => {
       if (err)
         return next(err);
       const items = _.reduce(result.rows, (dict, row) => {
-        const { id, lectureid, ps_label, ps_code, ps_order } = row;
+        const { id, lectureid, ps_label, ps_code, ps_order, paid } = row;
         if (!_.has(dict, lectureid))
           dict[lectureid] = [];
-        dict[lectureid].push({ id, ps_label, ps_code, ps_order });
+        dict[lectureid].push({ id, ps_label, ps_code, ps_order, paid });
         return dict;
       }, {});
       return res.json(items);
@@ -747,20 +747,21 @@ const getLectureProblemSetsByCode =
   (req, res, next) => {
     const { auth_user_id, schoolCode, courseCode } = req.params;
     const getq = `
-      select PS.id, ps_label, ps_code, ps_order, paid from bookmarked_courses BC
+      select PS.id, PS.ps_label, PS.ps_code, PS.ps_order, PS.paid from bookmarked_courses BC
       inner join lectures L on BC.lectureid = L.id
       inner join courses C on C.id = L.courseid
       inner join schools S on S.id = C.schoolid
       inner join problemsets PS on PS.lectureid = L.id
       inner join users U on U.id = BC.userid
-      where auth_user_id = $1 and S.code = $2 and C.code = $3
+      where U.auth_user_id = $1 and S.code = $2 and C.code = $3
       order by ps_order asc
     `;
     pool.query(getq, [auth_user_id, schoolCode, courseCode], (err, result) => {
       if (err)
         return next(err);
       const items = _.map(result.rows, (row) => {
-        return { ...row };
+        const { id, ps_label, ps_code, ps_order, paid } = row;
+        return { id, ps_label, ps_code, ps_order, paid };
       });
       return res.json(items);
     });
@@ -770,13 +771,14 @@ const getProblemSetTopicsByCode =
   (req, res, next) => {
     const { auth_user_id, schoolCode, courseCode } = req.params;
     const getq = `
-      select PST.id, PST.psid, topic_label, topic_order, topic_code from bookmarked_courses BC
+      select PST.id, PST.psid, PST.topic_label, PST.topic_order, PST.topic_code from bookmarked_courses BC
       inner join lectures L on BC.lectureid = L.id
       inner join courses C on C.id = L.courseid
       inner join schools S on S.id = C.schoolid
       inner join problemsets PS on PS.lectureid = L.id
       inner join problemset_topics PST on PST.psid = PS.id
-      where auth_user_id = $1 and S.code = $2 and C.code = $3
+      inner join users U on U.id = BC.userid
+      where U.auth_user_id = $1 and S.code = $2 and C.code = $3
       order by topic_order asc
     `;
     pool.query(getq, [auth_user_id, schoolCode, courseCode], (err, result) => {
@@ -793,13 +795,14 @@ const getProblemSetTopicsByCode =
     });
   };
 
-const getProblemSetInfo =
+const getLectureInfo =
   (req, res, next) => {
     const { schoolCode, courseCode, auth_user_id } = req.params;
     const getq = `
-      select * from bookmarked_courses BC
+      select L.id, L.professor, L.syllabus_url, L.lecture_code, T.term_label from bookmarked_courses BC
       inner join users U on BC.userid = U.id
       inner join lectures L on BC.lectureid = L.id
+      inner join terms T on T.id = L.termid
       inner join courses C on L.courseid = C.id
       inner join schools S on C.schoolid = S.id
       where U.auth_user_id = $1 and S.code = $2 and C.code = $3
@@ -807,8 +810,7 @@ const getProblemSetInfo =
     pool.query(getq, [auth_user_id, schoolCode, courseCode], (err, result) => {
       if (err)
         return next(err);
-      const items = _.map(result.rows, (row) => {
-      })
+      return res.json({ ...result.rows[0] });
     });
   };
 
@@ -885,7 +887,7 @@ module.exports = (app) => {
   app.get('/getTopicSubTopics', getTopicSubTopics);
   app.get('/getSubTopicProblems', getSubTopicProblems);
 
-  app.get('/getLectureProblemSetsByCode', getLectureProblemSetsByCode);
-  app.get('/getProblemSetTopicsByCode', getProblemSetTopicsByCode);
-  app.get('/getProblemSetInfo/:auth_user_id/:schoolCode/:courseCode', getProblemSetInfo);
+  app.get('/getLectureProblemSetsByCode/:auth_user_id/:schoolCode/:courseCode', getLectureProblemSetsByCode);
+  app.get('/getProblemSetTopicsByCode/:auth_user_id/:schoolCode/:courseCode', getProblemSetTopicsByCode);
+  app.get('/getLectureInfo/:auth_user_id/:schoolCode/:courseCode', getLectureInfo);
 }

@@ -219,6 +219,8 @@ export const modal = (state = { type: null, errorText: null }, action) => {
       return { type: 'reporterror', errorText: null, content_id: action.content_id };
     case Actions.SHOW_COURSE_REGISTER_MODAL:
       return { type: 'courseregister' };
+    case Actions.SHOW_PAYMENTS_MODAL:
+      return { type: 'payments' };
     case Actions.CLOSE_MODAL:
       return { type: null, errorText: null };
     case Actions.SET_MODAL_ERROR:

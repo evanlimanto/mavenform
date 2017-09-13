@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { map, sortBy, split } from 'lodash';
+import { Elements } from 'react-stripe-elements';
 import isEmail from 'validator/lib/isEmail';
 import isEmpty from 'validator/lib/isEmpty';
 import req from 'superagent';
 
+import PaymentsForm from './PaymentsForm';
 import Modal from './Modal';
 import { closeModal, showLoginModal, showSignupModal, showForgotPasswordModal, showReportSuccessModal, setModalError } from '../../actions';
+
+require('../../css/Modals.css');
 
 class ModalsComponent extends Component {
   constructor(props) {
     super(props);
 
+    this.hasInstantiatedStripe = false;
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
     this.selectSchool = this.selectSchool.bind(this);
@@ -236,6 +241,12 @@ class ModalsComponent extends Component {
           <hr className="s3" />
           <p>Thank your for registering! Now you will be able to access AI-generated custom problems for this course.</p>
         </span>
+      );
+    } else if (this.props.modal.type === 'payments') {
+      modalContent = (
+        <Elements>
+          <PaymentsForm />
+        </Elements>
       );
     }
 

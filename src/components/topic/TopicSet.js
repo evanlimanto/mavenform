@@ -9,9 +9,10 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import Navbar from '../navbar';
 import Footer from '../footer';
+import { Modals } from '../modal';
 
 import { BASE_URL, courseCodeToLabel } from '../../utils';
-import { updateCompletedProblemCounts, updateTopicsList } from '../../actions';
+import { showPaymentsModal, updateCompletedProblemCounts, updateTopicsList } from '../../actions';
 
 require('../../css/TopicSet.css');
 
@@ -31,6 +32,7 @@ class TopicSetComponent extends Component {
     super(props);
     this.state = {
       show: [false, false, false],
+      lectureInfo: { lecture_code: null }
     };
     this.getCategorizedTopics = this.getCategorizedTopics.bind(this);
     this.toggleShow = this.toggleShow.bind(this);
@@ -39,17 +41,16 @@ class TopicSetComponent extends Component {
   componentDidMount() {
     const { schoolCode, courseCode } = this.props;
     const auth_user_id = this.props.auth.getProfile().user_id;
-    const self = this;
     Promise.all([
-      fetch(`/getProblemSetInfo/${auth_user_id}/${schoolCode}/${courseCode}`)
+      fetch(`/getLectureInfo/${auth_user_id}/${schoolCode}/${courseCode}`)
         .then((response) => response.json())
-        .then((json) => self.setState({ problemSetInfo: json })),
+        .then((json) => this.setState({ lectureInfo: json })),
       fetch(`/getLectureProblemSetsByCode/${auth_user_id}/${schoolCode}/${courseCode}`)
         .then((response) => response.json())
-        .then((json) => self.setState({ courseProblemSets: json })),
+        .then((json) => this.setState({ lectureProblemSets: json })),
       fetch(`/getProblemSetTopicsByCode/${auth_user_id}/${schoolCode}/${courseCode}`)
         .then((response) => response.json())
-        .then((json) => self.setState({ problemSetTopics: json }))
+        .then((json) => this.setState({ problemSetTopics: json }))
     ])
   }
 
@@ -73,6 +74,7 @@ class TopicSetComponent extends Component {
   render() {
     console.log(this.state);
     const { courseCode, schoolCode } = this.props;
+    const { lectureInfo } = this.state;
     const topicsDict = this.getCategorizedTopics();
     const topicItems = map(this.getCategorizedTopics(), (items, topic) => {
       const arr = map(items, (item) => {
@@ -97,17 +99,20 @@ class TopicSetComponent extends Component {
         </div>
       );
     });
-    const containers = map(this.state.courseProblemSets, (set, index) => {
+    const containers = map(this.state.lectureProblemSets, (set, index) => {
       return (
         <span key={index}>
           <div className="int-box">
             <p className="int-helper">
-              {index === 0 ? (<i className="fa fa-check-circle" aria-hidden="true"></i>) : (<i className="fa fa-lock" aria-hidden="true"></i>)}
+              {set.paid ? (<i className="fa fa-lock" aria-hidden="true"></i>) : (<i className="fa fa-check-circle" aria-hidden="true"></i>)}
               &nbsp;&nbsp;&nbsp;
               <span className="int-highlight">{set.ps_label} </span>
               Review
             </p>
-            <button className={classnames({"int-button": true, "gray": this.state.show[0], "int-button-white": !this.state.show[0]})} onClick={() => this.toggleShow(0)}>{this.state.show[0] ? "Hide" : "View"}</button>
+            <button className={classnames({"int-button": true, "gray": this.state.show[index], "int-button-white": !this.state.show[index]})}
+              onClick={() => set.paid ? this.props.showPaymentsModal() : this.toggleShow(index)}>
+              {set.paid ? "Unlock" : (this.state.show[index] ? "Hide" : "View")}
+            </button>
           </div>
           {this.state.show[index] ? <div className="int-box int-box-white">{topicItems}</div> : null}
         </span>
@@ -115,14 +120,15 @@ class TopicSetComponent extends Component {
     })
     return (
       <div>
+        <Modals />
         <Navbar interactive={true} links={[`interactive/${schoolCode}/${courseCode}`]} navbarLabels={[courseCodeToLabel(courseCode)]} />
         <div className="container info-container">
           <hr className="s5" />
           <img className="info-img" src="/img/interactive.svg" alt="subject-logo" />
           <div className="info">
-            <h4 className="info-title">MATH 53 001</h4>
+            <h4 className="info-title">{courseCodeToLabel(courseCode)} {lectureInfo.lecture_code}</h4>
             <hr className="s1" />
-            <h5 className="info-subtitle">Auroux&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Fall 2017&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a className="school-link">Syllabus</a></h5>
+            <h5 className="info-subtitle">{lectureInfo.professor}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{lectureInfo.term_label}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a className="school-link">Syllabus</a></h5>
             <hr className="s1" />
             <hr className="s0-5" />
             <p className="info-text">
@@ -152,7 +158,10 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return { dispatch };
+  return {
+    showPaymentsModal: () => dispatch(showPaymentsModal()),
+    dispatch
+  };
 };
 
 const TopicSet = connect(
