@@ -25,6 +25,7 @@ class ProblemsComponent extends Component {
       correct: 0,
       wrong: 0,
       problemStatus: map(range(0, 10), () => false),
+      subTopicInfo: { problems: { 0: {} } }
     };
     this.problemCount = 1;
     this.reset = this.reset.bind(this);
@@ -37,25 +38,24 @@ class ProblemsComponent extends Component {
   }
 
   componentDidMount() {
-    ProblemsComponent.fetchData(this.props.dispatch, this.props);
-    window.renderMJ();
-  }
-
-  static fetchData(dispatch, props) {
-    const { courseCode, schoolCode, topicCode } = props;
-    const auth_user_id = props.auth.getProfile().user_id;
+    const { courseCode, schoolCode, topicCode } = this.props;
+    const auth_user_id = this.props.auth.getProfile().user_id;
     return Promise.all([
       fetch(`${BASE_URL}/getSubTopicInfo/${auth_user_id}/${schoolCode}/${courseCode}/${topicCode}`)
         .then((response) => response.json())
-        .then((json) => dispatch(updateTopicInfo(json))),
+        .then((json) => this.setState({ subTopicInfo: json })),
       fetch(`${BASE_URL}/getCompletedProblems/${schoolCode}/${courseCode}/${topicCode}/${auth_user_id}`)
         .then((response) => response.json())
-        .then((json) => dispatch(updateCompletedProblems(json)))
+        .then((json) => this.setState({ completedProblems: json }))
     ]);
   }
 
+  static fetchData(dispatch, props) {
+    
+  }
+
   componentWillUpdate(nextProps, nextState) {
-    this.problemCount = keys(nextProps.topicInfo.problems).length;
+    this.problemCount = keys(nextState.subTopicInfo.problems).length;
   }
 
   componentDidUpdate() {
@@ -135,14 +135,16 @@ class ProblemsComponent extends Component {
   render() {
     console.log(this.state);
     const { courseCode, schoolCode } = this.props;
-    const navbar = <Navbar interactive={true} links={[`interactive/${schoolCode}/${courseCode}`, this.props.topicCode]} navbarLabels={[courseCodeToLabel(courseCode), this.props.topicInfo.topicLabel]} />
+    const navbar = <Navbar interactive={true}
+                    links={[`interactive/${schoolCode}/${courseCode}`, this.props.topicCode]}
+                    navbarLabels={[courseCodeToLabel(courseCode), this.state.subTopicInfo.subtopic_label]} />
     if (this.state.progressIndicator === this.problemCount && !this.state.showSolution) {
       return (
         <div className="background">
           {navbar}
           <div className="box">
             <div className="end-text">
-              <h1 className="congratulations-text">Congratulations! You have mastered {this.props.topicInfo.topicLabel}</h1>
+              <h1 className="congratulations-text">Congratulations! You have mastered {this.state.subTopicInfo.subtopic_label}</h1>
               <hr className="s2" />
               <h2 className="info-text">Your correctly answered {this.state.correct} out of {this.problemCount} problem{this.problemCount > 1 ? "s" : ""}.</h2>
             </div>
@@ -155,7 +157,7 @@ class ProblemsComponent extends Component {
       );
     }
 
-    const itemContent = this.props.topicInfo.problems[this.state.progressIndicator];
+    const itemContent = this.state.subTopicInfo.problems[this.state.progressIndicator];
     const contents = this.state.showContents ? [(
       <div key={0}>
         <div dangerouslySetInnerHTML={{ __html: itemContent.problem }}></div>
@@ -177,7 +179,7 @@ class ProblemsComponent extends Component {
           <div className="box-header">
             <Link to={`/interactive/${schoolCode}/${courseCode}`}><i className="fa fa-chevron-left back-arrow" aria-hidden="true"></i></Link>
             &nbsp;&nbsp;&nbsp;
-            <span className="box-title">{this.props.topicInfo.topicLabel}</span>
+            <span className="box-title">{this.state.subTopicInfo.subtopic_label}</span>
             <span className="box-buttons">
               <input className="white" type="button" value="Ask Question" />
             </span>
@@ -208,7 +210,7 @@ class ProblemsComponent extends Component {
             {map(range(0, this.problemCount), (index) =>
               <div key={index} onClick={() => this.navigateProblem(index)} className={classnames({
                 "progress-circle": true,
-                "progress-done": this.state.problemStatus[index] || includes(this.props.completedProblems, this.props.topicInfo.problems[index].content_id),
+                "progress-done": this.state.problemStatus[index] || includes(this.props.completedProblems, this.state.subTopicInfo.problems[index].content_id),
                 "progress-current": index === this.state.progressIndicator && !this.state.problemStatus[index]
               })}></div>
             )}
@@ -231,8 +233,6 @@ const mapStateToProps = (state, ownProps) => {
     topicCode: ownProps.topicCode || ownProps.match.params.topicCode,
     courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
     schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
-    completedProblems: state.completedProblems,
-    topicInfo: state.topicInfo,
     auth: state.auth,
   };
 };

@@ -551,23 +551,22 @@ const getSubTopicInfo =
     const getq = `
       select C.id as content_id, C.problem_num, C.subproblem_num,
         C.problem, C.solution, C.choices, C.difficulty,
-        C.suggestion_text, C.interactive_problem, C.interactive_solution
-        from bookmarked_courses BC
+        C.suggestion_text, C.interactive_problem, C.interactive_solution from bookmarked_courses BC
       inner join lectures L on BC.lectureid = L.id
       inner join courses on courses.id = L.courseid
-      inner join schools S on S.id = C.schoolid
+      inner join schools S on S.id = courses.schoolid
       inner join users U on U.id = BC.userid
       inner join problemsets PS on PS.lectureid = L.id
       inner join problemset_topics PST on PST.psid = PS.id
       inner join problemset_subtopics PSS on PSS.pstid = PST.id
       inner join problemset_problems PSP on PSP.pssid = PSS.id
       inner join content C on PSP.contentid = C.id
-      where U.auth_user_id = $1 and S.code = $2 and C.code = $3 and PSS.subtopic_code = $4
+      where U.auth_user_id = $1 and S.code = $2 and courses.code = $3 and PSS.subtopic_code = $4
     `;
     async.parallel([
-      (callback) => pool.query(getinfoq, [code], callback),
+      (callback) => pool.query(getinfoq, [auth_user_id, schoolCode, courseCode, topicCode], callback),
       (callback) => {
-        pool.query(getq, [code], (err, result) => {
+        pool.query(getq, [auth_user_id, schoolCode, courseCode, topicCode], (err, result) => {
           if (err)
             return callback(err);
           const info = _.reduce(result.rows, (res, row, index) => {

@@ -847,7 +847,7 @@ module.exports = (app) => {
   });
 
   app.post('/saveProgress', (req, res, next) => {
-    const { schoolCode, courseCode, topicCode, auth_user_id, numProblems, contentid } = req.body;
+    const { schoolCode, courseCode, topicCode, auth_user_id, contentid } = req.body;
 
     const progressinq = `
       with A as (select CT.id from course_topics CT
