@@ -850,9 +850,7 @@ module.exports = (app) => {
     const { schoolCode, courseCode, auth_user_id, contentid } = req.body;
 
     const inq = `
-      insert into problems_solved (pspid, userid)
-      select A.id, B.id from
-      (select PSP.id from bookmarked_courses BC
+      with A as (select PSP.id from bookmarked_courses BC
         inner join lectures L on BC.lectureid = L.id
         inner join courses C on C.id = L.courseid
         inner join schools S on S.id = C.schoolid
@@ -861,8 +859,10 @@ module.exports = (app) => {
         inner join problemset_topics PST on PST.psid = PS.id
         inner join problemset_subtopics PSS on PSS.pstid = PST.id
         inner join problemset_problems PSP on PSP.pssid = PSS.id
-        where U.auth_user_id = $1 and S.code = $2 and C.code = $3 and PSP.contentid = $4) as A,
-      (select id from users where auth_user_id = $1) as B
+        where U.auth_user_id = $1 and S.code = $2 and C.code = $3 and PSP.contentid = $4),
+      B as (select id from users where auth_user_id = $1),
+      insert into problems_solved (pspid, userid) values(A.id, B.id)
+      where not exists (select 1 from problems_solved where pspid = A.id and userid = B.id)
     `;
     config.pool.query(inq, [auth_user_id, schoolCode, courseCode, contentid], (err, result) => {
       if (err)
