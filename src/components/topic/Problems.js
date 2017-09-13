@@ -101,10 +101,10 @@ class ProblemsComponent extends Component {
 
   saveProgress(contentid) {
     const auth_user_id = this.props.auth.getProfile().user_id;
-    const { schoolCode, courseCode, topicCode } = this.props;
+    const { schoolCode, courseCode } = this.props;
     const numProblems = reduce(this.state.problemStatus, (sum, val) => sum + val, 0);
     req.post('/saveProgress')
-      .send({ schoolCode, courseCode, topicCode, auth_user_id, numProblems, contentid })
+      .send({ schoolCode, courseCode, auth_user_id, numProblems, contentid })
       .end((err, res) => {
         if (err || !res.ok)
           return console.error(err);

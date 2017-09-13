@@ -847,20 +847,24 @@ module.exports = (app) => {
   });
 
   app.post('/saveProgress', (req, res, next) => {
-    const { schoolCode, courseCode, topicCode, auth_user_id, contentid } = req.body;
+    const { schoolCode, courseCode, auth_user_id, contentid } = req.body;
 
-    const progressinq = `
-      with A as (select CT.id from course_topics CT
-        inner join courses C on C.id = CT.courseid
+    const inq = `
+      insert into problems_solved (pspid, userid)
+      select A.id, B.id from
+      (select PSP.id from bookmarked_courses BC
+        inner join lectures L on BC.lectureid = L.id
+        inner join courses C on C.id = L.courseid
         inner join schools S on S.id = C.schoolid
-        inner join topics T on T.id = CT.topicid
-        where C.code = $2 and S.code = $3 and T.code = $4),
-          B as (select id from users where auth_user_id = $5)
-      insert into problems_solved (ctsid, contentid, userid)
-      select A.id, $1, B.id from A cross join B
-      where not exists (select 1 from problems_solved where ctsid = A.id and userid = B.id and contentid = $1)
+        inner join users U on U.id = BC.userid
+        inner join problemsets PS on PS.lectureid = L.id
+        inner join problemset_topics PST on PST.psid = PS.id
+        inner join problemset_subtopics PSS on PSS.pstid = PST.id
+        inner join problemset_problems PSP on PSP.pssid = PSS.id
+        where U.auth_user_id = $1 and S.code = $2 and C.code = $3 and PSP.contentid = $4) as A,
+      (select id from users where auth_user_id = $1) as B
     `;
-    config.pool.query(progressinq, [contentid, courseCode, schoolCode, topicCode, auth_user_id], (err, result) => {
+    config.pool.query(inq, [auth_user_id, schoolCode, courseCode, contentid], (err, result) => {
       if (err)
         return next(err);
       return res.send("Success!");
