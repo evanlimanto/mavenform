@@ -12,6 +12,7 @@ import UserHome from './components/userhome';
 
 const routes = [
   { path: '/', component: Home, exact: true },
+  { path: '/interactive/:schoolCode/:courseCode/:topicCode', component: Problems },
   { path: '/interactive/:schoolCode/:courseCode', component: TopicSet },
   { path: '/login', component: Login },
   { path: '/logout', component: Logout },
@@ -33,7 +34,6 @@ const routes = [
   { path: '/s3cr3tsignup', component: SecretSignup },
   { path: '/m4rk3t1ng4pp5', component: MarketingApps },
   { path: '/home', component: UserHome },
-  { path: '/interactive/:schoolCode/:courseCode/:topicCode', component: Problems },
   { path: '/:schoolCode/:courseCode/:examStr', component: Exam },
   { path: '/:schoolCode/:courseCode', component: Course },
   { path: '/:schoolCode', component: School },

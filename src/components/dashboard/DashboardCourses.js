@@ -62,7 +62,7 @@ class DashboardCourses extends Component {
         <span key={schoolName}>
           <h2>{schoolName}</h2>
           {map(schoolCourses, (course, key) => {
-            return <div key={key}>{course.course_code} - {(this.state.examid) ? course.course_name : "NO COURSE NAME"}<a className="admin-function" style={{"marginLeft" : "20px"}}onClick={() => this.deleteCourse(course.course_id)}>Delete</a></div>;
+            return <div key={key}>{course.course_code} - {(this.state.examid) ? course.course_name : "NO COURSE NAME"}<a className="admin-function" style={{"marginLeft" : "20px"}} onClick={() => this.deleteCourse(course.course_id)}>Delete</a></div>;
           })}
           <br/>
         </span>

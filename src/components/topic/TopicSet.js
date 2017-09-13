@@ -12,7 +12,7 @@ import Footer from '../footer';
 import { Modals } from '../modal';
 
 import { BASE_URL, courseCodeToLabel } from '../../utils';
-import { showPaymentsModal, updateCompletedProblemCounts, updateTopicsList } from '../../actions';
+import { showPaymentsModal, updateTopicsList } from '../../actions';
 
 require('../../css/TopicSet.css');
 
@@ -32,7 +32,11 @@ class TopicSetComponent extends Component {
     super(props);
     this.state = {
       show: [false, false, false],
-      lectureInfo: { lecture_code: null }
+      lectureInfo: { lecture_code: null },
+      lectureProblemSets: {},
+      problemSetTopics: {},
+      topicSubTopics: {},
+      completedProblemsCount: {},
     };
     this.getCategorizedTopics = this.getCategorizedTopics.bind(this);
     this.toggleShow = this.toggleShow.bind(this);
@@ -50,7 +54,13 @@ class TopicSetComponent extends Component {
         .then((json) => this.setState({ lectureProblemSets: json })),
       fetch(`/getProblemSetTopicsByCode/${auth_user_id}/${schoolCode}/${courseCode}`)
         .then((response) => response.json())
-        .then((json) => this.setState({ problemSetTopics: json }))
+        .then((json) => this.setState({ problemSetTopics: json })),
+      fetch(`/getCompletedProblemsCount/${auth_user_id}/${schoolCode}/${courseCode}`)
+        .then((response) => response.json())
+        .then((json) => this.setState({ completedProblemsCount: json })),
+      fetch(`/getTopicSubTopicsByCode/${auth_user_id}/${schoolCode}/${courseCode}`)
+        .then((response) => response.json())
+        .then((json) => this.setState({ topicSubTopics: json }))
     ])
   }
 
@@ -75,31 +85,30 @@ class TopicSetComponent extends Component {
     console.log(this.state);
     const { courseCode, schoolCode } = this.props;
     const { lectureInfo } = this.state;
-    const topicsDict = this.getCategorizedTopics();
-    const topicItems = map(this.getCategorizedTopics(), (items, topic) => {
-      const arr = map(items, (item) => {
-        const percent = Math.floor(toInteger(this.props.completedProblemCounts[item.code] || 0) / item.count * 100.0);
-        const hexColor = "#" + getGreenToRed(percent);
+    const containers = map(this.state.lectureProblemSets, (set, index) => {
+      const topicItems = map(this.state.problemSetTopics[set.id], (topic, topicKey) => {
+        const arr = map(this.state.topicSubTopics[topic.id], (subtopic, subtopicKey) => {
+          const percent = Math.floor(toInteger(this.state.completedProblemsCount[subtopic.id] || 0) / subtopic.problem_count * 100.0);
+          const hexColor = "#" + getGreenToRed(percent);
+          return (
+            <div key={subtopicKey} className="subtopic">
+              <Line className="progress" percent={percent} strokeWidth="4" strokeColor={hexColor} />
+              <hr className="s1" />
+              <Link to={`/interactive/${schoolCode}/${courseCode}/${subtopic.subtopic_code}`}>{subtopic.subtopic_label}</Link>
+              <hr className="s0-5" />
+              <label>({this.state.completedProblemsCount[subtopic.id]}/{subtopic.problem_count})</label>
+            </div>
+          );
+        });
+
         return (
-          <div key={item.concept} className="subtopic">
-            <Line className="progress" percent={percent} strokeWidth="4" strokeColor={hexColor} />
-            <hr className="s1" />
-            <Link to={`/interactive/${schoolCode}/${courseCode}/${item.code}`}>{item.concept}</Link>
-            <hr className="s0-5" />
-            <label>({Math.floor(percent/100 * item.count)}/{item.count}) &nbsp;</label>
+          <div key={topicKey} className="topic-container">
+            <div className="topic">{topic.topic_label}</div>
+            <hr className="s2" />
+            {arr}
           </div>
         );
       });
-
-      return (
-        <div key={topic} className="topic-container">
-          <div className="topic">{topic}</div>
-          <hr className="s2" />
-          {arr}
-        </div>
-      );
-    });
-    const containers = map(this.state.lectureProblemSets, (set, index) => {
       return (
         <span key={index}>
           <div className="int-box">
@@ -152,7 +161,6 @@ const mapStateToProps = (state, ownProps) => {
     topicsList: state.topicsList,
     courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
     schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
-    completedProblemCounts: state.completedProblemCounts,
     auth: state.auth,
   };
 };

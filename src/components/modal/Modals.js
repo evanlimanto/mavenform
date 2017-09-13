@@ -16,7 +16,6 @@ class ModalsComponent extends Component {
   constructor(props) {
     super(props);
 
-    this.hasInstantiatedStripe = false;
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
     this.selectSchool = this.selectSchool.bind(this);

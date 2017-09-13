@@ -607,21 +607,25 @@ const getCompletedProblemsCount =
   (req, res, next) => {
     const { schoolCode, courseCode, auth_user_id } = req.params;
     const getq = `
-      select T.code, count(*) from problems_solved PS
-        inner join course_topics CT on CT.id = PS.ctsid
-        inner join courses C on C.id = CT.courseid
-        inner join schools S on S.id = C.schoolid
-        inner join topics T on T.id = CT.topicid
-        inner join users U on U.id = PS.userid
-        where S.code = $1 and C.code = $2 and U.auth_user_id = $3
-        group by T.code;
+      select PSS.id, sum(case when problems_solved.id is not null then 1 else 0 end) as count from bookmarked_courses BC
+      inner join lectures L on BC.lectureid = L.id
+      inner join courses C on C.id = L.courseid
+      inner join schools S on S.id = C.schoolid
+      inner join users U on U.id = BC.userid
+      inner join problemsets PS on PS.lectureid = L.id
+      inner join problemset_topics PST on PST.psid = PS.id
+      inner join problemset_subtopics PSS on PSS.pstid = PST.id
+      full outer join problemset_problems PSP on PSP.pssid = PSS.id
+      full outer join problems_solved on problems_solved.pspid = PSP.id
+      where S.code = $1 and C.code = $2 and U.auth_user_id = $3
+      group by PSS.id
     `;
     pool.query(getq, [schoolCode, courseCode, auth_user_id], (err, result) => {
       if (err)
         return next(err);
       const items = _.reduce(result.rows, (dict, row) => {
-        const { code, count } = row;
-        dict[code] = count;
+        const { id, count } = row;
+        dict[id] = count;
         return dict;
       }, {});
       return res.json(items);
@@ -795,6 +799,37 @@ const getProblemSetTopicsByCode =
     });
   };
 
+const getTopicSubTopicsByCode =
+  (req, res, next) => {
+    const { auth_user_id, schoolCode, courseCode } = req.params;
+    const getq = `
+      select PSS.id, PSS.pstid, PSS.subtopic_label, PSS.subtopic_code, PSS.subtopic_order, sum(case when PSP.id is not NULL then 1 else 0 end) as problem_count from bookmarked_courses BC
+      inner join lectures L on BC.lectureid = L.id
+      inner join courses C on C.id = L.courseid
+      inner join schools S on S.id = C.schoolid
+      inner join users U on U.id = BC.userid
+      inner join problemsets PS on PS.lectureid = L.id
+      inner join problemset_topics PST on PST.psid = PS.id
+      inner join problemset_subtopics PSS on PSS.pstid = PST.id
+      full outer join problemset_problems PSP on PSP.pssid = PSS.id
+      where U.auth_user_id = $1 and S.code = $2 and C.code = $3
+      group by PSS.id, PSS.pstid, PSS.subtopic_label, PSS.subtopic_code, PSS.subtopic_order
+      order by subtopic_order asc
+    `;
+    pool.query(getq, [auth_user_id, schoolCode, courseCode], (err, result) => {
+      if (err)
+        return next(err);
+      const items = _.reduce(result.rows, (dict, row) => {
+        const { id, pstid, subtopic_label, subtopic_code, subtopic_order, problem_count } = row;
+        if (!_.has(dict, pstid))
+          dict[pstid] = [];
+        dict[pstid].push({ id, subtopic_label, subtopic_code, subtopic_order, problem_count });
+        return dict;
+      }, {});
+      return res.json(items);
+    });
+  };
+
 const getLectureInfo =
   (req, res, next) => {
     const { schoolCode, courseCode, auth_user_id } = req.params;
@@ -871,8 +906,8 @@ module.exports = (app) => {
   app.get('/getSchools', (req, res, next) => getSchools((err, result) => res.json(result)));
 
   // Retrieve completed problems
-  app.get('/getCompletedProblems/:schoolCode/:courseCode/:topicCode/:auth_user_id', getCompletedProblems);
-  app.get('/getCompletedProblemsCount/:schoolCode/:courseCode/:auth_user_id', getCompletedProblemsCount);
+  app.get('/getCompletedProblems/:auth_user_id/:schoolCode/:courseCode/:topicCode/', getCompletedProblems);
+  app.get('/getCompletedProblemsCount/:auth_user_id/:schoolCode/:courseCode/', getCompletedProblemsCount);
 
   // Retrive courses with exams
   app.get('/getAvailableCourses', getAvailableCourses);
@@ -889,5 +924,6 @@ module.exports = (app) => {
 
   app.get('/getLectureProblemSetsByCode/:auth_user_id/:schoolCode/:courseCode', getLectureProblemSetsByCode);
   app.get('/getProblemSetTopicsByCode/:auth_user_id/:schoolCode/:courseCode', getProblemSetTopicsByCode);
+  app.get('/getTopicSubTopicsByCode/:auth_user_id/:schoolCode/:courseCode', getTopicSubTopicsByCode);
   app.get('/getLectureInfo/:auth_user_id/:schoolCode/:courseCode', getLectureInfo);
 }

@@ -16,7 +16,7 @@ class PaymentsForm extends Component {
   render() {
     return (
       <form action="/charge" method="post" id="payment-form">
-        <div className="form-row">
+        <div className="form-row" style={{ margin: "15px 0px" }}>
           <label>Card Details <CardElement style={{base: {fontSize: '18px'}}} /></label>
           <div id="card-errors" role="alert"></div>
         </div>
