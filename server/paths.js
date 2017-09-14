@@ -133,6 +133,8 @@ module.exports = (app) => {
     let { examid, problem_num, subproblem_num, problem_content,
           solution_content, choices_content, final_solution_content,
           difficulty, topicid } = req.body;
+    if (topicid === "-- select a topic --")
+      topicid = null;
     if (difficulty === "" || !difficulty || difficulty.length > 2 || difficulty === "-- select a topic --")
       difficulty = null;
     const q = `

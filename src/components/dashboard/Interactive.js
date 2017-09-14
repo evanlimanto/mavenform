@@ -286,7 +286,7 @@ class Interactive extends Component {
       (topic, key) => (
         <div key={key}>
           <a className={classnames({ highlighted: topic.id === selectedTopic })}
-            onClick={() => this.selectTopic(topic.id)}>{topic.topic_label}</a>&nbsp;
+            onClick={() => this.selectTopic(topic.id)}>{topic.topic_label} - {topic.topic_order}</a>&nbsp;
           <a className="admin-function" onClick={() => this.removeTopicFromProblemSet(topic.id)}>Delete</a>
         </div>)) : "No Topics yet!";
     return (
@@ -359,7 +359,7 @@ class Interactive extends Component {
       (subtopic, key) => (
         <div key={key}>
           <a className={classnames({ highlighted: subtopic.id === selectedSubTopic })}
-            onClick={() => this.selectSubTopic(subtopic.id)}>{subtopic.subtopic_label}</a>&nbsp;
+            onClick={() => this.selectSubTopic(subtopic.id)}>{subtopic.subtopic_label} - {subtopic.subtopic_order}</a>&nbsp;
           <a className="admin-function" onClick={() => this.removeSubTopicFromTopic(subtopic.id)}>Delete</a>
         </div>
       )) : "No Subtopics yet!";
@@ -430,7 +430,7 @@ class Interactive extends Component {
     const problems = (subTopicProblems && subTopicProblems[selectedSubTopic]) ? map(subTopicProblems[selectedSubTopic],
       (problem, key) => (
         <div key={key}>
-          <a href={`/dashboard/problem/${problem.problemid}`} target="_blank">{problem.problemid}</a>&nbsp;
+          <a href={`/dashboard/problem/${problem.problemid}`} target="_blank">{problem.problemid} - {problem.problem_order}</a>&nbsp;
           <a className="admin-function" onClick={() => this.removeProblemFromSubTopic(problem.id)}>Delete</a>
         </div>
       )) : "No Problems yet!";
