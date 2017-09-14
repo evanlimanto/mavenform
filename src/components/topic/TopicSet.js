@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { clone, concat, includes, forEach, has, toInteger, map } from 'lodash';
+import { includes, forEach, has, toInteger, map } from 'lodash';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { Line } from 'rc-progress';

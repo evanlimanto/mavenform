@@ -18,7 +18,7 @@ class TopicContentComponent extends Component {
         dispatch(updateTopicInfo(json))
         return json;
       }).then((topicInfo) => {
-        /*return fetch(`${BASE_URL}/getComments`, {
+        return fetch(`${BASE_URL}/getComments`, {
           method: 'post',
           headers: {
             'Accept': 'application/json',
@@ -28,7 +28,7 @@ class TopicContentComponent extends Component {
             contentids: map(topicInfo.info, (num_parts, part) => topicInfo.problems[part].content_id)
           }),
         }).then((response) => response.json())
-          .then((json) => dispatch(updateComments(json)))*/
+          .then((json) => dispatch(updateComments(json)))
       })
   }
 

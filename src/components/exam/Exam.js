@@ -43,7 +43,7 @@ class ExamComponent extends Component {
         return json;
       })
       .then((examInfo) => {
-        /*return fetch(`${BASE_URL}/getComments`, {
+        return fetch(`${BASE_URL}/getComments`, {
           method: 'post',
           headers: {
             'Accept': 'application/json',
@@ -55,7 +55,7 @@ class ExamComponent extends Component {
             })))
           }),
         }).then((response) => response.json())
-          .then((json) => dispatch(updateComments(json)))*/
+          .then((json) => dispatch(updateComments(json)))
       });
   }
 

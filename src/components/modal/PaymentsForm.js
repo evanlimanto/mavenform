@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { CardElement, PostalCodeElement, injectStripe } from 'react-stripe-elements';
+import { CardElement, injectStripe } from 'react-stripe-elements';
 import req from 'superagent';
 
 import { closeModal, showPaymentSuccessfulModal, updateUnlockedSets } from '../../actions';

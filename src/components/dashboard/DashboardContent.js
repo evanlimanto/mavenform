@@ -41,6 +41,8 @@ class DashboardContentComponent extends Component {
     const solution_content = this.refs.solution.value;
     const choices_content = this.refs.choices.value;
     const final_solution_content = this.refs.final_solution.value;
+    const interactive_problem_content = this.refs.interactive_problem.value;
+    const interactive_solution_content = this.refs.interactive_solution.value;
     const topicid = this.refs.topic.value;
     const difficulty = this.refs.difficulty.value;
 
@@ -58,6 +60,8 @@ class DashboardContentComponent extends Component {
         solution_content,
         final_solution_content,
         choices_content,
+        interactive_problem_content,
+        interactive_solution_content,
         topicid,
         difficulty,
       })
@@ -69,6 +73,8 @@ class DashboardContentComponent extends Component {
       problem: problem_content,
       solution: solution_content,
       final_solution: final_solution_content,
+      interactive_problem: interactive_problem_content,
+      interactive_solution: interactive_solution_content,
       choices: choices_content,
       topicid,
       difficulty,
@@ -116,6 +122,8 @@ class DashboardContentComponent extends Component {
         choices: this.refs.choices.value,
         topicid: this.refs.topic.value,
         difficulty: this.refs.difficulty.value,
+        interactive_problem: this.refs.interactive_problem.value,
+        interactive_solution: this.refs.interactive_solution.value,
       }
     });
   }
