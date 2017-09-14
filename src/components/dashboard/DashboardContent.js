@@ -179,7 +179,6 @@ class DashboardContentComponent extends Component {
 
     const problem = this.state.problem;
     const exam = (this.state.examid) ? this.props.exams.key_dict[this.state.examid] : null;
-    console.log(exam);
     return (
       <div className="contentContainer">
         <DashboardNav />

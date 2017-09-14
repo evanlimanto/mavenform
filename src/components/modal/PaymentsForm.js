@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { CardElement, PostalCodeElement, injectStripe } from 'react-stripe-elements';
 import req from 'superagent';
 
-import { closeModal, showPaymentSuccessfulModal } from '../../actions';
+import { closeModal, showPaymentSuccessfulModal, updateUnlockedSets } from '../../actions';
 
 class PaymentsFormComponent extends Component {
   constructor(props) {
@@ -22,6 +22,8 @@ class PaymentsFormComponent extends Component {
     const self = this;
     const description = `Payment for ${schoolCode} ${courseCode} ${ps_label}`;
     this.props.stripe.createToken({name}).then(({token}) => {
+      if (token.error)
+        return;
       req.post('/submitPayment')
         .set('Content-Type', 'application/json')
         .send({ stripeToken: token.id, auth_user_id, ps_id, description })
@@ -29,6 +31,7 @@ class PaymentsFormComponent extends Component {
           if (err || !res.ok)
             return console.error(err);
           self.props.showPaymentSuccessfulModal();
+          self.props.updateUnlockedSets(ps_id);
         })
     });
   }
@@ -52,11 +55,13 @@ const mapStateToProps = (state, ownProps) => {
   return {
     auth: state.auth,
     modal: state.modal,
+    unlockedSets: state.unlockedSets,
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
+    updateUnlockedSets: (set) => dispatch(updateUnlockedSets(set)),
     closeModal: () => dispatch(closeModal()),
     showPaymentSuccessfulModal:() => dispatch(showPaymentSuccessfulModal()),
   }

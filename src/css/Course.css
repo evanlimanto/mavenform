@@ -116,8 +116,8 @@ button.int-button {
 
 @media (max-width: 1199px) {
   button.int-button {
-    float: none;
-    margin-top: 15px;
+    /*float: none;
+    margin-top: 15px;*/
   }
 }
 

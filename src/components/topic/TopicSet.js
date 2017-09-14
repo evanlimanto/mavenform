@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { includes, forEach, has, toInteger, map } from 'lodash';
+import { clone, concat, includes, forEach, has, toInteger, map } from 'lodash';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { Line } from 'rc-progress';
@@ -12,7 +12,7 @@ import Footer from '../footer';
 import { Modals } from '../modal';
 
 import { BASE_URL, courseCodeToLabel } from '../../utils';
-import { showPaymentsModal, updateTopicsList } from '../../actions';
+import { showPaymentsModal, updateTopicsList, updateUnlockedSets } from '../../actions';
 
 require('../../css/TopicSet.css');
 
@@ -63,7 +63,7 @@ class TopicSetComponent extends Component {
         .then((json) => this.setState({ topicSubTopics: json })),
       fetch(`/getUnlockedSetsByUser/${auth_user_id}`)
         .then((response) => response.json())
-        .then((json) => this.setState({ unlockedSets: json }))
+        .then((json) => this.props.updateUnlockedSets(json)),
     ])
   }
 
@@ -113,7 +113,7 @@ class TopicSetComponent extends Component {
       });
       if (topicItems.length === 0)
         topicItems = <h1 style={{ marginTop: "30px" }}>No topics yet. Check again for updates!</h1>;
-      const isUnlocked = !set.paid || includes(this.state.unlockedSets, set.id);
+      const isUnlocked = !set.paid || includes(this.props.unlockedSets, set.id);
       return (
         <span key={index}>
           <div className="int-box">
@@ -167,12 +167,14 @@ const mapStateToProps = (state, ownProps) => {
     courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
     schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
     auth: state.auth,
+    unlockedSets: state.unlockedSets,
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    showPaymentsModal: (ps_label) => dispatch(showPaymentsModal(ps_label)),
+    updateUnlockedSets: (sets) => dispatch(updateUnlockedSets(sets)),
+    showPaymentsModal: (id, ps_label, schoolCode, courseCode) => dispatch(showPaymentsModal(id, ps_label, schoolCode, courseCode)),
     dispatch
   };
 };

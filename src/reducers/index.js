@@ -1,3 +1,4 @@
+import { concat } from 'lodash';
 import AuthService from '../utils/AuthService';
 import * as Actions from '../actions';
 
@@ -194,6 +195,15 @@ export const completedProblemCounts = (state = {}, action) => {
   switch (action.type) {
     case Actions.UPDATE_COMPLETED_PROBLEM_COUNTS:
       return action.problemCounts;
+    default:
+      return state;
+  }
+};
+
+export const unlockedSets = (state = [], action) => {
+  switch (action.type) {
+    case Actions.UPDATE_UNLOCKED_SETS:
+      return concat(state, action.sets);
     default:
       return state;
   }

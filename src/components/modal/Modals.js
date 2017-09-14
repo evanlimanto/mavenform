@@ -279,7 +279,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     closeModal: () => dispatch(closeModal()),
     showLoginModal: () => dispatch(showLoginModal()),

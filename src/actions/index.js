@@ -142,6 +142,14 @@ export const updateCompletedProblemCounts = (problemCounts) => {
   };
 };
 
+export const UPDATE_UNLOCKED_SETS = 'UPDATE_UNLOCKED_SETS';
+export const updateUnlockedSets = (sets) => {
+  return {
+    type: UPDATE_UNLOCKED_SETS,
+    sets: sets,
+  };
+};
+
 export const SHOW_LOGIN_MODAL = 'SHOW_LOGIN_MODAL';
 export const showLoginModal = () => { return { type: SHOW_LOGIN_MODAL }; };
 export const SHOW_WAITLIST_MODAL = 'SHOW_WAITLIST_MODAL';
