@@ -57,12 +57,19 @@ class CourseComponent extends Component {
     this.setSelectedLecture = this.setSelectedLecture.bind(this);
     this.professor = null;
     this.state = {
+      lectureInfo: { lecture_code: null },
       getInfo: false,
     };
   }
 
   componentDidMount() {
     CourseComponent.fetchData(this.props.dispatch, this.props);
+    const { courseCode, schoolCode, auth } = this.props;
+    const profile = canUseDOM ? auth.getProfile() : null;
+    const auth_user_id = profile ? profile.user_id : null;
+    fetch(`/getLectureInfo/${auth_user_id}/${schoolCode}/${courseCode}`)
+      .then((response) => response.json())
+      .then((json) => this.setState({ lectureInfo: json }))
   }
 
   setSelectedLecture(id) {
@@ -155,6 +162,7 @@ class CourseComponent extends Component {
 
   render() {
     const { courseCode, schoolCode } = this.props;
+    const { lectureInfo } = this.state;
     const exams = map(this.props.exams, (exam, key) => {
       if (key === "notfound")
         return null;
@@ -177,13 +185,13 @@ class CourseComponent extends Component {
       );
     });
 
-    const interactiveBox = (courseCode === "MATH53" || courseCode === "MATH54" || courseCode === "MATH1A" || courseCode === "MATH1B") ? (
+    const interactiveBox = (courseCode === "MATH53" || courseCode === "MATH54" || courseCode === "MATH1A" || courseCode === "MATH1B" || courseCode === "MATH16A" || courseCode === "MATH16B") ? (
       <div className="container interactive-container">
         <div className="int-box">
           {this.props.registeredLecture ? (
             <span>
               <p className="int-helper">
-                You've already signed up for the interactive study guide for <span className="int-highlight">MATH 53 001</span>.
+                You've already signed up for the interactive study guide for <span className="int-highlight">{courseCodeToLabel(courseCode)} {lectureInfo.lecture_code}</span>.
               </p>
               <button className="int-button int-button-white int-button-spacer" onClick={this.unregisterClass}>Remove</button>
               <Link to={`/interactive/${schoolCode}/${courseCode}`}><button className="int-button">View</button></Link>

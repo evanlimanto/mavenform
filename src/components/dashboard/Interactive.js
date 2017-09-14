@@ -26,7 +26,7 @@ class Interactive extends Component {
       problemSetTopics: {},
       problemSetTopicProblems: {},
 
-      selectedCourse: 888,
+      selectedCourse: 881,
       selecdtedLecture: null,
       selectedProblemSet: null,
       selectedTopic: null,
