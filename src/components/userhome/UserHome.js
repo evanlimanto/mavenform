@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { map } from 'lodash';
 
-import { showAddCourseModal, showSelectSchoolModal, updateCoursesToBookmark } from '../../actions';
+import { showAddCourseModal, showSelectSchoolModal } from '../../actions';
 import { courseCodeToLabel, BASE_URL } from '../../utils';
 import { Modals } from '../modal';
 import Footer from '../footer';
@@ -16,7 +16,6 @@ class UserHomeComponent extends Component {
     this.state = {
       selectedSchool: { id: null },
       bookmarkedCourses: [],
-      coursesToBookmark: [],
     };
   }
 
@@ -28,18 +27,16 @@ class UserHomeComponent extends Component {
     fetch(`${BASE_URL}/getBookmarkedCourses/${userid}`)
       .then((response) => response.json())
       .then((json) => this.setState({ bookmarkedCourses: json }));
-    fetch(`${BASE_URL}/getCoursesToBookmark/${userid}`)
-      .then((response) => response.json())
-      .then((json) => this.props.updateCoursesToBookmark(json));
   }
 
   render() {
+    console.log(this.state.bookmarkedCourses);
     const bookmarkedCoursesBoxes = (this.state.bookmarkedCourses.length > 0) ? (
       <div className="card-container">
-        {map(this.state.bookmarkedCourses, (courseCode, key) => {
+        {map(this.state.bookmarkedCourses, (course, key) => {
           return (
-            <Link className="card course-card" key={key} to={"/" + this.state.selectedSchool.code + "/" + courseCode}>
-              <span>{courseCodeToLabel(courseCode)}</span>
+            <Link className="card course-card" key={key} to={"/interactive/" + this.state.selectedSchool.code + "/" + course.code}>
+              <span>{courseCodeToLabel(course.code)}</span>
               <span className="card-arrow">&#8594;</span>
             </Link>
           );
@@ -95,7 +92,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     showSelectSchoolModal: () => dispatch(showSelectSchoolModal()),
     showAddCourseModal: () => dispatch(showAddCourseModal()),
-    updateCoursesToBookmark: (courses) => dispatch(updateCoursesToBookmark(courses)),
   };
 };
 

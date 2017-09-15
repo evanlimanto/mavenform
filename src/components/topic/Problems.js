@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { cloneDeep, keys, includes, range, map, reduce } from 'lodash';
+import { cloneDeep, forEach, has, keys, includes, range, map, reduce, replace, split, toLower } from 'lodash';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import classnames from 'classnames';
@@ -24,7 +24,7 @@ class ProblemsComponent extends Component {
       progressIndicator: 0,
       correct: 0,
       wrong: 0,
-      problemStatus: map(range(0, 10), () => false),
+      problemStatus: map(range(0, 20), () => false),
       subTopicInfo: { problems: { 0: {} } }
     };
     this.problemCount = 1;
@@ -44,14 +44,13 @@ class ProblemsComponent extends Component {
       fetch(`${BASE_URL}/getSubTopicInfo/${auth_user_id}/${schoolCode}/${courseCode}/${topicCode}`)
         .then((response) => response.json())
         .then((json) => this.setState({ subTopicInfo: json })),
-      fetch(`${BASE_URL}/getCompletedProblems/${schoolCode}/${courseCode}/${topicCode}/${auth_user_id}`)
+      fetch(`${BASE_URL}/getCompletedProblems/${auth_user_id}/${schoolCode}/${courseCode}/${topicCode}`)
         .then((response) => response.json())
         .then((json) => this.setState({ completedProblems: json }))
     ]);
   }
 
   static fetchData(dispatch, props) {
-    
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -62,7 +61,7 @@ class ProblemsComponent extends Component {
     window.renderMJ();
   }
 
-  correctAnswer(contentid) {
+  correctAnswer() {
     const newProblemStatus = cloneDeep(this.state.problemStatus);
     newProblemStatus[this.state.progressIndicator] = true;
     this.setState({
@@ -70,7 +69,7 @@ class ProblemsComponent extends Component {
       showSolution: true,
       correct: this.state.correct + 1,
       problemStatus: newProblemStatus,
-    }, () => this.saveProgress(contentid));
+    }, () => this.saveProgress());
   }
 
   wrongAnswer() {
@@ -81,30 +80,36 @@ class ProblemsComponent extends Component {
     });
   }
 
-  checkAnswer(contentid) {
-    if (this.refs.answer) {
-      const answerValue = this.refs.answer.value;
-      if (answerValue === "0")
-        return this.correctAnswer(contentid);
+  checkAnswer() {
+    const answerInputs = document.getElementsByClassName("inline-input");
+    const expectedAnswers = split(this.state.subTopicInfo.problems[this.state.progressIndicator].interactive_solution, '@');
+    forEach(answerInputs, (answerInput, index) => {
+      const answerValue = toLower(replace(answerInput.value, / /g, ''));
+      const isCorrectAnswer = reduce(split(expectedAnswers[index], '|'), (res, item) => {
+        if (res)
+          return res;
+        return item === answerValue;
+      }, false);
+      if (isCorrectAnswer)
+        return this.correctAnswer();
       return this.wrongAnswer();
-    }
+    });
   }
 
-  showSolution(contentid) {
+  showSolution() {
     const newProblemStatus = cloneDeep(this.state.problemStatus);
     newProblemStatus[this.state.progressIndicator] = true;
     this.setState({
       showSolution: true,
       problemStatus: newProblemStatus
-    }, () => this.saveProgress(contentid));
+    }, () => this.saveProgress());
   }
 
-  saveProgress(contentid) {
+  saveProgress() {
     const auth_user_id = this.props.auth.getProfile().user_id;
-    const { schoolCode, courseCode } = this.props;
-    const numProblems = reduce(this.state.problemStatus, (sum, val) => sum + val, 0);
+    const pspid = this.state.subTopicInfo.problems[this.state.progressIndicator].pspid;
     req.post('/saveProgress')
-      .send({ schoolCode, courseCode, auth_user_id, numProblems, contentid })
+      .send({ auth_user_id, pspid })
       .end((err, res) => {
         if (err || !res.ok)
           return console.error(err);
@@ -120,7 +125,7 @@ class ProblemsComponent extends Component {
   }
 
   navigateProblem(index) {
-    this.setState({ progressIndicator: index, showSolution: false });
+    this.setState({ answerStatus: null, progressIndicator: index, showSolution: false });
   }
 
   componentWillMount() {
@@ -133,10 +138,10 @@ class ProblemsComponent extends Component {
   }
 
   render() {
-    const { courseCode, schoolCode } = this.props;
-    const navbar = <Navbar interactive={true}
-                    links={[`interactive/${schoolCode}/${courseCode}`, this.props.topicCode]}
-                    navbarLabels={[courseCodeToLabel(courseCode), this.state.subTopicInfo.subtopic_label]} />
+    const { courseCode, schoolCode, topicCode } = this.props;
+    const navbar = <Navbar interactive={true} links={[`${schoolCode}`, `${courseCode}`, "interactive", topicCode]}
+                    navbarLabels={[this.props.labels.schools[schoolCode], courseCodeToLabel(courseCode), "Interactive Study", this.state.subTopicInfo.subtopic_label]} />
+
     if (this.state.progressIndicator === this.problemCount && !this.state.showSolution) {
       return (
         <div className="background">
@@ -148,7 +153,7 @@ class ProblemsComponent extends Component {
               <h2 className="info-text">Your correctly answered {this.state.correct} out of {this.problemCount} problem{this.problemCount > 1 ? "s" : ""}.</h2>
             </div>
             <div className="box-footer">
-              <Link to="/interactive/math53"><button className="check-button">Continue</button></Link>
+              <Link to={`/interactive/${schoolCode}/${courseCode}`}><button className="check-button">Continue</button></Link>
             </div>
           </div>
           <Footer />
@@ -160,17 +165,13 @@ class ProblemsComponent extends Component {
     const contents = this.state.showContents ? [(
       <div key={0}>
         <div dangerouslySetInnerHTML={{ __html: itemContent.problem }}></div>
-        {/*$\int_0^2 \int_1^0 (x^2y^2 +$
-          <input className="inline-input"></input>
-          $) dy \; dx =$
-        <input className="inline-input"></input>*/}
-        {itemContent.interactive_problem}
+        <hr className="s1" />
+        <div dangerouslySetInnerHTML={{ __html: itemContent.interactive_problem }}></div>
         <div dangerouslySetInnerHTML={{ __html: this.state.showSolution ?
           `<hr class="s2" /><h3>Solution</h3><div class="problem-solution">${itemContent.solution}</div>` : null }}
         ></div>
       </div>
     )] : [];
-
     return (
       <div className="background">
         {navbar}
@@ -186,15 +187,16 @@ class ProblemsComponent extends Component {
           <div className="problem-content">
             <h3>
               Problem {this.state.progressIndicator + 1}
-              {itemContent.suggestion_text ? (<span className="reason-circle">
+              {/*itemContent.suggestion_text ? (<span className="reason-circle">
                 <div className="tooltip-container">
                   <i className="fa fa-question-circle" aria-hidden="true"></i>
                   <div className="tooltip">
                     {itemContent.suggestion_text}
-                    {/*This problem came from Auroux's Midterm 1 in Fall 2016. It was suggested for you because it is medium difficulty, covers iterated integrals, and has high relevance to your specific instructor.*/}
                   </div>
                 </div>
-              </span>) : null}
+              </span>) : null*/}
+              &nbsp;&nbsp;&nbsp;
+              <div className="badge">{itemContent.profs}, {itemContent.term_label}</div>
             </h3>
             <hr className="s2" />
             <CSSTransitionGroup
@@ -204,20 +206,26 @@ class ProblemsComponent extends Component {
               {contents}
             </CSSTransitionGroup>
           </div>
-          <div className="box-footer">
+          <div className={classnames({
+            "box-footer": true,
+            "correct-answer": this.state.answerStatus === "correct",
+            "wrong-answer": this.state.answerStatus === "wrong",
+          })}>
             <span className="progress-label">Progress</span>
             {map(range(0, this.problemCount), (index) =>
               <div key={index} onClick={() => this.navigateProblem(index)} className={classnames({
                 "progress-circle": true,
-                "progress-done": this.state.problemStatus[index] || includes(this.props.completedProblems, this.state.subTopicInfo.problems[index].content_id),
+                "progress-done": this.state.problemStatus[index] || includes(this.state.completedProblems, this.state.subTopicInfo.problems[index].pspid),
                 "progress-current": index === this.state.progressIndicator && !this.state.problemStatus[index]
               })}></div>
             )}
             <span className="progress-label progress-label-light">({this.state.progressIndicator + 1}/{this.problemCount})</span>
             <span className="box-buttons">
-              <input className="green" type="button" value="Check Answer" onClick={() => this.checkAnswer(itemContent.content_id)} />
+              {itemContent.interactive_problem && itemContent.interactive_problem.length > 0 ? (
+                <input className="green" type="button" value="Check Answer" onClick={this.checkAnswer} />
+              ) : null}
               &nbsp;
-              <input className="blue" type="button" value="Show Solution" onClick={() => this.showSolution(itemContent.content_id)} />
+              <input className="blue" type="button" value="Show Solution" onClick={this.showSolution} />
             </span>
           </div>
         </div>
@@ -233,6 +241,7 @@ const mapStateToProps = (state, ownProps) => {
     courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
     schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
     auth: state.auth,
+    labels: has(state.labels, 'schools') ? state.labels : { schools: {} },
   };
 };
 

@@ -1,68 +1,40 @@
-q5_1: |
-  Find polar coordinates $(r, \theta)$ of the point $(2, -2)$, where $r > 0$ and $0 \le \theta \lt 2\pi$.
-
-q5_1_s: |
-  Cartesian coordinates $(x, y)$ can be converted into polar coordinates $(r, \theta)$ by $r = \pm \sqrt{x^2 + y^2}, \theta = \tan^{-1} \left( \frac{x}{y} \right)$
-  <hr class="s2" ?>
-  Consider the coordinates $(2, -2)$. The point is in the fourth quadrant. Now $r = \sqrt{x^2 + y^2} = \sqrt{4 + 4} = 2\sqrt{2}$. And, $\theta = \tan^{-1} \left( \frac{y}{x} \right) = \tan^{-1}(-1) = -\frac{\pi}{4} = \frac{7\pi}{4}$. Therefore, the polar coordinate is $(2\sqrt{2}, \frac{7\pi}{4})$.
-
-q17_1: |
-  Identify the curve by finding a Cartesian equation for the curve $r = 2 \cos \theta$.
-
-q17_1_s: |
-  We have $r = 2 \left( \frac{x}{r} \right) \implies r^2 = 2x \implies x^2 + y^2 = 2x$. Therefore, the equation in Cartesian coordinates is $x^2 + y^2 = 2x$. Simplifying, we get $(x - 1)^2 + y^2 = 1$. This curve represents the circle with centre $(1, 0)$ and radius $1$.
-
-q25_1: |
-  Find a polar equation for the curve represented by the given Cartesian equation.
+q19_1: |
+  Find the limit or show that it does not exist.
   <hr class="s1" />
-  $x^2 + y^2 = 2cx$
+  $\lim_{t \to \infty} \frac{\sqrt{t} + t^2}{2t - t^2}$
 
-q25_1_s: |
-  Since $x = r \cos \theta$ and $y = r \sin \theta$,
+q19_1_s: |
+  Let $f(t) = \lim_{t \to \infty} \frac{\sqrt{t} + t^2}{2t - t^2}$.
   <hr class="s1" />
-  $r^2 \cos^2 \theta + r^2 \sin^2 \theta = 2cr \cos \theta \\\\
-  r^2 (\cos^2 \theta + \sin^2 \theta) = 2cr \cos \theta \\\\
-  r^2 = 2cr \cos \theta \\\\
-  r = 2c \cos \theta$
-  This is the polar equation that corresponds to the Cartesian equation.
+  To find out the limit of the function $f(t)$, we take the common $t^2$ from the denominator and the numerator. We obtain that
+  <hr class="s1" />
+  $f(t) = \frac{t^2 \left( \frac{1}{t^{3/2}} + 1 \right)}{t^2 \left( \frac{2}{t} - 1 \right)} = \frac{\left( \frac{1}{t^{3/2}} + 1 \right)}{\left( \frac{2}{t} - 1 \right)}$
+  <hr class="s1" />
+  Therefore,
+  $\lim_{t \to \infty} f(t) = \lim_{t \to \infty} \frac{\left( \frac{1}{t^{3/2}} + 1 \right)}{\left( \frac{2}{t} - 1 \right)} = \frac{\left( \lim_{t \to \infty} \frac{1}{t^{3/2}} + \lim_{t \to \infty} 1 \right)}{\left( \lim_{t \to \infty} \frac{2}{t} - \lim_{t \to \infty} 1 \right)} = \frac{0 + 0}{0 - 1} = -1$
+  <hr class="s1" />
+  Hence, $f(t) = -1$.
+
+q50_1: |
+  Find a formula for a function that has vertical asymptotes $x = 1$ and $x = 3$ and horizontal asymptote $y = 1$.
+
+q50_1_s: |
+  The vertical asymptotes are $x = 1$ and $x = 3$. So $(x - 1)$ and $(x - 3)$ will be factors of the denominator.
+  <hr class="s1" />
+  The horizontal asymptote is $y = 1$, so the power of $x$ in the numerator will be the same as in the denominator, that is, $x^2$.
+  <hr class="s1" />
+  So the formula of $f(x)$ is $f(x) = \frac{x^2}{(x - 1)(x - 3)}$
+  <hr class="s1" />
+  Or we can write, $f(x) = \frac{x^2}{x^2 - x - 3x + 3} = \frac{x^2}{x^2 - 4x + 3}$.
 
 q57_1: |
-  Find the slope of the tangent line to the given polar curve at the point specified by the value of $\theta$.
-  <hr class="s1" />
-  $r = 1 / \theta, \; \theta = \pi$
+  Use the Squeeze Theorem to evaluate $\lim_{x \to \infty} \frac{\sin x}{x}$.
 
 q57_1_s: |
-  We have $\frac{dy}{dx} = \frac{\frac{dr}{d\theta} \sin \theta + r \cos \theta}{\frac{dr}{d\theta} \cos \theta - r \sin \theta}.
+  We cannot use $\lim_{x \to \infty} \frac{\sin x}{x} = \lim_{x \to \infty} \frac{1}{x} \cdot \lim_{x \to \infty} \sin x$ because $\lim_{x \to \infty} \sin x$ does not exist.
   <hr class="s1" />
-  $\frac{dy}{dx} = \frac{-\frac{1}{\theta^2}\sin \theta + \frac{1}{\theta} \cos \theta}{\frac{-1}{\theta^2} \cos \theta - \frac{1}{\theta} \sin \theta} = \frac{\sin \theta - \theta \cos \theta}{\cos \theta + \theta \sin \theta}$.
+  Since $-1 \le \sin \le 1$, $\frac{-1}{x} \le \frac{1}{x} \sin x \le \frac{1}{x}$. We also know $\lim_{x \to \infty} \left( - \frac{1}{x} \right) = \lim_{x \to \infty} \left( \frac{1}{x} \right) = 0$.
   <hr class="s1" />
-  The slope of the tangent at the point where $\theta = \pi$ is $\frac{dy}{dx} |_{\theta = \pi} = \frac{0 + \pi}{-1 + \pi(0)} = -\pi$.
-
-q61_1: |
-  Find the points on the given curve where the tangent line is horizontal or vertical.
+  By the Squeeze Theorem, if $f(x) \le g(x) \le h(x)$ when $x$ is near $\infty$ and $\lim_{x \to \infty} f(x) = \lim_{x \to \infty} h(x) = L$, then $\lim_{x \to \infty} g(x) = L$.
   <hr class="s1" />
-  $r = 3 \cos \theta$
-
-q61_1_s: |
-  We have $x = r \cos \theta = 3\cos^2 \theta$ and $y = r \sin \theta = 3 \cos \theta \cdot \sin \theta = \frac{3}{2} \sin (2\theta)$.
-  <hr class="s1" />
-  Differentiate $x$ and $y$ w.r.t $\theta$.
-  <hr class="s1" />
-  $\frac{dx}{d\theta} = 3 \frac{d}{d\theta}(\cos^2\theta) = -6 \sin (2\theta)$
-  <hr class="s1" />
-  $\frac{dy}{d\theta} = \frac{3}{2}(2 \cos(2\theta)) = 3\cos(2\theta)$.
-  Therefore $\frac{dy}{dx} = \frac{\frac{dy}{d\theta}}{\frac{dx}{d\theta}} = \frac{\cos(2\theta)}{-2\sin(2)}$
-  <hr class="s2" />
-  To find the points where the curve has a horizontal tangent, set $\frac{dy}{dx} = 0$.
-  <hr class="s1" />
-  $\frac{\cos(2\theta)}{-2\sin(2\theta)} = 0 \implies \cos(2\theta) = 0 \implies \theta = \frac{\pi}{4}, \frac{3\pi}{4}$.
-  <hr class="s1" />
-  Substitute these values in $r = 3\cos \theta$. At $\theta = \frac{\pi}{4}, r = \frac{3}{\sqrt{2}}$. At $\theta = \frac{3\pi}{4}, r = -\frac{3}{\sqrt{2}}$.
-  <hr class="s1" />
-  Thus, the points on the given curve where the tangent line horizontal are: $(\frac{3}{\sqrt{2}}, \frac{\pi}{4})$ and $(-\frac{3}{\sqrt{2}}, \frac{3\pi}{4})$.
-  <hr class="s1" />
-  Likewise, set $\frac{dx}{dy} = 0$.
-  <hr class="s1" />
-  $\frac{-2\sin(2\theta)}{\cos(2\theta)} = 0 \implies \theta = 0, \frac{\pi}{2}$.
-  <hr class="s1" />
-  Substitute these values in $r = 3\cos\theta$. At $\theta = 0, r = 3$. At $\theta = \frac{\pi}{2}, r = 0$. Thus, the points on the given curve where the tangent line is vertical are $(3, 0)$ and $(0, \frac{\pi}{2})$.
+  Here, $\lim_{x \to \infty} \frac{\sin x}{x} = 0$, so $y = 0$. The $x$-axis is the horizontal asymptote.

@@ -87,6 +87,7 @@ class TopicSetComponent extends Component {
   render() {
     const { courseCode, schoolCode } = this.props;
     const { lectureInfo } = this.state;
+    console.log(this.state);
     const containers = map(this.state.lectureProblemSets, (set, index) => {
       let topicItems = map(this.state.problemSetTopics[set.id], (topic, topicKey) => {
         const arr = map(this.state.topicSubTopics[topic.id], (subtopic, subtopicKey) => {
@@ -96,7 +97,7 @@ class TopicSetComponent extends Component {
             <div key={subtopicKey} className="subtopic">
               <Line className="progress" percent={percent} strokeWidth="4" strokeColor={hexColor} />
               <hr className="s1" />
-              <Link to={`/interactive/${schoolCode}/${courseCode}/${subtopic.subtopic_code}`}>{subtopic.subtopic_label}</Link>
+              <Link to={`/${schoolCode}/${courseCode}/interactive/${subtopic.subtopic_code}`}>{subtopic.subtopic_label}</Link>
               <hr className="s0-5" />
               <label>({this.state.completedProblemsCount[subtopic.id]}/{subtopic.problem_count})</label>
             </div>
@@ -140,7 +141,7 @@ class TopicSetComponent extends Component {
     return (
       <div>
         <Modals />
-        <Navbar interactive={true} links={[`interactive/${schoolCode}/${courseCode}`]} navbarLabels={[courseCodeToLabel(courseCode)]} />
+        <Navbar interactive={true} links={[`${schoolCode}`, `${courseCode}`, "interactive"]} navbarLabels={[this.props.labels.schools[schoolCode], courseCodeToLabel(courseCode), "Interactive Study"]} />
         <div className="container info-container">
           <hr className="s5" />
           <img className="info-img" src="/img/interactive.svg" alt="subject-logo" />
@@ -173,6 +174,7 @@ const mapStateToProps = (state, ownProps) => {
     schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
     auth: state.auth,
     unlockedSets: state.unlockedSets,
+    labels: has(state.labels, 'schools') ? state.labels : { schools: {} },
   };
 };
 
