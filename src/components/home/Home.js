@@ -127,22 +127,7 @@ class HomeComponent extends Component {
               <div className="featured-des">
                 <p>An introduction to differential and integral calculus of functions of one variable, with applications and an introduction to...</p>
               </div>
-              <a className="featured-link">
-                CLICK TO VIEW <span className="card-arrow">&#8594;</span>
-              </a>
-            </div>
-            <div className="featured-card">
-              <div className="inner-card">
-                <h2>MATH 1B</h2>
-                <hr className="s0-5"></hr>
-                <p>UC Berkeley</p>
-                <hr className="s0-5"></hr>
-                <p className="blue-text"><i className="fa fa-check-circle" aria-hidden="true"></i> Interactive mode available</p>
-              </div>
-              <div className="featured-des">
-                <p>Continuation of 1A. Techniques of integration; applications of integration. Infinite sequences and series. First-order ordinary...</p>
-              </div>
-              <a className="featured-link">
+              <a className="featured-link" href="/ucb/MATH1A">
                 CLICK TO VIEW <span className="card-arrow">&#8594;</span>
               </a>
             </div>
@@ -157,7 +142,22 @@ class HomeComponent extends Component {
               <div className="featured-des">
                 <p>Parametric equations and polar coordinates. Vectors in 2- and 3-dimensional Euclidean spaces. Partial derivatives. Multiple...</p>
               </div>
-              <a className="featured-link">
+              <a className="featured-link" href="/ucb/MATH53">
+                CLICK TO VIEW <span className="card-arrow">&#8594;</span>
+              </a>
+            </div>
+            <div className="featured-card">
+              <div className="inner-card">
+                <h2>MATH 54</h2>
+                <hr className="s0-5"></hr>
+                <p>UC Berkeley</p>
+                <hr className="s0-5"></hr>
+                <p className="blue-text"><i className="fa fa-check-circle" aria-hidden="true"></i> Interactive mode available</p>
+              </div>
+              <div className="featured-des">
+                <p>Basic linear algebra; matrix arithmetic and determinants. Vector spaces; inner product spaces. Eigenvalues and...</p>
+              </div>
+              <a className="featured-link" href="/ucb/MATH54">
                 CLICK TO VIEW <span className="card-arrow">&#8594;</span>
               </a>
             </div>
