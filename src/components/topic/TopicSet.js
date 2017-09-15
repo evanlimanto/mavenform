@@ -87,6 +87,7 @@ class TopicSetComponent extends Component {
   render() {
     const { courseCode, schoolCode } = this.props;
     const { lectureInfo } = this.state;
+    console.log(this.state);
     const containers = map(this.state.lectureProblemSets, (set, index) => {
       let topicItems = map(this.state.problemSetTopics[set.id], (topic, topicKey) => {
         const arr = map(this.state.topicSubTopics[topic.id], (subtopic, subtopicKey) => {

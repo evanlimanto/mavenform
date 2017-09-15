@@ -132,19 +132,37 @@ module.exports = (app) => {
   app.post('/updateProblem', (req, res, next) => {
     let { examid, problem_num, subproblem_num, problem_content,
           solution_content, choices_content, final_solution_content,
-          difficulty, topicid } = req.body;
+          difficulty, topicid, interactive_problem_content, interactive_solution_content,
+          suggestion_text_content } = req.body;
     if (topicid === "-- select a topic --")
       topicid = null;
     if (difficulty === "" || !difficulty || difficulty.length > 2 || difficulty === "-- select a topic --")
       difficulty = null;
     const q = `
-      update content set problem=$1, solution=$2, choices=$3, topicid=$4, final_solution=$5, difficulty=$6
+      update content set problem=$1, solution=$2, choices=$3, topicid=$4, final_solution=$5, difficulty=$6, interactive_problem=$10, interactive_solution=$11, suggestion_text=$12
       where exam=$7 and problem_num=$8 and subproblem_num=$9
     `;
 
     config.pool.query(q, [problem_content, solution_content,
                           choices_content, topicid, final_solution_content, difficulty, examid,
-                          problem_num, subproblem_num], (err, result) => {
+                          problem_num, subproblem_num, interactive_problem_content,
+                          interactive_solution_content, suggestion_text_content], (err, result) => {
+      if (err) return next(err);
+      return res.send("Success!");
+    });
+  });
+
+  app.post('/updateProblemById', (req, res, next) => {
+    let { id, problem_content, solution_content, choices_content, final_solution_content,
+           interactive_problem_content, interactive_solution_content, suggestion_text_content } = req.body;
+    const q = `
+      update content set problem=$1, solution=$2, choices=$3, final_solution=$4, interactive_problem=$5, interactive_solution=$6, suggestion_text=$7
+      where id = $8
+    `;
+
+    config.pool.query(q, [problem_content, solution_content,
+                          choices_content, final_solution_content,
+                          interactive_problem_content, interactive_solution_content, suggestion_text_content, id], (err, result) => {
       if (err) return next(err);
       return res.send("Success!");
     });
@@ -849,24 +867,15 @@ module.exports = (app) => {
   });
 
   app.post('/saveProgress', (req, res, next) => {
-    const { schoolCode, courseCode, auth_user_id, contentid } = req.body;
+    const { auth_user_id, pspid } = req.body;
 
     const inq = `
-      with A as (select PSP.id from bookmarked_courses BC
-        inner join lectures L on BC.lectureid = L.id
-        inner join courses C on C.id = L.courseid
-        inner join schools S on S.id = C.schoolid
-        inner join users U on U.id = BC.userid
-        inner join problemsets PS on PS.lectureid = L.id
-        inner join problemset_topics PST on PST.psid = PS.id
-        inner join problemset_subtopics PSS on PSS.pstid = PST.id
-        inner join problemset_problems PSP on PSP.pssid = PSS.id
-        where U.auth_user_id = $1 and S.code = $2 and C.code = $3 and PSP.contentid = $4),
-      B as (select id from users where auth_user_id = $1),
-      insert into problems_solved (pspid, userid) values(A.id, B.id)
-      where not exists (select 1 from problems_solved where pspid = A.id and userid = B.id)
+      with A as (select id from users where auth_user_id = $1)
+      insert into problems_solved (pspid, userid)
+      select $2, A.id
+      where not exists (select 1 from problems_solved where pspid = $2 and userid = A.id)
     `;
-    config.pool.query(inq, [auth_user_id, schoolCode, courseCode, contentid], (err, result) => {
+    config.pool.query(inq, [auth_user_id, pspid], (err, result) => {
       if (err)
         return next(err);
       return res.send("Success!");

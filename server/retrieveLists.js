@@ -550,9 +550,10 @@ const getSubTopicInfo =
       where U.auth_user_id = $1 and S.code = $2 and C.code = $3 and PSS.subtopic_code = $4
     `;
     const getq = `
-      select C.id as content_id, C.problem_num, C.subproblem_num,
+      select PSP.id as pspid, C.id as content_id, C.problem_num, C.subproblem_num,
         C.problem, C.solution, C.choices, C.difficulty,
-        C.suggestion_text, C.interactive_problem, C.interactive_solution from bookmarked_courses BC
+        C.suggestion_text, C.interactive_problem, C.interactive_solution,
+        E.profs, T.term_label from bookmarked_courses BC
       inner join lectures L on BC.lectureid = L.id
       inner join courses on courses.id = L.courseid
       inner join schools S on S.id = courses.schoolid
@@ -562,6 +563,8 @@ const getSubTopicInfo =
       inner join problemset_subtopics PSS on PSS.pstid = PST.id
       inner join problemset_problems PSP on PSP.pssid = PSS.id
       inner join content C on PSP.contentid = C.id
+      inner join exams E on C.exam = E.id
+      inner join terms T on E.examid = T.id
       where U.auth_user_id = $1 and S.code = $2 and courses.code = $3 and PSS.subtopic_code = $4
     `;
     async.parallel([
@@ -578,12 +581,11 @@ const getSubTopicInfo =
           }, {});
 
           const problems = _.reduce(result.rows, (res, row, index) => {
-            let { content_id, problem_num, subproblem_num, problem, solution, choices, difficulty, suggestion_text, interactive_problem, interactive_solution } = row;
+            let { pspid, profs, type_label, term_label, content_id, problem_num, subproblem_num, problem, solution, choices, difficulty, suggestion_text, interactive_problem, interactive_solution } = row;
             problem = renderer.preprocess(row.problem);
             solution = renderer.preprocess(row.solution);
-            const { type_label, term_label } = row;
             const key = `${index}`;
-            res[key] = { problem, solution, choices, content_id, type_label, term_label, difficulty, suggestion_text, interactive_problem, interactive_solution };
+            res[key] = { pspid, profs, problem, solution, choices, content_id, type_label, term_label, difficulty, suggestion_text, interactive_problem, interactive_solution };
             return res;
           }, {});
 
@@ -618,7 +620,7 @@ const getCompletedProblems =
     pool.query(getq, [auth_user_id, schoolCode, courseCode, topicCode], (err, result) => {
       if (err)
         return console.error(err);
-      const items = _.map(result.rows, (row) => row.contentid);
+      const items = _.map(result.rows, (row) => row.pspid);
       return res.json(items);
     });
   };
@@ -939,8 +941,8 @@ module.exports = (app) => {
   app.get('/getSchools', (req, res, next) => getSchools((err, result) => res.json(result)));
 
   // Retrieve completed problems
-  app.get('/getCompletedProblems/:auth_user_id/:schoolCode/:courseCode/:topicCode/', getCompletedProblems);
-  app.get('/getCompletedProblemsCount/:auth_user_id/:schoolCode/:courseCode/', getCompletedProblemsCount);
+  app.get('/getCompletedProblems/:auth_user_id/:schoolCode/:courseCode/:topicCode', getCompletedProblems);
+  app.get('/getCompletedProblemsCount/:auth_user_id/:schoolCode/:courseCode', getCompletedProblemsCount);
 
   // Retrive courses with exams
   app.get('/getAvailableCourses', getAvailableCourses);
