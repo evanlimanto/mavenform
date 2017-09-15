@@ -116,19 +116,24 @@ class TopicSetComponent extends Component {
       const isUnlocked = !set.paid || includes(this.props.unlockedSets, set.id);
       return (
         <span key={index}>
-          <div className="int-box">
+          <div className="int-box int-box-set">
             <p className="int-helper">
               {isUnlocked ? (<i className="fa fa-check-circle" aria-hidden="true"></i>) : (<i className="fa fa-lock" aria-hidden="true"></i>)}
               &nbsp;&nbsp;&nbsp;
               <span className="int-highlight">{set.ps_label} </span>
               Review
             </p>
-            <button className={classnames({"int-button": true, "gray": this.state.show[index], "int-button-white": !this.state.show[index]})}
+            <button className={classnames({"int-button": true, "gray": this.state.show[index] & isUnlocked, "int-button-white": !this.state.show[index] & isUnlocked, "blue": !isUnlocked})}
               onClick={() => isUnlocked ? this.toggleShow(index) : this.props.showPaymentsModal(set.id, set.ps_label, schoolCode, courseCode)}>
               {isUnlocked ? (this.state.show[index] ? "Hide" : "View") : "Unlock"}
             </button>
           </div>
-          {this.state.show[index] ? <div className="int-box int-box-white">{topicItems}</div> : null}
+          {this.state.show[index] ? <div className="int-box-white-container">
+            <div className="int-box int-box-white">
+              {topicItems}
+            </div>
+          </div> : null}
+          <hr className="s2"/>
         </span>
       );
     })

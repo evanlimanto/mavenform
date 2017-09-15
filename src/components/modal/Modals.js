@@ -243,7 +243,12 @@ class ModalsComponent extends Component {
       );
     } else if (this.props.modal.type === 'payments') {
       headerContent = (
-        <h1>Unlock {this.props.modal.ps_label}</h1>
+        <h1>Secure Payment Portal</h1>
+      );
+      infoContent = (
+        <div className="login-helper">
+          <img className="stripe-badge" src={"/img/powered_by_stripe.png"}/>
+        </div>
       );
       modalContent = (
         <Elements>

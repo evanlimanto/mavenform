@@ -164,11 +164,11 @@ em {
 }
 
 .border-top {
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #eee;
 }
 
 .shadow-top {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(50, 50, 50, 0.1);
   z-index: 2;
   position: relative;
 }
@@ -181,6 +181,22 @@ em {
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+.black-text {
+  color: #111;
+}
+
+.blue-text {
+  color: #11aacc;
+}
+
+.green-text {
+  color: #77cc11;
+}
+
+.green-text i {
+  color: #77cc11;
 }
 
 .tab-sticky {

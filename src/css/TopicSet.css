@@ -358,3 +358,15 @@ h2.info-text {
 .tooltip-container i:hover ~ .tooltip, .tooltip:hover {
   display: block;
 }
+
+.payment-modal p {
+  margin: 7px 0;
+  color: #999;
+}
+
+.stripe-badge {
+  display: block;
+  margin: 10px auto 0;
+  opacity: 0.7;
+  max-width: 140px;
+}
