@@ -1,2 +1,137 @@
 q1_1: |
-  1\. (12 pts) The graph of a function $y = f(x)$ is shown. On the same grid, sketch the graph of the function $y = f(2x + 1) - 3$. Make your sketch accurate enough to show clearly how it is related to the graph of $f$.
+  1\. Let
+  $$\vec{a}_1 = \left[ \begin{array}{c} 1 \\\\ 1 \\\\ 1 \end{array} \right], \vec{a}_2 = \left[ \begin{array}{c} 1 \\\\ 1 \\\\ -1 \end{array} \right],
+    \vec{a}_3 = \left[ \begin{array}{c} 1 \\\\ -1 \\\\ 1 \end{array} \right],
+    \vec{b} = \left[ \begin{array}{c} 1 \\\\ 2 \\\\ 1 \end{array} \right]$$
+  (a) Do the columns of $A$ span $\mathbb{R}^3$? Justify your answer.
+
+q1_1_s: |
+  Reduce the matrix $[\vec{a}_1, \vec{a}_2, \vec{a}_3]$ to REF. One possible form is
+  $$\left[ \begin{array}{c c c} 1 & 1 & 1 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \end{array} \right]$$
+  There is a pivot in each row. So the solution of $A\vec{x} = \vec{b}$ has a solution for any $\vec{b} \in \mathbb{R}^3$, and the columns of $A$ spans $\mathbb{R}^3$.
+
+q1_2: |
+  Are the columns of $A$ linearly independent? Justify your answer.
+
+q1_2_s: |
+  There is a pivot in each column of the REF, and therefore there is no free variable. So the columns of $A$ are linearly independent.
+
+q1_3: |
+  Represent $\vec{b}$ as the linear combination of $\vec{a}_1, \vec{a}_2, \vec{a}_3$. Is this representation unique? Justify your answer.
+
+q1_3_s: |
+  Solve the augmented matrix
+  $$\left[ \begin{array}{c c c c} 1 & 1 & 1 & 1 \\\\ 0 & 1 & 0 & 2 \\\\ 0 & 0 & 1 & 1 \end{array} \right]$$
+  by reducing to REF
+  $$\left[ \begin{array}{c c c c} 1 & 1 & 1 & 1 \\\\ 0 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & -\frac{1}{2} \end{array} \right]$$
+  Further reduce this RREF (or use backward substitution), and the answer is
+  $$\vec{x} = \left[ \begin{array}{c} \frac{3}{2} \\\\ 0 \\\\ -\frac{1}{2} \end{array} \right]$$
+
+q2_1: |
+  2\. True or False: If True, explain why. If False, give an explicit numerical example for which the statement does not hold.
+  <hr class="s1" />
+  (a) A \in \mathbb{R}^{n \times n}$ is invertible, then $A^{-1}$ is invertible.
+
+q2_1_s: |
+  True. By definition $A^{-1}A = AA^{-1} = I$, hence $A$ is the inverse matrix of $A^{-1}$.
+
+q2_2: |
+  (b) If $n$ vectors in $\mathbb{R}^m$ are linearly dependent, then any vector can be represented by the linear combination of other $n - 1$ vectors $(n > 1)$.
+
+q2_2_s: |
+  False. Consider $\vec{a}_1 = \left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right], \vec{a}_2 = \left[ \begin{array}{c} 0 \\\\ 1 \end{array} \right], \vec{a}_3 = \left[ \begin{array}{c} 0 \\\\ 2 \end{array} \right]$. Then $\\{ \vec{a}_1, \vec{a}_2, \vec{a}_3 \\}$ are linearly dependent, but $\vec{a}_1$ cannot be represented as the linear combination of $\vec{a}_2, \vec{a}_3$.
+
+q2_3: |
+  (c) $A \in \mathbb{R}^{n \times n}$, then $(A^T)^2 = (A^2)^T$
+
+q2_3_s: |
+  True. Use
+  $$(AB)^T = B^TA^T$$
+  and let $A = B$.
+
+q2_4: |
+  (d) Every subspace of $\mathbb{R}^n$ contains at most $n$ vectors.
+
+q2_4_s: |
+  False. For example, $\mathbb{R}^2$ contains an infinite number of vectors.
+
+q2_5: |
+  (e) Let $\vec{v}_1, \vec{v}_2, \vec{v}_3 \in \mathbb{R}^n$. $\vec{v}_1$ and $\vec{v}_2$ are linearly dependent, then $\vec{v}_1, \vec{v}_2, \vec{v}_3$ are linearly dependent.
+
+q2_5_s: |
+  True. If $\vec{v}_1$ and $\vec{v}_2$ are linearly dependent then there exists a nonzero vector $\vec{x} = \left[ \begin{array}{c} x_1 \\\\ x_2 \end{array} \right]$ so that
+  $$x_1\vec{v}_1 + x_2\vec{v}_2 = \vec{0}$$
+  therefore
+  $$x_1\vec{v}_1 + x_2\vec{v}_2 + 0\vec{v}_3 = \vec{0}$$
+  This means that $\vec{v}_1, \vec{v}_2, \vec{v}_3$ are linearly dependent.
+
+q3_1: |
+  3a) Compute $C = A^TB$, where
+  $$A = \left[ \begin{array}{c c c} 2 & 3 & 4 \\\\ 0 & 1 & 1 \end{array} \right], \quad B = \left[ \begin{array}{c c} 1 & 2 \\\\ 2 & 1 \end{array} \right]$$
+
+q3_1_s: |
+  $$C = \left[ \begin{array}{c c} 2 & 4 \\\\ 5 & 7 \\\\ 6 & 9 \end{array} \right]$$
+
+q3_2: |
+  b) Compute the matrix inverse of
+  $$A = \left[ \begin{array}{c c c} 1 & 0 & 0 \\\\ 0 & 2 & 1 \\\\ 0 & 1 & 1 \end{array} \right]$$
+
+q3_2_s: |
+  Solve the augmente problem
+  $$[A|I] = \left[ \begin{array}{c c c c c c} 1 & 0 & 0 & 1 & 0 & 0 \\\\ 0 & 2 & 1 & 0 & 1 & 0 \\\\ 0 & 1 & 1 & 0 & 0 & 1 \end{array} \right]$$
+  Reduce $A$ to RREF and we have
+  $$\left[ \begin{array}{c c c c c c} 1 & 0 & 0 & 1 & 0 & 0 \\\\ 0 & 1 & 0 & 0 & 1 & -1 \\\\ 0 & 0 & 1 & 0 & -1 & 2 \end{array} \right]$$
+  hence
+  $$A^{-1} = \left[ \begin{array}{c c c} 1 & 0 & 0 \\\\ 0 & 1 & -1 \\\\ 0 & -1 & 2 \end{array} \right]$$
+
+q4_1: |
+  4\. A linear transformation $T: \mathbb{R}^2 \to \mathbb{R}^3$ has the following effect
+  $$T \left( \left[ \begin{array}{c} 1 \\\\ -1 \end{array} \right] \right) = \left[ \begin{array}{c} 1 \\\\ -1 \\\\ 0 \end{array} \right], T \left( \left[ \begin{array}{c} 1 \\\\ 1 \end{array} \right] \right) = \left[ \begin{array}{c} 1 \\\\ 1 \\\\ 1 \end{array} \right]$$
+  (a) Compute
+  $$T \left( \left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right] \right), T \left( \left[ \begin{array}{c} 0 \\\\ 1 \end{array} \right] \right)$$
+
+q4_1_s: |
+  First write $\left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right]$ and $\left[ \begin{array}{c} 0 \\\\ 1 \end{array} \right]$ as the linear combination of $\left[ \begin{array}{c} 1 \\\\ -1 \end{array} \right]$ and $\left[ \begin{array}{c} 1 \\\\ 1 \end{array} \right]$. This means solving
+  $$\alpha_{11} \left[ \begin{array}{c} 1 \\\\ -1 \end{array} \right] + \alpha_{21} \left[ \begin{array}{c} 1 \\\\ 1 \end{array} \right] = \left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right]$$
+  $$\alpha_{12} \left[ \begin{array}{c} 1 \\\\ -1 \end{array} \right] + \alpha_{22} \left[ \begin{array}{c} 1 \\\\ 1 \end{array} \right] = \left[ \begin{array}{c} 0 \\\\ 1 \end{array} \right]$$
+  This can be solved by the following augmented matrix
+  $$\left[ \begin{array}{c c c c} 1 & 1 & 1 & 0 \\\\ -1 & 1 & 0 & 1 \end{array} \right]$$
+  Reduce the left to RREF, we have
+  $$\left[ \begin{array}{c c c c} 1 & 0 & \frac{1}{2} & -\frac{1}{2} \\\\ 0 & 1 & \frac{1}{2} & \frac{1}{2} \end{array} \right]$$
+  In other words
+  $$\left[ \begin{array}{c c} \alpha_{11} & \alpha_{12} \\\\ \alpha_{21} & \alpha_{22} \end{array} \right] = \left[ \begin{array}{c c} \frac{1}{2} & -\frac{1}{2} \\\\ \frac{1}{2} & \frac{1}{2} \end{array} \right]$$
+  Using that $T$ is a linear transformation
+  $$T \left( \left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right] \right) = \frac{1}{2} T \left( \left[ \begin{array}{c} 1 \\\\ -1 \end{array} \right] \right) + \frac{1}{2} T \left( \left[ \begin{array}{c} 1 \\\\ 1 \end{array} \right] \right) = \left[ \begin{array}{c} 1 \\\\ 0 \\\\ \frac{1}{2} \end{array} \right]$$
+  $$T \left( \left[ \begin{array}{c} 0 \\\\ 1 \end{array} \right] \right) = -\frac{1}{2} T \left( \left[ \begin{array}{c} 1 \\\\ -1 \end{array} \right] \right) + \frac{1}{2} T \left( \left[ \begin{array}{c} 1 \\\\ 1 \end{array} \right] \right) = \left[ \begin{array}{c} 0 \\\\ 1 \\\\ \frac{1}{2} \end{array} \right]$$
+
+q4_2: |
+  (b) Write down the standard matrix of $T$, denoted by $A$.
+
+q4_2_s: |
+  The standard matrix is
+  $$A = \left[ T \left( \left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right] \right), T \left( \left[ \begin{array}{c} 0 \\\\ 1 \end{array} \right] \right) \right] = \left[ \begin{array}{c c} 1 & 0 \\\\ 0 & 1 \\\\ \frac{1}{2} & \frac{1}{2} \end{array} \right]$$
+
+q4_3: |
+  (c) Find a basis for the null space and column space of $A$.
+
+q4_3_s: |
+  Reduce $A$ to REF, and one possible form is
+  $$\left[ \begin{array}{c c} 1 & 0 \\\\ 0 & 1 \\\\ 0 & 0 \end{array} \right]$$
+  There is no free column, and the null space is $\\{ \vec{0} \\}$, and there is no basis (if you say $\vec{0}$ is its basis, your points will not be reduced either).
+  <hr class="s1" />
+  Each column is a pivot column, and therefore a basis of the column space is
+  $$\left\\{ \left[ \begin{array}{c} 1 \\\\ 0 \\\\ \frac{1}{2}, \left[ \begin{array}{c} 0 \\\\ 1 \\\\ \frac{1}{2} \end{array} \right] \right\\}$$
+
+q4_4: |
+  (d) Is $T$ injective? Is $T$ surjective? Justify your answer.
+
+q4_4_s: |
+  $T$ maps $\mathbb{R}^2$ to $\mathbb{R}^3$ and therefore cannot be surjective.
+
+q4_5: |
+  (e) State the rank theorem, and verify the rank theorem for $A$ from the computation in (c).
+
+q4_5_s: |
+  The rank theorem states that the number of columns of $A$ equals to the sum of the dimension of the null space of $A$ and the dimension of the column space of $A$ (i.e. the rank of $A$).
+  <hr class="s1" />
+  In this case, the number of columns is $2$. The dimension of the null space of $A$ is $0$, and the dimension of the column space is $2$. Hence $2 = 0 + 2$ and the rank theorem is satisfied.

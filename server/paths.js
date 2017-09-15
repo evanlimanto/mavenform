@@ -369,20 +369,6 @@ module.exports = (app) => {
     });
   });
 
-  app.get('/getBookmarkedCourses/:userid', (req, res, next) => {
-    const userid = req.params.userid;
-
-    const q = `select courses.id, courses.code from bookmarked_courses BC
-      inner join courses on BC.courseid = courses.id
-      inner join users on BC.userid = users.id
-      where users.auth_user_id = $1`;
-    config.pool.query(q, [userid], (err, result) => {
-      if (err) return next(err);
-      const items = _.map(result.rows, (row) => row.code);
-      return res.json(items);
-    });
-  });
-
   app.get('/getUserSchool/:userid', (req, res, next) => {
     const userid = req.params.userid;
 
@@ -396,26 +382,6 @@ module.exports = (app) => {
         const row = result.rows[0];
         return res.json({ id: row.id, name: row.name, code: row.code });
       }
-    });
-  });
-
-  app.get('/getCoursesToBookmark/:userid', (req, res, next) => {
-    const userid = req.params.userid;
-
-    const getq = `
-      select C.id, C.code_label from courses C
-      inner join users U on C.schoolid = U.schoolid
-      where U.auth_user_id = $1
-      and C.id not in
-        (select BC.courseid from bookmarked_courses BC inner join users U on BC.userid = U.id where U.auth_user_id = $1)
-    `;
-    config.pool.query(getq, [userid], (err, result) => {
-      if (err) return next(err);
-      const items = _.map(result.rows, (row) => {
-        const { id, code_label } = row;
-        return { id, code_label };
-      });
-      return res.json(items);
     });
   });
 

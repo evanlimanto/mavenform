@@ -194,7 +194,7 @@ class CourseComponent extends Component {
                 You've already signed up for the interactive study guide for <span className="int-highlight">{courseCodeToLabel(courseCode)} {lectureInfo.lecture_code}</span>.
               </p>
               <button className="int-button int-button-white int-button-spacer" onClick={this.unregisterClass}>Remove</button>
-              <Link to={`/interactive/${schoolCode}/${courseCode}`}><button className="int-button">View</button></Link>
+              <Link to={`/${schoolCode}/${courseCode}/interactive`}><button className="int-button">View</button></Link>
             </span>
           ) : (
             <span>

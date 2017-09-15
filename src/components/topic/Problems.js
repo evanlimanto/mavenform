@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { cloneDeep, forEach, keys, includes, range, map, reduce, replace, split, toLower } from 'lodash';
+import { cloneDeep, forEach, has, keys, includes, range, map, reduce, replace, split, toLower } from 'lodash';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import classnames from 'classnames';
@@ -138,10 +138,10 @@ class ProblemsComponent extends Component {
   }
 
   render() {
-    const { courseCode, schoolCode } = this.props;
-    const navbar = <Navbar interactive={true}
-                    links={[`interactive/${schoolCode}/${courseCode}`, this.props.topicCode]}
-                    navbarLabels={[courseCodeToLabel(courseCode), this.state.subTopicInfo.subtopic_label]} />
+    const { courseCode, schoolCode, topicCode } = this.props;
+    const navbar = <Navbar interactive={true} links={[`${schoolCode}`, `${courseCode}`, "interactive", topicCode]}
+                    navbarLabels={[this.props.labels.schools[schoolCode], courseCodeToLabel(courseCode), "Interactive Study", this.state.subTopicInfo.subtopic_label]} />
+
     if (this.state.progressIndicator === this.problemCount && !this.state.showSolution) {
       return (
         <div className="background">
@@ -241,6 +241,7 @@ const mapStateToProps = (state, ownProps) => {
     courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
     schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
     auth: state.auth,
+    labels: has(state.labels, 'schools') ? state.labels : { schools: {} },
   };
 };
 

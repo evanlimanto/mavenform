@@ -12,8 +12,8 @@ import UserHome from './components/userhome';
 
 const routes = [
   { path: '/', component: Home, exact: true },
-  { path: '/interactive/:schoolCode/:courseCode/:topicCode', component: Problems },
-  { path: '/interactive/:schoolCode/:courseCode', component: TopicSet },
+  { path: '/:schoolCode/:courseCode/interactive', component: TopicSet, exact: true },
+  { path: '/:schoolCode/:courseCode/interactive/:topicCode', component: Problems },
   { path: '/login', component: Login },
   { path: '/logout', component: Logout },
   { path: '/signup', component: Signup },

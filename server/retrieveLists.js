@@ -501,15 +501,15 @@ const getBookmarkedCourses =
   (req, res, next) => {
     const { auth_user_id } = req.params;
     const getq = `
-      select C.id, C.code_label, C.label from bookmarked_courses BC
-      inner join courses C on BC.lectureid = C.id
+      select C.id, C.code_label, C.label, C.code from bookmarked_courses BC
+      inner join lectures L on BC.lectureid = L.id
+      inner join courses C on L.courseid = C.id
       inner join users U on BC.userid = U.id
       where U.auth_user_id = $1;
     `;
     pool.query(getq, [auth_user_id], (err, result) => {
       const items = _.map(result.rows, (row) => {
-        const { id, code_label, label } = row;
-        return { id, code_label, label };
+        return { ...row };
       });
       return res.json(items);
     });

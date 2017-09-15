@@ -40,7 +40,7 @@ class PaymentsFormComponent extends Component {
     return (
       <form id="payment-form">
         <div className="form-row" style={{ margin: "15px 0px" }}>
-          <label style={{ margin: "15px 0px"}}>Price: $5.99</label>
+          <label style={{ margin: "15px 0px"}}>Price: $4.99</label>
           <input className="login-info" type="text" ref="name" placeholder="Name" />
           <CardElement style={{base: {fontSize: '18px'}}} />
           <div id="card-errors" role="alert"></div>
