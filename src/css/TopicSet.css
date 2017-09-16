@@ -34,10 +34,10 @@
   border-radius: 5px;
   border: 1px solid #ccc;
   height: auto;
-  height: 600px;
+  height: 548px;
   position: relative;
   max-width: 1000px;
-  margin: -285px auto auto;
+  margin: -250px auto auto;
   top: 50%;
   position: relative;
 }
@@ -226,29 +226,11 @@
 }
 
 .input-correct {
-  border-color: green !important;
+  border: 1px solid #77cc11 !important;
 }
 
 .input-wrong {
-  border-color: red !important;
-}
-
-.correct-answer {
-  background-color: #DDFF99;
-}
-
-.wrong-answer {
-  background-color: #FEA4A4;
-}
-
-.correct-answer-style {
-  border-color: #80D480 !important;
-  color: #80D480 !important;
-}
-
-.wrong-answer-style {
-  border-color: #FF1515 !important;
-  color: #FF1515 !important;
+  border: 1px solid #ff5555 !important;
 }
 
 .inline-input {

@@ -35,7 +35,7 @@ class UserHomeComponent extends Component {
       <div className="card-container">
         {map(this.state.bookmarkedCourses, (course, key) => {
           return (
-            <Link className="card course-card" key={key} to={"/interactive/" + this.state.selectedSchool.code + "/" + course.code}>
+            <Link className="card course-card" key={key} to={this.state.selectedSchool.code + "/" + course.code + "/interactive"}>
               <span>{courseCodeToLabel(course.code)}</span>
               <span className="card-arrow">&#8594;</span>
             </Link>
