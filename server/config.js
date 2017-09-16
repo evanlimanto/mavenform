@@ -39,7 +39,7 @@ const config = {
 const pool = new pg.Pool(config);
 
 // Stripe
-const stripe = require("stripe")("sk_test_Weey8vQWAUJL6nPiFL9p1qd5");
+const stripe = require("stripe")(process.env.NODE_ENV === "development" ? "sk_test_Uhws7IVVHLISzBQUQZckgbho" : "sk_live_dYbYDw2eyxN2DHB1jm8h4Rol");
 
 module.exports = {
   mg_options, mg_api_key, mg_domain, marketingBucket, stagingBucket, uploadsBucket, bucket, pool, stripe

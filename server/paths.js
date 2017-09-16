@@ -1103,10 +1103,10 @@ module.exports = (app) => {
       (select id from users where auth_user_id = $2) as A
     `;
     config.stripe.charges.create({
-      amount: 599,
+      amount: 499,
       currency: "usd",
       description: description,
-      source: stripeToken,
+      source: stripeToken.id,
     }, (err, charge) => {
       if (err)
         return next(err);

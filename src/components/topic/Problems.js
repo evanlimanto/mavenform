@@ -189,7 +189,7 @@ class ProblemsComponent extends Component {
               <h1 className="congratulations-text">Congratulations!</h1>
               <h3 className="center"> You have mastered {this.state.subTopicInfo.subtopic_label}. </h3>
               <hr className="s2" />
-              <p className="info-text center">{this.problemCount} out of {this.problemCount} problem{this.problemCount > 1 ? "s" : ""} successfully finished. </p>
+              <p className="info-text center">{this.state.correct} out of {this.problemCount} problem{this.problemCount > 1 ? "s" : ""} successfully finished. </p>
             </div>
             <div className="box-footer">
               <span className="progress-label">Progress</span>

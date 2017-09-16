@@ -18,7 +18,7 @@ class PaymentsFormComponent extends Component {
 
     const name = this.refs.name.value;
     if (!name || name.length === 0)
-      return this.setState({ errorMessage: "Name required.", loading: false });;
+      return this.setState({ errorMessage: "Name required.", loading: false });
     const auth_user_id = this.props.auth.getProfile().user_id;
     const { schoolCode, courseCode, ps_label, ps_id } = this.props.modal;
     const self = this;
@@ -28,7 +28,7 @@ class PaymentsFormComponent extends Component {
         return self.setState({ errorMessage: "Invalid payment information.", loading: false });
       self.setState({ errorMessage: null }, () => req.post('/submitPayment')
         .set('Content-Type', 'application/json')
-        .send({ stripeToken: token.ifd, auth_user_id, ps_id, description })
+        .send({ stripeToken: token, auth_user_id, ps_id, description })
         .end((err, res) => {
           if (err || !res.ok)
             return console.error(err);

@@ -52,7 +52,7 @@ ReactDOM.render((
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <ScrollToTop>
-        <StripeProvider apiKey="pk_test_EGjrXw5z4UoMqXjcXugwf7Z8">
+        <StripeProvider apiKey="pk_test_jlnFqtkMtqsSyISWB14hgeo4">
           <Switch>
             {map(routes, (route, key) => <Route key={key} path={route.path} component={route.component} exact={route.exact} />)}
           </Switch>
