@@ -117,7 +117,13 @@ class ProblemsComponent extends Component {
   showSolution() {
     const newProblemStatus = cloneDeep(this.state.problemStatus);
     newProblemStatus[this.state.progressIndicator] = true;
+    const inputBoxes = document.getElementsByClassName("inline-input");
+    for (var i = 0; i < inputBoxes.length; i++) {
+      inputBoxes[i].classList.remove("input-wrong");
+      inputBoxes[i].classList.remove("input-correct");
+    }
     this.setState({
+      answerStatus: null,
       showSolution: true,
       problemStatus: newProblemStatus
     }, () => this.saveProgress());
