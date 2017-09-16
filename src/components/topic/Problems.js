@@ -176,13 +176,38 @@ class ProblemsComponent extends Component {
         <div className="background">
           {navbar}
           <div className="box">
-            <div className="end-text">
-              <h1 className="congratulations-text">Congratulations! You have mastered {this.state.subTopicInfo.subtopic_label}</h1>
+            <div className="box-header">
+              <Link to={`/${schoolCode}/${courseCode}/interactive`}><i className="fa fa-chevron-left back-arrow" aria-hidden="true"></i></Link>
+              &nbsp;&nbsp;&nbsp;
+              <span className="box-title">{this.state.subTopicInfo.subtopic_label}</span>
+              <span className="box-buttons">
+                <input className="white" type="button" value="Ask Question" onClick={this.askQuestion} />
+              </span>
+            </div>
+            <div className="problem-content">
+              <img className="flag" src={"/img/flag.svg"} />
+              <h1 className="congratulations-text">Congratulations!</h1>
+              <h3 className="center"> You have mastered {this.state.subTopicInfo.subtopic_label}. </h3>
               <hr className="s2" />
-              <h2 className="info-text">Your correctly answered {this.state.correct} out of {this.problemCount} problem{this.problemCount > 1 ? "s" : ""}.</h2>
+              <p className="info-text center">{this.problemCount} out of {this.problemCount} problem{this.problemCount > 1 ? "s" : ""} successfully finished. </p>
             </div>
             <div className="box-footer">
-              <Link to={`/interactive/${schoolCode}/${courseCode}`}><button className="check-button">Continue</button></Link>
+              <span className="progress-label">Progress</span>
+              {map(range(0, this.problemCount), (index) =>
+                <div key={index} onClick={() => this.navigateProblem(index)} className={classnames({
+                  "progress-circle": true,
+                  "progress-done": this.state.problemStatus[index] || includes(this.state.completedProblems, this.state.subTopicInfo.problems[index].pspid),
+                  "progress-current": index === this.state.progressIndicator && !this.state.problemStatus[index]
+                })}></div>
+              )}
+              <span className={classnames({
+                "progress-label": true,
+                "progress-label-light": true,
+              })}>({this.state.progressIndicator}/{this.problemCount})</span>
+              <span className="box-buttons">
+                <span onClick={() => this.navigateProblem(0)}><input className="white" type="button" value="Redo Section"/></span>
+                <Link to={`/${schoolCode}/${courseCode}/interactive`}><input className="blue" type="button" value="Finish Section"/></Link>
+              </span>
             </div>
           </div>
           <Footer />
@@ -264,7 +289,7 @@ class ProblemsComponent extends Component {
                   {(this.state.progressIndicator < keys(this.state.subTopicInfo.problems).length - 1) ? (
                     <input className="blue" type="button" value="Next Problem" onClick={() => this.navigateProblem(this.state.progressIndicator + 1)} />
                   ): (
-                    <input className="blue" type="button" value="Finish Set" onClick={() => this.navigateProblem(this.state.progressIndicator + 1)} />
+                    <input className="blue" type="button" value="Continue" onClick={() => this.navigateProblem(this.state.progressIndicator + 1)} />
                   )}
                 </span>
               ) : (

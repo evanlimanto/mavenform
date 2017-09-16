@@ -274,15 +274,23 @@
   margin: 25px;
 }
 
+.flag {
+  display: block;
+  margin: 30px auto 20px;
+  width: 100px;
+  height: 100px;
+
+}
+
 h1.congratulations-text {
   font-size: 32px;
-  font-weight: 500;
-  margin: 20px 0;
+  font-weight: 700;
   text-align: center;
 }
 
-h2.info-text {
+p.info-text {
   text-align: center;
+  color: #11aacc;
 }
 
 .end-text {
