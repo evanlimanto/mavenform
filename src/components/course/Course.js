@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { map, range, replace } from 'lodash';
+import { map, range, replace, sortBy } from 'lodash';
 import { Helmet } from 'react-helmet';
 import Dropzone from 'react-dropzone';
 import req from 'superagent';
@@ -30,7 +30,7 @@ class InteractiveCards extends Component {
   }
 
   render() {
-    const cards = map(this.props.courseLectures, (lecture) => {
+    const cards = map(sortBy(this.props.courseLectures, [(lecture) => lecture.lecture_order]), (lecture) => {
       return (
         <div key={lecture.id} className={"card int-card " + ((lecture.id === this.state.selected) ? "active" : "")} onClick={() => this.clickBox(lecture.id)}>
           <div className="int-card-h">{courseCodeToLabel(this.props.courseCode)} {lecture.lecture_code}</div>
