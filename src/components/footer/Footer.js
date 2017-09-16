@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
 class Footer extends Component {
+  provideFeedback(e) {
+    window.Intercom('showNewMessage');
+  }
+
   render() {
     return (
       <span>
@@ -9,7 +13,11 @@ class Footer extends Component {
         <div className="blue center footer">
           <hr className="s2" />
           <div className="container">
-            <p className="white-text"><span className="lighter">Copyright &copy; 2017 Studyform.</span> Got <a className="feedback-link" href="https://goo.gl/forms/lNRTlct9SBSiAtrO2" target="_blank" rel="noopener noreferrer">feedback</a>?</p>
+            <p className="white-text">
+              <span className="lighter">Copyright &copy; 2017 Studyform. Got </span>
+              <a onClick={this.provideFeedback} className="feedback-link">feedback</a>
+              <span className="lighter">?</span>
+            </p>
           </div>
           <hr className="s2" />
         </div>

@@ -35,6 +35,7 @@ class ProblemsComponent extends Component {
     this.showSolution = this.showSolution.bind(this);
     this.correctAnswer = this.correctAnswer.bind(this);
     this.navigateProblem = this.navigateProblem.bind(this);
+    this.askQuestion = this.askQuestion.bind(this);
   }
 
   componentDidMount() {
@@ -137,6 +138,11 @@ class ProblemsComponent extends Component {
     this.setState({ answerStatus: null, progressIndicator: index, showSolution: false });
   }
 
+  askQuestion() {
+    const { courseCode } = this.props;
+    window.Intercom('showNewMessage', `I need help with ${courseCode} on Problem ${(this.state.progressIndicator + 1)} of the topic "${this.state.subTopicInfo.subtopic_label}"!`);
+  }
+
   componentWillMount() {
     const self = this;
     document.addEventListener("keydown", (e) => {
@@ -192,20 +198,20 @@ class ProblemsComponent extends Component {
             &nbsp;&nbsp;&nbsp;
             <span className="box-title">{this.state.subTopicInfo.subtopic_label}</span>
             <span className="box-buttons">
-              <input className="white" type="button" value="Ask Question" />
+              <input className="white" type="button" value="Ask Question" onClick={this.askQuestion} />
             </span>
           </div>
           <div className="problem-content">
             <h3>
               Problem {this.state.progressIndicator + 1}
-              {/*itemContent.suggestion_text ? (<span className="reason-circle">
+              {(itemContent.suggestion_text && itemContent.suggestion_text.length > 0) ? (<span className="reason-circle">
                 <div className="tooltip-container">
                   <i className="fa fa-question-circle" aria-hidden="true"></i>
                   <div className="tooltip">
                     {itemContent.suggestion_text}
                   </div>
                 </div>
-              </span>) : null*/}
+              </span>) : null}
               &nbsp;&nbsp;&nbsp;
               {itemContent.exam && thisExam ? (<div className="badge">{thisExam.profs}, {termToLabel(thisExam.examid)}</div>) : null}
             </h3>
