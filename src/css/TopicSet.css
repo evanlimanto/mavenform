@@ -131,6 +131,8 @@
 }
 
 .badge {
+  position: relative;
+  bottom: 2px;
   background-color: #33aacc;
   display: inline-block;
   padding: .25em .6em;

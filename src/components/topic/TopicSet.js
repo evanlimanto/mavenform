@@ -6,6 +6,7 @@ import { Line } from 'rc-progress';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import cookies from 'browser-cookies';
 
 import Navbar from '../navbar';
 import Footer from '../footer';
@@ -31,7 +32,7 @@ class TopicSetComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: [false, false, false],
+      show: JSON.parse(cookies.get('showTabs')) || [false, false, false],
       lectureInfo: { lecture_code: null },
       lectureProblemSets: {},
       problemSetTopics: {},
@@ -71,7 +72,7 @@ class TopicSetComponent extends Component {
     const show = this.state.show;
     const newShow = [show[0], show[1], show[2]];
     newShow[index] = !newShow[index];
-    this.setState({ show: newShow });
+    this.setState({ show: newShow }, () => cookies.set('showTabs', JSON.stringify(newShow), { expires: 1 }));
   }
 
   getCategorizedTopics() {
@@ -87,7 +88,6 @@ class TopicSetComponent extends Component {
   render() {
     const { courseCode, schoolCode } = this.props;
     const { lectureInfo } = this.state;
-    console.log(this.state);
     const containers = map(this.state.lectureProblemSets, (set, index) => {
       let topicItems = map(this.state.problemSetTopics[set.id], (topic, topicKey) => {
         const arr = map(this.state.topicSubTopics[topic.id], (subtopic, subtopicKey) => {

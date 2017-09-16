@@ -36,6 +36,7 @@ class ProblemsComponent extends Component {
     this.correctAnswer = this.correctAnswer.bind(this);
     this.navigateProblem = this.navigateProblem.bind(this);
     this.askQuestion = this.askQuestion.bind(this);
+    this.redoQuestion = this.redoQuestion.bind(this);
   }
 
   componentDidMount() {
@@ -87,6 +88,13 @@ class ProblemsComponent extends Component {
     this.setState({
       answerStatus: "wrong",
       wrong: this.state.wrong + 1,
+    });
+  }
+
+  redoQuestion() {
+    this.setState({
+      showSolution: false,
+      answerStatus: null,
     });
   }
 
@@ -243,9 +251,10 @@ class ProblemsComponent extends Component {
               "progress-label-wrong": this.state.answerStatus === "wrong"
             })}>({this.state.progressIndicator + 1}/{this.problemCount})</span>
             <span className="box-buttons">
-              {this.state.answerStatus === "correct" ? (
+              {(this.state.answerStatus === "correct" || this.state.showSolution) ? (
                 <span>
-                  <input className="white" type="button" value="Redo Question" /><input className="blue" type="button" value="Next Problem" />
+                  <input className="white" type="button" value="Redo Question" onClick={this.redoQuestion} />
+                  {(this.state.progressIndicator < keys(this.state.subTopicInfo.problems).length - 1) ? <input className="blue" type="button" value="Next Problem" onClick={() => this.navigateProblem(this.state.progressIndicator + 1)} /> : null}
                 </span>
               ) : (
                 <span>
