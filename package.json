@@ -34,6 +34,7 @@
     "express-fileupload": "^0.2.0",
     "forever": "^0.15.3",
     "google-cloud": "^0.56.0",
+    "grpc": "^1.6.0",
     "history": "^4.6.1",
     "ignore-styles": "^5.0.1",
     "isomorphic-fetch": "^2.2.1",
