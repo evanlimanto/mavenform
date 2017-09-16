@@ -121,7 +121,7 @@ class CourseComponent extends Component {
       .end((err, res) => {
         if (err || !res.ok)
           return console.error(err);
-        document.location = `/interactive/${schoolCode}/${courseCode}`;
+        document.location = `/${schoolCode}/${courseCode}/interactive`;
       });
   }
 

@@ -254,7 +254,11 @@ class ProblemsComponent extends Component {
               {(this.state.answerStatus === "correct" || this.state.showSolution) ? (
                 <span>
                   <input className="white" type="button" value="Redo Question" onClick={this.redoQuestion} />
-                  {(this.state.progressIndicator < keys(this.state.subTopicInfo.problems).length - 1) ? <input className="blue" type="button" value="Next Problem" onClick={() => this.navigateProblem(this.state.progressIndicator + 1)} /> : null}
+                  {(this.state.progressIndicator < keys(this.state.subTopicInfo.problems).length - 1) ? (
+                    <input className="blue" type="button" value="Next Problem" onClick={() => this.navigateProblem(this.state.progressIndicator + 1)} />
+                  ): (
+                    <input className="blue" type="button" value="Finish Set" onClick={() => this.navigateProblem(this.state.progressIndicator + 1)} />
+                  )}
                 </span>
               ) : (
                 <span>
