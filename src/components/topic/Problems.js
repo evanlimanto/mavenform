@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import req from 'superagent';
 
 import { updateTopicInfo, updateCompletedProblems } from '../../actions';
-import { BASE_URL, courseCodeToLabel } from '../../utils';
+import { BASE_URL, courseCodeToLabel, termToLabel } from '../../utils';
 import Navbar from '../navbar';
 import Footer from '../footer';
 
@@ -64,6 +64,11 @@ class ProblemsComponent extends Component {
   correctAnswer() {
     const newProblemStatus = cloneDeep(this.state.problemStatus);
     newProblemStatus[this.state.progressIndicator] = true;
+    const inputBoxes = document.getElementsByClassName("inline-input");
+    for (var i = 0; i < inputBoxes.length; i++) {
+      inputBoxes[i].classList.remove("input-wrong");
+      inputBoxes[i].classList.add("input-correct");
+    }
     this.setState({
       answerStatus: "correct",
       showSolution: true,
@@ -73,9 +78,13 @@ class ProblemsComponent extends Component {
   }
 
   wrongAnswer() {
+    const inputBoxes = document.getElementsByClassName("inline-input");
+    for (var i = 0; i < inputBoxes.length; i++) {
+      inputBoxes[i].classList.remove("input-correct");
+      inputBoxes[i].classList.add("input-wrong");
+    }
     this.setState({
       answerStatus: "wrong",
-      showSolution: true,
       wrong: this.state.wrong + 1,
     });
   }
@@ -163,21 +172,23 @@ class ProblemsComponent extends Component {
 
     const itemContent = this.state.subTopicInfo.problems[this.state.progressIndicator];
     const contents = this.state.showContents ? [(
-      <div key={0}>
+      <div key={0} className="problem-contents">
         <div dangerouslySetInnerHTML={{ __html: itemContent.problem }}></div>
         <hr className="s1" />
         <div dangerouslySetInnerHTML={{ __html: itemContent.interactive_problem }}></div>
         <div dangerouslySetInnerHTML={{ __html: this.state.showSolution ?
-          `<hr class="s2" /><h3>Solution</h3><div class="problem-solution">${itemContent.solution}</div>` : null }}
+          `<hr class="s2" /><h3>Solution</h3><div>${itemContent.solution}</div>` : null }}
         ></div>
       </div>
     )] : [];
+    const thisExam = this.props.exams.key_dict[itemContent.exam];
+
     return (
       <div className="background">
         {navbar}
         <div className="box">
           <div className="box-header">
-            <Link to={`/interactive/${schoolCode}/${courseCode}`}><i className="fa fa-chevron-left back-arrow" aria-hidden="true"></i></Link>
+            <Link to={`/${schoolCode}/${courseCode}/interactive`}><i className="fa fa-chevron-left back-arrow" aria-hidden="true"></i></Link>
             &nbsp;&nbsp;&nbsp;
             <span className="box-title">{this.state.subTopicInfo.subtopic_label}</span>
             <span className="box-buttons">
@@ -196,7 +207,7 @@ class ProblemsComponent extends Component {
                 </div>
               </span>) : null*/}
               &nbsp;&nbsp;&nbsp;
-              <div className="badge">{itemContent.profs}, {itemContent.term_label}</div>
+              {itemContent.exam && thisExam ? (<div className="badge">{thisExam.profs}, {termToLabel(thisExam.examid)}</div>) : null}
             </h3>
             <hr className="s2" />
             <CSSTransitionGroup
@@ -211,21 +222,34 @@ class ProblemsComponent extends Component {
             "correct-answer": this.state.answerStatus === "correct",
             "wrong-answer": this.state.answerStatus === "wrong",
           })}>
-            <span className="progress-label">Progress</span>
+            <span className={classnames({"progress-label": true, "progress-label-wrong": this.state.answerStatus === "wrong"})}>Progress</span>
             {map(range(0, this.problemCount), (index) =>
               <div key={index} onClick={() => this.navigateProblem(index)} className={classnames({
                 "progress-circle": true,
+                "progress-circle-wrong": this.state.answerStatus === "wrong",
                 "progress-done": this.state.problemStatus[index] || includes(this.state.completedProblems, this.state.subTopicInfo.problems[index].pspid),
                 "progress-current": index === this.state.progressIndicator && !this.state.problemStatus[index]
               })}></div>
             )}
-            <span className="progress-label progress-label-light">({this.state.progressIndicator + 1}/{this.problemCount})</span>
+            <span className={classnames({
+              "progress-label": true,
+              "progress-label-light": true,
+              "progress-label-wrong": this.state.answerStatus === "wrong"
+            })}>({this.state.progressIndicator + 1}/{this.problemCount})</span>
             <span className="box-buttons">
-              {itemContent.interactive_problem && itemContent.interactive_problem.length > 0 ? (
-                <input className="green" type="button" value="Check Answer" onClick={this.checkAnswer} />
-              ) : null}
-              &nbsp;
-              <input className="blue" type="button" value="Show Solution" onClick={this.showSolution} />
+              {this.state.answerStatus === "correct" ? (
+                <span>
+                  <input className="white" type="button" value="Redo Question" /><input className="blue" type="button" value="Next Problem" />
+                </span>
+              ) : (
+                <span>
+                  {itemContent.interactive_problem && itemContent.interactive_problem.length > 0 ? (
+                    <input className="green" type="button" value="Check Answer" onClick={this.checkAnswer} />
+                  ) : null}
+                  &nbsp;
+                  <input className="blue" type="button" value="Show Solution" onClick={this.showSolution} />
+                </span>
+              )}
             </span>
           </div>
         </div>
@@ -241,6 +265,7 @@ const mapStateToProps = (state, ownProps) => {
     courseCode: ownProps.courseCode || ownProps.match.params.courseCode,
     schoolCode: ownProps.schoolCode || ownProps.match.params.schoolCode,
     auth: state.auth,
+    exams: state.exams,
     labels: has(state.labels, 'schools') ? state.labels : { schools: {} },
   };
 };

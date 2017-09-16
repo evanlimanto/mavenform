@@ -212,6 +212,20 @@
   padding: 0;
 }
 
+.background-edu {
+  background: url('../img/featured.png');
+  background-size: 1200px 900px;
+}
+
+.home-des {
+  margin: auto;
+  max-width: 700px;
+  padding: 15px 50px 0;
+  color: #333;
+  font-size: 16.5px;
+  line-height: 1.55em;
+}
+
 .feature-column {
   display: inline-block;
   margin-top: 50px;

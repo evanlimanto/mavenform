@@ -88,7 +88,7 @@ class HomeComponent extends Component {
           <div className="banner-text">
             <div className="banner-header">Study More Effectively</div>
             <hr className="s2" />
-            <h5 className="h5-alt">A new and interactive format for past exams and practice problems</h5>
+            <h5 className="h5-alt">Study guides and practice problems for your courses at your school</h5>
             <hr className="s5" />
             <div className="search-container">
               <div className="material-icons search-icon">search</div>
@@ -109,40 +109,77 @@ class HomeComponent extends Component {
             </div>
           </div>
         </div>
-        <Element name="features" className="features">
+        <div>
+          <hr className="s7-5" />
+          <h4 className="center">Featured Courses</h4>
+          <hr className="s1" />
+          <h5>Browse our most popular study resources</h5>
+          <hr className="s3" />
+          <div className="card-container">
+            <div className="featured-card">
+              <div className="inner-card">
+                <h2>MATH 1A</h2>
+                <hr className="s0-5"></hr>
+                <p>UC Berkeley</p>
+                <hr className="s0-5"></hr>
+                <p className="blue-text"><i className="fa fa-check-circle" aria-hidden="true"></i> Interactive mode available</p>
+              </div>
+              <div className="featured-des">
+                <p>An introduction to differential and integral calculus of functions of one variable, with applications and an introduction to...</p>
+              </div>
+              <a className="featured-link" href="/ucb/MATH1A">
+                CLICK TO VIEW <span className="card-arrow">&#8594;</span>
+              </a>
+            </div>
+            <div className="featured-card">
+              <div className="inner-card">
+                <h2>MATH 53</h2>
+                <hr className="s0-5"></hr>
+                <p>UC Berkeley</p>
+                <hr className="s0-5"></hr>
+                <p className="blue-text"><i className="fa fa-check-circle" aria-hidden="true"></i> Interactive mode available</p>
+              </div>
+              <div className="featured-des">
+                <p>Parametric equations and polar coordinates. Vectors in 2- and 3-dimensional Euclidean spaces. Partial derivatives. Multiple...</p>
+              </div>
+              <a className="featured-link" href="/ucb/MATH53">
+                CLICK TO VIEW <span className="card-arrow">&#8594;</span>
+              </a>
+            </div>
+            <div className="featured-card">
+              <div className="inner-card">
+                <h2>MATH 54</h2>
+                <hr className="s0-5"></hr>
+                <p>UC Berkeley</p>
+                <hr className="s0-5"></hr>
+                <p className="blue-text"><i className="fa fa-check-circle" aria-hidden="true"></i> Interactive mode available</p>
+              </div>
+              <div className="featured-des">
+                <p>Basic linear algebra; matrix arithmetic and determinants. Vector spaces; inner product spaces. Eigenvalues and...</p>
+              </div>
+              <a className="featured-link" href="/ucb/MATH54">
+                CLICK TO VIEW <span className="card-arrow">&#8594;</span>
+              </a>
+            </div>
+            <hr className="s7-5" />
+          </div>
+        </div>
+        <Element name="features" className="features background-edu border-top">
           <div className="center">
             <hr className="s7-5" />
-            <h4 className="center">Features</h4>
+            <h4 className="center">What is Studyform?</h4>
+            <hr className="s1" />
+            <h5>Everything you need to ace your next exam</h5>
             <hr className="s3" />
-            <div className="column">
-              <div className="material-icons">touch_app</div>
-              <h1>Interactive</h1>
-              <hr className="s2" />
-              <p>Use interactive elements like solution toggling and a navigation menu to check your answers online and save time.</p>
-              <hr className="s1" />
-            </div>
-            <div className="column">
-              <div className="material-icons">people</div>
-              <h1>Collaborative</h1>
-              <hr className="s2" />
-              <p>Post a question or comment on any practice problem and discuss with other students studying the same topics.</p>
-              <hr className="s1" />
-            </div>
-            <div className="column">
-              <div className="material-icons">view_carousel</div>
-              <h1>Responsive</h1>
-              <hr className="s2" />
-              <p>If you need to study on the go, our interface is intuitive and legible with any device type and any screen width.</p>
-              <hr className="s1" />
-            </div>
-            <img className="banner-screen" src={"/img/screen" + (supportsWebP ? ".webp" : ".png")} alt="banner" /> 
+            <p className="home-des">Studyform is where you can find study guides, past exams, and practice problems for your course at your school. We make every resource on Studyform interactive and provide personalized tutoring to help you get better grades in less time!</p>
+            <img className="banner-screen" src={"/img/screen.png"} alt="banner" /> 
           </div>
         </Element>
-        <Element name="schools" className="light-gray border-top shadow-top">
+        <Element name="schools" className="border-top shadow-top">
           <hr className="s7-5" />
-          <h4 className="center">Schools</h4>
+          <h4 className="center">School Directory</h4>
           <hr className="s1" />
-          <h5>Browse resources by school</h5>
+          <h5>Browse study resources by school</h5>
           <hr className="s3" />
           <div className="card-container">
             {schoolCards}

@@ -93,6 +93,10 @@
   font-weight: 400;
 }
 
+.progress-label-wrong {
+  color: #fff;
+}
+
 .progress-circle {
   display: inline-block;
   width: 16px;
@@ -101,6 +105,10 @@
   border: 1.5px solid #ccc;
   margin: 12px 8px 0;
   opacity: 0.9;
+}
+
+.progress-circle-wrong {
+  border: 1.5px solid #fff;
 }
 
 .progress-done {
@@ -180,6 +188,11 @@
   bottom: 0;
 }
 
+.problem-content {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 @media(max-width: 699px) {
   .problem-answer {
     margin-bottom: 180px;
@@ -210,6 +223,14 @@
   margin: 10px 0px;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+.input-correct {
+  border-color: green !important;
+}
+
+.input-wrong {
+  border-color: red !important;
 }
 
 .correct-answer {
@@ -371,4 +392,16 @@ h2.info-text {
 
 .tooltip-container i:hover ~ .tooltip, .tooltip:hover {
   display: block;
+}
+
+.payment-modal p {
+  margin: 7px 0;
+  color: #999;
+}
+
+.stripe-badge {
+  display: block;
+  margin: 10px auto 0;
+  opacity: 0.7;
+  max-width: 140px;
 }

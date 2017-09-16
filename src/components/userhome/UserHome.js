@@ -49,7 +49,8 @@ class UserHomeComponent extends Component {
     return (
       <div className="userhome">
         <Modals />
-        <Navbar interactive={true} links={["course"]} navbarLabels={["Courses"]} />
+        <Navbar interactive={true} links={["course"]} navbarLabels={["Your Courses"]} />
+        <hr className="s5" />
         <div className="container">
           <div className="center">
             <h4>Your Courses</h4>

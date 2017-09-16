@@ -7,7 +7,7 @@ import Dropzone from 'react-dropzone';
 import req from 'superagent';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import { showLoginModal, showUploadSuccessModal, updateCourseExams, updateCourseLabel,
+import { showSignupModal, showUploadSuccessModal, updateCourseExams, updateCourseLabel,
          updateCourseSubject, updateRegisteredLecture, updateCourseLectures } from '../../actions';
 import { canUseDOM, courseCodeToLabel, BASE_URL } from '../../utils';
 import { examClickEvent } from '../../events';
@@ -140,7 +140,7 @@ class CourseComponent extends Component {
 
   getInfo() {
     if (!this.props.auth.loggedIn())
-      return this.props.showLoginModal();
+      return this.props.showSignupModal();
     this.setState({ getInfo: !this.state.getInfo });
   }
 
@@ -318,7 +318,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    showLoginModal: () => dispatch(showLoginModal()),
+    showSignupModal: () => dispatch(showSignupModal()),
     showUploadSuccessModal: () => dispatch(showUploadSuccessModal()),
     dispatch
   };

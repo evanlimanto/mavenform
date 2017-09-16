@@ -59,28 +59,34 @@ td.upload-exam-container {
   border-radius: 5px;
 }
 
+.int-box-set {
+  margin: 0 5px;
+}
+
 .int-box-top {
   margin: 0 5px;
   border-radius: 5px 5px 0 0;
   border-bottom: none;
 }
 
-.int-box-mid {
+.int-box-white-container {
   margin: 0 5px;
-  border-radius: 0;
-  border-bottom: none;
-}
-
-.int-box-bot {
-  margin: 0 5px;
+  border: 1px solid #ccc;
+  padding: 5px 0 0 0;
+  position: relative;
+  top: -5px;
+  border-top: none;
+  background: #f3f3f3;
   border-radius: 0 0 5px 5px;
 }
 
 .int-box-white {
-  margin: 0 5px;
-  padding: 5px 40px 15px;
-  background: transparent;
-  border-radius: 0;
+  margin: 5px 0 0 0;
+  padding: 5px 40px 40px;
+  border: none;
+  border-top: 1px solid #ccc;
+  background: #fff;
+  border-radius: 0 0 5px 5px;
 }
 
 .int-helper {

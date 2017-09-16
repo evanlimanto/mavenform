@@ -838,7 +838,7 @@ module.exports = (app) => {
     const inq = `
       with A as (select id from users where auth_user_id = $1)
       insert into problems_solved (pspid, userid)
-      select $2, A.id
+      select $2, A.id from A
       where not exists (select 1 from problems_solved where pspid = $2 and userid = A.id)
     `;
     config.pool.query(inq, [auth_user_id, pspid], (err, result) => {

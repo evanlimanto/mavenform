@@ -37,6 +37,49 @@
   border: 1px solid #ccc;
 }
 
+.featured-card {
+  position: relative;
+  vertical-align: top;
+  display: inline-block;
+  width: 100%;
+  max-width: 305px;
+  margin: 15px;
+  border-radius: 5px;
+  border: 1px solid #999;
+  text-align: left;
+  background: #fff;
+  color: #999;
+  font-size: 16px;
+}
+
+.featured-card .inner-card {
+  padding: 25px 30px;
+}
+
+.featured-card h2 {
+  padding: 0;
+  line-height: 27px;
+}
+
+.featured-des {
+  padding: 25px 30px;
+  border-top: 1px solid #ccc;
+}
+
+.featured-link {
+  display: block;
+  color: #ccc;
+  border-top: 1px solid #ccc;
+  padding: 20px 30px;
+}
+
+.featured-link:hover {
+  background: #fafafa;
+  color: #11aacc;
+  cursor: pointer;
+  border-radius: 0 0 5px 5px;
+}
+
 .course-code {
   display: inline-block;
   max-width: 155px;
