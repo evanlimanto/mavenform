@@ -9,7 +9,7 @@ class PaymentsFormComponent extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = { loading: false };
+    this.state = { loading: false, errorMessage: null };
   }
 
   handleSubmit(ev) {
@@ -17,14 +17,16 @@ class PaymentsFormComponent extends Component {
     this.setState({ loading: true });
 
     const name = this.refs.name.value;
+    if (!name || name.length === 0)
+      return this.setState({ errorMessage: "Name required.", loading: false });;
     const auth_user_id = this.props.auth.getProfile().user_id;
     const { schoolCode, courseCode, ps_label, ps_id } = this.props.modal;
     const self = this;
     const description = `Payment for ${schoolCode} ${courseCode} ${ps_label}`;
     this.props.stripe.createToken({name}).then(({token}) => {
-      if (token.error)
-        return;
-      req.post('/submitPayment')
+      if (!token || token.error)
+        return self.setState({ errorMessage: "Invalid payment information.", loading: false });
+      self.setState({ errorMessage: null }, () => req.post('/submitPayment')
         .set('Content-Type', 'application/json')
         .send({ stripeToken: token.id, auth_user_id, ps_id, description })
         .end((err, res) => {
@@ -32,7 +34,7 @@ class PaymentsFormComponent extends Component {
             return console.error(err);
           self.props.showPaymentSuccessfulModal();
           self.props.updateUnlockedSets(ps_id);
-        })
+        }));
     });
   }
 
@@ -46,6 +48,7 @@ class PaymentsFormComponent extends Component {
           <div id="card-errors" role="alert"></div>
         </div>
         <button className="login-button blue" onClick={this.handleSubmit}>{this.state.loading ? "Paying.." : "Submit Payment"}</button>
+        {this.state.errorMessage ? (<p className="modal-error-text">{this.state.errorMessage}</p>) : null}
       </form>
     );
   }
