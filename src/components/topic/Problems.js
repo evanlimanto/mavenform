@@ -117,7 +117,13 @@ class ProblemsComponent extends Component {
   showSolution() {
     const newProblemStatus = cloneDeep(this.state.problemStatus);
     newProblemStatus[this.state.progressIndicator] = true;
+    const inputBoxes = document.getElementsByClassName("inline-input");
+    for (var i = 0; i < inputBoxes.length; i++) {
+      inputBoxes[i].classList.remove("input-wrong");
+      inputBoxes[i].classList.remove("input-correct");
+    }
     this.setState({
+      answerStatus: null,
       showSolution: true,
       problemStatus: newProblemStatus
     }, () => this.saveProgress());
@@ -191,7 +197,7 @@ class ProblemsComponent extends Component {
         <hr className="s1" />
         <div dangerouslySetInnerHTML={{ __html: itemContent.interactive_problem }}></div>
         <div dangerouslySetInnerHTML={{ __html: this.state.showSolution ?
-          `<hr class="s2" /><h3>Solution</h3><div>${itemContent.solution}</div>` : null }}
+          `<hr class="s2" /><div class="blue-text">${itemContent.solution}</div>` : null }}
         ></div>
       </div>
     )] : [];
@@ -230,17 +236,19 @@ class ProblemsComponent extends Component {
               transitionLeaveTimeout={300}>
               {contents}
             </CSSTransitionGroup>
+            {this.state.answerStatus === "wrong" ? (<div><hr className="s2"/><div className="red-text">Not quite! Try again by entering a different answer, or move on by looking at the solution.</div></div>) : null}
+            {this.state.answerStatus === "correct" ? (<div><hr className="s2"/><div className="green-text">Great job! You're ready for the next question.</div></div>) : null}
           </div>
-          <div className={classnames({
+          <div className="box-footer">
+          {/*{classnames({
             "box-footer": true,
             "correct-answer": this.state.answerStatus === "correct",
             "wrong-answer": this.state.answerStatus === "wrong",
-          })}>
-            <span className={classnames({"progress-label": true, "progress-label-wrong": this.state.answerStatus === "wrong"})}>Progress</span>
+          }*/}
+            <span className="progress-label">Progress</span>
             {map(range(0, this.problemCount), (index) =>
               <div key={index} onClick={() => this.navigateProblem(index)} className={classnames({
                 "progress-circle": true,
-                "progress-circle-wrong": this.state.answerStatus === "wrong",
                 "progress-done": this.state.problemStatus[index] || includes(this.state.completedProblems, this.state.subTopicInfo.problems[index].pspid),
                 "progress-current": index === this.state.progressIndicator && !this.state.problemStatus[index]
               })}></div>
@@ -248,7 +256,6 @@ class ProblemsComponent extends Component {
             <span className={classnames({
               "progress-label": true,
               "progress-label-light": true,
-              "progress-label-wrong": this.state.answerStatus === "wrong"
             })}>({this.state.progressIndicator + 1}/{this.problemCount})</span>
             <span className="box-buttons">
               {(this.state.answerStatus === "correct" || this.state.showSolution) ? (
