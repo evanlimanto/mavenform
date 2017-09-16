@@ -14,6 +14,10 @@ import Footer from '../footer';
 
 require('../../css/TopicSet.css');
 
+function cleanProblem(content) {
+  return content;
+}
+
 class ProblemsComponent extends Component {
   constructor(props) {
     super(props);
