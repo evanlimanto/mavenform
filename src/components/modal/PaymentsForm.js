@@ -72,7 +72,7 @@ class PaymentsFormComponent extends Component {
         <input className="login-info" type="text" ref="name" placeholder="Name" />
         <CardElement style={{base: {fontSize: '18px'}}} />
         <div id="card-errors" role="alert"></div>
-        <button className="login-button blue" onClick={this.handleSubmit}>{this.state.loading ? "Unlocking.." : "Get Access Now"}</button>
+        <button className="login-button blue" onClick={this.handleSubmit}>{this.state.loading ? "Unlocking..." : "Get Access Now"}</button>
         {this.state.errorMessage ? (<p className="modal-error-text">{this.state.errorMessage}</p>) : null}
       </form>
     );

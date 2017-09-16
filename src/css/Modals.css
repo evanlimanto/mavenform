@@ -62,7 +62,7 @@
 .modal-error-text {
   text-align: left;
   padding: 14px 0 5px;
-  color: #ee3344;
+  color: #ff5555 !important;
 }
 
 .modal-header {
