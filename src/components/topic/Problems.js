@@ -12,8 +12,6 @@ import { BASE_URL, courseCodeToLabel, termToLabel } from '../../utils';
 import Navbar from '../navbar';
 import Footer from '../footer';
 
-require('../../css/TopicSet.css');
-
 function cleanProblem(content) {
   return content;
 }
@@ -193,7 +191,7 @@ class ProblemsComponent extends Component {
               <h1 className="congratulations-text">Congratulations!</h1>
               <h3 className="center"> You have mastered {this.state.subTopicInfo.subtopic_label}. </h3>
               <hr className="s2" />
-              <p className="info-text center">{this.state.correct} out of {this.problemCount} problem{this.problemCount > 1 ? "s" : ""} successfully finished. </p>
+              <p className="blue-text center"><strong>{this.problemCount} out of {this.problemCount} problem{this.problemCount > 1 ? "s" : ""}</strong> successfully finished. </p>
             </div>
             <div className="box-footer">
               <span className="progress-label">Progress</span>
