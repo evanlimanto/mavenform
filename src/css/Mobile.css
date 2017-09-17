@@ -2,6 +2,28 @@
   display: none;
 }
 
+@media (max-height: 725px) {
+  .box {
+    height: 450px;
+    margin: -205px auto auto;
+  }
+
+  .problem-content {
+    height: 300px;
+  }
+}
+
+@media (max-height: 625px) {
+  .box {
+    height: 400px;
+    margin: -190px auto auto;
+  }
+
+  .problem-content {
+    height: 250px;
+  }
+}
+
 @media (max-width: 1199px) {
   .content {
     max-width: 100%;
