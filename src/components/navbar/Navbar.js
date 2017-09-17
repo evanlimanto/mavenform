@@ -43,6 +43,12 @@ class NavbarComponent extends Component {
     this.setState(results);
   }
 
+  updateSearch() {
+    if (this.refs.search.value === "")
+      return this.setState({ suggestions: [] });
+    return getSuggestions(this.refs.search.value, this.updateSearchResults)
+  }
+
   render() {
     const isLoggedIn = this.props.auth.loggedIn();
     const suggestions = this.state.suggestions;
@@ -155,7 +161,7 @@ class NavbarComponent extends Component {
             <div className="nav-search-container">
               <input className="nav-search" name="search"
                 placeholder="Search courses..." type="text" autoComplete="off"
-                onChange={() => getSuggestions(this.refs.search.value, this.updateSearchResults)} ref="search" />
+                onChange={this.updateSearch} ref="search" />
               {searchResults}
             </div>
             {(isLoggedIn) ? (

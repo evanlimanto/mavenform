@@ -563,7 +563,7 @@ module.exports = (app) => {
 
     config.pool.query(getq, (err, result) => {
       if (err) return next(err);
-      const ieems = _.reduce(result.rows, (dict, row) => {
+      const items = _.reduce(result.rows, (dict, row) => {
         const { id, content, nickname, datetime, parentid, upvotes, deleted, contentid } = row;
         if (!_.has(dict, contentid))
           dict[contentid] = [];
