@@ -612,7 +612,7 @@ const getCompletedProblems =
       inner join problemset_topics PST on PST.psid = PS.id
       inner join problemset_subtopics PSS on PSS.pstid = PST.id
       inner join problemset_problems PSP on PSP.pssid = PSS.id
-      inner join problems_solved on problems_solved.pspid = PSP.id
+      inner join problems_solved on problems_solved.pspid = PSP.id and problems_solved.userid = U.id
       where U.auth_user_id = $1 and S.code = $2 and C.code = $3 and PSS.subtopic_code = $4
     `;
     pool.query(getq, [auth_user_id, schoolCode, courseCode, topicCode], (err, result) => {

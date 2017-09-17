@@ -112,7 +112,7 @@ class TopicSetComponent extends Component {
         );
       });
       if (topicItems.length === 0)
-        topicItems = <h1 style={{ marginTop: "30px" }}>No topics yet. Check again for updates!</h1>;
+        topicItems = <div><hr className="s4"/><h1>In Progress</h1><p>We apologize for the inconvenience. We are still finalizing this problem set. It will be fully available <span className="blue-text">2 weeks</span> before its corresponding exam.</p><hr className="s1"/></div>;
       const isUnlocked = !set.paid || includes(this.props.unlockedSets, set.id);
       return (
         <span key={index}>
