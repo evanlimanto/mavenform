@@ -2,6 +2,15 @@
   display: none;
 }
 
+.box {
+  height: 550px;
+  margin: -255px auto auto;
+}
+
+.problem-content {
+  height: 400px;
+}
+
 @media (max-height: 725px) {
   .box {
     height: 450px;
