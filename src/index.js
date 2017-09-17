@@ -8,7 +8,7 @@ import { StripeProvider } from 'react-stripe-elements';
 
 import routes from './routes';
 import initializeTracking from './tracking';
-import { canUseDOM } from './utils';
+import { canUseDOM, STRIPE_TOKEN } from './utils';
 import { configureStore, initStore } from './utils/configureStore';
 import { ReactGA } from './events';
 import ScrollToTop from './components/scrolltotop';
@@ -52,7 +52,7 @@ ReactDOM.render((
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <ScrollToTop>
-        <StripeProvider apiKey="pk_test_jlnFqtkMtqsSyISWB14hgeo4">
+        <StripeProvider apiKey={STRIPE_TOKEN}>
           <Switch>
             {map(routes, (route, key) => <Route key={key} path={route.path} component={route.component} exact={route.exact} />)}
           </Switch>

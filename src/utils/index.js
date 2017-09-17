@@ -8,7 +8,7 @@ export const canUseDOM = !!(
 );
 export const BASE_URL = ENV_IS_DEV ? "http://localhost:8080" : (process.env.HOST || "https://www.studyform.com");
 
-const STRIPE_TOKEN = ENV_IS_DEV ? "pk_test_jlnFqtkMtqsSyISWB14hgeo4" : "pk_live_4P4Cg6A4HmnszGFNWjp7tRYf";
+export const STRIPE_TOKEN = ENV_IS_DEV ? "pk_test_jlnFqtkMtqsSyISWB14hgeo4" : "pk_live_4P4Cg6A4HmnszGFNWjp7tRYf";
 
 // Algolia search
 const APP_ID = 'NPJP92R96D'
