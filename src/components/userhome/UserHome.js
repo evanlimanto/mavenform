@@ -30,7 +30,6 @@ class UserHomeComponent extends Component {
   }
 
   render() {
-    console.log(this.state.bookmarkedCourses);
     const bookmarkedCoursesBoxes = (this.state.bookmarkedCourses.length > 0) ? (
       <div className="card-container">
         {map(this.state.bookmarkedCourses, (course, key) => {

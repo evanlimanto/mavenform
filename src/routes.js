@@ -1,6 +1,6 @@
 import { Course } from './components/course';
 import { Dashboard, DashboardContent, DashboardCourses, DashboardComments, DashboardProblem, DashboardTopics, Interactive, Transcribe, Transcribed } from './components/dashboard';
-import { Exam, ProblemSet } from './components/exam';
+import { Exam } from './components/exam';
 import Home from './components/home';
 import { Login, Logout, SecretSignup, Signup } from './components/login';
 import NotFound from './components/notfound';

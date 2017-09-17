@@ -113,6 +113,8 @@ class CourseComponent extends Component {
   }
 
   registerClass() {
+    if (!this.props.auth.loggedIn())
+      return this.props.showSignupModal();
     const { courseCode, schoolCode } = this.props;
     const auth_user_id = this.props.auth.getProfile().user_id;
     const id = this.selectedId;
@@ -139,8 +141,6 @@ class CourseComponent extends Component {
   }
 
   getInfo() {
-    if (!this.props.auth.loggedIn())
-      return this.props.showSignupModal();
     this.setState({ getInfo: !this.state.getInfo });
   }
 
