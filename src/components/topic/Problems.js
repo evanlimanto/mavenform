@@ -12,8 +12,6 @@ import { BASE_URL, courseCodeToLabel, termToLabel } from '../../utils';
 import Navbar from '../navbar';
 import Footer from '../footer';
 
-require('../../css/TopicSet.css');
-
 function cleanProblem(content) {
   return content;
 }

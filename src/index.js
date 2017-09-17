@@ -25,9 +25,10 @@ import './css/School.css';
 import './css/Exam.css';
 import './css/Course.css';
 import './css/Marketing.css';
-import './css/Mobile.css';
 import './css/Admin.css';
 import './css/Info.css';
+import './css/TopicSet.css';
+import './css/Mobile.css';
 
 ReactGA.set({ path: window.location.pathname });
 ReactGA.pageview(window.location.pathname);

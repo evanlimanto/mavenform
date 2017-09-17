@@ -15,8 +15,6 @@ import { Modals } from '../modal';
 import { BASE_URL, courseCodeToLabel } from '../../utils';
 import { showPaymentsModal, updateTopicsList, updateUnlockedSets } from '../../actions';
 
-require('../../css/TopicSet.css');
-
 function getGreenToRed(percent){
   let r, g;
   r = percent<50 ? 255 : Math.floor(255-(percent*2-100)*255/100);
