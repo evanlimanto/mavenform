@@ -56,13 +56,14 @@ class UserHomeComponent extends Component {
           </div>
         </div>
         <hr className="s5" />
-        {this.state.selectedSchool.id ? bookmarkedCoursesBoxes : (
+        {bookmarkedCoursesBoxes}
+        {/*this.state.selectedSchool.id ? bookmarkedCoursesBoxes : (
           <div className="center">
             <a className="card school-card add-school" onClick={this.props.showSelectSchoolModal}>
               <span>Click to select your school</span>
             </a>
           </div>
-        )}
+        )*/}
         {/*
           <hr className="s2" />
           <h4>Your Documents</h4>
