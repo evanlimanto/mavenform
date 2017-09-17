@@ -553,6 +553,9 @@ module.exports = (app) => {
   app.post('/getComments', (req, res, next) => {
     const { contentids } = req.body;
 
+    if (!contentids || contentids.length === 0)
+      return res.json({});
+
     const getq = `
       select D.id as id, D.content as content, users.nickname as nickname,
         D.datetime as datetime, D.parentid as parentid,

@@ -6,14 +6,15 @@ import { Line } from 'rc-progress';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import cookies from 'browser-cookies';
 
 import Navbar from '../navbar';
 import Footer from '../footer';
 import { Modals } from '../modal';
 
-import { BASE_URL, courseCodeToLabel } from '../../utils';
+import { BASE_URL, canUseDOM, courseCodeToLabel } from '../../utils';
 import { showPaymentsModal, updateTopicsList, updateUnlockedSets } from '../../actions';
+
+const cookies = canUseDOM ? require("browser-cookies") : null;
 
 function getGreenToRed(percent){
   let r, g;
@@ -30,7 +31,7 @@ class TopicSetComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: JSON.parse(cookies.get('showTabs')) || [false, false, false],
+      show: (cookies ? (JSON.parse(cookies.get('showTabs')) || [false, false, false]) : [false, false, false]),
       lectureInfo: { lecture_code: null },
       lectureProblemSets: {},
       problemSetTopics: {},
@@ -97,7 +98,7 @@ class TopicSetComponent extends Component {
               <hr className="s1" />
               <Link to={`/${schoolCode}/${courseCode}/interactive/${subtopic.subtopic_code}`}>{subtopic.subtopic_label}</Link>
               <hr className="s0-5" />
-              <label>({this.state.completedProblemsCount[subtopic.id]}/{subtopic.problem_count})</label>
+              <label>({this.state.completedProblemsCount[subtopic.id] || 0}/{subtopic.problem_count})</label>
             </div>
           );
         });

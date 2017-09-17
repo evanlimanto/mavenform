@@ -627,7 +627,7 @@ const getCompletedProblemsCount =
   (req, res, next) => {
     const { schoolCode, courseCode, auth_user_id } = req.params;
     const getq = `
-      select PSS.id, sum(case when problems_solved.id is not null then 1 else 0 end) as count from bookmarked_courses BC
+      select PSS.id, count(*) from bookmarked_courses BC
       inner join lectures L on BC.lectureid = L.id
       inner join courses C on C.id = L.courseid
       inner join schools S on S.id = C.schoolid
@@ -635,8 +635,8 @@ const getCompletedProblemsCount =
       inner join problemsets PS on PS.lectureid = L.id
       inner join problemset_topics PST on PST.psid = PS.id
       inner join problemset_subtopics PSS on PSS.pstid = PST.id
-      full outer join problemset_problems PSP on PSP.pssid = PSS.id
-      full outer join problems_solved on problems_solved.pspid = PSP.id
+      inner join problemset_problems PSP on PSP.pssid = PSS.id
+      inner join problems_solved PSD on PSD.pspid = PSP.id and PSD.userid = U.id
       where S.code = $1 and C.code = $2 and U.auth_user_id = $3
       group by PSS.id
     `;
