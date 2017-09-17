@@ -18,6 +18,7 @@ class NavbarComponent extends Component {
 
     this.toggleProfileDropdown = this.toggleProfileDropdown.bind(this);
     this.updateSearchResults = this.updateSearchResults.bind(this);
+    this.updateSearch = this.updateSearch.bind(this);
   }
 
   componentDidMount() {
