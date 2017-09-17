@@ -147,7 +147,8 @@ class TopicSetComponent extends Component {
           <div className="info">
             <h4 className="info-title">{courseCodeToLabel(courseCode)} {lectureInfo.lecture_code}</h4>
             <hr className="s1" />
-            <h5 className="info-subtitle">{lectureInfo.professor}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{lectureInfo.term_label}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a className="school-link">Syllabus</a></h5>
+            <h5 className="info-subtitle">{lectureInfo.professor}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{lectureInfo.term_label}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+              <a className="school-link" href={lectureInfo.syllabus_url}>Syllabus</a></h5>
             <hr className="s1" />
             <hr className="s0-5" />
             <p className="info-text">
