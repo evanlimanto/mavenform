@@ -13,6 +13,8 @@ import Navbar from '../navbar';
 class ExamComponent extends Component {
   componentDidMount() {
     ExamComponent.fetchData(this.props.dispatch, this.props);
+    if (canUseDOM)
+      window.renderMJ();
   }
 
   static getMeta(props) {

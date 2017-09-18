@@ -143,6 +143,7 @@ class TopicSetComponent extends Component {
         <Navbar interactive={true} links={[`${schoolCode}`, `${courseCode}`, "interactive"]} navbarLabels={[this.props.labels.schools[schoolCode], courseCodeToLabel(courseCode), "Interactive Study"]} />
         <div className="container info-container">
           <hr className="s5" />
+          <div className="mobile-warning int-box"><strong>Note:</strong> Interactive Mode is in beta and may not be fully optimized for your screen size yet. It will be soon!</div>
           <img className="info-img" src="/img/interactive.svg" alt="subject-logo" />
           <div className="info">
             <h4 className="info-title">{courseCodeToLabel(courseCode)} {lectureInfo.lecture_code}</h4>

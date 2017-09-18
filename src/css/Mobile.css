@@ -11,6 +11,10 @@
   height: 400px;
 }
 
+.mobile-warning {
+  display: none;
+}
+
 @media (max-height: 725px) {
   .box {
     height: 450px;
@@ -130,6 +134,12 @@
 
   .gray-filler {
     display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .mobile-warning {
+    display: block;
   }
 }
 

@@ -3,8 +3,7 @@ import { join, map, split, reduce, toUpper } from 'lodash';
 export const ENV_IS_DEV = process.env.NODE_ENV === "development";
 export const canUseDOM = !!(
   typeof window !== 'undefined' &&
-  window.document &&
-  window.document.createElement
+  window.document
 );
 export const BASE_URL = ENV_IS_DEV ? "http://localhost:8080" : (process.env.HOST || "https://www.studyform.com");
 
