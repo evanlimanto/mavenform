@@ -26,7 +26,7 @@ pg.defaults.ssl = true;
 const prod_client = new pg.Client(prodConfig);
 prod_client.connect();
 
-const q1 = `select pspid, userid from problems_solved`;
+const q1 = `select pspid, userid from problems_solved where id > 47`;
 const i1 = `insert into problems_solved (pspid, userid) values($1, $2)`;
 
 async.parallel([

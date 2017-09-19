@@ -1,137 +1,104 @@
 q1_1: |
-  1\. Let
-  $$\vec{a}_1 = \left[ \begin{array}{c} 1 \\\\ 1 \\\\ 1 \end{array} \right], \vec{a}_2 = \left[ \begin{array}{c} 1 \\\\ 1 \\\\ -1 \end{array} \right],
-    \vec{a}_3 = \left[ \begin{array}{c} 1 \\\\ -1 \\\\ 1 \end{array} \right],
-    \vec{b} = \left[ \begin{array}{c} 1 \\\\ 2 \\\\ 1 \end{array} \right]$$
-  (a) Do the columns of $A$ span $\mathbb{R}^3$? Justify your answer.
+  Let $f(x, y) = \frac{y}{x} - \frac{x}{y}$. Compute $\frac{\partial^2 f}{\partial x \partial y}$.
 
 q1_1_s: |
-  Reduce the matrix $[\vec{a}_1, \vec{a}_2, \vec{a}_3]$ to REF. One possible form is
-  $$\left[ \begin{array}{c c c} 1 & 1 & 1 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \end{array} \right]$$
-  There is a pivot in each row. So the solution of $A\vec{x} = \vec{b}$ has a solution for any $\vec{b} \in \mathbb{R}^3$, and the columns of $A$ spans $\mathbb{R}^3$.
+  $-\frac{1}{x^2} + \frac{1}{y^2}$
 
 q1_2: |
-  Are the columns of $A$ linearly independent? Justify your answer.
+  Compute $\frac{\partial}{\partial x} e^{\sin^2 xy}$.
 
 q1_2_s: |
-  There is a pivot in each column of the REF, and therefore there is no free variable. So the columns of $A$ are linearly independent.
+  $e^{\sin^2 xy}(2\sin xy)(\cos xy)y$
 
 q1_3: |
-  Represent $\vec{b}$ as the linear combination of $\vec{a}_1, \vec{a}_2, \vec{a}_3$. Is this representation unique? Justify your answer.
+  Find the constant function $g(x) = A$ that fits the data $(0, 1), (1, 2), (2, 4)$ in the least squares sense. (Hint: find $A$ to minimize $f(A) = (A - 1)^2 + (A - 2)^2 + (A - 4)^2$)
 
 q1_3_s: |
-  Solve the augmented matrix
-  $$\left[ \begin{array}{c c c c} 1 & 1 & 1 & 1 \\\\ 0 & 1 & 0 & 2 \\\\ 0 & 0 & 1 & 1 \end{array} \right]$$
-  by reducing to REF
-  $$\left[ \begin{array}{c c c c} 1 & 1 & 1 & 1 \\\\ 0 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & -\frac{1}{2} \end{array} \right]$$
-  Further reduce this RREF (or use backward substitution), and the answer is
-  $$\vec{x} = \left[ \begin{array}{c} \frac{3}{2} \\\\ 0 \\\\ -\frac{1}{2} \end{array} \right]$$
+  $f'(A) = 2(A - 1) + 2(A - 2) + 2(A - 4) = 6A - 14 = 0 \implies A = \frac{7}{3}$
+
+q1_4: |
+  Suppose $0 \le t \le \pi$ and $\tan t = -\frac{2}{3}$. Compute $\sin t$.
+
+q1_4_s: |
+  $\frac{2}{\sqrt{13}}$
+
+q1_5: |
+  Evaluate the indefinite integral $\int \frac{2}{\cos^2 (3xy)} dy$
+
+q1_5_s: |
+  $\frac{2}{3x} \tan(3xy) + C$
+
+q1_6: |
+  Which of the following is a contour plot of $f(x, y) = x^2 + 4y^2$?
+  <hr class="s1" />
+  <p align="center">!!q1-1.png!!</p>
 
 q2_1: |
-  2\. True or False: If True, explain why. If False, give an explicit numerical example for which the statement does not hold.
-  <hr class="s1" />
-  (a) A \in \mathbb{R}^{n \times n}$ is invertible, then $A^{-1}$ is invertible.
+  Find the critical points of
+  $$f(x, y) = x^2 + 3y - \ln y \qquad (y > 0)$$
+  and classify them as relative maxima, minima or saddle points.
 
 q2_1_s: |
-  True. By definition $A^{-1}A = AA^{-1} = I$, hence $A$ is the inverse matrix of $A^{-1}$.
-
-q2_2: |
-  (b) If $n$ vectors in $\mathbb{R}^m$ are linearly dependent, then any vector can be represented by the linear combination of other $n - 1$ vectors $(n > 1)$.
-
-q2_2_s: |
-  False. Consider $\vec{a}_1 = \left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right], \vec{a}_2 = \left[ \begin{array}{c} 0 \\\\ 1 \end{array} \right], \vec{a}_3 = \left[ \begin{array}{c} 0 \\\\ 2 \end{array} \right]$. Then $\\{ \vec{a}_1, \vec{a}_2, \vec{a}_3 \\}$ are linearly dependent, but $\vec{a}_1$ cannot be represented as the linear combination of $\vec{a}_2, \vec{a}_3$.
-
-q2_3: |
-  (c) $A \in \mathbb{R}^{n \times n}$, then $(A^T)^2 = (A^2)^T$
-
-q2_3_s: |
-  True. Use
-  $$(AB)^T = B^TA^T$$
-  and let $A = B$.
-
-q2_4: |
-  (d) Every subspace of $\mathbb{R}^n$ contains at most $n$ vectors.
-
-q2_4_s: |
-  False. For example, $\mathbb{R}^2$ contains an infinite number of vectors.
-
-q2_5: |
-  (e) Let $\vec{v}_1, \vec{v}_2, \vec{v}_3 \in \mathbb{R}^n$. $\vec{v}_1$ and $\vec{v}_2$ are linearly dependent, then $\vec{v}_1, \vec{v}_2, \vec{v}_3$ are linearly dependent.
-
-q2_5_s: |
-  True. If $\vec{v}_1$ and $\vec{v}_2$ are linearly dependent then there exists a nonzero vector $\vec{x} = \left[ \begin{array}{c} x_1 \\\\ x_2 \end{array} \right]$ so that
-  $$x_1\vec{v}_1 + x_2\vec{v}_2 = \vec{0}$$
-  therefore
-  $$x_1\vec{v}_1 + x_2\vec{v}_2 + 0\vec{v}_3 = \vec{0}$$
-  This means that $\vec{v}_1, \vec{v}_2, \vec{v}_3$ are linearly dependent.
+  $\frac{\partial f}{\partial x} = 2x = 0 \implies x = 0 \\\\
+  \frac{\partial f}{\partial y} = 3 - \frac{1}{y} = 0 \implies \frac{1}{y} = 3, y = \frac{1}{3} \\\\
+  \frac{\partial^2 f}{\partial x^2} = 2, \frac{\partial^2 f}{\partial x \partial y} = 0, \frac{\partial^2 f}{\partial y^2} = \frac{1}{y^2} = \frac{1}{(1/3)^2} = 9 \\\\
+  D = (2)(9) - 0^2 = 18 > 0, \frac{\partial ^2 f}{\partial x^2} = 2 > 0$
 
 q3_1: |
-  3a) Compute $C = A^TB$, where
-  $$A = \left[ \begin{array}{c c c} 2 & 3 & 4 \\\\ 0 & 1 & 1 \end{array} \right], \quad B = \left[ \begin{array}{c c} 1 & 2 \\\\ 2 & 1 \end{array} \right]$$
+  Use the method of Lagrange multipliers to find the minimum value of
+  $$f(x, y, z) = 2x + e^y + z^2$$
+  subject to the constraint $x + y + z = 2$. Don't forget to evaluate (and simplify) $f$ at the end.
 
 q3_1_s: |
-  $$C = \left[ \begin{array}{c c} 2 & 4 \\\\ 5 & 7 \\\\ 6 & 9 \end{array} \right]$$
-
-q3_2: |
-  b) Compute the matrix inverse of
-  $$A = \left[ \begin{array}{c c c} 1 & 0 & 0 \\\\ 0 & 2 & 1 \\\\ 0 & 1 & 1 \end{array} \right]$$
-
-q3_2_s: |
-  Solve the augmente problem
-  $$[A|I] = \left[ \begin{array}{c c c c c c} 1 & 0 & 0 & 1 & 0 & 0 \\\\ 0 & 2 & 1 & 0 & 1 & 0 \\\\ 0 & 1 & 1 & 0 & 0 & 1 \end{array} \right]$$
-  Reduce $A$ to RREF and we have
-  $$\left[ \begin{array}{c c c c c c} 1 & 0 & 0 & 1 & 0 & 0 \\\\ 0 & 1 & 0 & 0 & 1 & -1 \\\\ 0 & 0 & 1 & 0 & -1 & 2 \end{array} \right]$$
-  hence
-  $$A^{-1} = \left[ \begin{array}{c c c} 1 & 0 & 0 \\\\ 0 & 1 & -1 \\\\ 0 & -1 & 2 \end{array} \right]$$
+  $F(x, y, z, \lambda) = 2x + e^y + z^2 + \lambda(x + y + z - 2) \\\\
+  \frac{\partial F}{\partial x} = 2 + \lambda = 0 \implies \lambda = -2 \\\\
+  \frac{\partial F}{\partial y} = e^y + \lambda = 0 \implies e^y = 2, y = \ln 2 \\\\
+  \frac{\partial F}{\partial z} = 2z + \lambda = 0 \implies 2z = 2, z = 1 \\\\
+  \frac{\partial F}{\partial \lambda} = x + y + z - 2 = 0 \implies x = 2 - y - z = 2 - \ln 2 - 1 = 1 - \ln 2 \\\\
+  f(x, y, z) = 2(1 - \ln 2) + e^{\ln 2} + 1^2 = 5 - 2 \ln 2$
 
 q4_1: |
-  4\. A linear transformation $T: \mathbb{R}^2 \to \mathbb{R}^3$ has the following effect
-  $$T \left( \left[ \begin{array}{c} 1 \\\\ -1 \end{array} \right] \right) = \left[ \begin{array}{c} 1 \\\\ -1 \\\\ 0 \end{array} \right], T \left( \left[ \begin{array}{c} 1 \\\\ 1 \end{array} \right] \right) = \left[ \begin{array}{c} 1 \\\\ 1 \\\\ 1 \end{array} \right]$$
-  (a) Compute
-  $$T \left( \left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right] \right), T \left( \left[ \begin{array}{c} 0 \\\\ 1 \end{array} \right] \right)$$
+  Evaluate the integral over the region.
+  <hr class="s1" />
+  $\int \int_R \sqrt{xy} dx \; dy \quad (R = \\{ (x, y) : x \ge 0, y \ge \sqrt{x}, y \le 1 \\})$
 
 q4_1_s: |
-  First write $\left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right]$ and $\left[ \begin{array}{c} 0 \\\\ 1 \end{array} \right]$ as the linear combination of $\left[ \begin{array}{c} 1 \\\\ -1 \end{array} \right]$ and $\left[ \begin{array}{c} 1 \\\\ 1 \end{array} \right]$. This means solving
-  $$\alpha_{11} \left[ \begin{array}{c} 1 \\\\ -1 \end{array} \right] + \alpha_{21} \left[ \begin{array}{c} 1 \\\\ 1 \end{array} \right] = \left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right]$$
-  $$\alpha_{12} \left[ \begin{array}{c} 1 \\\\ -1 \end{array} \right] + \alpha_{22} \left[ \begin{array}{c} 1 \\\\ 1 \end{array} \right] = \left[ \begin{array}{c} 0 \\\\ 1 \end{array} \right]$$
-  This can be solved by the following augmented matrix
-  $$\left[ \begin{array}{c c c c} 1 & 1 & 1 & 0 \\\\ -1 & 1 & 0 & 1 \end{array} \right]$$
-  Reduce the left to RREF, we have
-  $$\left[ \begin{array}{c c c c} 1 & 0 & \frac{1}{2} & -\frac{1}{2} \\\\ 0 & 1 & \frac{1}{2} & \frac{1}{2} \end{array} \right]$$
-  In other words
-  $$\left[ \begin{array}{c c} \alpha_{11} & \alpha_{12} \\\\ \alpha_{21} & \alpha_{22} \end{array} \right] = \left[ \begin{array}{c c} \frac{1}{2} & -\frac{1}{2} \\\\ \frac{1}{2} & \frac{1}{2} \end{array} \right]$$
-  Using that $T$ is a linear transformation
-  $$T \left( \left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right] \right) = \frac{1}{2} T \left( \left[ \begin{array}{c} 1 \\\\ -1 \end{array} \right] \right) + \frac{1}{2} T \left( \left[ \begin{array}{c} 1 \\\\ 1 \end{array} \right] \right) = \left[ \begin{array}{c} 1 \\\\ 0 \\\\ \frac{1}{2} \end{array} \right]$$
-  $$T \left( \left[ \begin{array}{c} 0 \\\\ 1 \end{array} \right] \right) = -\frac{1}{2} T \left( \left[ \begin{array}{c} 1 \\\\ -1 \end{array} \right] \right) + \frac{1}{2} T \left( \left[ \begin{array}{c} 1 \\\\ 1 \end{array} \right] \right) = \left[ \begin{array}{c} 0 \\\\ 1 \\\\ \frac{1}{2} \end{array} \right]$$
+  $\begin{align}
+  V &= \int_0^1 \int_0^{y^2} x^{1/2} y^{1/2} dx \; dy \\\\
+  &= \int_0^1 \left[ \frac{2}{3} x^{3/2}y^{1/2} \right]_{x=0}^{x=y^2} dy \\\\
+  &= \int_0^1 \frac{2}{3} y^{7/2} dy \\\\
+  &= \left( \frac{2}{3} \right) \left( \frac{2}{9} \right) y^{9/2} |_0^1 \\\\
+  &= \frac{4}{27}
+  \end{align}$
 
-q4_2: |
-  (b) Write down the standard matrix of $T$, denoted by $A$.
+q5_1: |
+  The square of the distance between the tips of the minute and hour hands on a certain clock is given by
+  $$f(t) = 25 - 24 \cos (2\pi t - \frac{\pi}{6}t), \qquad (t = \text{hours since midnight})$$
+  Compute $f'(1)$. Simplify your answer as much as possible.
 
-q4_2_s: |
-  The standard matrix is
-  $$A = \left[ T \left( \left[ \begin{array}{c} 1 \\\\ 0 \end{array} \right] \right), T \left( \left[ \begin{array}{c} 0 \\\\ 1 \end{array} \right] \right) \right] = \left[ \begin{array}{c c} 1 & 0 \\\\ 0 & 1 \\\\ \frac{1}{2} & \frac{1}{2} \end{array} \right]$$
+q5_1_s: |
+  $f'(t) = 24\sin(\frac{11\pi}{6} t) \cdot \frac{11\pi}{6} = 44 \pi \sin(\frac{11\pi}{6} t) \\\\
+  f'(1) = 44\pi \sin(\frac{11\pi}{6})$
 
-q4_3: |
-  (c) Find a basis for the null space and column space of $A$.
+q5_2: |
+  What is the period of $f(t)$? (In other words, find the smallest number $T > 0$ such that $f(t + T) = f(t)$ for all $t$.)
 
-q4_3_s: |
-  Reduce $A$ to REF, and one possible form is
-  $$\left[ \begin{array}{c c} 1 & 0 \\\\ 0 & 1 \\\\ 0 & 0 \end{array} \right]$$
-  There is no free column, and the null space is $\\{ \vec{0} \\}$, and there is no basis (if you say $\vec{0}$ is its basis, your points will not be reduced either).
+q5_2_s: |
+  $f(t + T) = 25 - 24 \cos (\frac{11\pi}{6}t + \frac{11\pi}{6}T) \\\\
+  f(t) = 25 - 24 \cos (\frac{11\pi}{6} t)$
   <hr class="s1" />
-  Each column is a pivot column, and therefore a basis of the column space is
-  $$\left\\{ \left[ \begin{array}{c} 1 \\\\ 0 \\\\ \frac{1}{2}, \left[ \begin{array}{c} 0 \\\\ 1 \\\\ \frac{1}{2} \end{array} \right] \right\\}$$
+  They will be equal if $\frac{11\pi}{6}T = 2\pi$, or $T = \frac{12}{11}$ hours.
 
-q4_4: |
-  (d) Is $T$ injective? Is $T$ surjective? Justify your answer.
+q5_3: |
+  How many times will the minute hand and hour hand line up (so that $f(t)$ is minimized) in a typical $24$ hour span, e.g. from $9$ AM today to $9$ AM tomorrow? (Hint: you don't have to solve the optimization problem to know how much time elapses between successive minima)
 
-q4_4_s: |
-  $T$ maps $\mathbb{R}^2$ to $\mathbb{R}^3$ and therefore cannot be surjective.
-
-q4_5: |
-  (e) State the rank theorem, and verify the rank theorem for $A$ from the computation in (c).
-
-q4_5_s: |
-  The rank theorem states that the number of columns of $A$ equals to the sum of the dimension of the null space of $A$ and the dimension of the column space of $A$ (i.e. the rank of $A$).
+q5_3_s: |
+  $n = \text{# of cycles}$
   <hr class="s1" />
-  In this case, the number of columns is $2$. The dimension of the null space of $A$ is $0$, and the dimension of the column space is $2$. Hence $2 = 0 + 2$ and the rank theorem is satisfied.
+  $T = \text{period}$
+  <hr class="s1" />
+  $t = \text{time it takes to execute} \; n \; \text{cycles}$
+  <hr class="s1" />
+  $t = nT = 24 \; \text{hours} \implies n = \frac{24}{T} = 24 \cdot \frac{11}{12} = 22$
+  <hr class="s2" />
+  Note: Since $24$ is an integer multiple of $T$, the number of minima that occur in that time doesn't depend on when you start (unless you start at a minimum, e.g. midnight, and count both ends)

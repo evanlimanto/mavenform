@@ -86,6 +86,14 @@ class TopicSetComponent extends Component {
 
   render() {
     const { courseCode, schoolCode } = this.props;
+    if (!this.state.lectureInfo || !this.state.lectureProblemSets || !this.state.problemSetTopics || !this.state.topicSubTopics || !this.state.completedProblemsCount)
+      return (
+        <div>
+          <Navbar interactive={true} links={[`${schoolCode}`, `${courseCode}`, "interactive"]} navbarLabels={[this.props.labels.schools[schoolCode], courseCodeToLabel(courseCode), "Interactive Study"]} />
+          <h1>Loading..</h1>
+        </div>
+      );
+
     const { lectureInfo } = this.state;
     const containers = map(this.state.lectureProblemSets, (set, index) => {
       let topicItems = map(this.state.problemSetTopics[set.id], (topic, topicKey) => {
