@@ -220,7 +220,7 @@ class ProblemsComponent extends Component {
     const itemContent = this.state.subTopicInfo.problems[this.state.progressIndicator];
     const contents = this.state.showContents ? [(
       <div key={0} className="problem-contents">
-        <div dangerouslySetInnerHTML={{ __html: itemContent.problem }}></div>
+        <div dangerouslySetInnerHTML={{ __html: (itemContent.problem && itemContent.problem.length > 0) ? itemContent.problem : "Loading content.." }}></div>
         <hr className="s1" />
         <div dangerouslySetInnerHTML={{ __html: itemContent.interactive_problem }}></div>
         <div dangerouslySetInnerHTML={{ __html: this.state.showSolution ?
