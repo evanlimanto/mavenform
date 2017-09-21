@@ -53,11 +53,11 @@ ReactDOM.render((
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <ScrollToTop>
-        {/*<StripeProvider apiKey={STRIPE_TOKEN}>*/}
+        <StripeProvider apiKey={STRIPE_TOKEN}>
           <Switch>
             {map(routes, (route, key) => <Route key={key} path={route.path} component={route.component} exact={route.exact} />)}
           </Switch>
-        {/*</StripeProvider>*/}
+        </StripeProvider>
       </ScrollToTop>
     </ConnectedRouter>
   </Provider>
