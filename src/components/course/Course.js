@@ -190,17 +190,17 @@ class CourseComponent extends Component {
         <div className="int-box">
           {this.props.registeredLecture ? (
             <span>
-              <p className="int-helper">
+              <div className="int-helper">
                 You've already signed up for the interactive study guide for <span className="int-highlight">{courseCodeToLabel(courseCode)} {lectureInfo.lecture_code}</span>.
-              </p>
+              </div>
               <button className="int-button int-button-white int-button-spacer" onClick={this.unregisterClass}>Remove</button>
               <Link to={`/${schoolCode}/${courseCode}/interactive`}><button className="int-button">View</button></Link>
             </span>
           ) : (
             <span>
               <p className="int-helper">
-                  <span className="int-highlight">Interactive study mode available.</span> Study from an interactive study guide personalized to your class and professor.
-                </p>
+                <span className="int-highlight">Interactive study mode available.</span> Study from an interactive study guide personalized to your class and professor.
+              </p>
               <ReactCSSTransitionGroup
                 transitionName="getInfoButton"
                 transitionEnterTimeout={200}

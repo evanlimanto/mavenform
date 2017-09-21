@@ -120,13 +120,6 @@ button.int-button {
   -webkit-appearance: none;
 }
 
-@media (max-width: 1199px) {
-  button.int-button {
-    /*float: none;
-    margin-top: 15px;*/
-  }
-}
-
 button.int-button:hover {
   cursor: pointer;
   opacity: 1;

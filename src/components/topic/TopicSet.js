@@ -32,7 +32,7 @@ class TopicSetComponent extends Component {
     super(props);
     this.state = {
       show: (cookies ? (JSON.parse(cookies.get('showTabs')) || [false, false, false]) : [false, false, false]),
-      lectureInfo: { lecture_code: null },
+      lectureInfo: null,
       lectureProblemSets: {},
       problemSetTopics: {},
       topicSubTopics: {},

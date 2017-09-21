@@ -84,7 +84,7 @@ class DashboardProblemComponent extends Component {
           <textarea className="contentCol" value={problem.problem ? problem.problem : ""} ref="problem" onChange={this.handleChange} placeholder="PROBLEM CONTENT" />
           <textarea className="contentCol" value={problem.solution ? problem.solution : ""} ref="solution" onChange={this.handleChange} placeholder="FREE RESPONSE SOLUTION" />
           <textarea className="contentCol" value={problem.choices ? problem.choices: ""} ref="choices" onChange={this.handleChange} placeholder="MULTIPLE CHOICE OPTIONS" />
-          <textarea className="contentCol" value={problem.final_solution ? problem.final_solution : ""} ref="final_solution" onChange={this.handleChange} placeholder="MULTIPLE CHOICE SOLUTION" />
+          <textarea className="contentCol" value={problem.final_solution ? problem.final_solution : ""} ref="final_solution" onChange={this.handleChange} placeholder="FINAL SOLUTION" />
           <textarea className="contentCol" value={problem.interactive_problem ? problem.interactive_problem : ""} ref="interactive_problem" onChange={this.handleChange} placeholder="INTERACTIVE PROBLEM" />
           <textarea className="contentCol" value={problem.interactive_solution ? problem.interactive_solution : ""} ref="interactive_solution" onChange={this.handleChange} placeholder="INTERACTIVE SOLUTION" />
           <textarea className="contentCol" value={problem.suggestion_text ? problem.suggestion_text : ""} ref="suggestion_text" onChange={this.handleChange} placeholder="SUGGESTION TEXT" />

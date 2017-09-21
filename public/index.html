@@ -15,8 +15,8 @@
   <link rel="shortcut icon" href="%PUBLIC_URL%/img/favicon.ico">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script>
-    if (window.location.href === "http://www.studyform.com/" || window.location.href === "http://www.studyform.com") {
-      window.location.href = "https://www.studyform.com";
+    if (window.location.origin === "http://www.studyform.com/" || window.location.origin === "http://www.studyform.com") {
+      window.location.href = "https://www.studyform.com" + window.location.pathname;
     }
   </script>
   <script type="text/x-mathjax-config">
