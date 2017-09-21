@@ -1,104 +1,93 @@
 q1_1: |
-  Let $f(x, y) = \frac{y}{x} - \frac{x}{y}$. Compute $\frac{\partial^2 f}{\partial x \partial y}$.
+  The volume of an expanding cloud of gas starts at $10$ L and multiplies by some factor $m$ each second.
+  <hr class="s1" />
+  (a) In terms of $m$ and number of elapsed seconds $t$, write down an expression for the volume of the gas after $t$ seconds.
 
 q1_1_s: |
-  $-\frac{1}{x^2} + \frac{1}{y^2}$
+  $10m^t$ L
 
 q1_2: |
-  Compute $\frac{\partial}{\partial x} e^{\sin^2 xy}$.
+  (b) If, after $100$ seconds, the cloud of gas has doubled in size, what is $m$? No need to simplify your answer.
 
 q1_2_s: |
-  $e^{\sin^2 xy}(2\sin xy)(\cos xy)y$
+  $10m^{100} = 2 \cdot 10 \implies m^{100} = 2 \implies m = 2^{1/100}$
 
 q1_3: |
-  Find the constant function $g(x) = A$ that fits the data $(0, 1), (1, 2), (2, 4)$ in the least squares sense. (Hint: find $A$ to minimize $f(A) = (A - 1)^2 + (A - 2)^2 + (A - 4)^2$)
+  (c) How long until the gas reaches $50$ L?
 
 q1_3_s: |
-  $f'(A) = 2(A - 1) + 2(A - 2) + 2(A - 4) = 6A - 14 = 0 \implies A = \frac{7}{3}$
+  $10m^t = 50 \implies m^t = 5$
+  <hr class="s1" />
+  $(2^{1/100})^t = 5 \implies 2^{t/100} = 5$
+  <hr class="s1" />
+  $\frac{t}{100}\ln(2) = \ln(5)$
+  <hr class="s1" />
+  $t = \frac{100 \ln(5)}{\ln(2)}$ seconds after start
 
 q1_4: |
-  Suppose $0 \le t \le \pi$ and $\tan t = -\frac{2}{3}$. Compute $\sin t$.
+  (d) Let $V(t)$ denote the volume as a function of time. What is the instantaneous rate of change of $V(t)$ at $t = 0$?
 
 q1_4_s: |
-  $\frac{2}{\sqrt{13}}$
-
-q1_5: |
-  Evaluate the indefinite integral $\int \frac{2}{\cos^2 (3xy)} dy$
-
-q1_5_s: |
-  $\frac{2}{3x} \tan(3xy) + C$
-
-q1_6: |
-  Which of the following is a contour plot of $f(x, y) = x^2 + 4y^2$?
+  $v(t) = 10m^t = 10 \cdot 2^{1/100}$
   <hr class="s1" />
-  <p align="center">!!q1-1.png!!</p>
+  $\frac{dV}{dt} = 10 \cdot 2^{t/100} \cdot \frac{1}{100} = \ln(2)$
+  <hr class="s1" />
+  $\frac{dV}{dt} |_{t=0} = \frac{\ln 2}{10}$
 
 q2_1: |
-  Find the critical points of
-  $$f(x, y) = x^2 + 3y - \ln y \qquad (y > 0)$$
-  and classify them as relative maxima, minima or saddle points.
+  Differentiate $f(x) = \frac{1}{1 + x^2}$.
 
 q2_1_s: |
-  $\frac{\partial f}{\partial x} = 2x = 0 \implies x = 0 \\\\
-  \frac{\partial f}{\partial y} = 3 - \frac{1}{y} = 0 \implies \frac{1}{y} = 3, y = \frac{1}{3} \\\\
-  \frac{\partial^2 f}{\partial x^2} = 2, \frac{\partial^2 f}{\partial x \partial y} = 0, \frac{\partial^2 f}{\partial y^2} = \frac{1}{y^2} = \frac{1}{(1/3)^2} = 9 \\\\
-  D = (2)(9) - 0^2 = 18 > 0, \frac{\partial ^2 f}{\partial x^2} = 2 > 0$
+  $f'(x) = \frac{-2x}{(1 + x^2)^2}$
+
+q2_2: |
+  Differentiate $f(x) = \sqrt{\sqrt{x}}$.
+
+q2_2_s: |
+  $f(x) = \sqrt[4]{x} \implies f'(x) = \frac{1}{4}x^{-3/4}$
+
+q2_3: |
+  Differentiate $f(x) = \cos^2 \left( \frac{x^2}{2} \right)$.
+
+q2_3_s: |
+  $f'(x) = 2\cos(\frac{x^2}{2}) (-\sin(\frac{x^2}{2})) (x) = -2x \cos(\frac{x^2}{2})\sin(\frac{x^2}{2})$
+
+q2_4: |
+  Differentiate $\ln(1 + \sqrt{x})$.
+
+q2_4_s: |
+  $f'(x) = \frac{1}{1 + \sqrt{x}} \cdot \frac{1}{2}x^{-1/2} = \frac{1}{2} \cdot \frac{1}{\sqrt{x} + x}$
 
 q3_1: |
-  Use the method of Lagrange multipliers to find the minimum value of
-  $$f(x, y, z) = 2x + e^y + z^2$$
-  subject to the constraint $x + y + z = 2$. Don't forget to evaluate (and simplify) $f$ at the end.
+  A hyperbola has an equation given by
+  $$\frac{x^2}{4} - \frac{y^2}{9} = 1$$
+  What is the equation to the tangent line to the hyperbola at $(2\sqrt{2}, 3)$?
 
 q3_1_s: |
-  $F(x, y, z, \lambda) = 2x + e^y + z^2 + \lambda(x + y + z - 2) \\\\
-  \frac{\partial F}{\partial x} = 2 + \lambda = 0 \implies \lambda = -2 \\\\
-  \frac{\partial F}{\partial y} = e^y + \lambda = 0 \implies e^y = 2, y = \ln 2 \\\\
-  \frac{\partial F}{\partial z} = 2z + \lambda = 0 \implies 2z = 2, z = 1 \\\\
-  \frac{\partial F}{\partial \lambda} = x + y + z - 2 = 0 \implies x = 2 - y - z = 2 - \ln 2 - 1 = 1 - \ln 2 \\\\
-  f(x, y, z) = 2(1 - \ln 2) + e^{\ln 2} + 1^2 = 5 - 2 \ln 2$
+  Differentiating implicitly, $\frac{2x}{4} - \frac{2y}{9} \frac{dy}{dx} = 0$ at $(2\sqrt{2}, 3)$ this gives $\sqrt{2} - \frac{2}{3} \frac{dy}{dx} = 0$
+  <hr class="s1" />
+  Hence $\frac{dy}{dx} = \frac{3\sqrt{2}}{2}$ and the equation of the tangent line is $y - 3 = \frac{3\sqrt{2}}{2}(x - 2\sqrt{2})$.
 
 q4_1: |
-  Evaluate the integral over the region.
-  <hr class="s1" />
-  $\int \int_R \sqrt{xy} dx \; dy \quad (R = \\{ (x, y) : x \ge 0, y \ge \sqrt{x}, y \le 1 \\})$
+  $\sqrt[3]{2}$ is close to $\frac{5}{4}$. Use one iteration of Newton's method to improve on this guess.
 
 q4_1_s: |
-  $\begin{align}
-  V &= \int_0^1 \int_0^{y^2} x^{1/2} y^{1/2} dx \; dy \\\\
-  &= \int_0^1 \left[ \frac{2}{3} x^{3/2}y^{1/2} \right]_{x=0}^{x=y^2} dy \\\\
-  &= \int_0^1 \frac{2}{3} y^{7/2} dy \\\\
-  &= \left( \frac{2}{3} \right) \left( \frac{2}{9} \right) y^{9/2} |_0^1 \\\\
-  &= \frac{4}{27}
-  \end{align}$
+  Apply Newton's method to $f(x) = x^3 - 2$ with guess $x_1 = \frac{5}{4}$.
+  <hr class="s1" />
+  $x_2 = x_1 - \frac{(x_1)^3 - 2}{3(x_1)^2} = \frac{63}{50}$
 
 q5_1: |
-  The square of the distance between the tips of the minute and hour hands on a certain clock is given by
-  $$f(t) = 25 - 24 \cos (2\pi t - \frac{\pi}{6}t), \qquad (t = \text{hours since midnight})$$
-  Compute $f'(1)$. Simplify your answer as much as possible.
+  What is the 3rd degree Taylor polynomial of $\sin(x)$ centered at $x = 0$? Use your answer to esimate $\sin(\frac{1}{4})$.
 
 q5_1_s: |
-  $f'(t) = 24\sin(\frac{11\pi}{6} t) \cdot \frac{11\pi}{6} = 44 \pi \sin(\frac{11\pi}{6} t) \\\\
-  f'(1) = 44\pi \sin(\frac{11\pi}{6})$
-
-q5_2: |
-  What is the period of $f(t)$? (In other words, find the smallest number $T > 0$ such that $f(t + T) = f(t)$ for all $t$.)
-
-q5_2_s: |
-  $f(t + T) = 25 - 24 \cos (\frac{11\pi}{6}t + \frac{11\pi}{6}T) \\\\
-  f(t) = 25 - 24 \cos (\frac{11\pi}{6} t)$
+  $f(x) = \sin(x) \quad f(0) = 0$
   <hr class="s1" />
-  They will be equal if $\frac{11\pi}{6}T = 2\pi$, or $T = \frac{12}{11}$ hours.
-
-q5_3: |
-  How many times will the minute hand and hour hand line up (so that $f(t)$ is minimized) in a typical $24$ hour span, e.g. from $9$ AM today to $9$ AM tomorrow? (Hint: you don't have to solve the optimization problem to know how much time elapses between successive minima)
-
-q5_3_s: |
-  $n = \text{# of cycles}$
+  $f'(x) = \cos(x) \quad f'(0) = 1$
   <hr class="s1" />
-  $T = \text{period}$
+  $f''(x) = -\sin(x) \quad f''(0) = 0$
   <hr class="s1" />
-  $t = \text{time it takes to execute} \; n \; \text{cycles}$
-  <hr class="s1" />
-  $t = nT = 24 \; \text{hours} \implies n = \frac{24}{T} = 24 \cdot \frac{11}{12} = 22$
+  $f'''(x) = -\cos(x) \quad f'''(0) = -1$
   <hr class="s2" />
-  Note: Since $24$ is an integer multiple of $T$, the number of minima that occur in that time doesn't depend on when you start (unless you start at a minimum, e.g. midnight, and count both ends)
+  $T_3(x) = 0 + \frac{1}{1!}(x - 0) + \frac{0}{2!}(x - 0)^2 + \frac{-1}{3!}(x - 0)^3 = x - \frac{x^3}{6}$
+  <hr class="s2" />
+  $\sin(\frac{1}{4}) \approx \frac{1}{4} - \frac{(\frac{1}{4})^3}{6} = \frac{95}{384}$

@@ -394,9 +394,9 @@ const getExamInfoById =
       where id = $1
     `;
     pool.query(getq, [examid], (err, result) => {
-      if (err) return next(err);
-      const { id, courseid, examtype, examid, profs, schoolid, source_url, solutions_available } = result.rows[0];
-      return ({ id, courseid, examtype, examid, profs, schoolid, source_url, solutions_available });
+      if (err)
+        return next(err);
+      return ({ ...result.rows[0] });
     });
   };
 
