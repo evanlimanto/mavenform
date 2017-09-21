@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import req from 'superagent';
 
 import { updateTopicInfo, updateCompletedProblems } from '../../actions';
-import { BASE_URL, courseCodeToLabel, termToLabel } from '../../utils';
+import { BASE_URL, canUseDOM, courseCodeToLabel, termToLabel } from '../../utils';
 import Navbar from '../navbar';
 import Footer from '../footer';
 
@@ -42,6 +42,8 @@ class ProblemsComponent extends Component {
   }
 
   componentDidMount() {
+    if (!canUseDOM)
+      return;
     const { courseCode, schoolCode, topicCode } = this.props;
     const auth_user_id = this.props.auth.getProfile().user_id;
     return Promise.all([
@@ -108,7 +110,7 @@ class ProblemsComponent extends Component {
       const isCorrectAnswer = reduce(split(expectedAnswers[index], '|'), (res, item) => {
         if (res)
           return res;
-        return item === answerValue;
+        return toLower(item) === answerValue;
       }, false);
       if (isCorrectAnswer)
         return this.correctAnswer();

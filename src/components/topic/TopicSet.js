@@ -43,6 +43,8 @@ class TopicSetComponent extends Component {
   }
 
   componentDidMount() {
+    if (!canUseDOM)
+      return;
     const { schoolCode, courseCode } = this.props;
     const auth_user_id = this.props.auth.getProfile().user_id;
     Promise.all([

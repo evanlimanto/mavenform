@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { map, range, replace, sortBy } from 'lodash';
+import { map, replace, sortBy } from 'lodash';
 import { Helmet } from 'react-helmet';
 import Dropzone from 'react-dropzone';
 import req from 'superagent';
@@ -279,23 +279,14 @@ class CourseComponent extends Component {
       </div>
     );
 
-    const topicCards = map(this.props.topics, (topic) => {
-      return (
-        <Link key={topic.code} className="card topic-card" to={"/" + schoolCode + "/" + courseCode + "/" + topic.code}>
-          <span>{topic.concept} (<b>{topic.problem_count} problem{topic.problem_count <= 1 || "s"}</b>)</span>
-          <span className="card-arrow">&#8594;</span>
-        </Link>
-      );
-    });
-
     return (
       <div>
-      {CourseComponent.getMeta(this.props)}
-      <Navbar schoolCode={schoolCode} courseCode={courseCode} />
-      <Modals />
-      {content}
-      <hr className="s8" />
-      <Footer />
+        {CourseComponent.getMeta(this.props)}
+        <Navbar schoolCode={schoolCode} courseCode={courseCode} />
+        <Modals />
+        {content}
+        <hr className="s8" />
+        <Footer />
       </div>
     );
   }
