@@ -5,13 +5,12 @@ import { Helmet } from 'react-helmet';
 import { Line } from 'rc-progress';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import Navbar from '../navbar';
 import Footer from '../footer';
 import { Modals } from '../modal';
 
-import { BASE_URL, canUseDOM, courseCodeToLabel } from '../../utils';
+import { canUseDOM, courseCodeToLabel } from '../../utils';
 import { showPaymentsModal, updateTopicsList, updateUnlockedSets } from '../../actions';
 
 const cookies = canUseDOM ? require("browser-cookies") : null;
@@ -159,7 +158,7 @@ class TopicSetComponent extends Component {
             <h4 className="info-title">{courseCodeToLabel(courseCode)} {lectureInfo.lecture_code}</h4>
             <hr className="s1" />
             <h5 className="info-subtitle">{lectureInfo.professor}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{lectureInfo.term_label}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <a className="school-link" href={lectureInfo.syllabus_url}>Syllabus</a></h5>
+              <a className="school-link" href={lectureInfo.syllabus_url} target="_blank">Syllabus</a></h5>
             <hr className="s1" />
             <hr className="s0-5" />
             <p className="info-text">

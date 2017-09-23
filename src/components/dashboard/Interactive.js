@@ -5,9 +5,6 @@ import req from 'superagent';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-import TopicCard from './TopicCard';
-import TopicContainer from './TopicContainer';
-import TopicListContainer from './TopicListContainer';
 import DashboardNav from './DashboardNav';
 
 function cloneOrEmpty(arr) {

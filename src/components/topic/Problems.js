@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import { cloneDeep, forEach, has, keys, includes, range, map, reduce, replace, split, toLower } from 'lodash';
 import { connect } from 'react-redux';
-import { Helmet } from 'react-helmet';
 import classnames from 'classnames';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { Link } from 'react-router-dom';
 import req from 'superagent';
 
-import { updateTopicInfo, updateCompletedProblems } from '../../actions';
 import { BASE_URL, canUseDOM, courseCodeToLabel, termToLabel } from '../../utils';
 import Navbar from '../navbar';
 import Footer from '../footer';
 
 function cleanProblem(content) {
-  return content;
+  let removalRegexes = [
+    /\([a-z]\)/g,
+    /\(\d+ points\)/g,
+    /^\d[a-z]?(\.|\))?/g,
+    /^<strong>\d[a-z]?(\.|\))?<\/strong>/g,
+  ];
+  return reduce(removalRegexes, (res, regex) => replace(res, regex, ""), content);
 }
 
 class ProblemsComponent extends Component {
@@ -220,9 +224,10 @@ class ProblemsComponent extends Component {
     }
 
     const itemContent = this.state.subTopicInfo.problems[this.state.progressIndicator];
+    console.log(itemContent, cleanProblem(itemContent.problem));
     const contents = this.state.showContents ? [(
       <div key={0} className="problem-contents">
-        <div dangerouslySetInnerHTML={{ __html: (itemContent.problem && itemContent.problem.length > 0) ? itemContent.problem : "Loading content.." }}></div>
+        <div dangerouslySetInnerHTML={{ __html: (itemContent.problem && itemContent.problem.length > 0) ? cleanProblem(itemContent.problem) : "Loading content.." }}></div>
         <hr className="s1" />
         <div dangerouslySetInnerHTML={{ __html: itemContent.interactive_problem }}></div>
         <div dangerouslySetInnerHTML={{ __html: this.state.showSolution ?
@@ -269,11 +274,6 @@ class ProblemsComponent extends Component {
             {this.state.answerStatus === "correct" ? (<div><hr className="s2"/><div className="green-text">Great job! You're ready for the next question.</div></div>) : null}
           </div>
           <div className="box-footer">
-          {/*{classnames({
-            "box-footer": true,
-            "correct-answer": this.state.answerStatus === "correct",
-            "wrong-answer": this.state.answerStatus === "wrong",
-          }*/}
             <span className="progress-label">Progress</span>
             {map(range(0, this.problemCount), (index) =>
               <div key={index} onClick={() => this.navigateProblem(index)} className={classnames({

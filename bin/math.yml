@@ -1,40 +1,38 @@
-q19_1: |
-  Find the limit or show that it does not exist.
+q10_1: |
+  Find the dimension of the subspace $H$ of $\mathbb{R}^2$ spanned by
+  $$\left[ \begin{array}{c} 1 \\\\ -5 \end{array} \right], \left[ \begin{array}{c} -2 \\\\ 10 \end{array} \right], \left[ \begin{array}{c} -3 \\\\ 15 \end{array} \right]$$
+
+q10_1_s: |
+  To find the dimension of the subspace, first find the basis for the subspace. The basis for the space spanned by the vectors $\left\\{ \mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3 \right\\}$ is same as the basis for $\text{Col} \; A$, where $A = \left[ \mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3 \right]$.
   <hr class="s1" />
-  $\lim_{t \to \infty} \frac{\sqrt{t} + t^2}{2t - t^2}$
+  Consider the matrix with the vectors $\left\\{ \mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3 \right\\}$ as column vectors:
+  $$A = \left[ \begin{array}{c c c} -1 & -2 & -3 \\\\ 5 & 10 & 15 \end{array} \right]$$
+  The row echelon matrix for the matrix $A$ is
+  $$A \sim \left[ \begin{array}{c c c} -1 & -2 & -3 \\\\ 0 & 0 & 0 \end{array} \right]$$
+  Since $\mathbf{b}_2$ and $\mathbf{b}_3$ can be written as linear combinations of the vector $\mathbf{b}_1$, the basis for $\text{Col} \; A$ is $\left\\{ \mathbf{v}_1 = \left[ \begin{array}{c} -1 \\\\ 5 \end{array} \right] \right\\}$.
+  <hr class="s1" />
+  Therefore, the basis for the space spanned by the vectors $H = \text{span} \left\\{ \mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3 \right\\}$ is $\left\\{ \left[ \begin{array}{c} -1 \\\\ 5 \end{array} \right] \right\\}$.
+  <hr class="s1" />
+  Hence, the dimension of the subspace $H$ is $1$.
+
+q19_1: |
+  True/False: The number of pivot columns of a matrix equals the dimension of its column space.
 
 q19_1_s: |
-  Let $f(t) = \lim_{t \to \infty} \frac{\sqrt{t} + t^2}{2t - t^2}$.
-  <hr class="s1" />
-  To find out the limit of the function $f(t)$, we take the common $t^2$ from the denominator and the numerator. We obtain that
-  <hr class="s1" />
-  $f(t) = \frac{t^2 \left( \frac{1}{t^{3/2}} + 1 \right)}{t^2 \left( \frac{2}{t} - 1 \right)} = \frac{\left( \frac{1}{t^{3/2}} + 1 \right)}{\left( \frac{2}{t} - 1 \right)}$
-  <hr class="s1" />
-  Therefore,
-  $\lim_{t \to \infty} f(t) = \lim_{t \to \infty} \frac{\left( \frac{1}{t^{3/2}} + 1 \right)}{\left( \frac{2}{t} - 1 \right)} = \frac{\left( \lim_{t \to \infty} \frac{1}{t^{3/2}} + \lim_{t \to \infty} 1 \right)}{\left( \lim_{t \to \infty} \frac{2}{t} - \lim_{t \to \infty} 1 \right)} = \frac{0 + 0}{0 - 1} = -1$
-  <hr class="s1" />
-  Hence, $f(t) = -1$.
+  The pivot columns of a matrix $A$ form a basis for $\text{Col} \; A$. So, the number of pivot columns is the same as the number of vectors in the basis for $\text{Col} \; A$. Thus, the dimension of its column space is the same as the number of pivot columns of $A$. Therefore, the given statement is **True**.
 
-q50_1: |
-  Find a formula for a function that has vertical asymptotes $x = 1$ and $x = 3$ and horizontal asymptote $y = 1$.
+q19_4: |
+  True/False: If $\text{dim} \; V = n$ and $S$ is a linearly independent set in $V$, then $S$ is a basis for $V$.
 
-q50_1_s: |
-  The vertical asymptotes are $x = 1$ and $x = 3$. So $(x - 1)$ and $(x - 3)$ will be factors of the denominator.
-  <hr class="s1" />
-  The horizontal asymptote is $y = 1$, so the power of $x$ in the numerator will be the same as in the denominator, that is, $x^2$.
-  <hr class="s1" />
-  So the formula of $f(x)$ is $f(x) = \frac{x^2}{(x - 1)(x - 3)}$
-  <hr class="s1" />
-  Or we can write, $f(x) = \frac{x^2}{x^2 - x - 3x + 3} = \frac{x^2}{x^2 - 4x + 3}$.
+q19_4_s: |
+  Consider the vector space $\mathbb{R}^4$ whose dimension is $4$. Let $S = \left\\{ (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0) \right\\}$ be the linearly independent set in $\mathbb{R}^4$. The set $S$ does not span the vector space $\mathbb{R}^4$, because $(0, 1, 0, 2) \notin \text{Span} \; S$. Hence, the set $S$ is not a basis for $\mathbb{R}^4$. Therefore, the given statement is **False**.
 
-q57_1: |
-  Use the Squeeze Theorem to evaluate $\lim_{x \to \infty} \frac{\sin x}{x}$.
+q22_1: |
+  The first four Laguerre polynomials are $1, 1 - t, 2 - 4t + t^2$ and $6 - 18t + 9t^2 - t^3$. Show that these polynomials form a basis of $\mathbb{P}_3$.
 
-q57_1_s: |
-  We cannot use $\lim_{x \to \infty} \frac{\sin x}{x} = \lim_{x \to \infty} \frac{1}{x} \cdot \lim_{x \to \infty} \sin x$ because $\lim_{x \to \infty} \sin x$ does not exist.
+q22_1_s: |
+  The matrix whose columns are the coordinate vectors of the given polynomials relative to the standard basis $\left\\{ 1, t, t^2, t^3 \right\\}$ of $P_3$.
+  $$A = \left[ \begin{array}{c c c c} 1 & 1 & 2 & 6 \\\\ 0 & -1 & -4 & -18 \\\\ 0 & 0 & 1 & 9 \\\\ 0 & 0 & 0 & -1 \end{array} \right]$$
+  Row reducing $A$, we get the identity matrix. The matrix contains $4$ pivots, so its columns are linearly independent.
   <hr class="s1" />
-  Since $-1 \le \sin \le 1$, $\frac{-1}{x} \le \frac{1}{x} \sin x \le \frac{1}{x}$. We also know $\lim_{x \to \infty} \left( - \frac{1}{x} \right) = \lim_{x \to \infty} \left( \frac{1}{x} \right) = 0$.
-  <hr class="s1" />
-  By the Squeeze Theorem, if $f(x) \le g(x) \le h(x)$ when $x$ is near $\infty$ and $\lim_{x \to \infty} f(x) = \lim_{x \to \infty} h(x) = L$, then $\lim_{x \to \infty} g(x) = L$.
-  <hr class="s1" />
-  Here, $\lim_{x \to \infty} \frac{\sin x}{x} = 0$, so $y = 0$. The $x$-axis is the horizontal asymptote.
+  Since their coordinate vectors form a linearly independent set, the Laguerre polynomials themselves are linearly independent in $P_3$. As there are four Laguerre polynomials and $\text{dim} \; P_3 = 4$, the given Laguerre polynomials form a basis for $P_3$.

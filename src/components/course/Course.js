@@ -5,7 +5,6 @@ import { map, replace, sortBy } from 'lodash';
 import { Helmet } from 'react-helmet';
 import Dropzone from 'react-dropzone';
 import req from 'superagent';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import { showSignupModal, showUploadSuccessModal, updateCourseExams, updateCourseLabel,
          updateCourseSubject, updateRegisteredLecture, updateCourseLectures } from '../../actions';
@@ -51,14 +50,12 @@ class CourseComponent extends Component {
   constructor(props) {
     super(props);
     this.onDrop = this.onDrop.bind(this);
-    this.getInfo = this.getInfo.bind(this);
     this.registerClass = this.registerClass.bind(this);
     this.unregisterClass = this.unregisterClass.bind(this);
     this.setSelectedLecture = this.setSelectedLecture.bind(this);
     this.professor = null;
     this.state = {
       lectureInfo: { lecture_code: null },
-      getInfo: false,
     };
   }
 
@@ -140,10 +137,6 @@ class CourseComponent extends Component {
       });
   }
 
-  getInfo() {
-    this.setState({ getInfo: !this.state.getInfo });
-  }
-
   onDrop(acceptedFiles, rejectedFiles) {
     const profile = this.props.auth.getProfile();
     const request = req.post('/upload');
@@ -163,7 +156,11 @@ class CourseComponent extends Component {
   render() {
     const { courseCode, schoolCode } = this.props;
     const { lectureInfo } = this.state;
-    const exams = map(this.props.exams, (exam, key) => {
+    const exams = map(sortBy(this.props.exams, [
+      (exam) => -exam.type_code.charCodeAt(0),
+      (exam) => exam.type_code,
+    ]), (exam, key) => {
+      console.log(exam, key);
       if (key === "notfound")
         return null;
       const typeCode = exam.type_code;
@@ -185,7 +182,10 @@ class CourseComponent extends Component {
       );
     });
 
-    const interactiveBox = (courseCode === "MATH53" || courseCode === "MATH54" || courseCode === "MATH1A" || courseCode === "MATH1B" || courseCode === "MATH16A" || courseCode === "MATH16B") ? (
+    const interactiveBox = (courseCode === "MATH53" ||
+                            courseCode === "MATH54" ||
+                            courseCode === "MATH1A" ||
+                            courseCode === "MATH1B") ? (
       <div className="container interactive-container">
         <div className="int-box">
           {this.props.registeredLecture ? (
@@ -197,33 +197,14 @@ class CourseComponent extends Component {
               <Link to={`/${schoolCode}/${courseCode}/interactive`}><button className="int-button">View</button></Link>
             </span>
           ) : (
-            <span>
-              <p className="int-helper">
-                <span className="int-highlight">Interactive study mode available.</span> Study from an interactive study guide personalized to your class and professor.
-              </p>
-              <ReactCSSTransitionGroup
-                transitionName="getInfoButton"
-                transitionEnterTimeout={200}
-                transitionLeaveTimeout={200}>
-                {this.state.getInfo ? null : (<button className="int-button" onClick={this.getInfo}>Get Started</button>)}
-              </ReactCSSTransitionGroup>
-            </span>
-          )}
-          <ReactCSSTransitionGroup
-            transitionName="getInfo"
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={500}>
-          {this.state.getInfo ? (
             <div key={0} className="int-form">
-              <hr className="s2" />
               <p className="int-helper">Great! To get started, please select the option below that best matches your class information and syllabus.</p>
               <hr className="s1" />
               <InteractiveCards courseLectures={this.props.courseLectures} courseCode={courseCode} setSelectedLecture={this.setSelectedLecture} />
               <hr className="s2" />
               <input type="button" className="blue" value="Sign Up" onClick={this.registerClass} />
-              <input type="button" className="gray" value="Cancel" onClick={this.getInfo}/>
-            </div>) : null}
-          </ReactCSSTransitionGroup>
+            </div>
+          )}
         </div>
       </div>
     ) : null;
