@@ -197,11 +197,11 @@ class CourseComponent extends Component {
             </span>
           ) : (
             <div key={0} className="int-form">
-              <p className="int-helper">Great! To get started, please select the option below that best matches your class information and syllabus.</p>
+              <p className="int-helper"><strong className="int-highlight">Interactive mode available!</strong> <span>To get started, please select the option below that best matches your class information and syllabus.</span></p>
               <hr className="s1" />
               <InteractiveCards courseLectures={this.props.courseLectures} courseCode={courseCode} setSelectedLecture={this.setSelectedLecture} />
-              <hr className="s2" />
-              <input type="button" className="blue" value="Sign Up" onClick={this.registerClass} />
+              <hr className="s1" />
+              <input type="button" className="blue" value="Get Started" onClick={this.registerClass} />
             </div>
           )}
         </div>

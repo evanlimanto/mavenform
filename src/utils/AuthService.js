@@ -100,13 +100,14 @@ export default class AuthService {
                   "$email": profile.email,
                   "$name": profile.user_metadata.username
                 });
-                // This is an example script - don't forget to change it!
-                window.FS.identify(profile.user_id, {
-                  displayName: profile.user_metadata.username,
-                  email: profile.email,
-                  // TODO: Add your own custom user variables here, details at
-                  // http://help.fullstory.com/develop-js/setuservars.
-                });
+                if (window.FS) {
+                  window.FS.identify(profile.user_id, {
+                    displayName: profile.user_metadata.username,
+                    email: profile.email,
+                    // TODO: Add your own custom user variables here, details at
+                    // http://help.fullstory.com/develop-js/setuservars.
+                  });
+                }
                 document.location = document.referrer;
               }
             });
