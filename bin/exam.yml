@@ -1,191 +1,83 @@
 q1_1: |
-  1\. Consider the following matrix:
-  $$A = \left[ \begin{array}{c c c} 1 & 1 & 0 \\\\ -1 & 3 & 0 \\\\ 6 & -6 & 0 \end{array} \right]$$
-  (a) Compute the eigenvalues of $A$.
+  1\. Find a formula for the derivative $\frac{dy}{dx}$ in each of the following three cases:
+  <hr class="s1" />
+  (a) $y = \sqrt[3]{\sin(x^3)}$
+  <hr class="s1" />
 
 q1_1_s: |
-  The characteristic polynomial is
-  $$\begin{align}
-  \det(A - \lambda I) &= \det \left[ \begin{array}{c c c} 1 - \lambda & 1 & 0 \\\\ -1 & 3 - \lambda & 0 \\\\ 6 & -6 & -\lambda \end{array} \right] \\\\
-  &= (-\lambda) \det \left[ \begin{array}{c c} 1 - \lambda & 1 \\\\ -1 & 3 - \lambda \end{array} \right] \\\\
-  &= (-\lambda)((1 - \lambda)(3 - \lambda) + 1) \\\\
-  &= (-\lambda)(\lambda^2 - 4\lambda + 4) = -\lambda(\lambda - 2)^2
-  \end{align}$$
-  So the eigenvalues are $0$ (with multiplicity $1$) and $2$ (with multiplicity $2$).
+  (a) By the chain rule, the derivative is $\frac{1}{3}(\sin (x^3)^{-2/3})$ times the derivative of $\sin(x^3)$. Again by the chain rule, this latter derivative is $\cos(x^3)$ times the derivative of $x^3$, which is $3x^2$. The answer is thus a product of three terms. The value of the derivative is
+  $$\frac{x^2\cos(x^3)}{\sin(x^3)^{2/3}}$$
+  Note that the $1/3$ at the beginning of the problem is cancelled by the $3$ at the end of the problem.
 
 q1_2: |
-  (b) Find a basis for the eigenspace corresponding to each of the eigenvalues.
+  (b) $y = \ln \left( \frac{1}{\cos x} + \frac{\sin x}{\cos x} \right)$
 
 q1_2_s: |
-  Finding an eigenvector for $\lambda = 0$ is easy: we can already see that the third variable is free, so $E_0 = \text{Null}(A)$ contains the eigenvector $(0, 0, 1)$. (More generally, $(0, 0, t)$ works, where we require $t \ne 0$ to count it as an eigenvector). Then since the multiplicity of $\lambda = 0$ is one, we know that this is the whole eigenspace.
-  <hr class="s2" />
-  For $\lambda = 2$, we need to find a basis for $E_2 = \text{Null}(A - 2I)$, so we row-reduce:
-  $$A - 2I &= \left[ \begin{array}{c c c} -1 & 1 & 0 \\\\ -1 & 1 & 0 \\\\ 6 & -6 & -2 \end{array} \right] \sim \left[ \begin{array}{c c c} -1 & 1 & 0 \\\\ 0 & 0 & -2 \\\\ 0 & 0 & 0 \end{array} \right]$$
-  This time, the null space is $1$-dimensional, spanned by $(1, 1, 0)$, which we get from looking at the first and second rows.
+  I will write $\sec x$ for $\frac{1}{\cos x}$ and $\tan x$ for $\frac{\sin x}{\cos x}$. This is not necessary to do the problem, but I'm hoping that the solution will involve less typing for me if I go that way. The derivatives of $\sec x$ and $\tan x$ are respectively $(\sec x)(\tan x)$ and $\sec^2 x$, as you can check from the quotient rule. The derivative of $\ln(\sec x + \tan x)$ is then
+  $$\frac{1}{\sec x + \tan x} \cdot \frac{d}{dx}(\sec x + \tan x) = \frac{\sec^x + (\sec x)(\tan x)}{\sec x + \tan x}$$
+  In this fraction, each term in the numerator is $\sec x$ times the term in the denominator that's below it. Hence the final answer is $\sec x$. (The takeaway is that if someone asks you for a function whose derivative is $\sec x$, you'll have the answer $\ln \left( \frac{1}{\cos x} + \frac{\sin x}{\cos x} \right)$ at hand.) A final note: although my answer $\sec x$ was very tidy, you can say that it results from the simplication of a more complicated expression.
 
 q1_3: |
-  (c) Is $A$ diagonalizable? Justify.
+  (c) $x^4 + 4y^4 = 7$
 
 q1_3_s: |
-  No, since the dimension of the $\lambda = 2$ eigenspace is $1$ dimensional, but the multiplicity of $\lambda = 2$ is $2$ and $1 < 2$.
+  This was intended as an implicit differentiation problem, but you can write $y = \pm \sqrt[4]{(7 - x^4)/4}$ and do the problem without implicit differentiation. I do really insist on the $\pm$, though: the indicated fourth root is positive, by definition, but $y$ might be negative or positive. (If you graph this function, you'll get something that looks like an ellipse that's straining to become rectangular.) The derivative of $\sqrt[4]{(7 - x^4)/4}$ is
+  $$\frac{1}{4}((7 - x^4)/4)^{-3/4} \cdot \frac{d}{dx}((7 - x^4)/4) = \frac{1}{4}((7 - x^4)/4)^{-3/4} \cdot (-x^3)$$
+  which we can rewrite as
+  $$\frac{-x^3}{4(\sqrt[4]{(7 - x^4)/4})^3}$$
+  Hence the derivative of $y$ with respect to $x$ is
+  $$\frac{-x^3}{4y^3}$$
+  If you write $\sqrt[4]{(7 - x^4)/4}$ in place of $y$, you are getting the sign wrong half the time. If you write $\pm \sqrt[4]{(7 - x^4)/4}$ in place of $y$, you are telling the truth, but not the whole truth.
+  <hr class="s2" />
+  Here is how to do the same problem *with* implicit differentiation: Differentiate both sides of $x^4 + 4y^4 = 7$ with respect to $x$ to get
+  $$4x^3 + 16y^3 \frac{dy}{dx} = 0$$
+  Then solve for $\frac{dy}{dx}$ to obtain $\frac{dy}{dx} = -\frac{x^3}{4y^3}$. This is the same answer as by the first method, but I think that the second method is easier to carry out.
 
 q2_1: |
-  2\. (a) Check that the following set of vectors is a basis for $\mathbb{R}^3$.
-  $$\mathcal{B} = \left\\{ \left( \begin{array}{c} 1 \\\\ 0 \\\\ 0 \end{array} \right) , \left( \begin{array}{c} 0 \\\\ 1 \\\\ 2 \end{array} \right) , \left( \begin{array}{c} 6 \\\\ 0 \\\\ 1 \end{array} \right) \right\\}$$
+  2\. The equation $x^2 - x - 1 = 0$ has a root between $1.5$ and $2.0$. Suppose we employ Newton's method to find an approximation for the root, starting with $2$ as our first guess for the root. What will the method output as our second guess? What will the method then output as our third guess?
 
 q2_1_s: |
-  We have
-  $$\det \left( \begin{array}{c c c} 1 & 0 & 6 \\\\ 0 & 1 & 0 \\\\ 0 & 2 & 1 \end{array} \right) = 1 \ne 0$$
-  so the matrix formed by these column vectors is invertible and hence they form a basis.
-
-q2_2: |
-  (b) Compute the change of basis matrices $P_{\mathcal{S} \leftarrow \mathcal{B}}$ and $\mathcal{P}_{\mathcal{B} \leftarrow \mathcal{S}}$ where $\mathcal{S}$ is the standard basis of $\mathbb{R}^3$.
-
-q2_2_s: |
-  Computing $P_{\mathcal{S} \leftarrow \mathcal{B}}$ is easier. We have
-  $$P_{\mathcal{S} \leftarrow \mathcal{B}} = ([b_1]_\mathcal{S} \quad [b_2]_\mathcal{S} \quad [b_3]_\mathcal{S}) = \left( \begin{array}{c c c} 1 & 0 & 6 \\\\ 0 & 1 & 0 \\\\ 0 & 2 & 1 \end{array} \right)$$
-  Now, $P_{\mathcal{B} \leftarrow \mathcal{S}} = P_{\mathcal{S} \leftarrow \mathcal{B}}^{-1}$. Computing the inverse in any way gives
-  $$P_{\mathcal{B} \leftarrow \mathcal{S}} = \left( \begin{array}{c c c} 1 & 12 & -6 \\\\ 0 & 1 & 0 \\\\ 0 & -2 & 1 \end{array} \right)$$
-
-q2_3: |
-  (c) Consider the linear transformation $T: \mathbb{R}^3 \to \mathbb{R}^3$ given by
-  $$T \left( \begin{array}{c} x \\\\ y \\\\ z \end{array} \right) = \left( \begin{array}{c} x - y \\\\ x - z \\\\ y - z \end{array} \right)$$
-  Using the results of the previous part, find the matrix of $T$ with respect to $\mathcal{B}$. Feel free to write your answer as a product of matrices.
-
-q2_3_s: |
-  From the formula, we see that the standard matrix of $T$ is
-  $$T_\mathcal{S} = \left( \begin{array}{c c c} 1 & -1 & 0 \\\\ 1 & 0 & -1 \\\\ 0 & 1 & -1 \end{array} \right)$$
-  Hence, the matrix with respect to $\mathcal{B}$ is
-  $$\begin{align}
-  T_\mathcal{B} = P_{\mathcal{B} \leftarrow \mathcal{S}}T_\mathcal{S}P_{\mathcal{S} \leftarrow \mathcal{B}}
-  &= \left( \begin{array}{c c c} 1 & 12 & -6 \\\\ 0 & 1 & 0 \\\\ 0 & -2 & 1 \end{array} \right) \left( \begin{array}{c c c} 1 & -1 & 0 \\\\ 1 & 0 & -1 \\\\ 0 & 1 & -1 \end{array} \right) \left( \begin{array}{c c c} 1 & 0 & 6 \\\\ 0 & 1 & 0 \\\\ 0 & 2 & 1 \end{array} \right) \\\\
-  &= \left( \begin{array}{c c c} 13 & -19 & 72 \\\\ 1 & -2 & 5 \\\\ -2 & 3 & -11 \end{array} \right)
-  \end{align}$$
+  To find a solution to $f(x) = 0$ near a guess $a$, we take $a - \frac{f(a)}{f'(a)}$ as a revised guess. Since $f(x) = x^2 - x - 1, a - \frac{f(a)}{f'(a)} = \frac{a^2 + 1}{2a - 1}$. (You don't need to write down this last expression, but I found it to be helpful.) The guess $a = 2$ leads to the revised guess $5/3$. Repeating the process with $5/3$ in place of $2$, we obtain the second revised guess $34/21$ for the root. This is infact very close to the actual root: The true root $(1 + \sqrt{5})/2$ has decimal value $1.618 ...$, whereas $34/21 \approx 1.619$.
 
 q3_1: |
-  3\. Label the following statement as true or false.
-  <hr class="s1" />
-  (a) The vector $x = \left[ \begin{array}{c} 1 \\\\ 2 \\\\ 3 \end{array} \right]$ is an eigenvector of the matrix $A = \left[ \begin{array}{c c c} 2 & -3 & 1 \\\\ 4 & 0 & 3 \\\\ 1 & 6 & 0 \end{array} \right]$.
+  3a\. Let
+  $$f(x) = \begin{cases} x^2 \sin(1/x) & \text{if} \; x \ne 0 \\\\ 0 \; \text{if} x = 0 \end{cases}$$
+  Use the definition of *derivative* to express $f'(0)$ as a limit.
 
 q3_1_s: |
-  False. Computing $Ax = \left[ \begin{array}{c} -1 \\\\ 13 \\\\ 13 \end{array} \right]$, we see that this is not a scalar multiple of $x$.
+  By definition, $f'(0)$ is the limit $\lim_{x \to 0} \frac{f(x) - f(0)}{x - 0}$. In this case, $f(0)$ is $0$, and also $x - 0$ is $x$, so the limit is
+  $$\lim_{x \to 0} \frac{f(x)}{x} = \lim_{x \to 0}{x \sin(1/x)}$$
 
 q3_2: |
-  (b) If the $n \times n$ matrix $A$ represents the linear transformation $T: \mathbb{R}^n \to \mathbb{R}^n$ with respect to one basis, and $B$ represents the same transformation with respect to a different basis, then $\det A = \det B$.
+  b\. Decide whether or not the limit in part (a) exists; if it does, find its value.
 
 q3_2_s: |
-  True. In this situation, we have $A = PBP^{-1}$, where $P$ is some change-of-basis matrix. Then $\det(A) = \det(P)\det(B)\det(P)^{-1} = \det B$.
-
-q3_3: |
-  (c) If $A$ is a $4 \times 4$ matrix with characteristic polynomial $\chi_A(\lambda) = \lambda^4 + 3\lambda^3 - 11\lambda^2 + \lambda + 5$, then $A$ must be invertible.
-
-q3_3_s: |
-  True. $A$ must be $4 \times 4$ because the degree of the characteristic polynomial is the size of the matrix, and it must be invertible because $\det(A - 0 \cdot I) = \chi_A(0) = 5 \ne 0$; that is, $0$ is not an eigenvalue.
-
-q3_4: |
-  (d) If $W \subset \mathbb{R}^n$ is a subspace, and $y$ is in $\mathbb{R}^n$, then $y$ is in $W$ or $y$ is in $W^\bot$.
-
-q3_4_s: |
-  False. Take $W = \text{Span}(e_1, e_2)$ in $\mathbb{R}^3$. Then $y = (1, 2, 3)$ is in neither.
-
-q3_5: |
-  (e) For vectors $u, v \in \mathbb{R}^n$, if $||u||^2 + ||v||^2 = ||u + v||^2$, then $u$ and $v$ are orthogonal.
-
-q3_5_s: |
-  True. We have $||u + v||^2 = (u + v) \cdot (u + v) = (u \cdot u) + 2(u \cdot v) + (v \cdot v)$. If this is equal to $(u \cdot u) + (v \cdot v)$, then we must have $2(u \cdot v) = 0$, so that $(u \cdot v) = 0$, so $u$ and $v$ are orthogonal.
+  The answer is that the limit does exist, and in fact the limit is $0$. The reason is that the first factor in the prodcut, namely $x$, is going to $0$, while the second factor is between $-1$ and $+1$. Hence the product is going to $0$. I don't expect people to be "proving" this rigorously, but I hope that they will provide a comprehensible explanation along these lines.
 
 q4_1: |
-  4\. Provide an example of the following, **or** explain why no such example can exist. If you want to provide an example, you are allowed to choose a specfic value for $n$.
-  <hr class="s2" />
-  We say that a matrix $A$ is diagonalizable if $A = PDP^{-1}$ where $D$ is a diagonal matrix and $P, D$, and $P^{-1}$ are allowed to have complex entries.
-  <hr class="s2" />
-  (a) Two $n \times n$ matrices $A$ and $B$ where $A$ and $B$ have the same eigenvalues with the same multiplicities but are not similar.
+  4\. Sketch the graph of $y = \frac{x}{1 + x^2}$, taking note of such features as local maxima and minima, concavity, intercepts with the aes and behavior as $x \to + \infty$. Be sure to include the coordinates of any points where concavity changes or where the graph has a max or min.
 
 q4_1_s: |
-  Let $A = \left[ \begin{array}{c c} 0 & 1 \\\\ 0 & 0 \end{array} \right]$ and $B = \left[ \begin{array}{c c} 0 & 0 \\\\ 0 & 0 \end{array} \right]$. Both $A$ and $B$ have the same characteristic polynomial, $\lambda^2$, and thus the same eigenvalues with multiplicity. To see that they are not similar, observe the only matrix similar to $B$ is itself since $PBP^{-1}$ must be the zero matrix.
-
-q4_2: |
-  (b) Two $n \times n$ matrices $A$ and $B$ that are diagonalizable such that $A - B$ is not diagonalizable.
-
-q4_2_s: |
-  Let $A = \left[ \begin{array}{c c} 1 & 1 \\\\ 0 & 0 \end{array} \right]$ and $B = \left[ \begin{array}{c c} 1 & 0 \\\\ 0 & 0 \end{array} \right]$. Then $A - B = \left[ \begin{array}{c c} 0 & 1 \\\\ 0 & 0 \end{array} \right]$, which is not diagonalizable, even though $A$ and $B$ are, since they have distinct eigenvalues.
-
-q4_3: |
-  (c) An $n \times n$ invertible matrix $A$ where $A$ is diagonalizable but $A^{-1}$ is not.
-
-q4_3_s: |
-  No such example exists. Since $A$ is invertible $0$ is not an eigenvalue so $D$ is invertible. Then given $A = PDP^{-1}$ we see $A^{-1} = (PDP^{-1})^{-1} = (P^{-1})^{-1}D^{-1}P^{-1} = PD^{-1}P^{-1}$ so $A^{-1}$ is diagonalizable.
+  Here's a crude hand-drawn sketch of the curve:
+  <hr class="s2" />
+  <p align="center">!!q4-1.png!!</p>
+  <hr class="s2" />
+  The derivative of $y$ is $\frac{1 - x^2}{(x^2 + 1)^2}$; this fraction vanishes when $x = \pm 1$; for those $x$-values there's a local min or a local max. The second derivative is $\frac{2x^3 - 6x}{(x^2 + 1)^3}$, which vanishes for $x = 0$ and for $x = \pm \sqrt{3}$. The curve is concave down from $-\infty$ to $-\sqrt{3}$, concave up from $-\sqrt{3}$ to $0$, down again from $0$ to $\sqrt{3}$ and finally concave up from $\sqrt{3}$ to $\infty$. For $x \to \infty$, $y$ is approaching $0$ from above; for $x \to -\infty$, $y$ is approaching $0$ from below.
 
 q5_1: |
-  5\. (a) Consider vectors $v_1 = \left[ \begin{array}{c} -1 \\\\ 2 \\\\ 2 \end{array} \right]$ and $v_2 = \left[ \begin{array}{c} 2 \\\\ -1 \\\\ 2 \end{array} \right]$. Find an orthonormal basis $B = \\{ b_1, b_2 \\}$ of the plane spanned by $v_1$ and $v_2$ in $\mathbb{R}^3$.
+  5\. Evaluate each of the following limits (if they exist):
+  <hr class="s1" />
+  (a) $\lim_{x \to 0^{+}} x^{1/x}$
 
 q5_1_s: |
-  We see that $v_1$ and $v_2$ are already orthogonal, so we normalize both to get $b_1 = \left[ \begin{array}{c} -1/3 \\\\ 2/3 \\\\ 2/3 \end{array} \right]$ and $b_2 = \left[ \begin{array}{c} 2/3 \\\\ -1/3 \\\\ 2/3 \end{array} \right]$ which is the orthonormal basis we desire.
+  You can just reason through the problem. When $x$ is small and positive, $1/x$ is enormous and positive. You are taking a tiny number and raising it to a huge power. The result is miniscule. This function approaches $0$. l'Hôpital's rule is neither needed nor relevant.
 
 q5_2: |
-  (b) Find a third vector $b_3$ such that the matrix $A$ with columns $b_1, b_2, b_3$ is orthogonal. (Hint: There are multiple possibilities for $b_3$.)
+  (b) $\lim_{x \to \infty} \left( \sqrt{x^2 + x + 1} - x \right)$
 
 q5_2_s: |
-  For $A$ to be an orthogonal matrix its columns must form an orthonormal basis. Thus $b_3$ must be a unit vector in the orthogonal complement of the span of $b_1$ and $b_2$, whcih si the null space of the matrix formed by turning the rows of $b_1$ and $b_2$ into the columns.
-  <hr class="s1" />
-  $\text{Nul} \left[ \begin{array}{c c c} -1/3 & 2/3 & 2/3 \\\\ 2/3 & -1/3 & 2/3 \end{array} \right] = \text{Nul} \left[ \begin{array}{c c c} 1 & 0 & 2 \\\\ 0 & 1 & 2 \end{array} \right]$. Therefore the basis for the nullspace is $\left[ \begin{array}{c} -2 \\\\ -2 \\\\ 1 \end{array} \right]. Normalizign this gives us $\left[ \begin{array}{c} 2/3 \\\\ 2/3 \\\\ -1/3 \end{array} \right]$. The two possibilities for $b_3$ are $\pm \left[ \begin{array}{c} 2/3 \\\\ 2/3 \\\\ -1/3 \end{array} \right]$.
-
-q5_3: |
-  (c) What is $| \det(A) |$?
-
-q5_3_s: |
-  Since $A$ is orthogonal, $AA^T = Id$, so $\det(A)\det(A^T) = \det(A)^2 = 1$. So $\det(A) = \pm 1$. So $|\det(A)| = 1$.
-
-q6_1: |
-  6\. Consider the following vectors in $\mathbb{R}^4$:
-  $$v_1 = \left[ \begin{array}{c} 1 \\\\ -2 \\\\ -1 \\\\ 2 \end{array} \right], v_2 = \left[ \begin{array}{c} -4 \\\\ 1 \\\\ 0 \\\\ 3 \end{array} \right], y = \left[ \begin{array}{c} 3 \\\\ -1 \\\\ 1 \\\\ 13 \end{array} \right]$$
-  Let $W = \text{Span} (v_1, v_2)$.
-  <hr class="s1" />
-  (a) Show that $\\{ v_1, v_2 \\}$ is an orthogonal set.
-
-q6_1_s: |
-  We have $v_1 \cdot v_2 = -4 -2 + 0 + 6 = 0$.
-
-q6_2: |
-  (b) Find the closest point to $y$ in the subspace $W$.
-
-q6_2_s: |
-  We project $y$ onto $W$ to get:
-  $$\hat{y} = \frac{v_1 \cdot y}{v_1 \cdot v_1} v_1 + \frac{v_2 \cdot y}{v_2 \cdot v_2} = \frac{30}{10}v_1 + \frac{26}{26}v_2 = 3v_1 + v_2 = \left[ \begin{array}{c} -1 \\\\ -5 \\\\ -3 \\\\ 9 \end{array} \right]$$
-  which is the closest point to $y$ in $W$.
-
-q6_3: |
-  (c) Find the distance from $y$ to the subspace $W$.
-
-q6_3_s: |
-  We need to compute $||y - \hat{y}||$. We have
-  $$y - \hat{y} = \left[ \begin{array}{c} 4 \\\\ 4 \\\\ 4 \\\\ 4 \end{array} \right]$$
-  So that $||y - \hat{y}|| = \sqrt{64} = 8$ is the distance.
-
-q7_1: |
-  7\. An $n \times n$ square matrix $A$ is called *idempotent* if $A^2 = A$. Recall that $E_\lambda = \text{Nul}(A - \lambda I)$ denotes the $\lambda$-eigenspace of $A$.
-  <hr class="s1" />
-  (a) Show that the only possible eigenvalues of an idempotent matrix are $0$ and $1$.
-
-q7_1_s: |
-  Suppose $v$ is an eigenvector with eigenvalue $\lambda$, so that $Av = \lambda v$. Applying $A$ a second time gives $A^2v = \lambda^2 v$, but using $A^2 = A$ gives $A^v = Av = \lambda v$. Thus $\lambda^2v = \lambda v$. Because $v \ne 0$, it follows that $\lambda^2 = \lambda$, hence $\lambda = 0$ or $1$.
-
-q7_2: |
-  (b) If $A$ is an idempotent matrix, show that $\text{Col}(A)$ is precisely the eigenspace $E_1$ of $A$.
-
-q7_2_s: |
-  If $v \in E_1$, then $Av = v$, so $v \in \text{Col}(A)$. This shows $E_1 \subset \text{Col}(A)$. Conversely, if $v \in \text{Col}(A)$, then there is some $w$ such that $Aw = v$, hence $A^2w = v$, hence $A^2w = Av$. Using idempotence of $A$ we get $Aw = A^2w = Av$, so $v = Aw = Av$.
-
-q7_3: |
-  (c) If $A$ is an idempotent matrix, show that $\text{Col}(I - A)$ is precisely the eigenspace $E_0$ of $A$. (Hint: $A - A^2 = A(I - A) = 0$.)
-
-q7_3_s: |
-  We proceed as above: If $v \in E_0$, then $Av = 0$, hence $v - Av = (I - A)v = v$, so $v \in \text{Col}(I - A)$. This shows $E_0 \subset \text{Col}(I - A)$. Conversely, if $v \in \text{Col}(I - A)$, then there is some $w$ such that $(I - A)w = w - Aw = v$, hence $Av = A(w - Aw) = Aw - A^2w = Aw - Aw = 0$, so $v \in E_0$.
-
-q7_4: |
-  (d) Show that an idempotent matrix is diagonalizable. (Hint: $I = A + (I - A)$.)
-
-q7_4_s: |
-  Every vector $v \in \mathbb{R}^n$ can be written in the form
-  $$v = Av + (I - A)v$$
-  where $Av \in \text{Col}(A)$ and $(I - A)v \in \text{Col}(I - A)$. By the previous sections, these are eigenspaces $E_1$ and $E_0$ respectively; this means that the eigenspaces of $A$ span $\mathbb{R}^n$, so we can find a basis of $\mathbb{R}^n$ consisting of eigenvectors of $A$ (by combining a basis of $E_1$ and a basis of $E_0$), so $A$ is diagonalizable.
+  The single technique to use is to multiply and divide by $\sqrt{x^2 + x + 1} + x$:
+  $$\sqrt{x^2 + x + 1} - x = \left( \sqrt{x^2 + x + 1} - x \right) \cdot \frac{\sqrt{x^2 + x + 1} + x}{\sqrt{x^2 + x + 1} + x} = \frac{x^2 + x + 1 - x^2}{\sqrt{x^2 + x + 1} + 1}$$
+  Then
+  $$\frac{x^2 + x + 1 - x^2}{\sqrt{x^2 + x + 1} + x} = \frac{x + 1}{\sqrt{x^2 + x + 1} + x} = \frac{1 + \frac{1}{x}}{\sqrt{1 + \frac{1}{x} + \frac{1}{x^2}} + 1}$$
+  As $x \to \infty$, the quantities $\frac{1}{x}$ and $\frac{1}{x^2}$ approach $0$, so the limit is $\frac{1}{1 + 1} = \frac{1}{2}$.

@@ -160,7 +160,6 @@ class CourseComponent extends Component {
       (exam) => -exam.type_code.charCodeAt(0),
       (exam) => exam.type_code,
     ]), (exam, key) => {
-      console.log(exam, key);
       if (key === "notfound")
         return null;
       const typeCode = exam.type_code;

@@ -29,7 +29,7 @@ class HomeComponent extends Component {
     return (
       <Helmet>
         <title>Studyform - Study More Effectively</title>
-        <meta name="description" content="Find past exams and practice problems to solve and discuss . Ace your courses with Studyform." />
+        <meta name="description" content="Find past exams and practice problems to solve and discuss. Ace your courses with Studyform." />
       </Helmet>
     );
   }

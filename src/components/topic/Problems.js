@@ -224,7 +224,6 @@ class ProblemsComponent extends Component {
     }
 
     const itemContent = this.state.subTopicInfo.problems[this.state.progressIndicator];
-    console.log(itemContent, cleanProblem(itemContent.problem));
     const contents = this.state.showContents ? [(
       <div key={0} className="problem-contents">
         <div dangerouslySetInnerHTML={{ __html: (itemContent.problem && itemContent.problem.length > 0) ? cleanProblem(itemContent.problem) : "Loading content.." }}></div>
