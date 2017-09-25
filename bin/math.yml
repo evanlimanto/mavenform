@@ -1,38 +1,8 @@
-q10_1: |
-  Find the dimension of the subspace $H$ of $\mathbb{R}^2$ spanned by
-  $$\left[ \begin{array}{c} 1 \\\\ -5 \end{array} \right], \left[ \begin{array}{c} -2 \\\\ 10 \end{array} \right], \left[ \begin{array}{c} -3 \\\\ 15 \end{array} \right]$$
-
-q10_1_s: |
-  To find the dimension of the subspace, first find the basis for the subspace. The basis for the space spanned by the vectors $\left\\{ \mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3 \right\\}$ is same as the basis for $\text{Col} \; A$, where $A = \left[ \mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3 \right]$.
+q9_1: |
+  Find the limit, if possible.
   <hr class="s1" />
-  Consider the matrix with the vectors $\left\\{ \mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3 \right\\}$ as column vectors:
-  $$A = \left[ \begin{array}{c c c} -1 & -2 & -3 \\\\ 5 & 10 & 15 \end{array} \right]$$
-  The row echelon matrix for the matrix $A$ is
-  $$A \sim \left[ \begin{array}{c c c} -1 & -2 & -3 \\\\ 0 & 0 & 0 \end{array} \right]$$
-  Since $\mathbf{b}_2$ and $\mathbf{b}_3$ can be written as linear combinations of the vector $\mathbf{b}_1$, the basis for $\text{Col} \; A$ is $\left\\{ \mathbf{v}_1 = \left[ \begin{array}{c} -1 \\\\ 5 \end{array} \right] \right\\}$.
-  <hr class="s1" />
-  Therefore, the basis for the space spanned by the vectors $H = \text{span} \left\\{ \mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3 \right\\}$ is $\left\\{ \left[ \begin{array}{c} -1 \\\\ 5 \end{array} \right] \right\\}$.
-  <hr class="s1" />
-  Hence, the dimension of the subspace $H$ is $1$.
+  $\lim_{x \to 0^+} \frac{\sin x}{\ln x}$
 
-q19_1: |
-  True/False: The number of pivot columns of a matrix equals the dimension of its column space.
-
-q19_1_s: |
-  The pivot columns of a matrix $A$ form a basis for $\text{Col} \; A$. So, the number of pivot columns is the same as the number of vectors in the basis for $\text{Col} \; A$. Thus, the dimension of its column space is the same as the number of pivot columns of $A$. Therefore, the given statement is **True**.
-
-q19_4: |
-  True/False: If $\text{dim} \; V = n$ and $S$ is a linearly independent set in $V$, then $S$ is a basis for $V$.
-
-q19_4_s: |
-  Consider the vector space $\mathbb{R}^4$ whose dimension is $4$. Let $S = \left\\{ (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0) \right\\}$ be the linearly independent set in $\mathbb{R}^4$. The set $S$ does not span the vector space $\mathbb{R}^4$, because $(0, 1, 0, 2) \notin \text{Span} \; S$. Hence, the set $S$ is not a basis for $\mathbb{R}^4$. Therefore, the given statement is **False**.
-
-q22_1: |
-  The first four Laguerre polynomials are $1, 1 - t, 2 - 4t + t^2$ and $6 - 18t + 9t^2 - t^3$. Show that these polynomials form a basis of $\mathbb{P}_3$.
-
-q22_1_s: |
-  The matrix whose columns are the coordinate vectors of the given polynomials relative to the standard basis $\left\\{ 1, t, t^2, t^3 \right\\}$ of $P_3$.
-  $$A = \left[ \begin{array}{c c c c} 1 & 1 & 2 & 6 \\\\ 0 & -1 & -4 & -18 \\\\ 0 & 0 & 1 & 9 \\\\ 0 & 0 & 0 & -1 \end{array} \right]$$
-  Row reducing $A$, we get the identity matrix. The matrix contains $4$ pivots, so its columns are linearly independent.
-  <hr class="s1" />
-  Since their coordinate vectors form a linearly independent set, the Laguerre polynomials themselves are linearly independent in $P_3$. As there are four Laguerre polynomials and $\text{dim} \; P_3 = 4$, the given Laguerre polynomials form a basis for $P_3$.
+q9_1_s: |
+  Applying l'Hôpital's rule, we get
+  $$\lim_{x \to 0^+} \frac{\sin x}{\ln x} = \lim_{x \to 0^+} (x \cos x) = 0$$

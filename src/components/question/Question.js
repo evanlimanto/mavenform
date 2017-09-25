@@ -3,32 +3,10 @@ import React, { Component } from 'react';
 import Comments from './Comments';
 import Solution from './Solution';
 import QuestionDropdown from './QuestionDropdown';
-const ProgressBar = require('react-progressbar.js')
-const Line = ProgressBar.Line;
 
 class Question extends Component {
   render() {
-    const { id, content_id, schoolCode, courseCode, examType, termCode, solution, content, final_solution, term_label, type_label, difficulty, comments } = this.props;
-    const options = {
-      strokeWidth: 4,
-      easing: 'easeInOut',
-      duration: 1400,
-      color: '#FFEA82',
-      trailColor: '#eee',
-      trailWidth: 1,
-      svgStyle: {width: '100%', height: '100%'},
-      from: {color: '#00FF00'},
-      to: {color: '#FFA05A'},
-      step: (state, bar) => {
-        bar.path.setAttribute('stroke', state.color);
-      },
-    };
-    /*const difficultyBar = difficulty ? (
-      <span>
-        Difficulty: {difficulty <= 3 ? ("Easy") : (difficulty <= 6 ? "Medium" : "Hard")}
-        <Line options={options} initialAnimate={true} progress={difficulty/10.0} containerClassName="progress-container" />
-      </span>
-    ): null*/
+    const { id, content_id, schoolCode, courseCode, examType, termCode, solution, content, final_solution, term_label, type_label, comments } = this.props;
 
     return (
       <div id={id} className="question">

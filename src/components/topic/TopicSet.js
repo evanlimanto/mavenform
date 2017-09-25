@@ -11,7 +11,7 @@ import Footer from '../footer';
 import { Modals } from '../modal';
 
 import { canUseDOM, courseCodeToLabel } from '../../utils';
-import { showPaymentsModal, updateTopicsList, updateUnlockedSets } from '../../actions';
+import { showPaymentsModal, updateUnlockedSets } from '../../actions';
 
 const cookies = canUseDOM ? require("browser-cookies") : null;
 

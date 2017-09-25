@@ -26,7 +26,7 @@ pg.defaults.ssl = true;
 const prod_client = new pg.Client(prodConfig);
 prod_client.connect();
 
-const q1 = `select userid, lectureid from bookmarked_courses where id > 22`;
+const q1 = `select userid, lectureid from bookmarked_courses where id > 36`;
 const i1 = `insert into bookmarked_courses (userid, lectureid) values($1, $2)`;
 
 async.parallel([

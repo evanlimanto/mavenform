@@ -87,7 +87,7 @@ class SchoolComponent extends Component {
           </Link>
         );
       });
-      if (sortedCourses.length > 8) {
+      if (false && sortedCourses.length > 8) {
         const showHiddenCourses = () => {
           document.getElementById("showhidden-" + courseCode).classList.add("hidden");
           document.getElementById("courses-" + courseCode).classList.remove("hidden");
